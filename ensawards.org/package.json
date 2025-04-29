@@ -12,9 +12,10 @@
     "lint:ci": "biome ci"
   },
   "dependencies": {
-    "astro": "^5.7.8",
     "@astrojs/tailwind": "^6.0.0",
+    "astro": "^5.7.8",
     "astro-font": "^1.0.0",
-    "astro-seo": "^0.8.4"
+    "astro-seo": "^0.8.4",
+    "sharp": "^0.34.1"
   }
 }
