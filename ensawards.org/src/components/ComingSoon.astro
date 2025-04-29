@@ -1,0 +1,9 @@
+---
+import { Image } from "astro:assets";
+import awardsImage from "../assets/ensawards.png";
+---
+
+<main class="box-border h-screen w-full flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-0 p-5 sm:p-16 bg-gradient-to-b from-[#FFD73A] from-30% sm:from-10% to-[#FFC700] to-80%">
+	<h1 class="max-w-[600px] w-full font-bold leading-[54px] sm:leading-[104px] text-5xl sm:text-8xl text-[#003692] text-center sm:text-left">Coming Soon!</h1>
+	<Image src={awardsImage} alt="ENS awards" class="w-full h-auto max-w-xl max-h-xl aspect-square" quality={100}/>
+</main>
