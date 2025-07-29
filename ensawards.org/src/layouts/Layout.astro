@@ -2,6 +2,7 @@
 import { AstroFont } from "astro-font";
 import { SEO } from "astro-seo";
 import "../styles/global.css";
+import Header from "../components/organisms/Header.astro";
 // favicon credits: <a href="https://www.flaticon.com/free-icons/award" title="award icons">Award icons created by Freepik - Flaticon</a>
 ---
 
@@ -59,6 +60,7 @@ import "../styles/global.css";
 		/>
 	</head>
 	<body>
+		<Header />
 		<slot />
 	</body>
 </html>
