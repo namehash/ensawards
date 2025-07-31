@@ -1,11 +1,52 @@
 ---
-import Welcome from "../components/organisms/ComingSoon.astro";
 import Layout from "../layouts/Layout.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import ItemsList from "../components/molecules/ItemsList.astro";
+import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
+import AppReviewCard from "../components/atoms/cards/AppReviewCard.astro";
+import RainbowIcon from "../assets/rainbowIcon.svg";
+import CardBadge from "../components/atoms/CardBadge.astro";
+import {bestPracticesCategoryCards} from "../data/bestPracticesData";
+import {appReviewCards} from "../data/appReviewsData";
 ---
 
 <Layout>
-	<h1>LANDING PAGE</h1>
+	<section id="lpHero" class="relative w-full h-full max-h-[820px] flex flex-col justify-center items-center border-2 border-violet-700">
+		<div class="w-fit max-w-[800px] h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center gap-8">
+			<div class="flex flex-col flex-nowrap justify-center items-center gap-4 self-stretch">
+				<h1>Unleash ENS potential within your app</h1>
+				<p>Unleash full ENS potential within your app check how fully it supports ENS</p>
+			</div>
+			<a href="/best-practices">Best practices</a>
+		</div>
+		<a href="#previews-section" class="absolute bottom-[25px] p-[10px] flex flex-col justify-center items-center w-5 h-5 box-content rounded-[40px] border border-gray-400">V</a>
+	</section>
+	<section id="previews-section" class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 py-[60px]  sm:px-8">
+		<ItemsList header="Category" numberOfItems={bestPracticesCategoryCards.length} seeAllLink="/best-practices">
+			{bestPracticesCategoryCards.slice(0,4).map((card, idx) => (
+				<CategoryCard
+					key=`best-practice-card-${idx}`
+					name="ENS Resolution"
+				    description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
+					viewBestPracticesLink=`/best-practices/${card}`
+				    numberOfBestPractices={12}
+				/>
+			))}
+		</ItemsList>
+		<ItemsList header="App reviews" numberOfItems={appReviewCards.length} seeAllLink="/app-reviews">
+			{appReviewCards.slice(0,4).map((app, idx) => (
+				<AppReviewCard
+					key=`app-review-card-${idx}`
+					name="Rainbow Wallet"
+					description="Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum."
+					overallScore={90}
+					websiteLink="https://rainbow.me/"
+					type="website"
+					viewReviewLink="/app-reviews"
+				>
+					<RainbowIcon slot="icon" />
+					<CardBadge slot="badge" text="Top performer" className="text-primary-foreground bg-black"/>
+				</AppReviewCard>
+				))}
+		</ItemsList>
+	</section>
 </Layout>

@@ -1,0 +1,25 @@
+---
+export interface CategoryCardProps {
+    name: string;
+    description: string;
+    viewBestPracticesLink: string; //might change to URL or change name to not be misleading
+    numberOfBestPractices: number;
+}
+
+const {name, description, viewBestPracticesLink, numberOfBestPractices}: CategoryCardProps = Astro.props;
+---
+
+<div class="w-fit max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap justify-center items-start gap-4 px-6 pt-6 pb-4 rounded-2xl border border-gray-200">
+    <div class="flex flex-col flex-nowrap justify-center items-start gap-2 self-stretch">
+        <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
+        <p class="text-muted-foreground text-base leading-normal font-normal">{description}</p>
+    </div>
+    <div class="bg-gray-200 h-[1px] self-stretch" />
+    <div class="flex flex-row flex-nowrap justify-between items-start self-stretch">
+        <a href={viewBestPracticesLink} class="flex flex-row justify-center items-center gap-2 px-4 py-2 bg-neutral-100 shadow-xs rounded-full text-sm leading-normal font-medium">View best practices</a>
+        <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
+            <p class="text-muted-foreground text-sm leading-normal font-medium">Best practices</p>
+            <p class="text-sm leading-normal font-semibold">{numberOfBestPractices}</p>
+        </div>
+    </div>
+</div>

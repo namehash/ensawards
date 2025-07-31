@@ -1,0 +1,55 @@
+---
+export interface SuggestFormOpenerProps {
+    whatsSuggested: "app" | "best practice";
+}
+
+const adaptSuggestionText = (whatsSuggested: "app" | "best practice"): string => {
+    switch (whatsSuggested) {
+        case "app":
+            return "an app";
+
+        case "best practice":
+            return "a best practice";
+
+        default:
+            throw new Error(`${whatsSuggested} is not a valid suggestion category`)
+    }
+}
+
+const {whatsSuggested}: SuggestFormOpenerProps = Astro.props;
+---
+
+<div class="w-fit md:w-[598px] max-w-[598px] h-fit min-h-[62px] box-border px-6 py-5 flex flex-row flex-wrap justify-between items-center rounded-2xl border border-dashed border-gray-300">
+    <p class="text-base leading-normal font-normal text-muted-foreground">Suggest {adaptSuggestionText(whatsSuggested)} you'd like us to add.</p>
+    <suggest-form-button data-suggestion={whatsSuggested} id=`${whatsSuggested}-suggestion-button` class="flex flex-row justify-center items-center gap-2 px-4 py-2 bg-neutral-100 shadow-xs rounded-full text-sm leading-normal font-medium cursor-pointer">Suggest {whatsSuggested}</suggest-form-button>
+</div>
+
+
+<script>
+
+    function openSuggestionOverlay(whatsSuggested: string) {
+        switch (whatsSuggested) {
+            case "app":
+                alert("Opening App suggestion!");
+                break;
+
+            case "best practice":
+                alert("Opening Best practice suggestion!");
+                break;
+
+            default:
+                throw new Error(`${whatsSuggested} is not a valid suggestion category`)
+        }
+    }
+    class SuggestionFormOpener extends HTMLElement {
+        connectedCallback() {
+            const formOpenerButton = document.getElementById(`${this.dataset.suggestion}-suggestion-button`);
+
+            formOpenerButton.addEventListener('click', () => {
+                openSuggestionOverlay(this.dataset.suggestion);
+            });
+        }
+    }
+
+    customElements.define('suggest-form-button', SuggestionFormOpener);
+</script>

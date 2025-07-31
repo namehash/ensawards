@@ -1,0 +1,52 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import SubpageHero from "../../../components/molecules/SubpageHero.astro";
+import ItemsList from "../../../components/molecules/ItemsList.astro";
+import BestPracticeCard from "../../../components/atoms/cards/BestPracticeCard.astro";
+import SuggestFormOpener from "../../../components/atoms/SuggestFormOpener.astro";
+export function getStaticPaths() {
+    return [
+        {params: {category: 0}},
+        {params: {category: 1}},
+        {params: {category: 2}},
+        {params: {category: 3}},
+        {params: {category: 4}},
+        {params: {category: 5}},
+        {params: {category: 6}},
+        {params: {category: 7}},
+        {params: {category: 8}},
+        {params: {category: 9}},
+        {params: {category: 10}},
+        {params: {category: 11}},
+    ]
+}
+
+const {category} = Astro.params;
+
+//TODO: adapt all data here to be dependent on actual category once we get the data
+---
+
+<Layout>
+    <SubpageHero
+            header=`Category #${category}`
+            description="The Resolution process at its core is the process of converting a human-readable name to a machine-readable address."
+            breadcrumbs={["Best practices", "ENS Resolution"]}
+            additionalElements={[{name: "Best practices", value: "12"}]}
+    />
+    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px]">
+        <ItemsList header="Best practices" numberOfItems={12}>
+            {[...Array(parseInt(category)+1).keys()].map((card, idx) => (
+                    <BestPracticeCard
+                            key=`best-practice-card-${idx}`
+                            name="ENS Resolution"
+                            description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
+                            viewReviewsLink=`/app-reviews`
+                            appsPassed={12}
+                            passingScore={90}
+                    />
+            ))}
+            <SuggestFormOpener whatsSuggested="best practice"/>
+        </ItemsList>
+    </section>
+</Layout>
+

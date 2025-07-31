@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import {adaptBreadcrumb} from "../../utils";
 
 interface additionalHeroElement {
     name: string;
@@ -9,17 +10,25 @@ interface additionalHeroElement {
 export interface SubpageHeroProps {
     header: string;
     description?: string;
-    breadcrumbs?: string[]; //May change depending on astro's policy on breadcrumbs
-    icon?: string; //May change to react node or just a source string
+    breadcrumbs?: string[]; //May change depending on astro's policy on breadcrumbs (update: external but recommended library, but requires SASS styling and is yet another dependency, so for now I'll try doing it manually)
+    icon?: string; //May change to react node or just a source string -> TODO: change to <slot name="icon"/>
     additionalElements?: additionalHeroElement[];
 }
 
 const {header, description, breadcrumbs, icon, additionalElements}: SubpageHeroProps = Astro.props;
+
+let breadcrumbHref = ""
 ---
 
-<section class="w-screen h-fit sm:pt-8 sm:pb-10 flex flex-nowrap flex-col items-center justify-center">
+<section class="w-full h-fit box-border sm:px-8 sm:pt-[102px] sm:pb-10 flex flex-nowrap flex-col items-center justify-center">
     <div class="w-full max-w-[1216px] h-full max-h-[280px] flex flex-nowrap flex-col justify-center gap-[60px]">
-        <div class="flex flex-row flex-wrap justify-start items-center gap-[10px]">{breadcrumbs.map((crumb) => <><p>{crumb}</p><p>></p></>)}</div>
+        {breadcrumbs && <div class="flex flex-row flex-wrap justify-start items-center gap-[10px]">{breadcrumbs.map((crumb, idx) => {
+            breadcrumbHref = breadcrumbHref.concat("/", crumb);
+            if (idx < breadcrumbs.length - 1){
+                return <><a href={decodeURI(adaptBreadcrumb(breadcrumbHref))}>{crumb}</a><span class="text-muted-foreground">></span></>;
+            }
+            return <p class="text-muted-foreground">{crumb}</p>
+        })}</div>}
         <div class="h-fit flex flex-nowrap flex-row items-center justify-between">
             <div class="flex flex-nowrap flex-col items-start justify-end gap-4">
                 {icon && <Image src={icon} alt={header}/>}
