@@ -9,7 +9,7 @@ export interface ItemsListProps {
 const {header, numberOfItems, seeAllLink}: ItemsListProps = Astro.props;
 ---
 
-<div class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-5">
+<div class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6">
     <div class="w-full h-fit flex flex-row flex-nowrap justify-between items-center">
         <h2>{header} <span class="text-gray-400">({numberOfItems})</span></h2>
         {seeAllLink && <a href={seeAllLink} class="flex flex-row flex-nowrap justify-center items-center px-4 py-2 rounded-md">See all</a>}

@@ -119,3 +119,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+body.no-scroll {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+}

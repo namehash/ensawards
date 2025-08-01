@@ -1,0 +1,85 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import SubpageHero from "../../../components/molecules/SubpageHero.astro";
+import ItemsMatrix from "../../../components/molecules/ItemsMatrix.astro";
+export function getStaticPaths() { //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
+    return [
+        {params: {category: 0, bestPractice: 0}},
+        {params: {category: 1, bestPractice: 0}},
+        {params: {category: 2, bestPractice: 0}},
+        {params: {category: 3, bestPractice: 0}},
+        {params: {category: 4, bestPractice: 0}},
+        {params: {category: 5, bestPractice: 0}},
+        {params: {category: 6, bestPractice: 0}},
+        {params: {category: 7, bestPractice: 0}},
+        {params: {category: 8, bestPractice: 0}},
+        {params: {category: 9, bestPractice: 0}},
+        {params: {category: 10, bestPractice: 0}},
+        {params: {category: 11, bestPractice: 0}},
+    ]
+}
+
+const {category, bestPractice} = Astro.params;
+
+//TODO: adapt all data here to be dependent on actual category->best-practice pairs once we get the data, for now use mock
+
+const mockBestPracticeData = {
+    name: "Support ENSIP-19",
+    description: "This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the ecosystem.",
+    additionalHeroData: [
+        {
+            name: "Category",
+            value: "ENS Resolution",
+            link: new URL("https://docs.ens.domains/resolution/")
+        },
+        {
+            name: "Apps passed",
+            value: "12"
+        },
+        {
+            name: "Passing score",
+            value: "90%"
+        },
+    ],
+
+}
+---
+
+<Layout>
+    <SubpageHero
+            header={mockBestPracticeData.name}
+            description={mockBestPracticeData.description}
+            breadcrumbs={["Best practices", category, mockBestPracticeData.name]}
+            additionalElements={mockBestPracticeData.additionalHeroData}
+    />
+    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px] sm:px-8">
+        <ItemsMatrix
+                header="App support matrix"
+                whatToSuggest="app"
+                columnNames={["App name", "Type", "Website", "Notes", "Result"]}
+                rows={[
+                     [
+                         {text: "Rainbow", link: "https://rainbow.me/", iconSource: "/src/assets/rainbowIcon.svg"},
+                         {text: "Wallet"},
+                         {text: "https://rainbow.me/", link: "https://rainbow.me/"},
+                         {text: "-"},
+                         {text: "Pass", badgeData: {icon: "check", className: "text-emerald-600 bg-[#0596691A]"}},
+                     ],
+                    [
+                        {text: "Rainbow", link: "https://rainbow.me/", iconSource: "/src/assets/rainbowIcon.svg"},
+                        {text: "Wallet"},
+                        {text: "https://rainbow.me/", link: "https://rainbow.me/"},
+                        {text: "-"},
+                        {text: "Partial pass", badgeData: {icon: "partialCheck", className: "text-neutral-900 bg-neutral-100"}},
+                    ],
+                    [
+                        {text: "Rainbow", link: "https://rainbow.me/", iconSource: "/src/assets/rainbowIcon.svg"},
+                        {text: "Wallet"},
+                        {text: "https://rainbow.me/", link: "https://rainbow.me/"},
+                        {text: "-"},
+                        {text: "Fail", badgeData: {icon: "cross", className: "text-red-600 bg-[#DC26261A]"}},
+                    ],
+                    ]}
+        />
+    </section>
+</Layout>

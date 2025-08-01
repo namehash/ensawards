@@ -8,7 +8,25 @@
         <div class="flex flex-row flex-nowrap gap-2 justify-center items-center">
             <a href="/best-practices">Best practices</a>
             <a href="/app-reviews">App reviews</a>
-            <button>Suggest an app</button>
+            <header-suggest-button id="header-app-suggestion-button" class="cursor-pointer">Suggest an app</header-suggest-button>
         </div>
     </div>
 </header>
+<script>
+    import {openSuggestionOverlay} from "../../utils/openSuggestionOverlay";
+
+    class SuggestionFormOpener extends HTMLElement {
+        connectedCallback() {
+            const formOpenerButton = document.getElementById(`header-app-suggestion-button`);
+
+            formOpenerButton.addEventListener('click', () => {
+                const scrollValue = window.scrollY;
+                document.querySelector('#overlay').classList.remove('hidden');
+                document.body.classList.add('no-scroll');
+                document.body.style.top = `-${scrollValue}px`;
+            });
+        }
+    }
+
+    customElements.define('header-suggest-button', SuggestionFormOpener);
+</script>

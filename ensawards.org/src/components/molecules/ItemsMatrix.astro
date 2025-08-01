@@ -1,0 +1,128 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+import MatrixBadge from "../atoms/MatrixBadge.astro";
+import Plus from "../../assets/plusIcon.svg";
+import {cn} from "../../lib/utils";
+
+interface cellElement {
+    text: string;
+    link?: string;
+    iconSource?: string;
+    badgeData?: {
+        icon: "check" | "partialCheck" | "cross";
+        className: string;
+        };
+    }
+
+export interface ItemsMatrixProps {
+    header: string;
+    whatToSuggest: "app" | "best practice";
+    columnNames: string[];
+    rows: cellElement[][];
+    }
+
+const { header, whatToSuggest, columnNames, rows }: ItemsMatrixProps = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif,svg}');
+---
+
+<div class="w-full max-w-[1216px] h-fit flex flex-col items-center gap-6">
+    <div class="w-full">
+        <h2 class="text-2xl font-semibold text-black">{header}</h2>
+    </div>
+
+    <table class="w-full table-auto border-collapse">
+        <thead>
+        <tr class="border-b border-gray-200">
+            {columnNames.map((columnName, idx) => {
+             const leftPadding = idx === 0 ? "pl-0": "";
+             return <th class={cn("text-left text-muted-foreground text-sm font-medium p-4", leftPadding)}>
+                 {columnName}
+             </th>
+            }
+            )}
+        </tr>
+        </thead>
+
+        <tbody>
+        {rows.map((rowData) => (
+                <tr class="border-b border-gray-200">
+                    {rowData.slice(0, columnNames.length).map((cell, idx) => {
+                        const stretchColumn = idx === columnNames.length-2 ? "min-[1160px]:w-1/2" : "";
+                        const leftPadding = idx === 0 ? "pl-0": "";
+                        if (cell.link) {
+                            return (
+                                    <td class={cn("p-4", stretchColumn, leftPadding)}>
+                                        <div class="flex items-center gap-3">
+                                            {cell.iconSource && (
+                                                    <Image class="rounded-md" src={images[cell.iconSource]()} alt={cell.text} />
+                                            )}
+                                            <a class="text-base text-blue-600" href={cell.link}>{cell.text}</a>
+                                        </div>
+                                    </td>
+                            );
+                        }
+
+                        if (cell.badgeData) {
+                            return (
+                                    <td class="p-4 min-w-[160px]">
+                                        <MatrixBadge text={cell.text} className={cell.badgeData.className} iconId={cell.badgeData.icon} />
+                                    </td>
+                            );
+                        }
+
+                        return (
+                                <td class={cn("p-4", stretchColumn, leftPadding)}>
+                                    <div class="flex items-center gap-3">
+                                        {cell.iconSource && (
+                                                <Image class="rounded-md" src={images[cell.iconSource]()} alt={cell.text} />
+                                        )}
+                                        <p class="text-base text-black">{cell.text}</p>
+                                    </div>
+                                </td>
+                        );
+                    })}
+                </tr>
+        ))}
+
+        <tr>
+            <td class="pr-4 pl-0 py-4 w-fit" colspan={1}>
+                <suggest-button
+                        data-header={header}
+                        data-suggestion={whatToSuggest}
+                        id={`${header}-matrix-suggestion-button`}
+                        class="flex items-center gap-2 rounded-md cursor-pointer px-4 py-2"
+                >
+                    <Plus />
+                    <p class="text-sm font-medium text-black">Suggest {whatToSuggest}</p>
+                </suggest-button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    import { openSuggestionOverlay } from "../../utils/openSuggestionOverlay";
+
+    class SuggestionFormOpener extends HTMLElement {
+        connectedCallback() {
+            const formOpenerButton = document.getElementById(`${this.dataset.header}-matrix-suggestion-button`);
+            formOpenerButton?.addEventListener('click', () => {
+                openSuggestionOverlay(this.dataset.suggestion);
+            });
+        }
+    }
+
+    customElements.define('suggest-button', SuggestionFormOpener);
+</script>
+
+<!--            formOpenerButton.addEventListener('click', () => {-->
+<!--                openSuggestionOverlay(this.dataset.suggestion);-->
+<!--            });-->
+<!--        }-->
+<!--    }-->
+
+<!--    customElements.define('suggest-button', SuggestionFormOpener);-->
+<!--</script>-->

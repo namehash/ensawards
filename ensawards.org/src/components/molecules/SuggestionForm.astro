@@ -1,0 +1,52 @@
+---
+export interface SuggestionFormProps {
+    whatsSuggested: "app" | "best practice";
+    formFields: {
+        label: string;
+        type: "text" | "url";
+        required: boolean;
+    }[];
+}
+
+const formTextContentsAdaptations = new Map<"header" | "description", Map<"app" | "best practice", string>>([
+    [
+        "header",
+        new Map<"app" | "best practice", string>([
+            ["app", "an app for review"],
+            ["best practice", "best practice"]
+        ])
+    ],
+    [
+        "description", new Map<"app" | "best practice", string>([
+        ["app", "the app details"],
+        ["best practice", "a best practice"]
+    ])
+    ]
+]);
+
+const {whatsSuggested, formFields}: SuggestionFormProps = Astro.props;
+---
+
+<section>
+    <button>X</button>
+    <div>
+        <h2>Suggest {formTextContentsAdaptations.get("header")!.get(whatsSuggested)}</h2>
+        <p>Provide {formTextContentsAdaptations.get("description")!.get(whatsSuggested)} you'd like us to add to ENSAwards.</p>
+    </div>
+    <form>
+        {formFields.map((field) => (
+            <div>
+                <label for={field.label}>{field.label}{!field.required && " (optional)"}</label>
+                <input id={field.label} name={field.label} type={field.type} required={field.required}/>
+                <!--TODO: fix "An invalid form control with name='Name' is not focusable." error-->
+            </div>
+        ))}
+        <div>
+            <input type="submit" value="Send"/>
+            <button class="cursor-pointer bg-red-600 text-white"
+                    onclick="document.querySelector('#overlay').classList.add('hidden');
+						document.body.classList.remove('no-scroll');
+						">Cancel</button>
+        </div>
+    </form>
+</section>

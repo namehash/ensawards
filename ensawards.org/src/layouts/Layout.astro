@@ -3,9 +3,11 @@ import { AstroFont } from "astro-font";
 import { SEO } from "astro-seo";
 import "../styles/global.css";
 import Header from "../components/organisms/Header.astro";
-// favicon credits: <a href="https://www.flaticon.com/free-icons/award" title="award icons">Award icons created by Freepik - Flaticon</a>
----
+import Overlay from "../components/molecules/Overlay.astro";
+import SuggestionForm from "../components/molecules/SuggestionForm.astro";
 
+let scrollY = 0;
+---
 
 <!doctype html>
 <html lang="en">
@@ -62,6 +64,20 @@ import Header from "../components/organisms/Header.astro";
 	<body>
 		<Header />
 		<slot />
+		<div id="overlay" class="transition-all duration-1000 hidden">
+			<Overlay>
+				<SuggestionForm
+					whatsSuggested="app"
+					formFields={
+						[
+							{label: "Name", type: "text", required: true},
+							{label: "URL", type: "url", required: true},
+							{label: "Description", type: "text", required: false},
+						]
+					}
+				/>
+			</Overlay>
+		</div>
 	</body>
 </html>
 

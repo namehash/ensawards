@@ -1,19 +1,7 @@
 ---
+import {adaptSuggestionText} from "../../utils";
 export interface SuggestFormOpenerProps {
     whatsSuggested: "app" | "best practice";
-}
-
-const adaptSuggestionText = (whatsSuggested: "app" | "best practice"): string => {
-    switch (whatsSuggested) {
-        case "app":
-            return "an app";
-
-        case "best practice":
-            return "a best practice";
-
-        default:
-            throw new Error(`${whatsSuggested} is not a valid suggestion category`)
-    }
 }
 
 const {whatsSuggested}: SuggestFormOpenerProps = Astro.props;
@@ -26,21 +14,8 @@ const {whatsSuggested}: SuggestFormOpenerProps = Astro.props;
 
 
 <script>
+    import {openSuggestionOverlay} from "../../utils/openSuggestionOverlay";
 
-    function openSuggestionOverlay(whatsSuggested: string) {
-        switch (whatsSuggested) {
-            case "app":
-                alert("Opening App suggestion!");
-                break;
-
-            case "best practice":
-                alert("Opening Best practice suggestion!");
-                break;
-
-            default:
-                throw new Error(`${whatsSuggested} is not a valid suggestion category`)
-        }
-    }
     class SuggestionFormOpener extends HTMLElement {
         connectedCallback() {
             const formOpenerButton = document.getElementById(`${this.dataset.suggestion}-suggestion-button`);

@@ -1,0 +1,83 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import ItemsMatrix from "../../components/molecules/ItemsMatrix.astro";
+
+export function getStaticPaths() { //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
+    return [
+        {params: {app: 0}},
+        {params: {app: 1}},
+        {params: {app: 2}},
+        {params: {app: 3}},
+        {params: {app: 4}},
+        {params: {app: 5}},
+        {params: {app: 6}},
+        {params: {app: 7}},
+        {params: {app: 8}},
+        {params: {app: 9}},
+        {params: {app: 10}},
+        {params: {app: 11}},
+    ]
+}
+
+const {app} = Astro.params;
+
+//TODO: adapt all data here to be dependent on actual category->best-practice pairs once we get the data, for now use mock
+
+const mockAppReviewData = {
+    name: "Rainbow Wallet",
+    description: "Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum.",
+    additionalHeroData: [
+        {
+            name: "Type",
+            value: "Wallet"
+        },
+        {
+            name: "Webiste",
+            value: "Visit site",
+            link: new URL("https://rainbow.me/")
+        },
+        {
+            name: "Overall score",
+            value: "90%"
+        },
+    ],
+
+}
+---
+
+<Layout>
+    <SubpageHero
+            header={mockAppReviewData.name}
+            description={mockAppReviewData.description}
+            breadcrumbs={["App reviews", mockAppReviewData.name]}
+            additionalElements={mockAppReviewData.additionalHeroData}
+    />
+    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px] sm:px-8">
+        <ItemsMatrix
+                header="App support matrix"
+                whatToSuggest="best practice"
+                columnNames={["Best practice", "Type", "Notes", "Result"]}
+                rows={[
+                    [
+                        {text: "Support ENSIP-19", link: "https://docs.ens.domains/resolution/"},
+                        {text: "ENS Resolution", link: "https://docs.ens.domains/resolution/"},
+                        {text: "-"},
+                        {text: "Pass", badgeData: {icon: "check", className: "text-emerald-600 bg-[#0596691A]"}},
+                    ],
+                    [
+                        {text: "Support ENSIP-19", link: "https://docs.ens.domains/resolution/"},
+                        {text: "ENS Resolution", link: "https://docs.ens.domains/resolution/"},
+                        {text: "-"},
+                        {text: "Partial pass", badgeData: {icon: "partialCheck", className: "text-neutral-900 bg-neutral-100"}},
+                    ],
+                    [
+                        {text: "Support ENSIP-19", link: "https://docs.ens.domains/resolution/"},
+                        {text: "ENS Resolution", link: "https://docs.ens.domains/resolution/"},
+                        {text: "-"},
+                        {text: "Fail", badgeData: {icon: "cross", className: "text-red-600 bg-[#DC26261A]"}},
+                    ],
+                ]}
+        />
+    </section>
+</Layout>
