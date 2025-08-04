@@ -1,4 +1,8 @@
 ---
+import CloseOverlay from "../../assets/closeOverlayIcon.svg";
+import {cn} from "../../lib/utils";
+import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
+
 export interface SuggestionFormProps {
     whatsSuggested: "app" | "best practice";
     formFields: {
@@ -27,26 +31,88 @@ const formTextContentsAdaptations = new Map<"header" | "description", Map<"app" 
 const {whatsSuggested, formFields}: SuggestionFormProps = Astro.props;
 ---
 
-<section>
-    <button>X</button>
-    <div>
-        <h2>Suggest {formTextContentsAdaptations.get("header")!.get(whatsSuggested)}</h2>
-        <p>Provide {formTextContentsAdaptations.get("description")!.get(whatsSuggested)} you'd like us to add to ENSAwards.</p>
+<overlay-content id=`${whatsSuggested.replace(" ","-")}-overlay-content` data-suggestion={whatsSuggested} class="w-fit max-w-[460px] h-fit box-border p-6 flex flex-nowrap flex-col justify-start items-start gap-5 shrink-0 rounded-xl bg-white">
+    <div class="flex flex-col flex-nowrap justify-start items-start gap-2">
+        <div class="flex flex-row flex-nowrap justify-between items-center self-stretch">
+            <h2 class="text-lg leading-7 font-semibold text-foreground">Suggest {formTextContentsAdaptations.get("header")!.get(whatsSuggested)}</h2>
+            <overlay-close-button data-suggestion={whatsSuggested} id=`${whatsSuggested.replace(" ","-")}-overlay-close-button`><CloseOverlay class="cursor-pointer text-[#A3A3A3] transition-all duration-200 hover:text-red-600"/></overlay-close-button>
+        </div>
+        <p class="text-sm leading-5 font-normal text-gray-500">Provide {formTextContentsAdaptations.get("description")!.get(whatsSuggested)} you'd like us to add to ENSAwards.</p>
     </div>
-    <form>
+    <form class="flex flex-col flex-nowrap justify-start items-start gap-5 self-stretch">
         {formFields.map((field) => (
-            <div>
-                <label for={field.label}>{field.label}{!field.required && " (optional)"}</label>
-                <input id={field.label} name={field.label} type={field.type} required={field.required}/>
-                <!--TODO: fix "An invalid form control with name='Name' is not focusable." error-->
+            <div class="flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch">
+                <label for={field.label} class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">{field.label}{!field.required && " (optional)"}</label>
+                <input id={field.label} name={field.label} type={field.type} required={field.required} autocomplete="off" class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"/>
             </div>
         ))}
-        <div>
-            <input type="submit" value="Send"/>
-            <button class="cursor-pointer bg-red-600 text-white"
-                    onclick="document.querySelector('#overlay').classList.add('hidden');
-						document.body.classList.remove('no-scroll');
-						">Cancel</button>
+        <div class="flex flex-row flex-nowrap justify-end items-center gap-2 self-stretch">
+            <overlay-cancel-button data-suggestion={whatsSuggested} id=`${whatsSuggested.replace(" ","-")}-overlay-cancel-button` class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "cursor-pointer rounded-full"}))}>Cancel</overlay-cancel-button>
+            <input type="submit" value="Send" class={cn(shadcnButtonVariants({variant: "default", size: "default", className: "cursor-pointer rounded-full"}))}/>
         </div>
     </form>
-</section>
+</overlay-content>
+
+<script>
+    function closeOverlay(whatsSuggested: string) {
+        document.querySelector(`#${whatsSuggested.replace(" ", "-")}-overlay`).classList.add('hidden');
+        document.body.classList.remove('no-scroll');
+
+        const scrollToY = parseInt(document.body.style.top.replace('px', '').replace('-',''));
+        document.body.style.top = '';
+
+        if (!isNaN(scrollToY)){
+            window.scrollTo(0, scrollToY);
+        }
+    }
+
+    function enableAlternativeClosings(whatsSuggested: string) {
+        const overlay = document.querySelector(`#${whatsSuggested.replace(" ", "-")}-overlay`);
+        const content = overlay.querySelector(`#${whatsSuggested.replace(" ", "-")}-overlay-content`);
+
+        // Close on click outside
+        overlay.addEventListener('click', (e) => {
+            if (!content.contains(e.target)) closeOverlay(whatsSuggested);
+        });
+
+        // Close on Escape key
+        // Currently this event fires twice cause there are two overlays always in dom
+        // TODO: for now it's fixed in a 'hacky' way in line 59 - figure out if there is a more elegant way to do it
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeOverlay(whatsSuggested);
+            }
+        });
+    }
+
+    class OverlayCancelButton extends HTMLElement {
+        connectedCallback() {
+            const cancelButton = document.getElementById(`${this.dataset.suggestion.replace(" ","-")}-overlay-cancel-button`);
+
+            cancelButton.addEventListener('click', () => {
+                closeOverlay(this.dataset.suggestion);
+            });
+        }
+    }
+
+    class OverlayCloseButton extends HTMLElement {
+        connectedCallback() {
+            const closeButton = document.getElementById(`${this.dataset.suggestion.replace(" ","-")}-overlay-close-button`);
+
+            closeButton.addEventListener('click', () => {
+                closeOverlay(this.dataset.suggestion);
+            });
+        }
+    }
+
+    class OverlayContent extends HTMLElement {
+        connectedCallback() {
+            enableAlternativeClosings(this.dataset.suggestion);
+        }
+    }
+
+    customElements.define("overlay-content", OverlayContent);
+    customElements.define('overlay-close-button', OverlayCloseButton);
+    customElements.define('overlay-cancel-button', OverlayCancelButton);
+</script>

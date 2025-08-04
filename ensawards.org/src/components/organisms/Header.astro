@@ -20,10 +20,7 @@
             const formOpenerButton = document.getElementById(`header-app-suggestion-button`);
 
             formOpenerButton.addEventListener('click', () => {
-                const scrollValue = window.scrollY;
-                document.querySelector('#overlay').classList.remove('hidden');
-                document.body.classList.add('no-scroll');
-                document.body.style.top = `-${scrollValue}px`;
+                openSuggestionOverlay("app");
             });
         }
     }

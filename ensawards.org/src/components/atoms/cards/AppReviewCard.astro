@@ -1,4 +1,6 @@
 ---
+import {cn} from "../../../lib/utils";
+import {shadcnButtonVariants} from "../../shadcn/shadcnButtonStyles";
 export interface AppReviewCardProps {
     name: string;
     description: string;
@@ -24,7 +26,7 @@ const {name, description, viewReviewLink, overallScore, websiteLink, type}: AppR
     </div>
     <div class="bg-gray-200 h-[1px] self-stretch" />
     <div class="flex flex-row flex-nowrap justify-between items-start self-stretch">
-        <a href={viewReviewLink} class="flex flex-row justify-center items-center gap-2 px-4 py-2 bg-neutral-100 shadow-xs rounded-full text-sm leading-normal font-medium">View review</a>
+        <a href={viewReviewLink} class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full"}))}>View review</a>
         <div class="flex flex-nowrap flex-row justify-start items-center gap-6">
             <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
                 <p class="text-muted-foreground text-sm leading-normal font-normal">Overall score</p>

@@ -1,5 +1,7 @@
 ---
 import {adaptSuggestionText} from "../../utils";
+import {cn} from "../../lib/utils";
+import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
 export interface SuggestFormOpenerProps {
     whatsSuggested: "app" | "best practice";
 }
@@ -9,7 +11,7 @@ const {whatsSuggested}: SuggestFormOpenerProps = Astro.props;
 
 <div class="w-fit md:w-[598px] max-w-[598px] h-fit min-h-[62px] box-border px-6 py-5 flex flex-row flex-wrap justify-between items-center rounded-2xl border border-dashed border-gray-300">
     <p class="text-base leading-normal font-normal text-muted-foreground">Suggest {adaptSuggestionText(whatsSuggested)} you'd like us to add.</p>
-    <suggest-form-button data-suggestion={whatsSuggested} id=`${whatsSuggested}-suggestion-button` class="flex flex-row justify-center items-center gap-2 px-4 py-2 bg-neutral-100 shadow-xs rounded-full text-sm leading-normal font-medium cursor-pointer">Suggest {whatsSuggested}</suggest-form-button>
+    <suggest-form-button data-suggestion={whatsSuggested} id=`${whatsSuggested}-suggestion-button` class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full"}))}>Suggest {whatsSuggested}</suggest-form-button>
 </div>
 
 

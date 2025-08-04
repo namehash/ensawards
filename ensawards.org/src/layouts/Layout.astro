@@ -64,7 +64,7 @@ let scrollY = 0;
 	<body>
 		<Header />
 		<slot />
-		<div id="overlay" class="transition-all duration-1000 hidden">
+		<div id="app-overlay" class="transition-all duration-1000 hidden">
 			<Overlay>
 				<SuggestionForm
 					whatsSuggested="app"
@@ -72,6 +72,19 @@ let scrollY = 0;
 						[
 							{label: "Name", type: "text", required: true},
 							{label: "URL", type: "url", required: true},
+							{label: "Description", type: "text", required: false},
+						]
+					}
+				/>
+			</Overlay>
+		</div>
+		<div id="best-practice-overlay" class="transition-all duration-1000 hidden">
+			<Overlay>
+				<SuggestionForm
+					whatsSuggested="best practice"
+					formFields={
+						[
+							{label: "Name", type: "text", required: true},
 							{label: "Description", type: "text", required: false},
 						]
 					}

@@ -1,11 +1,16 @@
 export function openSuggestionOverlay(whatsSuggested: string) {
+    const scrollValue = window.scrollY;
     switch (whatsSuggested) {
         case "app":
-            alert("Opening App suggestion!");
+            document.querySelector('#app-overlay')!.classList.remove('hidden');
+            document.body.classList.add('no-scroll');
+            document.body.style.top = `-${scrollValue}px`;
             break;
 
         case "best practice":
-            alert("Opening Best practice suggestion!");
+            document.querySelector('#best-practice-overlay')!.classList.remove('hidden');
+            document.body.classList.add('no-scroll');
+            document.body.style.top = `-${scrollValue}px`;
             break;
 
         default:

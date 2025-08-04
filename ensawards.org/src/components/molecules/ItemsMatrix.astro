@@ -5,6 +5,7 @@ import type { ImageMetadata } from 'astro';
 import MatrixBadge from "../atoms/MatrixBadge.astro";
 import Plus from "../../assets/plusIcon.svg";
 import {cn} from "../../lib/utils";
+import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
 
 interface cellElement {
     text: string;
@@ -92,10 +93,10 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg
                         data-header={header}
                         data-suggestion={whatToSuggest}
                         id={`${header}-matrix-suggestion-button`}
-                        class="flex items-center gap-2 rounded-md cursor-pointer px-4 py-2"
+                        class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "cursor-pointer"}))}
                 >
                     <Plus />
-                    <p class="text-sm font-medium text-black">Suggest {whatToSuggest}</p>
+                    <p>Suggest {whatToSuggest}</p>
                 </suggest-button>
             </td>
         </tr>
@@ -117,12 +118,3 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg
 
     customElements.define('suggest-button', SuggestionFormOpener);
 </script>
-
-<!--            formOpenerButton.addEventListener('click', () => {-->
-<!--                openSuggestionOverlay(this.dataset.suggestion);-->
-<!--            });-->
-<!--        }-->
-<!--    }-->
-
-<!--    customElements.define('suggest-button', SuggestionFormOpener);-->
-<!--</script>-->
