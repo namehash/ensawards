@@ -1,14 +1,15 @@
 ---
-import {cn} from "../../../lib/utils";
-import {shadcnButtonVariants} from "../../shadcn/shadcnButtonStyles";
+import { cn } from "../../../lib/utils";
+import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
 export interface CategoryCardProps {
-    name: string;
-    description: string;
-    viewBestPracticesLink: string; //might change to URL or change name to not be misleading
-    numberOfBestPractices: number;
+  name: string;
+  description: string;
+  viewBestPracticesLink: string; //might change to URL or change name to not be misleading
+  numberOfBestPractices: number;
 }
 
-const {name, description, viewBestPracticesLink, numberOfBestPractices}: CategoryCardProps = Astro.props;
+const { name, description, viewBestPracticesLink, numberOfBestPractices }: CategoryCardProps =
+  Astro.props;
 ---
 
 <div class="w-fit max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap justify-center items-start gap-4 px-6 pt-6 pb-4 rounded-2xl border border-gray-200">

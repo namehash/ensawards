@@ -1,23 +1,24 @@
 ---
-import { Image } from 'astro:assets';
-import {adaptBreadcrumb} from "../../utils";
+import { Image } from "astro:assets";
+import { adaptBreadcrumb } from "../../utils";
 
 interface additionalHeroElement {
-    name: string;
-    value: string;
-    link?: URL;
+  name: string;
+  value: string;
+  link?: URL;
 }
 export interface SubpageHeroProps {
-    header: string;
-    description?: string;
-    breadcrumbs?: string[]; //May change depending on astro's policy on breadcrumbs (update: external but recommended library, but requires SASS styling and is yet another dependency, so for now I'll try doing it manually)
-    icon?: string; //May change to react node or just a source string -> TODO: change to <slot name="icon"/>
-    additionalElements?: additionalHeroElement[];
+  header: string;
+  description?: string;
+  breadcrumbs?: string[]; //May change depending on astro's policy on breadcrumbs (update: external but recommended library, but requires SASS styling and is yet another dependency, so for now I'll try doing it manually)
+  icon?: string; //May change to react node or just a source string -> TODO: change to <slot name="icon"/>
+  additionalElements?: additionalHeroElement[];
 }
 
-const {header, description, breadcrumbs, icon, additionalElements}: SubpageHeroProps = Astro.props;
+const { header, description, breadcrumbs, icon, additionalElements }: SubpageHeroProps =
+  Astro.props;
 
-let breadcrumbHref = ""
+let breadcrumbHref = "";
 ---
 
 <section class="w-full h-fit box-border sm:px-8 sm:pt-[102px] sm:pb-10 flex flex-nowrap flex-col items-center justify-center">

@@ -1,16 +1,16 @@
 ---
-import {cn} from "../../lib/utils";
 import Check from "../../assets/checkIcon.svg";
 import PartialCheck from "../../assets/grayCheckIcon.svg";
 import Cross from "../../assets/xIcon.svg";
+import { cn } from "../../lib/utils";
 
 export interface MatrixBadgeProps {
-    text: string;
-    className: string;
-    iconId: string;
+  text: string;
+  className: string;
+  iconId: string;
 }
 
-const {text, className, iconId}:MatrixBadgeProps = Astro.props;
+const { text, className, iconId }: MatrixBadgeProps = Astro.props;
 
 //TODO: see if possible to merge with CardBadge later
 ---

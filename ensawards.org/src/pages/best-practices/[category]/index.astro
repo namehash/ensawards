@@ -1,27 +1,27 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
-import SubpageHero from "../../../components/molecules/SubpageHero.astro";
-import ItemsList from "../../../components/molecules/ItemsList.astro";
-import BestPracticeCard from "../../../components/atoms/cards/BestPracticeCard.astro";
 import SuggestFormOpener from "../../../components/atoms/SuggestFormOpener.astro";
+import BestPracticeCard from "../../../components/atoms/cards/BestPracticeCard.astro";
+import ItemsList from "../../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../../components/molecules/SubpageHero.astro";
+import Layout from "../../../layouts/Layout.astro";
 export function getStaticPaths() {
-    return [
-        {params: {category: 0}},
-        {params: {category: 1}},
-        {params: {category: 2}},
-        {params: {category: 3}},
-        {params: {category: 4}},
-        {params: {category: 5}},
-        {params: {category: 6}},
-        {params: {category: 7}},
-        {params: {category: 8}},
-        {params: {category: 9}},
-        {params: {category: 10}},
-        {params: {category: 11}},
-    ]
+  return [
+    { params: { category: 0 } },
+    { params: { category: 1 } },
+    { params: { category: 2 } },
+    { params: { category: 3 } },
+    { params: { category: 4 } },
+    { params: { category: 5 } },
+    { params: { category: 6 } },
+    { params: { category: 7 } },
+    { params: { category: 8 } },
+    { params: { category: 9 } },
+    { params: { category: 10 } },
+    { params: { category: 11 } },
+  ];
 }
 
-const {category} = Astro.params;
+const { category } = Astro.params;
 
 //TODO: adapt all data here to be dependent on actual category once we get the data
 ---

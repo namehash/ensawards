@@ -1,31 +1,31 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
-import MatrixBadge from "../atoms/MatrixBadge.astro";
 import Plus from "../../assets/plusIcon.svg";
-import {cn} from "../../lib/utils";
-import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
+import { cn } from "../../lib/utils";
+import MatrixBadge from "../atoms/MatrixBadge.astro";
+import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
 
 interface cellElement {
-    text: string;
-    link?: string;
-    iconSource?: string;
-    badgeData?: {
-        icon: "check" | "partialCheck" | "cross";
-        className: string;
-        };
-    }
+  text: string;
+  link?: string;
+  iconSource?: string;
+  badgeData?: {
+    icon: "check" | "partialCheck" | "cross";
+    className: string;
+  };
+}
 
 export interface ItemsMatrixProps {
-    header: string;
-    whatToSuggest: "app" | "best practice";
-    columnNames: string[];
-    rows: cellElement[][];
-    }
+  header: string;
+  whatToSuggest: "app" | "best practice";
+  columnNames: string[];
+  rows: cellElement[][];
+}
 
 const { header, whatToSuggest, columnNames, rows }: ItemsMatrixProps = Astro.props;
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif,svg}');
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 ---
 
 <div class="w-full max-w-[1216px] h-fit flex flex-col items-center gap-6">

@@ -1,48 +1,49 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
-import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import ItemsMatrix from "../../../components/molecules/ItemsMatrix.astro";
-export function getStaticPaths() { //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
-    return [
-        {params: {category: 0, bestPractice: 0}},
-        {params: {category: 1, bestPractice: 0}},
-        {params: {category: 2, bestPractice: 0}},
-        {params: {category: 3, bestPractice: 0}},
-        {params: {category: 4, bestPractice: 0}},
-        {params: {category: 5, bestPractice: 0}},
-        {params: {category: 6, bestPractice: 0}},
-        {params: {category: 7, bestPractice: 0}},
-        {params: {category: 8, bestPractice: 0}},
-        {params: {category: 9, bestPractice: 0}},
-        {params: {category: 10, bestPractice: 0}},
-        {params: {category: 11, bestPractice: 0}},
-    ]
+import SubpageHero from "../../../components/molecules/SubpageHero.astro";
+import Layout from "../../../layouts/Layout.astro";
+export function getStaticPaths() {
+  //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
+  return [
+    { params: { category: 0, bestPractice: 0 } },
+    { params: { category: 1, bestPractice: 0 } },
+    { params: { category: 2, bestPractice: 0 } },
+    { params: { category: 3, bestPractice: 0 } },
+    { params: { category: 4, bestPractice: 0 } },
+    { params: { category: 5, bestPractice: 0 } },
+    { params: { category: 6, bestPractice: 0 } },
+    { params: { category: 7, bestPractice: 0 } },
+    { params: { category: 8, bestPractice: 0 } },
+    { params: { category: 9, bestPractice: 0 } },
+    { params: { category: 10, bestPractice: 0 } },
+    { params: { category: 11, bestPractice: 0 } },
+  ];
 }
 
-const {category, bestPractice} = Astro.params;
+const { category, bestPractice } = Astro.params;
 
 //TODO: adapt all data here to be dependent on actual category->best-practice pairs once we get the data, for now use mock
 
 const mockBestPracticeData = {
-    name: "Support ENSIP-19",
-    description: "This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the ecosystem.",
-    additionalHeroData: [
-        {
-            name: "Category",
-            value: "ENS Resolution",
-            link: new URL("https://docs.ens.domains/resolution/")
-        },
-        {
-            name: "Apps passed",
-            value: "12"
-        },
-        {
-            name: "Passing score",
-            value: "90%"
-        },
-    ],
-
-}
+  name: "Support ENSIP-19",
+  description:
+    "This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the ecosystem.",
+  additionalHeroData: [
+    {
+      name: "Category",
+      value: "ENS Resolution",
+      link: new URL("https://docs.ens.domains/resolution/"),
+    },
+    {
+      name: "Apps passed",
+      value: "12",
+    },
+    {
+      name: "Passing score",
+      value: "90%",
+    },
+  ],
+};
 ---
 
 <Layout>

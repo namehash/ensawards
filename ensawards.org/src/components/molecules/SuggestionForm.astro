@@ -1,34 +1,38 @@
 ---
 import CloseOverlay from "../../assets/closeOverlayIcon.svg";
-import {cn} from "../../lib/utils";
-import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
+import { cn } from "../../lib/utils";
+import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
 
 export interface SuggestionFormProps {
-    whatsSuggested: "app" | "best practice";
-    formFields: {
-        label: string;
-        type: "text" | "url";
-        required: boolean;
-    }[];
+  whatsSuggested: "app" | "best practice";
+  formFields: {
+    label: string;
+    type: "text" | "url";
+    required: boolean;
+  }[];
 }
 
-const formTextContentsAdaptations = new Map<"header" | "description", Map<"app" | "best practice", string>>([
-    [
-        "header",
-        new Map<"app" | "best practice", string>([
-            ["app", "an app for review"],
-            ["best practice", "best practice"]
-        ])
-    ],
-    [
-        "description", new Map<"app" | "best practice", string>([
-        ["app", "the app details"],
-        ["best practice", "a best practice"]
-    ])
-    ]
+const formTextContentsAdaptations = new Map<
+  "header" | "description",
+  Map<"app" | "best practice", string>
+>([
+  [
+    "header",
+    new Map<"app" | "best practice", string>([
+      ["app", "an app for review"],
+      ["best practice", "best practice"],
+    ]),
+  ],
+  [
+    "description",
+    new Map<"app" | "best practice", string>([
+      ["app", "the app details"],
+      ["best practice", "a best practice"],
+    ]),
+  ],
 ]);
 
-const {whatsSuggested, formFields}: SuggestionFormProps = Astro.props;
+const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;
 ---
 
 <overlay-content id=`${whatsSuggested.replace(" ","-")}-overlay-content` data-suggestion={whatsSuggested} class="w-fit max-w-[460px] h-fit box-border p-6 flex flex-nowrap flex-col justify-start items-start gap-5 shrink-0 rounded-xl bg-white">
