@@ -2,6 +2,7 @@
 import ItemsMatrix from "../../components/molecules/ItemsMatrix.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import Layout from "../../layouts/Layout.astro";
+import RainbowIcon from "../../assets/rainbowIcon.svg";
 
 export function getStaticPaths() {
   //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
@@ -35,7 +36,7 @@ const mockAppReviewData = {
       value: "Wallet",
     },
     {
-      name: "Webiste",
+      name: "Website",
       value: "Visit site",
       link: new URL("https://rainbow.me/"),
     },
@@ -51,12 +52,14 @@ const mockAppReviewData = {
     <SubpageHero
             header={mockAppReviewData.name}
             description={mockAppReviewData.description}
-            breadcrumbs={["App reviews", mockAppReviewData.name]}
+            breadcrumbs={["App reviews"]}
             additionalElements={mockAppReviewData.additionalHeroData}
-    />
+    >
+        <RainbowIcon slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg"/>
+    </SubpageHero>
     <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px] sm:px-8">
         <ItemsMatrix
-                header="App support matrix"
+                header="Review"
                 whatToSuggest="best practice"
                 columnNames={["Best practice", "Type", "Notes", "Result"]}
                 rows={[

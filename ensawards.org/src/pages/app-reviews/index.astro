@@ -24,7 +24,9 @@ import Layout from "../../layouts/Layout.astro";
                             viewReviewLink=`/app-reviews/${idx}`
                     >
                         <RainbowIcon slot="icon" />
-                        <CardBadge slot="badge" text="Top performer" className="text-primary-foreground bg-black"/>
+                        {idx % 2 === 0 ? <CardBadge slot="badge" text="Top performer" className="text-primary-foreground bg-black"/> :
+                            (idx === 1 && <CardBadge slot="badge" text="New" className="text-primary-foreground bg-emerald-600"/> )
+                        }
                     </AppReviewCard>
             ))}
             <SuggestFormOpener whatsSuggested="app"/>

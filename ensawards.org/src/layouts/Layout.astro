@@ -6,12 +6,10 @@ import Overlay from "../components/molecules/Overlay.astro";
 import SuggestionForm from "../components/molecules/SuggestionForm.astro";
 import Footer from "../components/organisms/Footer.astro";
 import Header from "../components/organisms/Header.astro";
-
-let scrollY = 0;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<AstroFont
@@ -64,7 +62,7 @@ let scrollY = 0;
 	</head>
 	<body>
 		<Header />
-		<slot />
+		<slot/>
 		<div id="app-overlay" class="transition-all duration-1000 hidden">
 			<Overlay>
 				<SuggestionForm

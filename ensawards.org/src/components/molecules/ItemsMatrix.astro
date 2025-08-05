@@ -38,7 +38,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
         <tr class="border-b border-gray-200">
             {columnNames.map((columnName, idx) => {
              const leftPadding = idx === 0 ? "pl-0": "";
-             return <th class={cn("text-left text-muted-foreground text-sm font-medium p-4", leftPadding)}>
+             return <th class={cn("text-left text-muted-foreground text-sm leading-5 font-medium p-4", leftPadding)}>
                  {columnName}
              </th>
             }
@@ -52,14 +52,15 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
                     {rowData.slice(0, columnNames.length).map((cell, idx) => {
                         const stretchColumn = idx === columnNames.length-2 ? "min-[1160px]:w-1/2" : "";
                         const leftPadding = idx === 0 ? "pl-0": "";
+                        const linkFontWeight = cell.iconSource ? "font-medium" : "font-normal";
                         if (cell.link) {
                             return (
                                     <td class={cn("p-4", stretchColumn, leftPadding)}>
                                         <div class="flex items-center gap-3">
                                             {cell.iconSource && (
-                                                    <Image class="rounded-md" src={images[cell.iconSource]()} alt={cell.text} />
+                                                    <Image class="rounded-md w-10 aspect-square" src={images[cell.iconSource]()} alt={cell.text} />
                                             )}
-                                            <a class="text-base text-blue-600" href={cell.link}>{cell.text}</a>
+                                            <a class={cn("text-base text-blue-600 whitespace-nowrap transition-all duration-200 hover:underline hover:underline-offset-[25%]", linkFontWeight)} href={cell.link}>{cell.text}</a>
                                         </div>
                                     </td>
                             );
@@ -93,7 +94,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
                         data-header={header}
                         data-suggestion={whatToSuggest}
                         id={`${header}-matrix-suggestion-button`}
-                        class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "cursor-pointer"}))}
+                        class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "cursor-pointer rounded-full"}))}
                 >
                     <Plus />
                     <p>Suggest {whatToSuggest}</p>

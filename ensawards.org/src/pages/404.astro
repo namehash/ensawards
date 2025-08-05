@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {cn} from "../lib/utils";
+import {shadcnButtonVariants} from "../components/shadcn/shadcnButtonStyles";
+import NotFoundErrorCode from "../assets/404.svg";
+---
+
+<Layout>
+    <section class="w-full h-screen flex justify-center items-center">
+        <div class="h-fit w-fit max-w-[444px] flex flex-nowrap flex-col justify-center items-center gap-8">
+            <NotFoundErrorCode />
+            <div class="h-fit w-fit flex flex-nowrap flex-col justify-center items-center gap-5">
+                <div class="h-fit w-fit flex flex-nowrap flex-col justify-center items-center gap-3">
+                    <h1 class="text-4xl leading-normal font-semibold">Page not found</h1>
+                    <p class="text-sm leading-normal font-normal text-gray-500">We can’t seem to find the page you’re looking for</p>
+                </div>
+                <a href="/" class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "onScrollButton cursor-pointer rounded-full"}))}>Back to homepage</a>
+            </div>
+        </div>
+    </section>
+</Layout>
