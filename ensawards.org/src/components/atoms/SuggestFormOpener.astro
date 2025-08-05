@@ -9,9 +9,9 @@ export interface SuggestFormOpenerProps {
 const { whatsSuggested }: SuggestFormOpenerProps = Astro.props;
 ---
 
-<div class="w-fit md:w-[598px] max-w-[598px] h-fit min-h-[62px] box-border px-6 py-5 flex flex-row flex-wrap justify-between items-center rounded-2xl border border-dashed border-gray-300">
-    <p class="text-base leading-normal font-normal text-muted-foreground">Suggest {adaptSuggestionText(whatsSuggested)} you'd like us to add.</p>
-    <suggest-form-button data-suggestion={whatsSuggested} id=`${whatsSuggested}-suggestion-button` class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full"}))}>Suggest {whatsSuggested}</suggest-form-button>
+<div class="w-full sm:w-fit md:w-[598px] max-w-[598px] h-fit min-h-[62px] box-border p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row flex-nowrap sm:flex-wrap justify-center sm:justify-between items-center max-sm:gap-3 rounded-2xl border border-dashed border-gray-300">
+    <p class="text-base leading-normal font-normal text-muted-foreground text-center sm:text-left">Suggest {adaptSuggestionText(whatsSuggested)} you'd like us to add.</p>
+    <suggest-form-button data-suggestion={whatsSuggested} id=`${whatsSuggested}-suggestion-button` class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full max-sm:self-stretch"}))}>Suggest {whatsSuggested}</suggest-form-button>
 </div>
 
 

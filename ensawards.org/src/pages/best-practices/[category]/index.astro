@@ -33,13 +33,13 @@ const { category } = Astro.params;
             breadcrumbs={["Best practices"]}
             additionalElements={[{name: "Best practices", value: "12"}]}
     />
-    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px]">
+    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
         <ItemsList header="Best practices" numberOfItems={12}>
             {[...Array(parseInt(category)+1).keys()].map((card, idx) => (
                     <BestPracticeCard
                             key=`best-practice-card-${idx}`
                             name="ENS Resolution"
-                            description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
+                            description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
                             viewReviewsLink=`/best-practices/${category}/0`
                             appsPassed={12}
                             passingScore={90}

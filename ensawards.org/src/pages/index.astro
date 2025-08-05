@@ -13,17 +13,17 @@ import {shadcnButtonVariants} from "../components/shadcn/shadcnButtonStyles";
 ---
 
 <Layout>
-	<section id="lpHero" class="relative w-full h-full max-h-[820px] flex flex-col justify-center items-center bg-yellow-400">
-		<div class="w-fit max-w-[800px] h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center gap-8">
+	<section id="lpHero" class="relative w-full h-full max-sm:px-5 max-h-[820px] flex flex-col justify-center items-center bg-yellow-400">
+		<div class="w-fit max-w-[800px] h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center gap-6 sm:gap-8">
 			<div class="flex flex-col flex-nowrap justify-center items-center gap-4 self-stretch">
-				<h1 class="text-black text-[64px] leading-[72px] font-bold text-center">Unleash ENS potential within your app</h1>
-				<p class="text-lg leading-7 font-normal text-center text-black/60">Unleash full ENS potential within your app check how fully it supports ENS</p>
+				<h1 class="text-black text-[32px] sm:text-[64px] leading-[44px] sm:leading-[72px] font-bold text-center">Unleash ENS potential within your&nbsp;app</h1>
+				<p class="text-base sm:text-lg leading-normal sm:leading-7 font-normal text-center text-black/60">Unleash full ENS potential within your app check how fully it supports ENS</p>
 			</div>
 			<a href="/best-practices" class={cn(shadcnButtonVariants({variant: "default", size: "default", className: "cursor-pointer rounded-full px-5 h-[50px] box-border"}))}>View best practices</a>
 		</div>
-		<a href="#previews-section" class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "hover:bg-black/5 cursor-pointer absolute bottom-[25px] has-[>svg]:p-[10px] w-5 h-5 box-content rounded-[40px] border border-black/20"}))}><ChevronDown /></a>
+		<a href="#previews-section" class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "hover:bg-black/5 cursor-pointer absolute max-sm:bottom-5 bottom-[25px] has-[>svg]:p-[10px] w-5 h-5 box-content rounded-[40px] border border-black/20"}))}><ChevronDown /></a>
 	</section>
-	<section id="previews-section" class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 py-[60px]  sm:px-8">
+	<section id="previews-section" class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
 		<ItemsList header="Category" numberOfItems={bestPracticesCategoryCards.length} seeAllLink="/best-practices">
 			{bestPracticesCategoryCards.slice(0,4).map((card, idx) => (
 				<CategoryCard
@@ -43,7 +43,7 @@ import {shadcnButtonVariants} from "../components/shadcn/shadcnButtonStyles";
 					description="Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum."
 					overallScore={90}
 					websiteLink="https://rainbow.me/"
-					type="website"
+					type="wallet"
 					viewReviewLink=`/app-reviews/${idx}`
 				>
 					<RainbowIcon slot="icon" />
