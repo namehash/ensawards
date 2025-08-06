@@ -3,6 +3,9 @@ import ItemsMatrix from "../../components/molecules/ItemsMatrix.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import Layout from "../../layouts/Layout.astro";
 import RainbowIcon from "../../assets/rainbowIcon.svg";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import MobileMatrixRowCard from "../../components/atoms/cards/MobileMatrixRowCard.astro";
+import MatrixBadge from "../../components/atoms/MatrixBadge.astro";
 
 export function getStaticPaths() {
   //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
@@ -57,7 +60,33 @@ const mockAppReviewData = {
     >
         <RainbowIcon slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg"/>
     </SubpageHero>
-    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px] sm:px-8">
+    <section class="w-full box-border h-fit sm:hidden flex flex-col flex-nowrap justify-start items-center gap-XX p-5">
+        <ItemsList header="Review" numberOfItems={3}>
+            {[1,2,3].map((elem) => (
+                <MobileMatrixRowCard name="Support ENSIP-19"
+                                     notes={ elem === 1 ? `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                                     in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                                     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.` : `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                     ullamco laboris nisi ut aliquip ex ea commodo consequat.`}
+                                     viewButtonData={{text: "View best practice details", link: `/best-practices/${elem}/0`}}
+                                     matrixColumnData={[
+                                         {
+                                             category: "Category",
+                                             value: "ENS Resolution",
+                                             link: "https://docs.ens.domains/resolution/",
+                                             linkStyles: "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                                         }]}>
+                    <MatrixBadge slot="badge" text={elem === 1 ? "Partial pass" : (elem === 2 ? "Pass" : "Fail")}
+                                 className={elem === 1 ? "text-neutral-900 bg-neutral-100" : (elem === 2 ? "text-emerald-600 bg-[#0596691A]" : "text-red-600 bg-[#DC26261A]")}
+                                 iconId={elem === 1 ? "partialCheck" : (elem === 2 ? "check" : "cross")} />
+                </MobileMatrixRowCard>
+            ))}
+        </ItemsList>
+    </section>
+    <section class="w-full box-border h-fit hidden sm:flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px] px-8">
         <ItemsMatrix
                 header="Review"
                 whatToSuggest="best practice"

@@ -3,7 +3,7 @@ import {cn} from "../../lib/utils";
 import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
 export interface ItemsListProps {
   header: string;
-  numberOfItems: number;
+  numberOfItems: number; //probably should be optional to accommodate for Mobile Matrix replacement
   seeAllLink?: string; //might change to URL or change name to not be misleading - TODO: replace <a> tag with shadcn/ui button component - find out how to make it a link if astro doesn't have support for that
 }
 
