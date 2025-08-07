@@ -3,16 +3,17 @@ import Layout from "../layouts/Layout.astro";
 import {cn} from "../lib/utils";
 import {shadcnButtonVariants} from "../components/shadcn/shadcnButtonStyles";
 import NotFoundErrorCode from "../assets/404.svg";
+import { Image } from "astro:assets";
 ---
 
 <Layout>
     <section class="w-full h-screen flex justify-center items-center">
         <div class="h-fit w-fit max-w-[444px] flex flex-nowrap flex-col justify-center items-center gap-8">
-            <NotFoundErrorCode />
-            <div class="h-fit w-fit flex flex-nowrap flex-col justify-center items-center gap-5">
+            <Image src={NotFoundErrorCode} alt="404 error" class="h-[90px] sm:h-[200px] sm:pl-[26px] sm:pr-[28px] sm:pt-[21px]" quality={100}/>
+            <div class="h-fit w-fit flex flex-nowrap flex-col justify-center items-center gap-5 max-sm:px-5">
                 <div class="h-fit w-fit flex flex-nowrap flex-col justify-center items-center gap-3">
-                    <h1 class="text-4xl leading-normal font-semibold">Page not found</h1>
-                    <p class="text-sm leading-normal font-normal text-gray-500">We can’t seem to find the page you’re looking for</p>
+                    <h1 class="text-2xl sm:text-4xl leading-8 sm:leading-normal font-semibold">Page not found</h1>
+                    <p class="text-base sm:text-sm leading-6 sm:leading-normal font-normal text-gray-500 text-center">We can’t seem to find the page you’re looking for</p>
                 </div>
                 <a href="/" class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "onScrollButton cursor-pointer rounded-full"}))}>Back to homepage</a>
             </div>

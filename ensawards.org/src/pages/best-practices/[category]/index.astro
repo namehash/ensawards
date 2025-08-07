@@ -34,7 +34,7 @@ const { category } = Astro.params;
             additionalElements={[{name: "Best practices", value: "12"}]}
     />
     <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
-        <ItemsList header="Best practices" numberOfItems={12}>
+        <ItemsList header="Best practices" numberOfItems={[...Array(parseInt(category)+1).keys()].length}>
             {[...Array(parseInt(category)+1).keys()].map((card, idx) => (
                     <BestPracticeCard
                             key=`best-practice-card-${idx}`

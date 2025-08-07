@@ -4,14 +4,15 @@ import {cn} from "../../lib/utils";
 import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
 ---
 
-<header id="site-header" class="custom_header fixed top-0 w-full z-20 h-[70px] border-b border-b-black/5 flex flex-row justify-center items-center">
-    <div class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center sm:px-8">
-        <a href="/" class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px] text-2xl text-black leading-8 font-bold"><ENSAwardsLogo /><p>ENSAwards</p></a>
-        <div class="flex flex-row flex-nowrap gap-2 justify-center items-center">
+<header id="site-header" class="custom_header fixed top-0 w-full z-20 h-[56px] sm:h-[70px] border-b border-b-black/5 flex flex-row justify-center items-center">
+    <div class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center px-5 sm:px-8">
+        <a href="/" class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px] text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold"><ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" /><p>ENSAwards</p></a>
+        <div class="hidden sm:flex flex-row flex-nowrap gap-2 justify-center items-center">
             <a href="/best-practices" class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "onScrollButton rounded-full"}))}>Best practices</a>
             <a href="/app-reviews" class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "onScrollButton rounded-full"}))}>App reviews</a>
             <header-suggest-button id="header-app-suggestion-button" class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "onScrollButton cursor-pointer rounded-full border-black/20 bg-transparent"}))}>Suggest an app</header-suggest-button>
         </div>
+        <div class="block sm:hidden text-black">=</div>
     </div>
 </header>
 <script>

@@ -3,7 +3,7 @@ import {cn} from "../../lib/utils";
 import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
 export interface ItemsListProps {
   header: string;
-  numberOfItems: number; //probably should be optional to accommodate for Mobile Matrix replacement
+  numberOfItems?: number; //probably should be optional to accommodate for Mobile Matrix replacement
   seeAllLink?: string; //might change to URL or change name to not be misleading - TODO: replace <a> tag with shadcn/ui button component - find out how to make it a link if astro doesn't have support for that
 }
 
@@ -12,7 +12,7 @@ const { header, numberOfItems, seeAllLink }: ItemsListProps = Astro.props;
 
 <div class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-6">
     <div class="w-full h-fit flex flex-row flex-nowrap justify-between items-center self-stretch">
-        <h2 class="text-xl sm:text-2xl leading-normal font-semibold text-black">{header} <span class="text-gray-400">({numberOfItems})</span></h2>
+        <h2 class="text-xl sm:text-2xl leading-normal font-semibold text-black">{header} {numberOfItems && <span class="text-gray-400">({numberOfItems})</span>}</h2>
         {seeAllLink && <a href={seeAllLink} class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "cursor-pointer rounded-full text-base"}))}>See all</a>}
     </div>
     <div class="w-full h-fit flex flex-row flex-wrap justify-start items-start max-[1215px]:justify-center gap-4 sm:gap-5 self-stretch">
