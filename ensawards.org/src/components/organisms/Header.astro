@@ -2,6 +2,7 @@
 import ENSAwardsLogo from "../../assets/ENSAwardsLogo.svg";
 import {cn} from "../../lib/utils";
 import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
+import HeaderMobileNavigation from "../molecules/HeaderMobileNavigation";
 ---
 
 <header id="site-header" class="custom_header fixed top-0 w-full z-20 h-[56px] sm:h-[70px] border-b border-b-black/5 flex flex-row justify-center items-center">
@@ -12,7 +13,7 @@ import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
             <a href="/app-reviews" class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "onScrollButton rounded-full"}))}>App reviews</a>
             <header-suggest-button id="header-app-suggestion-button" class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "onScrollButton cursor-pointer rounded-full border-black/20 bg-transparent"}))}>Suggest an app</header-suggest-button>
         </div>
-        <div class="block sm:hidden text-black">=</div>
+        <div class="block sm:hidden"><HeaderMobileNavigation client:load /></div>
     </div>
 </header>
 <script>

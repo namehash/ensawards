@@ -19,7 +19,7 @@ import {shadcnButtonVariants} from "../components/shadcn/shadcnButtonStyles";
 				<h1 class="text-black text-[32px] sm:text-[64px] leading-[44px] sm:leading-[72px] font-bold text-center">Unleash ENS potential within your&nbsp;app</h1>
 				<p class="text-base sm:text-lg leading-normal sm:leading-7 font-normal text-center text-black/60">Unleash full ENS potential within your app check how fully it supports ENS</p>
 			</div>
-			<a href="/best-practices" class={cn(shadcnButtonVariants({variant: "default", size: "default", className: "cursor-pointer rounded-full px-5 h-[50px] box-border"}))}>View best practices</a>
+			<a href="/best-practices" class={cn(shadcnButtonVariants({variant: "default", size: "default", className: "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border"}))}>View best practices</a>
 		</div>
 		<a
 			id="scroll-to-previews-anchor"
@@ -71,7 +71,7 @@ import {shadcnButtonVariants} from "../components/shadcn/shadcnButtonStyles";
 		const scrollAnchor = document.getElementById("scroll-to-previews-anchor");
 		scrollAnchor.addEventListener('click', (event) => {
 			event.preventDefault();
-			scrollWithOffset("previews-section", 50); //TODO:may need adaptation for mobile layout
+			scrollWithOffset("previews-section", 50);
 		});
 	</script>
 </Layout>

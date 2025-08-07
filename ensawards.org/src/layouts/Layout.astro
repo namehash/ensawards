@@ -63,7 +63,7 @@ import Header from "../components/organisms/Header.astro";
 	<body>
 		<Header />
 		<slot/>
-		<div id="app-overlay" class="transition-all duration-1000 hidden">
+		<div id="app-overlay" class="hidden">
 			<Overlay>
 				<SuggestionForm
 					whatsSuggested="app"
@@ -77,7 +77,7 @@ import Header from "../components/organisms/Header.astro";
 				/>
 			</Overlay>
 		</div>
-		<div id="best-practice-overlay" class="transition-all duration-1000 hidden">
+		<div id="best-practice-overlay" class="hidden">
 			<Overlay>
 				<SuggestionForm
 					whatsSuggested="best practice"
