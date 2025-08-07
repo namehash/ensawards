@@ -2,22 +2,21 @@
 import { cn } from "../../../lib/utils";
 import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
 export interface MobileMatrixRowCardProps {
-    name: string;
-    notes: string;
-    viewButtonData: {
-        text: string;
-        link: string;
-    };
-    matrixColumnData: {
-        category: string;
-        value: string;
-        link?: string;
-        linkStyles?: string;
-    }[];
+  name: string;
+  notes: string;
+  viewButtonData: {
+    text: string;
+    link: string;
+  };
+  matrixColumnData: {
+    category: string;
+    value: string;
+    link?: string;
+    linkStyles?: string;
+  }[];
 }
 
-const { name, notes, viewButtonData, matrixColumnData }: MobileMatrixRowCardProps =
-    Astro.props;
+const { name, notes, viewButtonData, matrixColumnData }: MobileMatrixRowCardProps = Astro.props;
 ---
 
 <div class="w-fit h-fit min-h-[275px] box-border flex flex-col flex-nowrap justify-center items-start gap-3 p-4 rounded-2xl border border-gray-200">

@@ -1,15 +1,15 @@
 ---
-import RainbowIcon from "../assets/rainbowIcon.svg";
 import ChevronDown from "../assets/chevronDown.svg";
+import RainbowIcon from "../assets/rainbowIcon.svg";
 import CardBadge from "../components/atoms/CardBadge.astro";
 import AppReviewCard from "../components/atoms/cards/AppReviewCard.astro";
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
+import { shadcnButtonVariants } from "../components/shadcn/shadcnButtonStyles";
 import { appReviewCards } from "../data/appReviewsData";
 import { bestPracticesCategoryCards } from "../data/bestPracticesData";
 import Layout from "../layouts/Layout.astro";
-import {cn} from "../lib/utils";
-import {shadcnButtonVariants} from "../components/shadcn/shadcnButtonStyles";
+import { cn } from "../lib/utils";
 ---
 
 <Layout>
