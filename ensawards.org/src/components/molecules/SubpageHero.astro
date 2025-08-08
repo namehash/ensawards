@@ -21,8 +21,8 @@ const { header, description, breadcrumbs, icon, additionalElements }: SubpageHer
 let breadcrumbHref = "";
 ---
 
-<section class="w-full h-fit max-sm:min-h-[240px] box-border px-5 sm:px-8 pt-[76px] sm:pt-[102px] pb-6 sm:pb-10 flex flex-nowrap flex-col items-center justify-end sm:justify-center bg-yellow-400">
-    <div class="w-full max-w-[1216px] h-fit sm:h-full sm:max-h-[280px] flex flex-nowrap flex-col justify-center gap-10 sm:gap-[60px]">
+<section class="w-full h-fit min-h-[240px] sm:min-h-[358px] box-border px-5 sm:px-8 pt-[76px] sm:pt-[102px] pb-6 sm:pb-10 flex flex-nowrap flex-col items-center justify-end bg-yellow-400">
+    <div class="w-full max-w-[1216px] h-fit sm:max-h-[272px] flex flex-nowrap flex-col justify-center gap-10 sm:gap-[60px]">
         {breadcrumbs && <div class="flex flex-row flex-wrap justify-start items-center gap-[10px]">
             <a href="/"><HomeIcon width="16" height="16" /></a>
             <ChevronIcon />
@@ -44,7 +44,7 @@ let breadcrumbHref = "";
             {additionalElements && <div class="block sm:hidden bg-black/20 h-[1px] self-stretch" />}
             {additionalElements &&
                     <div class="w-full sm:w-fit h-full flex-col justify-center sm:justify-end items-center">
-                        <div class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-start items-center gap-2 sm:gap-10">
+                        <div class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-start items-start gap-2 sm:gap-5 md:gap-10">
                             {additionalElements.map((elem) =>
                                     <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
                                         <p class="text-black/60">{elem.name}</p>

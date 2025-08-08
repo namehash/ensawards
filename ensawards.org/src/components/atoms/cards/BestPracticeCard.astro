@@ -13,7 +13,7 @@ const { name, description, viewReviewsLink, appsPassed, passingScore }: BestPrac
   Astro.props;
 ---
 
-<div class="w-fit max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-4 p-5 sm:px-6 sm:pt-6 sm:pb-4 rounded-2xl border border-gray-200">
+<div class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-4 p-5 sm:px-6 sm:pt-6 sm:pb-4 rounded-2xl border border-gray-200">
     <div class="flex flex-col flex-nowrap justify-center items-start gap-5 self-stretch">
         <slot name="icon" />
         <div class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
@@ -37,7 +37,7 @@ const { name, description, viewReviewsLink, appsPassed, passingScore }: BestPrac
             </div>
         </div>
         <a href={viewReviewsLink} class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full max-sm:self-stretch"}))}>View reviews</a>
-        <div class="hidden sm:flex flex-nowrap flex-row justify-start items-center gap-6">
+        <div class="hidden sm:flex flex-nowrap flex-row justify-start items-start gap-6 sm:pl-4">
             <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
                 <p class="text-muted-foreground text-sm leading-normal font-normal">Apps passed</p>
                 <p class="text-sm leading-normal font-semibold text-accent-foreground">{appsPassed}</p>
