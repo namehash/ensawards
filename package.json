@@ -1,4 +1,7 @@
 {
+	"scripts": {
+		"lint": "biome check --write"
+	},
 	"dependencies": {
 		"tailwindcss": "^4.1.11"
 	},

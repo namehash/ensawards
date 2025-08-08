@@ -12,18 +12,23 @@ const { name, description, viewBestPracticesLink, numberOfBestPractices }: Categ
   Astro.props;
 ---
 
-<div class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4 rounded-2xl border border-gray-200">
+<div class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
+            justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4 rounded-2xl border border-gray-200">
     <div class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
         <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
         <p class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">{description}</p>
     </div>
     <div class="bg-gray-200 h-[1px] self-stretch" />
-    <div class="flex flex-col sm:flex-row flex-nowrap justify-center max-sm:gap-3 sm:justify-between items-center sm:items-start self-stretch">
+    <div class="flex flex-col sm:flex-row flex-nowrap justify-center max-sm:gap-3 sm:justify-between items-center
+                sm:items-start self-stretch">
         <div class="sm:hidden flex flex-row flex-nowrap justify-between items-center self-stretch">
             <p class="text-muted-foreground text-sm leading-normal font-medium">Best practices</p>
             <p class="text-sm leading-normal font-semibold">{numberOfBestPractices}</p>
         </div>
-        <a href={viewBestPracticesLink} class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full max-sm:self-stretch"}))}>View best practices</a>
+        <a href={viewBestPracticesLink}
+           class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full max-sm:self-stretch"}))}>
+            View best practices
+        </a>
         <div class="hidden sm:flex flex-col flex-nowrap justify-center items-start gap-0">
             <p class="text-muted-foreground text-sm leading-normal font-medium">Best practices</p>
             <p class="text-sm leading-normal font-semibold">{numberOfBestPractices}</p>
