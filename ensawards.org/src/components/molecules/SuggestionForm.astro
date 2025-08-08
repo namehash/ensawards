@@ -44,12 +44,21 @@ const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;
         <p class="text-sm leading-5 font-normal text-gray-500">Provide {formTextContentsAdaptations.get("description")!.get(whatsSuggested)} you'd like us to add to ENSAwards.</p>
     </div>
     <form class="flex flex-col flex-nowrap justify-start items-start gap-5 self-stretch">
-        {formFields.map((field) => (
+        {formFields.map((field, idx) =>
+            (field.label === "Description" ?
+                (
             <div class="flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch">
                 <label for={field.label} class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">{field.label}{!field.required && " (optional)"}</label>
-                <input id={field.label} name={field.label} type={field.type} required={field.required} autocomplete="off" class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"/>
-            </div>
-        ))}
+                <textarea id={field.label} name={field.label} type={field.type} required={field.required} autocomplete="off"
+                       class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive min-h-[84px] align-top"/>
+            </div>)
+        :
+            (
+            <div class="flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch">
+                <label for={field.label} class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50">{field.label}{!field.required && " (optional)"}</label>
+                <input id={field.label} name={field.label} type={field.type} required={field.required} autocomplete="off"
+                       class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive h-9"/>
+            </div>)))}
         <div class="flex flex-row flex-nowrap justify-end items-center gap-2 self-stretch">
             <overlay-cancel-button data-suggestion={whatsSuggested} id=`${whatsSuggested.replace(" ","-")}-overlay-cancel-button` class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "cursor-pointer rounded-full"}))}>Cancel</overlay-cancel-button>
             <input type="submit" value="Send" class={cn(shadcnButtonVariants({variant: "default", size: "default", className: "cursor-pointer rounded-full"}))}/>
