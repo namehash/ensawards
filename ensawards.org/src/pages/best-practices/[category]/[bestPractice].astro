@@ -51,72 +51,126 @@ const mockBestPracticeData = {
 ---
 
 <Layout>
-    <SubpageHero
-            header={mockBestPracticeData.name}
-            description={mockBestPracticeData.description}
-            breadcrumbs={["Best practices", category]}
-            additionalElements={mockBestPracticeData.additionalHeroData}
-    />
-    <section class="w-full box-border h-fit sm:hidden flex flex-col flex-nowrap justify-start items-center gap-XX p-5">
-        <ItemsList header="App support matrix">
-            {[1,2,3].map((elem) => (
-                    <MobileMatrixRowCard name="Rainbow Wallet"
-                                         notes={ elem === 1 ? `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+  <SubpageHero
+    header={mockBestPracticeData.name}
+    description={mockBestPracticeData.description}
+    breadcrumbs={["Best practices", category]}
+    additionalElements={mockBestPracticeData.additionalHeroData}
+  />
+  <section
+    class="w-full box-border h-fit sm:hidden flex flex-col flex-nowrap justify-start items-center gap-XX p-5">
+    <ItemsList header="App support matrix">
+      {
+        [1, 2, 3].map((elem) => (
+          <MobileMatrixRowCard
+            name="Rainbow Wallet"
+            notes={
+              elem === 1
+                ? `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                                      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
                                      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.` : `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
+                : `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                     ullamco laboris nisi ut aliquip ex ea commodo consequat.`}
-                                         viewButtonData={{text: "View full review", link: `/app-reviews/${elem}`}}
-                                         matrixColumnData={[
-                                             {
-                                                 category: "Type",
-                                                 value: "Wallet",
-                                             },
-                                             {
-                                                 category: "Website",
-                                                 value: "Visit site ↗",
-                                                 link: "https://rainbow.me/",
-                                                 linkStyles: "text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black"
-                                             }
-                                         ]}>
-                        <MatrixBadge slot="badge" text={elem === 1 ? "Partial pass" : (elem === 2 ? "Pass" : "Fail")}
-                                     className={elem === 1 ? "text-neutral-900 bg-neutral-100" : (elem === 2 ? "text-emerald-600 bg-[#0596691A]" : "text-red-600 bg-[#DC26261A]")}
-                                     iconId={elem === 1 ? "partialCheck" : (elem === 2 ? "check" : "cross")} />
-                        <RainbowIcon slot="icon"/>
-                    </MobileMatrixRowCard>
-            ))}
-        </ItemsList>
-    </section>
-    <section class="w-full box-border h-fit hidden sm:flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px] sm:px-8">
-        <ItemsMatrix
-                header="App support matrix"
-                whatToSuggest="app"
-                columnNames={["App name", "Type", "Website", "Notes", "Result"]}
-                rows={[
-                     [
-                         {text: "Rainbow", link: "https://rainbow.me/", iconSource: "/src/assets/rainbowIcon.svg"},
-                         {text: "Wallet"},
-                         {text: "https://rainbow.me/", link: "https://rainbow.me/"},
-                         {text: "-"},
-                         {text: "Pass", badgeData: {icon: "check", className: "text-emerald-600 bg-[#0596691A]"}},
-                     ],
-                    [
-                        {text: "Rainbow", link: "https://rainbow.me/", iconSource: "/src/assets/rainbowIcon.svg"},
-                        {text: "Wallet"},
-                        {text: "https://rainbow.me/", link: "https://rainbow.me/"},
-                        {text: "-"},
-                        {text: "Partial pass", badgeData: {icon: "partialCheck", className: "text-neutral-900 bg-neutral-100"}},
-                    ],
-                    [
-                        {text: "Rainbow", link: "https://rainbow.me/", iconSource: "/src/assets/rainbowIcon.svg"},
-                        {text: "Wallet"},
-                        {text: "https://rainbow.me/", link: "https://rainbow.me/"},
-                        {text: "-"},
-                        {text: "Fail", badgeData: {icon: "cross", className: "text-red-600 bg-[#DC26261A]"}},
-                    ],
-                    ]}
-        />
-    </section>
+                                     ullamco laboris nisi ut aliquip ex ea commodo consequat.`
+            }
+            viewButtonData={{
+              text: "View full review",
+              link: `/app-reviews/${elem}`,
+            }}
+            matrixColumnData={[
+              {
+                category: "Type",
+                value: "Wallet",
+              },
+              {
+                category: "Website",
+                value: "Visit site ↗",
+                link: "https://rainbow.me/",
+                linkStyles:
+                  "text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black",
+              },
+            ]}>
+            <MatrixBadge
+              slot="badge"
+              text={elem === 1 ? "Partial pass" : elem === 2 ? "Pass" : "Fail"}
+              className={
+                elem === 1
+                  ? "text-neutral-900 bg-neutral-100"
+                  : elem === 2
+                    ? "text-emerald-600 bg-[#0596691A]"
+                    : "text-red-600 bg-[#DC26261A]"
+              }
+              iconId={
+                elem === 1 ? "partialCheck" : elem === 2 ? "check" : "cross"
+              }
+            />
+            <RainbowIcon slot="icon" />
+          </MobileMatrixRowCard>
+        ))
+      }
+    </ItemsList>
+  </section>
+  <section
+    class="w-full box-border h-fit hidden sm:flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px] sm:px-8">
+    <ItemsMatrix
+      header="App support matrix"
+      whatToSuggest="app"
+      columnNames={["App name", "Type", "Website", "Notes", "Result"]}
+      rows={[
+        [
+          {
+            text: "Rainbow",
+            link: "https://rainbow.me/",
+            iconSource: "/src/assets/rainbowIcon.svg",
+          },
+          { text: "Wallet" },
+          { text: "https://rainbow.me/", link: "https://rainbow.me/" },
+          { text: "-" },
+          {
+            text: "Pass",
+            badgeData: {
+              icon: "check",
+              className: "text-emerald-600 bg-[#0596691A]",
+            },
+          },
+        ],
+        [
+          {
+            text: "Rainbow",
+            link: "https://rainbow.me/",
+            iconSource: "/src/assets/rainbowIcon.svg",
+          },
+          { text: "Wallet" },
+          { text: "https://rainbow.me/", link: "https://rainbow.me/" },
+          { text: "-" },
+          {
+            text: "Partial pass",
+            badgeData: {
+              icon: "partialCheck",
+              className: "text-neutral-900 bg-neutral-100",
+            },
+          },
+        ],
+        [
+          {
+            text: "Rainbow",
+            link: "https://rainbow.me/",
+            iconSource: "/src/assets/rainbowIcon.svg",
+          },
+          { text: "Wallet" },
+          { text: "https://rainbow.me/", link: "https://rainbow.me/" },
+          { text: "-" },
+          {
+            text: "Fail",
+            badgeData: {
+              icon: "cross",
+              className: "text-red-600 bg-[#DC26261A]",
+            },
+          },
+        ],
+      ]}
+    />
+  </section>
 </Layout>

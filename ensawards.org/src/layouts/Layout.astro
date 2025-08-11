@@ -10,95 +10,92 @@ import Header from "../components/organisms/Header.astro";
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<AstroFont
-			config={[
-				{
-					src: [],
-					name: "Inter",
-					// Google Fonts URL
-                googleFontsURL: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
-					preload: true,
-					display: "swap",
-					selector: "body",
-					fallback: "sans-serif",
-				},
-			]}
-		/>
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<SEO
-			title="ENSAwards - Coming Soon"
-			description="Promoting excellence in ENS integrations"
-			openGraph={{
-				basic: {
-					title: "ENSAwards - Coming Soon",
-					type: "website",
-					image: "https://ensawards.org/ensawards_og.png",
-					url: "https://ensawards.org/",
-				},
-				optional: {
-					description: "Promoting excellence in ENS integrations",
-					siteName: "ENSAwards"
-				}
-			}}
-			twitter={{
-				creator: "@NameHashLabs",
-				title: "ENSAwards - Coming Soon",
-				image: "https://ensawards.org/ensawards_og.png",
-				description: "Promoting excellence in ENS integrations",
-				card: "summary_large_image"
-			}}
-			extend={{
-				link: [
-					{ rel: "icon", href: "/favicon.svg" },
-					{ rel:"manifest", href:"/site.webmanifest"},
-					{ rel: "apple-touch-icon", href: "/apple-touch-icon.png"}
-				],
-			}}
-		/>
-	</head>
-	<body>
-		<Header />
-		<slot/>
-		<div id="app-overlay" class="hidden">
-			<Overlay>
-				<SuggestionForm
-					whatsSuggested="app"
-					formFields={
-						[
-							{label: "Name", type: "text", required: true},
-							{label: "URL", type: "url", required: true},
-							{label: "Description", type: "text", required: false},
-						]
-					}
-				/>
-			</Overlay>
-		</div>
-		<div id="best-practice-overlay" class="hidden">
-			<Overlay>
-				<SuggestionForm
-					whatsSuggested="best practice"
-					formFields={
-						[
-							{label: "Name", type: "text", required: true},
-							{label: "Description", type: "text", required: false},
-						]
-					}
-				/>
-			</Overlay>
-		</div>
-	<Footer />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <AstroFont
+      config={[
+        {
+          src: [],
+          name: "Inter",
+          // Google Fonts URL
+          googleFontsURL:
+            "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+          preload: true,
+          display: "swap",
+          selector: "body",
+          fallback: "sans-serif",
+        },
+      ]}
+    />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO
+      title="ENSAwards - Coming Soon"
+      description="Promoting excellence in ENS integrations"
+      openGraph={{
+        basic: {
+          title: "ENSAwards - Coming Soon",
+          type: "website",
+          image: "https://ensawards.org/ensawards_og.png",
+          url: "https://ensawards.org/",
+        },
+        optional: {
+          description: "Promoting excellence in ENS integrations",
+          siteName: "ENSAwards",
+        },
+      }}
+      twitter={{
+        creator: "@NameHashLabs",
+        title: "ENSAwards - Coming Soon",
+        image: "https://ensawards.org/ensawards_og.png",
+        description: "Promoting excellence in ENS integrations",
+        card: "summary_large_image",
+      }}
+      extend={{
+        link: [
+          { rel: "icon", href: "/favicon.svg" },
+          { rel: "manifest", href: "/site.webmanifest" },
+          { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+        ],
+      }}
+    />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <div id="app-overlay" class="hidden">
+      <Overlay>
+        <SuggestionForm
+          whatsSuggested="app"
+          formFields={[
+            { label: "Name", type: "text", required: true },
+            { label: "URL", type: "url", required: true },
+            { label: "Description", type: "text", required: false },
+          ]}
+        />
+      </Overlay>
+    </div>
+    <div id="best-practice-overlay" class="hidden">
+      <Overlay>
+        <SuggestionForm
+          whatsSuggested="best practice"
+          formFields={[
+            { label: "Name", type: "text", required: true },
+            { label: "Description", type: "text", required: false },
+          ]}
+        />
+      </Overlay>
+    </div>
+    <Footer />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

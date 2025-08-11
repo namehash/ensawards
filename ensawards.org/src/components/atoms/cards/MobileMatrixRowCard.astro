@@ -19,38 +19,62 @@ export interface MobileMatrixRowCardProps {
 const { name, notes, viewButtonData, matrixColumnData }: MobileMatrixRowCardProps = Astro.props;
 ---
 
-<div class="w-fit h-fit min-h-[275px] box-border flex flex-col flex-nowrap justify-center items-start gap-3
+<div
+  class="w-fit h-fit min-h-[275px] box-border flex flex-col flex-nowrap justify-center items-start gap-3
             p-4 rounded-2xl border border-gray-200">
-    <div class="flex flex-row flex-nowrap justify-between items-center self-stretch">
-        <slot name="icon" />
-        <slot name="badge"/>
-    </div>
-    <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
-    <div class="flex flex-col flex-nowrap justify-center items-center gap-2 self-stretch">
-        {matrixColumnData.map((elem, idx) => {
-            if (elem.link) {
-                return <div class="flex flex-row flex-nowrap justify-between items-start self-stretch">
-                    <p class="text-muted-foreground text-sm leading-normal font-normal">{elem.category}</p>
-                    <a href={elem.link}
-                       target="_blank"
-                       rel="noreferrer noopener"
-                       class={cn("text-sm leading-normal font-medium transition-all duration-200", elem.linkStyles)}
-                        >
-                        {elem.value}
-                    </a>
-                </div>
-            }
-            else {
-                return <div class="flex flex-row flex-nowrap justify-between items-start self-stretch">
-                    <p class="text-muted-foreground text-sm leading-normal font-normal">{elem.category}</p>
-                    <p class="text-sm leading-normal font-medium text-black">{elem.value}</p>
-                </div>
-            }
-        })}
-        <p class="text-sm font-normal leading-6 text-black self-stretch">{notes}</p>
-        <a href={viewButtonData.link}
-           class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full self-stretch"}))}>
-            {viewButtonData.text}
-        </a>
-    </div>
+  <div
+    class="flex flex-row flex-nowrap justify-between items-center self-stretch">
+    <slot name="icon" />
+    <slot name="badge" />
+  </div>
+  <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
+  <div
+    class="flex flex-col flex-nowrap justify-center items-center gap-2 self-stretch">
+    {
+      matrixColumnData.map((elem, idx) => {
+        if (elem.link) {
+          return (
+            <div class="flex flex-row flex-nowrap justify-between items-start self-stretch">
+              <p class="text-muted-foreground text-sm leading-normal font-normal">
+                {elem.category}
+              </p>
+              <a
+                href={elem.link}
+                target="_blank"
+                rel="noreferrer noopener"
+                class={cn(
+                  "text-sm leading-normal font-medium transition-all duration-200",
+                  elem.linkStyles,
+                )}>
+                {elem.value}
+              </a>
+            </div>
+          );
+        } else {
+          return (
+            <div class="flex flex-row flex-nowrap justify-between items-start self-stretch">
+              <p class="text-muted-foreground text-sm leading-normal font-normal">
+                {elem.category}
+              </p>
+              <p class="text-sm leading-normal font-medium text-black">
+                {elem.value}
+              </p>
+            </div>
+          );
+        }
+      })
+    }
+    <p class="text-sm font-normal leading-6 text-black self-stretch">{notes}</p>
+    <a
+      href={viewButtonData.link}
+      class={cn(
+        shadcnButtonVariants({
+          variant: "secondary",
+          size: "default",
+          className: "cursor-pointer rounded-full self-stretch",
+        }),
+      )}>
+      {viewButtonData.text}
+    </a>
+  </div>
 </div>

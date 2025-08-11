@@ -27,26 +27,30 @@ const { category } = Astro.params;
 ---
 
 <Layout>
-    <SubpageHero
-            header=`Category #${category}`
-            description="The Resolution process at its core is the process of converting a human-readable name to a machine-readable address."
-            breadcrumbs={["Best practices"]}
-            additionalElements={[{name: "Best practices", value: "12"}]}
-    />
-    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
-        <ItemsList header="Best practices" numberOfItems={[...Array(parseInt(category)+1).keys()].length}>
-            {[...Array(parseInt(category)+1).keys()].map((card, idx) => (
-                    <BestPracticeCard
-                            key=`best-practice-card-${idx}`
-                            name="ENS Resolution"
-                            description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
-                            viewReviewsLink=`/best-practices/${category}/0`
-                            appsPassed={12}
-                            passingScore={90}
-                    />
-            ))}
-            <SuggestFormOpener whatsSuggested="best practice"/>
-        </ItemsList>
-    </section>
+  <SubpageHero
+    header=`Category #${category}`
+    description="The Resolution process at its core is the process of converting a human-readable name to a machine-readable address."
+    breadcrumbs={["Best practices"]}
+    additionalElements={[{ name: "Best practices", value: "12" }]}
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
+    <ItemsList
+      header="Best practices"
+      numberOfItems={[...Array(parseInt(category) + 1).keys()].length}>
+      {
+        [...Array(parseInt(category) + 1).keys()].map((card, idx) => (
+          <BestPracticeCard
+            key={`best-practice-card-${idx}`}
+            name="ENS Resolution"
+            description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
+            viewReviewsLink={`/best-practices/${category}/0`}
+            appsPassed={12}
+            passingScore={90}
+          />
+        ))
+      }
+      <SuggestFormOpener whatsSuggested="best practice" />
+    </ItemsList>
+  </section>
 </Layout>
-

@@ -5,81 +5,124 @@ import HeaderMobileNavigation from "../molecules/HeaderMobileNavigation";
 import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
 ---
 
-<header id="site-header" class="custom_header fixed top-0 w-full z-20 h-[56px] sm:h-[70px] border-b border-b-black/5 flex flex-row justify-center items-center">
-    <div class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center px-5 sm:px-8">
-        <a href="/" class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px] text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold"><ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" /><p>ENSAwards</p></a>
-        <div class="hidden sm:flex flex-row flex-nowrap gap-2 justify-center items-center">
-            <a href="/best-practices" class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "onScrollButton rounded-full"}))}>Best practices</a>
-            <a href="/app-reviews" class={cn(shadcnButtonVariants({variant: "ghost", size: "default", className: "onScrollButton rounded-full"}))}>App reviews</a>
-            <header-suggest-button id="header-app-suggestion-button" class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "onScrollButton cursor-pointer rounded-full border-black/20 bg-transparent"}))}>Suggest an app</header-suggest-button>
-        </div>
-        <div class="block sm:hidden"><HeaderMobileNavigation client:load /></div>
+<header
+  id="site-header"
+  class="custom_header fixed top-0 w-full z-20 h-[56px] sm:h-[70px] border-b border-b-black/5 flex flex-row justify-center items-center">
+  <div
+    class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center px-5 sm:px-8">
+    <a
+      href="/"
+      class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px] text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold"
+      ><ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" /><p>
+        ENSAwards
+      </p></a
+    >
+    <div
+      class="hidden sm:flex flex-row flex-nowrap gap-2 justify-center items-center">
+      <a
+        href="/best-practices"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className: "onScrollButton rounded-full",
+          }),
+        )}>Best practices</a
+      >
+      <a
+        href="/app-reviews"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className: "onScrollButton rounded-full",
+          }),
+        )}>App reviews</a
+      >
+      <header-suggest-button
+        id="header-app-suggestion-button"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "outline",
+            size: "default",
+            className:
+              "onScrollButton cursor-pointer rounded-full border-black/20 bg-transparent",
+          }),
+        )}>Suggest an app</header-suggest-button
+      >
     </div>
+    <div class="block sm:hidden"><HeaderMobileNavigation client:load /></div>
+  </div>
 </header>
 <script>
-    import {openSuggestionOverlay} from "../../utils/openSuggestionOverlay";
+  import { openSuggestionOverlay } from "../../utils/openSuggestionOverlay";
 
-    class SuggestionFormOpener extends HTMLElement {
-        connectedCallback() {
-            const formOpenerButton = document.getElementById(`header-app-suggestion-button`);
+  class SuggestionFormOpener extends HTMLElement {
+    connectedCallback() {
+      const formOpenerButton = document.getElementById(
+        `header-app-suggestion-button`,
+      );
 
-            formOpenerButton.addEventListener('click', () => {
-                openSuggestionOverlay("app");
-            });
-        }
+      formOpenerButton.addEventListener("click", () => {
+        openSuggestionOverlay("app");
+      });
     }
+  }
 
-    function ScrollHeader() {
-        if (typeof window !== "undefined") {
-            const header = document.getElementById("site-header");
-            const headerButtons = document.getElementsByClassName("onScrollButton");
+  function ScrollHeader() {
+    if (typeof window !== "undefined") {
+      const header = document.getElementById("site-header");
+      const headerButtons = document.getElementsByClassName("onScrollButton");
 
-            const scrollWatcher = document.createElement("div");
+      const scrollWatcher = document.createElement("div");
 
-            scrollWatcher.setAttribute("data-scroll-watcher", "");
-            header.before(scrollWatcher);
+      scrollWatcher.setAttribute("data-scroll-watcher", "");
+      header.before(scrollWatcher);
 
-            const navObserver = new IntersectionObserver(
-                (entries) => {
-                    header.classList.toggle("scrolled", !entries[0].isIntersecting);
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          header.classList.toggle("scrolled", !entries[0].isIntersecting);
 
-                    for (const headerButton of headerButtons) {
-                        headerButton.classList.toggle("scrolled", !entries[0].isIntersecting);
-                    }
-                },
-                { rootMargin: "50px 0px 0px 0px" },
+          for (const headerButton of headerButtons) {
+            headerButton.classList.toggle(
+              "scrolled",
+              !entries[0].isIntersecting,
             );
+          }
+        },
+        { rootMargin: "50px 0px 0px 0px" },
+      );
 
-            navObserver.observe(scrollWatcher);
-        }
-
-        return null;
+      navObserver.observe(scrollWatcher);
     }
 
-    customElements.define('header-suggest-button', SuggestionFormOpener);
-    ScrollHeader();
+    return null;
+  }
+
+  customElements.define("header-suggest-button", SuggestionFormOpener);
+  ScrollHeader();
 </script>
 
 <style>
-    .custom_header {
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        color: black;
-    }
+  .custom_header {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: black;
+  }
 
-    .custom_header.scrolled {
-        background-color: white;
-        border-bottom: 1px solid oklch(87.2% 0.01 258.338);
-    }
+  .custom_header.scrolled {
+    background-color: white;
+    border-bottom: 1px solid oklch(87.2% 0.01 258.338);
+  }
 
-    .onScrollButton {
-        &:hover {
-            background-color: rgba(0,0,0,0.05);
-        }
+  .onScrollButton {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
     }
+  }
 
-    .onScrollButton.scrolled {
-        &:hover {
-            background-color: var(--accent);
-        }
+  .onScrollButton.scrolled {
+    &:hover {
+      background-color: var(--accent);
     }
+  }
 </style>

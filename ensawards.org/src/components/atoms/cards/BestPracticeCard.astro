@@ -13,44 +13,79 @@ const { name, description, viewReviewsLink, appsPassed, passingScore }: BestPrac
   Astro.props;
 ---
 
-<div class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
+<div
+  class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
             justify-center items-start gap-3 sm:gap-4 p-5 sm:px-6 sm:pt-6 sm:pb-4 rounded-2xl border border-gray-200">
-    <div class="flex flex-col flex-nowrap justify-center items-start gap-5 self-stretch">
-        <slot name="icon" />
-        <div class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
-            <div class="w-fit flex flex-nowrap flex-row justify-start items-center gap-3">
-                <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
-                <slot name="badge"/>
-            </div>
-            <p class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">{description}</p>
-        </div>
+  <div
+    class="flex flex-col flex-nowrap justify-center items-start gap-5 self-stretch">
+    <slot name="icon" />
+    <div
+      class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
+      <div
+        class="w-fit flex flex-nowrap flex-row justify-start items-center gap-3">
+        <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
+        <slot name="badge" />
+      </div>
+      <p
+        class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">
+        {description}
+      </p>
     </div>
-    <div class="bg-gray-200 h-[1px] self-stretch" />
-    <div class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start
+  </div>
+  <div class="bg-gray-200 h-[1px] self-stretch"></div>
+  <div
+    class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start
                 max-sm:gap-3 self-stretch">
-        <div class="sm:hidden flex flex-nowrap flex-col justify-start items-center gap-2 max-sm:self-stretch">
-            <div class="flex flex-row flex-nowrap justify-between items-center self-stretch">
-                <p class="text-muted-foreground text-sm leading-normal font-normal">Apps passed</p>
-                <p class="text-sm leading-normal font-semibold text-accent-foreground">{appsPassed}</p>
-            </div>
-            <div class="flex flex-row flex-nowrap justify-between items-center self-stretch">
-                <p class="text-muted-foreground text-sm leading-normal font-normal">Passing score</p>
-                <p class="text-sm leading-normal font-semibold text-emerald-600">{passingScore}%</p>
-            </div>
-        </div>
-        <a href={viewReviewsLink}
-           class={cn(shadcnButtonVariants({variant: "secondary", size: "default", className: "cursor-pointer rounded-full max-sm:self-stretch"}))}>
-            View reviews
-        </a>
-        <div class="hidden sm:flex flex-nowrap flex-row justify-start items-start gap-6 sm:pl-4">
-            <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
-                <p class="text-muted-foreground text-sm leading-normal font-normal">Apps passed</p>
-                <p class="text-sm leading-normal font-semibold text-accent-foreground">{appsPassed}</p>
-            </div>
-            <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
-                <p class="text-muted-foreground text-sm leading-normal font-normal">Passing score</p>
-                <p class="text-sm leading-normal font-semibold text-emerald-600">{passingScore}%</p>
-            </div>
-        </div>
+    <div
+      class="sm:hidden flex flex-nowrap flex-col justify-start items-center gap-2 max-sm:self-stretch">
+      <div
+        class="flex flex-row flex-nowrap justify-between items-center self-stretch">
+        <p class="text-muted-foreground text-sm leading-normal font-normal">
+          Apps passed
+        </p>
+        <p class="text-sm leading-normal font-semibold text-accent-foreground">
+          {appsPassed}
+        </p>
+      </div>
+      <div
+        class="flex flex-row flex-nowrap justify-between items-center self-stretch">
+        <p class="text-muted-foreground text-sm leading-normal font-normal">
+          Passing score
+        </p>
+        <p class="text-sm leading-normal font-semibold text-emerald-600">
+          {passingScore}%
+        </p>
+      </div>
     </div>
+    <a
+      href={viewReviewsLink}
+      class={cn(
+        shadcnButtonVariants({
+          variant: "secondary",
+          size: "default",
+          className: "cursor-pointer rounded-full max-sm:self-stretch",
+        }),
+      )}>
+      View reviews
+    </a>
+    <div
+      class="hidden sm:flex flex-nowrap flex-row justify-start items-start gap-6 sm:pl-4">
+      <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
+        <p class="text-muted-foreground text-sm leading-normal font-normal">
+          Apps passed
+        </p>
+        <p class="text-sm leading-normal font-semibold text-accent-foreground">
+          {appsPassed}
+        </p>
+      </div>
+      <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
+        <p class="text-muted-foreground text-sm leading-normal font-normal">
+          Passing score
+        </p>
+        <p class="text-sm leading-normal font-semibold text-emerald-600">
+          {passingScore}%
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

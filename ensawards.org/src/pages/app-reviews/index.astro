@@ -10,26 +10,40 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout>
-    <SubpageHero header="App reviews" />
-    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-        <ItemsList header="App reviews" numberOfItems={appReviewCards.length} >
-            {appReviewCards.map((app, idx) => (
-                    <AppReviewCard
-                            key=`app-review-card-${idx}`
-                            name="Rainbow Wallet"
-                            description="Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum."
-                            overallScore={90}
-                            websiteLink="https://rainbow.me/"
-                            type="wallet"
-                            viewReviewLink=`/app-reviews/${idx}`
-                    >
-                        <RainbowIcon slot="icon" />
-                        {idx % 2 === 0 ? <CardBadge slot="badge" text="Top performer" className="text-primary-foreground bg-black"/> :
-                            (idx === 1 && <CardBadge slot="badge" text="New" className="text-primary-foreground bg-emerald-600"/> )
-                        }
-                    </AppReviewCard>
-            ))}
-            <SuggestFormOpener whatsSuggested="app"/>
-        </ItemsList>
-    </section>
+  <SubpageHero header="App reviews" />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ItemsList header="App reviews" numberOfItems={appReviewCards.length}>
+      {
+        appReviewCards.map((app, idx) => (
+          <AppReviewCard
+            key={`app-review-card-${idx}`}
+            name="Rainbow Wallet"
+            description="Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum."
+            overallScore={90}
+            websiteLink="https://rainbow.me/"
+            type="wallet"
+            viewReviewLink={`/app-reviews/${idx}`}>
+            <RainbowIcon slot="icon" />
+            {idx % 2 === 0 ? (
+              <CardBadge
+                slot="badge"
+                text="Top performer"
+                className="text-primary-foreground bg-black"
+              />
+            ) : (
+              idx === 1 && (
+                <CardBadge
+                  slot="badge"
+                  text="New"
+                  className="text-primary-foreground bg-emerald-600"
+                />
+              )
+            )}
+          </AppReviewCard>
+        ))
+      }
+      <SuggestFormOpener whatsSuggested="app" />
+    </ItemsList>
+  </section>
 </Layout>

@@ -8,9 +8,13 @@ export interface CardBadgeProps {
 
 const { text, className, slot }: CardBadgeProps = Astro.props;
 ---
-<span class={cn("w-fit flex flex-row flex-nowrap justify-center items-center px-2 py-[2px] rounded-md text-xs " +
-    "leading-normal font-semibold", className)}
-      slot={slot}
-        >
-    {text}
+
+<span
+  class={cn(
+    "w-fit flex flex-row flex-nowrap justify-center items-center px-2 py-[2px] rounded-md text-xs " +
+      "leading-normal font-semibold",
+    className,
+  )}
+  slot={slot}>
+  {text}
 </span>

@@ -14,10 +14,21 @@ const { text, className, iconId }: MatrixBadgeProps = Astro.props;
 
 //TODO: see if possible to merge with CardBadge later
 ---
+
 <span
-    class={cn("w-fit flex flex-row flex-nowrap justify-center items-center gap-[6px] pl-[10px] pr-3 " +
-        "py-1 rounded-full text-xs leading-normal font-medium", className)}
->
-    {iconId === "check" ? <Check /> : (iconId === "cross" ? <Cross /> : <PartialCheck />)}
-    {text}
+  class={cn(
+    "w-fit flex flex-row flex-nowrap justify-center items-center gap-[6px] pl-[10px] pr-3 " +
+      "py-1 rounded-full text-xs leading-normal font-medium",
+    className,
+  )}>
+  {
+    iconId === "check" ? (
+      <Check />
+    ) : iconId === "cross" ? (
+      <Cross />
+    ) : (
+      <PartialCheck />
+    )
+  }
+  {text}
 </span>
