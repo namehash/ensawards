@@ -31,7 +31,7 @@ import { cn } from "../lib/utils";
         </p>
       </div>
       <a
-        href="/best-practices"
+        href="/ens-best-practices"
         class={cn(
           shadcnButtonVariants({
             variant: "default",
@@ -39,7 +39,7 @@ import { cn } from "../lib/utils";
             className:
               "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border",
           }),
-        )}>View best practices</a
+        )}>ENS best practices</a
       >
     </div>
     <a
@@ -61,7 +61,7 @@ import { cn } from "../lib/utils";
     <ItemsList
       header="Category"
       numberOfItems={bestPracticesCategoryCards.length}
-      seeAllLink="/best-practices">
+      seeAllLink="/ens-best-practices">
       {
         bestPracticesCategoryCards
           .slice(0, 4)
@@ -70,16 +70,16 @@ import { cn } from "../lib/utils";
               key={`best-practice-card-${idx}`}
               name="ENS Resolution"
               description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
-              viewBestPracticesLink={`/best-practices/${card}`}
+              viewBestPracticesLink={`/ens-best-practices/${card}`}
               numberOfBestPractices={12}
             />
           ))
       }
     </ItemsList>
     <ItemsList
-      header="App reviews"
+      header="App benchmarks"
       numberOfItems={appReviewCards.length}
-      seeAllLink="/app-reviews">
+      seeAllLink="/app-benchmarks">
       {
         appReviewCards.slice(0, 4).map((app, idx) => (
           <AppReviewCard
@@ -89,7 +89,7 @@ import { cn } from "../lib/utils";
             overallScore={90}
             websiteLink="https://rainbow.me/"
             type="wallet"
-            viewReviewLink={`/app-reviews/${idx}`}>
+            viewReviewLink={`/app-benchmarks/${idx}`}>
             <RainbowIcon slot="icon" />
             <CardBadge
               slot="badge"

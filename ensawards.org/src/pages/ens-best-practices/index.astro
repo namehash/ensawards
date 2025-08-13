@@ -7,7 +7,7 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout>
-  <SubpageHero header="Best practices" />
+  <SubpageHero header="ENS best practices" />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList
@@ -19,7 +19,7 @@ import Layout from "../../layouts/Layout.astro";
             key={`category-card-${idx}`}
             name="ENS Resolution"
             description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
-            viewBestPracticesLink={`/best-practices/${card}`}
+            viewBestPracticesLink={`/ens-best-practices/${card}`}
             numberOfBestPractices={12}
           />
         ))

@@ -59,7 +59,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
           <tr class="border-b border-gray-200">
             {rowData.slice(0, columnNames.length).map((cell, idx) => {
               const stretchColumn =
-                idx === columnNames.length - 2 ? "min-[1160px]:w-1/2" : "";
+                columnNames[idx] === "Notes" ? "min-[1160px]:w-1/2" : "";
               const leftPadding = idx === 0 ? "pl-0" : "";
               const linkFontWeight = cell.iconSource
                 ? "font-medium"

@@ -71,11 +71,11 @@ export default function HeaderMobileNavigation() {
                     )}
                   >
                     <ul className="py-3 flex flex-col justify-center gap-5">
-                      <a href="/best-practices" className={mainLinkClass}>
-                        Best practices
+                      <a href="/ens-best-practices" className={mainLinkClass}>
+                        ENS best practices
                       </a>
-                      <a href="/app-reviews" className={mainLinkClass}>
-                        App reviews
+                      <a href="/app-benchmarks" className={mainLinkClass}>
+                        App benchmarks
                       </a>
                     </ul>
                   </div>

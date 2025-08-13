@@ -10,10 +10,10 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout>
-  <SubpageHero header="App reviews" />
+  <SubpageHero header="App benchmarks" />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ItemsList header="App reviews" numberOfItems={appReviewCards.length}>
+    <ItemsList header="Benchmarks" numberOfItems={appReviewCards.length}>
       {
         appReviewCards.map((app, idx) => (
           <AppReviewCard
@@ -23,7 +23,7 @@ import Layout from "../../layouts/Layout.astro";
             overallScore={90}
             websiteLink="https://rainbow.me/"
             type="wallet"
-            viewReviewLink={`/app-reviews/${idx}`}>
+            viewReviewLink={`/app-benchmarks/${idx}`}>
             <RainbowIcon slot="icon" />
             {idx % 2 === 0 ? (
               <CardBadge
