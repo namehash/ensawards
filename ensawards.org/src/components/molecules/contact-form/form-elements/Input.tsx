@@ -1,8 +1,7 @@
 import { cn } from "@/lib/utils.ts";
 import React, { useId } from "react";
 
-export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   className?: string;
   variant?: "primary" | "secondary";
   inputSize?: "small" | "medium" | "large";
@@ -32,15 +31,8 @@ export const Input: React.FC<InputProps> = ({
 
   return (
     <div className="gap-1 self-stretch">
-      <input
-        id={inputId}
-        className={inputClasses}
-        disabled={disabled}
-        {...props}
-      />
-      {error && (
-        <span className="mt-2 text-sm font-normal text-red-600">{error}</span>
-      )}
+      <input id={inputId} className={inputClasses} disabled={disabled} {...props} />
+      {error && <span className="mt-2 text-sm font-normal text-red-600">{error}</span>}
     </div>
   );
 };

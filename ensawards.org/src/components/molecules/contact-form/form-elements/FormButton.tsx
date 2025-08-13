@@ -2,8 +2,7 @@ import { shadcnButtonVariants } from "@/components/shadcn/shadcnButtonStyles.ts"
 import { cn } from "@/lib/utils.ts";
 import React from "react";
 
-export interface FormButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface FormButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   children?: React.ReactNode;
   variant?: "default" | "secondary" | "ghost" | "outline" | "destructive";
@@ -48,11 +47,7 @@ export const FormButton = React.forwardRef<HTMLButtonElement, FormButtonProps>(
     );
 
     return (
-      <button
-        ref={ref}
-        className={combinedClassName}
-        disabled={disabled}
-        {...props}>
+      <button ref={ref} className={combinedClassName} disabled={disabled} {...props}>
         {content}
       </button>
     );
@@ -63,14 +58,7 @@ FormButton.displayName = "Button";
 
 const Spinner = () => (
   <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-    <circle
-      className="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-    />
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
     <path
       className="opacity-75"
       fill="currentColor"

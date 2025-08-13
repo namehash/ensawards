@@ -1,12 +1,10 @@
-import type {PossibleSuggestions} from "@/components/molecules/contact-form/types.ts";
+import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
 
 export const adaptBreadcrumb = (breadcrumb: string): string =>
   breadcrumb.toLowerCase().replaceAll(" ", "-");
 //TODO: If we only use it in subpage hero, maybe it's best to move it there
 
-export const adaptSuggestionText = (
-  whatsSuggested: PossibleSuggestions,
-): string => {
+export const adaptSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
   switch (whatsSuggested) {
     case "app":
       return "an app";
