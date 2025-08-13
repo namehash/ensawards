@@ -1,0 +1,80 @@
+---
+import {
+  ContactForm,
+  EnsAwardsFormFields,
+} from "../molecules/contact-form/ContactForm";
+import {
+  FormField,
+  PossibleSuggestions,
+} from "../molecules/contact-form/types";
+
+export interface SuggestionFormProps {
+  whatsSuggested: PossibleSuggestions;
+  formFields: FormField[];
+}
+
+const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;
+---
+
+<overlay-content
+  id=`${whatsSuggested.replace(" ","-")}-overlay-content`
+  data-suggestion={whatsSuggested}
+  class="w-fit max-w-[460px] h-fit box-border p-6 flex flex-nowrap flex-col justify-start items-start gap-5 shrink-0 rounded-xl bg-white">
+  <ContactForm
+    whatsSuggested={whatsSuggested}
+    submissionEndpoint="https://namehashlabs.org/api/contact-form"
+    formFields={formFields}
+    client:load
+  />
+</overlay-content>
+
+<script>
+  function closeOverlay(whatsSuggested: string) {
+    document
+      .querySelector(`#${whatsSuggested.replace(" ", "-")}-overlay`)
+      .classList.add("hidden");
+    document.body.classList.remove("no-scroll");
+
+    const scrollToY = parseInt(
+      document.body.style.top.replace("px", "").replace("-", ""),
+    );
+    document.body.style.top = "";
+
+    if (!isNaN(scrollToY)) {
+      window.scrollTo({top: scrollToY, behavior: "instant"});
+    }
+  }
+
+  function enableAlternativeClosings(whatsSuggested: string) {
+    const overlay = document.querySelector(
+      `#${whatsSuggested.replace(" ", "-")}-overlay`,
+    );
+    const content = overlay.querySelector(
+      `#${whatsSuggested.replace(" ", "-")}-overlay-content`,
+    );
+
+    // Close on click outside
+    overlay.addEventListener("click", (e) => {
+      if (!content.contains(e.target)) closeOverlay(whatsSuggested);
+    });
+
+    // Close on Escape key
+    // Currently this event fires twice cause there are two overlays always in DOM
+    // TODO: for now it's fixed in a 'hacky' way in the closeOverlay function
+    // - figure out if there is a more elegant way to do it
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeOverlay(whatsSuggested);
+      }
+    });
+  }
+
+  class OverlayContent extends HTMLElement {
+    connectedCallback() {
+      enableAlternativeClosings(this.dataset.suggestion);
+    }
+  }
+
+  customElements.define("overlay-content", OverlayContent);
+</script>
