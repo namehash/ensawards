@@ -1,11 +1,12 @@
 import { FormButton } from "@/components/molecules/contact-form/form-elements/FormButton.tsx";
 import { Input } from "@/components/molecules/contact-form/form-elements/Input.tsx";
 import { TextArea } from "@/components/molecules/contact-form/form-elements/TextArea.tsx";
-import type {
-  ContactFormDataProps,
-  FormField,
-  PossibleSuggestions,
-  SuggestionFormDataProps,
+import {
+  type ContactFormDataProps,
+  EnsAwardsFormFields,
+  type FormField,
+  type PossibleSuggestions,
+  type SuggestionFormDataProps,
 } from "@/components/molecules/contact-form/types.ts";
 import {
   appSuggestionFormSchema,
@@ -16,21 +17,14 @@ import { CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import React, { type FormEvent, useEffect, useState } from "react";
 import * as Yup from "yup";
 
-// Reference form inputs from `Contact us` form at www.namehashlabs.org
-// where we forward requests from our form as well
-enum NameHashFormFields {
-  Name = "name",
-  Email = "email",
-  Telegram = "telegram",
-  Message = "message",
-  Source = "source",
+interface ValidationErrors {
+  [key: string]: string;
 }
 
-export enum EnsAwardsFormFields {
-  Name = "name",
-  Url = "url",
-  Description = "description",
-  Source = "source",
+interface FormProps {
+  whatsSuggested: PossibleSuggestions;
+  formFields: FormField[];
+  submissionEndpoint: string;
 }
 
 const formTextContentsAdaptations = new Map<
@@ -58,15 +52,18 @@ const validationSchemaMap = new Map([
   ["best practice", bestPracticeSuggestionFormSchema],
 ]);
 
-interface ValidationErrors {
-  [key: string]: string;
-}
+/**
+ * Used to satisfy the required email parameter in the `Contact-Us` form on namehashlabs.org
+ * where we forward forms sent from this site.
+ */
+const PLACEHOLDER_EMAIL = "placeholder@gmail.com";
 
-interface FormProps {
-  whatsSuggested: PossibleSuggestions;
-  formFields: FormField[];
-  submissionEndpoint: string;
-}
+/**
+ * Structural elements to make the message more dev-friendly in the Slack channel.
+ */
+const MESSAGE_SEPARATOR = "\n----------\n";
+const APP_SUGGESTION_DESCRIPTION_HEADER = "\nAPP SUGGESTION from ensawards.org";
+const BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER = "\nBEST PRACTICE SUGGESTION from ensawards.org";
 
 const closeOverlayIcon = (
   <svg
@@ -153,11 +150,15 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       // Proceed with form submission if validation is successful
       // Map ENSAwards form fields to ContactUs form fields
       // since we use a common Slack channel as an output & forward our requests to namehashlabs.org
+      const descriptionMapping =
+        whatsSuggested === "app"
+          ? `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested app URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
+          : `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`;
       const dataToSend: ContactFormDataProps = {
         name: data.name,
-        email: data.url,
+        email: PLACEHOLDER_EMAIL,
         telegram: "",
-        message: data.description,
+        message: descriptionMapping,
         source: data.source,
       };
       await sendData(dataToSend);
@@ -256,6 +257,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
               onClick={() => {
                 closeOverlay(whatsSuggested);
               }}
+              className="z-10"
             >
               {closeOverlayIcon}
             </button>
@@ -268,7 +270,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
 
         <div
           className={cn([
-            "w-full h-full flex flex-col items-center justify-center absolute  transition-all duration-300",
+            "w-full h-full flex flex-col items-center justify-center absolute  transition-all duration-300 pt-5",
             successfulFormSubmit ? "opacity-100" : "opacity-0 z-[-1]",
           ])}
         >

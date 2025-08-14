@@ -1,4 +1,19 @@
-import { EnsAwardsFormFields } from "@/components/molecules/contact-form/ContactForm.tsx";
+// Reference form inputs from `Contact us` form at www.namehashlabs.org
+// where we forward requests from our form as well
+enum NameHashFormFields {
+  Name = "name",
+  Email = "email",
+  Telegram = "telegram",
+  Message = "message",
+  Source = "source",
+}
+
+export enum EnsAwardsFormFields {
+  Name = "name",
+  Url = "url",
+  Description = "description",
+  Source = "source",
+}
 
 // Reference form inputs from `Contact us` form at www.namehashlabs.org
 // where we forward requests from our form as well
