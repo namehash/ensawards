@@ -2,34 +2,51 @@
 import { cn } from "../../lib/utils";
 import { adaptSuggestionText } from "../../utils";
 import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
+import Plus from "../../assets/plusIcon.svg";
 export interface SuggestFormOpenerProps {
   whatsSuggested: "app" | "best practice";
+  suggestionStyle: "card" | "outline";
 }
 
-const { whatsSuggested }: SuggestFormOpenerProps = Astro.props;
+const { whatsSuggested, suggestionStyle }: SuggestFormOpenerProps = Astro.props;
 ---
-
+{suggestionStyle === "outline" ? (
+<suggest-form-button
+        data-suggestion={whatsSuggested}
+        id={`${whatsSuggested}-suggestion-button`}
+        class={cn(
+            shadcnButtonVariants({
+                variant: "ghost",
+                size: "default",
+                className: "cursor-pointer rounded-full",
+            }),
+        )}>
+    <Plus />
+    <p>Suggest {whatsSuggested}</p>
+</suggest-form-button>
+    ) : (
 <div
-  class="w-full md:w-[598px] max-w-[598px] h-fit min-h-[62px] box-border p-4 sm:px-6 sm:py-5 flex flex-col
+        class="w-full md:w-[598px] max-w-[598px] h-fit min-h-[62px] box-border p-4 sm:px-6 sm:py-5 flex flex-col
             sm:flex-row flex-nowrap sm:flex-wrap justify-center sm:justify-between items-center max-sm:gap-3
             rounded-2xl border border-dashed border-gray-300">
-  <p
-    class="text-base leading-normal font-normal text-muted-foreground text-left">
-    Suggest {adaptSuggestionText(whatsSuggested)} you'd like us to add.
-  </p>
-  <suggest-form-button
-    data-suggestion={whatsSuggested}
-    id=`${whatsSuggested}-suggestion-button`
-    class={cn(
-      shadcnButtonVariants({
-        variant: "secondary",
-        size: "default",
-        className: "cursor-pointer rounded-full max-sm:self-stretch",
-      }),
-    )}>
-    Suggest
-  </suggest-form-button>
+    <p
+            class="text-base leading-normal font-normal text-muted-foreground text-left">
+        Suggest {adaptSuggestionText(whatsSuggested)}
+    </p>
+    <suggest-form-button
+            data-suggestion={whatsSuggested}
+            id=`${whatsSuggested}-suggestion-button`
+            class={cn(
+                shadcnButtonVariants({
+                    variant: "secondary",
+                    size: "default",
+                    className: "cursor-pointer rounded-full max-sm:self-stretch",
+                }),
+            )}>
+        Suggest
+    </suggest-form-button>
 </div>
+    )}
 
 <script>
   import { openSuggestionOverlay } from "../../utils/openSuggestionOverlay";

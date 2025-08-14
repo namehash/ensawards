@@ -58,9 +58,31 @@ import { cn } from "../lib/utils";
   <section
     id="previews-section"
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
+  <ItemsList
+          header="App benchmarks"
+          seeAllLink="/app-benchmarks">
+      {
+          appReviewCards.slice(0, 4).map((app, idx) => (
+                  <AppReviewCard
+                          key={`app-review-card-${idx}`}
+                          name="Rainbow Wallet"
+                          description="Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum."
+                          overallScore={90}
+                          websiteLink="https://rainbow.me/"
+                          type="wallet"
+                          viewReviewLink={`/app-benchmarks/${idx}`}>
+                      <RainbowIcon slot="icon" />
+                      <CardBadge
+                              slot="badge"
+                              text="Top performer"
+                              className="text-primary-foreground bg-black"
+                      />
+                  </AppReviewCard>
+          ))
+      }
+  </ItemsList>
     <ItemsList
-      header="Category"
-      numberOfItems={bestPracticesCategoryCards.length}
+      header="ENS best practices"
       seeAllLink="/ens-best-practices">
       {
         bestPracticesCategoryCards
@@ -74,30 +96,6 @@ import { cn } from "../lib/utils";
               numberOfBestPractices={12}
             />
           ))
-      }
-    </ItemsList>
-    <ItemsList
-      header="App benchmarks"
-      numberOfItems={appReviewCards.length}
-      seeAllLink="/app-benchmarks">
-      {
-        appReviewCards.slice(0, 4).map((app, idx) => (
-          <AppReviewCard
-            key={`app-review-card-${idx}`}
-            name="Rainbow Wallet"
-            description="Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum."
-            overallScore={90}
-            websiteLink="https://rainbow.me/"
-            type="wallet"
-            viewReviewLink={`/app-benchmarks/${idx}`}>
-            <RainbowIcon slot="icon" />
-            <CardBadge
-              slot="badge"
-              text="Top performer"
-              className="text-primary-foreground bg-black"
-            />
-          </AppReviewCard>
-        ))
       }
     </ItemsList>
   </section>
