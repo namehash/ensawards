@@ -35,8 +35,7 @@ const { category } = Astro.params;
   />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
-    <ItemsList
-      header="Best practices">
+    <ItemsList header="Best practices">
       {
         [...Array(parseInt(category) + 1).keys()].map((card, idx) => (
           <BestPracticeCard
@@ -49,7 +48,10 @@ const { category } = Astro.params;
           />
         ))
       }
-      <SuggestFormOpener whatsSuggested="best practice" suggestionStyle="card" />
+      <SuggestFormOpener
+        whatsSuggested="best practice"
+        suggestionStyle="card"
+      />
     </ItemsList>
   </section>
 </Layout>

@@ -1,12 +1,12 @@
 ---
 import RainbowIcon from "../../assets/rainbowIcon.svg";
 import MatrixBadge from "../../components/atoms/MatrixBadge.astro";
+import SuggestFormOpener from "../../components/atoms/SuggestFormOpener.astro";
 import MobileMatrixRowCard from "../../components/atoms/cards/MobileMatrixRowCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import ItemsMatrix from "../../components/molecules/ItemsMatrix.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import Layout from "../../layouts/Layout.astro";
-import SuggestFormOpener from "../../components/atoms/SuggestFormOpener.astro";
 
 export function getStaticPaths() {
   //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
@@ -108,7 +108,10 @@ const mockAppReviewData = {
           </MobileMatrixRowCard>
         ))
       }
-      <SuggestFormOpener whatsSuggested="best practice" suggestionStyle="outline"/>
+      <SuggestFormOpener
+        whatsSuggested="best practice"
+        suggestionStyle="outline"
+      />
     </ItemsList>
   </section>
   <section
