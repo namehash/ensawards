@@ -16,3 +16,15 @@ export const adaptSuggestionText = (whatsSuggested: PossibleSuggestions): string
       throw new Error(`${whatsSuggested} is not a valid suggestion category`);
   }
 };
+
+export const scrollWithOffset = (id:string, offset:number) => {
+  const element = document.getElementById(id);
+  if (!element) return;
+
+  const y = element.getBoundingClientRect().top + window.scrollY - offset;
+
+  window.scrollTo({
+    top: y,
+    behavior: "smooth",
+  });
+}

@@ -2,9 +2,8 @@
 import RainbowIcon from "../../assets/rainbowIcon.svg";
 import MatrixBadge from "../../components/atoms/MatrixBadge.astro";
 import SuggestFormOpener from "../../components/atoms/SuggestFormOpener.astro";
-import MobileMatrixRowCard from "../../components/atoms/cards/MobileMatrixRowCard.astro";
+import MobileMatrixRowCard from "../../components/atoms/cards/SupportMatrixCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
-import ItemsMatrix from "../../components/molecules/ItemsMatrix.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import Layout from "../../layouts/Layout.astro";
 
@@ -61,8 +60,8 @@ const mockAppReviewData = {
     <RainbowIcon slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg" />
   </SubpageHero>
   <section
-    class="w-full box-border h-fit sm:hidden flex flex-col flex-nowrap justify-start items-center gap-XX p-5">
-    <ItemsList header="Review">
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
+    <ItemsList header="Benchmarks">
       {
         [1, 2, 3].map((elem) => (
           <MobileMatrixRowCard
@@ -113,69 +112,5 @@ const mockAppReviewData = {
         suggestionStyle="outline"
       />
     </ItemsList>
-  </section>
-  <section
-    class="w-full box-border h-fit hidden sm:flex flex-col flex-nowrap justify-start items-center gap-10 py-[60px] px-8">
-    <ItemsMatrix
-      header="Review"
-      whatToSuggest="best practice"
-      columnNames={["Best practice", "Type", "Notes", "Result"]}
-      rows={[
-        [
-          {
-            text: "Support ENSIP-19",
-            link: "https://docs.ens.domains/resolution/",
-          },
-          {
-            text: "ENS Resolution",
-            link: "https://docs.ens.domains/resolution/",
-          },
-          { text: "-" },
-          {
-            text: "Pass",
-            badgeData: {
-              icon: "check",
-              className: "text-emerald-600 bg-[#0596691A]",
-            },
-          },
-        ],
-        [
-          {
-            text: "Support ENSIP-19",
-            link: "https://docs.ens.domains/resolution/",
-          },
-          {
-            text: "ENS Resolution",
-            link: "https://docs.ens.domains/resolution/",
-          },
-          { text: "-" },
-          {
-            text: "Partial pass",
-            badgeData: {
-              icon: "partialCheck",
-              className: "text-neutral-900 bg-neutral-100",
-            },
-          },
-        ],
-        [
-          {
-            text: "Support ENSIP-19",
-            link: "https://docs.ens.domains/resolution/",
-          },
-          {
-            text: "ENS Resolution",
-            link: "https://docs.ens.domains/resolution/",
-          },
-          { text: "-" },
-          {
-            text: "Fail",
-            badgeData: {
-              icon: "cross",
-              className: "text-red-600 bg-[#DC26261A]",
-            },
-          },
-        ],
-      ]}
-    />
   </section>
 </Layout>

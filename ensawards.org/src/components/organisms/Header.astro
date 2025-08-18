@@ -12,11 +12,12 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
     class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center px-5 sm:px-8">
     <a
       href="/"
-      class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px] text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold"
-      ><ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" /><p>
-        ENSAwards
-      </p></a
-    >
+      class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px]"
+      >
+        <ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" />
+        <p class="text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold">ENSAwards</p>
+        <span id="alphaBadge" class="w-fit h-fit flex flex-row flex-nowrap justify-center items-center px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200">Alpha</span>
+    </a>
     <div
       class="hidden sm:flex flex-row flex-nowrap gap-2 justify-center items-center">
       <a
@@ -72,6 +73,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
   function ScrollHeader() {
     if (typeof window !== "undefined") {
       const header = document.getElementById("site-header");
+      const alphaBadge = document.getElementById("alphaBadge");
       const headerButtons = document.getElementsByClassName("onScrollButton");
 
       const scrollWatcher = document.createElement("div");
@@ -82,6 +84,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
       const navObserver = new IntersectionObserver(
         (entries) => {
           header.classList.toggle("scrolled", !entries[0].isIntersecting);
+          alphaBadge.classList.toggle("scrolled", !entries[0].isIntersecting);
 
           for (const headerButton of headerButtons) {
             headerButton.classList.toggle(
@@ -124,5 +127,15 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
     &:hover {
       background-color: var(--accent);
     }
+  }
+
+  #alphaBadge {
+      color: black;
+      background-color: white;
+  }
+
+  #alphaBadge.scrolled {
+      color: white;
+      background-color: black;
   }
 </style>

@@ -52,15 +52,18 @@ export default function HeaderMobileNavigation() {
               <PopoverPanel className="sm:hidden fixed inset-0 z-30 h-screen w-full bg-white">
                 <div className="flex h-full flex-col justify-between px-5 pb-5">
                   <div className="w-full justify-between items-center flex absolute px-5 h-[56px] top-0 left-0 max-w-[640px] border-b border-b-black/5">
-                    <a
-                      href="/"
-                      className="h-fit flex justify-center items-center gap-2 text-[19px] text-black not-italic font-bold leading-[25px] tracking-[-0.907px]"
-                    >
-                      <img src={ENSAwardsLogo.src} className="h-[25px] w-[24opx]" alt="ENSNode" />
-                      ENSAwards
-                    </a>
-                    <PopoverButton className="transition rounded-lg border-0 inline-flex items-center whitespace-nowrap underline-none text-[#737373]">
-                      {/*NOTE: this results in a browser error (not-breaking) but is directly copied from namekit.io solution*/}
+                      <a
+                          href="/"
+                          className="h-fit flex justify-center items-center gap-2 text-[19px] text-black not-italic font-bold leading-[25px] tracking-[-0.907px]"
+                      >
+                          <img src={ENSAwardsLogo.src} className="h-[25px] w-[24opx]" alt="ENSNode"/>
+                          ENSAwards
+                          <span
+                                className="w-fit h-fit flex flex-row flex-nowrap justify-center items-center bg-black text-white px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200">Alpha</span>
+                      </a>
+                      <PopoverButton
+                          className="transition rounded-lg border-0 inline-flex items-center whitespace-nowrap underline-none text-[#737373]">
+                          {/*NOTE: this results in a browser error (not-breaking) but is directly copied from namekit.io solution*/}
                       <span className="sr-only">Close menu</span>
                       {closeIcon}
                     </PopoverButton>

@@ -4,11 +4,12 @@ import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
 export interface CategoryCardProps {
   name: string;
   description: string;
-  viewBestPracticesLink: string; //might change to URL or change name to not be misleading
-  numberOfBestPractices: number;
+  viewBestPracticesLink: string;
+  comingSoon?: boolean;
+  numberOfBestPractices?: number;
 }
 
-const { name, description, viewBestPracticesLink, numberOfBestPractices }: CategoryCardProps =
+const { name, description, viewBestPracticesLink, comingSoon, numberOfBestPractices }: CategoryCardProps =
   Astro.props;
 ---
 
@@ -17,7 +18,10 @@ const { name, description, viewBestPracticesLink, numberOfBestPractices }: Categ
             justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4 rounded-2xl border border-gray-200">
   <div
     class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
-    <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
+    <div class="flex flex-row flex-nowrap justify-start items-center gap-3">
+      <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
+      {comingSoon && <span class="w-fit h-fit rounded-md bg-neutral-100 py-[2px] px-2 text-xs leading-normal font-semibold">Coming soon</span>}
+    </div>
     <p
       class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">
       {description}
@@ -28,7 +32,7 @@ const { name, description, viewBestPracticesLink, numberOfBestPractices }: Categ
     class="flex flex-col sm:flex-row flex-nowrap justify-center max-sm:gap-3 sm:justify-between items-center
                 sm:items-start self-stretch">
     <div
-      class="sm:hidden flex flex-row flex-nowrap justify-between items-center self-stretch">
+      class={cn("sm:hidden flex flex-row flex-nowrap justify-between items-center self-stretch", comingSoon ? "hidden" : "")}>
       <p class="text-muted-foreground text-sm leading-normal font-medium">
         Best practices
       </p>
@@ -38,6 +42,7 @@ const { name, description, viewBestPracticesLink, numberOfBestPractices }: Categ
     </div>
     <a
       href={viewBestPracticesLink}
+      aria-disabled={comingSoon || false}
       class={cn(
         shadcnButtonVariants({
           variant: "secondary",
@@ -48,7 +53,7 @@ const { name, description, viewBestPracticesLink, numberOfBestPractices }: Categ
       View best practices
     </a>
     <div
-      class="hidden sm:flex flex-col flex-nowrap justify-center items-start gap-0">
+      class={cn("hidden sm:flex flex-col flex-nowrap justify-center items-start gap-0", comingSoon ? "sm:hidden": "")}>
       <p class="text-muted-foreground text-sm leading-normal font-medium">
         Best practices
       </p>

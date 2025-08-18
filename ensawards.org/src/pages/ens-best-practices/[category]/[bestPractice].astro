@@ -1,10 +1,10 @@
 ---
-import RainbowIcon from "../../../assets/rainbowIcon.svg";
+import { Image } from "astro:assets";
+import type {ImageMetadata} from "astro";
 import MatrixBadge from "../../../components/atoms/MatrixBadge.astro";
 import SuggestFormOpener from "../../../components/atoms/SuggestFormOpener.astro";
-import MobileMatrixRowCard from "../../../components/atoms/cards/MobileMatrixRowCard.astro";
+import SupportMatrixCard from "../../../components/atoms/cards/SupportMatrixCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
-import ItemsMatrix from "../../../components/molecules/ItemsMatrix.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import Layout from "../../../layouts/Layout.astro";
 import { cn } from "../../../lib/utils";
@@ -27,6 +27,7 @@ export function getStaticPaths() {
 }
 
 const { category, bestPractice } = Astro.params;
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
@@ -48,7 +49,7 @@ const mockBestPracticeData = {
       value: "12",
     },
     {
-      name: "Passing score",
+      name: "App support",
       value: "90%",
     },
   ],
@@ -89,7 +90,7 @@ const mockBestPracticeData = {
           valueStyles: "text-black",
         },
         {
-          name: "Passing score",
+          name: "App support",
           value: "90%",
           valueStyles: "text-emerald-600",
         },
@@ -105,13 +106,15 @@ const mockBestPracticeData = {
     description={mockBestPracticeData.description}
     breadcrumbs={["ENS best practices", category]}
     additionalElements={mockBestPracticeData.additionalHeroData}
-  />
+  >
+    <technical-info-anchor data-id={`${mockBestPracticeData.name.replace(" ", "-")}`} href={`#${mockBestPracticeData.name.replace(" ", "-")}-technical-info`} id={`${mockBestPracticeData.name.replace(" ", "-")}-technical-info-anchor`} slot="technicalSectionAnchor" class="text-black transition-all duration-200 hover:underline hover:underline-offset-[25%] decoration-from-font hover:cursor-pointer">Learn More</technical-info-anchor href={`#${mockBestPracticeData.name}-technical-info`}>
+  </SubpageHero>
   <section
-    class="w-full box-border h-fit sm:hidden flex flex-col flex-nowrap justify-start items-center p-5">
-    <ItemsList header="App support matrix">
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8">
+    <ItemsList header="App benchmarks" containerStyles="sm:gap-2">
       {
         [1, 2, 3].map((elem) => (
-          <MobileMatrixRowCard
+          <SupportMatrixCard
             name="Rainbow Wallet"
             notes={
               elem === 1
@@ -125,20 +128,13 @@ const mockBestPracticeData = {
                                      ullamco laboris nisi ut aliquip ex ea commodo consequat.`
             }
             viewButtonData={{
-              text: "View full review",
+              text: "Benchmarks",
               link: `/app-benchmarks/${elem}`,
             }}
             matrixColumnData={[
               {
                 category: "Type",
                 value: "Wallet",
-              },
-              {
-                category: "Website",
-                value: "Visit site ↗",
-                link: "https://rainbow.me/",
-                linkStyles:
-                  "text-blue-600 transition-all duration-200 hover:underline hover:underline-offset-[25%] decoration-from-font",
               },
             ]}>
             <MatrixBadge
@@ -155,75 +151,77 @@ const mockBestPracticeData = {
                 elem === 1 ? "partialCheck" : elem === 2 ? "check" : "cross"
               }
             />
-            <RainbowIcon slot="icon" />
-          </MobileMatrixRowCard>
+            <Image src={images["/src/assets/rainbowIcon.svg"]()} alt={`${"TODO:FILL"}-logo`} slot="icon" class="shrink-0 rounded-md w-10 h-10" />
+          </SupportMatrixCard>
         ))
       }
       <SuggestFormOpener whatsSuggested="app" suggestionStyle="outline" />
     </ItemsList>
   </section>
+  <!--left for the sake of lookup on how to use items matrix if the need occurrs, TODO: remove after app benchmarks list refactor-->
+  <!--<section-->
+  <!--  class="w-full box-border h-fit hidden sm:flex flex-col flex-nowrap justify-start items-center gap-10 pt-[60px] sm:px-8">-->
+  <!--  <ItemsMatrix-->
+  <!--    header="App benchmarks"-->
+  <!--    whatToSuggest="app"-->
+  <!--    columnNames={["App name", "Type", "Website", "Notes", "Result"]}-->
+  <!--    rows={[-->
+  <!--      [-->
+  <!--        {-->
+  <!--          text: "Rainbow",-->
+  <!--          link: "https://rainbow.me/",-->
+  <!--          iconSource: "/src/assets/rainbowIcon.svg",-->
+  <!--        },-->
+  <!--        { text: "Wallet" },-->
+  <!--        { text: "https://rainbow.me/", link: "https://rainbow.me/" },-->
+  <!--        { text: "-" },-->
+  <!--        {-->
+  <!--          text: "Pass",-->
+  <!--          badgeData: {-->
+  <!--            icon: "check",-->
+  <!--            className: "text-emerald-600 bg-[#0596691A]",-->
+  <!--          },-->
+  <!--        },-->
+  <!--      ],-->
+  <!--      [-->
+  <!--        {-->
+  <!--          text: "Rainbow",-->
+  <!--          link: "https://rainbow.me/",-->
+  <!--          iconSource: "/src/assets/rainbowIcon.svg",-->
+  <!--        },-->
+  <!--        { text: "Wallet" },-->
+  <!--        { text: "https://rainbow.me/", link: "https://rainbow.me/" },-->
+  <!--        { text: "-" },-->
+  <!--        {-->
+  <!--          text: "Partial pass",-->
+  <!--          badgeData: {-->
+  <!--            icon: "partialCheck",-->
+  <!--            className: "text-neutral-900 bg-neutral-100",-->
+  <!--          },-->
+  <!--        },-->
+  <!--      ],-->
+  <!--      [-->
+  <!--        {-->
+  <!--          text: "Rainbow",-->
+  <!--          link: "https://rainbow.me/",-->
+  <!--          iconSource: "/src/assets/rainbowIcon.svg",-->
+  <!--        },-->
+  <!--        { text: "Wallet" },-->
+  <!--        { text: "https://rainbow.me/", link: "https://rainbow.me/" },-->
+  <!--        { text: "-" },-->
+  <!--        {-->
+  <!--          text: "Fail",-->
+  <!--          badgeData: {-->
+  <!--            icon: "cross",-->
+  <!--            className: "text-red-600 bg-[#DC26261A]",-->
+  <!--          },-->
+  <!--        },-->
+  <!--      ],-->
+  <!--    ]}-->
+  <!--  />-->
+  <!--</section>-->
   <section
-    class="w-full box-border h-fit hidden sm:flex flex-col flex-nowrap justify-start items-center gap-10 pt-[60px] sm:px-8">
-    <ItemsMatrix
-      header="App support matrix"
-      whatToSuggest="app"
-      columnNames={["App name", "Type", "Website", "Notes", "Result"]}
-      rows={[
-        [
-          {
-            text: "Rainbow",
-            link: "https://rainbow.me/",
-            iconSource: "/src/assets/rainbowIcon.svg",
-          },
-          { text: "Wallet" },
-          { text: "https://rainbow.me/", link: "https://rainbow.me/" },
-          { text: "-" },
-          {
-            text: "Pass",
-            badgeData: {
-              icon: "check",
-              className: "text-emerald-600 bg-[#0596691A]",
-            },
-          },
-        ],
-        [
-          {
-            text: "Rainbow",
-            link: "https://rainbow.me/",
-            iconSource: "/src/assets/rainbowIcon.svg",
-          },
-          { text: "Wallet" },
-          { text: "https://rainbow.me/", link: "https://rainbow.me/" },
-          { text: "-" },
-          {
-            text: "Partial pass",
-            badgeData: {
-              icon: "partialCheck",
-              className: "text-neutral-900 bg-neutral-100",
-            },
-          },
-        ],
-        [
-          {
-            text: "Rainbow",
-            link: "https://rainbow.me/",
-            iconSource: "/src/assets/rainbowIcon.svg",
-          },
-          { text: "Wallet" },
-          { text: "https://rainbow.me/", link: "https://rainbow.me/" },
-          { text: "-" },
-          {
-            text: "Fail",
-            badgeData: {
-              icon: "cross",
-              className: "text-red-600 bg-[#DC26261A]",
-            },
-          },
-        ],
-      ]}
-    />
-  </section>
-  <section
+      id={`${mockBestPracticeData.name.replace(" ", "-")}-technical-info`}
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
     <div
       class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
@@ -296,4 +294,19 @@ const mockBestPracticeData = {
       </div>
     </div>
   </section>
+  <script>
+    import {scrollWithOffset} from "../../../utils";
+
+    class AnchorToTechnicalInfo extends HTMLElement {
+      connectedCallback() {
+        const scrollAnchor = document.getElementById(`${this.dataset.id}-technical-info-anchor`);
+        scrollAnchor.addEventListener("click", (event) => {
+          event.preventDefault();
+          scrollWithOffset(`${this.dataset.id}-technical-info`, 60);
+        });
+      }
+    }
+
+    customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
+  </script>
 </Layout>

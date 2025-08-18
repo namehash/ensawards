@@ -35,7 +35,7 @@ const { category } = Astro.params;
   />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
-    <ItemsList header="Best practices">
+    <ItemsList header="Best practices" additionalInfo="The list of best practices is not comprehensive and is being updated.">
       {
         [...Array(parseInt(category) + 1).keys()].map((card, idx) => (
           <BestPracticeCard
@@ -44,7 +44,7 @@ const { category } = Astro.params;
             description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
             viewReviewsLink={`/ens-best-practices/${category}/0`}
             appsPassed={12}
-            passingScore={90}
+            appSupport={90}
           />
         ))
       }

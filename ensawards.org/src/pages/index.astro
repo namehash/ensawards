@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
+import type {ImageMetadata} from "astro";
 import ChevronDown from "../assets/chevronDown.svg";
 import RainbowIcon from "../assets/rainbowIcon.svg";
-import CardBadge from "../components/atoms/CardBadge.astro";
-import AppReviewCard from "../components/atoms/cards/AppReviewCard.astro";
+import ThirdPlaceIcon from "../assets/thirdPlaceAward.svg";
+import AppLeaderboardCard from "../components/atoms/cards/AppLeaderboardCard.astro";
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import { shadcnButtonVariants } from "../components/shadcn/shadcnButtonStyles";
@@ -58,24 +60,20 @@ import { cn } from "../lib/utils";
   <section
     id="previews-section"
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
-    <ItemsList header="App benchmarks" seeAllLink="/app-benchmarks">
+    <ItemsList header="App benchmarks" seeAllLink="/app-benchmarks" containerStyles="gap-3 sm:gap-3">
       {
-        appReviewCards.slice(0, 4).map((app, idx) => (
-          <AppReviewCard
+        appReviewCards.slice(0, 5).map((app, idx) => (
+          <AppLeaderboardCard
             key={`app-review-card-${idx}`}
             name="Rainbow Wallet"
             description="Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum."
             overallScore={90}
             websiteLink="https://rainbow.me/"
-            type="wallet"
+            type="Wallet"
             viewReviewLink={`/app-benchmarks/${idx}`}>
-            <RainbowIcon slot="icon" />
-            <CardBadge
-              slot="badge"
-              text="Top performer"
-              className="text-primary-foreground bg-black"
-            />
-          </AppReviewCard>
+            <Image src={RainbowIcon} alt={`${"app"}`} slot="appIcon" class="rounded-md" />
+              {idx < 3 ? (<Image alt="third place" src={ThirdPlaceIcon} slot="placeIcon" />) : <p slot="placeIcon" class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">{idx+1}</p>}
+          </AppLeaderboardCard>
         ))
       }
     </ItemsList>
@@ -89,6 +87,7 @@ import { cn } from "../lib/utils";
               name="ENS Resolution"
               description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
               viewBestPracticesLink={`/ens-best-practices/${card}`}
+              comingSoon={idx === 3}
               numberOfBestPractices={12}
             />
           ))
@@ -96,17 +95,7 @@ import { cn } from "../lib/utils";
     </ItemsList>
   </section>
   <script>
-    function scrollWithOffset(id, offset) {
-      const element = document.getElementById(id);
-      if (!element) return;
-
-      const y = element.getBoundingClientRect().top + window.scrollY - offset;
-
-      window.scrollTo({
-        top: y,
-        behavior: "smooth",
-      });
-    }
+    import {scrollWithOffset} from "../utils";
 
     const scrollAnchor = document.getElementById("scroll-to-previews-anchor");
     scrollAnchor.addEventListener("click", (event) => {

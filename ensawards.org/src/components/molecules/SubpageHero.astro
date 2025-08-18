@@ -1,5 +1,5 @@
 ---
-import ChevronIcon from "../../assets/chevronRight.svg";
+import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
 import HomeIcon from "../../assets/homeIcon.svg";
 import { adaptBreadcrumb } from "../../utils";
 
@@ -31,7 +31,7 @@ let breadcrumbHref = "";
           <a href="/">
             <HomeIcon width="16" height="16" />
           </a>
-          <ChevronIcon />
+          <ChevronRightIcon />
           {breadcrumbs.map((crumb, idx) => {
             breadcrumbHref = breadcrumbHref.concat("/", crumb);
             if (idx < breadcrumbs.length - 1) {
@@ -42,7 +42,7 @@ let breadcrumbHref = "";
                     href={decodeURI(adaptBreadcrumb(breadcrumbHref))}>
                     {crumb}
                   </a>
-                  <ChevronIcon />
+                  <ChevronRightIcon />
                 </>
               );
             }
@@ -70,7 +70,7 @@ let breadcrumbHref = "";
           {
             description && (
               <p class="w-fit max-w-[580px] text-sm sm:text-base leading-6 sm:leading-7 font-normal text-black/60">
-                {description}
+                {description} <slot name="technicalSectionAnchor"/>
               </p>
             )
           }

@@ -6,10 +6,10 @@ export interface BestPracticeCardProps {
   description: string;
   viewReviewsLink: string;
   appsPassed: number;
-  passingScore: number;
+  appSupport: number;
 }
 
-const { name, description, viewReviewsLink, appsPassed, passingScore }: BestPracticeCardProps =
+const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracticeCardProps =
   Astro.props;
 ---
 
@@ -50,10 +50,10 @@ const { name, description, viewReviewsLink, appsPassed, passingScore }: BestPrac
       <div
         class="flex flex-row flex-nowrap justify-between items-center self-stretch">
         <p class="text-muted-foreground text-sm leading-normal font-normal">
-          Passing score
+          App support
         </p>
         <p class="text-sm leading-normal font-semibold text-emerald-600">
-          {passingScore}%
+          {appSupport}%
         </p>
       </div>
     </div>
@@ -66,7 +66,7 @@ const { name, description, viewReviewsLink, appsPassed, passingScore }: BestPrac
           className: "cursor-pointer rounded-full max-sm:self-stretch",
         }),
       )}>
-      View reviews
+      View details
     </a>
     <div
       class="hidden sm:flex flex-nowrap flex-row justify-start items-start gap-6 sm:pl-4">
@@ -80,10 +80,10 @@ const { name, description, viewReviewsLink, appsPassed, passingScore }: BestPrac
       </div>
       <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
         <p class="text-muted-foreground text-sm leading-normal font-normal">
-          Passing score
+          App support
         </p>
         <p class="text-sm leading-normal font-semibold text-emerald-600">
-          {passingScore}%
+          {appSupport}%
         </p>
       </div>
     </div>
