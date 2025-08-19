@@ -38,10 +38,19 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
             size: "default",
             className: "onScrollButton rounded-full",
           }),
-        )}>App benchmarks</a
-      >
-      <header-suggest-button
-        id="header-app-suggestion-button"
+        )}>App benchmarks</a>
+        <a
+                href="/about"
+                class={cn(
+                    shadcnButtonVariants({
+                        variant: "ghost",
+                        size: "default",
+                        className: "onScrollButton rounded-full",
+                    }),
+                )}>About</a
+        >
+      <a
+              href="/ens-referral-program"
         class={cn(
           shadcnButtonVariants({
             variant: "outline",
@@ -49,27 +58,13 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
             className:
               "onScrollButton cursor-pointer rounded-full border-black/20 bg-transparent",
           }),
-        )}>Suggest an app</header-suggest-button
+        )}>ENS Referral Program</a
       >
     </div>
     <div class="block sm:hidden"><HeaderMobileNavigation client:load /></div>
   </div>
 </header>
 <script>
-  import { openSuggestionOverlay } from "../../utils/openSuggestionOverlay";
-
-  class SuggestionFormOpener extends HTMLElement {
-    connectedCallback() {
-      const formOpenerButton = document.getElementById(
-        `header-app-suggestion-button`,
-      );
-
-      formOpenerButton.addEventListener("click", () => {
-        openSuggestionOverlay("app");
-      });
-    }
-  }
-
   function ScrollHeader() {
     if (typeof window !== "undefined") {
       const header = document.getElementById("site-header");
@@ -102,7 +97,6 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
     return null;
   }
 
-  customElements.define("header-suggest-button", SuggestionFormOpener);
   ScrollHeader();
 </script>
 

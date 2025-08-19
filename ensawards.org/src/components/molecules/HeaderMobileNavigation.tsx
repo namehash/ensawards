@@ -73,28 +73,21 @@ export default function HeaderMobileNavigation() {
                       "py-16 flex flex-col h-full justify-center overflow-y-auto scrollbar-styled",
                     )}
                   >
-                    <ul className="py-3 flex flex-col justify-center gap-5">
-                      <a href="/ens-best-practices" className={mainLinkClass}>
-                        ENS best practices
-                      </a>
-                      <a href="/app-benchmarks" className={mainLinkClass}>
-                        App benchmarks
-                      </a>
-                    </ul>
+                      <ul className="py-3 flex flex-col justify-center gap-5">
+                          <a href="/ens-best-practices" className={mainLinkClass}>
+                              ENS best practices
+                          </a>
+                          <a href="/app-benchmarks" className={mainLinkClass}>
+                              App benchmarks
+                          </a>
+                          <a href="/about" className={mainLinkClass}>
+                              About
+                          </a>
+                          <a href="/ens-referral-program" className={mainLinkClass}>
+                              ENS Referral Program
+                          </a>
+                      </ul>
                   </div>
-                  <button
-                    onClick={() => openSuggestionOverlay("app")}
-                    className={cn(
-                      shadcnButtonVariants({
-                        variant: "outline",
-                        size: "default",
-                        className:
-                          "cursor-pointer rounded-full w-full text-base leading-6 h-[42px] box-border",
-                      }),
-                    )}
-                  >
-                    Suggest an app
-                  </button>
                 </div>
               </PopoverPanel>
             </Transition>

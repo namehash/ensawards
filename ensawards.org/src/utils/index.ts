@@ -33,7 +33,7 @@ export const getAppById = (appId: string): AppData | undefined => {
   return appsData.find((app) => app.id === appId);
 }
 
-
+//TODO: distribute these functions more reasonably
 export const BenchmarkResultToBadgeStyles = new Map<BenchmarkResult, string>([
     [BenchmarkResult.PartialPass, "text-neutral-900 bg-neutral-100"],
     [BenchmarkResult.Pass, "text-emerald-600 bg-[#0596691A]"],
