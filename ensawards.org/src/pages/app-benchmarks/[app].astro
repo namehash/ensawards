@@ -1,116 +1,80 @@
 ---
-import RainbowIcon from "../../assets/rainbowIcon.svg";
+import { Image } from "astro:assets";
+import type {ImageMetadata} from "astro";
 import MatrixBadge from "../../components/atoms/MatrixBadge.astro";
 import SuggestFormOpener from "../../components/atoms/SuggestFormOpener.astro";
-import MobileMatrixRowCard from "../../components/atoms/cards/SupportMatrixCard.astro";
+import SupportMatrixCard from "../../components/atoms/cards/SupportMatrixCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import Layout from "../../layouts/Layout.astro";
+import {appsData, BenchmarkResult} from "../../data/appData";
+import {adaptToLink, BenchmarkResultToBadgeStyles, getAppById} from "../../utils";
 
 export function getStaticPaths() {
-  //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
-  return [
-    { params: { app: 0 } },
-    { params: { app: 1 } },
-    { params: { app: 2 } },
-    { params: { app: 3 } },
-    { params: { app: 4 } },
-    { params: { app: 5 } },
-    { params: { app: 6 } },
-    { params: { app: 7 } },
-    { params: { app: 8 } },
-    { params: { app: 9 } },
-    { params: { app: 10 } },
-    { params: { app: 11 } },
-  ];
+  return appsData.map((app) => ({ params: { app: adaptToLink(app.name) }}));
 }
 
 const { app } = Astro.params;
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
-//TODO: adapt all data here to be dependent on actual category->best-practice pairs once we get the data, for now use mock
+const appToDisplay = getAppById(app);
 
-const mockAppReviewData = {
-  name: "Rainbow Wallet",
-  description:
-    "Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum.",
-  additionalHeroData: [
-    {
-      name: "Type",
-      value: "Wallet",
-    },
-    {
-      name: "Website",
-      value: "Visit site",
-      link: new URL("https://rainbow.me/"),
-    },
-    {
-      name: "Overall score",
-      value: "90%",
-    },
-  ],
-};
+//TODO: update all links to BPs after implementing real BP data
 ---
 
 <Layout>
-  <SubpageHero
-    header={mockAppReviewData.name}
-    description={mockAppReviewData.description}
-    breadcrumbs={["App benchmarks"]}
-    additionalElements={mockAppReviewData.additionalHeroData}>
-    <RainbowIcon slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg" />
-  </SubpageHero>
-  <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
-    <ItemsList header="Benchmarks">
-      {
-        [1, 2, 3].map((elem) => (
-          <MobileMatrixRowCard
-            name="Support ENSIP-19"
-            notes={
-              elem === 1
-                ? `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                                     in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
-                : `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                     ullamco laboris nisi ut aliquip ex ea commodo consequat.`
-            }
-            viewButtonData={{
-              text: "View best practice details",
-              link: `/ens-best-practices/${elem}/0`,
-            }}
-            matrixColumnData={[
-              {
-                category: "Category",
-                value: "ENS Resolution",
-                link: "https://docs.ens.domains/resolution/",
-                linkStyles:
-                  "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
-              },
+  {appToDisplay === undefined ? (
+      <p>ERROR</p>
+      // TODO: update the error version (even though it should never occur
+      ) : (
+      <>
+        <SubpageHero
+            header={appToDisplay.name}
+            description={appToDisplay.description}
+            breadcrumbs={["App benchmarks"]}
+            additionalElements={[
+                {name: "Type", value: appToDisplay.type},
+                {name: "Website", value: "Visit site", link: new URL(appToDisplay.websiteLink)},
+                {name: "Overall score", value: `${appToDisplay.ensAwardsScore}%`}
             ]}>
-            <MatrixBadge
-              slot="badge"
-              text={elem === 1 ? "Partial pass" : elem === 2 ? "Pass" : "Fail"}
-              className={
-                elem === 1
-                  ? "text-neutral-900 bg-neutral-100"
-                  : elem === 2
-                    ? "text-emerald-600 bg-[#0596691A]"
-                    : "text-red-600 bg-[#DC26261A]"
-              }
-              iconId={
-                elem === 1 ? "partialCheck" : elem === 2 ? "check" : "cross"
-              }
+            <Image src={images[appToDisplay.iconSourceLink]()} alt={`${appToDisplay.id}-hero`} slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg" />
+        </SubpageHero>
+        <section
+            class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
+          <ItemsList header="Benchmarks">
+            {
+              appToDisplay.benchmarks.map((benchmark, idx) => (
+                  <SupportMatrixCard
+                      name={benchmark.bestPracticeDetails.name}
+                      notes={benchmark.bestPracticeDetails.description}
+                      viewButtonData={{
+                        text: "View best practice details",
+                        link: `/ens-best-practices/${idx+1}/0`,
+                      }}
+                      matrixColumnData={[
+                        {
+                          category: "Category",
+                          value: benchmark.category,
+                          link: `/ens-best-practices/${idx+1}`,
+                          linkStyles:
+                              "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
+                        },
+                      ]}>
+                    <MatrixBadge
+                        slot="badge"
+                        text={benchmark.result}
+                        className={BenchmarkResultToBadgeStyles.get(benchmark.result)!}
+                        iconId={benchmark.result}
+                    />
+                  </SupportMatrixCard>
+              ))
+            }
+            <SuggestFormOpener
+                whatsSuggested="best practice"
+                suggestionStyle="outline"
             />
-          </MobileMatrixRowCard>
-        ))
-      }
-      <SuggestFormOpener
-        whatsSuggested="best practice"
-        suggestionStyle="outline"
-      />
-    </ItemsList>
-  </section>
+          </ItemsList>
+        </section>
+      </>
+  )}
 </Layout>

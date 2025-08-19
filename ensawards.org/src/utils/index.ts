@@ -1,8 +1,8 @@
-import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
+import type {PossibleSuggestions} from "@/components/molecules/contact-form/types.ts";
+import {type AppData, appsData, BenchmarkResult} from "@/data/appData.ts";
 
-export const adaptBreadcrumb = (breadcrumb: string): string =>
-  breadcrumb.toLowerCase().replaceAll(" ", "-");
-//TODO: If we only use it in subpage hero, maybe it's best to move it there
+export const adaptToLink = (name: string): string =>
+  name.toLowerCase().replaceAll(" ", "-");
 
 export const adaptSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
   switch (whatsSuggested) {
@@ -28,3 +28,14 @@ export const scrollWithOffset = (id:string, offset:number) => {
     behavior: "smooth",
   });
 }
+
+export const getAppById = (appId: string): AppData | undefined => {
+  return appsData.find((app) => app.id === appId);
+}
+
+
+export const BenchmarkResultToBadgeStyles = new Map<BenchmarkResult, string>([
+    [BenchmarkResult.PartialPass, "text-neutral-900 bg-neutral-100"],
+    [BenchmarkResult.Pass, "text-emerald-600 bg-[#0596691A]"],
+    [BenchmarkResult.Fail, "text-red-600 bg-[#DC26261A]"]
+]);

@@ -8,6 +8,8 @@ import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import Layout from "../../../layouts/Layout.astro";
 import { cn } from "../../../lib/utils";
+import {appsData, BenchmarkResult} from "../../../data/appData";
+import {BenchmarkResultToBadgeStyles} from "../../../utils";
 export function getStaticPaths() {
   //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
   return [
@@ -36,6 +38,7 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
 
 const mockBestPracticeData = {
   name: "Support ENSIP-19",
+  category: "ENS Resolution",
   description:
     "This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the ecosystem.",
   additionalHeroData: [
@@ -98,6 +101,8 @@ const mockBestPracticeData = {
     },
   },
 };
+
+const benchmarkedApps = appsData.filter((app) => app.benchmarks.find((benchmark) => benchmark.category === mockBestPracticeData.category && benchmark.bestPracticeDetails.name === mockBestPracticeData.name) !== undefined);
 ---
 
 <Layout>
@@ -113,113 +118,38 @@ const mockBestPracticeData = {
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8">
     <ItemsList header="App benchmarks" containerStyles="sm:gap-2">
       {
-        [1, 2, 3].map((elem) => (
-          <SupportMatrixCard
-            name="Rainbow Wallet"
-            notes={
-              elem === 1
-                ? `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                                     in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
-                : `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                     ullamco laboris nisi ut aliquip ex ea commodo consequat.`
-            }
+        benchmarkedApps.map((app) => {
+          // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
+          const relatedBenchmark  =
+              app.benchmarks.find((benchmark) =>
+                  benchmark.bestPracticeDetails.name === mockBestPracticeData.name)!;
+
+          return (<SupportMatrixCard
+            name={app.name}
+            notes={app.description}
             viewButtonData={{
               text: "Benchmarks",
-              link: `/app-benchmarks/${elem}`,
+              link: `/app-benchmarks/${app.id}`,
             }}
             matrixColumnData={[
               {
                 category: "Type",
-                value: "Wallet",
+                value: app.type,
               },
             ]}>
             <MatrixBadge
               slot="badge"
-              text={elem === 1 ? "Partial pass" : elem === 2 ? "Pass" : "Fail"}
-              className={
-                elem === 1
-                  ? "text-neutral-900 bg-neutral-100"
-                  : elem === 2
-                    ? "text-emerald-600 bg-[#0596691A]"
-                    : "text-red-600 bg-[#DC26261A]"
-              }
-              iconId={
-                elem === 1 ? "partialCheck" : elem === 2 ? "check" : "cross"
-              }
+              text={relatedBenchmark.result}
+              className={BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!}
+              iconId={relatedBenchmark.result}
             />
-            <Image src={images["/src/assets/rainbowIcon.svg"]()} alt={`${"TODO:FILL"}-logo`} slot="icon" class="shrink-0 rounded-md w-10 h-10" />
-          </SupportMatrixCard>
-        ))
+            <Image src={images[app.iconSourceLink]()} alt={`${app.name}-logo`} slot="icon" class="shrink-0 rounded-md w-10 h-10" />
+          </SupportMatrixCard>);
+      })
       }
       <SuggestFormOpener whatsSuggested="app" suggestionStyle="outline" />
     </ItemsList>
   </section>
-  <!--left for the sake of lookup on how to use items matrix if the need occurrs, TODO: remove after app benchmarks list refactor-->
-  <!--<section-->
-  <!--  class="w-full box-border h-fit hidden sm:flex flex-col flex-nowrap justify-start items-center gap-10 pt-[60px] sm:px-8">-->
-  <!--  <ItemsMatrix-->
-  <!--    header="App benchmarks"-->
-  <!--    whatToSuggest="app"-->
-  <!--    columnNames={["App name", "Type", "Website", "Notes", "Result"]}-->
-  <!--    rows={[-->
-  <!--      [-->
-  <!--        {-->
-  <!--          text: "Rainbow",-->
-  <!--          link: "https://rainbow.me/",-->
-  <!--          iconSource: "/src/assets/rainbowIcon.svg",-->
-  <!--        },-->
-  <!--        { text: "Wallet" },-->
-  <!--        { text: "https://rainbow.me/", link: "https://rainbow.me/" },-->
-  <!--        { text: "-" },-->
-  <!--        {-->
-  <!--          text: "Pass",-->
-  <!--          badgeData: {-->
-  <!--            icon: "check",-->
-  <!--            className: "text-emerald-600 bg-[#0596691A]",-->
-  <!--          },-->
-  <!--        },-->
-  <!--      ],-->
-  <!--      [-->
-  <!--        {-->
-  <!--          text: "Rainbow",-->
-  <!--          link: "https://rainbow.me/",-->
-  <!--          iconSource: "/src/assets/rainbowIcon.svg",-->
-  <!--        },-->
-  <!--        { text: "Wallet" },-->
-  <!--        { text: "https://rainbow.me/", link: "https://rainbow.me/" },-->
-  <!--        { text: "-" },-->
-  <!--        {-->
-  <!--          text: "Partial pass",-->
-  <!--          badgeData: {-->
-  <!--            icon: "partialCheck",-->
-  <!--            className: "text-neutral-900 bg-neutral-100",-->
-  <!--          },-->
-  <!--        },-->
-  <!--      ],-->
-  <!--      [-->
-  <!--        {-->
-  <!--          text: "Rainbow",-->
-  <!--          link: "https://rainbow.me/",-->
-  <!--          iconSource: "/src/assets/rainbowIcon.svg",-->
-  <!--        },-->
-  <!--        { text: "Wallet" },-->
-  <!--        { text: "https://rainbow.me/", link: "https://rainbow.me/" },-->
-  <!--        { text: "-" },-->
-  <!--        {-->
-  <!--          text: "Fail",-->
-  <!--          badgeData: {-->
-  <!--            icon: "cross",-->
-  <!--            className: "text-red-600 bg-[#DC26261A]",-->
-  <!--          },-->
-  <!--        },-->
-  <!--      ],-->
-  <!--    ]}-->
-  <!--  />-->
-  <!--</section>-->
   <section
       id={`${mockBestPracticeData.name.replace(" ", "-")}-technical-info`}
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">

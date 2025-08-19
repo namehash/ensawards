@@ -2,118 +2,17 @@
 import { cn } from "../../../lib/utils";
 import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
 import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
-export interface AppReviewCardProps {
+export interface AppLeaderboardCardProps {
   name: string;
-  description: string;
-  viewReviewLink: string;
-  overallScore: number;
-  websiteLink: string;
+  viewBenchmarksLink: string;
+  ensAwardsScore: number;
   type: string; //Will probably change to string union once the data is provided
 }
 
-const { name, description, viewReviewLink, overallScore, websiteLink, type }: AppReviewCardProps =
+const { name, viewBenchmarksLink, ensAwardsScore, type }: AppLeaderboardCardProps =
   Astro.props;
 ---
-<!--old version-->
-<!--<div-->
-<!--  class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[259px] box-border flex flex-col-->
-<!--            flex-nowrap justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4 rounded-2xl border border-gray-200">-->
-<!--  <div-->
-<!--    class="flex flex-col flex-nowrap justify-center items-start gap-4 sm:gap-5 self-stretch">-->
-<!--    <slot name="placeIcon" />-->
-<!--    <slot name="appIcon" />-->
-<!--    <div-->
-<!--      class="flex flex-col flex-nowrap justify-center items-start gap-2 self-stretch">-->
-<!--      <div-->
-<!--        class="w-fit flex flex-nowrap flex-row justify-start items-center gap-3">-->
-<!--        <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>-->
-<!--        <slot name="badge" />-->
-<!--      </div>-->
-<!--      <p-->
-<!--        class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">-->
-<!--        {description}-->
-<!--      </p>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="bg-gray-200 h-[1px] self-stretch"></div>-->
-<!--  <div-->
-<!--    class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start-->
-<!--                max-sm:gap-3 self-stretch">-->
-<!--    <div-->
-<!--      class="sm:hidden flex flex-nowrap flex-col justify-center items-center gap-2 self-stretch">-->
-<!--      <div-->
-<!--        class="flex flex-row flex-nowrap justify-between items-start self-stretch">-->
-<!--        <p class="text-muted-foreground text-sm leading-normal font-normal">-->
-<!--          Overall score-->
-<!--        </p>-->
-<!--        <p class="text-sm leading-normal font-semibold text-emerald-600">-->
-<!--          {overallScore}%-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div-->
-<!--        class="flex flex-row flex-nowrap justify-between items-start self-stretch">-->
-<!--        <p class="text-muted-foreground text-sm leading-normal font-normal">-->
-<!--          Website-->
-<!--        </p>-->
-<!--        <a-->
-<!--          href={websiteLink}-->
-<!--          class="text-sm leading-normal font-semibold text-accent-foreground"-->
-<!--          >Visit site ↗</a-->
-<!--        >-->
-<!--      </div>-->
-<!--      <div-->
-<!--        class="flex flex-row flex-nowrap justify-between items-start self-stretch">-->
-<!--        <p class="text-muted-foreground text-sm leading-normal font-normal">-->
-<!--          Type-->
-<!--        </p>-->
-<!--        <p class="text-sm leading-normal font-semibold text-accent-foreground">-->
-<!--          {type}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <a-->
-<!--      href={viewReviewLink}-->
-<!--      class={cn(-->
-<!--        shadcnButtonVariants({-->
-<!--          variant: "secondary",-->
-<!--          size: "default",-->
-<!--          className: "cursor-pointer rounded-full max-sm:self-stretch",-->
-<!--        }),-->
-<!--      )}>-->
-<!--      View review-->
-<!--    </a>-->
-<!--    <div-->
-<!--      class="hidden sm:flex flex-nowrap flex-row justify-start items-start gap-6 sm:px-2">-->
-<!--      <div class="flex flex-col flex-nowrap justify-center items-start gap-0">-->
-<!--        <p class="text-muted-foreground text-sm leading-normal font-normal">-->
-<!--          Overall score-->
-<!--        </p>-->
-<!--        <p class="text-sm leading-normal font-semibold text-emerald-600">-->
-<!--          {overallScore}%-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="flex flex-col flex-nowrap justify-center items-start gap-0">-->
-<!--        <p class="text-muted-foreground text-sm leading-normal font-normal">-->
-<!--          Website-->
-<!--        </p>-->
-<!--        <a-->
-<!--          href={websiteLink}-->
-<!--          class="text-sm leading-normal font-medium text-blue-600 transition-all duration-200 hover:underline hover:underline-offset-[25%] decoration-from-font"-->
-<!--          >Visit site ↗</a-->
-<!--        >-->
-<!--      </div>-->
-<!--      <div class="flex flex-col flex-nowrap justify-center items-start gap-0">-->
-<!--        <p class="text-muted-foreground text-sm leading-normal font-normal">-->
-<!--          Type-->
-<!--        </p>-->
-<!--        <p class="text-sm leading-normal font-semibold text-accent-foreground">-->
-<!--          {type}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--New version-->
+
 <div class="w-full h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-start gap-3 p-4 sm:p-6 rounded-2xl border border-gray-200">
   <!--Desktop Header-->
   <div class="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-5">
@@ -148,16 +47,16 @@ const { name, description, viewReviewLink, overallScore, websiteLink, type }: Ap
           ENSAwards score
         </p>
         <p class="text-sm leading-normal font-medium sm:font-semibold text-emerald-600">
-          {overallScore}%
+          {ensAwardsScore}%
         </p>
       </div>
       <a
-          href={viewReviewLink}
+          href={viewBenchmarksLink}
           class="hidden sm:flex">
         <ChevronRightIcon className="w-10 h-10 hover:opacity-60"/>
       </a>
       <a
-          href={viewReviewLink}
+          href={viewBenchmarksLink}
           class={cn(
               shadcnButtonVariants({
                 variant: "secondary",
