@@ -1,0 +1,61 @@
+---
+import {PossibleSuggestions} from "../../molecules/contact-form/types";
+import GitHubOutlineIcon from "../../../assets/githubOutlineIcon.svg";
+import {cn} from "../../../lib/utils";
+import {shadcnButtonVariants} from "../../shadcn/shadcnButtonStyles";
+import {getSuggestionText} from "../../../utils";
+export interface SuggestionCardProps {
+    whatsSuggested: PossibleSuggestions
+}
+
+const {whatsSuggested}: SuggestionCardProps = Astro.props;
+---
+
+<div class="w-full h-fit flex flex-col sm:flex-row flex-nowrap justify-start max-sm:gap-5 sm:justify-between items-center p-4 sm:py-5 sm:px-6 rounded-2xl border border-dashed border-gray-200">
+    <p class="text-sm sm:text-base leading-normal font-normal text-muted-foreground">{getSuggestionText(whatsSuggested)}</p>
+    <div class="flex flex-nowrap flex-col-reverse sm:flex-row justify-center items-center gap-2 max-sm:self-stretch">
+        <suggest-form-button
+                data-suggestion={whatsSuggested}
+                id={`${whatsSuggested}-suggestion-button`}
+                class={cn(
+                    shadcnButtonVariants({
+                        variant: "ghost",
+                        size: "default",
+                        className: "cursor-pointer rounded-full max-sm:self-stretch",
+                    }),
+                )}>
+            Contact us
+        </suggest-form-button>
+        <a
+                href="https://github.com/namehash/ensawards"
+                target="_blank"
+                rel="noreferrer noopener"
+                class={cn(
+                    shadcnButtonVariants({
+                        variant: "secondary",
+                        size: "default",
+                        className: "cursor-pointer rounded-full max-sm:self-stretch",
+                    }),
+                )}
+        >
+            <GitHubOutlineIcon />Edit in GitHub
+        </a>
+    </div>
+</div>
+<script>
+    import { openSuggestionOverlay } from "../../../utils/openSuggestionOverlay";
+
+    class SuggestionFormOpener extends HTMLElement {
+        connectedCallback() {
+            const formOpenerButton = document.getElementById(
+                `${this.dataset.suggestion}-suggestion-button`,
+            );
+
+            formOpenerButton.addEventListener("click", () => {
+                openSuggestionOverlay(this.dataset.suggestion);
+            });
+        }
+    }
+
+    customElements.define("suggest-form-button", SuggestionFormOpener);
+</script>

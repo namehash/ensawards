@@ -34,29 +34,8 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
   </div>
   <div class="bg-gray-200 h-[1px] self-stretch"></div>
   <div
-    class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start
+    class="flex flex-col-reverse sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start
                 max-sm:gap-3 self-stretch">
-    <div
-      class="sm:hidden flex flex-nowrap flex-col justify-start items-center gap-2 max-sm:self-stretch">
-      <div
-        class="flex flex-row flex-nowrap justify-between items-center self-stretch">
-        <p class="text-muted-foreground text-sm leading-normal font-normal">
-          Apps passed
-        </p>
-        <p class="text-sm leading-normal font-semibold text-accent-foreground">
-          {appsPassed}
-        </p>
-      </div>
-      <div
-        class="flex flex-row flex-nowrap justify-between items-center self-stretch">
-        <p class="text-muted-foreground text-sm leading-normal font-normal">
-          App support
-        </p>
-        <p class="text-sm leading-normal font-semibold text-emerald-600">
-          {appSupport}%
-        </p>
-      </div>
-    </div>
     <a
       href={viewReviewsLink}
       class={cn(
@@ -69,8 +48,8 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
       View details
     </a>
     <div
-      class="hidden sm:flex flex-nowrap flex-row justify-start items-start gap-6 sm:pl-4">
-      <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
+      class="flex flex-nowrap flex-col sm:flex-row justify-start items-center sm:items-start gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
+      <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
         <p class="text-muted-foreground text-sm leading-normal font-normal">
           Apps passed
         </p>
@@ -78,7 +57,7 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
           {appsPassed}
         </p>
       </div>
-      <div class="flex flex-col flex-nowrap justify-center items-start gap-0">
+      <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
         <p class="text-muted-foreground text-sm leading-normal font-normal">
           App support
         </p>

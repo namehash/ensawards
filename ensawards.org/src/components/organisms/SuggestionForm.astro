@@ -1,5 +1,5 @@
 ---
-import { ContactForm, EnsAwardsFormFields } from "../molecules/contact-form/ContactForm";
+import { ContactForm } from "../molecules/contact-form/ContactForm";
 import { FormField, PossibleSuggestions } from "../molecules/contact-form/types";
 
 export interface SuggestionFormProps {
@@ -13,7 +13,7 @@ const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;
 <overlay-content
   id=`${whatsSuggested.replace(" ","-")}-overlay-content`
   data-suggestion={whatsSuggested}
-  class="w-fit max-w-[460px] h-fit box-border p-6 flex flex-nowrap flex-col justify-start items-start gap-5 shrink-0 rounded-xl bg-white">
+  class="w-fit sm:min-w-[420px] max-w-[460px] h-fit box-border p-6 flex flex-nowrap flex-col justify-start items-start gap-5 shrink-0 rounded-xl bg-white">
   <ContactForm
     whatsSuggested={whatsSuggested}
     submissionEndpoint="https://namehashlabs.org/api/contact-form"

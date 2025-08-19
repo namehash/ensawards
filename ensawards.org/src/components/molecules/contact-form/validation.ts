@@ -12,3 +12,9 @@ export const bestPracticeSuggestionFormSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   description: Yup.string().optional(),
 });
+
+export const benchmarkResultUpdateRequestSchema = Yup.object().shape({
+  app: Yup.string().required("App is required"),
+  benchmark: Yup.string().required("Benchmark is required"),
+  "requested benchmark result update": Yup.string().optional(),
+})

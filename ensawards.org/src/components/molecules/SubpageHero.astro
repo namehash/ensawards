@@ -1,7 +1,7 @@
 ---
 import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
 import HomeIcon from "../../assets/homeIcon.svg";
-import { adaptToLink } from "../../utils";
+import { normalizeText } from "../../utils";
 
 interface additionalHeroElement {
   name: string;
@@ -24,7 +24,7 @@ let breadcrumbHref = "";
 <section
   class="w-full h-fit min-h-[240px] sm:min-h-[358px] box-border px-5 sm:px-8 pt-[76px] sm:pt-[102px] pb-6 sm:pb-10 flex flex-nowrap flex-col items-center justify-end bg-yellow-400">
   <div
-    class="w-full max-w-[1216px] h-fit sm:max-h-[272px] flex flex-nowrap flex-col justify-center gap-10 sm:gap-[60px]">
+    class="w-full max-w-[1216px] h-fit flex flex-nowrap flex-col justify-center gap-10 sm:gap-[60px]">
     {
       breadcrumbs && (
         <div class="flex flex-row flex-wrap justify-start items-center gap-[10px]">
@@ -39,7 +39,7 @@ let breadcrumbHref = "";
                 <>
                   <a
                     class="text-xs sm:text-sm leading-normal font-normal text-black"
-                    href={decodeURI(adaptToLink(breadcrumbHref))}>
+                    href={decodeURI(normalizeText(breadcrumbHref))}>
                     {crumb}
                   </a>
                   <ChevronRightIcon />
@@ -49,7 +49,7 @@ let breadcrumbHref = "";
             return (
               <a
                 class="text-xs sm:text-sm leading-normal font-normal text-black"
-                href={decodeURI(adaptToLink(breadcrumbHref))}>
+                href={decodeURI(normalizeText(breadcrumbHref))}>
                 {crumb}
               </a>
             );

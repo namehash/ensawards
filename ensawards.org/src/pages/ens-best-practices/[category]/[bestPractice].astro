@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import type {ImageMetadata} from "astro";
 import MatrixBadge from "../../../components/atoms/MatrixBadge.astro";
-import SuggestFormOpener from "../../../components/atoms/SuggestFormOpener.astro";
 import SupportMatrixCard from "../../../components/atoms/cards/SupportMatrixCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
@@ -10,6 +9,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { cn } from "../../../lib/utils";
 import {appsData, BenchmarkResult} from "../../../data/appData";
 import {BenchmarkResultToBadgeStyles} from "../../../utils";
+import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
 export function getStaticPaths() {
   //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
   return [
@@ -147,7 +147,7 @@ const benchmarkedApps = appsData.filter((app) => app.benchmarks.find((benchmark)
           </SupportMatrixCard>);
       })
       }
-      <SuggestFormOpener whatsSuggested="app" suggestionStyle="outline" />
+      <SuggestionCard whatsSuggested="benchmark result" />
     </ItemsList>
   </section>
   <section

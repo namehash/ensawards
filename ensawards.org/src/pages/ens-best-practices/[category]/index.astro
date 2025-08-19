@@ -1,9 +1,9 @@
 ---
-import SuggestFormOpener from "../../../components/atoms/SuggestFormOpener.astro";
 import BestPracticeCard from "../../../components/atoms/cards/BestPracticeCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import Layout from "../../../layouts/Layout.astro";
+import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
 export function getStaticPaths() {
   return [
     { params: { category: 0 } },
@@ -48,10 +48,7 @@ const { category } = Astro.params;
           />
         ))
       }
-      <SuggestFormOpener
-        whatsSuggested="best practice"
-        suggestionStyle="card"
-      />
+      <SuggestionCard whatsSuggested="best practice"/>
     </ItemsList>
   </section>
 </Layout>

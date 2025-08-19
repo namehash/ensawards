@@ -96,6 +96,22 @@ import SuggestionForm from "../components/organisms/SuggestionForm.astro";
         />
       </Overlay>
     </div>
+    <div id="benchmark-result-overlay" class="hidden">
+      <Overlay>
+        <SuggestionForm
+            whatsSuggested="benchmark result"
+            formFields={[
+              { label: EnsAwardsFormFields.App, type: "text", required: true },
+              { label: EnsAwardsFormFields.Benchmark, type: "text", required: true },
+              {
+                label: EnsAwardsFormFields.BenchmarkResultUpdate,
+                type: "text",
+                required: false,
+              },
+            ]}
+        />
+      </Overlay>
+    </div>
     <Footer />
   </body>
 </html>

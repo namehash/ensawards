@@ -9,7 +9,7 @@ import {
   type SuggestionFormDataProps,
 } from "@/components/molecules/contact-form/types.ts";
 import {
-  appSuggestionFormSchema,
+  appSuggestionFormSchema, benchmarkResultUpdateRequestSchema,
   bestPracticeSuggestionFormSchema,
 } from "@/components/molecules/contact-form/validation.ts";
 import { cn } from "@/lib/utils.ts";
@@ -33,16 +33,18 @@ const formTextContentsAdaptations = new Map<
 >([
   [
     "header",
-    new Map<"app" | "best practice", string>([
-      ["app", "an app for review"],
-      ["best practice", "best practice"],
+    new Map<PossibleSuggestions, string>([
+      ["app", "Suggest an app for review"],
+      ["best practice", "Suggest best practice"],
+        ["benchmark result", "Request benchmark result update"],
     ]),
   ],
   [
     "description",
-    new Map<"app" | "best practice", string>([
-      ["app", "the app details"],
-      ["best practice", "a best practice"],
+    new Map<PossibleSuggestions, string>([
+      ["app", "Provide the app details you’d like us to add to ENSAwards."],
+      ["best practice", "Suggest a best practice you’d like us to add to ENSAwards."],
+        ["benchmark result", "Suggest a benchmark result update for review"],
     ]),
   ],
 ]);
@@ -50,6 +52,7 @@ const formTextContentsAdaptations = new Map<
 const validationSchemaMap = new Map([
   ["app", appSuggestionFormSchema],
   ["best practice", bestPracticeSuggestionFormSchema],
+    ["benchmark result", benchmarkResultUpdateRequestSchema],
 ]);
 
 /**
@@ -64,6 +67,7 @@ const PLACEHOLDER_EMAIL = "placeholder@gmail.com";
 const MESSAGE_SEPARATOR = "\n----------\n";
 const APP_SUGGESTION_DESCRIPTION_HEADER = "\nAPP SUGGESTION from ensawards.org";
 const BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER = "\nBEST PRACTICE SUGGESTION from ensawards.org";
+const BENCHMARK_UPDATE_REQUEST_HEADER = "\nBENCHMARK UPDATE REQUEST from ensawards.org";
 
 const closeOverlayIcon = (
   <svg
@@ -138,6 +142,9 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       name: formData.get(EnsAwardsFormFields.Name)?.toString().trim() || "",
       url: formData.get(EnsAwardsFormFields.Url)?.toString().trim() || "",
       description: formData.get(EnsAwardsFormFields.Description)?.toString().trim() || "",
+      app: formData.get(EnsAwardsFormFields.App)?.toString().trim() || "",
+      benchmark: formData.get(EnsAwardsFormFields.Benchmark)?.toString().trim() || "",
+      "requested benchmark result update": formData.get(EnsAwardsFormFields.BenchmarkResultUpdate)?.toString().trim() || "",
       source: formData.get("source")?.toString().trim() || "",
     };
 
@@ -153,7 +160,12 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       const descriptionMapping =
         whatsSuggested === "app"
           ? `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested app URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
-          : `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`;
+          : (whatsSuggested === "best practice" ?
+                `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
+                :
+                `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`
+            );
+
       const dataToSend: ContactFormDataProps = {
         name: data.name,
         email: PLACEHOLDER_EMAIL,
@@ -250,7 +262,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
         <div className="flex flex-col flex-nowrap justify-start items-start gap-2">
           <div className="flex flex-row flex-nowrap justify-between items-center self-stretch">
             <h2 className="text-lg leading-7 font-semibold text-foreground">
-              Suggest {formTextContentsAdaptations.get("header")!.get(whatsSuggested)}
+              {formTextContentsAdaptations.get("header")!.get(whatsSuggested)}
             </h2>
             <button
               type="reset"
@@ -263,8 +275,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
             </button>
           </div>
           <p className="text-sm leading-5 font-normal text-gray-500">
-            Provide {formTextContentsAdaptations.get("description")!.get(whatsSuggested)} you'd like
-            us to add to ENSAwards.
+            {formTextContentsAdaptations.get("description")!.get(whatsSuggested)}
           </p>
         </div>
 
@@ -318,7 +329,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
                   {capitalizeLabel(field.label)}
                   {!field.required && " (optional)"}
                 </label>
-                {field.label === EnsAwardsFormFields.Description ? (
+                {[EnsAwardsFormFields.Description, EnsAwardsFormFields.BenchmarkResultUpdate].includes(field.label) ? (
                   <TextArea
                     rows={4}
                     id={field.label}

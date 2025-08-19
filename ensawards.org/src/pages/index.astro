@@ -10,7 +10,8 @@ import { appsData } from "../data/appData";
 import { bestPracticesCategoryCards } from "../data/bestPracticesData";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../lib/utils";
-import {adaptToLink} from "../utils";
+import {normalizeText} from "../utils";
+import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = ["/src/assets/firstPlaceAward.svg", "/src/assets/secondPlaceAward.svg","/src/assets/thirdPlaceAward.svg"]
@@ -66,16 +67,17 @@ const placeIcons = ["/src/assets/firstPlaceAward.svg", "/src/assets/secondPlaceA
       {
         appsData.map((app, idx) => (
           <AppLeaderboardCard
-            key={`app-review-card-${adaptToLink(app.name)}`}
+            key={`app-review-card-${normalizeText(app.name)}`}
             name={app.name}
             ensAwardsScore={app.ensAwardsScore}
             type={app.type}
-            viewBenchmarksLink={`/app-benchmarks/${adaptToLink(app.name)}`}>
+            viewBenchmarksLink={`/app-benchmarks/${normalizeText(app.name)}`}>
             <Image src={images[app.iconSourceLink]()} alt={`${app.id}-LP`} slot="appIcon" class="rounded-md" />
               {idx < 3 ? (<Image alt={`${idx+1}-place-LP`} src={images[placeIcons[idx]]()} slot="placeIcon" />) : <p slot="placeIcon" class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">{idx+1}</p>}
           </AppLeaderboardCard>
         ))
       }
+        <SuggestionCard whatsSuggested="app" />
     </ItemsList>
     <ItemsList header="ENS best practices" seeAllLink="/ens-best-practices">
       {
