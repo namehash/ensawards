@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
 import HomeIcon from "../../assets/homeIcon.svg";
 import SubpageHeroImage from "../../assets/subpageHeroImage.svg";
 import { normalizeText } from "../../utils";
+import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
 
 interface additionalHeroElement {
   name: string;
@@ -25,8 +25,18 @@ let breadcrumbHref = "";
 
 <section
   class="relative w-full h-fit min-h-[240px] sm:min-h-[358px] box-border px-5 sm:px-8 pt-[76px] sm:pt-[102px] pb-6 sm:pb-10 flex flex-nowrap flex-col items-center justify-end bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden">
-  <Image src={SubpageHeroImage} alt="background" quality={100} class="hidden sm:block absolute right-0 top-14"/>
-  <Image src={SubpageHeroImage} alt="background" quality={100} class="hidden min-[1650px]:block absolute left-0 [transform:rotateY(180deg)]"/>
+  <Image
+    src={SubpageHeroImage}
+    alt="background"
+    quality={100}
+    class="hidden sm:block absolute right-0 top-14"
+  />
+  <Image
+    src={SubpageHeroImage}
+    alt="background"
+    quality={100}
+    class="hidden min-[1650px]:block absolute left-0 [transform:rotateY(180deg)]"
+  />
   <div
     class="w-full max-w-[1216px] h-fit flex flex-nowrap flex-col justify-center gap-10 sm:gap-[60px]">
     {
@@ -37,7 +47,8 @@ let breadcrumbHref = "";
           </a>
           <ChevronRightIcon className="text-white" />
           {breadcrumbs.map((crumb, idx) => {
-            const urlAdaptedCrumb = crumb === "App benchmarks" ? "benchmarks" : crumb;
+            const urlAdaptedCrumb =
+              crumb === "App benchmarks" ? "benchmarks" : crumb;
             breadcrumbHref = breadcrumbHref.concat("/", urlAdaptedCrumb);
             if (idx < breadcrumbs.length - 1) {
               return (
@@ -75,7 +86,7 @@ let breadcrumbHref = "";
           {
             description && (
               <p class="w-fit max-w-[580px] text-sm sm:text-base leading-6 sm:leading-7 font-normal text-gray-400">
-                {description} <slot name="technicalSectionAnchor"/>
+                {description} <slot name="technicalSectionAnchor" />
               </p>
             )
           }

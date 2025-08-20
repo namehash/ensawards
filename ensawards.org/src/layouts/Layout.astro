@@ -6,14 +6,14 @@ import Overlay from "../components/molecules/Overlay.astro";
 import { EnsAwardsFormFields } from "../components/molecules/contact-form/types";
 import Footer from "../components/organisms/Footer.astro";
 import Header from "../components/organisms/Header.astro";
-import SuggestionForm from "../components/organisms/SuggestionForm.astro";
 import StaticHeader from "../components/organisms/StaticHeader.astro";
+import SuggestionForm from "../components/organisms/SuggestionForm.astro";
 
 export interface LayoutProps {
-    isStatic: boolean;
+  isStatic: boolean;
 }
 
-const {isStatic=false}:LayoutProps = Astro.props;
+const { isStatic = false }: LayoutProps = Astro.props;
 ---
 
 <!doctype html>
@@ -70,7 +70,7 @@ const {isStatic=false}:LayoutProps = Astro.props;
     />
   </head>
   <body>
-  {isStatic ? <StaticHeader />: <Header />}
+    {isStatic ? <StaticHeader /> : <Header />}
     <slot />
     <div id="app-overlay" class="hidden">
       <Overlay>
@@ -106,16 +106,20 @@ const {isStatic=false}:LayoutProps = Astro.props;
     <div id="benchmark-result-overlay" class="hidden">
       <Overlay>
         <SuggestionForm
-            whatsSuggested="benchmark result"
-            formFields={[
-              { label: EnsAwardsFormFields.App, type: "text", required: true },
-              { label: EnsAwardsFormFields.Benchmark, type: "text", required: true },
-              {
-                label: EnsAwardsFormFields.BenchmarkResultUpdate,
-                type: "text",
-                required: false,
-              },
-            ]}
+          whatsSuggested="benchmark result"
+          formFields={[
+            { label: EnsAwardsFormFields.App, type: "text", required: true },
+            {
+              label: EnsAwardsFormFields.Benchmark,
+              type: "text",
+              required: true,
+            },
+            {
+              label: EnsAwardsFormFields.BenchmarkResultUpdate,
+              type: "text",
+              required: false,
+            },
+          ]}
         />
       </Overlay>
     </div>

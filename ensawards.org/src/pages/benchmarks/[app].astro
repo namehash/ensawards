@@ -1,17 +1,17 @@
 ---
 import { Image } from "astro:assets";
-import type {ImageMetadata} from "astro";
+import type { ImageMetadata } from "astro";
 import MatrixBadge from "../../components/atoms/MatrixBadge.astro";
+import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import SupportMatrixCard from "../../components/atoms/cards/SupportMatrixCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { appsData } from "../../data/appData";
 import Layout from "../../layouts/Layout.astro";
-import {appsData} from "../../data/appData";
-import {normalizeText, BenchmarkResultToBadgeStyles, getAppById} from "../../utils";
-import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
+import { BenchmarkResultToBadgeStyles, getAppById, normalizeText } from "../../utils";
 
 export function getStaticPaths() {
-  return appsData.map((app) => ({ params: { app: normalizeText(app.name) }}));
+  return appsData.map((app) => ({ params: { app: normalizeText(app.name) } }));
 }
 
 const { app } = Astro.params;
@@ -23,55 +23,65 @@ const appToDisplay = getAppById(app);
 ---
 
 <Layout>
-  {appToDisplay === undefined ? (
+  {
+    appToDisplay === undefined ? (
       <p>ERROR</p>
+    ) : (
       // TODO: update the error version (even though it should never occur
-      ) : (
       <>
         <SubpageHero
-            header={appToDisplay.name}
-            description={appToDisplay.description}
-            breadcrumbs={["App benchmarks"]}
-            additionalElements={[
-                {name: "Type", value: appToDisplay.type},
-                {name: "Website", value: "Visit site ↗", link: appToDisplay.websiteLink},
-                {name: "Overall score", value: `${appToDisplay.ensAwardsScore}%`}
-            ]}>
-            <Image src={images[appToDisplay.iconSourceLink]()} alt={`${appToDisplay.id}-hero`} slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg" />
-        </SubpageHero>
-        <section
-            class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
-          <ItemsList header="Benchmark results">
+          header={appToDisplay.name}
+          description={appToDisplay.description}
+          breadcrumbs={["App benchmarks"]}
+          additionalElements={[
+            { name: "Type", value: appToDisplay.type },
             {
-              appToDisplay.benchmarks.map((benchmark, idx) => (
-                  <SupportMatrixCard
-                      name={benchmark.bestPracticeDetails.name}
-                      notes={benchmark.bestPracticeDetails.description}
-                      viewButtonData={{
-                        text: "View best practice details",
-                        link: `/ens-best-practices/${idx+1}/0`,
-                      }}
-                      matrixColumnData={[
-                        {
-                          category: "Category",
-                          value: benchmark.category,
-                          link: `/ens-best-practices/${idx+1}`,
-                          linkStyles:
-                              "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
-                        },
-                      ]}>
-                    <MatrixBadge
-                        slot="badge"
-                        text={benchmark.result}
-                        className={BenchmarkResultToBadgeStyles.get(benchmark.result)!}
-                        iconId={benchmark.result}
-                    />
-                  </SupportMatrixCard>
-              ))
-            }
-              <SuggestionCard whatsSuggested="benchmark result"/>
+              name: "Website",
+              value: "Visit site ↗",
+              link: appToDisplay.websiteLink,
+            },
+            { name: "Overall score", value: `${appToDisplay.ensAwardsScore}%` },
+          ]}>
+          <Image
+            src={images[appToDisplay.iconSourceLink]()}
+            alt={`${appToDisplay.id}-hero`}
+            slot="icon"
+            class="w-[60px] h-[60px] shrink-0 rounded-lg"
+          />
+        </SubpageHero>
+        <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
+          <ItemsList header="Benchmark results">
+            {appToDisplay.benchmarks.map((benchmark, idx) => (
+              <SupportMatrixCard
+                name={benchmark.bestPracticeDetails.name}
+                notes={benchmark.bestPracticeDetails.description}
+                viewButtonData={{
+                  text: "View best practice details",
+                  link: `/ens-best-practices/${idx + 1}/0`,
+                }}
+                matrixColumnData={[
+                  {
+                    category: "Category",
+                    value: benchmark.category,
+                    link: `/ens-best-practices/${idx + 1}`,
+                    linkStyles:
+                      "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
+                  },
+                ]}>
+                <MatrixBadge
+                  slot="badge"
+                  text={benchmark.result}
+                  className={
+                    BenchmarkResultToBadgeStyles.get(benchmark.result)!
+                  }
+                  iconId={benchmark.result}
+                />
+              </SupportMatrixCard>
+            ))}
+            <SuggestionCard whatsSuggested="benchmark result" />
           </ItemsList>
         </section>
       </>
-  )}
+    )
+  }
 </Layout>

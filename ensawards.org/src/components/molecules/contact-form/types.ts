@@ -15,7 +15,7 @@ export enum EnsAwardsFormFields {
   Source = "source",
   App = "app",
   Benchmark = "benchmark",
-  BenchmarkResultUpdate = "requested benchmark result update"
+  BenchmarkResultUpdate = "requested benchmark result update",
 }
 
 // Reference form inputs from `Contact us` form at www.namehashlabs.org
@@ -34,7 +34,7 @@ export interface SuggestionFormDataProps {
   description: string;
   app: string;
   benchmark: string;
-  "requested benchmark result update": string
+  "requested benchmark result update": string;
   source: string;
 }
 

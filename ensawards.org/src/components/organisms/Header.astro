@@ -12,11 +12,18 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
     class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center px-5 sm:px-8">
     <a
       href="/"
-      class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px]"
+      class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px]">
+      <ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" />
+      <p
+        id="ensAwardsName"
+        class="text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold">
+        ENSAwards
+      </p>
+      <span
+        id="alphaBadge"
+        class="w-fit h-fit flex flex-row flex-nowrap justify-center items-center px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200"
+        >Alpha</span
       >
-        <ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" />
-        <p id="ensAwardsName" class="text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold">ENSAwards</p>
-        <span id="alphaBadge" class="w-fit h-fit flex flex-row flex-nowrap justify-center items-center px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200">Alpha</span>
     </a>
     <div
       class="hidden min-[860px]:flex flex-row flex-nowrap gap-2 justify-center items-center">
@@ -38,30 +45,32 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
             size: "default",
             className: "onScrollButton rounded-full",
           }),
-        )}>App benchmarks</a>
-        <a
-                href="/about"
-                class={cn(
-                    shadcnButtonVariants({
-                        variant: "ghost",
-                        size: "default",
-                        className: "onScrollButton rounded-full",
-                    }),
-                )}>About</a
-        >
+        )}>App benchmarks</a
+      >
       <a
-              href="/ens-referral-program"
+        href="/about"
         class={cn(
           shadcnButtonVariants({
             variant: "ghost",
             size: "default",
-            className:
-              "onScrollButton rounded-full",
+            className: "onScrollButton rounded-full",
+          }),
+        )}>About</a
+      >
+      <a
+        href="/ens-referral-program"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className: "onScrollButton rounded-full",
           }),
         )}>ENS Referral Program</a
       >
     </div>
-    <div class="block min-[860px]:hidden"><HeaderMobileNavigation client:load /></div>
+    <div class="block min-[860px]:hidden">
+      <HeaderMobileNavigation client:load />
+    </div>
   </div>
 </header>
 <script>
@@ -81,7 +90,10 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
         (entries) => {
           header.classList.toggle("scrolled", !entries[0].isIntersecting);
           alphaBadge.classList.toggle("scrolled", !entries[0].isIntersecting);
-          ensAwardsName.classList.toggle("scrolled", !entries[0].isIntersecting);
+          ensAwardsName.classList.toggle(
+            "scrolled",
+            !entries[0].isIntersecting,
+          );
 
           for (const headerButton of headerButtons) {
             headerButton.classList.toggle(
@@ -115,11 +127,11 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
   }
 
   #ensAwardsName {
-      color: white;
+    color: white;
   }
 
   #ensAwardsName.scrolled {
-      color: black;
+    color: black;
   }
 
   .onScrollButton {
@@ -137,12 +149,12 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
   }
 
   #alphaBadge {
-      color: black;
-      background-color: white;
+    color: black;
+    background-color: white;
   }
 
   #alphaBadge.scrolled {
-      color: white;
-      background-color: black;
+    color: white;
+    background-color: black;
   }
 </style>

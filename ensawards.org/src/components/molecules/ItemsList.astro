@@ -9,7 +9,8 @@ export interface ItemsListProps {
   containerStyles?: string;
 }
 
-const { header, numberOfItems, seeAllLink, additionalInfo, containerStyles }: ItemsListProps = Astro.props;
+const { header, numberOfItems, seeAllLink, additionalInfo, containerStyles }: ItemsListProps =
+  Astro.props;
 ---
 
 <div
@@ -36,9 +37,18 @@ const { header, numberOfItems, seeAllLink, additionalInfo, containerStyles }: It
       )
     }
   </div>
-  {additionalInfo && <p class="text-base leading-normal font-normal text-muted-foreground text-left self-stretch">{additionalInfo}</p>}
+  {
+    additionalInfo && (
+      <p class="text-base leading-normal font-normal text-muted-foreground text-left self-stretch">
+        {additionalInfo}
+      </p>
+    )
+  }
   <div
-    class={cn("w-full h-fit flex flex-row flex-wrap justify-start items-start max-[1215px]:justify-center gap-4 sm:gap-5 self-stretch", containerStyles)}>
+    class={cn(
+      "w-full h-fit flex flex-row flex-wrap justify-start items-start max-[1215px]:justify-center gap-4 sm:gap-5 self-stretch",
+      containerStyles,
+    )}>
     <slot />
   </div>
 </div>

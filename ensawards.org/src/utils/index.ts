@@ -1,8 +1,7 @@
-import type {PossibleSuggestions} from "@/components/molecules/contact-form/types.ts";
-import {type AppData, appsData, BenchmarkResult} from "@/data/appData.ts";
+import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
+import { type AppData, BenchmarkResult, appsData } from "@/data/appData.ts";
 
-export const normalizeText = (text: string): string =>
-  text.toLowerCase().replaceAll(" ", "-");
+export const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
 
 export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
   switch (whatsSuggested) {
@@ -20,7 +19,7 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
   }
 };
 
-export const scrollWithOffset = (id:string, offset:number) => {
+export const scrollWithOffset = (id: string, offset: number) => {
   const element = document.getElementById(id);
   if (!element) return;
 
@@ -30,15 +29,15 @@ export const scrollWithOffset = (id:string, offset:number) => {
     top: y,
     behavior: "smooth",
   });
-}
+};
 
 export const getAppById = (appId: string): AppData | undefined => {
   return appsData.find((app) => app.id === appId);
-}
+};
 
 //TODO: distribute these functions more reasonably
 export const BenchmarkResultToBadgeStyles = new Map<BenchmarkResult, string>([
-    [BenchmarkResult.PartialPass, "text-neutral-900 bg-neutral-100"],
-    [BenchmarkResult.Pass, "text-emerald-600 bg-[#0596691A]"],
-    [BenchmarkResult.Fail, "text-red-600 bg-[#DC26261A]"]
+  [BenchmarkResult.PartialPass, "text-neutral-900 bg-neutral-100"],
+  [BenchmarkResult.Pass, "text-emerald-600 bg-[#0596691A]"],
+  [BenchmarkResult.Fail, "text-red-600 bg-[#DC26261A]"],
 ]);

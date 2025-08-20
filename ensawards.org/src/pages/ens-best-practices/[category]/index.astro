@@ -1,9 +1,9 @@
 ---
 import BestPracticeCard from "../../../components/atoms/cards/BestPracticeCard.astro";
+import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import Layout from "../../../layouts/Layout.astro";
-import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
 export function getStaticPaths() {
   return [
     { params: { category: 0 } },
@@ -35,7 +35,9 @@ const { category } = Astro.params;
   />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
-    <ItemsList header="Best practices" additionalInfo="The list of best practices is not comprehensive and is being updated.">
+    <ItemsList
+      header="Best practices"
+      additionalInfo="The list of best practices is not comprehensive and is being updated.">
       {
         [...Array(parseInt(category) + 1).keys()].map((card, idx) => (
           <BestPracticeCard
@@ -48,7 +50,7 @@ const { category } = Astro.params;
           />
         ))
       }
-      <SuggestionCard whatsSuggested="best practice"/>
+      <SuggestionCard whatsSuggested="best practice" />
     </ItemsList>
   </section>
 </Layout>

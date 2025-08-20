@@ -9,7 +9,8 @@ import {
   type SuggestionFormDataProps,
 } from "@/components/molecules/contact-form/types.ts";
 import {
-  appSuggestionFormSchema, benchmarkResultUpdateRequestSchema,
+  appSuggestionFormSchema,
+  benchmarkResultUpdateRequestSchema,
   bestPracticeSuggestionFormSchema,
 } from "@/components/molecules/contact-form/validation.ts";
 import { cn } from "@/lib/utils.ts";
@@ -36,7 +37,7 @@ const formTextContentsAdaptations = new Map<
     new Map<PossibleSuggestions, string>([
       ["app", "Suggest an app for review"],
       ["best practice", "Suggest best practice"],
-        ["benchmark result", "Request benchmark result update"],
+      ["benchmark result", "Request benchmark result update"],
     ]),
   ],
   [
@@ -44,7 +45,7 @@ const formTextContentsAdaptations = new Map<
     new Map<PossibleSuggestions, string>([
       ["app", "Provide the app details you’d like us to add to ENSAwards."],
       ["best practice", "Suggest a best practice you’d like us to add to ENSAwards."],
-        ["benchmark result", "Suggest a benchmark result update for review"],
+      ["benchmark result", "Suggest a benchmark result update for review"],
     ]),
   ],
 ]);
@@ -52,7 +53,7 @@ const formTextContentsAdaptations = new Map<
 const validationSchemaMap = new Map([
   ["app", appSuggestionFormSchema],
   ["best practice", bestPracticeSuggestionFormSchema],
-    ["benchmark result", benchmarkResultUpdateRequestSchema],
+  ["benchmark result", benchmarkResultUpdateRequestSchema],
 ]);
 
 /**
@@ -144,7 +145,8 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       description: formData.get(EnsAwardsFormFields.Description)?.toString().trim() || "",
       app: formData.get(EnsAwardsFormFields.App)?.toString().trim() || "",
       benchmark: formData.get(EnsAwardsFormFields.Benchmark)?.toString().trim() || "",
-      "requested benchmark result update": formData.get(EnsAwardsFormFields.BenchmarkResultUpdate)?.toString().trim() || "",
+      "requested benchmark result update":
+        formData.get(EnsAwardsFormFields.BenchmarkResultUpdate)?.toString().trim() || "",
       source: formData.get("source")?.toString().trim() || "",
     };
 
@@ -160,13 +162,14 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       const descriptionMapping =
         whatsSuggested === "app"
           ? `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested app URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
-          : (whatsSuggested === "best practice" ?
-                `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
-                :
-                `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`
-            );
+          : whatsSuggested === "best practice"
+            ? `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
+            : `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`;
 
-      const nameMapping = whatsSuggested === "benchmark result" ? `Update benchmark result for: ${data.app}` : data.name;
+      const nameMapping =
+        whatsSuggested === "benchmark result"
+          ? `Update benchmark result for: ${data.app}`
+          : data.name;
 
       const dataToSend: ContactFormDataProps = {
         name: nameMapping,
@@ -331,7 +334,10 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
                   {capitalizeLabel(field.label)}
                   {!field.required && " (optional)"}
                 </label>
-                {[EnsAwardsFormFields.Description, EnsAwardsFormFields.BenchmarkResultUpdate].includes(field.label) ? (
+                {[
+                  EnsAwardsFormFields.Description,
+                  EnsAwardsFormFields.BenchmarkResultUpdate,
+                ].includes(field.label) ? (
                   <TextArea
                     rows={4}
                     id={field.label}
