@@ -45,7 +45,7 @@ const mockBestPracticeData = {
     {
       name: "Category",
       value: "ENS Resolution",
-      link: new URL("https://docs.ens.domains/resolution/"),
+      link: "/ens-best-practices/0",
     },
     {
       name: "Apps passed",
@@ -85,7 +85,7 @@ const mockBestPracticeData = {
           value: "ENS Resolution",
           valueStyles:
             "text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200",
-          link: new URL("https://docs.ens.domains/resolution/"),
+          link: "/ens-best-practices/0",
         },
         {
           name: "Apps passed",
@@ -129,7 +129,7 @@ const benchmarkedApps = appsData.filter((app) => app.benchmarks.find((benchmark)
             notes={app.description}
             viewButtonData={{
               text: "Benchmarks",
-              link: `/app-benchmarks/${app.id}`,
+              link: `/benchmarks/${app.id}`,
             }}
             matrixColumnData={[
               {

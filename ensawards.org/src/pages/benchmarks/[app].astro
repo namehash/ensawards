@@ -34,7 +34,7 @@ const appToDisplay = getAppById(app);
             breadcrumbs={["App benchmarks"]}
             additionalElements={[
                 {name: "Type", value: appToDisplay.type},
-                {name: "Website", value: "Visit site", link: new URL(appToDisplay.websiteLink)},
+                {name: "Website", value: "Visit site ↗", link: appToDisplay.websiteLink},
                 {name: "Overall score", value: `${appToDisplay.ensAwardsScore}%`}
             ]}>
             <Image src={images[appToDisplay.iconSourceLink]()} alt={`${appToDisplay.id}-hero`} slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg" />

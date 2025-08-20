@@ -63,7 +63,7 @@ const placeIcons = ["/src/assets/firstPlaceAward.svg", "/src/assets/secondPlaceA
   <section
     id="previews-section"
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
-    <ItemsList header="App benchmarks" seeAllLink="/app-benchmarks" containerStyles="gap-3 sm:gap-3">
+    <ItemsList header="App benchmarks" seeAllLink="/benchmarks" containerStyles="gap-3 sm:gap-3">
       {
         appsData.map((app, idx) => (
           <AppLeaderboardCard
@@ -71,7 +71,7 @@ const placeIcons = ["/src/assets/firstPlaceAward.svg", "/src/assets/secondPlaceA
             name={app.name}
             ensAwardsScore={app.ensAwardsScore}
             type={app.type}
-            viewBenchmarksLink={`/app-benchmarks/${normalizeText(app.name)}`}>
+            viewBenchmarksLink={`/benchmarks/${normalizeText(app.name)}`}>
             <Image src={images[app.iconSourceLink]()} alt={`${app.id}-LP`} slot="appIcon" class="rounded-md" />
               {idx < 3 ? (<Image alt={`${idx+1}-place-LP`} src={images[placeIcons[idx]]()} slot="placeIcon" />) : <p slot="placeIcon" class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">{idx+1}</p>}
           </AppLeaderboardCard>

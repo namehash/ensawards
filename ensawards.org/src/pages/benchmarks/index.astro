@@ -25,7 +25,7 @@ const placeIcons = ["/src/assets/firstPlaceAward.svg", "/src/assets/secondPlaceA
                 name={app.name}
                 ensAwardsScore={app.ensAwardsScore}
                 type={app.type}
-                viewBenchmarksLink={`/app-benchmarks/${normalizeText(app.name)}`}>
+                viewBenchmarksLink={`/benchmarks/${normalizeText(app.name)}`}>
               <Image src={images[app.iconSourceLink]()} alt={`${app.id}`} slot="appIcon" class="rounded-md" />
               {idx < 3 ? (<Image alt={`${idx+1}-place`} src={images[placeIcons[idx]]()} slot="placeIcon" />) : <p slot="placeIcon" class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">{idx+1}</p>}
             </AppLeaderboardCard>

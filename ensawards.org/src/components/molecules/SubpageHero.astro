@@ -6,7 +6,7 @@ import { normalizeText } from "../../utils";
 interface additionalHeroElement {
   name: string;
   value: string;
-  link?: URL;
+  link?: string;
 }
 export interface SubpageHeroProps {
   header: string;
@@ -93,8 +93,8 @@ let breadcrumbHref = "";
                       class="text-base leading-normal font-medium text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
                       target="_blank"
                       rel="noreferrer noopener"
-                      href={elem.link.toString()}>
-                      {elem.value} ↗
+                      href={elem.link}>
+                      {elem.value}
                     </a>
                   ) : (
                     <p class="text-base leading-normal font-medium text-black">

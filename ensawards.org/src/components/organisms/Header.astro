@@ -19,7 +19,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
         <span id="alphaBadge" class="w-fit h-fit flex flex-row flex-nowrap justify-center items-center px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200">Alpha</span>
     </a>
     <div
-      class="hidden sm:flex flex-row flex-nowrap gap-2 justify-center items-center">
+      class="hidden min-[860px]:flex flex-row flex-nowrap gap-2 justify-center items-center">
       <a
         href="/ens-best-practices"
         class={cn(
@@ -31,7 +31,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
         )}>ENS best practices</a
       >
       <a
-        href="/app-benchmarks"
+        href="/benchmarks"
         class={cn(
           shadcnButtonVariants({
             variant: "ghost",
@@ -61,7 +61,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
         )}>ENS Referral Program</a
       >
     </div>
-    <div class="block sm:hidden"><HeaderMobileNavigation client:load /></div>
+    <div class="block min-[860px]:hidden"><HeaderMobileNavigation client:load /></div>
   </div>
 </header>
 <script>

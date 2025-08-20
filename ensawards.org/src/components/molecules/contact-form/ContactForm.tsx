@@ -76,7 +76,7 @@ const closeOverlayIcon = (
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="cursor-pointer text-[#A3A3A3] transition-all duration-200 hover:text-red-600"
+    className="cursor-pointer text-[#A3A3A3]"
   >
     <path
       d="M18 6L6 18M6 6L18 18"
@@ -166,8 +166,10 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
                 `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`
             );
 
+      const nameMapping = whatsSuggested === "benchmark result" ? `Update benchmark result for: ${data.app}` : data.name;
+
       const dataToSend: ContactFormDataProps = {
-        name: data.name,
+        name: nameMapping,
         email: PLACEHOLDER_EMAIL,
         telegram: "",
         message: descriptionMapping,
@@ -297,7 +299,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
               setSuccessfulFormSubmit(false);
             }}
             type="reset"
-            className="mt-5"
+            className="mt-5 cursor-pointer"
           >
             Send another message
           </FormButton>
