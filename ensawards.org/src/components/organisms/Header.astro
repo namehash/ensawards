@@ -7,7 +7,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
 
 <header
   id="site-header"
-  class="custom_header fixed top-0 w-full z-20 h-[56px] sm:h-[70px] border-b border-b-black/5 flex flex-row justify-center items-center">
+  class="custom_header fixed top-0 w-full z-20 h-[56px] sm:h-[70px] border-b border-b-white/10 flex flex-row justify-center items-center">
   <div
     class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center px-5 sm:px-8">
     <a
@@ -15,7 +15,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
       class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px]"
       >
         <ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" />
-        <p class="text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold">ENSAwards</p>
+        <p id="ensAwardsName" class="text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold">ENSAwards</p>
         <span id="alphaBadge" class="w-fit h-fit flex flex-row flex-nowrap justify-center items-center px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200">Alpha</span>
     </a>
     <div
@@ -53,10 +53,10 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
               href="/ens-referral-program"
         class={cn(
           shadcnButtonVariants({
-            variant: "outline",
+            variant: "ghost",
             size: "default",
             className:
-              "onScrollButton cursor-pointer rounded-full border-black/20 bg-transparent",
+              "onScrollButton rounded-full",
           }),
         )}>ENS Referral Program</a
       >
@@ -69,6 +69,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
     if (typeof window !== "undefined") {
       const header = document.getElementById("site-header");
       const alphaBadge = document.getElementById("alphaBadge");
+      const ensAwardsName = document.getElementById("ensAwardsName");
       const headerButtons = document.getElementsByClassName("onScrollButton");
 
       const scrollWatcher = document.createElement("div");
@@ -80,6 +81,7 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
         (entries) => {
           header.classList.toggle("scrolled", !entries[0].isIntersecting);
           alphaBadge.classList.toggle("scrolled", !entries[0].isIntersecting);
+          ensAwardsName.classList.toggle("scrolled", !entries[0].isIntersecting);
 
           for (const headerButton of headerButtons) {
             headerButton.classList.toggle(
@@ -103,22 +105,33 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
 <style>
   .custom_header {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    color: black;
+    color: white;
   }
 
   .custom_header.scrolled {
+    color: black;
     background-color: white;
     border-bottom: 1px solid oklch(87.2% 0.01 258.338);
   }
 
+  #ensAwardsName {
+      color: white;
+  }
+
+  #ensAwardsName.scrolled {
+      color: black;
+  }
+
   .onScrollButton {
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      color: white;
+      background-color: rgba(255, 255, 255, 0.05);
     }
   }
 
   .onScrollButton.scrolled {
     &:hover {
+      color: black;
       background-color: var(--accent);
     }
   }

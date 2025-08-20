@@ -54,7 +54,7 @@ export default function HeaderMobileNavigation() {
                   <div className="w-full justify-between items-center flex absolute px-5 sm:px-8 h-[56px] sm:h-[70px] top-0 left-0 max-w-[860px] border-b border-b-black/5">
                       <a
                           href="/"
-                          className="h-fit flex justify-center items-center gap-2 text-[19px] sm:text-2xl text-black not-italic font-bold leading-[25px] sm:leading-8 tracking-[-0.907px]"
+                          className="h-fit flex justify-center items-center gap-[10px] text-[19px] sm:text-2xl text-black not-italic font-bold leading-[25px] sm:leading-8"
                       >
                           <img src={ENSAwardsLogo.src} className="max-sm:w-[26px] max-sm:h-[25px]" alt="ENSNode"/>
                           ENSAwards

@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import type {ImageMetadata} from "astro";
-import ChevronDown from "../assets/chevronDown.svg";
 import AppLeaderboardCard from "../components/atoms/cards/AppLeaderboardCard.astro";
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
@@ -12,6 +11,8 @@ import Layout from "../layouts/Layout.astro";
 import { cn } from "../lib/utils";
 import {normalizeText} from "../utils";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
+import AwardImage from "../assets/awardImage.svg";
+import Beams from "../assets/beams.svg";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = ["/src/assets/firstPlaceAward.svg", "/src/assets/secondPlaceAward.svg","/src/assets/thirdPlaceAward.svg"]
@@ -20,45 +21,38 @@ const placeIcons = ["/src/assets/firstPlaceAward.svg", "/src/assets/secondPlaceA
 <Layout>
   <section
     id="lpHero"
-    class="relative w-full h-full max-sm:px-5 max-h-[820px] flex flex-col justify-center items-center bg-yellow-400">
-    <div
-      class="w-fit max-w-[800px] h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center gap-6 sm:gap-8">
-      <div
-        class="flex flex-col flex-nowrap justify-center items-center gap-4 self-stretch">
-        <h1
-          class="text-black text-[32px] sm:text-[64px] leading-[44px] sm:leading-[72px] font-bold text-center">
-          Unleash ENS potential within your&nbsp;app
-        </h1>
-        <p
-          class="max-md:max-w-[600px] text-base sm:text-lg leading-normal sm:leading-7 font-normal text-center text-black/60">
-          Unleash full ENS potential within your app check how fully it supports
-          ENS
-        </p>
-      </div>
-      <a
-        href="/ens-best-practices"
-        class={cn(
-          shadcnButtonVariants({
-            variant: "default",
-            size: "default",
-            className:
-              "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border",
-          }),
-        )}>ENS best practices</a
-      >
+    class="relative w-full h-full max-sm:px-5 max-h-[820px] flex flex-col justify-center items-center bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden">
+    <div class="w-full max-w-[1280px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:px-8 max-sm:pt-[96px] max-sm:pb-6 max-sm:gap-6">
+        <div
+                class="w-fit h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-6 sm:gap-8">
+            <div
+                    class="flex flex-col flex-nowrap justify-center items-center sm:items-start gap-4">
+                <h1
+                        class="text-white text-[32px] sm:text-[60px] leading-[44px] sm:leading-[72px] font-bold text-center sm:text-left">
+                    Discover the best in&nbsp;ENS
+                </h1>
+                <p
+                        class="max-md:max-w-[600px] text-base sm:text-lg leading-normal sm:leading-7 font-normal text-center sm:text-left text-white/60">
+                    Do your apps fully support ENS best practices?
+                </p>
+            </div>
+            <a
+                    href="/ens-best-practices"
+                    class={cn(
+                        shadcnButtonVariants({
+                            variant: "default",
+                            size: "default",
+                            className:
+                                "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+                        }),
+                    )}>ENS best practices</a
+            >
+        </div>
+        <div class="relative md:max-w-1/2 overflow-visible">
+            <Image src={AwardImage} alt="award" quality={100} class="relative z-10 w-full"/>
+            <img src={Beams.src} alt="beams"  width="1139" height="820" class="absolute -top-60 sm:-top:50 min-[1100px]:-top-40 -right-[70%] min-[1100px]:-right-[25%] w-[1139px] h-[820px] max-w-none" />
+        </div>
     </div>
-    <a
-      id="scroll-to-previews-anchor"
-      href="#previews-section"
-      class={cn(
-        shadcnButtonVariants({
-          variant: "ghost",
-          size: "default",
-          className:
-            "hover:bg-black/5 cursor-pointer absolute max-sm:bottom-5 bottom-[25px] has-[>svg]:p-[10px] w-5 h-5 box-content rounded-[40px] border border-black/20",
-        }),
-      )}><ChevronDown /></a
-    >
   </section>
   <section
     id="previews-section"
@@ -96,13 +90,4 @@ const placeIcons = ["/src/assets/firstPlaceAward.svg", "/src/assets/secondPlaceA
       }
     </ItemsList>
   </section>
-  <script>
-    import {scrollWithOffset} from "../utils";
-
-    const scrollAnchor = document.getElementById("scroll-to-previews-anchor");
-    scrollAnchor.addEventListener("click", (event) => {
-      event.preventDefault();
-      scrollWithOffset("previews-section", 50);
-    });
-  </script>
 </Layout>

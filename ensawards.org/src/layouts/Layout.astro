@@ -7,6 +7,13 @@ import { EnsAwardsFormFields } from "../components/molecules/contact-form/types"
 import Footer from "../components/organisms/Footer.astro";
 import Header from "../components/organisms/Header.astro";
 import SuggestionForm from "../components/organisms/SuggestionForm.astro";
+import StaticHeader from "../components/organisms/StaticHeader.astro";
+
+export interface LayoutProps {
+    isStatic: boolean;
+}
+
+const {isStatic=false}:LayoutProps = Astro.props;
 ---
 
 <!doctype html>
@@ -63,7 +70,7 @@ import SuggestionForm from "../components/organisms/SuggestionForm.astro";
     />
   </head>
   <body>
-    <Header />
+  {isStatic ? <StaticHeader />: <Header />}
     <slot />
     <div id="app-overlay" class="hidden">
       <Overlay>
