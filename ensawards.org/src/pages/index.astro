@@ -1,8 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import AwardImage from "../assets/awardImage.svg";
-import Beams from "../assets/beams.svg";
+import HeroImage from "../assets/mergedHeroImage.png";
 import AppLeaderboardCard from "../components/atoms/cards/AppLeaderboardCard.astro";
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
@@ -29,7 +28,7 @@ const placeIcons = [
     <div
       class="w-full max-w-[1280px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:px-8 max-sm:pt-[96px] max-sm:pb-6 max-sm:gap-6">
       <div
-        class="w-fit h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-6 sm:gap-8">
+        class="relative z-10 w-fit h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-6 sm:gap-8">
         <div
           class="flex flex-col flex-nowrap justify-center items-center sm:items-start gap-4">
           <h1
@@ -53,19 +52,11 @@ const placeIcons = [
           )}>ENS best practices</a
         >
       </div>
-      <div class="relative md:max-w-1/2 overflow-visible">
-        <Image
-          src={AwardImage}
-          alt="award"
-          quality={100}
-          class="relative z-10 w-full"
-        />
+      <div class="md:max-w-1/2 max-sm:h-[50vh] overflow-visible">
         <img
-          src={Beams.src}
-          alt="beams"
-          width="1139"
-          height="820"
-          class="absolute -top-60 sm:-top:50 min-[1100px]:-top-40 -right-[70%] min-[1100px]:-right-[25%] w-[1139px] h-[820px] max-w-none"
+            src={HeroImage.src}
+            alt="Award"
+            class="relative max-sm:max-w-[200vw] max-sm:-top-[200px] sm:w-[300%] lg:w-[200%] max-w-none sm:left-1/2 sm:-translate-x-1/2"
         />
       </div>
     </div>
