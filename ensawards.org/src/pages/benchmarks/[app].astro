@@ -27,7 +27,7 @@ const appToDisplay = getAppById(app);
     appToDisplay === undefined ? (
       <p>ERROR</p>
     ) : (
-      // TODO: update the error version (even though it should never occur
+      // TODO: update the error version (even though it should never occur)
       <>
         <SubpageHero
           header={appToDisplay.name}
@@ -57,13 +57,13 @@ const appToDisplay = getAppById(app);
                 notes={benchmark.bestPracticeDetails.description}
                 viewButtonData={{
                   text: "View best practice details",
-                  link: `/ens-best-practices/${idx + 1}/0`,
+                  link: `/ens-best-practices/${normalizeText(benchmark.bestPracticeDetails.category)}/${benchmark.bestPracticeDetails.id}`,
                 }}
                 matrixColumnData={[
                   {
                     category: "Category",
-                    value: benchmark.category,
-                    link: `/ens-best-practices/${idx + 1}`,
+                    value: benchmark.bestPracticeDetails.category,
+                    link: `/ens-best-practices/${normalizeText(benchmark.bestPracticeDetails.category)}`,
                     linkStyles:
                       "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
                   },

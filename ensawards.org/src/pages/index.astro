@@ -7,9 +7,8 @@ import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import Hero from "../components/molecules/Hero.astro";
 import { appsData } from "../data/appData";
-import { bestPracticesCategoryCards } from "../data/bestPracticesData";
+import {BestPracticeCategories} from "../data/bestPracticesData";
 import Layout from "../layouts/Layout.astro";
-import { normalizeText } from "../utils";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -31,11 +30,11 @@ const placeIcons = [
       {
         appsData.map((app, idx) => (
           <AppLeaderboardCard
-            key={`app-review-card-${normalizeText(app.name)}`}
+            key={`app-review-card-${app.id}`}
             name={app.name}
             ensAwardsScore={app.ensAwardsScore}
             type={app.type}
-            viewBenchmarksLink={`/benchmarks/${normalizeText(app.name)}`}>
+            viewBenchmarksLink={`/benchmarks/${app.id}`}>
             <Image
               src={images[app.iconSourceLink]()}
               alt={`${app.id}-LP`}
@@ -62,16 +61,15 @@ const placeIcons = [
     </ItemsList>
     <ItemsList header="ENS best practices" seeAllLink="/ens-best-practices">
       {
-        bestPracticesCategoryCards
-          .slice(0, 4)
-          .map((card, idx) => (
+        BestPracticeCategories
+          .map((category, idx) => (
             <CategoryCard
               key={`best-practice-card-${idx}`}
-              name="ENS Resolution"
-              description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
-              viewBestPracticesLink={`/ens-best-practices/${card}`}
-              comingSoon={idx === 3}
-              numberOfBestPractices={12}
+              name={category.name}
+              description={category.description}
+              viewBestPracticesLink={`/ens-best-practices/${category.id}`}
+              comingSoon={category.status}
+              numberOfBestPractices={category.bestPractices.length}
             />
           ))
       }

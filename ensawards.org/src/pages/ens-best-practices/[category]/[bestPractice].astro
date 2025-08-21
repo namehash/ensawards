@@ -9,23 +9,20 @@ import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import { BenchmarkResult, appsData } from "../../../data/appData";
 import Layout from "../../../layouts/Layout.astro";
 import { cn } from "../../../lib/utils";
-import { BenchmarkResultToBadgeStyles } from "../../../utils";
+import {
+  BenchmarkResultToBadgeStyles,
+  getAppSupportColor,
+  getBestPracticeByCategoryAndId,
+  scrollWithOffset
+} from "../../../utils";
+import {BestPracticeCategories} from "../../../data/bestPracticesData";
 export function getStaticPaths() {
-  //TODO: this will grow a lot once the data is actually here, but I suppose we'll be able to automate this function then
-  return [
-    { params: { category: 0, bestPractice: 0 } },
-    { params: { category: 1, bestPractice: 0 } },
-    { params: { category: 2, bestPractice: 0 } },
-    { params: { category: 3, bestPractice: 0 } },
-    { params: { category: 4, bestPractice: 0 } },
-    { params: { category: 5, bestPractice: 0 } },
-    { params: { category: 6, bestPractice: 0 } },
-    { params: { category: 7, bestPractice: 0 } },
-    { params: { category: 8, bestPractice: 0 } },
-    { params: { category: 9, bestPractice: 0 } },
-    { params: { category: 10, bestPractice: 0 } },
-    { params: { category: 11, bestPractice: 0 } },
-  ];
+  const staticPaths = [];
+
+  for (let category of BestPracticeCategories){
+    category.bestPractices.forEach((bestPractice) => staticPaths.push({ params: { category: category.id, bestPractice: bestPractice.id } }));
+  }
+  return staticPaths;
 }
 
 const { category, bestPractice } = Astro.params;
@@ -34,234 +31,180 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
 
-//TODO: adapt all data here to be dependent on actual category->best-practice pairs once we get the data, for now use mock
-
-const mockBestPracticeData = {
-  name: "Support ENSIP-19",
-  category: "ENS Resolution",
-  description:
-    "This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the ecosystem.",
-  additionalHeroData: [
-    {
-      name: "Category",
-      value: "ENS Resolution",
-      link: "/ens-best-practices/0",
-    },
-    {
-      name: "Apps passed",
-      value: "12",
-    },
-    {
-      name: "App support",
-      value: "90%",
-    },
-  ],
-  technicalDetails: {
-    main: {
-      header: "Technical info",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-    sides: [
-      {
-        header: "Header",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      },
-    ],
-    card: {
-      header: "Support ENSIP-19",
-      content:
-        "ENSIP standardizes reverse and primary name resolution for all coin types, defines how the process operates across the ecosystem.",
-      additionalData: [
-        {
-          name: "Category",
-          value: "ENS Resolution",
-          valueStyles:
-            "text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200",
-          link: "/ens-best-practices/0",
-        },
-        {
-          name: "Apps passed",
-          value: "12",
-          valueStyles: "text-black",
-        },
-        {
-          name: "App support",
-          value: "90%",
-          valueStyles: "text-emerald-600",
-        },
-      ],
-    },
-  },
-};
+const bestPracticeToDisplay = getBestPracticeByCategoryAndId(category, bestPractice);
 
 const benchmarkedApps = appsData.filter(
   (app) =>
     app.benchmarks.find(
       (benchmark) =>
-        benchmark.category === mockBestPracticeData.category &&
-        benchmark.bestPracticeDetails.name === mockBestPracticeData.name,
+        benchmark.bestPracticeDetails.category === bestPracticeToDisplay.category &&
+        benchmark.bestPracticeDetails.name === bestPracticeToDisplay.name,
     ) !== undefined,
 );
 ---
 
 <Layout>
-  <SubpageHero
-    header={mockBestPracticeData.name}
-    description={mockBestPracticeData.description}
-    breadcrumbs={["ENS best practices", category]}
-    additionalElements={mockBestPracticeData.additionalHeroData}>
-    <technical-info-anchor
-      data-id={`${mockBestPracticeData.name.replace(" ", "-")}`}
-      href={`#${mockBestPracticeData.name.replace(" ", "-")}-technical-info`}
-      id={`${mockBestPracticeData.name.replace(" ", "-")}-technical-info-anchor`}
-      slot="technicalSectionAnchor"
-      class="text-white transition-all duration-200 hover:underline hover:underline-offset-[25%] decoration-from-font hover:cursor-pointer"
-      >Learn More</technical-info-anchor
-    >
-  </SubpageHero>
-  <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8">
-    <ItemsList header="App benchmarks" containerStyles="sm:gap-2">
-      {
-        benchmarkedApps.map((app) => {
-          // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
-          const relatedBenchmark = app.benchmarks.find(
-            (benchmark) =>
-              benchmark.bestPracticeDetails.name === mockBestPracticeData.name,
-          )!;
-
-          return (
-            <SupportMatrixCard
-              name={app.name}
-              notes={app.description}
-              viewButtonData={{
-                text: "Benchmarks",
-                link: `/benchmarks/${app.id}`,
-              }}
-              matrixColumnData={[
-                {
-                  category: "Type",
-                  value: app.type,
-                },
-              ]}>
-              <MatrixBadge
-                slot="badge"
-                text={relatedBenchmark.result}
-                className={
-                  BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
-                }
-                iconId={relatedBenchmark.result}
-              />
-              <Image
-                src={images[app.iconSourceLink]()}
-                alt={`${app.name}-logo`}
-                slot="icon"
-                class="shrink-0 rounded-md w-10 h-10"
-              />
-            </SupportMatrixCard>
-          );
-        })
-      }
-      <SuggestionCard whatsSuggested="benchmark result" />
-    </ItemsList>
-  </section>
-  <section
-    id={`${mockBestPracticeData.name.replace(" ", "-")}-technical-info`}
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
-    <div
-      class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
-      <div
-        class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
-        <h2 class="text-2xl leading-none font-semibold text-black">
-          {mockBestPracticeData.technicalDetails.main.header}
-        </h2>
-        <p class={technicalSectionContentStyles}>
-          {mockBestPracticeData.technicalDetails.main.content}
-        </p>
-        {
-          mockBestPracticeData.technicalDetails.sides.map(
-            (additionalContent) => (
-              <>
-                <h3 class={technicalSectionMinorHeaderStyles}>
-                  {additionalContent.header}
-                </h3>
-                <p class={technicalSectionContentStyles}>
-                  {additionalContent.content}
-                </p>
-              </>
-            ),
+  {
+      bestPracticeToDisplay === undefined ? (
+              <p>ERROR</p>
+              // TODO: update the error version (even though it should never occur)
           )
-        }
-      </div>
-      <div
-        class="w-1/2 min-w-[300px] max-w-[420px] box-border h-fit hidden sm:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
-        <h4 class={technicalSectionMinorHeaderStyles}>
-          {mockBestPracticeData.technicalDetails.card.header}
-        </h4>
-        <p class={technicalSectionContentStyles}>
-          {mockBestPracticeData.technicalDetails.card.content}
-        </p>
-        <div class="bg-gray-200 h-[1px] self-stretch"></div>
-        <div
-          class="w-full flex flex-row flex-wrap justify-between items-center gap-6">
-          {
-            mockBestPracticeData.technicalDetails.card.additionalData.map(
-              (additionalElem) => (
-                <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-                  <p class="text-sm leading-normal font-normal text-muted-foreground">
-                    {additionalElem.name}
-                  </p>
-                  {additionalElem.link ? (
-                    <a
-                      class={cn(
-                        "text-sm leading-normal font-semibold",
-                        additionalElem.valueStyles,
-                      )}
-                      href={additionalElem.link}
-                      target="_blank"
-                      rel="noreferrer noopener">
-                      {additionalElem.value}
-                    </a>
-                  ) : (
-                    <p
-                      class={cn(
-                        "text-sm leading-normal font-semibold",
-                        additionalElem.valueStyles,
-                      )}>
-                      {additionalElem.value}
-                    </p>
-                  )}
-                </div>
-              ),
-            )
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-  <script>
-    import { scrollWithOffset } from "../../../utils";
+          :
+          (
+              <>
+                <SubpageHero
+                    header={bestPracticeToDisplay.name}
+                    description={bestPracticeToDisplay.description}
+                    breadcrumbs={["ENS best practices", bestPracticeToDisplay.category]}
+                    additionalElements={[
+                      {
+                        name: "Category",
+                        value: bestPracticeToDisplay.category,
+                        link: `/ens-best-practices/${category}`,
+                      },
+                      {
+                        name: "Apps passed",
+                        value: bestPracticeToDisplay.appsPassed,
+                      },
+                      {
+                        name: "App support",
+                        value: `${bestPracticeToDisplay.appSupport}%`,
+                      },
+                    ]}>
+                  <technical-info-anchor
+                      data-id={bestPracticeToDisplay.id}
+                      href={`#${bestPracticeToDisplay.id}-technical-info`}
+                      id={`${bestPracticeToDisplay.id}-technical-info-anchor`}
+                      slot="technicalSectionAnchor"
+                      class="text-white transition-all duration-200 hover:underline hover:underline-offset-[25%] decoration-from-font hover:cursor-pointer"
+                  >Learn More</technical-info-anchor
+                  >
+                </SubpageHero>
+                <section
+                    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8">
+                  <ItemsList header="App benchmarks" containerStyles="sm:gap-2">
+                    {
+                      benchmarkedApps.map((app) => {
+                        // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
+          const relatedBenchmark = app.benchmarks.find(
+                            (benchmark) =>
+                                benchmark.bestPracticeDetails.name === bestPracticeToDisplay.name,
+                        )!;
 
-    class AnchorToTechnicalInfo extends HTMLElement {
-      connectedCallback() {
-        const scrollAnchor = document.getElementById(
-          `${this.dataset.id}-technical-info-anchor`,
-        );
-        scrollAnchor.addEventListener("click", (event) => {
-          event.preventDefault();
-          scrollWithOffset(`${this.dataset.id}-technical-info`, 60);
-        });
-      }
-    }
+                        return (
+                            <SupportMatrixCard
+                                name={app.name}
+                                notes={app.description}
+                                viewButtonData={{
+                                  text: "Benchmarks",
+                                  link: `/benchmarks/${app.id}`,
+                                }}
+                                matrixColumnData={[
+                                  {
+                                    category: "Type",
+                                    value: app.type,
+                                  },
+                                ]}>
+                              <MatrixBadge
+                                  slot="badge"
+                                  text={relatedBenchmark.result}
+                                  className={
+                                    BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
+                                  }
+                                  iconId={relatedBenchmark.result}
+                              />
+                              <Image
+                                  src={images[app.iconSourceLink]()}
+                                  alt={`${app.name}-logo`}
+                                  slot="icon"
+                                  class="shrink-0 rounded-md w-10 h-10"
+                              />
+                            </SupportMatrixCard>
+                        );
+                      })
+                    }
+                    <SuggestionCard whatsSuggested="benchmark result" />
+                  </ItemsList>
+                </section>
+                <section
+                    id={`${bestPracticeToDisplay.id}-technical-info`}
+                    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
+                  <div
+                      class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
+                    <div
+                        class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
+                      <h2 class="text-2xl leading-none font-semibold text-black">
+                        {bestPracticeToDisplay.technicalDetails.main.header}
+                      </h2>
+                      <p class={technicalSectionContentStyles}>
+                        {bestPracticeToDisplay.technicalDetails.main.content}
+                      </p>
+                      {
+                        bestPracticeToDisplay.technicalDetails.sides.map(
+                            (additionalContent) => (
+                                <>
+                                  <h3 class={technicalSectionMinorHeaderStyles}>
+                                    {additionalContent.header}
+                                  </h3>
+                                  <p class={technicalSectionContentStyles}>
+                                    {additionalContent.content}
+                                  </p>
+                                </>
+                            ),
+                        )
+                      }
+                    </div>
+                    <div
+                        class="w-1/2 min-w-[300px] max-w-[420px] box-border h-fit hidden sm:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
+                      <h4 class={technicalSectionMinorHeaderStyles}>
+                        {bestPracticeToDisplay.name}
+                      </h4>
+                      <p class={technicalSectionContentStyles}>
+                        {bestPracticeToDisplay.description}
+                      </p>
+                      <div class="bg-gray-200 h-[1px] self-stretch"></div>
+                      <div
+                          class="w-full flex flex-row flex-wrap justify-between items-center gap-6">
+                          <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+                              <p class="text-sm leading-normal font-normal text-muted-foreground">Category</p>
+                              <a href={`/ens-best-practices/${category}`} class="text-sm leading-normal font-semibold text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200">
+                                  {bestPracticeToDisplay.category}
+                              </a>
+                          </div>
+                          <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+                              <p class="text-sm leading-normal font-normal text-muted-foreground">Apps passed</p>
+                              <p class="text-sm leading-normal font-semibold text-black">
+                                  {bestPracticeToDisplay.appsPassed}
+                              </p>
+                          </div>
+                          <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+                              <p class="text-sm leading-normal font-normal text-muted-foreground">App support</p>
+                              <p class={cn("text-sm leading-normal font-semibold", getAppSupportColor(bestPracticeToDisplay.appSupport))}>
+                                  {bestPracticeToDisplay.appSupport}%
+                              </p>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <script>
+                  import { scrollWithOffset } from "../../../utils";
 
-    customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
-  </script>
+                  class AnchorToTechnicalInfo extends HTMLElement {
+                    connectedCallback() {
+                      const scrollAnchor = document.getElementById(
+                          `${this.dataset.id}-technical-info-anchor`,
+                      );
+                      scrollAnchor.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        scrollWithOffset(`${this.dataset.id}-technical-info`, 60);
+                      });
+                    }
+                  }
+
+                  customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
+                </script>
+              </>
+          )
+  }
 </Layout>

@@ -1,5 +1,6 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
 import { type AppData, BenchmarkResult, appsData } from "@/data/appData.ts";
+import {type BestPractice, BestPracticeCategories, type BestPracticeCategory} from "@/data/bestPracticesData.ts";
 
 export const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
 
@@ -34,6 +35,22 @@ export const scrollWithOffset = (id: string, offset: number) => {
 export const getAppById = (appId: string): AppData | undefined => {
   return appsData.find((app) => app.id === appId);
 };
+
+export const getCategoryById = (categoryId: string): BestPracticeCategory | undefined => {
+  return BestPracticeCategories.find((category) => category.id === categoryId);
+}
+
+export const getBestPracticeByCategoryAndId = (categoryId: string, bestPracticeId: string): BestPractice | undefined => {
+  const category = getCategoryById(categoryId);
+
+  if (!category) {
+    return undefined;
+  }
+
+  return category.bestPractices.find((bestPractice) => bestPractice.id === bestPracticeId);
+}
+
+export const getAppSupportColor = (value: number): string => value > 75 ? "text-emerald-600" : (value > 35 ? "text-amber-600" : "text-red-600");
 
 //TODO: distribute these functions more reasonably
 export const BenchmarkResultToBadgeStyles = new Map<BenchmarkResult, string>([

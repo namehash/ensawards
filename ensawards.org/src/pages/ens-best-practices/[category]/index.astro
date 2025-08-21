@@ -4,53 +4,49 @@ import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import Layout from "../../../layouts/Layout.astro";
+import {BestPracticeCategories, CategoryStatus} from "../../../data/bestPracticesData";
+import {getCategoryById} from "../../../utils";
 export function getStaticPaths() {
-  return [
-    { params: { category: 0 } },
-    { params: { category: 1 } },
-    { params: { category: 2 } },
-    { params: { category: 3 } },
-    { params: { category: 4 } },
-    { params: { category: 5 } },
-    { params: { category: 6 } },
-    { params: { category: 7 } },
-    { params: { category: 8 } },
-    { params: { category: 9 } },
-    { params: { category: 10 } },
-    { params: { category: 11 } },
-  ];
+  return BestPracticeCategories.map((category) => ({ params: { category: category.id } }))
 }
 
 const { category } = Astro.params;
 
-//TODO: adapt all data here to be dependent on actual category once we get the data
+const categoryToDisplay = getCategoryById(category);
 ---
 
 <Layout>
-  <SubpageHero
-    header=`Category #${category}`
-    description="The Resolution process at its core is the process of converting a human-readable name to a machine-readable address."
-    breadcrumbs={["ENS best practices"]}
-    additionalElements={[{ name: "Best practices", value: "12" }]}
-  />
-  <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
-    <ItemsList
-      header="Best practices"
-      additionalInfo="The list of best practices is not comprehensive and is being updated.">
-      {
-        [...Array(parseInt(category) + 1).keys()].map((card, idx) => (
-          <BestPracticeCard
-            key={`best-practice-card-${idx}`}
-            name="ENS Resolution"
-            description="This ENSIP standardizes reverse and primary name resolution for all coin types, and defines how this resolution process operates across the  multichain Ethereum ecosystem."
-            viewReviewsLink={`/ens-best-practices/${category}/0`}
-            appsPassed={12}
-            appSupport={90}
-          />
-        ))
-      }
-      <SuggestionCard whatsSuggested="best practice" />
-    </ItemsList>
-  </section>
+  {categoryToDisplay === undefined ? (
+      <p>ERROR</p>
+      // TODO: update the error version (even though it should never occur)
+  ) : (
+      <>
+    <SubpageHero
+        header={categoryToDisplay.name}
+        description={categoryToDisplay.description}
+        breadcrumbs={["ENS best practices"]}
+        additionalElements={[{ name: "Best practices", value: categoryToDisplay.bestPractices.length }]}
+    />
+    <section
+        class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
+      <ItemsList
+          header="Best practices"
+          additionalInfo={categoryToDisplay.status === CategoryStatus.Updated ? "The list of best practices is not comprehensive and is being updated." : undefined}>
+        {
+          categoryToDisplay.bestPractices.map((bestPractice, idx) => (
+              <BestPracticeCard
+                  key={`best-practice-card-${idx}`}
+                  name={bestPractice.name}
+                  description={bestPractice.description}
+                  viewReviewsLink={`/ens-best-practices/${category}/${bestPractice.id}`}
+                  appsPassed={bestPractice.appsPassed}
+                  appSupport={bestPractice.appSupport}
+              />
+          ))
+        }
+        <SuggestionCard whatsSuggested="best practice" />
+      </ItemsList>
+    </section>
+      </>
+  )}
 </Layout>

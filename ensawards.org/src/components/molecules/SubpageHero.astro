@@ -54,7 +54,7 @@ let breadcrumbHref = "";
                     href={decodeURI(normalizeText(breadcrumbHref))}>
                     {crumb}
                   </a>
-                  <ChevronRightIcon />
+                  <ChevronRightIcon className="text-white" />
                 </>
               );
             }
@@ -95,7 +95,7 @@ let breadcrumbHref = "";
       }
       {
         additionalElements && (
-          <div class="w-full sm:w-fit h-full flex-col justify-center sm:justify-end items-center">
+          <div class="w-full sm:w-fit h-full flex-col justify-center sm:justify-end items-center relative z-10">
             <div class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-start items-start gap-2 sm:gap-5 md:gap-10">
               {additionalElements.map((elem) => (
                 <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
@@ -103,8 +103,6 @@ let breadcrumbHref = "";
                   {elem.link ? (
                     <a
                       class="text-base leading-normal font-medium text-white underline underline-offset-[25%] decoration-white/40 hover:decoration-white transition-all duration-200"
-                      target="_blank"
-                      rel="noreferrer noopener"
                       href={elem.link}>
                       {elem.value}
                     </a>
