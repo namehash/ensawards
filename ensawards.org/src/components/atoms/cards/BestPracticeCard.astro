@@ -13,7 +13,7 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
   Astro.props;
 ---
 
-<div
+<a href={viewReviewsLink}
   class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
             justify-center items-start gap-3 sm:gap-4 p-5 sm:px-6 sm:pt-6 sm:pb-4 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <div
@@ -36,8 +36,7 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
   <div
     class="flex flex-col-reverse sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start
                 max-sm:gap-3 self-stretch">
-    <a
-      href={viewReviewsLink}
+    <button
       class={cn(
         shadcnButtonVariants({
           variant: "secondary",
@@ -46,7 +45,7 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
         }),
       )}>
       View details
-    </a>
+    </button>
     <div
       class="flex flex-nowrap flex-col sm:flex-row justify-start items-center sm:items-start gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
       <div
@@ -69,4 +68,4 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
       </div>
     </div>
   </div>
-</div>
+</a>

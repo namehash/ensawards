@@ -16,51 +16,78 @@ const {
   comingSoon,
   numberOfBestPractices,
 }: CategoryCardProps = Astro.props;
----
 
+const cardWrapperStyles = "max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap\n" +
+    "            justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4 rounded-2xl border border-gray-200"
+---
+{comingSoon ? (
 <div
-  class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
-            justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
+   class={cardWrapperStyles}>
   <div
-    class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
+      class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
     <div class="flex flex-row flex-nowrap justify-start items-center gap-3">
       <h3
-        class="text-lg leading-normal font-semibold text-black">{name}</h3
+          class="text-lg leading-normal font-semibold text-black">{name}</h3
       >
-      {
-        comingSoon && (
-          <span class="w-fit h-fit rounded-md bg-black py-[2px] px-2 text-xs leading-normal font-semibold text-white">
+              <span class="w-fit h-fit rounded-md bg-black py-[2px] px-2 text-xs leading-normal font-semibold text-white">
             Coming soon
           </span>
-        )
-      }
     </div>
     <p
-      class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">
+        class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">
       {description}
     </p>
   </div>
   <div class="bg-gray-200 h-[1px] self-stretch"></div>
   <div
-    class="flex flex-col-reverse sm:flex-row flex-nowrap justify-center max-sm:gap-3 sm:justify-between items-center
+      class="flex flex-col-reverse sm:flex-row flex-nowrap justify-center max-sm:gap-3 sm:justify-between items-center
                 sm:items-start self-stretch">
-    <a
-      href={viewBestPracticesLink}
-      aria-disabled={comingSoon || false}
-      class={cn(
-        shadcnButtonVariants({
-          variant: "secondary",
-          size: "default",
-          className: "cursor-pointer rounded-full max-sm:self-stretch",
-        }),
-      )}>
+    <button
+        aria-disabled={true}
+        class={cn(
+            shadcnButtonVariants({
+              variant: "secondary",
+              size: "default",
+              className: "cursor-pointer rounded-full max-sm:self-stretch",
+            }),
+        )}>
       View best practices
-    </a>
+    </button>
+  </div>
+</div>
+    ) :
+    (
+<a href={viewBestPracticesLink}
+   class={cn(cardWrapperStyles,"hover:border-gray-300 hover:shadow-xs cursor-pointer")}>
+  <div
+      class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
+    <div class="flex flex-row flex-nowrap justify-start items-center gap-3">
+      <h3
+          class="text-lg leading-normal font-semibold text-black">{name}</h3
+      >
+    </div>
+    <p
+        class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">
+      {description}
+    </p>
+  </div>
+  <div class="bg-gray-200 h-[1px] self-stretch"></div>
+  <div
+      class="flex flex-col-reverse sm:flex-row flex-nowrap justify-center max-sm:gap-3 sm:justify-between items-center
+                sm:items-start self-stretch">
+    <button
+        aria-disabled={false}
+        class={cn(
+            shadcnButtonVariants({
+              variant: "secondary",
+              size: "default",
+              className: "cursor-pointer rounded-full max-sm:self-stretch",
+            }),
+        )}>
+      View best practices
+    </button>
     <div
-      class={cn(
-        "flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch",
-        comingSoon ? "hidden" : "",
-      )}>
+        class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch" >
       <p class="text-muted-foreground text-sm leading-normal font-medium">
         Best practices
       </p>
@@ -69,4 +96,5 @@ const {
       </p>
     </div>
   </div>
-</div>
+</a>
+    )}

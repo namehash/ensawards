@@ -12,7 +12,7 @@ export interface AppLeaderboardCardProps {
 const { name, viewBenchmarksLink, ensAwardsScore, type }: AppLeaderboardCardProps = Astro.props;
 ---
 
-<div
+<a href={viewBenchmarksLink}
   class="w-full h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-start gap-3 p-4 sm:p-6 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <!--Desktop Header-->
   <div
@@ -57,11 +57,10 @@ const { name, viewBenchmarksLink, ensAwardsScore, type }: AppLeaderboardCardProp
         {ensAwardsScore}%
       </p>
     </div>
-    <a href={viewBenchmarksLink} class="hidden sm:flex">
+    <span class="hidden sm:flex">
       <ChevronRightIcon className="w-10 h-10 hover:opacity-60" />
-    </a>
-    <a
-      href={viewBenchmarksLink}
+    </span>
+    <button
       class={cn(
         shadcnButtonVariants({
           variant: "secondary",
@@ -71,6 +70,6 @@ const { name, viewBenchmarksLink, ensAwardsScore, type }: AppLeaderboardCardProp
         }),
       )}>
       Benchmarks
-    </a>
+    </button>
   </div>
-</div>
+</a>
