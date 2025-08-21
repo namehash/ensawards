@@ -6,22 +6,24 @@ import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro
 import SupportMatrixCard from "../../../components/atoms/cards/SupportMatrixCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
+import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 import { appsData } from "../../../data/appData";
+import { BestPracticeCategories } from "../../../data/bestPracticesData";
 import Layout from "../../../layouts/Layout.astro";
 import { cn } from "../../../lib/utils";
 import {
   BenchmarkResultToBadgeStyles,
   getAppSupportColor,
   getBestPracticeByCategoryAndId,
-  scrollWithOffset
+  scrollWithOffset,
 } from "../../../utils";
-import {BestPracticeCategories} from "../../../data/bestPracticesData";
-import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 export function getStaticPaths() {
   const staticPaths = [];
 
-  for (let category of BestPracticeCategories){
-    category.bestPractices.forEach((bestPractice) => staticPaths.push({ params: { category: category.id, bestPractice: bestPractice.id } }));
+  for (let category of BestPracticeCategories) {
+    category.bestPractices.forEach((bestPractice) =>
+      staticPaths.push({ params: { category: category.id, bestPractice: bestPractice.id } }),
+    );
   }
   return staticPaths;
 }

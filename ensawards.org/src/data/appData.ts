@@ -1,4 +1,8 @@
-import {type BestPractice, placeholderBestPractice, supportEnsip19BestPractice} from "@/data/bestPracticesData.ts";
+import {
+  type BestPractice,
+  placeholderBestPractice,
+  supportEnsip19BestPractice,
+} from "@/data/bestPracticesData.ts";
 
 export enum BenchmarkResult {
   Pass = "Pass",
@@ -61,7 +65,7 @@ export const appsData: AppData[] = [
         bestPracticeDetails: placeholderBestPractice,
         result: BenchmarkResult.Fail,
       },
-    ]
+    ],
   },
   {
     id: "metamask",
@@ -81,6 +85,6 @@ export const appsData: AppData[] = [
         bestPracticeDetails: placeholderBestPractice,
         result: BenchmarkResult.Fail,
       },
-    ]
+    ],
   },
 ];

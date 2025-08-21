@@ -1,45 +1,45 @@
 ---
-import {cn} from "../../lib/utils";
-import {shadcnButtonVariants} from "../shadcn/shadcnButtonStyles";
 import HeroImage from "../../assets/mergedHeroImage.png";
+import { cn } from "../../lib/utils";
+import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
 ---
 
 <section
-        id="lpHero"
-        class="relative w-full h-full max-sm:px-5 max-h-[820px] flex flex-col justify-center items-center bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden">
+  id="lpHero"
+  class="relative w-full h-full max-sm:px-5 max-h-[820px] flex flex-col justify-center items-center bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden">
+  <div
+    class="w-full max-w-[1280px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:px-8 max-sm:pt-[96px] max-sm:pb-6 max-sm:gap-6">
     <div
-            class="w-full max-w-[1280px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:px-8 max-sm:pt-[96px] max-sm:pb-6 max-sm:gap-6">
-        <div
-                class="relative z-10 w-fit h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-6 sm:gap-8">
-            <div
-                    class="flex flex-col flex-nowrap justify-center items-center sm:items-start gap-4">
-                <h1
-                        class="text-white text-[32px] sm:text-[60px] leading-[44px] sm:leading-[72px] font-bold text-center sm:text-left">
-                    Discover the best in&nbsp;ENS
-                </h1>
-                <p
-                        class="max-md:max-w-[600px] text-base sm:text-lg leading-normal sm:leading-7 font-normal text-center sm:text-left text-white/60">
-                    Do your apps fully support ENS best practices?
-                </p>
-            </div>
-            <a
-                    href="/ens-best-practices"
-                    class={cn(
-                        shadcnButtonVariants({
-                            variant: "default",
-                            size: "default",
-                            className:
-                                "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
-                        }),
-                    )}>ENS best practices</a
-            >
-        </div>
-        <div class="md:max-w-1/2 max-sm:h-[40vh] overflow-visible">
-            <img
-                    src={HeroImage.src}
-                    alt="Award"
-                    class="relative max-sm:max-w-[200vw] max-sm:top-1/2 max-sm:-translate-y-1/2 sm:w-[300%] lg:w-[200%] max-w-none sm:left-1/2 sm:-translate-x-1/2"
-            />
-        </div>
+      class="relative z-10 w-fit h-fit max-h-[268px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-6 sm:gap-8">
+      <div
+        class="flex flex-col flex-nowrap justify-center items-center sm:items-start gap-4">
+        <h1
+          class="text-white text-[32px] sm:text-[60px] leading-[44px] sm:leading-[72px] font-bold text-center sm:text-left">
+          Discover the best in&nbsp;ENS
+        </h1>
+        <p
+          class="max-md:max-w-[600px] text-base sm:text-lg leading-normal sm:leading-7 font-normal text-center sm:text-left text-white/60">
+          Do your apps fully support ENS best practices?
+        </p>
+      </div>
+      <a
+        href="/ens-best-practices"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "default",
+            size: "default",
+            className:
+              "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+          }),
+        )}>ENS best practices</a
+      >
     </div>
+    <div class="md:max-w-1/2 max-sm:h-[40vh] overflow-visible">
+      <img
+        src={HeroImage.src}
+        alt="Award"
+        class="relative max-sm:max-w-[200vw] max-sm:top-1/2 max-sm:-translate-y-1/2 sm:w-[300%] lg:w-[200%] max-w-none sm:left-1/2 sm:-translate-x-1/2"
+      />
+    </div>
+  </div>
 </section>

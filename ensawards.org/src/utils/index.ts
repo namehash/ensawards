@@ -1,6 +1,10 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
 import { type AppData, BenchmarkResult, appsData } from "@/data/appData.ts";
-import {type BestPractice, BestPracticeCategories, type BestPracticeCategory} from "@/data/bestPracticesData.ts";
+import {
+  type BestPractice,
+  BestPracticeCategories,
+  type BestPracticeCategory,
+} from "@/data/bestPracticesData.ts";
 
 export const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
 
@@ -38,9 +42,12 @@ export const getAppById = (appId: string): AppData | undefined => {
 
 export const getCategoryById = (categoryId: string): BestPracticeCategory | undefined => {
   return BestPracticeCategories.find((category) => category.id === categoryId);
-}
+};
 
-export const getBestPracticeByCategoryAndId = (categoryId: string, bestPracticeId: string): BestPractice | undefined => {
+export const getBestPracticeByCategoryAndId = (
+  categoryId: string,
+  bestPracticeId: string,
+): BestPractice | undefined => {
   const category = getCategoryById(categoryId);
 
   if (!category) {
@@ -48,9 +55,10 @@ export const getBestPracticeByCategoryAndId = (categoryId: string, bestPracticeI
   }
 
   return category.bestPractices.find((bestPractice) => bestPractice.id === bestPracticeId);
-}
+};
 
-export const getAppSupportColor = (value: number): string => value > 75 ? "text-emerald-600" : (value > 35 ? "text-amber-600" : "text-red-600");
+export const getAppSupportColor = (value: number): string =>
+  value > 75 ? "text-emerald-600" : value > 35 ? "text-amber-600" : "text-red-600";
 
 //TODO: distribute these functions more reasonably
 export const BenchmarkResultToBadgeStyles = new Map<BenchmarkResult, string>([
