@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import HomeIcon from "../../assets/homeIcon.svg";
-import SubpageHeroImage from "../../assets/subpageHeroImage.svg";
+import SubpageHeroImage from "../../assets/subpageHeroImage.png";
 import { normalizeText } from "../../utils";
 import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
 
@@ -31,7 +31,9 @@ let breadcrumbHref = "";
         src={SubpageHeroImage}
         alt="background"
         quality={100}
-        class="hidden sm:block absolute right-0 -top-11"
+        width={948}
+        height={848}
+        class="hidden sm:block absolute -right-60 -top-55"
     />
     {
       breadcrumbs && (
