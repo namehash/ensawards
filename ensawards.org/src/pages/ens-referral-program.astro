@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import ReferralImage from "../assets/referralImage.svg";
+import SubpageHero from "../components/molecules/SubpageHero.astro";
+import Layout from "../layouts/Layout.astro";
+
+const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-stretch";
+---
+
+<Layout>
+  <SubpageHero header="ENS Referral Program" />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col min-[900px]:flex-row flex-nowrap justify-start sm:justify-center items-center gap-10">
+      <Image
+        alt="about ENSAwards"
+        src={ReferralImage}
+        quality={100}
+        class="min-[900px]:hidden block"
+      />
+      <div
+        class="w-full min-[900px]:w-1/2 h-fit flex flex-nowrap flex-col justify-start items-start gap-3">
+        <h3 class="text-2xl leading-none font-semibold text-black">
+          Main Header
+        </h3>
+        <p class={descriptionStyles}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <h4 class="text-lg leading-normal font-semibold text-black">Header</h4>
+        <p class={descriptionStyles}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+      <Image
+        alt="about ENSAwards"
+        src={ReferralImage}
+        quality={100}
+        class="hidden min-[900px]:block max-w-1/2"
+      />
+    </div>
+  </section>
+</Layout>

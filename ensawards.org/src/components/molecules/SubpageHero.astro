@@ -1,0 +1,122 @@
+---
+import { Image } from "astro:assets";
+import HomeIcon from "../../assets/homeIcon.svg";
+import SubpageHeroImage from "../../assets/subpageHeroImage.png";
+import { normalizeText } from "../../utils";
+import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
+
+interface additionalHeroElement {
+  name: string;
+  value: string;
+  link?: string;
+}
+export interface SubpageHeroProps {
+  header: string;
+  description?: string;
+  breadcrumbs?: string[]; //May change depending on astro's policy on breadcrumbs (update: external & validated (shown as an official astro lib) library, but requires SASS styling and is yet another dependency, so for now I'll try doing it manually)
+  additionalElements?: additionalHeroElement[];
+}
+
+const { header, description, breadcrumbs, icon, additionalElements }: SubpageHeroProps =
+  Astro.props;
+
+let breadcrumbHref = "";
+---
+
+<section
+  class="w-full h-fit min-h-[240px] sm:min-h-[358px] box-border px-5 sm:px-8 pt-[76px] sm:pt-[102px] pb-6 sm:pb-10 flex flex-nowrap flex-col items-center justify-end bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden">
+  <div
+    class="relative w-full max-w-[1216px] h-fit sm:min-h-[200px] flex flex-nowrap flex-col justify-end gap-10 sm:gap-[60px]">
+    <Image
+      src={SubpageHeroImage}
+      alt="background"
+      quality={100}
+      width={948}
+      height={848}
+      class="hidden sm:block absolute -right-60 -top-55"
+    />
+    {
+      breadcrumbs && (
+        <div class="flex flex-row flex-wrap justify-start items-center gap-[10px]">
+          <a href="/">
+            <HomeIcon width="16" height="16" />
+          </a>
+          <ChevronRightIcon className="text-white" />
+          {breadcrumbs.map((crumb, idx) => {
+            const urlAdaptedCrumb =
+              crumb === "App benchmarks" ? "benchmarks" : crumb;
+            breadcrumbHref = breadcrumbHref.concat("/", urlAdaptedCrumb);
+            if (idx < breadcrumbs.length - 1) {
+              return (
+                <>
+                  <a
+                    class="text-xs sm:text-sm leading-normal font-normal text-white"
+                    href={decodeURI(normalizeText(breadcrumbHref))}>
+                    {crumb}
+                  </a>
+                  <ChevronRightIcon className="text-white" />
+                </>
+              );
+            }
+            return (
+              <a
+                class="text-xs sm:text-sm leading-normal font-normal text-white"
+                href={decodeURI(normalizeText(breadcrumbHref))}>
+                {crumb}
+              </a>
+            );
+          })}
+        </div>
+      )
+    }
+    <div
+      class="h-fit flex flex-nowrap flex-col sm:flex-row items-center sm:items-end justify-center sm:justify-between gap-4">
+      <div
+        class="max-sm:w-full flex flex-nowrap flex-col items-start justify-end gap-2 sm:gap-4">
+        <slot name="icon" />
+        <div class="flex flex-nowrap flex-col items-start justify-start gap-2">
+          <h1
+            class="text-white text-3xl sm:text-[44px] leading-normal sm:leading-[52px] font-semibold">
+            {header}
+          </h1>
+          {
+            description && (
+              <p class="w-fit max-w-[580px] text-sm sm:text-base leading-6 sm:leading-7 font-normal text-gray-400">
+                {description} <slot name="technicalSectionAnchor" />
+              </p>
+            )
+          }
+        </div>
+      </div>
+      {
+        additionalElements && (
+          <div class="block sm:hidden bg-black/20 h-[1px] self-stretch" />
+        )
+      }
+      {
+        additionalElements && (
+          <div class="w-full sm:w-fit h-full flex-col justify-center sm:justify-end items-center relative z-10">
+            <div class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-start items-start gap-2 sm:gap-5 md:gap-10">
+              {additionalElements.map((elem) => (
+                <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
+                  <p class="text-gray-400">{elem.name}</p>
+                  {elem.link ? (
+                    <a
+                      class="text-base leading-normal font-medium text-white underline underline-offset-[25%] decoration-white/40 hover:decoration-white transition-all duration-200"
+                      href={elem.link}>
+                      {elem.value}
+                    </a>
+                  ) : (
+                    <p class="text-base leading-normal font-medium text-white">
+                      {elem.value}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

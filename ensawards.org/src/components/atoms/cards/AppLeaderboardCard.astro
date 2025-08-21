@@ -1,0 +1,76 @@
+---
+import { cn } from "../../../lib/utils";
+import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
+import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
+export interface AppLeaderboardCardProps {
+  name: string;
+  viewBenchmarksLink: string;
+  ensAwardsScore: number;
+  type: string; //Will probably change to string union once the data is provided
+}
+
+const { name, viewBenchmarksLink, ensAwardsScore, type }: AppLeaderboardCardProps = Astro.props;
+---
+
+<a
+  href={viewBenchmarksLink}
+  class="w-full h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-start gap-3 p-4 sm:p-6 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
+  <!--Desktop Header-->
+  <div
+    class="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-5">
+    <slot name="placeIcon" />
+    <div
+      class="w-fit flex flex-nowrap flex-row justify-start items-center gap-3">
+      <slot name="appIcon" />
+      <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
+      <slot name="badge" />
+    </div>
+  </div>
+  <!--Mobile Header-->
+  <div
+    class="sm:hidden flex flex-col flex-nowrap justify-start items-start gap-4 self-stretch">
+    <div
+      class="w-full h-fit flex flex-row flex-nowrap justify-between items-center">
+      <slot name="appIcon" />
+      <slot name="placeIcon" />
+    </div>
+    <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
+  </div>
+  <div
+    class="flex flex-nowrap flex-col sm:flex-row justify-start sm:justify-end items-center gap-2 sm:gap-10 max-sm:self-stretch">
+    <div
+      class="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+      <p class="text-muted-foreground text-sm leading-normal font-normal">
+        Type
+      </p>
+      <p
+        class="text-sm leading-normal font-medium sm:font-semibold text-accent-foreground">
+        {type}
+      </p>
+    </div>
+    <div
+      class="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+      <p class="text-muted-foreground text-sm leading-normal font-normal">
+        ENSAwards score
+      </p>
+      <p
+        class="text-sm leading-normal font-medium sm:font-semibold text-emerald-600">
+        {ensAwardsScore}%
+      </p>
+    </div>
+    <span class="hidden sm:flex">
+      <ChevronRightIcon className="w-10 h-10 hover:opacity-60" />
+    </span>
+    <button
+      class={cn(
+        shadcnButtonVariants({
+          variant: "secondary",
+          size: "default",
+          className:
+            "sm:hidden cursor-pointer rounded-full max-sm:self-stretch",
+        }),
+      )}>
+      Benchmarks
+    </button>
+  </div>
+</a>

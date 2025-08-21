@@ -1,0 +1,121 @@
+---
+import ENSAwardsLogo from "../../assets/ENSAwardsLogo.svg";
+import { cn } from "../../lib/utils";
+import HeaderMobileNavigation from "../molecules/HeaderMobileNavigation";
+import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 w-full z-20 h-[56px] sm:h-[70px] bg-white border-b border-b-black/10 flex flex-row justify-center items-center">
+  <div
+    class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center px-5 sm:px-8">
+    <a
+      href="/"
+      class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px]">
+      <ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" />
+      <p
+        class="text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold">
+        ENSAwards
+      </p>
+      <span
+        id="alphaBadge"
+        class="w-fit h-fit flex flex-row flex-nowrap justify-center items-center px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200"
+        >Alpha</span
+      >
+    </a>
+    <div
+      class="hidden min-[860px]:flex flex-row flex-nowrap gap-2 justify-center items-center">
+      <a
+        href="/ens-best-practices"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className: "onScrollButton rounded-full",
+          }),
+        )}>ENS best practices</a
+      >
+      <a
+        href="/benchmarks"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className: "onScrollButton rounded-full",
+          }),
+        )}>App benchmarks</a
+      >
+      <a
+        href="/about"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className: "onScrollButton rounded-full",
+          }),
+        )}>About</a
+      >
+      <a
+        href="/ens-referral-program"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className: "onScrollButton rounded-full",
+          }),
+        )}>ENS Referral Program</a
+      >
+    </div>
+    <div class="block min-[860px]:hidden">
+      <HeaderMobileNavigation client:load />
+    </div>
+  </div>
+</header>
+<script>
+  function ScrollHeader() {
+    if (typeof window !== "undefined") {
+      const header = document.getElementById("site-header");
+      const headerButtons = document.getElementsByClassName("onScrollButton");
+
+      const scrollWatcher = document.createElement("div");
+
+      scrollWatcher.setAttribute("data-scroll-watcher", "");
+      header.before(scrollWatcher);
+
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          header.classList.toggle("scrolled", !entries[0].isIntersecting);
+
+          for (const headerButton of headerButtons) {
+            headerButton.classList.toggle(
+              "scrolled",
+              !entries[0].isIntersecting,
+            );
+          }
+        },
+        { rootMargin: "50px 0px 0px 0px" },
+      );
+
+      navObserver.observe(scrollWatcher);
+    }
+
+    return null;
+  }
+
+  ScrollHeader();
+</script>
+
+<style>
+  .onScrollButton {
+    &:hover {
+      color: black;
+      background-color: var(--accent);
+    }
+  }
+
+  #alphaBadge {
+    color: white;
+    background-color: black;
+  }
+</style>

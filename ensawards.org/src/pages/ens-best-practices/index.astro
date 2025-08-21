@@ -1,0 +1,29 @@
+---
+import CategoryCard from "../../components/atoms/cards/CategoryCard.astro";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { BestPracticeCategories } from "../../data/bestPracticesData";
+import Layout from "../../layouts/Layout.astro";
+import { normalizeText } from "../../utils";
+---
+
+<Layout>
+  <SubpageHero header="ENS best practices" />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ItemsList header="Categories">
+      {
+        BestPracticeCategories.map((category, idx) => (
+          <CategoryCard
+            key={`best-practice-card-${idx}`}
+            name={category.name}
+            description={category.description}
+            viewBestPracticesLink={`/ens-best-practices/${category.id}`}
+            comingSoon={category.status}
+            numberOfBestPractices={category.bestPractices.length}
+          />
+        ))
+      }
+    </ItemsList>
+  </section>
+</Layout>
