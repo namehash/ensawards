@@ -6,7 +6,7 @@ import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro
 import SupportMatrixCard from "../../../components/atoms/cards/SupportMatrixCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
-import { BenchmarkResult, appsData } from "../../../data/appData";
+import { appsData } from "../../../data/appData";
 import Layout from "../../../layouts/Layout.astro";
 import { cn } from "../../../lib/utils";
 import {
@@ -16,6 +16,7 @@ import {
   scrollWithOffset
 } from "../../../utils";
 import {BestPracticeCategories} from "../../../data/bestPracticesData";
+import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 export function getStaticPaths() {
   const staticPaths = [];
 
@@ -42,16 +43,14 @@ const benchmarkedApps = appsData.filter(
     ) !== undefined,
 );
 ---
-
-<Layout>
   {
       bestPracticeToDisplay === undefined ? (
-              <p>ERROR</p>
-              // TODO: update the error version (even though it should never occur)
+              // theoretically, because of Astro's build-time page generation, this should never happen
+              <DataLoadingError />
           )
           :
           (
-              <>
+          <Layout>
                 <SubpageHero
                     header={bestPracticeToDisplay.name}
                     description={bestPracticeToDisplay.description}
@@ -204,7 +203,6 @@ const benchmarkedApps = appsData.filter(
 
                   customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
                 </script>
-              </>
+          </Layout>
           )
   }
-</Layout>

@@ -9,6 +9,7 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { appsData } from "../../data/appData";
 import Layout from "../../layouts/Layout.astro";
 import { BenchmarkResultToBadgeStyles, getAppById, normalizeText } from "../../utils";
+import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 
 export function getStaticPaths() {
   return appsData.map((app) => ({ params: { app: normalizeText(app.name) } }));
@@ -18,17 +19,13 @@ const { app } = Astro.params;
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
 const appToDisplay = getAppById(app);
-
-//TODO: update all links to BPs after implementing real BP data
 ---
-
-<Layout>
   {
     appToDisplay === undefined ? (
-      <p>ERROR</p>
+        // theoretically, because of Astro's build-time page generation, this should never happen
+      <DataLoadingError />
     ) : (
-      // TODO: update the error version (even though it should never occur)
-      <>
+    <Layout>
         <SubpageHero
           header={appToDisplay.name}
           description={appToDisplay.description}
@@ -81,7 +78,6 @@ const appToDisplay = getAppById(app);
             <SuggestionCard whatsSuggested="benchmark result" />
           </ItemsList>
         </section>
-      </>
+    </Layout>
     )
   }
-</Layout>

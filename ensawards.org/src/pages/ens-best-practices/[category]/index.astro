@@ -6,6 +6,7 @@ import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import Layout from "../../../layouts/Layout.astro";
 import {BestPracticeCategories, CategoryStatus} from "../../../data/bestPracticesData";
 import {getCategoryById} from "../../../utils";
+import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 export function getStaticPaths() {
   return BestPracticeCategories.map((category) => ({ params: { category: category.id } }))
 }
@@ -14,13 +15,11 @@ const { category } = Astro.params;
 
 const categoryToDisplay = getCategoryById(category);
 ---
-
-<Layout>
   {categoryToDisplay === undefined ? (
-      <p>ERROR</p>
-      // TODO: update the error version (even though it should never occur)
+      // theoretically, because of Astro's build-time page generation, this should never happen
+          <DataLoadingError />
   ) : (
-      <>
+  <Layout>
     <SubpageHero
         header={categoryToDisplay.name}
         description={categoryToDisplay.description}
@@ -47,6 +46,5 @@ const categoryToDisplay = getCategoryById(category);
         <SuggestionCard whatsSuggested="best practice" />
       </ItemsList>
     </section>
-      </>
+  </Layout>
   )}
-</Layout>
