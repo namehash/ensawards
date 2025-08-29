@@ -4,12 +4,15 @@ import { shadcnButtonVariants } from "../shadcn/shadcnButtonStyles";
 export interface ItemsListProps {
   header: string;
   numberOfItems?: number; //is optional and temporarily removed from the designs, will be turned back on when there is enough elements in the data
-  seeAllLink?: string;
+  linkData?: {
+    link: string;
+    text: string;
+  };
   additionalInfo?: string;
   containerStyles?: string;
 }
 
-const { header, numberOfItems, seeAllLink, additionalInfo, containerStyles }: ItemsListProps =
+const { header, numberOfItems, linkData, additionalInfo, containerStyles }: ItemsListProps =
   Astro.props;
 ---
 
@@ -22,9 +25,9 @@ const { header, numberOfItems, seeAllLink, additionalInfo, containerStyles }: It
       {numberOfItems && <span class="text-gray-400">({numberOfItems})</span>}
     </h2>
     {
-      seeAllLink && (
+      linkData && (
         <a
-          href={seeAllLink}
+          href={linkData.link}
           class={cn(
             shadcnButtonVariants({
               variant: "ghost",
@@ -32,7 +35,7 @@ const { header, numberOfItems, seeAllLink, additionalInfo, containerStyles }: It
               className: "cursor-pointer rounded-full text-base",
             }),
           )}>
-          See all
+          {linkData.text}
         </a>
       )
     }

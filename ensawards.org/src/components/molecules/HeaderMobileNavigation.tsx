@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import ENSAwardsLogo from "../../assets/ENSAwardsLogo.svg";
 
 export default function HeaderMobileNavigation() {
-  const mainLinkClass = "text-2xl leading-normal font-medium text-black";
+  const mainLinkClass = "text-2xl leading-normal font-medium text-black px-4 py-2 rounded-lg border-transparent transition-all duration-200 hover:bg-black/5";
   const closeIcon = (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -33,7 +33,7 @@ export default function HeaderMobileNavigation() {
       <Popover className="relative">
         {({ open }) => (
           <>
-            <PopoverButton className="min-[860px]:hidden relative z-30 p-1 mt-1 focus:outline-none focus-visible:outline-2 focus-visible:outline-black cursor-pointer">
+            <PopoverButton className="min-[860px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200 hover:bg-black/5">
               <span className="sr-only">Open menu</span>
               {hamburgerMenuIcon}
             </PopoverButton>
@@ -64,7 +64,7 @@ export default function HeaderMobileNavigation() {
                         Alpha
                       </span>
                     </a>
-                    <PopoverButton className="transition rounded-lg border-0 inline-flex items-center whitespace-nowrap underline-none text-[#737373] cursor-pointer">
+                    <PopoverButton className="transition-all duration-200 rounded-lg border-0 inline-flex items-center whitespace-nowrap underline-none text-[#737373] cursor-pointer p-2 border-transparent hover:bg-black/5">
                       {/*NOTE: this results in a browser error (not-breaking) but is directly copied from namekit.io solution*/}
                       <span className="sr-only">Close menu</span>
                       {closeIcon}
@@ -75,7 +75,7 @@ export default function HeaderMobileNavigation() {
                       "py-16 flex flex-col h-full justify-center overflow-y-auto scrollbar-styled",
                     )}
                   >
-                    <ul className="py-3 flex flex-col justify-center gap-5">
+                    <ul className="py-3 flex flex-col justify-center gap-1">
                       <a href="/ens-best-practices" className={mainLinkClass}>
                         ENS best practices
                       </a>

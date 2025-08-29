@@ -8,8 +8,7 @@ export const appSuggestionFormSchema = Yup.object().shape({
 });
 
 export const bestPracticeSuggestionFormSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  description: Yup.string().optional(),
+  description: Yup.string().required("Best practice description is required"),
 });
 
 export const benchmarkResultUpdateRequestSchema = Yup.object().shape({

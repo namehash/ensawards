@@ -43,7 +43,7 @@ const formTextContentsAdaptations = new Map<
   [
     "description",
     new Map<PossibleSuggestions, string>([
-      ["app", "Provide the app details you’d like us to add to ENSAwards."],
+      ["app", "Provide details of the app you’d like us to add to ENSAwards."],
       ["best practice", "Suggest a best practice you’d like us to add to ENSAwards."],
       ["benchmark result", "Suggest a benchmark result update for review"],
     ]),
@@ -77,7 +77,7 @@ const closeOverlayIcon = (
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="cursor-pointer text-[#A3A3A3]"
+    className="text-[#A3A3A3]"
   >
     <path
       d="M18 6L6 18M6 6L18 18"
@@ -104,6 +104,18 @@ const capitalizeLabel = (label: string): string => {
 
   return label.charAt(0).toUpperCase() + label.slice(1);
 };
+
+/**
+ * Adds "App" prefix to a selected list of labels. Separates presentation from the form logic.
+ */
+const addPrefixToLabel = (label: string): string => {
+  const labelsToPrefix = ["Name", "URL"];
+  if (labelsToPrefix.includes(label)){
+    return "App ".concat(label);
+  }
+
+  return label;
+}
 
 export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: FormProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -169,7 +181,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       const nameMapping =
         whatsSuggested === "benchmark result"
           ? `Update benchmark result for: ${data.app}`
-          : data.name;
+          : (whatsSuggested === "app" ? data.name: "New best practice suggested");
 
       const dataToSend: ContactFormDataProps = {
         name: nameMapping,
@@ -274,12 +286,12 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
               onClick={() => {
                 closeOverlay(whatsSuggested);
               }}
-              className="z-10"
+              className="z-10 p-2 border-transparent rounded-lg transition-all duration-200 hover:bg-black/5 cursor-pointer"
             >
               {closeOverlayIcon}
             </button>
           </div>
-          <p className="text-sm leading-5 font-normal text-gray-500">
+          <p className={cn("text-sm leading-5 font-normal text-gray-500", successfulFormSubmit ? "opacity-0 z-[-1]" : "opacity-100")}>
             {formTextContentsAdaptations.get("description")!.get(whatsSuggested)}
           </p>
         </div>
@@ -331,7 +343,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
                 className="flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch"
               >
                 <label htmlFor={field.label} className={labelStyles}>
-                  {capitalizeLabel(field.label)}
+                  {addPrefixToLabel(capitalizeLabel(field.label))}
                   {!field.required && " (optional)"}
                 </label>
                 {[

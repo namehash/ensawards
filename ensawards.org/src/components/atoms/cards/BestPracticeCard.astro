@@ -67,7 +67,7 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
         <p
           class={cn(
             "text-sm leading-normal font-semibold",
-            getAppSupportColor(appSupport),
+            `text-${getAppSupportColor(appSupport)}`,
           )}>
           {appSupport}%
         </p>

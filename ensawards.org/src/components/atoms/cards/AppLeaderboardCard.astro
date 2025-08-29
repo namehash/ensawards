@@ -2,6 +2,7 @@
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
 import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
+import {getAppSupportColor} from "../../../utils/styles";
 export interface AppLeaderboardCardProps {
   name: string;
   viewBenchmarksLink: string;
@@ -53,10 +54,15 @@ const { name, viewBenchmarksLink, ensAwardsScore, type }: AppLeaderboardCardProp
       <p class="text-muted-foreground text-sm leading-normal font-normal">
         ENSAwards score
       </p>
-      <p
-        class="text-sm leading-normal font-medium sm:font-semibold text-emerald-600">
-        {ensAwardsScore}%
-      </p>
+      <div class="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
+        <div class="max-sm:hidden flex relative w-20 h-[7px] rounded-[20px] bg-gray-200 z-0">
+          <div class={cn("absolute h-full self-stretch rounded-[20px] z-10", `bg-${getAppSupportColor(ensAwardsScore)}`)} style={{width:`calc(${ensAwardsScore}%)`}} />
+        </div>
+        <p
+            class={cn("text-sm leading-normal font-medium sm:font-semibold", `text-${getAppSupportColor(ensAwardsScore)}`)}>
+          {ensAwardsScore}%
+        </p>
+      </div>
     </div>
     <span class="hidden sm:flex">
       <ChevronRightIcon className="w-10 h-10 hover:opacity-60" />
