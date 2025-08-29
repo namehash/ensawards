@@ -13,7 +13,7 @@ import {
   benchmarkResultUpdateRequestSchema,
   bestPracticeSuggestionFormSchema,
 } from "@/components/molecules/contact-form/validation.ts";
-import { cn } from "@/lib/utils.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import React, { type FormEvent, useEffect, useState } from "react";
 import * as Yup from "yup";

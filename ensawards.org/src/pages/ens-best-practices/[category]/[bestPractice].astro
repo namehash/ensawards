@@ -10,13 +10,11 @@ import DataLoadingError from "../../../components/organisms/DataLoadingError.ast
 import { appsData } from "../../../data/appData";
 import { BestPracticeCategories } from "../../../data/bestPracticesData";
 import Layout from "../../../layouts/Layout.astro";
-import { cn } from "../../../lib/utils";
+import { cn } from "../../../utils/tailwindClassConcatenation";
 import {
-  BenchmarkResultToBadgeStyles,
-  getAppSupportColor,
   getBestPracticeByCategoryAndId,
-  scrollWithOffset,
 } from "../../../utils";
+import {BenchmarkResultToBadgeStyles, getAppSupportColor} from "../../../utils/styles";
 export function getStaticPaths() {
   const staticPaths = [];
 
@@ -189,7 +187,7 @@ const benchmarkedApps = appsData.filter(
                   </div>
                 </section>
                 <script>
-                  import { scrollWithOffset } from "../../../utils";
+                  import { scrollWithOffset } from "../../../utils/domActions";
 
                   class AnchorToTechnicalInfo extends HTMLElement {
                     connectedCallback() {

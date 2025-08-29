@@ -20,3 +20,15 @@ export function openSuggestionOverlay(whatsSuggested: string) {
   document.body.classList.add("no-scroll");
   document.body.style.top = `-${scrollValue}px`;
 }
+
+export const scrollWithOffset = (id: string, offset: number) => {
+  const element = document.getElementById(id);
+  if (!element) return;
+
+  const y = element.getBoundingClientRect().top + window.scrollY - offset;
+
+  window.scrollTo({
+    top: y,
+    behavior: "smooth",
+  });
+};

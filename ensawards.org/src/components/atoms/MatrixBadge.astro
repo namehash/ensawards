@@ -3,7 +3,7 @@ import Check from "../../assets/checkIcon.svg";
 import PartialCheck from "../../assets/grayCheckIcon.svg";
 import Cross from "../../assets/xIcon.svg";
 import { BenchmarkResult } from "../../data/appData";
-import { cn } from "../../lib/utils";
+import { cn } from "../../utils/tailwindClassConcatenation";
 
 export interface MatrixBadgeProps {
   text: string;
@@ -12,8 +12,6 @@ export interface MatrixBadgeProps {
 }
 
 const { text, className, iconId }: MatrixBadgeProps = Astro.props;
-
-//TODO: see if possible to merge with CardBadge later
 ---
 
 <span
