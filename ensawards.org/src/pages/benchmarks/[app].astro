@@ -10,7 +10,7 @@ import DataLoadingError from "../../components/organisms/DataLoadingError.astro"
 import { appsData } from "../../data/appData";
 import Layout from "../../layouts/Layout.astro";
 import { getAppById, normalizeText } from "../../utils";
-import {BenchmarkResultToBadgeStyles} from "../../utils/styles";
+import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 
 export function getStaticPaths() {
   return appsData.map((app) => ({ params: { app: normalizeText(app.name) } }));
