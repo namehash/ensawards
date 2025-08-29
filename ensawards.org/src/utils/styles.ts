@@ -1,7 +1,7 @@
 import { BenchmarkResult } from "@/data/appData.ts";
 
 export const getAppSupportColor = (value: number): string =>
-  value > 75 ? "text-emerald-600" : value > 35 ? "text-amber-600" : "text-red-600";
+  value > 75 ? "emerald-600" : value > 35 ? "amber-600" : "red-600";
 
 export const BenchmarkResultToBadgeStyles = new Map<BenchmarkResult, string>([
   [BenchmarkResult.PartialPass, "text-neutral-900 bg-neutral-100"],

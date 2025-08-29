@@ -176,7 +176,7 @@ const benchmarkedApps = appsData.filter(
                           </div>
                           <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
                               <p class="text-sm leading-normal font-normal text-muted-foreground">App support</p>
-                              <p class={cn("text-sm leading-normal font-semibold", getAppSupportColor(bestPracticeToDisplay.appSupport))}>
+                              <p class={cn("text-sm leading-normal font-semibold", `text-${getAppSupportColor(bestPracticeToDisplay.appSupport)}`)}>
                                   {bestPracticeToDisplay.appSupport}%
                               </p>
                           </div>
