@@ -77,7 +77,7 @@ const closeOverlayIcon = (
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="cursor-pointer text-[#A3A3A3]"
+    className="text-[#A3A3A3]"
   >
     <path
       d="M18 6L6 18M6 6L18 18"
@@ -274,7 +274,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
               onClick={() => {
                 closeOverlay(whatsSuggested);
               }}
-              className="z-10"
+              className="z-10 p-2 border-transparent rounded-lg transition-all duration-200 hover:bg-black/5 cursor-pointer"
             >
               {closeOverlayIcon}
             </button>
