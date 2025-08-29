@@ -93,11 +93,10 @@ const { isStatic = false }: LayoutProps = Astro.props;
         <SuggestionForm
           whatsSuggested="best practice"
           formFields={[
-            { label: EnsAwardsFormFields.Name, type: "text", required: true },
             {
               label: EnsAwardsFormFields.Description,
               type: "text",
-              required: false,
+              required: true,
             },
           ]}
         />

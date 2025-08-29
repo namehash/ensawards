@@ -43,7 +43,7 @@ const formTextContentsAdaptations = new Map<
   [
     "description",
     new Map<PossibleSuggestions, string>([
-      ["app", "Provide the app details you’d like us to add to ENSAwards."],
+      ["app", "Provide details of the app you’d like us to add to ENSAwards."],
       ["best practice", "Suggest a best practice you’d like us to add to ENSAwards."],
       ["benchmark result", "Suggest a benchmark result update for review"],
     ]),
@@ -104,6 +104,18 @@ const capitalizeLabel = (label: string): string => {
 
   return label.charAt(0).toUpperCase() + label.slice(1);
 };
+
+/**
+ * Adds "App" prefix to a selected list of labels. Separates presentation from the form logic.
+ */
+const addPrefixToLabel = (label: string): string => {
+  const labelsToPrefix = ["Name", "URL"];
+  if (labelsToPrefix.includes(label)){
+    return "App ".concat(label);
+  }
+
+  return label;
+}
 
 export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: FormProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -169,7 +181,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       const nameMapping =
         whatsSuggested === "benchmark result"
           ? `Update benchmark result for: ${data.app}`
-          : data.name;
+          : (whatsSuggested === "app" ? data.name: "New best practice suggested");
 
       const dataToSend: ContactFormDataProps = {
         name: nameMapping,
@@ -331,7 +343,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
                 className="flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch"
               >
                 <label htmlFor={field.label} className={labelStyles}>
-                  {capitalizeLabel(field.label)}
+                  {addPrefixToLabel(capitalizeLabel(field.label))}
                   {!field.required && " (optional)"}
                 </label>
                 {[

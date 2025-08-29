@@ -4,7 +4,7 @@ import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { BestPracticeCategories } from "../../data/bestPracticesData";
 import Layout from "../../layouts/Layout.astro";
-import { normalizeText } from "../../utils";
+import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 ---
 
 <Layout>
@@ -24,6 +24,7 @@ import { normalizeText } from "../../utils";
           />
         ))
       }
+      <SuggestionCard whatsSuggested="best practice" />
     </ItemsList>
   </section>
 </Layout>
