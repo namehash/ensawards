@@ -1,6 +1,4 @@
-import { shadcnButtonVariants } from "@/components/shadcn/shadcnButtonStyles.ts";
-import { cn } from "@/lib/utils.ts";
-import { openSuggestionOverlay } from "@/utils/openSuggestionOverlay.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 import ENSAwardsLogo from "../../assets/ENSAwardsLogo.svg";

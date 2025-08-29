@@ -1,6 +1,6 @@
 ---
 import { CategoryStatus } from "../../../data/bestPracticesData";
-import { cn } from "../../../lib/utils";
+import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
 export interface CategoryCardProps {
   name: string;
@@ -31,7 +31,7 @@ const cardWrapperStyles =
           <h3 class="text-lg leading-normal font-semibold text-black">
             {name}
           </h3>
-          <span class="w-fit h-fit rounded-md bg-black py-[2px] px-2 text-xs leading-normal font-semibold text-white">
+          <span class="w-fit min-w-[95px] h-fit rounded-md bg-black py-[2px] px-2 text-xs leading-normal font-semibold text-white">
             Coming soon
           </span>
         </div>
