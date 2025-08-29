@@ -291,7 +291,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
               {closeOverlayIcon}
             </button>
           </div>
-          <p className="text-sm leading-5 font-normal text-gray-500">
+          <p className={cn("text-sm leading-5 font-normal text-gray-500", successfulFormSubmit ? "opacity-0 z-[-1]" : "opacity-100")}>
             {formTextContentsAdaptations.get("description")!.get(whatsSuggested)}
           </p>
         </div>
