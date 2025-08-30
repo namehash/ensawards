@@ -25,7 +25,7 @@ const placeIcons = [
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
     <ItemsList
       header="App leaderboard"
-      linkData={{link:"/benchmarks", text: "All app benchmarks"}}
+      linkData={{ link: "/benchmarks", text: "All app benchmarks" }}
       containerStyles="gap-3 sm:gap-3">
       {
         appsData.map((app, idx) => (
@@ -59,7 +59,9 @@ const placeIcons = [
       }
       <SuggestionCard whatsSuggested="app" />
     </ItemsList>
-    <ItemsList header="ENS best practices" linkData={{link:"/ens-best-practices", text: "See all"}}>
+    <ItemsList
+      header="ENS best practices"
+      linkData={{ link: "/ens-best-practices", text: "See all" }}>
       {
         BestPracticeCategories.map((category, idx) => (
           <CategoryCard

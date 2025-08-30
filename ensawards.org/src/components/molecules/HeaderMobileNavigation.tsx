@@ -4,7 +4,8 @@ import React, { Fragment } from "react";
 import ENSAwardsLogo from "../../assets/ENSAwardsLogo.svg";
 
 export default function HeaderMobileNavigation() {
-  const mainLinkClass = "text-2xl leading-normal font-medium text-black px-4 py-2 rounded-lg border-transparent transition-all duration-200 hover:bg-black/5";
+  const mainLinkClass =
+    "text-2xl leading-normal font-medium text-black px-4 py-2 rounded-lg border-transparent transition-all duration-200 hover:bg-black/5";
   const closeIcon = (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

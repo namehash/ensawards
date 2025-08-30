@@ -8,5 +8,5 @@ module.exports = {
     "text-emerald-600",
     "text-amber-600",
     "text-red-600",
-  ]
+  ],
 };
