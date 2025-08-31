@@ -85,8 +85,8 @@ export default function HeaderMobileNavigation() {
                       <a href="/about" className={mainLinkClass}>
                         About
                       </a>
-                      <a href="/ens-referral-program" className={mainLinkClass}>
-                        ENS Referral Program
+                      <a href="/ens-referral-awards" className={mainLinkClass}>
+                        ENS Referral Awards
                       </a>
                     </ul>
                   </div>
