@@ -1,7 +1,9 @@
 import {
   type BestPractice,
-  placeholderBestPractice,
-  supportEnsip19BestPractice,
+  recognizeAllENSNames,
+  placeholderBestPractice1,
+  placeholderBestPractice2,
+  placeholderBestPractice3,
 } from "@/data/bestPracticesData.ts";
 
 export enum BenchmarkResult {
@@ -38,11 +40,19 @@ export const appsData: AppData[] = [
     iconSourceLink: "/src/assets/rainbowIcon.svg",
     benchmarks: [
       {
-        bestPracticeDetails: supportEnsip19BestPractice,
+        bestPracticeDetails: recognizeAllENSNames,
         result: BenchmarkResult.Pass,
       },
       {
-        bestPracticeDetails: placeholderBestPractice,
+        bestPracticeDetails: placeholderBestPractice1,
+        result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice2,
+        result: BenchmarkResult.Fail,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice3,
         result: BenchmarkResult.Fail,
       },
     ],
@@ -58,11 +68,19 @@ export const appsData: AppData[] = [
     iconSourceLink: "/src/assets/coinbaseWalletIcon.svg",
     benchmarks: [
       {
-        bestPracticeDetails: supportEnsip19BestPractice,
+        bestPracticeDetails: recognizeAllENSNames,
         result: BenchmarkResult.Pass,
       },
       {
-        bestPracticeDetails: placeholderBestPractice,
+        bestPracticeDetails: placeholderBestPractice1,
+        result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice2,
+        result: BenchmarkResult.Fail,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice3,
         result: BenchmarkResult.Fail,
       },
     ],
@@ -78,11 +96,19 @@ export const appsData: AppData[] = [
     iconSourceLink: "/src/assets/metamaskIcon.svg",
     benchmarks: [
       {
-        bestPracticeDetails: supportEnsip19BestPractice,
+        bestPracticeDetails: recognizeAllENSNames,
         result: BenchmarkResult.Pass,
       },
       {
-        bestPracticeDetails: placeholderBestPractice,
+        bestPracticeDetails: placeholderBestPractice1,
+        result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice2,
+        result: BenchmarkResult.Fail,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice3,
         result: BenchmarkResult.Fail,
       },
     ],
