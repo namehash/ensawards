@@ -1,4 +1,4 @@
-# ENS Awards Page
+# ENS Awards Website
 
 ## 🧞 Commands
 
