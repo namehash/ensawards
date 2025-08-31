@@ -1,6 +1,6 @@
 # ENSAwards
 
-Welcome to the GitHub for [ENSAwards.org](https://ensawards.org/)
+Welcome to the GitHub for [ENSAwards](https://ensawards.org/)
 
 ## What is the ENSAwards site about?
 ENSAwards is a celebration of excellence in ENS integrations.
