@@ -110,12 +110,12 @@ const capitalizeLabel = (label: string): string => {
  */
 const addPrefixToLabel = (label: string): string => {
   const labelsToPrefix = ["Name", "URL"];
-  if (labelsToPrefix.includes(label)){
+  if (labelsToPrefix.includes(label)) {
     return "App ".concat(label);
   }
 
   return label;
-}
+};
 
 export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: FormProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -181,7 +181,9 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       const nameMapping =
         whatsSuggested === "benchmark result"
           ? `Update benchmark result for: ${data.app}`
-          : (whatsSuggested === "app" ? data.name: "New best practice suggested");
+          : whatsSuggested === "app"
+            ? data.name
+            : "New best practice suggested";
 
       const dataToSend: ContactFormDataProps = {
         name: nameMapping,
@@ -291,7 +293,12 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
               {closeOverlayIcon}
             </button>
           </div>
-          <p className={cn("text-sm leading-5 font-normal text-gray-500", successfulFormSubmit ? "opacity-0 z-[-1]" : "opacity-100")}>
+          <p
+            className={cn(
+              "text-sm leading-5 font-normal text-gray-500",
+              successfulFormSubmit ? "opacity-0 z-[-1]" : "opacity-100",
+            )}
+          >
             {formTextContentsAdaptations.get("description")!.get(whatsSuggested)}
           </p>
         </div>
