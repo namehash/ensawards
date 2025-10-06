@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import {normalizeText} from "../../utils";
+import Layout from "../../layouts/Layout.astro";
+import {Project, SupportedProjects} from "../../types/projects";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import projectsDataJson from "../../data/projects.json";
+export function getStaticPaths() {
+    return Object.values(SupportedProjects).map((contract) => ({ params: { project: normalizeText(contract) } }));
+
+}
+
+const {project} = Astro.params;
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
+
+const projectsData = projectsDataJson as Array<Project>;
+
+const resolvedProject = projectsData.find((maybeProject) => normalizeText(maybeProject.name) === project);
+---
+
+<Layout>
+    <SubpageHero header={`${resolvedProject.name} DAO`} description={resolvedProject.description}>
+        <Image
+                src={images[resolvedProject.iconLink]()}
+                alt={`${resolvedProject.name}-hero`}
+                slot="icon"
+                class="w-[60px] h-[60px] shrink-0 rounded-lg"
+        />
+    </SubpageHero>
+    <!--because of Astro's build-time page generation we are sure that 'resolvedProject' will never be undefined-->
+    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+        PROJECT
+    </section>
+</Layout>
