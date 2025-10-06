@@ -5,7 +5,14 @@ import {normalizeText} from "../../utils";
 import Layout from "../../layouts/Layout.astro";
 import {Project, SupportedProjects} from "../../types/projects";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
+import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import projectsDataJson from "../../data/projects.json";
+import DaoScore from "../../components/atoms/DaoScore.astro";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import MatrixBadge from "../../components/atoms/MatrixBadge.astro";
+import {BenchmarkResult} from "../../data/appData";
+import {BenchmarkResultToBadgeStyles} from "../../utils/styles";
 export function getStaticPaths() {
     return Object.values(SupportedProjects).map((contract) => ({ params: { project: normalizeText(contract) } }));
 
@@ -20,16 +27,33 @@ const resolvedProject = projectsData.find((maybeProject) => normalizeText(maybeP
 ---
 
 <Layout>
-    <SubpageHero header={`${resolvedProject.name} DAO`} description={resolvedProject.description}>
+    <SubpageHero header={`${resolvedProject.name} DAO`} description={resolvedProject.description} breadcrumbs={["DAO Report"]}>
         <Image
                 src={images[resolvedProject.iconLink]()}
                 alt={`${resolvedProject.name}-hero`}
                 slot="icon"
                 class="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
+        <div slot="socialLinks" class="flex flex-row flex-nowrap justify-start items-center gap-2">
+            <a href={resolvedProject.socialLinks.websiteLink} rel="noreferrer noopener" target="_blank"><GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" /></a>
+            <a href={resolvedProject.socialLinks.twitterLink} rel="noreferrer noopener" target="_blank"><TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" /></a>
+        </div>
+        <DaoScore slot="score" daoName={resolvedProject.name} />
     </SubpageHero>
     <!--because of Astro's build-time page generation we are sure that 'resolvedProject' will never be undefined-->
     <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-        PROJECT
+        <div class="max-w-[1216px] w-full flex flex-row flex-nowrap bg-orange-300">
+            <p>ICON</p>
+            <div>
+                <h4>ENS Contract Naming Season</h4>
+                <p>Up to 10,000 $ENS in awards</p>
+            </div>
+            <a>Learn more</a>
+        </div>
+        <ItemsList header="Smart contract naming">
+            <div slot="ctaButton">Powered by Enscribe</div>
+            <div class="flex flex-row flex-nowrap"><span>ETH icon</span><h4>Ethereum</h4></div>
+            {[1,2,3,4].map((elem) => <span class="w-full h-8">#{elem} <MatrixBadge text={elem % 2 === 0 ? "Named" : "Unnamed"} className={BenchmarkResultToBadgeStyles.get(elem % 2 === 0 ? BenchmarkResult.Pass : BenchmarkResult.Fail)!} iconId={elem % 2 === 0 ? BenchmarkResult.Pass : BenchmarkResult.Fail}/></span>)}
+        </ItemsList>
     </section>
 </Layout>

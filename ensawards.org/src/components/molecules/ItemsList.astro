@@ -25,7 +25,7 @@ const { header, numberOfItems, linkData, additionalInfo, containerStyles }: Item
       {numberOfItems && <span class="text-gray-400">({numberOfItems})</span>}
     </h2>
     {
-      linkData && (
+      linkData ? (
         <a
           href={linkData.link}
           class={cn(
@@ -37,7 +37,7 @@ const { header, numberOfItems, linkData, additionalInfo, containerStyles }: Item
           )}>
           {linkData.text}
         </a>
-      )
+      ) : <slot name="ctaButton" />
     }
   </div>
   {

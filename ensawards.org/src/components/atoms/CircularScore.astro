@@ -1,0 +1,78 @@
+---
+export interface CircularScoreProps {
+    score: number;
+    size?: number;
+    strokeWidth?: number;
+}
+
+const {score, size = 139, strokeWidth = 10}: CircularScoreProps = Astro.props;
+
+const gradientStartColors = ["#12D494", "#ffd230", "#fb2c36"];
+const gradientStopColors = ["#0D9A6B", "#e17100", "#c10007"];
+
+const getGradientColorIndex = (score: number) => {
+    if (score < 35) {
+        // return red-ish gradient index
+        return 2;
+    }
+
+    if (score < 70) {
+        // return orange-ish gradient index
+        return 1;
+    }
+
+    // return green-ish gradient index
+    return 0;
+
+}
+
+const gradientIndex = getGradientColorIndex(score);
+const colorFrom = gradientStartColors[gradientIndex];
+const colorTo = gradientStopColors[gradientIndex];
+
+// Count size parameters of the score bar
+const radius = (size - strokeWidth) / 2;
+const circumference = 2 * Math.PI * radius;
+const offset = circumference - (score / 100) * circumference;
+---
+<div
+        class="relative flex items-center justify-center"
+        style={`width: ${size}px; height: ${size}px;`}
+>
+    <svg width={size} height={size} class="transform -rotate-90">
+        <!-- Background circle -->
+        <circle
+                stroke="#0D0F28"
+                fill="transparent"
+                stroke-width="10"
+                opacity="0.8"
+                r={radius}
+                cx={size / 2}
+                cy={size / 2}
+        />
+
+        <!-- Gradient -->
+        <defs>
+            <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color={colorFrom} />
+                <stop offset="100%" stop-color={colorTo} />
+            </linearGradient>
+        </defs>
+
+        <!-- Foreground progress circle -->
+        <circle
+                stroke="url(#gradient)"
+                fill="transparent"
+                stroke-width={strokeWidth}
+                stroke-linecap="round"
+                stroke-dasharray={circumference}
+                stroke-dashoffset={offset}
+                r={radius}
+                cx={size / 2}
+                cy={size / 2}
+        />
+    </svg>
+    <div class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-1">
+    <p class="text-4xl text-white leading-8 font-semibold">{score}</p><p class="absolute right-8 text-base leading-none text-white/50 font-semibold">%</p>
+  </div>
+</div>

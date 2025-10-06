@@ -1,0 +1,17 @@
+---
+import {SupportedProject} from "../../types/projects";
+import CircularScore from "./CircularScore.astro";
+export interface DaoScoreProps {
+    daoName: SupportedProject;
+}
+
+const { daoName }: DaoScoreProps = Astro.props;
+
+// TODO: After defining "pipeline" functions, run a pipeline here to count the score of a given DAO
+const score = 90;
+---
+
+<div class="max-w-[228px] max-h-[232px] box-border flex flex-col justify-center items-center gap-6 pt-[35px] pb-5 px-[45px] bg-[linear-gradient(180deg,#191D4D_0%,#10143F_100%)] rounded-2xl border border-white/10 relative z-10">
+    <CircularScore score={score} />
+    <p class="text-base leading-normal font-semibold text-white">DAO score</p>
+</div>
