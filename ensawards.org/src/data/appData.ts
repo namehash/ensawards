@@ -1,9 +1,9 @@
 import {
   type BestPractice,
-  recognizeAllENSNames,
   placeholderBestPractice1,
   placeholderBestPractice2,
   placeholderBestPractice3,
+  recognizeAllENSNames,
 } from "@/data/bestPracticesData.ts";
 
 export enum BenchmarkResult {

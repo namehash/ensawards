@@ -1,16 +1,16 @@
 ---
-import {Contract} from "../../../types/contracts";
+import { BenchmarkResult } from "../../../data/appData";
+import { Contract } from "../../../types/contracts";
+import { BenchmarkResultToBadgeStyles } from "../../../utils/styles";
+import { cn } from "../../../utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
 import MatrixBadge from "../MatrixBadge.astro";
-import {BenchmarkResultToBadgeStyles} from "../../../utils/styles";
-import {BenchmarkResult} from "../../../data/appData";
-import {cn} from "../../../utils/tailwindClassConcatenation";
-import {shadcnButtonVariants} from "../../shadcn/shadcnButtonStyles";
+import EfpIcon from "../icons/EfpIcon.astro";
 import FarcasterIcon from "../icons/FarcasterIcon.astro";
 import GitHubIcon from "../icons/GitHubIcon.astro";
 import GlobeIcon from "../icons/GlobeIcon.astro";
-import EfpIcon from "../icons/EfpIcon.astro";
 export interface ContractCardProps {
-    contract: Contract;
+  contract: Contract;
 }
 
 const { contract }: ContractCardProps = Astro.props;

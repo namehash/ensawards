@@ -1,17 +1,3 @@
-import { ArbitrumIcon } from "./icons/chains/ArbitrumIcon";
-import { ArbitrumTestnetIcon } from "./icons/chains/ArbitrumTestnetIcon";
-import { BaseIcon } from "./icons/chains/BaseIcon";
-import { BaseTestnetIcon } from "./icons/chains/BaseTestnetIcon";
-import { EthereumIcon } from "./icons/chains/EthereumIcon";
-import { EthereumLocalIcon } from "./icons/chains/EthereumLocalIcon";
-import { EthereumTestnetIcon } from "./icons/chains/EthereumTestnetIcon";
-import { LineaIcon } from "./icons/chains/LineaIcon";
-import { LineaTestnetIcon } from "./icons/chains/LineaTestnetIcon";
-import { OptimismIcon } from "./icons/chains/OptimismIcon";
-import { OptimismTestnetIcon } from "./icons/chains/OptimismTestnetIcon";
-import { ScrollIcon } from "./icons/chains/ScrollIcon";
-import { ScrollTestnetIcon } from "./icons/chains/ScrollTestnetIcon";
-import { UnrecognizedChainIcon } from "./icons/chains/UnrecognizedChainIcon";
 // import { ensTestEnvL1Chain } from "@ensnode/datasources";
 import {
   arbitrum,
@@ -28,6 +14,20 @@ import {
   scrollSepolia,
   sepolia,
 } from "viem/chains";
+import { ArbitrumIcon } from "./icons/chains/ArbitrumIcon";
+import { ArbitrumTestnetIcon } from "./icons/chains/ArbitrumTestnetIcon";
+import { BaseIcon } from "./icons/chains/BaseIcon";
+import { BaseTestnetIcon } from "./icons/chains/BaseTestnetIcon";
+import { EthereumIcon } from "./icons/chains/EthereumIcon";
+import { EthereumLocalIcon } from "./icons/chains/EthereumLocalIcon";
+import { EthereumTestnetIcon } from "./icons/chains/EthereumTestnetIcon";
+import { LineaIcon } from "./icons/chains/LineaIcon";
+import { LineaTestnetIcon } from "./icons/chains/LineaTestnetIcon";
+import { OptimismIcon } from "./icons/chains/OptimismIcon";
+import { OptimismTestnetIcon } from "./icons/chains/OptimismTestnetIcon";
+import { ScrollIcon } from "./icons/chains/ScrollIcon";
+import { ScrollTestnetIcon } from "./icons/chains/ScrollTestnetIcon";
+import { UnrecognizedChainIcon } from "./icons/chains/UnrecognizedChainIcon";
 
 export interface ChainIconProps {
   chainId: number;

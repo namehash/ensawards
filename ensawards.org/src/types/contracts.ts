@@ -1,28 +1,26 @@
-import type {Address} from "viem";
-import type {SupportedProject} from "@/types/projects.ts";
+import type { SupportedProject } from "@/types/projects.ts";
+import type { Address } from "viem";
 
 export const ContractTypes = {
-    Dao: "DAO",
-    Defi: "DeFi"
+  Dao: "DAO",
+  Defi: "DeFi",
 } as const;
 
 /**
  * ContractType is the derived string union of possible identifiers of established contract types.
  */
-export type ContractType =
-    (typeof ContractTypes)[keyof typeof ContractTypes];
+export type ContractType = (typeof ContractTypes)[keyof typeof ContractTypes];
 
 export const ContractSubtypes = {
-    Governance: "Governance",
-    DefiApp: "DeFi App",
-    Utility: "Utility"
+  Governance: "Governance",
+  DefiApp: "DeFi App",
+  Utility: "Utility",
 } as const;
 
 /**
  * ContractSubtype is the derived string union of possible identifiers of established contract subtypes.
  */
-export type ContractSubtype =
-    (typeof ContractSubtypes)[keyof typeof ContractSubtypes];
+export type ContractSubtype = (typeof ContractSubtypes)[keyof typeof ContractSubtypes];
 
 /**
  * Chain ID
@@ -40,10 +38,10 @@ export type ChainId = number;
  * @throws If the unnamed contract contains metadata
  */
 export interface ContractMetadata {
-    field1?: string;
-    field2?: string;
-    field3?: string;
-    field4?: string;
+  field1?: string;
+  field2?: string;
+  field3?: string;
+  field4?: string;
 }
 
 // TODO: improve this description
@@ -51,12 +49,12 @@ export interface ContractMetadata {
  * Describes the smart contract.
  */
 export interface Contract {
-    project: SupportedProject,
-    type: ContractType,
-    subtype: ContractSubtype,
-    address: Address,
-    chainId: ChainId,
-    codeName: string;
-    name?: string;
-    metadata?: ContractMetadata;
+  project: SupportedProject;
+  type: ContractType;
+  subtype: ContractSubtype;
+  address: Address;
+  chainId: ChainId;
+  codeName: string;
+  name?: string;
+  metadata?: ContractMetadata;
 }

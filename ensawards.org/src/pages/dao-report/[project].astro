@@ -1,85 +1,144 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import {normalizeText} from "../../utils";
-import Layout from "../../layouts/Layout.astro";
-import {Project, SupportedProjects} from "../../types/projects";
-import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
-import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
-import projectsDataJson from "../../data/projects.json";
-import contractsDataJson from "../../data/contracts.json";
+import { ChainIcon } from "../../components/atoms/ChainIcon";
 import DaoScore from "../../components/atoms/DaoScore.astro";
-import ItemsList from "../../components/molecules/ItemsList.astro";
-import {cn} from "../../utils/tailwindClassConcatenation";
-import {shadcnButtonVariants} from "../../components/shadcn/shadcnButtonStyles";
+import ContractCard from "../../components/atoms/cards/ContractCard.astro";
 import DollarEnsIcon from "../../components/atoms/icons/DollarEnsIcon.astro";
 import EnscribeIcon from "../../components/atoms/icons/EnscribeIcon.astro";
-import {ChainIcon} from "../../components/atoms/ChainIcon";
-import {getChainName, SUPPORTED_CHAINS} from "../../utils/chains";
-import {Contract} from "../../types/contracts";
-import ContractCard from "../../components/atoms/cards/ContractCard.astro";
+import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
+import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { shadcnButtonVariants } from "../../components/shadcn/shadcnButtonStyles";
+import contractsDataJson from "../../data/contracts.json";
+import projectsDataJson from "../../data/projects.json";
+import Layout from "../../layouts/Layout.astro";
+import { Contract } from "../../types/contracts";
+import { Project, SupportedProjects } from "../../types/projects";
+import { normalizeText } from "../../utils";
+import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
+import { cn } from "../../utils/tailwindClassConcatenation";
 export function getStaticPaths() {
-    return Object.values(SupportedProjects).map((contract) => ({ params: { project: normalizeText(contract) } }));
-
+  return Object.values(SupportedProjects).map((contract) => ({
+    params: { project: normalizeText(contract) },
+  }));
 }
 
-const {project} = Astro.params;
+const { project } = Astro.params;
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
 const projectsData = projectsDataJson as Array<Project>;
 
-const resolvedProject = projectsData.find((maybeProject) => normalizeText(maybeProject.name) === project);
-const projectContracts = (contractsDataJson as Array<Contract>).filter((contract) => contract.project === resolvedProject.name);
+const resolvedProject = projectsData.find(
+  (maybeProject) => normalizeText(maybeProject.name) === project,
+);
+const projectContracts = (contractsDataJson as Array<Contract>).filter(
+  (contract) => contract.project === resolvedProject.name,
+);
 ---
 
 <Layout>
-    <SubpageHero header={`${resolvedProject.name} DAO`} description={resolvedProject.description} breadcrumbs={["DAO Report"]}>
-        <Image
-                src={images[resolvedProject.iconLink]()}
-                alt={`${resolvedProject.name}-hero`}
-                slot="icon"
-                class="w-[60px] h-[60px] shrink-0 rounded-lg"
-        />
-        <div slot="socialLinks" class="flex flex-row flex-nowrap justify-start items-center gap-2">
-            <a href={resolvedProject.socialLinks.websiteLink} rel="noreferrer noopener" target="_blank"><GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" /></a>
-            <a href={resolvedProject.socialLinks.twitterLink} rel="noreferrer noopener" target="_blank"><TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" /></a>
+  <SubpageHero
+    header={`${resolvedProject.name} DAO`}
+    description={resolvedProject.description}
+    breadcrumbs={["DAO Report"]}>
+    <Image
+      src={images[resolvedProject.iconLink]()}
+      alt={`${resolvedProject.name}-hero`}
+      slot="icon"
+      class="w-[60px] h-[60px] shrink-0 rounded-lg"
+    />
+    <div
+      slot="socialLinks"
+      class="flex flex-row flex-nowrap justify-start items-center gap-2">
+      <a
+        href={resolvedProject.socialLinks.websiteLink}
+        rel="noreferrer noopener"
+        target="_blank"
+        ><GlobeIcon
+          className="hover:text-white text-gray-400 transition-all duration-200"
+        /></a
+      >
+      <a
+        href={resolvedProject.socialLinks.twitterLink}
+        rel="noreferrer noopener"
+        target="_blank"
+        ><TwitterIcon
+          className="hover:text-white text-gray-400 transition-all duration-200"
+        /></a
+      >
+    </div>
+    <DaoScore slot="score" daoName={resolvedProject.name} />
+  </SubpageHero>
+  <!--because of Astro's build-time page generation we are sure that 'resolvedProject' will never be undefined-->
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div
+      class="max-w-[1216px] w-full h-fit sm:h-[88px] flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-center bg-[linear-gradient(0deg,#F9D25A_0%,#F4BF1A_100%)] sm:bg-[linear-gradient(90deg,#F9D25A_0%,#F4BF1A_100%)] p-4 sm:px-6 rounded-lg">
+      <div
+        class="flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3 sm:gap-5">
+        <DollarEnsIcon />
+        <div>
+          <h4
+            class="text-lg font-semibold leading-7 max-sm:self-stretch max-sm:text-center">
+            ENS Contract Naming Season
+          </h4>
+          <p
+            class="text-sm text-black/50 font-normal leading-7 max-sm:self-stretch max-sm:text-center">
+            Up to 10,000 $ENS in awards
+          </p>
         </div>
-        <DaoScore slot="score" daoName={resolvedProject.name} />
-    </SubpageHero>
-    <!--because of Astro's build-time page generation we are sure that 'resolvedProject' will never be undefined-->
-    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-        <div class="max-w-[1216px] w-full h-fit sm:h-[88px] flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-center bg-[linear-gradient(0deg,#F9D25A_0%,#F4BF1A_100%)] sm:bg-[linear-gradient(90deg,#F9D25A_0%,#F4BF1A_100%)] p-4 sm:px-6 rounded-lg">
-            <div class="flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3 sm:gap-5">
-                <DollarEnsIcon />
-                <div>
-                    <h4 class="text-lg font-semibold leading-7 max-sm:self-stretch max-sm:text-center">ENS Contract Naming Season</h4>
-                    <p class="text-sm text-black/50 font-normal leading-7 max-sm:self-stretch max-sm:text-center">Up to 10,000 $ENS in awards</p>
-                </div>
-            </div>
-            <a
-                    href="/ens-referral-awards"
-                    class={cn(
-                shadcnButtonVariants({
-                    variant: "ghost",
-                    size: "default",
-                    className: "cursor-pointer rounded-full hover:bg-black/5",
-                }),
-            )}>Learn more</a>
-        </div>
-        <ItemsList header="Smart contract naming" containerStyles="gap-2 sm:gap-2">
-            <div slot="ctaButton" class="w-fit h-fit flex flex-col sm:flex-row flex-nowrap justify-start items-start sm:items-center gap-1 sm:gap-3 px-2 sm:px-4 py-1 sm:py-2 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-400 font-normal leading-normal sm:leading-7">Powered by <EnscribeIcon /></div>
-                {SUPPORTED_CHAINS.map((supportedChain, idx) => {
-                    const contractsOnChain = projectContracts.filter((contract) => contract.chainId === supportedChain.id);
-                    if (contractsOnChain.length === 0){
-                        return null;
-                    }
+      </div>
+      <a
+        href="/ens-referral-awards"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className: "cursor-pointer rounded-full hover:bg-black/5",
+          }),
+        )}>Learn more</a
+      >
+    </div>
+    <ItemsList header="Smart contract naming" containerStyles="gap-2 sm:gap-2">
+      <div
+        slot="ctaButton"
+        class="w-fit h-fit flex flex-col sm:flex-row flex-nowrap justify-start items-start sm:items-center gap-1 sm:gap-3 px-2 sm:px-4 py-1 sm:py-2 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-400 font-normal leading-normal sm:leading-7">
+        Powered by <EnscribeIcon />
+      </div>
+      {
+        SUPPORTED_CHAINS.map((supportedChain, idx) => {
+          const contractsOnChain = projectContracts.filter(
+            (contract) => contract.chainId === supportedChain.id,
+          );
+          if (contractsOnChain.length === 0) {
+            return null;
+          }
 
-                    return <>
-                        <div class={cn("h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-2 sm:pb-4", idx > 0 && "pt-6 sm:pt-8")}><span class="w-10 h-10 bg-white flex flex-col justify-center items-center rounded-lg border border-gray-200"><ChainIcon chainId={supportedChain.id}/></span><h4 class="text-xl text-black leading-normal font-semibold">{getChainName(supportedChain.id)}</h4></div>
-                        {contractsOnChain.map((contract) => <ContractCard contract={contract} />)}
-                    </>
-                })}
-        </ItemsList>
-    </section>
+          return (
+            <>
+              <div
+                class={cn(
+                  "h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-2 sm:pb-4",
+                  idx > 0 && "pt-6 sm:pt-8",
+                )}>
+                <>
+                  <span class="w-10 h-10 bg-white flex flex-col justify-center items-center rounded-lg border border-gray-200">
+                    <ChainIcon chainId={supportedChain.id} />
+                  </span>
+                  <h4 class="text-xl text-black leading-normal font-semibold">
+                    {getChainName(supportedChain.id)}
+                  </h4>
+                </>
+              </div>
+              {contractsOnChain.map((contract) => (
+                <ContractCard contract={contract} />
+              ))}
+            </>
+          );
+        })
+      }
+    </ItemsList>
+  </section>
 </Layout>

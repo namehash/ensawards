@@ -34,8 +34,7 @@ export interface BestPracticeCategory {
 export const recognizeAllENSNames: BestPractice = {
   id: "recognize-all-ens-names",
   name: "Recognize all valid ENS names",
-  description:
-    "Support user input of all valid ENS names (not only .eth names).",
+  description: "Support user input of all valid ENS names (not only .eth names).",
   category: "Forward Resolution",
   appsPassed: 3,
   appSupport: 100,
@@ -66,8 +65,7 @@ export const recognizeAllENSNames: BestPractice = {
 export const placeholderBestPractice1: BestPractice = {
   id: "placeholder-bp1",
   name: "Placeholder Forward Resolution Best Practice #1",
-  description:
-    "Temporary placeholder best practice.",
+  description: "Temporary placeholder best practice.",
   category: "Forward Resolution",
   appsPassed: 2,
   appSupport: 66,
@@ -98,8 +96,7 @@ export const placeholderBestPractice1: BestPractice = {
 export const placeholderBestPractice2: BestPractice = {
   id: "placeholder-bp2",
   name: "Placeholder Forward Resolution Best Practice #2",
-  description:
-    "Temporary placeholder best practice.",
+  description: "Temporary placeholder best practice.",
   category: "Forward Resolution",
   appsPassed: 1,
   appSupport: 33,
@@ -130,8 +127,7 @@ export const placeholderBestPractice2: BestPractice = {
 export const placeholderBestPractice3: BestPractice = {
   id: "placeholder-bp3",
   name: "Placeholder Forward Resolution Best Practice #3",
-  description:
-    "Temporary placeholder best practice.",
+  description: "Temporary placeholder best practice.",
   category: "Forward Resolution",
   appsPassed: 2,
   appSupport: 66,
@@ -166,7 +162,12 @@ export const BestPracticeCategories: BestPracticeCategory[] = [
     description:
       "Lookup social records, the contenthash of decentralized websites, avatar images, multichain deposit addresses, and more.",
     status: CategoryStatus.Updated,
-    bestPractices: [recognizeAllENSNames, placeholderBestPractice1, placeholderBestPractice2, placeholderBestPractice3],
+    bestPractices: [
+      recognizeAllENSNames,
+      placeholderBestPractice1,
+      placeholderBestPractice2,
+      placeholderBestPractice3,
+    ],
   },
   {
     id: "reverse-resolution",

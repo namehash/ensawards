@@ -1,8 +1,8 @@
-import {binaryWeights} from "@/contract-pipelines/weights.ts";
+import { groupByProject } from "@/contract-pipelines/group-by.ts";
+import { binaryWeights } from "@/contract-pipelines/weights.ts";
+import type { Contract, ContractSubtype, ContractType } from "@/types/contracts.ts";
+import type { SupportedProject } from "@/types/projects.ts";
 import contractsDataJson from "../data/contracts.json";
-import type {Contract, ContractSubtype, ContractType} from "@/types/contracts.ts";
-import type {SupportedProject} from "@/types/projects.ts";
-import {groupByProject} from "@/contract-pipelines/group-by.ts";
 
 export type SupportedGroupByCategory = SupportedProject | ContractType | ContractSubtype;
 
@@ -15,27 +15,33 @@ export type SupportedGroupByCategory = SupportedProject | ContractType | Contrac
  * but can also take data from other sources
  */
 export function contractPipeline(
-    groupBy: (contracts: Contract[]) => Record<SupportedGroupByCategory, Contract[]> = groupByProject,
-    weights: (groupedContracts: Record<SupportedGroupByCategory, Contract[]>) => Record<SupportedGroupByCategory, number[]> = binaryWeights,
-    filter?: (contract: Contract) => boolean,
-    data: Contract[] = contractsDataJson as Array<Contract>,
+  groupBy: (contracts: Contract[]) => Record<SupportedGroupByCategory, Contract[]> = groupByProject,
+  weights: (
+    groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
+  ) => Record<SupportedGroupByCategory, number[]> = binaryWeights,
+  filter?: (contract: Contract) => boolean,
+  data: Contract[] = contractsDataJson as Array<Contract>,
 ): Record<SupportedGroupByCategory, number> {
-    let contracts = data;
+  let contracts = data;
 
-    if (filter){
-        contracts = contracts.filter((contract) => filter(contract));
-    }
+  if (filter) {
+    contracts = contracts.filter((contract) => filter(contract));
+  }
 
-    const groupedContracts = groupBy(contracts);
-    const weightedContracts = weights(groupedContracts);
+  const groupedContracts = groupBy(contracts);
+  const weightedContracts = weights(groupedContracts);
 
-    const scores = {} as Record<SupportedGroupByCategory, number>;
+  const scores = {} as Record<SupportedGroupByCategory, number>;
 
-    for (const [key, values] of Object.entries(weightedContracts) as [SupportedGroupByCategory, number[]][]){
-        scores[key] =  values.length > 0
-            ? Math.round(values.reduce((sum, v) => sum + v, 0) * 100 / values.length)
-            : 0;
-    }
+  for (const [key, values] of Object.entries(weightedContracts) as [
+    SupportedGroupByCategory,
+    number[],
+  ][]) {
+    scores[key] =
+      values.length > 0
+        ? Math.round((values.reduce((sum, v) => sum + v, 0) * 100) / values.length)
+        : 0;
+  }
 
-    return scores;
+  return scores;
 }

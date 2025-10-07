@@ -37,7 +37,9 @@ const { header, numberOfItems, linkData, additionalInfo, containerStyles }: Item
           )}>
           {linkData.text}
         </a>
-      ) : <slot name="ctaButton" />
+      ) : (
+        <slot name="ctaButton" />
+      )
     }
   </div>
   {
