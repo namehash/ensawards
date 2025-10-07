@@ -16,14 +16,20 @@ export interface ContractCardProps {
 const { contract }: ContractCardProps = Astro.props;
 ---
 
-<div class="w-full h-fit min-h-[80px] box-border flex flex-row flex-wrap justify-between items-center gap-y-5
-            p-5 rounded-2xl border border-gray-200">
-    <div class="min-w-[425px] flex flex-col justify-start items-start">
+<div class="w-full h-fit min-h-[80px] box-border flex flex-col-reverse sm:flex-row flex-wrap justify-start min-[970px]:justify-between items-start sm:items-center gap-3 sm:gap-y-5
+            p-4 sm:p-5 rounded-2xl border border-gray-200">
+    <div class="max-sm:w-full sm:min-w-[425px] flex flex-col justify-start items-start">
         <p class="text-sm leading-normal font-normal text-muted-foreground">{contract.codeName}</p>
-        <p class="text-sm leading-normal font-medium text-black">{contract.address}</p>
+        <p class="text-sm leading-normal font-medium text-black max-sm:break-all">{contract.address}</p>
     </div>
-    {contract.name ? <div class="min-w-[225px]"><a href={`https://app.ens.domains/${contract.name}`} target="_blank" rel="noreferrer noopener" class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">{contract.name} ↗</a></div> : <div class="min-w-[225px]"><p class="text-sm leading-normal font-medium">Unnamed contract</p></div>}
-    {contract.name && contract.metadata ?     <div class="min-w-[175px]">
+    <div class="sm:min-w-[225px]">
+        {contract.name ?
+                <a href={`https://app.ens.domains/${contract.name}`} target="_blank" rel="noreferrer noopener" class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">{contract.name} ↗</a>
+            : <p class="text-sm leading-normal font-medium">Unnamed contract</p>}
+    </div>
+    <div class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px]">
+        {contract.name && contract.metadata ?
+            <>
         <p class="text-sm leading-normal font-normal text-muted-foreground">ENS metadata</p>
         <!--TODO replace with actual appropriate icons when they are provided-->
         <!--TODO: Maybe we could add a tooltip to the icons, similarly to how we do it in ENSNodeConfigInfo?-->
@@ -33,17 +39,37 @@ const { contract }: ContractCardProps = Astro.props;
             <GlobeIcon className={cn(contract.metadata.field3 ? "text-black" : "text-gray-200")}/>
             <EfpIcon className={cn(contract.metadata.field4 ? "text-black" : "text-gray-200")}/>
         </div>
-    </div> : <div class="min-w-[175px]"><a href="https://app.enscribe.xyz/nameContract" target="_blank" rel="noreferrer noopened" class={cn(
+    </> : <a href="https://app.enscribe.xyz/nameContract" target="_blank" rel="noreferrer noopened" class={cn(
         shadcnButtonVariants({
             variant: "default",
             size: "default",
             className: "cursor-pointer rounded-full",
         }),
-    )}>Set contract name</a></div>
-    }
-    <div class="min-w-[115px]">
+    )}>Set contract name</a>
+    }</div>
+    <div class="max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:items-center sm:min-w-[115px] max-sm:self-stretch">
         <MatrixBadge text={contract.name ? "Named" : "Unnamed"}
                      className={BenchmarkResultToBadgeStyles.get(contract.name ? BenchmarkResult.Pass : BenchmarkResult.Fail)!}
                      iconId={contract.name ? BenchmarkResult.Pass : BenchmarkResult.Fail}/>
+        <div class="flex sm:hidden flex-col justify-start items-start">
+            {contract.name && contract.metadata ?
+                    <>
+                        <p class="text-sm leading-normal font-normal text-muted-foreground">ENS metadata</p>
+                        <!--TODO replace with actual appropriate icons when they are provided-->
+                        <!--TODO: Maybe we could add a tooltip to the icons, similarly to how we do it in ENSNodeConfigInfo?-->
+                        <div class="flex flex-row flex-nowrap justify-start items-center gap-2">
+                            <FarcasterIcon className={cn(contract.metadata.field1 ? "text-black" : "text-gray-200")} />
+                            <GitHubIcon className={cn(contract.metadata.field2 ? "text-black" : "text-gray-200")}/>
+                            <GlobeIcon className={cn(contract.metadata.field3 ? "text-black" : "text-gray-200")}/>
+                            <EfpIcon className={cn(contract.metadata.field4 ? "text-black" : "text-gray-200")}/>
+                        </div>
+                    </> : <a href="https://app.enscribe.xyz/nameContract" target="_blank" rel="noreferrer noopened" class={cn(
+                    shadcnButtonVariants({
+                        variant: "default",
+                        size: "default",
+                        className: "cursor-pointer rounded-full",
+                    }),
+                )}>Set contract name</a>
+            }</div>
     </div>
 </div>
