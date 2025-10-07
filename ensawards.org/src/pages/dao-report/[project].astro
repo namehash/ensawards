@@ -8,11 +8,17 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import projectsDataJson from "../../data/projects.json";
+import contractsDataJson from "../../data/contracts.json";
 import DaoScore from "../../components/atoms/DaoScore.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
-import MatrixBadge from "../../components/atoms/MatrixBadge.astro";
-import {BenchmarkResult} from "../../data/appData";
-import {BenchmarkResultToBadgeStyles} from "../../utils/styles";
+import {cn} from "../../utils/tailwindClassConcatenation";
+import {shadcnButtonVariants} from "../../components/shadcn/shadcnButtonStyles";
+import DollarEnsIcon from "../../components/atoms/icons/DollarEnsIcon.astro";
+import EnscribeIcon from "../../components/atoms/icons/EnscribeIcon.astro";
+import {ChainIcon} from "../../components/atoms/ChainIcon";
+import {getChainName, SUPPORTED_CHAINS} from "../../utils/chains";
+import {Contract} from "../../types/contracts";
+import ContractCard from "../../components/atoms/cards/ContractCard.astro";
 export function getStaticPaths() {
     return Object.values(SupportedProjects).map((contract) => ({ params: { project: normalizeText(contract) } }));
 
@@ -24,6 +30,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
 const projectsData = projectsDataJson as Array<Project>;
 
 const resolvedProject = projectsData.find((maybeProject) => normalizeText(maybeProject.name) === project);
+const projectContracts = (contractsDataJson as Array<Contract>).filter((contract) => contract.project === resolvedProject.name);
 ---
 
 <Layout>
@@ -42,18 +49,37 @@ const resolvedProject = projectsData.find((maybeProject) => normalizeText(maybeP
     </SubpageHero>
     <!--because of Astro's build-time page generation we are sure that 'resolvedProject' will never be undefined-->
     <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-        <div class="max-w-[1216px] w-full flex flex-row flex-nowrap bg-orange-300">
-            <p>ICON</p>
-            <div>
-                <h4>ENS Contract Naming Season</h4>
-                <p>Up to 10,000 $ENS in awards</p>
+        <div class="max-w-[1216px] w-full h-[88px] flex flex-row flex-nowrap justify-between items-center bg-[linear-gradient(90deg,#F9D25A_0%,#F4BF1A_100%)] px-6 rounded-lg">
+            <div class="flex flex-row flex-nowrap justify-start items-center gap-5">
+                <DollarEnsIcon />
+                <div>
+                    <h4 class="text-lg font-semibold leading-7">ENS Contract Naming Season</h4>
+                    <p class="text-sm text-black/50 font-normal leading-7">Up to 10,000 $ENS in awards</p>
+                </div>
             </div>
-            <a>Learn more</a>
+            <a
+                    href="/ens-referral-awards"
+                    class={cn(
+                shadcnButtonVariants({
+                    variant: "ghost",
+                    size: "default",
+                    className: "cursor-pointer rounded-full hover:bg-black/5",
+                }),
+            )}>Learn more</a>
         </div>
-        <ItemsList header="Smart contract naming">
-            <div slot="ctaButton">Powered by Enscribe</div>
-            <div class="flex flex-row flex-nowrap"><span>ETH icon</span><h4>Ethereum</h4></div>
-            {[1,2,3,4].map((elem) => <span class="w-full h-8">#{elem} <MatrixBadge text={elem % 2 === 0 ? "Named" : "Unnamed"} className={BenchmarkResultToBadgeStyles.get(elem % 2 === 0 ? BenchmarkResult.Pass : BenchmarkResult.Fail)!} iconId={elem % 2 === 0 ? BenchmarkResult.Pass : BenchmarkResult.Fail}/></span>)}
+        <ItemsList header="Smart contract naming" containerStyles="sm:gap-2">
+            <div slot="ctaButton" class="w-fit h-fit flex flex-row flex-nowrap justify-start items-center gap-3 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-400 font-normal leading-7">Powered by <EnscribeIcon /></div>
+                {SUPPORTED_CHAINS.map((supportedChain, idx) => {
+                    const contractsOnChain = projectContracts.filter((contract) => contract.chainId === supportedChain.id);
+                    if (contractsOnChain.length === 0){
+                        return null;
+                    }
+
+                    return <>
+                        <div class={cn("h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-4", idx > 0 && "pt-8")}><span class="w-10 h-10 bg-white flex flex-col justify-center items-center rounded-lg border border-gray-200"><ChainIcon chainId={supportedChain.id}/></span><h4 class="text-xl text-black leading-normal font-semibold">{getChainName(supportedChain.id)}</h4></div>
+                        {contractsOnChain.map((contract) => <ContractCard contract={contract} />)}
+                    </>
+                })}
         </ItemsList>
     </section>
 </Layout>

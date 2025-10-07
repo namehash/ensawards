@@ -11,7 +11,7 @@
   {
     "name": "Uniswap",
     "description": "The largest onchain marketplace. Buy and sell crypto on Ethereum and 12+ other chains.",
-    "iconLink": "",
+    "iconLink": "/src/assets/uniswapIcon.svg",
     "socialLinks": {
       "websiteLink": "https://app.uniswap.org/",
       "twitterLink": "https://x.com/Uniswap"

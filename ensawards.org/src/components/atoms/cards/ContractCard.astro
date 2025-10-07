@@ -1,0 +1,49 @@
+---
+import {Contract} from "../../../types/contracts";
+import MatrixBadge from "../MatrixBadge.astro";
+import {BenchmarkResultToBadgeStyles} from "../../../utils/styles";
+import {BenchmarkResult} from "../../../data/appData";
+import {cn} from "../../../utils/tailwindClassConcatenation";
+import {shadcnButtonVariants} from "../../shadcn/shadcnButtonStyles";
+import FarcasterIcon from "../icons/FarcasterIcon.astro";
+import GitHubIcon from "../icons/GitHubIcon.astro";
+import GlobeIcon from "../icons/GlobeIcon.astro";
+import EfpIcon from "../icons/EfpIcon.astro";
+export interface ContractCardProps {
+    contract: Contract;
+}
+
+const { contract }: ContractCardProps = Astro.props;
+---
+
+<div class="w-full h-fit min-h-[80px] box-border flex flex-row flex-wrap justify-between items-center gap-y-5
+            p-5 rounded-2xl border border-gray-200">
+    <div class="min-w-[425px] flex flex-col justify-start items-start">
+        <p class="text-sm leading-normal font-normal text-muted-foreground">{contract.codeName}</p>
+        <p class="text-sm leading-normal font-medium text-black">{contract.address}</p>
+    </div>
+    {contract.name ? <div class="min-w-[225px]"><a href={`https://app.ens.domains/${contract.name}`} target="_blank" rel="noreferrer noopener" class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">{contract.name} ↗</a></div> : <div class="min-w-[225px]"><p class="text-sm leading-normal font-medium">Unnamed contract</p></div>}
+    {contract.name && contract.metadata ?     <div class="min-w-[175px]">
+        <p class="text-sm leading-normal font-normal text-muted-foreground">ENS metadata</p>
+        <!--TODO replace with actual appropriate icons when they are provided-->
+        <!--TODO: Maybe we could add a tooltip to the icons, similarly to how we do it in ENSNodeConfigInfo?-->
+        <div class="flex flex-row flex-nowrap justify-start items-center gap-2">
+            <FarcasterIcon className={cn(contract.metadata.field1 ? "text-black" : "text-gray-200")} />
+            <GitHubIcon className={cn(contract.metadata.field2 ? "text-black" : "text-gray-200")}/>
+            <GlobeIcon className={cn(contract.metadata.field3 ? "text-black" : "text-gray-200")}/>
+            <EfpIcon className={cn(contract.metadata.field4 ? "text-black" : "text-gray-200")}/>
+        </div>
+    </div> : <div class="min-w-[175px]"><a href="https://app.enscribe.xyz/nameContract" target="_blank" rel="noreferrer noopened" class={cn(
+        shadcnButtonVariants({
+            variant: "default",
+            size: "default",
+            className: "cursor-pointer rounded-full",
+        }),
+    )}>Set contract name</a></div>
+    }
+    <div class="min-w-[115px]">
+        <MatrixBadge text={contract.name ? "Named" : "Unnamed"}
+                     className={BenchmarkResultToBadgeStyles.get(contract.name ? BenchmarkResult.Pass : BenchmarkResult.Fail)!}
+                     iconId={contract.name ? BenchmarkResult.Pass : BenchmarkResult.Fail}/>
+    </div>
+</div>
