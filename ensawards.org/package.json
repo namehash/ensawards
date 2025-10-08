@@ -22,10 +22,10 @@
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-label": "^2.1.7",
     "@tailwindcss/postcss": "^4.1.11",
-    "@tailwindcss/vite": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.14",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
-    "astro": "^5.7.8",
+    "astro": "^5.14.1",
     "astro-font": "^1.0.0",
     "astro-seo": "^0.8.4",
     "class-variance-authority": "^0.7.1",
@@ -44,7 +44,7 @@
     "prettier-plugin-astro": "0.14.1",
     "tailwindcss": "^4.1.11",
     "tw-animate-css": "^1.3.6",
-    "vitest": "catalog:",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "catalog:"
   }
 }
