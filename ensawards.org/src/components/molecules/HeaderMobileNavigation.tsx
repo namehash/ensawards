@@ -1,4 +1,4 @@
-import ENSAwardsLogo from "@/assets/ENSAwardsLogo.svg";
+import ENSAwardsLogo from "../../assets/ensAwardsLogo.svg";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
