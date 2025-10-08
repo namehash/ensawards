@@ -10,7 +10,7 @@ on:
 jobs:
   audit:
     name: "Audit Dependencies"
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -21,7 +21,7 @@ jobs:
 
   static-analysis:
     name: "Static Analysis"
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -38,7 +38,7 @@ jobs:
 
   unit-tests:
     name: "Unit Tests"
-    runs-on: blacksmith-4vcpu-ubuntu-2204
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
