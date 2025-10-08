@@ -1,7 +1,7 @@
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
-import ENSAwardsLogo from "../../assets/ENSAwardsLogo.svg";
+import ENSAwardsLogo from "@/assets/ENSAwardsLogo.svg";
 
 export default function HeaderMobileNavigation() {
   const mainLinkClass =
