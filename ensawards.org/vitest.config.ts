@@ -1,8 +1,11 @@
-import tsconfigPaths from "vite-tsconfig-paths";
-/// <reference types="vitest" />
-import { defineConfig } from "vitest/config";
+import { resolve } from "path";
+import { defineProject } from "vitest/config";
 
-export default defineConfig({
-  plugins: [tsconfigPaths()],
+export default defineProject({
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "./src"),
+    },
+  },
   test: {},
 });
