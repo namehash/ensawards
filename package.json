@@ -1,4 +1,8 @@
 {
+	"name": "ensawards-monorepo",
+	"version": "0.0.1",
+	"private": true,
+	"packageManager": "pnpm@10.18.1",
 	"scripts": {
 		"lint": "biome check --write",
 		"lint:ci": "pnpm -r --parallel --aggregate-output lint:ci",
