@@ -19,13 +19,13 @@ export function contractPipeline(
   weights: (
     groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
   ) => Record<SupportedGroupByCategory, number[]> = binaryWeights,
-  filter?: (contract: Contract) => boolean,
+  filter?: (contracts: Contract[]) => Contract[],
   data: Contract[] = contractsDataJson as Array<Contract>,
 ): Record<SupportedGroupByCategory, number> {
   let contracts = data;
 
   if (filter) {
-    contracts = contracts.filter((contract) => filter(contract));
+    contracts = filter(contracts);
   }
 
   const groupedContracts = groupBy(contracts);
