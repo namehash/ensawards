@@ -53,7 +53,7 @@ const formTextContentsAdaptations = new Map<
 const validationSchemaMap = {
   app: appSuggestionFormSchema,
   "best practice": bestPracticeSuggestionFormSchema,
-  "benchmark result": benchmarkResultUpdateRequestSchema
+  "benchmark result": benchmarkResultUpdateRequestSchema,
 } as const;
 
 /**
@@ -164,7 +164,9 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
 
     try {
       // Validate form data against the schema
-      await validationSchemaMap[whatsSuggested]!.validate(data, { abortEarly: false });
+      await validationSchemaMap[whatsSuggested]!.validate(data, {
+        abortEarly: false,
+      });
       // Reset validation errors on successful validation
       setValidationErrors(getInitialValidationErrorsState(formFields));
 
