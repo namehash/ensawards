@@ -50,11 +50,11 @@ const formTextContentsAdaptations = new Map<
   ],
 ]);
 
-const validationSchemaMap = new Map([
-  ["app", appSuggestionFormSchema],
-  ["best practice", bestPracticeSuggestionFormSchema],
-  ["benchmark result", benchmarkResultUpdateRequestSchema],
-]);
+const validationSchemaMap = {
+  app: appSuggestionFormSchema,
+  "best practice": bestPracticeSuggestionFormSchema,
+  "benchmark result": benchmarkResultUpdateRequestSchema,
+} as const;
 
 /**
  * Used to satisfy the required email parameter in the `Contact-Us` form on namehashlabs.org
@@ -164,7 +164,9 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
 
     try {
       // Validate form data against the schema
-      await validationSchemaMap.get(whatsSuggested)!.validate(data, { abortEarly: false });
+      await validationSchemaMap[whatsSuggested]!.validate(data, {
+        abortEarly: false,
+      });
       // Reset validation errors on successful validation
       setValidationErrors(getInitialValidationErrorsState(formFields));
 
