@@ -1,11 +1,10 @@
-import {groupByOrg, type SupportedGroupByCategory} from "@/contract-pipelines/group-by.ts";
+import { type SupportedGroupByCategory, groupByOrg } from "@/contract-pipelines/group-by.ts";
+import { CONTRACTS_TEST_DATA } from "@/data/contracts-test.ts";
 import type { Contract } from "@/types/contracts.ts";
+import { OrganizationNames } from "@/types/organizations.ts";
 import { describe, expect, it } from "vitest";
-import {CONTRACTS_TEST_DATA} from "@/data/contracts-test.ts";
-import {OrganizationNames} from "@/types/organizations.ts";
 
 describe("group-by functions", () => {
-
   describe("groupByProject", () => {
     it("should group all contracts by their project", () => {
       const expectedLengthOfEachEntry = 10;

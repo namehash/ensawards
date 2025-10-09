@@ -1,7 +1,7 @@
-import {groupByOrg, type SupportedGroupByCategory} from "@/contract-pipelines/group-by.ts";
+import { type SupportedGroupByCategory, groupByOrg } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
+import { CONTRACTS } from "@/data/contracts.ts";
 import type { Contract } from "@/types/contracts.ts";
-import {CONTRACTS} from "@/data/contracts.ts";
 
 /**
  * Takes optional filter, group-by and weights functions

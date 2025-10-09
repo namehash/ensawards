@@ -1,5 +1,5 @@
-import type {Address, Chain} from "viem";
-import type {Organization} from "@/types/organizations.ts";
+import type { Organization } from "@/types/organizations.ts";
+import type { Address, Chain } from "viem";
 
 export const ContractTypes = {
   Dao: "DAO",

@@ -9,13 +9,13 @@ import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
+import { CONTRACTS } from "../../data/contracts";
+import { ORGANIZATIONS } from "../../data/organizations";
 import Layout from "../../layouts/Layout.astro";
+import { OrganizationNames } from "../../types/organizations";
 import { normalizeText } from "../../utils";
 import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
 import { cn } from "../../utils/tailwindClassConcatenation";
-import {ORGANIZATIONS} from "../../data/organizations";
-import {CONTRACTS} from "../../data/contracts";
-import {OrganizationNames} from "../../types/organizations";
 export function getStaticPaths() {
   return Object.values(OrganizationNames).map((contract) => ({
     params: { org: normalizeText(contract) },
@@ -27,9 +27,7 @@ const { org } = Astro.params;
 const resolvedOrg = Object.values(ORGANIZATIONS).find(
   (maybeOrg) => normalizeText(maybeOrg.name) === org,
 );
-const orgContracts = CONTRACTS.filter(
-  (contract) => contract.org.name === resolvedOrg.name,
-);
+const orgContracts = CONTRACTS.filter((contract) => contract.org.name === resolvedOrg.name);
 
 const OrgIcon = resolvedOrg.icon;
 ---
@@ -39,7 +37,7 @@ const OrgIcon = resolvedOrg.icon;
     header={resolvedOrg.name}
     description={resolvedOrg.description}
     breadcrumbs={["DAO Report"]}>
-    <OrgIcon slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg"/>
+    <OrgIcon slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg" />
     <div
       slot="socialLinks"
       class="flex flex-row flex-nowrap justify-start items-center gap-2">

@@ -1,4 +1,4 @@
-import type {SvgComponent} from "astro/types";
+import type { SvgComponent } from "astro/types";
 
 export const ProjectNames = {
   Ens: "ENS",

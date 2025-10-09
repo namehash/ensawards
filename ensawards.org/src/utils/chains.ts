@@ -1,22 +1,8 @@
-import {
-  arbitrum,
-  base,
-  linea,
-  mainnet,
-  optimism,
-  scroll,
-} from "viem/chains";
-import type {ChainId} from "@ensnode/ensnode-sdk";
-import type {Address} from "viem";
+import type { ChainId } from "@ensnode/ensnode-sdk";
+import type { Address } from "viem";
+import { arbitrum, base, linea, mainnet, optimism, scroll } from "viem/chains";
 
-export const SUPPORTED_CHAINS = [
-  mainnet,
-  base,
-  linea,
-  optimism,
-  arbitrum,
-  scroll,
-];
+export const SUPPORTED_CHAINS = [mainnet, base, linea, optimism, arbitrum, scroll];
 
 /**
  * Mapping of chain id to prettified chain name.
@@ -65,7 +51,10 @@ export function getChainBlockExplorerUrl(chainId: ChainId): URL | null {
  * @returns complete block explorer URL for a specific contract on a specific chainId,
  * or null if the referenced chain doesn't have a known block explorer
  */
-export const getBlockExplorerUrlForContract = (chainId: ChainId, contractAddress: Address): URL | null => {
+export const getBlockExplorerUrlForContract = (
+  chainId: ChainId,
+  contractAddress: Address,
+): URL | null => {
   const chainBlockExplorer = getChainBlockExplorerUrl(chainId);
   if (!chainBlockExplorer) return null;
 

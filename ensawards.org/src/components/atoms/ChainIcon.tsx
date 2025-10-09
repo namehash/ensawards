@@ -1,11 +1,5 @@
-import {
-  arbitrum,
-  base,
-  linea,
-  mainnet,
-  optimism,
-  scroll,
-} from "viem/chains";
+import type { ChainId } from "@ensnode/ensnode-sdk";
+import { arbitrum, base, linea, mainnet, optimism, scroll } from "viem/chains";
 import { ArbitrumIcon } from "./icons/chains/ArbitrumIcon";
 import { BaseIcon } from "./icons/chains/BaseIcon";
 import { EthereumIcon } from "./icons/chains/EthereumIcon";
@@ -13,7 +7,6 @@ import { LineaIcon } from "./icons/chains/LineaIcon";
 import { OptimismIcon } from "./icons/chains/OptimismIcon";
 import { ScrollIcon } from "./icons/chains/ScrollIcon";
 import { UnrecognizedChainIcon } from "./icons/chains/UnrecognizedChainIcon";
-import type {ChainId} from "@ensnode/ensnode-sdk";
 
 export interface ChainIconProps {
   chainId: ChainId;

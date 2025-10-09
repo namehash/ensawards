@@ -1,13 +1,13 @@
-import type {Project} from "@/types/projects.ts";
-import type {SvgComponent} from "astro/types";
+import type { Project } from "@/types/projects.ts";
+import type { SvgComponent } from "astro/types";
 
 export const OrganizationTypes = {
-    DAO: "DAO"
+  DAO: "DAO",
 } as const;
 
 export const OrganizationNames = {
-    Ens: "ENS DAO",
-    Uniswap: "Uniswap DAO"
+  Ens: "ENS DAO",
+  Uniswap: "Uniswap DAO",
 } as const;
 
 /**
@@ -16,16 +16,15 @@ export const OrganizationNames = {
 export type OrganizationName = (typeof OrganizationNames)[keyof typeof OrganizationNames];
 
 export interface DAO {
-    orgType: typeof OrganizationTypes.DAO; // DAOs are organizations with `OrganizationType.DAO`.
-    project: Project; // each organization belongs to a single project.
-    name: OrganizationName;
-    description: string;
-    icon: SvgComponent;
-    socialLinks: {
-        websiteLink: URL;
-        twitterLink: URL;
-    };
+  orgType: typeof OrganizationTypes.DAO; // DAOs are organizations with `OrganizationType.DAO`.
+  project: Project; // each organization belongs to a single project.
+  name: OrganizationName;
+  description: string;
+  icon: SvgComponent;
+  socialLinks: {
+    websiteLink: URL;
+    twitterLink: URL;
+  };
 }
-
 
 export type Organization = DAO;

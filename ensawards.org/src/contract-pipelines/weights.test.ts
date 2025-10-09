@@ -1,8 +1,8 @@
+import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
+import { CONTRACTS_TEST_DATA } from "@/data/contracts-test.ts";
 import type { Contract } from "@/types/contracts.ts";
 import { describe, expect, it } from "vitest";
-import type {SupportedGroupByCategory} from "@/contract-pipelines/group-by.ts";
-import {CONTRACTS_TEST_DATA} from "@/data/contracts-test.ts";
 
 describe("weight functions", () => {
   const mockGroupedTestData = {

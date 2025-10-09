@@ -46,7 +46,7 @@ const circumference = 2 * Math.PI * radius;
       opacity="0.8"
       r={radius}
       cx={size / 2}
-      cy={size / 2} />
+      cy={size / 2}/>
 
     <!-- Gradient -->
     <defs>
@@ -75,7 +75,11 @@ const circumference = 2 * Math.PI * radius;
   </svg>
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-1">
-    <p id="scoreNumber" data-score={score} class="text-4xl text-white leading-8 font-semibold transition-all ease-linear" />
+    <p
+      id="scoreNumber"
+      data-score={score}
+      class="text-4xl text-white leading-8 font-semibold transition-all ease-linear">
+    </p>
     <p
       class="absolute right-8 text-base leading-none text-white/50 font-semibold">
       %
@@ -86,7 +90,7 @@ const circumference = 2 * Math.PI * radius;
   // Set up of the numeric label
   const scoreLabel = document.getElementById("scoreNumber");
   const targetScore = Number(scoreLabel.dataset.score);
-  scoreLabel.innerText = '0'
+  scoreLabel.innerText = "0";
   let counter = 0;
 
   // Set up of the progress bar
@@ -99,22 +103,22 @@ const circumference = 2 * Math.PI * radius;
   let delay = 150;
 
   function animateScore() {
-      // Calculate new values
-      counter += 1;
-      offset = circumference * (1 - (counter/100));
+    // Calculate new values
+    counter += 1;
+    offset = circumference * (1 - counter / 100);
 
-      // Display new values
-      progressBar.setAttribute("stroke-dashoffset", offset.toString());
-      scoreLabel.innerText = `${counter}`;
+    // Display new values
+    progressBar.setAttribute("stroke-dashoffset", offset.toString());
+    scoreLabel.innerText = `${counter}`;
 
-      // Adjust delay and set another timeout if needed
-      if (counter !== targetScore) {
-        // Delay growths
-        delay = Math.max(30, 120 * counter/targetScore);
+    // Adjust delay and set another timeout if needed
+    if (counter !== targetScore) {
+      // Delay growths
+      delay = Math.max(30, 120 * (counter / targetScore));
 
-        setTimeout(animateScore, delay);
-      }
+      setTimeout(animateScore, delay);
+    }
   }
 
-  setTimeout(animateScore, delay)
+  setTimeout(animateScore, delay);
 </script>
