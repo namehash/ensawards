@@ -9,6 +9,7 @@ import EfpIcon from "../icons/EfpIcon.astro";
 import FarcasterIcon from "../icons/FarcasterIcon.astro";
 import GitHubIcon from "../icons/GitHubIcon.astro";
 import GlobeIcon from "../icons/GlobeIcon.astro";
+import {getBlockExplorerUrlForContract} from "../../../utils/chains";
 export interface ContractCardProps {
   contract: Contract;
 }
@@ -20,9 +21,10 @@ const { contract }: ContractCardProps = Astro.props;
             p-4 sm:p-5 rounded-2xl border border-gray-200">
     <div class="max-sm:w-full sm:min-w-[425px] flex flex-col justify-start items-start">
         <p class="text-sm leading-normal font-normal text-muted-foreground">{contract.codeName}</p>
-        <p class="text-sm leading-normal font-medium text-black max-sm:break-all">{contract.address}</p>
+        <a href={getBlockExplorerUrlForContract(contract.chain.id, contract.address)} target="_blank" rel="noreferrer noopener" class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]">{contract.address} ↗</a>
     </div>
-    <div class="sm:min-w-[225px]">
+    <div class="sm:min-w-[225px] h-[42px] flex flex-col justify-start items-start">
+        <p class="text-sm leading-normal font-normal text-muted-foreground">ENS name</p>
         {contract.name ?
                 <a href={`https://app.ens.domains/${contract.name}`} target="_blank" rel="noreferrer noopener" class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">{contract.name} ↗</a>
             : <p class="text-sm leading-normal font-medium">Unnamed contract</p>}
@@ -34,10 +36,10 @@ const { contract }: ContractCardProps = Astro.props;
         <!--TODO replace with actual appropriate icons when they are provided-->
         <!--TODO: Maybe we could add a tooltip to the icons, similarly to how we do it in ENSNodeConfigInfo?-->
         <div class="flex flex-row flex-nowrap justify-start items-center gap-2">
-            <FarcasterIcon className={cn(contract.metadata.field1 ? "text-black" : "text-gray-200")} />
-            <GitHubIcon className={cn(contract.metadata.field2 ? "text-black" : "text-gray-200")}/>
-            <GlobeIcon className={cn(contract.metadata.field3 ? "text-black" : "text-gray-200")}/>
-            <EfpIcon className={cn(contract.metadata.field4 ? "text-black" : "text-gray-200")}/>
+            <FarcasterIcon className={cn("w-[21px] h-[21px]", contract.metadata.field1 ? "text-black" : "text-gray-200")} />
+            <GitHubIcon className={cn("w-[21px] h-[21px]", contract.metadata.field2 ? "text-black" : "text-gray-200")}/>
+            <GlobeIcon className={cn("w-[21px] h-[21px]", contract.metadata.field3 ? "text-black" : "text-gray-200")}/>
+            <EfpIcon className={cn("w-[21px] h-[21px]", contract.metadata.field4 ? "text-black" : "text-gray-200")}/>
         </div>
     </> : <a href="https://app.enscribe.xyz/nameContract" target="_blank" rel="noreferrer noopened" class={cn(
         shadcnButtonVariants({
