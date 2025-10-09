@@ -6,7 +6,6 @@ export interface DaoScoreProps {
   daoName: OrganizationName;
 }
 
-//TODO: adapt after changing the default groupBy functions
 const { daoName }: DaoScoreProps = Astro.props;
 
 const score = contractPipeline()[daoName];

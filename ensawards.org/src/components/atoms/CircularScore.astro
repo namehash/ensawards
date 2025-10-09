@@ -32,7 +32,6 @@ const colorTo = gradientStopColors[gradientIndex];
 // Count size parameters of the score bar
 const radius = (size - strokeWidth) / 2;
 const circumference = 2 * Math.PI * radius;
-const offset = circumference - (score / 100) * circumference;
 ---
 
 <div
@@ -47,7 +46,7 @@ const offset = circumference - (score / 100) * circumference;
       opacity="0.8"
       r={radius}
       cx={size / 2}
-      cy={size / 2}></circle>
+      cy={size / 2} />
 
     <!-- Gradient -->
     <defs>
@@ -59,21 +58,63 @@ const offset = circumference - (score / 100) * circumference;
 
     <!-- Foreground progress circle -->
     <circle
+      id="progressBar"
+      data-radius={radius}
+      data-circumference={circumference}
       stroke="url(#gradient)"
       fill="transparent"
       stroke-width={strokeWidth}
       stroke-linecap="round"
       stroke-dasharray={circumference}
-      stroke-dashoffset={offset}
+      stroke-dashoffset={circumference}
       r={radius}
       cx={size / 2}
-      cy={size / 2}></circle>
+      cy={size / 2}
+      class="transition-all ease-linear"
+    />
   </svg>
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-1">
-    <p class="text-4xl text-white leading-8 font-semibold">{score}</p><p
+    <p id="scoreNumber" data-score={score} class="text-4xl text-white leading-8 font-semibold transition-all ease-linear" />
+    <p
       class="absolute right-8 text-base leading-none text-white/50 font-semibold">
       %
     </p>
   </div>
 </div>
+<script>
+  // Set up of the numeric label
+  const scoreLabel = document.getElementById("scoreNumber");
+  const targetScore = Number(scoreLabel.dataset.score);
+  scoreLabel.innerText = '0'
+  let counter = 0;
+
+  // Set up of the progress bar
+  const progressBar = document.getElementById("progressBar");
+  const radius = Number(progressBar.dataset.radius);
+  const circumference = Number(progressBar.dataset.circumference);
+  let offset = circumference;
+
+  // Initial delay
+  let delay = 150;
+
+  function animateScore() {
+      // Calculate new values
+      counter += 1;
+      offset = circumference * (1 - (counter/100));
+
+      // Display new values
+      progressBar.setAttribute("stroke-dashoffset", offset.toString());
+      scoreLabel.innerText = `${counter}`;
+
+      // Adjust delay and set another timeout if needed
+      if (counter !== targetScore) {
+        // Delay growths
+        delay = Math.max(30, 120 * counter/targetScore);
+
+        setTimeout(animateScore, delay);
+      }
+  }
+
+  setTimeout(animateScore, delay)
+</script>
