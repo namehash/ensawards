@@ -5,8 +5,8 @@ import { OrganizationNames } from "@/types/organizations.ts";
 import { describe, expect, it } from "vitest";
 
 describe("group-by functions", () => {
-  describe("groupByProject", () => {
-    it("should group all contracts by their project", () => {
+  describe("groupByOrg", () => {
+    it("should group all contracts by their org", () => {
       const expectedLengthOfEachEntry = 10;
 
       const result = groupByOrg(CONTRACTS_TEST_DATA);
@@ -18,7 +18,7 @@ describe("group-by functions", () => {
         SupportedGroupByCategory,
         Contract[],
       ][]) {
-        values.forEach((value) => expect(value.org).toEqual(key));
+        values.forEach((value) => expect(value.org.name).toEqual(key));
       }
     });
   });
