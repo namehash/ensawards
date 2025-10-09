@@ -1,7 +1,7 @@
+import { EnsDaoIcon } from "@/components/atoms/icons/EnsDaoIcon.tsx";
+import { UniswapIcon } from "@/components/atoms/icons/UniswapIcon.tsx";
 import { PROJECTS } from "@/data/projects.ts";
 import { type Organization, OrganizationNames, OrganizationTypes } from "@/types/organizations.ts";
-import ENSDaoIcon from "../assets/ensDaoIcon.svg";
-import UniswapDaoIcon from "../assets/uniswapIcon.svg";
 
 export const ORGANIZATIONS: Record<string, Organization> = {
   EnsDao: {
@@ -10,7 +10,7 @@ export const ORGANIZATIONS: Record<string, Organization> = {
     name: OrganizationNames.Ens,
     description:
       "The Ethereum Name Service (ENS) is a decentralized domain name system. The ENS DAO governs the ENS protocol and treasury.",
-    icon: ENSDaoIcon,
+    icon: EnsDaoIcon,
     socialLinks: {
       websiteLink: new URL("https://ensdao.org/"),
       twitterLink: new URL("https://x.com/ENS_DAO"),
@@ -22,7 +22,7 @@ export const ORGANIZATIONS: Record<string, Organization> = {
     name: OrganizationNames.Uniswap,
     description:
       "The largest onchain marketplace. Buy and sell crypto on Ethereum and 12+ other chains.",
-    icon: UniswapDaoIcon,
+    icon: UniswapIcon,
     socialLinks: {
       websiteLink: new URL("https://app.uniswap.org/"),
       twitterLink: new URL("https://x.com/Uniswap"),

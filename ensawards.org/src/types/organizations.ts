@@ -1,5 +1,5 @@
 import type { Project } from "@/types/projects.ts";
-import type { SvgComponent } from "astro/types";
+import type { JSX } from "astro/jsx-runtime";
 
 export const OrganizationTypes = {
   DAO: "DAO",
@@ -20,7 +20,7 @@ export interface DAO {
   project: Project; // each organization belongs to a single project.
   name: OrganizationName;
   description: string;
-  icon: SvgComponent;
+  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
   socialLinks: {
     websiteLink: URL;
     twitterLink: URL;

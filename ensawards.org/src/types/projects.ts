@@ -1,4 +1,4 @@
-import type { SvgComponent } from "astro/types";
+import type { JSX } from "astro/jsx-runtime";
 
 export const ProjectNames = {
   Ens: "ENS",
@@ -16,7 +16,7 @@ export type ProjectName = (typeof ProjectNames)[keyof typeof ProjectNames];
 export interface Project {
   name: ProjectName;
   description: string;
-  icon: SvgComponent;
+  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
   socialLinks: {
     websiteLink: URL;
     twitterLink: URL;
