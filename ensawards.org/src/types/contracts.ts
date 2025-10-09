@@ -22,18 +22,24 @@ export const ContractSubtypes = {
  */
 export type ContractSubtype = (typeof ContractSubtypes)[keyof typeof ContractSubtypes];
 
-//TODO: is this the correct way to describe an invariant (following some earlier instructions from ensadmin)
 //TODO: improve this when more info is gained
+interface MetadataField {
+  active: boolean;
+  messageActivated: string;
+  messageDeactivated: string;
+}
+
+//TODO: is this the correct way to describe an invariant (following some earlier instructions from ensadmin)
 /**
  * Describes metadata fields of a named contract.
  *
  * @throws If the unnamed contract contains metadata
  */
 export interface ContractMetadata {
-  field1?: string;
-  field2?: string;
-  field3?: string;
-  field4?: string;
+  field1: MetadataField;
+  field2: MetadataField;
+  field3: MetadataField;
+  field4: MetadataField;
 }
 
 /**

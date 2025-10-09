@@ -12,10 +12,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "ENSToken",
         name: "token.ensdao.eth",
         metadata: {
-            field1: "plh",
-            field2: "plh",
-            field3: "plh",
-            field4: "plh"
+            field1: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            }
         }
     },
     {
@@ -35,9 +51,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "TokenLock",
         name: "tokenlock.ensdao.eth",
         metadata: {
-            field1: "plh",
-            field3: "plh",
-            field4: "plh"
+            field1: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            }
         }
     },
     {
@@ -49,8 +82,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "ENSGovernor",
         name: "governor.ensdao.eth",
         metadata: {
-            field1: "plh",
-            field2: "plh"
+            field1: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
         }
     },
     {
@@ -62,9 +113,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "TimelockController",
         name: "wallet.ensdao.eth",
         metadata: {
-            field2: "plh",
-            field3: "plh",
-            field4: "plh"
+            field1: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            }
         }
     },
     {
@@ -76,8 +144,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "SafeProxy",
         name: "twap.ensdao.eth",
         metadata: {
-            field1: "plh",
-            field4: "plh"
+            field1: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            }
         }
     },
     {
@@ -89,7 +175,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "Veto",
         name: "veto.ensdao.eth",
         metadata: {
-            field2: "plh"
+            field1: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
         }
     },
     {
@@ -101,8 +206,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "GnosisSafeProxy",
         name: "endowment.ensdao.eth",
         metadata: {
-            field3: "plh",
-            field4: "plh"
+            field1: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            }
         }
     },
     {
@@ -123,10 +246,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "Plh base named ctr",
         name: "Named placeholder contract",
         metadata: {
-            field1: "plh",
-            field2: "plh",
-            field3: "plh",
-            field4: "plh"
+            field1: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: true,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            }
         }
     },
     {
@@ -274,9 +413,26 @@ export const CONTRACTS: Contract[] = [
         codeName: "Uniswap Plh base named ctr",
         name: "Uniswap Named placeholder contract",
         metadata: {
-            field1: "",
-            field2: "",
-            field3: ""
+            field1: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field2: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field3: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
+            field4: {
+                active: false,
+                messageActivated: "Example activated info",
+                messageDeactivated: "Example deactivated info"
+            },
         }
     },
     {

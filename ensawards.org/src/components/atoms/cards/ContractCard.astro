@@ -3,13 +3,10 @@ import { BenchmarkResult } from "../../../data/appData";
 import { Contract } from "../../../types/contracts";
 import { BenchmarkResultToBadgeStyles } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
-import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
+import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import MatrixBadge from "../MatrixBadge.astro";
-import EfpIcon from "../icons/EfpIcon.astro";
-import FarcasterIcon from "../icons/FarcasterIcon.astro";
-import GitHubIcon from "../icons/GitHubIcon.astro";
-import GlobeIcon from "../icons/GlobeIcon.astro";
 import {getBlockExplorerUrlForContract} from "../../../utils/chains";
+import {SmartContractMetadata} from "../SmartContractMetadata";
 export interface ContractCardProps {
   contract: Contract;
 }
@@ -33,14 +30,7 @@ const { contract }: ContractCardProps = Astro.props;
         {contract.name && contract.metadata ?
             <>
         <p class="text-sm leading-normal font-normal text-muted-foreground">ENS metadata</p>
-        <!--TODO replace with actual appropriate icons when they are provided-->
-        <!--TODO: Maybe we could add a tooltip to the icons, similarly to how we do it in ENSNodeConfigInfo?-->
-        <div class="flex flex-row flex-nowrap justify-start items-center gap-2">
-            <FarcasterIcon className={cn("w-[21px] h-[21px]", contract.metadata.field1 ? "text-black" : "text-gray-200")} />
-            <GitHubIcon className={cn("w-[21px] h-[21px]", contract.metadata.field2 ? "text-black" : "text-gray-200")}/>
-            <GlobeIcon className={cn("w-[21px] h-[21px]", contract.metadata.field3 ? "text-black" : "text-gray-200")}/>
-            <EfpIcon className={cn("w-[21px] h-[21px]", contract.metadata.field4 ? "text-black" : "text-gray-200")}/>
-        </div>
+        <SmartContractMetadata client:load metadata={contract.metadata} />
     </> : <a href="https://app.enscribe.xyz/nameContract" target="_blank" rel="noreferrer noopened" class={cn(
         shadcnButtonVariants({
             variant: "default",
@@ -57,14 +47,7 @@ const { contract }: ContractCardProps = Astro.props;
             {contract.name && contract.metadata ?
                     <>
                         <p class="text-sm leading-normal font-normal text-muted-foreground">ENS metadata</p>
-                        <!--TODO replace with actual appropriate icons when they are provided-->
-                        <!--TODO: Maybe we could add a tooltip to the icons, similarly to how we do it in ENSNodeConfigInfo?-->
-                        <div class="flex flex-row flex-nowrap justify-start items-center gap-2">
-                            <FarcasterIcon className={cn(contract.metadata.field1 ? "text-black" : "text-gray-200")} />
-                            <GitHubIcon className={cn(contract.metadata.field2 ? "text-black" : "text-gray-200")}/>
-                            <GlobeIcon className={cn(contract.metadata.field3 ? "text-black" : "text-gray-200")}/>
-                            <EfpIcon className={cn(contract.metadata.field4 ? "text-black" : "text-gray-200")}/>
-                        </div>
+                        <SmartContractMetadata client:load metadata={contract.metadata} />
                     </> : <a href="https://app.enscribe.xyz/nameContract" target="_blank" rel="noreferrer noopened" class={cn(
                     shadcnButtonVariants({
                         variant: "default",
