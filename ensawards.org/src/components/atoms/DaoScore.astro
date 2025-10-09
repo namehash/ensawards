@@ -1,11 +1,12 @@
 ---
 import { contractPipeline } from "../../contract-pipelines";
-import { SupportedProject } from "../../types/projects";
 import CircularScore from "./CircularScore.astro";
+import {OrganizationName} from "../../types/organizations";
 export interface DaoScoreProps {
-  daoName: SupportedProject;
+  daoName: OrganizationName;
 }
 
+//TODO: adapt after changing the default groupBy functions
 const { daoName }: DaoScoreProps = Astro.props;
 
 const score = contractPipeline()[daoName];

@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
 import { ChainIcon } from "../../components/atoms/ChainIcon";
 import DaoScore from "../../components/atoms/DaoScore.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
@@ -11,49 +9,42 @@ import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../../components/shadcn/shadcnButtonStyles";
-import contractsDataJson from "../../data/contracts.json";
-import projectsDataJson from "../../data/projects.json";
 import Layout from "../../layouts/Layout.astro";
-import { Contract } from "../../types/contracts";
-import { Project, SupportedProjects } from "../../types/projects";
 import { normalizeText } from "../../utils";
 import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
 import { cn } from "../../utils/tailwindClassConcatenation";
+import {ORGANIZATIONS} from "../../data/organizations";
+import {CONTRACTS} from "../../data/contracts";
+import {OrganizationNames} from "../../types/organizations";
 export function getStaticPaths() {
-  return Object.values(SupportedProjects).map((contract) => ({
-    params: { project: normalizeText(contract) },
+  return Object.values(OrganizationNames).map((contract) => ({
+    params: { org: normalizeText(contract) },
   }));
 }
 
-const { project } = Astro.params;
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
+const { org } = Astro.params;
 
-const projectsData = projectsDataJson as Array<Project>;
+const resolvedOrg = Object.values(ORGANIZATIONS).find(
+  (maybeOrg) => normalizeText(maybeOrg.name) === org,
+);
+const orgContracts = CONTRACTS.filter(
+  (contract) => contract.org.name === resolvedOrg.name,
+);
 
-const resolvedProject = projectsData.find(
-  (maybeProject) => normalizeText(maybeProject.name) === project,
-);
-const projectContracts = (contractsDataJson as Array<Contract>).filter(
-  (contract) => contract.project === resolvedProject.name,
-);
+const OrgIcon = resolvedOrg.icon;
 ---
 
 <Layout>
   <SubpageHero
-    header={`${resolvedProject.name} DAO`}
-    description={resolvedProject.description}
+    header={resolvedOrg.name}
+    description={resolvedOrg.description}
     breadcrumbs={["DAO Report"]}>
-    <Image
-      src={images[resolvedProject.iconLink]()}
-      alt={`${resolvedProject.name}-hero`}
-      slot="icon"
-      class="w-[60px] h-[60px] shrink-0 rounded-lg"
-    />
+    <OrgIcon slot="icon" class="w-[60px] h-[60px] shrink-0 rounded-lg"/>
     <div
       slot="socialLinks"
       class="flex flex-row flex-nowrap justify-start items-center gap-2">
       <a
-        href={resolvedProject.socialLinks.websiteLink}
+        href={resolvedOrg.socialLinks.websiteLink}
         rel="noreferrer noopener"
         target="_blank"
         ><GlobeIcon
@@ -61,7 +52,7 @@ const projectContracts = (contractsDataJson as Array<Contract>).filter(
         /></a
       >
       <a
-        href={resolvedProject.socialLinks.twitterLink}
+        href={resolvedOrg.socialLinks.twitterLink}
         rel="noreferrer noopener"
         target="_blank"
         ><TwitterIcon
@@ -69,7 +60,7 @@ const projectContracts = (contractsDataJson as Array<Contract>).filter(
         /></a
       >
     </div>
-    <DaoScore slot="score" daoName={resolvedProject.name} />
+    <DaoScore slot="score" daoName={resolvedOrg.name} />
   </SubpageHero>
   <!--because of Astro's build-time page generation we are sure that 'resolvedProject' will never be undefined-->
   <section
@@ -109,8 +100,8 @@ const projectContracts = (contractsDataJson as Array<Contract>).filter(
       </div>
       {
         SUPPORTED_CHAINS.map((supportedChain, idx) => {
-          const contractsOnChain = projectContracts.filter(
-            (contract) => contract.chainId === supportedChain.id,
+          const contractsOnChain = orgContracts.filter(
+            (contract) => contract.chain.id === supportedChain.id,
           );
           if (contractsOnChain.length === 0) {
             return null;

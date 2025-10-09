@@ -1,22 +1,22 @@
-//TODO: name's sketchy, improve
-export const SupportedProjects = {
+import type {SvgComponent} from "astro/types";
+
+export const ProjectNames = {
   Ens: "ENS",
   Uniswap: "Uniswap",
 } as const;
 
 /**
- * SupportedProject is the derived string union of possible identifiers of supported projects.
+ * ProjectName is the derived string union of possible identifiers of supported projects' names.
  */
-export type SupportedProject = (typeof SupportedProjects)[keyof typeof SupportedProjects];
+export type ProjectName = (typeof ProjectNames)[keyof typeof ProjectNames];
 
-// TODO: improve this description
 /**
- * Describes the entity issuing the smart contracts.
+ * Describes a project.
  */
 export interface Project {
-  name: SupportedProject;
+  name: ProjectName;
   description: string;
-  iconLink: string;
+  icon: SvgComponent;
   socialLinks: {
     websiteLink: URL;
     twitterLink: URL;

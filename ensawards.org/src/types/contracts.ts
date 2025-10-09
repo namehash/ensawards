@@ -1,5 +1,5 @@
-import type { SupportedProject } from "@/types/projects.ts";
-import type { Address } from "viem";
+import type {Address, Chain} from "viem";
+import type {Organization} from "@/types/organizations.ts";
 
 export const ContractTypes = {
   Dao: "DAO",
@@ -22,14 +22,6 @@ export const ContractSubtypes = {
  */
 export type ContractSubtype = (typeof ContractSubtypes)[keyof typeof ContractSubtypes];
 
-/**
- * Chain ID
- *
- * Represents a unique identifier for a chain.
- * Guaranteed to be a positive integer.
- **/
-export type ChainId = number;
-
 //TODO: is this the correct way to describe an invariant (following some earlier instructions from ensadmin)
 //TODO: improve this when more info is gained
 /**
@@ -44,16 +36,15 @@ export interface ContractMetadata {
   field4?: string;
 }
 
-// TODO: improve this description
 /**
  * Describes the smart contract.
  */
 export interface Contract {
-  project: SupportedProject;
+  org: Organization;
   type: ContractType;
   subtype: ContractSubtype;
   address: Address;
-  chainId: ChainId;
+  chain: Chain;
   codeName: string;
   name?: string;
   metadata?: ContractMetadata;

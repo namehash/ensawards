@@ -1,21 +1,18 @@
-import { groupByProject } from "@/contract-pipelines/group-by.ts";
-import { type SupportedGroupByCategory, contractPipeline } from "@/contract-pipelines/index.ts";
+import {groupByOrg, type SupportedGroupByCategory} from "@/contract-pipelines/group-by.ts";
+import { contractPipeline } from "@/contract-pipelines/index.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
-import type { Contract } from "@/types/contracts.ts";
 import { describe, expect, it } from "vitest";
-import testContractsData from "../data/contracts-test.json";
+import {CONTRACTS_TEST_DATA} from "@/data/contracts-test.ts";
 
 describe("contract pipelines", () => {
-  const testData = testContractsData as Array<Contract>;
-
   describe("default pipeline", () => {
     it("should return correct scores for both projects", () => {
       const expectedResult = {
-        ENS: 80,
-        Uniswap: 30,
+        "ENS DAO": 80,
+        "Uniswap DAO": 30,
       } as Record<SupportedGroupByCategory, number>;
 
-      const result = contractPipeline(groupByProject, binaryWeights, undefined, testData);
+      const result = contractPipeline(groupByOrg, binaryWeights, undefined, CONTRACTS_TEST_DATA);
 
       for (const [key, values] of Object.entries(result) as [SupportedGroupByCategory, number][]) {
         expect(result[key]).toEqual(expectedResult[key]);

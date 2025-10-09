@@ -1,26 +1,23 @@
-import { groupByProject } from "@/contract-pipelines/group-by.ts";
+import {groupByOrg, type SupportedGroupByCategory} from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
-import type { Contract, ContractSubtype, ContractType } from "@/types/contracts.ts";
-import type { SupportedProject } from "@/types/projects.ts";
-import contractsDataJson from "../data/contracts.json";
-
-export type SupportedGroupByCategory = SupportedProject | ContractType | ContractSubtype;
+import type { Contract } from "@/types/contracts.ts";
+import {CONTRACTS} from "@/data/contracts.ts";
 
 /**
  * Takes optional filter, group-by and weights functions
  * and returns a score (in %) achieved by a group of contracts,
  * defined by the provided functions.
  *
- * By default, it operates on the data from /data/contracts.json,
+ * By default, it operates on the data from /data/contracts.ts,
  * but can also take data from other sources
  */
 export function contractPipeline(
-  groupBy: (contracts: Contract[]) => Record<SupportedGroupByCategory, Contract[]> = groupByProject,
+  groupBy: (contracts: Contract[]) => Record<SupportedGroupByCategory, Contract[]> = groupByOrg,
   weights: (
     groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
   ) => Record<SupportedGroupByCategory, number[]> = binaryWeights,
   filter?: (contracts: Contract[]) => Contract[],
-  data: Contract[] = contractsDataJson as Array<Contract>,
+  data: Contract[] = CONTRACTS,
 ): Record<SupportedGroupByCategory, number> {
   let contracts = data;
 
