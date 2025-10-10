@@ -26,26 +26,46 @@ import { cn } from "../../utils/tailwindClassConcatenation";
       </p>
     </div>
     <div
-      class="w-full max-w-[1216px] h-fit flex flex-col justify-start items-start gap-4">
-      <h3 class="text-xl sm:text-2xl leading-normal font-semibold text-black">
-        Choose a "DAO Report" page
-      </h3>
-      <div class="flex flex-row flex-wrap justify-start items-center gap-4">
-        {
-          Object.values(OrganizationNames).map((page) => (
-            <a
-              href={`/dao-report/${normalizeText(page)}`}
+      class="w-full max-w-[1216px] h-fit flex flex-row justify-start items-start gap-6">
+      <div class="w-1/2 h-fit flex flex-col justify-start items-start gap-4">
+        <h3 class="text-xl sm:text-2xl leading-normal font-semibold text-black">
+          Choose a "DAO Report" page
+        </h3>
+        <div class="flex flex-row flex-wrap justify-start items-center gap-4">
+          {
+            Object.values(OrganizationNames).map((page) => (
+                <a
+                    href={`/dao-report/${normalizeText(page)}`}
+                    class={cn(
+                        shadcnButtonVariants({
+                          variant: "default",
+                          size: "default",
+                          className: "cursor-pointer rounded-full",
+                        }),
+                    )}>
+                  {page}
+                </a>
+            ))
+          }
+        </div>
+      </div>
+      <div class="w-1/2 h-fit flex flex-col justify-start items-start gap-4">
+        <h3 class="text-xl sm:text-2xl leading-normal font-semibold text-black">
+          Choose a contract naming leaderboard
+        </h3>
+        <div class="flex flex-row flex-wrap justify-start items-center gap-4">
+          <a
+              href={`/dao-report/dao-leaderboard`}
               class={cn(
-                shadcnButtonVariants({
-                  variant: "default",
-                  size: "default",
-                  className: "cursor-pointer rounded-full",
-                }),
+                  shadcnButtonVariants({
+                    variant: "default",
+                    size: "default",
+                    className: "cursor-pointer rounded-full",
+                  }),
               )}>
-              {page}
-            </a>
-          ))
-        }
+            DAO leaderboard
+          </a>
+        </div>
       </div>
     </div>
   </section>

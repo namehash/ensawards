@@ -22,14 +22,17 @@ export function contractPipeline(
   let contracts = data;
 
   if (filter) {
+    // Filter contracts
     contracts = filter(contracts);
   }
 
+  // Group & weight all remaining contracts
   const groupedContracts = groupBy(contracts);
   const weightedContracts = weights(groupedContracts);
 
   const scores = {} as Record<SupportedGroupByCategory, number>;
 
+  // Count scores in % for weighted results
   for (const [key, values] of Object.entries(weightedContracts) as [
     SupportedGroupByCategory,
     number[],
@@ -40,5 +43,11 @@ export function contractPipeline(
         : 0;
   }
 
-  return scores;
+  // Sort results in descending order
+  const sortedScores = {} as Record<SupportedGroupByCategory, number>;
+  Object.keys(scores)
+      .sort((idA , idB) => ((scores[idA as SupportedGroupByCategory] > (scores[idB as SupportedGroupByCategory]) ? -1 : 1))).
+      forEach((key) => sortedScores[key as SupportedGroupByCategory] = scores[key as SupportedGroupByCategory])
+
+  return sortedScores;
 }

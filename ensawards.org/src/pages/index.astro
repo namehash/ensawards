@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import AppLeaderboardCard from "../components/atoms/cards/AppLeaderboardCard.astro";
+import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
 import Hero from "../components/molecules/Hero.astro";
@@ -29,12 +29,12 @@ const placeIcons = [
       containerStyles="gap-3 sm:gap-3">
       {
         appsData.map((app, idx) => (
-          <AppLeaderboardCard
+          <LeaderboardCard
             key={`app-review-card-${app.id}`}
             name={app.name}
             ensAwardsScore={app.ensAwardsScore}
             type={app.type}
-            viewBenchmarksLink={`/benchmarks/${app.id}`}>
+            viewDetailsLink={`/benchmarks/${app.id}`}>
             <Image
               src={images[app.iconSourceLink]()}
               alt={`${app.id}-LP`}
@@ -54,7 +54,7 @@ const placeIcons = [
                 {idx + 1}
               </p>
             )}
-          </AppLeaderboardCard>
+          </LeaderboardCard>
         ))
       }
       <SuggestionCard whatsSuggested="app" />

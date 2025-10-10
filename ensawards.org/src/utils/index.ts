@@ -19,6 +19,9 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
     case "benchmark result":
       return "Benchmark result updates to report? Notify us of the change or update it yourself on GitHub.";
 
+    case "dao":
+      return "Want to add a DAO? Suggest the DAO for review or add an DAO review yourself on GitHub.";
+
     default:
       throw new Error(`${whatsSuggested} is not a valid suggestion category`);
   }

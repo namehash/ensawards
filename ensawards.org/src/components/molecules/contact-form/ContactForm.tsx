@@ -38,6 +38,7 @@ const formTextContentsAdaptations = new Map<
       ["app", "Suggest an app for review"],
       ["best practice", "Suggest best practice"],
       ["benchmark result", "Request benchmark result update"],
+      ["dao", "Suggest a DAO for review"]
     ]),
   ],
   [
@@ -46,6 +47,7 @@ const formTextContentsAdaptations = new Map<
       ["app", "Provide details of the app you’d like us to add to ENSAwards."],
       ["best practice", "Suggest a best practice you’d like us to add to ENSAwards."],
       ["benchmark result", "Suggest a benchmark result update for review"],
+      ["dao", "Provide details of the DAO you’d like us to add to ENSAwards."]
     ]),
   ],
 ]);
@@ -54,6 +56,7 @@ const validationSchemaMap = {
   app: appSuggestionFormSchema,
   "best practice": bestPracticeSuggestionFormSchema,
   "benchmark result": benchmarkResultUpdateRequestSchema,
+  dao: appSuggestionFormSchema, //TODO: this might be temporary (will know when final form of suggestion is determined)
 } as const;
 
 /**
@@ -106,12 +109,18 @@ const capitalizeLabel = (label: string): string => {
 };
 
 /**
- * Adds "App" prefix to a selected list of labels. Separates presentation from the form logic.
+ * Adds a suitable prefix to a selected list of labels. Separates presentation from the form logic.
  */
-const addPrefixToLabel = (label: string): string => {
+const addPrefixToLabel = (label: string, whatsSuggested: PossibleSuggestions): string => {
   const labelsToPrefix = ["Name", "URL"];
+  const prefixes: Record<PossibleSuggestions, string> = {
+    "app": "App ",
+    "dao": "DAO ",
+    "best practice": "",
+    "benchmark result": ""
+  }
   if (labelsToPrefix.includes(label)) {
-    return "App ".concat(label);
+    return prefixes[whatsSuggested].concat(label);
   }
 
   return label;
@@ -173,9 +182,11 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       // Proceed with form submission if validation is successful
       // Map ENSAwards form fields to ContactUs form fields
       // since we use a common Slack channel as an output & forward our requests to namehashlabs.org
+
+      //TODO: the solution for DAO is temporary until a final form is established
       const descriptionMapping =
-        whatsSuggested === "app"
-          ? `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested app URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
+        whatsSuggested === "app" || whatsSuggested === "dao"
+          ? `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
           : whatsSuggested === "best practice"
             ? `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
             : `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`;
@@ -183,7 +194,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       const nameMapping =
         whatsSuggested === "benchmark result"
           ? `Update benchmark result for: ${data.app}`
-          : whatsSuggested === "app"
+          : whatsSuggested === "app" || whatsSuggested === "dao"
             ? data.name
             : "New best practice suggested";
 
@@ -352,7 +363,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
                 className="flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch"
               >
                 <label htmlFor={field.label} className={labelStyles}>
-                  {addPrefixToLabel(capitalizeLabel(field.label))}
+                  {addPrefixToLabel(capitalizeLabel(field.label), whatsSuggested)}
                   {!field.required && " (optional)"}
                 </label>
                 {[

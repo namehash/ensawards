@@ -38,7 +38,7 @@ export interface SuggestionFormDataProps {
   source: string;
 }
 
-export type PossibleSuggestions = "app" | "best practice" | "benchmark result";
+export type PossibleSuggestions = "app" | "best practice" | "benchmark result" | "dao";
 
 export interface FormField {
   label: EnsAwardsFormFields;

@@ -4,7 +4,7 @@ import { base, mainnet } from "viem/chains";
 
 export const CONTRACTS: Contract[] = [
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72",
@@ -35,7 +35,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000000",
@@ -43,7 +43,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "Example Unnamed Contract",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0xd7A029Db2585553978190dB5E85eC724Aa4dF23f",
@@ -74,7 +74,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x323A76393544d5ecca80cd6ef2A560C6a395b7E3",
@@ -105,7 +105,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0xFe89cc7aBB2C4183683ab71653C4cdc9B02D44b7",
@@ -136,7 +136,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x02D61347e5c6EA5604f3f814C5b5498421cEBdEB",
@@ -167,7 +167,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x552DF471a4c7Fea11Ea8d7a7b0Acc6989b902a95",
@@ -198,7 +198,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x4F2083f5fBede34C2714aFfb3105539775f7FE64",
@@ -229,7 +229,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x323A76393544d5ecca80cd6ef2A560C6a395b7E3",
@@ -238,7 +238,7 @@ export const CONTRACTS: Contract[] = [
     name: "governor.ensdao.eth",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000001",
@@ -269,7 +269,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000002",
@@ -277,7 +277,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "Plh base unnamed ctr",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
@@ -285,7 +285,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "UNIToken",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
@@ -293,7 +293,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "Timelock",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
@@ -301,7 +301,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "GovernorBravo",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x090D4613473dEE047c3f2706764f49E0821D256e",
@@ -309,7 +309,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "UniMerkleDistributor",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x3032Ab3Fa8C01d786D29dAdE018d7f2017918e12",
@@ -317,7 +317,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "StakingRewardsFactory",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x6c3e4cb2e96b01f4b866965a91ed4437839a121a",
@@ -325,7 +325,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "StakingRewards1",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x7fba4b8dc5e7616e59622806932dbea72537a56b",
@@ -333,7 +333,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "StakingRewards2",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0xa1484c3aa22a66c62b77e0ae78e15258bd0cb711",
@@ -341,7 +341,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "StakingRewards3",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0xca35e32e7926b96a9988f61d510e038108d8068e",
@@ -349,7 +349,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "StakingRewards4",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x000000000004444c5dc75cB358380D2e3dE08A90",
@@ -357,7 +357,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "PoolManager",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0xd1428ba554f4c8450b763a0b2040a4935c63f06c",
@@ -365,7 +365,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "PositionDescriptor",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e",
@@ -373,7 +373,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "PositionManager",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x52f0e24d1c21c8a0cb1e5a5dd6198556bd9e1203",
@@ -381,7 +381,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "Quoter",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x7ffe42c4a5deea5b0fec41c94c136cf115597227",
@@ -389,7 +389,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "StateView",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
@@ -397,7 +397,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "UniversalRouter",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
@@ -405,7 +405,7 @@ export const CONTRACTS: Contract[] = [
     codeName: "Permit2",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x0000000000000000000000000000000000000003",
@@ -436,7 +436,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "Utility",
     address: "0x0000000000000000000000000000000000000004",

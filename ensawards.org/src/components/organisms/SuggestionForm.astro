@@ -53,7 +53,7 @@ const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;
     });
 
     // Close on Escape key
-    // Currently this event fires twice cause there are two overlays always in DOM
+    // Currently this event fires multiple cause there are multiple overlays always in DOM
     // TODO: for now it's fixed in a 'hacky' way in the closeOverlay function
     // - figure out if there is a more elegant way to do it
     document.addEventListener("keydown", (e) => {

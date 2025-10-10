@@ -4,7 +4,7 @@ import { mainnet } from "viem/chains";
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x0000000000000000000000000000000000000000",
@@ -12,7 +12,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 1 - Unnamed Contract 1",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x0000000000000000000000000000000000000001",
@@ -20,7 +20,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 1 - Unnamed Contract 2",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x0000000000000000000000000000000000000002",
@@ -29,7 +29,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P1C1",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x0000000000000000000000000000000000000003",
@@ -38,7 +38,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P1C2",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000004",
@@ -47,7 +47,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P1C3",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000005",
@@ -56,7 +56,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P1C4",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000006",
@@ -65,7 +65,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P1C5",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x0000000000000000000000000000000000000007",
@@ -74,7 +74,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P1C6",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x0000000000000000000000000000000000000008",
@@ -83,7 +83,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P1C7",
   },
   {
-    org: ORGANIZATIONS.EnsDao,
+    org: ORGANIZATIONS["ENS DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x0000000000000000000000000000000000000009",
@@ -92,7 +92,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P1C8",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x0000000000000000000000000000000000000010",
@@ -100,7 +100,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 2 - Unnamed Contract 1",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x0000000000000000000000000000000000000011",
@@ -108,7 +108,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 2 - Unnamed Contract 2",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x0000000000000000000000000000000000000012",
@@ -116,7 +116,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 2 - Unnamed Contract 3",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DeFi",
     subtype: "DeFi App",
     address: "0x0000000000000000000000000000000000000013",
@@ -124,7 +124,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 2 - Unnamed Contract 4",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x0000000000000000000000000000000000000014",
@@ -132,7 +132,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 2 - Unnamed Contract 5",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x0000000000000000000000000000000000000015",
@@ -140,7 +140,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 2 - Unnamed Contract 6",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Utility",
     address: "0x0000000000000000000000000000000000000016",
@@ -148,7 +148,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 2 - Unnamed Contract 7",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000017",
@@ -157,7 +157,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P2C1",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000018",
@@ -166,7 +166,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     name: "Name P2C2",
   },
   {
-    org: ORGANIZATIONS.UniswapDao,
+    org: ORGANIZATIONS["Uniswap DAO"],
     type: "DAO",
     subtype: "Governance",
     address: "0x0000000000000000000000000000000000000019",
