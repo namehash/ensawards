@@ -1,7 +1,12 @@
 import { EnsDaoIcon } from "@/components/atoms/icons/EnsDaoIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/UniswapIcon.tsx";
 import { PROJECTS } from "@/data/projects.ts";
-import {type Organization, type OrganizationName, OrganizationNames, OrganizationTypes} from "@/types/organizations.ts";
+import {
+  type Organization,
+  type OrganizationName,
+  OrganizationNames,
+  OrganizationTypes,
+} from "@/types/organizations.ts";
 
 export const ORGANIZATIONS: Record<OrganizationName, Organization> = {
   "ENS DAO": {

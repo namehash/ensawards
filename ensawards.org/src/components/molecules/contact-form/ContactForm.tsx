@@ -38,7 +38,7 @@ const formTextContentsAdaptations = new Map<
       ["app", "Suggest an app for review"],
       ["best practice", "Suggest best practice"],
       ["benchmark result", "Request benchmark result update"],
-      ["dao", "Suggest a DAO for review"]
+      ["dao", "Suggest a DAO for review"],
     ]),
   ],
   [
@@ -47,7 +47,7 @@ const formTextContentsAdaptations = new Map<
       ["app", "Provide details of the app you’d like us to add to ENSAwards."],
       ["best practice", "Suggest a best practice you’d like us to add to ENSAwards."],
       ["benchmark result", "Suggest a benchmark result update for review"],
-      ["dao", "Provide details of the DAO you’d like us to add to ENSAwards."]
+      ["dao", "Provide details of the DAO you’d like us to add to ENSAwards."],
     ]),
   ],
 ]);
@@ -114,11 +114,11 @@ const capitalizeLabel = (label: string): string => {
 const addPrefixToLabel = (label: string, whatsSuggested: PossibleSuggestions): string => {
   const labelsToPrefix = ["Name", "URL"];
   const prefixes: Record<PossibleSuggestions, string> = {
-    "app": "App ",
-    "dao": "DAO ",
+    app: "App ",
+    dao: "DAO ",
     "best practice": "",
-    "benchmark result": ""
-  }
+    "benchmark result": "",
+  };
   if (labelsToPrefix.includes(label)) {
     return prefixes[whatsSuggested].concat(label);
   }

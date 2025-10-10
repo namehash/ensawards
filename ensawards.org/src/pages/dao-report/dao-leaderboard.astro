@@ -1,65 +1,64 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import Layout from "../../layouts/Layout.astro";
-import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import ItemsList from "../../components/molecules/ItemsList.astro";
-import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
-import {contractPipeline} from "../../contract-pipelines";
 import LeaderboardCard from "../../components/atoms/cards/LeaderboardCard.astro";
-import {normalizeText} from "../../utils";
-import {Organization} from "../../types/organizations";
-import {ORGANIZATIONS} from "../../data/organizations";
+import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { contractPipeline } from "../../contract-pipelines";
+import { ORGANIZATIONS } from "../../data/organizations";
+import Layout from "../../layouts/Layout.astro";
+import { Organization } from "../../types/organizations";
+import { normalizeText } from "../../utils";
 
 const daoScores = contractPipeline();
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
-    "/src/assets/firstPlaceAward.svg",
-    "/src/assets/secondPlaceAward.svg",
-    "/src/assets/thirdPlaceAward.svg",
+  "/src/assets/firstPlaceAward.svg",
+  "/src/assets/secondPlaceAward.svg",
+  "/src/assets/thirdPlaceAward.svg",
 ];
 
 const getOrgByName = (orgName: string): Organization => ORGANIZATIONS[orgName];
 ---
 
 <Layout>
-    <!--TODO: breadcrumbs are not in figma and are here just to make checking out the preview easier.
+  <!--TODO: breadcrumbs are not in figma and are here just to make checking out the preview easier.
             They can easily be removed later on.-->
-    <SubpageHero header="DAO leaderboard" breadcrumbs={["DAO Report"]}/>
-    <section
-            class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-        <ItemsList header="Smart contract naming" containerStyles="gap-3 sm:gap-3">
-            {Object.entries(daoScores).map(([daoName, value], idx) => {
-                const OrgIcon = getOrgByName(daoName).icon;
-                return (
-                        <LeaderboardCard
-                                key={`dao-leaderboard-card-${daoName}`}
-                                name={daoName}
-                                ensAwardsScore={value}
-                                viewDetailsLink={`/dao-report/${normalizeText(daoName)}`}
-
-                        >
-                            {idx < 3 ? (
-                                    <Image
-                                            alt={`${idx + 1}-place`}
-                                            src={images[placeIcons[idx]]()}
-                                            slot="placeIcon"
-                                    />
-                            ) : (
-                                    <p
-                                            slot="placeIcon"
-                                            class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                                        {idx + 1}
-                                    </p>
-                            )}
-                            <OrgIcon slot="appIcon" className="w-10 h-10 rounded-md"/>
-                        </LeaderboardCard>
-                );
-            }
-            )}
-            <!--TODO: Adapt the PoC dao variant, after its final form is determined-->
-            <SuggestionCard whatsSuggested="dao" />
-        </ItemsList>
-    </section>
+  <SubpageHero header="DAO leaderboard" breadcrumbs={["DAO Report"]} />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ItemsList header="Smart contract naming" containerStyles="gap-3 sm:gap-3">
+      {
+        Object.entries(daoScores).map(([daoName, value], idx) => {
+          const OrgIcon = getOrgByName(daoName).icon;
+          return (
+            <LeaderboardCard
+              key={`dao-leaderboard-card-${daoName}`}
+              name={daoName}
+              ensAwardsScore={value}
+              viewDetailsLink={`/dao-report/${normalizeText(daoName)}`}>
+              {idx < 3 ? (
+                <Image
+                  alt={`${idx + 1}-place`}
+                  src={images[placeIcons[idx]]()}
+                  slot="placeIcon"
+                />
+              ) : (
+                <p
+                  slot="placeIcon"
+                  class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
+                  {idx + 1}
+                </p>
+              )}
+              <OrgIcon slot="appIcon" className="w-10 h-10 rounded-md" />
+            </LeaderboardCard>
+          );
+        })
+      }
+      <!--TODO: Adapt the PoC dao variant, after its final form is determined-->
+      <SuggestionCard whatsSuggested="dao" />
+    </ItemsList>
+  </section>
 </Layout>

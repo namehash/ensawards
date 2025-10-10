@@ -125,16 +125,16 @@ const { isStatic = false }: LayoutProps = Astro.props;
     <div id="dao-overlay" class="hidden">
       <Overlay>
         <SuggestionForm
-            whatsSuggested="dao"
-            formFields={[
-              { label: EnsAwardsFormFields.Name, type: "text", required: true },
-              { label: EnsAwardsFormFields.Url, type: "url", required: true },
-              {
-                label: EnsAwardsFormFields.Description,
-                type: "text",
-                required: false,
-              },
-            ]}
+          whatsSuggested="dao"
+          formFields={[
+            { label: EnsAwardsFormFields.Name, type: "text", required: true },
+            { label: EnsAwardsFormFields.Url, type: "url", required: true },
+            {
+              label: EnsAwardsFormFields.Description,
+              type: "text",
+              required: false,
+            },
+          ]}
         />
       </Overlay>
     </div>

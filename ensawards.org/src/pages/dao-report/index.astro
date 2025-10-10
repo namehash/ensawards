@@ -34,17 +34,17 @@ import { cn } from "../../utils/tailwindClassConcatenation";
         <div class="flex flex-row flex-wrap justify-start items-center gap-4">
           {
             Object.values(OrganizationNames).map((page) => (
-                <a
-                    href={`/dao-report/${normalizeText(page)}`}
-                    class={cn(
-                        shadcnButtonVariants({
-                          variant: "default",
-                          size: "default",
-                          className: "cursor-pointer rounded-full",
-                        }),
-                    )}>
-                  {page}
-                </a>
+              <a
+                href={`/dao-report/${normalizeText(page)}`}
+                class={cn(
+                  shadcnButtonVariants({
+                    variant: "default",
+                    size: "default",
+                    className: "cursor-pointer rounded-full",
+                  }),
+                )}>
+                {page}
+              </a>
             ))
           }
         </div>
@@ -55,14 +55,14 @@ import { cn } from "../../utils/tailwindClassConcatenation";
         </h3>
         <div class="flex flex-row flex-wrap justify-start items-center gap-4">
           <a
-              href={`/dao-report/dao-leaderboard`}
-              class={cn(
-                  shadcnButtonVariants({
-                    variant: "default",
-                    size: "default",
-                    className: "cursor-pointer rounded-full",
-                  }),
-              )}>
+            href={`/dao-report/dao-leaderboard`}
+            class={cn(
+              shadcnButtonVariants({
+                variant: "default",
+                size: "default",
+                className: "cursor-pointer rounded-full",
+              }),
+            )}>
             DAO leaderboard
           </a>
         </div>

@@ -114,7 +114,10 @@ const circumference = 2 * Math.PI * radius;
     // Adjust delay and set another timeout if needed
     if (counter !== targetScore) {
       // Delay growths
-      delay = counter > targetScore - 8 ? 140 : Math.max(30, 70 * (counter / targetScore));
+      delay =
+        counter > targetScore - 8
+          ? 140
+          : Math.max(30, 70 * (counter / targetScore));
 
       setTimeout(animateScore, delay);
     }

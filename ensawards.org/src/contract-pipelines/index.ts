@@ -46,8 +46,13 @@ export function contractPipeline(
   // Sort results in descending order
   const sortedScores = {} as Record<SupportedGroupByCategory, number>;
   Object.keys(scores)
-      .sort((idA , idB) => ((scores[idA as SupportedGroupByCategory] > (scores[idB as SupportedGroupByCategory]) ? -1 : 1))).
-      forEach((key) => sortedScores[key as SupportedGroupByCategory] = scores[key as SupportedGroupByCategory])
+    .sort((idA, idB) =>
+      scores[idA as SupportedGroupByCategory] > scores[idB as SupportedGroupByCategory] ? -1 : 1,
+    )
+    .forEach(
+      (key) =>
+        (sortedScores[key as SupportedGroupByCategory] = scores[key as SupportedGroupByCategory]),
+    );
 
   return sortedScores;
 }
