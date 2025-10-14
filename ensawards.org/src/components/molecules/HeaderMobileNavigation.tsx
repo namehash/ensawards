@@ -1,7 +1,7 @@
+import { EnsAwardsIcon } from "@/components/atoms/icons/EnsAwardsIcon.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
-import ENSAwardsLogo from "../../assets/ENSAwardsLogo.svg";
 
 export default function HeaderMobileNavigation() {
   const mainLinkClass =
@@ -55,11 +55,7 @@ export default function HeaderMobileNavigation() {
                       href="/"
                       className="h-fit flex justify-center items-center gap-[10px] text-[19px] sm:text-2xl text-black not-italic font-bold leading-[25px] sm:leading-8"
                     >
-                      <img
-                        src={ENSAwardsLogo.src}
-                        className="max-sm:w-[26px] max-sm:h-[25px]"
-                        alt="ENSNode"
-                      />
+                      <EnsAwardsIcon className="max-sm:w-[26px] max-sm:h-[25px]" />
                       ENSAwards
                       <span className="w-fit h-fit flex flex-row flex-nowrap justify-center items-center bg-black text-white px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200">
                         Alpha

@@ -1,21 +1,21 @@
 ---
 import { getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
-import { shadcnButtonVariants } from "../../shadcn/shadcnButtonStyles";
+import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
-export interface AppLeaderboardCardProps {
+export interface LeaderboardCardProps {
   name: string;
-  viewBenchmarksLink: string;
+  viewDetailsLink: string;
   ensAwardsScore: number;
-  type: string; //Will probably change to string union once the data is provided
+  type?: string;
 }
 
-const { name, viewBenchmarksLink, ensAwardsScore, type }: AppLeaderboardCardProps = Astro.props;
+const { name, viewDetailsLink, ensAwardsScore, type }: LeaderboardCardProps = Astro.props;
 ---
 
 <a
-  href={viewBenchmarksLink}
-  class="w-full h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-start gap-3 p-4 sm:p-6 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
+  href={viewDetailsLink}
+  class="w-full h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-start sm:items-center gap-3 p-4 sm:p-6 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <!--Desktop Header-->
   <div
     class="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-5">
@@ -39,16 +39,18 @@ const { name, viewBenchmarksLink, ensAwardsScore, type }: AppLeaderboardCardProp
   </div>
   <div
     class="flex flex-nowrap flex-col sm:flex-row justify-start sm:justify-end items-center gap-2 sm:gap-10 max-sm:self-stretch">
-    <div
-      class="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-      <p class="text-muted-foreground text-sm leading-normal font-normal">
-        Type
-      </p>
-      <p
-        class="text-sm leading-normal font-medium sm:font-semibold text-accent-foreground">
-        {type}
-      </p>
-    </div>
+    {
+      type && (
+        <div class="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+          <p class="text-muted-foreground text-sm leading-normal font-normal">
+            Type
+          </p>
+          <p class="text-sm leading-normal font-medium sm:font-semibold text-accent-foreground">
+            {type}
+          </p>
+        </div>
+      )
+    }
     <div
       class="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
       <p class="text-muted-foreground text-sm leading-normal font-normal">

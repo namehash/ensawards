@@ -4,18 +4,19 @@ import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
-import { BestPracticeCategories, CategoryStatus } from "../../../data/bestPracticesData";
+import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
-import { getCategoryById } from "../../../utils";
+import { CategoryStatus } from "../../../types/bestPractices";
+import { getCategoryBySlug } from "../../../utils/dataAccess";
 export function getStaticPaths() {
-  return BestPracticeCategories.map((category) => ({
-    params: { category: category.id },
+  return BEST_PRACTICE_CATEGORIES.map((category) => ({
+    params: { category: category.slug },
   }));
 }
 
 const { category } = Astro.params;
 
-const categoryToDisplay = getCategoryById(category);
+const categoryToDisplay = getCategoryBySlug(category);
 ---
 
 {
@@ -48,7 +49,7 @@ const categoryToDisplay = getCategoryById(category);
               key={`best-practice-card-${idx}`}
               name={bestPractice.name}
               description={bestPractice.description}
-              viewReviewsLink={`/ens-best-practices/${category}/${bestPractice.id}`}
+              viewReviewsLink={`/ens-best-practices/${categoryToDisplay.slug}/${bestPractice.slug}`}
               appsPassed={bestPractice.appsPassed}
               appSupport={bestPractice.appSupport}
             />

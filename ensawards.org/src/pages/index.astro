@@ -1,13 +1,13 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import AppLeaderboardCard from "../components/atoms/cards/AppLeaderboardCard.astro";
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
+import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
-import { appsData } from "../data/appData";
-import { BestPracticeCategories } from "../data/bestPracticesData";
+import { APPS } from "../data/apps";
+import { BEST_PRACTICE_CATEGORIES } from "../data/bestPractices";
 import Layout from "../layouts/Layout.astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
@@ -28,13 +28,13 @@ const placeIcons = [
       linkData={{ link: "/benchmarks", text: "All app benchmarks" }}
       containerStyles="gap-3 sm:gap-3">
       {
-        appsData.map((app, idx) => (
-          <AppLeaderboardCard
+        APPS.map((app, idx) => (
+          <LeaderboardCard
             key={`app-review-card-${app.id}`}
             name={app.name}
             ensAwardsScore={app.ensAwardsScore}
             type={app.type}
-            viewBenchmarksLink={`/benchmarks/${app.id}`}>
+            viewDetailsLink={`/benchmarks/${app.slug}`}>
             <Image
               src={images[app.iconSourceLink]()}
               alt={`${app.id}-LP`}
@@ -54,7 +54,7 @@ const placeIcons = [
                 {idx + 1}
               </p>
             )}
-          </AppLeaderboardCard>
+          </LeaderboardCard>
         ))
       }
       <SuggestionCard whatsSuggested="app" />
@@ -63,12 +63,12 @@ const placeIcons = [
       header="ENS best practices"
       linkData={{ link: "/ens-best-practices", text: "See all" }}>
       {
-        BestPracticeCategories.map((category, idx) => (
+        BEST_PRACTICE_CATEGORIES.map((category, idx) => (
           <CategoryCard
             key={`best-practice-card-${idx}`}
             name={category.name}
             description={category.description}
-            viewBestPracticesLink={`/ens-best-practices/${category.id}`}
+            viewBestPracticesLink={`/ens-best-practices/${category.slug}`}
             comingSoon={category.status}
             numberOfBestPractices={category.bestPractices.length}
           />

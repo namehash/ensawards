@@ -1,13 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import AppLeaderboardCard from "../../components/atoms/cards/AppLeaderboardCard.astro";
+import LeaderboardCard from "../../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import { appsData } from "../../data/appData";
+import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
-import { normalizeText } from "../../utils";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -23,13 +22,13 @@ const placeIcons = [
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList header="Benchmarks" containerStyles="gap-3 sm:gap-3">
       {
-        appsData.map((app, idx) => (
-          <AppLeaderboardCard
-            key={`app-review-card-${normalizeText(app.name)}`}
+        APPS.map((app, idx) => (
+          <LeaderboardCard
+            key={`app-review-card-${app.id}`}
             name={app.name}
             ensAwardsScore={app.ensAwardsScore}
             type={app.type}
-            viewBenchmarksLink={`/benchmarks/${normalizeText(app.name)}`}>
+            viewDetailsLink={`/benchmarks/${app.slug}`}>
             <Image
               src={images[app.iconSourceLink]()}
               alt={`${app.id}`}
@@ -49,7 +48,7 @@ const placeIcons = [
                 {idx + 1}
               </p>
             )}
-          </AppLeaderboardCard>
+          </LeaderboardCard>
         ))
       }
       <SuggestionCard whatsSuggested="app" />

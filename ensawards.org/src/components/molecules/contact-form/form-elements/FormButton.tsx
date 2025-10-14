@@ -1,4 +1,4 @@
-import { shadcnButtonVariants } from "@/components/shadcn/shadcnButtonStyles.ts";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import React from "react";
 

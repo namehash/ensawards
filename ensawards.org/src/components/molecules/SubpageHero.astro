@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import HomeIcon from "../../assets/homeIcon.svg";
 import SubpageHeroImage from "../../assets/subpageHeroImage.png";
-import { normalizeText } from "../../utils";
 import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
 
 interface additionalHeroElement {
@@ -21,6 +20,8 @@ const { header, description, breadcrumbs, icon, additionalElements }: SubpageHer
   Astro.props;
 
 let breadcrumbHref = "";
+
+const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
 ---
 
 <section
@@ -72,7 +73,7 @@ let breadcrumbHref = "";
     <div
       class="h-fit flex flex-nowrap flex-col sm:flex-row items-center sm:items-end justify-center sm:justify-between gap-4">
       <div
-        class="max-sm:w-full flex flex-nowrap flex-col items-start justify-end gap-2 sm:gap-4">
+        class="max-sm:w-full flex flex-nowrap flex-col items-start justify-end gap-2 sm:gap-4 relative z-10">
         <slot name="icon" />
         <div class="flex flex-nowrap flex-col items-start justify-start gap-2">
           <h1
@@ -87,6 +88,7 @@ let breadcrumbHref = "";
             )
           }
         </div>
+        <slot name="socialLinks" />
       </div>
       {
         additionalElements && (
@@ -117,6 +119,7 @@ let breadcrumbHref = "";
           </div>
         )
       }
+      <slot name="score" />
     </div>
   </div>
 </section>

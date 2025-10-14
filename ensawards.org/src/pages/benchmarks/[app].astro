@@ -7,19 +7,19 @@ import SupportMatrixCard from "../../components/atoms/cards/SupportMatrixCard.as
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
-import { appsData } from "../../data/appData";
+import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
-import { getAppById, normalizeText } from "../../utils";
+import { getAppBySlug } from "../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 
 export function getStaticPaths() {
-  return appsData.map((app) => ({ params: { app: normalizeText(app.name) } }));
+  return APPS.map((app) => ({ params: { app: app.slug } }));
 }
 
 const { app } = Astro.params;
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
-const appToDisplay = getAppById(app);
+const appToDisplay = getAppBySlug(app);
 ---
 
 {
@@ -56,13 +56,13 @@ const appToDisplay = getAppById(app);
               notes={benchmark.bestPracticeDetails.description}
               viewButtonData={{
                 text: "View best practice details",
-                link: `/ens-best-practices/${normalizeText(benchmark.bestPracticeDetails.category)}/${benchmark.bestPracticeDetails.id}`,
+                link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}/${benchmark.bestPracticeDetails.slug}`,
               }}
               matrixColumnData={[
                 {
                   category: "Category",
-                  value: benchmark.bestPracticeDetails.category,
-                  link: `/ens-best-practices/${normalizeText(benchmark.bestPracticeDetails.category)}`,
+                  value: benchmark.bestPracticeDetails.categoryName,
+                  link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}`,
                   linkStyles:
                     "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
                 },

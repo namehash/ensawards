@@ -1,36 +1,15 @@
 import {
-  type BestPractice,
-  recognizeAllENSNames,
   placeholderBestPractice1,
   placeholderBestPractice2,
   placeholderBestPractice3,
-} from "@/data/bestPracticesData.ts";
+  recognizeAllENSNames,
+} from "@/data/bestPractices.ts";
+import { type App, BenchmarkResult } from "@/types/apps.ts";
 
-export enum BenchmarkResult {
-  Pass = "Pass",
-  PartialPass = "Partial pass",
-  Fail = "Fail",
-}
-
-export interface AppBenchmark {
-  bestPracticeDetails: BestPractice;
-  result: BenchmarkResult;
-}
-
-export interface AppData {
-  id: string; // normalized app name, might be redundant
-  name: string;
-  description: string;
-  ensAwardsScore: number;
-  type: string; //Will probably change to string union once the data is provided
-  websiteLink: string;
-  iconSourceLink: string;
-  benchmarks: AppBenchmark[];
-}
-
-export const appsData: AppData[] = [
+export const APPS: App[] = [
   {
     id: "rainbow-wallet",
+    slug: "rainbow-wallet",
     name: "Rainbow Wallet",
     description:
       "Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum.",
@@ -59,6 +38,7 @@ export const appsData: AppData[] = [
   },
   {
     id: "coinbase-wallet",
+    slug: "coinbase-wallet",
     name: "Coinbase Wallet",
     description:
       "Coinbase Wallet helps you unlock one of the most significant features of crypto: the ability to send or receive peer-to-peer transfers without any financial intermediaries.",
@@ -87,6 +67,7 @@ export const appsData: AppData[] = [
   },
   {
     id: "metamask",
+    slug: "metamask",
     name: "Metamask",
     description:
       "MetaMask is a widely used, self-custodial cryptocurrency wallet that allows users to interact with the Ethereum blockchain and other compatible networks. It functions as a browser extension and mobile app, enabling users to store, send, receive, and trade digital assets, as well as connect with decentralized applications (dApps). ",

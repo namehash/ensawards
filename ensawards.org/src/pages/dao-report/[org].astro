@@ -1,0 +1,117 @@
+---
+import { ChainIcon } from "../../components/atoms/ChainIcon";
+import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
+import DaoScore from "../../components/atoms/DaoScore.astro";
+import ContractCard from "../../components/atoms/cards/ContractCard.astro";
+import EnscribeIcon from "../../components/atoms/icons/EnscribeIcon.astro";
+import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
+import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
+import { CONTRACTS } from "../../data/contracts";
+import { ORGANIZATIONS } from "../../data/organizations";
+import Layout from "../../layouts/Layout.astro";
+import { Contract } from "../../types/contracts";
+import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
+import { getOrgBySlug } from "../../utils/dataAccess";
+import { cn } from "../../utils/tailwindClassConcatenation";
+export function getStaticPaths() {
+  return Object.values(ORGANIZATIONS).map((org) => ({
+    params: { org: org.slug },
+  }));
+}
+
+const { org } = Astro.params;
+
+const resolvedOrg = getOrgBySlug(org);
+
+let orgContracts: Contract[];
+let OrgIcon;
+
+if (resolvedOrg) {
+  orgContracts = CONTRACTS.filter((contract) => contract.org.id === resolvedOrg.id);
+  OrgIcon = resolvedOrg.icon;
+}
+---
+
+{
+  resolvedOrg === undefined ? (
+    // theoretically, because of Astro's build-time page generation, this should never happen
+    <DataLoadingError />
+  ) : (
+    <Layout>
+      <SubpageHero
+        header={resolvedOrg.name}
+        description={resolvedOrg.description}
+        breadcrumbs={["DAO Report"]}>
+        <OrgIcon
+          slot="icon"
+          className="w-[60px] h-[60px] shrink-0 rounded-lg"
+        />
+        <div
+          slot="socialLinks"
+          class="flex flex-row flex-nowrap justify-start items-center gap-2">
+          <a
+            href={resolvedOrg.socialLinks.websiteLink}
+            rel="noreferrer noopener"
+            target="_blank">
+            <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
+          </a>
+          <a
+            href={resolvedOrg.socialLinks.twitterLink}
+            rel="noreferrer noopener"
+            target="_blank">
+            <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
+          </a>
+        </div>
+        <DaoScore slot="score" daoId={resolvedOrg.id} />
+      </SubpageHero>
+      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+        <ContractNamingBanner />
+        <ItemsList
+          header="Smart contract naming"
+          containerStyles="gap-2 sm:gap-2">
+          <a
+            href="https://www.enscribe.xyz/"
+            target="_blank"
+            rel="noreferrer noopener"
+            slot="ctaButton"
+            class="w-fit h-fit flex flex-col sm:flex-row flex-nowrap justify-start items-start sm:items-center gap-1 sm:gap-3 px-2 sm:px-4 py-1 sm:py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 hover:text-gray-500 font-normal leading-normal sm:leading-7 hover:shadow-xs transition duration-200">
+            Powered by <EnscribeIcon />
+          </a>
+          {SUPPORTED_CHAINS.map((supportedChain, idx) => {
+            const contractsOnChain = orgContracts.filter(
+              (contract) => contract.contract.chain.id === supportedChain.id,
+            );
+            if (contractsOnChain.length === 0) {
+              return null;
+            }
+
+            return (
+              <>
+                <div
+                  class={cn(
+                    "h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-2 sm:pb-4",
+                    idx > 0 && "pt-6 sm:pt-8",
+                  )}>
+                  <>
+                    <span class="w-10 h-10 bg-white flex flex-col justify-center items-center rounded-lg border border-gray-200">
+                      <ChainIcon chainId={supportedChain.id} />
+                    </span>
+                    <h4 class="text-xl text-black leading-normal font-semibold">
+                      {getChainName(supportedChain.id)}
+                    </h4>
+                  </>
+                </div>
+                {contractsOnChain.map((contract) => (
+                  <ContractCard contract={contract} />
+                ))}
+              </>
+            );
+          })}
+        </ItemsList>
+      </section>
+    </Layout>
+  )
+}

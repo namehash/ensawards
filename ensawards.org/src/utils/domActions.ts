@@ -13,6 +13,10 @@ export function openSuggestionOverlay(whatsSuggested: string) {
       document.querySelector("#benchmark-result-overlay")!.classList.remove("hidden");
       break;
 
+    case "dao":
+      document.querySelector("#dao-overlay")!.classList.remove("hidden");
+      break;
+
     default:
       throw new Error(`${whatsSuggested} is not a valid suggestion category`);
   }

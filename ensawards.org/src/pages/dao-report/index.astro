@@ -1,0 +1,73 @@
+---
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
+import { ORGANIZATIONS } from "../../data/organizations";
+import Layout from "../../layouts/Layout.astro";
+import { cn } from "../../utils/tailwindClassConcatenation";
+---
+
+<Layout>
+  <SubpageHero header="DAO Reports" />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div
+      class="max-w-[1216px] flex flex-col justify-start items-start gap-4 p-4 sm:p-6 bg-orange-200 border-orange-400 border-[1px] rounded-lg">
+      <h3 class="text-2xl font-semibold text-orange-800">
+        WARNING: For development only
+      </h3>
+      <p>
+        This page was specifically created for our development pipeline and
+        won't be a part of the final page routing.
+        <br />
+        It's aim is to allow for easier changing between the "DAO Report" pages that
+        are currently being developed.
+        <br />
+        After this work is complete "dao-report/index.astro"
+        page will be deleted, and all its subpages will be made available from the landing page. Currently they are only accessible via the manual change of the path.
+      </p>
+    </div>
+    <div
+      class="w-full max-w-[1216px] h-fit flex flex-row justify-start items-start gap-6">
+      <div class="w-1/2 h-fit flex flex-col justify-start items-start gap-4">
+        <h3 class="text-xl sm:text-2xl leading-normal font-semibold text-black">
+          Choose a "DAO Report" page
+        </h3>
+        <div class="flex flex-row flex-wrap justify-start items-center gap-4">
+          {
+            ORGANIZATIONS.map((org) => (
+              <a
+                href={`/dao-report/${org.slug}`}
+                class={cn(
+                  shadcnButtonVariants({
+                    variant: "default",
+                    size: "default",
+                    className: "cursor-pointer rounded-full",
+                  }),
+                )}>
+                {org.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <div class="w-1/2 h-fit flex flex-col justify-start items-start gap-4">
+        <h3 class="text-xl sm:text-2xl leading-normal font-semibold text-black">
+          Choose a contract naming leaderboard
+        </h3>
+        <div class="flex flex-row flex-wrap justify-start items-center gap-4">
+          <a
+            href={`/dao-report/dao-leaderboard`}
+            class={cn(
+              shadcnButtonVariants({
+                variant: "default",
+                size: "default",
+                className: "cursor-pointer rounded-full",
+              }),
+            )}>
+            DAO leaderboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

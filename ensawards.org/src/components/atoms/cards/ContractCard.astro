@@ -1,0 +1,130 @@
+---
+import { BenchmarkResult } from "../../../types/apps";
+import { Contract } from "../../../types/contracts";
+import { getBlockExplorerUrlForContract } from "../../../utils/chains";
+import { BenchmarkResultToBadgeStyles } from "../../../utils/styles";
+import { cn } from "../../../utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import MatrixBadge from "../MatrixBadge.astro";
+import { SmartContractMetadata } from "../SmartContractMetadata";
+export interface ContractCardProps {
+  contract: Contract;
+}
+
+const { contract }: ContractCardProps = Astro.props;
+---
+
+<div
+  class="w-full h-fit min-h-[80px] box-border flex flex-col-reverse sm:flex-row flex-wrap justify-start min-[970px]:justify-between items-start sm:items-center gap-3 sm:gap-y-5
+            p-4 sm:p-5 rounded-2xl border border-gray-200">
+  <div
+    class="max-sm:w-full sm:min-w-[425px] flex flex-col justify-start items-start">
+    <p class="text-sm leading-normal font-normal text-muted-foreground">
+      {contract.codeName}
+    </p>
+    <a
+      href={getBlockExplorerUrlForContract(
+        contract.contract.chain.id,
+        contract.contract.address,
+      )}
+      target="_blank"
+      rel="noreferrer noopener"
+      class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
+      >{contract.contract.address} ↗</a
+    >
+  </div>
+  <div
+    class="sm:min-w-[225px] h-[42px] flex flex-col justify-start items-start">
+    <p class="text-sm leading-normal font-normal text-muted-foreground">
+      ENS name
+    </p>
+    {
+      contract.cachedEnsProfile !== null ? (
+        <a
+          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedEnsProfile.ensName)}`}
+          target="_blank"
+          rel="noreferrer noopener"
+          class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
+          {contract.cachedEnsProfile.ensName} ↗
+        </a>
+      ) : (
+        <p class="text-sm leading-normal font-medium">Unnamed contract</p>
+      )
+    }
+  </div>
+  <div
+    class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px]">
+    {
+      contract.cachedEnsProfile !== null &&
+      contract.cachedEnsProfile.ensMetadata ? (
+        <>
+          <p class="text-sm leading-normal font-normal text-muted-foreground">
+            ENS metadata
+          </p>
+          <SmartContractMetadata
+            client:load
+            metadata={contract.cachedEnsProfile.ensMetadata}
+          />
+        </>
+      ) : (
+        <a
+          href="https://app.enscribe.xyz/nameContract"
+          target="_blank"
+          rel="noreferrer noopened"
+          class={cn(
+            shadcnButtonVariants({
+              variant: "default",
+              size: "default",
+              className: "cursor-pointer rounded-full",
+            }),
+          )}>
+          Set contract name
+        </a>
+      )
+    }
+  </div>
+  <div
+    class="max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:items-center sm:min-w-[115px] max-sm:self-stretch">
+    <MatrixBadge
+      text={contract.cachedEnsProfile !== null ? "Named" : "Unnamed"}
+      className={BenchmarkResultToBadgeStyles.get(
+        contract.cachedEnsProfile !== null
+          ? BenchmarkResult.Pass
+          : BenchmarkResult.Fail,
+      )!}
+      iconId={contract.cachedEnsProfile !== null
+        ? BenchmarkResult.Pass
+        : BenchmarkResult.Fail}
+    />
+    <div class="flex sm:hidden flex-col justify-start items-start">
+      {
+        contract.cachedEnsProfile !== null &&
+        contract.cachedEnsProfile.ensMetadata ? (
+          <>
+            <p class="text-sm leading-normal font-normal text-muted-foreground">
+              ENS metadata
+            </p>
+            <SmartContractMetadata
+              client:load
+              metadata={contract.cachedEnsProfile.ensMetadata}
+            />
+          </>
+        ) : (
+          <a
+            href="https://app.enscribe.xyz/nameContract"
+            target="_blank"
+            rel="noreferrer noopened"
+            class={cn(
+              shadcnButtonVariants({
+                variant: "default",
+                size: "default",
+                className: "cursor-pointer rounded-full",
+              }),
+            )}>
+            Set contract name
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>
