@@ -1,10 +1,8 @@
-import { APPS, type AppData } from "@/data/appData.ts";
-import {
-  BEST_PRACTICE_CATEGORIES,
-  type BestPractice,
-  type BestPracticeCategory,
-} from "@/data/bestPracticesData.ts";
+import { APPS } from "@/data/apps.ts";
+import { BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
 import { ORGANIZATIONS } from "@/data/organizations.ts";
+import type { App } from "@/types/apps.ts";
+import type { BestPractice, BestPracticeCategory } from "@/types/bestPractices.ts";
 import type { OrgId, Organization } from "@/types/organizations.ts";
 
 export const getOrgById = (orgId: OrgId): Organization => {
@@ -16,11 +14,11 @@ export const getOrgBySlug = (orgSlug: string): Organization | undefined => {
   return ORGANIZATIONS.find((org) => org.slug === orgSlug);
 };
 
-export const getAppBySlug = (appSlug: string): AppData | undefined => {
+export const getAppBySlug = (appSlug: string): App | undefined => {
   return APPS.find((app) => app.slug === appSlug);
 };
 
-export const getAppById = (appId: string): AppData | undefined => {
+export const getAppById = (appId: string): App | undefined => {
   return APPS.find((app) => app.id === appId);
 };
 

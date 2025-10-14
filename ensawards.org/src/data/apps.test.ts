@@ -1,4 +1,4 @@
-import { APPS } from "@/data/appData.ts";
+import { APPS } from "@/data/apps.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
 import { describe, expect, it } from "vitest";
 

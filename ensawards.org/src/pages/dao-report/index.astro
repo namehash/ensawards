@@ -7,7 +7,7 @@ import { cn } from "../../utils/tailwindClassConcatenation";
 ---
 
 <Layout>
-  <SubpageHero header="DAO Reports (mocks)" />
+  <SubpageHero header="DAO Reports" />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
     <div
@@ -20,8 +20,10 @@ import { cn } from "../../utils/tailwindClassConcatenation";
         won't be a part of the final page routing.
         <br />
         It's aim is to allow for easier changing between the "DAO Report" pages that
-        are currently being developed. After this work is complete "index.astro"
-        page will be deleted.
+        are currently being developed.
+        <br />
+        After this work is complete "dao-report/index.astro"
+        page will be deleted, and all its subpages will be made available from the landing page. Currently they are only accessible via the manual change of the path.
       </p>
     </div>
     <div

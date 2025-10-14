@@ -6,8 +6,8 @@ import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
-import { APPS } from "../data/appData";
-import { BEST_PRACTICE_CATEGORIES } from "../data/bestPracticesData";
+import { APPS } from "../data/apps";
+import { BEST_PRACTICE_CATEGORIES } from "../data/bestPractices";
 import Layout from "../layouts/Layout.astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");

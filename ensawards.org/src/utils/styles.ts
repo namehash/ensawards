@@ -1,4 +1,4 @@
-import { BenchmarkResult } from "@/data/appData.ts";
+import { BenchmarkResult } from "@/types/apps.ts";
 
 export const getAppSupportColor = (value: number): string =>
   value > 75 ? "emerald-600" : value > 35 ? "amber-600" : "red-600";

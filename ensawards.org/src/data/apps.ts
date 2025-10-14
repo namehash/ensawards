@@ -1,35 +1,12 @@
 import {
-  type BestPractice,
   placeholderBestPractice1,
   placeholderBestPractice2,
   placeholderBestPractice3,
   recognizeAllENSNames,
-} from "@/data/bestPracticesData.ts";
+} from "@/data/bestPractices.ts";
+import { type App, BenchmarkResult } from "@/types/apps.ts";
 
-export enum BenchmarkResult {
-  Pass = "Pass",
-  PartialPass = "Partial pass",
-  Fail = "Fail",
-}
-
-export interface AppBenchmark {
-  bestPracticeDetails: BestPractice;
-  result: BenchmarkResult;
-}
-
-export interface AppData {
-  id: string; // normalized app name, might be redundant
-  slug: string;
-  name: string;
-  description: string;
-  ensAwardsScore: number;
-  type: string; //Will probably change to string union once the data is provided
-  websiteLink: string;
-  iconSourceLink: string;
-  benchmarks: AppBenchmark[];
-}
-
-export const APPS: AppData[] = [
+export const APPS: App[] = [
   {
     id: "rainbow-wallet",
     slug: "rainbow-wallet",

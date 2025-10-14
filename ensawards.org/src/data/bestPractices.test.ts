@@ -1,4 +1,4 @@
-import { BEST_PRACTICE_CATEGORIES } from "@/data/bestPracticesData.ts";
+import { BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
 import { describe, expect, it } from "vitest";
 
@@ -44,7 +44,7 @@ describe("Best Practices data", () => {
       const slugArray: string[] = [];
       data.forEach((category) => {
         // All best practices in one category have the same categorySlug
-        if (category.bestPractices.length > 0){
+        if (category.bestPractices.length > 0) {
           slugArray.push(category.bestPractices[0].categorySlug);
         }
 
@@ -56,8 +56,8 @@ describe("Best Practices data", () => {
         });
       });
       expect(
-          areStringsUnique(slugArray),
-          `CategorySlugs for best practices are not unique`,
+        areStringsUnique(slugArray),
+        `CategorySlugs for best practices are not unique`,
       ).toEqual(true);
     });
   });
