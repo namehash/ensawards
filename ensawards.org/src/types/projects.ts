@@ -5,7 +5,6 @@ export const ProjectIds = {
   Uniswap: "project-uniswap",
 } as const;
 
-
 /**
  * The derived string union of possible {@link ProjectIds}.
  */

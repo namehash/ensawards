@@ -1,5 +1,5 @@
 import type { Contract, ContractSubtype, ContractType } from "@/types/contracts.ts";
-import type {OrgId} from "@/types/organizations.ts";
+import type { OrgId } from "@/types/organizations.ts";
 
 export type SupportedGroupByCategory = OrgId | ContractType | ContractSubtype;
 

@@ -1,4 +1,4 @@
-import {ENSDaoOrg, UniswapDaoOrg} from "@/data/organizations.ts";
+import { ENSDaoOrg, UniswapDaoOrg } from "@/data/organizations.ts";
 import type { Contract } from "@/types/contracts.ts";
 import { base, mainnet } from "viem/chains";
 
@@ -367,7 +367,7 @@ export const CONTRACTS: Contract[] = [
     cachedEnsProfile: {
       ensName: "uniswap.named.placeholder.contract.eth",
       ensMetadata: {},
-    }
+    },
   },
   {
     org: UniswapDaoOrg,

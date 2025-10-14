@@ -23,7 +23,10 @@ const { contract }: ContractCardProps = Astro.props;
       {contract.codeName}
     </p>
     <a
-      href={getBlockExplorerUrlForContract(contract.contract.chain.id, contract.contract.address)}
+      href={getBlockExplorerUrlForContract(
+        contract.contract.chain.id,
+        contract.contract.address,
+      )}
       target="_blank"
       rel="noreferrer noopener"
       class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
@@ -52,12 +55,16 @@ const { contract }: ContractCardProps = Astro.props;
   <div
     class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px]">
     {
-      contract.cachedEnsProfile !== null && contract.cachedEnsProfile.ensMetadata ? (
+      contract.cachedEnsProfile !== null &&
+      contract.cachedEnsProfile.ensMetadata ? (
         <>
           <p class="text-sm leading-normal font-normal text-muted-foreground">
             ENS metadata
           </p>
-          <SmartContractMetadata client:load metadata={contract.cachedEnsProfile.ensMetadata} />
+          <SmartContractMetadata
+            client:load
+            metadata={contract.cachedEnsProfile.ensMetadata}
+          />
         </>
       ) : (
         <a
@@ -81,18 +88,26 @@ const { contract }: ContractCardProps = Astro.props;
     <MatrixBadge
       text={contract.cachedEnsProfile !== null ? "Named" : "Unnamed"}
       className={BenchmarkResultToBadgeStyles.get(
-          contract.cachedEnsProfile !== null ? BenchmarkResult.Pass : BenchmarkResult.Fail,
+        contract.cachedEnsProfile !== null
+          ? BenchmarkResult.Pass
+          : BenchmarkResult.Fail,
       )!}
-      iconId={contract.cachedEnsProfile !== null ? BenchmarkResult.Pass : BenchmarkResult.Fail}
+      iconId={contract.cachedEnsProfile !== null
+        ? BenchmarkResult.Pass
+        : BenchmarkResult.Fail}
     />
     <div class="flex sm:hidden flex-col justify-start items-start">
       {
-        contract.cachedEnsProfile !== null && contract.cachedEnsProfile.ensMetadata ? (
+        contract.cachedEnsProfile !== null &&
+        contract.cachedEnsProfile.ensMetadata ? (
           <>
             <p class="text-sm leading-normal font-normal text-muted-foreground">
               ENS metadata
             </p>
-            <SmartContractMetadata client:load metadata={contract.cachedEnsProfile.ensMetadata} />
+            <SmartContractMetadata
+              client:load
+              metadata={contract.cachedEnsProfile.ensMetadata}
+            />
           </>
         ) : (
           <a

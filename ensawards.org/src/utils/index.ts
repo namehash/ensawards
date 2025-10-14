@@ -9,12 +9,12 @@ import type { PossibleSuggestions } from "@/components/molecules/contact-form/ty
 export const isValidSlug = (maybeSlug: string) => {
   const slugRegex = /^[a-z-]+$/;
 
-  if (maybeSlug.length == 0 ){
+  if (maybeSlug.length == 0) {
     return false;
   }
 
   return slugRegex.test(maybeSlug);
-}
+};
 
 /**
  * Takes in an array of strings and returns true
@@ -23,8 +23,8 @@ export const isValidSlug = (maybeSlug: string) => {
 export const areStringsUnique = (stringArray: string[]): boolean => {
   const stringSet = new Set();
 
-  for (const elem of stringArray){
-    if (stringSet.has(elem)){
+  for (const elem of stringArray) {
+    if (stringSet.has(elem)) {
       return false;
     }
 
@@ -32,7 +32,7 @@ export const areStringsUnique = (stringArray: string[]): boolean => {
   }
 
   return true;
-}
+};
 
 export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
   switch (whatsSuggested) {

@@ -6,7 +6,7 @@ import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 import { BEST_PRACTICE_CATEGORIES, CategoryStatus } from "../../../data/bestPracticesData";
 import Layout from "../../../layouts/Layout.astro";
-import {getCategoryBySlug} from "../../../utils/dataAccess";
+import { getCategoryBySlug } from "../../../utils/dataAccess";
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
     params: { category: category.slug },

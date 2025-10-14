@@ -1,6 +1,6 @@
 import type { Organization } from "@/types/organizations.ts";
+import type { Name } from "@ensnode/ensnode-sdk";
 import type { Address, Chain } from "viem";
-import type {Name} from "@ensnode/ensnode-sdk";
 
 export const ContractTypes = {
   Dao: "DAO",
@@ -22,7 +22,6 @@ export const ContractSubtypes = {
  * ContractSubtype is the derived string union of possible identifiers of established contract subtypes.
  */
 export type ContractSubtype = (typeof ContractSubtypes)[keyof typeof ContractSubtypes];
-
 
 /**
  * Describes metadata fields of a named contract.
