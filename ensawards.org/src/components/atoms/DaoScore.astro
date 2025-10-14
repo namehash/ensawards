@@ -1,14 +1,14 @@
 ---
 import { contractPipeline } from "../../contract-pipelines";
-import { OrganizationName } from "../../types/organizations";
 import CircularScore from "./CircularScore.astro";
+import {OrgId} from "../../types/organizations";
 export interface DaoScoreProps {
-  daoName: OrganizationName;
+  daoId: OrgId;
 }
 
-const { daoName }: DaoScoreProps = Astro.props;
+const { daoId }: DaoScoreProps = Astro.props;
 
-const score = contractPipeline()[daoName];
+const score = contractPipeline()[daoId];
 ---
 
 <div

@@ -1,8 +1,10 @@
 export interface BestPractice {
   id: string;
+  slug: string;
   name: string;
   description: string;
-  category: string;
+  categoryName: string;
+  categorySlug: string; //TODO: Refactor this dependency
   appsPassed: number;
   appSupport: number;
   technicalDetails: {
@@ -25,6 +27,7 @@ export enum CategoryStatus {
 
 export interface BestPracticeCategory {
   id: string;
+  slug: string;
   name: string;
   description: string;
   status: CategoryStatus;
@@ -33,9 +36,11 @@ export interface BestPracticeCategory {
 
 export const recognizeAllENSNames: BestPractice = {
   id: "recognize-all-ens-names",
+  slug: "recognize-all-ens-names",
   name: "Recognize all valid ENS names",
   description: "Support user input of all valid ENS names (not only .eth names).",
-  category: "Forward Resolution",
+  categoryName: "Forward Resolution",
+  categorySlug: "forward-resolution",
   appsPassed: 3,
   appSupport: 100,
   technicalDetails: {
@@ -64,9 +69,11 @@ export const recognizeAllENSNames: BestPractice = {
 
 export const placeholderBestPractice1: BestPractice = {
   id: "placeholder-bp1",
+  slug: "placeholder-bp-one",
   name: "Placeholder Forward Resolution Best Practice #1",
   description: "Temporary placeholder best practice.",
-  category: "Forward Resolution",
+  categoryName: "Forward Resolution",
+  categorySlug: "forward-resolution",
   appsPassed: 2,
   appSupport: 66,
   technicalDetails: {
@@ -95,9 +102,11 @@ export const placeholderBestPractice1: BestPractice = {
 
 export const placeholderBestPractice2: BestPractice = {
   id: "placeholder-bp2",
+  slug: "placeholder-bp-two",
   name: "Placeholder Forward Resolution Best Practice #2",
   description: "Temporary placeholder best practice.",
-  category: "Forward Resolution",
+  categoryName: "Forward Resolution",
+  categorySlug: "forward-resolution",
   appsPassed: 1,
   appSupport: 33,
   technicalDetails: {
@@ -126,9 +135,11 @@ export const placeholderBestPractice2: BestPractice = {
 
 export const placeholderBestPractice3: BestPractice = {
   id: "placeholder-bp3",
+  slug: "placeholder-bp-three",
   name: "Placeholder Forward Resolution Best Practice #3",
   description: "Temporary placeholder best practice.",
-  category: "Forward Resolution",
+  categoryName: "Forward Resolution",
+  categorySlug: "forward-resolution",
   appsPassed: 2,
   appSupport: 66,
   technicalDetails: {
@@ -155,9 +166,10 @@ export const placeholderBestPractice3: BestPractice = {
   },
 };
 
-export const BestPracticeCategories: BestPracticeCategory[] = [
+export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
   {
     id: "forward-resolution",
+    slug: "forward-resolution",
     name: "Forward Resolution",
     description:
       "Lookup social records, the contenthash of decentralized websites, avatar images, multichain deposit addresses, and more.",
@@ -171,6 +183,7 @@ export const BestPracticeCategories: BestPracticeCategory[] = [
   },
   {
     id: "reverse-resolution",
+    slug: "reverse-resolution",
     name: "Reverse Resolution",
     description:
       "Reverse records, primary names, default primary names, L2 primary names, and more.",
@@ -179,6 +192,7 @@ export const BestPracticeCategories: BestPracticeCategory[] = [
   },
   {
     id: "display-profiles",
+    slug: "display-profiles",
     name: "Displaying Profiles",
     description:
       "Avatar images, social records, address records, and more. Ensure each ENS profile is displayed optimally.",
@@ -187,6 +201,7 @@ export const BestPracticeCategories: BestPracticeCategory[] = [
   },
   {
     id: "register-names",
+    slug: "register-names",
     name: "Registering Names",
     description:
       "Provide smooth onboarding when supporting users to find and register their own names.",
@@ -195,6 +210,7 @@ export const BestPracticeCategories: BestPracticeCategory[] = [
   },
   {
     id: "renew-names",
+    slug: "renew-names",
     name: "Renewing Names",
     description:
       "Help your users avoid unintentionally losing the names they love. Renewal reminders and name renewal best practices.",
@@ -203,6 +219,7 @@ export const BestPracticeCategories: BestPracticeCategory[] = [
   },
   {
     id: "manage-names",
+    slug: "manage-names",
     name: "Managing Names",
     description:
       "Updating profiles, transferring ownership, configuring resolvers, and more. There's a lot to managing ENS names!",

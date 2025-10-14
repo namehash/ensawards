@@ -1,12 +1,38 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
-import { type AppData, BenchmarkResult, appsData } from "@/data/appData.ts";
-import {
-  type BestPractice,
-  BestPracticeCategories,
-  type BestPracticeCategory,
-} from "@/data/bestPracticesData.ts";
 
-export const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
+/**
+ * Checks whether a given string is a valid slug.
+ * A valid slug:
+ * - is non-empty
+ * - contains only lowercase letters (a–z) and hyphens (-)
+ */
+export const isValidSlug = (maybeSlug: string) => {
+  const slugRegex = /^[a-z-]+$/;
+
+  if (maybeSlug.length == 0 ){
+    return false;
+  }
+
+  return slugRegex.test(maybeSlug);
+}
+
+/**
+ * Takes in an array of strings and returns true
+ * if and only if all strings in the provided array are unique.
+ */
+export const areStringsUnique = (stringArray: string[]): boolean => {
+  const stringSet = new Set();
+
+  for (const elem of stringArray){
+    if (stringSet.has(elem)){
+      return false;
+    }
+
+    stringSet.add(elem);
+  }
+
+  return true;
+}
 
 export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
   switch (whatsSuggested) {
@@ -25,25 +51,4 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
     default:
       throw new Error(`${whatsSuggested} is not a valid suggestion category`);
   }
-};
-
-export const getAppById = (appId: string): AppData | undefined => {
-  return appsData.find((app) => app.id === appId);
-};
-
-export const getCategoryById = (categoryId: string): BestPracticeCategory | undefined => {
-  return BestPracticeCategories.find((category) => category.id === categoryId);
-};
-
-export const getBestPracticeByCategoryAndId = (
-  categoryId: string,
-  bestPracticeId: string,
-): BestPractice | undefined => {
-  const category = getCategoryById(categoryId);
-
-  if (!category) {
-    return undefined;
-  }
-
-  return category.bestPractices.find((bestPractice) => bestPractice.id === bestPracticeId);
 };

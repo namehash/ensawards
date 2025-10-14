@@ -2,9 +2,8 @@
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
 import Layout from "../../layouts/Layout.astro";
-import { OrganizationNames } from "../../types/organizations";
-import { normalizeText } from "../../utils";
 import { cn } from "../../utils/tailwindClassConcatenation";
+import {ORGANIZATIONS} from "../../data/organizations";
 ---
 
 <Layout>
@@ -33,9 +32,9 @@ import { cn } from "../../utils/tailwindClassConcatenation";
         </h3>
         <div class="flex flex-row flex-wrap justify-start items-center gap-4">
           {
-            Object.values(OrganizationNames).map((page) => (
+            ORGANIZATIONS.map((org) => (
               <a
-                href={`/dao-report/${normalizeText(page)}`}
+                href={`/dao-report/${org.slug}`}
                 class={cn(
                   shadcnButtonVariants({
                     variant: "default",
@@ -43,7 +42,7 @@ import { cn } from "../../utils/tailwindClassConcatenation";
                     className: "cursor-pointer rounded-full",
                   }),
                 )}>
-                {page}
+                {org.name}
               </a>
             ))
           }

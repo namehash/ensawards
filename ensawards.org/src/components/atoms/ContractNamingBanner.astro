@@ -1,0 +1,34 @@
+---
+import {cn} from "../../utils/tailwindClassConcatenation";
+import {shadcnButtonVariants} from "../ui/shadcnButtonStyles";
+import DollarEnsIcon from "../../components/atoms/icons/DollarEnsIcon.astro";
+---
+<a
+        href="https://discuss.ens.domains/t/temp-check-ens-contract-naming-season/21402"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="max-w-[1216px] w-full h-fit sm:h-[88px] flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-center bg-[linear-gradient(0deg,#F9D25A_0%,#F4BF1A_100%)] sm:bg-[linear-gradient(90deg,#F9D25A_0%,#F4BF1A_100%)] p-4 sm:px-6 rounded-lg">
+    <div
+            class="flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3 sm:gap-5">
+        <DollarEnsIcon />
+        <div>
+            <h4
+                    class="text-lg font-semibold leading-7 max-sm:self-stretch max-sm:text-center">
+                ENS Contract Naming Season
+            </h4>
+            <p
+                    class="text-sm text-black/50 font-normal leading-7 max-sm:self-stretch max-sm:text-center">
+                Up to 10,000 $ENS in awards
+            </p>
+        </div>
+    </div>
+    <button
+            class={cn(
+                shadcnButtonVariants({
+                    variant: "ghost",
+                    size: "default",
+                    className: "cursor-pointer rounded-full hover:bg-black/5",
+                }),
+            )}>Learn more</button
+    >
+</a>

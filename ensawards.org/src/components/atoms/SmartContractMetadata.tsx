@@ -13,6 +13,10 @@ export interface SmartContractMetadataProps {
   metadata: ContractMetadata;
 }
 
+const getActivatedMetadataFieldMessage = (fieldValue:string) => `Example activated info. Field value=${fieldValue}.`;
+
+const getDeactivatedMetadataFieldMessage = () => "Example deactivated info";
+
 export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) {
   return (
     <TooltipProvider delayDuration={1000} skipDelayDuration={0}>
@@ -23,7 +27,7 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
             <Aperture
               className={cn(
                 "w-[21px] h-[21px]",
-                metadata.field1.active ? "text-black" : "text-gray-200",
+                metadata.field1 ? "text-black" : "text-gray-200",
               )}
             />
           </TooltipTrigger>
@@ -31,9 +35,9 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
             sideOffset={10}
             className="bg-gray-50 text-sm text-black shadow-md outline-none max-w-[275px]"
           >
-            {metadata.field1.active
-              ? metadata.field1.messageActivated
-              : metadata.field1.messageDeactivated}
+            {metadata.field1
+              ? getActivatedMetadataFieldMessage(metadata.field1)
+              : getDeactivatedMetadataFieldMessage()}
           </TooltipContent>
         </Tooltip>
         <Tooltip>
@@ -41,7 +45,7 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
             <Bell
               className={cn(
                 "w-[21px] h-[21px]",
-                metadata.field2.active ? "text-black" : "text-gray-200",
+                metadata.field2 ? "text-black" : "text-gray-200",
               )}
             />
           </TooltipTrigger>
@@ -49,9 +53,9 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
             sideOffset={10}
             className="bg-gray-50 text-sm text-black shadow-md outline-none max-w-[275px]"
           >
-            {metadata.field2.active
-              ? metadata.field2.messageActivated
-              : metadata.field2.messageDeactivated}
+            {metadata.field2
+                ? getActivatedMetadataFieldMessage(metadata.field2)
+                : getDeactivatedMetadataFieldMessage()}
           </TooltipContent>
         </Tooltip>
         <Tooltip>
@@ -59,7 +63,7 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
             <Citrus
               className={cn(
                 "w-[21px] h-[21px]",
-                metadata.field3.active ? "text-black" : "text-gray-200",
+                metadata.field3 ? "text-black" : "text-gray-200",
               )}
             />
           </TooltipTrigger>
@@ -67,9 +71,9 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
             sideOffset={10}
             className="bg-gray-50 text-sm text-black shadow-md outline-none max-w-[275px]"
           >
-            {metadata.field3.active
-              ? metadata.field3.messageActivated
-              : metadata.field3.messageDeactivated}
+            {metadata.field3
+                ? getActivatedMetadataFieldMessage(metadata.field3)
+                : getDeactivatedMetadataFieldMessage()}
           </TooltipContent>
         </Tooltip>
         <Tooltip>
@@ -77,7 +81,7 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
             <BadgeDollarSign
               className={cn(
                 "w-[21px] h-[21px]",
-                metadata.field4.active ? "text-black" : "text-gray-200",
+                metadata.field4 ? "text-black" : "text-gray-200",
               )}
             />
           </TooltipTrigger>
@@ -85,9 +89,9 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
             sideOffset={10}
             className="bg-gray-50 text-sm text-black shadow-md outline-none max-w-[275px]"
           >
-            {metadata.field4.active
-              ? metadata.field4.messageActivated
-              : metadata.field4.messageDeactivated}
+            {metadata.field4
+                ? getActivatedMetadataFieldMessage(metadata.field4)
+                : getDeactivatedMetadataFieldMessage()}
           </TooltipContent>
         </Tooltip>
       </div>

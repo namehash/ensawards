@@ -23,11 +23,11 @@ const { contract }: ContractCardProps = Astro.props;
       {contract.codeName}
     </p>
     <a
-      href={getBlockExplorerUrlForContract(contract.chain.id, contract.address)}
+      href={getBlockExplorerUrlForContract(contract.contract.chain.id, contract.contract.address)}
       target="_blank"
       rel="noreferrer noopener"
       class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
-      >{contract.address} ↗</a
+      >{contract.contract.address} ↗</a
     >
   </div>
   <div
@@ -36,13 +36,13 @@ const { contract }: ContractCardProps = Astro.props;
       ENS name
     </p>
     {
-      contract.name ? (
+      contract.cachedEnsProfile !== null ? (
         <a
-          href={`https://app.ens.domains/${contract.name}`}
+          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedEnsProfile.ensName)}`}
           target="_blank"
           rel="noreferrer noopener"
           class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-          {contract.name} ↗
+          {contract.cachedEnsProfile.ensName} ↗
         </a>
       ) : (
         <p class="text-sm leading-normal font-medium">Unnamed contract</p>
@@ -52,12 +52,12 @@ const { contract }: ContractCardProps = Astro.props;
   <div
     class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px]">
     {
-      contract.name && contract.metadata ? (
+      contract.cachedEnsProfile !== null && contract.cachedEnsProfile.ensMetadata ? (
         <>
           <p class="text-sm leading-normal font-normal text-muted-foreground">
             ENS metadata
           </p>
-          <SmartContractMetadata client:load metadata={contract.metadata} />
+          <SmartContractMetadata client:load metadata={contract.cachedEnsProfile.ensMetadata} />
         </>
       ) : (
         <a
@@ -79,20 +79,20 @@ const { contract }: ContractCardProps = Astro.props;
   <div
     class="max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:items-center sm:min-w-[115px] max-sm:self-stretch">
     <MatrixBadge
-      text={contract.name ? "Named" : "Unnamed"}
+      text={contract.cachedEnsProfile !== null ? "Named" : "Unnamed"}
       className={BenchmarkResultToBadgeStyles.get(
-        contract.name ? BenchmarkResult.Pass : BenchmarkResult.Fail,
+          contract.cachedEnsProfile !== null ? BenchmarkResult.Pass : BenchmarkResult.Fail,
       )!}
-      iconId={contract.name ? BenchmarkResult.Pass : BenchmarkResult.Fail}
+      iconId={contract.cachedEnsProfile !== null ? BenchmarkResult.Pass : BenchmarkResult.Fail}
     />
     <div class="flex sm:hidden flex-col justify-start items-start">
       {
-        contract.name && contract.metadata ? (
+        contract.cachedEnsProfile !== null && contract.cachedEnsProfile.ensMetadata ? (
           <>
             <p class="text-sm leading-normal font-normal text-muted-foreground">
               ENS metadata
             </p>
-            <SmartContractMetadata client:load metadata={contract.metadata} />
+            <SmartContractMetadata client:load metadata={contract.cachedEnsProfile.ensMetadata} />
           </>
         ) : (
           <a

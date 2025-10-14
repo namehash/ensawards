@@ -1,177 +1,248 @@
-import { ORGANIZATIONS } from "@/data/organizations.ts";
+import {ENSDaoOrg, UniswapDaoOrg} from "@/data/organizations.ts";
 import type { Contract } from "@/types/contracts.ts";
 import { mainnet } from "viem/chains";
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    address: "0x0000000000000000000000000000000000000000",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000000",
+      chain: mainnet
+    },
     codeName: "Project 1 - Unnamed Contract 1",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    address: "0x0000000000000000000000000000000000000001",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000001",
+      chain: mainnet
+    },
     codeName: "Project 1 - Unnamed Contract 2",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    address: "0x0000000000000000000000000000000000000002",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000002",
+      chain: mainnet
+    },
     codeName: "Project 1 - Named Contract 1",
-    name: "Name P1C1",
+    cachedEnsProfile: {
+      ensName: "Name P1C1",
+    },
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    address: "0x0000000000000000000000000000000000000003",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000003",
+      chain: mainnet
+    },
     codeName: "Project 1 - Named Contract 2",
-    name: "Name P1C2",
+    cachedEnsProfile: {
+      ensName: "Name P1C2",
+    },
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    address: "0x0000000000000000000000000000000000000004",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000004",
+      chain: mainnet
+    },
     codeName: "Project 1 - Named Contract 3",
-    name: "Name P1C3",
+    cachedEnsProfile: {
+      ensName: "Name P1C3",
+    },
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    address: "0x0000000000000000000000000000000000000005",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000005",
+      chain: mainnet
+    },
     codeName: "Project 1 - Named Contract 4",
-    name: "Name P1C4",
+    cachedEnsProfile: {
+      ensName: "Name P1C4",
+    },
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    address: "0x0000000000000000000000000000000000000006",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000006",
+      chain: mainnet
+    },
     codeName: "Project 1 - Named Contract 5",
-    name: "Name P1C5",
+    cachedEnsProfile: {
+      ensName: "Name P1C5",
+    },
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    address: "0x0000000000000000000000000000000000000007",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000007",
+      chain: mainnet
+    },
     codeName: "Project 1 - Named Contract 6",
-    name: "Name P1C6",
+    cachedEnsProfile: {
+      ensName: "Name P1C6",
+    },
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    address: "0x0000000000000000000000000000000000000008",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000008",
+      chain: mainnet
+    },
     codeName: "Project 1 - Named Contract 7",
-    name: "Name P1C7",
+    cachedEnsProfile: {
+      ensName: "Name P1C7",
+    },
   },
   {
-    org: ORGANIZATIONS["ENS DAO"],
+    org: ENSDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    address: "0x0000000000000000000000000000000000000009",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000009",
+      chain: mainnet
+    },
     codeName: "Project 1 - Named Contract 8",
-    name: "Name P1C8",
+    cachedEnsProfile: {
+      ensName: "Name P1C8",
+    },
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    address: "0x0000000000000000000000000000000000000010",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000010",
+      chain: mainnet
+    },
     codeName: "Project 2 - Unnamed Contract 1",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    address: "0x0000000000000000000000000000000000000011",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000011",
+      chain: mainnet
+    },
     codeName: "Project 2 - Unnamed Contract 2",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    address: "0x0000000000000000000000000000000000000012",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000012",
+      chain: mainnet
+    },
     codeName: "Project 2 - Unnamed Contract 3",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    address: "0x0000000000000000000000000000000000000013",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000013",
+      chain: mainnet
+    },
     codeName: "Project 2 - Unnamed Contract 4",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    address: "0x0000000000000000000000000000000000000014",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000014",
+      chain: mainnet
+    },
     codeName: "Project 2 - Unnamed Contract 5",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    address: "0x0000000000000000000000000000000000000015",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000015",
+      chain: mainnet
+    },
     codeName: "Project 2 - Unnamed Contract 6",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    address: "0x0000000000000000000000000000000000000016",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000016",
+      chain: mainnet
+    },
     codeName: "Project 2 - Unnamed Contract 7",
+    cachedEnsProfile: null,
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    address: "0x0000000000000000000000000000000000000017",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000017",
+      chain: mainnet
+    },
     codeName: "Project 2 - Named Contract 1",
-    name: "Name P2C1",
+    cachedEnsProfile: {
+      ensName: "Name P2C1",
+    },
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    address: "0x0000000000000000000000000000000000000018",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000018",
+      chain: mainnet
+    },
     codeName: "Project 2 - Named Contract 2",
-    name: "Name P2C2",
+    cachedEnsProfile: {
+      ensName: "Name P2C2",
+    },
   },
   {
-    org: ORGANIZATIONS["Uniswap DAO"],
+    org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    address: "0x0000000000000000000000000000000000000019",
-    chain: mainnet,
+    contract: {
+      address: "0x0000000000000000000000000000000000000019",
+      chain: mainnet
+    },
     codeName: "Project 2 - Named Contract 3",
-    name: "Name P2C3",
+    cachedEnsProfile: {
+      ensName: "Name P2C3",
+    },
   },
 ];

@@ -1,5 +1,5 @@
 ---
-import ENSAwardsLogo from "../../assets/ensAwardsLogo.svg";
+import { EnsAwardsIcon } from "@/components/atoms/icons/EnsAwardsIcon.tsx";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import HeaderMobileNavigation from "../molecules/HeaderMobileNavigation";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
@@ -13,7 +13,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
     <a
       href="/"
       class="w-fit h-fit max-h-[56px] flex flex-row flex-nowrap justify-start items-center gap-[10px]">
-      <ENSAwardsLogo class="max-sm:w-[26px] max-sm:h-[25px]" />
+      <EnsAwardsIcon className="max-sm:w-[26px] max-sm:h-[25px]" />
       <p
         class="text-[19px] sm:text-2xl text-black leading-[1.333] sm:leading-8 font-bold">
         ENSAwards

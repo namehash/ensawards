@@ -6,15 +6,15 @@ import { describe, expect, it } from "vitest";
 
 describe("weight functions", () => {
   const mockGroupedTestData = {
-    "ENS DAO": CONTRACTS_TEST_DATA.slice(0, 10),
-    "Uniswap DAO": CONTRACTS_TEST_DATA.slice(10),
+    "org-ens-dao": CONTRACTS_TEST_DATA.slice(0, 10),
+    "org-uniswap-dao": CONTRACTS_TEST_DATA.slice(10),
   } as Record<SupportedGroupByCategory, Contract[]>;
 
   describe("binaryWeights", () => {
     it("should give weight = 1 to all named contracts", () => {
       const expectedOutput = {
-        "ENS DAO": [0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-        "Uniswap DAO": [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        "org-ens-dao": [0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+        "org-uniswap-dao": [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
       } as Record<SupportedGroupByCategory, number[]>;
 
       const result = binaryWeights(mockGroupedTestData);

@@ -3,7 +3,7 @@ import CategoryCard from "../../components/atoms/cards/CategoryCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import { BestPracticeCategories } from "../../data/bestPracticesData";
+import { BEST_PRACTICE_CATEGORIES } from "../../data/bestPracticesData";
 import Layout from "../../layouts/Layout.astro";
 ---
 
@@ -13,12 +13,12 @@ import Layout from "../../layouts/Layout.astro";
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList header="Categories">
       {
-        BestPracticeCategories.map((category, idx) => (
+        BEST_PRACTICE_CATEGORIES.map((category, idx) => (
           <CategoryCard
             key={`best-practice-card-${idx}`}
             name={category.name}
             description={category.description}
-            viewBestPracticesLink={`/ens-best-practices/${category.id}`}
+            viewBestPracticesLink={`/ens-best-practices/${category.slug}`}
             comingSoon={category.status}
             numberOfBestPractices={category.bestPractices.length}
           />

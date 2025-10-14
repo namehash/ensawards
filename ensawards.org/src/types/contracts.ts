@@ -1,5 +1,6 @@
 import type { Organization } from "@/types/organizations.ts";
 import type { Address, Chain } from "viem";
+import type {Name} from "@ensnode/ensnode-sdk";
 
 export const ContractTypes = {
   Dao: "DAO",
@@ -22,24 +23,37 @@ export const ContractSubtypes = {
  */
 export type ContractSubtype = (typeof ContractSubtypes)[keyof typeof ContractSubtypes];
 
-//TODO: improve this when more info is gained
-interface MetadataField {
-  active: boolean;
-  messageActivated: string;
-  messageDeactivated: string;
-}
 
-//TODO: is this the correct way to describe an invariant (following some earlier instructions from ensadmin)
 /**
  * Describes metadata fields of a named contract.
  *
- * @throws If the unnamed contract contains metadata
+ * Invariant: If {@link Contract.name} is undefined, the contract cannot contain metadata.
  */
 export interface ContractMetadata {
-  field1: MetadataField;
-  field2: MetadataField;
-  field3: MetadataField;
-  field4: MetadataField;
+  field1?: string;
+  field2?: string;
+  field3?: string;
+  field4?: string;
+}
+
+/**
+ * Describes data connecting the smart contract to its chain.
+ */
+export interface ContractRef {
+  chain: Chain;
+  address: Address;
+}
+
+/**
+ * TODO: Add docs
+ *
+ * Invariants:
+ * - If {@link CachedEnsProfile.ensName} is defined it must be a non-empty normalized ENS name.
+ * - If {@link CachedEnsProfile.ensMetadata} is defined then {@link CachedEnsProfile.ensName} must be defined.
+ */
+export interface CachedEnsProfile {
+  ensName: Name; //TODO: Use `NormalizedName` type from ensnode-sdk once new version is published;
+  ensMetadata?: ContractMetadata;
 }
 
 /**
@@ -49,9 +63,7 @@ export interface Contract {
   org: Organization;
   type: ContractType;
   subtype: ContractSubtype;
-  address: Address;
-  chain: Chain;
+  contract: ContractRef;
   codeName: string;
-  name?: string;
-  metadata?: ContractMetadata;
+  cachedEnsProfile: CachedEnsProfile | null;
 }

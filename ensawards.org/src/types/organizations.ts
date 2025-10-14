@@ -2,23 +2,25 @@ import type { Project } from "@/types/projects.ts";
 import type { JSX } from "astro/jsx-runtime";
 
 export const OrganizationTypes = {
-  DAO: "DAO",
+  Dao: "orgtype-dao",
 } as const;
 
-export const OrganizationNames = {
-  Ens: "ENS DAO",
-  Uniswap: "Uniswap DAO",
+export const OrgIds = {
+  Ens: "org-ens-dao",
+  Uniswap: "org-uniswap-dao",
 } as const;
 
 /**
- * ContractSubtype is the derived string union of possible identifiers of established contract subtypes.
+ * The derived string union of possible {@link OrgIds}.
  */
-export type OrganizationName = (typeof OrganizationNames)[keyof typeof OrganizationNames];
+export type OrgId = (typeof OrgIds)[keyof typeof OrgIds];
 
 export interface DAO {
-  orgType: typeof OrganizationTypes.DAO; // DAOs are organizations with `OrganizationType.DAO`.
+  id: OrgId;
+  slug: string;
+  orgType: typeof OrganizationTypes.Dao;
   project: Project; // each organization belongs to a single project.
-  name: OrganizationName;
+  name: string;
   description: string;
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
   socialLinks: {
@@ -27,4 +29,5 @@ export interface DAO {
   };
 }
 
+// TODO: add more Org types to this type union in the future
 export type Organization = DAO;

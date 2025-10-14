@@ -10,7 +10,8 @@ export function binaryWeights(
     SupportedGroupByCategory,
     Contract[],
   ][]) {
-    weightedContracts[key] = values.map((contract) => (contract.name ? 1 : 0));
+    // Verification of the cachedEnsProfile field is enough because then the name has to be defined
+    weightedContracts[key] = values.map((contract) => (contract.cachedEnsProfile !== null ? 1 : 0));
   }
 
   return weightedContracts;

@@ -1,36 +1,48 @@
 import { EnsDaoIcon } from "@/components/atoms/icons/EnsDaoIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/UniswapIcon.tsx";
-import { PROJECTS } from "@/data/projects.ts";
+import {ENSProject, UniswapProject} from "@/data/projects.ts";
 import {
   type Organization,
-  type OrganizationName,
-  OrganizationNames,
-  OrganizationTypes,
+  OrganizationTypes, OrgIds,
 } from "@/types/organizations.ts";
 
-export const ORGANIZATIONS: Record<OrganizationName, Organization> = {
-  "ENS DAO": {
-    orgType: OrganizationTypes.DAO,
-    project: PROJECTS.ENS,
-    name: OrganizationNames.Ens,
-    description:
+export const ENSDaoOrg: Organization = {
+  id: OrgIds.Ens,
+  slug: "ens-dao",
+  orgType: OrganizationTypes.Dao,
+  project: ENSProject,
+  name: "ENS DAO",
+  description:
       "The Ethereum Name Service (ENS) is a decentralized domain name system. The ENS DAO governs the ENS protocol and treasury.",
-    icon: EnsDaoIcon,
-    socialLinks: {
-      websiteLink: new URL("https://ensdao.org/"),
-      twitterLink: new URL("https://x.com/ENS_DAO"),
-    },
+  icon: EnsDaoIcon,
+  socialLinks: {
+    websiteLink: new URL("https://ensdao.org/"),
+    twitterLink: new URL("https://x.com/ENS_DAO"),
   },
-  "Uniswap DAO": {
-    orgType: OrganizationTypes.DAO,
-    project: PROJECTS.Uniswap,
-    name: OrganizationNames.Uniswap,
-    description:
-      "The largest onchain marketplace. Buy and sell crypto on Ethereum and 12+ other chains.",
-    icon: UniswapIcon,
-    socialLinks: {
-      websiteLink: new URL("https://app.uniswap.org/"),
-      twitterLink: new URL("https://x.com/Uniswap"),
-    },
+}
+
+export const UniswapDaoOrg: Organization = {
+  id: OrgIds.Uniswap,
+  slug: "uniswap-dao",
+  orgType: OrganizationTypes.Dao,
+  project: UniswapProject,
+  name: "Uniswap DAO",
+  description:
+      "Uniswap governance is a collective of companies, communities, and token holders working together to steward the future of the Uniswap protocol.",
+  icon: UniswapIcon,
+  socialLinks: {
+    websiteLink: new URL("https://www.uniswapfoundation.org/"),
+    twitterLink: new URL("https://x.com/UniswapFND"),
   },
-} as const;
+};
+
+/**
+ * Array of supported organizations.
+ *
+ * Invariant: This array should contain exactly one {@link Organization} for each {@link OrgId}.
+ */
+export const ORGANIZATIONS: Organization[] = [
+    ENSDaoOrg, UniswapDaoOrg
+];
+
+

@@ -7,18 +7,18 @@ import SupportMatrixCard from "../../../components/atoms/cards/SupportMatrixCard
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
-import { appsData } from "../../../data/appData";
-import { BestPracticeCategories } from "../../../data/bestPracticesData";
+import { APPS } from "../../../data/appData";
+import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPracticesData";
 import Layout from "../../../layouts/Layout.astro";
-import { getBestPracticeByCategoryAndId } from "../../../utils";
+import { getBestPracticeByCategoryAndSlug } from "../../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 export function getStaticPaths() {
   const staticPaths = [];
 
-  for (let category of BestPracticeCategories) {
+  for (let category of BEST_PRACTICE_CATEGORIES) {
     category.bestPractices.forEach((bestPractice) =>
-      staticPaths.push({ params: { category: category.id, bestPractice: bestPractice.id } }),
+      staticPaths.push({ params: { category: category.slug, bestPractice: bestPractice.slug } }),
     );
   }
   return staticPaths;
@@ -30,14 +30,14 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
 
-const bestPracticeToDisplay = getBestPracticeByCategoryAndId(category, bestPractice);
+const bestPracticeToDisplay = getBestPracticeByCategoryAndSlug(category, bestPractice);
 
-const benchmarkedApps = appsData.filter(
+const benchmarkedApps = APPS.filter(
   (app) =>
     app.benchmarks.find(
       (benchmark) =>
-        benchmark.bestPracticeDetails.category === bestPracticeToDisplay.category &&
-        benchmark.bestPracticeDetails.name === bestPracticeToDisplay.name,
+        benchmark.bestPracticeDetails.categorySlug === bestPracticeToDisplay.categorySlug &&
+        benchmark.bestPracticeDetails.id === bestPracticeToDisplay.id,
     ) !== undefined,
 );
 ---
@@ -52,11 +52,11 @@ const benchmarkedApps = appsData.filter(
                 <SubpageHero
                     header={bestPracticeToDisplay.name}
                     description={bestPracticeToDisplay.description}
-                    breadcrumbs={["ENS best practices", bestPracticeToDisplay.category]}
+                    breadcrumbs={["ENS best practices", bestPracticeToDisplay.categoryName]}
                     additionalElements={[
                       {
                         name: "Category",
-                        value: bestPracticeToDisplay.category,
+                        value: bestPracticeToDisplay.categoryName,
                         link: `/ens-best-practices/${category}`,
                       },
                       {
@@ -165,7 +165,7 @@ const benchmarkedApps = appsData.filter(
                           <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
                               <p class="text-sm leading-normal font-normal text-muted-foreground">Category</p>
                               <a href={`/ens-best-practices/${category}`} class="text-sm leading-normal font-semibold text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200">
-                                  {bestPracticeToDisplay.category}
+                                  {bestPracticeToDisplay.categoryName}
                               </a>
                           </div>
                           <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">

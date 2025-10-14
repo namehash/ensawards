@@ -8,8 +8,8 @@ describe("contract pipelines", () => {
   describe("default pipeline", () => {
     it("should return correct scores for both projects", () => {
       const expectedResult = {
-        "ENS DAO": 80,
-        "Uniswap DAO": 30,
+        "org-ens-dao": 80,
+        "org-uniswap-dao": 30,
       } as Record<SupportedGroupByCategory, number>;
 
       const result = contractPipeline(groupByOrg, binaryWeights, undefined, CONTRACTS_TEST_DATA);

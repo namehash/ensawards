@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import HomeIcon from "../../assets/homeIcon.svg";
 import SubpageHeroImage from "../../assets/subpageHeroImage.png";
-import { normalizeText } from "../../utils";
 import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
 
 interface additionalHeroElement {
@@ -21,6 +20,8 @@ const { header, description, breadcrumbs, icon, additionalElements }: SubpageHer
   Astro.props;
 
 let breadcrumbHref = "";
+
+const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
 ---
 
 <section
