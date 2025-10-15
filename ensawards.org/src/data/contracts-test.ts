@@ -127,7 +127,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     codeName: "Project 1 - Forward Named Contract 1",
     cachedEnsProfile: {
       primaryName: null,
-      forwardNames: ["forward.name.p1c1.eth"]
+      forwardNames: ["forward.name.p1c1.eth"],
     },
   },
   {
