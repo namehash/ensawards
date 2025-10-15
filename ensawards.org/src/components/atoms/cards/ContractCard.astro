@@ -39,11 +39,12 @@ const { contract }: ContractCardProps = Astro.props;
     {
       contract.cachedEnsProfile !== null ? (
         <a
-          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedEnsProfile.primaryName)}`}
+          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedEnsProfile.primaryName !== null ? contract.cachedEnsProfile.primaryName : contract.cachedEnsProfile.forwardNames[0])}`}
           target="_blank"
           rel="noreferrer noopener"
           class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-          {contract.cachedEnsProfile.primaryName} ↗
+          <!--Users can add as many forward names as they want but for the sake of consistency we will always display the first one-->
+          {contract.cachedEnsProfile.primaryName !== null ? contract.cachedEnsProfile.primaryName : contract.cachedEnsProfile.forwardNames[0]} ↗
         </a>
       ) : (
         <p class="text-sm leading-normal font-medium">Unnamed contract</p>
