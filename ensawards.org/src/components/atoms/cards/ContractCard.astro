@@ -1,12 +1,10 @@
 ---
-import { BenchmarkResult } from "../../../types/apps";
 import { Contract } from "../../../types/contracts";
 import { getBlockExplorerUrlForContract } from "../../../utils/chains";
-import { BenchmarkResultToBadgeStyles } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import MatrixBadge from "../MatrixBadge.astro";
 import { SmartContractMetadata } from "../SmartContractMetadata";
+import { ContractBadge} from "../badges/ContractBadge";
 export interface ContractCardProps {
   contract: Contract;
 }
@@ -85,17 +83,7 @@ const { contract }: ContractCardProps = Astro.props;
   </div>
   <div
     class="max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:items-center sm:min-w-[115px] max-sm:self-stretch">
-    <MatrixBadge
-      text={contract.cachedEnsProfile !== null ? "Named" : "Unnamed"}
-      className={BenchmarkResultToBadgeStyles.get(
-        contract.cachedEnsProfile !== null
-          ? BenchmarkResult.Pass
-          : BenchmarkResult.Fail,
-      )!}
-      iconId={contract.cachedEnsProfile !== null
-        ? BenchmarkResult.Pass
-        : BenchmarkResult.Fail}
-    />
+    <ContractBadge client:load ensProfileData={contract.cachedEnsProfile}/>
     <div class="flex sm:hidden flex-col justify-start items-start">
       {
         contract.cachedEnsProfile !== null &&
