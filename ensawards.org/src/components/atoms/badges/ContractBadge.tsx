@@ -28,7 +28,7 @@ export function ContractBadge({ensProfileData}: ContractBadgeProps) {
                     )}>
         {ensProfileData.primaryName !== null ? <CheckCheck width={20} height={20} /> : <Check width={20} height={20} />}
                     Named
-                    {ensProfileData.primaryName === null && <GenericTooltip content={<>Forward named only</>}><ForwardNameOnlyInfoIcon width={20} height={20} /></GenericTooltip>}
+                    {ensProfileData.primaryName === null && <GenericTooltip content={<>This name forward-resolves to this contract, however it is not properly configured as an ENS primary name.</>}><ForwardNameOnlyInfoIcon width={20} height={20} /></GenericTooltip>}
 </span>
             }
         </TooltipProvider>
