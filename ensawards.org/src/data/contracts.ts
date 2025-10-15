@@ -13,7 +13,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "ENSToken",
     cachedEnsProfile: {
-      ensName: "token.ensdao.eth",
+      primaryName: "token.ensdao.eth",
       ensMetadata: {
         field1: "field 1 value",
         field2: "field 2 value",
@@ -36,6 +36,26 @@ export const CONTRACTS: Contract[] = [
   {
     org: ENSDaoOrg,
     type: "DAO",
+    subtype: "Utility",
+    contract: {
+      address: "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9XDD",
+      chain: mainnet,
+    },
+    codeName: "Example forward named only",
+    cachedEnsProfile: {
+      primaryName: null,
+      forwardNames: ["example.forward.name.eth"],
+      ensMetadata: {
+        field1: "field 1 value",
+        field2: "field 2 value",
+        field3: "field 3 value",
+        field4: "field 4 value",
+      },
+    },
+  },
+  {
+    org: ENSDaoOrg,
+    type: "DAO",
     subtype: "Governance",
     contract: {
       address: "0xd7A029Db2585553978190dB5E85eC724Aa4dF23f",
@@ -43,7 +63,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "TokenLock",
     cachedEnsProfile: {
-      ensName: "tokenlock.ensdao.eth",
+      primaryName: "tokenlock.ensdao.eth",
       ensMetadata: {
         field1: "field 1 value",
         field3: "field 3 value",
@@ -61,7 +81,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "ENSGovernor",
     cachedEnsProfile: {
-      ensName: "governor.ensdao.eth",
+      primaryName: "governor.ensdao.eth",
       ensMetadata: {
         field1: "field 1 value",
         field2: "field 2 value",
@@ -78,7 +98,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "TimelockController",
     cachedEnsProfile: {
-      ensName: "wallet.ensdao.eth",
+      primaryName: "wallet.ensdao.eth",
       ensMetadata: {
         field2: "field 2 value",
         field3: "field 3 value",
@@ -96,7 +116,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "SafeProxy",
     cachedEnsProfile: {
-      ensName: "twap.ensdao.eth",
+      primaryName: "twap.ensdao.eth",
       ensMetadata: {
         field1: "field 1 value",
         field4: "field 4 value",
@@ -113,7 +133,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "Veto",
     cachedEnsProfile: {
-      ensName: "veto.ensdao.eth",
+      primaryName: "veto.ensdao.eth",
       ensMetadata: {
         field2: "field 2 value",
       },
@@ -129,7 +149,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "GnosisSafeProxy",
     cachedEnsProfile: {
-      ensName: "endowment.ensdao.eth",
+      primaryName: "endowment.ensdao.eth",
       ensMetadata: {
         field3: "field 3 value",
         field4: "field 4 value",
@@ -146,7 +166,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "ENSGovernor",
     cachedEnsProfile: {
-      ensName: "governor.ensdao.eth",
+      primaryName: "governor.ensdao.eth",
     },
   },
   {
@@ -159,7 +179,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "Plh base named ctr",
     cachedEnsProfile: {
-      ensName: "named.placeholder.contract.eth",
+      primaryName: "named.placeholder.contract.eth",
       ensMetadata: {
         field1: "field 1 value",
         field2: "field 2 value",
@@ -365,7 +385,7 @@ export const CONTRACTS: Contract[] = [
     },
     codeName: "Uniswap Plh base named ctr",
     cachedEnsProfile: {
-      ensName: "uniswap.named.placeholder.contract.eth",
+      primaryName: "uniswap.named.placeholder.contract.eth",
       ensMetadata: {},
     },
   },

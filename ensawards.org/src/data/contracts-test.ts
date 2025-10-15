@@ -35,7 +35,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 1 - Named Contract 1",
     cachedEnsProfile: {
-      ensName: "Name P1C1",
+      primaryName: "name.p1c1.eth",
     },
   },
   {
@@ -48,7 +48,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 1 - Named Contract 2",
     cachedEnsProfile: {
-      ensName: "Name P1C2",
+      primaryName: "name.p1c2.eth",
     },
   },
   {
@@ -61,7 +61,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 1 - Named Contract 3",
     cachedEnsProfile: {
-      ensName: "Name P1C3",
+      primaryName: "name.p1c3.eth",
     },
   },
   {
@@ -74,7 +74,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 1 - Named Contract 4",
     cachedEnsProfile: {
-      ensName: "Name P1C4",
+      primaryName: "name.p1c4.eth",
     },
   },
   {
@@ -87,7 +87,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 1 - Named Contract 5",
     cachedEnsProfile: {
-      ensName: "Name P1C5",
+      primaryName: "name.p1c5.eth",
     },
   },
   {
@@ -100,7 +100,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 1 - Named Contract 6",
     cachedEnsProfile: {
-      ensName: "Name P1C6",
+      primaryName: "name.p1c6.eth",
     },
   },
   {
@@ -113,7 +113,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 1 - Named Contract 7",
     cachedEnsProfile: {
-      ensName: "Name P1C7",
+      primaryName: "name.p1c7.eth",
     },
   },
   {
@@ -124,9 +124,10 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       address: "0x0000000000000000000000000000000000000009",
       chain: mainnet,
     },
-    codeName: "Project 1 - Named Contract 8",
+    codeName: "Project 1 - Forward Named Contract 1",
     cachedEnsProfile: {
-      ensName: "Name P1C8",
+      primaryName: null,
+      forwardNames: ["forward.name.p1c1.eth"]
     },
   },
   {
@@ -216,7 +217,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 2 - Named Contract 1",
     cachedEnsProfile: {
-      ensName: "Name P2C1",
+      primaryName: "name.p2c1.eth",
     },
   },
   {
@@ -229,7 +230,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
     codeName: "Project 2 - Named Contract 2",
     cachedEnsProfile: {
-      ensName: "Name P2C2",
+      primaryName: "name.p2c2.eth",
     },
   },
   {
@@ -240,9 +241,10 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       address: "0x0000000000000000000000000000000000000019",
       chain: mainnet,
     },
-    codeName: "Project 2 - Named Contract 3",
+    codeName: "Project 2 - Forward Named Contract 1",
     cachedEnsProfile: {
-      ensName: "Name P2C3",
+      primaryName: null,
+      forwardNames: ["forward.name.p2c1.eth"],
     },
   },
 ];

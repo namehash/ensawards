@@ -44,14 +44,19 @@ export interface ContractRef {
 }
 
 /**
- * TODO: Add docs
+ * Cached ENS contract data including the possible Primary Name, Forward Names and the metadata.
+ *
+ * TODO: improve docs
  *
  * Invariants:
- * - If {@link CachedEnsProfile.ensName} is defined it must be a non-empty normalized ENS name.
- * - If {@link CachedEnsProfile.ensMetadata} is defined then {@link CachedEnsProfile.ensName} must be defined.
+ * - If {@link CachedEnsProfile.primaryName} is defined it must be a non-empty normalized ENS name.
+ * - If {@link CachedEnsProfile.forwardNames} is defined it must be a list of non-empty normalized ENS names.
+ * - If {@link CachedEnsProfile.ensMetadata} is defined then
+ *   either {@link CachedEnsProfile.primaryName} or {@link CachedEnsProfile.forwardNames} must be defined and not null.
  */
 export interface CachedEnsProfile {
-  ensName: Name; //TODO: Use `NormalizedName` type from ensnode-sdk once new version is published;
+  primaryName: Name | null; //TODO: Use `NormalizedName` type from ensnode-sdk once new version is published;
+  forwardNames?: [Name, ...Name[]];
   ensMetadata?: ContractMetadata;
 }
 

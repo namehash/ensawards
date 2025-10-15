@@ -10,7 +10,8 @@ export function binaryWeights(
     SupportedGroupByCategory,
     Contract[],
   ][]) {
-    // Verification of the cachedEnsProfile field is enough because then the name has to be defined
+    // Verification of the cachedEnsProfile field is enough because then
+    // either primaryName or forwardNames field has to be defined and not null
     weightedContracts[key] = values.map((contract) => (contract.cachedEnsProfile !== null ? 1 : 0));
   }
 
