@@ -1,8 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { ENSNODE_URL } from "astro:env/client";
 import SubpageHero from "../components/molecules/SubpageHero.astro";
-import {ENSNODE_URL } from "astro:env/client";
-import {EnsNodeReactContent} from "../components/organisms/EnsNodeReactContent";
+import { EnsNodeReactContent } from "../components/organisms/EnsNodeReactContent";
+import Layout from "../layouts/Layout.astro";
 ---
 <Layout>
     <SubpageHero header="ENSNode integration (tests)" />
