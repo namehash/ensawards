@@ -22,15 +22,17 @@ export function NameRecords({name}: NameRecordsProps) {
         return <div>No data</div>;
     }
     return (
-        <div>
-            <h3>Resolved Record for vitalik.eth</h3>
+        <div className="flex flex-col justify-start items-start gap-4">
+            <h3>Resolved Records for <b>{name}</b></h3>
             {data.records.addresses && (
                 <p>ETH Address: {data.records.addresses["60"]}</p>
             )}
-            <div>
-                <p>And his avatar: </p>
-                <p>AVATAR PLACEHOLDER</p>
-            </div>
+            {data.records.texts && (
+                <div>
+                    <p>Avatar: {data.records.texts.avatar}</p>
+                    <p>Twitter: {data.records.texts["com.twitter"]}</p>
+                </div>
+            )}
         </div>
     );
 }

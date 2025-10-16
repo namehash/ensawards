@@ -26,7 +26,7 @@ export function EnsNodeReactContent({connectionURL}: ProviderWrapperProps){
 
     return (
         <ENSNodeProvider config={config}>
-            <div className="flex flex-col justify-start items-start gap-6">
+            <div className="w-full h-fit flex flex-col justify-start items-start gap-6">
                 <h1 className="">Select a name to preview its avatar</h1>
                 <div className="flex flex-row flex-wrap justify-start items-center gap-4">{EXAMPLE_NAMES.map((name) =>               <button
                         key={name}
