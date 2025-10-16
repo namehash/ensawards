@@ -81,6 +81,11 @@ export interface EnsProfileForContract {
 export interface ContractDeployment {
   chain: Chain;
   address: Address;
+
+  /**
+   * The name of the contract from a codebase perspective (ex: in Solidity).
+   */
+  codeName: string;
 }
 
 export const ContractResolutionStatusIds = {
@@ -236,11 +241,6 @@ export interface Contract {
   org: Organization;
   type: ContractType;
   subtype: ContractSubtype;
-
-  /**
-   * The name of the contract from a codebase perspective (ex: in Solidity).
-   */
-  codeName: string;
 
   /**
    * The cached resolution result of the contract's ENS identity.
