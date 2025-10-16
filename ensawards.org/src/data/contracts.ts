@@ -1,5 +1,5 @@
 import { ENSDaoOrg, UniswapDaoOrg } from "@/data/organizations.ts";
-import type { Contract } from "@/types/contracts.ts";
+import {type Contract, ContractResolutionStatusIds} from "@/types/contracts.ts";
 import { base, mainnet } from "viem/chains";
 
 export const CONTRACTS: Contract[] = [
@@ -7,397 +7,488 @@ export const CONTRACTS: Contract[] = [
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72",
-      chain: mainnet,
-    },
-    codeName: "ENSToken",
-    cachedEnsProfile: {
-      primaryName: "token.ensdao.eth",
-      ensMetadata: {
-        field1: "field 1 value",
-        field2: "field 2 value",
-        field3: "field 3 value",
-        field4: "field 4 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72",
+        chain: mainnet,
+        codeName: "ENSToken",
       },
+      name: "token.ensdao.eth",
+      // TODO: replace placeholder data below (in all "profiles")
+      profile: {
+        docs: new URL("https://ensnode.io/docs"),
+        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        audits: [
+          {
+            auditor: "John Doe",
+            report: new URL("https://ensrainbow.io")
+          }
+        ]
+      }
     },
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x0000000000000000000000000000000000000000",
-      chain: mainnet,
-    },
-    codeName: "Example Unnamed Contract",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000000",
+        chain: mainnet,
+        codeName: "Example Unnamed Contract",
+      },
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    contract: {
-      address: "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9XDD",
-      chain: mainnet,
-    },
-    codeName: "Example forward named only",
-    cachedEnsProfile: {
-      primaryName: null,
-      forwardNames: ["example.forward.name.eth"],
-      ensMetadata: {
-        field1: "field 1 value",
-        field2: "field 2 value",
-        field3: "field 3 value",
-        field4: "field 4 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      contract: {
+        address: "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9XDD",
+        chain: mainnet,
+        codeName: "Example forward named only",
       },
-    },
+      name: "example.forward.name.eth",
+      profile: {
+        docs: new URL("https://ensnode.io/docs"),
+        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        audits: [
+          {
+            auditor: "John Doe",
+            report: new URL("https://ensrainbow.io")
+          }
+        ]
+      }
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0xd7A029Db2585553978190dB5E85eC724Aa4dF23f",
-      chain: mainnet,
-    },
-    codeName: "TokenLock",
-    cachedEnsProfile: {
-      primaryName: "tokenlock.ensdao.eth",
-      ensMetadata: {
-        field1: "field 1 value",
-        field3: "field 3 value",
-        field4: "field 4 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0xd7A029Db2585553978190dB5E85eC724Aa4dF23f",
+        chain: mainnet,
+        codeName: "TokenLock",
       },
-    },
+      name: "tokenlock.ensdao.eth",
+      profile: {
+        docs: new URL("https://ensnode.io/docs"),
+        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        audits: [
+          {
+            auditor: "John Doe",
+            report: new URL("https://ensrainbow.io")
+          }
+        ]
+      }
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x323A76393544d5ecca80cd6ef2A560C6a395b7E3",
-      chain: mainnet,
-    },
-    codeName: "ENSGovernor",
-    cachedEnsProfile: {
-      primaryName: "governor.ensdao.eth",
-      ensMetadata: {
-        field1: "field 1 value",
-        field2: "field 2 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x323A76393544d5ecca80cd6ef2A560C6a395b7E3",
+        chain: mainnet,
+        codeName: "ENSGovernor",
       },
-    },
+      name: "governor.ensdao.eth",
+      profile: {
+        docs: new URL("https://ensnode.io/docs"),
+        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+      }
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0xFe89cc7aBB2C4183683ab71653C4cdc9B02D44b7",
-      chain: mainnet,
-    },
-    codeName: "TimelockController",
-    cachedEnsProfile: {
-      primaryName: "wallet.ensdao.eth",
-      ensMetadata: {
-        field2: "field 2 value",
-        field3: "field 3 value",
-        field4: "field 4 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0xFe89cc7aBB2C4183683ab71653C4cdc9B02D44b7",
+        chain: mainnet,
+        codeName: "TimelockController",
       },
-    },
+      name: "wallet.ensdao.eth",
+      profile: {
+        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        audits: [
+          {
+            auditor: "John Doe",
+            report: new URL("https://ensrainbow.io")
+          }
+        ]
+      }
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x02D61347e5c6EA5604f3f814C5b5498421cEBdEB",
-      chain: mainnet,
-    },
-    codeName: "SafeProxy",
-    cachedEnsProfile: {
-      primaryName: "twap.ensdao.eth",
-      ensMetadata: {
-        field1: "field 1 value",
-        field4: "field 4 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x02D61347e5c6EA5604f3f814C5b5498421cEBdEB",
+        chain: mainnet,
+        codeName: "SafeProxy",
       },
-    },
+      name: "twap.ensdao.eth",
+      profile: {
+        docs: new URL("https://ensnode.io/docs"),
+        audits: [
+          {
+            auditor: "John Doe",
+            report: new URL("https://ensrainbow.io")
+          }
+        ]
+      }
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x552DF471a4c7Fea11Ea8d7a7b0Acc6989b902a95",
-      chain: mainnet,
-    },
-    codeName: "Veto",
-    cachedEnsProfile: {
-      primaryName: "veto.ensdao.eth",
-      ensMetadata: {
-        field2: "field 2 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x552DF471a4c7Fea11Ea8d7a7b0Acc6989b902a95",
+        chain: mainnet,
+        codeName: "Veto",
       },
-    },
+      name: "veto.ensdao.eth",
+      profile: {
+        docs: new URL("https://ensnode.io/docs"),
+        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        audits: [
+          {
+            auditor: "John Doe",
+            report: new URL("https://ensrainbow.io")
+          }
+        ]
+      }
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x4F2083f5fBede34C2714aFfb3105539775f7FE64",
-      chain: mainnet,
-    },
-    codeName: "GnosisSafeProxy",
-    cachedEnsProfile: {
-      primaryName: "endowment.ensdao.eth",
-      ensMetadata: {
-        field3: "field 3 value",
-        field4: "field 4 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x4F2083f5fBede34C2714aFfb3105539775f7FE64",
+        chain: mainnet,
+        codeName: "GnosisSafeProxy",
       },
-    },
+      name: "endowment.ensdao.eth",
+      profile: {
+        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        audits: [
+          {
+            auditor: "John Doe",
+            report: new URL("https://ensrainbow.io")
+          }
+        ]
+      }
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x323A76393544d5ecca80cd6ef2A560C6a395b7E3",
-      chain: mainnet,
-    },
-    codeName: "ENSGovernor",
-    cachedEnsProfile: {
-      primaryName: "governor.ensdao.eth",
-    },
-  },
-  {
-    org: ENSDaoOrg,
-    type: "DAO",
-    subtype: "Governance",
-    contract: {
-      address: "0x0000000000000000000000000000000000000001",
-      chain: base,
-    },
-    codeName: "Plh base named ctr",
-    cachedEnsProfile: {
-      primaryName: "named.placeholder.contract.eth",
-      ensMetadata: {
-        field1: "field 1 value",
-        field2: "field 2 value",
-        field3: "field 3 value",
-        field4: "field 4 value",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x323A76393544d5ecca80cd6ef2A560C6a395b7E3",
+        chain: mainnet,
+        codeName: "ENSGovernor",
       },
-    },
+      name: "governor.ensdao.eth"
+    }
   },
   {
     org: ENSDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x0000000000000000000000000000000000000002",
-      chain: base,
-    },
-    codeName: "Plh base unnamed ctr",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000001",
+        chain: base,
+        codeName: "Plh base named ctr",
+      },
+      name: "named.placeholder.contract.eth",
+      profile: {
+        docs: new URL("https://ensnode.io/docs"),
+        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        audits: [
+          {
+            auditor: "John Doe",
+            report: new URL("https://ensrainbow.io")
+          }
+        ]
+      }
+    }
+  },
+  {
+    org: ENSDaoOrg,
+    type: "DAO",
+    subtype: "Governance",
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000002",
+        chain: base,
+        codeName: "Plh base unnamed ctr",
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-      chain: mainnet,
-    },
-    codeName: "UNIToken",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+        chain: mainnet,
+        codeName: "UNIToken",
+      }
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
-      chain: mainnet,
-    },
-    codeName: "Timelock",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
+        chain: mainnet,
+        codeName: "Timelock",
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Governance",
-    contract: {
-      address: "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
-      chain: mainnet,
-    },
-    codeName: "GovernorBravo",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+        chain: mainnet,
+        codeName: "GovernorBravo",
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    contract: {
-      address: "0x090D4613473dEE047c3f2706764f49E0821D256e",
-      chain: mainnet,
-    },
-    codeName: "UniMerkleDistributor",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x090D4613473dEE047c3f2706764f49E0821D256e",
+        chain: mainnet,
+        codeName: "UniMerkleDistributor"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    contract: {
-      address: "0x3032Ab3Fa8C01d786D29dAdE018d7f2017918e12",
-      chain: mainnet,
-    },
-    codeName: "StakingRewardsFactory",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x3032Ab3Fa8C01d786D29dAdE018d7f2017918e12",
+        chain: mainnet,
+        codeName: "StakingRewardsFactory",
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    contract: {
-      address: "0x6c3e4cb2e96b01f4b866965a91ed4437839a121a",
-      chain: mainnet,
-    },
-    codeName: "StakingRewards1",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x6c3e4cb2e96b01f4b866965a91ed4437839a121a",
+        chain: mainnet,
+        codeName: "StakingRewards1",
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    contract: {
-      address: "0x7fba4b8dc5e7616e59622806932dbea72537a56b",
-      chain: mainnet,
-    },
-    codeName: "StakingRewards2",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x7fba4b8dc5e7616e59622806932dbea72537a56b",
+        chain: mainnet,
+        codeName: "StakingRewards2",
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    contract: {
-      address: "0xa1484c3aa22a66c62b77e0ae78e15258bd0cb711",
-      chain: mainnet,
-    },
-    codeName: "StakingRewards3",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xa1484c3aa22a66c62b77e0ae78e15258bd0cb711",
+        chain: mainnet,
+        codeName: "StakingRewards3"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    contract: {
-      address: "0xca35e32e7926b96a9988f61d510e038108d8068e",
-      chain: mainnet,
-    },
-    codeName: "StakingRewards4",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xca35e32e7926b96a9988f61d510e038108d8068e",
+        chain: mainnet,
+        codeName: "StakingRewards4",
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    contract: {
-      address: "0x000000000004444c5dc75cB358380D2e3dE08A90",
-      chain: mainnet,
-    },
-    codeName: "PoolManager",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x000000000004444c5dc75cB358380D2e3dE08A90",
+        chain: mainnet,
+        codeName: "PoolManager"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    contract: {
-      address: "0xd1428ba554f4c8450b763a0b2040a4935c63f06c",
-      chain: mainnet,
-    },
-    codeName: "PositionDescriptor",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xd1428ba554f4c8450b763a0b2040a4935c63f06c",
+        chain: mainnet,
+        codeName: "PositionDescriptor"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    contract: {
-      address: "0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e",
-      chain: mainnet,
-    },
-    codeName: "PositionManager",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e",
+        chain: mainnet,
+        codeName: "PositionManager"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    contract: {
-      address: "0x52f0e24d1c21c8a0cb1e5a5dd6198556bd9e1203",
-      chain: mainnet,
-    },
-    codeName: "Quoter",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x52f0e24d1c21c8a0cb1e5a5dd6198556bd9e1203",
+        chain: mainnet,
+        codeName: "Quoter"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    contract: {
-      address: "0x7ffe42c4a5deea5b0fec41c94c136cf115597227",
-      chain: mainnet,
-    },
-    codeName: "StateView",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x7ffe42c4a5deea5b0fec41c94c136cf115597227",
+        chain: mainnet,
+        codeName: "StateView"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    contract: {
-      address: "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
-      chain: mainnet,
-    },
-    codeName: "UniversalRouter",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
+        chain: mainnet,
+        codeName: "UniversalRouter"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "DeFi App",
-    contract: {
-      address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
-      chain: mainnet,
-    },
-    codeName: "Permit2",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+        chain: mainnet,
+        codeName: "Permit2"
+      },
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DAO",
     subtype: "Utility",
-    contract: {
-      address: "0x0000000000000000000000000000000000000003",
-      chain: base,
-    },
-    codeName: "Uniswap Plh base named ctr",
-    cachedEnsProfile: {
-      primaryName: "uniswap.named.placeholder.contract.eth",
-      ensMetadata: {},
-    },
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000003",
+        chain: base,
+        codeName: "Uniswap Plh base named ctr",
+      },
+      name: "uniswap.named.placeholder.contract.eth",
+    }
   },
   {
     org: UniswapDaoOrg,
     type: "DeFi",
     subtype: "Utility",
-    contract: {
-      address: "0x0000000000000000000000000000000000000004",
-      chain: base,
-    },
-    codeName: "Uniswap Plh base unnamed ctr",
-    cachedEnsProfile: null,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000004",
+        chain: base,
+        codeName: "Uniswap Plh base unnamed ctr"
+      },
+    }
   },
 ];
