@@ -29,9 +29,12 @@ importers:
       '@ensnode/datasources':
         specifier: ^0.35.0
         version: 0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+      '@ensnode/ensnode-react':
+        specifier: ^0.36.0
+        version: 0.36.0(@tanstack/react-query@5.90.3(react@19.1.1))(react@19.1.1)(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
       '@ensnode/ensnode-sdk':
-        specifier: ^0.35.0
-        version: 0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+        specifier: ^0.36.0
+        version: 0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
       '@headlessui/react':
         specifier: ^2.2.7
         version: 2.2.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -370,8 +373,19 @@ packages:
     peerDependencies:
       viem: ^2.22.13
 
-  '@ensnode/ensnode-sdk@0.35.0':
-    resolution: {integrity: sha512-OZWlGlWwg7bngbVKIC7qpswSFlJb62JhTkCET+lrhmUg5HRNZla5BO0zQHEz7aysMB0dJK7DDVuGblW4CIOzNw==}
+  '@ensnode/datasources@0.36.0':
+    resolution: {integrity: sha512-ySFO3l3HxKdxcFsw9UbFrefzQkAh7oA+PhTb5uiCYuxUZwZmozsi6v7a6Jz76G9034cQDgRIipB1KIcd83u65w==}
+    peerDependencies:
+      viem: ^2.22.13
+
+  '@ensnode/ensnode-react@0.36.0':
+    resolution: {integrity: sha512-f592MQOZb2vhq4kbX/QGQVaX7+LwAPNZZGQTDTBYTQLTkUyNBIcW+ZRotchVA88b4nGkOduiV+JEhPpRRgt8/w==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.0.0
+      react: ^18.0.0
+
+  '@ensnode/ensnode-sdk@0.36.0':
+    resolution: {integrity: sha512-e3kMRTWGQKg1ccCUVmJ//2EDS7J9KeFKyqMJT3k97PqWLa3oVWhCcYZau1JPm1ZsQfewNVFUxGmX7mLtbHf6Tg==}
     peerDependencies:
       viem: ^2.22.13
 
@@ -720,6 +734,15 @@ packages:
 
   '@ponder/utils@0.2.10':
     resolution: {integrity: sha512-h9y+L+dUEOkLn0oh0GECJ1kWJNzrFtLoMPODR7NsvqGcovq5ZaGFvFxb7+iDOUN6f6xn2M+cUoYjkmMsskw8+A==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+      viem: '>=2'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@ponder/utils@0.2.14':
+    resolution: {integrity: sha512-O4t14Hb6/tVcD0WoS13ghFnDntP6x33/DDvA+sd0tRjemzS+Cne4YTkXl9TKW3AawBIEwMjGrGbAn82C8gXQWQ==}
     peerDependencies:
       typescript: '>=5.0.4'
       viem: '>=2'
@@ -1308,6 +1331,14 @@ packages:
     resolution: {integrity: sha512-BoFUoU0XqgCUS1UXWhmDJroKKhNXeDzD7/XwabjkDIAbMnc4ULn5e2FuEuBbhZ6ENZoSYzKlzvZ44Yr6EUDUSA==}
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
+
+  '@tanstack/query-core@5.90.3':
+    resolution: {integrity: sha512-HtPOnCwmx4dd35PfXU8jjkhwYrsHfuqgC8RCJIwWglmhIUIlzPP0ZcEkDAc+UtAWCiLm7T8rxeEfHZlz3hYMCA==}
+
+  '@tanstack/react-query@5.90.3':
+    resolution: {integrity: sha512-i/LRL6DtuhG6bjGzavIMIVuKKPWx2AnEBIsBfuMm3YoHne0a20nWmsatOCBcVSaT0/8/5YFjNkebHAPLVUSi0Q==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@tanstack/react-virtual@3.13.12':
     resolution: {integrity: sha512-Gd13QdxPSukP8ZrkbgS2RwoZseTTbQPLnQEn7HY/rqtM+8Zt95f7xKC7N0EsKs7aoz0WzZ+fditZux+F8EzYxA==}
@@ -3484,10 +3515,27 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@ensnode/ensnode-sdk@0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
+  '@ensnode/datasources@0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
     dependencies:
+      '@ponder/utils': 0.2.14(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+      viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
+    transitivePeerDependencies:
+      - typescript
+
+  '@ensnode/ensnode-react@0.36.0(@tanstack/react-query@5.90.3(react@19.1.1))(react@19.1.1)(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
+    dependencies:
+      '@ensnode/ensnode-sdk': 0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+      '@tanstack/react-query': 5.90.3(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - typescript
+      - viem
+
+  '@ensnode/ensnode-sdk@0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
+    dependencies:
+      '@adraffy/ens-normalize': 1.11.1
       '@ensdomains/address-encoder': 1.1.4
-      '@ensnode/datasources': 0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+      '@ensnode/datasources': 0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
       viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
       zod: 3.25.76
     transitivePeerDependencies:
@@ -3733,6 +3781,12 @@ snapshots:
   '@oslojs/encoding@1.1.0': {}
 
   '@ponder/utils@0.2.10(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
+    dependencies:
+      viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
+    optionalDependencies:
+      typescript: 5.8.3
+
+  '@ponder/utils@0.2.14(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
     dependencies:
       viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
     optionalDependencies:
@@ -4234,6 +4288,13 @@ snapshots:
       '@tailwindcss/oxide': 4.1.14
       tailwindcss: 4.1.14
       vite: 6.3.6(@types/node@22.18.8)(jiti@2.6.1)(lightningcss@1.30.1)(yaml@2.7.1)
+
+  '@tanstack/query-core@5.90.3': {}
+
+  '@tanstack/react-query@5.90.3(react@19.1.1)':
+    dependencies:
+      '@tanstack/query-core': 5.90.3
+      react: 19.1.1
 
   '@tanstack/react-virtual@3.13.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
