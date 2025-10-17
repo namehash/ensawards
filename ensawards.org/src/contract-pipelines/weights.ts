@@ -1,5 +1,5 @@
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
-import {type Contract, ContractResolutionStatusIds} from "@/types/contracts.ts";
+import { type Contract, ContractResolutionStatusIds } from "@/types/contracts.ts";
 
 export function binaryWeights(
   groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
@@ -12,7 +12,12 @@ export function binaryWeights(
   ][]) {
     // Verification of the `cachedIdentity.resolutionStatus` field is enough because then
     // the `name` field has to be defined and valid
-    weightedContracts[key] = values.map((contract) => (contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed || contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed ? 1 : 0));
+    weightedContracts[key] = values.map((contract) =>
+      contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
+      contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
+        ? 1
+        : 0,
+    );
   }
 
   return weightedContracts;

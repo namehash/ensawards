@@ -1,10 +1,10 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ForwardNameOnlyInfoIcon } from "@/components/atoms/icons/ForwardNameOnlyInfoIcon.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import { type ContractResolutionStatusId, ContractResolutionStatusIds } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { Check, CheckCheck, X as XIcon } from "lucide-react";
 import React from "react";
-import {type ContractResolutionStatusId, ContractResolutionStatusIds} from "@/types/contracts.ts";
 
 export interface ContractBadgeProps {
   contractResolutionStatus: ContractResolutionStatusId;

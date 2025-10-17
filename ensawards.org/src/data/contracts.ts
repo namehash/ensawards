@@ -1,5 +1,5 @@
 import { ENSDaoOrg, UniswapDaoOrg } from "@/data/organizations.ts";
-import {type Contract, ContractResolutionStatusIds} from "@/types/contracts.ts";
+import { type Contract, ContractResolutionStatusIds } from "@/types/contracts.ts";
 import { base, mainnet } from "viem/chains";
 
 export const CONTRACTS: Contract[] = [
@@ -18,15 +18,17 @@ export const CONTRACTS: Contract[] = [
       // TODO: replace placeholder data below (in all "profiles")
       profile: {
         docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        compiledMetadata: new URL(
+          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
+        ),
         avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
         audits: [
           {
             auditor: "John Doe",
-            report: new URL("https://ensrainbow.io")
-          }
-        ]
-      }
+            report: new URL("https://ensrainbow.io"),
+          },
+        ],
+      },
     },
   },
   {
@@ -40,7 +42,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "Example Unnamed Contract",
       },
-    }
+    },
   },
   {
     org: ENSDaoOrg,
@@ -56,16 +58,18 @@ export const CONTRACTS: Contract[] = [
       name: "example.forward.name.eth",
       profile: {
         docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        compiledMetadata: new URL(
+          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
+        ),
         avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
         audits: [
           {
             auditor: "John Doe",
-            report: new URL("https://ensrainbow.io")
-          }
-        ]
-      }
-    }
+            report: new URL("https://ensrainbow.io"),
+          },
+        ],
+      },
+    },
   },
   {
     org: ENSDaoOrg,
@@ -85,11 +89,11 @@ export const CONTRACTS: Contract[] = [
         audits: [
           {
             auditor: "John Doe",
-            report: new URL("https://ensrainbow.io")
-          }
-        ]
-      }
-    }
+            report: new URL("https://ensrainbow.io"),
+          },
+        ],
+      },
+    },
   },
   {
     org: ENSDaoOrg,
@@ -105,9 +109,11 @@ export const CONTRACTS: Contract[] = [
       name: "governor.ensdao.eth",
       profile: {
         docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
-      }
-    }
+        compiledMetadata: new URL(
+          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
+        ),
+      },
+    },
   },
   {
     org: ENSDaoOrg,
@@ -122,16 +128,18 @@ export const CONTRACTS: Contract[] = [
       },
       name: "wallet.ensdao.eth",
       profile: {
-        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        compiledMetadata: new URL(
+          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
+        ),
         avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
         audits: [
           {
             auditor: "John Doe",
-            report: new URL("https://ensrainbow.io")
-          }
-        ]
-      }
-    }
+            report: new URL("https://ensrainbow.io"),
+          },
+        ],
+      },
+    },
   },
   {
     org: ENSDaoOrg,
@@ -150,11 +158,11 @@ export const CONTRACTS: Contract[] = [
         audits: [
           {
             auditor: "John Doe",
-            report: new URL("https://ensrainbow.io")
-          }
-        ]
-      }
-    }
+            report: new URL("https://ensrainbow.io"),
+          },
+        ],
+      },
+    },
   },
   {
     org: ENSDaoOrg,
@@ -170,16 +178,18 @@ export const CONTRACTS: Contract[] = [
       name: "veto.ensdao.eth",
       profile: {
         docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        compiledMetadata: new URL(
+          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
+        ),
         avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
         audits: [
           {
             auditor: "John Doe",
-            report: new URL("https://ensrainbow.io")
-          }
-        ]
-      }
-    }
+            report: new URL("https://ensrainbow.io"),
+          },
+        ],
+      },
+    },
   },
   {
     org: ENSDaoOrg,
@@ -198,11 +208,11 @@ export const CONTRACTS: Contract[] = [
         audits: [
           {
             auditor: "John Doe",
-            report: new URL("https://ensrainbow.io")
-          }
-        ]
-      }
-    }
+            report: new URL("https://ensrainbow.io"),
+          },
+        ],
+      },
+    },
   },
   {
     org: ENSDaoOrg,
@@ -215,8 +225,8 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "ENSGovernor",
       },
-      name: "governor.ensdao.eth"
-    }
+      name: "governor.ensdao.eth",
+    },
   },
   {
     org: ENSDaoOrg,
@@ -232,16 +242,18 @@ export const CONTRACTS: Contract[] = [
       name: "named.placeholder.contract.eth",
       profile: {
         docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL("https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata"),
+        compiledMetadata: new URL(
+          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
+        ),
         avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
         audits: [
           {
             auditor: "John Doe",
-            report: new URL("https://ensrainbow.io")
-          }
-        ]
-      }
-    }
+            report: new URL("https://ensrainbow.io"),
+          },
+        ],
+      },
+    },
   },
   {
     org: ENSDaoOrg,
@@ -254,7 +266,7 @@ export const CONTRACTS: Contract[] = [
         chain: base,
         codeName: "Plh base unnamed ctr",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -266,8 +278,8 @@ export const CONTRACTS: Contract[] = [
         address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
         chain: mainnet,
         codeName: "UNIToken",
-      }
-    }
+      },
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -280,7 +292,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "Timelock",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -293,7 +305,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "GovernorBravo",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -304,9 +316,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0x090D4613473dEE047c3f2706764f49E0821D256e",
         chain: mainnet,
-        codeName: "UniMerkleDistributor"
+        codeName: "UniMerkleDistributor",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -319,7 +331,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "StakingRewardsFactory",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -332,7 +344,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "StakingRewards1",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -345,7 +357,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "StakingRewards2",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -356,9 +368,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0xa1484c3aa22a66c62b77e0ae78e15258bd0cb711",
         chain: mainnet,
-        codeName: "StakingRewards3"
+        codeName: "StakingRewards3",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -371,7 +383,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "StakingRewards4",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -382,9 +394,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0x000000000004444c5dc75cB358380D2e3dE08A90",
         chain: mainnet,
-        codeName: "PoolManager"
+        codeName: "PoolManager",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -395,9 +407,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0xd1428ba554f4c8450b763a0b2040a4935c63f06c",
         chain: mainnet,
-        codeName: "PositionDescriptor"
+        codeName: "PositionDescriptor",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -408,9 +420,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e",
         chain: mainnet,
-        codeName: "PositionManager"
+        codeName: "PositionManager",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -421,9 +433,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0x52f0e24d1c21c8a0cb1e5a5dd6198556bd9e1203",
         chain: mainnet,
-        codeName: "Quoter"
+        codeName: "Quoter",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -434,9 +446,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0x7ffe42c4a5deea5b0fec41c94c136cf115597227",
         chain: mainnet,
-        codeName: "StateView"
+        codeName: "StateView",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -447,9 +459,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0x66a9893cc07d91d95644aedd05d03f95e1dba8af",
         chain: mainnet,
-        codeName: "UniversalRouter"
+        codeName: "UniversalRouter",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -460,9 +472,9 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
         chain: mainnet,
-        codeName: "Permit2"
+        codeName: "Permit2",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -476,7 +488,7 @@ export const CONTRACTS: Contract[] = [
         codeName: "Uniswap Plh base named ctr",
       },
       name: "uniswap.named.placeholder.contract.eth",
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -487,8 +499,8 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000004",
         chain: base,
-        codeName: "Uniswap Plh base unnamed ctr"
+        codeName: "Uniswap Plh base unnamed ctr",
       },
-    }
+    },
   },
 ];

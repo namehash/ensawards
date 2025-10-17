@@ -1,5 +1,5 @@
 import { ENSDaoOrg, UniswapDaoOrg } from "@/data/organizations.ts";
-import {type Contract, ContractResolutionStatusIds} from "@/types/contracts.ts";
+import { type Contract, ContractResolutionStatusIds } from "@/types/contracts.ts";
 import { mainnet } from "viem/chains";
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
@@ -14,7 +14,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 1 - Unnamed Contract 1",
       },
-    }
+    },
   },
   {
     org: ENSDaoOrg,
@@ -25,9 +25,9 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000001",
         chain: mainnet,
-        codeName: "Project 1 - Unnamed Contract 2"
+        codeName: "Project 1 - Unnamed Contract 2",
       },
-    }
+    },
   },
   {
     org: ENSDaoOrg,
@@ -40,8 +40,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 1 - Named Contract 1",
       },
-      name: "name.p1c1.eth"
-    }
+      name: "name.p1c1.eth",
+    },
   },
   {
     org: ENSDaoOrg,
@@ -54,8 +54,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 1 - Named Contract 2",
       },
-      name: "name.p1c2.eth"
-    }
+      name: "name.p1c2.eth",
+    },
   },
   {
     org: ENSDaoOrg,
@@ -69,7 +69,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project 1 - Named Contract 3",
       },
       name: "name.p1c3.eth",
-    }
+    },
   },
   {
     org: ENSDaoOrg,
@@ -82,8 +82,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 1 - Named Contract 4",
       },
-      name: "name.p1c4.eth"
-    }
+      name: "name.p1c4.eth",
+    },
   },
   {
     org: ENSDaoOrg,
@@ -96,8 +96,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 1 - Named Contract 5",
       },
-      name: "name.p1c5.eth"
-    }
+      name: "name.p1c5.eth",
+    },
   },
   {
     org: ENSDaoOrg,
@@ -110,8 +110,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 1 - Named Contract 6",
       },
-      name: "name.p1c6.eth"
-    }
+      name: "name.p1c6.eth",
+    },
   },
   {
     org: ENSDaoOrg,
@@ -124,8 +124,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 1 - Named Contract 7",
       },
-      name: "name.p1c7.eth"
-    }
+      name: "name.p1c7.eth",
+    },
   },
   {
     org: ENSDaoOrg,
@@ -138,8 +138,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 1 - Forward Named Contract 1",
       },
-      name: "forward.name.p1c1.eth"
-    }
+      name: "forward.name.p1c1.eth",
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -150,9 +150,9 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000010",
         chain: mainnet,
-        codeName: "Project 2 - Unnamed Contract 1"
+        codeName: "Project 2 - Unnamed Contract 1",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -163,9 +163,9 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000011",
         chain: mainnet,
-        codeName: "Project 2 - Unnamed Contract 2"
+        codeName: "Project 2 - Unnamed Contract 2",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -176,9 +176,9 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000012",
         chain: mainnet,
-        codeName: "Project 2 - Unnamed Contract 3"
+        codeName: "Project 2 - Unnamed Contract 3",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -189,9 +189,9 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000013",
         chain: mainnet,
-        codeName: "Project 2 - Unnamed Contract 4"
+        codeName: "Project 2 - Unnamed Contract 4",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -202,9 +202,9 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000014",
         chain: mainnet,
-        codeName: "Project 2 - Unnamed Contract 5"
+        codeName: "Project 2 - Unnamed Contract 5",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -215,9 +215,9 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000015",
         chain: mainnet,
-        codeName: "Project 2 - Unnamed Contract 6"
+        codeName: "Project 2 - Unnamed Contract 6",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -228,9 +228,9 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       contract: {
         address: "0x0000000000000000000000000000000000000016",
         chain: mainnet,
-        codeName: "Project 2 - Unnamed Contract 7"
+        codeName: "Project 2 - Unnamed Contract 7",
       },
-    }
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -243,8 +243,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 2 - Named Contract 1",
       },
-      name: "name.p2c1.eth"
-    }
+      name: "name.p2c1.eth",
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -257,8 +257,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 2 - Named Contract 2",
       },
-      name: "name.p2c2.eth"
-    }
+      name: "name.p2c2.eth",
+    },
   },
   {
     org: UniswapDaoOrg,
@@ -271,7 +271,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project 2 - Forward Named Contract 1",
       },
-      name: "forward.name.p2c1.eth"
-    }
+      name: "forward.name.p2c1.eth",
+    },
   },
 ];

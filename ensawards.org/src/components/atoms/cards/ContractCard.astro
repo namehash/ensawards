@@ -1,5 +1,5 @@
 ---
-import {Contract, ContractResolutionStatusIds} from "../../../types/contracts";
+import { Contract, ContractResolutionStatusIds } from "../../../types/contracts";
 import { getBlockExplorerUrlForContract } from "../../../utils/chains";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
@@ -37,7 +37,10 @@ const { contract }: ContractCardProps = Astro.props;
       ENS name
     </p>
     {
-      contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed || contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed ? (
+      contract.cachedIdentity.resolutionStatus ===
+        ContractResolutionStatusIds.PrimaryNamed ||
+      contract.cachedIdentity.resolutionStatus ===
+        ContractResolutionStatusIds.ForwardNamed ? (
         <a
           href={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
           target="_blank"
@@ -53,7 +56,10 @@ const { contract }: ContractCardProps = Astro.props;
   <div
     class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px]">
     {
-      contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed || contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed ? (
+      contract.cachedIdentity.resolutionStatus ===
+        ContractResolutionStatusIds.PrimaryNamed ||
+      contract.cachedIdentity.resolutionStatus ===
+        ContractResolutionStatusIds.ForwardNamed ? (
         <>
           <p class="text-sm leading-normal font-normal text-muted-foreground">
             ENS metadata
@@ -82,10 +88,16 @@ const { contract }: ContractCardProps = Astro.props;
   </div>
   <div
     class="max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:items-center sm:min-w-[115px] max-sm:self-stretch">
-    <ContractBadge client:load contractResolutionStatus={contract.cachedIdentity.resolutionStatus}/>
+    <ContractBadge
+      client:load
+      contractResolutionStatus={contract.cachedIdentity.resolutionStatus}
+    />
     <div class="flex sm:hidden flex-col justify-start items-start">
       {
-        contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed || contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed ? (
+        contract.cachedIdentity.resolutionStatus ===
+          ContractResolutionStatusIds.PrimaryNamed ||
+        contract.cachedIdentity.resolutionStatus ===
+          ContractResolutionStatusIds.ForwardNamed ? (
           <>
             <p class="text-sm leading-normal font-normal text-muted-foreground">
               ENS metadata
