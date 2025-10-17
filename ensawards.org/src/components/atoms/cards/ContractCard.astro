@@ -1,5 +1,5 @@
 ---
-import { Contract } from "../../../types/contracts";
+import {Contract, ContractResolutionStatusIds} from "../../../types/contracts";
 import { getBlockExplorerUrlForContract } from "../../../utils/chains";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
@@ -18,17 +18,17 @@ const { contract }: ContractCardProps = Astro.props;
   <div
     class="max-sm:w-full sm:min-w-[425px] flex flex-col justify-start items-start">
     <p class="text-sm leading-normal font-normal text-muted-foreground">
-      {contract.codeName}
+      {contract.cachedIdentity.contract.codeName}
     </p>
     <a
       href={getBlockExplorerUrlForContract(
-        contract.contract.chain.id,
-        contract.contract.address,
+        contract.cachedIdentity.contract.chain.id,
+        contract.cachedIdentity.contract.address,
       )}
       target="_blank"
       rel="noreferrer noopener"
       class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
-      >{contract.contract.address} ↗</a
+      >{contract.cachedIdentity.contract.address} ↗</a
     >
   </div>
   <div
@@ -37,14 +37,13 @@ const { contract }: ContractCardProps = Astro.props;
       ENS name
     </p>
     {
-      contract.cachedEnsProfile !== null ? (
+      contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed || contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed ? (
         <a
-          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedEnsProfile.primaryName !== null ? contract.cachedEnsProfile.primaryName : contract.cachedEnsProfile.forwardNames[0])}`}
+          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
           target="_blank"
           rel="noreferrer noopener"
           class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-          <!--Users can add as many forward names as they want but for the sake of consistency we will always display the first one-->
-          {contract.cachedEnsProfile.primaryName !== null ? contract.cachedEnsProfile.primaryName : contract.cachedEnsProfile.forwardNames[0]} ↗
+          {contract.cachedIdentity.name} ↗
         </a>
       ) : (
         <p class="text-sm leading-normal font-medium">Unnamed contract</p>
@@ -54,15 +53,14 @@ const { contract }: ContractCardProps = Astro.props;
   <div
     class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px]">
     {
-      contract.cachedEnsProfile !== null &&
-      contract.cachedEnsProfile.ensMetadata ? (
+      contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed || contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed ? (
         <>
           <p class="text-sm leading-normal font-normal text-muted-foreground">
             ENS metadata
           </p>
           <SmartContractMetadata
             client:load
-            metadata={contract.cachedEnsProfile.ensMetadata}
+            metadata={contract.cachedIdentity.profile}
           />
         </>
       ) : (
@@ -84,18 +82,17 @@ const { contract }: ContractCardProps = Astro.props;
   </div>
   <div
     class="max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:items-center sm:min-w-[115px] max-sm:self-stretch">
-    <ContractBadge client:load ensProfileData={contract.cachedEnsProfile}/>
+    <ContractBadge client:load contractResolutionStatus={contract.cachedIdentity.resolutionStatus}/>
     <div class="flex sm:hidden flex-col justify-start items-start">
       {
-        contract.cachedEnsProfile !== null &&
-        contract.cachedEnsProfile.ensMetadata ? (
+        contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed || contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed ? (
           <>
             <p class="text-sm leading-normal font-normal text-muted-foreground">
               ENS metadata
             </p>
             <SmartContractMetadata
               client:load
-              metadata={contract.cachedEnsProfile.ensMetadata}
+              metadata={contract.cachedIdentity.profile}
             />
           </>
         ) : (

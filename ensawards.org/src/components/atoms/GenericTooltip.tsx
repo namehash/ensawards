@@ -11,7 +11,7 @@ export function GenericTooltip({ content, children }: PropsWithChildren<GenericT
       <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent
         sideOffset={10}
-        className="bg-black text-xs leading-normal text-white outline-none max-w-[275px] px-3 py-[6px] rounded-md"
+        className="bg-black text-xs leading-normal text-white outline-none px-3 py-[6px] rounded-md"
       >
         {content}
         <TooltipArrow width={12} height={8} />

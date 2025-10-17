@@ -1,19 +1,19 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ForwardNameOnlyInfoIcon } from "@/components/atoms/icons/ForwardNameOnlyInfoIcon.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import type { CachedEnsProfile } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { Check, CheckCheck, X as XIcon } from "lucide-react";
 import React from "react";
+import {type ContractResolutionStatusId, ContractResolutionStatusIds} from "@/types/contracts.ts";
 
 export interface ContractBadgeProps {
-  ensProfileData: CachedEnsProfile;
+  contractResolutionStatus: ContractResolutionStatusId;
 }
 
-export function ContractBadge({ ensProfileData }: ContractBadgeProps) {
+export function ContractBadge({ contractResolutionStatus }: ContractBadgeProps) {
   return (
     <TooltipProvider delayDuration={1000} skipDelayDuration={0}>
-      {ensProfileData === null ? (
+      {contractResolutionStatus === ContractResolutionStatusIds.Unnamed ? (
         <span
           className={cn(
             "w-fit flex flex-row flex-nowrap justify-center items-center gap-[6px] pl-[10px] pr-3 " +
@@ -29,18 +29,18 @@ export function ContractBadge({ ensProfileData }: ContractBadgeProps) {
           className={cn(
             "w-fit flex flex-row flex-nowrap justify-center items-center gap-[6px] pl-[10px] pr-3 " +
               "py-1 rounded-full text-xs leading-normal font-medium",
-            ensProfileData.primaryName !== null
+            contractResolutionStatus === ContractResolutionStatusIds.PrimaryNamed
               ? "text-emerald-600 bg-[#0596691A]"
               : "text-orange-600 bg-orange-100",
           )}
         >
-          {ensProfileData.primaryName !== null ? (
+          {contractResolutionStatus === ContractResolutionStatusIds.PrimaryNamed ? (
             <CheckCheck width={20} height={20} />
           ) : (
             <Check width={20} height={20} />
           )}
           Named
-          {ensProfileData.primaryName === null && (
+          {contractResolutionStatus === ContractResolutionStatusIds.ForwardNamed && (
             <GenericTooltip
               content={
                 <>
