@@ -82,7 +82,8 @@ if (resolvedOrg) {
           </a>
           {SUPPORTED_CHAINS.map((supportedChain, idx) => {
             const contractsOnChain = orgContracts.filter(
-              (contract) => contract.contract.chain.id === supportedChain.id,
+              (contract) =>
+                contract.cachedIdentity.contract.chain.id === supportedChain.id,
             );
             if (contractsOnChain.length === 0) {
               return null;
