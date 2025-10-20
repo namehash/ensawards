@@ -1,11 +1,11 @@
+import { EnsAvatar } from "@/components/atoms/EnsAvatar.tsx";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import type { EnsProfileForContract } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { BookOpen, Braces, CircleUser, ShieldCheck } from "lucide-react";
+import type { Name } from "@ensnode/ensnode-sdk";
+import { BookOpen, Braces, ShieldCheck } from "lucide-react";
 import React from "react";
-import type {Name} from "@ensnode/ensnode-sdk";
-import {EnsAvatar} from "@/components/atoms/EnsAvatar.tsx";
 
 export interface SmartContractMetadataProps {
   name: Name;
@@ -80,15 +80,16 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
           content={
             <div className="w-full max-w-[275px]">
               {metadata && metadata.avatar ? (
-                <p>Avatar URL:{" "}
-                    <a
+                <p>
+                  Avatar URL:{" "}
+                  <a
                     className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                     href={metadata.avatar.href}
                     target="_blank"
                     rel="noreferrer noopener"
-                >
+                  >
                     {metadata.avatar.href} ↗
-                </a>
+                  </a>
                 </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("avatar")
@@ -96,7 +97,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
             </div>
           }
         >
-            <EnsAvatar name={name} avatarUrl={metadata?.avatar} className="w-[21px] h-[21px]" />
+          <EnsAvatar name={name} avatarUrl={metadata?.avatar} className="w-[21px] h-[21px]" />
         </GenericTooltip>
         <GenericTooltip
           content={
