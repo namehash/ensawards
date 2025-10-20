@@ -6,11 +6,13 @@ import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
 export interface LeaderboardCardProps {
   name: string;
   viewDetailsLink: string;
+  viewDetailsText?: string;
   ensAwardsScore: number;
   type?: string;
 }
 
-const { name, viewDetailsLink, ensAwardsScore, type }: LeaderboardCardProps = Astro.props;
+const { name, viewDetailsLink, viewDetailsText, ensAwardsScore, type }: LeaderboardCardProps =
+  Astro.props;
 ---
 
 <a
@@ -89,7 +91,7 @@ const { name, viewDetailsLink, ensAwardsScore, type }: LeaderboardCardProps = As
             "sm:hidden cursor-pointer rounded-full max-sm:self-stretch",
         }),
       )}>
-      Benchmarks
+      {viewDetailsText || "Benchmarks"}
     </button>
   </div>
 </a>
