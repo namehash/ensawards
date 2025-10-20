@@ -105,7 +105,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               {metadata && metadata.audits ? (
                 <div>
                   <p>
-                    The audits passed by the contract:
+                    Audits passed by the contract:
                     <ul>
                       {metadata &&
                         metadata.audits.map((audit) => (
