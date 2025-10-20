@@ -8,7 +8,7 @@ export interface GenericTooltipProps {
 export function GenericTooltip({ content, children }: PropsWithChildren<GenericTooltipProps>) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipTrigger>{children}</TooltipTrigger>
       <TooltipContent
         sideOffset={10}
         className="bg-black text-xs leading-normal text-white outline-none px-3 py-[6px] rounded-md"

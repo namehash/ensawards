@@ -4,15 +4,18 @@ import type { EnsProfileForContract } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { BookOpen, Braces, CircleUser, ShieldCheck } from "lucide-react";
 import React from "react";
+import type {Name} from "@ensnode/ensnode-sdk";
+import {EnsAvatar} from "@/components/atoms/EnsAvatar.tsx";
 
 export interface SmartContractMetadataProps {
+  name: Name;
   metadata: EnsProfileForContract | undefined;
 }
 
 const getDeactivatedMetadataFieldMessage = (metadataName: string) =>
   `${metadataName} record is undefined for this contract.`;
 
-export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) {
+export function SmartContractMetadata({ metadata, name }: SmartContractMetadataProps) {
   return (
     <TooltipProvider delayDuration={1000} skipDelayDuration={0}>
       <div className="flex flex-row flex-nowrap justify-start items-center gap-3">
@@ -77,19 +80,23 @@ export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) 
           content={
             <div className="w-full max-w-[275px]">
               {metadata && metadata.avatar ? (
-                <p>TODO: display the contract's avatar here</p>
+                <p>Avatar URL:{" "}
+                    <a
+                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                    href={metadata.avatar.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                >
+                    {metadata.avatar.href} ↗
+                </a>
+                </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("avatar")
               )}
             </div>
           }
         >
-          <CircleUser
-            className={cn(
-              "w-[21px] h-[21px]",
-              metadata && metadata.avatar ? "text-black" : "text-gray-200",
-            )}
-          />
+            <EnsAvatar name={name} avatarUrl={metadata?.avatar} className="w-[21px] h-[21px]" />
         </GenericTooltip>
         <GenericTooltip
           content={

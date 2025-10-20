@@ -43,10 +43,10 @@ export function ContractBadge({ contractResolutionStatus }: ContractBadgeProps) 
           {contractResolutionStatus === ContractResolutionStatusIds.ForwardNamed && (
             <GenericTooltip
               content={
-                <>
+                <p className="max-w-[275px]">
                   This name forward-resolves to this contract, however it is not properly configured
                   as an ENS primary name.
-                </>
+                </p>
               }
             >
               <ForwardNameOnlyInfoIcon width={20} height={20} />

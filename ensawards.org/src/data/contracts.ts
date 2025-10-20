@@ -21,7 +21,7 @@ export const CONTRACTS: Contract[] = [
         compiledMetadata: new URL(
           "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
         ),
-        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
         audits: [
           {
             auditor: "John Doe",
@@ -61,7 +61,7 @@ export const CONTRACTS: Contract[] = [
         compiledMetadata: new URL(
           "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
         ),
-        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
         audits: [
           {
             auditor: "John Doe",
@@ -85,7 +85,7 @@ export const CONTRACTS: Contract[] = [
       name: "tokenlock.ensdao.eth",
       profile: {
         docs: new URL("https://ensnode.io/docs"),
-        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
         audits: [
           {
             auditor: "John Doe",
@@ -131,7 +131,7 @@ export const CONTRACTS: Contract[] = [
         compiledMetadata: new URL(
           "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
         ),
-        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
         audits: [
           {
             auditor: "John Doe",
@@ -181,7 +181,7 @@ export const CONTRACTS: Contract[] = [
         compiledMetadata: new URL(
           "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
         ),
-        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
         audits: [
           {
             auditor: "John Doe",
@@ -204,7 +204,7 @@ export const CONTRACTS: Contract[] = [
       },
       name: "endowment.ensdao.eth",
       profile: {
-        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
         audits: [
           {
             auditor: "John Doe",
@@ -245,7 +245,7 @@ export const CONTRACTS: Contract[] = [
         compiledMetadata: new URL(
           "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
         ),
-        avatar: new URL("https://ensnode.io/Twitter_OG_image.png"),
+        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
         audits: [
           {
             auditor: "John Doe",

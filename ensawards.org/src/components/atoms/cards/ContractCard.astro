@@ -66,6 +66,7 @@ const { contract }: ContractCardProps = Astro.props;
           </p>
           <SmartContractMetadata
             client:load
+            name={contract.cachedIdentity.name}
             metadata={contract.cachedIdentity.profile}
           />
         </>
@@ -104,6 +105,7 @@ const { contract }: ContractCardProps = Astro.props;
             </p>
             <SmartContractMetadata
               client:load
+              name={contract.cachedIdentity.name}
               metadata={contract.cachedIdentity.profile}
             />
           </>
