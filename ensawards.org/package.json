@@ -13,6 +13,7 @@
     "lint:ci": "biome ci",
     "prettier": "pnpm exec prettier . --write",
     "test": "vitest",
+    "test:periodic": "vitest --run --testNamePattern=\"contracts data\"",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
