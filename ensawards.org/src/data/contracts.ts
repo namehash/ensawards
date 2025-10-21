@@ -310,5 +310,5 @@ export const CONTRACTS: Contract[] = [
         codeName: "Permit2",
       },
     },
-  }
+  },
 ];
