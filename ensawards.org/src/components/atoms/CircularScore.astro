@@ -100,7 +100,7 @@ const circumference = 2 * Math.PI * radius;
   let offset = circumference;
 
   // Initial delay
-  let delay = 150;
+  let delay = 200;
 
   function animateScore() {
     // Calculate new values
@@ -113,11 +113,11 @@ const circumference = 2 * Math.PI * radius;
 
     // Adjust delay and set another timeout if needed
     if (counter !== targetScore) {
-      // Delay growths
+      // Delay grows when counter is closer to target
       delay =
-        counter > targetScore - 8
-          ? 140
-          : Math.max(30, 70 * (counter / targetScore));
+        counter > targetScore - 5
+          ? 40 * (5 - (targetScore - counter))
+          : 20;
 
       setTimeout(animateScore, delay);
     }
