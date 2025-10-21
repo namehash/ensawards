@@ -13,5 +13,10 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"vitest": "catalog:"
+	},
+	"pnpm": {
+		"overrides": {
+			"vite": ">=6.4.1"
+		}
 	}
 }
