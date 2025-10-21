@@ -8,7 +8,7 @@ jobs:
     name: "Stale data detection"
     runs-on: ubuntu-22.04
     env:
-      VITE_ENSNODE_URL: ${{secrets.VITE_ENSNODE_URL}}
+      VITE_ENSNODE_URL: ${{ secrets.VITE_ENSNODE_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
