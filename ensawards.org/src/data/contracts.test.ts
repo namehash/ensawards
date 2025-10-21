@@ -48,23 +48,20 @@ const testContractsCachedProfile = async (contractsCachedIdentity: ContractIdent
 
   const recordsData = (await recordsResponse.json()) as RecordsAPIResponse;
 
-  console.log("State:", recordsData);
-  console.log("-----------");
-
   // Expect the returned address to match our data
   expect(recordsData.records.addresses["60"], `Contract named=${contractsCachedIdentity.name} has a different address than the cached one`).toEqual(contractsCachedIdentity.contract.address.toLowerCase());
 
   // Expect records from the response to equal our cached data
   const parsedResponse = responseToProfile(recordsData);
-  expect(parsedResponse.docs, `profile.docs field for contract named ${contractsCachedIdentity.name} is stale`).toEqual(contractsCachedIdentity.profile?.docs?.href);
-  expect(parsedResponse.compiledMetadata, `profile.compiledMetadata field for contract named ${contractsCachedIdentity.name} is stale`).toEqual(contractsCachedIdentity.profile?.compiledMetadata);
-  expect(parsedResponse.avatar, `profile.avatar field for contract named ${contractsCachedIdentity.name} is stale`).toEqual(contractsCachedIdentity.profile?.avatar);
-  expect(parsedResponse.audits, `profile.audits field for contract named ${contractsCachedIdentity.name} is stale`).toEqual(contractsCachedIdentity.profile?.audits);
+  expect(parsedResponse.docs, `profile.docs field for contract: ${contractsCachedIdentity.name} is stale`).toEqual(contractsCachedIdentity.profile?.docs?.href);
+  expect(parsedResponse.compiledMetadata, `profile.compiledMetadata field for contract: ${contractsCachedIdentity.name} is stale`).toEqual(contractsCachedIdentity.profile?.compiledMetadata);
+  expect(parsedResponse.avatar, `profile.avatar field for contract: ${contractsCachedIdentity.name} is stale`).toEqual(contractsCachedIdentity.profile?.avatar);
+  expect(parsedResponse.audits, `profile.audits field for contract: ${contractsCachedIdentity.name} is stale`).toEqual(contractsCachedIdentity.profile?.audits);
 
 }
 
 const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentityResolved) => {
-  const chainId: ChainId = 1; // for now, we only care about the mainnet
+  const chainId: ChainId = 1; // for now, we only care about the mainnet TODO: Is that a correct assumption?
   const primaryNameLookupURL = new URL(`/api/resolve/primary-name/${encodeURIComponent(contractsCachedIdentity.contract.address)}/${chainId}`, process.env.VITE_ENSNODE_URL);
 
   const primaryNameResponse = await fetch(primaryNameLookupURL);
@@ -116,6 +113,9 @@ describe("contracts data", () => {
             await testContractsCachedProfile(contract.cachedIdentity);
           }
         }
-    });
+    }, 60000);
+    // wait 60s before terminating
+    // Might need longer if we add more data
+    // For current "prod" data (only 23 contracts) lasts around 10 seconds
   });
 });
