@@ -5,7 +5,7 @@ import * as React from "react";
 
 export interface EnsAvatarProps {
   name: Name;
-  avatarUrl: URL | undefined;
+  avatarUrl?: URL;
   className?: string;
 }
 

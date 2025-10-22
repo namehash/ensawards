@@ -9,11 +9,11 @@ import React from "react";
 
 export interface SmartContractMetadataProps {
   name: Name;
-  metadata: EnsProfileForContract | undefined;
+  metadata?: EnsProfileForContract;
 }
 
-const getDeactivatedMetadataFieldMessage = (metadataName: string) =>
-  `${metadataName} record is undefined for this contract.`;
+const getDeactivatedMetadataFieldMessage = (metadataFieldName: string) =>
+  `The "${metadataFieldName}" field has not been defined for this contract.`;
 
 export function SmartContractMetadata({ metadata, name }: SmartContractMetadataProps) {
   return (

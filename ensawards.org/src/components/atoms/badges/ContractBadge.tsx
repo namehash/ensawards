@@ -44,8 +44,7 @@ export function ContractBadge({ contractResolutionStatus }: ContractBadgeProps) 
             <GenericTooltip
               content={
                 <p className="max-w-[275px]">
-                  This name forward-resolves to this contract, however it is not properly configured
-                  as an ENS primary name.
+                  This contract does not have an ENS primary name configured, but this name resolves to this contract.
                 </p>
               }
             >

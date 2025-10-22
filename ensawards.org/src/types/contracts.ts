@@ -82,6 +82,9 @@ export interface ContractDeployment {
 
   /**
    * The name of the contract from a codebase perspective (ex: in Solidity).
+   *
+   * Invariant:
+   * - the `codeName` must be a non-empty string
    */
   codeName: string;
 }
