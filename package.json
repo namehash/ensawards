@@ -8,7 +8,7 @@
 		"lint:ci": "pnpm -r --parallel --aggregate-output lint:ci",
 		"typecheck": "pnpm -r --parallel --aggregate-output typecheck",
 		"test": "vitest --silent passed-only",
-		"test:periodic": "vitest --run --silent passed-only --testNamePattern=\"contracts data\""
+		"test:cache": "vitest --run --silent passed-only --testNamePattern=\"contracts data\""
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",

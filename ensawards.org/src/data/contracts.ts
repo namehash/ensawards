@@ -5,10 +5,8 @@ import {
   ContractSubtypes,
   ContractTypes,
 } from "@/types/contracts.ts";
-import { base, mainnet } from "viem/chains";
+import { mainnet } from "viem/chains";
 
-// TODO: replace placeholder data below (in all "profiles" and some placeholder contracts as well)
-//TODO: Where can I verify the profile data? Is "records" tab in ENS Manager a good place to look?
 export const CONTRACTS: Contract[] = [
   {
     org: ENSDaoOrg,

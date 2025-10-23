@@ -5,7 +5,7 @@ on:
 
 jobs:
   unit-tests:
-    name: "Stale data detection"
+    name: "Cached ENS identity validation"
     runs-on: ubuntu-22.04
     env:
       VITE_ENSNODE_URL: ${{ env.VITE_ENSNODE_URL }}
@@ -16,4 +16,4 @@ jobs:
         with:
           node-version-file: .nvmrc
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test:periodic
+      - run: pnpm test:cache

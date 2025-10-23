@@ -1,7 +1,14 @@
-import { CONTRACTS } from "@/data/contracts.ts";
-import { getChainName } from "@/utils/chains.ts";
-import { type ChainId, isNormalizedName } from "@ensnode/ensnode-sdk";
-import { type Address, getAddress, isAddress, isAddressEqual } from "viem";
+import {CONTRACTS} from "@/data/contracts.ts";
+import {getChainName} from "@/utils/chains.ts";
+import {
+  type ChainId,
+  ENSNodeClient,
+  evmChainIdToCoinType,
+  isNormalizedName,
+  type ResolverRecordsResponseBase,
+  type ResolveRecordsResponse
+} from "@ensnode/ensnode-sdk";
+import {type Address, getAddress, isAddress, isAddressEqual} from "viem";
 import {
   type ContractIdentityForwardNamed,
   type ContractIdentityPrimaryNamed,
@@ -9,110 +16,109 @@ import {
   ContractResolutionStatusIds,
   type EnsProfileForContract,
 } from "@/types/contracts.ts";
-import { describe, expect, it } from "vitest";
+import {describe, expect, it} from "vitest";
+import {getENSNodeUrlForTests} from "@/utils/envVariables.ts";
 
-// TODO: is this approach alright? I should probably rename this type and move it somewhere else,
-//  but it seems good to define it and have more control over the request response
-type RecordsAPIResponse = {
-  records: {
-    addresses: {
-      60: Address | null;
-    };
-    texts: {
-      docs: string | null;
-      "compiled-metadata": string | null;
-      avatar: string | null;
-      audits: { auditor: string; report: string }[] | null;
-    };
-  };
-  accelerationAttempted: boolean;
-};
-
-// TODO: this function should probably be moved somewhere else alongside the RecordsAPIResponse type
-const responseToProfile = (response: RecordsAPIResponse): EnsProfileForContract => ({
-  docs: response.records.texts.docs !== null ? new URL(response.records.texts.docs) : undefined,
-  compiledMetadata:
-    response.records.texts["compiled-metadata"] !== null
-      ? new URL(response.records.texts["compiled-metadata"])
-      : undefined,
-  avatar:
-    response.records.texts.avatar !== null ? new URL(response.records.texts.avatar) : undefined,
-  audits:
-    response.records.texts.audits !== null
-      ? response.records.texts.audits.map((audit) => ({
-          auditor: audit.auditor,
-          report: new URL(audit.report),
-        }))
-      : undefined,
+const client = new ENSNodeClient({
+  url: getENSNodeUrlForTests()
 });
 
-// TODO: These functions should only be used for testing,
-//  so that's why I think it's valid to store them here, but appreciate advice nonetheless
+/**
+ * Serializes {@link EnsProfileForContract} into
+ * an expected {@link ResolveRecordsResponse} "texts" field to facilitate data validation.
+ */
+const serializeEnsProfileForContract = (profile?: EnsProfileForContract): Omit<ResolverRecordsResponseBase, "name" | "addresses"> => {
+  if (profile === undefined){
+    return {
+      texts: {
+        "docs" : null,
+        "compiled-metadata": null,
+        "avatar": null,
+        "audits": null
+      }
+    } as const satisfies Omit<ResolverRecordsResponseBase, "name" | "addresses">;
+  }
+
+  return {
+    texts: {
+      "docs": profile.docs ? profile.docs.href : null,
+      "compiled-metadata": profile.compiledMetadata ? profile.compiledMetadata.href : null,
+      "avatar": profile.avatar ? profile.avatar.href : null,
+      "audits": profile.audits ? JSON.stringify(profile.audits) : null
+      //TODO: to be honest I have no idea how such object could look like,
+      // as I couldn't find any examples, but I'll assume it's a stringified JSON for now
+    }
+  } as const satisfies Omit<ResolverRecordsResponseBase, "name" | "addresses">;
+}
+
 const testContractsCachedProfile = async (
   contractsCachedIdentity: ContractIdentityPrimaryNamed | ContractIdentityForwardNamed,
 ) => {
-  const textRecordsToCheck = ["docs", "compiled-metadata", "avatar", "audits"];
+  try {
+    const { records } = await client.resolveRecords(contractsCachedIdentity.name, {
+      addresses: [evmChainIdToCoinType(contractsCachedIdentity.contract.chain.id)],
+      texts: ["docs", "compiled-metadata", "avatar", "audits"]
+    })
 
-  const recordsLookupURL = new URL(
-    `/api/resolve/records/${encodeURIComponent(contractsCachedIdentity.name)}`,
-    process.env.VITE_ENSNODE_URL,
-  );
-  recordsLookupURL.searchParams.set("addresses", [60].join(",")); //we are only interested in the ETH coin type
-  recordsLookupURL.searchParams.set("texts", textRecordsToCheck.join(","));
+    // Expect the returned address to match our data
 
-  const recordsResponse = await fetch(recordsLookupURL);
-  expect(recordsResponse.status, "Records lookup failed").toBe(200);
+    // NOTE: This check is only relevant for the forward named contracts,
+    // as it is redundant for the primary named contracts that already passed the `testContractsPrimaryName` test.
+    // We perform it anyway for the sake of code simplicity, as well as,
+    // having a consistent data model for the `resolveRecords` response.
+    const resolvedAddress = records.addresses[evmChainIdToCoinType(contractsCachedIdentity.contract.chain.id)];
 
-  const recordsData = (await recordsResponse.json()) as RecordsAPIResponse;
+    expect(resolvedAddress !== null &&
+        isAddressEqual(contractsCachedIdentity.contract.address, resolvedAddress as Address),
+        `Contract named=${contractsCachedIdentity.name} has a different address than the cached one on ${getChainName(contractsCachedIdentity.contract.chain.id)} chain.`,
+    ).toEqual(true);
 
-  // Expect the returned address to match our data
-  expect(
-    recordsData.records.addresses["60"],
-    `Contract named=${contractsCachedIdentity.name} has a different address than the cached one`,
-  ).toEqual(contractsCachedIdentity.contract.address.toLowerCase());
+    // Expect records.texts from the response to equal our cached data
+    const serializedProfile = serializeEnsProfileForContract(contractsCachedIdentity.profile);
 
-  // Expect records from the response to equal our cached data
-  const parsedResponse = responseToProfile(recordsData);
-  expect(
-    parsedResponse.docs,
-    `profile.docs field for contract: ${contractsCachedIdentity.name} is stale`,
-  ).toEqual(contractsCachedIdentity.profile?.docs?.href);
-  expect(
-    parsedResponse.compiledMetadata,
-    `profile.compiledMetadata field for contract: ${contractsCachedIdentity.name} is stale`,
-  ).toEqual(contractsCachedIdentity.profile?.compiledMetadata);
-  expect(
-    parsedResponse.avatar,
-    `profile.avatar field for contract: ${contractsCachedIdentity.name} is stale`,
-  ).toEqual(contractsCachedIdentity.profile?.avatar);
-  expect(
-    parsedResponse.audits,
-    `profile.audits field for contract: ${contractsCachedIdentity.name} is stale`,
-  ).toEqual(contractsCachedIdentity.profile?.audits);
+    expect(
+        records.texts.docs,
+        `profile.docs field for contract: ${contractsCachedIdentity.name} is stale`,
+    ).toEqual(serializedProfile.texts.docs);
+    expect(
+        records.texts.compiledMetadata,
+        `profile.compiledMetadata field for contract: ${contractsCachedIdentity.name} is stale`,
+    ).toEqual(serializedProfile.texts["compiled-metadata"]);
+    expect(
+        records.texts.avatar,
+        `profile.avatar field for contract: ${contractsCachedIdentity.name} is stale`,
+    ).toEqual(serializedProfile.texts.avatar);
+    expect(
+        records.texts.audits,
+        `profile.audits field for contract: ${contractsCachedIdentity.name} is stale`,
+    ).toEqual(serializedProfile.texts.audits);
+  }
+  catch (error){
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.error(errorMessage);
+  }
 };
 
 const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentityResolved) => {
-  const chainId: ChainId = 1; // for now, we only care about the mainnet TODO: Is that a correct assumption?
-  const primaryNameLookupURL = new URL(
-    `/api/resolve/primary-name/${encodeURIComponent(contractsCachedIdentity.contract.address)}/${chainId}`,
-    process.env.VITE_ENSNODE_URL,
-  );
+  try {
+    const {name} = await client.resolvePrimaryName(contractsCachedIdentity.contract.address, contractsCachedIdentity.contract.chain.id);
 
-  const primaryNameResponse = await fetch(primaryNameLookupURL);
-  expect(primaryNameResponse.status, "Primary Name lookup failed").toBe(200);
+    // If contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed,
+    // expect response to match its cached name
+    if (contractsCachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed) {
+      expect(name).toEqual(contractsCachedIdentity.name);
+    }
 
-  const primaryNameData = await primaryNameResponse.json();
-
-  // If contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed,
-  // expect response to match its cached name
-  if (contractsCachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed) {
-    expect(primaryNameData["name"]).toEqual(contractsCachedIdentity.name);
+    // For forward named and unnamed contracts expect the response value to be null
+    // (the contract still isn't primary named)
+    else {
+      const expectedResponseValue = null;
+      expect(name).toEqual(expectedResponseValue);
+    }
   }
-  // For forward named and unnamed contracts expect the response value to be null
-  // (the contract still isn't primary named)
-  else {
-    const expectedResponseValue = null;
-    expect(primaryNameData["name"]).toEqual(expectedResponseValue);
+  catch (error){
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.error(errorMessage);
   }
 };
 
@@ -177,8 +183,7 @@ describe("contracts data", () => {
       );
     });
 
-    //TODO: Can I make batch requests to the ENSNode API (not to my knowledge)? If so, is that a reasonable way to go?
-    it("All values match the current state in ENS", async () => {
+    it("All cached ENS identities match the current state in ENS", async () => {
       for (const contract of data) {
         // 1) Check if the contract's primary name is unchanged
         // (either still the same or still not set)
