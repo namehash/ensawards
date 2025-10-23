@@ -2,12 +2,14 @@
 import { Image } from "astro:assets";
 import HomeIcon from "../../assets/homeIcon.svg";
 import SubpageHeroImage from "../../assets/subpageHeroImage.png";
+import { ExternalLinkWithIcon } from "../atoms/Link";
 import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
 
 interface additionalHeroElement {
   name: string;
   value: string;
   link?: string;
+  externalLink?: string;
 }
 export interface SubpageHeroProps {
   header: string;
@@ -108,6 +110,12 @@ const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" 
                       href={elem.link}>
                       {elem.value}
                     </a>
+                  ) : elem.externalLink ? (
+                    <ExternalLinkWithIcon
+                      href={elem.externalLink}
+                      className="text-base leading-snug font-medium text-white decoration-white/40">
+                      {elem.value}
+                    </ExternalLinkWithIcon>
                   ) : (
                     <p class="text-base leading-normal font-medium text-white">
                       {elem.value}
