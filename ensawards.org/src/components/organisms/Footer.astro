@@ -7,6 +7,7 @@ import GitHubIcon from "../atoms/icons/GitHubIcon.astro";
 import NameHashLabsIcon from "../atoms/icons/NameHashLabsIcon.astro";
 import TelegramIcon from "../atoms/icons/TelegramIcon.astro";
 import TwitterIcon from "../atoms/icons/TwitterIcon.astro";
+import {ExternalLink} from "../atoms/Link";
 
 const footerProducts = [
   {
@@ -92,13 +93,11 @@ const footerResources = [
               footerProducts.map((product) => {
                 return (
                   <li key={product.name} class="my-2">
-                    <a
+                    <ExternalLink
                       href={product.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      class="transition cursor-pointer text-gray-500 hover:text-black text-sm">
+                      className="text-gray-500 hover:text-black text-sm leading-snug">
                       {product.name}
-                    </a>
+                    </ExternalLink>
                   </li>
                 );
               })
@@ -112,13 +111,11 @@ const footerResources = [
               footerResources.map((resource) => {
                 return (
                   <li key={resource.name} class="my-2">
-                    <a
+                    <ExternalLink
                       href={resource.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      class="transition cursor-pointer text-gray-500 hover:text-black text-sm">
+                      className="text-gray-500 hover:text-black text-sm leading-snug">
                       {resource.name}
-                    </a>
+                    </ExternalLink>
                   </li>
                 );
               })
@@ -199,13 +196,11 @@ const footerResources = [
           <span class="text-[#EF4444] mx-1">{"❤️"}</span>
           by
         </span>
-        <a
-          class="!text-black text-sm text-current underline decoration-current underline-offset-[4px] transition-all duration-200 hover:underline-offset-[2px]"
-          href="https://namehashlabs.org/"
-          target="_blank"
-          rel="noreferrer noopener">
+        <ExternalLink
+          className="text-black text-sm leading-normal"
+          href="https://namehashlabs.org/">
           NameHash Labs
-        </a>
+        </ExternalLink>
       </div>
     </div>
   </div>

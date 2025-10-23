@@ -36,8 +36,8 @@ const appToDisplay = getAppBySlug(app);
           { name: "Type", value: appToDisplay.type },
           {
             name: "Website",
-            value: "Visit site ↗",
-            link: appToDisplay.websiteLink,
+            value: "Visit site",
+            externalLink: appToDisplay.websiteLink,
           },
           { name: "Overall score", value: `${appToDisplay.ensAwardsScore}%` },
         ]}>
@@ -64,7 +64,7 @@ const appToDisplay = getAppBySlug(app);
                   value: benchmark.bestPracticeDetails.categoryName,
                   link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}`,
                   linkStyles:
-                    "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
+                    "text-blue-600 whitespace-nowrap leading-snug",
                 },
               ]}>
               <MatrixBadge

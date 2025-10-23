@@ -4,8 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import type { EnsProfileForContract } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { Name } from "@ensnode/ensnode-sdk";
-import { BookOpen, Braces, ShieldCheck } from "lucide-react";
+import {BookOpen, Braces, ShieldCheck} from "lucide-react";
 import React from "react";
+import {ExternalLinkWithIcon} from "@/components/atoms/Link.tsx";
 
 export interface SmartContractMetadataProps {
   name: Name;
@@ -19,21 +20,19 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
   return (
     <TooltipProvider delayDuration={1000} skipDelayDuration={0}>
       <div className="flex flex-row flex-nowrap justify-start items-center gap-3">
-        {/*TODO replace with actual appropriate icons when they are provided*/}
         <GenericTooltip
           content={
             <div className="w-full max-w-[275px]">
               {metadata && metadata.docs ? (
                 <p>
                   The docs of the contract are available{" "}
-                  <a
-                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                  <ExternalLinkWithIcon
+                    className="text-blue-400 whitespace-nowrap"
                     href={metadata.docs.href}
-                    target="_blank"
-                    rel="noreferrer noopener"
+                    iconSize={14}
                   >
-                    here ↗
-                  </a>
+                    here
+                  </ExternalLinkWithIcon>
                 </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("docs")
@@ -43,7 +42,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
         >
           <BookOpen
             className={cn(
-              "w-[21px] h-[21px]",
+              "w-[17px] h-[17px]",
               metadata && metadata.docs ? "text-black" : "text-gray-200",
             )}
           />
@@ -54,14 +53,13 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               {metadata && metadata.compiledMetadata ? (
                 <p>
                   The compiled metadata of the contract is available{" "}
-                  <a
-                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                  <ExternalLinkWithIcon
+                    className="text-blue-400 whitespace-nowrap"
                     href={metadata.compiledMetadata.href}
-                    target="_blank"
-                    rel="noreferrer noopener"
+                    iconSize={14}
                   >
-                    here ↗
-                  </a>
+                    here
+                  </ExternalLinkWithIcon>
                 </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("compiled-metadata")
@@ -71,7 +69,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
         >
           <Braces
             className={cn(
-              "w-[21px] h-[21px]",
+              "w-[17px] h-[17px]",
               metadata && metadata.compiledMetadata ? "text-black" : "text-gray-200",
             )}
           />
@@ -82,14 +80,13 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               {metadata && metadata.avatar ? (
                 <p>
                   Avatar URL:{" "}
-                  <a
-                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                  <ExternalLinkWithIcon
+                    className="text-blue-400 whitespace-nowrap"
                     href={metadata.avatar.href}
-                    target="_blank"
-                    rel="noreferrer noopener"
+                    iconSize={14}
                   >
-                    {metadata.avatar.href} ↗
-                  </a>
+                    {metadata.avatar.href}
+                  </ExternalLinkWithIcon>
                 </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("avatar")
@@ -97,11 +94,11 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
             </div>
           }
         >
-          <EnsAvatar name={name} avatarUrl={metadata?.avatar} className="w-[21px] h-[21px]" />
+          <EnsAvatar name={name} avatarUrl={metadata?.avatar} className="w-[17px] h-[17px]" />
         </GenericTooltip>
         <GenericTooltip
           content={
-            <div className="w-full max-w-[275px]">
+            <div className="w-full max-w-[350px]">
               {metadata && metadata.audits ? (
                 <div>
                   <p>
@@ -111,14 +108,13 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                         metadata.audits.map((audit) => (
                           <li className="list-disc list-inside">
                             Auditor: {audit.auditor} |{" "}
-                            <a
-                              className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                            <ExternalLinkWithIcon
+                              className="text-blue-400 whitespace-nowrap"
                               href={audit.report.href}
-                              target="_blank"
-                              rel="noreferrer noopener"
+                              iconSize={14}
                             >
-                              Report ↗
-                            </a>
+                              Report
+                            </ExternalLinkWithIcon>
                           </li>
                         ))}
                     </ul>
@@ -132,7 +128,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
         >
           <ShieldCheck
             className={cn(
-              "w-[21px] h-[21px]",
+              "w-[17px] h-[17px]",
               metadata && metadata.audits ? "text-black" : "text-gray-200",
             )}
           />
