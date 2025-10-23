@@ -1,12 +1,12 @@
 import { EnsAvatar } from "@/components/atoms/EnsAvatar.tsx";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { ExternalLinkWithIcon } from "@/components/atoms/Link.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import type { EnsProfileForContract } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { Name } from "@ensnode/ensnode-sdk";
-import {BookOpen, Braces, ShieldCheck} from "lucide-react";
+import { BookOpen, Braces, ShieldCheck } from "lucide-react";
 import React from "react";
-import {ExternalLinkWithIcon} from "@/components/atoms/Link.tsx";
 
 export interface SmartContractMetadataProps {
   name: Name;

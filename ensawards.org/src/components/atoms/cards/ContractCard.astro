@@ -3,9 +3,9 @@ import { Contract, ContractResolutionStatusIds } from "../../../types/contracts"
 import { getBlockExplorerUrlForContract } from "../../../utils/chains";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import { ExternalLinkWithIcon } from "../Link";
 import { SmartContractMetadata } from "../SmartContractMetadata";
 import { ContractBadge } from "../badges/ContractBadge";
-import { ExternalLinkWithIcon } from "../Link";
 export interface ContractCardProps {
   contract: Contract;
 }

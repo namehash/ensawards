@@ -115,9 +115,7 @@ const circumference = 2 * Math.PI * radius;
     if (counter !== targetScore) {
       // Delay grows when counter is closer to target
       delay =
-        counter > targetScore - 5
-          ? 40 * (5 - (targetScore - counter))
-          : 20;
+        counter > targetScore - 5 ? 40 * (5 - (targetScore - counter)) : 20;
 
       setTimeout(animateScore, delay);
     }
