@@ -58,5 +58,5 @@ export const getBlockExplorerUrlForContract = (
   const chainBlockExplorer = getChainBlockExplorerUrl(chainId);
   if (!chainBlockExplorer) return null;
 
-  return new URL(contractAddress, chainBlockExplorer.toString());
+  return new URL(`/address/${contractAddress}`, chainBlockExplorer.toString());
 };
