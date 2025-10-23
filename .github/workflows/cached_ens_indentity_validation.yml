@@ -1,7 +1,12 @@
+name: "Test: Cached ENS data validation"
+
 on:
   schedule:
     # run once a day at 16:30pm UTC
     - cron: '30 16 * * *'
+
+permissions:
+  contents: read
 
 jobs:
   unit-tests:
