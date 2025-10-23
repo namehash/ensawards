@@ -13,7 +13,7 @@ jobs:
     name: "Cached ENS identity validation"
     runs-on: ubuntu-22.04
     env:
-      VITE_ENSNODE_URL: ${{ env.VITE_ENSNODE_URL }}
+      VITE_ENSNODE_URL: ${{ vars.VITE_ENSNODE_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
