@@ -10,8 +10,8 @@ import { mainnet } from "viem/chains";
 export const CONTRACTS: Contract[] = [
   {
     org: ENSDaoOrg,
-    type: "DAO",
-    subtype: "Governance",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
