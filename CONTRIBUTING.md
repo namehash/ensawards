@@ -60,10 +60,7 @@ export interface Contract {
     org: Organization;
     type: ContractType;
     subtype: ContractSubtype;
-    contract: ContractRef;
-    codeName: string;
-    cachedEnsProfile: CachedEnsProfile | null;
-}
+    cachedIdentity: ContractIdentityResolved;
 ```
 * If you’re part of a project or DAO that owns any of the listed contracts, you may suggest updates, ex. let us know that you've named your contract.
 

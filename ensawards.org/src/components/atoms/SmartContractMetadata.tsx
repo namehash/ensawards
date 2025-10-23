@@ -1,88 +1,138 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip.tsx";
-import type { ContractMetadata } from "@/types/contracts.ts";
+import { EnsAvatar } from "@/components/atoms/EnsAvatar.tsx";
+import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { ExternalLinkWithIcon } from "@/components/atoms/Link.tsx";
+import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import type { EnsProfileForContract } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { Aperture, BadgeDollarSign, Bell, Citrus } from "lucide-react";
+import type { Name } from "@ensnode/ensnode-sdk";
+import { BookOpen, Braces, ShieldCheck } from "lucide-react";
 import React from "react";
 
 export interface SmartContractMetadataProps {
-  metadata: ContractMetadata;
+  name: Name;
+  metadata?: EnsProfileForContract;
 }
 
-const getActivatedMetadataFieldMessage = (fieldValue: string) =>
-  `Example activated info. Field value=${fieldValue}.`;
+const getDeactivatedMetadataFieldMessage = (metadataFieldName: string) =>
+  `The "${metadataFieldName}" field has not been defined for this contract.`;
 
-const getDeactivatedMetadataFieldMessage = () => "Example deactivated info";
-
-export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) {
+export function SmartContractMetadata({ metadata, name }: SmartContractMetadataProps) {
   return (
     <TooltipProvider delayDuration={1000} skipDelayDuration={0}>
       <div className="flex flex-row flex-nowrap justify-start items-center gap-3">
-        {/*TODO replace with actual appropriate icons when they are provided*/}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Aperture
-              className={cn("w-[21px] h-[21px]", metadata.field1 ? "text-black" : "text-gray-200")}
-            />
-          </TooltipTrigger>
-          <TooltipContent
-            sideOffset={10}
-            className="bg-gray-50 text-sm text-black shadow-md outline-none max-w-[275px]"
-          >
-            {metadata.field1
-              ? getActivatedMetadataFieldMessage(metadata.field1)
-              : getDeactivatedMetadataFieldMessage()}
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Bell
-              className={cn("w-[21px] h-[21px]", metadata.field2 ? "text-black" : "text-gray-200")}
-            />
-          </TooltipTrigger>
-          <TooltipContent
-            sideOffset={10}
-            className="bg-gray-50 text-sm text-black shadow-md outline-none max-w-[275px]"
-          >
-            {metadata.field2
-              ? getActivatedMetadataFieldMessage(metadata.field2)
-              : getDeactivatedMetadataFieldMessage()}
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Citrus
-              className={cn("w-[21px] h-[21px]", metadata.field3 ? "text-black" : "text-gray-200")}
-            />
-          </TooltipTrigger>
-          <TooltipContent
-            sideOffset={10}
-            className="bg-gray-50 text-sm text-black shadow-md outline-none max-w-[275px]"
-          >
-            {metadata.field3
-              ? getActivatedMetadataFieldMessage(metadata.field3)
-              : getDeactivatedMetadataFieldMessage()}
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <BadgeDollarSign
-              className={cn("w-[21px] h-[21px]", metadata.field4 ? "text-black" : "text-gray-200")}
-            />
-          </TooltipTrigger>
-          <TooltipContent
-            sideOffset={10}
-            className="bg-gray-50 text-sm text-black shadow-md outline-none max-w-[275px]"
-          >
-            {metadata.field4
-              ? getActivatedMetadataFieldMessage(metadata.field4)
-              : getDeactivatedMetadataFieldMessage()}
-          </TooltipContent>
-        </Tooltip>
+        <GenericTooltip
+          content={
+            <div className="w-full max-w-[275px]">
+              {metadata && metadata.docs ? (
+                <p>
+                  The docs of the contract are available{" "}
+                  <ExternalLinkWithIcon
+                    className="text-blue-400 whitespace-nowrap"
+                    href={metadata.docs.href}
+                    iconSize={14}
+                  >
+                    here
+                  </ExternalLinkWithIcon>
+                </p>
+              ) : (
+                getDeactivatedMetadataFieldMessage("docs")
+              )}
+            </div>
+          }
+        >
+          <BookOpen
+            className={cn(
+              "w-[17px] h-[17px]",
+              metadata && metadata.docs ? "text-black" : "text-gray-200",
+            )}
+          />
+        </GenericTooltip>
+        <GenericTooltip
+          content={
+            <div className="w-full max-w-[275px]">
+              {metadata && metadata.compiledMetadata ? (
+                <p>
+                  The compiled metadata of the contract is available{" "}
+                  <ExternalLinkWithIcon
+                    className="text-blue-400 whitespace-nowrap"
+                    href={metadata.compiledMetadata.href}
+                    iconSize={14}
+                  >
+                    here
+                  </ExternalLinkWithIcon>
+                </p>
+              ) : (
+                getDeactivatedMetadataFieldMessage("compiled-metadata")
+              )}
+            </div>
+          }
+        >
+          <Braces
+            className={cn(
+              "w-[17px] h-[17px]",
+              metadata && metadata.compiledMetadata ? "text-black" : "text-gray-200",
+            )}
+          />
+        </GenericTooltip>
+        <GenericTooltip
+          content={
+            <div className="w-full max-w-[275px]">
+              {metadata && metadata.avatar ? (
+                <p>
+                  Avatar URL:{" "}
+                  <ExternalLinkWithIcon
+                    className="text-blue-400 whitespace-nowrap"
+                    href={metadata.avatar.href}
+                    iconSize={14}
+                  >
+                    {metadata.avatar.href}
+                  </ExternalLinkWithIcon>
+                </p>
+              ) : (
+                getDeactivatedMetadataFieldMessage("avatar")
+              )}
+            </div>
+          }
+        >
+          <EnsAvatar name={name} avatarUrl={metadata?.avatar} className="w-[17px] h-[17px]" />
+        </GenericTooltip>
+        <GenericTooltip
+          content={
+            <div className="w-full max-w-[350px]">
+              {metadata && metadata.audits ? (
+                <div>
+                  <p>
+                    Audits passed by the contract:
+                    <ul>
+                      {metadata &&
+                        metadata.audits.map((audit) => (
+                          <li className="list-disc list-inside">
+                            Auditor: {audit.auditor} |{" "}
+                            <ExternalLinkWithIcon
+                              className="text-blue-400 whitespace-nowrap"
+                              href={audit.report.href}
+                              iconSize={14}
+                            >
+                              Report
+                            </ExternalLinkWithIcon>
+                          </li>
+                        ))}
+                    </ul>
+                  </p>
+                </div>
+              ) : (
+                getDeactivatedMetadataFieldMessage("audits")
+              )}
+            </div>
+          }
+        >
+          <ShieldCheck
+            className={cn(
+              "w-[17px] h-[17px]",
+              metadata && metadata.audits ? "text-black" : "text-gray-200",
+            )}
+          />
+        </GenericTooltip>
       </div>
     </TooltipProvider>
   );

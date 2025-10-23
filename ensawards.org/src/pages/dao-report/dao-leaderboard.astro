@@ -39,7 +39,8 @@ const placeIcons = [
               key={`dao-leaderboard-card-${org.id}`}
               name={org.name}
               ensAwardsScore={value}
-              viewDetailsLink={`/dao-report/${org.slug}`}>
+              viewDetailsLink={`/dao-report/${org.slug}`}
+              viewDetailsText="DAO report">
               {idx < 3 ? (
                 <Image
                   alt={`${idx + 1}-place`}

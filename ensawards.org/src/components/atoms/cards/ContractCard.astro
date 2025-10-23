@@ -1,12 +1,11 @@
 ---
-import { BenchmarkResult } from "../../../types/apps";
-import { Contract } from "../../../types/contracts";
+import { Contract, ContractResolutionStatusIds } from "../../../types/contracts";
 import { getBlockExplorerUrlForContract } from "../../../utils/chains";
-import { BenchmarkResultToBadgeStyles } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import MatrixBadge from "../MatrixBadge.astro";
+import { ExternalLinkWithIcon } from "../Link";
 import { SmartContractMetadata } from "../SmartContractMetadata";
+import { ContractBadge } from "../badges/ContractBadge";
 export interface ContractCardProps {
   contract: Contract;
 }
@@ -20,17 +19,15 @@ const { contract }: ContractCardProps = Astro.props;
   <div
     class="max-sm:w-full sm:min-w-[425px] flex flex-col justify-start items-start">
     <p class="text-sm leading-normal font-normal text-muted-foreground">
-      {contract.codeName}
+      {contract.cachedIdentity.contract.codeName}
     </p>
-    <a
+    <ExternalLinkWithIcon
       href={getBlockExplorerUrlForContract(
-        contract.contract.chain.id,
-        contract.contract.address,
+        contract.cachedIdentity.contract.chain.id,
+        contract.cachedIdentity.contract.address,
       )}
-      target="_blank"
-      rel="noreferrer noopener"
-      class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
-      >{contract.contract.address} ↗</a
+      className="text-sm leading-snug font-medium text-black max-sm:break-all"
+      >{contract.cachedIdentity.contract.address}</ExternalLinkWithIcon
     >
   </div>
   <div
@@ -39,31 +36,35 @@ const { contract }: ContractCardProps = Astro.props;
       ENS name
     </p>
     {
-      contract.cachedEnsProfile !== null ? (
-        <a
-          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedEnsProfile.ensName)}`}
-          target="_blank"
-          rel="noreferrer noopener"
-          class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-          {contract.cachedEnsProfile.ensName} ↗
-        </a>
+      contract.cachedIdentity.resolutionStatus ===
+        ContractResolutionStatusIds.PrimaryNamed ||
+      contract.cachedIdentity.resolutionStatus ===
+        ContractResolutionStatusIds.ForwardNamed ? (
+        <ExternalLinkWithIcon
+          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
+          className="text-sm leading-snug font-medium text-blue-600 whitespace-nowrap">
+          {contract.cachedIdentity.name}
+        </ExternalLinkWithIcon>
       ) : (
         <p class="text-sm leading-normal font-medium">Unnamed contract</p>
       )
     }
   </div>
   <div
-    class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px]">
+    class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px] gap-1">
     {
-      contract.cachedEnsProfile !== null &&
-      contract.cachedEnsProfile.ensMetadata ? (
+      contract.cachedIdentity.resolutionStatus ===
+        ContractResolutionStatusIds.PrimaryNamed ||
+      contract.cachedIdentity.resolutionStatus ===
+        ContractResolutionStatusIds.ForwardNamed ? (
         <>
           <p class="text-sm leading-normal font-normal text-muted-foreground">
             ENS metadata
           </p>
           <SmartContractMetadata
             client:load
-            metadata={contract.cachedEnsProfile.ensMetadata}
+            name={contract.cachedIdentity.name}
+            metadata={contract.cachedIdentity.profile}
           />
         </>
       ) : (
@@ -85,28 +86,24 @@ const { contract }: ContractCardProps = Astro.props;
   </div>
   <div
     class="max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:items-center sm:min-w-[115px] max-sm:self-stretch">
-    <MatrixBadge
-      text={contract.cachedEnsProfile !== null ? "Named" : "Unnamed"}
-      className={BenchmarkResultToBadgeStyles.get(
-        contract.cachedEnsProfile !== null
-          ? BenchmarkResult.Pass
-          : BenchmarkResult.Fail,
-      )!}
-      iconId={contract.cachedEnsProfile !== null
-        ? BenchmarkResult.Pass
-        : BenchmarkResult.Fail}
+    <ContractBadge
+      client:load
+      contractResolutionStatus={contract.cachedIdentity.resolutionStatus}
     />
-    <div class="flex sm:hidden flex-col justify-start items-start">
+    <div class="flex sm:hidden flex-col justify-start items-start gap-1">
       {
-        contract.cachedEnsProfile !== null &&
-        contract.cachedEnsProfile.ensMetadata ? (
+        contract.cachedIdentity.resolutionStatus ===
+          ContractResolutionStatusIds.PrimaryNamed ||
+        contract.cachedIdentity.resolutionStatus ===
+          ContractResolutionStatusIds.ForwardNamed ? (
           <>
             <p class="text-sm leading-normal font-normal text-muted-foreground">
               ENS metadata
             </p>
             <SmartContractMetadata
               client:load
-              metadata={contract.cachedEnsProfile.ensMetadata}
+              name={contract.cachedIdentity.name}
+              metadata={contract.cachedIdentity.profile}
             />
           </>
         ) : (

@@ -11,7 +11,7 @@ describe("weight functions", () => {
   } as Record<SupportedGroupByCategory, Contract[]>;
 
   describe("binaryWeights", () => {
-    it("should give weight = 1 to all named contracts", () => {
+    it("should give weight = 1 to all named (either with primary or forward name) contracts", () => {
       const expectedOutput = {
         "org-ens-dao": [0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
         "org-uniswap-dao": [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
