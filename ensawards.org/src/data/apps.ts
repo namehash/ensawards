@@ -98,8 +98,7 @@ export const APPS: App[] = [
     id: "etherscan",
     slug: "etherscan",
     name: "Etherscan",
-    description:
-        "Etherscan is a Block Explorer and Analytics Platform for Ethereum.",
+    description: "Etherscan is a Block Explorer and Analytics Platform for Ethereum.",
     ensAwardsScore: 90,
     type: "Explorer",
     websiteLink: "https://etherscan.io/",
@@ -127,8 +126,7 @@ export const APPS: App[] = [
     id: "blockscout",
     slug: "blockscout",
     name: "Blockscout",
-    description:
-        "Blockscout is a tool for inspecting and analyzing EVM based blockchains.",
+    description: "Blockscout is a tool for inspecting and analyzing EVM based blockchains.",
     ensAwardsScore: 90,
     type: "Explorer",
     websiteLink: "https://www.blockscout.com/",

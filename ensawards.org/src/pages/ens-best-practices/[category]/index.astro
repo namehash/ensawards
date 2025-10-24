@@ -24,11 +24,12 @@ const categoryToDisplay = getCategoryBySlug(category);
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
-    <Layout pageMetadata={{
+    <Layout
+      pageMetadata={{
         title: `ENSAwards: ${categoryToDisplay.name} Best Practices`,
         description: `${categoryToDisplay.description} Includes: ${categoryToDisplay.bestPractices.map((bestPractice) => bestPractice.name).join(", ")}. Track app benchmarks for key ENS standards.`,
-        url: `https://ensawards.org/ens-best-practices/${category}`
-    }}>
+        url: `https://ensawards.org/ens-best-practices/${category}`,
+      }}>
       <SubpageHero
         header={categoryToDisplay.name}
         description={categoryToDisplay.description}

@@ -21,14 +21,14 @@ const { contract }: ContractCardProps = Astro.props;
       {contract.cachedIdentity.contract.codeName}
     </p>
     <a
-        href={getBlockExplorerUrlForContract(
-            contract.cachedIdentity.contract.chain.id,
-            contract.cachedIdentity.contract.address,
-        )}
-        target="_blank"
-        rel="noreferrer noopener"
-        class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
-    >{contract.cachedIdentity.contract.address}</a
+      href={getBlockExplorerUrlForContract(
+        contract.cachedIdentity.contract.chain.id,
+        contract.cachedIdentity.contract.address,
+      )}
+      target="_blank"
+      rel="noreferrer noopener"
+      class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
+      >{contract.cachedIdentity.contract.address}</a
     >
   </div>
   <div
@@ -41,13 +41,13 @@ const { contract }: ContractCardProps = Astro.props;
         ContractResolutionStatusIds.PrimaryNamed ||
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
-          <a
-              href={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
-              target="_blank"
-              rel="noreferrer noopener"
-              class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-            {contract.cachedIdentity.name}
-          </a>
+        <a
+          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
+          target="_blank"
+          rel="noreferrer noopener"
+          class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
+          {contract.cachedIdentity.name}
+        </a>
       ) : (
         <p class="text-sm leading-normal font-medium">Unnamed contract</p>
       )

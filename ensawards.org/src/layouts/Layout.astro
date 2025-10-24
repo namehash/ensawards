@@ -10,11 +10,11 @@ import StaticHeader from "../components/organisms/StaticHeader.astro";
 import SuggestionForm from "../components/organisms/SuggestionForm.astro";
 
 interface PageMetadata {
-    title?: string;
-    description?: string;
-    og_image?: string;
-    twitter_image?: string;
-    url?: string;
+  title?: string;
+  description?: string;
+  og_image?: string;
+  twitter_image?: string;
+  url?: string;
 }
 export interface LayoutProps {
   isStatic: boolean;
@@ -22,20 +22,21 @@ export interface LayoutProps {
 }
 
 const DEFAULT_TITLE = "ENSAwards: Excellence in ENS Integrations";
-const DEFAULT_DESCRIPTION = "Benchmark ENS integrations across apps and DAOs. Discover top performers, best practices, and referral awards.";
+const DEFAULT_DESCRIPTION =
+  "Benchmark ENS integrations across apps and DAOs. Discover top performers, best practices, and referral awards.";
 const DEFAULT_OG_IMAGE = "https://ensawards.org/og_image.png";
 const DEFAULT_TWITTER_IMAGE = "https://ensawards.org/twitter_og_image.png";
 const DEFAULT_URL = "https://ensawards.org/";
 
 const DEFAULT_PAGE_METADATA: PageMetadata = {
-    title: DEFAULT_TITLE,
-    description: DEFAULT_DESCRIPTION,
-    og_image: DEFAULT_OG_IMAGE,
-    twitter_image: DEFAULT_TWITTER_IMAGE,
-    url: DEFAULT_URL
-}
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  og_image: DEFAULT_OG_IMAGE,
+  twitter_image: DEFAULT_TWITTER_IMAGE,
+  url: DEFAULT_URL,
+};
 
-const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA}: LayoutProps = Astro.props;
+const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = Astro.props;
 ---
 
 <!doctype html>

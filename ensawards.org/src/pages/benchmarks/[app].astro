@@ -27,11 +27,12 @@ const appToDisplay = getAppBySlug(app);
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
-    <Layout pageMetadata={{
+    <Layout
+      pageMetadata={{
         title: `ENSAwards: ${appToDisplay.name} Benchmarks`,
         description: `${appToDisplay.description} Type: ${appToDisplay.type}. Track overall score and passed/failed benchmarks.`,
-        url: `https://ensawards.org/benchmarks/${app}`
-    }}>
+        url: `https://ensawards.org/benchmarks/${app}`,
+      }}>
       <SubpageHero
         header={appToDisplay.name}
         description={appToDisplay.description}
@@ -67,7 +68,8 @@ const appToDisplay = getAppBySlug(app);
                   category: "Category",
                   value: benchmark.bestPracticeDetails.categoryName,
                   link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}`,
-                  linkStyles: "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
+                  linkStyles:
+                    "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
                 },
               ]}>
               <MatrixBadge

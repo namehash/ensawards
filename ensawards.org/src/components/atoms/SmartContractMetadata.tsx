@@ -23,17 +23,17 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
           content={
             <div className="w-full max-w-[275px]">
               {metadata && metadata.docs ? (
-                  <p>
-                      The docs of the contract are available{" "}
-                      <a
-                          className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-                          href={metadata.docs.href}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                      >
-                          here
-                      </a>
-                  </p>
+                <p>
+                  The docs of the contract are available{" "}
+                  <a
+                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                    href={metadata.docs.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    here
+                  </a>
+                </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("docs")
               )}
@@ -51,17 +51,17 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
           content={
             <div className="w-full max-w-[275px]">
               {metadata && metadata.compiledMetadata ? (
-                  <p>
-                      The compiled metadata of the contract is available{" "}
-                      <a
-                          className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-                          href={metadata.compiledMetadata.href}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                      >
-                          here
-                      </a>
-                  </p>
+                <p>
+                  The compiled metadata of the contract is available{" "}
+                  <a
+                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                    href={metadata.compiledMetadata.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    here
+                  </a>
+                </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("compiled-metadata")
               )}
@@ -82,9 +82,9 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                 <p>
                   Avatar URL:{" "}
                   <a
-                  className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-                  target="_blank"
-                  rel="noreferrer noopener"
+                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                    target="_blank"
+                    rel="noreferrer noopener"
                     href={metadata.avatar.href}
                   >
                     {metadata.avatar.href}
@@ -108,17 +108,17 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                     <ul>
                       {metadata &&
                         metadata.audits.map((audit) => (
-                            <li className="list-disc list-inside">
-                                Auditor: {audit.auditor} |{" "}
-                                <a
-                                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-                                    href={audit.report.href}
-                                    target="_blank"
-                                    rel="noreferrer noopener"
-                                >
-                                    Report
-                                </a>
-                            </li>
+                          <li className="list-disc list-inside">
+                            Auditor: {audit.auditor} |{" "}
+                            <a
+                              className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                              href={audit.report.href}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                            >
+                              Report
+                            </a>
+                          </li>
                         ))}
                     </ul>
                   </p>
