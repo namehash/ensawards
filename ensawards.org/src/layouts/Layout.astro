@@ -9,11 +9,33 @@ import Header from "../components/organisms/Header.astro";
 import StaticHeader from "../components/organisms/StaticHeader.astro";
 import SuggestionForm from "../components/organisms/SuggestionForm.astro";
 
+interface PageMetadata {
+    title?: string;
+    description?: string;
+    og_image?: string;
+    twitter_image?: string;
+    url?: string;
+}
 export interface LayoutProps {
   isStatic: boolean;
+  pageMetadata: PageMetadata;
 }
 
-const { isStatic = false }: LayoutProps = Astro.props;
+const DEFAULT_TITLE = "ENSAwards: Excellence in ENS Integrations";
+const DEFAULT_DESCRIPTION = "Benchmark ENS integrations across apps and DAOs. Discover top performers, best practices, and referral awards.";
+const DEFAULT_OG_IMAGE = "https://ensawards.org/og_image.png";
+const DEFAULT_TWITTER_IMAGE = "https://ensawards.org/twitter_og_image.png";
+const DEFAULT_URL = "https://ensawards.org/";
+
+const DEFAULT_PAGE_METADATA: PageMetadata = {
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    og_image: DEFAULT_OG_IMAGE,
+    twitter_image: DEFAULT_TWITTER_IMAGE,
+    url: DEFAULT_URL
+}
+
+const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA}: LayoutProps = Astro.props;
 ---
 
 <!doctype html>
@@ -39,25 +61,25 @@ const { isStatic = false }: LayoutProps = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <SEO
-      title="ENSAwards - Promoting excellence in ENS integrations"
-      description="Promoting excellence in ENS integrations"
+      title={pageMetadata.title || DEFAULT_TITLE}
+      description={pageMetadata.description || DEFAULT_DESCRIPTION}
       openGraph={{
         basic: {
-          title: "ENSAwards - Promoting excellence in ENS integrations",
+          title: pageMetadata.title || DEFAULT_TITLE,
           type: "website",
-          image: "https://ensawards.org/og_image.png",
-          url: "https://ensawards.org/",
+          image: pageMetadata.og_image || DEFAULT_OG_IMAGE,
+          url: pageMetadata.url || DEFAULT_URL,
         },
         optional: {
-          description: "Promoting excellence in ENS integrations",
+          description: pageMetadata.description || DEFAULT_DESCRIPTION,
           siteName: "ENSAwards",
         },
       }}
       twitter={{
         creator: "@NameHashLabs",
-        title: "ENSAwards - Promoting excellence in ENS integrations",
-        image: "https://ensawards.org/twitter_og_image.png",
-        description: "Promoting excellence in ENS integrations",
+        title: pageMetadata.title || DEFAULT_TITLE,
+        image: pageMetadata.twitter_image || DEFAULT_TWITTER_IMAGE,
+        description: pageMetadata.description || DEFAULT_DESCRIPTION,
         card: "summary_large_image",
       }}
       extend={{

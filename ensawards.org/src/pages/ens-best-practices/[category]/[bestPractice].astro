@@ -48,7 +48,11 @@ const benchmarkedApps = APPS.filter(
           )
           :
           (
-          <Layout>
+          <Layout pageMetadata={{
+              title: `ENSAwards: ${bestPracticeToDisplay.name}`,
+              description: `${bestPracticeToDisplay.description} Track app benchmarks, technical details, and support levels.`,
+              url: `https://ensawards.org/ens-best-practices/${category}/${bestPractice}`
+          }}>
                 <SubpageHero
                     header={bestPracticeToDisplay.name}
                     description={bestPracticeToDisplay.description}

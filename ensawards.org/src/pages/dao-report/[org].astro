@@ -40,7 +40,11 @@ if (resolvedOrg) {
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
-    <Layout>
+    <Layout pageMetadata={{
+      title: `ENSAwards: ${resolvedOrg.name} Report`,
+      description: `${resolvedOrg.description} Track DAO score and named contracts on Ethereum, Base, and other chains.`,
+      url: `https://ensawards.org/dao-report/${org}` //TODO: adapt after planned route changes
+    }}>
       <SubpageHero
         header={resolvedOrg.name}
         description={resolvedOrg.description}
