@@ -11,7 +11,7 @@ export interface ContractBadgeProps {
 
 export function ContractBadge({ contractResolutionStatus }: ContractBadgeProps) {
   return (
-    <TooltipProvider delayDuration={1000} skipDelayDuration={0}>
+    <TooltipProvider delayDuration={250} skipDelayDuration={0}>
       {contractResolutionStatus === ContractResolutionStatusIds.Unnamed && (
         <span
           className="w-fit flex flex-row flex-nowrap justify-center items-center gap-[6px] pl-[10px] pr-3 py-1

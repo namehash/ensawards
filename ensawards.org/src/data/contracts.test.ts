@@ -27,7 +27,7 @@ describe("contracts data", () => {
       data.forEach((contract) =>
         expect(
           isAddress(contract.cachedIdentity.contract.address),
-          `The address=${contract.cachedIdentity.contract.address} is not valid or not in checksum format. Should be ${getAddress(contract.cachedIdentity.contract.address)} instead.`,
+          `The address=${contract.cachedIdentity.contract.address} is not valid or not in checksum format.`,
         ).toEqual(true),
       );
     });

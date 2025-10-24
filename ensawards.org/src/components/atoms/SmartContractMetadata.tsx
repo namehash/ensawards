@@ -18,7 +18,7 @@ const getDeactivatedMetadataFieldMessage = (metadataFieldName: string) =>
 
 export function SmartContractMetadata({ metadata, name }: SmartContractMetadataProps) {
   return (
-    <TooltipProvider delayDuration={1000} skipDelayDuration={0}>
+    <TooltipProvider delayDuration={250} skipDelayDuration={0}>
       <div className="flex flex-row flex-nowrap justify-start items-center gap-3">
         <GenericTooltip
           content={
