@@ -94,4 +94,62 @@ export const APPS: App[] = [
       },
     ],
   },
+  {
+    id: "etherscan",
+    slug: "etherscan",
+    name: "Etherscan",
+    description:
+        "Etherscan is a Block Explorer and Analytics Platform for Ethereum.",
+    ensAwardsScore: 90,
+    type: "Explorer",
+    websiteLink: "https://etherscan.io/",
+    iconSourceLink: "/src/assets/etherscanIcon.svg",
+    benchmarks: [
+      {
+        bestPracticeDetails: recognizeAllENSNames,
+        result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice1,
+        result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice2,
+        result: BenchmarkResult.Fail,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice3,
+        result: BenchmarkResult.Fail,
+      },
+    ],
+  },
+  {
+    id: "blockscout",
+    slug: "blockscout",
+    name: "Blockscout",
+    description:
+        "Blockscout is a tool for inspecting and analyzing EVM based blockchains.",
+    ensAwardsScore: 90,
+    type: "Explorer",
+    websiteLink: "https://www.blockscout.com/",
+    iconSourceLink: "/src/assets/blockscoutIcon.svg",
+    benchmarks: [
+      {
+        bestPracticeDetails: recognizeAllENSNames,
+        result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice1,
+        result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice2,
+        result: BenchmarkResult.Fail,
+      },
+      {
+        bestPracticeDetails: placeholderBestPractice3,
+        result: BenchmarkResult.Fail,
+      },
+    ],
+  },
 ];
