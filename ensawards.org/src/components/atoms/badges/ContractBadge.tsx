@@ -1,8 +1,9 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type ContractResolutionStatusId, ContractResolutionStatusIds } from "@/types/contracts.ts";
-import { CheckCheck, TriangleAlert, X as XIcon } from "lucide-react";
+import { CheckCheck, Check, X as XIcon } from "lucide-react";
 import React from "react";
+import {InfoIcon} from "@/components/atoms/icons/InfoIcon.tsx";
 
 export interface ContractBadgeProps {
   contractResolutionStatus: ContractResolutionStatusId;
@@ -42,8 +43,9 @@ export function ContractBadge({ contractResolutionStatus }: ContractBadgeProps) 
             className="w-fit flex flex-row flex-nowrap justify-center items-center gap-[6px] pl-[10px] pr-3
               py-1 rounded-full text-sm leading-normal font-medium text-orange-600 bg-orange-100 hover:bg-orange-200 cursor-default"
           >
-            <TriangleAlert width={16} height={16} />
+            <Check width={16} height={16} />
             Named
+            <InfoIcon width={16} height={16} className="text-orange-400" />
           </span>
         </GenericTooltip>
       )}
