@@ -2,6 +2,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar.tsx";
 import type { Name } from "@ensnode/ensnode-sdk";
 import { CircleUser } from "lucide-react";
 import * as React from "react";
+import {cn} from "@/utils/tailwindClassConcatenation.ts";
 
 export interface EnsAvatarProps {
   name: Name;
@@ -18,7 +19,7 @@ export const EnsAvatar = ({ name, avatarUrl, className }: EnsAvatarProps) => {
   if (avatarUrl === undefined) {
     return (
       <Avatar className={className}>
-        <EnsAvatarFallback />
+        <EnsAvatarFallback withUrl={false} />
       </Avatar>
     );
   }
@@ -32,7 +33,7 @@ export const EnsAvatar = ({ name, avatarUrl, className }: EnsAvatarProps) => {
           setLoadingStatus(status);
         }}
       />
-      {loadingStatus === "error" && <EnsAvatarFallback />}
+      {loadingStatus === "error" && <EnsAvatarFallback withUrl={true} />}
       {(loadingStatus === "idle" || loadingStatus === "loading") && <AvatarLoading />}
     </Avatar>
   );
@@ -42,6 +43,9 @@ export const EnsAvatar = ({ name, avatarUrl, className }: EnsAvatarProps) => {
 // Spent too much time on it, and couldn't fix it.
 // Decided to rollback to using an icon,
 // but would like to investigate more when I have more time.
-const EnsAvatarFallback = () => <CircleUser className="w-[21px] h-[21px] text-gray-200" />;
+interface EnsAvatarFallbackProps {
+    withUrl: boolean;
+}
+const EnsAvatarFallback = ({withUrl}: EnsAvatarFallbackProps) => <CircleUser className={cn("w-[17px] h-[17px]", withUrl ? "text-black": "text-gray-200")} />;
 
 const AvatarLoading = () => <div className="h-full w-full rounded-full animate-pulse bg-muted" />;

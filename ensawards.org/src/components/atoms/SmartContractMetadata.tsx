@@ -82,7 +82,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                 <p>
                   Avatar URL:{" "}
                   <a
-                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                    className="block w-full text-blue-400 hover:underline hover:underline-offset-[25%] break-all"
                     target="_blank"
                     rel="noreferrer noopener"
                     href={metadata.avatar.href}

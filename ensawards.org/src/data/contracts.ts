@@ -111,12 +111,16 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
         address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
         chain: mainnet,
         codeName: "UNIToken",
       },
+      name: "uni.tkn.eth",
+      profile: {
+        avatar: new URL("https://gateway.tkn.xyz/ipfs/bafybeiclyzf4rogl67kd42ss2z2mnf4o3pf5s2aginvsxk7iomlelxhsdi"),
+      }
     },
   },
   {
@@ -124,12 +128,13 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
         address: "0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
         chain: mainnet,
         codeName: "Timelock",
       },
+      name: "uniswap.eth"
     },
   },
   {
@@ -245,7 +250,7 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0xd1428ba554f4c8450b763a0b2040a4935c63f06c",
         chain: mainnet,
-        codeName: "PositionDescriptor",
+        codeName: "TransparentUpgradeableProxy",
       },
     },
   },
@@ -271,7 +276,7 @@ export const CONTRACTS: Contract[] = [
       contract: {
         address: "0x52f0e24d1c21c8a0cb1e5a5dd6198556bd9e1203",
         chain: mainnet,
-        codeName: "Quoter",
+        codeName: "V4Quoter",
       },
     },
   },
@@ -306,12 +311,13 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
         address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
         chain: mainnet,
         codeName: "Permit2",
       },
+      name: "dex.davywoodfi.eth"
     },
   },
 ];
