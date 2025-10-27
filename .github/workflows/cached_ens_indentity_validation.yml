@@ -1,0 +1,24 @@
+name: "Test: Cached ENS data validation"
+
+on:
+  schedule:
+    # run once a day at 16:30pm UTC
+    - cron: '30 16 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    name: "Cached ENS identity validation"
+    runs-on: ubuntu-22.04
+    env:
+      VITE_ENSNODE_URL: ${{ vars.VITE_ENSNODE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:cache

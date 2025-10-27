@@ -1,0 +1,37 @@
+---
+import ContractCard from "../../components/atoms/cards/ContractCard.astro";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { CONTRACTS_TEST_DATA } from "../../data/contracts-test";
+import Layout from "../../layouts/Layout.astro";
+import { ContractResolutionStatusIds } from "../../types/contracts";
+
+// We are certain they will always be defined as we control our test data
+const namedContract = CONTRACTS_TEST_DATA.find(
+  (contract) =>
+    contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed,
+)!;
+const forwardNamedContract = CONTRACTS_TEST_DATA.find(
+  (contract) =>
+    contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed,
+)!;
+const unnamedContract = CONTRACTS_TEST_DATA.find(
+  (contract) => contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.Unnamed,
+)!;
+---
+
+<Layout>
+  <SubpageHero header="ContractCard" breadcrumbs={["Mocks"]} />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div>
+      <ItemsList
+        header="ContractCard variants"
+        containerStyles="gap-4 sm:gap-4">
+        <ContractCard contract={namedContract} />
+        <ContractCard contract={forwardNamedContract} />
+        <ContractCard contract={unnamedContract} />
+      </ItemsList>
+    </div>
+  </section>
+</Layout>

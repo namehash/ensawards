@@ -7,5 +7,7 @@ export default defineProject({
       "@": resolve(__dirname, "./src"),
     },
   },
-  test: {},
+  test: {
+    env: process.env,
+  },
 });

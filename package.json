@@ -7,10 +7,16 @@
 		"lint": "biome check --write",
 		"lint:ci": "pnpm -r --parallel --aggregate-output lint:ci",
 		"typecheck": "pnpm -r --parallel --aggregate-output typecheck",
-		"test": "vitest --silent passed-only"
+		"test": "vitest --silent passed-only",
+		"test:cache": "vitest --run --silent passed-only --testNamePattern=\"contracts data\""
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"vitest": "catalog:"
+	},
+	"pnpm": {
+		"overrides": {
+			"vite": ">=6.4.1"
+		}
 	}
 }
