@@ -119,8 +119,10 @@ export const CONTRACTS: Contract[] = [
       },
       name: "uni.tkn.eth",
       profile: {
-        avatar: new URL("https://gateway.tkn.xyz/ipfs/bafybeiclyzf4rogl67kd42ss2z2mnf4o3pf5s2aginvsxk7iomlelxhsdi"),
-      }
+        avatar: new URL(
+          "https://gateway.tkn.xyz/ipfs/bafybeiclyzf4rogl67kd42ss2z2mnf4o3pf5s2aginvsxk7iomlelxhsdi",
+        ),
+      },
     },
   },
   {
@@ -134,7 +136,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "Timelock",
       },
-      name: "uniswap.eth"
+      name: "uniswap.eth",
     },
   },
   {
@@ -317,7 +319,7 @@ export const CONTRACTS: Contract[] = [
         chain: mainnet,
         codeName: "Permit2",
       },
-      name: "dex.davywoodfi.eth"
+      name: "dex.davywoodfi.eth",
     },
   },
 ];

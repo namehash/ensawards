@@ -27,34 +27,36 @@ const placeIcons = [
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList containerStyles="gap-3 sm:gap-3">
       {
-        APPS.sort((a, b) => b.ensAwardsScore - a.ensAwardsScore).map((app, idx) => (
-          <LeaderboardCard
-            key={`app-review-card-${app.id}`}
-            name={app.name}
-            ensAwardsScore={app.ensAwardsScore}
-            type={app.type}
-            viewDetailsLink={`/app/${app.slug}`}>
-            <Image
-              src={images[app.iconSourceLink]()}
-              alt={`${app.id}`}
-              slot="appIcon"
-              class="w-10 h-10 rounded-md"
-            />
-            {idx < 3 ? (
+        APPS.sort((a, b) => b.ensAwardsScore - a.ensAwardsScore).map(
+          (app, idx) => (
+            <LeaderboardCard
+              key={`app-review-card-${app.id}`}
+              name={app.name}
+              ensAwardsScore={app.ensAwardsScore}
+              type={app.type}
+              viewDetailsLink={`/app/${app.slug}`}>
               <Image
-                alt={`${idx + 1}-place`}
-                src={images[placeIcons[idx]]()}
-                slot="placeIcon"
+                src={images[app.iconSourceLink]()}
+                alt={`${app.id}`}
+                slot="appIcon"
+                class="w-10 h-10 rounded-md"
               />
-            ) : (
-              <p
-                slot="placeIcon"
-                class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                {idx + 1}
-              </p>
-            )}
-          </LeaderboardCard>
-        ))
+              {idx < 3 ? (
+                <Image
+                  alt={`${idx + 1}-place`}
+                  src={images[placeIcons[idx]]()}
+                  slot="placeIcon"
+                />
+              ) : (
+                <p
+                  slot="placeIcon"
+                  class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
+                  {idx + 1}
+                </p>
+              )}
+            </LeaderboardCard>
+          ),
+        )
       }
       <SuggestionCard whatsSuggested="app" />
     </ItemsList>

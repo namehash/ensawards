@@ -69,20 +69,20 @@ export default function HeaderMobileNavigation() {
                       "py-16 flex flex-col h-full justify-center overflow-y-auto scrollbar-styled",
                     )}
                   >
-                      <ul className="py-3 flex flex-col justify-center gap-1">
-                          <a href="/leaderboard" className={mainLinkClass}>
-                              ENS leaderboards
-                          </a>
-                          <a href="/ens-best-practices" className={mainLinkClass}>
-                              ENS best practices
-                          </a>
-                          <a href="/about" className={mainLinkClass}>
-                              About
-                          </a>
-                          <a href="/ens-referral-awards" className={mainLinkClass}>
-                              ENS Referral Awards
-                          </a>
-                      </ul>
+                    <ul className="py-3 flex flex-col justify-center gap-1">
+                      <a href="/leaderboard" className={mainLinkClass}>
+                        ENS leaderboards
+                      </a>
+                      <a href="/ens-best-practices" className={mainLinkClass}>
+                        ENS best practices
+                      </a>
+                      <a href="/about" className={mainLinkClass}>
+                        About
+                      </a>
+                      <a href="/ens-referral-awards" className={mainLinkClass}>
+                        ENS Referral Awards
+                      </a>
+                    </ul>
                   </div>
                 </div>
               </PopoverPanel>

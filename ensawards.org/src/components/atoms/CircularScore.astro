@@ -1,5 +1,5 @@
 ---
-import {cn} from "../../utils/tailwindClassConcatenation";
+import { cn } from "../../utils/tailwindClassConcatenation";
 export interface CircularScoreProps {
   score: number;
   size?: number;
@@ -47,7 +47,7 @@ const circumference = 2 * Math.PI * radius;
       opacity="0.8"
       r={radius}
       cx={size / 2}
-      cy={size / 2}/>
+      cy={size / 2}></circle>
 
     <!-- Gradient -->
     <defs>
@@ -71,8 +71,7 @@ const circumference = 2 * Math.PI * radius;
       r={radius}
       cx={size / 2}
       cy={size / 2}
-      class="transition-all ease-linear"
-    />
+      class="transition-all ease-linear"></circle>
   </svg>
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-1">
@@ -82,7 +81,10 @@ const circumference = 2 * Math.PI * radius;
       class="text-4xl text-white leading-8 font-semibold transition-all ease-linear">
     </p>
     <p
-      class={cn("absolute text-base leading-none text-white/50 font-semibold", score === 100 ? "right-6" : (score < 10 ? "right-10" : "right-8"))}>
+      class={cn(
+        "absolute text-base leading-none text-white/50 font-semibold",
+        score === 100 ? "right-6" : score < 10 ? "right-10" : "right-8",
+      )}>
       %
     </p>
   </div>
@@ -121,7 +123,7 @@ const circumference = 2 * Math.PI * radius;
       setTimeout(animateScore, delay);
     }
   }
-  if (targetScore > 0){
+  if (targetScore > 0) {
     setTimeout(animateScore, delay);
   }
 </script>

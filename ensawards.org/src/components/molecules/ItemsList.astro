@@ -18,30 +18,33 @@ const { header, numberOfItems, linkData, additionalInfo, containerStyles }: Item
 
 <div
   class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-6">
-  {header && <div
-    class="w-full h-fit flex flex-row flex-nowrap justify-between items-center self-stretch">
-    <h2 class="text-xl sm:text-2xl leading-normal font-semibold text-black">
-      {header}
-      {numberOfItems && <span class="text-gray-400">({numberOfItems})</span>}
-    </h2>
-    {
-      linkData ? (
-        <a
-          href={linkData.link}
-          class={cn(
-            shadcnButtonVariants({
-              variant: "ghost",
-              size: "default",
-              className: "cursor-pointer rounded-full text-base",
-            }),
-          )}>
-          {linkData.text}
-        </a>
-      ) : (
-        <slot name="ctaButton" />
-      )
-    }
-  </div>}
+  {
+    header && (
+      <div class="w-full h-fit flex flex-row flex-nowrap justify-between items-center self-stretch">
+        <h2 class="text-xl sm:text-2xl leading-normal font-semibold text-black">
+          {header}
+          {numberOfItems && (
+            <span class="text-gray-400">({numberOfItems})</span>
+          )}
+        </h2>
+        {linkData ? (
+          <a
+            href={linkData.link}
+            class={cn(
+              shadcnButtonVariants({
+                variant: "ghost",
+                size: "default",
+                className: "cursor-pointer rounded-full text-base",
+              }),
+            )}>
+            {linkData.text}
+          </a>
+        ) : (
+          <slot name="ctaButton" />
+        )}
+      </div>
+    )
+  }
   {
     additionalInfo && (
       <p class="text-base leading-normal font-normal text-muted-foreground text-left self-stretch">

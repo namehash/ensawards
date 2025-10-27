@@ -1,8 +1,8 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar.tsx";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { Name } from "@ensnode/ensnode-sdk";
 import { CircleUser } from "lucide-react";
 import * as React from "react";
-import {cn} from "@/utils/tailwindClassConcatenation.ts";
 
 export interface EnsAvatarProps {
   name: Name;
@@ -44,8 +44,10 @@ export const EnsAvatar = ({ name, avatarUrl, className }: EnsAvatarProps) => {
 // Decided to rollback to using an icon,
 // but would like to investigate more when I have more time.
 interface EnsAvatarFallbackProps {
-    withUrl: boolean;
+  withUrl: boolean;
 }
-const EnsAvatarFallback = ({withUrl}: EnsAvatarFallbackProps) => <CircleUser className={cn("w-[17px] h-[17px]", withUrl ? "text-black": "text-gray-200")} />;
+const EnsAvatarFallback = ({ withUrl }: EnsAvatarFallbackProps) => (
+  <CircleUser className={cn("w-[17px] h-[17px]", withUrl ? "text-black" : "text-gray-200")} />
+);
 
 const AvatarLoading = () => <div className="h-full w-full rounded-full animate-pulse bg-muted" />;
