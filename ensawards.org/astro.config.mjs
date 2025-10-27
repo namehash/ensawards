@@ -13,6 +13,6 @@ export default defineConfig({
   },
   redirects: {
     "/benchmarks": "/leaderboard/apps",
-    "/benchmarks/[...app]": "/app/[...app]",
+    "/benchmarks/[app]": "/app/[app]",
   },
 });
