@@ -42,7 +42,7 @@ const { contract }: ContractCardProps = Astro.props;
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
         <a
-          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
+          href={`https://app.enscribe.xyz/explore/${encodeURIComponent(contract.cachedIdentity.contract.chain.id)}/${encodeURIComponent(contract.cachedIdentity.name)}`}
           target="_blank"
           rel="noreferrer noopener"
           class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
@@ -72,7 +72,7 @@ const { contract }: ContractCardProps = Astro.props;
         </>
       ) : (
         <a
-          href="https://app.enscribe.xyz/nameContract"
+          href=`https://app.enscribe.xyz/nameContract?contract=${encodeURIComponent(contract.cachedIdentity.contract.address)}&chainId=${encodeURIComponent(contract.cachedIdentity.contract.chain.id)}`
           target="_blank"
           rel="noreferrer noopened"
           class={cn(
@@ -111,7 +111,7 @@ const { contract }: ContractCardProps = Astro.props;
           </>
         ) : (
           <a
-            href="https://app.enscribe.xyz/nameContract"
+            href=`https://app.enscribe.xyz/nameContract?contract=${encodeURIComponent(contract.cachedIdentity.contract.address)}&chainId=${encodeURIComponent(contract.cachedIdentity.contract.chain.id)}`
             target="_blank"
             rel="noreferrer noopened"
             class={cn(
