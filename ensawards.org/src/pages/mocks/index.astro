@@ -1,0 +1,52 @@
+---
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
+import Layout from "../../layouts/Layout.astro";
+import { cn } from "../../utils/tailwindClassConcatenation";
+
+interface SupportedMock {
+  componentName: string;
+  slug: string;
+}
+
+const supportedMocks: SupportedMock[] = [
+  {
+    componentName: "ContractCard",
+    slug: "contract-card",
+  },
+];
+---
+
+<Layout>
+  <SubpageHero
+    header="Mocks"
+    description="Preview our display components in a isolated environment."
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
+      <h3 class="text-xl sm:text-2xl leading-normal font-semibold text-black">
+        Select a UI to preview
+      </h3>
+      <div
+        class="w-full max-w-[1216px] box-border h-fit flex flex-row flex-wrap justify-start items-center gap-3 sm:gap-4">
+        {
+          supportedMocks.map((mockedElement) => (
+            <a
+              href={`/mocks/${mockedElement.slug}`}
+              class={cn(
+                shadcnButtonVariants({
+                  variant: "outline",
+                  size: "default",
+                  className: "cursor-pointer rounded-full text-base",
+                }),
+              )}>
+              {mockedElement.componentName}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

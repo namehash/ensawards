@@ -7,6 +7,9 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   audit:
     name: "Audit Dependencies"
@@ -39,6 +42,8 @@ jobs:
   unit-tests:
     name: "Unit Tests"
     runs-on: ubuntu-22.04
+    env:
+      VITE_ENSNODE_URL: ${{ vars.VITE_ENSNODE_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

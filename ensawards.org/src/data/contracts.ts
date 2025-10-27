@@ -5,7 +5,7 @@ import {
   ContractSubtypes,
   ContractTypes,
 } from "@/types/contracts.ts";
-import { base, mainnet } from "viem/chains";
+import { mainnet } from "viem/chains";
 
 export const CONTRACTS: Contract[] = [
   {
@@ -20,84 +20,20 @@ export const CONTRACTS: Contract[] = [
         codeName: "ENSToken",
       },
       name: "token.ensdao.eth",
-      // TODO: replace placeholder data below (in all "profiles")
-      profile: {
-        docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL(
-          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
-        ),
-        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
-        audits: [
-          {
-            auditor: "John Doe",
-            report: new URL("https://ensrainbow.io"),
-          },
-        ],
-      },
     },
   },
   {
     org: ENSDaoOrg,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
-        address: "0x0000000000000000000000000000000000000000",
-        chain: mainnet,
-        codeName: "ExampleUnnamedContract",
-      },
-    },
-  },
-  {
-    org: ENSDaoOrg,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
-      contract: {
-        address: "0x0000000000000000000000000000000000000008",
-        chain: mainnet,
-        codeName: "ExampleForwardNamedOnlyContract",
-      },
-      name: "example.forward.name.eth",
-      profile: {
-        docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL(
-          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
-        ),
-        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
-        audits: [
-          {
-            auditor: "John Doe",
-            report: new URL("https://ensrainbow.io"),
-          },
-        ],
-      },
-    },
-  },
-  {
-    org: ENSDaoOrg,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Governance,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
         address: "0xd7A029Db2585553978190dB5E85eC724Aa4dF23f",
         chain: mainnet,
         codeName: "TokenLock",
       },
       name: "tokenlock.ensdao.eth",
-      profile: {
-        docs: new URL("https://ensnode.io/docs"),
-        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
-        audits: [
-          {
-            auditor: "John Doe",
-            report: new URL("https://ensrainbow.io"),
-          },
-        ],
-      },
     },
   },
   {
@@ -105,19 +41,13 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
         address: "0x323A76393544d5ecca80cd6ef2A560C6a395b7E3",
         chain: mainnet,
         codeName: "ENSGovernor",
       },
       name: "governor.ensdao.eth",
-      profile: {
-        docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL(
-          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
-        ),
-      },
     },
   },
   {
@@ -132,18 +62,6 @@ export const CONTRACTS: Contract[] = [
         codeName: "TimelockController",
       },
       name: "wallet.ensdao.eth",
-      profile: {
-        compiledMetadata: new URL(
-          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
-        ),
-        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
-        audits: [
-          {
-            auditor: "John Doe",
-            report: new URL("https://ensrainbow.io"),
-          },
-        ],
-      },
     },
   },
   {
@@ -158,15 +76,6 @@ export const CONTRACTS: Contract[] = [
         codeName: "SafeProxy",
       },
       name: "twap.ensdao.eth",
-      profile: {
-        docs: new URL("https://ensnode.io/docs"),
-        audits: [
-          {
-            auditor: "John Doe",
-            report: new URL("https://ensrainbow.io"),
-          },
-        ],
-      },
     },
   },
   {
@@ -181,19 +90,6 @@ export const CONTRACTS: Contract[] = [
         codeName: "Veto",
       },
       name: "veto.ensdao.eth",
-      profile: {
-        docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL(
-          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
-        ),
-        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
-        audits: [
-          {
-            auditor: "John Doe",
-            report: new URL("https://ensrainbow.io"),
-          },
-        ],
-      },
     },
   },
   {
@@ -208,55 +104,6 @@ export const CONTRACTS: Contract[] = [
         codeName: "GnosisSafeProxy",
       },
       name: "endowment.ensdao.eth",
-      profile: {
-        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
-        audits: [
-          {
-            auditor: "John Doe",
-            report: new URL("https://ensrainbow.io"),
-          },
-        ],
-      },
-    },
-  },
-  {
-    org: ENSDaoOrg,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Governance,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
-      contract: {
-        address: "0x0000000000000000000000000000000000000001",
-        chain: base,
-        codeName: "PlaceholderBaseNamedContract",
-      },
-      name: "named.placeholder.contract.eth",
-      profile: {
-        docs: new URL("https://ensnode.io/docs"),
-        compiledMetadata: new URL(
-          "https://docs.soliditylang.org/en/latest/metadata.html#contract-metadata",
-        ),
-        avatar: new URL("https://i.imgur.com/guaLxYE.jpg"),
-        audits: [
-          {
-            auditor: "John Doe",
-            report: new URL("https://ensrainbow.io"),
-          },
-        ],
-      },
-    },
-  },
-  {
-    org: ENSDaoOrg,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Governance,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
-        address: "0x0000000000000000000000000000000000000002",
-        chain: base,
-        codeName: "PlaceholderBaseUnnamedContract",
-      },
     },
   },
   {
@@ -464,33 +311,6 @@ export const CONTRACTS: Contract[] = [
         address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
         chain: mainnet,
         codeName: "Permit2",
-      },
-    },
-  },
-  {
-    org: UniswapDaoOrg,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Utility,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
-      contract: {
-        address: "0x0000000000000000000000000000000000000003",
-        chain: base,
-        codeName: "UniswapPlaceholderBaseNamedContract",
-      },
-      name: "uniswap.named.placeholder.contract.eth",
-    },
-  },
-  {
-    org: UniswapDaoOrg,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.Utility,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
-        address: "0x0000000000000000000000000000000000000004",
-        chain: base,
-        codeName: "UniswapPlaceholderBaseUnnamedContract",
       },
     },
   },
