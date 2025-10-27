@@ -20,20 +20,20 @@ const placeIcons = [
   pageMetadata={{
     title: "ENSAwards: ENS Leaderboard for App Integrations",
     description: "See how apps score on ENS integration benchmarks.",
-    url: "https://ensawards.org/benchmarks",
+    url: "https://ensawards.org/leaderboard/apps",
   }}>
-  <SubpageHero header="App benchmark results" />
+  <SubpageHero header="App leaderboard" breadcrumbs={["ENS leaderboards"]} />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ItemsList header="Benchmarks" containerStyles="gap-3 sm:gap-3">
+    <ItemsList containerStyles="gap-3 sm:gap-3">
       {
-        APPS.map((app, idx) => (
+        APPS.sort((a, b) => b.ensAwardsScore - a.ensAwardsScore).map((app, idx) => (
           <LeaderboardCard
             key={`app-review-card-${app.id}`}
             name={app.name}
             ensAwardsScore={app.ensAwardsScore}
             type={app.type}
-            viewDetailsLink={`/benchmarks/${app.slug}`}>
+            viewDetailsLink={`/app/${app.slug}`}>
             <Image
               src={images[app.iconSourceLink]()}
               alt={`${app.id}`}

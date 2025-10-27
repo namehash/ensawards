@@ -1,4 +1,5 @@
 ---
+import {cn} from "../../utils/tailwindClassConcatenation";
 export interface CircularScoreProps {
   score: number;
   size?: number;
@@ -81,7 +82,7 @@ const circumference = 2 * Math.PI * radius;
       class="text-4xl text-white leading-8 font-semibold transition-all ease-linear">
     </p>
     <p
-      class="absolute right-8 text-base leading-none text-white/50 font-semibold">
+      class={cn("absolute text-base leading-none text-white/50 font-semibold", score === 100 ? "right-6" : (score < 10 ? "right-10" : "right-8"))}>
       %
     </p>
   </div>

@@ -31,12 +31,12 @@ const appToDisplay = getAppBySlug(app);
       pageMetadata={{
         title: `ENSAwards: ${appToDisplay.name} ENS Integration Benchmarks`,
         description: appToDisplay.description,
-        url: `https://ensawards.org/benchmarks/${app}`,
+        url: `https://ensawards.org/app/${app}`,
       }}>
       <SubpageHero
         header={appToDisplay.name}
         description={appToDisplay.description}
-        breadcrumbs={["App benchmarks"]}
+        breadcrumbs={["ENS leaderboards", "Apps"]}
         additionalElements={[
           { name: "Type", value: appToDisplay.type },
           {

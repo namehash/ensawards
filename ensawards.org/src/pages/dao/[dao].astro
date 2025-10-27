@@ -18,13 +18,13 @@ import { getOrgBySlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 export function getStaticPaths() {
   return Object.values(ORGANIZATIONS).map((org) => ({
-    params: { org: org.slug },
+    params: { dao: org.slug },
   }));
 }
 
-const { org } = Astro.params;
+const { dao } = Astro.params;
 
-const resolvedOrg = getOrgBySlug(org);
+const resolvedOrg = getOrgBySlug(dao);
 
 let orgContracts: Contract[];
 let OrgIcon;
@@ -44,12 +44,12 @@ if (resolvedOrg) {
       pageMetadata={{
         title: `ENSAwards: ${resolvedOrg.name} ENS Integration Benchmarks`,
         description: resolvedOrg.description,
-        url: `https://ensawards.org/dao-report/${org}`, //TODO: adapt after planned route changes
+        url: `https://ensawards.org/dao/${dao}`,
       }}>
       <SubpageHero
         header={resolvedOrg.name}
         description={resolvedOrg.description}
-        breadcrumbs={["DAO Report"]}>
+        breadcrumbs={["ENS leaderboards", "DAOs"]}>
         <OrgIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"

@@ -23,6 +23,16 @@ const { header, description, breadcrumbs, icon, additionalElements }: SubpageHer
 let breadcrumbHref = "";
 
 const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
+
+const adaptBreadcrumb = (crumb: string): string => {
+  // We use switch case here to stay flexible in the future
+  switch (crumb){
+    case "ENS leaderboards":
+      return "leaderboard";
+    default:
+      return crumb
+  }
+}
 ---
 
 <section
@@ -45,8 +55,7 @@ const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" 
           </a>
           <ChevronRightIcon className="text-white" />
           {breadcrumbs.map((crumb, idx) => {
-            const urlAdaptedCrumb =
-              crumb === "App benchmarks" ? "benchmarks" : crumb;
+            const urlAdaptedCrumb = adaptBreadcrumb(crumb);
             breadcrumbHref = breadcrumbHref.concat("/", urlAdaptedCrumb);
             if (idx < breadcrumbs.length - 1) {
               return (
