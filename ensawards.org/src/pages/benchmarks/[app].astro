@@ -29,8 +29,8 @@ const appToDisplay = getAppBySlug(app);
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ${appToDisplay.name} Benchmarks`,
-        description: `${appToDisplay.description} Type: ${appToDisplay.type}. Track overall score and passed/failed benchmarks.`,
+        title: `ENSAwards: ${appToDisplay.name} ENS Integration Benchmarks`,
+        description: appToDisplay.description,
         url: `https://ensawards.org/benchmarks/${app}`,
       }}>
       <SubpageHero
