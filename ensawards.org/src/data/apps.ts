@@ -102,7 +102,7 @@ export const APPS: App[] = [
     ensAwardsScore: 90,
     type: "Explorer",
     websiteLink: "https://etherscan.io/",
-    iconSourceLink: "/src/assets/etherscanIcon.svg",
+    iconSourceLink: "/src/assets/etherscanIcon.png",
     benchmarks: [
       {
         bestPracticeDetails: recognizeAllENSNames,
@@ -130,7 +130,7 @@ export const APPS: App[] = [
     ensAwardsScore: 90,
     type: "Explorer",
     websiteLink: "https://www.blockscout.com/",
-    iconSourceLink: "/src/assets/blockscoutIcon.svg",
+    iconSourceLink: "/src/assets/blockscoutIcon.jpg",
     benchmarks: [
       {
         bestPracticeDetails: recognizeAllENSNames,
