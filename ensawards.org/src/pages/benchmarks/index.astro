@@ -16,7 +16,12 @@ const placeIcons = [
 ];
 ---
 
-<Layout>
+<Layout
+  pageMetadata={{
+    title: "ENSAwards: ENS Leaderboard for App Integrations",
+    description: "See how apps score on ENS integration benchmarks.",
+    url: "https://ensawards.org/benchmarks",
+  }}>
   <SubpageHero header="App benchmark results" />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
@@ -33,7 +38,7 @@ const placeIcons = [
               src={images[app.iconSourceLink]()}
               alt={`${app.id}`}
               slot="appIcon"
-              class="rounded-md"
+              class="w-10 h-10 rounded-md"
             />
             {idx < 3 ? (
               <Image

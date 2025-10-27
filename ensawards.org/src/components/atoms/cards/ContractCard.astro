@@ -3,7 +3,6 @@ import { Contract, ContractResolutionStatusIds } from "../../../types/contracts"
 import { getBlockExplorerUrlForContract } from "../../../utils/chains";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import { ExternalLinkWithIcon } from "../Link";
 import { SmartContractMetadata } from "../SmartContractMetadata";
 import { ContractBadge } from "../badges/ContractBadge";
 export interface ContractCardProps {
@@ -21,13 +20,15 @@ const { contract }: ContractCardProps = Astro.props;
     <p class="text-sm leading-normal font-normal text-muted-foreground">
       {contract.cachedIdentity.contract.codeName}
     </p>
-    <ExternalLinkWithIcon
+    <a
       href={getBlockExplorerUrlForContract(
         contract.cachedIdentity.contract.chain.id,
         contract.cachedIdentity.contract.address,
       )}
-      className="text-sm leading-snug font-medium text-black max-sm:break-all"
-      >{contract.cachedIdentity.contract.address}</ExternalLinkWithIcon
+      target="_blank"
+      rel="noreferrer noopener"
+      class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
+      >{contract.cachedIdentity.contract.address}</a
     >
   </div>
   <div
@@ -40,11 +41,13 @@ const { contract }: ContractCardProps = Astro.props;
         ContractResolutionStatusIds.PrimaryNamed ||
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
-        <ExternalLinkWithIcon
+        <a
           href={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
-          className="text-sm leading-snug font-medium text-blue-600 whitespace-nowrap">
+          target="_blank"
+          rel="noreferrer noopener"
+          class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
           {contract.cachedIdentity.name}
-        </ExternalLinkWithIcon>
+        </a>
       ) : (
         <p class="text-sm leading-normal font-medium">Unnamed contract</p>
       )

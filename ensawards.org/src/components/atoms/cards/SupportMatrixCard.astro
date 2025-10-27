@@ -1,7 +1,6 @@
 ---
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import { Link } from "../Link";
 import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
 export interface MobileMatrixRowCardProps {
   name: string;
@@ -42,14 +41,14 @@ const { name, notes, viewButtonData, matrixColumnData }: MobileMatrixRowCardProp
               <p class="text-muted-foreground text-sm leading-normal font-normal">
                 {elem.category}
               </p>
-              <Link
+              <a
                 href={elem.link}
-                className={cn(
+                class={cn(
                   "text-sm leading-normal font-medium transition-all duration-200",
                   elem.linkStyles,
                 )}>
                 {elem.value}
-              </Link>
+              </a>
             </div>
           );
         } else {
@@ -105,14 +104,14 @@ const { name, notes, viewButtonData, matrixColumnData }: MobileMatrixRowCardProp
               <p class="text-muted-foreground text-sm leading-normal font-normal">
                 {elem.category}
               </p>
-              <Link
+              <a
                 href={elem.link}
-                className={cn(
+                class={cn(
                   "text-sm leading-normal font-medium transition-all duration-200",
                   elem.linkStyles,
                 )}>
                 {elem.value}
-              </Link>
+              </a>
             </div>
           );
         } else {

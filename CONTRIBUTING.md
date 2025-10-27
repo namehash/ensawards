@@ -61,6 +61,7 @@ export interface Contract {
     type: ContractType;
     subtype: ContractSubtype;
     cachedIdentity: ContractIdentityResolved;
+}
 ```
 * If you’re part of a project or DAO that owns any of the listed contracts, you may suggest updates, ex. let us know that you've named your contract.
 

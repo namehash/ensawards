@@ -7,7 +7,13 @@ import Layout from "../layouts/Layout.astro";
 const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-stretch";
 ---
 
-<Layout>
+<Layout
+  pageMetadata={{
+    title: "ENSAwards: ENS Referral Awards",
+    description:
+      "Earn rewards for referring .eth name registrations and renewals. Join the ENS Holiday Awards program.",
+    url: "https://ensawards.org/ens-referral-awards",
+  }}>
   <SubpageHero header="ENS Referral Awards" />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 p-5 sm:py-[60px] sm:px-8">

@@ -7,7 +7,12 @@ import { BEST_PRACTICE_CATEGORIES } from "../../data/bestPractices";
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout>
+<Layout
+  pageMetadata={{
+    title: "ENSAwards: ENS Best Practices",
+    description: "Best practices for ENS integrations.",
+    url: "https://ensawards.org/ens-best-practices",
+  }}>
   <SubpageHero header="ENS best practices" />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">

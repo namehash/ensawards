@@ -1,6 +1,5 @@
 import { EnsAvatar } from "@/components/atoms/EnsAvatar.tsx";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { ExternalLinkWithIcon } from "@/components/atoms/Link.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import type { EnsProfileForContract } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -18,7 +17,7 @@ const getDeactivatedMetadataFieldMessage = (metadataFieldName: string) =>
 
 export function SmartContractMetadata({ metadata, name }: SmartContractMetadataProps) {
   return (
-    <TooltipProvider delayDuration={1000} skipDelayDuration={0}>
+    <TooltipProvider delayDuration={250} skipDelayDuration={0}>
       <div className="flex flex-row flex-nowrap justify-start items-center gap-3">
         <GenericTooltip
           content={
@@ -26,13 +25,14 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               {metadata && metadata.docs ? (
                 <p>
                   The docs of the contract are available{" "}
-                  <ExternalLinkWithIcon
-                    className="text-blue-400 whitespace-nowrap"
+                  <a
+                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                     href={metadata.docs.href}
-                    iconSize={14}
+                    target="_blank"
+                    rel="noreferrer noopener"
                   >
                     here
-                  </ExternalLinkWithIcon>
+                  </a>
                 </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("docs")
@@ -53,13 +53,14 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               {metadata && metadata.compiledMetadata ? (
                 <p>
                   The compiled metadata of the contract is available{" "}
-                  <ExternalLinkWithIcon
-                    className="text-blue-400 whitespace-nowrap"
+                  <a
+                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                     href={metadata.compiledMetadata.href}
-                    iconSize={14}
+                    target="_blank"
+                    rel="noreferrer noopener"
                   >
                     here
-                  </ExternalLinkWithIcon>
+                  </a>
                 </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("compiled-metadata")
@@ -80,13 +81,14 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               {metadata && metadata.avatar ? (
                 <p>
                   Avatar URL:{" "}
-                  <ExternalLinkWithIcon
-                    className="text-blue-400 whitespace-nowrap"
+                  <a
+                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                    target="_blank"
+                    rel="noreferrer noopener"
                     href={metadata.avatar.href}
-                    iconSize={14}
                   >
                     {metadata.avatar.href}
-                  </ExternalLinkWithIcon>
+                  </a>
                 </p>
               ) : (
                 getDeactivatedMetadataFieldMessage("avatar")
@@ -108,13 +110,14 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                         metadata.audits.map((audit) => (
                           <li className="list-disc list-inside">
                             Auditor: {audit.auditor} |{" "}
-                            <ExternalLinkWithIcon
-                              className="text-blue-400 whitespace-nowrap"
+                            <a
+                              className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                               href={audit.report.href}
-                              iconSize={14}
+                              target="_blank"
+                              rel="noreferrer noopener"
                             >
                               Report
-                            </ExternalLinkWithIcon>
+                            </a>
                           </li>
                         ))}
                     </ul>

@@ -57,9 +57,6 @@ export default function HeaderMobileNavigation() {
                     >
                       <EnsAwardsIcon className="max-sm:w-[26px] max-sm:h-[25px]" />
                       ENSAwards
-                      <span className="w-fit h-fit flex flex-row flex-nowrap justify-center items-center bg-black text-white px-[6px] sm:pt-[2px] pt-[3px] pb-[3px] rounded-full text-[10px] leading-[1.1] font-semibold transition-all duration-200">
-                        Alpha
-                      </span>
                     </a>
                     <PopoverButton className="transition-all duration-200 rounded-lg border-0 inline-flex items-center whitespace-nowrap underline-none text-[#737373] cursor-pointer p-2 border-transparent hover:bg-black/5">
                       {/*NOTE: this results in a browser error (not-breaking) but is directly copied from namekit.io solution*/}
