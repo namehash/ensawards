@@ -1,4 +1,5 @@
 import {
+  displayNamedSmartContracts,
   placeholderBestPractice1,
   placeholderBestPractice2,
   placeholderBestPractice3,
@@ -21,6 +22,10 @@ export const APPS: App[] = [
       {
         bestPracticeDetails: recognizeAllENSNames,
         result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: displayNamedSmartContracts,
+        result: BenchmarkResult.Fail,
       },
       {
         bestPracticeDetails: placeholderBestPractice1,
@@ -52,6 +57,10 @@ export const APPS: App[] = [
         result: BenchmarkResult.Pass,
       },
       {
+        bestPracticeDetails: displayNamedSmartContracts,
+        result: BenchmarkResult.Fail,
+      },
+      {
         bestPracticeDetails: placeholderBestPractice1,
         result: BenchmarkResult.Pass,
       },
@@ -79,6 +88,10 @@ export const APPS: App[] = [
       {
         bestPracticeDetails: recognizeAllENSNames,
         result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: displayNamedSmartContracts,
+        result: BenchmarkResult.Fail,
       },
       {
         bestPracticeDetails: placeholderBestPractice1,
@@ -109,6 +122,10 @@ export const APPS: App[] = [
         result: BenchmarkResult.Pass,
       },
       {
+        bestPracticeDetails: displayNamedSmartContracts,
+        result: BenchmarkResult.Pass,
+      },
+      {
         bestPracticeDetails: placeholderBestPractice1,
         result: BenchmarkResult.Pass,
       },
@@ -134,6 +151,10 @@ export const APPS: App[] = [
     benchmarks: [
       {
         bestPracticeDetails: recognizeAllENSNames,
+        result: BenchmarkResult.Pass,
+      },
+      {
+        bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
       },
       {

@@ -13,7 +13,8 @@ interface additionalHeroElement {
 export interface SubpageHeroProps {
   header: string;
   description?: string;
-  breadcrumbs?: string[]; //May change depending on astro's policy on breadcrumbs (update: external & validated (shown as an official astro lib) library, but requires SASS styling and is yet another dependency, so for now I'll try doing it manually)
+  breadcrumbs?: string[]; //May change depending on astro's policy on breadcrumbs
+  // (update: there is external & validated (shown as an official astro lib) library, but requires SASS styling and is yet another dependency, so for now I'll try doing it manually)
   additionalElements?: additionalHeroElement[];
 }
 
@@ -27,6 +28,10 @@ const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" 
 const adaptBreadcrumb = (crumb: string): string => {
   // We use switch case here to stay flexible in the future
   switch (crumb) {
+    case  "DAO leaderboards":
+      return "daos";
+    case 'App leaderboards':
+      return "apps";
     case "ENS leaderboards":
       return "leaderboard";
     default:
@@ -109,6 +114,7 @@ const adaptBreadcrumb = (crumb: string): string => {
         additionalElements && (
           <div class="w-full sm:w-fit h-full flex-col justify-center sm:justify-end items-center relative z-10">
             <div class="flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-start items-start gap-2 sm:gap-5 md:gap-10">
+              <slot name="extraAdditionalElement" />
               {additionalElements.map((elem) => (
                 <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
                   <p class="text-gray-400">{elem.name}</p>

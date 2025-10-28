@@ -1,5 +1,5 @@
 import {
-  type BestPractice,
+  type BestPractice, BestPracticeApplications,
   type BestPracticeCategory,
   CategoryStatus,
 } from "@/types/bestPractices.ts";
@@ -11,8 +11,12 @@ export const recognizeAllENSNames: BestPractice = {
   description: "Support user input of all valid ENS names (not only .eth names).",
   categoryName: "Forward Resolution",
   categorySlug: "forward-resolution",
-  appsPassed: 3,
-  appSupport: 100,
+  supportDetails: {
+    appBenchmarksResults: {
+      appsPassed: 3,
+      appSupport: 100,
+    }
+  },
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -37,6 +41,78 @@ export const recognizeAllENSNames: BestPractice = {
   },
 };
 
+export const nameYourSmartContracts: BestPractice = {
+  id: "name-your-smart-contracts",
+  slug: "name-your-smart-contracts",
+  name: "Name your smart contracts",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  categoryName: "Contract naming",
+  categorySlug: "contract-naming",
+  supportDetails: {
+    appliesTo: [BestPracticeApplications.Dao],
+  },
+  technicalDetails: {
+    main: {
+      header: "Technical Details",
+      content:
+          "The following is temporary placeholder content. Technical details will be added soon. " +
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
+          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
+          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    sides: [
+      {
+        header: "Additional Details",
+        content:
+            "The following is temporary placeholder content. Technical details will be added soon. " +
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
+            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
+            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      },
+    ],
+  },
+};
+
+export const displayNamedSmartContracts: BestPractice = {
+  id: "display-named-smart-contracts",
+  slug: "display-named-smart-contracts",
+  name: "Display named smart contracts",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  categoryName: "Contract naming",
+  categorySlug: "contract-naming",
+  supportDetails: {
+    appBenchmarksResults: {
+      appsPassed: 2,
+      appSupport: 40,
+    },
+    appliesTo: [BestPracticeApplications.App]
+  },
+  technicalDetails: {
+    main: {
+      header: "Technical Details",
+      content:
+          "The following is temporary placeholder content. Technical details will be added soon. " +
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
+          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
+          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    sides: [
+      {
+        header: "Additional Details",
+        content:
+            "The following is temporary placeholder content. Technical details will be added soon. " +
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
+            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
+            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      },
+    ],
+  },
+}
+
 export const placeholderBestPractice1: BestPractice = {
   id: "placeholder-bp1",
   slug: "placeholder-bp-one",
@@ -44,8 +120,12 @@ export const placeholderBestPractice1: BestPractice = {
   description: "Temporary placeholder best practice.",
   categoryName: "Forward Resolution",
   categorySlug: "forward-resolution",
-  appsPassed: 2,
-  appSupport: 66,
+  supportDetails: {
+    appBenchmarksResults: {
+      appsPassed: 2,
+      appSupport: 66,
+    }
+  },
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -77,8 +157,12 @@ export const placeholderBestPractice2: BestPractice = {
   description: "Temporary placeholder best practice.",
   categoryName: "Forward Resolution",
   categorySlug: "forward-resolution",
-  appsPassed: 1,
-  appSupport: 33,
+  supportDetails: {
+    appBenchmarksResults: {
+      appsPassed: 1,
+      appSupport: 33,
+    }
+  },
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -110,8 +194,12 @@ export const placeholderBestPractice3: BestPractice = {
   description: "Temporary placeholder best practice.",
   categoryName: "Forward Resolution",
   categorySlug: "forward-resolution",
-  appsPassed: 2,
-  appSupport: 66,
+  supportDetails: {
+    appBenchmarksResults: {
+      appsPassed: 2,
+      appSupport: 66,
+    }
+  },
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -150,6 +238,17 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
       placeholderBestPractice2,
       placeholderBestPractice3,
     ],
+  },
+  {
+    id: "contract-naming",
+    slug: "contract-naming",
+    name: "Contract naming",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    status: CategoryStatus.Updated,
+    bestPractices: [
+        nameYourSmartContracts,
+        displayNamedSmartContracts
+    ]
   },
   {
     id: "reverse-resolution",

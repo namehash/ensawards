@@ -5,8 +5,10 @@ export interface BestPractice {
   description: string;
   categoryName: string;
   categorySlug: string; //TODO: Refactor this dependency
-  appsPassed: number;
-  appSupport: number;
+  supportDetails: {
+    appBenchmarksResults?: AppSupport;
+    appliesTo?: BestPracticeAppliesTo[];
+  }
   technicalDetails: {
     main: {
       header: string;
@@ -18,6 +20,18 @@ export interface BestPractice {
     }[];
   };
 }
+
+export interface AppSupport{
+  appSupport: number;
+  appsPassed: number;
+}
+
+export const BestPracticeApplications = {
+  Dao: "DAOs",
+  App: "Apps"
+} as const;
+
+export type BestPracticeAppliesTo = (typeof BestPracticeApplications)[keyof typeof BestPracticeApplications];
 
 export enum CategoryStatus {
   ComingSoon,

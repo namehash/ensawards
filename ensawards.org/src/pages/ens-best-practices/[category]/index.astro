@@ -8,6 +8,8 @@ import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
 import { CategoryStatus } from "../../../types/bestPractices";
 import { getCategoryBySlug } from "../../../utils/dataAccess";
+import ContractNamingBanner from "../../../components/atoms/ContractNamingBanner.astro";
+import EnscribeIcon from "../../../components/atoms/icons/EnscribeIconDark.astro";
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
     params: { category: category.slug },
@@ -40,8 +42,14 @@ const categoryToDisplay = getCategoryBySlug(category);
             value: categoryToDisplay.bestPractices.length,
           },
         ]}
-      />
+      >
+          {categoryToDisplay.id.includes("contract") && <div slot="extraAdditionalElement" class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
+                  <p class="text-gray-400">Powered by</p>
+                    <EnscribeIcon />
+          </div>}
+      </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
+        {categoryToDisplay.id.includes("contract") && <ContractNamingBanner />}
         <ItemsList
           header="Best practices"
           additionalInfo={
@@ -55,8 +63,7 @@ const categoryToDisplay = getCategoryBySlug(category);
               name={bestPractice.name}
               description={bestPractice.description}
               viewReviewsLink={`/ens-best-practices/${categoryToDisplay.slug}/${bestPractice.slug}`}
-              appsPassed={bestPractice.appsPassed}
-              appSupport={bestPractice.appSupport}
+              supportDetails={bestPractice.supportDetails}
             />
           ))}
           <SuggestionCard whatsSuggested="best practice" />

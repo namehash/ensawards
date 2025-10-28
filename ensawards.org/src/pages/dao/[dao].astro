@@ -3,7 +3,7 @@ import { ChainIcon } from "../../components/atoms/ChainIcon";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import DaoScore from "../../components/atoms/DaoScore.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
-import EnscribeIcon from "../../components/atoms/icons/EnscribeIcon.astro";
+import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
@@ -49,7 +49,7 @@ if (resolvedOrg) {
       <SubpageHero
         header={resolvedOrg.name}
         description={resolvedOrg.description}
-        breadcrumbs={["ENS leaderboards", "DAOs"]}>
+        breadcrumbs={["ENS leaderboards", "DAO leaderboards"]}>
         <OrgIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"
