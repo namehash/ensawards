@@ -72,7 +72,7 @@ if (resolvedOrg) {
         </div>
         <DaoScore slot="score" daoId={resolvedOrg.id} />
       </SubpageHero>
-      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ContractNamingBanner />
         <ItemsList
           header="Smart contract naming"
@@ -82,7 +82,7 @@ if (resolvedOrg) {
             target="_blank"
             rel="noreferrer noopener"
             slot="ctaButton"
-            class="w-fit h-fit flex flex-col sm:flex-row flex-nowrap justify-start items-start sm:items-center gap-1 sm:gap-3 px-2 sm:px-4 py-1 sm:py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 hover:text-gray-500 font-normal leading-normal sm:leading-7 hover:shadow-xs transition duration-200">
+            class="w-[224px] h-fit flex flex-row flex-nowrap justify-start items-center gap-3 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 hover:text-gray-500 font-normal leading-7 hover:shadow-xs transition duration-200">
             Powered by <EnscribeIcon />
           </a>
           {SUPPORTED_CHAINS.map((supportedChain, idx) => {
