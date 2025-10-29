@@ -1,8 +1,8 @@
 ---
+import { AppSupport, BestPracticeAppliesTo } from "../../../types/bestPractices";
 import { getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import {AppSupport, BestPracticeAppliesTo} from "../../../types/bestPractices";
 export interface BestPracticeCardProps {
   name: string;
   description: string;
@@ -10,11 +10,10 @@ export interface BestPracticeCardProps {
   supportDetails: {
     appBenchmarksResults?: AppSupport;
     appliesTo?: BestPracticeAppliesTo[];
-  }
+  };
 }
 
-const { name, description, viewReviewsLink, supportDetails}: BestPracticeCardProps =
-  Astro.props;
+const { name, description, viewReviewsLink, supportDetails }: BestPracticeCardProps = Astro.props;
 ---
 
 <a
@@ -53,41 +52,48 @@ const { name, description, viewReviewsLink, supportDetails}: BestPracticeCardPro
     </button>
     <div
       class="flex flex-nowrap flex-col sm:flex-row justify-start items-center gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
-      {supportDetails.appliesTo !== undefined &&
+      {
+        supportDetails.appliesTo !== undefined && (
           <div class="flex flex-row justify-between sm:justify-start items-center sm:gap-2 max-sm:self-stretch">
-            <p class="text-sm leading-normal font-normal text-muted-foreground">Applies to</p>
+            <p class="text-sm leading-normal font-normal text-muted-foreground">
+              Applies to
+            </p>
             <div class="flex flex-row justify-start items-center gap-1">
-              {supportDetails.appliesTo.map((bestPracticeApplication) =>
-                  <span class="flex justify-center items-center px-2 py-[2px] rounded-md bg-secondary text-black text-xs leading-normal font-semibold">
+              {supportDetails.appliesTo.map((bestPracticeApplication) => (
+                <span class="flex justify-center items-center px-2 py-[2px] rounded-md bg-secondary text-black text-xs leading-normal font-semibold">
                   {bestPracticeApplication}
-                </span>)
-              }
+                </span>
+              ))}
             </div>
           </div>
+        )
       }
-      {supportDetails.appBenchmarksResults !== undefined && (<>
-      <div
-        class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
-        <p class="text-muted-foreground text-sm leading-normal font-normal">
-          Apps passed
-        </p>
-        <p class="text-sm leading-normal font-semibold text-accent-foreground">
-          {supportDetails.appBenchmarksResults.appsPassed}
-        </p>
-      </div>
-      <div
-        class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
-        <p class="text-muted-foreground text-sm leading-normal font-normal">
-          App support
-        </p>
-        <p
-          class={cn(
-            "text-sm leading-normal font-semibold",
-            `text-${getAppSupportColor(supportDetails.appBenchmarksResults.appSupport)}`,
-          )}>
-          {supportDetails.appBenchmarksResults.appSupport}%
-        </p>
-      </div></>)}
+      {
+        supportDetails.appBenchmarksResults !== undefined && (
+          <>
+            <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
+              <p class="text-muted-foreground text-sm leading-normal font-normal">
+                Apps passed
+              </p>
+              <p class="text-sm leading-normal font-semibold text-accent-foreground">
+                {supportDetails.appBenchmarksResults.appsPassed}
+              </p>
+            </div>
+            <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
+              <p class="text-muted-foreground text-sm leading-normal font-normal">
+                App support
+              </p>
+              <p
+                class={cn(
+                  "text-sm leading-normal font-semibold",
+                  `text-${getAppSupportColor(supportDetails.appBenchmarksResults.appSupport)}`,
+                )}>
+                {supportDetails.appBenchmarksResults.appSupport}%
+              </p>
+            </div>
+          </>
+        )
+      }
     </div>
   </div>
 </a>

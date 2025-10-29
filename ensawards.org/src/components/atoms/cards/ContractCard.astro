@@ -12,11 +12,11 @@ export interface ContractCardProps {
 const { contract }: ContractCardProps = Astro.props;
 
 const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
-  if (word.length < minLength){
+  if (word.length < minLength) {
     return [word];
   }
 
-  const elements = word.split(/(?=[A-Z])/)
+  const elements = word.split(/(?=[A-Z])/);
   const result: string[] = [];
   let current = elements[0];
 
@@ -32,7 +32,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
 
   if (current) result.push(current);
   return result;
-}
+};
 ---
 
 <div

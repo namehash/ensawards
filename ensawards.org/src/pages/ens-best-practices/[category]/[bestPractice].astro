@@ -2,24 +2,26 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import MatrixBadge from "../../../components/atoms/badges/MatrixBadge.astro";
+import BenchmarkResultCard from "../../../components/atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 import { APPS } from "../../../data/apps";
-import {BEST_PRACTICE_CATEGORIES, nameYourSmartContracts} from "../../../data/bestPractices";
+import { BEST_PRACTICE_CATEGORIES, nameYourSmartContracts } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
 import { getBestPracticeByCategoryAndSlug } from "../../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
-import BenchmarkResultCard from "../../../components/atoms/cards/BenchmarkResultCard.astro";
 export function getStaticPaths() {
   const staticPaths = [];
 
   for (let category of BEST_PRACTICE_CATEGORIES) {
-    category.bestPractices.filter((bestPractice) => bestPractice.id !== nameYourSmartContracts.id).forEach((bestPractice) =>
-      staticPaths.push({ params: { category: category.slug, bestPractice: bestPractice.slug } }),
-    );
+    category.bestPractices
+      .filter((bestPractice) => bestPractice.id !== nameYourSmartContracts.id)
+      .forEach((bestPractice) =>
+        staticPaths.push({ params: { category: category.slug, bestPractice: bestPractice.slug } }),
+      );
   }
   return staticPaths;
 }

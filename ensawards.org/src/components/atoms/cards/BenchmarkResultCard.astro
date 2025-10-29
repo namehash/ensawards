@@ -1,76 +1,95 @@
 ---
+import { cn } from "../../../utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
-import {cn} from "../../../utils/tailwindClassConcatenation";
-import {shadcnButtonVariants} from "../../ui/shadcnButtonStyles";
 export interface BenchmarkResultCardProps {
-    name: string;
-    notes: string;
-    viewDetails: {
-        text: string;
-        link: string;
-    };
-    additionalInfo: {
-        category: string;
-        value: string;
-        link?: string;
-        linkStyles?: string;
-    }[];
+  name: string;
+  notes: string;
+  viewDetails: {
+    text: string;
+    link: string;
+  };
+  additionalInfo: {
+    category: string;
+    value: string;
+    link?: string;
+    linkStyles?: string;
+  }[];
 }
 const { name, notes, viewDetails, additionalInfo }: BenchmarkResultCardProps = Astro.props;
 ---
+
 <!--The "onClick" here is hacky, but allows us to have two different links (as before) and the requested hover behavior-->
 <div
-        data-link={viewDetails.link}
-        onClick=`if(!event.target.closest('a')) window.location=this.dataset.link`
-        class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-nowrap justify-start items-start gap-3 sm:gap-10
+  data-link={viewDetails.link}
+  onClick=`if(!event.target.closest('a')) window.location=this.dataset.link`
+  class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-nowrap justify-start items-start gap-3 sm:gap-10
             p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
-    <!--Mobile Header start-->
-    <div
-            class="sm:hidden flex flex-row flex-nowrap justify-between items-center self-stretch">
-        <slot name="icon" />
-        <slot name="badge" />
-    </div>
-    <h3 class="sm:hidden text-lg leading-normal font-semibold text-black self-stretch">
+  <!--Mobile Header start-->
+  <div
+    class="sm:hidden flex flex-row flex-nowrap justify-between items-center self-stretch">
+    <slot name="icon" />
+    <slot name="badge" />
+  </div>
+  <h3
+    class="sm:hidden text-lg leading-normal font-semibold text-black self-stretch">
+    {name}
+  </h3>
+  <p class="sm:hidden text-sm font-normal leading-6 text-black self-stretch">
+    {notes}
+  </p>
+  <!--Mobile Header end-->
+  <div
+    class="w-2/3 hidden sm:flex flex-row flex-nowrap justify-start items-start gap-4">
+    <slot name="icon" />
+    <div class="flex flex-col flex-nowrap justify-center items-start gap-3">
+      <h3 class="text-lg leading-normal font-semibold text-black self-stretch">
         {name}
-    </h3>
-    <p class="sm:hidden text-sm font-normal leading-6 text-black self-stretch">
+      </h3>
+      <p class="text-sm font-normal leading-6 text-gray-500 self-stretch">
         {notes}
-    </p>
-    <!--Mobile Header end-->
-    <div class="w-2/3 hidden sm:flex flex-row flex-nowrap justify-start items-start gap-4">
-        <slot name="icon" />
-        <div class="flex flex-col flex-nowrap justify-center items-start gap-3">
-            <h3 class="text-lg leading-normal font-semibold text-black self-stretch">
-                {name}
-            </h3>
-            <p class="text-sm font-normal leading-6 text-gray-500 self-stretch">
-                {notes}
+      </p>
+    </div>
+  </div>
+  <div
+    class="min-[1000px]:w-1/3 flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start gap-2 max-sm:self-stretch">
+    {
+      additionalInfo.map((elem) => (
+        <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-start items-start max-sm:self-stretch">
+          <p class="text-muted-foreground text-sm leading-normal font-normal">
+            {elem.category}
+          </p>
+          {elem.link ? (
+            <a
+              href={elem.link}
+              class={cn(
+                "text-sm leading-normal font-medium transition-all duration-200",
+                elem.linkStyles,
+              )}>
+              {elem.value}
+            </a>
+          ) : (
+            <p class="text-sm leading-normal font-medium text-black">
+              {elem.value}
             </p>
+          )}
         </div>
+      ))
+    }
+    <div
+      class="max-sm:hidden flex flex-nowrap flex-row justify-end items-center py-[6px] w-[127px]">
+      <slot name="badge" />
     </div>
-    <div class="min-[1000px]:w-1/3 flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start gap-2 max-sm:self-stretch">
-        {additionalInfo.map((elem) => <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-start items-start max-sm:self-stretch">
-            <p class="text-muted-foreground text-sm leading-normal font-normal">{elem.category}</p>
-            {elem.link ?
-                    <a href={elem.link} class={cn("text-sm leading-normal font-medium transition-all duration-200",
-                        elem.linkStyles)}>{elem.value}</a>
-                :
-                    <p class="text-sm leading-normal font-medium text-black">{elem.value}</p>
-            }
-        </div>)}
-        <div class="max-sm:hidden flex flex-nowrap flex-row justify-end items-center py-[6px] w-[127px]">
-            <slot name="badge" />
-        </div>
-        <ChevronRightIcon className="max-sm:hidden w-10 h-10 hover:opacity-60" />
-    </div>
-    <button
-            class={cn(
-                shadcnButtonVariants({
-                    variant: "secondary",
-                    size: "default",
-                    className: "sm:hidden cursor-pointer rounded-full self-stretch",
-                }),
-            )}>
-        {viewDetails.text}
-    </button>
+    <ChevronRightIcon className="max-sm:hidden w-10 h-10 hover:opacity-60" />
+  </div>
+  <button
+    class={cn(
+      shadcnButtonVariants({
+        variant: "secondary",
+        size: "default",
+        className: "sm:hidden cursor-pointer rounded-full self-stretch",
+      }),
+    )}>
+    {viewDetails.text}
+  </button>
 </div>

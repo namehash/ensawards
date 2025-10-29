@@ -28,9 +28,9 @@ const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" 
 const adaptBreadcrumb = (crumb: string): string => {
   // We use switch case here to stay flexible in the future
   switch (crumb) {
-    case  "DAO leaderboards":
+    case "DAO leaderboards":
       return "daos";
-    case 'App leaderboards':
+    case "App leaderboards":
       return "apps";
     case "ENS leaderboards":
       return "leaderboard";

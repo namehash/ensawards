@@ -96,7 +96,11 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
             </div>
           }
         >
-          <EnsAvatar name={name} avatarUrl={metadata?.avatar} className="w-[17px] h-[17px] cursor-pointer" />
+          <EnsAvatar
+            name={name}
+            avatarUrl={metadata?.avatar}
+            className="w-[17px] h-[17px] cursor-pointer"
+          />
         </GenericTooltip>
         <GenericTooltip
           content={

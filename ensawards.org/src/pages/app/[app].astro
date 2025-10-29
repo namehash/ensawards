@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import MatrixBadge from "../../components/atoms/badges/MatrixBadge.astro";
+import BenchmarkResultCard from "../../components/atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
@@ -10,7 +11,6 @@ import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { getAppBySlug } from "../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
-import BenchmarkResultCard from "../../components/atoms/cards/BenchmarkResultCard.astro";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.slug } }));
@@ -55,31 +55,31 @@ const appToDisplay = getAppBySlug(app);
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
         <ItemsList header="Benchmark results">
-            {appToDisplay.benchmarks.map((benchmark, idx) => (
-                    <BenchmarkResultCard
-                            name={benchmark.bestPracticeDetails.name}
-                            notes={benchmark.bestPracticeDetails.description}
-                            viewDetails={{
-                                text: "View best practice details",
-                                link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}/${benchmark.bestPracticeDetails.slug}`,
-                            }}
-                            additionalInfo={[
-                                {
-                                    category: "Category",
-                                    value: benchmark.bestPracticeDetails.categoryName,
-                                    link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}`,
-                                    linkStyles:
-                                        "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
-                                },
-                            ]}>
-                        <MatrixBadge
-                                slot="badge"
-                                text={benchmark.result}
-                                className={BenchmarkResultToBadgeStyles.get(benchmark.result)!}
-                                iconId={benchmark.result}
-                        />
-                    </BenchmarkResultCard>
-            ))}
+          {appToDisplay.benchmarks.map((benchmark, idx) => (
+            <BenchmarkResultCard
+              name={benchmark.bestPracticeDetails.name}
+              notes={benchmark.bestPracticeDetails.description}
+              viewDetails={{
+                text: "View best practice details",
+                link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}/${benchmark.bestPracticeDetails.slug}`,
+              }}
+              additionalInfo={[
+                {
+                  category: "Category",
+                  value: benchmark.bestPracticeDetails.categoryName,
+                  link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}`,
+                  linkStyles:
+                    "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
+                },
+              ]}>
+              <MatrixBadge
+                slot="badge"
+                text={benchmark.result}
+                className={BenchmarkResultToBadgeStyles.get(benchmark.result)!}
+                iconId={benchmark.result}
+              />
+            </BenchmarkResultCard>
+          ))}
           <SuggestionCard whatsSuggested="benchmark result" />
         </ItemsList>
       </section>

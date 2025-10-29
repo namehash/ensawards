@@ -8,7 +8,7 @@ export interface BestPractice {
   supportDetails: {
     appBenchmarksResults?: AppSupport;
     appliesTo?: BestPracticeAppliesTo[];
-  }
+  };
   technicalDetails: {
     main: {
       header: string;
@@ -21,17 +21,18 @@ export interface BestPractice {
   };
 }
 
-export interface AppSupport{
+export interface AppSupport {
   appSupport: number;
   appsPassed: number;
 }
 
 export const BestPracticeApplications = {
   Dao: "DAOs",
-  App: "Apps"
+  App: "Apps",
 } as const;
 
-export type BestPracticeAppliesTo = (typeof BestPracticeApplications)[keyof typeof BestPracticeApplications];
+export type BestPracticeAppliesTo =
+  (typeof BestPracticeApplications)[keyof typeof BestPracticeApplications];
 
 export enum CategoryStatus {
   ComingSoon,
