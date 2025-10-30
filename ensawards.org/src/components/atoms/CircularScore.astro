@@ -74,7 +74,7 @@ const circumference = 2 * Math.PI * radius;
       class="transition-all ease-linear"></circle>
   </svg>
   <div
-    class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-1">
+    class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-0">
     <p
       id="scoreNumber"
       data-score={score}
@@ -82,8 +82,7 @@ const circumference = 2 * Math.PI * radius;
     </p>
     <p
       class={cn(
-        "absolute text-base leading-none text-white/50 font-semibold",
-        score === 100 ? "right-6" : score < 10 ? "right-10" : "right-8",
+        "text-2xl leading-8 text-white/50 font-semibold"
       )}>
       %
     </p>
