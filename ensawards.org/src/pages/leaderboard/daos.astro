@@ -21,7 +21,13 @@ const placeIcons = [
 ];
 ---
 
-<Layout>
+<Layout pageMetadata={{
+  title: "ENSAwards: ENS Leaderboard for DAO Integrations",
+  description: "See how DAOs score on ENS integration benchmarks.",
+  url: "https://ensawards.org/leaderboard/daos",
+  og_image: "https://ensawards.org/dao_leaderboard_og_image.png",
+  twitter_image: "https://ensawards.org/dao_leaderboard_twitter_og_image.png"
+}}>
   <SubpageHero header="DAO leaderboard" breadcrumbs={["ENS leaderboards"]} />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
