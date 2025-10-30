@@ -116,117 +116,6 @@ export const displayNamedSmartContracts: BestPractice = {
   },
 };
 
-export const placeholderBestPractice1: BestPractice = {
-  id: "placeholder-bp1",
-  slug: "placeholder-bp-one",
-  name: "Placeholder Forward Resolution Best Practice #1",
-  description: "Temporary placeholder best practice.",
-  categoryName: "Forward Resolution",
-  categorySlug: "forward-resolution",
-  supportDetails: {
-    appBenchmarksResults: {
-      appsPassed: 2,
-      appSupport: 66,
-    },
-  },
-  technicalDetails: {
-    main: {
-      header: "Technical Details",
-      content:
-        "The following is temporary placeholder content. Technical details will be added soon. " +
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-    sides: [
-      {
-        header: "Additional Details",
-        content:
-          "The following is temporary placeholder content. Technical details will be added soon. " +
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      },
-    ],
-  },
-};
-
-export const placeholderBestPractice2: BestPractice = {
-  id: "placeholder-bp2",
-  slug: "placeholder-bp-two",
-  name: "Placeholder Forward Resolution Best Practice #2",
-  description: "Temporary placeholder best practice.",
-  categoryName: "Forward Resolution",
-  categorySlug: "forward-resolution",
-  supportDetails: {
-    appBenchmarksResults: {
-      appsPassed: 1,
-      appSupport: 33,
-    },
-  },
-  technicalDetails: {
-    main: {
-      header: "Technical Details",
-      content:
-        "The following is temporary placeholder content. Technical details will be added soon. " +
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-    sides: [
-      {
-        header: "Additional Details",
-        content:
-          "The following is temporary placeholder content. Technical details will be added soon. " +
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      },
-    ],
-  },
-};
-
-export const placeholderBestPractice3: BestPractice = {
-  id: "placeholder-bp3",
-  slug: "placeholder-bp-three",
-  name: "Placeholder Forward Resolution Best Practice #3",
-  description: "Temporary placeholder best practice.",
-  categoryName: "Forward Resolution",
-  categorySlug: "forward-resolution",
-  supportDetails: {
-    appBenchmarksResults: {
-      appsPassed: 2,
-      appSupport: 66,
-    },
-  },
-  technicalDetails: {
-    main: {
-      header: "Technical Details",
-      content:
-        "The following is temporary placeholder content. Technical details will be added soon. " +
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-    sides: [
-      {
-        header: "Additional Details",
-        content:
-          "The following is temporary placeholder content. Technical details will be added soon. " +
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      },
-    ],
-  },
-};
-
 export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
   {
     id: "forward-resolution",
@@ -237,9 +126,6 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
     status: CategoryStatus.Updated,
     bestPractices: [
       recognizeAllENSNames,
-      placeholderBestPractice1,
-      placeholderBestPractice2,
-      placeholderBestPractice3,
     ],
   },
   {

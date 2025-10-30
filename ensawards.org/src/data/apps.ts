@@ -1,8 +1,5 @@
 import {
   displayNamedSmartContracts,
-  placeholderBestPractice1,
-  placeholderBestPractice2,
-  placeholderBestPractice3,
   recognizeAllENSNames,
 } from "@/data/bestPractices.ts";
 import { type App, BenchmarkResult } from "@/types/apps.ts";
@@ -27,18 +24,6 @@ export const APPS: App[] = [
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Fail,
       },
-      {
-        bestPracticeDetails: placeholderBestPractice1,
-        result: BenchmarkResult.Pass,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice2,
-        result: BenchmarkResult.Fail,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice3,
-        result: BenchmarkResult.Fail,
-      },
     ],
   },
   {
@@ -58,18 +43,6 @@ export const APPS: App[] = [
       },
       {
         bestPracticeDetails: displayNamedSmartContracts,
-        result: BenchmarkResult.Fail,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice1,
-        result: BenchmarkResult.Pass,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice2,
-        result: BenchmarkResult.Fail,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice3,
         result: BenchmarkResult.Fail,
       },
     ],
@@ -93,18 +66,6 @@ export const APPS: App[] = [
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Fail,
       },
-      {
-        bestPracticeDetails: placeholderBestPractice1,
-        result: BenchmarkResult.Pass,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice2,
-        result: BenchmarkResult.Fail,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice3,
-        result: BenchmarkResult.Fail,
-      },
     ],
   },
   {
@@ -125,18 +86,6 @@ export const APPS: App[] = [
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
       },
-      {
-        bestPracticeDetails: placeholderBestPractice1,
-        result: BenchmarkResult.Pass,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice2,
-        result: BenchmarkResult.Fail,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice3,
-        result: BenchmarkResult.Fail,
-      },
     ],
   },
   {
@@ -156,18 +105,6 @@ export const APPS: App[] = [
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice1,
-        result: BenchmarkResult.Pass,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice2,
-        result: BenchmarkResult.Fail,
-      },
-      {
-        bestPracticeDetails: placeholderBestPractice3,
-        result: BenchmarkResult.Fail,
       },
     ],
   },
