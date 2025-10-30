@@ -124,9 +124,7 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
     description:
       "Lookup social records, the contenthash of decentralized websites, avatar images, multichain deposit addresses, and more.",
     status: CategoryStatus.Updated,
-    bestPractices: [
-      recognizeAllENSNames,
-    ],
+    bestPractices: [recognizeAllENSNames],
   },
   {
     id: "contract-naming",

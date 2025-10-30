@@ -15,7 +15,7 @@ export const ENSDaoOrg: Organization = {
   socialLinks: {
     websiteLink: new URL("https://ensdao.org/"),
     twitterLink: new URL("https://x.com/ENS_DAO"),
-    associatedENSName: "ensdao.eth"
+    associatedENSName: "ensdao.eth",
   },
 };
 
@@ -31,7 +31,7 @@ export const UniswapDaoOrg: Organization = {
   socialLinks: {
     websiteLink: new URL("https://www.uniswapfoundation.org/"),
     twitterLink: new URL("https://x.com/UniswapFND"),
-    associatedENSName: "uniswap.eth"
+    associatedENSName: "uniswap.eth",
   },
 };
 

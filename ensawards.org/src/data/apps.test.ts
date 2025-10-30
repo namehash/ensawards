@@ -1,7 +1,7 @@
 import { APPS } from "@/data/apps.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
+import { isNormalizedName } from "@ensnode/ensnode-sdk";
 import { describe, expect, it } from "vitest";
-import {isNormalizedName} from "@ensnode/ensnode-sdk";
 
 describe("App data", () => {
   const data = APPS;
@@ -20,13 +20,11 @@ describe("App data", () => {
 
   it("In `socialLinks`, `associatedENSName`, if defined, must be a non-empty normalized ENS name", () => {
     data.forEach((app) => {
-      if (
-          app.socialLinks.associatedENSName !== undefined
-      ) {
+      if (app.socialLinks.associatedENSName !== undefined) {
         expect(
-            app.socialLinks.associatedENSName.length > 0 &&
+          app.socialLinks.associatedENSName.length > 0 &&
             isNormalizedName(app.socialLinks.associatedENSName),
-            `Name={${app.socialLinks.associatedENSName}} is empty or is not ENS normalized`,
+          `Name={${app.socialLinks.associatedENSName}} is empty or is not ENS normalized`,
         ).toEqual(true);
       }
     });

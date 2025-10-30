@@ -8,7 +8,7 @@ import { contractPipeline } from "../../contract-pipelines";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { OrgId } from "../../types/organizations";
-import {calculateAppEnsAwardsScore, getOrgById} from "../../utils/dataAccess";
+import { calculateAppEnsAwardsScore, getOrgById } from "../../utils/dataAccess";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -70,7 +70,10 @@ const daoScores = contractPipeline();
       linkData={{ link: "/leaderboards/app", text: "All Apps" }}
       containerStyles="gap-3 sm:gap-3">
       {
-        APPS.sort((a, b) => calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a))
+        APPS.sort(
+          (a, b) =>
+            calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a),
+        )
           .slice(0, 3)
           .map((app, idx) => (
             <LeaderboardCard

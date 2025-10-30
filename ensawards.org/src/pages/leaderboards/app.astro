@@ -7,7 +7,7 @@ import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
-import {calculateAppEnsAwardsScore} from "../../utils/dataAccess";
+import { calculateAppEnsAwardsScore } from "../../utils/dataAccess";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -28,36 +28,37 @@ const placeIcons = [
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList containerStyles="gap-3 sm:gap-3">
       {
-        APPS.sort((a, b) => calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a)).map(
-          (app, idx) => (
-            <LeaderboardCard
-              key={`app-review-card-${app.id}`}
-              name={app.name}
-              ensAwardsScore={calculateAppEnsAwardsScore(app)}
-              type={app.type}
-              viewDetailsLink={`/app/${app.slug}`}>
+        APPS.sort(
+          (a, b) =>
+            calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a),
+        ).map((app, idx) => (
+          <LeaderboardCard
+            key={`app-review-card-${app.id}`}
+            name={app.name}
+            ensAwardsScore={calculateAppEnsAwardsScore(app)}
+            type={app.type}
+            viewDetailsLink={`/app/${app.slug}`}>
+            <Image
+              src={images[app.iconSourceLink]()}
+              alt={`${app.id}`}
+              slot="appIcon"
+              class="w-10 h-10 rounded-md"
+            />
+            {idx < 3 ? (
               <Image
-                src={images[app.iconSourceLink]()}
-                alt={`${app.id}`}
-                slot="appIcon"
-                class="w-10 h-10 rounded-md"
+                alt={`${idx + 1}-place`}
+                src={images[placeIcons[idx]]()}
+                slot="placeIcon"
               />
-              {idx < 3 ? (
-                <Image
-                  alt={`${idx + 1}-place`}
-                  src={images[placeIcons[idx]]()}
-                  slot="placeIcon"
-                />
-              ) : (
-                <p
-                  slot="placeIcon"
-                  class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                  {idx + 1}
-                </p>
-              )}
-            </LeaderboardCard>
-          ),
-        )
+            ) : (
+              <p
+                slot="placeIcon"
+                class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
+                {idx + 1}
+              </p>
+            )}
+          </LeaderboardCard>
+        ))
       }
       <SuggestionCard whatsSuggested="app" />
     </ItemsList>

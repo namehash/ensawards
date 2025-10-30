@@ -1,21 +1,21 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
+import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import MatrixBadge from "../../components/atoms/badges/MatrixBadge.astro";
 import BenchmarkResultCard from "../../components/atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
+import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
+import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
+import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
-import {calculateAppEnsAwardsScore, getAppBySlug} from "../../utils/dataAccess";
+import { calculateAppEnsAwardsScore, getAppBySlug } from "../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
-import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
-import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
-import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
-import {EnsSolidIcon} from "../../components/atoms/icons/EnsSolidIcon";
-import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.slug } }));
@@ -26,10 +26,10 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
 
 const appToDisplay = getAppBySlug(app);
 
-let appScore:number;
+let appScore: number;
 
-if (appToDisplay !== undefined){
-    appScore = calculateAppEnsAwardsScore(appToDisplay);
+if (appToDisplay !== undefined) {
+  appScore = calculateAppEnsAwardsScore(appToDisplay);
 }
 ---
 
