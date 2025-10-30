@@ -1,5 +1,6 @@
 import type { Project } from "@/types/projects.ts";
 import type { JSX } from "astro/jsx-runtime";
+import type {Name} from "@ensnode/ensnode-sdk";
 
 export const OrganizationTypes = {
   Dao: "orgtype-dao",
@@ -26,6 +27,7 @@ export interface DAO {
   socialLinks: {
     websiteLink: URL;
     twitterLink: URL;
+    associatedENSName?: Name;
   };
 }
 

@@ -1,7 +1,7 @@
 import { APPS } from "@/data/apps.ts";
 import { BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
 import { ORGANIZATIONS } from "@/data/organizations.ts";
-import type { App } from "@/types/apps.ts";
+import {type App, BenchmarkResult} from "@/types/apps.ts";
 import type { BestPractice, BestPracticeCategory } from "@/types/bestPractices.ts";
 import type { OrgId, Organization } from "@/types/organizations.ts";
 
@@ -55,3 +55,20 @@ export const getBestPracticeByCategoryAndId = (
 
   return category.bestPractices.find((bestPractice) => bestPractice.id === bestPracticeId);
 };
+
+export const calculateAppEnsAwardsScore = (app: App) => {
+  const accumulatedBenchmarks = app.benchmarks.reduce((sum, benchmark) => {
+    switch (benchmark.result){
+      case BenchmarkResult.Pass:
+        return sum + 1;
+
+      case BenchmarkResult.PartialPass:
+        return sum + 0.5;
+
+      default:
+        return sum;
+    }
+  }, 0);
+
+  return (accumulatedBenchmarks * 100) / app.benchmarks.length;
+}

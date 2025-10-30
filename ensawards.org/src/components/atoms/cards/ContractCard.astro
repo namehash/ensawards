@@ -125,6 +125,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
     <ContractBadge
       client:load
       contractResolutionStatus={contract.cachedIdentity.resolutionStatus}
+      name={contract.cachedIdentity.resolutionStatus == ContractResolutionStatusIds.Unnamed ? undefined : contract.cachedIdentity.name}
     />
   </div>
 </div>

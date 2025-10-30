@@ -8,7 +8,7 @@ import { contractPipeline } from "../../contract-pipelines";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { OrgId } from "../../types/organizations";
-import { getOrgById } from "../../utils/dataAccess";
+import {calculateAppEnsAwardsScore, getOrgById} from "../../utils/dataAccess";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -30,7 +30,7 @@ const daoScores = contractPipeline();
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList
       header="DAO leaderboard"
-      linkData={{ link: "/leaderboard/daos", text: "All DAOs" }}
+      linkData={{ link: "/leaderboards/dao", text: "All DAOs" }}
       containerStyles="gap-3 sm:gap-3">
       {
         Object.entries(daoScores)
@@ -67,16 +67,16 @@ const daoScores = contractPipeline();
     </ItemsList>
     <ItemsList
       header="Apps leaderboard"
-      linkData={{ link: "/leaderboard/apps", text: "All Apps" }}
+      linkData={{ link: "/leaderboards/app", text: "All Apps" }}
       containerStyles="gap-3 sm:gap-3">
       {
-        APPS.sort((a, b) => b.ensAwardsScore - a.ensAwardsScore)
+        APPS.sort((a, b) => calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a))
           .slice(0, 3)
           .map((app, idx) => (
             <LeaderboardCard
               key={`app-review-card-${app.id}`}
               name={app.name}
-              ensAwardsScore={app.ensAwardsScore}
+              ensAwardsScore={calculateAppEnsAwardsScore(app)}
               type={app.type}
               viewDetailsLink={`/app/${app.slug}`}>
               <Image

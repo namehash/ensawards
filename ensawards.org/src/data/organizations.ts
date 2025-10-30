@@ -5,7 +5,7 @@ import { OrgIds, type Organization, OrganizationTypes } from "@/types/organizati
 
 export const ENSDaoOrg: Organization = {
   id: OrgIds.Ens,
-  slug: "ens-dao",
+  slug: "ens",
   orgType: OrganizationTypes.Dao,
   project: ENSProject,
   name: "ENS DAO",
@@ -15,12 +15,13 @@ export const ENSDaoOrg: Organization = {
   socialLinks: {
     websiteLink: new URL("https://ensdao.org/"),
     twitterLink: new URL("https://x.com/ENS_DAO"),
+    associatedENSName: "ensdao.eth"
   },
 };
 
 export const UniswapDaoOrg: Organization = {
   id: OrgIds.Uniswap,
-  slug: "uniswap-dao",
+  slug: "uniswap",
   orgType: OrganizationTypes.Dao,
   project: UniswapProject,
   name: "Uniswap DAO",
@@ -30,6 +31,7 @@ export const UniswapDaoOrg: Organization = {
   socialLinks: {
     websiteLink: new URL("https://www.uniswapfoundation.org/"),
     twitterLink: new URL("https://x.com/UniswapFND"),
+    associatedENSName: "uniswap.eth"
   },
 };
 

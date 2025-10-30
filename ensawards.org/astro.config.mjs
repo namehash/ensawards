@@ -12,7 +12,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   redirects: {
-    "/benchmarks": "/leaderboard/apps",
+    "/benchmarks": "/leaderboards/app",
     "/benchmarks/[app]": "/app/[app]",
   },
 });

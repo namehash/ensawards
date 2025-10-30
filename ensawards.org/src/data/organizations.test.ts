@@ -2,6 +2,7 @@ import { ORGANIZATIONS } from "@/data/organizations.ts";
 import { OrgIds } from "@/types/organizations.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
 import { describe, expect, it } from "vitest";
+import {isNormalizedName} from "@ensnode/ensnode-sdk";
 
 describe("organizations data", () => {
   const data = ORGANIZATIONS;
@@ -26,5 +27,19 @@ describe("organizations data", () => {
     });
 
     expect(areStringsUnique(slugArray), `Slugs for organizations are not unique`).toEqual(true);
+  });
+
+  it("In `socialLinks`, `associatedENSName`, if defined, must be a non-empty normalized ENS name", () => {
+    data.forEach((org) => {
+      if (
+          org.socialLinks.associatedENSName !== undefined
+      ) {
+        expect(
+            org.socialLinks.associatedENSName.length > 0 &&
+            isNormalizedName(org.socialLinks.associatedENSName),
+            `Name={${org.socialLinks.associatedENSName}} is empty or is not ENS normalized`,
+        ).toEqual(true);
+      }
+    });
   });
 });

@@ -111,18 +111,12 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
         address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
         chain: mainnet,
         codeName: "UNIToken",
-      },
-      name: "uni.tkn.eth",
-      profile: {
-        avatar: new URL(
-          "https://gateway.tkn.xyz/ipfs/bafybeiclyzf4rogl67kd42ss2z2mnf4o3pf5s2aginvsxk7iomlelxhsdi",
-        ),
-      },
+      }
     },
   },
   {
@@ -313,13 +307,12 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
         address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
         chain: mainnet,
         codeName: "Permit2",
       },
-      name: "dex.davywoodfi.eth",
     },
   },
 ];

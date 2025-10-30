@@ -29,11 +29,11 @@ const adaptBreadcrumb = (crumb: string): string => {
   // We use switch case here to stay flexible in the future
   switch (crumb) {
     case "DAO leaderboards":
-      return "daos";
+      return "dao";
     case "App leaderboards":
-      return "apps";
+      return "app";
     case "ENS leaderboards":
-      return "leaderboard";
+      return "leaderboards";
     default:
       return crumb;
   }

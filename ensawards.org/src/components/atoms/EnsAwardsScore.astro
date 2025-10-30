@@ -1,18 +1,15 @@
 ---
-import { contractPipeline } from "../../contract-pipelines";
-import { OrgId } from "../../types/organizations";
 import CircularScore from "./CircularScore.astro";
-export interface DaoScoreProps {
-  daoId: OrgId;
+export interface EnsAwardsScoreProps {
+  score: number;
+  label: string
 }
 
-const { daoId }: DaoScoreProps = Astro.props;
-
-const score = contractPipeline()[daoId];
+const { score, label }: EnsAwardsScoreProps = Astro.props;
 ---
 
 <div
   class="max-w-[228px] max-h-[232px] box-border flex flex-col justify-center items-center gap-[14px] pt-[32px] pb-[23px] px-[44px] bg-[linear-gradient(180deg,#191D4D_0%,#10143F_100%)] rounded-2xl border border-white/10 relative z-10">
   <CircularScore score={score} />
-  <p class="text-base leading-normal font-semibold text-white">DAO score</p>
+  <p class="text-base leading-normal font-semibold text-white">{label}</p>
 </div>

@@ -9,8 +9,13 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
-import { getAppBySlug } from "../../utils/dataAccess";
+import {calculateAppEnsAwardsScore, getAppBySlug} from "../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
+import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
+import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
+import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
+import {EnsSolidIcon} from "../../components/atoms/icons/EnsSolidIcon";
+import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.slug } }));
@@ -20,6 +25,12 @@ const { app } = Astro.params;
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
 const appToDisplay = getAppBySlug(app);
+
+let appScore:number;
+
+if (appToDisplay !== undefined){
+    appScore = calculateAppEnsAwardsScore(appToDisplay);
+}
 ---
 
 {
@@ -36,24 +47,42 @@ const appToDisplay = getAppBySlug(app);
       <SubpageHero
         header={appToDisplay.name}
         description={appToDisplay.description}
-        breadcrumbs={["ENS leaderboards", "App leaderboards"]}
-        additionalElements={[
-          { name: "Type", value: appToDisplay.type },
-          {
-            name: "Website",
-            value: "Visit site",
-            externalLink: appToDisplay.websiteLink,
-          },
-          { name: "Overall score", value: `${appToDisplay.ensAwardsScore}%` },
-        ]}>
+        breadcrumbs={["ENS leaderboards", "App leaderboards"]}>
         <Image
           src={images[appToDisplay.iconSourceLink]()}
           alt={`${appToDisplay.id}-hero`}
           slot="icon"
           class="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
+          <div
+                  slot="socialLinks"
+                  class="flex flex-row flex-nowrap justify-start items-center gap-2">
+              <a
+                      href={appToDisplay.socialLinks.websiteLink}
+                      rel="noreferrer noopener"
+                      target="_blank">
+                  <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
+              </a>
+              <a
+                      href={appToDisplay.socialLinks.twitterLink}
+                      rel="noreferrer noopener"
+                      target="_blank">
+                  <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
+              </a>
+              {appToDisplay.socialLinks.associatedENSName &&
+                      <a
+                              href=`https://admin.ensnode.io/name/${appToDisplay.socialLinks.associatedENSName}`
+                              rel="noreferrer noopener"
+                              target="_blank"
+                      >
+                          <EnsSolidIcon width={24} height={24} className="hover:text-white text-gray-400 transition-all duration-200"/>
+                      </a>
+              }
+          </div>
+          <EnsAwardsScore slot="score" score={appScore} label="ENSAwards score" />
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
+          <ContractNamingBanner />
         <ItemsList header="Benchmark results">
           {appToDisplay.benchmarks.map((benchmark, idx) => (
             <BenchmarkResultCard
