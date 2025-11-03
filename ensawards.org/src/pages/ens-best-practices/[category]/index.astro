@@ -1,6 +1,8 @@
 ---
+import ContractNamingBanner from "../../../components/atoms/ContractNamingBanner.astro";
 import BestPracticeCard from "../../../components/atoms/cards/BestPracticeCard.astro";
 import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
+import EnscribeIcon from "../../../components/atoms/icons/EnscribeIconDark.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
@@ -39,9 +41,23 @@ const categoryToDisplay = getCategoryBySlug(category);
             name: "Best practices",
             value: categoryToDisplay.bestPractices.length,
           },
-        ]}
-      />
-      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px]">
+        ]}>
+        {categoryToDisplay.id.includes("contract") && (
+          <div
+            slot="extraAdditionalElement"
+            class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
+            <p class="text-gray-400">Powered by</p>
+            <a
+              href="https://www.enscribe.xyz/"
+              target="_blank"
+              rel="noreferrer noopener">
+              <EnscribeIcon />
+            </a>
+          </div>
+        )}
+      </SubpageHero>
+      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px]">
+        {categoryToDisplay.id.includes("contract") && <ContractNamingBanner />}
         <ItemsList
           header="Best practices"
           additionalInfo={
@@ -52,11 +68,11 @@ const categoryToDisplay = getCategoryBySlug(category);
           {categoryToDisplay.bestPractices.map((bestPractice, idx) => (
             <BestPracticeCard
               key={`best-practice-card-${idx}`}
+              id={bestPractice.id}
               name={bestPractice.name}
               description={bestPractice.description}
               viewReviewsLink={`/ens-best-practices/${categoryToDisplay.slug}/${bestPractice.slug}`}
-              appsPassed={bestPractice.appsPassed}
-              appSupport={bestPractice.appSupport}
+              appliesTo={bestPractice.appliesTo}
             />
           ))}
           <SuggestionCard whatsSuggested="best practice" />

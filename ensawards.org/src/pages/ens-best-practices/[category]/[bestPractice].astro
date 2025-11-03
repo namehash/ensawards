@@ -2,24 +2,30 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import MatrixBadge from "../../../components/atoms/badges/MatrixBadge.astro";
+import BenchmarkResultCard from "../../../components/atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
-import SupportMatrixCard from "../../../components/atoms/cards/SupportMatrixCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 import { APPS } from "../../../data/apps";
-import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
+import { BEST_PRACTICE_CATEGORIES, nameYourSmartContracts } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
-import { getBestPracticeByCategoryAndSlug } from "../../../utils/dataAccess";
+import {
+  calculateAppSupport,
+  calculateAppsPassed,
+  getBestPracticeBySlug,
+} from "../../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 export function getStaticPaths() {
   const staticPaths = [];
 
   for (let category of BEST_PRACTICE_CATEGORIES) {
-    category.bestPractices.forEach((bestPractice) =>
-      staticPaths.push({ params: { category: category.slug, bestPractice: bestPractice.slug } }),
-    );
+    category.bestPractices
+      .filter((bestPractice) => bestPractice.id !== nameYourSmartContracts.id)
+      .forEach((bestPractice) =>
+        staticPaths.push({ params: { category: category.slug, bestPractice: bestPractice.slug } }),
+      );
   }
   return staticPaths;
 }
@@ -30,7 +36,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
 
-const bestPracticeToDisplay = getBestPracticeByCategoryAndSlug(category, bestPractice);
+const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
 
 const benchmarkedApps = APPS.filter(
   (app) =>
@@ -65,11 +71,11 @@ const benchmarkedApps = APPS.filter(
                       },
                       {
                         name: "Apps passed",
-                        value: bestPracticeToDisplay.appsPassed,
+                        value: calculateAppsPassed(bestPracticeToDisplay),
                       },
                       {
                         name: "App support",
-                        value: `${bestPracticeToDisplay.appSupport}%`,
+                        value: `${calculateAppSupport(bestPracticeToDisplay)}%`,
                       },
                     ]}>
                   <technical-info-anchor
@@ -84,46 +90,46 @@ const benchmarkedApps = APPS.filter(
                 <section
                     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8">
                   <ItemsList header="App benchmarks" containerStyles="sm:gap-2">
-                    {
-                      benchmarkedApps.map((app) => {
-                        // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
+                      {
+                          benchmarkedApps.map((app) => {
+                              // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
           const relatedBenchmark = app.benchmarks.find(
-                            (benchmark) =>
-                                benchmark.bestPracticeDetails.name === bestPracticeToDisplay.name,
-                        )!;
+                                  (benchmark) =>
+                                      benchmark.bestPracticeDetails.name === bestPracticeToDisplay.name,
+                              )!;
 
-                        return (
-                            <SupportMatrixCard
-                                name={app.name}
-                                notes={app.description}
-                                viewButtonData={{
-                                  text: "Benchmarks",
-                                  link: `/benchmarks/${app.id}`,
-                                }}
-                                matrixColumnData={[
-                                  {
-                                    category: "Type",
-                                    value: app.type,
-                                  },
-                                ]}>
-                              <MatrixBadge
-                                  slot="badge"
-                                  text={relatedBenchmark.result}
-                                  className={
-                                    BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
-                                  }
-                                  iconId={relatedBenchmark.result}
-                              />
-                              <Image
-                                  src={images[app.iconSourceLink]()}
-                                  alt={`${app.name}-logo`}
-                                  slot="icon"
-                                  class="shrink-0 rounded-md w-10 h-10"
-                              />
-                            </SupportMatrixCard>
-                        );
-                      })
-                    }
+                              return (
+                                      <BenchmarkResultCard
+                                              name={app.name}
+                                              notes={app.description}
+                                              viewDetails={{
+                                                  text: "App details",
+                                                  link: `/app/${app.id}`,
+                                              }}
+                                              additionalInfo={[
+                                                  {
+                                                      category: "Type",
+                                                      value: app.type,
+                                                  },
+                                              ]}>
+                                          <MatrixBadge
+                                                  slot="badge"
+                                                  text={relatedBenchmark.result}
+                                                  className={
+                                                      BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
+                                                  }
+                                                  iconId={relatedBenchmark.result}
+                                          />
+                                          <Image
+                                                  src={images[app.iconSourceLink]()}
+                                                  alt={`${app.name}-logo`}
+                                                  slot="icon"
+                                                  class="shrink-0 rounded-md w-10 h-10"
+                                          />
+                                      </BenchmarkResultCard>
+                              );
+                          })
+                      }
                     <SuggestionCard whatsSuggested="benchmark result" />
                   </ItemsList>
                 </section>
@@ -175,13 +181,13 @@ const benchmarkedApps = APPS.filter(
                           <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
                               <p class="text-sm leading-normal font-normal text-muted-foreground">Apps passed</p>
                               <p class="text-sm leading-normal font-semibold text-black">
-                                  {bestPracticeToDisplay.appsPassed}
+                                  {calculateAppsPassed(bestPracticeToDisplay)}
                               </p>
                           </div>
                           <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
                               <p class="text-sm leading-normal font-normal text-muted-foreground">App support</p>
-                              <p class={cn("text-sm leading-normal font-semibold", `text-${getAppSupportColor(bestPracticeToDisplay.appSupport)}`)}>
-                                  {bestPracticeToDisplay.appSupport}%
+                              <p class={cn("text-sm leading-normal font-semibold", `text-${getAppSupportColor(calculateAppSupport(bestPracticeToDisplay))}`)}>
+                                  {calculateAppSupport(bestPracticeToDisplay)}%
                               </p>
                           </div>
                       </div>

@@ -11,4 +11,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  redirects: {
+    "/benchmarks": "/leaderboards/app",
+    "/benchmarks/[app]": "/app/[app]",
+  },
 });

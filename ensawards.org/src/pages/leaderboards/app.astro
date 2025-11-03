@@ -7,6 +7,7 @@ import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
+import { calculateAppEnsAwardsScore } from "../../utils/dataAccess";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -20,20 +21,23 @@ const placeIcons = [
   pageMetadata={{
     title: "ENSAwards: ENS Leaderboard for App Integrations",
     description: "See how apps score on ENS integration benchmarks.",
-    url: "https://ensawards.org/benchmarks",
+    url: "https://ensawards.org/leaderboards/app",
   }}>
-  <SubpageHero header="App benchmark results" />
+  <SubpageHero header="App leaderboard" breadcrumbs={["ENS leaderboards"]} />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ItemsList header="Benchmarks" containerStyles="gap-3 sm:gap-3">
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ItemsList containerStyles="gap-3 sm:gap-3">
       {
-        APPS.map((app, idx) => (
+        APPS.sort(
+          (a, b) =>
+            calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a),
+        ).map((app, idx) => (
           <LeaderboardCard
             key={`app-review-card-${app.id}`}
             name={app.name}
-            ensAwardsScore={app.ensAwardsScore}
+            ensAwardsScore={calculateAppEnsAwardsScore(app)}
             type={app.type}
-            viewDetailsLink={`/benchmarks/${app.slug}`}>
+            viewDetailsLink={`/app/${app.slug}`}>
             <Image
               src={images[app.iconSourceLink]()}
               alt={`${app.id}`}

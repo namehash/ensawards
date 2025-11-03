@@ -1,14 +1,16 @@
 ---
 import { ChainIcon } from "../../components/atoms/ChainIcon";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
-import DaoScore from "../../components/atoms/DaoScore.astro";
+import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
-import EnscribeIcon from "../../components/atoms/icons/EnscribeIcon.astro";
+import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
+import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
+import { contractPipeline } from "../../contract-pipelines";
 import { CONTRACTS } from "../../data/contracts";
 import { ORGANIZATIONS } from "../../data/organizations";
 import Layout from "../../layouts/Layout.astro";
@@ -18,20 +20,22 @@ import { getOrgBySlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 export function getStaticPaths() {
   return Object.values(ORGANIZATIONS).map((org) => ({
-    params: { org: org.slug },
+    params: { dao: org.slug },
   }));
 }
 
-const { org } = Astro.params;
+const { dao } = Astro.params;
 
-const resolvedOrg = getOrgBySlug(org);
+const resolvedOrg = getOrgBySlug(dao);
 
 let orgContracts: Contract[];
 let OrgIcon;
+let daoScore: number;
 
 if (resolvedOrg) {
   orgContracts = CONTRACTS.filter((contract) => contract.org.id === resolvedOrg.id);
   OrgIcon = resolvedOrg.icon;
+  daoScore = contractPipeline()[resolvedOrg.id];
 }
 ---
 
@@ -44,12 +48,14 @@ if (resolvedOrg) {
       pageMetadata={{
         title: `ENSAwards: ${resolvedOrg.name} ENS Integration Benchmarks`,
         description: resolvedOrg.description,
-        url: `https://ensawards.org/dao-report/${org}`, //TODO: adapt after planned route changes
+        url: `https://ensawards.org/dao/${dao}`,
+        og_image: `https://ensawards.org/${resolvedOrg.id}_og_image.png`,
+        twitter_image: `https://ensawards.org/${resolvedOrg.id}_twitter_og_image.png`
       }}>
       <SubpageHero
         header={resolvedOrg.name}
         description={resolvedOrg.description}
-        breadcrumbs={["DAO Report"]}>
+        breadcrumbs={["ENS leaderboards", "DAO leaderboards"]}>
         <OrgIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"
@@ -58,21 +64,30 @@ if (resolvedOrg) {
           slot="socialLinks"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
           <a
-            href={resolvedOrg.socialLinks.websiteLink}
+            href={resolvedOrg.socials.website}
             rel="noreferrer noopener"
             target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
           <a
-            href={resolvedOrg.socialLinks.twitterLink}
+            href={resolvedOrg.socials.twitter}
             rel="noreferrer noopener"
             target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
+            {resolvedOrg.socials.ens &&
+                    <a
+                            href=`https://app.ens.domains/${encodeURIComponent(resolvedOrg.socials.ens)}`
+                            rel="noreferrer noopener"
+                            target="_blank"
+                    >
+                        <EnsSolidIcon width={24} height={24} className="hover:text-white text-gray-400 transition-all duration-200"/>
+                    </a>
+            }
         </div>
-        <DaoScore slot="score" daoId={resolvedOrg.id} />
+        <EnsAwardsScore slot="score" score={daoScore} label="ENSAwards score" />
       </SubpageHero>
-      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
+      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ContractNamingBanner />
         <ItemsList
           header="Smart contract naming"
@@ -82,7 +97,7 @@ if (resolvedOrg) {
             target="_blank"
             rel="noreferrer noopener"
             slot="ctaButton"
-            class="w-fit h-fit flex flex-col sm:flex-row flex-nowrap justify-start items-start sm:items-center gap-1 sm:gap-3 px-2 sm:px-4 py-1 sm:py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 hover:text-gray-500 font-normal leading-normal sm:leading-7 hover:shadow-xs transition duration-200">
+            class="w-[224px] h-fit flex flex-row flex-nowrap justify-start items-center gap-3 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 hover:text-gray-500 font-normal leading-7 hover:shadow-xs transition duration-200">
             Powered by <EnscribeIcon />
           </a>
           {SUPPORTED_CHAINS.map((supportedChain, idx) => {

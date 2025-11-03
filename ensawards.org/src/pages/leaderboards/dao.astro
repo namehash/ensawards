@@ -21,14 +21,18 @@ const placeIcons = [
 ];
 ---
 
-<Layout>
-  <!--TODO: breadcrumbs are not in figma and are here just to make checking out the preview easier.
-            They can easily be removed later on.-->
-  <SubpageHero header="DAO leaderboard" breadcrumbs={["DAO Report"]} />
+<Layout
+  pageMetadata={{
+    title: "ENSAwards: ENS Leaderboard for DAO Integrations",
+    description: "See how DAOs score on ENS integration benchmarks.",
+    url: "https://ensawards.org/leaderboards/dao",
+    og_image: "https://ensawards.org/dao_leaderboard_og_image.png",
+    twitter_image: "https://ensawards.org/dao_leaderboard_twitter_og_image.png",
+  }}>
+  <SubpageHero header="DAO leaderboard" breadcrumbs={["ENS leaderboards"]} />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ContractNamingBanner />
-    <ItemsList header="Smart contract naming" containerStyles="gap-3 sm:gap-3">
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ItemsList containerStyles="gap-3 sm:gap-3">
       {
         Object.entries(daoScores).map(([scoreCategory, value], idx) => {
           const daoId = scoreCategory as OrgId;
@@ -39,7 +43,7 @@ const placeIcons = [
               key={`dao-leaderboard-card-${org.id}`}
               name={org.name}
               ensAwardsScore={value}
-              viewDetailsLink={`/dao-report/${org.slug}`}
+              viewDetailsLink={`/dao/${org.slug}`}
               viewDetailsText="DAO report">
               {idx < 3 ? (
                 <Image
@@ -59,7 +63,6 @@ const placeIcons = [
           );
         })
       }
-      <!--TODO: Adapt the PoC dao variant, after its final form is determined-->
       <SuggestionCard whatsSuggested="dao" />
     </ItemsList>
   </section>

@@ -34,7 +34,7 @@ export default function HeaderMobileNavigation() {
       <Popover className="relative">
         {({ open }) => (
           <>
-            <PopoverButton className="min-[860px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200 hover:bg-black/5">
+            <PopoverButton className="min-[860px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200 hover:bg-white/5">
               <span className="sr-only">Open menu</span>
               {hamburgerMenuIcon}
             </PopoverButton>
@@ -70,11 +70,11 @@ export default function HeaderMobileNavigation() {
                     )}
                   >
                     <ul className="py-3 flex flex-col justify-center gap-1">
+                      <a href="/leaderboards" className={mainLinkClass}>
+                        ENS leaderboards
+                      </a>
                       <a href="/ens-best-practices" className={mainLinkClass}>
                         ENS best practices
-                      </a>
-                      <a href="/benchmarks" className={mainLinkClass}>
-                        App benchmarks
                       </a>
                       <a href="/about" className={mainLinkClass}>
                         About

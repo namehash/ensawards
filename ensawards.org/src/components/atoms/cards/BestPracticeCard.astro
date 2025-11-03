@@ -1,17 +1,33 @@
 ---
+import { BestPracticeApplications, BestPracticeAppliesTo } from "../../../types/bestPractices";
+import {
+  calculateAppSupport,
+  calculateAppsPassed,
+  getBestPracticeById,
+} from "../../../utils/dataAccess";
 import { getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 export interface BestPracticeCardProps {
+  id: string;
   name: string;
   description: string;
   viewReviewsLink: string;
-  appsPassed: number;
-  appSupport: number;
+  appliesTo: BestPracticeAppliesTo[];
 }
 
-const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracticeCardProps =
-  Astro.props;
+const { id, name, description, viewReviewsLink, appliesTo }: BestPracticeCardProps = Astro.props;
+
+let appsPassed: number;
+let appSupport: number;
+
+// Theoretically, because of Astro's build-time page generation, this best practice should always be defined
+const bestPracticeToDisplay = getBestPracticeById(id);
+
+if (appliesTo.includes(BestPracticeApplications.App) && bestPracticeToDisplay !== undefined) {
+  appsPassed = calculateAppsPassed(bestPracticeToDisplay);
+  appSupport = calculateAppSupport(bestPracticeToDisplay);
+}
 ---
 
 <a
@@ -36,7 +52,7 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
   </div>
   <div class="bg-gray-200 h-[1px] self-stretch"></div>
   <div
-    class="flex flex-col-reverse sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start
+    class="flex flex-col-reverse sm:flex-row flex-nowrap justify-center sm:justify-between items-center
                 max-sm:gap-3 self-stretch">
     <button
       class={cn(
@@ -49,29 +65,52 @@ const { name, description, viewReviewsLink, appsPassed, appSupport }: BestPracti
       View details
     </button>
     <div
-      class="flex flex-nowrap flex-col sm:flex-row justify-start items-center sm:items-start gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
-      <div
-        class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
-        <p class="text-muted-foreground text-sm leading-normal font-normal">
-          Apps passed
-        </p>
-        <p class="text-sm leading-normal font-semibold text-accent-foreground">
-          {appsPassed}
-        </p>
-      </div>
-      <div
-        class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
-        <p class="text-muted-foreground text-sm leading-normal font-normal">
-          App support
-        </p>
-        <p
-          class={cn(
-            "text-sm leading-normal font-semibold",
-            `text-${getAppSupportColor(appSupport)}`,
-          )}>
-          {appSupport}%
-        </p>
-      </div>
+      class="flex flex-nowrap flex-col sm:flex-row justify-start items-center gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
+      {
+        // TODO: Hacky approach to display this info only for contract-related BPs --> to be refactored later
+        name.includes("contract") && (
+          <div class="flex flex-row justify-between sm:justify-start items-center sm:gap-2 max-sm:self-stretch">
+            <p class="text-sm leading-normal font-normal text-muted-foreground">
+              Applies to
+            </p>
+            <div class="flex flex-row justify-start items-center gap-1">
+              {appliesTo.map((bestPracticeApplication) => (
+                <span class="flex justify-center items-center px-2 py-[2px] rounded-md bg-secondary text-black text-xs leading-normal font-semibold">
+                  {bestPracticeApplication}
+                </span>
+              ))}
+            </div>
+          </div>
+        )
+      }
+      {
+        // TODO: Hacky approach to not display this info for contract-related BPs --> to be refactored later
+        appliesTo.includes(BestPracticeApplications.App) &&
+          !name.includes("contract") && (
+            <>
+              <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
+                <p class="text-muted-foreground text-sm leading-normal font-normal">
+                  Apps passed
+                </p>
+                <p class="text-sm leading-normal font-semibold text-accent-foreground">
+                  {appsPassed}
+                </p>
+              </div>
+              <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
+                <p class="text-muted-foreground text-sm leading-normal font-normal">
+                  App support
+                </p>
+                <p
+                  class={cn(
+                    "text-sm leading-normal font-semibold",
+                    `text-${getAppSupportColor(appSupport)}`,
+                  )}>
+                  {appSupport}%
+                </p>
+              </div>
+            </>
+          )
+      }
     </div>
   </div>
 </a>

@@ -42,7 +42,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
         >
           <BookOpen
             className={cn(
-              "w-[17px] h-[17px]",
+              "w-[17px] h-[17px] cursor-pointer",
               metadata && metadata.docs ? "text-black" : "text-gray-200",
             )}
           />
@@ -70,7 +70,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
         >
           <Braces
             className={cn(
-              "w-[17px] h-[17px]",
+              "w-[17px] h-[17px] cursor-pointer",
               metadata && metadata.compiledMetadata ? "text-black" : "text-gray-200",
             )}
           />
@@ -82,7 +82,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                 <p>
                   Avatar URL:{" "}
                   <a
-                    className="text-blue-400 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+                    className="block w-full text-blue-400 hover:underline hover:underline-offset-[25%] break-all"
                     target="_blank"
                     rel="noreferrer noopener"
                     href={metadata.avatar.href}
@@ -96,7 +96,11 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
             </div>
           }
         >
-          <EnsAvatar name={name} avatarUrl={metadata?.avatar} className="w-[17px] h-[17px]" />
+          <EnsAvatar
+            name={name}
+            avatarUrl={metadata?.avatar}
+            className="w-[17px] h-[17px] cursor-pointer"
+          />
         </GenericTooltip>
         <GenericTooltip
           content={
@@ -131,7 +135,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
         >
           <ShieldCheck
             className={cn(
-              "w-[17px] h-[17px]",
+              "w-[17px] h-[17px] cursor-pointer",
               metadata && metadata.audits ? "text-black" : "text-gray-200",
             )}
           />

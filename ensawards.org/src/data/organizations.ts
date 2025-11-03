@@ -5,31 +5,33 @@ import { OrgIds, type Organization, OrganizationTypes } from "@/types/organizati
 
 export const ENSDaoOrg: Organization = {
   id: OrgIds.Ens,
-  slug: "ens-dao",
+  slug: "ens",
   orgType: OrganizationTypes.Dao,
   project: ENSProject,
   name: "ENS DAO",
   description:
     "The Ethereum Name Service (ENS) is a decentralized domain name system. The ENS DAO governs the ENS protocol and treasury.",
   icon: EnsDaoIcon,
-  socialLinks: {
-    websiteLink: new URL("https://ensdao.org/"),
-    twitterLink: new URL("https://x.com/ENS_DAO"),
+  socials: {
+    website: new URL("https://ensdao.org/"),
+    twitter: new URL("https://x.com/ENS_DAO"),
+    ens: "ensdao.eth",
   },
 };
 
 export const UniswapDaoOrg: Organization = {
   id: OrgIds.Uniswap,
-  slug: "uniswap-dao",
+  slug: "uniswap",
   orgType: OrganizationTypes.Dao,
   project: UniswapProject,
   name: "Uniswap DAO",
   description:
     "Uniswap governance is a collective of companies, communities, and token holders working together to steward the future of the Uniswap protocol.",
   icon: UniswapIcon,
-  socialLinks: {
-    websiteLink: new URL("https://www.uniswapfoundation.org/"),
-    twitterLink: new URL("https://x.com/UniswapFND"),
+  socials: {
+    website: new URL("https://www.uniswapfoundation.org/"),
+    twitter: new URL("https://x.com/UniswapFND"),
+    ens: "uniswap.eth",
   },
 };
 

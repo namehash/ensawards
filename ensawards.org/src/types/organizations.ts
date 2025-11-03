@@ -1,4 +1,5 @@
 import type { Project } from "@/types/projects.ts";
+import type { Name } from "@ensnode/ensnode-sdk";
 import type { JSX } from "astro/jsx-runtime";
 
 export const OrganizationTypes = {
@@ -23,9 +24,10 @@ export interface DAO {
   name: string;
   description: string;
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  socialLinks: {
-    websiteLink: URL;
-    twitterLink: URL;
+  socials: {
+    website: URL;
+    twitter: URL;
+    ens?: Name;
   };
 }
 

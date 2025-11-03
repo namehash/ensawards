@@ -21,9 +21,10 @@ export interface DAO {
     name: string;
     description: string;
     icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-    socialLinks: {
-        websiteLink: URL;
-        twitterLink: URL;
+    socials: {
+        website: URL;
+        twitter: URL;
+        ens?: Name;
     };
 }
 
@@ -43,9 +44,9 @@ export interface Project {
     name: string;
     description: string;
     icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-    socialLinks: {
-        websiteLink: URL;
-        twitterLink: URL;
+    socials: {
+        website: URL;
+        twitter: URL;
     };
 }
 ```
@@ -75,9 +76,12 @@ export interface App {
     slug: string;
     name: string;
     description: string;
-    ensAwardsScore: number;
     type: string;
-    websiteLink: string;
+    socials: {
+        website: URL;
+        twitter: URL;
+        ens?: Name;
+    };
     iconSourceLink: string;
     benchmarks: AppBenchmark[];
 }
@@ -102,8 +106,7 @@ export interface BestPractice {
     description: string;
     categoryName: string;
     categorySlug: string;
-    appsPassed: number;
-    appSupport: number;
+    appliesTo: BestPracticeAppliesTo[];
     technicalDetails: {
         main: {
             header: string;

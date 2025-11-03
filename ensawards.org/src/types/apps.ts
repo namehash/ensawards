@@ -1,4 +1,5 @@
 import type { BestPractice } from "@/types/bestPractices.ts";
+import type { Name } from "@ensnode/ensnode-sdk";
 
 export enum BenchmarkResult {
   Pass = "Pass",
@@ -16,9 +17,12 @@ export interface App {
   slug: string;
   name: string;
   description: string;
-  ensAwardsScore: number;
   type: string; //Will probably change to string union once the data is provided
-  websiteLink: string;
+  socials: {
+    website: URL;
+    twitter: URL;
+    ens?: Name;
+  };
   iconSourceLink: string;
   benchmarks: AppBenchmark[];
 }

@@ -10,16 +10,49 @@ export interface ContractCardProps {
 }
 
 const { contract }: ContractCardProps = Astro.props;
+
+const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
+  if (word.length < minLength) {
+    return [word];
+  }
+
+  const elements = word.split(/(?=[A-Z])/);
+  const result: string[] = [];
+  let current = elements[0];
+
+  for (let i = 1; i < elements.length; i++) {
+    const next = elements[i];
+    if ((current + next).length < minLength) {
+      current += next; // merge if still short
+    } else {
+      result.push(current);
+      current = next;
+    }
+  }
+
+  if (current) result.push(current);
+  return result;
+};
 ---
 
 <div
-  class="w-full h-fit min-h-[80px] box-border flex flex-col-reverse sm:flex-row flex-wrap justify-start min-[970px]:justify-between items-start sm:items-center gap-3 sm:gap-y-5
+  class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start min-[970px]:justify-between items-start sm:items-center gap-2 sm:gap-y-5
             p-4 sm:p-5 rounded-2xl border border-gray-200">
   <div
-    class="max-sm:w-full sm:min-w-[425px] flex flex-col justify-start items-start">
-    <p class="text-sm leading-normal font-normal text-muted-foreground">
+      class="block self-stretch sm:hidden pb-2">
+    <ContractBadge
+        client:load
+        contractResolutionStatus={contract.cachedIdentity.resolutionStatus}
+    />
+  </div>
+  <div
+    class="max-sm:w-full sm:min-w-[425px] flex flex-row max-sm:gap-5 sm:flex-col justify-start items-start">
+    <p class="max-sm:hidden text-sm leading-normal font-normal text-muted-foreground">
       {contract.cachedIdentity.contract.codeName}
     </p>
+      <div class="sm:hidden flex flex-col justify-start items-start gap-0 max-sm:min-w-[105px]">
+    {breakLongWordsAtCapitals(contract.cachedIdentity.contract.codeName).map((word) => <p class="text-sm leading-normal font-normal text-muted-foreground">{word}</p>)}
+      </div>
     <a
       href={getBlockExplorerUrlForContract(
         contract.cachedIdentity.contract.chain.id,
@@ -32,8 +65,8 @@ const { contract }: ContractCardProps = Astro.props;
     >
   </div>
   <div
-    class="sm:min-w-[225px] h-[42px] flex flex-col justify-start items-start">
-    <p class="text-sm leading-normal font-normal text-muted-foreground">
+    class="sm:min-w-[225px] h-[42px] flex flex-row max-sm:gap-5 sm:flex-col justify-start items-start">
+    <p class="text-sm leading-normal font-normal text-muted-foreground max-sm:min-w-[105px]">
       ENS name
     </p>
     {
@@ -42,26 +75,26 @@ const { contract }: ContractCardProps = Astro.props;
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
         <a
-          href={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
+          href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
           target="_blank"
           rel="noreferrer noopener"
           class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
           {contract.cachedIdentity.name}
         </a>
       ) : (
-        <p class="text-sm leading-normal font-medium">Unnamed contract</p>
+        <p class="text-sm leading-normal font-medium text-red-600">Unnamed contract</p>
       )
     }
   </div>
   <div
-    class="hidden sm:flex flex-col justify-start items-start sm:min-w-[175px] gap-1">
+    class="flex flex-row max-sm:gap-5 sm:flex-col justify-start items-start sm:min-w-[175px] sm:gap-1 max-sm:self-stretch">
     {
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.PrimaryNamed ||
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
         <>
-          <p class="text-sm leading-normal font-normal text-muted-foreground">
+          <p class="text-sm leading-normal font-normal text-muted-foreground max-sm:min-w-[105px]">
             ENS metadata
           </p>
           <SmartContractMetadata
@@ -72,14 +105,14 @@ const { contract }: ContractCardProps = Astro.props;
         </>
       ) : (
         <a
-          href="https://app.enscribe.xyz/nameContract"
+          href=`https://app.enscribe.xyz/nameContract?contract=${contract.cachedIdentity.contract.address}&chainId=${contract.cachedIdentity.contract.chain.id}`
           target="_blank"
           rel="noreferrer noopened"
           class={cn(
             shadcnButtonVariants({
               variant: "default",
               size: "default",
-              className: "cursor-pointer rounded-full",
+              className: "cursor-pointer rounded-full max-sm:w-full",
             }),
           )}>
           Set contract name
@@ -88,43 +121,11 @@ const { contract }: ContractCardProps = Astro.props;
     }
   </div>
   <div
-    class="max-sm:flex max-sm:flex-row max-sm:justify-between max-sm:items-center sm:min-w-[115px] max-sm:self-stretch">
+    class="sm:min-w-[115px] max-sm:hidden">
     <ContractBadge
       client:load
       contractResolutionStatus={contract.cachedIdentity.resolutionStatus}
+      name={contract.cachedIdentity.resolutionStatus == ContractResolutionStatusIds.Unnamed ? undefined : contract.cachedIdentity.name}
     />
-    <div class="flex sm:hidden flex-col justify-start items-start gap-1">
-      {
-        contract.cachedIdentity.resolutionStatus ===
-          ContractResolutionStatusIds.PrimaryNamed ||
-        contract.cachedIdentity.resolutionStatus ===
-          ContractResolutionStatusIds.ForwardNamed ? (
-          <>
-            <p class="text-sm leading-normal font-normal text-muted-foreground">
-              ENS metadata
-            </p>
-            <SmartContractMetadata
-              client:load
-              name={contract.cachedIdentity.name}
-              metadata={contract.cachedIdentity.profile}
-            />
-          </>
-        ) : (
-          <a
-            href="https://app.enscribe.xyz/nameContract"
-            target="_blank"
-            rel="noreferrer noopened"
-            class={cn(
-              shadcnButtonVariants({
-                variant: "default",
-                size: "default",
-                className: "cursor-pointer rounded-full",
-              }),
-            )}>
-            Set contract name
-          </a>
-        )
-      }
-    </div>
   </div>
 </div>
