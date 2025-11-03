@@ -97,8 +97,8 @@ if (resolvedOrg) {
             target="_blank"
             rel="noreferrer noopener"
             slot="ctaButton"
-            class="w-[224px] h-fit flex flex-row flex-nowrap justify-start items-center gap-3 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 hover:text-gray-500 font-normal leading-7 hover:shadow-xs transition duration-200">
-            Powered by <EnscribeIcon />
+            class="w-[225px] flex flex-row flex-nowrap justify-start items-center gap-3 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 whitespace-nowrap hover:text-gray-500 font-normal leading-7 hover:shadow-xs transition duration-200">
+              <span>Powered by</span><EnscribeIcon />
           </a>
           {SUPPORTED_CHAINS.map((supportedChain, idx) => {
             const contractsOnChain = orgContracts.filter(
