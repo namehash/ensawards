@@ -2,8 +2,16 @@
 import SubpageHero from "../components/molecules/SubpageHero.astro";
 import Layout from "../layouts/Layout.astro";
 ---
-
-<Layout>
+<!--TODO: For now the SEO content is initial / placeholder ==> update it when ready-->
+<Layout
+    pageMetadata={{
+      title: "ENSAwards: ENS Contract Naming Season",
+      description: "Elevate your protocol’s on-chain identity.",
+      url: "https://ensawards.org/ens-contract-naming-season",
+      og_image: "https://ensawards.org/dao_leaderboard_og_image.png",
+      twitter_image: "https://ensawards.org/dao_leaderboard_twitter_og_image.png",
+    }}
+>
   <SubpageHero header="ENS Contract Naming Season" />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">

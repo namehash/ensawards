@@ -7,9 +7,9 @@ export const ENSProject: Project = {
   name: "ENS",
   description: "The Ethereum Name Service (ENS) is a decentralized domain name system.",
   icon: EnsProjectIcon,
-  socialLinks: {
-    websiteLink: new URL("https://ens.domains/"),
-    twitterLink: new URL("https://x.com/ensdomains"),
+  socials: {
+    website: new URL("https://ens.domains/"),
+    twitter: new URL("https://x.com/ensdomains"),
   },
 };
 
@@ -19,9 +19,9 @@ export const UniswapProject: Project = {
   description:
     "The largest onchain marketplace. Buy and sell crypto on Ethereum and 12+ other chains.",
   icon: UniswapIcon,
-  socialLinks: {
-    websiteLink: new URL("https://app.uniswap.org/"),
-    twitterLink: new URL("https://x.com/Uniswap"),
+  socials: {
+    website: new URL("https://app.uniswap.org/"),
+    twitter: new URL("https://x.com/Uniswap"),
   },
 };
 

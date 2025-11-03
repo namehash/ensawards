@@ -12,12 +12,7 @@ export const recognizeAllENSNames: BestPractice = {
   description: "Support user input of all valid ENS names (not only .eth names).",
   categoryName: "Forward Resolution",
   categorySlug: "forward-resolution",
-  supportDetails: {
-    appBenchmarksResults: {
-      appsPassed: 3,
-      appSupport: 100,
-    },
-  },
+  appliesTo: [BestPracticeApplications.App],
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -50,9 +45,7 @@ export const nameYourSmartContracts: BestPractice = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  supportDetails: {
-    appliesTo: [BestPracticeApplications.Dao],
-  },
+  appliesTo: [BestPracticeApplications.Dao],
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -85,13 +78,7 @@ export const displayNamedSmartContracts: BestPractice = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  supportDetails: {
-    appBenchmarksResults: {
-      appsPassed: 2,
-      appSupport: 40,
-    },
-    appliesTo: [BestPracticeApplications.App],
-  },
+  appliesTo: [BestPracticeApplications.App],
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -115,6 +102,12 @@ export const displayNamedSmartContracts: BestPractice = {
     ],
   },
 };
+
+export const BEST_PRACTICES: BestPractice[] = [
+    recognizeAllENSNames,
+    nameYourSmartContracts,
+    displayNamedSmartContracts
+];
 
 export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
   {

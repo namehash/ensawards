@@ -18,13 +18,13 @@ describe("App data", () => {
     expect(areStringsUnique(slugArray), `Slugs for Apps are not unique`).toEqual(true);
   });
 
-  it("In `socialLinks`, `associatedENSName`, if defined, must be a non-empty normalized ENS name", () => {
+  it("In `socials`, `ens`, if defined, must be a non-empty normalized ENS name", () => {
     data.forEach((app) => {
-      if (app.socialLinks.associatedENSName !== undefined) {
+      if (app.socials.ens !== undefined) {
         expect(
-          app.socialLinks.associatedENSName.length > 0 &&
-            isNormalizedName(app.socialLinks.associatedENSName),
-          `Name={${app.socialLinks.associatedENSName}} is empty or is not ENS normalized`,
+          app.socials.ens.length > 0 &&
+            isNormalizedName(app.socials.ens),
+          `Name={${app.socials.ens}} is empty or is not ENS normalized`,
         ).toEqual(true);
       }
     });

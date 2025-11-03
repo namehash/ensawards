@@ -75,7 +75,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
         <a
-          href={`https://app.enscribe.xyz/explore/${encodeURIComponent(contract.cachedIdentity.contract.chain.id)}/${encodeURIComponent(contract.cachedIdentity.name)}`}
+          href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
           target="_blank"
           rel="noreferrer noopener"
           class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
@@ -105,7 +105,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
         </>
       ) : (
         <a
-          href=`https://app.enscribe.xyz/nameContract?contract=${encodeURIComponent(contract.cachedIdentity.contract.address)}&chainId=${encodeURIComponent(contract.cachedIdentity.contract.chain.id)}`
+          href=`https://app.enscribe.xyz/nameContract?contract=${contract.cachedIdentity.contract.address}&chainId=${contract.cachedIdentity.contract.chain.id}`
           target="_blank"
           rel="noreferrer noopened"
           class={cn(

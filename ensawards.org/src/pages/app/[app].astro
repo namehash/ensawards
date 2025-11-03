@@ -58,20 +58,20 @@ if (appToDisplay !== undefined) {
                   slot="socialLinks"
                   class="flex flex-row flex-nowrap justify-start items-center gap-2">
               <a
-                      href={appToDisplay.socialLinks.websiteLink}
+                      href={appToDisplay.socials.website}
                       rel="noreferrer noopener"
                       target="_blank">
                   <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
               </a>
               <a
-                      href={appToDisplay.socialLinks.twitterLink}
+                      href={appToDisplay.socials.twitter}
                       rel="noreferrer noopener"
                       target="_blank">
                   <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
               </a>
-              {appToDisplay.socialLinks.associatedENSName &&
+              {appToDisplay.socials.ens &&
                       <a
-                              href=`https://admin.ensnode.io/name/${appToDisplay.socialLinks.associatedENSName}`
+                              href=`https://app.ens.domains/${encodeURIComponent(appToDisplay.socials.ens)}`
                               rel="noreferrer noopener"
                               target="_blank"
                       >

@@ -18,8 +18,8 @@ export interface Project {
   name: string;
   description: string;
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  socialLinks: {
-    websiteLink: URL;
-    twitterLink: URL;
+  socials: {
+    website: URL;
+    twitter: URL;
   };
 }

@@ -24,10 +24,10 @@ export interface DAO {
   name: string;
   description: string;
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  socialLinks: {
-    websiteLink: URL;
-    twitterLink: URL;
-    associatedENSName?: Name;
+  socials: {
+    website: URL;
+    twitter: URL;
+    ens?: Name;
   };
 }
 

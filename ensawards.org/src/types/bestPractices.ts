@@ -5,10 +5,7 @@ export interface BestPractice {
   description: string;
   categoryName: string;
   categorySlug: string; //TODO: Refactor this dependency
-  supportDetails: {
-    appBenchmarksResults?: AppSupport;
-    appliesTo?: BestPracticeAppliesTo[];
-  };
+  appliesTo: BestPracticeAppliesTo[];
   technicalDetails: {
     main: {
       header: string;
@@ -19,11 +16,6 @@ export interface BestPractice {
       content: string;
     }[];
   };
-}
-
-export interface AppSupport {
-  appSupport: number;
-  appsPassed: number;
 }
 
 export const BestPracticeApplications = {

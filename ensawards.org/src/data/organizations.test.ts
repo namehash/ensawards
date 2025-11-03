@@ -29,13 +29,13 @@ describe("organizations data", () => {
     expect(areStringsUnique(slugArray), `Slugs for organizations are not unique`).toEqual(true);
   });
 
-  it("In `socialLinks`, `associatedENSName`, if defined, must be a non-empty normalized ENS name", () => {
+  it("In `socials`, `ens`, if defined, must be a non-empty normalized ENS name", () => {
     data.forEach((org) => {
-      if (org.socialLinks.associatedENSName !== undefined) {
+      if (org.socials.ens !== undefined) {
         expect(
-          org.socialLinks.associatedENSName.length > 0 &&
-            isNormalizedName(org.socialLinks.associatedENSName),
-          `Name={${org.socialLinks.associatedENSName}} is empty or is not ENS normalized`,
+          org.socials.ens.length > 0 &&
+            isNormalizedName(org.socials.ens),
+          `Name={${org.socials.ens}} is empty or is not ENS normalized`,
         ).toEqual(true);
       }
     });

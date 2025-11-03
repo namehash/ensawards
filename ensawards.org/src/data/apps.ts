@@ -9,10 +9,10 @@ export const APPS: App[] = [
     description:
       "Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum.",
     type: "Wallet",
-    socialLinks: {
-      websiteLink: new URL("https://rainbow.me/"),
-      twitterLink: new URL("https://x.com/rainbowdotme"),
-      associatedENSName: "rainbowwallet.eth",
+    socials: {
+      website: new URL("https://rainbow.me/"),
+      twitter: new URL("https://x.com/rainbowdotme"),
+      ens: "rainbowwallet.eth",
     },
     iconSourceLink: "/src/assets/rainbowIcon.svg",
     benchmarks: [
@@ -33,10 +33,10 @@ export const APPS: App[] = [
     description:
       "Coinbase Wallet helps you unlock one of the most significant features of crypto: the ability to send or receive peer-to-peer transfers without any financial intermediaries.",
     type: "Wallet",
-    socialLinks: {
-      websiteLink: new URL("https://www.coinbase.com/learn/wallet"),
-      twitterLink: new URL("https://x.com/coinbase"),
-      associatedENSName: "coinbase.eth",
+    socials: {
+      website: new URL("https://www.coinbase.com/learn/wallet"),
+      twitter: new URL("https://x.com/coinbase"),
+      ens: "coinbase.eth",
     },
     iconSourceLink: "/src/assets/coinbaseWalletIcon.svg",
     benchmarks: [
@@ -57,10 +57,10 @@ export const APPS: App[] = [
     description:
       "MetaMask is a widely used, self-custodial cryptocurrency wallet that allows users to interact with the Ethereum blockchain and other compatible networks. ",
     type: "Wallet",
-    socialLinks: {
-      websiteLink: new URL("https://metamask.io/"),
-      twitterLink: new URL("https://x.com/MetaMask"),
-      associatedENSName: "metamask.eth",
+    socials: {
+      website: new URL("https://metamask.io/"),
+      twitter: new URL("https://x.com/MetaMask"),
+      ens: "metamask.eth",
     },
     iconSourceLink: "/src/assets/metamaskIcon.svg",
     benchmarks: [
@@ -80,10 +80,10 @@ export const APPS: App[] = [
     name: "Etherscan",
     description: "Etherscan is a Block Explorer and Analytics Platform for Ethereum.",
     type: "Explorer",
-    socialLinks: {
-      websiteLink: new URL("https://etherscan.io/"),
-      twitterLink: new URL("https://x.com/etherscan"),
-      associatedENSName: "etherscan.eth",
+    socials: {
+      website: new URL("https://etherscan.io/"),
+      twitter: new URL("https://x.com/etherscan"),
+      ens: "etherscan.eth",
     },
     iconSourceLink: "/src/assets/etherscanIcon.png",
     benchmarks: [
@@ -103,9 +103,9 @@ export const APPS: App[] = [
     name: "Blockscout",
     description: "Blockscout is a tool for inspecting and analyzing EVM based blockchains.",
     type: "Explorer",
-    socialLinks: {
-      websiteLink: new URL("https://www.blockscout.com/"),
-      twitterLink: new URL("https://x.com/blockscout"),
+    socials: {
+      website: new URL("https://www.blockscout.com/"),
+      twitter: new URL("https://x.com/blockscout"),
     },
     iconSourceLink: "/src/assets/blockscoutIcon.jpg",
     benchmarks: [

@@ -10,7 +10,7 @@ import DataLoadingError from "../../../components/organisms/DataLoadingError.ast
 import { APPS } from "../../../data/apps";
 import { BEST_PRACTICE_CATEGORIES, nameYourSmartContracts } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
-import { getBestPracticeByCategoryAndSlug } from "../../../utils/dataAccess";
+import {calculateAppsPassed, calculateAppSupport, getBestPracticeBySlug} from "../../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 export function getStaticPaths() {
@@ -32,7 +32,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
 
-const bestPracticeToDisplay = getBestPracticeByCategoryAndSlug(category, bestPractice);
+const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
 
 const benchmarkedApps = APPS.filter(
   (app) =>
@@ -67,11 +67,11 @@ const benchmarkedApps = APPS.filter(
                       },
                       {
                         name: "Apps passed",
-                        value: bestPracticeToDisplay.supportDetails.appBenchmarksResults.appsPassed!,
+                        value: calculateAppsPassed(bestPracticeToDisplay),
                       },
                       {
                         name: "App support",
-                        value: `${bestPracticeToDisplay.supportDetails.appBenchmarksResults.appSupport!}%`,
+                        value: `${calculateAppSupport(bestPracticeToDisplay)}%`,
                       },
                     ]}>
                   <technical-info-anchor
@@ -177,13 +177,13 @@ const benchmarkedApps = APPS.filter(
                           <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
                               <p class="text-sm leading-normal font-normal text-muted-foreground">Apps passed</p>
                               <p class="text-sm leading-normal font-semibold text-black">
-                                  {bestPracticeToDisplay.supportDetails.appBenchmarksResults.appsPassed!}
+                                  {calculateAppsPassed(bestPracticeToDisplay)}
                               </p>
                           </div>
                           <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
                               <p class="text-sm leading-normal font-normal text-muted-foreground">App support</p>
-                              <p class={cn("text-sm leading-normal font-semibold", `text-${getAppSupportColor(bestPracticeToDisplay.supportDetails.appBenchmarksResults.appSupport)}`)}>
-                                  {bestPracticeToDisplay.supportDetails.appBenchmarksResults.appSupport!}%
+                              <p class={cn("text-sm leading-normal font-semibold", `text-${getAppSupportColor(calculateAppSupport(bestPracticeToDisplay))}`)}>
+                                  {calculateAppSupport(bestPracticeToDisplay)}%
                               </p>
                           </div>
                       </div>

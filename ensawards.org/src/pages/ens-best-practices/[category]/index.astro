@@ -47,7 +47,9 @@ const categoryToDisplay = getCategoryBySlug(category);
             slot="extraAdditionalElement"
             class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
             <p class="text-gray-400">Powered by</p>
-            <EnscribeIcon />
+              <a             href="https://www.enscribe.xyz/"
+                             target="_blank"
+                             rel="noreferrer noopener"><EnscribeIcon /></a>
           </div>
         )}
       </SubpageHero>
@@ -63,10 +65,11 @@ const categoryToDisplay = getCategoryBySlug(category);
           {categoryToDisplay.bestPractices.map((bestPractice, idx) => (
             <BestPracticeCard
               key={`best-practice-card-${idx}`}
+              id={bestPractice.id}
               name={bestPractice.name}
               description={bestPractice.description}
               viewReviewsLink={`/ens-best-practices/${categoryToDisplay.slug}/${bestPractice.slug}`}
-              supportDetails={bestPractice.supportDetails}
+              appliesTo={bestPractice.appliesTo}
             />
           ))}
           <SuggestionCard whatsSuggested="best practice" />

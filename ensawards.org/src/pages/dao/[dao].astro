@@ -64,20 +64,20 @@ if (resolvedOrg) {
           slot="socialLinks"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
           <a
-            href={resolvedOrg.socialLinks.websiteLink}
+            href={resolvedOrg.socials.website}
             rel="noreferrer noopener"
             target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
           <a
-            href={resolvedOrg.socialLinks.twitterLink}
+            href={resolvedOrg.socials.twitter}
             rel="noreferrer noopener"
             target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
-            {resolvedOrg.socialLinks.associatedENSName &&
+            {resolvedOrg.socials.ens &&
                     <a
-                            href=`https://admin.ensnode.io/name/${resolvedOrg.socialLinks.associatedENSName}`
+                            href=`https://app.ens.domains/${encodeURIComponent(resolvedOrg.socials.ens)}`
                             rel="noreferrer noopener"
                             target="_blank"
                     >
