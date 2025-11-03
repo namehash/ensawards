@@ -5,6 +5,7 @@ import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { SmartContractMetadata } from "../SmartContractMetadata";
 import { ContractBadge } from "../badges/ContractBadge";
+import {EnsSolidIcon} from "../icons/EnsSolidIcon";
 export interface ContractCardProps {
   contract: Contract;
 }
@@ -74,13 +75,21 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
         ContractResolutionStatusIds.PrimaryNamed ||
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
-        <a
-          href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
-          target="_blank"
-          rel="noreferrer noopener"
-          class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-          {contract.cachedIdentity.name}
-        </a>
+          <div class="h-[21px] flex flex-row flex-nowrap justify-start items-center gap-1">
+            <a
+                href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
+                target="_blank"
+                rel="noreferrer noopener"
+                class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
+              {contract.cachedIdentity.name}
+            </a>
+            <a
+              href=`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`
+              rel="noreferrer noopener"
+              target="_blank"
+          >
+              <EnsSolidIcon width={20} height={20} className="p-1 box-content rounded-sm hover:bg-black/5 text-[#0080BC] duration-200 transition-all"/>
+          </a></div>
       ) : (
         <p class="text-sm leading-normal font-medium text-red-600">Unnamed contract</p>
       )
