@@ -104,9 +104,9 @@ export const displayNamedSmartContracts: BestPractice = {
 };
 
 export const BEST_PRACTICES: BestPractice[] = [
-    recognizeAllENSNames,
-    nameYourSmartContracts,
-    displayNamedSmartContracts
+  recognizeAllENSNames,
+  nameYourSmartContracts,
+  displayNamedSmartContracts,
 ];
 
 export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [

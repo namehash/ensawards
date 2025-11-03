@@ -22,8 +22,7 @@ describe("App data", () => {
     data.forEach((app) => {
       if (app.socials.ens !== undefined) {
         expect(
-          app.socials.ens.length > 0 &&
-            isNormalizedName(app.socials.ens),
+          app.socials.ens.length > 0 && isNormalizedName(app.socials.ens),
           `Name={${app.socials.ens}} is empty or is not ENS normalized`,
         ).toEqual(true);
       }

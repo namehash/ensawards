@@ -1,9 +1,13 @@
 ---
-import { BestPracticeApplications, BestPracticeAppliesTo} from "../../../types/bestPractices";
+import { BestPracticeApplications, BestPracticeAppliesTo } from "../../../types/bestPractices";
+import {
+  calculateAppSupport,
+  calculateAppsPassed,
+  getBestPracticeById,
+} from "../../../utils/dataAccess";
 import { getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import {calculateAppsPassed, calculateAppSupport, getBestPracticeById} from "../../../utils/dataAccess";
 export interface BestPracticeCardProps {
   id: string;
   name: string;
@@ -14,13 +18,13 @@ export interface BestPracticeCardProps {
 
 const { id, name, description, viewReviewsLink, appliesTo }: BestPracticeCardProps = Astro.props;
 
-let appsPassed:number;
-let appSupport:number;
+let appsPassed: number;
+let appSupport: number;
 
 // Theoretically, because of Astro's build-time page generation, this best practice should always be defined
 const bestPracticeToDisplay = getBestPracticeById(id);
 
-if (appliesTo.includes(BestPracticeApplications.App) && bestPracticeToDisplay !== undefined){
+if (appliesTo.includes(BestPracticeApplications.App) && bestPracticeToDisplay !== undefined) {
   appsPassed = calculateAppsPassed(bestPracticeToDisplay);
   appSupport = calculateAppSupport(bestPracticeToDisplay);
 }
@@ -64,7 +68,7 @@ if (appliesTo.includes(BestPracticeApplications.App) && bestPracticeToDisplay !=
       class="flex flex-nowrap flex-col sm:flex-row justify-start items-center gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
       {
         // TODO: Hacky approach to display this info only for contract-related BPs --> to be refactored later
-          name.includes("contract") && (
+        name.includes("contract") && (
           <div class="flex flex-row justify-between sm:justify-start items-center sm:gap-2 max-sm:self-stretch">
             <p class="text-sm leading-normal font-normal text-muted-foreground">
               Applies to
@@ -81,30 +85,31 @@ if (appliesTo.includes(BestPracticeApplications.App) && bestPracticeToDisplay !=
       }
       {
         // TODO: Hacky approach to not display this info for contract-related BPs --> to be refactored later
-          appliesTo.includes(BestPracticeApplications.App) && !name.includes("contract") && (
-          <>
-            <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
-              <p class="text-muted-foreground text-sm leading-normal font-normal">
-                Apps passed
-              </p>
-              <p class="text-sm leading-normal font-semibold text-accent-foreground">
-                {appsPassed}
-              </p>
-            </div>
-            <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
-              <p class="text-muted-foreground text-sm leading-normal font-normal">
-                App support
-              </p>
-              <p
-                class={cn(
-                  "text-sm leading-normal font-semibold",
-                  `text-${getAppSupportColor(appSupport)}`,
-                )}>
-                {appSupport}%
-              </p>
-            </div>
-          </>
-        )
+        appliesTo.includes(BestPracticeApplications.App) &&
+          !name.includes("contract") && (
+            <>
+              <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
+                <p class="text-muted-foreground text-sm leading-normal font-normal">
+                  Apps passed
+                </p>
+                <p class="text-sm leading-normal font-semibold text-accent-foreground">
+                  {appsPassed}
+                </p>
+              </div>
+              <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
+                <p class="text-muted-foreground text-sm leading-normal font-normal">
+                  App support
+                </p>
+                <p
+                  class={cn(
+                    "text-sm leading-normal font-semibold",
+                    `text-${getAppSupportColor(appSupport)}`,
+                  )}>
+                  {appSupport}%
+                </p>
+              </div>
+            </>
+          )
       }
     </div>
   </div>

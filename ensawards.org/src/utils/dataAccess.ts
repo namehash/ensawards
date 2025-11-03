@@ -1,9 +1,9 @@
-import {APPS} from "@/data/apps.ts";
-import {BEST_PRACTICE_CATEGORIES, BEST_PRACTICES} from "@/data/bestPractices.ts";
-import {ORGANIZATIONS} from "@/data/organizations.ts";
-import {type App, BenchmarkResult} from "@/types/apps.ts";
-import type {BestPractice, BestPracticeCategory} from "@/types/bestPractices.ts";
-import type {Organization, OrgId} from "@/types/organizations.ts";
+import { APPS } from "@/data/apps.ts";
+import { BEST_PRACTICES, BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
+import { ORGANIZATIONS } from "@/data/organizations.ts";
+import { type App, BenchmarkResult } from "@/types/apps.ts";
+import type { BestPractice, BestPracticeCategory } from "@/types/bestPractices.ts";
+import type { OrgId, Organization } from "@/types/organizations.ts";
 
 export const getOrgById = (orgId: OrgId): Organization => {
   //Because of invariant that ORGANIZATIONS array satisfies we are guaranteed to find corresponding org
@@ -30,14 +30,12 @@ export const getCategoryById = (categoryId: string): BestPracticeCategory | unde
   return BEST_PRACTICE_CATEGORIES.find((category) => category.id === categoryId);
 };
 
-export const getBestPracticeBySlug = (
-  bestPracticeSlug: string,
-): BestPractice | undefined => {
-
+export const getBestPracticeBySlug = (bestPracticeSlug: string): BestPractice | undefined => {
   return BEST_PRACTICES.find((bestPractice) => bestPractice.slug === bestPracticeSlug);
 };
 
-export const getBestPracticeById = (bestPracticeId: string): BestPractice | undefined => BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
+export const getBestPracticeById = (bestPracticeId: string): BestPractice | undefined =>
+  BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
 
 export const calculateAppEnsAwardsScore = (app: App) => {
   const accumulatedBenchmarks = app.benchmarks.reduce((sum, benchmark) => {
@@ -69,15 +67,17 @@ export const calculateAppSupport = (bestPractice: BestPractice): number => {
   let appSupport = 0;
 
   for (const app of APPS) {
-    const appBenchmark = app.benchmarks.find((benchmark) => benchmark.bestPracticeDetails.id === bestPractice.id);
+    const appBenchmark = app.benchmarks.find(
+      (benchmark) => benchmark.bestPracticeDetails.id === bestPractice.id,
+    );
 
-    if (appBenchmark === undefined){
+    if (appBenchmark === undefined) {
       continue;
     }
 
     benchmarkedApps += 1;
 
-    switch (appBenchmark.result){
+    switch (appBenchmark.result) {
       case BenchmarkResult.Pass:
         appSupport += 1;
         break;
@@ -93,8 +93,8 @@ export const calculateAppSupport = (bestPractice: BestPractice): number => {
     }
   }
 
-  return (appSupport*100) / benchmarkedApps;
-}
+  return (appSupport * 100) / benchmarkedApps;
+};
 
 /**
  * Calculates how many apps passed our benchmark on this best practice.
@@ -105,12 +105,18 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
   let appsPassed = 0;
 
   APPS.forEach((app) => {
-    const appBenchmark = app.benchmarks.find((benchmark) => benchmark.bestPracticeDetails.id === bestPractice.id);
+    const appBenchmark = app.benchmarks.find(
+      (benchmark) => benchmark.bestPracticeDetails.id === bestPractice.id,
+    );
 
-    if (appBenchmark !== undefined && (appBenchmark.result === BenchmarkResult.Pass || appBenchmark.result === BenchmarkResult.PartialPass)){
+    if (
+      appBenchmark !== undefined &&
+      (appBenchmark.result === BenchmarkResult.Pass ||
+        appBenchmark.result === BenchmarkResult.PartialPass)
+    ) {
       appsPassed += 1;
     }
   });
 
   return appsPassed;
-}
+};

@@ -10,7 +10,11 @@ import DataLoadingError from "../../../components/organisms/DataLoadingError.ast
 import { APPS } from "../../../data/apps";
 import { BEST_PRACTICE_CATEGORIES, nameYourSmartContracts } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
-import {calculateAppsPassed, calculateAppSupport, getBestPracticeBySlug} from "../../../utils/dataAccess";
+import {
+  calculateAppSupport,
+  calculateAppsPassed,
+  getBestPracticeBySlug,
+} from "../../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 export function getStaticPaths() {

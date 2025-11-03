@@ -33,8 +33,7 @@ describe("organizations data", () => {
     data.forEach((org) => {
       if (org.socials.ens !== undefined) {
         expect(
-          org.socials.ens.length > 0 &&
-            isNormalizedName(org.socials.ens),
+          org.socials.ens.length > 0 && isNormalizedName(org.socials.ens),
           `Name={${org.socials.ens}} is empty or is not ENS normalized`,
         ).toEqual(true);
       }
