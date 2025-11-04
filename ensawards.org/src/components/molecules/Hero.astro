@@ -15,24 +15,37 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
         class="flex flex-col flex-nowrap justify-center items-center sm:items-start gap-4">
         <h1
           class="text-white text-[32px] sm:text-[60px] leading-[44px] sm:leading-[72px] font-bold text-center sm:text-left">
-          Discover the best in&nbsp;ENS
+          Awarding the best in&nbsp;ENS
         </h1>
         <p
           class="max-md:max-w-[600px] text-base sm:text-lg leading-normal sm:leading-7 font-normal text-center sm:text-left text-white/60">
           Are you fully supporting ENS best practices?
         </p>
       </div>
-      <a
-        href="/ens-best-practices"
-        class={cn(
-          shadcnButtonVariants({
-            variant: "default",
-            size: "default",
-            className:
-              "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
-          }),
-        )}>ENS best practices</a
-      >
+      <div class="flex flex-col sm:flex-row justify-start items-center sm:items-start gap-4">
+        <a
+            href="/leaderboards"
+            class={cn(
+                shadcnButtonVariants({
+                  variant: "default",
+                  size: "default",
+                  className:
+                      "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+                }),
+            )}>ENS leaderboards</a
+        >
+        <a
+            href="/ens-best-practices"
+            class={cn(
+                shadcnButtonVariants({
+                  variant: "ghost",
+                  size: "default",
+                  className:
+                      "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-white hover:text-white bg-white/10 hover:bg-white/15",
+                }),
+            )}>ENS best practices</a
+        >
+      </div>
     </div>
     <div class="md:max-w-1/2 max-sm:h-[40vh] overflow-visible">
       <img
