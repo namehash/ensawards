@@ -1,4 +1,10 @@
-import {AaveDaoOrg, ArbitrumDaoOrg, ENSDaoOrg, NounsDaoOrg, UniswapDaoOrg} from "@/data/organizations.ts";
+import {
+  AaveDaoOrg,
+  ArbitrumDaoOrg,
+  ENSDaoOrg,
+  NounsDaoOrg,
+  UniswapDaoOrg,
+} from "@/data/organizations.ts";
 import {
   type Contract,
   ContractResolutionStatusIds,
@@ -325,8 +331,8 @@ export const CONTRACTS: Contract[] = [
         address: "0x0000000000000000000000000000000000000001",
         chain: mainnet,
         codeName: "TestContractNouns",
-      }
-    }
+      },
+    },
   },
   {
     org: ArbitrumDaoOrg,
@@ -338,8 +344,8 @@ export const CONTRACTS: Contract[] = [
         address: "0x0000000000000000000000000000000000000002",
         chain: mainnet,
         codeName: "TestContractArbitrum",
-      }
-    }
+      },
+    },
   },
   {
     org: AaveDaoOrg,
@@ -351,7 +357,7 @@ export const CONTRACTS: Contract[] = [
         address: "0x0000000000000000000000000000000000000003",
         chain: mainnet,
         codeName: "TestContractAave",
-      }
-    }
-  }
+      },
+    },
+  },
 ];

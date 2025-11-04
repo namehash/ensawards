@@ -1,10 +1,16 @@
+import { AaveDaoIcon } from "@/components/atoms/icons/projects-and-daos/AaveDaoIcon.tsx";
+import { ArbitrumIcon } from "@/components/atoms/icons/projects-and-daos/ArbitrumIcon.tsx";
 import { EnsDaoIcon } from "@/components/atoms/icons/projects-and-daos/EnsDaoIcon.tsx";
+import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
-import {AaveProject, ArbitrumProject, ENSProject, NounsProject, UniswapProject} from "@/data/projects.ts";
+import {
+  AaveProject,
+  ArbitrumProject,
+  ENSProject,
+  NounsProject,
+  UniswapProject,
+} from "@/data/projects.ts";
 import { OrgIds, type Organization, OrganizationTypes } from "@/types/organizations.ts";
-import {NounsIcon} from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
-import {ArbitrumIcon} from "@/components/atoms/icons/projects-and-daos/ArbitrumIcon.tsx";
-import {AaveDaoIcon} from "@/components/atoms/icons/projects-and-daos/AaveDaoIcon.tsx";
 
 export const ENSDaoOrg: Organization = {
   id: OrgIds.Ens,
@@ -45,7 +51,7 @@ export const NounsDaoOrg: Organization = {
   project: NounsProject,
   name: "Nouns DAO",
   description:
-      "Nouns is a community-owned brand that makes a positive impact by funding ideas and fostering collaboration.",
+    "Nouns is a community-owned brand that makes a positive impact by funding ideas and fostering collaboration.",
   icon: NounsIcon,
   socials: {
     website: new URL("https://nouns.wtf/"),
@@ -61,7 +67,7 @@ export const ArbitrumDaoOrg: Organization = {
   project: ArbitrumProject,
   name: "Arbitrum DAO",
   description:
-      "The Arbitrum DAO provides governance for Arbitrum, a unified blockchain for everyone, where ideas thrive and boundaries fade.",
+    "The Arbitrum DAO provides governance for Arbitrum, a unified blockchain for everyone, where ideas thrive and boundaries fade.",
   icon: ArbitrumIcon,
   socials: {
     website: new URL("https://arbitrum.foundation/"),
@@ -76,7 +82,7 @@ export const AaveDaoOrg: Organization = {
   project: AaveProject,
   name: "Aave DAO",
   description:
-      "The Aave DAO provides governance to DeFi's largest lending network: Aave, where you can earn, borrow, save, and swap with millions of users.",
+    "The Aave DAO provides governance to DeFi's largest lending network: Aave, where you can earn, borrow, save, and swap with millions of users.",
   icon: AaveDaoIcon,
   socials: {
     website: new URL("https://aave.com/"),
@@ -90,4 +96,10 @@ export const AaveDaoOrg: Organization = {
  *
  * Invariant: This array should contain exactly one {@link Organization} for each {@link OrgId}.
  */
-export const ORGANIZATIONS: Organization[] = [ENSDaoOrg, UniswapDaoOrg, NounsDaoOrg, ArbitrumDaoOrg, AaveDaoOrg];
+export const ORGANIZATIONS: Organization[] = [
+  ENSDaoOrg,
+  UniswapDaoOrg,
+  NounsDaoOrg,
+  ArbitrumDaoOrg,
+  AaveDaoOrg,
+];

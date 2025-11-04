@@ -4,10 +4,12 @@ import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/re
 import React, { Fragment } from "react";
 
 export interface HeaderMobileNavigationProps {
-    popoverButtonClass?: string;
+  popoverButtonClass?: string;
 }
 
-export default function HeaderMobileNavigation({popoverButtonClass = "onScrollButton"}: HeaderMobileNavigationProps) {
+export default function HeaderMobileNavigation({
+  popoverButtonClass = "onScrollButton",
+}: HeaderMobileNavigationProps) {
   const mainLinkClass =
     "text-2xl leading-normal font-medium text-black px-4 py-2 rounded-lg border-transparent transition-all duration-200 hover:bg-black/5";
   const closeIcon = (
@@ -38,7 +40,12 @@ export default function HeaderMobileNavigation({popoverButtonClass = "onScrollBu
       <Popover className="relative">
         {({ open }) => (
           <>
-            <PopoverButton className={cn("min-[1050px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200", popoverButtonClass)}>
+            <PopoverButton
+              className={cn(
+                "min-[1050px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200",
+                popoverButtonClass,
+              )}
+            >
               <span className="sr-only">Open menu</span>
               {hamburgerMenuIcon}
             </PopoverButton>
@@ -73,23 +80,23 @@ export default function HeaderMobileNavigation({popoverButtonClass = "onScrollBu
                       "py-16 flex flex-col h-full justify-center overflow-y-auto scrollbar-styled",
                     )}
                   >
-                      <ul className="py-3 flex flex-col justify-center gap-1">
-                          <a href="/leaderboards" className={mainLinkClass}>
-                              ENS leaderboards
-                          </a>
-                          <a href="/ens-best-practices" className={mainLinkClass}>
-                              ENS best practices
-                          </a>
-                          <a href="/about" className={mainLinkClass}>
-                              About
-                          </a>
-                          <a href="/ens-contract-naming-season" className={mainLinkClass}>
-                              ENS Contract Naming Season
-                          </a>
-                          <a href="/ens-referral-awards" className={mainLinkClass}>
-                              ENS Referral Awards
-                          </a>
-                      </ul>
+                    <ul className="py-3 flex flex-col justify-center gap-1">
+                      <a href="/leaderboards" className={mainLinkClass}>
+                        ENS leaderboards
+                      </a>
+                      <a href="/ens-best-practices" className={mainLinkClass}>
+                        ENS best practices
+                      </a>
+                      <a href="/about" className={mainLinkClass}>
+                        About
+                      </a>
+                      <a href="/ens-contract-naming-season" className={mainLinkClass}>
+                        ENS Contract Naming Season
+                      </a>
+                      <a href="/ens-referral-awards" className={mainLinkClass}>
+                        ENS Referral Awards
+                      </a>
+                    </ul>
                   </div>
                 </div>
               </PopoverPanel>

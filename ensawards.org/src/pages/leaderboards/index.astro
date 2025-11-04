@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import LeaderboardCard from "../../components/atoms/cards/LeaderboardCard.astro";
+import LeaderboardSnippetCard from "../../components/atoms/cards/LeaderboardSnippetCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { contractPipeline } from "../../contract-pipelines";
@@ -9,15 +10,16 @@ import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { OrgId } from "../../types/organizations";
 import { calculateAppEnsAwardsScore, getOrgById } from "../../utils/dataAccess";
-import LeaderboardSnippetCard from "../../components/atoms/cards/LeaderboardSnippetCard.astro";
-import {cn} from "../../utils/tailwindClassConcatenation";
+import { cn } from "../../utils/tailwindClassConcatenation";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
 const daoScores = contractPipeline();
 
-const daoLeaderboardDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.";
-const appLeaderboardDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.";
+const daoLeaderboardDescription =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.";
+const appLeaderboardDescription =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.";
 ---
 
 <Layout
@@ -29,46 +31,77 @@ const appLeaderboardDescription = "Lorem ipsum dolor sit amet, consectetur adipi
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList>
-        <LeaderboardSnippetCard
-                name="DAO leaderboards"
-                description={daoLeaderboardDescription}
-                link="/leaderboards/dao"
-        >
-            <div slot="bestResultsIcons" class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
-                {        Object.entries(daoScores)
-                    .slice(0, 3)
-                    .map(([scoreCategory, value], idx) => {
-                        const daoId = scoreCategory as OrgId;
-                        const org = getOrgById(daoId);
-                        const OrgIcon = org.icon;
-                        return <div style={{right: `${12*idx}px`}} class={cn(idx > 0 && "relative", "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white")}><OrgIcon className="w-10 h-10 rounded-md" /></div>
-                    })
-                }
-                <p class="relative text-sm leading-normal font-medium text-muted-foreground" style={{right: "16px"}}>+ more</p>
-            </div>
-        </LeaderboardSnippetCard>
-        <LeaderboardSnippetCard
-                name="App leaderboards"
-                description={appLeaderboardDescription}
-                link="/leaderboards/app"
-        >
-            <div slot="bestResultsIcons" class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
-                {         APPS.sort(
-                    (a, b) =>
-                        calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a),
-                )
-                    .slice(0, 3)
-                    .map((app, idx) => {
-                        return <div style={{right: `${12*idx}px`}} class={cn(idx > 0 && "relative", "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white")}>              <Image
-                                src={images[app.iconSourceLink]()}
-                                alt={`${app.id}`}
-                                class="w-10 h-10 rounded-md"
-                        /></div>
-                    })
-                }
-                <p class="relative text-sm leading-normal font-medium text-muted-foreground" style={{right: "16px"}}>+ more</p>
-            </div>
-        </LeaderboardSnippetCard>
+      <LeaderboardSnippetCard
+        name="DAO leaderboards"
+        description={daoLeaderboardDescription}
+        link="/leaderboards/dao">
+        <div
+          slot="bestResultsIcons"
+          class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
+          {
+            Object.entries(daoScores)
+              .slice(0, 3)
+              .map(([scoreCategory, value], idx) => {
+                const daoId = scoreCategory as OrgId;
+                const org = getOrgById(daoId);
+                const OrgIcon = org.icon;
+                return (
+                  <div
+                    style={{ right: `${12 * idx}px` }}
+                    class={cn(
+                      idx > 0 && "relative",
+                      "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
+                    )}>
+                    <OrgIcon className="w-10 h-10 rounded-md" />
+                  </div>
+                );
+              })
+          }
+          <p
+            class="relative text-sm leading-normal font-medium text-muted-foreground"
+            style={{ right: "16px" }}>
+            + more
+          </p>
+        </div>
+      </LeaderboardSnippetCard>
+      <LeaderboardSnippetCard
+        name="App leaderboards"
+        description={appLeaderboardDescription}
+        link="/leaderboards/app">
+        <div
+          slot="bestResultsIcons"
+          class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
+          {
+            APPS.sort(
+              (a, b) =>
+                calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a),
+            )
+              .slice(0, 3)
+              .map((app, idx) => {
+                return (
+                  <div
+                    style={{ right: `${12 * idx}px` }}
+                    class={cn(
+                      idx > 0 && "relative",
+                      "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
+                    )}>
+                    {" "}
+                    <Image
+                      src={images[app.iconSourceLink]()}
+                      alt={`${app.id}`}
+                      class="w-10 h-10 rounded-md"
+                    />
+                  </div>
+                );
+              })
+          }
+          <p
+            class="relative text-sm leading-normal font-medium text-muted-foreground"
+            style={{ right: "16px" }}>
+            + more
+          </p>
+        </div>
+      </LeaderboardSnippetCard>
     </ItemsList>
   </section>
 </Layout>

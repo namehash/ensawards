@@ -17,8 +17,8 @@ import Layout from "../../layouts/Layout.astro";
 import { Contract } from "../../types/contracts";
 import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
 import { getOrgBySlug } from "../../utils/dataAccess";
+import { getOrgOgImagePath, getOrgTwitterImagePath } from "../../utils/ogImages";
 import { cn } from "../../utils/tailwindClassConcatenation";
-import {getOrgOgImagePath, getOrgTwitterImagePath} from "../../utils/ogImages";
 
 export function getStaticPaths() {
   return Object.values(ORGANIZATIONS).map((org) => ({

@@ -5,7 +5,7 @@ export const ProjectIds = {
   Uniswap: "project-uniswap",
   Nouns: "project-nouns",
   Arbitrum: "project-arbitrum",
-  Aave: "project-aave"
+  Aave: "project-aave",
 } as const;
 
 /**

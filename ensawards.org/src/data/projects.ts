@@ -1,9 +1,9 @@
+import { ArbitrumIcon } from "@/components/atoms/icons/chains/ArbitrumIcon.tsx";
+import { AaveProjectIcon } from "@/components/atoms/icons/projects-and-daos/AaveProjectIcon.tsx";
+import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
 import { type Project, ProjectIds } from "@/types/projects.ts";
 import { EnsProjectIcon } from "../components/atoms/icons/projects-and-daos/EnsProjectIcon.tsx";
-import {NounsIcon} from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
-import {ArbitrumIcon} from "@/components/atoms/icons/chains/ArbitrumIcon.tsx";
-import {AaveProjectIcon} from "@/components/atoms/icons/projects-and-daos/AaveProjectIcon.tsx";
 
 export const ENSProject: Project = {
   id: ProjectIds.Ens,
@@ -31,7 +31,8 @@ export const UniswapProject: Project = {
 export const NounsProject: Project = {
   id: ProjectIds.Nouns,
   name: "Nouns",
-  description: "Nouns is a community-owned brand that makes a positive impact by funding ideas and fostering collaboration.",
+  description:
+    "Nouns is a community-owned brand that makes a positive impact by funding ideas and fostering collaboration.",
   icon: NounsIcon,
   socials: {
     website: new URL("https://nouns.wtf/"),
@@ -42,7 +43,8 @@ export const NounsProject: Project = {
 export const ArbitrumProject: Project = {
   id: ProjectIds.Arbitrum,
   name: "Arbitrum",
-  description: "Arbitrum is a unified blockchain for everyone, where ideas thrive and boundaries fade.",
+  description:
+    "Arbitrum is a unified blockchain for everyone, where ideas thrive and boundaries fade.",
   icon: ArbitrumIcon,
   socials: {
     website: new URL("https://arbitrum.io/"),
@@ -53,7 +55,8 @@ export const ArbitrumProject: Project = {
 export const AaveProject: Project = {
   id: ProjectIds.Aave,
   name: "Aave",
-  description: "The largest lending network where you can earn, borrow, save, and swap with millions of users.",
+  description:
+    "The largest lending network where you can earn, borrow, save, and swap with millions of users.",
   icon: AaveProjectIcon,
   socials: {
     website: new URL("https://aave.com/"),
@@ -66,4 +69,10 @@ export const AaveProject: Project = {
  *
  * Invariant: This array should contain exactly one {@link Project} for each {@link ProjectId}.
  */
-export const PROJECTS: Project[] = [ENSProject, UniswapProject, NounsProject, ArbitrumProject, AaveProject];
+export const PROJECTS: Project[] = [
+  ENSProject,
+  UniswapProject,
+  NounsProject,
+  ArbitrumProject,
+  AaveProject,
+];
