@@ -3,7 +3,11 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 
-export default function HeaderMobileNavigation() {
+export interface HeaderMobileNavigationProps {
+    popoverButtonClass?: string;
+}
+
+export default function HeaderMobileNavigation({popoverButtonClass = "onScrollButton"}: HeaderMobileNavigationProps) {
   const mainLinkClass =
     "text-2xl leading-normal font-medium text-black px-4 py-2 rounded-lg border-transparent transition-all duration-200 hover:bg-black/5";
   const closeIcon = (
@@ -30,11 +34,11 @@ export default function HeaderMobileNavigation() {
   );
 
   return (
-    <div className="w-full max-w-[860px]">
+    <div className="w-full max-w-[1050px]">
       <Popover className="relative">
         {({ open }) => (
           <>
-            <PopoverButton className="min-[860px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200 hover:bg-white/5">
+            <PopoverButton className={cn("min-[1050px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200", popoverButtonClass)}>
               <span className="sr-only">Open menu</span>
               {hamburgerMenuIcon}
             </PopoverButton>
@@ -48,9 +52,9 @@ export default function HeaderMobileNavigation() {
               leaveFrom="opacity-100 translate-x-0"
               leaveTo="opacity-0 translate-x-full"
             >
-              <PopoverPanel className="min-[860px]:hidden fixed inset-0 z-30 h-screen w-full bg-white">
+              <PopoverPanel className="min-[1050px]:hidden fixed inset-0 z-30 h-screen w-full bg-white">
                 <div className="flex h-full flex-col justify-between px-5 sm:px-8 pb-5">
-                  <div className="w-full justify-between items-center flex absolute px-5 sm:px-8 h-[56px] sm:h-[70px] top-0 left-0 max-w-[860px] border-b border-b-black/5">
+                  <div className="w-full justify-between items-center flex absolute px-5 sm:px-8 h-[56px] sm:h-[70px] top-0 left-0 max-w-[1050px] border-b border-b-black/5">
                     <a
                       href="/"
                       className="h-fit flex justify-center items-center gap-[10px] text-[19px] sm:text-2xl text-black not-italic font-bold leading-[25px] sm:leading-8"
@@ -69,20 +73,23 @@ export default function HeaderMobileNavigation() {
                       "py-16 flex flex-col h-full justify-center overflow-y-auto scrollbar-styled",
                     )}
                   >
-                    <ul className="py-3 flex flex-col justify-center gap-1">
-                      <a href="/leaderboards" className={mainLinkClass}>
-                        ENS leaderboards
-                      </a>
-                      <a href="/ens-best-practices" className={mainLinkClass}>
-                        ENS best practices
-                      </a>
-                      <a href="/about" className={mainLinkClass}>
-                        About
-                      </a>
-                      <a href="/ens-referral-awards" className={mainLinkClass}>
-                        ENS Referral Awards
-                      </a>
-                    </ul>
+                      <ul className="py-3 flex flex-col justify-center gap-1">
+                          <a href="/leaderboards" className={mainLinkClass}>
+                              ENS leaderboards
+                          </a>
+                          <a href="/ens-best-practices" className={mainLinkClass}>
+                              ENS best practices
+                          </a>
+                          <a href="/about" className={mainLinkClass}>
+                              About
+                          </a>
+                          <a href="/ens-contract-naming-season" className={mainLinkClass}>
+                              ENS Contract Naming Season
+                          </a>
+                          <a href="/ens-referral-awards" className={mainLinkClass}>
+                              ENS Referral Awards
+                          </a>
+                      </ul>
                   </div>
                 </div>
               </PopoverPanel>

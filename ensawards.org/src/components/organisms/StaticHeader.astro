@@ -20,7 +20,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
       </p>
     </a>
     <div
-      class="hidden min-[860px]:flex flex-row flex-nowrap gap-2 justify-center items-center">
+      class="hidden min-[1050px]:flex flex-row flex-nowrap gap-2 justify-center items-center">
       <a
         href="/leaderboards"
         class={cn(
@@ -51,6 +51,16 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
           }),
         )}>About</a
       >
+        <a
+                href="/ens-contract-naming-season"
+                class={cn(
+                    shadcnButtonVariants({
+                        variant: "ghost",
+                        size: "default",
+                        className: "onScrollButton rounded-full",
+                    }),
+                )}>ENS Contract Naming Season</a
+        >
       <a
         href="/ens-referral-awards"
         class={cn(
@@ -62,8 +72,8 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
         )}>ENS Referral Awards</a
       >
     </div>
-    <div class="block min-[860px]:hidden">
-      <HeaderMobileNavigation client:load />
+    <div class="block min-[1050px]:hidden">
+      <HeaderMobileNavigation popoverButtonClass="staticHeaderButton" client:load />
     </div>
   </div>
 </header>

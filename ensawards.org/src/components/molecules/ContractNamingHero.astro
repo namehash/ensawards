@@ -1,0 +1,47 @@
+---
+
+import {cn} from "../../utils/tailwindClassConcatenation";
+import {shadcnButtonVariants} from "../ui/shadcnButtonStyles";
+import HeroImage from "../../assets/contractNamingSeasonHeroImage.png";
+---
+
+<section
+        class="relative w-full h-screen box-border flex flex-col justify-start sm:justify-center items-center bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden max-sm:px-5 max-sm:pt-[96px] max-sm:pb-[60px] max-h-[760px]">
+    <div
+            class="w-full max-w-[1280px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:px-8 max-sm:gap-6">
+        <div
+                class="relative z-10 w-fit h-fit sm:max-h-[268px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-6 sm:gap-8">
+            <div
+                    class="max-w-[600px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-4">
+                <h1
+                        class="text-white text-[32px] md:text-[52px] leading-[44px] sm:leading-normal font-bold text-center sm:text-left">
+                    Elevate Your Protocol’s On-Chain Identity
+                </h1>
+                <p
+                        class="text-base sm:text-lg leading-normal sm:leading-7 font-normal text-center sm:text-left text-white/60">
+                    DAOs, protocols, and dApps: Make your smart contracts human-readable and discoverable. The ENS Contract Naming Season is live – a 6-month ENS DAO-backed initiative to reward naming key contracts with ENS domains.
+                </p>
+            </div>
+            <a
+                    href="https://discuss.ens.domains/t/temp-check-ens-contract-naming-season/21402"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    class={cn(
+                        shadcnButtonVariants({
+                            variant: "default",
+                            size: "default",
+                            className:
+                                "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+                        }),
+                    )}>Join the discussion</a
+            >
+        </div>
+        <div class="md:max-w-1/2 max-sm:h-[25vh] overflow-visible">
+            <img
+                    src={HeroImage.src}
+                    alt="Award"
+                    class="relative max-sm:max-w-[150vw] max-sm:top-1/2 max-sm:-translate-y-[40%] sm:w-[150%] lg:w-[120%] max-w-none sm:left-1/2 sm:-translate-x-1/3"
+            />
+        </div>
+    </div>
+</section>
