@@ -30,7 +30,7 @@ export interface DAO {
 
 export type Organization = DAO;
 ```
-4. Include an icon as a React functional component inside [@/components/atoms/icons/](ensawards.org/src/components/atoms/icons/) directory. For reference, see [@/components/atoms/icons/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/EnsDaoIcon.tsx).
+4. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-daos/](ensawards.org/src/components/atoms/icons/projects-and-daos/) directory. For reference, see [@/components/atoms/icons/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-daos/EnsDaoIcon.tsx).
 5. In your PR describe your reasoning for adding this `DAO`.
 6. If you’re part of an existing DAO, you can also suggest updates to its details.
 
@@ -50,7 +50,7 @@ export interface Project {
     };
 }
 ```
-* Same as in the `DAO`, you also have to include the project's icon. Please put it in the [@/components/atoms/icons/](ensawards.org/src/components/atoms/icons/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/EnsProjectIcon.tsx).
+* Same as in the `DAO`, you also have to include the project's icon. Please put it in the [@/components/atoms/icons/projects-and-daos/](ensawards.org/src/components/atoms/icons/projects-and-daos/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-daos/EnsProjectIcon.tsx).
 * If you are a part of an already added project feel free to suggest changes to any of its details.
 
 ### Add a new `Contract`

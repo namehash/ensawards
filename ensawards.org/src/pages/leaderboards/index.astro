@@ -34,7 +34,7 @@ const appLeaderboardDescription = "Lorem ipsum dolor sit amet, consectetur adipi
                 description={daoLeaderboardDescription}
                 link="/leaderboards/dao"
         >
-            <div slot="bestResultsIcons" class="sm:relative sm:left-[2px] flex flex-row flex-nowrap justify-center items-center gap-0">
+            <div slot="bestResultsIcons" class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
                 {        Object.entries(daoScores)
                     .slice(0, 3)
                     .map(([scoreCategory, value], idx) => {
@@ -44,7 +44,7 @@ const appLeaderboardDescription = "Lorem ipsum dolor sit amet, consectetur adipi
                         return <div style={{right: `${12*idx}px`}} class={cn(idx > 0 && "relative", "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white")}><OrgIcon className="w-10 h-10 rounded-md" /></div>
                     })
                 }
-                <p class="relative text-sm leading-normal font-medium text-muted-foreground" style={{right: "2px"}}>+ more</p>
+                <p class="relative text-sm leading-normal font-medium text-muted-foreground" style={{right: "16px"}}>+ more</p>
             </div>
         </LeaderboardSnippetCard>
         <LeaderboardSnippetCard

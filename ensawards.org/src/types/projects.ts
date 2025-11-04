@@ -3,6 +3,9 @@ import type { JSX } from "astro/jsx-runtime";
 export const ProjectIds = {
   Ens: "project-ens",
   Uniswap: "project-uniswap",
+  Nouns: "project-nouns",
+  Arbitrum: "project-arbitrum",
+  Aave: "project-aave"
 } as const;
 
 /**

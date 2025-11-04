@@ -1,7 +1,10 @@
-import { EnsDaoIcon } from "@/components/atoms/icons/EnsDaoIcon.tsx";
-import { UniswapIcon } from "@/components/atoms/icons/UniswapIcon.tsx";
-import { ENSProject, UniswapProject } from "@/data/projects.ts";
+import { EnsDaoIcon } from "@/components/atoms/icons/projects-and-daos/EnsDaoIcon.tsx";
+import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
+import {AaveProject, ArbitrumProject, ENSProject, NounsProject, UniswapProject} from "@/data/projects.ts";
 import { OrgIds, type Organization, OrganizationTypes } from "@/types/organizations.ts";
+import {NounsIcon} from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
+import {ArbitrumIcon} from "@/components/atoms/icons/projects-and-daos/ArbitrumIcon.tsx";
+import {AaveDaoIcon} from "@/components/atoms/icons/projects-and-daos/AaveDaoIcon.tsx";
 
 export const ENSDaoOrg: Organization = {
   id: OrgIds.Ens,
@@ -35,9 +38,56 @@ export const UniswapDaoOrg: Organization = {
   },
 };
 
+export const NounsDaoOrg: Organization = {
+  id: OrgIds.Nouns,
+  slug: "nouns",
+  orgType: OrganizationTypes.Dao,
+  project: NounsProject,
+  name: "Nouns DAO",
+  description:
+      "Nouns is a community-owned brand that makes a positive impact by funding ideas and fostering collaboration.",
+  icon: NounsIcon,
+  socials: {
+    website: new URL("https://nouns.wtf/"),
+    twitter: new URL("https://x.com/nounsdao"),
+    ens: "nouns.eth",
+  },
+};
+
+export const ArbitrumDaoOrg: Organization = {
+  id: OrgIds.Arbitrum,
+  slug: "arbitrum",
+  orgType: OrganizationTypes.Dao,
+  project: ArbitrumProject,
+  name: "Arbitrum DAO",
+  description:
+      "The Arbitrum DAO provides governance for Arbitrum, a unified blockchain for everyone, where ideas thrive and boundaries fade.",
+  icon: ArbitrumIcon,
+  socials: {
+    website: new URL("https://arbitrum.foundation/"),
+    twitter: new URL("https://x.com/arbitrum"),
+  },
+};
+
+export const AaveDaoOrg: Organization = {
+  id: OrgIds.Aave,
+  slug: "aave",
+  orgType: OrganizationTypes.Dao,
+  project: AaveProject,
+  name: "Aave DAO",
+  description:
+      "The Aave DAO provides governance to DeFi's largest lending network: Aave, where you can earn, borrow, save, and swap with millions of users.",
+  icon: AaveDaoIcon,
+  socials: {
+    website: new URL("https://aave.com/"),
+    twitter: new URL("https://x.com/aave"),
+    ens: "aave.eth",
+  },
+};
+
 /**
  * Array of supported organizations.
  *
  * Invariant: This array should contain exactly one {@link Organization} for each {@link OrgId}.
  */
-export const ORGANIZATIONS: Organization[] = [ENSDaoOrg, UniswapDaoOrg];
+export const ORGANIZATIONS: Organization[] = [ENSDaoOrg, UniswapDaoOrg, NounsDaoOrg, ArbitrumDaoOrg, AaveDaoOrg];
