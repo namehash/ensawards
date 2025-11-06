@@ -3,10 +3,10 @@ import { Contract, ContractResolutionStatusIds } from "../../../types/contracts"
 import { getBlockExplorerUrlForContract } from "../../../utils/chains";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import { EnsManagerAppLink } from "../EnsManagerAppLink";
 import { SmartContractMetadata } from "../SmartContractMetadata";
 import { ContractBadge } from "../badges/ContractBadge";
 import { EnsSolidIcon } from "../icons/EnsSolidIcon";
-import { EnsManagerAppLink} from "../EnsManagerAppLink";
 export interface ContractCardProps {
   contract: Contract;
 }

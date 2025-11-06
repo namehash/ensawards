@@ -3,10 +3,14 @@ import React, { type PropsWithChildren, type ReactElement } from "react";
 
 export interface GenericTooltipProps {
   content: ReactElement;
-  tooltipOffset?: number
+  tooltipOffset?: number;
 }
 
-export function GenericTooltip({ content, children, tooltipOffset = 12 }: PropsWithChildren<GenericTooltipProps>) {
+export function GenericTooltip({
+  content,
+  children,
+  tooltipOffset = 12,
+}: PropsWithChildren<GenericTooltipProps>) {
   return (
     <Tooltip>
       <TooltipTrigger>{children}</TooltipTrigger>
