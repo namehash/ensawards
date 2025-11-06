@@ -18,11 +18,13 @@ export interface App {
   name: string;
   description: string;
   type: string; //Will probably change to string union once the data is provided
+  iconSourceLink: string;
+  benchmarks: AppBenchmark[];
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
-  iconSourceLink: string;
-  benchmarks: AppBenchmark[];
+  ogImage?: string;
+  twitterOgImage?: string;
 }
