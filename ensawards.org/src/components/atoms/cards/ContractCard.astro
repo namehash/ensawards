@@ -84,7 +84,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
                 class="text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
               {contract.cachedIdentity.name}
             </a>
-            <EnsManagerAppLink client:load link={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`} text="View on ENS Domains" withIcon={true} className="relative bottom-0.5"/>
+            <EnsManagerAppLink client:load link={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`} text="View on ENS Manager" withIcon={true} className="relative bottom-0.5"/>
             </div>
       ) : (
         <p class="text-sm leading-normal font-medium text-red-600">Unnamed contract</p>
