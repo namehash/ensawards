@@ -1,8 +1,10 @@
 ---
 import { Image } from "astro:assets";
+import type {ImageMetadata} from "astro";
 import HomeIcon from "../../assets/homeIcon.svg";
 import SubpageHeroImage from "../../assets/subpageHeroImage.png";
 import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
+import {cn} from "../../utils/tailwindClassConcatenation";
 
 interface additionalHeroElement {
   name: string;
@@ -15,10 +17,18 @@ export interface SubpageHeroProps {
   description?: string;
   breadcrumbs?: string[]; //May change depending on astro's policy on breadcrumbs
   // (update: there is external & validated (shown as an official astro lib) library, but requires SASS styling and is yet another dependency, so for now I'll try doing it manually)
+  customImage?: {
+    source: string;
+    width: number;
+    height: number;
+    styles?: string;
+  }
   additionalElements?: additionalHeroElement[];
 }
 
-const { header, description, breadcrumbs, icon, additionalElements }: SubpageHeroProps =
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
+
+const { header, description, breadcrumbs, icon, customImage, additionalElements }: SubpageHeroProps =
   Astro.props;
 
 let breadcrumbHref = "";
@@ -45,12 +55,12 @@ const adaptBreadcrumb = (crumb: string): string => {
   <div
     class="relative w-full max-w-[1216px] h-fit sm:min-h-[200px] flex flex-nowrap flex-col justify-end gap-10 sm:gap-[60px]">
     <Image
-      src={SubpageHeroImage}
+      src={customImage ? images[customImage.source]() : SubpageHeroImage}
       alt="background"
       quality={100}
-      width={948}
-      height={848}
-      class="hidden sm:block absolute -right-60 -top-55 opacity-60"
+      width={customImage? customImage.width : 948}
+      height={customImage? customImage.height : 848}
+      class={cn("hidden sm:block absolute -right-60 -top-55 opacity-60", customImage?.styles)}
     />
     {
       breadcrumbs && (
