@@ -6,6 +6,7 @@ import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { SmartContractMetadata } from "../SmartContractMetadata";
 import { ContractBadge } from "../badges/ContractBadge";
 import { EnsSolidIcon } from "../icons/EnsSolidIcon";
+import { EnsManagerAppLink} from "../EnsManagerAppLink";
 export interface ContractCardProps {
   contract: Contract;
 }
@@ -37,7 +38,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
 ---
 
 <div
-  class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start min-[970px]:justify-between items-start sm:items-center gap-2 sm:gap-y-5
+  class="w-full h-fit min-h-[84px] box-border flex flex-col sm:flex-row flex-wrap justify-start min-[970px]:justify-between items-start sm:items-center gap-3 sm:gap-y-5
             p-4 sm:p-5 rounded-2xl border border-gray-200">
   <div
       class="block self-stretch sm:hidden pb-2">
@@ -47,8 +48,8 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
     />
   </div>
   <div
-    class="max-sm:w-full sm:min-w-[425px] flex flex-row max-sm:gap-5 sm:flex-col justify-start items-start">
-    <p class="max-sm:hidden text-sm leading-normal font-normal text-muted-foreground">
+    class="max-sm:w-full sm:min-w-[425px] flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start">
+    <p class="max-sm:hidden text-sm leading-[20px] font-normal text-muted-foreground">
       {contract.cachedIdentity.contract.codeName}
     </p>
       <div class="sm:hidden flex flex-col justify-start items-start gap-0 max-sm:min-w-[105px]">
@@ -61,13 +62,13 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
       )}
       target="_blank"
       rel="noreferrer noopener"
-      class="text-sm leading-normal font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
+      class="text-sm leading-[20px] font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
       >{contract.cachedIdentity.contract.address}</a
     >
   </div>
   <div
-    class="sm:min-w-[225px] h-[42px] flex flex-row max-sm:gap-5 sm:flex-col justify-start items-start">
-    <p class="text-sm leading-normal font-normal text-muted-foreground max-sm:min-w-[105px]">
+    class="sm:min-w-[225px] flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start">
+    <p class="text-sm leading-[20px] font-normal text-muted-foreground max-sm:min-w-[105px]">
       ENS name
     </p>
     {
@@ -75,35 +76,30 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
         ContractResolutionStatusIds.PrimaryNamed ||
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
-          <div class="h-[21px] flex flex-row flex-nowrap justify-start items-center gap-1">
+          <div class="h-[20px] flex flex-row flex-nowrap justify-start items-start gap-1.5">
             <a
                 href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
                 target="_blank"
                 rel="noreferrer noopener"
-                class="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
+                class="text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
               {contract.cachedIdentity.name}
             </a>
-            <a
-              href=`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`
-              rel="noreferrer noopener"
-              target="_blank"
-          >
-              <EnsSolidIcon width={20} height={20} className="p-1 box-content rounded-sm hover:bg-black/5 text-[#0080BC] duration-200 transition-all"/>
-          </a></div>
+            <EnsManagerAppLink client:load link={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`} text="View on ENS Domains" withIcon={true} className="relative bottom-0.5"/>
+            </div>
       ) : (
         <p class="text-sm leading-normal font-medium text-red-600">Unnamed contract</p>
       )
     }
   </div>
   <div
-    class="flex flex-row max-sm:gap-5 sm:flex-col justify-start items-start sm:min-w-[175px] max-sm:self-stretch">
+    class="flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start sm:min-w-[175px] max-sm:self-stretch">
     {
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.PrimaryNamed ||
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
         <>
-          <p class="text-sm leading-normal font-normal text-muted-foreground max-sm:min-w-[105px]">
+          <p class="text-sm leading-[20px] font-normal text-muted-foreground max-sm:min-w-[105px]">
             ENS metadata
           </p>
           <SmartContractMetadata

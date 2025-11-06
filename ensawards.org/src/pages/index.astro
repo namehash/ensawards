@@ -30,11 +30,11 @@ const daoScores = contractPipeline();
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
     <ContractNamingBanner />
     <ItemsList
-      header="DAO leaderboard"
-      linkData={{ link: "/leaderboard/daos", text: "All DAOs" }}
+      header="Top DAOs"
+      linkData={{ link: "/leaderboard/daos", text: "View leaderboard" }}
       containerStyles="gap-3 sm:gap-3">
       {
-        Object.entries(daoScores).map(([scoreCategory, value], idx) => {
+        Object.entries(daoScores).slice(0,3).map(([scoreCategory, value], idx) => {
           const daoId = scoreCategory as OrgId;
           const org = getOrgById(daoId);
           const OrgIcon = org.icon;
