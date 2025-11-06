@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import type {ImageMetadata} from "astro";
+import type { ImageMetadata } from "astro";
 import HomeIcon from "../../assets/homeIcon.svg";
 import SubpageHeroImage from "../../assets/subpageHeroImage.png";
+import { cn } from "../../utils/tailwindClassConcatenation";
 import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
-import {cn} from "../../utils/tailwindClassConcatenation";
 
 interface additionalHeroElement {
   name: string;
@@ -22,14 +22,20 @@ export interface SubpageHeroProps {
     width: number;
     height: number;
     styles?: string;
-  }
+  };
   additionalElements?: additionalHeroElement[];
 }
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
-const { header, description, breadcrumbs, icon, customImage, additionalElements }: SubpageHeroProps =
-  Astro.props;
+const {
+  header,
+  description,
+  breadcrumbs,
+  icon,
+  customImage,
+  additionalElements,
+}: SubpageHeroProps = Astro.props;
 
 let breadcrumbHref = "";
 
@@ -58,9 +64,12 @@ const adaptBreadcrumb = (crumb: string): string => {
       src={customImage ? images[customImage.source]() : SubpageHeroImage}
       alt="background"
       quality={100}
-      width={customImage? customImage.width : 948}
-      height={customImage? customImage.height : 848}
-      class={cn("hidden sm:block absolute -right-60 -top-55 opacity-60", customImage?.styles)}
+      width={customImage ? customImage.width : 948}
+      height={customImage ? customImage.height : 848}
+      class={cn(
+        "hidden sm:block absolute -right-60 -top-55 opacity-60",
+        customImage?.styles,
+      )}
     />
     {
       breadcrumbs && (

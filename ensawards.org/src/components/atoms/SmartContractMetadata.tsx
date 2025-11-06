@@ -90,7 +90,10 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                 </span>
               </div>
               <div className="flex flex-col gap-1 justify-start items-start">
-                <p>Customize an avatar image for the contract that could appear in apps such as wallets and block explorers.</p>
+                <p>
+                  Customize an avatar image for the contract that could appear in apps such as
+                  wallets and block explorers.
+                </p>
                 <a
                   className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                   href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
