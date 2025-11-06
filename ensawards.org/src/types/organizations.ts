@@ -9,6 +9,9 @@ export const OrganizationTypes = {
 export const OrgIds = {
   Ens: "org-ens-dao",
   Uniswap: "org-uniswap-dao",
+  Nouns: "org-nouns-dao",
+  Arbitrum: "org-arbitrum-dao",
+  Aave: "org-aave-dao",
 } as const;
 
 /**

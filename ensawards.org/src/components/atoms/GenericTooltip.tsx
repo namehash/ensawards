@@ -10,7 +10,7 @@ export function GenericTooltip({ content, children }: PropsWithChildren<GenericT
     <Tooltip>
       <TooltipTrigger>{children}</TooltipTrigger>
       <TooltipContent
-        sideOffset={10}
+        sideOffset={12}
         className="bg-black text-xs leading-normal text-white outline-none px-3 py-[6px] rounded-md"
       >
         {content}

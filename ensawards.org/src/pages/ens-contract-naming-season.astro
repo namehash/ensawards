@@ -1,6 +1,88 @@
 ---
-import SubpageHero from "../components/molecules/SubpageHero.astro";
+import {
+  Award,
+  CopyCheck,
+  ExternalLink as ExternalLinkIcon,
+  type Icon as IconType,
+  MousePointer2,
+  Pointer,
+  ShieldCheck,
+  TrendingUp,
+  Trophy,
+} from "@lucide/astro";
+import ContractNamingIncentivesBanner from "../components/atoms/ContractNamingIncentivesBanner.astro";
+import { EnscribeSolidIcon } from "../components/atoms/icons/EnscribeSolidIcon";
+import { SquareReplyIcon } from "../components/atoms/icons/SquareReplyIcon";
+import TelegramIcon from "../components/atoms/icons/TelegramIcon.astro";
+import ContractNamingHero from "../components/molecules/ContractNamingHero.astro";
+import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import Layout from "../layouts/Layout.astro";
+import { cn } from "../utils/tailwindClassConcatenation";
+
+interface ContentItemData {
+  name: string;
+  description: string;
+  icon: typeof IconType;
+}
+
+const whyNameYourSmartContractsNowItems: ContentItemData[] = [
+  {
+    name: "Build Trust",
+    description:
+      "Named contracts verify authenticity, reducing scam risks for users interacting with your dApp or governance.",
+    icon: ShieldCheck,
+  },
+  {
+    name: "Simplify UX",
+    description:
+      "Replace cryptic addresses with branded names (e.g., yourdao.eth for a multisig or pool) for easier navigation.",
+    icon: Pointer,
+  },
+  {
+    name: "Gain Visibility",
+    description:
+      "Stand out on ENSAwards.org. Top integrations earn recognition, boosting adoption and credibility.",
+    icon: TrendingUp,
+  },
+  {
+    name: "Lead the Standard",
+    description:
+      "Shape Ethereum's identity layer. Early adopters drive norms for L2s, wallets, and protocols.",
+    icon: Award,
+  },
+];
+const howItWorksItems: ContentItemData[] = [
+  {
+    name: "Select contracts",
+    description:
+      "Target user-facing contracts like governance multisigs, DeFi pools, or wallet infrastructure.",
+    icon: MousePointer2,
+  },
+  {
+    name: "Apply ENS names",
+    description:
+      "Register .eth domains and configure them as primary or forward-resolving records per best practices.",
+    icon: CopyCheck,
+  },
+  {
+    name: "Submit for review",
+    description:
+      "Share with the ENS Contract Naming working group for scoring on impact and compliance.",
+    icon: SquareReplyIcon,
+  },
+  {
+    name: "Earn awards",
+    description:
+      "Approved submissions unlock $ENS grants. Track progress on the public leaderboard.",
+    icon: Trophy,
+  },
+];
+
+const containerBaseStyles =
+  "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center";
+const sectionHeaderBaseStyles = "text-2xl leading-normal font-semibold text-black";
+const itemHeadersBaseStyles = "text-lg leading-normal font-semibold text-black";
+const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-foreground";
 ---
 
 <!--TODO: For now the SEO content is initial / placeholder ==> update it when ready-->
@@ -9,12 +91,159 @@ import Layout from "../layouts/Layout.astro";
     title: "ENSAwards: ENS Contract Naming Season",
     description: "Elevate your protocol’s on-chain identity.",
     url: "https://ensawards.org/ens-contract-naming-season",
-    og_image: "https://ensawards.org/dao_leaderboard_og_image.png",
-    twitter_image: "https://ensawards.org/dao_leaderboard_twitter_og_image.png",
   }}>
-  <SubpageHero header="ENS Contract Naming Season" />
+  <ContractNamingHero />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
-    <p>PLACEHOLDER</p>
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-0 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
+    <div class={cn(containerBaseStyles, "gap-6 sm:gap-10 max-sm:pb-6")}>
+      <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>
+        Why name your contracts now?
+      </h3>
+      <div
+        class="w-full flex flex-row flex-wrap justify-center min-[1230px]:justify-between items-start gap-10">
+        <div
+          class="max-w-[588px] flex flex-col sm:flex-row flex-wrap justify-start items-start gap-6">
+          {
+            whyNameYourSmartContractsNowItems.map((item) => (
+              <div class="w-full sm:max-w-[282px] h-fit box-border flex flex-col flex-nowrap justify-start items-start gap-5">
+                <div class="w-12 h-12 p-3 bg-gray-100 rounded-full">
+                  <item.icon
+                    size={24}
+                    stroke-width={1.5}
+                    className="text-muted-foreground"
+                  />
+                </div>
+                <div class="flex flex-col flex-nowrap justify-start items-start gap-2">
+                  <h4 class={cn(itemHeadersBaseStyles)}>{item.name}</h4>
+                  <p class={cn(itemTextBaseStyles)}>{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <ContractNamingIncentivesBanner />
+      </div>
+    </div>
+    <div
+      class={cn(
+        containerBaseStyles,
+        "gap-5 sm:gap-10 py-6 sm:py-[60px] relative z-10",
+      )}>
+      <div
+        class="absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[60px] bg-neutral-50 bottom-0">
+      </div>
+      <h3
+        class={cn(
+          sectionHeaderBaseStyles,
+          "relative z-10 self-stretch text-left",
+        )}>
+        How it works?
+      </h3>
+      <div
+        class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-start items-start gap-4 sm:gap-6">
+        {
+          howItWorksItems.map((item, idx) => (
+            <div class="w-full sm:max-w-[286px] max-sm:min-h-[286px] sm:h-[286px] flex flex-col justify-between items-start p-5 rounded-xl border border-gray-200 bg-white">
+              <div class="flex flex-col justify-start items-start gap-3">
+                <item.icon
+                  size={24}
+                  stroke-width={1.5}
+                  className="text-muted-foreground"
+                />
+                <div class="flex flex-col justify-start items-start gap-2">
+                  <h4 class="text-lg leading-normal font-semibold text-black">
+                    {item.name}
+                  </h4>
+                  <p class={itemTextBaseStyles}>{item.description}</p>
+                </div>
+              </div>
+              <p class="text-xs leading-normal font-medium text-muted-foreground">
+                STEP {idx + 1}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div
+      class={cn(
+        containerBaseStyles,
+        "md:flex-row items-start py-6 sm:py-[60px] gap-6 sm:gap-10",
+      )}>
+      <div
+        class="w-full md:w-1/3 flex flex-col justify-start items-start gap-5">
+        <h3 class={cn(sectionHeaderBaseStyles)}>Start naming today</h3>
+        <p class={itemTextBaseStyles}>
+          Ready to name your contracts and claim your spot on the leaderboard?
+        </p>
+        <p class={itemTextBaseStyles}>
+          Start with ENS best practices for seamless integration and join the
+          Telegram community.
+        </p>
+      </div>
+      <div class="w-full md:w-[1px] h-[1px] md:h-60 bg-gray-200"></div>
+      <div
+        class="w-full md:w-1/4 flex flex-col justify-start items-start gap-6">
+        <div
+          class="w-[52px] h-[52px] box-border flex flex-col items-center justify-center p-[14px] border border-gray-200 rounded-full">
+          <EnscribeSolidIcon size={24} className="text-muted-foreground" />
+        </div>
+        <div class="flex flex-col justify-start items-start gap-4">
+          <h4 class="text-lg leading-normal font-semibold text-black">
+            Explore ENS best practices
+          </h4>
+          <p class={itemTextBaseStyles}>
+            Learn about contract naming best practices
+          </p>
+        </div>
+        <!--TODO: Replace with a link to enscribe's contract naming best practices once they publish it-->
+        <a
+          href="https://www.enscribe.xyz/guides/how-to-guides/deploy-and-name-smart-contract"
+          target="_blank"
+          rel="noreferrer noopener"
+          class={cn(
+            shadcnButtonVariants({
+              variant: "outline",
+              size: "default",
+              className:
+                "cursor-pointer rounded-md gap-3 pl-[17px] py-[9px] pr-[15px]",
+            }),
+          )}>Learn more <ExternalLinkIcon size={20} class="text-gray-400" /></a
+        >
+      </div>
+      <div class="w-full md:w-[1px] h-[1px] md:h-60 bg-gray-200"></div>
+      <div
+        class="w-full md:w-1/3 flex flex-col justify-start items-start gap-6">
+        <div
+          class="w-[52px] h-[52px] box-border flex flex-col items-center justify-center p-[14px] border border-gray-200 rounded-full">
+          <TelegramIcon className="text-gray-400 w-6 h-6" />
+        </div>
+        <div class="flex flex-col justify-start items-start gap-4">
+          <h4 class="text-lg leading-normal font-semibold text-black">
+            Join the conversation
+          </h4>
+          <p class={itemTextBaseStyles}>
+            Want to be part of the conversation? Join the community in Telegram
+          </p>
+        </div>
+        <a
+          href="https://t.me/c/enscribers/158"
+          target="_blank"
+          rel="noreferrer noopener"
+          class={cn(
+            shadcnButtonVariants({
+              variant: "outline",
+              size: "default",
+              className:
+                "cursor-pointer rounded-md gap-3 pl-[17px] py-[9px] pr-[15px]",
+            }),
+          )}
+          >Join the community<ExternalLinkIcon
+            size={20}
+            class="text-gray-400"
+          /></a
+        >
+      </div>
+    </div>
   </section>
 </Layout>

@@ -127,3 +127,24 @@ body.no-scroll {
   right: 0;
   width: 100%;
 }
+
+.onScrollButton {
+  &:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.onScrollButton.scrolled {
+  &:hover {
+    color: black;
+    background-color: var(--accent);
+  }
+}
+
+.staticHeaderButton {
+  &:hover {
+    color: black;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}

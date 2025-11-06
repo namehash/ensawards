@@ -1,4 +1,10 @@
-import { ENSDaoOrg, UniswapDaoOrg } from "@/data/organizations.ts";
+import {
+  AaveDaoOrg,
+  ArbitrumDaoOrg,
+  ENSDaoOrg,
+  NounsDaoOrg,
+  UniswapDaoOrg,
+} from "@/data/organizations.ts";
 import {
   type Contract,
   ContractResolutionStatusIds,
@@ -312,6 +318,45 @@ export const CONTRACTS: Contract[] = [
         address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
         chain: mainnet,
         codeName: "Permit2",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000001",
+        chain: mainnet,
+        codeName: "TestContractNouns",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000002",
+        chain: mainnet,
+        codeName: "TestContractArbitrum",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000003",
+        chain: mainnet,
+        codeName: "TestContractAave",
       },
     },
   },

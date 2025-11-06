@@ -55,7 +55,9 @@ const adaptBreadcrumb = (crumb: string): string => {
     {
       breadcrumbs && (
         <div class="flex flex-row flex-wrap justify-start items-center gap-[10px] relative z-10">
-          <a href="/">
+          <a
+            href="/"
+            class="box-content p-1 hover:bg-white/5 rounded-[4px] transition-all duration-200">
             <HomeIcon width="16" height="16" />
           </a>
           <ChevronRightIcon className="text-white" />
@@ -66,7 +68,7 @@ const adaptBreadcrumb = (crumb: string): string => {
               return (
                 <>
                   <a
-                    class="text-xs sm:text-sm leading-normal font-normal text-white"
+                    class="text-xs sm:text-sm leading-normal font-normal text-white hover:underline hover:underline-offset-[25%] transition-all duration-200"
                     href={decodeURI(normalizeText(breadcrumbHref))}>
                     {crumb}
                   </a>
@@ -76,7 +78,7 @@ const adaptBreadcrumb = (crumb: string): string => {
             }
             return (
               <a
-                class="text-xs sm:text-sm leading-normal font-normal text-white"
+                class="text-xs sm:text-sm leading-normal font-normal text-white hover:underline hover:underline-offset-[25%] transition-all duration-200"
                 href={decodeURI(normalizeText(breadcrumbHref))}>
                 {crumb}
               </a>

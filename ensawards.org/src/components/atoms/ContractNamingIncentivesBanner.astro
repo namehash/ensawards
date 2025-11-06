@@ -1,0 +1,50 @@
+---
+import CoinsImage from "../../assets/coinsImage.png";
+import { cn } from "../../utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+
+const sectionHeaderBaseStyles = "text-2xl leading-normal font-semibold text-black";
+const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-foreground";
+---
+
+<div
+  class="relative sm:max-w-[588px] h-[404px] sm:h-[400px] box-border flex flex-col flex-nowrap justify-start items-start p-0 max-sm:gap-10 sm:p-10 bg-[linear-gradient(180deg,#FFF_0%,#FAFAFA_100%)] border border-gray-200 rounded-2xl">
+  <div
+    class="sm:max-w-[440px] flex flex-col justify-start items-start gap-6 max-sm:pt-5 max-sm:px-5">
+    <div class="flex flex-col justify-start items-start gap-3">
+      <h3 class={cn(sectionHeaderBaseStyles, "max-sm:text-xl")}>
+        Up to 10,000 $ENS
+      </h3>
+      <p class={cn(itemTextBaseStyles)}>
+        in incentives for high-impact naming across DeFi, DAOs, consumer dApps,
+        and infrastructure.
+      </p>
+    </div>
+    <a
+      href="https://discuss.ens.domains/t/temp-check-ens-contract-naming-season/21402"
+      target="_blank"
+      rel="noreferrer noopener"
+      class={cn(
+        shadcnButtonVariants({
+          variant: "outline",
+          size: "default",
+          className: "cursor-pointer rounded-full",
+        }),
+      )}>Learn more on the forum</a
+    >
+  </div>
+  <!--Desktop image-->
+  <div
+    class="max-sm:hidden absolute left-0 top-[50%] w-full h-[50%] overflow-hidden">
+    <img src={CoinsImage.src} alt="Coins" class="w-full h-auto" />
+  </div>
+  <!--Mobile image-->
+  <div
+    class="sm:hidden overflow-hidden w-full rounded-2xl max-[500px]:h-[188px]">
+    <img
+      src={CoinsImage.src}
+      alt="Coins"
+      class="h-auto max-[500px]:h-[188px] w-full max-[500px]:w-auto"
+    />
+  </div>
+</div>

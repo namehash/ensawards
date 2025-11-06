@@ -1,6 +1,9 @@
-import { UniswapIcon } from "@/components/atoms/icons/UniswapIcon.tsx";
+import { ArbitrumIcon } from "@/components/atoms/icons/chains/ArbitrumIcon.tsx";
+import { AaveProjectIcon } from "@/components/atoms/icons/projects-and-daos/AaveProjectIcon.tsx";
+import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
+import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
 import { type Project, ProjectIds } from "@/types/projects.ts";
-import { EnsProjectIcon } from "../components/atoms/icons/EnsProjectIcon.tsx";
+import { EnsProjectIcon } from "../components/atoms/icons/projects-and-daos/EnsProjectIcon.tsx";
 
 export const ENSProject: Project = {
   id: ProjectIds.Ens,
@@ -25,9 +28,51 @@ export const UniswapProject: Project = {
   },
 };
 
+export const NounsProject: Project = {
+  id: ProjectIds.Nouns,
+  name: "Nouns",
+  description:
+    "Nouns is a community-owned brand that makes a positive impact by funding ideas and fostering collaboration.",
+  icon: NounsIcon,
+  socials: {
+    website: new URL("https://nouns.wtf/"),
+    twitter: new URL("https://x.com/nounsdao"),
+  },
+};
+
+export const ArbitrumProject: Project = {
+  id: ProjectIds.Arbitrum,
+  name: "Arbitrum",
+  description:
+    "Arbitrum is a unified blockchain for everyone, where ideas thrive and boundaries fade.",
+  icon: ArbitrumIcon,
+  socials: {
+    website: new URL("https://arbitrum.io/"),
+    twitter: new URL("https://x.com/arbitrum"),
+  },
+};
+
+export const AaveProject: Project = {
+  id: ProjectIds.Aave,
+  name: "Aave",
+  description:
+    "The largest lending network where you can earn, borrow, save, and swap with millions of users.",
+  icon: AaveProjectIcon,
+  socials: {
+    website: new URL("https://aave.com/"),
+    twitter: new URL("https://x.com/aave"),
+  },
+};
+
 /**
  * Array of supported projects.
  *
  * Invariant: This array should contain exactly one {@link Project} for each {@link ProjectId}.
  */
-export const PROJECTS: Project[] = [ENSProject, UniswapProject];
+export const PROJECTS: Project[] = [
+  ENSProject,
+  UniswapProject,
+  NounsProject,
+  ArbitrumProject,
+  AaveProject,
+];
