@@ -17,14 +17,14 @@ export interface App {
   slug: string;
   name: string;
   description: string;
-  type: string; //Will probably change to string union once the data is provided
-  iconSourceLink: string;
+  type: string; //Will probably change to string union type once the data is provided
+  iconPath: string;
   benchmarks: AppBenchmark[];
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
-  ogImage?: string;
-  twitterOgImage?: string;
+  ogImagePath?: string;
+  twitterOgImagePath?: string;
 }

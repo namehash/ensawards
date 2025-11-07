@@ -48,7 +48,7 @@ const placeIcons = [
             type={app.type}
             viewDetailsLink={`/app/${app.slug}`}>
             <Image
-              src={images[app.iconSourceLink]()}
+              src={images[app.iconPath]()}
               alt={`${app.id}`}
               slot="appIcon"
               class="w-10 h-10 rounded-md"

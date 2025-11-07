@@ -26,8 +26,8 @@ export interface DAO {
         twitter: URL;
         ens?: Name;
     };
-    ogImage?: string;
-    twitterOgImage?: string;
+    ogImagePath?: string;
+    twitterOgImagePath?: string;
 }
 
 export type Organization = DAO;
@@ -35,7 +35,7 @@ export type Organization = DAO;
 
 > **NOTE**
 >
-> We recommend to skip defining the OG image fields. They are optional, and we have a fallback mechanism in place, so the SEO of DAO's details page won't be degraded.
+> We recommend to skip defining the OG image-related fields. They are optional, and we have a fallback mechanism in place, so the SEO of DAO's details page won't be degraded.
 >
 > When your PR with a new `DAO` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
@@ -86,20 +86,20 @@ export interface App {
     name: string;
     description: string;
     type: string;
-    iconSourceLink: string;
+    iconPath: string;
     benchmarks: AppBenchmark[];
     socials: {
         website: URL;
         twitter: URL;
         ens?: Name;
     };
-    ogImage?: string;
-    twitterOgImage?: string;
+    ogImagePath?: string;
+    twitterOgImagePath?: string;
 }
 ```
 > **NOTE**
 >
-> We recommend to skip defining the OG image fields. They are optional, and we have a fallback mechanism in place, so the SEO of App's details page won't be degraded. 
+> We recommend to skip defining the OG image-related fields. They are optional, and we have a fallback mechanism in place, so the SEO of App's details page won't be degraded. 
 > 
 > When your PR with a new `App` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 

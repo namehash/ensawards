@@ -14,7 +14,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/rainbowdotme"),
       ens: "rainbowwallet.eth",
     },
-    iconSourceLink: "/src/assets/rainbowIcon.svg",
+    iconPath: "/src/assets/rainbowIcon.svg",
     benchmarks: [
       {
         bestPracticeDetails: recognizeAllENSNames,
@@ -38,7 +38,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/coinbase"),
       ens: "coinbase.eth",
     },
-    iconSourceLink: "/src/assets/coinbaseWalletIcon.svg",
+    iconPath: "/src/assets/coinbaseWalletIcon.svg",
     benchmarks: [
       {
         bestPracticeDetails: recognizeAllENSNames,
@@ -62,7 +62,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/MetaMask"),
       ens: "metamask.eth",
     },
-    iconSourceLink: "/src/assets/metamaskIcon.svg",
+    iconPath: "/src/assets/metamaskIcon.svg",
     benchmarks: [
       {
         bestPracticeDetails: recognizeAllENSNames,
@@ -85,7 +85,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/etherscan"),
       ens: "etherscan.eth",
     },
-    iconSourceLink: "/src/assets/etherscanIcon.png",
+    iconPath: "/src/assets/etherscanIcon.png",
     benchmarks: [
       {
         bestPracticeDetails: recognizeAllENSNames,
@@ -107,7 +107,7 @@ export const APPS: App[] = [
       website: new URL("https://www.blockscout.com/"),
       twitter: new URL("https://x.com/blockscout"),
     },
-    iconSourceLink: "/src/assets/blockscoutIcon.jpg",
+    iconPath: "/src/assets/blockscoutIcon.jpg",
     benchmarks: [
       {
         bestPracticeDetails: recognizeAllENSNames,

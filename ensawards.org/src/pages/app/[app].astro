@@ -43,15 +43,15 @@ if (appToDisplay !== undefined) {
         title: `ENSAwards: ${appToDisplay.name} ENS Integration Benchmarks`,
         description: appToDisplay.description,
         url: `https://ensawards.org/app/${app}`,
-          ogImage: appToDisplay.ogImage,
-          twitterOgImage: appToDisplay.twitterOgImage,
+          ogImage: appToDisplay.ogImagePath,
+          twitterOgImage: appToDisplay.twitterOgImagePath,
       }}>
       <SubpageHero
         header={appToDisplay.name}
         description={appToDisplay.description}
         breadcrumbs={["ENS leaderboards", "App leaderboards"]}>
         <Image
-          src={images[appToDisplay.iconSourceLink]()}
+          src={images[appToDisplay.iconPath]()}
           alt={`${appToDisplay.id}-hero`}
           slot="icon"
           class="w-[60px] h-[60px] shrink-0 rounded-lg"

@@ -32,8 +32,8 @@ export interface DAO {
     twitter: URL;
     ens?: Name;
   };
-  ogImage?: string;
-  twitterOgImage?: string;
+  ogImagePath?: string;
+  twitterOgImagePath?: string;
 }
 
 // TODO: add more Org types to this type union in the future
