@@ -56,7 +56,7 @@ const validationSchemaMap = {
   app: appSuggestionFormSchema,
   "best practice": bestPracticeSuggestionFormSchema,
   "benchmark result": benchmarkResultUpdateRequestSchema,
-  dao: appSuggestionFormSchema, //TODO: this might be temporary (will know when final form of suggestion is determined)
+  dao: appSuggestionFormSchema,
 } as const;
 
 /**
@@ -165,6 +165,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       url: formData.get(EnsAwardsFormFields.Url)?.toString().trim() || "",
       description: formData.get(EnsAwardsFormFields.Description)?.toString().trim() || "",
       app: formData.get(EnsAwardsFormFields.App)?.toString().trim() || "",
+      project: formData.get(EnsAwardsFormFields.Project)?.toString().trim() || "",
       benchmark: formData.get(EnsAwardsFormFields.Benchmark)?.toString().trim() || "",
       "requested benchmark result update":
         formData.get(EnsAwardsFormFields.BenchmarkResultUpdate)?.toString().trim() || "",
@@ -183,17 +184,16 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       // Map ENSAwards form fields to ContactUs form fields
       // since we use a common Slack channel as an output & forward our requests to namehashlabs.org
 
-      //TODO: the solution for DAO is temporary until a final form is established
       const descriptionMapping =
         whatsSuggested === "app" || whatsSuggested === "dao"
           ? `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
           : whatsSuggested === "best practice"
             ? `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`
-            : `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`;
+            : `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.project}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`;
 
       const nameMapping =
         whatsSuggested === "benchmark result"
-          ? `Update benchmark result for: ${data.app}`
+          ? `Update benchmark result for: ${data.project}`
           : whatsSuggested === "app" || whatsSuggested === "dao"
             ? data.name
             : "New best practice suggested";

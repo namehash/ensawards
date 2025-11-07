@@ -18,6 +18,7 @@ import { Contract } from "../../types/contracts";
 import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
 import { getOrgBySlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
+import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 
 export function getStaticPaths() {
   return Object.values(ORGANIZATIONS).map((org) => ({
@@ -92,7 +93,7 @@ if (resolvedOrg) {
         <ContractNamingBanner />
         <ItemsList
           header="Smart contract naming"
-          containerStyles="gap-2 sm:gap-2">
+          containerStyles="gap-3 sm:gap-2">
           <a
             href="https://www.enscribe.xyz/"
             target="_blank"
@@ -114,8 +115,8 @@ if (resolvedOrg) {
               <>
                 <div
                   class={cn(
-                    "h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-2 sm:pb-4",
-                    idx > 0 && "pt-6 sm:pt-8",
+                    "h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-1 sm:pb-4",
+                    idx > 0 && "pt-1 sm:pt-8",
                   )}>
                   <>
                     <span class="w-10 h-10 bg-white flex flex-col justify-center items-center rounded-lg border border-gray-200">
@@ -132,6 +133,9 @@ if (resolvedOrg) {
               </>
             );
           })}
+            <div class="w-full h-fit pt-1 sm:pt-8">
+                <SuggestionCard whatsSuggested="benchmark result"/>
+            </div>
         </ItemsList>
       </section>
     </Layout>

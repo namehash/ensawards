@@ -14,6 +14,7 @@ export enum EnsAwardsFormFields {
   Description = "description",
   Source = "source",
   App = "app",
+  Project = "project",
   Benchmark = "benchmark",
   BenchmarkResultUpdate = "requested benchmark result update",
 }
@@ -33,6 +34,7 @@ export interface SuggestionFormDataProps {
   url: string;
   description: string;
   app: string;
+  project: string;
   benchmark: string;
   "requested benchmark result update": string;
   source: string;

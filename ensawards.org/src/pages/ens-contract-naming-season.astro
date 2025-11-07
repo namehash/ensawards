@@ -178,10 +178,23 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
           Start by reviewing Enscribe's docs on contract naming best practices
           and join their Telegram community.
         </p>
+        <a
+            href="https://docs.ens.domains/web/naming-contracts"
+            target="_blank"
+            rel="noreferrer noopener"
+            class={cn(
+                shadcnButtonVariants({
+                  variant: "outline",
+                  size: "default",
+                  className:
+                      "cursor-pointer rounded-md gap-3 pl-[17px] py-[9px] pr-[15px]",
+                }),
+            )}>Learn more at ENS Labs<ExternalLinkIcon size={20} class="text-gray-400" /></a
+        >
       </div>
       <div class="w-full md:w-[1px] h-[1px] md:h-60 bg-gray-200"></div>
       <div
-        class="w-full md:w-1/4 flex flex-col justify-start items-start gap-6">
+        class="w-full md:w-1/3 flex flex-col justify-start items-start gap-6">
         <div
           class="w-[52px] h-[52px] box-border flex flex-col items-center justify-center p-[14px] border border-gray-200 rounded-full">
           <EnscribeSolidIcon size={24} className="text-muted-foreground" />
@@ -206,7 +219,7 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
               className:
                 "cursor-pointer rounded-md gap-3 pl-[17px] py-[9px] pr-[15px]",
             }),
-          )}>Learn more <ExternalLinkIcon size={20} class="text-gray-400" /></a
+          )}>Learn more at Enscribe<ExternalLinkIcon size={20} class="text-gray-400" /></a
         >
       </div>
       <div class="w-full md:w-[1px] h-[1px] md:h-60 bg-gray-200"></div>
