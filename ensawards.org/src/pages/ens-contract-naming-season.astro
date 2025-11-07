@@ -27,53 +27,51 @@ interface ContentItemData {
 
 const whyNameYourSmartContractsNowItems: ContentItemData[] = [
   {
-    name: "Build Trust",
-    description:
-      "Named contracts verify authenticity, reducing scam risks for users interacting with your dApp or governance.",
+    name: "Upgrade Security",
+    description: "Named contracts demonstrate authenticity and reduce risks for your community.",
     icon: ShieldCheck,
   },
   {
-    name: "Simplify UX",
+    name: "Enhance UX",
     description:
-      "Replace cryptic addresses with branded names (e.g., yourdao.eth for a multisig or pool) for easier navigation.",
+      "Replace cryptic addresses with branded contract names (e.g., token.yourdao.eth) and ENS profiles.",
     icon: Pointer,
   },
   {
-    name: "Gain Visibility",
+    name: "Follow Best Practices",
     description:
-      "Stand out on ENSAwards.org. Top integrations earn recognition, boosting adoption and credibility.",
-    icon: TrendingUp,
+      "Shape Ethereum's identity layer. Your adoption drives new standards for apps and protocols.",
+    icon: Award,
   },
   {
-    name: "Lead the Standard",
+    name: "Earn Awards",
     description:
-      "Shape Ethereum's identity layer. Early adopters drive norms for L2s, wallets, and protocols.",
-    icon: Award,
+      "Gain recognition on the ENSAwards leaderboards and an opportunity to earn $ENS awards.",
+    icon: TrendingUp,
   },
 ];
 const howItWorksItems: ContentItemData[] = [
   {
-    name: "Select contracts",
+    name: "Select contracts to name",
     description:
-      "Target user-facing contracts like governance multisigs, DeFi pools, or wallet infrastructure.",
+      'Prioritize "user-facing" contracts such as for DAO governance, DeFi transactions, or key multisig wallets.',
     icon: MousePointer2,
   },
   {
-    name: "Apply ENS names",
-    description:
-      "Register .eth domains and configure them as primary or forward-resolving records per best practices.",
+    name: "Assign ENS names",
+    description: "Configure ENS names for each contract according to best practices.",
     icon: CopyCheck,
   },
   {
     name: "Submit for review",
     description:
-      "Share with the ENS Contract Naming working group for scoring on impact and compliance.",
+      "Share your updates with the ENS Contract Naming Working Group for their review on impact.",
     icon: SquareReplyIcon,
   },
   {
     name: "Earn awards",
     description:
-      "Approved submissions unlock $ENS grants. Track progress on the public leaderboard.",
+      "Submissions selected by the ENS Contract Naming Working Group will receive $ENS awards.",
     icon: Trophy,
   },
 ];
@@ -137,7 +135,7 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
           sectionHeaderBaseStyles,
           "relative z-10 self-stretch text-left",
         )}>
-        How it works?
+        How to earn awards?
       </h3>
       <div
         class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-start items-start gap-4 sm:gap-6">
@@ -172,12 +170,12 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
       )}>
       <div
         class="w-full md:w-1/3 flex flex-col justify-start items-start gap-5">
-        <h3 class={cn(sectionHeaderBaseStyles)}>Start naming today</h3>
+        <h3 class={cn(sectionHeaderBaseStyles)}>Start contract naming today</h3>
         <p class={itemTextBaseStyles}>
           Ready to name your contracts and claim your spot on the leaderboard?
         </p>
         <p class={itemTextBaseStyles}>
-          Start with ENS best practices for seamless integration and join the
+          Start by reviewing Enscribe's docs on contract naming best practices and join their
           Telegram community.
         </p>
       </div>
@@ -190,10 +188,10 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
         </div>
         <div class="flex flex-col justify-start items-start gap-4">
           <h4 class="text-lg leading-normal font-semibold text-black">
-            Explore ENS best practices
+            Explore contract naming docs
           </h4>
           <p class={itemTextBaseStyles}>
-            Learn about contract naming best practices
+            Learn about contract naming best practices from Enscribe.
           </p>
         </div>
         <!--TODO: Replace with a link to enscribe's contract naming best practices once they publish it-->
@@ -223,11 +221,11 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
             Join the conversation
           </h4>
           <p class={itemTextBaseStyles}>
-            Want to be part of the conversation? Join the community in Telegram
+            Want to be part of the conversation? Join the Enscribe community in Telegram.
           </p>
         </div>
         <a
-          href="https://t.me/c/enscribers/158"
+          href="https://t.me/enscribers"
           target="_blank"
           rel="noreferrer noopener"
           class={cn(
