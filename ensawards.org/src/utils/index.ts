@@ -58,6 +58,6 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
 };
 
 /**
- * A Unix timestamp marking the end of the ENS contract naming season even on April 30th 23:59:59 (UTC)
+ * A Unix timestamp marking the approximate end of the ENS contract naming season event on April 30th 23:59:59 (UTC).
  */
 export const ENS_CONTRACT_NAMING_SEASON_END: UnixTimestamp = 1777593599;
