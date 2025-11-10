@@ -8,7 +8,6 @@ import Footer from "../components/organisms/Footer.astro";
 import Header from "../components/organisms/Header.astro";
 import StaticHeader from "../components/organisms/StaticHeader.astro";
 import SuggestionForm from "../components/organisms/SuggestionForm.astro";
-import { DEFAULT_OG_IMAGE, DEFAULT_TWITTER_IMAGE } from "../utils/ogImages";
 
 interface PageMetadata {
   title?: string;
@@ -25,6 +24,8 @@ export interface LayoutProps {
 const DEFAULT_TITLE = "ENSAwards: ENS leaderboards and best practices";
 const DEFAULT_DESCRIPTION = "Awarding the best in ENS.";
 const DEFAULT_URL = "https://ensawards.org/";
+const DEFAULT_OG_IMAGE = "/default_og_image.png";
+const DEFAULT_TWITTER_IMAGE = "/default_twitter_og_image.png";
 
 const DEFAULT_PAGE_METADATA: PageMetadata = {
   title: DEFAULT_TITLE,
@@ -59,6 +60,7 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <SEO
       title={pageMetadata.title || DEFAULT_TITLE}
       description={pageMetadata.description || DEFAULT_DESCRIPTION}
@@ -128,7 +130,11 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
         <SuggestionForm
           whatsSuggested="benchmark result"
           formFields={[
-            { label: EnsAwardsFormFields.App, type: "text", required: true },
+            {
+              label: EnsAwardsFormFields.App,
+              type: "text",
+              required: true,
+            },
             {
               label: EnsAwardsFormFields.Benchmark,
               type: "text",
@@ -150,6 +156,30 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
           formFields={[
             { label: EnsAwardsFormFields.Name, type: "text", required: true },
             { label: EnsAwardsFormFields.Url, type: "url", required: true },
+            {
+              label: EnsAwardsFormFields.Description,
+              type: "text",
+              required: false,
+            },
+          ]}
+        />
+      </Overlay>
+    </div>
+    <div id="contract-overlay" class="hidden">
+      <Overlay>
+        <SuggestionForm
+          whatsSuggested="contract"
+          formFields={[
+            {
+              label: EnsAwardsFormFields.Project,
+              type: "text",
+              required: true,
+            },
+            {
+              label: EnsAwardsFormFields.ContractAddress,
+              type: "text",
+              required: true,
+            },
             {
               label: EnsAwardsFormFields.Description,
               type: "text",

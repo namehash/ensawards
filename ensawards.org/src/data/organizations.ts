@@ -26,6 +26,8 @@ export const ENSDaoOrg: Organization = {
     twitter: new URL("https://x.com/ENS_DAO"),
     ens: "ensdao.eth",
   },
+  ogImagePath: "/org-ens-dao_og_image.png",
+  twitterOgImagePath: "/org-ens-dao_twitter_og_image.png",
 };
 
 export const UniswapDaoOrg: Organization = {
@@ -42,6 +44,8 @@ export const UniswapDaoOrg: Organization = {
     twitter: new URL("https://x.com/UniswapFND"),
     ens: "uniswap.eth",
   },
+  ogImagePath: "/org-uniswap-dao_og_image.png",
+  twitterOgImagePath: "/org-uniswap-dao_twitter_og_image.png",
 };
 
 export const NounsDaoOrg: Organization = {

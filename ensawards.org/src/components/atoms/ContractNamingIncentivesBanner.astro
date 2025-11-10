@@ -16,13 +16,14 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
         Earn up to 10,000 $ENS
       </h3>
       <p class={cn(itemTextBaseStyles)}>
-        The ENS DAO assigned the ENS Contract Naming Working Group to distribute awards for impactful contract naming.
+        The ENS DAO assigned the ENS Contract Naming Working Group to distribute
+        awards for impactful contract naming.
       </p>
     </div>
     <a
       href="https://t.me/enscribers"
       target="_blank"
-      rel="noreferrer noopener"
+      rel="noreferrer"
       class={cn(
         shadcnButtonVariants({
           variant: "outline",
@@ -35,14 +36,18 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
   <!--Desktop image-->
   <div
     class="max-sm:hidden absolute left-0 top-[50%] w-full h-[50%] overflow-hidden">
-    <img src={CoinsImage.src} alt="Coins" class="w-full h-auto" />
+    <img
+      src={CoinsImage.src}
+      alt="Earn $ENS for referrals"
+      class="w-full h-auto"
+    />
   </div>
   <!--Mobile image-->
   <div
     class="sm:hidden overflow-hidden w-full rounded-2xl max-[500px]:h-[188px]">
     <img
       src={CoinsImage.src}
-      alt="Coins"
+      alt="Earn $ENS for referrals"
       class="h-auto max-[500px]:h-[188px] w-full max-[500px]:w-auto"
     />
   </div>

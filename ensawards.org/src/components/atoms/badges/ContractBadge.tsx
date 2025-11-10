@@ -21,7 +21,7 @@ const getTooltipContent = (resolutionStatus: ContractResolutionStatusId, ensName
             className="text-blue-400 hover:underline hover:underline-offset-[25%]"
             href="https://docs.ens.domains/web/reverse"
             target="_blank"
-            rel="noreferrer noopener"
+            rel="noreferrer"
           >
             ENS primary name
           </a>
@@ -37,7 +37,7 @@ const getTooltipContent = (resolutionStatus: ContractResolutionStatusId, ensName
             className="text-blue-400 hover:underline hover:underline-offset-[25%]"
             href="https://docs.ens.domains/web/reverse"
             target="_blank"
-            rel="noreferrer noopener"
+            rel="noreferrer"
           >
             ENS primary name
           </a>{" "}
@@ -53,7 +53,7 @@ const getTooltipContent = (resolutionStatus: ContractResolutionStatusId, ensName
             className="text-blue-400 hover:underline hover:underline-offset-[25%]"
             href="https://docs.ens.domains/web/reverse"
             target="_blank"
-            rel="noreferrer noopener"
+            rel="noreferrer"
           >
             ENS primary name
           </a>{" "}

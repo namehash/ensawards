@@ -14,8 +14,10 @@ export enum EnsAwardsFormFields {
   Description = "description",
   Source = "source",
   App = "app",
+  Project = "project",
   Benchmark = "benchmark",
   BenchmarkResultUpdate = "requested benchmark result update",
+  ContractAddress = "contract address",
 }
 
 // Reference form inputs from `Contact us` form at www.namehashlabs.org
@@ -33,12 +35,14 @@ export interface SuggestionFormDataProps {
   url: string;
   description: string;
   app: string;
+  project: string;
   benchmark: string;
   "requested benchmark result update": string;
   source: string;
+  "contract address": string;
 }
 
-export type PossibleSuggestions = "app" | "best practice" | "benchmark result" | "dao";
+export type PossibleSuggestions = "app" | "best practice" | "benchmark result" | "dao" | "contract";
 
 export interface FormField {
   label: EnsAwardsFormFields;

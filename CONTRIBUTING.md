@@ -26,10 +26,19 @@ export interface DAO {
         twitter: URL;
         ens?: Name;
     };
+    ogImagePath?: string;
+    twitterOgImagePath?: string;
 }
 
 export type Organization = DAO;
 ```
+
+> **NOTE**
+>
+> We recommend to skip defining the OG image-related fields. They are optional, and we have a fallback mechanism in place, so the SEO of DAO's details page won't be degraded.
+>
+> When your PR with a new `DAO` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
+
 4. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-daos/](ensawards.org/src/components/atoms/icons/projects-and-daos/) directory. For reference, see [@/components/atoms/icons/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-daos/EnsDaoIcon.tsx).
 5. In your PR describe your reasoning for adding this `DAO`.
 6. If you’re part of an existing DAO, you can also suggest updates to its details.
@@ -76,16 +85,24 @@ export interface App {
     slug: string;
     name: string;
     description: string;
-    type: string;
+    type: AppType;
+    iconPath: string;
+    benchmarks: AppBenchmark[];
     socials: {
         website: URL;
         twitter: URL;
         ens?: Name;
     };
-    iconSourceLink: string;
-    benchmarks: AppBenchmark[];
+    ogImagePath?: string;
+    twitterOgImagePath?: string;
 }
 ```
+> **NOTE**
+>
+> We recommend to skip defining the OG image-related fields. They are optional, and we have a fallback mechanism in place, so the SEO of App's details page won't be degraded. 
+> 
+> When your PR with a new `App` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
+
 4. In your PR describe your reasoning for adding that new `App`.
 
 ### Add a new `Best Practice`

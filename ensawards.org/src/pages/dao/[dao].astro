@@ -3,6 +3,7 @@ import { ChainIcon } from "../../components/atoms/ChainIcon";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
+import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
 import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
@@ -17,7 +18,6 @@ import Layout from "../../layouts/Layout.astro";
 import { Contract } from "../../types/contracts";
 import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
 import { getOrgBySlug } from "../../utils/dataAccess";
-import { getOrgOgImagePath, getOrgTwitterImagePath } from "../../utils/ogImages";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
 export function getStaticPaths() {
@@ -51,8 +51,8 @@ if (resolvedOrg) {
         title: `ENSAwards: ${resolvedOrg.name} ENS Integration Benchmarks`,
         description: resolvedOrg.description,
         url: `https://ensawards.org/dao/${dao}`,
-        og_image: getOrgOgImagePath(resolvedOrg.id),
-        twitter_image: getOrgTwitterImagePath(resolvedOrg.id),
+        og_image: resolvedOrg.ogImagePath,
+        twitter_image: resolvedOrg.twitterOgImagePath,
       }}>
       <SubpageHero
         header={resolvedOrg.name}
@@ -67,20 +67,20 @@ if (resolvedOrg) {
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
           <a
             href={resolvedOrg.socials.website}
-            rel="noreferrer noopener"
+            rel="noreferrer"
             target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
           <a
             href={resolvedOrg.socials.twitter}
-            rel="noreferrer noopener"
+            rel="noreferrer"
             target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
             {resolvedOrg.socials.ens &&
                     <a
                             href=`https://app.ens.domains/${encodeURIComponent(resolvedOrg.socials.ens)}`
-                            rel="noreferrer noopener"
+                            rel="noreferrer"
                             target="_blank"
                     >
                         <EnsSolidIcon width={24} height={24} className="hover:text-white text-gray-400 transition-all duration-200"/>
@@ -93,11 +93,11 @@ if (resolvedOrg) {
         <ContractNamingBanner />
         <ItemsList
           header="Smart contract naming"
-          containerStyles="gap-2 sm:gap-2">
+          containerStyles="gap-3 sm:gap-2">
           <a
             href="https://www.enscribe.xyz/"
             target="_blank"
-            rel="noreferrer noopener"
+            rel="noreferrer"
             slot="ctaButton"
             class="w-[225px] flex flex-row flex-nowrap justify-start items-center gap-3 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 whitespace-nowrap hover:text-gray-500 font-normal leading-7 hover:shadow-xs transition duration-200">
               <span>Powered by</span><EnscribeIcon />
@@ -115,8 +115,8 @@ if (resolvedOrg) {
               <>
                 <div
                   class={cn(
-                    "h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-2 sm:pb-4",
-                    idx > 0 && "pt-6 sm:pt-8",
+                    "h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-1 sm:pb-4",
+                    idx > 0 && "pt-1 sm:pt-8",
                   )}>
                   <>
                     <span class="w-10 h-10 bg-white flex flex-col justify-center items-center rounded-lg border border-gray-200">
@@ -133,6 +133,9 @@ if (resolvedOrg) {
               </>
             );
           })}
+            <div class="w-full h-fit pt-1 sm:pt-8">
+                <SuggestionCard whatsSuggested="contract"/>
+            </div>
         </ItemsList>
       </section>
     </Layout>

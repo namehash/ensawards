@@ -16,3 +16,10 @@ export const benchmarkResultUpdateRequestSchema = Yup.object().shape({
   benchmark: Yup.string().required("Benchmark is required"),
   "requested benchmark result update": Yup.string().optional(),
 });
+
+export const contractSuggestionFormSchema = Yup.object().shape({
+  project: Yup.string().required("Project is required"),
+  // Address checksum validation not included due to UX concerns
+  "contract address": Yup.string().required("Contract address is required"),
+  description: Yup.string().optional(),
+});
