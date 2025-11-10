@@ -21,6 +21,7 @@ export interface SubpageHeroProps {
     source: string;
     width: number;
     height: number;
+    alt?: string;
     styles?: string;
   };
   additionalElements?: additionalHeroElement[];
@@ -62,7 +63,7 @@ const adaptBreadcrumb = (crumb: string): string => {
     class="relative w-full max-w-[1216px] h-fit sm:min-h-[200px] flex flex-nowrap flex-col justify-end gap-10 sm:gap-[60px]">
     <Image
       src={customImage ? images[customImage.source]() : SubpageHeroImage}
-      alt="background"
+      alt={customImage?.alt ? customImage.alt : header}
       quality={100}
       width={customImage ? customImage.width : 948}
       height={customImage ? customImage.height : 848}
