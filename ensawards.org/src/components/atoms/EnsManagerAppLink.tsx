@@ -20,7 +20,7 @@ export const EnsManagerAppLink = ({
     return (
       <a
         href={link}
-        rel="noreferrer noopener"
+        rel="noreferrer"
         target="_blank"
         className="text-sm leading-normal font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
       >
@@ -31,7 +31,7 @@ export const EnsManagerAppLink = ({
 
   return (
     <TooltipProvider delayDuration={200} skipDelayDuration={0}>
-      <a href={link} rel="noreferrer noopener" target="_blank">
+      <a href={link} rel="noreferrer" target="_blank">
         <GenericTooltip tooltipOffset={0} content={<p>{text}</p>}>
           <EnsSolidIcon
             width={20}

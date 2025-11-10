@@ -61,7 +61,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
         contract.cachedIdentity.contract.address,
       )}
       target="_blank"
-      rel="noreferrer noopener"
+      rel="noreferrer"
       class="text-sm leading-[20px] font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"
       >{contract.cachedIdentity.contract.address}</a
     >
@@ -80,7 +80,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
             <a
                 href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
                 target="_blank"
-                rel="noreferrer noopener"
+                rel="noreferrer"
                 class="text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
               {contract.cachedIdentity.name}
             </a>

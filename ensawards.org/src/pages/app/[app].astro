@@ -61,20 +61,20 @@ if (appToDisplay !== undefined) {
                   class="flex flex-row flex-nowrap justify-start items-center gap-2">
               <a
                       href={appToDisplay.socials.website}
-                      rel="noreferrer noopener"
+                      rel="noreferrer"
                       target="_blank">
                   <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
               </a>
               <a
                       href={appToDisplay.socials.twitter}
-                      rel="noreferrer noopener"
+                      rel="noreferrer"
                       target="_blank">
                   <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
               </a>
               {appToDisplay.socials.ens &&
                       <a
                               href=`https://app.ens.domains/${encodeURIComponent(appToDisplay.socials.ens)}`
-                              rel="noreferrer noopener"
+                              rel="noreferrer"
                               target="_blank"
                       >
                           <EnsSolidIcon width={24} height={24} className="hover:text-white text-gray-400 transition-all duration-200"/>

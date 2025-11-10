@@ -33,7 +33,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                   className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                   href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
                   target="_blank"
-                  rel="noreferrer noopener"
+                  rel="noreferrer"
                 >
                   Learn more
                 </a>
@@ -63,7 +63,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                   className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                   href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
                   target="_blank"
-                  rel="noreferrer noopener"
+                  rel="noreferrer"
                 >
                   Learn more
                 </a>
@@ -98,7 +98,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                   className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                   href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
                   target="_blank"
-                  rel="noreferrer noopener"
+                  rel="noreferrer"
                 >
                   Learn more
                 </a>
@@ -128,7 +128,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                   className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
                   href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
                   target="_blank"
-                  rel="noreferrer noopener"
+                  rel="noreferrer"
                 >
                   Learn more
                 </a>
