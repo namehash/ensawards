@@ -10,7 +10,7 @@ export const SUPPORTED_CHAINS = [mainnet, base, linea, optimism, arbitrum, scrol
  * NOTE: We prefer our custom names here, rather than those provided by default in `Chain#name`.
  */
 const CUSTOM_CHAIN_NAMES = new Map<ChainId, string>([
-  [mainnet.id, "Ethereum"],
+  [mainnet.id, "Mainnet"],
   [base.id, "Base"],
   [linea.id, "Linea"],
   [optimism.id, "Optimism"],
