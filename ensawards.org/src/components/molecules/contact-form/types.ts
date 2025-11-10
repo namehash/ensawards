@@ -17,7 +17,7 @@ export enum EnsAwardsFormFields {
   Project = "project",
   Benchmark = "benchmark",
   BenchmarkResultUpdate = "requested benchmark result update",
-  ContractAddress = "contract address"
+  ContractAddress = "contract address",
 }
 
 // Reference form inputs from `Contact us` form at www.namehashlabs.org

@@ -14,8 +14,8 @@ export interface AppBenchmark {
 
 export const AppTypes = {
   Wallet: "Wallet",
-  Explorer: "Explorer"
-}
+  Explorer: "Explorer",
+};
 
 /**
  * The derived string union of possible {@link AppTypes}.

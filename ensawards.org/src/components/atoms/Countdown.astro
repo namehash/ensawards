@@ -1,17 +1,18 @@
 ---
-import {secondsInDay, millisecondsInSecond} from "date-fns/constants";
-import type {UnixTimestamp} from "@ensnode/ensnode-sdk";
-import {cn} from "../../utils/tailwindClassConcatenation";
+import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import { millisecondsInSecond, secondsInDay } from "date-fns/constants";
+import { cn } from "../../utils/tailwindClassConcatenation";
 
 interface CountdownProps {
-    eventUnixTimestamp: UnixTimestamp;
-    eventText: string;
-    bannerStyles?: string;
-    textStyles?: string;
-    timerStyles?: string;
+  eventUnixTimestamp: UnixTimestamp;
+  eventText: string;
+  bannerStyles?: string;
+  textStyles?: string;
+  timerStyles?: string;
 }
 
-const {eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles} : CountdownProps = Astro.props;
+const { eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles }: CountdownProps =
+  Astro.props;
 
 const now = Date.now() / millisecondsInSecond;
 ---

@@ -1,9 +1,9 @@
 ---
 import HeroImage from "../../assets/contractNamingSeasonHeroImage.png";
+import { ENS_CONTRACT_NAMING_SEASON_END } from "../../utils";
 import { cn } from "../../utils/tailwindClassConcatenation";
-import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
-import {ENS_CONTRACT_NAMING_SEASON_END} from "../../utils";
 import Countdown from "../atoms/Countdown.astro";
+import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
 ---
 
 <section
@@ -38,7 +38,13 @@ import Countdown from "../atoms/Countdown.astro";
           }),
         )}>Learn more on the forum</a
       >
-      <Countdown eventText="6-Month incentive window is closing" eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_END} bannerStyles="bg-[linear-gradient(270deg,#3B78FF_0%,#2563EB_100%)]" textStyles="text-white" timerStyles="text-white"/>
+      <Countdown
+        eventText="6-Month incentive window is closing"
+        eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_END}
+        bannerStyles="bg-[linear-gradient(270deg,#3B78FF_0%,#2563EB_100%)]"
+        textStyles="text-white"
+        timerStyles="text-white"
+      />
     </div>
     <div class="md:max-w-1/2 max-sm:h-[25vh] overflow-visible">
       <img

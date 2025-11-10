@@ -1,5 +1,5 @@
 import { displayNamedSmartContracts, recognizeAllENSNames } from "@/data/bestPractices.ts";
-import {type App, AppTypes, BenchmarkResult} from "@/types/apps.ts";
+import { type App, AppTypes, BenchmarkResult } from "@/types/apps.ts";
 
 export const APPS: App[] = [
   {

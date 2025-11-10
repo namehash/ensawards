@@ -1,5 +1,5 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
-import type {UnixTimestamp} from "@ensnode/ensnode-sdk";
+import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 /**
  * Checks whether a given string is a valid slug.

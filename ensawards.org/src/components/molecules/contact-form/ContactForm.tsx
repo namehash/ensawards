@@ -11,7 +11,8 @@ import {
 import {
   appSuggestionFormSchema,
   benchmarkResultUpdateRequestSchema,
-  bestPracticeSuggestionFormSchema, contractSuggestionFormSchema,
+  bestPracticeSuggestionFormSchema,
+  contractSuggestionFormSchema,
 } from "@/components/molecules/contact-form/validation.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
@@ -39,7 +40,7 @@ const formTextContentsAdaptations = new Map<
       ["best practice", "Suggest best practice"],
       ["benchmark result", "Request benchmark result update"],
       ["dao", "Suggest a DAO for review"],
-      ["contract", "Suggest contract to update"]
+      ["contract", "Suggest contract to update"],
     ]),
   ],
   [
@@ -49,7 +50,7 @@ const formTextContentsAdaptations = new Map<
       ["best practice", "Suggest a best practice you’d like us to add to ENSAwards."],
       ["benchmark result", "Suggest a benchmark result update for review"],
       ["dao", "Provide details of the DAO you’d like us to add to ENSAwards."],
-      ["contract", "Provide details of the contract you'd like us to update."]
+      ["contract", "Provide details of the contract you'd like us to update."],
     ]),
   ],
 ]);
@@ -175,7 +176,8 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       "requested benchmark result update":
         formData.get(EnsAwardsFormFields.BenchmarkResultUpdate)?.toString().trim() || "",
       source: formData.get("source")?.toString().trim() || "",
-      "contract address": formData.get(EnsAwardsFormFields.ContractAddress)?.toString().trim() || "",
+      "contract address":
+        formData.get(EnsAwardsFormFields.ContractAddress)?.toString().trim() || "",
     };
 
     try {
@@ -191,19 +193,34 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       // since we use a common Slack channel as an output & forward our requests to namehashlabs.org
 
       const descriptionMap = new Map<PossibleSuggestions, string>([
-        ["app", `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`],
-        ["best practice", `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`],
-        ["benchmark result", `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`],
-        ["dao", `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`],
-        ["contract", `${CONTRACT_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Contract owner: ${data.project}${MESSAGE_SEPARATOR}Contract address: ${data["contract address"]}`]
+        [
+          "app",
+          `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`,
+        ],
+        [
+          "best practice",
+          `${BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`,
+        ],
+        [
+          "benchmark result",
+          `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`,
+        ],
+        [
+          "dao",
+          `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`,
+        ],
+        [
+          "contract",
+          `${CONTRACT_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Contract owner: ${data.project}${MESSAGE_SEPARATOR}Contract address: ${data["contract address"]}`,
+        ],
       ]);
 
       const nameMap = new Map<PossibleSuggestions, string>([
-          ["app", data.name],
-          ["best practice", "New best practice suggested"],
-          ["benchmark result", `Update benchmark result for: ${data.app}`],
-          ["dao", data.name],
-          ["contract", `Update request for contract=${data["contract address"]} in ${data.project}`]
+        ["app", data.name],
+        ["best practice", "New best practice suggested"],
+        ["benchmark result", `Update benchmark result for: ${data.app}`],
+        ["dao", data.name],
+        ["contract", `Update request for contract=${data["contract address"]} in ${data.project}`],
       ]);
 
       const dataToSend: ContactFormDataProps = {
