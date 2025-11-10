@@ -131,7 +131,7 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
           whatsSuggested="benchmark result"
           formFields={[
             {
-              label: EnsAwardsFormFields.Project,
+              label: EnsAwardsFormFields.App,
               type: "text",
               required: true,
             },
@@ -164,6 +164,22 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
           ]}
         />
       </Overlay>
+    </div>
+    <div id="contract-overlay" class="hidden">
+        <Overlay>
+            <SuggestionForm
+                    whatsSuggested="contract"
+                    formFields={[
+                        { label: EnsAwardsFormFields.Project, type: "text", required: true },
+                        { label: EnsAwardsFormFields.ContractAddress, type: "text", required: true },
+                        {
+                            label: EnsAwardsFormFields.Description,
+                            type: "text",
+                            required: false,
+                        },
+                    ]}
+            />
+        </Overlay>
     </div>
     <Footer />
   </body>
