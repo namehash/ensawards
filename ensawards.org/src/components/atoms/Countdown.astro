@@ -1,0 +1,70 @@
+---
+import {secondsInDay, millisecondsInSecond} from "date-fns/constants";
+import type {UnixTimestamp} from "@ensnode/ensnode-sdk";
+import {cn} from "../../utils/tailwindClassConcatenation";
+
+interface CountdownProps {
+    eventUnixTimestamp: UnixTimestamp;
+    eventText: string;
+    bannerStyles?: string;
+    textStyles?: string;
+    timerStyles?: string;
+}
+
+const {eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles} : CountdownProps = Astro.props;
+
+const now = Date.now() / millisecondsInSecond;
+---
+<!--When the incentive window has closed this banner won't be displayed-->
+{now < eventUnixTimestamp &&
+<div class={cn("max-w-[590px] w-fit flex flex-col sm:flex-row sm:justify-start gap-3 sm:gap-10 items-center px-5 py-3 rounded-xl cursor-default", bannerStyles)}>
+    <div class="flex flex-col justify-start items-center sm:items-start gap-0">
+        <h4 class={cn("text-lg leading-normal font-semibold", textStyles)}>Act now!</h4>
+        <p class={cn("text-base leading-normal font-normal max-sm:text-center", textStyles)}>{now > eventUnixTimestamp - 100 * secondsInDay ? eventText : `${eventText} soon`}</p>
+    </div>
+    {now > eventUnixTimestamp - 100 * secondsInDay &&
+            <div id="timerWrapper" data-timestamp={eventUnixTimestamp} class="flex flex-row flex-nowrap justify-start items-center gap-2">
+                <div class="w-fit flex flex-col justify-center items-center gap-0">
+                    <p id="daysLeft" class={cn("text-2xl leading-[30px] font-semibold", timerStyles)} />
+                    <p class={cn("text-xs leading-tight font-normal opacity-60", timerStyles)}>Days</p>
+                </div>
+                        <div class={cn("w-[1px] h-[45px] bg-white/20")}/>
+                        <div class="w-fit flex flex-col justify-center items-center gap-0">
+                            <p id="hoursLeft" class={cn("text-2xl leading-[30px] font-semibold", timerStyles)} />
+                            <p class={cn("text-xs leading-tight font-normal opacity-60", timerStyles)}>Hours</p>
+                        </div>
+                <div class={cn("w-[1px] h-[45px] bg-white/20")}/>
+                <div class="w-fit flex flex-col justify-center items-center gap-0">
+                    <p id="minutesLeft" class={cn("text-2xl leading-[30px] font-semibold", timerStyles)} />
+                    <p class={cn("text-xs leading-tight font-normal opacity-60", timerStyles)}>Minutes</p>
+                </div>
+        </div>
+    }
+</div>
+<script>
+    import {secondsInMinute, millisecondsInSecond} from "date-fns/constants";
+    import {differenceInDays, intervalToDuration} from "date-fns";
+
+    const wrapper = document.getElementById("timerWrapper");
+    const daysDisplay = document.getElementById("daysLeft");
+    const hoursDisplay = document.getElementById("hoursLeft");
+    const minutesDisplay = document.getElementById("minutesLeft");
+
+    function runCountdown(eventTimestamp: number) {
+        const now = Date.now();
+        const newDuration = intervalToDuration({start: new Date(now), end: new Date(eventTimestamp)});
+
+        daysDisplay.innerText = String(differenceInDays(new Date(eventTimestamp), new Date(now)));
+        hoursDisplay.innerText = String(newDuration.hours ? newDuration.hours : 0);
+        minutesDisplay.innerText = String(newDuration.minutes ? newDuration.minutes : 0);
+
+        if (eventTimestamp > now){
+            setTimeout(() => runCountdown(eventTimestamp), millisecondsInSecond * secondsInMinute);
+        }
+    }
+
+    if (wrapper !== null) {
+        const eventTimestamp = Number(wrapper.dataset.timestamp) * millisecondsInSecond;
+        runCountdown(eventTimestamp);
+    }
+</script>}

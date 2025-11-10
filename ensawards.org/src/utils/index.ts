@@ -1,4 +1,5 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
+import type {UnixTimestamp} from "@ensnode/ensnode-sdk";
 
 /**
  * Checks whether a given string is a valid slug.
@@ -52,3 +53,8 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
       throw new Error(`${whatsSuggested} is not a valid suggestion category`);
   }
 };
+
+/**
+ * A Unix timestamp marking the end of the ENS contract naming season even on April 30th 23:59:59 (UTC)
+ */
+export const ENS_CONTRACT_NAMING_SEASON_END: UnixTimestamp = 1777593599;

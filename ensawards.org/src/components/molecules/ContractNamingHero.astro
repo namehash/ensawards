@@ -2,18 +2,20 @@
 import HeroImage from "../../assets/contractNamingSeasonHeroImage.png";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+import {ENS_CONTRACT_NAMING_SEASON_END} from "../../utils";
+import Countdown from "../atoms/Countdown.astro";
 ---
 
 <section
-  class="relative w-full h-screen box-border flex flex-col justify-start sm:justify-center items-center bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden max-sm:px-5 max-sm:pt-[96px] max-sm:pb-[60px] max-h-[760px]">
+  class="relative w-full max-sm:h-[945px] h-screen box-border flex flex-col justify-start sm:justify-center items-center bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden max-sm:px-5 max-sm:pt-[96px] max-sm:pb-[60px] md:max-h-[760px]">
   <div
-    class="w-full max-w-[1280px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:px-8 max-sm:gap-6">
+    class="w-full max-w-[1280px] max-sm:h-full h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-center sm:px-8 max-sm:gap-6">
     <div
       class="relative z-10 w-fit h-fit sm:max-h-[268px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-6 sm:gap-8">
       <div
         class="max-w-[600px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-4">
         <h1
-          class="text-white text-[32px] md:text-[52px] leading-[44px] sm:leading-normal font-bold text-center sm:text-left">
+          class="text-white text-[32px] lg:text-[52px] leading-[44px] sm:leading-normal font-bold text-center sm:text-left">
           Elevate Your Protocol’s Onchain Identity
         </h1>
         <p
@@ -36,12 +38,13 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
           }),
         )}>Learn more on the forum</a
       >
+      <Countdown eventText="6-Month incentive window is closing" eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_END} bannerStyles="bg-[linear-gradient(270deg,#3B78FF_0%,#2563EB_100%)]" textStyles="text-white" timerStyles="text-white"/>
     </div>
     <div class="md:max-w-1/2 max-sm:h-[25vh] overflow-visible">
       <img
         src={HeroImage.src}
         alt="ENS contract naming season"
-        class="relative max-sm:max-w-[150vw] max-sm:top-1/2 max-sm:-translate-y-[40%] sm:w-[150%] lg:w-[135%] max-w-none sm:left-1/2 sm:-translate-x-1/3"
+        class="relative max-sm:max-w-[180vw] max-sm:top-1/2 max-sm:-translate-y-[30%] max-sm:translate-x-1/5 sm:w-[135%] max-w-none sm:left-1/2 sm:-translate-x-1/3"
       />
     </div>
   </div>

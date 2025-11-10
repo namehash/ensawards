@@ -1,0 +1,28 @@
+---
+
+import Layout from "../../layouts/Layout.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import {ENS_CONTRACT_NAMING_SEASON_END} from "../../utils";
+import Countdown from "../../components/atoms/Countdown.astro";
+import {secondsInHour, millisecondsInSecond, millisecondsInWeek, millisecondsInDay} from "date-fns/constants";
+
+const baseEventText = "Base event text";
+const bannerStyles = "bg-[linear-gradient(270deg,#3B78FF_0%,#2563EB_100%)]";
+const textStyles = "text-white";
+const timerStyles = "text-white";
+---
+
+<Layout>
+    <SubpageHero header="Countdown" breadcrumbs={["Mocks"]} />
+    <section
+            class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+        <ItemsList header="Countdown variants" containerStyles="gap-4 sm:gap-4">
+            <div class="w-full flex flex-col justify-start items-start gap-4"><p>Event ending on April 30th 2026</p><Countdown eventText={baseEventText} eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_END} bannerStyles={bannerStyles} textStyles={textStyles} timerStyles={timerStyles}/></div>
+            <div class="w-full h-[1px] bg-gray-200"/>
+            <div class="w-full flex flex-col justify-start items-start gap-4"><p>Event ending in 8 weeks from now</p><Countdown eventText={baseEventText} eventUnixTimestamp={(Date.now() + 8 * millisecondsInWeek) / millisecondsInSecond} bannerStyles={bannerStyles} textStyles={textStyles} timerStyles={timerStyles}/></div>
+            <div class="w-full h-[1px] bg-gray-200"/>
+            <div class="w-full flex flex-col justify-start items-start gap-4"><p>Event ending 2 days before now</p><Countdown eventText={baseEventText} eventUnixTimestamp={(Date.now() - 2 * millisecondsInDay) / millisecondsInSecond} bannerStyles={bannerStyles} textStyles={textStyles} timerStyles={timerStyles}/></div>
+        </ItemsList>
+    </section>
+</Layout>
