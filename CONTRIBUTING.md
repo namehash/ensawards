@@ -85,7 +85,7 @@ export interface App {
     slug: string;
     name: string;
     description: string;
-    type: string;
+    type: AppType;
     iconPath: string;
     benchmarks: AppBenchmark[];
     socials: {
