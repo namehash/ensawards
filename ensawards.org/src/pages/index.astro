@@ -8,11 +8,11 @@ import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import { contractPipeline } from "../contract-pipelines";
+import { APPS } from "../data/apps";
 import { BEST_PRACTICE_CATEGORIES } from "../data/bestPractices";
 import Layout from "../layouts/Layout.astro";
 import { OrgId } from "../types/organizations";
-import {calculateAppEnsAwardsScore, getOrgById} from "../utils/dataAccess";
-import {APPS} from "../data/apps";
+import { calculateAppEnsAwardsScore, getOrgById } from "../utils/dataAccess";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -67,41 +67,44 @@ const daoScores = contractPipeline();
           })
       }
     </ItemsList>
-    <ItemsList header="Top Apps"
-               linkData={{ link: "/leaderboards/app", text: "View leaderboard" }}
-               containerStyles="gap-3 sm:gap-2">
+    <ItemsList
+      header="Top Apps"
+      linkData={{ link: "/leaderboards/app", text: "View leaderboard" }}
+      containerStyles="gap-3 sm:gap-2">
       {
         APPS.sort(
-            (a, b) =>
-                calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a),
-        ).slice(0,3).map((app, idx) => (
+          (a, b) =>
+            calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a),
+        )
+          .slice(0, 3)
+          .map((app, idx) => (
             <LeaderboardCard
-                key={`app-review-card-${app.id}`}
-                name={app.name}
-                ensAwardsScore={calculateAppEnsAwardsScore(app)}
-                type={app.type}
-                viewDetailsLink={`/app/${app.slug}`}>
+              key={`app-review-card-${app.id}`}
+              name={app.name}
+              ensAwardsScore={calculateAppEnsAwardsScore(app)}
+              type={app.type}
+              viewDetailsLink={`/app/${app.slug}`}>
               <Image
-                  src={images[app.iconPath]()}
-                  alt={`${app.id}`}
-                  slot="appIcon"
-                  class="w-10 h-10 rounded-md"
+                src={images[app.iconPath]()}
+                alt={`${app.id}`}
+                slot="appIcon"
+                class="w-10 h-10 rounded-md"
               />
               {idx < 3 ? (
-                  <Image
-                      alt={`${idx + 1}-place`}
-                      src={images[placeIcons[idx]]()}
-                      slot="placeIcon"
-                  />
+                <Image
+                  alt={`${idx + 1}-place`}
+                  src={images[placeIcons[idx]]()}
+                  slot="placeIcon"
+                />
               ) : (
-                  <p
-                      slot="placeIcon"
-                      class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                    {idx + 1}
-                  </p>
+                <p
+                  slot="placeIcon"
+                  class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
+                  {idx + 1}
+                </p>
               )}
             </LeaderboardCard>
-        ))
+          ))
       }
     </ItemsList>
     <ItemsList
