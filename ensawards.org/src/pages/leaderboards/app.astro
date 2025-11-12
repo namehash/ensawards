@@ -47,7 +47,8 @@ const placeIcons = [
             name={app.name}
             ensAwardsScore={calculateAppEnsAwardsScore(app)}
             type={app.type}
-            viewDetailsLink={`/app/${app.slug}`}>
+            viewDetailsLink={`/app/${app.slug}`}
+            viewDetailsText="App report">
             <Image
               src={images[app.iconPath]()}
               alt={`${app.id}`}
