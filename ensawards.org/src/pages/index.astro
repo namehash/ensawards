@@ -107,22 +107,5 @@ const daoScores = contractPipeline();
           ))
       }
     </ItemsList>
-    <ItemsList
-      header="ENS best practices"
-      linkData={{ link: "/ens-best-practices", text: "See all" }}>
-      {
-        BEST_PRACTICE_CATEGORIES.map((category, idx) => (
-          <CategoryCard
-            key={`best-practice-card-${idx}`}
-            name={category.name}
-            description={category.description}
-            viewBestPracticesLink={`/ens-best-practices/${category.slug}`}
-            comingSoon={category.status}
-            numberOfBestPractices={category.bestPractices.length}
-          />
-        ))
-      }
-      <SuggestionCard whatsSuggested="best practice" />
-    </ItemsList>
   </section>
 </Layout>
