@@ -39,7 +39,7 @@ export const areStringsUnique = (stringArray: string[]): boolean => {
 export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
   switch (whatsSuggested) {
     case "app":
-      return "Want to add an app? Suggest the app for review or add an app review yourself on GitHub.";
+      return "Want to add an app? Suggest the app for review or add the app review yourself on GitHub.";
 
     case "best practice":
       return "Want to add best practice? Suggest it for review or add it yourself on GitHub.";
@@ -48,7 +48,7 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
       return "Benchmark result updates to report? Notify us of the change or update it yourself on GitHub.";
 
     case "dao":
-      return "Want to add a DAO? Suggest the DAO for review or add an DAO review yourself on GitHub.";
+      return "Want to add a DAO? Suggest the DAO for review or add the DAO review yourself on GitHub.";
 
     case "contract":
       return "Contracts to add or update? Notify us of the change or update it yourself on GitHub.";

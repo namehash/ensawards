@@ -45,9 +45,9 @@ const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" 
 const adaptBreadcrumb = (crumb: string): string => {
   // We use switch case here to stay flexible in the future
   switch (crumb) {
-    case "DAO leaderboards":
+    case "DAO leaderboard":
       return "dao";
-    case "App leaderboards":
+    case "App leaderboard":
       return "app";
     case "ENS leaderboards":
       return "leaderboards";
@@ -60,7 +60,7 @@ const adaptBreadcrumb = (crumb: string): string => {
 <section
   class="w-full h-fit min-h-[240px] sm:min-h-[358px] box-border px-5 sm:px-8 pt-[76px] sm:pt-[102px] pb-6 sm:pb-10 flex flex-nowrap flex-col items-center justify-end bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden">
   <div
-    class="relative w-full max-w-[1216px] h-fit sm:min-h-[200px] flex flex-nowrap flex-col justify-end gap-10 sm:gap-[60px]">
+    class={cn("relative w-full max-w-[1216px] h-fit sm:min-h-[200px] flex flex-nowrap flex-col justify-end gap-10 sm:gap-[60px]", breadcrumbs && "justify-between")}>
     <Image
       src={customImage ? images[customImage.source]() : SubpageHeroImage}
       alt={customImage?.alt ? customImage.alt : header}
