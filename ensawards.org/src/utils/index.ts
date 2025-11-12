@@ -1,5 +1,6 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import {getUnixTime} from "date-fns";
 
 /**
  * Checks whether a given string is a valid slug.
@@ -58,6 +59,7 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
 };
 
 /**
- * A Unix timestamp marking the approximate end of the ENS contract naming season event on April 30th 23:59:59 (UTC).
+ * Date marking the approximate end of the ENS contract naming season event.
+ * April 30th 2026 at 23:59:59 UTC
  */
-export const ENS_CONTRACT_NAMING_SEASON_END: UnixTimestamp = 1777593599;
+export const ENS_CONTRACT_NAMING_SEASON_END: UnixTimestamp = getUnixTime(new Date("2026-04-30T23:59:59.000Z"));
