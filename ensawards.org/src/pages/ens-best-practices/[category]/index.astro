@@ -10,6 +10,7 @@ import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
 import { CategoryStatus } from "../../../types/bestPractices";
 import { getCategoryBySlug } from "../../../utils/dataAccess";
+import UnderConstructionBanner from "../../../components/atoms/UnderConstructionBanner.astro";
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
     params: { category: category.slug },
@@ -55,16 +56,14 @@ const categoryToDisplay = getCategoryBySlug(category);
             </a>
           </div>
         )}
+          {categoryToDisplay.status === CategoryStatus.Updated &&         <div slot="largerHeroItem" class="max-sm:self-stretch sm:absolute sm:top-0 sm:right-0">
+              <UnderConstructionBanner text="The current catalog of ENS best practices is not comprehensive and is being expanded" />
+          </div>}
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px]">
         {categoryToDisplay.id.includes("contract") && <ContractNamingBanner />}
         <ItemsList
-          header="Best practices"
-          additionalInfo={
-            categoryToDisplay.status === CategoryStatus.Updated
-              ? "The list of best practices is not comprehensive and is being updated."
-              : undefined
-          }>
+          header="Best practices">
           {categoryToDisplay.bestPractices.map((bestPractice, idx) => (
             <BestPracticeCard
               key={`best-practice-card-${idx}`}

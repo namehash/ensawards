@@ -5,6 +5,7 @@ import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { BEST_PRACTICE_CATEGORIES } from "../../data/bestPractices";
 import Layout from "../../layouts/Layout.astro";
+import UnderConstructionBanner from "../../components/atoms/UnderConstructionBanner.astro";
 ---
 
 <Layout
@@ -13,10 +14,14 @@ import Layout from "../../layouts/Layout.astro";
     description: "Best practices for ENS integrations.",
     url: "https://ensawards.org/ens-best-practices",
   }}>
-  <SubpageHero header="ENS best practices" />
+    <SubpageHero header="ENS best practices" description="Learn how to build the best possible ENS integration." >
+        <div slot="largerHeroItem" class="max-sm:self-stretch sm:absolute sm:top-0 sm:right-0">
+            <UnderConstructionBanner text="The current catalog of ENS best practices is not comprehensive and is being expanded" />
+        </div>
+    </SubpageHero>
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ItemsList header="Categories">
+    <ItemsList header="Best Practice Categories">
       {
         BEST_PRACTICE_CATEGORIES.map((category, idx) => (
           <CategoryCard
