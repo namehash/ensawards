@@ -12,8 +12,8 @@ import SuggestionForm from "../components/organisms/SuggestionForm.astro";
 interface PageMetadata {
   title?: string;
   description?: string;
-  og_image?: string;
-  twitter_image?: string;
+  ogImage?: string;
+  twitterImage?: string;
   url?: string;
 }
 export interface LayoutProps {
@@ -30,8 +30,8 @@ const DEFAULT_TWITTER_IMAGE = "/default_twitter_og_image.png";
 const DEFAULT_PAGE_METADATA: PageMetadata = {
   title: DEFAULT_TITLE,
   description: DEFAULT_DESCRIPTION,
-  og_image: DEFAULT_OG_IMAGE,
-  twitter_image: DEFAULT_TWITTER_IMAGE,
+  ogImage: DEFAULT_OG_IMAGE,
+  twitterImage: DEFAULT_TWITTER_IMAGE,
   url: DEFAULT_URL,
 };
 
@@ -68,7 +68,7 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
         basic: {
           title: pageMetadata.title || DEFAULT_TITLE,
           type: "website",
-          image: pageMetadata.og_image || DEFAULT_OG_IMAGE,
+          image: pageMetadata.ogImage || DEFAULT_OG_IMAGE,
           url: pageMetadata.url || DEFAULT_URL,
         },
         optional: {
@@ -79,7 +79,7 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
       twitter={{
         creator: "@NameHashLabs",
         title: pageMetadata.title || DEFAULT_TITLE,
-        image: pageMetadata.twitter_image || DEFAULT_TWITTER_IMAGE,
+        image: pageMetadata.twitterImage || DEFAULT_TWITTER_IMAGE,
         description: pageMetadata.description || DEFAULT_DESCRIPTION,
         card: "summary_large_image",
       }}

@@ -11,12 +11,17 @@ import {
   Trophy,
 } from "@lucide/astro";
 import ContractNamingIncentivesBanner from "../components/atoms/ContractNamingIncentivesBanner.astro";
+import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import { EnscribeSolidIcon } from "../components/atoms/icons/EnscribeSolidIcon";
 import { SquareReplyIcon } from "../components/atoms/icons/SquareReplyIcon";
 import TelegramIcon from "../components/atoms/icons/TelegramIcon.astro";
+import ContractNamingBestPractices from "../components/molecules/ContractNamingBestPractices.astro";
 import ContractNamingHero from "../components/molecules/ContractNamingHero.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
+import { contractPipeline } from "../contract-pipelines";
 import Layout from "../layouts/Layout.astro";
+import { OrgId } from "../types/organizations";
+import { getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 
 interface ContentItemData {
@@ -81,54 +86,55 @@ const containerBaseStyles =
 const sectionHeaderBaseStyles = "text-2xl leading-normal font-semibold text-black";
 const itemHeadersBaseStyles = "text-lg leading-normal font-semibold text-black";
 const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-foreground";
+
+const daoScores = contractPipeline();
 ---
 
-<!--TODO: For now the SEO content is initial / placeholder ==> update it when ready-->
 <Layout
   pageMetadata={{
     title: "ENSAwards: ENS Contract Naming Season",
-    description: "Elevate your protocol’s on-chain identity.",
+    description: "Elevate your protocol’s onchain identity.",
     url: "https://ensawards.org/ens-contract-naming-season",
+    ogImage: "/contract-naming-season_og_image.png",
+    twitterImage: "/contract-naming-season_twitter_og_image.png",
   }}>
   <ContractNamingHero />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-0 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
-    <div class={cn(containerBaseStyles, "gap-6 sm:gap-10 max-sm:pb-6")}>
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] py-5 sm:py-[60px] px-5 sm:px-8">
+    <div class={cn(containerBaseStyles, "gap-6 sm:gap-10")}>
       <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>
         Why name your contracts now?
       </h3>
       <div
-        class="w-full flex flex-row flex-wrap justify-center min-[1230px]:justify-between items-start gap-10">
-        <div
-          class="max-w-[588px] flex flex-col sm:flex-row flex-wrap justify-start items-start gap-6">
-          {
-            whyNameYourSmartContractsNowItems.map((item) => (
-              <div class="w-full sm:max-w-[282px] h-fit box-border flex flex-col flex-nowrap justify-start items-start gap-5">
-                <div class="w-12 h-12 p-3 bg-gray-100 rounded-full">
-                  <item.icon
-                    size={24}
-                    stroke-width={1.5}
-                    className="text-muted-foreground"
-                  />
-                </div>
-                <div class="flex flex-col flex-nowrap justify-start items-start gap-2">
-                  <h4 class={cn(itemHeadersBaseStyles)}>{item.name}</h4>
-                  <p class={cn(itemTextBaseStyles)}>{item.description}</p>
-                </div>
+        class="flex flex-col sm:flex-row flex-wrap justify-start items-start gap-6">
+        {
+          whyNameYourSmartContractsNowItems.map((item) => (
+            <div class="w-full sm:max-w-[282px] h-fit box-border flex flex-col flex-nowrap justify-start items-start gap-5">
+              <div class="w-12 h-12 p-3 bg-gray-100 rounded-full">
+                <item.icon
+                  size={24}
+                  stroke-width={1.5}
+                  className="text-muted-foreground"
+                />
               </div>
-            ))
-          }
-        </div>
-        <ContractNamingIncentivesBanner />
+              <div class="flex flex-col flex-nowrap justify-start items-start gap-2">
+                <h4 class={cn(itemHeadersBaseStyles)}>{item.name}</h4>
+                <p class={cn(itemTextBaseStyles)}>{item.description}</p>
+              </div>
+            </div>
+          ))
+        }
       </div>
+      <ContractNamingIncentivesBanner />
     </div>
+    <ContractNamingBestPractices />
     <div
       class={cn(
         containerBaseStyles,
-        "gap-5 sm:gap-10 py-6 sm:py-[60px] relative z-10",
+        "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",
       )}>
       <div
-        class="absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[60px] bg-neutral-50 bottom-0">
+        class="absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[40px] bg-neutral-50 bottom-0">
       </div>
       <h3
         class={cn(
@@ -163,10 +169,60 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
         }
       </div>
     </div>
+    <div class={cn(containerBaseStyles, "sm:flex-row sm:flex-wrap gap-10")}>
+      <div
+        class="w-full md:w-[calc(50%-40px)] flex flex-col justify-start items-start gap-5">
+        <h3
+          class={cn(
+            sectionHeaderBaseStyles,
+            "relative z-10 self-stretch text-left",
+          )}>
+          Get inspired with contract naming examples
+        </h3>
+        <p class={itemTextBaseStyles}>
+          See examples for how other protocols are naming their smart contracts.
+          Join the race to the top of the ENSAwards leaderboards with your
+          protocol!
+        </p>
+      </div>
+      <LeaderboardSnippetCard
+        name="DAO leaderboard"
+        description="See how DAOs rank for following ENS best practices."
+        link="/leaderboards/dao">
+        <div
+          slot="bestResultsIcons"
+          class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
+          {
+            Object.entries(daoScores)
+              .slice(0, 3)
+              .map(([scoreCategory, value], idx) => {
+                const daoId = scoreCategory as OrgId;
+                const org = getOrgById(daoId);
+                const OrgIcon = org.icon;
+                return (
+                  <div
+                    style={{ right: `${12 * idx}px` }}
+                    class={cn(
+                      idx > 0 && "relative",
+                      "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
+                    )}>
+                    <OrgIcon className="w-10 h-10 rounded-md" />
+                  </div>
+                );
+              })
+          }
+          <p
+            class="relative text-sm leading-normal font-medium text-muted-foreground"
+            style={{ right: "16px" }}>
+            + more
+          </p>
+        </div>
+      </LeaderboardSnippetCard>
+    </div>
     <div
       class={cn(
         containerBaseStyles,
-        "min-[810px]:flex-row items-start py-6 sm:py-[60px] gap-6 sm:gap-10",
+        "min-[810px]:flex-row items-start gap-6 sm:gap-10",
       )}>
       <div
         class="w-full md:w-1/3 flex flex-col justify-start items-start gap-5">
@@ -213,7 +269,6 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
             Learn about contract naming best practices from Enscribe.
           </p>
         </div>
-        <!--TODO: Replace with a link to enscribe's contract naming best practices once they publish it-->
         <a
           href="https://www.enscribe.xyz/guides/how-to-guides/deploy-and-name-smart-contract"
           target="_blank"

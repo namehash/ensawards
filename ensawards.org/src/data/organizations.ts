@@ -62,6 +62,8 @@ export const NounsDaoOrg: Organization = {
     twitter: new URL("https://x.com/nounsdao"),
     ens: "nouns.eth",
   },
+  ogImagePath: "/org-nouns-dao_og_image.png",
+  twitterOgImagePath: "/org-nouns-dao_twitter_og_image.png",
 };
 
 export const ArbitrumDaoOrg: Organization = {
@@ -77,6 +79,8 @@ export const ArbitrumDaoOrg: Organization = {
     website: new URL("https://arbitrum.foundation/"),
     twitter: new URL("https://x.com/arbitrum"),
   },
+  ogImagePath: "/org-arbitrum-dao_og_image.png",
+  twitterOgImagePath: "/org-arbitrum-dao_twitter_og_image.png",
 };
 
 export const AaveDaoOrg: Organization = {
@@ -93,6 +97,8 @@ export const AaveDaoOrg: Organization = {
     twitter: new URL("https://x.com/aave"),
     ens: "aave.eth",
   },
+  ogImagePath: "/org-aave-dao_og_image.png",
+  twitterOgImagePath: "/org-aave-dao_twitter_og_image.png",
 };
 
 /**

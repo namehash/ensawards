@@ -51,13 +51,13 @@ if (resolvedOrg) {
         title: `ENSAwards: ${resolvedOrg.name} ENS Integration Benchmarks`,
         description: resolvedOrg.description,
         url: `https://ensawards.org/dao/${dao}`,
-        og_image: resolvedOrg.ogImagePath,
-        twitter_image: resolvedOrg.twitterOgImagePath,
+        ogImage: resolvedOrg.ogImagePath,
+        twitterImage: resolvedOrg.twitterOgImagePath,
       }}>
       <SubpageHero
         header={resolvedOrg.name}
         description={resolvedOrg.description}
-        breadcrumbs={["ENS leaderboards", "DAO leaderboards"]}>
+        breadcrumbs={["ENS leaderboards", "DAO leaderboard"]}>
         <OrgIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"
@@ -87,7 +87,7 @@ if (resolvedOrg) {
                     </a>
             }
         </div>
-        <EnsAwardsScore slot="score" score={daoScore} label="ENSAwards score" />
+        <EnsAwardsScore slot="largerHeroItem" score={daoScore} label="ENSAwards score" />
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ContractNamingBanner />

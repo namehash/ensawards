@@ -25,6 +25,8 @@ export const APPS: App[] = [
         result: BenchmarkResult.Fail,
       },
     ],
+    ogImagePath: "/app-rainbow-wallet_og_image.png",
+    twitterOgImagePath: "/app-rainbow-wallet_twitter_og_image.png",
   },
   {
     id: "coinbase-wallet",
@@ -49,6 +51,8 @@ export const APPS: App[] = [
         result: BenchmarkResult.Fail,
       },
     ],
+    ogImagePath: "/app-coinbase-wallet_og_image.png",
+    twitterOgImagePath: "/app-coinbase-wallet_twitter_og_image.png",
   },
   {
     id: "metamask",
@@ -73,6 +77,8 @@ export const APPS: App[] = [
         result: BenchmarkResult.Fail,
       },
     ],
+    ogImagePath: "/app-metamask_og_image.png",
+    twitterOgImagePath: "/app-metamask_twitter_og_image.png",
   },
   {
     id: "etherscan",
@@ -96,6 +102,8 @@ export const APPS: App[] = [
         result: BenchmarkResult.Pass,
       },
     ],
+    ogImagePath: "/app-etherscan_og_image.png",
+    twitterOgImagePath: "/app-etherscan_twitter_og_image.png",
   },
   {
     id: "blockscout",
@@ -118,5 +126,7 @@ export const APPS: App[] = [
         result: BenchmarkResult.Pass,
       },
     ],
+    ogImagePath: "/app-blockscout_og_image.png",
+    twitterOgImagePath: "/app-blockscout_twitter_og_image.png",
   },
 ];

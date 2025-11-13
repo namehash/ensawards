@@ -1,5 +1,6 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import { getUnixTime } from "date-fns";
 
 /**
  * Checks whether a given string is a valid slug.
@@ -38,7 +39,7 @@ export const areStringsUnique = (stringArray: string[]): boolean => {
 export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
   switch (whatsSuggested) {
     case "app":
-      return "Want to add an app? Suggest the app for review or add an app review yourself on GitHub.";
+      return "Want to add an app? Suggest the app for review or add the app review yourself on GitHub.";
 
     case "best practice":
       return "Want to add best practice? Suggest it for review or add it yourself on GitHub.";
@@ -47,7 +48,7 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
       return "Benchmark result updates to report? Notify us of the change or update it yourself on GitHub.";
 
     case "dao":
-      return "Want to add a DAO? Suggest the DAO for review or add an DAO review yourself on GitHub.";
+      return "Want to add a DAO? Suggest the DAO for review or add the DAO review yourself on GitHub.";
 
     case "contract":
       return "Contracts to add or update? Notify us of the change or update it yourself on GitHub.";
@@ -58,6 +59,9 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
 };
 
 /**
- * A Unix timestamp marking the approximate end of the ENS contract naming season event on April 30th 23:59:59 (UTC).
+ * Date marking the approximate end of the ENS contract naming season event.
+ * April 30th 2026 at 23:59:59 UTC
  */
-export const ENS_CONTRACT_NAMING_SEASON_END: UnixTimestamp = 1777593599;
+export const ENS_CONTRACT_NAMING_SEASON_APPROX_END: UnixTimestamp = getUnixTime(
+  new Date("2026-04-30T23:59:59.000Z"),
+);

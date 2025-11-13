@@ -12,14 +12,14 @@ const { name, description, link }: LeaderboardSnippetCardProps = Astro.props;
 
 <a
   href={link}
-  class="w-full min-lg:w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border
+  class="w-full min-lg:w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[175px] box-border
         flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4
         rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <div
     class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
     <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
     <p
-      class="sm:min-h-[56px] text-muted-foreground text-sm sm:text-base leading-normal font-normal">
+      class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">
       {description}
     </p>
   </div>

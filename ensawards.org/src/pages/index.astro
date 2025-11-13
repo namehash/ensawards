@@ -83,7 +83,8 @@ const daoScores = contractPipeline();
               name={app.name}
               ensAwardsScore={calculateAppEnsAwardsScore(app)}
               type={app.type}
-              viewDetailsLink={`/app/${app.slug}`}>
+              viewDetailsLink={`/app/${app.slug}`}
+              viewDetailsText="App report">
               <Image
                 src={images[app.iconPath]()}
                 alt={`${app.id}`}
@@ -106,23 +107,6 @@ const daoScores = contractPipeline();
             </LeaderboardCard>
           ))
       }
-    </ItemsList>
-    <ItemsList
-      header="ENS best practices"
-      linkData={{ link: "/ens-best-practices", text: "See all" }}>
-      {
-        BEST_PRACTICE_CATEGORIES.map((category, idx) => (
-          <CategoryCard
-            key={`best-practice-card-${idx}`}
-            name={category.name}
-            description={category.description}
-            viewBestPracticesLink={`/ens-best-practices/${category.slug}`}
-            comingSoon={category.status}
-            numberOfBestPractices={category.bestPractices.length}
-          />
-        ))
-      }
-      <SuggestionCard whatsSuggested="best practice" />
     </ItemsList>
   </section>
 </Layout>

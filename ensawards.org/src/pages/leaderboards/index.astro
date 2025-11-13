@@ -16,8 +16,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg
 
 const daoScores = contractPipeline();
 
-const daoLeaderboardDescription = "Check out the latest DAO leaderboard";
-const appLeaderboardDescription = "Check out the latest apps leaderboard";
+const daoLeaderboardDescription = "See how DAOs rank for following ENS best practices.";
+const appLeaderboardDescription = "See how apps rank for following ENS best practices.";
 ---
 
 <Layout
@@ -27,6 +27,7 @@ const appLeaderboardDescription = "Check out the latest apps leaderboard";
   }}>
   <SubpageHero
     header="ENS leaderboards"
+    description="Compare projects by their rank of following a selection of ENS best practices."
     customImage={{
       source: "/src/assets/ensLeaderboardsHeroImage.png",
       width: 628,
@@ -38,7 +39,7 @@ const appLeaderboardDescription = "Check out the latest apps leaderboard";
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList>
       <LeaderboardSnippetCard
-        name="DAO leaderboards"
+        name="DAO leaderboard"
         description={daoLeaderboardDescription}
         link="/leaderboards/dao">
         <div
@@ -71,7 +72,7 @@ const appLeaderboardDescription = "Check out the latest apps leaderboard";
         </div>
       </LeaderboardSnippetCard>
       <LeaderboardSnippetCard
-        name="App leaderboards"
+        name="App leaderboard"
         description={appLeaderboardDescription}
         link="/leaderboards/app">
         <div
