@@ -62,4 +62,4 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
  * Date marking the approximate end of the ENS contract naming season event.
  * April 30th 2026 at 23:59:59 UTC
  */
-export const ENS_CONTRACT_NAMING_SEASON_END: UnixTimestamp = getUnixTime(new Date("2026-04-30T23:59:59.000Z"));
+export const ENS_CONTRACT_NAMING_SEASON_APPROX_END: UnixTimestamp = getUnixTime(new Date("2026-04-30T23:59:59.000Z"));

@@ -9,7 +9,7 @@ import Countdown from "../../components/atoms/Countdown.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import Layout from "../../layouts/Layout.astro";
-import { ENS_CONTRACT_NAMING_SEASON_END } from "../../utils";
+import { ENS_CONTRACT_NAMING_SEASON_APPROX_END } from "../../utils";
 
 const baseEventText = "Base event text";
 const bannerStyles = "bg-[linear-gradient(270deg,#3B78FF_0%,#2563EB_100%)]";
@@ -25,7 +25,7 @@ const timerStyles = "text-white";
       <div class="w-full flex flex-col justify-start items-start gap-4">
         <p>Event ending on April 30th 2026</p><Countdown
           eventText={baseEventText}
-          eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_END}
+          eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_APPROX_END}
           bannerStyles={bannerStyles}
           textStyles={textStyles}
           timerStyles={timerStyles}

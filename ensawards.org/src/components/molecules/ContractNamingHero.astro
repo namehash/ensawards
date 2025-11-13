@@ -1,6 +1,6 @@
 ---
 import HeroImage from "../../assets/contractNamingSeasonHeroImage.png";
-import { ENS_CONTRACT_NAMING_SEASON_END } from "../../utils";
+import { ENS_CONTRACT_NAMING_SEASON_APPROX_END } from "../../utils";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import Countdown from "../atoms/Countdown.astro";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
@@ -40,7 +40,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
       >
       <Countdown
         eventText="10,000 $ENS incentive window closes soon"
-        eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_END}
+        eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_APPROX_END}
         bannerStyles="bg-[linear-gradient(270deg,#3B78FF_0%,#2563EB_100%)]"
         textStyles="text-white"
         timerStyles="text-white"
