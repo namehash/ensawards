@@ -22,6 +22,7 @@ import {OrgId} from "../types/organizations";
 import {getOrgById} from "../utils/dataAccess";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import {contractPipeline} from "../contract-pipelines";
+import ContractNamingBestPractices from "../components/molecules/ContractNamingBestPractices.astro";
 
 interface ContentItemData {
   name: string;
@@ -128,6 +129,7 @@ const daoScores = contractPipeline();
         <ContractNamingIncentivesBanner />
       </div>
     </div>
+    <ContractNamingBestPractices />
     <div
       class={cn(
         containerBaseStyles,
@@ -266,9 +268,8 @@ const daoScores = contractPipeline();
             Learn about contract naming best practices from Enscribe.
           </p>
         </div>
-        <!--TODO: Replace with a link to enscribe's contract naming best practices once they publish it-->
         <a
-          href="https://www.enscribe.xyz/guides/how-to-guides/deploy-and-name-smart-contract"
+          href="https://www.enscribe.xyz/guides/best-practices/dao"
           target="_blank"
           rel="noreferrer"
           class={cn(

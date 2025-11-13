@@ -4,6 +4,7 @@ import { ENS_CONTRACT_NAMING_SEASON_APPROX_END } from "../../utils";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import Countdown from "../atoms/Countdown.astro";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+import {EnsDaoIcon} from "../atoms/icons/projects-and-daos/EnsDaoIcon";
 ---
 
 <section
@@ -14,6 +15,9 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
       class="relative z-10 w-fit h-fit sm:max-h-[268px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-6 sm:gap-8">
       <div
         class="max-w-[600px] flex flex-col flex-nowrap justify-center items-center sm:items-start gap-4">
+        <div class="w-fit max-w-[200px] h-fit box-border flex flex-row justify-start items-center gap-1 bg-transparent rounded-full border border-[rgba(229,229,229,0.20)] pl-2 py-1 pr-3">
+          <EnsDaoIcon className="w-6 h-6 flex-shrink-0" />
+          <p class="text-xs leading-normal font-normal text-white whitespace-nowrap">Sponsored by ENS DAO</p></div>
         <h1
           class="text-white text-[32px] lg:text-[52px] leading-[44px] sm:leading-normal font-bold text-center sm:text-left">
           ENS Contract Naming Season is now live

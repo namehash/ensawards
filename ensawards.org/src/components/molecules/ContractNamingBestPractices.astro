@@ -1,0 +1,63 @@
+---
+
+import EnscribeIcon from "../atoms/icons/EnscribeIconDark.astro";
+import {ExternalLink as ExternalLinkIcon} from "@lucide/astro";
+import {cn} from "../../utils/tailwindClassConcatenation";
+import {shadcnButtonVariants} from "../ui/shadcnButtonStyles";
+---
+
+<div class="w-full max-w-[1216px] box-border h-fit flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-center gap-6 sm:gap-0 px-6 pt-5 pb-6 sm:p-10 rounded-xl bg-[linear-gradient(270deg,#161547_0%,#080E32_100%)]">
+    <div class="flex flex-col flex-nowrap justify-start items-start gap-5">
+        <h3 class="text-2xl leading-normal font-semibold text-white">Contract naming best practices</h3>
+        <a
+                href="https://www.enscribe.xyz/"
+                target="_blank"
+                rel="noreferrer"
+                slot="ctaButton"
+                class="w-[225px] flex flex-row flex-nowrap justify-start items-center gap-3 px-4 py-2 bg-[rgba(249,250,251,0.1)] hover:bg-[rgba(249,250,251,0.15)] rounded-lg text-sm text-gray-400 whitespace-nowrap hover:text-gray-500 font-normal leading-7 transition duration-200">
+            <span>Powered by</span><EnscribeIcon />
+        </a>
+    </div>
+    <div class="flex flex-row flex-wrap justify-start items-start gap-3">
+        <a href="https://www.enscribe.xyz/guides/best-practices/consumer-apps" target="_blank" rel="noreferrer" class={cn(
+            shadcnButtonVariants({
+                variant: "outline",
+                size: "lg",
+                className:
+                    "cursor-pointer rounded-full text-white hover:text-white bg-transparent hover:bg-white/5 border border-[rgba(229,229,229,0.20)]",
+            }),
+        )}>
+            Apps<ExternalLinkIcon size={16} class="text-gray-400"/>
+        </a>
+        <a href="https://www.enscribe.xyz/guides/best-practices/dao" target="_blank" rel="noreferrer" class={cn(
+            shadcnButtonVariants({
+                variant: "outline",
+                size: "lg",
+                className:
+                    "cursor-pointer rounded-full text-white hover:text-white bg-transparent hover:bg-white/5 border border-[rgba(229,229,229,0.20)]",
+            }),
+        )}>
+            DAOs<ExternalLinkIcon size={16} class="text-gray-400"/>
+        </a>
+        <a href="https://www.enscribe.xyz/guides/best-practices/defi-protocols" target="_blank" rel="noreferrer" class={cn(
+            shadcnButtonVariants({
+                variant: "outline",
+                size: "lg",
+                className:
+                    "cursor-pointer rounded-full text-white hover:text-white bg-transparent hover:bg-white/5 border border-[rgba(229,229,229,0.20)]",
+            }),
+        )}>
+            Defi<ExternalLinkIcon size={16} class="text-gray-400"/>
+        </a>
+        <a href="https://www.enscribe.xyz/guides/best-practices/l2" target="_blank" rel="noreferrer" class={cn(
+            shadcnButtonVariants({
+                variant: "outline",
+                size: "lg",
+                className:
+                    "cursor-pointer rounded-full text-white hover:text-white bg-transparent hover:bg-white/5 border border-[rgba(229,229,229,0.20)]",
+            }),
+        )}>
+            L2s<ExternalLinkIcon size={16} class="text-gray-400"/>
+        </a>
+    </div>
+</div>

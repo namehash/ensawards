@@ -9,10 +9,6 @@ export const EnsDaoIcon = (props: React.SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path
-      d="M0 10C0 4.47715 4.47715 0 10 0H50C55.5228 0 60 4.47715 60 10V50C60 55.5228 55.5228 60 50 60H10C4.47715 60 0 55.5228 0 50V10Z"
-      fill="white"
-    />
     <g clipPath="url(#clip0_966_6528)">
       <mask
         id="mask0_966_6528"
