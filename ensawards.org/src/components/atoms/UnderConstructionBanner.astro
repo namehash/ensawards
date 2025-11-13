@@ -1,12 +1,14 @@
 ---
-import {TrafficCone} from "@lucide/astro";
+import { TrafficCone } from "@lucide/astro";
 export interface UnderConstructionProps {
-    text: string;
+  text: string;
 }
 
-const {text}: UnderConstructionProps = Astro.props;
+const { text }: UnderConstructionProps = Astro.props;
 ---
-<div class="w-fit h-fit max-w-[309px] box-border flex flex-row justify-start items-start gap-[10px] px-3 py-2 rounded-md bg-white relative z-10">
-    <TrafficCone size={20} class="text-amber-500 flex-shrink-0" />
-    <p class="text-xs leading-5 font-normal text-black">{text}</p>
+
+<div
+  class="w-fit h-fit max-w-[309px] box-border flex flex-row justify-start items-start gap-[10px] px-3 py-2 rounded-md bg-white relative z-10">
+  <TrafficCone size={20} class="text-amber-500 flex-shrink-0" />
+  <p class="text-xs leading-5 font-normal text-black">{text}</p>
 </div>

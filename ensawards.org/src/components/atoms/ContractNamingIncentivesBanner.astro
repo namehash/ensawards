@@ -1,8 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import IncentivesImage from "../../assets/contractNamingIncentivesImage.png";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
-import {Image} from "astro:assets";
 
 const sectionHeaderBaseStyles = "text-2xl leading-normal font-semibold text-black";
 const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-foreground";
@@ -10,38 +10,48 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
 
 <div
   class="relative w-full max-w-[1216px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start items-center max-sm:gap-5 gap-0 bg-white border border-gray-200 rounded-2xl max-sm:p-5">
-  <div class="w-full sm:w-1/2 sm:min-h-[400px] box-border flex flex-col max-sm:justify-start justify-between items-start max-sm:gap-5 sm:p-10">
-    <div
-        class="flex flex-col justify-start items-start gap-6">
+  <div
+    class="w-full sm:w-1/2 sm:min-h-[400px] box-border flex flex-col max-sm:justify-start justify-between items-start max-sm:gap-5 sm:p-10">
+    <div class="flex flex-col justify-start items-start gap-6">
       <div class="flex flex-col justify-start items-start gap-2">
-        <h3 class={cn("text-2xl sm:text-4xl leading-normal font-semibold text-black")}>
+        <h3
+          class={cn(
+            "text-2xl sm:text-4xl leading-normal font-semibold text-black",
+          )}>
           Up to <span class="text-blue-600">10,000 $ENS*</span>
         </h3>
         <p class={cn(itemTextBaseStyles)}>
-          in incentives for high-impact naming across DeFi, DAOs, consumer dApps, and infrastructure.
+          in incentives for high-impact naming across DeFi, DAOs, consumer
+          dApps, and infrastructure.
         </p>
       </div>
       <a
-          href="https://discuss.ens.domains/t/ens-contract-naming-season/21596"
-          target="_blank"
-          rel="noreferrer"
-          class={cn(
-              shadcnButtonVariants({
-                variant: "outline",
-                size: "default",
-                className: "cursor-pointer rounded-full",
-              }),
-          )}>Learn more on the forum</a
+        href="https://discuss.ens.domains/t/ens-contract-naming-season/21596"
+        target="_blank"
+        rel="noreferrer"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "outline",
+            size: "default",
+            className: "cursor-pointer rounded-full",
+          }),
+        )}>Learn more on the forum</a
       >
     </div>
     <p class={cn(itemTextBaseStyles)}>
-      * Learn more about what's $ENS and the current exchange rate <a href="" target="_blank" rel="noreferrer" class="text-black hover:underline hover:underline-offset-[25%] transition-all duration-200">here</a>.
+      * Learn more about what's $ENS and the current exchange rate <a
+        href=""
+        target="_blank"
+        rel="noreferrer"
+        class="text-black hover:underline hover:underline-offset-[25%] transition-all duration-200"
+        >here</a
+      >.
     </p>
   </div>
-    <Image
-      quality={100}
-      src={IncentivesImage}
-      alt="Earn $ENS for naming your contracts"
-      class="w-full sm:w-1/2 h-auto"
-    />
+  <Image
+    quality={100}
+    src={IncentivesImage}
+    alt="Earn $ENS for naming your contracts"
+    class="w-full sm:w-1/2 h-auto"
+  />
 </div>

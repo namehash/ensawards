@@ -1,10 +1,10 @@
 ---
-import DollarEnsTokenIcon from "./icons/DollarEnsTokenIcon.astro";
+import { Image } from "astro:assets";
+import ContractNamingExample from "../../assets/contractNamingExampleImage.png";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
 import ChevronRightIcon from "./icons/ChevronRightIcon.astro";
-import {Image} from "astro:assets";
-import ContractNamingExample from "../../assets/contractNamingExampleImage.png";
+import DollarEnsTokenIcon from "./icons/DollarEnsTokenIcon.astro";
 ---
 
 <a
@@ -14,7 +14,9 @@ import ContractNamingExample from "../../assets/contractNamingExampleImage.png";
   py-2 pl-3 pr-4 sm:p-4 sm:px-6 rounded-lg">
   <div
     class="flex flex-row flex-nowrap justify-start items-center gap-[10px] sm:gap-5">
-    <DollarEnsTokenIcon className="flex-shrink-0 w-[36px] h-[36px] sm:w-[48px] sm:h-[48px]" />
+    <DollarEnsTokenIcon
+      className="flex-shrink-0 w-[36px] h-[36px] sm:w-[48px] sm:h-[48px]"
+    />
     <div>
       <h4
         class="text-lg max-sm:text-sm font-semibold leading-7 max-sm:leading-6 text-white">
@@ -24,27 +26,27 @@ import ContractNamingExample from "../../assets/contractNamingExampleImage.png";
         class="hidden sm:inline-flex text-sm text-white/50 font-normal leading-7">
         Act now! 10,000 $ENS incentive window closes soon.
       </p>
-        <p
-                class="text-xs text-white/50 font-normal leading-6 sm:hidden">
-            Up to 10,000 $ENS in awards
-        </p>
+      <p class="text-xs text-white/50 font-normal leading-6 sm:hidden">
+        Up to 10,000 $ENS in awards
+      </p>
     </div>
   </div>
-    <Image
-            quality={100}
-            alt="Example of named contract"
-            src={ContractNamingExample}
-            class="h-auto w-1/3 lg:w-[35%] max-[820px]:hidden"
-    />
+  <Image
+    quality={100}
+    alt="Example of named contract"
+    src={ContractNamingExample}
+    class="h-auto w-1/3 lg:w-[35%] max-[820px]:hidden"
+  />
   <button
     class={cn(
       shadcnButtonVariants({
         variant: "outline",
         size: "default",
-        className:
-          "cursor-pointer max-sm:hidden",
+        className: "cursor-pointer max-sm:hidden",
       }),
     )}>Learn more</button
   >
-  <ChevronRightIcon className="block sm:hidden w-6 h-6 text-white/50 hover:text-white" />
+  <ChevronRightIcon
+    className="block sm:hidden w-6 h-6 text-white/50 hover:text-white"
+  />
 </a>

@@ -11,18 +11,18 @@ import {
   Trophy,
 } from "@lucide/astro";
 import ContractNamingIncentivesBanner from "../components/atoms/ContractNamingIncentivesBanner.astro";
+import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import { EnscribeSolidIcon } from "../components/atoms/icons/EnscribeSolidIcon";
 import { SquareReplyIcon } from "../components/atoms/icons/SquareReplyIcon";
 import TelegramIcon from "../components/atoms/icons/TelegramIcon.astro";
+import ContractNamingBestPractices from "../components/molecules/ContractNamingBestPractices.astro";
 import ContractNamingHero from "../components/molecules/ContractNamingHero.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
+import { contractPipeline } from "../contract-pipelines";
 import Layout from "../layouts/Layout.astro";
+import { OrgId } from "../types/organizations";
+import { getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
-import {OrgId} from "../types/organizations";
-import {getOrgById} from "../utils/dataAccess";
-import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
-import {contractPipeline} from "../contract-pipelines";
-import ContractNamingBestPractices from "../components/molecules/ContractNamingBestPractices.astro";
 
 interface ContentItemData {
   name: string;
@@ -105,27 +105,27 @@ const daoScores = contractPipeline();
       <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>
         Why name your contracts now?
       </h3>
-        <div
-          class="flex flex-col sm:flex-row flex-wrap justify-start items-start gap-6">
-          {
-            whyNameYourSmartContractsNowItems.map((item) => (
-              <div class="w-full sm:max-w-[282px] h-fit box-border flex flex-col flex-nowrap justify-start items-start gap-5">
-                <div class="w-12 h-12 p-3 bg-gray-100 rounded-full">
-                  <item.icon
-                    size={24}
-                    stroke-width={1.5}
-                    className="text-muted-foreground"
-                  />
-                </div>
-                <div class="flex flex-col flex-nowrap justify-start items-start gap-2">
-                  <h4 class={cn(itemHeadersBaseStyles)}>{item.name}</h4>
-                  <p class={cn(itemTextBaseStyles)}>{item.description}</p>
-                </div>
+      <div
+        class="flex flex-col sm:flex-row flex-wrap justify-start items-start gap-6">
+        {
+          whyNameYourSmartContractsNowItems.map((item) => (
+            <div class="w-full sm:max-w-[282px] h-fit box-border flex flex-col flex-nowrap justify-start items-start gap-5">
+              <div class="w-12 h-12 p-3 bg-gray-100 rounded-full">
+                <item.icon
+                  size={24}
+                  stroke-width={1.5}
+                  className="text-muted-foreground"
+                />
               </div>
-            ))
-          }
-        </div>
-        <ContractNamingIncentivesBanner />
+              <div class="flex flex-col flex-nowrap justify-start items-start gap-2">
+                <h4 class={cn(itemHeadersBaseStyles)}>{item.name}</h4>
+                <p class={cn(itemTextBaseStyles)}>{item.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <ContractNamingIncentivesBanner />
     </div>
     <ContractNamingBestPractices />
     <div
@@ -170,47 +170,50 @@ const daoScores = contractPipeline();
       </div>
     </div>
     <div class={cn(containerBaseStyles, "sm:flex-row sm:flex-wrap gap-10")}>
-      <div class="w-full md:w-[calc(50%-40px)] flex flex-col justify-start items-start gap-5">
+      <div
+        class="w-full md:w-[calc(50%-40px)] flex flex-col justify-start items-start gap-5">
         <h3
-            class={cn(
-                sectionHeaderBaseStyles,
-                "relative z-10 self-stretch text-left",
-            )}>
+          class={cn(
+            sectionHeaderBaseStyles,
+            "relative z-10 self-stretch text-left",
+          )}>
           Get inspired with contract naming examples
         </h3>
         <p class={itemTextBaseStyles}>
-          See examples for how other protocols are naming their smart contracts. Join the race to the top of the ENSAwards leaderboards with your protocol!
+          See examples for how other protocols are naming their smart contracts.
+          Join the race to the top of the ENSAwards leaderboards with your
+          protocol!
         </p>
       </div>
       <LeaderboardSnippetCard
-          name="DAO leaderboard"
-          description="See how DAOs rank for following ENS best practices."
-          link="/leaderboards/dao">
+        name="DAO leaderboard"
+        description="See how DAOs rank for following ENS best practices."
+        link="/leaderboards/dao">
         <div
-            slot="bestResultsIcons"
-            class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
+          slot="bestResultsIcons"
+          class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
           {
             Object.entries(daoScores)
-                .slice(0, 3)
-                .map(([scoreCategory, value], idx) => {
-                  const daoId = scoreCategory as OrgId;
-                  const org = getOrgById(daoId);
-                  const OrgIcon = org.icon;
-                  return (
-                      <div
-                          style={{ right: `${12 * idx}px` }}
-                          class={cn(
-                              idx > 0 && "relative",
-                              "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
-                          )}>
-                        <OrgIcon className="w-10 h-10 rounded-md" />
-                      </div>
-                  );
-                })
+              .slice(0, 3)
+              .map(([scoreCategory, value], idx) => {
+                const daoId = scoreCategory as OrgId;
+                const org = getOrgById(daoId);
+                const OrgIcon = org.icon;
+                return (
+                  <div
+                    style={{ right: `${12 * idx}px` }}
+                    class={cn(
+                      idx > 0 && "relative",
+                      "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
+                    )}>
+                    <OrgIcon className="w-10 h-10 rounded-md" />
+                  </div>
+                );
+              })
           }
           <p
-              class="relative text-sm leading-normal font-medium text-muted-foreground"
-              style={{ right: "16px" }}>
+            class="relative text-sm leading-normal font-medium text-muted-foreground"
+            style={{ right: "16px" }}>
             + more
           </p>
         </div>
