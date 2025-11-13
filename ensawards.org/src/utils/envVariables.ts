@@ -11,7 +11,9 @@ const DEFAULT_ENSNODE_URL = "https://api.alpha.ensnode.io" as const;
 export const getENSNodeUrl = (): URL => {
   const maybeEnvVariableURL = process.env.ENSNODE_URL;
 
-  if (maybeEnvVariableURL === undefined) {
+  // Check for empty string is necessary due to GitHub's fallback mechanism
+  // https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
+  if (maybeEnvVariableURL === undefined || maybeEnvVariableURL === "") {
     return new URL(DEFAULT_ENSNODE_URL);
   }
 
@@ -27,7 +29,9 @@ export const getENSNodeUrl = (): URL => {
 export const getENSNodeUrlForTests = (): URL => {
   const maybeEnvVariableURL = process.env.VITE_ENSNODE_URL;
 
-  if (maybeEnvVariableURL === undefined) {
+  // Check for empty string is necessary due to GitHub's fallback mechanism
+  // https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
+  if (maybeEnvVariableURL === undefined || maybeEnvVariableURL === "") {
     return new URL(DEFAULT_ENSNODE_URL);
   }
 
