@@ -11,7 +11,7 @@ import {
   ContractSubtypes,
   ContractTypes,
 } from "@/types/contracts.ts";
-import { mainnet, arbitrum } from "viem/chains";
+import { arbitrum, mainnet } from "viem/chains";
 
 export const CONTRACTS: Contract[] = [
   {
