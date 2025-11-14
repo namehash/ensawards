@@ -1,0 +1,36 @@
+---
+import type {ImageMetadata} from "astro";
+import {Image} from "astro:assets";
+import {QuoteCardData} from "../../../utils/types";
+
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
+
+const {quote, author, avatarPath}: QuoteCardData = Astro.props;
+---
+
+<a
+        href={author.ensProfile}
+        target="_blank"
+        rel="noreferrer"
+        class="w-full min-lg:w-[calc(50%-10px)] max-w-[598px] h-fit sm:min-h-[215px] box-border
+        flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4
+        rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer bg-white">
+    <div
+            class="flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-2 self-stretch">
+        <p
+                class="sm:min-h-[100px] text-black text-sm sm:text-base leading-normal font-normal">
+            &quot;{quote}&quot;
+        </p>
+    </div>
+    <div class="bg-gray-200 h-[1px] self-stretch"></div>
+    <div
+            class="flex flex-row justify-start items-center self-stretch">
+        <div class="flex flex-row flex-nowrap justify-start items-start gap-3">
+            <Image src={images[avatarPath]()} alt={author.name} class="w-10 h-10 rounded-full" />
+            <div class="flex flex-col justify-start items-start gap-0">
+                <p class="text-base leading-normal font-semibold text-black">{author.name}</p>
+                <p class="text-sm leading-normal font-medium text-muted-foreground">{author.role}</p>
+            </div>
+        </div>
+    </div>
+</a>
