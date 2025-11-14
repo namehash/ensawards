@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import {
   Award,
   CopyCheck,
@@ -10,8 +11,10 @@ import {
   TrendingUp,
   Trophy,
 } from "@lucide/astro";
+import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
 import ContractNamingIncentivesBanner from "../components/atoms/ContractNamingIncentivesBanner.astro";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
+import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
 import { EnscribeSolidIcon } from "../components/atoms/icons/EnscribeSolidIcon";
 import { SquareReplyIcon } from "../components/atoms/icons/SquareReplyIcon";
 import TelegramIcon from "../components/atoms/icons/TelegramIcon.astro";
@@ -23,10 +26,7 @@ import Layout from "../layouts/Layout.astro";
 import { OrgId } from "../types/organizations";
 import { getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
-import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
-import {QuoteCardData} from "../utils/types";
-import {Image} from "astro:assets";
-import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
+import { QuoteCardData } from "../utils/types";
 
 interface ContentItemData {
   name: string;
@@ -87,40 +87,44 @@ const howItWorksItems: ContentItemData[] = [
 
 const voicesFromTheCommunity: QuoteCardData[] = [
   {
-    quote: "ENS has always been about empowering the Ethereum community to name and own their digital identities. Contract Naming Season continues that mission — helping developers, DAOs, and protocols give their smart contracts names users can trust.",
+    quote:
+      "ENS has always been about empowering the Ethereum community to name and own their digital identities. Contract Naming Season continues that mission — helping developers, DAOs, and protocols give their smart contracts names users can trust.",
     author: {
       name: "nick.eth",
       role: "Creator of ENS",
-      ensProfile: "https://app.ens.domains/nick.eth"
+      ensProfile: "https://app.ens.domains/nick.eth",
     },
-    avatarPath: "/src/assets/nickEthAvatar.svg"
+    avatarPath: "/src/assets/nickEthAvatar.svg",
   },
   {
-    quote: "All smart contracts should be named onchain, for security, readability, and transparency. Contract Naming Season with Enscribe is a great opportunity to finally get it done.",
+    quote:
+      "All smart contracts should be named onchain, for security, readability, and transparency. Contract Naming Season with Enscribe is a great opportunity to finally get it done.",
     author: {
       name: "brantly.eth",
       role: "Ethereum Identity Foundation",
-      ensProfile: "https://app.ens.domains/brantly.eth"
+      ensProfile: "https://app.ens.domains/brantly.eth",
     },
-    avatarPath: "/src/assets/brantlyEthAvatar.svg"
+    avatarPath: "/src/assets/brantlyEthAvatar.svg",
   },
   {
-    quote: "Naming Season captures what makes ENS, DAOs and Ethereum special — community-led initiatives that drive our ecosystem forward! It’s actions like naming contracts that build the culture of safety and transparency we all depend on.",
+    quote:
+      "Naming Season captures what makes ENS, DAOs and Ethereum special — community-led initiatives that drive our ecosystem forward! It’s actions like naming contracts that build the culture of safety and transparency we all depend on.",
     author: {
       name: "james.eth",
       role: "Fire Eyes DAO",
-      ensProfile: "https://app.ens.domains/james.eth"
+      ensProfile: "https://app.ens.domains/james.eth",
     },
-    avatarPath: "/src/assets/jamesEthAvatar.svg"
+    avatarPath: "/src/assets/jamesEthAvatar.svg",
   },
   {
-    quote: "Named contracts upgrade security and enhance UX. Promoting awareness of contract naming opportunities across protocols, DAOs, and apps through Contract Naming Season is a key step forward for the Ethereum community.",
+    quote:
+      "Named contracts upgrade security and enhance UX. Promoting awareness of contract naming opportunities across protocols, DAOs, and apps through Contract Naming Season is a key step forward for the Ethereum community.",
     author: {
       name: "lightwalker.eth",
       role: "NameHash Labs",
-      ensProfile: "https://app.ens.domains/lightwalker.eth"
+      ensProfile: "https://app.ens.domains/lightwalker.eth",
     },
-    avatarPath: "/src/assets/lightwalkerEthAvatar.svg"
+    avatarPath: "/src/assets/lightwalkerEthAvatar.svg",
   },
 ];
 
@@ -212,7 +216,12 @@ const daoScores = contractPipeline();
         }
       </div>
     </div>
-    <div class={cn(containerBaseStyles, "sm:flex-row sm:flex-wrap gap-10 sm:min-h-[340px]", "sm:bg-[url(/src/assets/getInspiredBackgroundImage.png)] bg-no-repeat bg-size-[auto_330px] bg-right")}>
+    <div
+      class={cn(
+        containerBaseStyles,
+        "sm:flex-row sm:flex-wrap gap-10 sm:min-h-[340px]",
+        "sm:bg-[url(/src/assets/getInspiredBackgroundImage.png)] bg-no-repeat bg-size-[auto_330px] bg-right",
+      )}>
       <div
         class="w-full md:w-[calc(50%-40px)] flex flex-col justify-start items-start gap-5">
         <h3
@@ -263,23 +272,23 @@ const daoScores = contractPipeline();
       </LeaderboardSnippetCard>
     </div>
     <div
-        class={cn(
-            containerBaseStyles,
-            "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",
-        )}>
+      class={cn(
+        containerBaseStyles,
+        "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",
+      )}>
       <div
-          class="absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[40px] bg-neutral-50 bottom-0">
+        class="absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[40px] bg-neutral-50 bottom-0">
       </div>
       <h3
-          class={cn(
-              sectionHeaderBaseStyles,
-              "relative z-10 self-stretch text-left",
-          )}>
+        class={cn(
+          sectionHeaderBaseStyles,
+          "relative z-10 self-stretch text-left",
+        )}>
         Voices from the community
       </h3>
       <div
-          class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-start items-start gap-4 sm:gap-5">
-        {voicesFromTheCommunity.map((quote) => <QuoteCard quote={quote.quote} author={{name: quote.author.name, role: quote.author.role, ensProfile: quote.author.ensProfile}} avatarPath={quote.avatarPath}/>)}
+        class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-start items-start gap-4 sm:gap-5">
+        {voicesFromTheCommunity.map((quote) => <QuoteCard {...quote} />)}
       </div>
     </div>
     <div
