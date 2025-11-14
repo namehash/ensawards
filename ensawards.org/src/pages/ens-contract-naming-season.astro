@@ -25,6 +25,8 @@ import { getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
 import {QuoteCardData} from "../utils/types";
+import {Image} from "astro:assets";
+import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
 
 interface ContentItemData {
   name: string;
@@ -210,7 +212,7 @@ const daoScores = contractPipeline();
         }
       </div>
     </div>
-    <div class={cn(containerBaseStyles, "sm:flex-row sm:flex-wrap gap-10")}>
+    <div class={cn(containerBaseStyles, "sm:flex-row sm:flex-wrap gap-10 sm:min-h-[340px]", "sm:bg-[url(/src/assets/getInspiredBackgroundImage.png)] bg-no-repeat bg-size-[auto_330px] bg-right")}>
       <div
         class="w-full md:w-[calc(50%-40px)] flex flex-col justify-start items-start gap-5">
         <h3
