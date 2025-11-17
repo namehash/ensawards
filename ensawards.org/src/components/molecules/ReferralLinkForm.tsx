@@ -132,7 +132,7 @@ export function ReferralLinkForm() {
   return (
     <div
       className={cn(
-        "w-full h-fit gap-12 p-5 pt-8 sm:p-8 box-border bg-neutral-50 rounded-2xl",
+        "w-full max-w-[600px] h-fit gap-12 p-5 pt-8 sm:p-8 box-border bg-neutral-50 rounded-2xl",
         verticalFlex,
       )}
     >
@@ -142,70 +142,67 @@ export function ReferralLinkForm() {
         </div>
         <div className={cn(verticalFlex, "gap-3")}>
           <h3 className="text-2xl leading-normal font-semibold text-center">
-            Generate your referral&nbsp;link
+            Generate your ENS&nbsp;Referral&nbsp;Program link
           </h3>
           <p className="text-base leading-normal font-normal text-muted-foreground text-center">
-            No signups or waiting for approval. Enter your Ethereum address below to generate your
-            referral link.
+            Participation in ENS Referrals is open to everyone! Simply enter your address below to
+            generate your ENS Referral Program link.
           </p>
         </div>
       </div>
       <form
         onSubmit={submitForm}
-        className="h-full w-full flex flex-col flex-nowrap justify-start items-start gap-5 self-stretch"
+        className="h-fit w-full flex flex-col flex-nowrap justify-start items-start gap-5 self-stretch"
         noValidate
       >
-        <div
-          className={cn([
-            successfulFormSubmit
-              ? "w-full h-fit flex flex-col items-start justify-start gap-3 transition-all duration-300"
-              : "hidden",
-          ])}
-        >
-          <div className="w-full h-fit flex flex-col items-start justify-start gap-2">
-            <p className="text-sm leading-none font-medium">
-              Your referral link for {truncateAddress(referrerAddress as Address)}:
-            </p>
-            <div className="w-full h-[38px] flex flex-row justify-start items-center gap-[5px] p-[5px] pl-3 box-border bg-neutral-100 border border-input rounded-md shadow-xs">
-              <p className="w-full text-sm leading-normal font-normal text-muted-foreground overflow-hidden text-nowrap">
-                {generatedLink}
-              </p>
-              <CopyButton value={generatedLink} className="px-2 py-1 h-[26px]" />
-            </div>
-          </div>
-          <button
-            onClick={() => {
-              setSuccessfulFormSubmit(false);
-            }}
-            type="reset"
+        {successfulFormSubmit ? (
+          <div
             className={cn(
-              shadcnButtonVariants({
-                variant: "outline",
-                size: "default",
-                className: "cursor-pointer self-stretch",
-              }),
+              "w-full h-fit flex flex-col items-start justify-start gap-3 transition-all duration-300",
             )}
           >
-            <RefreshIcon size={16} />
-            Generate another link
-          </button>
-        </div>
-        <div
-          className={cn([
-            successfulFormSubmit
-              ? "hidden"
-              : "transition-all duration-300 self-stretch flex flex-col justify-start items-start gap-5",
-          ])}
-        >
-          {formFields.map((field) => (
-            <div
-              key={`FormField-${field.label}`}
-              className="flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch"
+            <div className="w-full h-fit flex flex-col items-start justify-start gap-2">
+              <p className="text-sm leading-none font-medium">
+                Your referral link for {truncateAddress(referrerAddress as Address)}:
+              </p>
+              <div className="w-full h-[38px] flex flex-row justify-start items-center gap-0.5 p-[5px] pl-3 box-border bg-neutral-100 border border-input rounded-md shadow-xs">
+                <p className="w-full text-sm leading-normal font-normal text-muted-foreground truncate">
+                  {generatedLink}
+                </p>
+                <CopyButton value={generatedLink} className="px-2 py-1 h-[26px]" />
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setSuccessfulFormSubmit(false);
+              }}
+              type="reset"
+              className={cn(
+                shadcnButtonVariants({
+                  variant: "outline",
+                  size: "default",
+                  className: "cursor-pointer self-stretch",
+                }),
+              )}
             >
-              <label htmlFor={field.label} className={cn("text-sm leading-none font-medium")}>
-                {capitalizeFormLabel(field.label)}
-              </label>
-              <div className="w-full">
+              <RefreshIcon size={16} />
+              Generate another link
+            </button>
+          </div>
+        ) : (
+          <div
+            className={cn(
+              "transition-all duration-300 self-stretch flex flex-col justify-start items-start gap-5",
+            )}
+          >
+            {formFields.map((field) => (
+              <div
+                key={`FormField-${field.label}`}
+                className="w-full min-w-full flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch"
+              >
+                <label htmlFor={field.label} className={cn("text-sm leading-none font-medium")}>
+                  {capitalizeFormLabel(field.label)}
+                </label>
                 <Input
                   id={field.label}
                   type={field.type}
@@ -219,17 +216,17 @@ export function ReferralLinkForm() {
                   className="bg-white"
                 />
               </div>
-            </div>
-          ))}
-          <FormButton
-            disabled={isLoading}
-            type="submit"
-            variant="outline"
-            className="cursor-pointer self-stretch"
-          >
-            {isLoading ? "Generating..." : "Generate link"}
-          </FormButton>
-        </div>
+            ))}
+            <FormButton
+              disabled={isLoading}
+              type="submit"
+              variant="outline"
+              className="cursor-pointer self-stretch"
+            >
+              {isLoading ? "Generating..." : "Generate link"}
+            </FormButton>
+          </div>
+        )}
       </form>
     </div>
   );
