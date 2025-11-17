@@ -1,10 +1,10 @@
 ---
 import { ContactForm } from "../molecules/contact-form/ContactForm";
-import { FormField, PossibleSuggestions } from "../molecules/contact-form/types";
+import { ContactFormField, PossibleSuggestions } from "../molecules/contact-form/types";
 
 export interface SuggestionFormProps {
   whatsSuggested: PossibleSuggestions;
-  formFields: FormField[];
+  formFields: ContactFormField[];
 }
 
 const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;

@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import ReferralImage from "../assets/referralImage.svg";
 import SubpageHero from "../components/molecules/SubpageHero.astro";
 import Layout from "../layouts/Layout.astro";
+import {ReferralLinkForm} from "../components/molecules/ReferralLinkForm";
 
 const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-stretch";
 ---
@@ -26,35 +27,40 @@ const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-st
         class="min-[900px]:hidden block"
       />
       <div
-        class="w-full min-[900px]:w-1/2 h-fit flex flex-nowrap flex-col justify-start items-start gap-3">
-        <h3 class="text-2xl leading-none font-semibold text-black">
-          ENS Holiday Awards
-        </h3>
-        <p class={descriptionStyles}>
-          The team at <a
-            href="https://namehashlabs.org/"
-            target="_blank"
-            class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
+        class="w-full min-[900px]:w-1/2 h-fit flex flex-nowrap flex-col justify-start items-start gap-10">
+        <div class="flex flex-nowrap flex-col justify-start items-start gap-5">
+          <h3 class="text-2xl leading-none font-semibold text-black">
+            ENS Holiday Awards
+          </h3>
+          <div class="flex flex-nowrap flex-col justify-start items-start gap-2">
+            <p class={descriptionStyles}>
+              The team at <a
+                href="https://namehashlabs.org/"
+                target="_blank"
+                class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
             >NameHash Labs</a
-          > is coordinating the launch of an ENS Holiday Awards program.
-        </p>
-        <p class={descriptionStyles}>
-          <a
-            href="https://discuss.ens.domains/t/temp-check-ens-holiday-awards/21359"
-            target="_blank"
-            class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
-            >ENS Holiday Awards</a
-          > are envisioned as a trial incentive framework that will issue awards
-          in $ENS for referred .eth name registrations and renewals.
-        </p>
-        <p class={descriptionStyles}>
-          For details and to contribute to the discussion, please visit <a
-            href="https://discuss.ens.domains/t/temp-check-ens-holiday-awards/21359"
-            target="_blank"
-            class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
+            > is coordinating the launch of an ENS Holiday Awards program.
+            </p>
+            <p class={descriptionStyles}>
+              <a
+                  href="https://discuss.ens.domains/t/temp-check-ens-holiday-awards/21359"
+                  target="_blank"
+                  class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
+              >ENS Holiday Awards</a
+              > are envisioned as a trial incentive framework that will issue awards
+              in $ENS for referred .eth name registrations and renewals.
+            </p>
+            <p class={descriptionStyles}>
+              For details and to contribute to the discussion, please visit <a
+                href="https://discuss.ens.domains/t/temp-check-ens-holiday-awards/21359"
+                target="_blank"
+                class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
             >the ENS Holiday Awards discussion on the ENS DAO Forum</a
-          >.
-        </p>
+            >.
+            </p>
+          </div>
+        </div>
+        <ReferralLinkForm client:load />
       </div>
       <Image
         alt="ENS Referral Program"

@@ -1,10 +1,10 @@
-import { FormButton } from "@/components/molecules/contact-form/form-elements/FormButton.tsx";
-import { Input } from "@/components/molecules/contact-form/form-elements/Input.tsx";
-import { TextArea } from "@/components/molecules/contact-form/form-elements/TextArea.tsx";
+import { FormButton } from "@/components/atoms/form-elements/FormButton.tsx";
+import { Input } from "@/components/atoms/form-elements/Input.tsx";
+import { TextArea } from "@/components/atoms/form-elements/TextArea.tsx";
 import {
   type ContactFormDataProps,
-  EnsAwardsFormFields,
-  type FormField,
+  EnsAwardsContactFormFields,
+  type ContactFormField,
   type PossibleSuggestions,
   type SuggestionFormDataProps,
 } from "@/components/molecules/contact-form/types.ts";
@@ -18,14 +18,12 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import React, { type FormEvent, useEffect, useState } from "react";
 import * as Yup from "yup";
-
-interface ValidationErrors {
-  [key: string]: string;
-}
+import type {ValidationErrors} from "@/components/molecules/form/types.ts";
+import {capitalizeFormLabel} from "@/utils";
 
 interface FormProps {
   whatsSuggested: PossibleSuggestions;
-  formFields: FormField[];
+  formFields: ContactFormField[];
   submissionEndpoint: string;
 }
 
@@ -97,20 +95,11 @@ const closeOverlayIcon = (
   </svg>
 );
 
-const getInitialValidationErrorsState = (formFields: FormField[]): ValidationErrors => {
+const getInitialValidationErrorsState = (formFields: ContactFormField[]): ValidationErrors => {
   const validationErrorsInitialState: ValidationErrors = {};
   formFields.forEach((field) => (validationErrorsInitialState[field.label] = ""));
 
   return validationErrorsInitialState;
-};
-
-const capitalizeLabel = (label: string): string => {
-  //Special treatment for URL field
-  if (label === "url") {
-    return label.toUpperCase();
-  }
-
-  return label.charAt(0).toUpperCase() + label.slice(1);
 };
 
 /**
@@ -167,17 +156,17 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
     const formData: FormData = new FormData(e.target as HTMLFormElement);
 
     const data: SuggestionFormDataProps = {
-      name: formData.get(EnsAwardsFormFields.Name)?.toString().trim() || "",
-      url: formData.get(EnsAwardsFormFields.Url)?.toString().trim() || "",
-      description: formData.get(EnsAwardsFormFields.Description)?.toString().trim() || "",
-      app: formData.get(EnsAwardsFormFields.App)?.toString().trim() || "",
-      project: formData.get(EnsAwardsFormFields.Project)?.toString().trim() || "",
-      benchmark: formData.get(EnsAwardsFormFields.Benchmark)?.toString().trim() || "",
+      name: formData.get(EnsAwardsContactFormFields.Name)?.toString().trim() || "",
+      url: formData.get(EnsAwardsContactFormFields.Url)?.toString().trim() || "",
+      description: formData.get(EnsAwardsContactFormFields.Description)?.toString().trim() || "",
+      app: formData.get(EnsAwardsContactFormFields.App)?.toString().trim() || "",
+      project: formData.get(EnsAwardsContactFormFields.Project)?.toString().trim() || "",
+      benchmark: formData.get(EnsAwardsContactFormFields.Benchmark)?.toString().trim() || "",
       "requested benchmark result update":
-        formData.get(EnsAwardsFormFields.BenchmarkResultUpdate)?.toString().trim() || "",
+        formData.get(EnsAwardsContactFormFields.BenchmarkResultUpdate)?.toString().trim() || "",
       source: formData.get("source")?.toString().trim() || "",
       "contract address":
-        formData.get(EnsAwardsFormFields.ContractAddress)?.toString().trim() || "",
+        formData.get(EnsAwardsContactFormFields.ContractAddress)?.toString().trim() || "",
     };
 
     try {
@@ -237,9 +226,9 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
         for (const err of validationError.inner) {
           if (
             err.path &&
-            Object.values(EnsAwardsFormFields).includes(err.path as EnsAwardsFormFields)
+            Object.values(EnsAwardsContactFormFields).includes(err.path as EnsAwardsContactFormFields)
           ) {
-            errors[err.path as EnsAwardsFormFields] = err.message;
+            errors[err.path as EnsAwardsContactFormFields] = err.message;
           }
         }
 
@@ -388,12 +377,12 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
                 className="flex flex-col flex-nowrap justify-start items-start gap-2 self-stretch"
               >
                 <label htmlFor={field.label} className={labelStyles}>
-                  {addPrefixToLabel(capitalizeLabel(field.label), whatsSuggested)}
+                  {addPrefixToLabel(capitalizeFormLabel(field.label), whatsSuggested)}
                   {!field.required && " (optional)"}
                 </label>
                 {[
-                  EnsAwardsFormFields.Description,
-                  EnsAwardsFormFields.BenchmarkResultUpdate,
+                  EnsAwardsContactFormFields.Description,
+                  EnsAwardsContactFormFields.BenchmarkResultUpdate,
                 ].includes(field.label) ? (
                   <TextArea
                     rows={4}
