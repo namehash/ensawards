@@ -3,8 +3,8 @@ import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import { TextArea } from "@/components/atoms/form-elements/TextArea.tsx";
 import {
   type ContactFormDataProps,
-  EnsAwardsContactFormFields,
   type ContactFormField,
+  EnsAwardsContactFormFields,
   type PossibleSuggestions,
   type SuggestionFormDataProps,
 } from "@/components/molecules/contact-form/types.ts";
@@ -14,12 +14,12 @@ import {
   bestPracticeSuggestionFormSchema,
   contractSuggestionFormSchema,
 } from "@/components/molecules/contact-form/validation.ts";
+import type { ValidationErrors } from "@/components/molecules/form/types.ts";
+import { capitalizeFormLabel } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import React, { type FormEvent, useEffect, useState } from "react";
 import * as Yup from "yup";
-import type {ValidationErrors} from "@/components/molecules/form/types.ts";
-import {capitalizeFormLabel} from "@/utils";
 
 interface FormProps {
   whatsSuggested: PossibleSuggestions;
@@ -226,7 +226,9 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
         for (const err of validationError.inner) {
           if (
             err.path &&
-            Object.values(EnsAwardsContactFormFields).includes(err.path as EnsAwardsContactFormFields)
+            Object.values(EnsAwardsContactFormFields).includes(
+              err.path as EnsAwardsContactFormFields,
+            )
           ) {
             errors[err.path as EnsAwardsContactFormFields] = err.message;
           }

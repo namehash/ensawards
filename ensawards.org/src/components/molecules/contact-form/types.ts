@@ -1,6 +1,6 @@
 // Reference form inputs from `Contact us` form at www.namehashlabs.org
 // where we forward requests from our form as well
-import type {FormField} from "@/components/molecules/form/types.ts";
+import type { FormField } from "@/components/molecules/form/types.ts";
 
 enum NameHashFormFields {
   Name = "name",

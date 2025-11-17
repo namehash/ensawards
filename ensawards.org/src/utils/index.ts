@@ -1,7 +1,7 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { getUnixTime } from "date-fns";
-import type {Address} from "viem";
+import type { Address } from "viem";
 
 /**
  * Checks whether a given string is a valid slug.
@@ -68,7 +68,8 @@ export const capitalizeFormLabel = (label: string): string => {
   return label.charAt(0).toUpperCase() + label.slice(1);
 };
 
-export const truncateAddress = (address: Address) => `${address.slice(0,5)}...${address.slice(-4)}`;
+export const truncateAddress = (address: Address) =>
+  `${address.slice(0, 5)}...${address.slice(-4)}`;
 
 /**
  * Date marking the approximate end of the ENS contract naming season event.
