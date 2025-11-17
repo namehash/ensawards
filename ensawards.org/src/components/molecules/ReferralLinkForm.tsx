@@ -28,10 +28,14 @@ enum ENSAwardsReferralLinkFormFields {
 
 const generateReferralLinkFormSchema = Yup.object().shape({
   "ethereum address": Yup.string()
-    .required("Referrer's Ethereum address is required")
+    .required("Ethereum address is required")
     .test({
       name: "address-test",
+      exclusive: false,
       test(value, ctx) {
+        if (value.length === 0) {
+          return ctx.createError({ message: "Ethereum address is required" });
+        }
         if (!isAddress(value, { strict: false })) {
           return ctx.createError({ message: "Invalid Ethereum addresss" });
         }
@@ -87,13 +91,15 @@ export function ReferralLinkForm() {
       });
 
       // Proceed with form submission if validation is successful
-      setReferrerAddress(data["ethereum address"]);
+      setReferrerAddress(data[ENSAwardsReferralLinkFormFields.EthereumAddress]);
 
       // Reset validation errors on successful validation
       setValidationErrors(getInitialValidationErrorsState(formFields));
 
       // Generate the referral link (we know that input data is a valid address)
-      setGeneratedLink(buildEnsReferralUrl(data["ethereum address"] as Address).href);
+      setGeneratedLink(
+        buildEnsReferralUrl(data[ENSAwardsReferralLinkFormFields.EthereumAddress] as Address).href,
+      );
       setSuccessfulFormSubmit(true);
     } catch (validationError) {
       if (validationError instanceof Yup.ValidationError) {
@@ -149,7 +155,6 @@ export function ReferralLinkForm() {
         className="h-full w-full flex flex-col flex-nowrap justify-start items-start gap-5 self-stretch"
         noValidate
       >
-        {/*TODO: Redesign it to show the generated link and allow easy copying*/}
         <div
           className={cn([
             successfulFormSubmit
