@@ -192,7 +192,7 @@ export function ReferralLinkForm() {
         ) : (
           <div
             className={cn(
-              "transition-all duration-300 self-stretch flex flex-col justify-start items-start gap-5",
+              "transition-all duration-300 self-stretch flex flex-col justify-start items-start gap-3",
             )}
           >
             {formFields.map((field) => (
