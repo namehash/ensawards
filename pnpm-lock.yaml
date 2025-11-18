@@ -37,8 +37,8 @@ importers:
         specifier: ^0.35.0
         version: 0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
       '@ensnode/ensnode-sdk':
-        specifier: ^0.35.0
-        version: 0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+        specifier: ^0.36.0
+        version: 0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
       '@headlessui/react':
         specifier: ^2.2.7
         version: 2.2.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -389,8 +389,13 @@ packages:
     peerDependencies:
       viem: ^2.22.13
 
-  '@ensnode/ensnode-sdk@0.35.0':
-    resolution: {integrity: sha512-OZWlGlWwg7bngbVKIC7qpswSFlJb62JhTkCET+lrhmUg5HRNZla5BO0zQHEz7aysMB0dJK7DDVuGblW4CIOzNw==}
+  '@ensnode/datasources@0.36.0':
+    resolution: {integrity: sha512-ySFO3l3HxKdxcFsw9UbFrefzQkAh7oA+PhTb5uiCYuxUZwZmozsi6v7a6Jz76G9034cQDgRIipB1KIcd83u65w==}
+    peerDependencies:
+      viem: ^2.22.13
+
+  '@ensnode/ensnode-sdk@0.36.0':
+    resolution: {integrity: sha512-e3kMRTWGQKg1ccCUVmJ//2EDS7J9KeFKyqMJT3k97PqWLa3oVWhCcYZau1JPm1ZsQfewNVFUxGmX7mLtbHf6Tg==}
     peerDependencies:
       viem: ^2.22.13
 
@@ -744,6 +749,15 @@ packages:
 
   '@ponder/utils@0.2.10':
     resolution: {integrity: sha512-h9y+L+dUEOkLn0oh0GECJ1kWJNzrFtLoMPODR7NsvqGcovq5ZaGFvFxb7+iDOUN6f6xn2M+cUoYjkmMsskw8+A==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+      viem: '>=2'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@ponder/utils@0.2.14':
+    resolution: {integrity: sha512-O4t14Hb6/tVcD0WoS13ghFnDntP6x33/DDvA+sd0tRjemzS+Cne4YTkXl9TKW3AawBIEwMjGrGbAn82C8gXQWQ==}
     peerDependencies:
       typescript: '>=5.0.4'
       viem: '>=2'
@@ -3507,10 +3521,18 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@ensnode/ensnode-sdk@0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
+  '@ensnode/datasources@0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
     dependencies:
+      '@ponder/utils': 0.2.14(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+      viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
+    transitivePeerDependencies:
+      - typescript
+
+  '@ensnode/ensnode-sdk@0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
+    dependencies:
+      '@adraffy/ens-normalize': 1.11.1
       '@ensdomains/address-encoder': 1.1.4
-      '@ensnode/datasources': 0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+      '@ensnode/datasources': 0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
       viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
       zod: 3.25.76
     transitivePeerDependencies:
@@ -3760,6 +3782,12 @@ snapshots:
   '@oslojs/encoding@1.1.0': {}
 
   '@ponder/utils@0.2.10(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
+    dependencies:
+      viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
+    optionalDependencies:
+      typescript: 5.8.3
+
+  '@ponder/utils@0.2.14(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
     dependencies:
       viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
     optionalDependencies:
