@@ -69,7 +69,7 @@ export const capitalizeFormLabel = (label: string): string => {
 };
 
 export const truncateAddress = (address: Address) =>
-  `${address.slice(0, 5)}...${address.slice(-4)}`;
+  `${address.slice(0, 6)}...${address.slice(-4)}`;
 
 /**
  * Date marking the approximate end of the ENS contract naming season event.

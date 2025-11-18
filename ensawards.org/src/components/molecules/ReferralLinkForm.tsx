@@ -28,16 +28,16 @@ enum ENSAwardsReferralLinkFormFields {
 
 const generateReferralLinkFormSchema = Yup.object().shape({
   "ethereum address": Yup.string()
-    .required("Ethereum address is required")
+    .required("Address is required")
     .test({
       name: "address-test",
       exclusive: false,
       test(value, ctx) {
         if (value.length === 0) {
-          return ctx.createError({ message: "Ethereum address is required" });
+          return ctx.createError({ message: "Address is required" });
         }
         if (!isAddress(value, { strict: false })) {
-          return ctx.createError({ message: "Invalid Ethereum addresss" });
+          return ctx.createError({ message: "Invalid address" });
         }
 
         return true;
@@ -162,9 +162,7 @@ export function ReferralLinkForm() {
             )}
           >
             <div className="w-full h-fit flex flex-col items-start justify-start gap-2">
-              <p className="text-sm leading-none font-medium">
-                Your referral link for {truncateAddress(referrerAddress as Address)}:
-              </p>
+              <p className="text-sm leading-none font-medium">Your ENS Referral Program link:</p>
               <div className="w-full h-[38px] flex flex-row justify-start items-center gap-0.5 p-[5px] pl-3 box-border bg-neutral-100 border border-input rounded-md shadow-xs">
                 <p className="w-full text-sm leading-normal font-normal text-muted-foreground truncate">
                   {generatedLink}
@@ -208,7 +206,7 @@ export function ReferralLinkForm() {
                   type={field.type}
                   disabled={isLoading}
                   name={field.label}
-                  placeholder="0x"
+                  placeholder="Enter your address"
                   autoComplete="off"
                   onChange={handleInputChange}
                   error={validationErrors[field.label]}
