@@ -429,6 +429,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
               </FormButton>
               <FormButton
                 disabled={isLoading}
+                loading={isLoading}
                 type="submit"
                 className="cursor-pointer rounded-full"
               >

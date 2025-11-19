@@ -34,8 +34,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       '@ensnode/datasources':
-        specifier: ^0.35.0
-        version: 0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
+        specifier: ^0.36.0
+        version: 0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
       '@ensnode/ensnode-sdk':
         specifier: ^0.36.0
         version: 0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
@@ -383,11 +383,6 @@ packages:
 
   '@ensdomains/address-encoder@1.1.4':
     resolution: {integrity: sha512-hBY6VxVw9A1cMPOKDIvPB2nlmgaw2dvrrj/p/9tkGWmD+qdfKYZTdZuSdFcUGxhhzEB4HeLG/a98ytlTq84KcA==}
-
-  '@ensnode/datasources@0.35.0':
-    resolution: {integrity: sha512-67yPibdjaImwyeJlZtqq8qsEmEt609+H3P4r49SMfPRG7WSCHgmlCtquORDpjsqw3x7fqpBCJN9fEmzeIIwXAg==}
-    peerDependencies:
-      viem: ^2.22.13
 
   '@ensnode/datasources@0.36.0':
     resolution: {integrity: sha512-ySFO3l3HxKdxcFsw9UbFrefzQkAh7oA+PhTb5uiCYuxUZwZmozsi6v7a6Jz76G9034cQDgRIipB1KIcd83u65w==}
@@ -746,15 +741,6 @@ packages:
 
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
-
-  '@ponder/utils@0.2.10':
-    resolution: {integrity: sha512-h9y+L+dUEOkLn0oh0GECJ1kWJNzrFtLoMPODR7NsvqGcovq5ZaGFvFxb7+iDOUN6f6xn2M+cUoYjkmMsskw8+A==}
-    peerDependencies:
-      typescript: '>=5.0.4'
-      viem: '>=2'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
 
   '@ponder/utils@0.2.14':
     resolution: {integrity: sha512-O4t14Hb6/tVcD0WoS13ghFnDntP6x33/DDvA+sd0tRjemzS+Cne4YTkXl9TKW3AawBIEwMjGrGbAn82C8gXQWQ==}
@@ -3514,13 +3500,6 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
 
-  '@ensnode/datasources@0.35.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
-    dependencies:
-      '@ponder/utils': 0.2.10(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
-      viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
-    transitivePeerDependencies:
-      - typescript
-
   '@ensnode/datasources@0.36.0(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
     dependencies:
       '@ponder/utils': 0.2.14(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))
@@ -3780,12 +3759,6 @@ snapshots:
       fastq: 1.19.1
 
   '@oslojs/encoding@1.1.0': {}
-
-  '@ponder/utils@0.2.10(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
-    dependencies:
-      viem: 2.37.13(typescript@5.8.3)(zod@3.25.76)
-    optionalDependencies:
-      typescript: 5.8.3
 
   '@ponder/utils@0.2.14(typescript@5.8.3)(viem@2.37.13(typescript@5.8.3)(zod@3.25.76))':
     dependencies:

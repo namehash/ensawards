@@ -6,4 +6,5 @@ export interface FormField {
   label: string;
   type: "text" | "url";
   required: boolean;
+  placeholder?: string;
 }
