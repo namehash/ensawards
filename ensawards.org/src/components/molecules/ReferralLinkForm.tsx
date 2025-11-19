@@ -4,7 +4,7 @@ import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import type { FormField, ValidationErrors } from "@/components/molecules/form/types.ts";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { capitalizeFormLabel } from "@/utils";
-import { getENSNodeUrl } from "@/utils/envVariables.ts";
+import { getENSNodeUrl } from "@/utils/env/onClientAccess.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeClient, type Name, type ResolveRecordsResponse } from "@ensnode/ensnode-sdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
