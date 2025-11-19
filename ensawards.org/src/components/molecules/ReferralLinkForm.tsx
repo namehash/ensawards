@@ -110,8 +110,7 @@ export function ReferralLinkForm() {
       const errors: ValidationErrors = getInitialValidationErrorsState(formFields);
 
       // Handle wider array of the detailed validation errors.
-      errors[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient] =
-        "Invalid name or address";
+      errors[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient] = "Invalid name or address";
 
       // Check for initial validation error
       if (validationError instanceof Yup.ValidationError) {
