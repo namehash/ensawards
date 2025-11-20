@@ -13,6 +13,7 @@ import {
 } from "@lucide/astro";
 import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
 import VoicesFromTheCommunityBackgroundImage from "../assets/voicesFromTheCommunityBackground.png";
+import Web3NeedsToChangeImage from "../assets/web3NeedsToChangeImage.png";
 import ContractNamingIncentivesBanner from "../components/atoms/ContractNamingIncentivesBanner.astro";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
@@ -134,6 +135,7 @@ const containerBaseStyles =
 const sectionHeaderBaseStyles = "text-2xl leading-normal font-semibold text-black";
 const itemHeadersBaseStyles = "text-lg leading-normal font-semibold text-black";
 const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-foreground";
+const backgroundGreyStyles = "absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[40px] bg-neutral-50 bottom-0";
 
 const daoScores = contractPipeline();
 ---
@@ -149,6 +151,19 @@ const daoScores = contractPipeline();
   <ContractNamingHero />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] py-5 sm:py-[60px] px-5 sm:px-8">
+    <div class={cn(
+        containerBaseStyles,
+        "flex flex-col-reverse sm:flex-row justify-start items-center gap-5 sm:gap-10",
+    )}>
+        <div class="flex flex-col justify-start items-start gap-5 relative z-10">
+          <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>Web3 UX needs to change</h3>
+          <p class={itemTextBaseStyles}>Every time users interact with a smart contract, they’re asked
+            to trust a long, meaningless hex address.
+          </p>
+          <p class={itemTextBaseStyles}>Not only does this make Ethereum harder to use, it leaves users exposed to address spoofing and phishing attacks from scammers.</p>
+        </div>
+        <Image quality={100} src={Web3NeedsToChangeImage} alt="future of Web3 UX" class="w-full sm:w-1/2 sm:min-w-1/2 relative z-10"/>
+    </div>
     <div class={cn(containerBaseStyles, "gap-6 sm:gap-10")}>
       <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>
         Why name your contracts now?
@@ -182,7 +197,7 @@ const daoScores = contractPipeline();
         "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",
       )}>
       <div
-        class="absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[40px] bg-neutral-50 bottom-0">
+        class={backgroundGreyStyles}>
       </div>
       <h3
         class={cn(
@@ -278,7 +293,7 @@ const daoScores = contractPipeline();
         "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",
       )}>
       <div
-        class="absolute w-screen sm:w-[calc(100vw-15px)] h-full sm:h-[calc(100%+30px)] box-border py-6 sm:py-[40px] bg-neutral-50 bottom-0 flex justify-center items-center">
+        class={cn(backgroundGreyStyles, "sm:h-[calc(100%+30px)] flex justify-center items-center")}>
         <Image quality={100} src={VoicesFromTheCommunityBackgroundImage} alt="avatars of ENS community" class="max-sm:hidden relative bottom-0 sm:h-full sm:w-auto"/>
       </div>
       <h3
