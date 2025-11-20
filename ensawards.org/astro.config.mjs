@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, envField } from "astro/config";
+import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -17,14 +17,5 @@ export default defineConfig({
   redirects: {
     "/benchmarks": "/leaderboards/app",
     "/benchmarks/[app]": "/app/[app]",
-  },
-  env: {
-    schema: {
-      ENSNODE_URL: envField.string({
-        context: "client",
-        access: "public",
-        default: "https://api.alpha.ensnode.io",
-      }),
-    },
   },
 });

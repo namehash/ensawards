@@ -6,7 +6,7 @@ import { DEFAULT_ENSNODE_URL } from "@/utils/env/index.ts";
  * If the env variable is undefined returns a default fallback.
  */
 export const getENSNodeUrl = (): URL => {
-  const maybeEnvVariableURL = import.meta.env.ENSNODE_URL;
+  const maybeEnvVariableURL = import.meta.env.PUBLIC_ENSNODE_URL;
 
   // Check for empty string is necessary due to GitHub's fallback mechanism
   // https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
