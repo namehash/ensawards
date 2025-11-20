@@ -5,6 +5,8 @@ import { DEFAULT_ENSNODE_URL } from "@/utils/env/index.ts";
  * specifically for the unit testing.
  *
  * If the env variable is undefined returns a default fallback.
+ *
+ * @throws if the value set for VITE_ENSNODE_URL cannot be converted to a `URL`.
  */
 export const getENSNodeUrlForTests = (): URL => {
   const maybeEnvVariableURL = process.env.VITE_ENSNODE_URL;

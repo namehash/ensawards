@@ -57,7 +57,7 @@ function buildEnsReferralUrl(address: Address): URL {
 
 export function ReferralLinkForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [overallFormErrorMessage, setOverallFormErrorMessage] = useState("");
   const [successfulFormSubmit, setSuccessfulFormSubmit] = useState(false);
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
     getInitialValidationErrorsState(formFields),
@@ -69,7 +69,7 @@ export function ReferralLinkForm() {
   });
 
   const submitForm = async (e: FormEvent) => {
-    setErrorMessage("");
+    setOverallFormErrorMessage("");
     e.preventDefault();
     setIsLoading(true);
 
@@ -80,61 +80,89 @@ export function ReferralLinkForm() {
         formData.get(ENSAwardsReferralLinkFormFields.ReferralAwardRecipient)?.toString() || "",
     };
 
+    // Validate form data against the schema (initial validation)
     try {
-      // Validate form data against the schema (initial validation)
       await generateReferralLinkFormSchema.validate(data, {
         abortEarly: false,
       });
+    } catch (validationError) {
+      // Check for initial validation error
+      if (validationError instanceof Yup.ValidationError) {
+        const singleInputError = validationError.inner[0];
+        setInputError(singleInputError.message);
+      }
+      setIsLoading(false);
+      return;
+    }
 
-      // Proceed with detailed validation if the initial one is successful
-      const recipientInput = data[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient];
+    // Proceed with detailed validation if the initial one is successful
+    const recipientInput = data[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient];
 
-      // Check if the input is a valid address
-      if (isAddress(recipientInput, { strict: false })) {
-        // Generate the referral link
-        setGeneratedLink(buildEnsReferralUrl(recipientInput).href);
-        setSuccessfulFormSubmit(true);
+    // Check if the input is a valid address
+    if (isAddress(recipientInput, { strict: false })) {
+      // Generate the referral link
+      setGeneratedLink(buildEnsReferralUrl(recipientInput).href);
+      setSuccessfulFormSubmit(true);
 
-        // Reset validation errors on successful validation
-        setValidationErrors(getInitialValidationErrorsState(formFields));
+      // Reset validation errors on successful validation
+      setValidationErrors(getInitialValidationErrorsState(formFields));
 
+      setIsLoading(false);
+      return;
+    }
+
+    // Check if the input is a "normalizable" ENS name
+    let normalizedENSName: Name = "";
+
+    try {
+      normalizedENSName = normalize(recipientInput);
+    } catch (error) {
+      // Display a generic message (ignore the details on purpose)
+      setInputError("Invalid name or address");
+      setIsLoading(false);
+      return;
+    }
+
+    // If the name is normalizable proceed with resolution
+    try {
+      const resolvedAddress = await resolveEthAddress(normalizedENSName);
+
+      if (resolvedAddress === null) {
+        setInputError("No Ethereum address configured for this name.");
+        setIsLoading(false);
         return;
       }
 
-      // Check if the input is a "normalizable" ENS name
-      const normalizedENSName = normalize(recipientInput);
+      setGeneratedLink(buildEnsReferralUrl(resolvedAddress).href);
 
-      await lookupENSName(normalizedENSName);
-    } catch (validationError) {
-      // This will only handle validation errors as lookup errors are handled separately
-      const errors: ValidationErrors = getInitialValidationErrorsState(formFields);
+      setSuccessfulFormSubmit(true);
 
-      // Handle wider array of the detailed validation errors.
-      errors[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient] = "Invalid name or address";
-
-      // Check for initial validation error
-      if (validationError instanceof Yup.ValidationError) {
-        for (const err of validationError.inner) {
-          if (
-            err.path &&
-            Object.values(ENSAwardsReferralLinkFormFields).includes(
-              err.path as ENSAwardsReferralLinkFormFields,
-            )
-          ) {
-            errors[err.path as ENSAwardsReferralLinkFormFields] = err.message;
-          }
-        }
+      setValidationErrors(getInitialValidationErrorsState(formFields));
+    } catch (error) {
+      // Handle all possible errors of the resolution
+      if (error instanceof TypeError) {
+        // Likely a network error
+        console.error("Network error: ", error);
+        setOverallFormErrorMessage("Connection lost. Please check your connection and try again.");
+      } else if (error instanceof Error) {
+        console.log(error);
+        setOverallFormErrorMessage(error.message);
+      } else {
+        setOverallFormErrorMessage("Request error. Please try again later.");
       }
-
-      setErrorMessage("The input is invalid. Please check and try again.");
-      setValidationErrors(errors);
-    } finally {
-      setIsLoading(false);
     }
+
+    setIsLoading(false);
   };
 
-  const lookupENSName = async (name: Name) => {
-    const lookupPromise = client.resolveRecords(name, {
+  const setInputError = (message: string) => {
+    const errors: ValidationErrors = getInitialValidationErrorsState(formFields);
+    errors[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient] = message;
+    setValidationErrors(errors);
+  };
+
+  const resolveEthAddress = async (name: Name): Promise<Address | null> => {
+    const resolutionPromise = client.resolveRecords(name, {
       addresses: [60], // ETH CoinType
     });
 
@@ -143,45 +171,21 @@ export function ReferralLinkForm() {
 
     const timeoutPromise = new Promise<Response>((resolve, reject) => {
       setTimeout(() => {
-        reject(new Error("Request timeout. Please try again later."));
+        reject(new Error("Request timeout. Please try again."));
       }, timeoutLimit);
     });
 
-    try {
-      // Prevent the request from taking too long
-      const response = await Promise.race([lookupPromise, timeoutPromise]);
+    // Prevent the request from taking too long
+    const response = await Promise.race([resolutionPromise, timeoutPromise]);
 
-      const resolvedAddress = (response as ResolveRecordsResponse<{ addresses: 60[] }>).records
-        .addresses[60];
-
-      if (resolvedAddress === null) {
-        setErrorMessage("No Ethereum address configured for this name.");
-        return;
-      }
-
-      setGeneratedLink(buildEnsReferralUrl(resolvedAddress as Address).href);
-
-      setSuccessfulFormSubmit(true);
-
-      setValidationErrors(getInitialValidationErrorsState(formFields));
-    } catch (lookupError) {
-      // Handle all possible errors of the resolution
-      if (lookupError instanceof TypeError) {
-        // Likely a network error
-        console.error("Network error: ", lookupError);
-        setErrorMessage("Connection lost. Please check your connection and try again.");
-      } else if (lookupError instanceof Error) {
-        setErrorMessage(lookupError.message);
-      } else {
-        setErrorMessage("Request error. Please try again later.");
-      }
-    }
+    return (response as ResolveRecordsResponse<{ addresses: 60[] }>).records
+      .addresses[60] as Address;
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     setValidationErrors({ ...validationErrors, [name]: "" });
-    setErrorMessage("");
+    setOverallFormErrorMessage("");
   };
 
   const verticalFlex = "flex flex-col justify-start items-center";
@@ -193,10 +197,10 @@ export function ReferralLinkForm() {
         verticalFlex,
       )}
     >
-      {errorMessage && (
+      {overallFormErrorMessage && (
         <span className="flex flex-row justify-start items-center gap-3 py-3 px-4 rounded-lg border border-input bg-white self-stretch">
           <CircleAlertIcon className="text-destructive h-4 w-4" />
-          <p className="text-destructive font-medium text-sm">{errorMessage}</p>
+          <p className="text-destructive font-medium text-sm">{overallFormErrorMessage}</p>
         </span>
       )}
       <div className={cn(verticalFlex, "gap-5")}>

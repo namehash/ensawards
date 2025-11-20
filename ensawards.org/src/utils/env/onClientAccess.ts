@@ -4,6 +4,8 @@ import { DEFAULT_ENSNODE_URL } from "@/utils/env/index.ts";
  * Returns the ENSNode public URL defined in the .env file
  *
  * If the env variable is undefined returns a default fallback.
+ *
+ * @throws if the value set for PUBLIC_ENSNODE_URL cannot be converted to a `URL`.
  */
 export const getENSNodeUrl = (): URL => {
   const maybeEnvVariableURL = import.meta.env.PUBLIC_ENSNODE_URL;
