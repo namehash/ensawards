@@ -1,5 +1,7 @@
 // Reference form inputs from `Contact us` form at www.namehashlabs.org
 // where we forward requests from our form as well
+import type { FormField } from "@/components/molecules/form/types.ts";
+
 enum NameHashFormFields {
   Name = "name",
   Email = "email",
@@ -8,7 +10,7 @@ enum NameHashFormFields {
   Source = "source",
 }
 
-export enum EnsAwardsFormFields {
+export enum EnsAwardsContactFormFields {
   Name = "name",
   Url = "url",
   Description = "description",
@@ -44,8 +46,6 @@ export interface SuggestionFormDataProps {
 
 export type PossibleSuggestions = "app" | "best practice" | "benchmark result" | "dao" | "contract";
 
-export interface FormField {
-  label: EnsAwardsFormFields;
-  type: "text" | "url";
-  required: boolean;
+export interface ContactFormField extends Omit<FormField, "label"> {
+  label: EnsAwardsContactFormFields;
 }
