@@ -12,6 +12,7 @@ import {
   Trophy,
 } from "@lucide/astro";
 import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
+import VoicesFromTheCommunityBackgroundImage from "../assets/voicesFromTheCommunityBackground.png";
 import ContractNamingIncentivesBanner from "../components/atoms/ContractNamingIncentivesBanner.astro";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
@@ -114,7 +115,7 @@ const voicesFromTheCommunity: QuoteCardData[] = [
       role: "Fire Eyes DAO",
       ensProfile: "https://app.ens.domains/james.eth",
     },
-    avatarPath: "/src/assets/jamesEthAvatar.svg",
+    avatarPath: "/src/assets/jamesEthAvatar.png",
   },
   {
     quote:
@@ -277,7 +278,8 @@ const daoScores = contractPipeline();
         "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",
       )}>
       <div
-        class="absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[40px] bg-neutral-50 bottom-0">
+        class="absolute w-screen sm:w-[calc(100vw-15px)] h-full sm:h-[calc(100%+30px)] box-border py-6 sm:py-[40px] bg-neutral-50 bottom-0 flex justify-center items-center">
+        <Image quality={100} src={VoicesFromTheCommunityBackgroundImage} alt="avatars of ENS community" class="max-sm:hidden relative bottom-0 sm:h-full sm:w-auto"/>
       </div>
       <h3
         class={cn(
