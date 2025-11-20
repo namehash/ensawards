@@ -1,6 +1,6 @@
 ---
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
-import { millisecondsInSecond, secondsInDay } from "date-fns/constants";
+import { secondsInDay } from "date-fns/constants";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
 interface CountdownProps {
@@ -13,18 +13,14 @@ interface CountdownProps {
 
 const { eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles }: CountdownProps =
   Astro.props;
-
-const now = Date.now() / millisecondsInSecond;
 ---
-<!--When the incentive window has closed this banner won't be displayed-->
-{now < eventUnixTimestamp &&
-<div class={cn("max-w-[590px] w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between gap-3 sm:gap-0 sm:gap-y-3 items-center px-5 py-3 rounded-xl cursor-default", bannerStyles)}>
+<div id="countdownRoot" data-timestamp={eventUnixTimestamp}
+     data-threshold={90 * secondsInDay} style={{display: "none"}} class={cn("max-w-[590px] w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between gap-3 sm:gap-0 sm:gap-y-3 items-center px-5 py-3 rounded-xl cursor-default", bannerStyles)}>
     <div class="flex flex-col justify-start items-center sm:items-start gap-0">
         <h4 class={cn("text-sm leading-normal font-semibold", textStyles)}>ACT NOW!</h4>
         <p class={cn("text-sm leading-normal font-normal max-sm:text-center", textStyles)}>{eventText}</p>
     </div>
-    {now > eventUnixTimestamp - 90 * secondsInDay &&
-            <div id="timerWrapper" data-timestamp={eventUnixTimestamp} class="flex flex-row flex-nowrap justify-start items-center gap-2">
+            <div id="timerWrapper" style={{display: "none"}} class="flex flex-row flex-nowrap justify-start items-center gap-2">
                 <div class="w-fit flex flex-col justify-center items-center gap-0">
                     <p id="daysLeft" class={cn("text-2xl leading-[30px] font-semibold", timerStyles)} />
                     <p class={cn("text-xs leading-tight font-normal opacity-60", timerStyles)}>Days</p>
@@ -40,32 +36,49 @@ const now = Date.now() / millisecondsInSecond;
                     <p class={cn("text-xs leading-tight font-normal opacity-60", timerStyles)}>Minutes</p>
                 </div>
         </div>
-    }
 </div>
 <script>
     import {secondsInMinute, millisecondsInSecond} from "date-fns/constants";
     import {differenceInDays, intervalToDuration} from "date-fns";
 
-    const wrapper = document.getElementById("timerWrapper");
-    const daysDisplay = document.getElementById("daysLeft");
-    const hoursDisplay = document.getElementById("hoursLeft");
-    const minutesDisplay = document.getElementById("minutesLeft");
+    const countdownRoots = document.querySelectorAll("#countdownRoot");
 
-    function runCountdown(eventTimestamp: number) {
-        const now = Date.now();
-        const newDuration = intervalToDuration({start: new Date(now), end: new Date(eventTimestamp)});
+    function updateCountdown(root){
+        const timerWrapper = root.querySelector("#timerWrapper");
+        const daysDisplay = root.querySelector("#daysLeft");
+        const hoursDisplay = root.querySelector("#hoursLeft");
+        const minutesDisplay = root.querySelector("#minutesLeft");
 
-        daysDisplay.innerText = String(differenceInDays(new Date(eventTimestamp), new Date(now)));
-        hoursDisplay.innerText = String(newDuration.hours ? newDuration.hours : 0);
-        minutesDisplay.innerText = String(newDuration.minutes ? newDuration.minutes : 0);
+        const nowUnixTimestamp = Date.now() / millisecondsInSecond;
+        const eventUnixTimestamp = Number(root.dataset.timestamp);
+        const threshold = Number(root.dataset.threshold)
 
-        if (eventTimestamp > now){
-            setTimeout(() => runCountdown(eventTimestamp), millisecondsInSecond * secondsInMinute);
+        if (nowUnixTimestamp < eventUnixTimestamp) {
+            root.style.display = "flex";
+        } else {
+            // When the incentive window has closed this banner won't be displayed
+            root.style.display = "none";
+            return;
+        }
+
+        if (nowUnixTimestamp > eventUnixTimestamp - threshold) {
+            timerWrapper.style.display = "flex";
+
+            const eventTimestamp = eventUnixTimestamp * millisecondsInSecond;
+            const newDuration = intervalToDuration({start: new Date(), end: new Date(eventTimestamp)});
+
+            daysDisplay.innerText = String(differenceInDays(new Date(eventTimestamp), new Date()));
+            hoursDisplay.innerText = String(newDuration.hours ? newDuration.hours : 0);
+            minutesDisplay.innerText = String(newDuration.minutes ? newDuration.minutes : 0);
+        } else {
+            timerWrapper.style.display = "none";
         }
     }
 
-    if (wrapper !== null) {
-        const eventTimestamp = Number(wrapper.dataset.timestamp) * millisecondsInSecond;
-        runCountdown(eventTimestamp);
+    function tick() {
+        countdownRoots.forEach(updateCountdown);
     }
-</script>}
+
+    tick();
+    setInterval(tick, secondsInMinute * millisecondsInSecond);
+</script>

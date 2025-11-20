@@ -1,134 +1,30 @@
 ---
 import { Image } from "astro:assets";
 import {
-  Award,
-  CopyCheck,
   ExternalLink as ExternalLinkIcon,
-  type Icon as IconType,
-  MousePointer2,
-  Pointer,
-  ShieldCheck,
-  TrendingUp,
-  Trophy,
 } from "@lucide/astro";
 import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
 import VoicesFromTheCommunityBackgroundImage from "../assets/voicesFromTheCommunityBackground.png";
 import Web3NeedsToChangeImage from "../assets/web3NeedsToChangeImage.png";
-import ContractNamingIncentivesBanner from "../components/atoms/ContractNamingIncentivesBanner.astro";
+import ContractNamingIncentivesBanner from "../components/contract-naming-season/ContractNamingIncentivesBanner.astro";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
-import { EnscribeSolidIcon } from "../components/atoms/icons/EnscribeSolidIcon";
-import { SquareReplyIcon } from "../components/atoms/icons/SquareReplyIcon";
 import TelegramIcon from "../components/atoms/icons/TelegramIcon.astro";
-import ContractNamingBestPractices from "../components/molecules/ContractNamingBestPractices.astro";
-import ContractNamingHero from "../components/molecules/ContractNamingHero.astro";
+import ContractNamingBestPractices from "../components/contract-naming-season/ContractNamingBestPractices.astro";
+import ContractNamingHero from "../components/contract-naming-season/ContractNamingHero.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
 import Layout from "../layouts/Layout.astro";
 import { OrgId } from "../types/organizations";
 import { getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
-import { QuoteCardData } from "../utils/types";
-
-interface ContentItemData {
-  name: string;
-  description: string;
-  icon: typeof IconType;
-}
-
-const whyNameYourSmartContractsNowItems: ContentItemData[] = [
-  {
-    name: "Upgrade Security",
-    description: "Named contracts demonstrate authenticity and reduce risks for your community.",
-    icon: ShieldCheck,
-  },
-  {
-    name: "Enhance UX",
-    description:
-      "Replace cryptic addresses with branded contract names (e.g., token.yourdao.eth) and ENS profiles.",
-    icon: Pointer,
-  },
-  {
-    name: "Follow Best Practices",
-    description:
-      "Shape Ethereum's identity layer. Your adoption drives new standards for apps and protocols.",
-    icon: Award,
-  },
-  {
-    name: "Earn Awards",
-    description:
-      "Gain recognition on the ENSAwards leaderboards and an opportunity to earn $ENS awards.",
-    icon: TrendingUp,
-  },
-];
-const howItWorksItems: ContentItemData[] = [
-  {
-    name: "Select contracts to name",
-    description:
-      'Prioritize "user-facing" contracts such as for DAO governance, DeFi transactions, or key multisig wallets.',
-    icon: MousePointer2,
-  },
-  {
-    name: "Assign ENS names",
-    description: "Configure ENS names for each contract according to best practices.",
-    icon: CopyCheck,
-  },
-  {
-    name: "Submit for review",
-    description:
-      "Share your updates with the ENS Contract Naming Working Group for their review on impact.",
-    icon: SquareReplyIcon,
-  },
-  {
-    name: "Earn awards",
-    description:
-      "Submissions selected by the ENS Contract Naming Working Group will receive $ENS awards.",
-    icon: Trophy,
-  },
-];
-
-const voicesFromTheCommunity: QuoteCardData[] = [
-  {
-    quote:
-      "ENS has always been about empowering the Ethereum community to name and own their digital identities. Contract Naming Season continues that mission — helping developers, DAOs, and protocols give their smart contracts names users can trust.",
-    author: {
-      name: "nick.eth",
-      role: "Creator of ENS",
-      ensProfile: "https://app.ens.domains/nick.eth",
-    },
-    avatarPath: "/src/assets/nickEthAvatar.svg",
-  },
-  {
-    quote:
-      "All smart contracts should be named onchain, for security, readability, and transparency. Contract Naming Season with Enscribe is a great opportunity to finally get it done.",
-    author: {
-      name: "brantly.eth",
-      role: "Ethereum Identity Foundation",
-      ensProfile: "https://app.ens.domains/brantly.eth",
-    },
-    avatarPath: "/src/assets/brantlyEthAvatar.svg",
-  },
-  {
-    quote:
-      "Naming Season captures what makes ENS, DAOs and Ethereum special — community-led initiatives that drive our ecosystem forward! It’s actions like naming contracts that build the culture of safety and transparency we all depend on.",
-    author: {
-      name: "james.eth",
-      role: "Fire Eyes DAO",
-      ensProfile: "https://app.ens.domains/james.eth",
-    },
-    avatarPath: "/src/assets/jamesEthAvatar.png",
-  },
-  {
-    quote:
-      "Named contracts upgrade security and enhance UX. Promoting awareness of contract naming opportunities across protocols, DAOs, and apps through Contract Naming Season is a key step forward for the Ethereum community.",
-    author: {
-      name: "lightwalker.eth",
-      role: "NameHash Labs",
-      ensProfile: "https://app.ens.domains/lightwalker.eth",
-    },
-    avatarPath: "/src/assets/lightwalkerEthAvatar.svg",
-  },
-];
+import {
+  howItWorksItems,
+  voicesFromTheCommunity,
+  whyNameYourSmartContractsNowItems
+} from "../components/contract-naming-season/data";
+import {EnscribeSolidIcon} from "../components/atoms/icons/EnscribeSolidIcon";
+import {FrequentlyAskedQuestions} from "../components/contract-naming-season/FrequentlyAskedQuestions";
 
 const containerBaseStyles =
   "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center";
@@ -150,7 +46,7 @@ const daoScores = contractPipeline();
   }}>
   <ContractNamingHero />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] py-5 sm:py-[60px] px-5 sm:px-8">
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] pt-5 sm:pt-[60px] pb-0 px-5 sm:px-8">
     <div class={cn(
         containerBaseStyles,
         "flex flex-col-reverse sm:flex-row justify-start items-center gap-5 sm:gap-10",
@@ -411,6 +307,19 @@ const daoScores = contractPipeline();
             class="text-gray-400"
           /></a
         >
+      </div>
+    </div>
+    <div
+        class={cn(
+            containerBaseStyles,
+            "py-6 sm:py-[40px] sm:pb-[60px] relative z-10",
+        )}>
+      <div
+          class={backgroundGreyStyles}>
+      </div>
+      <div class="w-full flex flex-col min-[810px]:flex-row justify-start min-[810px]:justify-between items-start gap-5 sm:gap-10 min-[810px]:gap-0 relative z-10">
+        <h3 class={cn(sectionHeaderBaseStyles, "w-full min-[810px]:w-1/2 text-left")}>Frequently asked questions</h3>
+        <FrequentlyAskedQuestions client:load/>
       </div>
     </div>
   </section>
