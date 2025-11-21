@@ -1,7 +1,9 @@
+import type {Name} from "@ensnode/ensnode-sdk";
+
 export interface QuoteAuthorData {
-  name: string;
+  name: Name;
   role: string;
-  ensProfile: string;
+  ensProfile: URL;
 }
 export interface QuoteCardData {
   quote: string;

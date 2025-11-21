@@ -96,9 +96,9 @@ const voicesFromTheCommunity: QuoteCardData[] = [
     author: {
       name: "nick.eth",
       role: "Creator of ENS",
-      ensProfile: "https://app.ens.domains/nick.eth",
+      ensProfile: new URL("https://app.ens.domains/nick.eth"),
     },
-    avatarPath: "/src/assets/nickEthAvatar.svg",
+    avatarPath: "/src/assets/nickEthAvatar.png",
   },
   {
     quote:
@@ -106,9 +106,9 @@ const voicesFromTheCommunity: QuoteCardData[] = [
     author: {
       name: "brantly.eth",
       role: "Ethereum Identity Foundation",
-      ensProfile: "https://app.ens.domains/brantly.eth",
+      ensProfile: new URL("https://app.ens.domains/brantly.eth"),
     },
-    avatarPath: "/src/assets/brantlyEthAvatar.svg",
+    avatarPath: "/src/assets/brantlyEthAvatar.png",
   },
   {
     quote:
@@ -116,7 +116,7 @@ const voicesFromTheCommunity: QuoteCardData[] = [
     author: {
       name: "james.eth",
       role: "Fire Eyes DAO",
-      ensProfile: "https://app.ens.domains/james.eth",
+      ensProfile: new URL("https://app.ens.domains/james.eth"),
     },
     avatarPath: "/src/assets/jamesEthAvatar.png",
   },
@@ -126,9 +126,9 @@ const voicesFromTheCommunity: QuoteCardData[] = [
     author: {
       name: "lightwalker.eth",
       role: "NameHash Labs",
-      ensProfile: "https://app.ens.domains/lightwalker.eth",
+      ensProfile: new URL("https://app.ens.domains/lightwalker.eth"),
     },
-    avatarPath: "/src/assets/lightwalkerEthAvatar.svg",
+    avatarPath: "/src/assets/lightwalkerEthAvatar.png",
   },
 ];
 
@@ -300,35 +300,36 @@ const daoScores = contractPipeline();
         </div>
       </LeaderboardSnippetCard>
     </div>
-    <div
-      class={cn(
-        containerBaseStyles,
-        "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",
-      )}>
-      <div
-        class={cn(
-          backgroundGreyStyles,
-          "sm:h-[calc(100%+30px)] flex justify-center items-center",
-        )}>
-        <Image
-          quality={100}
-          src={VoicesFromTheCommunityBackgroundImage}
-          alt="avatars of ENS community"
-          class="max-sm:hidden relative bottom-0 sm:h-full sm:w-auto"
-        />
-      </div>
-      <h3
-        class={cn(
-          sectionHeaderBaseStyles,
-          "relative z-10 self-stretch text-left",
-        )}>
-        Voices from the community
-      </h3>
-      <div
-        class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-start items-start gap-4 sm:gap-5">
-        {voicesFromTheCommunity.map((quote) => <QuoteCard {...quote} />)}
-      </div>
-    </div>
+    <!--TODO: After quote authors confirm they are happy with their quotes make a PR that only uncomments this section to "launch" it-->
+    <!--<div-->
+    <!--  class={cn(-->
+    <!--    containerBaseStyles,-->
+    <!--    "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",-->
+    <!--  )}>-->
+    <!--  <div-->
+    <!--    class={cn(-->
+    <!--      backgroundGreyStyles,-->
+    <!--      "sm:h-[calc(100%+30px)] flex justify-center items-center",-->
+    <!--    )}>-->
+    <!--    <Image-->
+    <!--      quality={100}-->
+    <!--      src={VoicesFromTheCommunityBackgroundImage}-->
+    <!--      alt="avatars of ENS community"-->
+    <!--      class="max-sm:hidden relative bottom-0 sm:h-full sm:w-auto"-->
+    <!--    />-->
+    <!--  </div>-->
+    <!--  <h3-->
+    <!--    class={cn(-->
+    <!--      sectionHeaderBaseStyles,-->
+    <!--      "relative z-10 self-stretch text-left",-->
+    <!--    )}>-->
+    <!--    Voices from the community-->
+    <!--  </h3>-->
+    <!--  <div-->
+    <!--    class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-start items-start gap-4 sm:gap-5">-->
+    <!--    {voicesFromTheCommunity.map((quote) => <QuoteCard {...quote} />)}-->
+    <!--  </div>-->
+    <!--</div>-->
     <div
       class={cn(
         containerBaseStyles,

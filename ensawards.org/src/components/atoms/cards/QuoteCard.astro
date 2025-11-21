@@ -9,7 +9,7 @@ const { quote, author, avatarPath }: QuoteCardData = Astro.props;
 ---
 
 <a
-  href={author.ensProfile}
+  href={author.ensProfile.href}
   target="_blank"
   rel="noreferrer"
   class="w-full min-lg:w-[calc(50%-10px)] max-w-[598px] h-fit sm:min-h-[215px] box-border
@@ -28,7 +28,7 @@ const { quote, author, avatarPath }: QuoteCardData = Astro.props;
       <Image
         src={images[avatarPath]()}
         alt={author.name}
-        class="w-10 h-10 rounded-full"
+        class="w-10 h-10 rounded-full border border-gray-200"
       />
       <div class="flex flex-col justify-start items-start gap-0">
         <p class="text-base leading-normal font-semibold text-black">

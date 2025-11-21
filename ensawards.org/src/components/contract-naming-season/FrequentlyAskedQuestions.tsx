@@ -55,27 +55,7 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
         .
       </p>
     ),
-  },
-  {
-    question: "Question 2",
-    answer: (
-      <p className={textStyles}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod massa eget metus
-        molestie ullamcorper. Nunc dignissim a erat sed maximus. Proin tempus porttitor pretium. In
-        id justo eget arcu lobortis pharetra ut ac neque.
-      </p>
-    ),
-  },
-  {
-    question: "Question 3",
-    answer: (
-      <p className={textStyles}>
-        Mauris lobortis scelerisque ex. Morbi faucibus convallis ultrices. Praesent molestie
-        facilisis sagittis. Fusce sodales vel elit in efficitur. Suspendisse dictum ipsum quis magna
-        convallis, quis pellentesque est commodo.
-      </p>
-    ),
-  },
+  }
 ];
 
 export function FrequentlyAskedQuestions() {
