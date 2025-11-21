@@ -6,12 +6,16 @@ import { cn } from "../../utils/tailwindClassConcatenation";
 interface CountdownProps {
   eventUnixTimestamp: UnixTimestamp;
   eventText: string;
-  bannerStyles?: string;
-  textStyles?: string;
-  timerStyles?: string;
+  styles?: {
+    banner?: string;
+    header?: string;
+    text?: string;
+    timer?: string;
+    timerLegend?: string;
+  }
 }
 
-const { eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles }: CountdownProps =
+const { eventUnixTimestamp, eventText, styles }: CountdownProps =
   Astro.props;
 ---
 
@@ -21,17 +25,16 @@ const { eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles }: 
   data-threshold={90 * secondsInDay}
   style={{ display: "none" }}
   class={cn(
-    "max-w-[590px] w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between gap-3 sm:gap-0 sm:gap-y-3 items-center px-5 py-3 rounded-xl cursor-default",
-    bannerStyles,
+    "max-w-[590px] w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between gap-3 sm:gap-0 sm:gap-y-3 items-center px-5 py-3 rounded-xl cursor-default", styles?.banner,
   )}>
   <div class="flex flex-col justify-start items-center sm:items-start gap-0">
-    <h4 class={cn("text-sm leading-normal font-semibold", textStyles)}>
+    <h4 class={cn("text-sm leading-normal font-semibold", styles?.header)}>
       ACT NOW!
     </h4>
     <p
       class={cn(
         "text-sm leading-normal font-normal max-sm:text-center",
-        textStyles,
+          styles?.text,
       )}>
       {eventText}
     </p>
@@ -43,10 +46,10 @@ const { eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles }: 
     <div class="w-fit flex flex-col justify-center items-center gap-0">
       <p
         id="daysLeft"
-        class={cn("text-2xl leading-[30px] font-semibold", timerStyles)}>
+        class={cn("text-2xl leading-[30px] font-semibold", styles?.timer)}>
       </p>
       <p
-        class={cn("text-xs leading-tight font-normal opacity-60", timerStyles)}>
+        class={cn("text-xs leading-tight font-normal opacity-60", styles?.timerLegend)}>
         Days
       </p>
     </div>
@@ -54,10 +57,10 @@ const { eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles }: 
     <div class="w-fit flex flex-col justify-center items-center gap-0">
       <p
         id="hoursLeft"
-        class={cn("text-2xl leading-[30px] font-semibold", timerStyles)}>
+        class={cn("text-2xl leading-[30px] font-semibold", styles?.timer)}>
       </p>
       <p
-        class={cn("text-xs leading-tight font-normal opacity-60", timerStyles)}>
+        class={cn("text-xs leading-tight font-normal opacity-60", styles?.timerLegend)}>
         Hours
       </p>
     </div>
@@ -65,10 +68,10 @@ const { eventUnixTimestamp, eventText, bannerStyles, textStyles, timerStyles }: 
     <div class="w-fit flex flex-col justify-center items-center gap-0">
       <p
         id="minutesLeft"
-        class={cn("text-2xl leading-[30px] font-semibold", timerStyles)}>
+        class={cn("text-2xl leading-[30px] font-semibold", styles?.timer)}>
       </p>
       <p
-        class={cn("text-xs leading-tight font-normal opacity-60", timerStyles)}>
+        class={cn("text-xs leading-tight font-normal opacity-50", styles?.timerLegend)}>
         Minutes
       </p>
     </div>
