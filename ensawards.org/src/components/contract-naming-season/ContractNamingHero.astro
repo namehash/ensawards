@@ -50,12 +50,16 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
       <Countdown
         eventText="10,000 $ENS incentive window closes soon"
         eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_APPROX_END}
-        bannerStyles="bg-[linear-gradient(270deg,#3B78FF_0%,#2563EB_100%)]"
-        textStyles="text-white"
-        timerStyles="text-white"
+        styles={{
+          banner: "bg-white/5",
+          header: "text-white",
+          text: "text-white/50",
+          timer: "text-blue-500",
+          timerLegend: "text-white",
+        }}
       />
     </div>
-    <div class="md:max-w-1/2 max-sm:h-[25vh] overflow-visible">
+    <div class="sm:max-w-1/2 max-sm:h-[25vh] overflow-visible">
       <img
         src={HeroImage.src}
         alt="ENS contract naming season"
