@@ -12,9 +12,11 @@ import Layout from "../../layouts/Layout.astro";
 import { ENS_CONTRACT_NAMING_SEASON_APPROX_END } from "../../utils";
 
 const baseEventText = "Base event text";
-const bannerStyles = "bg-[linear-gradient(270deg,#3B78FF_0%,#2563EB_100%)]";
-const textStyles = "text-white";
-const timerStyles = "text-white";
+const bannerStyles = "bg-[linear-gradient(180deg,rgba(22,21,71,0.9)_0%,rgba(8,14,50,0.9)_100%)]";
+const headerStyles = "text-white";
+const textStyles = "text-white/50";
+const timerStyles = "text-blue-500";
+const timerLegendStyles = "text-white";
 ---
 
 <Layout>
@@ -22,13 +24,22 @@ const timerStyles = "text-white";
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList header="Countdown variants" containerStyles="gap-4 sm:gap-4">
+      <p class="text-amber-600 font-semibold">
+        NOTE: Banners are styled to be best visible in the mock environment.
+        Their styles are customizable, hence the public banner's CSS is a bit
+        different. The UX remains identical in both scenarios.
+      </p>
       <div class="w-full flex flex-col justify-start items-start gap-4">
         <p>Event ending on April 30th 2026</p><Countdown
           eventText={baseEventText}
           eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_APPROX_END}
-          bannerStyles={bannerStyles}
-          textStyles={textStyles}
-          timerStyles={timerStyles}
+          styles={{
+            banner: bannerStyles,
+            header: headerStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
         />
       </div>
       <div class="w-full h-[1px] bg-gray-200"></div>
@@ -37,9 +48,13 @@ const timerStyles = "text-white";
           eventText={baseEventText}
           eventUnixTimestamp={(Date.now() + 8 * millisecondsInWeek) /
             millisecondsInSecond}
-          bannerStyles={bannerStyles}
-          textStyles={textStyles}
-          timerStyles={timerStyles}
+          styles={{
+            banner: bannerStyles,
+            header: headerStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
         />
       </div>
       <div class="w-full h-[1px] bg-gray-200"></div>
@@ -48,9 +63,13 @@ const timerStyles = "text-white";
           eventText={baseEventText}
           eventUnixTimestamp={(Date.now() - 2 * millisecondsInDay) /
             millisecondsInSecond}
-          bannerStyles={bannerStyles}
-          textStyles={textStyles}
-          timerStyles={timerStyles}
+          styles={{
+            banner: bannerStyles,
+            header: headerStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
         />
       </div>
     </ItemsList>
