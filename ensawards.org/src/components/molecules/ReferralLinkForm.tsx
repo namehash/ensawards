@@ -7,10 +7,7 @@ import { capitalizeFormLabel } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env/onClientAccess.ts";
 import { resolveEthAddress } from "@/utils/resolution.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import {
-  type Name,
-  type NormalizedName,
-} from "@ensnode/ensnode-sdk";
+import { type Name, type NormalizedName } from "@ensnode/ensnode-sdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
 import { type Address, getAddress, isAddress } from "viem";
