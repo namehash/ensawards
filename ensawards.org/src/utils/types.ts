@@ -1,4 +1,4 @@
-import type {Name} from "@ensnode/ensnode-sdk";
+import type { Name } from "@ensnode/ensnode-sdk";
 
 export interface QuoteAuthorData {
   name: Name;

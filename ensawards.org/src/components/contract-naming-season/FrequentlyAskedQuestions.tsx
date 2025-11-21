@@ -55,7 +55,7 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
         .
       </p>
     ),
-  }
+  },
 ];
 
 export function FrequentlyAskedQuestions() {
