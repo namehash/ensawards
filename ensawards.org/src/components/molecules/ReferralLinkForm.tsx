@@ -5,8 +5,12 @@ import type { FormField, ValidationErrors } from "@/components/molecules/form/ty
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { capitalizeFormLabel } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env/onClientAccess.ts";
+import { resolveEthAddress } from "@/utils/resolution.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { ENSNodeClient, type Name, type ResolveRecordsResponse } from "@ensnode/ensnode-sdk";
+import {
+  type Name,
+  type NormalizedName,
+} from "@ensnode/ensnode-sdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
 import { type Address, getAddress, isAddress } from "viem";
@@ -64,10 +68,6 @@ export function ReferralLinkForm() {
   );
   const [generatedLink, setGeneratedLink] = useState<string>("");
 
-  const client = new ENSNodeClient({
-    url: getENSNodeUrl(),
-  });
-
   const submitForm = async (e: FormEvent) => {
     setOverallFormErrorMessage("");
     e.preventDefault();
@@ -100,7 +100,7 @@ export function ReferralLinkForm() {
 
     // Check if the input is a valid address
     if (isAddress(recipientInput, { strict: false })) {
-      // Generate the referral link
+      // Interpret the input as an address to generate the referral link
       setGeneratedLink(buildEnsReferralUrl(recipientInput).href);
       setSuccessfulFormSubmit(true);
 
@@ -112,7 +112,7 @@ export function ReferralLinkForm() {
     }
 
     // Check if the input is a "normalizable" ENS name
-    let normalizedENSName: Name = "";
+    let normalizedENSName: Name | null = null;
 
     try {
       normalizedENSName = normalize(recipientInput);
@@ -123,9 +123,9 @@ export function ReferralLinkForm() {
       return;
     }
 
-    // If the name is normalizable proceed with resolution
+    // If the name is normalizable (and normalized) proceed with resolution
     try {
-      const resolvedAddress = await resolveEthAddress(normalizedENSName);
+      const resolvedAddress = await resolveEthAddress(normalizedENSName as NormalizedName);
 
       if (resolvedAddress === null) {
         setInputError("No Ethereum address configured for this name.");
@@ -148,7 +148,7 @@ export function ReferralLinkForm() {
         console.log(error);
         setOverallFormErrorMessage(error.message);
       } else {
-        setOverallFormErrorMessage("Request error. Please try again later.");
+        setOverallFormErrorMessage("Request error. Please try again.");
       }
     }
 
@@ -159,27 +159,6 @@ export function ReferralLinkForm() {
     const errors: ValidationErrors = getInitialValidationErrorsState(formFields);
     errors[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient] = message;
     setValidationErrors(errors);
-  };
-
-  const resolveEthAddress = async (name: Name): Promise<Address | null> => {
-    const resolutionPromise = client.resolveRecords(name, {
-      addresses: [60], // ETH CoinType
-    });
-
-    // 5 seconds timeout limit
-    const timeoutLimit = 5000;
-
-    const timeoutPromise = new Promise<Response>((resolve, reject) => {
-      setTimeout(() => {
-        reject(new Error("Request timeout. Please try again."));
-      }, timeoutLimit);
-    });
-
-    // Prevent the request from taking too long
-    const response = await Promise.race([resolutionPromise, timeoutPromise]);
-
-    return (response as ResolveRecordsResponse<{ addresses: 60[] }>).records
-      .addresses[60] as Address;
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
