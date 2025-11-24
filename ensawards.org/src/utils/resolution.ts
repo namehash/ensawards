@@ -3,42 +3,47 @@ import {
   type Duration,
   ENSNodeClient,
   type NormalizedName,
-  type ResolveRecordsResponse,
+  type ResolverRecordsSelection,
 } from "@ensnode/ensnode-sdk";
 import { millisecondsInSecond } from "date-fns/constants";
 import type { Address } from "viem";
 
 /**
- * Resolves Ethereum address for an ENS name (Forward Resolution).
+ * Resolves the Ethereum Mainnet address for the given name.
  *
- * @param name - an ENS name to be resolved. Must be normalized.
- * @param timeoutLimit - a duration in seconds that marks the maximum allowed resolution time.
+ * @param name - a {@link NormalizedName} to resolve the Ethereum Mainnet address for.
+ * @param timeout - a duration in seconds when the resolution request will timeout.
  *
- * @returns Ethereum deposit {@link Address} associated with the provided name
- * or null if such address isn't configured for that name.
+ * @returns The Ethereum Mainnet {@link Address} for the provided name
+ *          or null if no Ethereum Mainnet address is found for that name.
  *
- * @throws If the resolution isn't completed in timeoutLimit or a resolution error occurs.
+ * @throws If the resolution isn't completed before the timeout or a resolution error occurs.
  */
 export const resolveEthAddress = async (
   name: NormalizedName,
-  timeoutLimit: Duration = 5,
+  timeout: Duration = 5,
 ): Promise<Address | null> => {
   const client = new ENSNodeClient({
     url: getENSNodeUrl(),
   });
 
-  const resolutionPromise = client.resolveRecords(name, {
-    addresses: [60], // ETH CoinType
-  });
+  // Define the selection of records to resolve. In this case, we only want to resolve the Ethereum Mainnet address.
+  // The Ethereum Mainnet coin type is 60 as per `evmChainIdToCoinType(mainnet.id)`.
+  // Hardcoding the coin type here since the type inference needs a concrete value.
+  const recordSelection = { addresses: [60] } satisfies ResolverRecordsSelection;
 
-  const timeoutPromise = new Promise<Response>((resolve, reject) => {
+  const resolutionPromise = client.resolveRecords(name, recordSelection);
+
+  // this is a Promise<never> because it always rejects with an error and never returns a value.
+  const timeoutPromise = new Promise<never>((resolve, reject) => {
     setTimeout(() => {
       reject(new Error("Request timeout. Please try again."));
-    }, timeoutLimit * millisecondsInSecond);
+    }, timeout * millisecondsInSecond);
   });
 
-  // Prevent the request from taking too long
+  // execute the resolution while enforcing the timeout.
   const response = await Promise.race([resolutionPromise, timeoutPromise]);
 
-  return (response as ResolveRecordsResponse<{ addresses: 60[] }>).records.addresses[60] as Address;
+  // resolution completed without error before the timeout.
+  return response.records.addresses[60] as Address | null;
 };
