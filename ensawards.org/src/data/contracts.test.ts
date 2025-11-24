@@ -7,7 +7,7 @@ import {
   type EnsProfileForContract,
 } from "@/types/contracts.ts";
 import { getChainName } from "@/utils/chains.ts";
-import { getENSNodeUrlForTests } from "@/utils/envVariables.ts";
+import { getENSNodeUrl } from "@/utils/env";
 import {
   type ChainId,
   ENSNodeClient,
@@ -16,11 +16,11 @@ import {
   evmChainIdToCoinType,
   isNormalizedName,
 } from "@ensnode/ensnode-sdk";
-import { type Address, getAddress, isAddress, isAddressEqual } from "viem";
+import { type Address, isAddress, isAddressEqual } from "viem";
 import { describe, expect, it } from "vitest";
 
 const client = new ENSNodeClient({
-  url: getENSNodeUrlForTests(),
+  url: getENSNodeUrl(),
 });
 
 /**

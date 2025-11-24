@@ -3,46 +3,36 @@ import { FormButton } from "@/components/atoms/form-elements/FormButton.tsx";
 import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import type { FormField, ValidationErrors } from "@/components/molecules/form/types.ts";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { capitalizeFormLabel, truncateAddress } from "@/utils";
+import { capitalizeFormLabel } from "@/utils";
+import { resolveEthAddress } from "@/utils/resolution.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
-import React, { type FormEvent, useEffect, useState } from "react";
+import { type NormalizedName } from "@ensnode/ensnode-sdk";
+import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
+import React, { type FormEvent, useState } from "react";
 import { type Address, getAddress, isAddress } from "viem";
+import { normalize } from "viem/ens";
 import * as Yup from "yup";
 
 interface ReferralLinkFormDataProps {
-  "ethereum address": string;
+  "referral award recipient": string;
 }
 
 const formFields: FormField[] = [
   {
-    label: "ethereum address",
+    label: "referral award recipient",
     type: "text",
     required: true,
+    placeholder: "Enter your ENS name or Ethereum Mainnet address",
   },
 ];
 
 enum ENSAwardsReferralLinkFormFields {
-  EthereumAddress = "ethereum address",
+  ReferralAwardRecipient = "referral award recipient",
 }
 
+// Very rudimentary validation here so that the more advanced one can be performed later in submit
 const generateReferralLinkFormSchema = Yup.object().shape({
-  "ethereum address": Yup.string()
-    .required("Address is required")
-    .test({
-      name: "address-test",
-      exclusive: false,
-      test(value, ctx) {
-        if (value.length === 0) {
-          return ctx.createError({ message: "Address is required" });
-        }
-        if (!isAddress(value, { strict: false })) {
-          return ctx.createError({ message: "Invalid address" });
-        }
-
-        return true;
-      },
-    }),
+  "referral award recipient": Yup.string().required("Name or address is required"),
 });
 
 const getInitialValidationErrorsState = (formFields: FormField[]): ValidationErrors => {
@@ -67,64 +57,110 @@ function buildEnsReferralUrl(address: Address): URL {
 
 export function ReferralLinkForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [overallFormErrorMessage, setOverallFormErrorMessage] = useState("");
   const [successfulFormSubmit, setSuccessfulFormSubmit] = useState(false);
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
     getInitialValidationErrorsState(formFields),
   );
-  const [referrerAddress, setReferrerAddress] = useState<string>("");
   const [generatedLink, setGeneratedLink] = useState<string>("");
 
   const submitForm = async (e: FormEvent) => {
+    setOverallFormErrorMessage("");
     e.preventDefault();
     setIsLoading(true);
 
     const formData: FormData = new FormData(e.target as HTMLFormElement);
 
     const data: ReferralLinkFormDataProps = {
-      "ethereum address": formData.get("ethereum address")?.toString() || "",
+      "referral award recipient":
+        formData.get(ENSAwardsReferralLinkFormFields.ReferralAwardRecipient)?.toString() || "",
     };
 
+    // Validate form data against the schema (initial validation)
     try {
-      // Validate form data against the schema
       await generateReferralLinkFormSchema.validate(data, {
         abortEarly: false,
       });
+    } catch (validationError) {
+      // Check for initial validation error
+      if (validationError instanceof Yup.ValidationError) {
+        const singleInputError = validationError.inner[0];
+        setInputError(singleInputError.message);
+      }
+      setIsLoading(false);
+      return;
+    }
 
-      // Proceed with form submission if validation is successful
-      setReferrerAddress(data[ENSAwardsReferralLinkFormFields.EthereumAddress]);
+    // Proceed with detailed validation if the initial one is successful
+    const recipientInput = data[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient];
+
+    // Check if the input is a valid address
+    if (isAddress(recipientInput, { strict: false })) {
+      // Interpret the input as an address to generate the referral link
+      setGeneratedLink(buildEnsReferralUrl(recipientInput).href);
+      setSuccessfulFormSubmit(true);
 
       // Reset validation errors on successful validation
       setValidationErrors(getInitialValidationErrorsState(formFields));
 
-      // Generate the referral link (we know that input data is a valid address)
-      setGeneratedLink(
-        buildEnsReferralUrl(data[ENSAwardsReferralLinkFormFields.EthereumAddress] as Address).href,
-      );
-      setSuccessfulFormSubmit(true);
-    } catch (validationError) {
-      if (validationError instanceof Yup.ValidationError) {
-        const errors: ValidationErrors = getInitialValidationErrorsState(formFields);
-        for (const err of validationError.inner) {
-          if (
-            err.path &&
-            Object.values(ENSAwardsReferralLinkFormFields).includes(
-              err.path as ENSAwardsReferralLinkFormFields,
-            )
-          ) {
-            errors[err.path as ENSAwardsReferralLinkFormFields] = err.message;
-          }
-        }
-
-        setValidationErrors(errors);
-      }
-    } finally {
       setIsLoading(false);
+      return;
     }
+
+    // Check if the input is a "normalizable" ENS name
+    let normalizedName: NormalizedName;
+
+    try {
+      normalizedName = normalize(recipientInput) as NormalizedName;
+    } catch (error) {
+      // Display a generic message (ignore the details on purpose)
+      setInputError("Invalid name or address");
+      setIsLoading(false);
+      return;
+    }
+
+    // The name was normalizable to `normalizedName` so proceed with resolution
+    try {
+      const resolvedAddress = await resolveEthAddress(normalizedName);
+
+      if (resolvedAddress === null) {
+        setInputError("No Ethereum Mainnet address configured for this name.");
+        setIsLoading(false);
+        return;
+      }
+
+      setGeneratedLink(buildEnsReferralUrl(resolvedAddress).href);
+
+      setSuccessfulFormSubmit(true);
+
+      setValidationErrors(getInitialValidationErrorsState(formFields));
+    } catch (error) {
+      // Handle all possible errors of the resolution
+      if (error instanceof TypeError) {
+        // Likely a network error
+        console.error("Network error: ", error);
+        setOverallFormErrorMessage("Connection lost. Please check your connection and try again.");
+      } else if (error instanceof Error) {
+        console.log(error);
+        setOverallFormErrorMessage(error.message);
+      } else {
+        setOverallFormErrorMessage("Request error. Please try again.");
+      }
+    }
+
+    setIsLoading(false);
+  };
+
+  const setInputError = (message: string) => {
+    const errors: ValidationErrors = getInitialValidationErrorsState(formFields);
+    errors[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient] = message;
+    setValidationErrors(errors);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     setValidationErrors({ ...validationErrors, [name]: "" });
+    setOverallFormErrorMessage("");
   };
 
   const verticalFlex = "flex flex-col justify-start items-center";
@@ -136,6 +172,12 @@ export function ReferralLinkForm() {
         verticalFlex,
       )}
     >
+      {overallFormErrorMessage && (
+        <span className="flex flex-row justify-start items-center gap-3 py-3 px-4 rounded-lg border border-input bg-white self-stretch">
+          <CircleAlertIcon className="text-destructive h-4 w-4" />
+          <p className="text-destructive font-medium text-sm">{overallFormErrorMessage}</p>
+        </span>
+      )}
       <div className={cn(verticalFlex, "gap-5")}>
         <div className="w-12 h-12 flex flex-col justify-center items-center bg-[rgba(0,82,204,0.20)] rounded-full">
           <LinkIcon size={20} className="text-blue-600 flex-shrink-0" />
@@ -206,7 +248,7 @@ export function ReferralLinkForm() {
                   type={field.type}
                   disabled={isLoading}
                   name={field.label}
-                  placeholder="Enter your address"
+                  placeholder={field.placeholder}
                   autoComplete="off"
                   onChange={handleInputChange}
                   error={validationErrors[field.label]}
@@ -217,11 +259,12 @@ export function ReferralLinkForm() {
             ))}
             <FormButton
               disabled={isLoading}
+              loading={isLoading}
               type="submit"
               variant="outline"
               className="cursor-pointer self-stretch"
             >
-              {isLoading ? "Generating..." : "Generate link"}
+              {isLoading ? "Loading" : "Generate link"}
             </FormButton>
           </div>
         )}
