@@ -30,7 +30,9 @@ export const resolveEthAddress = async (
   // Define the selection of records to resolve. In this case, we only want to resolve the Ethereum Mainnet address.
   // The Ethereum Mainnet coin type is 60 as per `evmChainIdToCoinType(mainnet.id)`.
   // Hardcoding the coin type here since the type inference needs a concrete value.
-  const recordSelection = { addresses: [60] } satisfies ResolverRecordsSelection;
+  const recordSelection = {
+    addresses: [60],
+  } satisfies ResolverRecordsSelection;
 
   const resolutionPromise = client.resolveRecords(name, recordSelection);
 
