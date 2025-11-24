@@ -10,10 +10,9 @@ const tertiaryLinkStyles =
   "text-black hover:underline hover:underline-offset-[25%] transition-all duration-200";
 const textStyles = "text-base leading-normal font-normal text-muted-foreground";
 
-// TODO: Populate the questions with actual data
 const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
   {
-    question: "What is $ENS?",
+    question: "What's an $ENS?",
     answer: (
       <p className={textStyles}>
         It's{" "}
@@ -62,7 +61,7 @@ export function FrequentlyAskedQuestions() {
   return (
     <div className="w-full min-[810px]:w-1/2 min-[810px]:min-w-1/2 h-fit flex flex-col justify-start items-start gap-2">
       {frequentlyAskedQuestions.map((faq, idx) => (
-        <FoldableCard key={`FAQ-#${idx}`} header={faq.question}>
+        <FoldableCard key={`FAQ-#${idx}`} initiallyOpen={idx === 0} header={faq.question}>
           {faq.answer}
         </FoldableCard>
       ))}

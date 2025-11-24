@@ -39,33 +39,11 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
         )}>Learn more on the forum</a
       >
     </div>
-    <p class={cn(itemTextBaseStyles)}>
-      Curious what an "$ENS" is? It's <a
-        href="https://docs.ens.domains/dao/token"
-        target="_blank"
-        rel="noreferrer"
-        class="text-black hover:underline hover:underline-offset-[25%] transition-all duration-200"
-        >the official ENS token</a
-      > which can be held and <a
-        href="https://delegate.ens.domains/"
-        target="_blank"
-        rel="noreferrer"
-        class="text-black hover:underline hover:underline-offset-[25%] transition-all duration-200"
-        >delegated</a
-      > to yourself or others to <a
-        href="https://www.tally.xyz/gov/ens"
-        target="_blank"
-        rel="noreferrer"
-        class="text-black hover:underline hover:underline-offset-[25%] transition-all duration-200"
-        >vote in ENS DAO governance</a
-      > that influences the future of the ENS protocol or <a
-        href="https://coinmarketcap.com/currencies/ethereum-name-service/"
-        target="_blank"
-        rel="noreferrer"
-        class="text-black hover:underline hover:underline-offset-[25%] transition-all duration-200"
-        >freely swapped for cash</a
-      >.
-    </p>
+    <a
+      id="scroll-to-faq"
+      class="text-base leading-normal font-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200 cursor-pointer"
+      >What's an $ENS?</a
+    >
   </div>
   <Image
     quality={100}
@@ -74,3 +52,12 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
     class="w-full sm:w-1/2 h-auto"
   />
 </div>
+<script>
+  import { scrollWithOffset } from "../../utils/domActions";
+
+  const scrollAnchor = document.getElementById("scroll-to-faq");
+  scrollAnchor.addEventListener("click", (event) => {
+    event.preventDefault();
+    scrollWithOffset(`FAQ-What's an $ENS?`, 90);
+  });
+</script>
