@@ -443,13 +443,31 @@ const daoScores = contractPipeline();
       <div class={backgroundGreyStyles}></div>
       <div
         class="w-full flex flex-col min-[810px]:flex-row justify-start min-[810px]:justify-between items-start gap-5 sm:gap-10 min-[810px]:gap-0 relative z-10">
-        <h3
-          class={cn(
-            sectionHeaderBaseStyles,
-            "w-full min-[810px]:w-1/2 text-left",
-          )}>
-          Frequently asked questions
-        </h3>
+        <div
+          class="w-full min-[810px]:w-1/2 h-fit flex flex-col justify-start items-start gap-5">
+          <h3 class={cn(sectionHeaderBaseStyles, "w-full text-left")}>
+            Frequently asked questions
+          </h3>
+          <p class={itemTextBaseStyles}>
+            Have questions? We've got answers! Check out our Frequently Asked
+            Questions (FAQs) to find quick solutions to common queries. Save
+            time and get the information you need right here.  Still have
+            questions? Try the link below and learn more on the forum.
+          </p>
+          <a
+            href="https://discuss.ens.domains/t/ens-contract-naming-season/21596"
+            target="_blank"
+            rel="noreferrer"
+            class={cn(
+              shadcnButtonVariants({
+                variant: "outline",
+                size: "default",
+                className: "cursor-pointer rounded-full",
+              }),
+            )}>
+            Learn more on the forum
+          </a>
+        </div>
         <FrequentlyAskedQuestions client:load />
       </div>
     </div>
