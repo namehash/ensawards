@@ -7,7 +7,7 @@ import {
   type EnsProfileForContract,
 } from "@/types/contracts.ts";
 import { getChainName } from "@/utils/chains.ts";
-import { getENSNodeUrl } from "@/utils/env/onClientAccess.ts";
+import { getENSNodeUrl } from "@/utils/env";
 import {
   type ChainId,
   ENSNodeClient,

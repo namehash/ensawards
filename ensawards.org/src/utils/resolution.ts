@@ -1,4 +1,4 @@
-import { getENSNodeUrl } from "@/utils/env/onClientAccess.ts";
+import { getENSNodeUrl } from "@/utils/env";
 import {
   type Duration,
   ENSNodeClient,
