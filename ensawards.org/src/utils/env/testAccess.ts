@@ -2,7 +2,7 @@ import { DEFAULT_ENSNODE_URL } from "@/utils/env/index.ts";
 
 /**
  * Returns the ENSNode public URL defined in the .env file
- * specifically for the unit testing.
+ * specifically for unit testing.
  *
  * If the env variable is undefined returns a default fallback.
  *
