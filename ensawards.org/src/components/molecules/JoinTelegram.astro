@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import TelegramBanner from "../../assets/telegramImage.svg";
+import { cn } from "../../utils/tailwindClassConcatenation";
+import TelegramIcon from "../atoms/icons/TelegramIcon.astro";
+import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+
+interface JoinTelegramProps {
+  header: string;
+  description: string;
+  inviteText: string;
+  telegramLink: URL;
+}
+
+const { header, description, inviteText, telegramLink }: JoinTelegramProps = Astro.props;
+---
+
+<div
+  class="bg-[linear-gradient(90deg,_#F9FAFB_0%,_#F3F5F7_100%)] max-w-[1216px] w-full h-fit flex flex-col min-[930px]:flex-row justify-center items-center flex-nowrap gap-10 min-[930px]:gap-5 min-[930px]:pl-20 min-[930px]:pr-5 pt-10 min-[930px]:pt-0 rounded-[20px] overflow-hidden">
+  <div
+    class="w-4/5 h-fit flex flex-col flex-nowrap items-center min-[930px]:items-start justify-center gap-5 min-[930px]:py-5">
+    <h2
+      class="self-stretch text-3xl min-[930px]:text-4xl leading-9 min-[930px]:leading-10 font-bold text-black text-center min-[930px]:text-left">
+      {header}
+    </h2>
+    <p
+      class="text-lg leading-8 min-[930px]:leading-7 font-normal text-gray-500 text-center min-[930px]:text-left">
+      {description}
+    </p>
+    <a
+      target="_blank"
+      href={telegramLink.href}
+      class={cn(
+        shadcnButtonVariants({
+          variant: "default",
+          size: "lg",
+          className:
+            "py-[9px] has-[>svg]:pl-[15px] has-[>svg]:pr-[17px] text-base leading-6",
+        }),
+      )}>
+      <TelegramIcon className="size-5" />
+      {inviteText}
+    </a>
+  </div>
+  <Image
+    class="flex min-[450px]:w-auto w-fit min-[450px]:h-[280px] h-full shrink-0 object-contain bg-no-repeat"
+    src={TelegramBanner}
+    alt="Telegram Banner"
+  />
+</div>
