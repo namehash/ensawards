@@ -108,7 +108,7 @@ export function ReferralLinkForm() {
     }
 
     // Check if the input is a "normalizable" ENS name
-    let normalizedName: NormalizedName | null = null;
+    let normalizedName: NormalizedName;
 
     try {
       normalizedName = normalize(recipientInput) as NormalizedName;
