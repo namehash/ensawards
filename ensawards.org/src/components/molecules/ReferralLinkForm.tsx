@@ -4,10 +4,9 @@ import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import type { FormField, ValidationErrors } from "@/components/molecules/form/types.ts";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { capitalizeFormLabel } from "@/utils";
-import { getENSNodeUrl } from "@/utils/env/onClientAccess.ts";
 import { resolveEthAddress } from "@/utils/resolution.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { type Name, type NormalizedName } from "@ensnode/ensnode-sdk";
+import { type NormalizedName } from "@ensnode/ensnode-sdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
 import { type Address, getAddress, isAddress } from "viem";
@@ -23,7 +22,7 @@ const formFields: FormField[] = [
     label: "referral award recipient",
     type: "text",
     required: true,
-    placeholder: "Enter your name or address",
+    placeholder: "Enter your ENS name or Ethereum Mainnet address",
   },
 ];
 
@@ -109,10 +108,10 @@ export function ReferralLinkForm() {
     }
 
     // Check if the input is a "normalizable" ENS name
-    let normalizedENSName: Name | null = null;
+    let normalizedName: NormalizedName | null = null;
 
     try {
-      normalizedENSName = normalize(recipientInput);
+      normalizedName = normalize(recipientInput) as NormalizedName;
     } catch (error) {
       // Display a generic message (ignore the details on purpose)
       setInputError("Invalid name or address");
@@ -120,12 +119,12 @@ export function ReferralLinkForm() {
       return;
     }
 
-    // If the name is normalizable (and normalized) proceed with resolution
+    // The name was normalizable to `normalizedName` so proceed with resolution
     try {
-      const resolvedAddress = await resolveEthAddress(normalizedENSName as NormalizedName);
+      const resolvedAddress = await resolveEthAddress(normalizedName);
 
       if (resolvedAddress === null) {
-        setInputError("No Ethereum address configured for this name.");
+        setInputError("No Ethereum Mainnet address configured for this name.");
         setIsLoading(false);
         return;
       }
