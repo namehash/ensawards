@@ -1,0 +1,164 @@
+---
+import { Image } from "astro:assets";
+import { Award as AwardIcon, Calendar as CalendarIcon } from "@lucide/astro";
+import ReferralImage from "../../assets/ensHolidayReferralAwardsImage.png";
+import { cn } from "../../utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+
+const horizontalContainerStyles =
+  "w-fit h-fit flex flex-row flex-nowrap justify-start items-center";
+const verticalContainerStyles = "w-fit h-fit flex flex-col justify-start items-start";
+
+const keyInformationTextStyles = "text-base font-normal leading-normal text-white";
+
+const timelineHeadersStyles = "text-lg leading-normal font-semibold";
+const timelineDatesStyles = "text-base leading-normal font-normal text-white/60";
+const timelineDotStyles = "w-1.5 h-1.5 bg-white rounded-full flex-shrink-0";
+const timelineHorizontalLineStyles = "h-[1px] w-full bg-gray-400/40";
+const timelineVerticalLineStyles = "h-full w-[1px] bg-gray-400/40";
+---
+
+<section
+  class="relative w-full h-fit box-border flex flex-col justify-start sm:justify-center items-center max-sm:gap-10 bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden max-sm:px-5 max-sm:pt-[96px]">
+  <div
+    class="w-full max-w-[1280px] h-fit sm:h-[800px] box-border flex flex-col min-[850px]:flex-row flex-nowrap justify-start sm:max-[850px]:justify-center min-[850px]:justify-between items-center sm:px-8 max-[850px]:gap-6">
+    <div
+      class="relative z-10 w-fit h-fit flex flex-col flex-nowrap justify-center items-center min-[850px]:items-start gap-6 sm:gap-8">
+      <div
+        class="max-w-[600px] flex flex-col flex-nowrap justify-center items-center min-[850px]:items-start gap-4">
+        <div
+          class="w-fit h-fit box-border flex flex-row justify-start items-center gap-1 bg-transparent rounded-full border border-[rgba(229,229,229,0.20)] py-2 px-3 cursor-default">
+          <p class="text-xs leading-4 font-normal text-white whitespace-nowrap">
+            ✨ Permissionless — Anyone can join!
+          </p>
+        </div>
+        <h1
+          class="text-white text-[32px] lg:text-[60px] leading-[44px] sm:leading-tight font-medium text-center sm:text-left">
+          ENS Holiday Awards
+        </h1>
+        <p
+          class="text-base leading-normal sm:leading-7 font-normal text-center sm:text-left text-white/60">
+          Grow .eth name registrations and renewals. Earn $ENS.
+        </p>
+        <div
+          class={cn(
+            horizontalContainerStyles,
+            "max-sm:flex-col gap-3 sm:gap-6",
+          )}>
+          <div class={cn(horizontalContainerStyles, "gap-2.5")}>
+            <CalendarIcon class="w-5 h-5 text-[#F59E0B] flex-shrink-0" />
+            <p class={keyInformationTextStyles}>December 1-31, 2025</p>
+          </div>
+          <div class={cn(horizontalContainerStyles, "gap-2.5")}>
+            <AwardIcon class="w-5 h-5 text-[#F59E0B] flex-shrink-0" />
+            <p class={keyInformationTextStyles}>$10,000 Prize Pool</p>
+          </div>
+        </div>
+      </div>
+      <div class={cn(horizontalContainerStyles, "gap-4")}>
+        <a
+          id="scroll-to-generate-referral"
+          class={cn(
+            shadcnButtonVariants({
+              variant: "default",
+              size: "default",
+              className:
+                "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+            }),
+          )}>Generate referral link</a
+        >
+        <a
+          href="https://discuss.ens.domains/t/rfc-ens-holiday-awards/21359"
+          target="_blank"
+          rel="noreferrer"
+          class={cn(
+            shadcnButtonVariants({
+              variant: "ghost",
+              size: "default",
+              className:
+                "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-white hover:text-white bg-white/10 hover:bg-white/20",
+            }),
+          )}>Read the rules</a
+        >
+      </div>
+    </div>
+    <Image
+      quality={100}
+      class="w-full sm:max-[850px]:w-[60%] min-[850px]:w-1/2"
+      alt="ENS Referral Program"
+      src={ReferralImage}
+    />
+  </div>
+  <div
+    class="w-full max-w-[1280px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start items-start sm:items-center gap-5 sm:gap-2.5 sm:px-8 pb-6 sm:pb-10 relative">
+    <div
+      class="sm:hidden h-3/4 w-fit flex flex-col justify-start items-center gap-2.5 absolute left-0 py-2.5">
+      <span class={timelineDotStyles}></span>
+      <div class={timelineVerticalLineStyles}></div>
+      <span class={timelineDotStyles}></span>
+      <div class={timelineVerticalLineStyles}></div>
+      <span class={timelineDotStyles}></span>
+    </div>
+    <div
+      class={cn(
+        verticalContainerStyles,
+        "w-full sm:max-[850px]:w-[215px] min-[850px]:w-1/3 gap-1 sm:gap-4 relative max-sm:left-5",
+      )}>
+      <div class={cn(verticalContainerStyles, "gap-1")}>
+        <h4 class={cn(timelineHeadersStyles, "text-blue-600")}>
+          Campaign Period
+        </h4>
+        <p class={keyInformationTextStyles}>31 days to earn with referrals</p>
+      </div>
+      <div
+        class={cn(horizontalContainerStyles, "max-sm:hidden w-full gap-[9px]")}>
+        <span class={timelineDotStyles}></span>
+        <div class={timelineHorizontalLineStyles}></div>
+      </div>
+      <p class={timelineDatesStyles}>December 1-31, 2025</p>
+    </div>
+    <div
+      class={cn(
+        verticalContainerStyles,
+        "w-full sm:max-[850px]:w-[215px] min-[850px]:w-1/3 gap-1 sm:gap-4 relative max-sm:left-5",
+      )}>
+      <div class={cn(verticalContainerStyles, "w-full gap-1")}>
+        <h4 class={cn(timelineHeadersStyles, "text-[#6F42C1]")}>
+          Award Finalization
+        </h4>
+        <p class={keyInformationTextStyles}>Winners calculated & announced</p>
+      </div>
+      <div
+        class={cn(horizontalContainerStyles, "max-sm:hidden w-full gap-[9px]")}>
+        <span class={timelineDotStyles}></span>
+        <div class={timelineHorizontalLineStyles}></div>
+      </div>
+      <p class={timelineDatesStyles}>January 15, 2026</p>
+    </div>
+    <div
+      class={cn(
+        verticalContainerStyles,
+        "w-full sm:max-[850px]:w-[215px] min-[850px]:w-1/3 gap-1 sm:gap-4 relative max-sm:left-5",
+      )}>
+      <div class={cn(verticalContainerStyles, "gap-1")}>
+        <h4 class={cn(timelineHeadersStyles, "text-[#10B981]")}>
+          Award Distribution
+        </h4>
+        <p class={keyInformationTextStyles}>$ENS token awards distributed</p>
+      </div>
+      <div
+        class={cn(horizontalContainerStyles, "max-sm:hidden w-full gap-[9px]")}>
+        <span class={timelineDotStyles}></span>
+        <div class={timelineHorizontalLineStyles}></div>
+      </div>
+      <p class={timelineDatesStyles}>January 31, 2026</p>
+    </div>
+  </div>
+</section>
+<script>
+  const scrollAnchor = document.getElementById("scroll-to-generate-referral");
+  scrollAnchor.addEventListener("click", (event) => {
+    event.preventDefault();
+    document.getElementById("referral award recipient").focus();
+  });
+</script>
