@@ -2,13 +2,13 @@
 
 import Layout from "../../layouts/Layout.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import {ReferrersList} from "../../components/holiday-referral-awards/referrers-list/ReferrersList";
+import {ReferrersPaginatedDisplay} from "../../components/holiday-referral-awards/referrers/ReferrersPaginatedDisplay";
 ---
 
 <Layout>
-    <SubpageHero header="Referrer leaderboard"/>
+    <SubpageHero header="Referrer leaderboard" description="Checkout the most proficient referrers."/>
     <section
             class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-        <ReferrersList client:load/>
+        <ReferrersPaginatedDisplay client:load/>
     </section>
 </Layout>

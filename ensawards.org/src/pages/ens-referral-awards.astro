@@ -1,6 +1,7 @@
 ---
 import HolidayReferralAwardsHero from "../components/holiday-referral-awards/HolidayReferralAwardsHero.astro";
 import { ReferralLinkForm } from "../components/holiday-referral-awards/ReferralLinkForm";
+import {TopReferrers} from "../components/holiday-referral-awards/referrers/TopReferrers";
 import JoinTelegram from "../components/molecules/JoinTelegram.astro";
 import Layout from "../layouts/Layout.astro";
 
@@ -56,6 +57,7 @@ const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-st
       </div>
       <ReferralLinkForm client:load />
     </div>
+    <TopReferrers client:load/>
     <JoinTelegram
       header="Have questions?"
       description="Join the ENSAwards telegram community and start a conversation"
