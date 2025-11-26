@@ -1,5 +1,5 @@
 import {
-    type AggregatedReferrerMetricsContribution, ENS_HOLIDAY_REFERRAL_AWARDS_PRIZE_POOL_IN_USD,
+    ENS_HOLIDAY_REFERRAL_AWARDS_PRIZE_POOL_IN_USD,
     REFERRER_PROGRAM_QUALIFICATION_THRESHOLD
 } from "@/utils/referrals.ts";
 import {cn} from "@/utils/tailwindClassConcatenation.ts";
@@ -8,9 +8,9 @@ import firstPlaceIcon from "../../../assets/firstPlaceAward.svg";
 import secondPlaceIcon from "../../../assets/secondPlaceAward.svg";
 import thirdPlaceIcon from "../../../assets/thirdPlaceAward.svg";
 import type {Address} from "viem";
-import {BenchmarkResult} from "@/types/apps.ts";
 import {Check, Cross} from "lucide-react";
 import {truncateAddress} from "@/utils";
+import type {AggregatedReferrerMetricsContribution} from "@ensnode/ensnode-sdk";
 
 export interface ReferrerCardProps {
     referrerData: AggregatedReferrerMetricsContribution;

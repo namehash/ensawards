@@ -1,4 +1,4 @@
-import type {PaginatedAggregatedReferrers} from "@/utils/referrals.ts";
+import type {PaginatedAggregatedReferrers} from "@ensnode/ensnode-sdk";
 import {ReferrerCard, ReferrerCardLoading} from "@/components/atoms/cards/ReferrerCard.tsx";
 import type {ReactElement} from "react";
 import {FetchingErrorInfo, NoReferrersInfo} from "@/components/holiday-referral-awards/referrers/utils.tsx";

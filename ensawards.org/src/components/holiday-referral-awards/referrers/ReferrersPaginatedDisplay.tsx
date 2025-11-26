@@ -1,12 +1,15 @@
 import {useEffect, useState} from "react";
-import {
-    getAggregatedReferrers, type PaginatedAggregatedReferrers,
-    PaginatedAggregatedReferrersResponseCodes
-} from "@/utils/referrals.ts";
-import {ChevronLeft, ChevronRight, Award as AwardIcon} from "lucide-react";
+
+import {ChevronLeft, ChevronRight} from "lucide-react";
 import {cn} from "@/utils/tailwindClassConcatenation.ts";
 import {FetchingErrorInfo} from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import {ReferrersList} from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
+import {getENSNodeUrl} from "@/utils/env";
+import {
+    ENSNodeClient,
+    type PaginatedAggregatedReferrers,
+    PaginatedAggregatedReferrersResponseCodes
+} from "@ensnode/ensnode-sdk";
 
 export interface ReferrersPaginatedDisplayProps {
     itemsPerPage?: number
@@ -19,6 +22,10 @@ export function ReferrersPaginatedDisplay({itemsPerPage = 5}: ReferrersPaginated
     const [isLoading, setIsLoading] = useState(false);
     const [fetchErrorMessage, setFetchErrorMessage] = useState("");
     const [aggregatedReferrersData, setAggregatedReferrersData] = useState<PaginatedAggregatedReferrers | null>(null);
+    const client = new ENSNodeClient({
+        url: new URL("https://api.alpha-sepolia.yellow.ensnode.io/"), //TODO: replace with the line below later on
+        // url: getENSNodeUrl(),
+    });
 
     //TODO: Ideally that part could also be extracted (with useQuery or w/e)
     // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -26,7 +33,7 @@ export function ReferrersPaginatedDisplay({itemsPerPage = 5}: ReferrersPaginated
     async function startFetching() {
         try {
             setIsLoading(true);
-            const response = await getAggregatedReferrers({page: currentPage, itemsPerPage: itemsPerPage});
+            const response = await client.getAggregatedReferrers({page: currentPage, itemsPerPage: itemsPerPage});
 
             if (response.responseCode !== PaginatedAggregatedReferrersResponseCodes.Ok){
                 setFetchErrorMessage(response.errorMessage);

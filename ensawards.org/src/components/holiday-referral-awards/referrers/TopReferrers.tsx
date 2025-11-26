@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
-import {
-    getAggregatedReferrers,
-    type PaginatedAggregatedReferrers,
-    PaginatedAggregatedReferrersResponseCodes
-} from "@/utils/referrals.ts";
 import {ReferrersList} from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
 import {FetchingErrorInfo} from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import {cn} from "@/utils/tailwindClassConcatenation.ts";
 import {shadcnButtonVariants} from "@/components/ui/shadcnButtonStyles.ts";
+import {
+    ENSNodeClient,
+    type PaginatedAggregatedReferrers,
+    PaginatedAggregatedReferrersResponseCodes
+} from "@ensnode/ensnode-sdk";
 
 export interface TopReferrersProps {
     snippetSize?: number;
@@ -18,6 +18,10 @@ export function TopReferrers({header, snippetSize = 3}:TopReferrersProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [fetchErrorMessage, setFetchErrorMessage] = useState("");
     const [aggregatedReferrersData, setAggregatedReferrersData] = useState<PaginatedAggregatedReferrers | null>(null);
+    const client = new ENSNodeClient({
+        url: new URL("https://api.alpha-sepolia.yellow.ensnode.io/"), //TODO: replace with the line below later on
+        // url: getENSNodeUrl(),
+    });
 
     //TODO: Ideally that part could also be extracted (with useQuery or w/e)
     // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -25,7 +29,7 @@ export function TopReferrers({header, snippetSize = 3}:TopReferrersProps) {
     async function startFetching() {
         try {
             setIsLoading(true);
-            const response = await getAggregatedReferrers({page: 1, itemsPerPage: snippetSize});
+            const response = await client.getAggregatedReferrers({page: 1, itemsPerPage: snippetSize});
 
             if (response.responseCode !== PaginatedAggregatedReferrersResponseCodes.Ok){
                 setFetchErrorMessage(response.errorMessage);
