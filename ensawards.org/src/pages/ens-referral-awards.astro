@@ -57,7 +57,15 @@ const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-st
       </div>
       <ReferralLinkForm client:load />
     </div>
-    <TopReferrers client:load/>
+    <div class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
+      <div class="w-full h-fit flex flex-col justify-start items-center gap-3">
+        <h3 class="text-3xl leading-normal font-semibold text-black">
+          Top referrers
+        </h3>
+        <p class="text-sm leading-normal font-normal text-muted-foreground">It may take a while for the data to be actualized</p>
+      </div>
+      <TopReferrers client:load/>
+    </div>
     <JoinTelegram
       header="Have questions?"
       description="Join the ENSAwards telegram community and start a conversation"

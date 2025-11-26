@@ -2,22 +2,16 @@ import {AlertCircle as AlertIcon, Award as AwardIcon, Clock as ClockIcon} from "
 import {AbsoluteTime} from "@/components/atoms/AbsoluteTime.tsx";
 import type {UnixTimestamp} from "@ensnode/ensnode-sdk";
 import type {ReactElement} from "react";
+import {TooltipProvider} from "@/components/ui/tooltip.tsx";
+import {RelativeTime} from "@/components/RelativeTime.tsx";
 
 export interface ReferrersSnapshotTimeProps {
     lastUpdateTimestamp: UnixTimestamp;
 }
 export const ReferrersSnapshotTime = ({lastUpdateTimestamp}: ReferrersSnapshotTimeProps) => {
-    return <div className="w-fit h-fit max-h-[80px] box-border flex flex-row justify-start items-center gap-3 border border-gray-200 rounded-2xl p-3">
-        <ClockIcon size={16} className="flex-shrink-0" />
-        <p className="text-sm">The current snapshot of referrers was generated on <span className="font-semibold"><AbsoluteTime timestamp={lastUpdateTimestamp} options={{
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-        }} /></span></p>
-    </div>
+    return <TooltipProvider delayDuration={200} skipDelayDuration={0}>
+        <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap"><RelativeTime prefix="Last updated " timestamp={lastUpdateTimestamp} enforcePast={true} conciseFormatting={true} /></p>
+    </TooltipProvider>
 }
 
 export interface FetchingErrorProps {

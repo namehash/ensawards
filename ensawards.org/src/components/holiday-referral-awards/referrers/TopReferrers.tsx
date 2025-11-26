@@ -11,9 +11,10 @@ import {shadcnButtonVariants} from "@/components/ui/shadcnButtonStyles.ts";
 
 export interface TopReferrersProps {
     snippetSize?: number;
+    header?: string;
 }
 
-export function TopReferrers({snippetSize = 3}:TopReferrersProps) {
+export function TopReferrers({header, snippetSize = 3}:TopReferrersProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [fetchErrorMessage, setFetchErrorMessage] = useState("");
     const [aggregatedReferrersData, setAggregatedReferrersData] = useState<PaginatedAggregatedReferrers | null>(null);
@@ -51,12 +52,6 @@ export function TopReferrers({snippetSize = 3}:TopReferrersProps) {
 
     return <div
         className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
-        <div className="w-full h-fit flex flex-col justify-start items-center gap-3">
-            <h3 className="text-3xl leading-normal font-semibold text-black">
-                Top referrers
-            </h3>
-            <p className="text-sm leading-normal font-normal text-muted-foreground">It may take a while for the data to be actualized</p>
-        </div>
         <ReferrersList aggregatedReferrersData={aggregatedReferrersData}
                        isLoading={isLoading}
                        generateLinkCTA={<a onClick={() => console.log("placeholder")}>Generate your referral link</a>}
@@ -65,6 +60,7 @@ export function TopReferrers({snippetSize = 3}:TopReferrersProps) {
                                startFetching()
                            }}/> : undefined}
                        numberOfItemsToDisplay={snippetSize}
+                       header={header}
         />
         <a
             href="/leaderboards/referrer"

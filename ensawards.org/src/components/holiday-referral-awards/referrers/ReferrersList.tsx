@@ -3,17 +3,19 @@ import {ReferrerCard, ReferrerCardLoading} from "@/components/atoms/cards/Referr
 import type {ReactElement} from "react";
 import {FetchingErrorInfo, NoReferrersInfo} from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import {ReferrersSnapshotTime} from "@/components/holiday-referral-awards/referrers/utils.tsx";
+import {cn} from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferrersListProps {
     aggregatedReferrersData: PaginatedAggregatedReferrers | null;
     isLoading: boolean;
     generateLinkCTA: ReactElement;
     error?: ReactElement;
+    header?: string;
     numberOfItemsToDisplay?: number;
     referrerPositionOffset?: number
 }
 
-export function ReferrersList({aggregatedReferrersData, isLoading, generateLinkCTA, error, referrerPositionOffset = 0, numberOfItemsToDisplay = 5}: ReferrersListProps) {
+export function ReferrersList({aggregatedReferrersData, isLoading, generateLinkCTA, error, header, referrerPositionOffset = 0, numberOfItemsToDisplay = 5}: ReferrersListProps) {
     if (isLoading || aggregatedReferrersData === null){
         return (
             <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-center gap-2 sm:gap-3">
@@ -34,8 +36,18 @@ export function ReferrersList({aggregatedReferrersData, isLoading, generateLinkC
     }
 
     return (
-            <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
-                <ReferrersSnapshotTime lastUpdateTimestamp={aggregatedReferrersData.updatedAt} />
+            <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
+                <div className={cn("w-full h-fit flex flex-row flex-nowrap items-end", header ? "justify-between" : "justify-end")}>
+                    {header && <div className="w-full h-fit flex flex-col justify-start items-start gap-0">
+                        <h3 className="text-xl sm:text-2xl leading-normal font-semibold text-black">
+                            {header}
+                        </h3>
+                        <p className="text-sm leading-normal font-normal text-muted-foreground">It may take a while for
+                            the data to be actualized</p>
+                    </div>
+                    }
+                    <ReferrersSnapshotTime lastUpdateTimestamp={aggregatedReferrersData.updatedAt}/>
+                </div>
                 {aggregatedReferrersData.referrers.map((referrer, idx) => <ReferrerCard referrerData={referrer}
                                                                                         position={referrerPositionOffset + idx + 1}/>)}
             </div>
