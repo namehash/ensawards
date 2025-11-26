@@ -35,7 +35,7 @@ const { name, description, link }: LeaderboardSnippetCardProps = Astro.props;
           size: "default",
           className: "cursor-pointer rounded-full max-sm:self-stretch",
         }),
-      )}>View {name}</button
+      )}>View {name.includes("DAO") ? name : name.toLowerCase()}</button
     >
     <slot name="bestResultsIcons" />
   </div>
