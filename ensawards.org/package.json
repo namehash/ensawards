@@ -19,8 +19,8 @@
   "dependencies": {
     "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.6.0",
-    "@ensnode/datasources": "^0.36.0",
-    "@ensnode/ensnode-sdk": "^1.0.1",
+    "@ensnode/datasources": "^1.0.3",
+    "@ensnode/ensnode-sdk": "^1.0.3",
     "@headlessui/react": "^2.2.7",
     "@heroicons/react": "^2.2.0",
     "@lucide/astro": "^0.552.0",
