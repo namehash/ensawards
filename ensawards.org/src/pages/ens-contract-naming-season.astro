@@ -15,7 +15,7 @@ import {
 } from "@lucide/astro";
 import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
 import VoicesFromTheCommunityBackgroundImage from "../assets/voicesFromTheCommunityBackground.png";
-import Web3NeedsToChangeImage from "../assets/web3UXNeedsToChangeImage.png";
+import Web3NeedsToChangeImage from "../assets/web3UXNeedsToChangeImage.svg";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
 import { EnscribeSolidIcon } from "../components/atoms/icons/EnscribeSolidIcon";
@@ -153,30 +153,26 @@ const daoScores = contractPipeline();
   }}>
   <ContractNamingHero />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] pt-5 sm:pt-0 pb-0 px-5 sm:px-8">
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] pt-6 sm:pt-0 pb-0 px-5 sm:px-8">
     <div
       class={cn(
         containerBaseStyles,
-        "flex flex-col-reverse sm:flex-row justify-start items-center gap-5 sm:gap-10 sm:py-10",
+        "flex flex-col-reverse sm:flex-col justify-start items-center gap-5 sm:gap-10 sm:pb-10 sm:pt-20",
       )}>
-      <div class="flex flex-col justify-start items-start gap-5 relative z-10">
-        <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>
+      <div class="flex flex-col justify-start items-start sm:items-center gap-5 relative z-10">
+        <h3 class={cn(sectionHeaderBaseStyles, "text-3xl sm:text-4xl max-sm:self-stretch text-left sm:text-center")}>
           Web3 UX needs to change
         </h3>
-        <p class={itemTextBaseStyles}>
-          Every time users interact with a smart contract, they’re asked to
-          trust a long, meaningless hex address.
-        </p>
-        <p class={itemTextBaseStyles}>
-          Not only does this make Ethereum harder to use, it leaves users
-          exposed to address spoofing and phishing attacks from scammers.
+        <p class={cn(itemTextBaseStyles,"text-lg sm:text-center max-w-[760px]")}>
+          Stop asking your users to trust long, meaningless hex addresses. This makes Ethereum
+          harder to use, and exposes users to address spoofing and phishing attacks.
         </p>
       </div>
       <Image
         quality={100}
         src={Web3NeedsToChangeImage}
-        alt="future of Web3 UX"
-        class="w-full sm:w-1/2 sm:min-w-1/2 relative z-10"
+        alt="Web3 UX before and after contract naming"
+        class="w-full max-w-[760px] relative z-10"
       />
     </div>
     <div class={cn(containerBaseStyles, "gap-6 sm:gap-10 sm:py-[20px]")}>
