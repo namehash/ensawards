@@ -7,10 +7,11 @@ import {
   AaveProject,
   ArbitrumProject,
   ENSProject,
-  NounsProject,
+  NounsProject, TaikoProject,
   UniswapProject,
 } from "@/data/projects.ts";
 import { OrgIds, type Organization, OrganizationTypes } from "@/types/organizations.ts";
+import {TaikoIcon} from "@/components/atoms/icons/projects-and-daos/TaikoIcon.tsx";
 
 export const ENSDaoOrg: Organization = {
   id: OrgIds.Ens,
@@ -101,6 +102,24 @@ export const AaveDaoOrg: Organization = {
   twitterOgImagePath: "/org-aave-dao_twitter_og_image.png",
 };
 
+export const TaikoDaoOrg: Organization = {
+  id: OrgIds.Taiko,
+  slug: "taiko",
+  orgType: OrganizationTypes.Dao,
+  project: TaikoProject,
+  name: "Taiko DAO",
+  description:
+      "Taiko DAO, created in collaboration with Aragon, plays a critical role in governing Taiko in a decentralized way.",
+  icon: TaikoIcon,
+  socials: {
+    website: new URL("https://dao.taiko.xyz/"),
+    twitter: new URL("https://x.com/taikoxyz"),
+    ens: "taiko.eth",
+  },
+  ogImagePath: "/org-taiko-dao_og_image.png",
+  twitterOgImagePath: "/org-taiko-dao_twitter_og_image.png",
+};
+
 /**
  * Array of supported organizations.
  *
@@ -112,4 +131,5 @@ export const ORGANIZATIONS: Organization[] = [
   NounsDaoOrg,
   ArbitrumDaoOrg,
   AaveDaoOrg,
+  TaikoDaoOrg,
 ];

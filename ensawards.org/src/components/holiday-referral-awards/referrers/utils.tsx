@@ -1,5 +1,4 @@
-import {AlertCircle as AlertIcon, Award as AwardIcon, Clock as ClockIcon} from "lucide-react";
-import {AbsoluteTime} from "@/components/atoms/AbsoluteTime.tsx";
+import {AlertCircle as AlertIcon, Award as AwardIcon} from "lucide-react";
 import type {UnixTimestamp} from "@ensnode/ensnode-sdk";
 import type {ReactElement} from "react";
 import {TooltipProvider} from "@/components/ui/tooltip.tsx";

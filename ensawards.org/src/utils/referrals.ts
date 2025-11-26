@@ -171,7 +171,7 @@ export type PaginatedAggregatedReferrersResponse =
 export async function getAggregatedReferrers(
     request?: PaginatedAggregatedReferrersRequest,
 ): Promise<PaginatedAggregatedReferrersResponse> {
-    const url = new URL(`/ensanalytics/aggregated-referrers`, "https://api.alpha-sepolia.green.ensnode.io/");
+    const url = new URL(`/ensanalytics/aggregated-referrers`, "https://api.alpha-sepolia.yellow.ensnode.io/");
 
     if (request?.page) url.searchParams.set("page", request.page.toString());
 if (request?.itemsPerPage)

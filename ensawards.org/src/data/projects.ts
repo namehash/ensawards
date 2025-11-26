@@ -4,6 +4,7 @@ import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.
 import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
 import { type Project, ProjectIds } from "@/types/projects.ts";
 import { EnsProjectIcon } from "../components/atoms/icons/projects-and-daos/EnsProjectIcon.tsx";
+import {TaikoIcon} from "@/components/atoms/icons/projects-and-daos/TaikoIcon.tsx";
 
 export const ENSProject: Project = {
   id: ProjectIds.Ens,
@@ -64,6 +65,18 @@ export const AaveProject: Project = {
   },
 };
 
+export const TaikoProject: Project = {
+  id: ProjectIds.Taiko,
+  name: "Taiko",
+  description:
+      "Taiko is a fully permissionless, Ethereum-equivalent based rollup. Inspired, secured, and sequenced by Ethereum.",
+  icon: TaikoIcon,
+  socials: {
+    website: new URL("https://taiko.xyz/"),
+    twitter: new URL("https://x.com/taikoxyz"),
+  },
+};
+
 /**
  * Array of supported projects.
  *
@@ -75,4 +88,5 @@ export const PROJECTS: Project[] = [
   NounsProject,
   ArbitrumProject,
   AaveProject,
+  TaikoProject,
 ];
