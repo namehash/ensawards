@@ -16,20 +16,20 @@ export interface ReferrersListProps {
 }
 
 export function ReferrersList({aggregatedReferrersData, isLoading, generateLinkCTA, error, header, referrerPositionOffset = 0, numberOfItemsToDisplay = 5}: ReferrersListProps) {
-    if (isLoading || aggregatedReferrersData === null){
-        return (
-            <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-center gap-2 sm:gap-3">
-                {[...Array(numberOfItemsToDisplay).keys()].map((elem) => <ReferrerCardLoading position={referrerPositionOffset + elem + 1}/>)}
-            </div>
-        );
-    }
-
     if (error !== undefined){
         return error;
     }
 
+    if (isLoading || aggregatedReferrersData === null){
+        return (
+            <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-center gap-2 sm:gap-3">
+                {[...Array(numberOfItemsToDisplay).keys()].map((elem) => <ReferrerCardLoading key={`Referrer-loading-${referrerPositionOffset + elem}`} position={referrerPositionOffset + elem + 1}/>)}
+            </div>
+        );
+    }
+
     if (aggregatedReferrersData.total === 0){
-        return <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-5">
+        return <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
             <NoReferrersInfo cta={generateLinkCTA}/>
             <ReferrersSnapshotTime lastUpdateTimestamp={aggregatedReferrersData.updatedAt} />
         </div>
@@ -48,7 +48,7 @@ export function ReferrersList({aggregatedReferrersData, isLoading, generateLinkC
                     }
                     <ReferrersSnapshotTime lastUpdateTimestamp={aggregatedReferrersData.updatedAt}/>
                 </div>
-                {aggregatedReferrersData.referrers.map((referrer, idx) => <ReferrerCard referrerData={referrer}
+                {aggregatedReferrersData.referrers.map((referrer, idx) => <ReferrerCard key={`Referrer-${referrer.referrer}`} referrerData={referrer}
                                                                                         position={referrerPositionOffset + idx + 1}/>)}
             </div>
     );

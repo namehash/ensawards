@@ -10,11 +10,12 @@ import {
 } from "@ensnode/ensnode-sdk";
 
 export interface TopReferrersProps {
+    onENSHolidayReferralsAwards: boolean;
     snippetSize?: number;
     header?: string;
 }
 
-export function TopReferrers({header, snippetSize = 3}:TopReferrersProps) {
+export function TopReferrers({onENSHolidayReferralsAwards, header, snippetSize = 3}:TopReferrersProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [fetchErrorMessage, setFetchErrorMessage] = useState("");
     const [aggregatedReferrersData, setAggregatedReferrersData] = useState<PaginatedAggregatedReferrers | null>(null);
@@ -27,11 +28,12 @@ export function TopReferrers({header, snippetSize = 3}:TopReferrersProps) {
     // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
     // and reuse this fetch wherever we need
     async function startFetching() {
+        setFetchErrorMessage("");
+        setIsLoading(true);
         try {
-            setIsLoading(true);
             const response = await client.getAggregatedReferrers({page: 1, itemsPerPage: snippetSize});
 
-            if (response.responseCode !== PaginatedAggregatedReferrersResponseCodes.Ok){
+            if (response.responseCode !== PaginatedAggregatedReferrersResponseCodes.Ok) {
                 setFetchErrorMessage(response.errorMessage);
                 setIsLoading(false);
                 return;
@@ -53,20 +55,30 @@ export function TopReferrers({header, snippetSize = 3}:TopReferrersProps) {
         startFetching();
     }, []);
 
+    const emptyStateCTAStyles = cn(shadcnButtonVariants({
+        variant: "outline",
+        size: "default",
+        className:
+            "cursor-pointer rounded-full",
+    }));
+
+    const emptyStateCTA = onENSHolidayReferralsAwards ?
+        <a className={emptyStateCTAStyles} onClick={() => document.getElementById("referral award recipient")!.focus()}>Generate your referral link</a>
+        :
+        <a className={emptyStateCTAStyles} href="/ens-referral-awards">Generate your referral
+            link</a>
 
     return <div
         className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
         <ReferrersList aggregatedReferrersData={aggregatedReferrersData}
                        isLoading={isLoading}
-                       generateLinkCTA={<a onClick={() => console.log("placeholder")}>Generate your referral link</a>}
+                       generateLinkCTA={emptyStateCTA}
                        error={fetchErrorMessage ?
-                           <FetchingErrorInfo errorMessage={fetchErrorMessage} retryFunction={() => {
-                               startFetching()
-                           }}/> : undefined}
+                           <FetchingErrorInfo errorMessage={fetchErrorMessage} retryFunction={startFetching}/> : undefined}
                        numberOfItemsToDisplay={snippetSize}
                        header={header}
         />
-        <a
+        {aggregatedReferrersData !== null && aggregatedReferrersData.total > 0 && <a
             href="/leaderboards/referrer"
             className={cn(
                 shadcnButtonVariants({
@@ -76,6 +88,6 @@ export function TopReferrers({header, snippetSize = 3}:TopReferrersProps) {
                 }),
             )}>
             View full referrer leaderboard
-        </a>
+        </a>}
     </div>
 }

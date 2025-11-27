@@ -22,7 +22,12 @@ export function MockReferrersList() {
                        updatedAt: 1764091210
                    },
                    isLoading: false,
-                   generateLinkCTA: <p>Placeholder</p>,
+                   generateLinkCTA: <p className={cn(shadcnButtonVariants({
+                       variant: "outline",
+                       size: "default",
+                       className:
+                           "cursor-pointer rounded-full",
+                   }))}>Placeholder</p>,
                 }
 
             case "loading":
@@ -34,17 +39,10 @@ export function MockReferrersList() {
 
             case "fetchError":
                 return {
-                    aggregatedReferrersData: {
-                        referrers: [],
-                        total: 0,
-                        paginationParams: {},
-                        hasNext: false,
-                        hasPrev: false,
-                        updatedAt: 1764091210
-                    },
+                    aggregatedReferrersData: null,
                     isLoading: false,
                     generateLinkCTA: <p>Placeholder</p>,
-                    error: <FetchingErrorInfo errorMessage="Mock error message" retryFunction={() => {alert("Retry fetching")}} />
+                    error: <FetchingErrorInfo errorMessage="Mock error message." retryFunction={() => {alert("Retry fetching")}} />
                 }
 
             default:

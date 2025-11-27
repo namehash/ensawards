@@ -10,6 +10,7 @@ import {
     type PaginatedAggregatedReferrers,
     PaginatedAggregatedReferrersResponseCodes
 } from "@ensnode/ensnode-sdk";
+import {shadcnButtonVariants} from "@/components/ui/shadcnButtonStyles.ts";
 
 export interface ReferrersPaginatedDisplayProps {
     itemsPerPage?: number
@@ -31,8 +32,9 @@ export function ReferrersPaginatedDisplay({itemsPerPage = 5}: ReferrersPaginated
     // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
     // and reuse this fetch wherever we need
     async function startFetching() {
+        setFetchErrorMessage("");
+        setIsLoading(true);
         try {
-            setIsLoading(true);
             const response = await client.getAggregatedReferrers({page: currentPage, itemsPerPage: itemsPerPage});
 
             if (response.responseCode !== PaginatedAggregatedReferrersResponseCodes.Ok){
@@ -62,9 +64,16 @@ export function ReferrersPaginatedDisplay({itemsPerPage = 5}: ReferrersPaginated
     return <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-5">
         <ReferrersList aggregatedReferrersData={aggregatedReferrersData}
                        isLoading={isLoading}
-                       generateLinkCTA={<a onClick={() => console.log("placeholder")}>Generate your referral link</a>}
+                       generateLinkCTA={<a className={cn(shadcnButtonVariants({
+                           variant: "outline",
+                           size: "default",
+                           className:
+                               "cursor-pointer rounded-full",
+                       }))} href="/ens-referral-awards">Generate your
+                           referral
+                           link</a>}
                        error={fetchErrorMessage ?
-                           <FetchingErrorInfo errorMessage={fetchErrorMessage} retryFunction={() => {startFetching()}} /> : undefined}
+                           <FetchingErrorInfo errorMessage={fetchErrorMessage} retryFunction={startFetching} /> : undefined}
                        referrerPositionOffset={(currentPage - 1) * itemsPerPage}
                        numberOfItemsToDisplay={itemsPerPage}
         />
