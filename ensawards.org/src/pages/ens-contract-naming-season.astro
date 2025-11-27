@@ -6,6 +6,7 @@ import {
   Award,
   CopyCheck,
   ExternalLink as ExternalLinkIcon,
+  type Icon as IconType,
   MousePointer2,
   Pointer,
   ShieldCheck,
@@ -27,9 +28,14 @@ import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
 import Layout from "../layouts/Layout.astro";
 import { OrgId } from "../types/organizations";
-import { ContentItemData } from "../utils";
 import { getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
+
+interface ContentItemData {
+  name: string;
+  description: string;
+  icon: typeof IconType;
+}
 
 const whyNameYourSmartContractsNowItems: ContentItemData[] = [
   {

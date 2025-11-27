@@ -1,25 +1,36 @@
 ---
-import { Code, Megaphone } from "@lucide/astro";
+import { Code, type Icon as IconType, Megaphone } from "@lucide/astro";
 import HolidayReferralAwardsHero from "../components/holiday-referral-awards/HolidayReferralAwardsHero.astro";
 import { ReferralLinkForm } from "../components/holiday-referral-awards/ReferralLinkForm";
 import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
 import JoinTelegram from "../components/molecules/JoinTelegram.astro";
 import Layout from "../layouts/Layout.astro";
-import { ContentItemData } from "../utils";
 import { cn } from "../utils/tailwindClassConcatenation";
 
-const everyoneCanParticipateItems: ContentItemData[] = [
+interface ContentItemData {
+  name: string;
+  description: string;
+  icon: typeof IconType;
+}
+
+interface EveryoneCanParticipateItemData extends ContentItemData {
+  iconColor: string;
+}
+
+const everyoneCanParticipateItems: EveryoneCanParticipateItemData[] = [
   {
     name: "Developers",
     description:
       "Build (and promote!) features for registering or renewing .eth names directly within your own app.",
     icon: Code,
+    iconColor: "text-[#0052CC]",
   },
   {
     name: "Content creators",
     description:
       "Share your referral link with your audience through social media or wherever you reach your community.",
     icon: Megaphone,
+    iconColor: "text-[#6F42C1]",
   },
 ];
 
@@ -87,10 +98,7 @@ const backgroundGreyStyles =
           everyoneCanParticipateItems.map((item, idx) => (
             <div class="w-fit h-fit flex flex-col justify-start items-start gap-4 p-4 sm:p-6 rounded-2xl border border-gray-200">
               <div class="w-fit h-fit flex flex-row justify-start items-start gap-5">
-                <item.icon
-                  size={24}
-                  className={cn(idx == 0 ? "text-[#0052CC]" : "text-[#6F42C1]")}
-                />
+                <item.icon size={24} className={item.iconColor} />
                 <h4 class="text-xl leading-normal font-semibold text-black">
                   {item.name}
                 </h4>
@@ -123,7 +131,8 @@ const backgroundGreyStyles =
           Bulk renewals not supported. <a
             href="/ens-holiday-awards-rules"
             class="underline underline-offset-[25%] decoration-muted-foreground/40 hover:decoration-muted-foreground"
-            >Learn&nbsp;more</a>
+            >Learn&nbsp;more</a
+          >
         </p>
       </div>
     </div>
