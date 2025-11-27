@@ -1,8 +1,7 @@
 import {AlertCircle as AlertIcon, Award as AwardIcon} from "lucide-react";
 import type {UnixTimestamp} from "@ensnode/ensnode-sdk";
 import type {ReactElement} from "react";
-import {TooltipProvider} from "@/components/ui/tooltip.tsx";
-import {RelativeTime} from "@/components/RelativeTime.tsx";
+import {RelativeTime} from "@/components/atoms/datetime/RelativeTime.tsx";
 import {cn} from "@/utils/tailwindClassConcatenation.ts";
 import {shadcnButtonVariants} from "@/components/ui/shadcnButtonStyles.ts";
 
@@ -10,9 +9,7 @@ export interface ReferrersSnapshotTimeProps {
     lastUpdateTimestamp: UnixTimestamp;
 }
 export const ReferrersSnapshotTime = ({lastUpdateTimestamp}: ReferrersSnapshotTimeProps) => {
-    return <TooltipProvider delayDuration={200} skipDelayDuration={0}>
-        <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap"><RelativeTime prefix="Last updated " timestamp={lastUpdateTimestamp} enforcePast={true} conciseFormatting={true} /></p>
-    </TooltipProvider>
+    return <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap"><RelativeTime prefix="Last updated " timestamp={lastUpdateTimestamp} enforcePast={true} conciseFormatting={true} /></p>
 }
 
 export interface FetchingErrorProps {

@@ -1,9 +1,10 @@
 import type {PaginatedAggregatedReferrers} from "@ensnode/ensnode-sdk";
 import {ReferrerCard, ReferrerCardLoading} from "@/components/atoms/cards/ReferrerCard.tsx";
 import type {ReactElement} from "react";
-import {FetchingErrorInfo, NoReferrersInfo} from "@/components/holiday-referral-awards/referrers/utils.tsx";
+import {NoReferrersInfo} from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import {ReferrersSnapshotTime} from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import {cn} from "@/utils/tailwindClassConcatenation.ts";
+import {Skeleton} from "@/components/ui/skeleton.tsx";
 
 export interface ReferrersListProps {
     aggregatedReferrersData: PaginatedAggregatedReferrers | null;
@@ -22,7 +23,8 @@ export function ReferrersList({aggregatedReferrersData, isLoading, generateLinkC
 
     if (isLoading || aggregatedReferrersData === null){
         return (
-            <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-center gap-2 sm:gap-3">
+            <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
+                <Skeleton className="w-[200px] h-5 bg-gray-300"/>
                 {[...Array(numberOfItemsToDisplay).keys()].map((elem) => <ReferrerCardLoading key={`Referrer-loading-${referrerPositionOffset + elem}`} position={referrerPositionOffset + elem + 1}/>)}
             </div>
         );

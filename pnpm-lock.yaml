@@ -37,6 +37,9 @@ importers:
       '@ensnode/datasources':
         specifier: ^1.0.3
         version: 1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/ensnode-react':
+        specifier: ^1.0.3
+        version: 1.0.3(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@ensnode/ensnode-sdk':
         specifier: ^1.0.3
         version: 1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
@@ -79,6 +82,9 @@ importers:
       astro-seo:
         specifier: ^0.8.4
         version: 0.8.4(prettier-plugin-astro@0.14.1)(prettier@3.6.2)(typescript@5.9.3)
+      boring-avatars:
+        specifier: ^2.0.4
+        version: 2.0.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -369,6 +375,12 @@ packages:
     resolution: {integrity: sha512-HyJZEnZ/9w3DXqngSIpGiKVZk5KFENCg1K4wTYclQ3yCYEHSTc0vjzda2doJwv4MA7st0Ih6ZWutP5vZOIK0Gg==}
     peerDependencies:
       viem: ^2.22.13
+
+  '@ensnode/ensnode-react@1.0.3':
+    resolution: {integrity: sha512-ndDOuEu0kwhZW35+et/AdotJiw1RIub3+xz1z/iTLOL1T3UTRZ9wvajDAD3GXQHJGYlIzK07cOAcsGSW2AuaqQ==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.0.0
+      react: ^18.0.0 || ^19.0.0
 
   '@ensnode/ensnode-sdk@1.0.3':
     resolution: {integrity: sha512-EQ0q0aJtw0d9MvDR+0+fOJbPYVtOwP9wGCI88RUXsvbvEDIz4bJJSDKSogC+Y6oARG5wn3XyB3eDlk7EH8KFgg==}
@@ -1327,6 +1339,14 @@ packages:
     peerDependencies:
       vite: '>=6.4.1'
 
+  '@tanstack/query-core@5.90.11':
+    resolution: {integrity: sha512-f9z/nXhCgWDF4lHqgIE30jxLe4sYv15QodfdPDKYAk7nAEjNcndy4dHz3ezhdUaR23BpWa4I2EH4/DZ0//Uf8A==}
+
+  '@tanstack/react-query@5.90.11':
+    resolution: {integrity: sha512-3uyzz01D1fkTLXuxF3JfoJoHQMU2fxsfJwE+6N5hHy0dVNoZOvwKP8Z2k7k1KDeD54N20apcJnG75TBAStIrBA==}
+    peerDependencies:
+      react: ^18 || ^19
+
   '@tanstack/react-virtual@3.13.12':
     resolution: {integrity: sha512-Gd13QdxPSukP8ZrkbgS2RwoZseTTbQPLnQEn7HY/rqtM+8Zt95f7xKC7N0EsKs7aoz0WzZ+fditZux+F8EzYxA==}
     peerDependencies:
@@ -1560,6 +1580,12 @@ packages:
 
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+
+  boring-avatars@2.0.4:
+    resolution: {integrity: sha512-xhZO/w/6aFmRfkaWohcl2NfyIy87gK5SBbys8kctZeTGF1Apjpv/10pfUuv+YEfVPkESU/h2Y6tt/Dwp+bIZPw==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
 
   boxen@8.0.1:
     resolution: {integrity: sha512-F3PH5k5juxom4xktynS7MoFY+NUWH5LC4CnH11YB8NPew+HLpmBLCybSAEyb2F+4pRXhuhWqFesoQd6DAyc2hw==}
@@ -3428,6 +3454,15 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
+  '@ensnode/ensnode-react@1.0.3(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+    dependencies:
+      '@ensnode/ensnode-sdk': 1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@tanstack/react-query': 5.90.11(react@19.2.0)
+      react: 19.2.0
+    transitivePeerDependencies:
+      - typescript
+      - viem
+
   '@ensnode/ensnode-sdk@1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
@@ -4191,6 +4226,13 @@ snapshots:
       tailwindcss: 4.1.17
       vite: 7.2.4(@types/node@22.19.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1)
 
+  '@tanstack/query-core@5.90.11': {}
+
+  '@tanstack/react-query@5.90.11(react@19.2.0)':
+    dependencies:
+      '@tanstack/query-core': 5.90.11
+      react: 19.2.0
+
   '@tanstack/react-virtual@3.13.12(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@tanstack/virtual-core': 3.13.12
@@ -4549,6 +4591,11 @@ snapshots:
   binary-extensions@2.3.0: {}
 
   boolbase@1.0.0: {}
+
+  boring-avatars@2.0.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
 
   boxen@8.0.1:
     dependencies:

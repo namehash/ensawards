@@ -7,10 +7,10 @@ import { millisecondsInSecond } from "date-fns/constants";
 import type * as React from "react";
 import { useEffect, useState } from "react";
 
-import type { Duration, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import {AbsoluteTime} from "@/components/atoms/AbsoluteTime.tsx";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip.tsx";
+import {AbsoluteTime} from "@/components/atoms/datetime/AbsoluteTime.tsx";
 
 /**
  * Formats a Unix timestamp as its relative distance with now

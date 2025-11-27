@@ -11,6 +11,8 @@ import {
 } from "@ensnode/ensnode-sdk";
 import {shadcnButtonVariants} from "@/components/ui/shadcnButtonStyles.ts";
 import {Pagination} from "@/components/molecules/Pagination.tsx";
+import {TooltipProvider} from "@/components/ui/tooltip.tsx";
+import {createConfig, ENSNodeProvider} from "@ensnode/ensnode-react";
 
 export interface ReferrersPaginatedDisplayProps {
     itemsPerPage?: number
@@ -27,6 +29,7 @@ export function ReferrersPaginatedDisplay({itemsPerPage = 5}: ReferrersPaginated
         url: new URL("https://api.alpha-sepolia.yellow.ensnode.io/"), //TODO: replace with the line below later on
         // url: getENSNodeUrl(),
     });
+    const ensNodeReactConfig = createConfig({ url:  "https://api.alpha-sepolia.yellow.ensnode.io/"}); //TODO: replace with getENSNodeUrl for prod
 
     //TODO: Ideally that part could also be extracted (with useQuery or w/e)
     // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -61,7 +64,8 @@ export function ReferrersPaginatedDisplay({itemsPerPage = 5}: ReferrersPaginated
     }, [currentPage]);
 
 
-    return <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-5">
+    return <ENSNodeProvider config={ensNodeReactConfig}><TooltipProvider delayDuration={200} skipDelayDuration={0}>
+        <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-5">
         <ReferrersList aggregatedReferrersData={aggregatedReferrersData}
                        isLoading={isLoading}
                        generateLinkCTA={<a className={cn(shadcnButtonVariants({
@@ -82,5 +86,5 @@ export function ReferrersPaginatedDisplay({itemsPerPage = 5}: ReferrersPaginated
         }} onNext={() => {
             setCurrentPage((prev) => prev + 1)
         }} onChosen={(newPage) => {setCurrentPage(newPage)}}/>}
-    </div>
+        </div></TooltipProvider></ENSNodeProvider>
 }

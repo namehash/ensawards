@@ -8,6 +8,8 @@ import {
     type PaginatedAggregatedReferrers,
     PaginatedAggregatedReferrersResponseCodes
 } from "@ensnode/ensnode-sdk";
+import {TooltipProvider} from "@/components/ui/tooltip.tsx";
+import {createConfig, ENSNodeProvider} from "@ensnode/ensnode-react";
 
 export interface TopReferrersProps {
     onENSHolidayReferralsAwards: boolean;
@@ -23,6 +25,7 @@ export function TopReferrers({onENSHolidayReferralsAwards, header, snippetSize =
         url: new URL("https://api.alpha-sepolia.yellow.ensnode.io/"), //TODO: replace with the line below later on
         // url: getENSNodeUrl(),
     });
+    const ensNodeReactConfig = createConfig({ url:  "https://api.alpha-sepolia.yellow.ensnode.io/"}); //TODO: replace with getENSNodeUrl for prod
 
     //TODO: Ideally that part could also be extracted (with useQuery or w/e)
     // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -68,7 +71,9 @@ export function TopReferrers({onENSHolidayReferralsAwards, header, snippetSize =
         <a className={emptyStateCTAStyles} href="/ens-referral-awards">Generate your referral
             link</a>
 
-    return <div
+    return <ENSNodeProvider config={ensNodeReactConfig}>
+    <TooltipProvider delayDuration={200} skipDelayDuration={0}>
+        <div
         className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
         <ReferrersList aggregatedReferrersData={aggregatedReferrersData}
                        isLoading={isLoading}
@@ -89,5 +94,6 @@ export function TopReferrers({onENSHolidayReferralsAwards, header, snippetSize =
             )}>
             View full referrer leaderboard
         </a>}
-    </div>
+        </div></TooltipProvider>
+    </ENSNodeProvider>
 }

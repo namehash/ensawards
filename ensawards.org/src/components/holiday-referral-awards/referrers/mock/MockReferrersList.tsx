@@ -3,11 +3,14 @@ import {cn} from "@/utils/tailwindClassConcatenation.ts";
 import {shadcnButtonVariants} from "@/components/ui/shadcnButtonStyles.ts";
 import {ReferrersList, type ReferrersListProps} from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
 import {FetchingErrorInfo} from "@/components/holiday-referral-awards/referrers/utils.tsx";
+import {TooltipProvider} from "@/components/ui/tooltip.tsx";
+import {createConfig, ENSNodeProvider} from "@ensnode/ensnode-react";
 
 type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 
 const DEFAULT_STATE = "loaded";
 export function MockReferrersList() {
+    const ensNodeReactConfig = createConfig({ url:  "https://api.alpha-sepolia.yellow.ensnode.io/"}); //TODO: replace with getENSNodeUrl for prod
     const [selectedState, setSelectedState] = useState<ReferrersListState>(DEFAULT_STATE);
     const props: ReferrersListProps = useMemo(() => {
         switch (selectedState){
@@ -90,7 +93,8 @@ export function MockReferrersList() {
         }
     }, [selectedState]);
 
-    return <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
+    return <ENSNodeProvider config={ensNodeReactConfig}><TooltipProvider delayDuration={200} skipDelayDuration={0}>
+        <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
         <div className="flex flex-wrap gap-2">
             {["loading", "fetchError", "empty", "loaded"].map((variant) => (
                 <button
@@ -106,5 +110,5 @@ export function MockReferrersList() {
             ))}
         </div>
         <ReferrersList {...props} />
-    </div>
+        </div></TooltipProvider></ENSNodeProvider>
 }
