@@ -16,6 +16,7 @@ import { OrgId } from "../types/organizations";
 import { calculateAppEnsAwardsScore, getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 import {TopReferrers} from "../components/holiday-referral-awards/referrers/TopReferrers";
+import HolidayReferralAwardsCTA from "../components/holiday-referral-awards/HolidayReferralAwardsCTA.astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -132,5 +133,6 @@ const daoScores = contractPipeline();
       </a>
     </ItemsList>
       <TopReferrers client:load header="Top Referrers" onENSHolidayReferralsAwards={false}/>
+      <HolidayReferralAwardsCTA />
   </section>
 </Layout>

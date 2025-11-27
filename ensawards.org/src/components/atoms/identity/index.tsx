@@ -126,7 +126,7 @@ export function DisplayIdentity({
       `withAvatar` prop. */}
       {withAvatar && avatar}
       {/*// TODO: for now, this is styled to fit the Referrer Card designs, but it should be made more flexible --> connected with the other todos in this file*/}
-      <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+      <div className="min-md:min-w-[120px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
         {prefix && <p className="text-muted-foreground text-sm leading-normal font-normal">{prefix}</p>}
         {identitifer}
       </div>

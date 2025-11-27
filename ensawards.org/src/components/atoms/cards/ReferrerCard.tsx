@@ -54,6 +54,7 @@ export function ReferrerCard({referrerData, position}: ReferrerCardProps) {
                     <ResolveAndDisplayIdentity
                         identity={referrerIdentity}
                         namespaceId={namespaceId}
+                        prefix="Referrer"
                         withAvatar={true}
                         withTooltip={false}
                     />
@@ -172,7 +173,7 @@ export const ReferrerCardLoading = ({position}: Omit<ReferrerCardProps, "referre
                 <div className="flex flex-row justify-start items-center gap-3">
                     <div className="animate-pulse w-10 h-10 bg-gray-300 rounded-full"/>
                     <div
-                        className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+                        className="min-md:min-w-[120px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
                         <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
                         <div className="animate-pulse bg-gray-300 rounded-sm w-[100px] h-4"/>
                     </div>
@@ -188,7 +189,7 @@ export const ReferrerCardLoading = ({position}: Omit<ReferrerCardProps, "referre
                 <div className="flex flex-row justify-start items-center gap-3">
                     <div className="animate-pulse w-10 h-10 bg-gray-300 rounded-full"/>
                     <div
-                        className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+                        className="min-md:min-w-[120px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
                         <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
                         <div className="animate-pulse bg-gray-300 rounded-sm w-[100px] h-4"/>
                     </div>
