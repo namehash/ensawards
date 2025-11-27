@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 
-import {ChevronLeft, ChevronRight} from "lucide-react";
 import {cn} from "@/utils/tailwindClassConcatenation.ts";
 import {FetchingErrorInfo} from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import {ReferrersList} from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
@@ -11,6 +10,7 @@ import {
     PaginatedAggregatedReferrersResponseCodes
 } from "@ensnode/ensnode-sdk";
 import {shadcnButtonVariants} from "@/components/ui/shadcnButtonStyles.ts";
+import {Pagination} from "@/components/molecules/Pagination.tsx";
 
 export interface ReferrersPaginatedDisplayProps {
     itemsPerPage?: number
@@ -77,15 +77,10 @@ export function ReferrersPaginatedDisplay({itemsPerPage = 5}: ReferrersPaginated
                        referrerPositionOffset={(currentPage - 1) * itemsPerPage}
                        numberOfItemsToDisplay={itemsPerPage}
         />
-        {aggregatedReferrersData !== null && aggregatedReferrersData.referrers.length > 0 && <div className="flex flex-row justify-center items-center gap-3">
-            <button disabled={currentPage === 1} onClick={() => {
-                setCurrentPage((prev) => prev - 1)
-            }}><ChevronLeft className={cn(currentPage === 1 ? "text-black/40" : "text-black cursor-pointer")}/></button>
-            <p>{currentPage}</p>
-            <button disabled={currentPage === numberOfPages} onClick={() => {
-                setCurrentPage((prev) => prev + 1)
-            }}><ChevronRight
-                className={cn(currentPage === numberOfPages ? "text-black/40" : "text-black cursor-pointer")}/></button>
-        </div>}
+        {aggregatedReferrersData !== null && aggregatedReferrersData.referrers.length > 0 && numberOfPages > 1 && <Pagination numberOfPages={numberOfPages} currentPage={currentPage} onPrevious={() => {
+            setCurrentPage((prev) => prev - 1)
+        }} onNext={() => {
+            setCurrentPage((prev) => prev + 1)
+        }} onChosen={(newPage) => {setCurrentPage(newPage)}}/>}
     </div>
 }
