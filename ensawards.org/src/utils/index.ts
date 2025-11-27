@@ -2,6 +2,7 @@ import type { PossibleSuggestions } from "@/components/molecules/contact-form/ty
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { getUnixTime } from "date-fns";
 import type { Address } from "viem";
+import type {Icon as IconType} from "@lucide/astro";
 
 /**
  * Checks whether a given string is a valid slug.
@@ -78,3 +79,9 @@ export const truncateAddress = (address: Address) =>
 export const ENS_CONTRACT_NAMING_SEASON_APPROX_END: UnixTimestamp = getUnixTime(
   new Date("2026-04-30T23:59:59.000Z"),
 );
+
+export interface ContentItemData {
+  name: string;
+  description: string;
+  icon: typeof IconType;
+}

@@ -6,7 +6,6 @@ import {
   Award,
   CopyCheck,
   ExternalLink as ExternalLinkIcon,
-  type Icon as IconType,
   MousePointer2,
   Pointer,
   ShieldCheck,
@@ -30,12 +29,7 @@ import Layout from "../layouts/Layout.astro";
 import { OrgId } from "../types/organizations";
 import { getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
-
-interface ContentItemData {
-  name: string;
-  description: string;
-  icon: typeof IconType;
-}
+import {ContentItemData} from "../utils";
 
 const whyNameYourSmartContractsNowItems: ContentItemData[] = [
   {
@@ -134,7 +128,7 @@ const voicesFromTheCommunity: QuoteCardData[] = [
 
 const containerBaseStyles =
   "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center";
-const sectionHeaderBaseStyles = "text-2xl leading-normal font-semibold text-black";
+const sectionHeaderBaseStyles = "text-2xl sm:text-3xl leading-normal font-semibold text-black";
 const itemHeadersBaseStyles = "text-lg leading-normal font-semibold text-black";
 const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-foreground";
 const backgroundGreyStyles =
