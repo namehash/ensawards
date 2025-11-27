@@ -15,9 +15,9 @@ import {
 import { Check, Cross } from "lucide-react";
 import type * as React from "react";
 import type { Address } from "viem";
-import firstPlaceIcon from "../../../assets/firstPlaceAward.svg";
-import secondPlaceIcon from "../../../assets/secondPlaceAward.svg";
-import thirdPlaceIcon from "../../../assets/thirdPlaceAward.svg";
+import firstPlaceIcon from "../../../assets/firstPlaceAward.png";
+import secondPlaceIcon from "../../../assets/secondPlaceAward.png";
+import thirdPlaceIcon from "../../../assets/thirdPlaceAward.png";
 
 export interface ReferrerCardProps {
   referrerData: AggregatedReferrerMetricsContribution;
@@ -152,7 +152,7 @@ const FurtherPlaceIcon = ({ place }: PlaceProps) => (
 
 const PlaceIcon = ({ place }: PlaceProps) =>
   place <= 3 ? (
-    <img alt={`${place}-place`} src={placeIcons[place - 1].src} />
+    <img alt={`${place}-place`} src={placeIcons[place - 1].src} className="w-[32px] h-[32px]" />
   ) : (
     <FurtherPlaceIcon place={place} />
   );
