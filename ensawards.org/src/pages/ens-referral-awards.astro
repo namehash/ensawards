@@ -1,31 +1,33 @@
 ---
+import { Code, Megaphone } from "@lucide/astro";
 import HolidayReferralAwardsHero from "../components/holiday-referral-awards/HolidayReferralAwardsHero.astro";
 import { ReferralLinkForm } from "../components/holiday-referral-awards/ReferralLinkForm";
-import {TopReferrers} from "../components/holiday-referral-awards/referrers/TopReferrers";
+import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
 import JoinTelegram from "../components/molecules/JoinTelegram.astro";
 import Layout from "../layouts/Layout.astro";
-import {cn} from "../utils/tailwindClassConcatenation";
-import {Code, Megaphone} from "@lucide/astro";
-import {ContentItemData} from "../utils";
+import { ContentItemData } from "../utils";
+import { cn } from "../utils/tailwindClassConcatenation";
 
 const everyoneCanParticipateItems: ContentItemData[] = [
   {
     name: "Developers",
-    description: "Build (and promote!) features for registering or renewing .eth names directly within your own app.",
-    icon: Code
+    description:
+      "Build (and promote!) features for registering or renewing .eth names directly within your own app.",
+    icon: Code,
   },
   {
     name: "Content creators",
-    description: "Share your referral link with your audience through social media or wherever you reach your community.",
-    icon: Megaphone
-  }
+    description:
+      "Share your referral link with your audience through social media or wherever you reach your community.",
+    icon: Megaphone,
+  },
 ];
 
 const sectionHeaderBaseStyles = "text-2xl sm:text-3xl leading-normal font-semibold text-black";
 const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-stretch";
 
 const backgroundGreyStyles =
-    "absolute w-screen h-full box-border py-6 sm:py-[80px] bg-neutral-50 bottom-0";
+  "absolute w-screen h-full box-border py-6 sm:py-[80px] bg-neutral-50 bottom-0";
 ---
 
 <Layout
@@ -76,38 +78,68 @@ const backgroundGreyStyles =
         </div>
       </div>
     </div>
-    <div class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start sm:items-center gap-5 sm:gap-[60px]">
-        <h3 class={sectionHeaderBaseStyles}>Everyone can participate!</h3>
-        <div class="w-full flex flex-col sm:flex-row flex-nowrap justify-center items-center gap-3 sm:gap-5">
-          {everyoneCanParticipateItems.map((item, idx) => <div class="w-fit h-fit flex flex-col justify-start items-start gap-4 p-4 sm:p-6 rounded-2xl border border-gray-200">
-            <div class="w-fit h-fit flex flex-row justify-start items-start gap-5">
-              <item.icon size={24} className={cn(idx == 0 ? "text-[#0052CC]" : "text-[#6F42C1]")} />
-              <h4 class="text-xl leading-normal font-semibold text-black">{item.name}</h4>
+    <div
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start sm:items-center gap-5 sm:gap-[60px]">
+      <h3 class={sectionHeaderBaseStyles}>Everyone can participate!</h3>
+      <div
+        class="w-full flex flex-col sm:flex-row flex-nowrap justify-center items-center gap-3 sm:gap-5">
+        {
+          everyoneCanParticipateItems.map((item, idx) => (
+            <div class="w-fit h-fit flex flex-col justify-start items-start gap-4 p-4 sm:p-6 rounded-2xl border border-gray-200">
+              <div class="w-fit h-fit flex flex-row justify-start items-start gap-5">
+                <item.icon
+                  size={24}
+                  className={cn(idx == 0 ? "text-[#0052CC]" : "text-[#6F42C1]")}
+                />
+                <h4 class="text-xl leading-normal font-semibold text-black">
+                  {item.name}
+                </h4>
+              </div>
+              <p class="text-base leading-normal font-normal text-muted-foreground">
+                {item.description}
+              </p>
             </div>
-            <p class="text-base leading-normal font-normal text-muted-foreground">{item.description}</p>
-          </div>)}
-        </div>
+          ))
+        }
+      </div>
     </div>
     <div
+      class={cn(
+        "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-center items-center " +
+          "gap-5 sm:gap-10 py-6 sm:py-[80px] relative z-10 bg-neutral-50",
+      )}>
+      <div
         class={cn(
-            "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-center items-center " +
-            "gap-5 sm:gap-10 py-6 sm:py-[80px] relative z-10 bg-neutral-50",
+          backgroundGreyStyles,
+          "sm:bg-[url(/src/assets/generateReferralLinkBackgroundImage.png)] bg-no-repeat bg-size-[1440px_578px] bg-top",
         )}>
-      <div class={cn(backgroundGreyStyles, "sm:bg-[url(/src/assets/generateReferralLinkBackgroundImage.png)] bg-no-repeat bg-size-[1440px_578px] bg-top")}></div>
-      <div class="sm:min-h-[500px] relative z-10 flex flex-col flex-nowrap justify-center items-center gap-5">
+      </div>
+      <div
+        class="sm:min-h-[500px] relative z-10 flex flex-col flex-nowrap justify-center items-center gap-5">
         <ReferralLinkForm client:load />
         <!--TODO: replace current href with the correct link (should lead to FAQ section when it's done)-->
-        <p class="text-base leading-normal font-normal text-muted-foreground text-center">Bulk renewals not supported. <a href="/ens-holiday-awards-rules" class="underline underline-offset-[25%] decoration-muted-foreground/40 hover:decoration-muted-foreground">Learn&nbsp;more</a></p>
+        <p
+          class="text-base leading-normal font-normal text-muted-foreground text-center">
+          Bulk renewals not supported. <a
+            href="/ens-holiday-awards-rules"
+            class="underline underline-offset-[25%] decoration-muted-foreground/40 hover:decoration-muted-foreground"
+            >Learn&nbsp;more</a>
+        </p>
       </div>
     </div>
-    <div class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start max-md:gap-5">
+    <div
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start max-md:gap-5">
       <div class="w-full h-fit flex flex-col justify-start items-center gap-3">
-        <h3 class="text-3xl leading-normal font-semibold text-black text-center">
+        <h3
+          class="text-3xl leading-normal font-semibold text-black text-center">
           Top referrers
         </h3>
-        <p class="text-sm leading-normal font-normal text-muted-foreground text-center">It may take a while for the data to be actualized</p>
+        <p
+          class="text-sm leading-normal font-normal text-muted-foreground text-center">
+          It may take a while for the data to be actualized
+        </p>
       </div>
-      <TopReferrers client:load onENSHolidayReferralsAwards={true}/>
+      <TopReferrers client:load onENSHolidayReferralsAwards={true} />
     </div>
     <JoinTelegram
       header="Have questions?"

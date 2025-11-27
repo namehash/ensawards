@@ -5,6 +5,8 @@ import ContractNamingBanner from "../components/atoms/ContractNamingBanner.astro
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
+import HolidayReferralAwardsCTA from "../components/holiday-referral-awards/HolidayReferralAwardsCTA.astro";
+import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
@@ -15,8 +17,6 @@ import Layout from "../layouts/Layout.astro";
 import { OrgId } from "../types/organizations";
 import { calculateAppEnsAwardsScore, getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
-import {TopReferrers} from "../components/holiday-referral-awards/referrers/TopReferrers";
-import HolidayReferralAwardsCTA from "../components/holiday-referral-awards/HolidayReferralAwardsCTA.astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -132,7 +132,11 @@ const daoScores = contractPipeline();
         View full app leaderboard
       </a>
     </ItemsList>
-      <TopReferrers client:load header="Top Referrers" onENSHolidayReferralsAwards={false}/>
-      <HolidayReferralAwardsCTA />
+    <TopReferrers
+      client:load
+      header="Top Referrers"
+      onENSHolidayReferralsAwards={false}
+    />
+    <HolidayReferralAwardsCTA />
   </section>
 </Layout>

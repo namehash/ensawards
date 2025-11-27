@@ -18,7 +18,8 @@ const daoScores = contractPipeline();
 
 const daoLeaderboardDescription = "See how DAOs rank for following ENS best practices.";
 const appLeaderboardDescription = "See how apps rank for following ENS best practices.";
-const referrerLeaderboardDescription = "Compare referrers by their performance in ENS Holiday Awards.";
+const referrerLeaderboardDescription =
+  "Compare referrers by their performance in ENS Holiday Awards.";
 ---
 
 <Layout
@@ -110,10 +111,11 @@ const referrerLeaderboardDescription = "Compare referrers by their performance i
           </p>
         </div>
       </LeaderboardSnippetCard>
-        <LeaderboardSnippetCard
-                name="Referrer leaderboard"
-                description={referrerLeaderboardDescription}
-                link="/leaderboards/referrer" />
+      <LeaderboardSnippetCard
+        name="Referrer leaderboard"
+        description={referrerLeaderboardDescription}
+        link="/leaderboards/referrer"
+      />
     </ItemsList>
   </section>
 </Layout>

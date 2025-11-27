@@ -1,7 +1,7 @@
-import type {ChainId, Name} from "@ensnode/ensnode-sdk";
-import {type ENSNamespaceId, ENSNamespaceIds} from "@ensnode/datasources";
-import {SUPPORTED_CHAINS} from "@/utils/chains.ts";
-import type {Address} from "viem";
+import { SUPPORTED_CHAINS } from "@/utils/chains.ts";
+import { type ENSNamespaceId, ENSNamespaceIds } from "@ensnode/datasources";
+import type { ChainId, Name } from "@ensnode/ensnode-sdk";
+import type { Address } from "viem";
 
 /**
  * Get the ENS Manager App URL for the provided namespace.
@@ -11,17 +11,17 @@ import type {Address} from "viem";
  * doesn't have a known ENS Manager App
  */
 export function getEnsManagerAppUrl(namespaceId: ENSNamespaceId): URL | null {
-    switch (namespaceId) {
-        case ENSNamespaceIds.Mainnet:
-            return new URL(`https://app.ens.domains/`);
-        case ENSNamespaceIds.Sepolia:
-            return new URL(`https://sepolia.app.ens.domains/`);
-        case ENSNamespaceIds.Holesky:
-            return new URL(`https://holesky.app.ens.domains/`);
-        case ENSNamespaceIds.EnsTestEnv:
-            // ens-test-env runs on a local chain and is not supported by app.ens.domains
-            return null;
-    }
+  switch (namespaceId) {
+    case ENSNamespaceIds.Mainnet:
+      return new URL(`https://app.ens.domains/`);
+    case ENSNamespaceIds.Sepolia:
+      return new URL(`https://sepolia.app.ens.domains/`);
+    case ENSNamespaceIds.Holesky:
+      return new URL(`https://holesky.app.ens.domains/`);
+    case ENSNamespaceIds.EnsTestEnv:
+      // ens-test-env runs on a local chain and is not supported by app.ens.domains
+      return null;
+  }
 }
 
 /**
@@ -39,22 +39,22 @@ export function getEnsManagerAppUrl(namespaceId: ENSNamespaceId): URL | null {
  *          ENS namespace is not supported by the ENS Metadata Service
  */
 export function buildEnsMetadataServiceAvatarUrl(
-    name: Name,
-    namespaceId: ENSNamespaceId,
+  name: Name,
+  namespaceId: ENSNamespaceId,
 ): URL | null {
-    switch (namespaceId) {
-        case ENSNamespaceIds.Mainnet:
-            return new URL(name, `https://metadata.ens.domains/mainnet/avatar/`);
-        case ENSNamespaceIds.Sepolia:
-            return new URL(name, `https://metadata.ens.domains/sepolia/avatar/`);
-        case ENSNamespaceIds.Holesky:
-            // metadata.ens.domains doesn't currently support holesky
-            return null;
-        case ENSNamespaceIds.EnsTestEnv:
-            // ens-test-env runs on a local chain and is not supported by metadata.ens.domains
-            // TODO: Above comment is not true. Details at https://github.com/namehash/ensnode/issues/1078
-            return null;
-    }
+  switch (namespaceId) {
+    case ENSNamespaceIds.Mainnet:
+      return new URL(name, `https://metadata.ens.domains/mainnet/avatar/`);
+    case ENSNamespaceIds.Sepolia:
+      return new URL(name, `https://metadata.ens.domains/sepolia/avatar/`);
+    case ENSNamespaceIds.Holesky:
+      // metadata.ens.domains doesn't currently support holesky
+      return null;
+    case ENSNamespaceIds.EnsTestEnv:
+      // ens-test-env runs on a local chain and is not supported by metadata.ens.domains
+      // TODO: Above comment is not true. Details at https://github.com/namehash/ensnode/issues/1078
+      return null;
+  }
 }
 
 /**
@@ -64,10 +64,10 @@ export function buildEnsMetadataServiceAvatarUrl(
  * or null if this URL is not known
  */
 export function buildExternalEnsAppProfileUrl(name: Name, namespaceId: ENSNamespaceId): URL | null {
-    const baseUrl = getEnsManagerAppUrl(namespaceId);
-    if (!baseUrl) return null;
+  const baseUrl = getEnsManagerAppUrl(namespaceId);
+  if (!baseUrl) return null;
 
-    return new URL(name, baseUrl);
+  return new URL(name, baseUrl);
 }
 
 /**
@@ -77,10 +77,10 @@ export function buildExternalEnsAppProfileUrl(name: Name, namespaceId: ENSNamesp
  * Namespace, or null if this URL is not known
  */
 export function getAddressDetailsUrl(address: Address, namespaceId: ENSNamespaceId): URL | null {
-    const baseUrl = getEnsManagerAppUrl(namespaceId);
-    if (!baseUrl) return null;
+  const baseUrl = getEnsManagerAppUrl(namespaceId);
+  if (!baseUrl) return null;
 
-    return new URL(address, baseUrl);
+  return new URL(address, baseUrl);
 }
 
 /**
@@ -90,13 +90,13 @@ export function getAddressDetailsUrl(address: Address, namespaceId: ENSNamespace
  * or null if the referenced chain doesn't have a known block explorer
  */
 export const getChainBlockExplorerUrl = (chainId: ChainId): URL | null => {
-    const chain = SUPPORTED_CHAINS.find((chain) => chain.id === chainId);
-    if (!chain) return null;
+  const chain = SUPPORTED_CHAINS.find((chain) => chain.id === chainId);
+  if (!chain) return null;
 
-    // NOTE: anvil/ens-test-env chain does not have a blockExplorer
-    if (!chain.blockExplorers) return null;
+  // NOTE: anvil/ens-test-env chain does not have a blockExplorer
+  if (!chain.blockExplorers) return null;
 
-    return new URL(chain.blockExplorers.default.url);
+  return new URL(chain.blockExplorers.default.url);
 };
 
 /**
@@ -106,8 +106,8 @@ export const getChainBlockExplorerUrl = (chainId: ChainId): URL | null => {
  * or null if the referenced chain doesn't have a known block explorer
  */
 export const getBlockExplorerUrlForAddress = (chainId: ChainId, address: Address): URL | null => {
-    const chainBlockExplorer = getChainBlockExplorerUrl(chainId);
-    if (!chainBlockExplorer) return null;
+  const chainBlockExplorer = getChainBlockExplorerUrl(chainId);
+  if (!chainBlockExplorer) return null;
 
-    return new URL(`address/${address}`, chainBlockExplorer.toString());
+  return new URL(`address/${address}`, chainBlockExplorer.toString());
 };

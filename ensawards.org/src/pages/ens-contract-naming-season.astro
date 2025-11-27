@@ -27,9 +27,9 @@ import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
 import Layout from "../layouts/Layout.astro";
 import { OrgId } from "../types/organizations";
+import { ContentItemData } from "../utils";
 import { getOrgById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
-import {ContentItemData} from "../utils";
 
 const whyNameYourSmartContractsNowItems: ContentItemData[] = [
   {
@@ -153,13 +153,23 @@ const daoScores = contractPipeline();
         containerBaseStyles,
         "flex flex-col-reverse sm:flex-col justify-start items-center gap-5 sm:gap-10 sm:pb-10 sm:pt-20",
       )}>
-      <div class="flex flex-col justify-start items-start sm:items-center gap-5 relative z-10">
-        <h3 class={cn(sectionHeaderBaseStyles, "text-3xl sm:text-4xl max-sm:self-stretch text-left sm:text-center")}>
+      <div
+        class="flex flex-col justify-start items-start sm:items-center gap-5 relative z-10">
+        <h3
+          class={cn(
+            sectionHeaderBaseStyles,
+            "text-3xl sm:text-4xl max-sm:self-stretch text-left sm:text-center",
+          )}>
           Web3 UX needs to change
         </h3>
-        <p class={cn(itemTextBaseStyles,"text-lg sm:text-center max-w-[760px]")}>
-          Stop asking your users to trust long, meaningless hex addresses. This makes Ethereum
-          harder to use, and exposes users to address spoofing and phishing attacks.
+        <p
+          class={cn(
+            itemTextBaseStyles,
+            "text-lg sm:text-center max-w-[760px]",
+          )}>
+          Stop asking your users to trust long, meaningless hex addresses. This
+          makes Ethereum harder to use, and exposes users to address spoofing
+          and phishing attacks.
         </p>
       </div>
       <Image
@@ -439,8 +449,9 @@ const daoScores = contractPipeline();
             Frequently asked questions
           </h3>
           <p class={itemTextBaseStyles}>
-            Check out our Frequently Asked Questions (FAQs) to find quick solutions to common queries. Still have
-            questions? Join the Telegram community or try the link below to learn more on the forum.
+            Check out our Frequently Asked Questions (FAQs) to find quick
+            solutions to common queries. Still have questions? Join the Telegram
+            community or try the link below to learn more on the forum.
           </p>
           <a
             href="https://discuss.ens.domains/t/ens-contract-naming-season/21596"

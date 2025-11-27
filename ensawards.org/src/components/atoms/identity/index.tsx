@@ -4,18 +4,18 @@ import { useResolvedIdentity } from "@ensnode/ensnode-react";
 import {
   type ENSNamespaceId,
   type Identity,
-  isResolvedIdentity,
   ResolutionStatusIds,
-  translateDefaultableChainIdToChainId,
   type UnresolvedIdentity,
+  isResolvedIdentity,
+  translateDefaultableChainIdToChainId,
 } from "@ensnode/ensnode-sdk";
 
 import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
-import { EnsAvatar } from "./EnsAvatar.tsx";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EnsAvatar } from "./EnsAvatar.tsx";
 
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { AddressDisplay, IdentityLink, IdentityTooltip, NameDisplay } from "./utils";
-import {cn} from "@/utils/tailwindClassConcatenation.ts";
 
 interface ResolveAndDisplayIdentityProps {
   identity: UnresolvedIdentity;
@@ -38,18 +38,20 @@ interface ResolveAndDisplayIdentityProps {
  */
 export function ResolveAndDisplayIdentity({
   identity,
-    namespaceId,
-    prefix,
+  namespaceId,
+  prefix,
   withLink = true,
   withTooltip = true,
   withAvatar = false,
   className,
 }: ResolveAndDisplayIdentityProps) {
-
   // resolve the primary name for `identity` using ENSNode
   // TODO: extract out the concept of resolving an `Identity` into a provider that child
   //       components can then hook into.
-  const { identity: identityResult } = useResolvedIdentity({ identity, namespaceId });
+  const { identity: identityResult } = useResolvedIdentity({
+    identity,
+    namespaceId,
+  });
 
   return (
     <DisplayIdentity
@@ -89,7 +91,7 @@ interface DisplayIdentityProps {
 export function DisplayIdentity({
   identity,
   namespaceId,
-    prefix,
+  prefix,
   withLink = true,
   withTooltip = true,
   withAvatar = false,
@@ -114,10 +116,20 @@ export function DisplayIdentity({
         width={24}
       />
     );
-    identitifer = <AddressDisplay address={identity.address} className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%]",className)} />;
+    identitifer = (
+      <AddressDisplay
+        address={identity.address}
+        className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%]", className)}
+      />
+    );
   } else {
     avatar = <EnsAvatar name={identity.name} namespaceId={namespaceId} className="h-10 w-10" />;
-    identitifer = <NameDisplay name={identity.name} className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%]",className)} />;
+    identitifer = (
+      <NameDisplay
+        name={identity.name}
+        className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%]", className)}
+      />
+    );
   }
 
   let result = (
@@ -127,7 +139,9 @@ export function DisplayIdentity({
       {withAvatar && avatar}
       {/*// TODO: for now, this is styled to fit the Referrer Card designs, but it should be made more flexible --> connected with the other todos in this file*/}
       <div className="min-md:min-w-[120px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
-        {prefix && <p className="text-muted-foreground text-sm leading-normal font-normal">{prefix}</p>}
+        {prefix && (
+          <p className="text-muted-foreground text-sm leading-normal font-normal">{prefix}</p>
+        )}
         {identitifer}
       </div>
     </div>

@@ -1,8 +1,8 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { Icon as IconType } from "@lucide/astro";
 import { getUnixTime } from "date-fns";
 import type { Address } from "viem";
-import type {Icon as IconType} from "@lucide/astro";
 
 /**
  * Checks whether a given string is a valid slug.

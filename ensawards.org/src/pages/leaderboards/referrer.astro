@@ -1,24 +1,23 @@
 ---
-
-import Layout from "../../layouts/Layout.astro";
+import { ReferrersPaginatedDisplay } from "../../components/holiday-referral-awards/referrers/ReferrersPaginatedDisplay";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import {ReferrersPaginatedDisplay} from "../../components/holiday-referral-awards/referrers/ReferrersPaginatedDisplay";
+import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout>
-    <SubpageHero
-            header="Referrer leaderboard"
-            description="Compare referrers by their performance in ENS Holiday Awards."
-            breadcrumbs={["ENS Holiday Awards"]}
-            customImage={{
-                source: "/src/assets/leaderboardsHeroImage.png",
-                width: 371,
-                height: 372,
-                styles: "-top-0 right-0",
-            }}
-    />
-    <section
-            class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-        <ReferrersPaginatedDisplay client:load/>
-    </section>
+  <SubpageHero
+    header="Referrer leaderboard"
+    description="Compare referrers by their performance in ENS Holiday Awards."
+    breadcrumbs={["ENS Holiday Awards"]}
+    customImage={{
+      source: "/src/assets/leaderboardsHeroImage.png",
+      width: 371,
+      height: 372,
+      styles: "-top-0 right-0",
+    }}
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ReferrersPaginatedDisplay client:load />
+  </section>
 </Layout>

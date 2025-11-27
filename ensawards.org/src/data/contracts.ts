@@ -2,7 +2,8 @@ import {
   AaveDaoOrg,
   ArbitrumDaoOrg,
   ENSDaoOrg,
-  NounsDaoOrg, TaikoDaoOrg,
+  NounsDaoOrg,
+  TaikoDaoOrg,
   UniswapDaoOrg,
 } from "@/data/organizations.ts";
 import {

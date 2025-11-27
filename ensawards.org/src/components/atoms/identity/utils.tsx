@@ -2,27 +2,24 @@ import type { PropsWithChildren } from "react";
 import { type Address, getAddress } from "viem";
 
 import {
-  beautifyName,
   DEFAULT_EVM_CHAIN_ID,
   type ENSNamespaceId,
   type Identity,
-  isResolvedIdentity,
   type Name,
   ResolutionStatusIds,
+  beautifyName,
+  isResolvedIdentity,
   translateDefaultableChainIdToChainId,
 } from "@ensnode/ensnode-sdk";
 
 import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
 import { CopyButton } from "@/components/atoms/CopyButton.tsx";
 import { ChainExplorerIcon } from "@/components/atoms/icons/ChainExplorerIcon.tsx";
+import { EnsSolidIcon } from "@/components/atoms/icons/EnsSolidIcon.tsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import {
-  getAddressDetailsUrl,
-  getBlockExplorerUrlForAddress,
-} from "@/utils/namespace.ts";
-import {getChainName} from "@/utils/chains.ts";
-import {EnsSolidIcon} from "@/components/atoms/icons/EnsSolidIcon.tsx";
-import {cn} from "@/utils/tailwindClassConcatenation.ts";
+import { getChainName } from "@/utils/chains.ts";
+import { getAddressDetailsUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 interface NameDisplayProps {
   name: Name;
@@ -82,7 +79,11 @@ export function IdentityLink({
   }
 
   return (
-    <a target="_blank" href={ensAppAddressDetailsUrl.toString()} className={cn("text-sm leading-normal font-medium text-blue-600",className)}>
+    <a
+      target="_blank"
+      href={ensAppAddressDetailsUrl.toString()}
+      className={cn("text-sm leading-normal font-medium text-blue-600", className)}
+    >
       {children}
     </a>
   );

@@ -1,16 +1,12 @@
-import {
-    formatDistance,
-    formatDistanceStrict,
-    fromUnixTime,
-} from "date-fns";
+import { formatDistance, formatDistanceStrict, fromUnixTime } from "date-fns";
 import { millisecondsInSecond } from "date-fns/constants";
 import type * as React from "react";
 import { useEffect, useState } from "react";
 
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
+import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip.tsx";
-import {AbsoluteTime} from "@/components/atoms/datetime/AbsoluteTime.tsx";
 
 /**
  * Formats a Unix timestamp as its relative distance with now
@@ -26,98 +22,98 @@ import {AbsoluteTime} from "@/components/atoms/datetime/AbsoluteTime.tsx";
  * @param relativeTo - if defined represents the timestamp to compare with. Otherwise, the timestamp param is compared with the present.
  */
 export function formatRelativeTime(
-    timestamp: UnixTimestamp,
-    enforcePast = false,
-    includeSeconds = false,
-    conciseFormatting = false,
-    relativeTo?: UnixTimestamp,
+  timestamp: UnixTimestamp,
+  enforcePast = false,
+  includeSeconds = false,
+  conciseFormatting = false,
+  relativeTo?: UnixTimestamp,
 ): string {
-    const date = fromUnixTime(timestamp);
-    const compareWith = typeof relativeTo !== "undefined" ? fromUnixTime(relativeTo) : new Date();
+  const date = fromUnixTime(timestamp);
+  const compareWith = typeof relativeTo !== "undefined" ? fromUnixTime(relativeTo) : new Date();
 
-    if (
-        (enforcePast && date >= compareWith) ||
-        (!includeSeconds &&
-            !conciseFormatting &&
-            Math.abs(date.getTime() - compareWith.getTime()) < 60 * millisecondsInSecond)
-    ) {
-        return "just now";
-    }
+  if (
+    (enforcePast && date >= compareWith) ||
+    (!includeSeconds &&
+      !conciseFormatting &&
+      Math.abs(date.getTime() - compareWith.getTime()) < 60 * millisecondsInSecond)
+  ) {
+    return "just now";
+  }
 
-    if (conciseFormatting) {
-        return formatDistanceStrict(date, compareWith, { addSuffix: true });
-    }
+  if (conciseFormatting) {
+    return formatDistanceStrict(date, compareWith, { addSuffix: true });
+  }
 
-    return formatDistance(date, compareWith, {
-        addSuffix: true,
-        includeSeconds,
-    });
+  return formatDistance(date, compareWith, {
+    addSuffix: true,
+    includeSeconds,
+  });
 }
 
 /**
  * Client-only relative time component
  */
 export function RelativeTime({
-                                 timestamp,
-                                 enforcePast = false,
-                                 includeSeconds = false,
-                                 conciseFormatting = false,
-                                 tooltipPosition = "top",
-                                 relativeTo,
-                                 prefix,
-                                 contentWrapper,
-                             }: {
-    timestamp: UnixTimestamp;
-    enforcePast?: boolean;
-    includeSeconds?: boolean;
-    conciseFormatting?: boolean;
-    tooltipPosition?: React.ComponentProps<typeof TooltipContent>["side"];
-    relativeTo?: UnixTimestamp;
-    prefix?: string;
-    /**
-     * A component to be rendered as a wrapper for the Relative Time component content.
-     */
-    contentWrapper?: ({ children }: React.PropsWithChildren) => React.ReactNode;
+  timestamp,
+  enforcePast = false,
+  includeSeconds = false,
+  conciseFormatting = false,
+  tooltipPosition = "top",
+  relativeTo,
+  prefix,
+  contentWrapper,
+}: {
+  timestamp: UnixTimestamp;
+  enforcePast?: boolean;
+  includeSeconds?: boolean;
+  conciseFormatting?: boolean;
+  tooltipPosition?: React.ComponentProps<typeof TooltipContent>["side"];
+  relativeTo?: UnixTimestamp;
+  prefix?: string;
+  /**
+   * A component to be rendered as a wrapper for the Relative Time component content.
+   */
+  contentWrapper?: ({ children }: React.PropsWithChildren) => React.ReactNode;
 }) {
-    const [relativeTime, setRelativeTime] = useState<string>("");
+  const [relativeTime, setRelativeTime] = useState<string>("");
 
-    useEffect(() => {
-        setRelativeTime(
-            formatRelativeTime(timestamp, enforcePast, includeSeconds, conciseFormatting, relativeTo),
-        );
-    }, [timestamp, conciseFormatting, enforcePast, includeSeconds, relativeTo]);
-
-    const tooltipTriggerContent = (
-        <>
-            {prefix}
-            {relativeTime}
-        </>
+  useEffect(() => {
+    setRelativeTime(
+      formatRelativeTime(timestamp, enforcePast, includeSeconds, conciseFormatting, relativeTo),
     );
+  }, [timestamp, conciseFormatting, enforcePast, includeSeconds, relativeTo]);
 
-    return (
-        <Tooltip delayDuration={1000}>
-            <TooltipTrigger className="cursor-text">
-                {typeof contentWrapper === "function"
-                    ? contentWrapper({ children: tooltipTriggerContent })
-                    : tooltipTriggerContent}
-            </TooltipTrigger>
-            <TooltipContent
-                side={tooltipPosition}
-                className="bg-[#171717] text-sm text-white text-center shadow-md outline-none w-fit"
-            >
-                <AbsoluteTime
-                    timestamp={timestamp}
-                    options={{
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                        hour: "numeric",
-                        minute: "numeric",
-                        second: "numeric",
-                        hour12: true,
-                    }}
-                />
-            </TooltipContent>
-        </Tooltip>
-    );
+  const tooltipTriggerContent = (
+    <>
+      {prefix}
+      {relativeTime}
+    </>
+  );
+
+  return (
+    <Tooltip delayDuration={1000}>
+      <TooltipTrigger className="cursor-text">
+        {typeof contentWrapper === "function"
+          ? contentWrapper({ children: tooltipTriggerContent })
+          : tooltipTriggerContent}
+      </TooltipTrigger>
+      <TooltipContent
+        side={tooltipPosition}
+        className="bg-[#171717] text-sm text-white text-center shadow-md outline-none w-fit"
+      >
+        <AbsoluteTime
+          timestamp={timestamp}
+          options={{
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+          }}
+        />
+      </TooltipContent>
+    </Tooltip>
+  );
 }

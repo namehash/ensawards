@@ -1,156 +1,302 @@
 ---
-
-import Layout from "../layouts/Layout.astro";
 import SubpageHero from "../components/molecules/SubpageHero.astro";
-import {cn} from "../utils/tailwindClassConcatenation";
+import Layout from "../layouts/Layout.astro";
+import { cn } from "../utils/tailwindClassConcatenation";
 
 const headerStyles = "text-2xl leading-normal font-semibold text-black";
 const textStyles = "text-base leading-7 font-normal text-muted-foreground";
-const linkStyles = "leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200";
+const linkStyles =
+  "leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200";
 ---
+
 <Layout>
-    <SubpageHero header="Program rules" description="Trial incentive framework for a broader ENS Referral Awards Program." breadcrumbs={["ENS Holiday Awards"]} />
-    <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-        <div class="w-full max-w-[660px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-5">
-            <h3 class={headerStyles}>Introduction</h3>
-            <p class={textStyles}>This RFC (request for comment) outlines a trial incentive framework - &quot;ENS Holiday Awards&quot; - designed to issue awards in $ENS for referred .eth name registrations and renewals.<br /><br />
-                This trial is proposed to run for the duration of December 1-31, 2025 with a fixed award pool of $ENS equivalent to $10,000 USD for qualifying referrers.<br /><br />
-                This trial is planned and organized by&nbsp;<a target="_blank" href="https://namehashlabs.org/" class={linkStyles}>NameHash Labs</a>&nbsp;as part of our efforts to advance a broader ENS Referral Program. These efforts are part of our&nbsp;<a target="_blank" href="https://discuss.ens.domains/t/spp2-namehash-labs-application/20502/2#p-56809-h-414-ensv2-referral-programs-technical-deployment-guaranteed-50000-funding-6" class={linkStyles}>SPP2 deliverables</a>&nbsp;to the ENS DAO, which include our commitment to ultimately fund $50,000 USD in ENS Referral Program awards throughout the duration of SPP2.<br /><br />
-                The ENS Holiday Awards are designed as a time and budget constrained trial. This gives an opportunity to test execution and identify opportunities for improvement before follow-up ENS Referral Award Programs are introduced.<br /><br />
-                The below outlined framework is subject to refinement. Community feedback is welcome and appreciated.</p>
+  <SubpageHero
+    header="Program rules"
+    description="Trial incentive framework for a broader ENS Referral Awards Program."
+    breadcrumbs={["ENS Holiday Awards"]}
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div
+      class="w-full max-w-[660px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-5">
+      <h3 class={headerStyles}>Introduction</h3>
+      <p class={textStyles}>
+        This RFC (request for comment) outlines a trial incentive framework -
+        &quot;ENS Holiday Awards&quot; - designed to issue awards in $ENS for
+        referred .eth name registrations and renewals.<br /><br />
+        This trial is proposed to run for the duration of December 1-31, 2025 with
+        a fixed award pool of $ENS equivalent to $10,000 USD for qualifying referrers.<br
+        /><br />
+        This trial is planned and organized by&nbsp;<a
+          target="_blank"
+          href="https://namehashlabs.org/"
+          class={linkStyles}>NameHash Labs</a
+        >&nbsp;as part of our efforts to advance a broader ENS Referral Program.
+        These efforts are part of our&nbsp;<a
+          target="_blank"
+          href="https://discuss.ens.domains/t/spp2-namehash-labs-application/20502/2#p-56809-h-414-ensv2-referral-programs-technical-deployment-guaranteed-50000-funding-6"
+          class={linkStyles}>SPP2 deliverables</a
+        >&nbsp;to the ENS DAO, which include our commitment to ultimately fund
+        $50,000 USD in ENS Referral Program awards throughout the duration of
+        SPP2.<br /><br />
+        The ENS Holiday Awards are designed as a time and budget constrained trial.
+        This gives an opportunity to test execution and identify opportunities for
+        improvement before follow-up ENS Referral Award Programs are introduced.<br
+        /><br />
+        The below outlined framework is subject to refinement. Community feedback
+        is welcome and appreciated.
+      </p>
 
-            <h3 class={headerStyles}>Overview</h3>
-            <ul class="list-disc list-inside">
-                <li class={cn(textStyles, "list-disc text-black")}><b>Program Period:</b> <span class={textStyles}>The duration of December 2025</span></li>
-                <li class={cn(textStyles, "list-disc text-black")}><b>Budget:</b> <span class={textStyles}>$10,000 USD (funded by NameHash Labs)</span></li>
-                <li class={cn(textStyles, "list-disc text-black")}><b>Awards:</b> <span class={textStyles}>Distributed in $ENS (converted from USDC at program conclusion)</span></li>
-                <li class={cn(textStyles, "list-disc text-black")}><b>Participation:</b> <span class={textStyles}>Permissionless (anyone can participate as a referrer)</span></li>
-                <li class={cn(textStyles, "list-disc text-black")}><b>Implementation:</b> <span class={textStyles}>Led by NameHash Labs</span></li>
-            </ul>
+      <h3 class={headerStyles}>Overview</h3>
+      <ul class="list-disc list-inside">
+        <li class={cn(textStyles, "list-disc text-black")}>
+          <b>Program Period:</b>
+          <span class={textStyles}>The duration of December 2025</span>
+        </li>
+        <li class={cn(textStyles, "list-disc text-black")}>
+          <b>Budget:</b>
+          <span class={textStyles}>$10,000 USD (funded by NameHash Labs)</span>
+        </li>
+        <li class={cn(textStyles, "list-disc text-black")}>
+          <b>Awards:</b>
+          <span class={textStyles}
+            >Distributed in $ENS (converted from USDC at program conclusion)</span>
+        </li>
+        <li class={cn(textStyles, "list-disc text-black")}>
+          <b>Participation:</b>
+          <span class={textStyles}
+            >Permissionless (anyone can participate as a referrer)</span>
+        </li>
+        <li class={cn(textStyles, "list-disc text-black")}>
+          <b>Implementation:</b>
+          <span class={textStyles}>Led by NameHash Labs</span>
+        </li>
+      </ul>
 
-            <h3 class={headerStyles}>Referral Incentives</h3>
-            <ul class="list-disc list-inside">
-                <li class={cn(textStyles, "text-black")}>Award Pool 1: Guaranteed Awards</li>
-                <li class="list-none relative left-5">
-                    <ul class="list-disc list-inside">
-                        <li class={textStyles}>$5,000 USD in $ENS distributed proportionally to each Qualified Referrer based on their Referrer Contribution.</li>
-                        <li class={textStyles}>Award Pool 1 guarantees that each Qualifying Referrer receives an award.</li>
-                    </ul>
-                </li>
-                <li class="list-none w-full h-5" />
-                <li class={cn(textStyles, "text-black")}>Award Pool 2: Verifiably Random Lottery</li>
-                <li class="list-none relative left-5">
-                    <ul class="list-disc list-inside">
-                        <li class={textStyles}>5 awards, each $1,000 USD in $ENS. Each Qualified Referrer has a probability of winning each of the 5 awards in proportion to their Referrer Contribution.</li>
-                        <li class={textStyles}>Award Pool 2 provides each Qualifying Referrer a chance at a larger award.</li>
-                    </ul>
-                </li>
-            </ul>
+      <h3 class={headerStyles}>Referral Incentives</h3>
+      <ul class="list-disc list-inside">
+        <li class={cn(textStyles, "text-black")}>
+          Award Pool 1: Guaranteed Awards
+        </li>
+        <li class="list-none relative left-5">
+          <ul class="list-disc list-inside">
+            <li class={textStyles}>
+              $5,000 USD in $ENS distributed proportionally to each Qualified
+              Referrer based on their Referrer Contribution.
+            </li>
+            <li class={textStyles}>
+              Award Pool 1 guarantees that each Qualifying Referrer receives an
+              award.
+            </li>
+          </ul>
+        </li>
+        <li class="list-none w-full h-5"></li>
+        <li class={cn(textStyles, "text-black")}>
+          Award Pool 2: Verifiably Random Lottery
+        </li>
+        <li class="list-none relative left-5">
+          <ul class="list-disc list-inside">
+            <li class={textStyles}>
+              5 awards, each $1,000 USD in $ENS. Each Qualified Referrer has a
+              probability of winning each of the 5 awards in proportion to their
+              Referrer Contribution.
+            </li>
+            <li class={textStyles}>
+              Award Pool 2 provides each Qualifying Referrer a chance at a
+              larger award.
+            </li>
+          </ul>
+        </li>
+      </ul>
 
-            <h3 class={headerStyles}>Key Exploration: Referral Awards in $ENS</h3>
-            <p class={textStyles}>
-                This proposal explores a key question: What if referral awards were distributed in $ENS?<br /><br />
-                This award mechanism is understood to provide strategic benefits, including:<br />
-                1.  Preserving ENS DAO Revenue: Future referral awards in $ENS tokens could be possible without dilution of ENS DAO revenue. This has benefits vs. awarding as revenue sharing paid in ETH or USDC.<br />
-                2.  Expanding ENS DAO Governance Participation: Awarding ecosystem contributors in $ENS can boost engagement in DAO governance from parties who are invested in the success of ENS.<br />
-            </p>
+      <h3 class={headerStyles}>Key Exploration: Referral Awards in $ENS</h3>
+      <p class={textStyles}>
+        This proposal explores a key question: What if referral awards were
+        distributed in $ENS?<br /><br />
+        This award mechanism is understood to provide strategic benefits, including:<br
+        />
+        1. Preserving ENS DAO Revenue: Future referral awards in $ENS tokens could
+        be possible without dilution of ENS DAO revenue. This has benefits vs. awarding
+        as revenue sharing paid in ETH or USDC.<br />
+        2. Expanding ENS DAO Governance Participation: Awarding ecosystem contributors
+        in $ENS can boost engagement in DAO governance from parties who are invested
+        in the success of ENS.<br />
+      </p>
 
-            <h3 class={headerStyles}>Program Rules [DRAFT]</h3>
-            <p class={textStyles}>
-                <b class="text-black">&quot;Program Duration&quot;</b><br /><br />
-                The &quot;Program Duration&quot; is the duration of December 2025:<br /><br />
-                Dec 1, 2025 00:00:00 UTC to Dec 31, 23:59:59 UTC.
-            </p>
+      <h3 class={headerStyles}>Program Rules [DRAFT]</h3>
+      <p class={textStyles}>
+        <b class="text-black">&quot;Program Duration&quot;</b><br /><br />
+        The &quot;Program Duration&quot; is the duration of December 2025:<br
+        /><br />
+        Dec 1, 2025 00:00:00 UTC to Dec 31, 23:59:59 UTC.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Qualifying Referral&quot; and &quot;Referrer&quot;</h3>
-            <p class={textStyles}>To be a &quot;Qualifying Referral&quot;, registrations / renewals must satisfy all of the following conditions:</p>
-            <ul class="list-disc list-inside">
-                <li class={textStyles}>To be a &quot;Qualifying Referral&quot;, registrations / renewals must satisfy all of the following conditions:
-                    Registration / renewal of a direct subname of &quot;.eth&quot; made through&nbsp;<a target="_blank" href="https://etherscan.io/address/0x59E16fcCd424Cc24e280Be16E11Bcd56fb0CE547" class={linkStyles}>the new EthRegistrarController</a>&nbsp;activated via&nbsp;<a target="_blank" href="https://docs.ens.domains/dao/proposals/6.16/" class={linkStyles}>EP6.16.</a></li>
-                <li class={textStyles}>The&nbsp;referrer&nbsp;param passed to the register / renew call is a 32-byte value, while an Ethereum address is a 20-byte value. Therefore, to qualify for this program, the&nbsp;referrerparam must match the following format:</li>
-                <li class="list-none relative left-5">
-                    <ul class="list-disc list-inside">
-                        <li class={textStyles}>First 12-bytes: all zeros.</li>
-                        <li class={textStyles}>Last 20-bytes: Ethereum mainnet address identifying the &quot;Referrer&quot; and where any Award Distributions the Referrer may earn will be deposited.</li>
-                    </ul>
-                </li>
-            </ul>
-            <p class={textStyles}>
-               1.  Successful registration / renewal transaction recorded on Ethereum mainnet within the Program Duration.<br /><br />
-                To reduce complexity with this initial trial:
-            </p>
-            <ul class="list-disc list-inside">
-                <li class={textStyles}>No restrictions will be made for &quot;self-referrals&quot;. However please note the related definition of Qualifying Referrer below.</li>
-                <li class={textStyles}>Referrers cannot customize where any Award Distributions they may earn will be deposited.</li>
-            </ul>
+      <h3 class={headerStyles}>
+        &quot;Qualifying Referral&quot; and &quot;Referrer&quot;
+      </h3>
+      <p class={textStyles}>
+        To be a &quot;Qualifying Referral&quot;, registrations / renewals must
+        satisfy all of the following conditions:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class={textStyles}>
+          To be a &quot;Qualifying Referral&quot;, registrations / renewals must
+          satisfy all of the following conditions: Registration / renewal of a
+          direct subname of &quot;.eth&quot; made through&nbsp;<a
+            target="_blank"
+            href="https://etherscan.io/address/0x59E16fcCd424Cc24e280Be16E11Bcd56fb0CE547"
+            class={linkStyles}>the new EthRegistrarController</a
+          >&nbsp;activated via&nbsp;<a
+            target="_blank"
+            href="https://docs.ens.domains/dao/proposals/6.16/"
+            class={linkStyles}>EP6.16.</a>
+        </li>
+        <li class={textStyles}>
+          The&nbsp;referrer&nbsp;param passed to the register / renew call is a
+          32-byte value, while an Ethereum address is a 20-byte value.
+          Therefore, to qualify for this program, the&nbsp;referrerparam must
+          match the following format:
+        </li>
+        <li class="list-none relative left-5">
+          <ul class="list-disc list-inside">
+            <li class={textStyles}>First 12-bytes: all zeros.</li>
+            <li class={textStyles}>
+              Last 20-bytes: Ethereum mainnet address identifying the
+              &quot;Referrer&quot; and where any Award Distributions the
+              Referrer may earn will be deposited.
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <p class={textStyles}>
+        1. Successful registration / renewal transaction recorded on Ethereum
+        mainnet within the Program Duration.<br /><br />
+        To reduce complexity with this initial trial:
+      </p>
+      <ul class="list-disc list-inside">
+        <li class={textStyles}>
+          No restrictions will be made for &quot;self-referrals&quot;. However
+          please note the related definition of Qualifying Referrer below.
+        </li>
+        <li class={textStyles}>
+          Referrers cannot customize where any Award Distributions they may earn
+          will be deposited.
+        </li>
+      </ul>
 
-            <h3 class={headerStyles}>&quot;Qualifying Referral Year&quot;</h3>
-            <p class={textStyles}>Each Qualifying Referral is measured in &quot;Qualifying Referral Years&quot;:</p>
-            <ul class="list-disc list-inside relative left-5">
-                <li class={textStyles}>For registrations: equal to the number of years the name was registered for.</li>
-                <li class={textStyles}>For renewals: equal to the number of years the name was renewed for.</li>
-            </ul>
-            <p class={textStyles}>Here we define a year as 31,556,952 seconds.<br /><br />
-                (60 seconds per minute * 60 minutes per hour * 24 hours per day * 365.2425 days on average per year)<br /><br />
-                Qualifying Referral Years support measurement in fractional units. Ex: A renewal of 6 months would represent 0.5 Qualifying Referral Years.</p>
+      <h3 class={headerStyles}>&quot;Qualifying Referral Year&quot;</h3>
+      <p class={textStyles}>
+        Each Qualifying Referral is measured in &quot;Qualifying Referral
+        Years&quot;:
+      </p>
+      <ul class="list-disc list-inside relative left-5">
+        <li class={textStyles}>
+          For registrations: equal to the number of years the name was
+          registered for.
+        </li>
+        <li class={textStyles}>
+          For renewals: equal to the number of years the name was renewed for.
+        </li>
+      </ul>
+      <p class={textStyles}>
+        Here we define a year as 31,556,952 seconds.<br /><br />
+        (60 seconds per minute * 60 minutes per hour * 24 hours per day * 365.2425
+        days on average per year)<br /><br />
+        Qualifying Referral Years support measurement in fractional units. Ex: A
+        renewal of 6 months would represent 0.5 Qualifying Referral Years.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Referrer Point&quot;</h3>
-            <p class={textStyles}>
-                1 &quot;Referrer Point&quot; is awarded for each Qualifying Referral Year.<br /><br />
-                Referrer Points support measurement in fractional units. Ex: 0.5 Qualifying Referral Years award 0.5 Referrer Points.<br /><br />
-                To reduce complexity with this initial trial, no weight adjustments will be made for short (3-4 character) names or registrations made with a temporary premium price.
-            </p>
+      <h3 class={headerStyles}>&quot;Referrer Point&quot;</h3>
+      <p class={textStyles}>
+        1 &quot;Referrer Point&quot; is awarded for each Qualifying Referral
+        Year.<br /><br />
+        Referrer Points support measurement in fractional units. Ex: 0.5 Qualifying
+        Referral Years award 0.5 Referrer Points.<br /><br />
+        To reduce complexity with this initial trial, no weight adjustments will
+        be made for short (3-4 character) names or registrations made with a temporary
+        premium price.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Referrer Score&quot;</h3>
-            <p class={textStyles}>
-                A &quot;Referrer Score&quot; is the sum of Referrer Points awarded to a Referrer.
-            </p>
+      <h3 class={headerStyles}>&quot;Referrer Score&quot;</h3>
+      <p class={textStyles}>
+        A &quot;Referrer Score&quot; is the sum of Referrer Points awarded to a
+        Referrer.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Qualifying Referrer&quot;</h3>
-            <p class={textStyles}>
-                A &quot;Qualifying Referrer&quot; is a Referrer with minimum Referrer Score of 10.<br /><br />
-                Anyone has the potential to become a Qualifying Referrer. The program is permissionless.
-            </p>
+      <h3 class={headerStyles}>&quot;Qualifying Referrer&quot;</h3>
+      <p class={textStyles}>
+        A &quot;Qualifying Referrer&quot; is a Referrer with minimum Referrer
+        Score of 10.<br /><br />
+        Anyone has the potential to become a Qualifying Referrer. The program is
+        permissionless.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Referrer Contribution&quot;</h3>
-            <p class={textStyles}>
-                Each Qualifying Referrer has a &quot;Referrer Contribution&quot; calculated as their Referrer Score divided by the sum of Referrer Scores from all Qualified Referrers.
-            </p>
+      <h3 class={headerStyles}>&quot;Referrer Contribution&quot;</h3>
+      <p class={textStyles}>
+        Each Qualifying Referrer has a &quot;Referrer Contribution&quot;
+        calculated as their Referrer Score divided by the sum of Referrer Scores
+        from all Qualified Referrers.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Total Award Budget&quot; and &quot;Total Award Pool&quot;</h3>
-            <p class={textStyles}>
-                The &quot;Total Award Budget&quot; is $10,000 USD. This will be converted into the &quot;Total Award Pool&quot; measured in $ENS tokens. NameHash Labs will execute this USDC to $ENS conversion in early January at a specific time and method of their choosing.<br /><br />
-                The Total Award Budget has been defined in USD terms for ease of familiarity.<br /><br />
-                The Total Award Pool is what will ultimately be distributed to Qualifying Referrers as awards.
-            </p>
+      <h3 class={headerStyles}>
+        &quot;Total Award Budget&quot; and &quot;Total Award Pool&quot;
+      </h3>
+      <p class={textStyles}>
+        The &quot;Total Award Budget&quot; is $10,000 USD. This will be
+        converted into the &quot;Total Award Pool&quot; measured in $ENS tokens.
+        NameHash Labs will execute this USDC to $ENS conversion in early January
+        at a specific time and method of their choosing.<br /><br />
+        The Total Award Budget has been defined in USD terms for ease of familiarity.<br
+        /><br />
+        The Total Award Pool is what will ultimately be distributed to Qualifying
+        Referrers as awards.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Award Pool 1&quot; and &quot;Award Pool 1 Distributions&quot;</h3>
-            <p class={textStyles}>
-                &quot;Award Pool 1&quot; is 50% of the Total Award Pool.<br /><br />
-                After the Program Duration ends, each Qualifying Referrer will receive an &quot;Award Pool 1 Distribution&quot; calculated as Award Pool 1 * their Referrer Contribution.<br /><br />
-                In other words, $5,000 USD in $ENS distributed proportionally to each Qualified Referrer based on their Referrer Contribution.<br /><br />
-                Award Pool 1 guarantees that each Qualifying Referrer receives an award.
-            </p>
+      <h3 class={headerStyles}>
+        &quot;Award Pool 1&quot; and &quot;Award Pool 1 Distributions&quot;
+      </h3>
+      <p class={textStyles}>
+        &quot;Award Pool 1&quot; is 50% of the Total Award Pool.<br /><br />
+        After the Program Duration ends, each Qualifying Referrer will receive an
+        &quot;Award Pool 1 Distribution&quot; calculated as Award Pool 1 * their
+        Referrer Contribution.<br /><br />
+        In other words, $5,000 USD in $ENS distributed proportionally to each Qualified
+        Referrer based on their Referrer Contribution.<br /><br />
+        Award Pool 1 guarantees that each Qualifying Referrer receives an award.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Award Pool 2&quot; and &quot;Award Pool 2 Distributions&quot;</h3>
-            <p class={textStyles}>
-                &quot;Award Pool 2&quot; is 50% of the Total Award Pool.<br /><br />
-                After the Program Duration ends, a total of 5 &quot;Award Pool 2 Distributions&quot; will be made, each 1/5 of Award Pool 2. The recipient of each Award Pool 2 Distribution will be chosen through a verifiably random selection mechanism. Each Qualified Referrer’s probability of being selected for each distribution will be proportional to their Referrer Contribution.<br /><br />
-                In other words, 5 awards, each $1,000 USD in $ENS. Each Qualified Referrer has a probability of winning each of the 5 awards in proportion to their Referrer Contribution.<br /><br />
-                Award Pool 2 provides each Qualifying Referrer a chance at a larger award.
-            </p>
+      <h3 class={headerStyles}>
+        &quot;Award Pool 2&quot; and &quot;Award Pool 2 Distributions&quot;
+      </h3>
+      <p class={textStyles}>
+        &quot;Award Pool 2&quot; is 50% of the Total Award Pool.<br /><br />
+        After the Program Duration ends, a total of 5 &quot;Award Pool 2 Distributions&quot;
+        will be made, each 1/5 of Award Pool 2. The recipient of each Award Pool
+        2 Distribution will be chosen through a verifiably random selection mechanism.
+        Each Qualified Referrer’s probability of being selected for each distribution
+        will be proportional to their Referrer Contribution.<br /><br />
+        In other words, 5 awards, each $1,000 USD in $ENS. Each Qualified Referrer
+        has a probability of winning each of the 5 awards in proportion to their
+        Referrer Contribution.<br /><br />
+        Award Pool 2 provides each Qualifying Referrer a chance at a larger award.
+      </p>
 
-            <h3 class={headerStyles}>&quot;Award Distribution&quot;</h3>
-            <p class={textStyles}>
-                NameHash Labs aims to perform &quot;Award Distribution&quot; of all Award Pool 1 Distributions and Award Pool 2 Distributions by no later than Jan 15, 2026.<br /><br />
-                Publicly auditable records of the Award Distribution will be provided back to the ENS DAO.
-            </p>
+      <h3 class={headerStyles}>&quot;Award Distribution&quot;</h3>
+      <p class={textStyles}>
+        NameHash Labs aims to perform &quot;Award Distribution&quot; of all
+        Award Pool 1 Distributions and Award Pool 2 Distributions by no later
+        than Jan 15, 2026.<br /><br />
+        Publicly auditable records of the Award Distribution will be provided back
+        to the ENS DAO.
+      </p>
 
-            <h3 class={headerStyles}>Execution Plan</h3>
-            <p class={textStyles}>
-                For the coming weeks we will be collecting feedback on this proposal. Based on that feedback a more detailed execution plan will be drafted and shared.<br /><br />
-                Your feedback is welcome and appreciated.
-            </p>
-        </div>
-    </section>
+      <h3 class={headerStyles}>Execution Plan</h3>
+      <p class={textStyles}>
+        For the coming weeks we will be collecting feedback on this proposal.
+        Based on that feedback a more detailed execution plan will be drafted
+        and shared.<br /><br />
+        Your feedback is welcome and appreciated.
+      </p>
+    </div>
+  </section>
 </Layout>

@@ -1,10 +1,10 @@
 import { ArbitrumIcon } from "@/components/atoms/icons/chains/ArbitrumIcon.tsx";
 import { AaveProjectIcon } from "@/components/atoms/icons/projects-and-daos/AaveProjectIcon.tsx";
 import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
+import { TaikoIcon } from "@/components/atoms/icons/projects-and-daos/TaikoIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
 import { type Project, ProjectIds } from "@/types/projects.ts";
 import { EnsProjectIcon } from "../components/atoms/icons/projects-and-daos/EnsProjectIcon.tsx";
-import {TaikoIcon} from "@/components/atoms/icons/projects-and-daos/TaikoIcon.tsx";
 
 export const ENSProject: Project = {
   id: ProjectIds.Ens,
@@ -69,7 +69,7 @@ export const TaikoProject: Project = {
   id: ProjectIds.Taiko,
   name: "Taiko",
   description:
-      "Taiko is a fully permissionless, Ethereum-equivalent based rollup. Inspired, secured, and sequenced by Ethereum.",
+    "Taiko is a fully permissionless, Ethereum-equivalent based rollup. Inspired, secured, and sequenced by Ethereum.",
   icon: TaikoIcon,
   socials: {
     website: new URL("https://taiko.xyz/"),
