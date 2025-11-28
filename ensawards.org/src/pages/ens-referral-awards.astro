@@ -1,5 +1,5 @@
 ---
-import { Code, type Icon as IconType, Megaphone } from "@lucide/astro";
+import { Award, Code, type Icon as IconType, Link2, Megaphone, TrendingUp } from "@lucide/astro";
 import HolidayReferralAwardsHero from "../components/holiday-referral-awards/HolidayReferralAwardsHero.astro";
 import { ReferralLinkForm } from "../components/holiday-referral-awards/ReferralLinkForm";
 import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
@@ -14,8 +14,37 @@ interface ContentItemData {
   icon: typeof IconType;
 }
 
+interface HowItWorksItemData extends ContentItemData {
+  iconBackground: string;
+  iconColor: string;
+}
+
+const howItWorksItems: HowItWorksItemData[] = [
+  {
+    name: "Get your referral link",
+    description: "Generate your unique referrer link above and integrate, embed, or distribute it however you choose.",
+    icon: Link2,
+    iconBackground: "bg-[rgba(0,82,204,0.10)]",
+    iconColor: "text-[rgba(0,82,204,1.0)]"
+  },
+  {
+    name: "Earn points",
+    description: "Each year of .eth name registrations or renewals attributed to you through referrals earns you 1 point.",
+    icon: TrendingUp,
+    iconBackground: "bg-[rgba(111,66,193,0.10)]",
+    iconColor: "text-[rgba(111,66,193,1.0)]"
+  },
+  {
+    name: "Win awards",
+    description: "A $10,000 prize pool will be distributed proportionally to the top referrers based on their final score.",
+    icon: Award,
+    iconBackground: "bg-[rgba(16,185,129,0.10)]",
+    iconColor: "text-[rgba(16,185,129,1.0)]"
+  }
+];
+
 const sectionHeaderBaseStyles = "text-2xl sm:text-3xl leading-normal font-semibold text-black";
-const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-stretch";
+const descriptionStyles = "text-base leading-6 font-normal text-muted-foreground self-stretch";
 
 const backgroundGreyStyles =
   "absolute w-screen h-full box-border py-6 sm:py-[80px] bg-neutral-50 bottom-0";
@@ -96,6 +125,18 @@ const backgroundGreyStyles =
             >Learn&nbsp;more</a
           >
         </p>
+      </div>
+    </div>
+    <div class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-5 sm:gap-[60px]">
+      <h3 class={sectionHeaderBaseStyles}>How it works</h3>
+      <div class="w-full h-fit flex flex-col min-[880px]:flex-row min-[880px]:flex-wrap justify-start min-[880px]:justify-center items-center gap-3 sm:gap-5">
+        {howItWorksItems.map((item) => <div class="w-full max-w-[390px] h-fit flex flex-col justify-start items-start gap-5 p-4 rounded-2xl border border-gray-200">
+          <div class={cn("w-[48px] h-[48px] rounded-full flex justify-center items-center", item.iconBackground)}><item.icon size={20} className={cn(item.iconColor)} /></div>
+          <div class="w-full h-fit flex flex-col justify-start items-start gap-4">
+            <h4 class="text-xl leading-normal font-semibold text-black">{item.name}</h4>
+            <p class={descriptionStyles}>{item.description}</p>
+          </div>
+        </div>)}
       </div>
     </div>
     <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
