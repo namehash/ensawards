@@ -5,6 +5,8 @@ import ContractNamingBanner from "../components/atoms/ContractNamingBanner.astro
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
+import HolidayReferralAwardsCTA from "../components/holiday-referral-awards/HolidayReferralAwardsCTA.astro";
+import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
@@ -31,6 +33,7 @@ const daoScores = contractPipeline();
   <section
     id="previews-section"
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
+    <HolidayReferralAwardsCTA />
     <ContractNamingBanner />
     <ItemsList
       header="Top DAOs"
@@ -130,5 +133,11 @@ const daoScores = contractPipeline();
         View full app leaderboard
       </a>
     </ItemsList>
+    <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
+    <!--<TopReferrers-->
+    <!--  client:load-->
+    <!--  header="Top Referrers"-->
+    <!--  onENSHolidayReferralsAwards={false}-->
+    <!--/>-->
   </section>
 </Layout>

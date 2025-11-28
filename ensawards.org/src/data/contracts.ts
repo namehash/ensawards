@@ -3,6 +3,7 @@ import {
   ArbitrumDaoOrg,
   ENSDaoOrg,
   NounsDaoOrg,
+  TaikoDaoOrg,
   UniswapDaoOrg,
 } from "@/data/organizations.ts";
 import {
@@ -357,6 +358,19 @@ export const CONTRACTS: Contract[] = [
         address: "0x0000000000000000000000000000000000000003",
         chain: mainnet,
         codeName: "TestContractAave",
+      },
+    },
+  },
+  {
+    org: TaikoDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000004",
+        chain: mainnet,
+        codeName: "TestContractTaiko",
       },
     },
   },

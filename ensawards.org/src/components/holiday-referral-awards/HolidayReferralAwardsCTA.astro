@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import { Award as AwardIcon, Calendar as CalendarIcon } from "@lucide/astro";
+import ChristmasDecorationsImageLeft from "../../assets/christmastDecorationImageLeft.png";
+import ChristmasDecorationsImageRight from "../../assets/christmastDecorationImageRight.png";
+import { cn } from "../../utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+
+const horizontalContainerStyles =
+  "w-fit h-fit flex flex-row flex-nowrap justify-start items-center";
+
+const keyInformationTextStyles = "text-base font-normal leading-normal text-black";
+---
+
+<div
+  class="w-full max-w-[1216px] box-border h-fit sm:min-h-[360px] flex flex-row flex-nowrap justify-center items-center bg-neutral-50 rounded-xl max-sm:py-5 max-sm:px-4">
+  <Image
+    quality={100}
+    alt="christmas decorations"
+    src={ChristmasDecorationsImageLeft}
+    class="max-[800px]:hidden w-[30%]"
+  />
+  <div
+    class="relative z-10 w-fit h-fit flex flex-col flex-nowrap justify-center items-center gap-6">
+    <div
+      class="w-full max-w-[630px] flex flex-col flex-nowrap justify-center items-center gap-4">
+      <div
+        class="w-fit h-fit box-border flex flex-row justify-start items-center gap-1 bg-transparent rounded-full border border-black/10 py-2 px-3 cursor-default">
+        <p class="text-xs leading-4 font-normal text-black whitespace-nowrap">
+          ✨ Permissionless — Anyone can join!
+        </p>
+      </div>
+      <h1
+        class="text-black text-2xl lg:text-4xl leading-6 sm:leading-[40px] font-medium text-center">
+        ENS Holiday Awards
+      </h1>
+      <p
+        class="text-base leading-normal sm:leading-7 font-normal text-center text-muted-foreground">
+        Grow .eth name registrations and renewals. Earn&nbsp;$ENS.
+      </p>
+      <div
+        class={cn(horizontalContainerStyles, "max-sm:flex-col gap-3 sm:gap-6")}>
+        <div class={cn(horizontalContainerStyles, "gap-2.5")}>
+          <CalendarIcon class="w-5 h-5 text-[#F59E0B] flex-shrink-0" />
+          <p class={keyInformationTextStyles}>December 1-31, 2025</p>
+        </div>
+        <div class={cn(horizontalContainerStyles, "gap-2.5")}>
+          <AwardIcon class="w-5 h-5 text-[#F59E0B] flex-shrink-0" />
+          <p class={keyInformationTextStyles}>$10,000 Prize Pool</p>
+        </div>
+      </div>
+    </div>
+    <a
+      href="/ens-referral-awards"
+      class={cn(
+        shadcnButtonVariants({
+          variant: "default",
+          size: "default",
+          className: "cursor-pointer rounded-full",
+        }),
+      )}>Learn more about the program</a
+    >
+  </div>
+  <Image
+    quality={100}
+    alt="christmas decorations"
+    src={ChristmasDecorationsImageRight}
+    class="max-sm:hidden w-[30%]"
+  />
+</div>

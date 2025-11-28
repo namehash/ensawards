@@ -18,6 +18,8 @@ const daoScores = contractPipeline();
 
 const daoLeaderboardDescription = "See how DAOs rank for following ENS best practices.";
 const appLeaderboardDescription = "See how apps rank for following ENS best practices.";
+const referrerLeaderboardDescription =
+  "Compare referrers by their performance in ENS Holiday Awards.";
 ---
 
 <Layout
@@ -29,10 +31,10 @@ const appLeaderboardDescription = "See how apps rank for following ENS best prac
     header="ENS leaderboards"
     description="Compare projects by their rank of following a selection of ENS best practices."
     customImage={{
-      source: "/src/assets/ensLeaderboardsHeroImage.png",
-      width: 628,
-      height: 288,
-      styles: "-top-10 right-0",
+      source: "/src/assets/leaderboardsHeroImage.png",
+      width: 371,
+      height: 372,
+      styles: "-top-0 right-0",
     }}
   />
   <section
@@ -109,6 +111,12 @@ const appLeaderboardDescription = "See how apps rank for following ENS best prac
           </p>
         </div>
       </LeaderboardSnippetCard>
+      <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
+      <!--<LeaderboardSnippetCard-->
+      <!--  name="Referrer leaderboard"-->
+      <!--  description={referrerLeaderboardDescription}-->
+      <!--  link="/leaderboards/referrer"-->
+      <!--/>-->
     </ItemsList>
   </section>
 </Layout>

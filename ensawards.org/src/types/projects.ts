@@ -6,6 +6,7 @@ export const ProjectIds = {
   Nouns: "project-nouns",
   Arbitrum: "project-arbitrum",
   Aave: "project-aave",
+  Taiko: "project-taiko",
 } as const;
 
 /**

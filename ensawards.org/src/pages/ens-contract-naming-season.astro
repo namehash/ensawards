@@ -23,7 +23,7 @@ import TelegramIcon from "../components/atoms/icons/TelegramIcon.astro";
 import ContractNamingBestPractices from "../components/contract-naming-season/ContractNamingBestPractices.astro";
 import ContractNamingHero from "../components/contract-naming-season/ContractNamingHero.astro";
 import ContractNamingIncentivesBanner from "../components/contract-naming-season/ContractNamingIncentivesBanner.astro";
-import { FrequentlyAskedQuestions } from "../components/contract-naming-season/FrequentlyAskedQuestions";
+import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAskedQuestions";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
 import Layout from "../layouts/Layout.astro";
@@ -134,11 +134,11 @@ const voicesFromTheCommunity: QuoteCardData[] = [
 
 const containerBaseStyles =
   "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center";
-const sectionHeaderBaseStyles = "text-2xl leading-normal font-semibold text-black";
+const sectionHeaderBaseStyles = "text-2xl sm:text-3xl leading-normal font-semibold text-black";
 const itemHeadersBaseStyles = "text-lg leading-normal font-semibold text-black";
 const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-foreground";
 const backgroundGreyStyles =
-  "absolute w-screen sm:w-[calc(100vw-15px)] h-full box-border py-6 sm:py-[50px] bg-neutral-50 bottom-0";
+  "absolute w-screen h-full box-border py-6 sm:py-[50px] bg-neutral-50 bottom-0";
 
 const daoScores = contractPipeline();
 ---
@@ -153,33 +153,39 @@ const daoScores = contractPipeline();
   }}>
   <ContractNamingHero />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] pt-5 sm:pt-0 pb-0 px-5 sm:px-8">
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] pt-6 sm:pt-0 pb-0 px-5 sm:px-8 overflow-hidden">
     <div
       class={cn(
         containerBaseStyles,
-        "flex flex-col-reverse sm:flex-row justify-start items-center gap-5 sm:gap-10 sm:py-10",
+        "flex flex-col-reverse sm:flex-col justify-start items-center gap-5 sm:gap-10 sm:pt-20",
       )}>
-      <div class="flex flex-col justify-start items-start gap-5 relative z-10">
-        <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>
+      <div
+        class="flex flex-col justify-start items-start sm:items-center gap-5 relative z-10">
+        <h3
+          class={cn(
+            sectionHeaderBaseStyles,
+            "text-3xl sm:text-4xl max-sm:self-stretch text-left sm:text-center",
+          )}>
           Web3 UX needs to change
         </h3>
-        <p class={itemTextBaseStyles}>
-          Every time users interact with a smart contract, they’re asked to
-          trust a long, meaningless hex address.
-        </p>
-        <p class={itemTextBaseStyles}>
-          Not only does this make Ethereum harder to use, it leaves users
-          exposed to address spoofing and phishing attacks from scammers.
+        <p
+          class={cn(
+            itemTextBaseStyles,
+            "text-lg sm:text-center max-w-[760px]",
+          )}>
+          Stop asking your users to trust long, meaningless hex addresses. This
+          makes Ethereum harder to use, and exposes users to address spoofing
+          and phishing attacks.
         </p>
       </div>
       <Image
         quality={100}
         src={Web3NeedsToChangeImage}
-        alt="future of Web3 UX"
-        class="w-full sm:w-1/2 sm:min-w-1/2 relative z-10"
+        alt="Web3 UX before and after contract naming"
+        class="w-full max-w-[760px] relative z-10"
       />
     </div>
-    <div class={cn(containerBaseStyles, "gap-6 sm:gap-10 sm:py-[20px]")}>
+    <div class={cn(containerBaseStyles, "gap-6 sm:gap-10 sm:pb-[20px]")}>
       <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>
         Why name your contracts now?
       </h3>
@@ -449,8 +455,9 @@ const daoScores = contractPipeline();
             Frequently asked questions
           </h3>
           <p class={itemTextBaseStyles}>
-            Check out our Frequently Asked Questions (FAQs) to find quick solutions to common queries. Still have
-            questions? Join the Telegram community or try the link below to learn more on the forum.
+            Check out our Frequently Asked Questions (FAQs) to find quick
+            solutions to common queries. Still have questions? Join the Telegram
+            community or try the link below to learn more on the forum.
           </p>
           <a
             href="https://discuss.ens.domains/t/ens-contract-naming-season/21596"
@@ -466,7 +473,10 @@ const daoScores = contractPipeline();
             Learn more on the forum
           </a>
         </div>
-        <FrequentlyAskedQuestions client:load />
+        <FrequentlyAskedQuestions
+          client:load
+          itemsToShow={["What's an $ENS?"]}
+        />
       </div>
     </div>
   </section>

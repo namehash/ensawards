@@ -12,6 +12,7 @@ export const OrgIds = {
   Nouns: "org-nouns-dao",
   Arbitrum: "org-arbitrum-dao",
   Aave: "org-aave-dao",
+  Taiko: "org-taiko-dao",
 } as const;
 
 /**
