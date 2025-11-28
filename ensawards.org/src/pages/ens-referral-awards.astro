@@ -1,5 +1,5 @@
 ---
-import { Award, Code, type Icon as IconType, Link2, Megaphone, TrendingUp } from "@lucide/astro";
+import { Award, Code, type Icon as IconType, Link2, Megaphone, Sparkles, TrendingUp } from "@lucide/astro";
 import HolidayReferralAwardsHero from "../components/holiday-referral-awards/HolidayReferralAwardsHero.astro";
 import { ReferralLinkForm } from "../components/holiday-referral-awards/ReferralLinkForm";
 import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
@@ -7,6 +7,7 @@ import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAske
 import JoinTelegram from "../components/molecules/JoinTelegram.astro";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../utils/tailwindClassConcatenation";
+import {shadcnButtonVariants} from "../components/ui/shadcnButtonStyles";
 
 interface ContentItemData {
   name: string;
@@ -64,7 +65,7 @@ const backgroundGreyStyles =
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-[80px] pt-6 sm:pt-[80px] px-5 sm:px-8 overflow-hidden">
     <div
       class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start sm:items-center gap-5 sm:gap-[60px]">
-      <h3 class={sectionHeaderBaseStyles}>Everyone can participate!</h3>
+      <h3 class={cn(sectionHeaderBaseStyles, "text-center")}>Everyone can participate!</h3>
       <div
         class="w-full flex flex-col sm:flex-row flex-nowrap justify-center items-center gap-3 sm:gap-5">
         <div
@@ -128,7 +129,7 @@ const backgroundGreyStyles =
       </div>
     </div>
     <div class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-5 sm:gap-[60px]">
-      <h3 class={sectionHeaderBaseStyles}>How it works</h3>
+      <h3 class={cn(sectionHeaderBaseStyles, "text-center")}>How it works</h3>
       <div class="w-full h-fit flex flex-col min-[880px]:flex-row min-[880px]:flex-wrap justify-start min-[880px]:justify-center items-center gap-3 sm:gap-5">
         {howItWorksItems.map((item) => <div class="w-full max-w-[390px] h-fit flex flex-col justify-start items-start gap-5 p-4 rounded-2xl border border-gray-200">
           <div class={cn("w-[48px] h-[48px] rounded-full flex justify-center items-center", item.iconBackground)}><item.icon size={20} className={cn(item.iconColor)} /></div>
@@ -137,6 +138,50 @@ const backgroundGreyStyles =
             <p class={descriptionStyles}>{item.description}</p>
           </div>
         </div>)}
+      </div>
+    </div>
+    <div
+        class={cn(
+            "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-5 sm:gap-[60px] " +
+            "py-6 sm:py-[80px] relative z-10",
+        )}>
+      <div class={backgroundGreyStyles}></div>
+      <div class="w-full h-fit flex flex-col justify-start items-center gap-6 relative z-10">
+        <div class={cn("w-[48px] h-[48px] rounded-full flex justify-center items-center bg-[rgba(111,66,193,0.10)]")}><Code size={20} className="text-[rgba(111,66,193,1.0)]" /></div>
+        <div class="w-full h-fit flex flex-col justify-start items-center gap-4">
+          <h3 class={cn(sectionHeaderBaseStyles, "text-center")}>Developer Integration Options</h3>
+          <p class={cn(descriptionStyles, "text-center")}>Explore integration options with the ENS Referral Program</p>
+        </div>
+      </div>
+      <div class="w-full h-fit flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-center items-center gap-3 sm:gap-5 relative z-10">
+        <div class="w-full max-w-[590px] h-fit sm:min-h-[245px] box-border flex flex-col justify-between items-start max-sm:gap-10 sm:gap-y-5 p-4 rounded-2xl border border-gray-200 bg-white">
+          <div class="w-full h-fit flex flex-col justify-start items-start gap-5">
+            <div class="flex flex-row flex-nowrap justify-start items-center gap-4 sm:gap-5">
+              <Code size={24} className="text-[rgba(0,82,204,1.0)]" />
+              <h4 class="text-xl leading-normal font-semibold text-black">Total UX Control</h4>
+            </div>
+            <p class={descriptionStyles}>Integrate directly with ENS smart contracts for full flexibility and control over the user journey. Build the ultimate .eth name registration and renewal features directly into your app or wallet.</p>
+          </div>
+          <a target="_blank" href="https://github.com/namehash/ens-referrals" class={cn(shadcnButtonVariants({
+            variant: "secondary",
+            size: "default",
+            className: "cursor-pointer rounded-full",
+          }))}>Learn more on GitHub  →</a>
+        </div>
+        <div class="w-full max-w-[590px] h-fit sm:min-h-[245px] box-border flex flex-col justify-between items-start max-sm:gap-10 sm:gap-y-5 p-4 rounded-2xl border border-gray-200 bg-white">
+          <div class="w-full h-fit flex flex-col justify-start items-start gap-5">
+            <div class="flex flex-row flex-nowrap justify-start items-center gap-4 sm:gap-5">
+              <Sparkles size={24} className="text-[rgba(111,66,193,1.0)]" />
+              <h4 class="text-xl leading-normal font-semibold text-black">Fast & Easy</h4>
+            </div>
+            <p class={descriptionStyles}>Simply integrate referral links into your apps and websites. For example: Consider notifying your users of the .eth names they own and that will expire soon if not renewed.</p>
+          </div>
+          <a id="fastAndEasyCardButton" class={cn(shadcnButtonVariants({
+            variant: "secondary",
+            size: "default",
+            className: "cursor-pointer rounded-full",
+          }))}>Generate my link  →</a>
+        </div>
       </div>
     </div>
     <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
@@ -201,6 +246,12 @@ const backgroundGreyStyles =
     scrollAnchorJoinTelegram.addEventListener("click", (event) => {
       event.preventDefault();
       scrollWithOffset(`joinTelegramCommunity`, 90);
+    });
+
+    const scrollAnchorDeveloperIntegrations = document.getElementById("fastAndEasyCardButton");
+    scrollAnchorDeveloperIntegrations.addEventListener("click", (event) => {
+      event.preventDefault();
+      document.getElementById("referral award recipient").focus();
     });
   </script>
 </Layout>
