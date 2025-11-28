@@ -3,6 +3,7 @@ import { Code, type Icon as IconType, Megaphone } from "@lucide/astro";
 import HolidayReferralAwardsHero from "../components/holiday-referral-awards/HolidayReferralAwardsHero.astro";
 import { ReferralLinkForm } from "../components/holiday-referral-awards/ReferralLinkForm";
 import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
+import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAskedQuestions";
 import JoinTelegram from "../components/molecules/JoinTelegram.astro";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../utils/tailwindClassConcatenation";
@@ -12,27 +13,6 @@ interface ContentItemData {
   description: string;
   icon: typeof IconType;
 }
-
-interface EveryoneCanParticipateItemData extends ContentItemData {
-  iconColor: string;
-}
-
-const everyoneCanParticipateItems: EveryoneCanParticipateItemData[] = [
-  {
-    name: "Developers",
-    description:
-      "Build (and promote!) features for registering or renewing .eth names directly within your own app.",
-    icon: Code,
-    iconColor: "text-[#0052CC]",
-  },
-  {
-    name: "Content creators",
-    description:
-      "Share your referral link with your audience through social media or wherever you reach your community.",
-    icon: Megaphone,
-    iconColor: "text-[#6F42C1]",
-  },
-];
 
 const sectionHeaderBaseStyles = "text-2xl sm:text-3xl leading-normal font-semibold text-black";
 const descriptionStyles = "text-base leading-7 font-normal text-gray-500 self-stretch";
@@ -47,68 +27,50 @@ const backgroundGreyStyles =
     description:
       "Earn rewards for referring .eth name registrations and renewals. Join the ENS Holiday Awards program.",
     url: "https://ensawards.org/ens-referral-awards",
-    ogImage: "holiday-referral-awards_og_image.png",
-    twitterImage: "holiday-referral-awards_twitter_og_image.png",
+    ogImage: "/holiday-referral-awards_og_image.png",
+    twitterImage: "/holiday-referral-awards_twitter_og_image.png",
   }}>
   <HolidayReferralAwardsHero />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-[80px] py-6 sm:py-[80px] px-5 sm:px-8 overflow-hidden">
-    <div
-      class="w-full max-w-[1216px] box-border h-fit flex flex-col min-[900px]:flex-row flex-nowrap justify-start sm:justify-center items-center sm:items-start gap-10">
-      <div
-        class="w-full max-w-[650px] h-fit flex flex-nowrap flex-col justify-start items-start gap-5">
-        <h3 class="text-2xl leading-none font-semibold text-black">
-          ENS Holiday Awards
-        </h3>
-        <div class="flex flex-nowrap flex-col justify-start items-start gap-2">
-          <p class={descriptionStyles}>
-            The team at <a
-              href="https://namehashlabs.org/"
-              target="_blank"
-              class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
-              >NameHash Labs</a
-            > is coordinating the launch of an ENS Holiday Awards program.
-          </p>
-          <p class={descriptionStyles}>
-            <a
-              href="https://discuss.ens.domains/t/temp-check-ens-holiday-awards/21359"
-              target="_blank"
-              class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
-              >ENS Holiday Awards</a
-            > are envisioned as a trial incentive framework that will issue awards
-            in $ENS for referred .eth name registrations and renewals.
-          </p>
-          <p class={descriptionStyles}>
-            For details and to contribute to the discussion, please visit <a
-              href="https://discuss.ens.domains/t/temp-check-ens-holiday-awards/21359"
-              target="_blank"
-              class="leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
-              >the ENS Holiday Awards discussion on the ENS DAO Forum</a
-            >.
-          </p>
-        </div>
-      </div>
-    </div>
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-[80px] pt-6 sm:pt-[80px] px-5 sm:px-8 overflow-hidden">
     <div
       class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start sm:items-center gap-5 sm:gap-[60px]">
       <h3 class={sectionHeaderBaseStyles}>Everyone can participate!</h3>
       <div
         class="w-full flex flex-col sm:flex-row flex-nowrap justify-center items-center gap-3 sm:gap-5">
-        {
-          everyoneCanParticipateItems.map((item, idx) => (
-            <div class="w-fit h-fit flex flex-col justify-start items-start gap-4 p-4 sm:p-6 rounded-2xl border border-gray-200">
-              <div class="w-fit h-fit flex flex-row justify-start items-start gap-5">
-                <item.icon size={24} className={item.iconColor} />
-                <h4 class="text-xl leading-normal font-semibold text-black">
-                  {item.name}
-                </h4>
-              </div>
-              <p class="text-base leading-normal font-normal text-muted-foreground">
-                {item.description}
-              </p>
-            </div>
-          ))
-        }
+        <div
+          class="w-fit h-fit flex flex-col justify-start items-start gap-4 p-4 sm:p-6 rounded-2xl border border-gray-200">
+          <div
+            class="w-fit h-fit flex flex-row justify-start items-start gap-5">
+            <Code size={24} className="text-[#0052CC]" />
+            <h4 class="text-xl leading-normal font-semibold text-black">
+              Developers
+            </h4>
+          </div>
+          <p class="text-base leading-normal font-normal text-muted-foreground">
+            Build .eth name registration and renewals directly into your app and
+            to earn big through referrals! <a
+              target="_blank"
+              href="https://github.com/namehash/ens-referrals"
+              class="text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
+              >Learn more at the ens-referrals GitHub</a
+            >.
+          </p>
+        </div>
+        <div
+          class="w-fit h-fit flex flex-col justify-start items-start gap-4 p-4 sm:p-6 rounded-2xl border border-gray-200">
+          <div
+            class="w-fit h-fit flex flex-row justify-start items-start gap-5">
+            <Megaphone size={24} className="text-[#6F42C1]" />
+            <h4 class="text-xl leading-normal font-semibold text-black">
+              Content creators
+            </h4>
+          </div>
+          <p class="text-base leading-normal font-normal text-muted-foreground">
+            Generate your ENS Referral Program link below and share it with your
+            audience through social media or wherever you reach your community.
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -128,33 +90,76 @@ const backgroundGreyStyles =
         <!--TODO: replace current href with the correct link (should lead to FAQ section when it's done)-->
         <p
           class="text-base leading-normal font-normal text-muted-foreground text-center">
-          Bulk renewals not supported. <a
-            href="/ens-holiday-awards-rules"
-            class="underline underline-offset-[25%] decoration-muted-foreground/40 hover:decoration-muted-foreground"
+          Limitations apply. <a
+            id="scroll-to-faq"
+            class="cursor-pointer underline underline-offset-[25%] decoration-muted-foreground/40 hover:decoration-muted-foreground"
             >Learn&nbsp;more</a
           >
         </p>
       </div>
     </div>
-    <div
-      class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start max-md:gap-5">
-      <div class="w-full h-fit flex flex-col justify-start items-center gap-3">
-        <h3
-          class="text-3xl leading-normal font-semibold text-black text-center">
-          Top referrers
-        </h3>
-        <p
-          class="text-sm leading-normal font-normal text-muted-foreground text-center">
-          It may take a while for the data to be actualized
-        </p>
-      </div>
-      <TopReferrers client:load onENSHolidayReferralsAwards={true} />
-    </div>
+    <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
+    <!--<div-->
+    <!--  class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center max-md:gap-5">-->
+    <!--  <h3-->
+    <!--      class="text-2xl sm:text-3xl leading-normal font-semibold text-black text-center">-->
+    <!--    Top referrers-->
+    <!--  </h3>-->
+    <!--  <TopReferrers client:load onENSHolidayReferralsAwards={true} />-->
+    <!--</div>-->
     <JoinTelegram
       header="Have questions?"
       description="Join the ENSAwards telegram community and start a conversation"
       inviteText="Join our Telegram"
       telegramLink={new URL("https://t.me/ensawards")}
     />
+    <div
+      class={cn(
+        "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center " +
+          "py-6 sm:pt-[50px] sm:pb-[80px] relative z-10",
+      )}>
+      <div class={backgroundGreyStyles}></div>
+      <div
+        class="w-full flex flex-col min-[810px]:flex-row justify-start min-[810px]:justify-between items-start gap-5 sm:gap-10 min-[810px]:gap-0 relative z-10">
+        <div
+          class="w-full min-[810px]:w-1/2 h-fit flex flex-col justify-start items-start gap-5">
+          <h3 class={cn(sectionHeaderBaseStyles, "w-full text-left")}>
+            Frequently asked questions
+          </h3>
+          <p class="text-base leading-normal font-normal text-muted-foreground">
+            Check out our Frequently Asked Questions (FAQs) to find quick
+            solutions to common queries. Still have questions? <a
+              id="scroll-to-tg"
+              class="cursor-pointer text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
+              >Join the Telegram community!</a
+            >
+          </p>
+        </div>
+        <FrequentlyAskedQuestions
+          client:load
+          itemsToShow={[
+            "Are there limitations to the referral links?",
+            "How do I earn points?",
+            "What's an $ENS?",
+          ]}
+        />
+      </div>
+    </div>
   </section>
+  <script>
+    import { scrollWithOffset } from "../utils/domActions";
+
+    const scrollAnchorReferralLinkForm =
+      document.getElementById("scroll-to-faq");
+    scrollAnchorReferralLinkForm.addEventListener("click", (event) => {
+      event.preventDefault();
+      scrollWithOffset(`FAQ-Are there limitations to the referral links?`, 90);
+    });
+
+    const scrollAnchorJoinTelegram = document.getElementById("scroll-to-tg");
+    scrollAnchorJoinTelegram.addEventListener("click", (event) => {
+      event.preventDefault();
+      scrollWithOffset(`joinTelegramCommunity`, 90);
+    });
+  </script>
 </Layout>

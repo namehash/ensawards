@@ -107,6 +107,7 @@ export function MockReferrersList() {
             updatedAt: 1764091210,
           },
           isLoading: false,
+          header: "Top referrers",
           generateLinkCTA: <p>Placeholder</p>,
         };
     }

@@ -23,7 +23,7 @@ import TelegramIcon from "../components/atoms/icons/TelegramIcon.astro";
 import ContractNamingBestPractices from "../components/contract-naming-season/ContractNamingBestPractices.astro";
 import ContractNamingHero from "../components/contract-naming-season/ContractNamingHero.astro";
 import ContractNamingIncentivesBanner from "../components/contract-naming-season/ContractNamingIncentivesBanner.astro";
-import { FrequentlyAskedQuestions } from "../components/contract-naming-season/FrequentlyAskedQuestions";
+import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAskedQuestions";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
 import Layout from "../layouts/Layout.astro";
@@ -157,7 +157,7 @@ const daoScores = contractPipeline();
     <div
       class={cn(
         containerBaseStyles,
-        "flex flex-col-reverse sm:flex-col justify-start items-center gap-5 sm:gap-10 sm:pb-10 sm:pt-20",
+        "flex flex-col-reverse sm:flex-col justify-start items-center gap-5 sm:gap-10 sm:pt-20",
       )}>
       <div
         class="flex flex-col justify-start items-start sm:items-center gap-5 relative z-10">
@@ -185,7 +185,7 @@ const daoScores = contractPipeline();
         class="w-full max-w-[760px] relative z-10"
       />
     </div>
-    <div class={cn(containerBaseStyles, "gap-6 sm:gap-10 sm:py-[20px]")}>
+    <div class={cn(containerBaseStyles, "gap-6 sm:gap-10 sm:pb-[20px]")}>
       <h3 class={cn(sectionHeaderBaseStyles, "self-stretch text-left")}>
         Why name your contracts now?
       </h3>
@@ -473,7 +473,10 @@ const daoScores = contractPipeline();
             Learn more on the forum
           </a>
         </div>
-        <FrequentlyAskedQuestions client:load />
+        <FrequentlyAskedQuestions
+          client:load
+          itemsToShow={["What's an $ENS?"]}
+        />
       </div>
     </div>
   </section>

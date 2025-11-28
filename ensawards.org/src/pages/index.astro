@@ -33,6 +33,7 @@ const daoScores = contractPipeline();
   <section
     id="previews-section"
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
+    <HolidayReferralAwardsCTA />
     <ContractNamingBanner />
     <ItemsList
       header="Top DAOs"
@@ -132,11 +133,11 @@ const daoScores = contractPipeline();
         View full app leaderboard
       </a>
     </ItemsList>
-    <TopReferrers
-      client:load
-      header="Top Referrers"
-      onENSHolidayReferralsAwards={false}
-    />
-    <HolidayReferralAwardsCTA />
+    <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
+    <!--<TopReferrers-->
+    <!--  client:load-->
+    <!--  header="Top Referrers"-->
+    <!--  onENSHolidayReferralsAwards={false}-->
+    <!--/>-->
   </section>
 </Layout>

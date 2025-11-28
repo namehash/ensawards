@@ -56,19 +56,12 @@ export function ReferrersList({
     <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
       <div
         className={cn(
-          "w-full h-fit flex flex-row flex-nowrap items-end",
+          "w-full h-fit flex flex-row flex-nowrap items-center",
           header ? "justify-between" : "justify-end",
         )}
       >
         {header && (
-          <div className="w-full h-fit flex flex-col justify-start items-start gap-0">
-            <h3 className="text-xl sm:text-2xl leading-normal font-semibold text-black">
-              {header}
-            </h3>
-            <p className="text-sm leading-normal font-normal text-muted-foreground">
-              It may take a while for the data to be actualized
-            </p>
-          </div>
+          <h3 className="text-xl sm:text-2xl leading-normal font-semibold text-black">{header}</h3>
         )}
         <ReferrersSnapshotTime lastUpdateTimestamp={aggregatedReferrersData.updatedAt} />
       </div>
