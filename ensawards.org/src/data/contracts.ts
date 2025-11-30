@@ -12,7 +12,7 @@ import {
   ContractSubtypes,
   ContractTypes,
 } from "@/types/contracts.ts";
-import { mainnet } from "viem/chains";
+import { arbitrum, mainnet } from "viem/chains";
 
 export const CONTRACTS: Contract[] = [
   {
@@ -234,7 +234,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Protocol,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -247,7 +247,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Protocol,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -260,7 +260,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Protocol,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -273,7 +273,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Protocol,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -286,7 +286,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Protocol,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -299,7 +299,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Protocol,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -312,7 +312,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Protocol,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -325,13 +325,182 @@ export const CONTRACTS: Contract[] = [
   {
     org: NounsDaoOrg,
     type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Token,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
+        chain: mainnet,
+        codeName: "NounsToken",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.UserFacing,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x830BD73E4184ceF73443C15111a1DF14e495C706",
+        chain: mainnet,
+        codeName: "NounsAuctionHouseProxy",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Protocol,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x1D835808ddCa38fbE14e560D8e25b3D256810aF0",
+        chain: mainnet,
+        codeName: "NounsAuctionHouseV3",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000001",
+        address: "0xf790A5f59678dd733fb3De93493A91f472ca1365",
         chain: mainnet,
-        codeName: "TestContractNouns",
+        codeName: "NounsDataDaoProxy",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x513e9277192767eb4dc044A08da8228862828150",
+        chain: mainnet,
+        codeName: "NounsDataDao",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x6f3E6272A167e8AcCb32072d08E0957F9c79223d",
+        chain: mainnet,
+        codeName: "NounsDaoProxy",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xA23e8A919D29d74Ee24d909D80f4bC8778d656d1",
+        chain: mainnet,
+        codeName: "NounsDaoLogicV4",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.UserFacing,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x883860178F95d0C82413eDc1D6De530cB4771d55",
+        chain: mainnet,
+        codeName: "NounsRewardsProxy",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Protocol,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xaaF173E6b65aa4473C830EDB402D26B7A33c5E94",
+        chain: mainnet,
+        codeName: "NounsRewards",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xb1a32FC9F9D8b2cf86C068Cae13108809547ef71",
+        chain: mainnet,
+        codeName: "NounsDAOExecutorProxy",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0FB7CF84F171154cBC3F553aA9Df9b0e9076649D",
+        chain: mainnet,
+        codeName: "NounsDAOExecutorV2",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Protocol,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x33A9c445fb4FB21f2c030A6b2d3e2F12D017BFAC",
+        chain: mainnet,
+        codeName: "NounsDescriptorV3",
+      },
+    },
+  },
+  {
+    org: NounsDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Utility,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0fd206FC7A7dBcD5661157eDCb1FFDD0D02A61ff",
+        chain: mainnet,
+        codeName: "NounsStreamFactory",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Token,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xB50721BCf8d664c30412Cfbc6cf7a15145234ad1",
+        chain: mainnet,
+        codeName: "ARBTokenL1",
       },
     },
   },
@@ -342,9 +511,295 @@ export const CONTRACTS: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000002",
+        address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
+        chain: arbitrum,
+        codeName: "ARBTokenL2",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xF3FC178157fb3c87548bAA86F9d24BA38E649B58",
+        chain: arbitrum,
+        codeName: "ArbitrumDaoTreasury",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xbbcE8aA77782F13D4202a230d978F361B011dB27",
         chain: mainnet,
-        codeName: "TestContractArbitrum",
+        codeName: "ARBGatewayL1",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xCaD7828a19b363A2B44717AFB1786B5196974D8E",
+        chain: arbitrum,
+        codeName: "ARBGatewayL2",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x3ffFbAdAF827559da092217e474760E2b2c3CeDd",
+        chain: mainnet,
+        codeName: "L1UpgradeExecutor",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xE6841D92B0C345144506576eC13ECf5103aC7f49",
+        chain: mainnet,
+        codeName: "L1Timelock",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xf07DeD9dC292157749B6Fd268E37DF6EA38395B9",
+        chain: arbitrum,
+        codeName: "CoreGovernor",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x789fC99093B09aD01C34DC7251D0C89ce743e5a4",
+        chain: arbitrum,
+        codeName: "TreasuryGovernor",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xCF57572261c7c2BCF21ffD220ea7d1a27D40A827",
+        chain: arbitrum,
+        codeName: "ArbOneUpgradeExecutor",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x34d45e99f7D8c45ed05B5cA72D54bbD1fb3F98f0",
+        chain: arbitrum,
+        codeName: "L2CoreTimelock",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xbFc1FECa8B09A5c5D3EFfE7429eBE24b9c09EF58",
+        chain: arbitrum,
+        codeName: "L2TreasuryTimelock",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xF06E95eF589D9c38af242a8AAee8375f14023F85",
+        chain: mainnet,
+        codeName: "SecurityCouncilL1Emergency",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x423552c0F05baCCac5Bfa91C6dCF1dc53a0A1641",
+        chain: arbitrum,
+        codeName: "SecurityCouncilL2Emergency",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x8a1cDA8dee421cD06023470608605934c16A05a0",
+        chain: arbitrum,
+        codeName: "NomineeElectionGovernor",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x467923B9AE90BDB36BA88eCA11604D45F13b712C",
+        chain: arbitrum,
+        codeName: "MemberElectionGovernor",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xD509E5f5aEe2A205F554f36E8a7d56094494eDFC",
+        chain: arbitrum,
+        codeName: "Manager",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x7481716f05E315Fc4C4a64E56DcD9bc1D6F24C0a",
+        chain: arbitrum,
+        codeName: "UpgradeExecRouteBuilder",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x6f3a242cA91A119F872f0073BC14BC8a74a315Ad",
+        chain: arbitrum,
+        codeName: "MemberRemovalGovernor",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x9BF7b8884Fa381a45f8CB2525905fb36C996297a",
+        chain: arbitrum,
+        codeName: "MemberSyncActionL2",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x9BF7b8884Fa381a45f8CB2525905fb36C996297a",
+        chain: mainnet,
+        codeName: "MemberSyncActionL1",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x1D62fFeB72e4c360CcBbacf7c965153b00260417",
+        chain: arbitrum,
+        codeName: "ConstitutionHash",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x5613AF0474EB9c528A34701A5b1662E3C8FA0678",
+        chain: mainnet,
+        codeName: "L1ProxyAdmin",
+      },
+    },
+  },
+  {
+    org: ArbitrumDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xdb216562328215E010F819B5aBe947bad4ca961e",
+        chain: arbitrum,
+        codeName: "ArbOneProxyAdmin",
       },
     },
   },
@@ -355,9 +810,113 @@ export const CONTRACTS: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000003",
+        address: "0x9AEE0B04504CeF83A65AC3f0e838D0593BCb2BC7",
         chain: mainnet,
-        codeName: "TestContractAave",
+        codeName: "AaveGovernance",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xa198Fac58E02A5C5F8F7e877895d50cFa9ad1E04",
+        chain: mainnet,
+        codeName: "GovernancePowerStrategy",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x6ACe1Bf22D57a33863161bFDC851316Fb0442690",
+        chain: mainnet,
+        codeName: "VotingPortalEth",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x06a1795a88b82700896583e123F46BE43877bFb6",
+        chain: mainnet,
+        codeName: "VotingMachine",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xA16044F268d84599e58E851b25f4DBA061DC6088",
+        chain: mainnet,
+        codeName: "VotingStrategy",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xa638c14525CAEE8e498A67b409CCb1B7b34c3981",
+        chain: mainnet,
+        codeName: "DataWarehouse",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+        chain: mainnet,
+        codeName: "ExecutorLvl1",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x17Dd33Ed0e3dD2a80E37489B8A63063161BE6957",
+        chain: mainnet,
+        codeName: "ExecutorLvl2",
+      },
+    },
+  },
+  {
+    org: AaveDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0xdAbad81aF85554E9ae636395611C58F7eC1aAEc5",
+        chain: mainnet,
+        codeName: "PayloadsController",
       },
     },
   },

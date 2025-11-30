@@ -5,6 +5,8 @@ import type { Address, Chain } from "viem";
 export const ContractTypes = {
   Dao: "DAO",
   Defi: "DeFi",
+  L2: "L2",
+  Consumer: "Consumer",
 } as const;
 
 /**
@@ -14,8 +16,10 @@ export type ContractType = (typeof ContractTypes)[keyof typeof ContractTypes];
 
 export const ContractSubtypes = {
   Governance: "Governance",
-  DefiApp: "DeFi App",
+  UserFacing: "User Facing",
+  Protocol: "Protocol",
   Utility: "Utility",
+  Token: "Token",
 } as const;
 
 /**

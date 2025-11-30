@@ -6,7 +6,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: ENSDaoOrg,
     type: "DeFi",
-    subtype: "DeFi App",
+    subtype: "Protocol",
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -19,7 +19,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: ENSDaoOrg,
     type: "DeFi",
-    subtype: "DeFi App",
+    subtype: "Protocol",
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -32,7 +32,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: ENSDaoOrg,
     type: "DeFi",
-    subtype: "DeFi App",
+    subtype: "Protocol",
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -46,7 +46,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: ENSDaoOrg,
     type: "DeFi",
-    subtype: "DeFi App",
+    subtype: "Protocol",
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -144,7 +144,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: "DeFi",
-    subtype: "DeFi App",
+    subtype: "Protocol",
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -157,7 +157,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: "DeFi",
-    subtype: "DeFi App",
+    subtype: "Protocol",
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -170,7 +170,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: "DeFi",
-    subtype: "DeFi App",
+    subtype: "Protocol",
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -183,7 +183,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: "DeFi",
-    subtype: "DeFi App",
+    subtype: "Protocol",
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
