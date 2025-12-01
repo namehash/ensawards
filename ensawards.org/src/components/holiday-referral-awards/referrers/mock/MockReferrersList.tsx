@@ -21,13 +21,35 @@ export function MockReferrersList() {
     switch (selectedState) {
       case "empty":
         return {
-          aggregatedReferrersData: {
+          referrersData: {
+            rules: {
+              totalAwardPoolValue: 10000,
+              maxQualifiedReferrers: 10,
+              startTime: 1735689600,
+              endTime: 1767225599,
+              subregistryId: {
+                chainId: 11155111, //TODO replace with mainnet's subregistry's address later on
+                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+              }
+            },
             referrers: [],
-            total: 0,
-            paginationParams: {},
-            hasNext: false,
-            hasPrev: false,
-            updatedAt: 1764091210,
+            aggregatedMetrics: {
+              grandTotalReferrals: 0,
+              grandTotalIncrementalDuration: 0,
+              grandTotalQualifiedReferrersFinalScore: 0,
+              minFinalScoreToQualify: 0,
+            },
+            paginationContext: {
+              page: 1,
+              itemsPerPage: 4,
+              totalRecords: 0,
+              totalPages: 1,
+              hasNext: false,
+              hasPrev: false,
+              startIndex: undefined,
+              endIndex: undefined
+            },
+            accurateAsOf: 1764091210,
           },
           isLoading: false,
           generateLinkCTA: (
@@ -47,14 +69,14 @@ export function MockReferrersList() {
 
       case "loading":
         return {
-          aggregatedReferrersData: null,
+          referrersData: null,
           isLoading: true,
           generateLinkCTA: <p>Placeholder</p>,
         };
 
       case "fetchError":
         return {
-          aggregatedReferrersData: null,
+          referrersData: null,
           isLoading: false,
           generateLinkCTA: <p>Placeholder</p>,
           error: (
@@ -69,42 +91,84 @@ export function MockReferrersList() {
 
       default:
         return {
-          aggregatedReferrersData: {
+          referrersData: {
+            rules: {
+              totalAwardPoolValue: 10000,
+              maxQualifiedReferrers: 10,
+              startTime: 1735689600,
+              endTime: 1767225599,
+              subregistryId: {
+                chainId: 11155111, //TODO replace with mainnet's subregistry's address later on
+                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+              }
+            },
             referrers: [
               {
-                referrer: "0x538e35b2888ed5bc58cf2825d76cf6265aa4e31e",
-                totalReferrals: 3,
-                totalIncrementalDuration: 94694400,
-                totalReferralsContribution: 0.33,
-                totalIncrementalDurationContribution: 0.5,
+                referrer: "0x03c098d2bed4609e6ed9beb2c4877741f45f290d",
+                totalReferrals: 5,
+                totalIncrementalDuration: 22813200,
+                score: 0.722921529303591,
+                rank: 9,
+                isQualified: true,
+                finalScoreBoost: 0.111111111111111,
+                finalScore: 0.803246143670656,
+                awardPoolShare: 0.0276828248101365,
+                awardPoolApproxValue: 276.828248101365
               },
               {
-                referrer: "0xcfa4f8192ad39d1ee09f473e88e79d267e09ddca",
-                totalReferrals: 2,
-                totalIncrementalDuration: 63072000,
-                totalReferralsContribution: 0.1,
-                totalIncrementalDurationContribution: 0.11,
+                referrer: "0xabe3fdb4d2cd5f2e7193a4ac380ecb68e899896a",
+                totalReferrals: 7,
+                totalIncrementalDuration: 15120000,
+                score: 0.479133726222989,
+                rank: 10,
+                isQualified: true,
+                finalScoreBoost: 0,
+                finalScore: 0.479133726222989,
+                awardPoolShare: 0.01651271544616,
+                awardPoolApproxValue: 165.1271544616
               },
               {
-                referrer: "0x00000000000000000000000000000000000000f1",
-                totalReferrals: 1,
-                totalIncrementalDuration: 39657600,
-                totalReferralsContribution: 0.05,
-                totalIncrementalDurationContribution: 0.05,
+                referrer: "0xffa596cdf9a69676e689b1a92e5e681711227d75",
+                totalReferrals: 5,
+                totalIncrementalDuration: 12960000,
+                score: 0.410686051048276,
+                rank: 11,
+                isQualified: false,
+                finalScoreBoost: 0,
+                finalScore: 0.410686051048276,
+                awardPoolShare: 0,
+                awardPoolApproxValue: 0
               },
               {
-                referrer: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
-                totalReferrals: 1,
-                totalIncrementalDuration: 34214400,
-                totalReferralsContribution: 0.05,
-                totalIncrementalDurationContribution: 0.03,
-              },
+                referrer: "0x2a614b7984854177d22fa23a4034a13ea82e4f97",
+                totalReferrals: 5,
+                totalIncrementalDuration: 12096000,
+                score: 0.383306980978391,
+                rank: 12,
+                isQualified: false,
+                finalScoreBoost: 0,
+                finalScore: 0.383306980978391,
+                awardPoolShare: 0,
+                awardPoolApproxValue: 0
+              }
             ],
-            total: 4,
-            paginationParams: {},
-            hasNext: false,
-            hasPrev: false,
-            updatedAt: 1764091210,
+            aggregatedMetrics: {
+              grandTotalReferrals: 84,
+              grandTotalIncrementalDuration: 651636003,
+              grandTotalQualifiedReferrersFinalScore: 29.0160469236699,
+              minFinalScoreToQualify: 0.479133726222989
+            },
+            paginationContext: {
+              page: 1,
+              itemsPerPage: 4,
+              totalRecords: 33,
+              totalPages: 9,
+              hasNext: true,
+              hasPrev: false,
+              startIndex: 0,
+              endIndex: 3
+            },
+            accurateAsOf: 1764580368
           },
           isLoading: false,
           header: "Top referrers",
