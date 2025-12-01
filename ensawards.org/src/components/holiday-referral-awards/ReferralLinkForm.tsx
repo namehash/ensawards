@@ -9,9 +9,10 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { type NormalizedName } from "@ensnode/ensnode-sdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
-import { type Address, getAddress, isAddress } from "viem";
+import { isAddress } from "viem";
 import { normalize } from "viem/ens";
 import * as Yup from "yup";
+import {buildEnsReferralUrl} from "@namehash/ens-referrals";
 
 interface ReferralLinkFormDataProps {
   "referral award recipient": string;
@@ -41,19 +42,6 @@ const getInitialValidationErrorsState = (formFields: FormField[]): ValidationErr
 
   return validationErrorsInitialState;
 };
-
-// TODO: remove after ens-referrals package is published and use its function instead
-/**
- * Build a URL to the official ENS manager app
- * where the given {@link Address} is set as the referrer.
- */
-function buildEnsReferralUrl(address: Address): URL {
-  const ensAppUrl = new URL("https://app.ens.domains");
-
-  ensAppUrl.searchParams.set("referrer", getAddress(address));
-
-  return ensAppUrl;
-}
 
 export function ReferralLinkForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -140,10 +128,8 @@ export function ReferralLinkForm() {
         // Likely a network error
         console.error("Network error: ", error);
         setOverallFormErrorMessage("Connection lost. Please check your connection and try again.");
-      } else if (error instanceof Error) {
-        console.log(error);
-        setOverallFormErrorMessage(error.message);
       } else {
+        console.log(error);
         setOverallFormErrorMessage("Request error. Please try again.");
       }
     }
