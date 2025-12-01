@@ -3,8 +3,8 @@ import { NoReferrersInfo } from "@/components/holiday-referral-awards/referrers/
 import { ReferrersSnapshotTime } from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 import type { ReactElement } from "react";
-import type {ReferrerLeaderboardPage} from "@namehash/ens-referrals";
 
 export interface ReferrersListProps {
   referrersData: ReferrerLeaderboardPage | null;
@@ -15,7 +15,7 @@ export interface ReferrersListProps {
   loadingStateData?: {
     numberOfItemsToDisplay: number;
     referrerPositionOffset: number;
-  }
+  };
 }
 
 export function ReferrersList({

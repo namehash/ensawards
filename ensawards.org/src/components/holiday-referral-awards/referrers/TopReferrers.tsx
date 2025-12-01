@@ -4,11 +4,9 @@ import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import {
-  ENSNodeClient, ReferrerLeaderboardPageResponseCodes,
-} from "@ensnode/ensnode-sdk";
+import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
+import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 import { useEffect, useState } from "react";
-import type {ReferrerLeaderboardPage} from "@namehash/ens-referrals";
 
 export interface TopReferrersProps {
   onENSHolidayReferralsAwards: boolean;
@@ -23,8 +21,7 @@ export function TopReferrers({
 }: TopReferrersProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [topReferrersData, setTopReferrersData] =
-    useState<ReferrerLeaderboardPage | null>(null);
+  const [topReferrersData, setTopReferrersData] = useState<ReferrerLeaderboardPage | null>(null);
   const client = new ENSNodeClient({
     url: new URL("https://api.alpha-sepolia.yellow.ensnode.io/"), //TODO: replace with the line below later on
     // url: getENSNodeUrl(),
@@ -102,24 +99,25 @@ export function TopReferrers({
             }
             loadingStateData={{
               numberOfItemsToDisplay: snippetSize,
-              referrerPositionOffset: 0
+              referrerPositionOffset: 0,
             }}
             header={header}
           />
-          {topReferrersData !== null && topReferrersData.paginationContext.totalRecords > snippetSize && (
-            <a
-              href="/leaderboards/referrer"
-              className={cn(
-                shadcnButtonVariants({
-                  variant: "ghost",
-                  size: "default",
-                  className: "cursor-pointer rounded-full text-sm max-sm:w-full",
-                }),
-              )}
-            >
-              View full referrer leaderboard
-            </a>
-          )}
+          {topReferrersData !== null &&
+            topReferrersData.paginationContext.totalRecords > snippetSize && (
+              <a
+                href="/leaderboards/referrer"
+                className={cn(
+                  shadcnButtonVariants({
+                    variant: "ghost",
+                    size: "default",
+                    className: "cursor-pointer rounded-full text-sm max-sm:w-full",
+                  }),
+                )}
+              >
+                View full referrer leaderboard
+              </a>
+            )}
         </div>
       </TooltipProvider>
     </ENSNodeProvider>

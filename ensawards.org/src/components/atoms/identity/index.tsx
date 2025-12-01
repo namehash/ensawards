@@ -110,13 +110,13 @@ export function DisplayIdentity({
     identity.resolutionStatus === ResolutionStatusIds.Unknown
   ) {
     avatar = (
-        <div className="w-10 h-10 flex justify-center items-center">
-          <ChainIcon
-              chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
-              height={24}
-              width={24}
-          />
-        </div>
+      <div className="w-10 h-10 flex justify-center items-center">
+        <ChainIcon
+          chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
+          height={24}
+          width={24}
+        />
+      </div>
     );
     identitifer = (
       <AddressDisplay
@@ -129,7 +129,10 @@ export function DisplayIdentity({
     identitifer = (
       <NameDisplay
         name={identity.name}
-        className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%] w-full overflow-x-auto max-sm:text-end", className)}
+        className={cn(
+          "whitespace-nowrap hover:underline hover:underline-offset-[25%] w-full overflow-x-auto max-sm:text-end",
+          className,
+        )}
       />
     );
   }

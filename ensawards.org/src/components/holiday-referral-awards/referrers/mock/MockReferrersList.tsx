@@ -29,8 +29,8 @@ export function MockReferrersList() {
               endTime: 1767225599,
               subregistryId: {
                 chainId: 11155111, //TODO replace with mainnet's subregistry's address later on
-                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
-              }
+                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+              },
             },
             referrers: [],
             aggregatedMetrics: {
@@ -47,7 +47,7 @@ export function MockReferrersList() {
               hasNext: false,
               hasPrev: false,
               startIndex: undefined,
-              endIndex: undefined
+              endIndex: undefined,
             },
             accurateAsOf: 1764091210,
           },
@@ -75,7 +75,7 @@ export function MockReferrersList() {
           loadingStateData: {
             referrerPositionOffset: 0,
             numberOfItemsToDisplay: 4,
-          }
+          },
         };
 
       case "fetchError":
@@ -103,8 +103,8 @@ export function MockReferrersList() {
               endTime: 1767225599,
               subregistryId: {
                 chainId: 11155111, //TODO replace with mainnet's subregistry's address later on
-                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
-              }
+                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+              },
             },
             referrers: [
               {
@@ -117,7 +117,7 @@ export function MockReferrersList() {
                 finalScoreBoost: 0.111111111111111,
                 finalScore: 0.803246143670656,
                 awardPoolShare: 0.0276828248101365,
-                awardPoolApproxValue: 276.828248101365
+                awardPoolApproxValue: 276.828248101365,
               },
               {
                 referrer: "0xabe3fdb4d2cd5f2e7193a4ac380ecb68e899896a",
@@ -129,7 +129,7 @@ export function MockReferrersList() {
                 finalScoreBoost: 0,
                 finalScore: 0.479133726222989,
                 awardPoolShare: 0.01651271544616,
-                awardPoolApproxValue: 165.1271544616
+                awardPoolApproxValue: 165.1271544616,
               },
               {
                 referrer: "0xffa596cdf9a69676e689b1a92e5e681711227d75",
@@ -141,7 +141,7 @@ export function MockReferrersList() {
                 finalScoreBoost: 0,
                 finalScore: 0.410686051048276,
                 awardPoolShare: 0,
-                awardPoolApproxValue: 0
+                awardPoolApproxValue: 0,
               },
               {
                 referrer: "0x2a614b7984854177d22fa23a4034a13ea82e4f97",
@@ -153,14 +153,14 @@ export function MockReferrersList() {
                 finalScoreBoost: 0,
                 finalScore: 0.383306980978391,
                 awardPoolShare: 0,
-                awardPoolApproxValue: 0
-              }
+                awardPoolApproxValue: 0,
+              },
             ],
             aggregatedMetrics: {
               grandTotalReferrals: 84,
               grandTotalIncrementalDuration: 651636003,
               grandTotalQualifiedReferrersFinalScore: 29.0160469236699,
-              minFinalScoreToQualify: 0.479133726222989
+              minFinalScoreToQualify: 0.479133726222989,
             },
             paginationContext: {
               page: 1,
@@ -170,9 +170,9 @@ export function MockReferrersList() {
               hasNext: true,
               hasPrev: false,
               startIndex: 0,
-              endIndex: 3
+              endIndex: 3,
             },
-            accurateAsOf: 1764580368
+            accurateAsOf: 1764580368,
           },
           isLoading: false,
           generateLinkCTA: <p>Placeholder</p>,

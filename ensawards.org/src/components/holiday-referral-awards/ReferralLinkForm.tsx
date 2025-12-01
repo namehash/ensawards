@@ -7,12 +7,12 @@ import { capitalizeFormLabel } from "@/utils";
 import { resolveEthAddress } from "@/utils/resolution.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { type NormalizedName } from "@ensnode/ensnode-sdk";
+import { buildEnsReferralUrl } from "@namehash/ens-referrals";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
 import { isAddress } from "viem";
 import { normalize } from "viem/ens";
 import * as Yup from "yup";
-import {buildEnsReferralUrl} from "@namehash/ens-referrals";
 
 interface ReferralLinkFormDataProps {
   "referral award recipient": string;

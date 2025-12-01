@@ -8,10 +8,8 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import {
-  ENSNodeClient, ReferrerLeaderboardPageResponseCodes,
-} from "@ensnode/ensnode-sdk";
-import type {ReferrerLeaderboardPage} from "@namehash/ens-referrals";
+import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
+import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 
 export interface ReferrersPaginatedDisplayProps {
   itemsPerPage?: number;
@@ -94,9 +92,8 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 12 }: ReferrersPagina
             }
             loadingStateData={{
               referrerPositionOffset: referrersLeaderboardsData?.paginationContext.startIndex || 0,
-              numberOfItemsToDisplay: itemsPerPage
-            }
-            }
+              numberOfItemsToDisplay: itemsPerPage,
+            }}
           />
           {referrersLeaderboardsData !== null &&
             referrersLeaderboardsData.paginationContext.totalRecords > 0 &&
