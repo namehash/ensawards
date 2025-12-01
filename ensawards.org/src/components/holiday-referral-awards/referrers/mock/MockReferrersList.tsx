@@ -72,6 +72,10 @@ export function MockReferrersList() {
           referrersData: null,
           isLoading: true,
           generateLinkCTA: <p>Placeholder</p>,
+          loadingStateData: {
+            referrerPositionOffset: 0,
+            numberOfItemsToDisplay: 4,
+          }
         };
 
       case "fetchError":
@@ -108,7 +112,7 @@ export function MockReferrersList() {
                 totalReferrals: 5,
                 totalIncrementalDuration: 22813200,
                 score: 0.722921529303591,
-                rank: 9,
+                rank: 1,
                 isQualified: true,
                 finalScoreBoost: 0.111111111111111,
                 finalScore: 0.803246143670656,
@@ -120,7 +124,7 @@ export function MockReferrersList() {
                 totalReferrals: 7,
                 totalIncrementalDuration: 15120000,
                 score: 0.479133726222989,
-                rank: 10,
+                rank: 2,
                 isQualified: true,
                 finalScoreBoost: 0,
                 finalScore: 0.479133726222989,
@@ -132,7 +136,7 @@ export function MockReferrersList() {
                 totalReferrals: 5,
                 totalIncrementalDuration: 12960000,
                 score: 0.410686051048276,
-                rank: 11,
+                rank: 3,
                 isQualified: false,
                 finalScoreBoost: 0,
                 finalScore: 0.410686051048276,
@@ -144,7 +148,7 @@ export function MockReferrersList() {
                 totalReferrals: 5,
                 totalIncrementalDuration: 12096000,
                 score: 0.383306980978391,
-                rank: 12,
+                rank: 4,
                 isQualified: false,
                 finalScoreBoost: 0,
                 finalScore: 0.383306980978391,
@@ -171,7 +175,6 @@ export function MockReferrersList() {
             accurateAsOf: 1764580368
           },
           isLoading: false,
-          header: "Top referrers",
           generateLinkCTA: <p>Placeholder</p>,
         };
     }

@@ -110,11 +110,13 @@ export function DisplayIdentity({
     identity.resolutionStatus === ResolutionStatusIds.Unknown
   ) {
     avatar = (
-      <ChainIcon
-        chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
-        height={24}
-        width={24}
-      />
+        <div className="w-10 h-10 flex justify-center items-center">
+          <ChainIcon
+              chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
+              height={24}
+              width={24}
+          />
+        </div>
     );
     identitifer = (
       <AddressDisplay
@@ -127,18 +129,18 @@ export function DisplayIdentity({
     identitifer = (
       <NameDisplay
         name={identity.name}
-        className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%]", className)}
+        className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%] w-full overflow-x-auto max-sm:text-end", className)}
       />
     );
   }
 
   let result = (
-    <div className="flex flex-row justify-start items-center gap-3">
+    <div className="max-sm:w-full flex flex-col sm:flex-row justify-start items-start sm:items-center gap-2 sm:gap-3">
       {/* TODO: extract the `EnsAvatar` / `ChainIcon` out of this component and remove the
       `withAvatar` prop. */}
       {withAvatar && avatar}
       {/*// TODO: for now, this is styled to fit the Referrer Card designs, but it should be made more flexible --> connected with the other todos in this file*/}
-      <div className="min-md:min-w-[120px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
+      <div className="min-md:w-[170px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         {prefix && (
           <p className="text-muted-foreground text-sm leading-normal font-normal">{prefix}</p>
         )}
@@ -159,7 +161,7 @@ export function DisplayIdentity({
   // TODO: extract the `IdentityLink` out of this component and remove the `withLink` prop.
   if (withLink) {
     result = (
-      <IdentityLink identity={identity} namespaceId={namespaceId}>
+      <IdentityLink identity={identity} namespaceId={namespaceId} className="max-sm:w-full">
         {result}
       </IdentityLink>
     );

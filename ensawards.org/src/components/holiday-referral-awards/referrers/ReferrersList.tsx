@@ -36,7 +36,7 @@ export function ReferrersList({
   if (isLoading || referrersData === null) {
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
-        <Skeleton className="w-[200px] h-5 bg-gray-300" />
+        <Skeleton className="w-[200px] h-6 bg-gray-300" />
         {[...Array(loadingStateData.numberOfItemsToDisplay).keys()].map((elem) => (
           <ReferrerCardLoading
             key={`Referrer-loading-${loadingStateData.referrerPositionOffset + elem}`}

@@ -11,6 +11,7 @@ import firstPlaceIcon from "../../../assets/firstPlaceAward.svg";
 import secondPlaceIcon from "../../../assets/secondPlaceAward.svg";
 import thirdPlaceIcon from "../../../assets/thirdPlaceAward.svg";
 import type {AggregatedReferrerMetrics, AwardedReferrerMetrics, ReferrerRank} from "@namehash/ens-referrals";
+import {getAppSupportColor} from "@/utils/styles.ts";
 
 export interface ReferrerCardProps {
     referrer: AwardedReferrerMetrics;
@@ -25,7 +26,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
     getENSRootChainId(namespaceId),
   );
   return (
-    <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-3 p-4 sm:p-6 sm:gap-y-3 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs">
+    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-3 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs">
       {/*Desktop Header*/}
       <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-5">
         <PlaceIcon rank={referrer.rank} />
@@ -39,10 +40,8 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         />
       </div>
       {/*Mobile Header*/}
-      <div className="sm:hidden flex flex-col flex-nowrap justify-start items-start gap-4 self-stretch">
-        <div className="w-full h-fit flex flex-row flex-nowrap justify-between items-center">
-          <PlaceIcon rank={referrer.rank} />
-        </div>
+      <div className="sm:hidden flex flex-row-reverse flex-nowrap justify-end items-start gap-4 self-stretch relative">
+        <PlaceIcon rank={referrer.rank} className="absolute top-0 right-0" />
         <ResolveAndDisplayIdentity
           identity={referrerIdentity}
           namespaceId={namespaceId}
@@ -52,60 +51,67 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         />
       </div>
       {/*------------*/}
-      <div className="flex flex-nowrap flex-col sm:flex-row justify-start sm:justify-end items-center gap-2 sm:gap-10 max-sm:self-stretch">
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">Referrals</p>
-          <p className="text-sm">{referrer.totalReferrals}</p>
+          <p className="text-sm leading-normal font-medium text-black">{referrer.totalReferrals}</p>
         </div>
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">Points</p>
-          <p className="text-sm">{referrer.score.toFixed(2)}</p>
+          <p className="text-sm leading-normal font-medium text-black">{referrer.score.toFixed(2)}</p>
         </div>
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[100px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">Qualified</p>
           <span
             className={cn(
-              "w-fit flex flex-row flex-nowrap justify-center items-center gap-[6px] pl-[10px] pr-3 py-1 rounded-full text-sm leading-normal font-medium cursor-default",
-              referrer.isQualified ? "text-emerald-600 bg-[#0596691A]" : "text-red-600 bg-[#DC26261A]",
+              "w-fit flex flex-row flex-nowrap justify-center items-center gap-2 text-sm leading-normal font-medium text-black"
             )}
           >
-            {referrer.isQualified ? <Check /> : <XIcon />}
-            {referrer.isQualified ? "Yes" : "Not yet"}
+            {referrer.isQualified ? <><Check size={20} className="text-emerald-600" /> Yes</> : <><XIcon size={20} className="text-red-600" /> Not yet</>}
           </span>
         </div>
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[180px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">
-            Final score
+            Qualified contribution
           </p>
           {referrer.isQualified ? (
-            <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
-              <p
-                className={cn(
-                  "text-sm leading-normal font-medium sm:font-semibold text-black",
-                )}
-              >
-                {referrer.finalScore.toFixed(2)}
-              </p>
-            </div>
+              <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
+                <div className="max-sm:hidden flex relative w-20 h-[7px] rounded-[20px] bg-gray-200 z-0">
+                  <div
+                      className={cn(
+                          "absolute h-full self-stretch rounded-[20px] z-10",
+                          `bg-${getAppSupportColor(referrer.awardPoolShare * 100)}`,
+                      )}
+                      style={{width: `calc(${referrer.awardPoolShare * 100}%)`}}
+                  ></div>
+                </div>
+                <p
+                    className={cn(
+                        "text-sm leading-normal font-medium sm:font-semibold",
+                        `text-${getAppSupportColor(referrer.awardPoolShare * 100)}`,
+                    )}
+                >
+                  {(referrer.awardPoolShare * 100).toFixed(2)}%
+                </p>
+              </div>
           ) : (
-            <p className="text-sm">
-              requires{" "}
-              {(aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore).toFixed(2)} more
-              points
-            </p>
+              <p className="text-sm leading-normal font-medium text-black">
+                requires{" "}
+                {(aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore).toFixed(2)} more
+                points
+              </p>
           )}
         </div>
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div
+            className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start sm:items-end gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">
             Tentative awards
           </p>
-            <p className={cn("text-sm font-semibold", referrer.isQualified ? "text-green-600" : "text-red-600")}>
-              US $
-              {referrer.awardPoolApproxValue.toFixed(2)}
-            </p>
+          <p className={cn("text-sm font-semibold", referrer.isQualified ? "text-emerald-600" : "text-black font-normal")}>
+            {referrer.isQualified ? <>US $
+              {referrer.awardPoolApproxValue.toFixed(2)}</> : "-"}
+          </p>
         </div>
       </div>
-    </div>
   );
 }
 
@@ -117,74 +123,71 @@ interface RankProps {
    * @invariant must be a positive integer (>= 1)
    */
   rank: ReferrerRank;
+  className?: string;
 }
 
-const PlaceIcon = ({ rank }: RankProps) =>
+const PlaceIcon = ({ rank, className }: RankProps) =>
   rank <= 3 ? (
-    <img alt={`${rank}-place`} src={placeIcons[rank - 1].src} />
+    <img alt={`${rank}-place`} src={placeIcons[rank - 1].src} className={className} />
   ) : (
-      <p className="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
+      <p className={cn("w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground", className)}>
         {rank}
       </p>
   );
-export const ReferrerCardLoading = ({rank}: RankProps) => {
+export const ReferrerCardLoading = ({rank}: Omit<RankProps, "className">) => {
   const loadingStateStyles = "animate-pulse bg-gray-300 rounded-sm";
   return (
-    <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-3 p-4 sm:p-6 sm:gap-y-3 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs">
+    <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-3 rounded-2xl border border-gray-200">
       {/*Desktop Header*/}
       <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-5">
         <PlaceIcon rank={rank} />
         <div className="flex flex-row justify-start items-center gap-3">
           <div className="animate-pulse w-10 h-10 bg-gray-300 rounded-full" />
-          <div className="min-md:min-w-[120px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
+          <div className="sm:min-w-[170px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
-            <div className="animate-pulse bg-gray-300 rounded-sm w-[100px] h-4" />
+            <div className="animate-pulse bg-gray-300 rounded-sm w-[100px] h-[21px]" />
           </div>
         </div>
       </div>
       {/*Mobile Header*/}
-      <div className="sm:hidden flex flex-col flex-nowrap justify-start items-start gap-4 self-stretch">
-        <div className="w-full h-fit flex flex-row flex-nowrap justify-between items-center">
-          <PlaceIcon rank={rank} />
-        </div>
-        <div className="flex flex-row justify-start items-center gap-3">
+      <div className="sm:hidden flex flex-row flex-nowrap justify-start items-start gap-4 self-stretch relative">
+          <PlaceIcon rank={rank} className="absolute top-0 right-0"/>
+        <div className="flex flex-col justify-start items-start gap-2 w-full">
           <div className="animate-pulse w-10 h-10 bg-gray-300 rounded-full" />
-          <div className="min-md:min-w-[120px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
+          <div className="sm:min-w-[170px] flex flex-row flex-nowrap justify-between items-center gap-0 max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
-            <div className="animate-pulse bg-gray-300 rounded-sm w-[100px] h-4" />
+            <div className="animate-pulse bg-gray-300 rounded-sm w-[100px] h-[21px]" />
           </div>
         </div>
       </div>
       {/*------------*/}
-      <div className="flex flex-nowrap flex-col sm:flex-row justify-start sm:justify-end items-center gap-2 sm:gap-10 max-sm:self-stretch">
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">Referrals</p>
-          <div className={cn(loadingStateStyles, "w-11 h-4")} />
+          <div className={cn(loadingStateStyles, "w-11 h-[21px]")} />
         </div>
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">Points</p>
-          <div className={cn(loadingStateStyles, "w-[68px] h-4")} />
+          <div className={cn(loadingStateStyles, "w-[68px] h-[21px]")} />
         </div>
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[100px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">Qualified</p>
           <div className="flex flex-row flex-nowrap justify-start items-center gap-2">
-            <div className={cn(loadingStateStyles, "w-4 h-4 rounded-full")} />
-            <div className={cn(loadingStateStyles, "w-[52px] h-4")} />
+            <div className={cn(loadingStateStyles, "w-[21px] h-[21px] rounded-full")} />
+            <div className={cn(loadingStateStyles, "w-[52px] h-[21px]")} />
           </div>
         </div>
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[180px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">
             Qualified Contribution
           </p>
-          <div className={cn(loadingStateStyles, "w-[120px] h-4")} />
+          <div className={cn(loadingStateStyles, "w-[120px] h-[21px]")} />
         </div>
-        <div className="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+        <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start sm:items-end gap-0 max-sm:self-stretch">
           <p className="text-muted-foreground text-sm leading-normal font-normal">
             Tentative awards
           </p>
-          <div className={cn(loadingStateStyles, "w-[88px] h-4")} />
+          <div className={cn(loadingStateStyles, "w-[88px] h-[21px]")} />
         </div>
       </div>
-    </div>
   );
 };
