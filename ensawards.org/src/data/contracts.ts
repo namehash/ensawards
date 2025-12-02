@@ -118,7 +118,8 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      name: "uni.uniswap.eth",
       contract: {
         address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
         chain: mainnet,
@@ -138,6 +139,20 @@ export const CONTRACTS: Contract[] = [
         codeName: "Timelock",
       },
       name: "uniswap.eth",
+    },
+  },
+  {
+    org: UniswapDaoOrg,
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      name: "governance.uniswap.eth",
+      contract: {
+        address: "0x5e4be8bc9637f0eaa1a755019e06a68ce081d58f",
+        chain: mainnet,
+        codeName: "GovernerAlpha",
+      },
     },
   },
   {
