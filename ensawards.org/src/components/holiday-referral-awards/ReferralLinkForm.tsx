@@ -4,6 +4,7 @@ import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import type { FormField, ValidationErrors } from "@/components/molecules/form/types.ts";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { capitalizeFormLabel } from "@/utils";
+import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import { resolveEthAddress } from "@/utils/resolution.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { type NormalizedName } from "@ensnode/ensnode-sdk";
@@ -13,7 +14,6 @@ import React, { type FormEvent, useState } from "react";
 import { isAddress } from "viem";
 import { normalize } from "viem/ens";
 import * as Yup from "yup";
-import {useIsMobile} from "@/utils/hooks/useMobile.tsx";
 
 interface ReferralLinkFormDataProps {
   "referral award recipient": string;

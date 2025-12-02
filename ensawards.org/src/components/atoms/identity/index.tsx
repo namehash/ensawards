@@ -43,7 +43,7 @@ export function ResolveAndDisplayIdentity({
   withLink = true,
   withTooltip = true,
   withAvatar = false,
-    withIdentifier = true,
+  withIdentifier = true,
   className,
 }: ResolveAndDisplayIdentityProps) {
   // resolve the primary name for `identity` using ENSNode
@@ -96,7 +96,7 @@ export function DisplayIdentity({
   withLink = true,
   withTooltip = true,
   withAvatar = false,
-    withIdentifier =  true,
+  withIdentifier = true,
   className,
 }: DisplayIdentityProps) {
   let avatar: React.ReactElement;
@@ -140,12 +140,12 @@ export function DisplayIdentity({
   }
 
   let result = (
-      <div className="inline-flex items-center gap-2">
-        {/* TODO: extract the `EnsAvatar` / `ChainIcon` out of this component and remove the
+    <div className="inline-flex items-center gap-2">
+      {/* TODO: extract the `EnsAvatar` / `ChainIcon` out of this component and remove the
       `withAvatar` prop. */}
-        {withAvatar && avatar}
-        {withIdentifier && identitifer}
-      </div>
+      {withAvatar && avatar}
+      {withIdentifier && identitifer}
+    </div>
   );
 
   // TODO: extract the `IdentityInfoTooltip` out of this component and remove the `withTooltip` prop.
@@ -160,7 +160,11 @@ export function DisplayIdentity({
   // TODO: extract the `IdentityLink` out of this component and remove the `withLink` prop.
   if (withLink) {
     result = (
-      <IdentityLink identity={identity} namespaceId={namespaceId} className={cn(withAvatar && "h-10")}>
+      <IdentityLink
+        identity={identity}
+        namespaceId={namespaceId}
+        className={cn(withAvatar && "h-10")}
+      >
         {result}
       </IdentityLink>
     );

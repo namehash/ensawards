@@ -1,10 +1,9 @@
-import { RelativeTime } from "@/components/atoms/datetime/RelativeTime.tsx";
+import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { AlertCircle as AlertIcon, Award as AwardIcon } from "lucide-react";
 import type { ReactElement } from "react";
-import {AbsoluteTime} from "@/components/atoms/datetime/AbsoluteTime.tsx";
 
 export interface ReferrersSnapshotTimeProps {
   lastUpdateTimestamp: UnixTimestamp;
@@ -12,7 +11,10 @@ export interface ReferrersSnapshotTimeProps {
 export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshotTimeProps) => {
   return (
     <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap">
-      Last updated <AbsoluteTime timestamp={lastUpdateTimestamp} options={{
+      Last updated{" "}
+      <AbsoluteTime
+        timestamp={lastUpdateTimestamp}
+        options={{
           year: "numeric",
           month: "short",
           day: "numeric",
@@ -20,7 +22,8 @@ export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshot
           minute: "numeric",
           second: "numeric",
           hour12: false,
-      }} />
+        }}
+      />
     </p>
   );
 };
