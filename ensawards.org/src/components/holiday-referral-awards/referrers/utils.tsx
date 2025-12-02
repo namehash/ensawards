@@ -4,6 +4,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { AlertCircle as AlertIcon, Award as AwardIcon } from "lucide-react";
 import type { ReactElement } from "react";
+import {AbsoluteTime} from "@/components/atoms/datetime/AbsoluteTime.tsx";
 
 export interface ReferrersSnapshotTimeProps {
   lastUpdateTimestamp: UnixTimestamp;
@@ -11,12 +12,15 @@ export interface ReferrersSnapshotTimeProps {
 export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshotTimeProps) => {
   return (
     <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap">
-      <RelativeTime
-        prefix="Last updated "
-        timestamp={lastUpdateTimestamp}
-        enforcePast={true}
-        conciseFormatting={true}
-      />
+      Last updated <AbsoluteTime timestamp={lastUpdateTimestamp} options={{
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+          hour12: false,
+      }} />
     </p>
   );
 };
