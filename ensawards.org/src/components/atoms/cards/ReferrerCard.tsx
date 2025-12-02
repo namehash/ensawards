@@ -22,7 +22,7 @@ export interface ReferrerCardProps {
 const QUALIFIED_REFERRERS_LIMIT = 10;
 
 export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps) {
-  const namespaceId = ENSNamespaceIds.Sepolia; //TODO: change to mainnet for production
+  const namespaceId = ENSNamespaceIds.Mainnet;
   const referrerIdentity = buildUnresolvedIdentity(
     referrer.referrer,
     namespaceId,

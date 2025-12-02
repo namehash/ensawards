@@ -24,11 +24,11 @@ export function TopReferrers({
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [topReferrersData, setTopReferrersData] = useState<ReferrerLeaderboardPage | null>(null);
   const client = new ENSNodeClient({
-    url: new URL("https://api.alpha-sepolia.yellow.ensnode.io/"), //TODO: replace with the line below later on
+    url: new URL("https://api.alpha.blue.ensnode.io/"), //TODO: replace with the line below later on
     // url: getENSNodeUrl(),
   });
   const ensNodeReactConfig = createConfig({
-    url: "https://api.alpha-sepolia.yellow.ensnode.io/",
+    url: "https://api.alpha.blue.ensnode.io/",
   }); //TODO: replace with getENSNodeUrl for prod
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
