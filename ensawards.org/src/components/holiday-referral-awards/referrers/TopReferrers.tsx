@@ -115,7 +115,7 @@ export function TopReferrers({
                   }),
                 )}
               >
-                View full referrer leaderboard
+                View full ENS referral leaderboard
               </a>
             )}
         </div>

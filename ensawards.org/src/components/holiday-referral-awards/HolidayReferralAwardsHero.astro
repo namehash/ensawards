@@ -57,7 +57,7 @@ const timelineVerticalLineStyles = "h-full w-[1px] bg-gray-400/40";
       </div>
       <div class={cn(horizontalContainerStyles, "gap-4")}>
         <a
-          id="scroll-to-generate-referral"
+          href="/leaderboards/referrer"
           class={cn(
             shadcnButtonVariants({
               variant: "default",
@@ -65,7 +65,7 @@ const timelineVerticalLineStyles = "h-full w-[1px] bg-gray-400/40";
               className:
                 "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
             }),
-          )}>Generate referral link</a
+          )}>View leaderboard</a
         >
         <a
           href="/ens-holiday-awards-rules"
@@ -153,10 +153,3 @@ const timelineVerticalLineStyles = "h-full w-[1px] bg-gray-400/40";
     </div>
   </div>
 </section>
-<script>
-  const scrollAnchor = document.getElementById("scroll-to-generate-referral");
-  scrollAnchor.addEventListener("click", (event) => {
-    event.preventDefault();
-    document.getElementById("referral award recipient").focus();
-  });
-</script>

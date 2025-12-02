@@ -13,6 +13,7 @@ import React, { type FormEvent, useState } from "react";
 import { isAddress } from "viem";
 import { normalize } from "viem/ens";
 import * as Yup from "yup";
+import {useIsMobile} from "@/utils/hooks/useMobile.tsx";
 
 interface ReferralLinkFormDataProps {
   "referral award recipient": string;
@@ -23,7 +24,10 @@ const formFields: FormField[] = [
     label: "referral award recipient",
     type: "text",
     required: true,
-    placeholder: "Enter your ENS name or Ethereum Mainnet address",
+    placeholder: {
+      desktop: "Enter your ENS name or Ethereum Mainnet address",
+      mobile: "Enter your ENS name or address",
+    },
   },
 ];
 
@@ -51,6 +55,7 @@ export function ReferralLinkForm() {
     getInitialValidationErrorsState(formFields),
   );
   const [generatedLink, setGeneratedLink] = useState<string>("");
+  const isMobile = useIsMobile();
 
   const submitForm = async (e: FormEvent) => {
     setOverallFormErrorMessage("");
@@ -235,7 +240,7 @@ export function ReferralLinkForm() {
                   type={field.type}
                   disabled={isLoading}
                   name={field.label}
-                  placeholder={field.placeholder}
+                  placeholder={isMobile ? field.placeholder?.mobile : field.placeholder?.desktop}
                   autoComplete="off"
                   onChange={handleInputChange}
                   error={validationErrors[field.label]}

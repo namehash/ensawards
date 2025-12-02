@@ -91,7 +91,7 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 12 }: ReferrersPagina
               ) : undefined
             }
             loadingStateData={{
-              referrerPositionOffset: referrersLeaderboardsData?.paginationContext.startIndex || 0,
+              referrerPositionOffset: (currentPage - 1) * itemsPerPage,
               numberOfItemsToDisplay: itemsPerPage,
             }}
           />
