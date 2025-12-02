@@ -15,7 +15,7 @@ export interface ReferrersPaginatedDisplayProps {
   itemsPerPage?: number;
 }
 
-export function ReferrersPaginatedDisplay({ itemsPerPage = 12 }: ReferrersPaginatedDisplayProps) {
+export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPaginatedDisplayProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);

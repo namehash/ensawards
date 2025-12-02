@@ -321,10 +321,13 @@ const backgroundGreyStyles =
     const scrollFromDeveloperIntegrationsElement = document.getElementById(
       "fastAndEasyCardButton",
     );
-    scrollFromDeveloperIntegrationsElement.addEventListener("click", (event) => {
-      event.preventDefault();
-      document.getElementById("referral award recipient").focus();
-    });
+    scrollFromDeveloperIntegrationsElement.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        document.getElementById("referral award recipient").focus();
+      },
+    );
 
     const scrollToGenerateLinkFormElement = document.getElementById(
       "scroll-to-generate-referral-from-ECP-section",
