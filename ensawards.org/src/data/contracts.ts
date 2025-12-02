@@ -234,7 +234,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -247,7 +247,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -260,7 +260,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -273,7 +273,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -286,7 +286,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -299,7 +299,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -312,7 +312,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: UniswapDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -325,20 +325,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: NounsDaoOrg,
     type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Token,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
-        address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
-        chain: mainnet,
-        codeName: "NounsToken",
-      },
-    },
-  },
-  {
-    org: NounsDaoOrg,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.UserFacing,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -351,7 +338,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: NounsDaoOrg,
     type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -416,7 +403,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: NounsDaoOrg,
     type: ContractTypes.Dao,
-    subtype: ContractSubtypes.UserFacing,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -429,7 +416,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: NounsDaoOrg,
     type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -468,7 +455,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: NounsDaoOrg,
     type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Protocol,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -488,19 +475,6 @@ export const CONTRACTS: Contract[] = [
         address: "0x0fd206FC7A7dBcD5661157eDCb1FFDD0D02A61ff",
         chain: mainnet,
         codeName: "NounsStreamFactory",
-      },
-    },
-  },
-  {
-    org: ArbitrumDaoOrg,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Token,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
-        address: "0xB50721BCf8d664c30412Cfbc6cf7a15145234ad1",
-        chain: mainnet,
-        codeName: "ARBTokenL1",
       },
     },
   },
