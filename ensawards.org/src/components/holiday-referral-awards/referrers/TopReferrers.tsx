@@ -2,13 +2,11 @@ import { ReferrersList } from "@/components/holiday-referral-awards/referrers/Re
 import { FetchingErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import {
-  ENSNodeClient,
-  type PaginatedAggregatedReferrers,
-  PaginatedAggregatedReferrersResponseCodes,
-} from "@ensnode/ensnode-sdk";
+import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
+import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 import { useEffect, useState } from "react";
 
 export interface TopReferrersProps {
@@ -24,14 +22,13 @@ export function TopReferrers({
 }: TopReferrersProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [aggregatedReferrersData, setAggregatedReferrersData] =
-    useState<PaginatedAggregatedReferrers | null>(null);
+  const [topReferrersData, setTopReferrersData] = useState<ReferrerLeaderboardPage | null>(null);
   const client = new ENSNodeClient({
-    url: new URL("https://api.alpha-sepolia.yellow.ensnode.io/"), //TODO: replace with the line below later on
+    url: new URL("https://api.alpha.blue.ensnode.io/"), //TODO: replace with the line below later on
     // url: getENSNodeUrl(),
   });
   const ensNodeReactConfig = createConfig({
-    url: "https://api.alpha-sepolia.yellow.ensnode.io/",
+    url: "https://api.alpha.blue.ensnode.io/",
   }); //TODO: replace with getENSNodeUrl for prod
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
@@ -41,23 +38,23 @@ export function TopReferrers({
     setFetchErrorMessage("");
     setIsLoading(true);
     try {
-      const response = await client.getAggregatedReferrers({
+      const response = await client.getReferrerLeaderboard({
         page: 1,
         itemsPerPage: snippetSize,
       });
 
-      if (response.responseCode !== PaginatedAggregatedReferrersResponseCodes.Ok) {
-        setFetchErrorMessage(response.errorMessage);
+      if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
+        console.error(response.errorMessage);
+        setFetchErrorMessage("An error has occurred while loading the leaderboard.");
         setIsLoading(false);
         return;
       }
 
-      setAggregatedReferrersData(response.data);
+      setTopReferrersData(response.data);
     } catch (error) {
       console.error(error);
-      const errorMessage = error instanceof Error ? error.message : "Unknown error";
-      setAggregatedReferrersData(null);
-      setFetchErrorMessage(errorMessage);
+      setTopReferrersData(null);
+      setFetchErrorMessage("An error has occurred while loading the leaderboard.");
     } finally {
       setIsLoading(false);
     }
@@ -93,7 +90,7 @@ export function TopReferrers({
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
           <ReferrersList
-            aggregatedReferrersData={aggregatedReferrersData}
+            referrersData={topReferrersData}
             isLoading={isLoading}
             generateLinkCTA={emptyStateCTA}
             error={
@@ -101,23 +98,27 @@ export function TopReferrers({
                 <FetchingErrorInfo errorMessage={fetchErrorMessage} retryFunction={startFetching} />
               ) : undefined
             }
-            numberOfItemsToDisplay={snippetSize}
+            loadingStateData={{
+              numberOfItemsToDisplay: snippetSize,
+              referrerPositionOffset: 0,
+            }}
             header={header}
           />
-          {aggregatedReferrersData !== null && aggregatedReferrersData.total > 0 && (
-            <a
-              href="/leaderboards/referrer"
-              className={cn(
-                shadcnButtonVariants({
-                  variant: "ghost",
-                  size: "default",
-                  className: "cursor-pointer rounded-full text-sm max-sm:w-full",
-                }),
-              )}
-            >
-              View full referrer leaderboard
-            </a>
-          )}
+          {topReferrersData !== null &&
+            topReferrersData.paginationContext.totalRecords > snippetSize && (
+              <a
+                href="/leaderboards/referrer"
+                className={cn(
+                  shadcnButtonVariants({
+                    variant: "ghost",
+                    size: "default",
+                    className: "cursor-pointer rounded-full text-sm max-sm:w-full",
+                  }),
+                )}
+              >
+                View full ENS referral leaderboard
+              </a>
+            )}
         </div>
       </TooltipProvider>
     </ENSNodeProvider>

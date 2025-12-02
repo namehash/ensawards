@@ -20,10 +20,10 @@ import { AddressDisplay, IdentityLink, IdentityTooltip, NameDisplay } from "./ut
 interface ResolveAndDisplayIdentityProps {
   identity: UnresolvedIdentity;
   namespaceId: ENSNamespaceId;
-  prefix?: string;
   withLink?: boolean;
   withTooltip?: boolean;
   withAvatar?: boolean;
+  withIdentifier?: boolean;
   className?: string;
 }
 
@@ -34,15 +34,16 @@ interface ResolveAndDisplayIdentityProps {
  * @param withLink - Whether to wrap the displayed identity in an `IdentityLink` component.
  * @param withTooltip - Whether to wrap the displayed identity in an `IdentityInfoTooltip` component.
  * @param withAvatar - Whether to display an avatar image.
+ * @param withIdentifier - Whether to display identity's textual identifier (address or name).
  * @param className - The class name to apply to the displayed identity.
  */
 export function ResolveAndDisplayIdentity({
   identity,
   namespaceId,
-  prefix,
   withLink = true,
   withTooltip = true,
   withAvatar = false,
+  withIdentifier = true,
   className,
 }: ResolveAndDisplayIdentityProps) {
   // resolve the primary name for `identity` using ENSNode
@@ -57,10 +58,10 @@ export function ResolveAndDisplayIdentity({
     <DisplayIdentity
       identity={identityResult}
       namespaceId={namespaceId}
-      prefix={prefix}
       withLink={withLink}
       withTooltip={withTooltip}
       withAvatar={withAvatar}
+      withIdentifier={withIdentifier}
       className={className}
     />
   );
@@ -69,10 +70,10 @@ export function ResolveAndDisplayIdentity({
 interface DisplayIdentityProps {
   identity: Identity;
   namespaceId: ENSNamespaceId;
-  prefix?: string;
   withLink?: boolean;
   withTooltip?: boolean;
   withAvatar?: boolean;
+  withIdentifier?: boolean;
   className?: string;
 }
 
@@ -86,15 +87,16 @@ interface DisplayIdentityProps {
  * @param withLink - Whether to wrap the displayed identity in an `IdentityLink` component.
  * @param withTooltip - Whether to wrap the displayed identity in an `IdentityInfoTooltip` component.
  * @param withAvatar - Whether to display an avatar image.
+ * @param withIdentifier - Whether to display identity's textual identifier (address or name).
  * @param className - The class name to apply to the displayed identity.
  */
 export function DisplayIdentity({
   identity,
   namespaceId,
-  prefix,
   withLink = true,
   withTooltip = true,
   withAvatar = false,
+  withIdentifier = true,
   className,
 }: DisplayIdentityProps) {
   let avatar: React.ReactElement;
@@ -110,11 +112,13 @@ export function DisplayIdentity({
     identity.resolutionStatus === ResolutionStatusIds.Unknown
   ) {
     avatar = (
-      <ChainIcon
-        chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
-        height={24}
-        width={24}
-      />
+      <div className="w-10 h-10 flex justify-center items-center">
+        <ChainIcon
+          chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
+          height={24}
+          width={24}
+        />
+      </div>
     );
     identitifer = (
       <AddressDisplay
@@ -127,23 +131,20 @@ export function DisplayIdentity({
     identitifer = (
       <NameDisplay
         name={identity.name}
-        className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%]", className)}
+        className={cn(
+          "w-fit sm:w-full whitespace-nowrap hover:underline hover:underline-offset-[25%] overflow-x-auto",
+          className,
+        )}
       />
     );
   }
 
   let result = (
-    <div className="flex flex-row justify-start items-center gap-3">
+    <div className="inline-flex items-center gap-2">
       {/* TODO: extract the `EnsAvatar` / `ChainIcon` out of this component and remove the
       `withAvatar` prop. */}
       {withAvatar && avatar}
-      {/*// TODO: for now, this is styled to fit the Referrer Card designs, but it should be made more flexible --> connected with the other todos in this file*/}
-      <div className="min-md:min-w-[120px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
-        {prefix && (
-          <p className="text-muted-foreground text-sm leading-normal font-normal">{prefix}</p>
-        )}
-        {identitifer}
-      </div>
+      {withIdentifier && identitifer}
     </div>
   );
 
@@ -159,7 +160,11 @@ export function DisplayIdentity({
   // TODO: extract the `IdentityLink` out of this component and remove the `withLink` prop.
   if (withLink) {
     result = (
-      <IdentityLink identity={identity} namespaceId={namespaceId}>
+      <IdentityLink
+        identity={identity}
+        namespaceId={namespaceId}
+        className={cn(withAvatar && "h-10")}
+      >
         {result}
       </IdentityLink>
     );

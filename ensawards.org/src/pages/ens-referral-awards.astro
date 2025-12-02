@@ -75,6 +75,14 @@ const backgroundGreyStyles =
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-[80px] pt-6 sm:pt-[80px] px-5 sm:px-8 overflow-hidden">
     <div
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center max-md:gap-5">
+      <h3
+        class="text-2xl sm:text-3xl leading-normal font-semibold text-black text-center">
+        Top referrers
+      </h3>
+      <TopReferrers client:load onENSHolidayReferralsAwards={true} />
+    </div>
+    <div
       class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start sm:items-center gap-5 sm:gap-[60px]">
       <h3 class={cn(sectionHeaderBaseStyles, "text-center")}>
         Everyone can participate!
@@ -110,8 +118,12 @@ const backgroundGreyStyles =
             </h4>
           </div>
           <p class="text-base leading-normal font-normal text-muted-foreground">
-            Generate your ENS Referral Program link below and share it with your
-            audience through social media or wherever you reach your community.
+            <a
+              id="scroll-to-generate-referral-from-ECP-section"
+              class="text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200 cursor-pointer"
+              >Generate your ENS Referral Program link</a
+            > below and share it with your audience through social media or wherever
+            you reach your community.
           </p>
         </div>
       </div>
@@ -130,7 +142,6 @@ const backgroundGreyStyles =
       <div
         class="sm:min-h-[500px] relative z-10 flex flex-col flex-nowrap justify-center items-center gap-5">
         <ReferralLinkForm client:load />
-        <!--TODO: replace current href with the correct link (should lead to FAQ section when it's done)-->
         <p
           class="text-base leading-normal font-normal text-muted-foreground text-center">
           Limitations apply. <a
@@ -253,15 +264,6 @@ const backgroundGreyStyles =
         </div>
       </div>
     </div>
-    <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
-    <!--<div-->
-    <!--  class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center max-md:gap-5">-->
-    <!--  <h3-->
-    <!--      class="text-2xl sm:text-3xl leading-normal font-semibold text-black text-center">-->
-    <!--    Top referrers-->
-    <!--  </h3>-->
-    <!--  <TopReferrers client:load onENSHolidayReferralsAwards={true} />-->
-    <!--</div>-->
     <JoinTelegram
       header="Have questions?"
       description="Join the ENSAwards telegram community and start a conversation"
@@ -304,23 +306,33 @@ const backgroundGreyStyles =
   <script>
     import { scrollWithOffset } from "../utils/domActions";
 
-    const scrollAnchorReferralLinkForm =
-      document.getElementById("scroll-to-faq");
-    scrollAnchorReferralLinkForm.addEventListener("click", (event) => {
+    const scrollToFaqElement = document.getElementById("scroll-to-faq");
+    scrollToFaqElement.addEventListener("click", (event) => {
       event.preventDefault();
       scrollWithOffset(`FAQ-Are there limitations to the referral links?`, 90);
     });
 
-    const scrollAnchorJoinTelegram = document.getElementById("scroll-to-tg");
-    scrollAnchorJoinTelegram.addEventListener("click", (event) => {
+    const scrollToJoinTelegramElement = document.getElementById("scroll-to-tg");
+    scrollToJoinTelegramElement.addEventListener("click", (event) => {
       event.preventDefault();
       scrollWithOffset(`joinTelegramCommunity`, 90);
     });
 
-    const scrollAnchorDeveloperIntegrations = document.getElementById(
+    const scrollFromDeveloperIntegrationsElement = document.getElementById(
       "fastAndEasyCardButton",
     );
-    scrollAnchorDeveloperIntegrations.addEventListener("click", (event) => {
+    scrollFromDeveloperIntegrationsElement.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        document.getElementById("referral award recipient").focus();
+      },
+    );
+
+    const scrollToGenerateLinkFormElement = document.getElementById(
+      "scroll-to-generate-referral-from-ECP-section",
+    );
+    scrollToGenerateLinkFormElement.addEventListener("click", (event) => {
       event.preventDefault();
       document.getElementById("referral award recipient").focus();
     });

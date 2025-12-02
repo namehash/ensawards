@@ -25,7 +25,11 @@ const referrerLeaderboardDescription =
 <Layout
   pageMetadata={{
     title: "ENSAwards: ENS Leaderboards",
-    url: "https://ensawards.org/leaderboard",
+    description:
+      "Compare projects by their rank of following a selection of ENS best practices.",
+    url: "https://ensawards.org/leaderboards",
+    ogImage: "/ens_leaderboards_og_image.png",
+    twitterImage: "/ens_leaderboards_twitter_og_image.png",
   }}>
   <SubpageHero
     header="ENS leaderboards"
@@ -111,12 +115,11 @@ const referrerLeaderboardDescription =
           </p>
         </div>
       </LeaderboardSnippetCard>
-      <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
-      <!--<LeaderboardSnippetCard-->
-      <!--  name="Referrer leaderboard"-->
-      <!--  description={referrerLeaderboardDescription}-->
-      <!--  link="/leaderboards/referrer"-->
-      <!--/>-->
+      <LeaderboardSnippetCard
+        name="Referrer leaderboard"
+        description={referrerLeaderboardDescription}
+        link="/leaderboards/referrer"
+      />
     </ItemsList>
   </section>
 </Layout>
