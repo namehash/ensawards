@@ -25,10 +25,10 @@ export function MockReferrersList() {
             rules: {
               totalAwardPoolValue: 10000,
               maxQualifiedReferrers: 10,
-              startTime: 1735689600,
+              startTime: 1764547200,
               endTime: 1767225599,
               subregistryId: {
-                chainId: 11155111, //TODO replace with mainnet's subregistry's address later on
+                chainId: 1,
                 address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
               },
             },
@@ -99,10 +99,10 @@ export function MockReferrersList() {
             rules: {
               totalAwardPoolValue: 10000,
               maxQualifiedReferrers: 10,
-              startTime: 1735689600,
+              startTime: 1764547200,
               endTime: 1767225599,
               subregistryId: {
-                chainId: 11155111, //TODO replace with mainnet's subregistry's address later on
+                chainId: 1,
                 address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
               },
             },
