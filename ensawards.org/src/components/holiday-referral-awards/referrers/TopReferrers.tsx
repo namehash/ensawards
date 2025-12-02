@@ -2,6 +2,7 @@ import { ReferrersList } from "@/components/holiday-referral-awards/referrers/Re
 import { FetchingErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
@@ -43,7 +44,8 @@ export function TopReferrers({
       });
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
-        setFetchErrorMessage(response.errorMessage);
+        console.error(response.errorMessage);
+        setFetchErrorMessage("An error has occurred while loading the leaderboard.");
         setIsLoading(false);
         return;
       }
@@ -51,9 +53,8 @@ export function TopReferrers({
       setTopReferrersData(response.data);
     } catch (error) {
       console.error(error);
-      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       setTopReferrersData(null);
-      setFetchErrorMessage(errorMessage);
+      setFetchErrorMessage("An error has occurred while loading the leaderboard.");
     } finally {
       setIsLoading(false);
     }

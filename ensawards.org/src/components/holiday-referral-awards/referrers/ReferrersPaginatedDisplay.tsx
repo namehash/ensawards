@@ -43,7 +43,8 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 12 }: ReferrersPagina
       });
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
-        setFetchErrorMessage(response.errorMessage);
+        console.error(response.errorMessage);
+        setFetchErrorMessage("An error has occurred while loading the leaderboard.");
         setIsLoading(false);
         return;
       }
@@ -52,9 +53,8 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 12 }: ReferrersPagina
       setNumberOfPages(response.data.paginationContext.totalPages);
     } catch (error) {
       console.error(error);
-      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       setReferrersLeaderboardsData(null);
-      setFetchErrorMessage(errorMessage);
+      setFetchErrorMessage("An error has occurred while loading the leaderboard.");
     } finally {
       setIsLoading(false);
     }
