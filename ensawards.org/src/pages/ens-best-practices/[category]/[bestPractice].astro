@@ -39,14 +39,32 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
 
 const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
 
-const benchmarkedApps = APPS.filter(
-  (app) =>
-    app.benchmarks.find(
-      (benchmark) =>
-        benchmark.bestPracticeDetails.categorySlug === bestPracticeToDisplay.categorySlug &&
-        benchmark.bestPracticeDetails.id === bestPracticeToDisplay.id,
-    ) !== undefined,
+// Get apps that have benchmarks for this specific best practice
+const appsWithBenchmarks = APPS.map((app) => {
+  const matchingBenchmark = app.benchmarks.find(
+    (benchmark) =>
+      benchmark.bestPracticeDetails.categorySlug === bestPracticeToDisplay?.categorySlug &&
+      benchmark.bestPracticeDetails.id === bestPracticeToDisplay?.id,
+  );
+
+  return {
+    app,
+    benchmark: matchingBenchmark,
+  };
+});
+
+// Filter out apps that don't have a benchmark for this best practice
+const appsWithValidBenchmarks = appsWithBenchmarks.filter(
+  ({ benchmark }) => benchmark !== undefined,
 );
+
+// Sort apps by benchmark result (alphabetically descending)
+const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) =>
+  b.benchmark!.result.localeCompare(a.benchmark!.result),
+);
+
+// Extract just the app objects for final result
+const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
 ---
   {
       bestPracticeToDisplay === undefined ? (
