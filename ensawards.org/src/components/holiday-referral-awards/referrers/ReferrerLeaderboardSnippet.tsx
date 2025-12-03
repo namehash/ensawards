@@ -87,7 +87,7 @@ export function ReferrerLeaderboardSnippet({
   return (
     <ENSNodeProvider config={ensNodeProviderConfig}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
-        <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
+        <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3 relative z-10">
           <ReferrerLeaderboardPage
             leaderboardPageData={leaderboardData}
             isLoading={isLoading}
