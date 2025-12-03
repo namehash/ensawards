@@ -426,12 +426,13 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
         address: "0xb1a32FC9F9D8b2cf86C068Cae13108809547ef71",
         chain: mainnet,
         codeName: "NounsDAOExecutorProxy",
       },
+      name: "nouns.eth",
     },
   },
   {
@@ -890,6 +891,9 @@ export const CONTRACTS: Contract[] = [
         codeName: "TaikoToken",
       },
       name: "token.taiko.eth",
+      profile: {
+        avatar: new URL("https://euc.li/token.taiko.eth"),
+      },
     },
   },
   {
