@@ -1,4 +1,7 @@
-import { displayNamedSmartContracts, recognizeAllENSNames } from "@/data/bestPractices.ts";
+import {
+  displayNamedSmartContracts,
+  //  recognizeAllENSNames
+} from "@/data/bestPractices.ts";
 import { type App, AppTypes, BenchmarkResult } from "@/types/apps.ts";
 
 export const APPS: App[] = [
@@ -16,10 +19,10 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/rainbowIcon.svg",
     benchmarks: [
-      {
-        bestPracticeDetails: recognizeAllENSNames,
-        result: BenchmarkResult.Pass,
-      },
+      // {
+      //   bestPracticeDetails: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
@@ -42,10 +45,10 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/coinbaseWalletIcon.svg",
     benchmarks: [
-      {
-        bestPracticeDetails: recognizeAllENSNames,
-        result: BenchmarkResult.Pass,
-      },
+      // {
+      //   bestPracticeDetails: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Fail,
@@ -68,10 +71,10 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/metamaskIcon.svg",
     benchmarks: [
-      {
-        bestPracticeDetails: recognizeAllENSNames,
-        result: BenchmarkResult.Pass,
-      },
+      // {
+      //   bestPracticeDetails: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Fail,
@@ -93,10 +96,10 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/etherscanIcon.png",
     benchmarks: [
-      {
-        bestPracticeDetails: recognizeAllENSNames,
-        result: BenchmarkResult.Pass,
-      },
+      // {
+      //   bestPracticeDetails: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
@@ -117,10 +120,10 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/blockscoutIcon.jpg",
     benchmarks: [
-      {
-        bestPracticeDetails: recognizeAllENSNames,
-        result: BenchmarkResult.Pass,
-      },
+      // {
+      //   bestPracticeDetails: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
