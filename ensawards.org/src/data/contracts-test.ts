@@ -1,12 +1,17 @@
 import { ENSDaoOrg, UniswapDaoOrg } from "@/data/organizations.ts";
-import { type Contract, ContractResolutionStatusIds } from "@/types/contracts.ts";
+import {
+  type Contract,
+  ContractResolutionStatusIds,
+  ContractSubtypes,
+  ContractTypes,
+} from "@/types/contracts.ts";
 import { mainnet } from "viem/chains";
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     org: ENSDaoOrg,
-    type: "DeFi",
-    subtype: "DeFi App",
+    type: ContractTypes.Defi,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -18,8 +23,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DeFi",
-    subtype: "DeFi App",
+    type: ContractTypes.Defi,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -31,8 +36,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DeFi",
-    subtype: "DeFi App",
+    type: ContractTypes.Defi,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -45,8 +50,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DeFi",
-    subtype: "DeFi App",
+    type: ContractTypes.Defi,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -59,8 +64,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DAO",
-    subtype: "Governance",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -73,8 +78,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DAO",
-    subtype: "Governance",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -87,8 +92,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DAO",
-    subtype: "Governance",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -101,8 +106,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DAO",
-    subtype: "Utility",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -115,8 +120,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DAO",
-    subtype: "Utility",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -129,8 +134,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: ENSDaoOrg,
-    type: "DAO",
-    subtype: "Utility",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -143,8 +148,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DeFi",
-    subtype: "DeFi App",
+    type: ContractTypes.Defi,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -156,8 +161,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DeFi",
-    subtype: "DeFi App",
+    type: ContractTypes.Defi,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -169,8 +174,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DeFi",
-    subtype: "DeFi App",
+    type: ContractTypes.Defi,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -182,8 +187,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DeFi",
-    subtype: "DeFi App",
+    type: ContractTypes.Defi,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -195,8 +200,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DAO",
-    subtype: "Utility",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -208,8 +213,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DAO",
-    subtype: "Utility",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -221,8 +226,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DAO",
-    subtype: "Utility",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -234,8 +239,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DAO",
-    subtype: "Governance",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -248,8 +253,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DAO",
-    subtype: "Governance",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -262,8 +267,8 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     org: UniswapDaoOrg,
-    type: "DAO",
-    subtype: "Governance",
+    type: ContractTypes.Dao,
+    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
