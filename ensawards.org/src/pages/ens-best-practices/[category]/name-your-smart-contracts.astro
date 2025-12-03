@@ -15,6 +15,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { OrgId } from "../../../types/organizations";
 import { getOrgById } from "../../../utils/dataAccess";
 import { scrollWithOffset } from "../../../utils/domActions";
+import { markdownToHtml } from "../../../utils/markdown";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 
 const daoScores = contractPipeline();
@@ -116,9 +117,7 @@ export function getStaticPaths() {
         <h2 class="text-2xl leading-none font-semibold text-black">
           {nameYourSmartContracts.technicalDetails.main.header}
         </h2>
-        <p class={technicalSectionContentStyles}>
-          {nameYourSmartContracts.technicalDetails.main.content}
-        </p>
+        <p class={technicalSectionContentStyles} set:html={markdownToHtml(nameYourSmartContracts.technicalDetails.main.content)} />
         {
           nameYourSmartContracts.technicalDetails.sides.map(
             (additionalContent) => (
@@ -126,9 +125,7 @@ export function getStaticPaths() {
                 <h3 class={technicalSectionMinorHeaderStyles}>
                   {additionalContent.header}
                 </h3>
-                <p class={technicalSectionContentStyles}>
-                  {additionalContent.content}
-                </p>
+                <p class={technicalSectionContentStyles} set:html={markdownToHtml(additionalContent.content)} />
               </>
             ),
           )
