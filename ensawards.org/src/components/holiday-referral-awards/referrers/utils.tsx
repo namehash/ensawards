@@ -5,15 +5,17 @@ import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { AlertCircle as AlertIcon, Award as AwardIcon } from "lucide-react";
 import type { ReactElement } from "react";
 
-export interface ReferrersSnapshotTimeProps {
-  lastUpdateTimestamp: UnixTimestamp;
+export interface ReferrerLeaderboardLastUpdateTimeProps {
+  timestamp: UnixTimestamp;
 }
-export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshotTimeProps) => {
+export const ReferrerLeaderboardLastUpdateTime = ({
+  timestamp,
+}: ReferrerLeaderboardLastUpdateTimeProps) => {
   return (
     <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap">
       Last updated{" "}
       <AbsoluteTime
-        timestamp={lastUpdateTimestamp}
+        timestamp={timestamp}
         options={{
           year: "numeric",
           month: "short",
@@ -28,11 +30,14 @@ export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshot
   );
 };
 
-export interface FetchingErrorProps {
-  errorMessage: string;
+export interface LeaderboardFetchErrorProps {
+  message: string;
   retryFunction: () => void;
 }
-export const FetchingErrorInfo = ({ errorMessage, retryFunction }: FetchingErrorProps) => {
+export const LeaderboardFetchErrorInfo = ({
+  message,
+  retryFunction,
+}: LeaderboardFetchErrorProps) => {
   const verticalContainerStyles = "w-full flex flex-col justify-start items-center";
   return (
     <div className={cn(verticalContainerStyles, "gap-5 justify-center md:min-h-[305px]")}>
@@ -45,7 +50,7 @@ export const FetchingErrorInfo = ({ errorMessage, retryFunction }: FetchingError
             Error loading referrer data
           </h3>
           <p className="text-base leading-normal font-normal text-muted-foreground text-center">
-            {errorMessage} Please try again later.
+            {message} Please try again later.
           </p>
         </div>
         <button
@@ -65,11 +70,11 @@ export const FetchingErrorInfo = ({ errorMessage, retryFunction }: FetchingError
   );
 };
 
-interface NoReferrersInfoProps {
+interface EmptyLeaderboardInfoProps {
   cta: ReactElement;
 }
 
-export const NoReferrersInfo = ({ cta }: NoReferrersInfoProps) => {
+export const EmptyLeaderboardInfo = ({ cta }: EmptyLeaderboardInfoProps) => {
   const verticalContainerStyles = "w-full flex flex-col justify-start items-center";
 
   return (

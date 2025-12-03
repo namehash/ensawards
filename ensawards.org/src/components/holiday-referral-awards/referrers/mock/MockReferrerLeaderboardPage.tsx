@@ -1,8 +1,8 @@
 import {
-  ReferrersList,
-  type ReferrersListProps,
-} from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
-import { FetchingErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
+  ReferrerLeaderboardPage,
+  type ReferrerLeaderboardPageProps,
+} from "@/components/holiday-referral-awards/referrers/ReferrerLeaderboardPage.tsx";
+import { LeaderboardFetchErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -12,16 +12,16 @@ import { useMemo, useState } from "react";
 type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 
 const DEFAULT_STATE = "loaded";
-export function MockReferrersList() {
+export function MockReferrerLeaderboardPage() {
   const ensNodeReactConfig = createConfig({
     url: "https://api.alpha-sepolia.yellow.ensnode.io/",
   }); //TODO: replace with getENSNodeUrl for prod
   const [selectedState, setSelectedState] = useState<ReferrersListState>(DEFAULT_STATE);
-  const props: ReferrersListProps = useMemo(() => {
+  const props: ReferrerLeaderboardPageProps = useMemo(() => {
     switch (selectedState) {
       case "empty":
         return {
-          referrersData: {
+          leaderboardPageData: {
             rules: {
               totalAwardPoolValue: 10000,
               maxQualifiedReferrers: 10,
@@ -52,7 +52,7 @@ export function MockReferrersList() {
             accurateAsOf: 1764091210,
           },
           isLoading: false,
-          generateLinkCTA: (
+          emptyLeaderboardCTA: (
             <p
               className={cn(
                 shadcnButtonVariants({
@@ -69,23 +69,23 @@ export function MockReferrersList() {
 
       case "loading":
         return {
-          referrersData: null,
+          leaderboardPageData: null,
           isLoading: true,
-          generateLinkCTA: <p>Placeholder</p>,
+          emptyLeaderboardCTA: <p>Placeholder</p>,
           loadingStateData: {
-            referrerPositionOffset: 0,
-            numberOfItemsToDisplay: 4,
+            referrerRankOffset: 0,
+            itemsToDisplay: 4,
           },
         };
 
       case "fetchError":
         return {
-          referrersData: null,
+          leaderboardPageData: null,
           isLoading: false,
-          generateLinkCTA: <p>Placeholder</p>,
+          emptyLeaderboardCTA: <p>Placeholder</p>,
           error: (
-            <FetchingErrorInfo
-              errorMessage="Mock error message."
+            <LeaderboardFetchErrorInfo
+              message="Mock error message."
               retryFunction={() => {
                 alert("Retry fetching");
               }}
@@ -95,7 +95,7 @@ export function MockReferrersList() {
 
       default:
         return {
-          referrersData: {
+          leaderboardPageData: {
             rules: {
               totalAwardPoolValue: 10000,
               maxQualifiedReferrers: 10,
@@ -175,7 +175,7 @@ export function MockReferrersList() {
             accurateAsOf: 1764580368,
           },
           isLoading: false,
-          generateLinkCTA: <p>Placeholder</p>,
+          emptyLeaderboardCTA: <p>Placeholder</p>,
         };
     }
   }, [selectedState]);
@@ -200,7 +200,7 @@ export function MockReferrersList() {
               </button>
             ))}
           </div>
-          <ReferrersList {...props} />
+          <ReferrerLeaderboardPage {...props} />
         </div>
       </TooltipProvider>
     </ENSNodeProvider>

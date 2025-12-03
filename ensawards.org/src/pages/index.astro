@@ -6,7 +6,7 @@ import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
 import HolidayReferralAwardsCTA from "../components/holiday-referral-awards/HolidayReferralAwardsCTA.astro";
-import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
+import { ReferrerLeaderboardSnippet } from "../components/holiday-referral-awards/referrers/ReferrerLeaderboardSnippet";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
@@ -133,10 +133,10 @@ const daoScores = contractPipeline();
         View full app leaderboard
       </a>
     </ItemsList>
-    <TopReferrers
+    <ReferrerLeaderboardSnippet
       client:load
       header="Top Referrers"
-      onENSHolidayReferralsAwards={false}
+      locatedOnHolidayReferralAwards={false}
     />
   </section>
 </Layout>

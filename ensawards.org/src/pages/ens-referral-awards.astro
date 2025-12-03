@@ -10,7 +10,7 @@ import {
 } from "@lucide/astro";
 import HolidayReferralAwardsHero from "../components/holiday-referral-awards/HolidayReferralAwardsHero.astro";
 import { ReferralLinkForm } from "../components/holiday-referral-awards/ReferralLinkForm";
-import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
+import { ReferrerLeaderboardSnippet } from "../components/holiday-referral-awards/referrers/ReferrerLeaderboardSnippet";
 import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAskedQuestions";
 import JoinTelegram from "../components/molecules/JoinTelegram.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
@@ -80,7 +80,10 @@ const backgroundGreyStyles =
         class="text-2xl sm:text-3xl leading-normal font-semibold text-black text-center">
         Top referrers
       </h3>
-      <TopReferrers client:load onENSHolidayReferralsAwards={true} />
+      <ReferrerLeaderboardSnippet
+        client:load
+        locatedOnHolidayReferralAwards={true}
+      />
     </div>
     <div
       class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start sm:items-center gap-5 sm:gap-[60px]">

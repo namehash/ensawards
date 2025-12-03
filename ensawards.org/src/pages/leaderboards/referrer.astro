@@ -1,5 +1,5 @@
 ---
-import { ReferrersPaginatedDisplay } from "../../components/holiday-referral-awards/referrers/ReferrersPaginatedDisplay";
+import { ReferrerLeaderboard } from "../../components/holiday-referral-awards/referrers/ReferrerLeaderboard";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import Layout from "../../layouts/Layout.astro";
 ---
@@ -27,6 +27,6 @@ import Layout from "../../layouts/Layout.astro";
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <!--TODO: Rollback itemsPerPage to the default 25 after the fix of the "hasNext" bug is rolled out-->
-    <ReferrersPaginatedDisplay client:load itemsPerPage={100} />
+    <ReferrerLeaderboard client:load itemsPerPage={100} />
   </section>
 </Layout>
