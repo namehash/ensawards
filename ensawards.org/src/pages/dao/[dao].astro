@@ -12,10 +12,11 @@ import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { contractPipeline } from "../../contract-pipelines";
+import { daoContractsOnly } from "../../contract-pipelines/filters";
 import { CONTRACTS } from "../../data/contracts";
 import { ORGANIZATIONS } from "../../data/organizations";
 import Layout from "../../layouts/Layout.astro";
-import { Contract } from "../../types/contracts";
+import { Contract, ContractTypes } from "../../types/contracts";
 import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
 import { getOrgBySlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
@@ -35,9 +36,11 @@ let OrgIcon;
 let daoScore: number;
 
 if (resolvedOrg) {
-  orgContracts = CONTRACTS.filter((contract) => contract.org.id === resolvedOrg.id);
+  orgContracts = CONTRACTS.filter(
+    (contract) => contract.org.id === resolvedOrg.id && contract.type === ContractTypes.Dao,
+  );
   OrgIcon = resolvedOrg.icon;
-  daoScore = contractPipeline()[resolvedOrg.id];
+  daoScore = contractPipeline(undefined, undefined, daoContractsOnly)[resolvedOrg.id];
 }
 ---
 
