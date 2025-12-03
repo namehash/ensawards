@@ -22,7 +22,7 @@ export const APPS: App[] = [
       },
       {
         bestPracticeDetails: displayNamedSmartContracts,
-        result: BenchmarkResult.Fail,
+        result: BenchmarkResult.Pass,
       },
     ],
     ogImagePath: "/app-rainbow-wallet_og_image.png",
