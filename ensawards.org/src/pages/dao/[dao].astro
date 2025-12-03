@@ -13,6 +13,7 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { contractPipeline } from "../../contract-pipelines";
 import { daoContractsOnly } from "../../contract-pipelines/filters";
+import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { CONTRACTS } from "../../data/contracts";
 import { ORGANIZATIONS } from "../../data/organizations";
 import Layout from "../../layouts/Layout.astro";
@@ -114,6 +115,9 @@ if (resolvedOrg) {
               return null;
             }
 
+            // Sort contracts by resolution status: PrimaryNamed, ForwardNamed, then Unnamed
+            const sortedContracts = sortByResolutionStatus(contractsOnChain);
+
             return (
               <>
                 <div
@@ -130,7 +134,7 @@ if (resolvedOrg) {
                     </h4>
                   </>
                 </div>
-                {contractsOnChain.map((contract) => (
+                {sortedContracts.map((contract) => (
                   <ContractCard contract={contract} />
                 ))}
               </>
