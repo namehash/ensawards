@@ -438,7 +438,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: NounsDaoOrg,
     type: ContractTypes.Dao,
-    subtype: ContractSubtypes.Utility,
+    subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "streams.nouns.eth",
@@ -1139,7 +1139,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: TaikoDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1257,7 +1257,7 @@ export const CONTRACTS: Contract[] = [
   {
     org: TaikoDaoOrg,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
