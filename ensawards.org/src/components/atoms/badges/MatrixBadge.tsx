@@ -4,12 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type BenchmarkResult, type BenchmarkVerifier } from "@/types/apps.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import {
-  ENSNamespaceIds,
-  ENSNodeClient,
-  type ResolvedIdentity,
-  type UnresolvedIdentity,
-} from "@ensnode/ensnode-sdk";
+import { ENSNamespaceIds, ENSNodeClient, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 import { Check, CheckCheck, X as XIcon } from "lucide-react";
 import React from "react";
 import { cn } from "../../../utils/tailwindClassConcatenation";

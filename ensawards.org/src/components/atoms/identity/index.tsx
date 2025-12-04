@@ -17,7 +17,7 @@ import { EnsAvatar } from "./EnsAvatar.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { AddressDisplay, IdentityLink, IdentityTooltip, NameDisplay } from "./utils";
 
-interface ResolveAndDisplayIdentityProps {
+export interface ResolveAndDisplayIdentityProps {
   identity: UnresolvedIdentity;
   namespaceId: ENSNamespaceId;
   prefix?: string;
