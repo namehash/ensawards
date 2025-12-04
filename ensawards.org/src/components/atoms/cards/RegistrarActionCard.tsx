@@ -111,7 +111,7 @@ function ResolveAndDisplayReferrerIdentity({
 export function RegistrarActionCardLoading() {
     return (
         <div className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
-            <LabeledField fieldLabel="Name" className="w-[30%] min-w-[192px]">
+            <LabeledField fieldLabel="Name" className="w-[15%] min-w-[192px]">
                 <div className="animate-pulse mt-1 h-6 bg-muted rounded-sm w-3/5" />
             </LabeledField>
 
@@ -170,7 +170,7 @@ export function RegistrarActionCard({
 
     return (
         <div className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
-            <LabeledField fieldLabel="Name" className="w-1/5 min-w-[192px]">
+            <LabeledField fieldLabel="Name" className="w-[15%] min-w-[192px]">
                 <div className="sm:w-full h-[21px] overflow-x-auto">
                     {/*TODO: Temporarily assuming that for the registered (renewed) name we'd want to link to ENSManagerApp */}
                     <a
