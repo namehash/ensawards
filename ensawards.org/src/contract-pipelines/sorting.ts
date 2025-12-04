@@ -1,5 +1,8 @@
+import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds } from "@/types/contracts.ts";
+import type { OrgId } from "@/types/organizations.ts";
+import { getOrgById } from "@/utils/dataAccess.ts";
 
 /**
  * Sorts contracts by their resolution status in priority order.
@@ -29,4 +32,51 @@ export function sortByResolutionStatus(contracts: Contract[]): Contract[] {
     const orderB = sortOrder[b.cachedIdentity.resolutionStatus] || 999;
     return orderA - orderB;
   });
+}
+
+/**
+ * Sorts DAO leaderboard entries with explicit tie-breaking rules.
+ *
+ * Sort order:
+ * 1. Primary: By ENS Awards score (descending)
+ * 2. Tie-breaker 1: By number of DAO contracts (descending)
+ * 3. Tie-breaker 2: By DAO display name (alphabetically)
+ *
+ * This ensures that when two DAOs have the same score, the DAO with more
+ * contracts ranks higher. If they also have the same number of contracts,
+ * they are sorted alphabetically by name.
+ *
+ * @param scores - The calculated scores for each organization
+ * @param groupedContracts - The grouped contracts used to calculate scores
+ * @returns An array of [orgId, score] tuples in the desired sort order
+ */
+export function sortDaoLeaderboard(
+  scores: Record<SupportedGroupByCategory, number>,
+  groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
+): [SupportedGroupByCategory, number][] {
+  return Object.entries(scores)
+    .map(
+      ([orgId, score]) =>
+        [orgId as SupportedGroupByCategory, score] as [SupportedGroupByCategory, number],
+    )
+    .sort(([orgIdA, scoreA], [orgIdB, scoreB]) => {
+      // Primary sort: by score (descending)
+      if (scoreA !== scoreB) {
+        return scoreB - scoreA;
+      }
+
+      // Tie-breaker 1: by number of contracts (descending)
+      const contractCountA = groupedContracts[orgIdA]?.length || 0;
+      const contractCountB = groupedContracts[orgIdB]?.length || 0;
+
+      if (contractCountA !== contractCountB) {
+        return contractCountB - contractCountA;
+      }
+
+      // Tie-breaker 2: by display name (alphabetically)
+      const orgA = getOrgById(orgIdA as OrgId);
+      const orgB = getOrgById(orgIdB as OrgId);
+
+      return orgA.name.localeCompare(orgB.name);
+    });
 }

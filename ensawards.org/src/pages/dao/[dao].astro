@@ -41,7 +41,7 @@ if (resolvedOrg) {
     (contract) => contract.org.id === resolvedOrg.id && contract.type === ContractTypes.Dao,
   );
   OrgIcon = resolvedOrg.icon;
-  daoScore = contractPipeline(undefined, undefined, daoContractsOnly)[resolvedOrg.id];
+  daoScore = contractPipeline({ filter: daoContractsOnly })[resolvedOrg.id];
 }
 ---
 

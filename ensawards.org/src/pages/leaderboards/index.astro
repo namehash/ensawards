@@ -6,6 +6,8 @@ import LeaderboardSnippetCard from "../../components/atoms/cards/LeaderboardSnip
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { contractPipeline } from "../../contract-pipelines";
+import { daoContractsOnly } from "../../contract-pipelines/filters";
+import { sortDaoLeaderboard } from "../../contract-pipelines/sorting";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { OrgId } from "../../types/organizations";
@@ -14,7 +16,10 @@ import { cn } from "../../utils/tailwindClassConcatenation";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
-const daoScores = contractPipeline();
+const daoScores = contractPipeline({
+  filter: daoContractsOnly,
+  sort: sortDaoLeaderboard,
+});
 
 const daoLeaderboardDescription = "See how DAOs rank for following ENS best practices.";
 const appLeaderboardDescription = "See how apps rank for following ENS best practices.";
