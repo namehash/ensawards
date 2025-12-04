@@ -1,28 +1,31 @@
-import { ReferrerLeaderboardPage } from "@/components/holiday-referral-awards/referrers/ReferrerLeaderboardPage.tsx";
-import { LeaderboardFetchErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
+import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
+import { LeaderboardFetchErrorInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
-import type { ReferrerLeaderboardPage as ReferrerLeaderboardPageType } from "@namehash/ens-referrals";
+import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 import { useEffect, useState } from "react";
 
+type GenerateReferralLinkAction = "scroll" | "link";
+
 export interface ReferrerLeaderboardSnippetProps {
-  locatedOnHolidayReferralAwards: boolean;
+  generateReferralLinkAction: GenerateReferralLinkAction;
   snippetSize?: number;
   header?: string;
 }
 
 export function ReferrerLeaderboardSnippet({
-  locatedOnHolidayReferralAwards,
+  generateReferralLinkAction,
   header,
   snippetSize = 3,
 }: ReferrerLeaderboardSnippetProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPageType | null>(null);
+  const [leaderboardSnippetData, setLeaderboardSnippetData] =
+    useState<ReferrerLeaderboardPage | null>(null);
   const client = new ENSNodeClient({
     url: getENSNodeUrl(),
   });
@@ -49,10 +52,10 @@ export function ReferrerLeaderboardSnippet({
         return;
       }
 
-      setLeaderboardData(response.data);
+      setLeaderboardSnippetData(response.data);
     } catch (error) {
       console.error(error);
-      setLeaderboardData(null);
+      setLeaderboardSnippetData(null);
       setFetchErrorMessage("An error has occurred while loading the leaderboard.");
     } finally {
       setIsLoading(false);
@@ -71,28 +74,29 @@ export function ReferrerLeaderboardSnippet({
     }),
   );
 
-  const emptyReferrerLeaderboardCTA = locatedOnHolidayReferralAwards ? (
-    <a
-      className={emptyLeaderboardCTAStyles}
-      onClick={() => document.getElementById("referral award recipient")!.focus()}
-    >
-      Generate your referral link
-    </a>
-  ) : (
-    <a className={emptyLeaderboardCTAStyles} href="/ens-referral-awards">
-      Generate your referral link
-    </a>
-  );
+  const emptyReferrerLeaderboardCTA =
+    generateReferralLinkAction === "scroll" ? (
+      <a
+        className={emptyLeaderboardCTAStyles}
+        onClick={() => document.getElementById("referral award recipient")!.focus()}
+      >
+        Generate your referral link
+      </a>
+    ) : (
+      <a className={emptyLeaderboardCTAStyles} href="/ens-referral-awards">
+        Generate your referral link
+      </a>
+    );
 
   return (
     <ENSNodeProvider config={ensNodeProviderConfig}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3 relative z-10">
-          <ReferrerLeaderboardPage
-            leaderboardPageData={leaderboardData}
+          <DisplayReferrerLeaderboardPage
+            leaderboardPageData={leaderboardSnippetData}
             isLoading={isLoading}
             emptyLeaderboardCTA={emptyReferrerLeaderboardCTA}
-            error={
+            leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <LeaderboardFetchErrorInfo
                   message={fetchErrorMessage}
@@ -100,14 +104,14 @@ export function ReferrerLeaderboardSnippet({
                 />
               ) : undefined
             }
-            loadingStateData={{
-              itemsToDisplay: snippetSize,
-              referrerRankOffset: 0,
+            leaderboardPageLoadingData={{
+              itemsPerPage: snippetSize,
+              currentPage: 1,
             }}
             header={header}
           />
-          {leaderboardData !== null &&
-            leaderboardData.paginationContext.totalRecords > snippetSize && (
+          {leaderboardSnippetData !== null &&
+            leaderboardSnippetData.paginationContext.totalRecords > snippetSize && (
               <a
                 href="/leaderboards/referrer"
                 className={cn(

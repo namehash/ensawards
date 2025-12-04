@@ -1,8 +1,8 @@
 import {
-  ReferrerLeaderboardPage,
-  type ReferrerLeaderboardPageProps,
-} from "@/components/holiday-referral-awards/referrers/ReferrerLeaderboardPage.tsx";
-import { LeaderboardFetchErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
+  DisplayReferrerLeaderboardPage,
+  type DisplayReferrerLeaderboardPageProps,
+} from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
+import { LeaderboardFetchErrorInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -12,12 +12,12 @@ import { useMemo, useState } from "react";
 type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 
 const DEFAULT_STATE = "loaded";
-export function MockReferrerLeaderboardPage() {
+export function MockDisplayReferrerLeaderboardPage() {
   const ensNodeReactConfig = createConfig({
     url: "https://api.alpha-sepolia.yellow.ensnode.io/",
   }); //TODO: replace with getENSNodeUrl for prod
   const [selectedState, setSelectedState] = useState<ReferrersListState>(DEFAULT_STATE);
-  const props: ReferrerLeaderboardPageProps = useMemo(() => {
+  const props: DisplayReferrerLeaderboardPageProps = useMemo(() => {
     switch (selectedState) {
       case "empty":
         return {
@@ -72,9 +72,9 @@ export function MockReferrerLeaderboardPage() {
           leaderboardPageData: null,
           isLoading: true,
           emptyLeaderboardCTA: <p>Placeholder</p>,
-          loadingStateData: {
-            referrerRankOffset: 0,
-            itemsToDisplay: 4,
+          leaderboardPageLoadingData: {
+            currentPage: 1,
+            itemsPerPage: 4,
           },
         };
 
@@ -83,7 +83,7 @@ export function MockReferrerLeaderboardPage() {
           leaderboardPageData: null,
           isLoading: false,
           emptyLeaderboardCTA: <p>Placeholder</p>,
-          error: (
+          leaderboardPageFetchError: (
             <LeaderboardFetchErrorInfo
               message="Mock error message."
               retryFunction={() => {
@@ -200,7 +200,7 @@ export function MockReferrerLeaderboardPage() {
               </button>
             ))}
           </div>
-          <ReferrerLeaderboardPage {...props} />
+          <DisplayReferrerLeaderboardPage {...props} />
         </div>
       </TooltipProvider>
     </ENSNodeProvider>

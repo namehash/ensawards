@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { ReferrerLeaderboardPage } from "@/components/holiday-referral-awards/referrers/ReferrerLeaderboardPage.tsx";
-import { LeaderboardFetchErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import { Pagination } from "@/components/molecules/Pagination.tsx";
+import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
+import { LeaderboardFetchErrorInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
-import type { ReferrerLeaderboardPage as ReferrerLeaderboardPageType } from "@namehash/ens-referrals";
+import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 
 export interface ReferrerLeaderboardProps {
   itemsPerPage?: number;
@@ -20,7 +20,7 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPageType | null>(null);
+  const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPage | null>(null);
   const client = new ENSNodeClient({
     url: getENSNodeUrl(),
   });
@@ -66,7 +66,7 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
     <ENSNodeProvider config={ensNodeProviderConfig}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-5">
-          <ReferrerLeaderboardPage
+          <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardData}
             isLoading={isLoading}
             emptyLeaderboardCTA={
@@ -83,7 +83,7 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
                 Generate your referral link
               </a>
             }
-            error={
+            leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <LeaderboardFetchErrorInfo
                   message={fetchErrorMessage}
@@ -91,9 +91,9 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
                 />
               ) : undefined
             }
-            loadingStateData={{
-              referrerRankOffset: (currentPage - 1) * itemsPerPage,
-              itemsToDisplay: itemsPerPage,
+            leaderboardPageLoadingData={{
+              currentPage: currentPage,
+              itemsPerPage: itemsPerPage,
             }}
           />
           {leaderboardData !== null &&

@@ -8,11 +8,11 @@ import {
   Sparkles,
   TrendingUp,
 } from "@lucide/astro";
-import HolidayReferralAwardsHero from "../components/holiday-referral-awards/HolidayReferralAwardsHero.astro";
-import { ReferralLinkForm } from "../components/holiday-referral-awards/ReferralLinkForm";
-import { ReferrerLeaderboardSnippet } from "../components/holiday-referral-awards/referrers/ReferrerLeaderboardSnippet";
 import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAskedQuestions";
 import JoinTelegram from "../components/molecules/JoinTelegram.astro";
+import HolidayReferralAwardsHero from "../components/referral-awards-program/HolidayReferralAwardsHero.astro";
+import { ReferralLinkForm } from "../components/referral-awards-program/ReferralLinkForm";
+import { ReferrerLeaderboardSnippet } from "../components/referral-awards-program/referrers/ReferrerLeaderboardSnippet";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../utils/tailwindClassConcatenation";
@@ -83,7 +83,7 @@ const backgroundGreyStyles =
       </h3>
       <ReferrerLeaderboardSnippet
         client:load
-        locatedOnHolidayReferralAwards={true}
+        generateReferralLinkAction="scroll"
       />
     </div>
     <div

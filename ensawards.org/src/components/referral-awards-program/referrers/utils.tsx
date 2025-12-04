@@ -12,7 +12,7 @@ export const ReferrerLeaderboardLastUpdateTime = ({
   timestamp,
 }: ReferrerLeaderboardLastUpdateTimeProps) => {
   return (
-    <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap">
+    <p className="text-sm sm:text-base leading-normal font-normal text-muted-foreground whitespace-nowrap">
       Last updated{" "}
       <AbsoluteTime
         timestamp={timestamp}

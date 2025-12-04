@@ -5,10 +5,10 @@ import ContractNamingBanner from "../components/atoms/ContractNamingBanner.astro
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
-import HolidayReferralAwardsCTA from "../components/holiday-referral-awards/HolidayReferralAwardsCTA.astro";
-import { ReferrerLeaderboardSnippet } from "../components/holiday-referral-awards/referrers/ReferrerLeaderboardSnippet";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
+import HolidayReferralAwardsCTA from "../components/referral-awards-program/HolidayReferralAwardsCTA.astro";
+import { ReferrerLeaderboardSnippet } from "../components/referral-awards-program/referrers/ReferrerLeaderboardSnippet";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
 import { APPS } from "../data/apps";
@@ -136,7 +136,7 @@ const daoScores = contractPipeline();
     <ReferrerLeaderboardSnippet
       client:load
       header="Top Referrers"
-      locatedOnHolidayReferralAwards={false}
+      generateReferralLinkAction="link"
     />
   </section>
 </Layout>

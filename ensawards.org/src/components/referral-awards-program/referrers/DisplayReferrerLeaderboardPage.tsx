@@ -1,46 +1,49 @@
 import { ReferrerCard, ReferrerCardLoading } from "@/components/atoms/cards/ReferrerCard.tsx";
-import { EmptyLeaderboardInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
-import { ReferrerLeaderboardLastUpdateTime } from "@/components/holiday-referral-awards/referrers/utils.tsx";
+import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
+import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 import type { ReactElement } from "react";
 
-export interface ReferrerLeaderboardPageProps {
+export interface DisplayReferrerLeaderboardPageProps {
   leaderboardPageData: ReferrerLeaderboardPage | null;
   isLoading: boolean;
   emptyLeaderboardCTA: ReactElement;
-  error?: ReactElement;
+  leaderboardPageFetchError?: ReactElement;
   header?: string;
-  loadingStateData?: {
-    itemsToDisplay: number;
-    referrerRankOffset: number;
+  leaderboardPageLoadingData?: {
+    itemsPerPage: number;
+    currentPage: number;
   };
 }
 
-export function ReferrerLeaderboardPage({
+export function DisplayReferrerLeaderboardPage({
   leaderboardPageData,
   isLoading,
   emptyLeaderboardCTA,
-  error,
+  leaderboardPageFetchError,
   header,
-  loadingStateData = {
-    referrerRankOffset: 0,
-    itemsToDisplay: 5,
+  leaderboardPageLoadingData = {
+    currentPage: 0,
+    itemsPerPage: 5,
   },
-}: ReferrerLeaderboardPageProps) {
-  if (error !== undefined) {
-    return error;
+}: DisplayReferrerLeaderboardPageProps) {
+  if (leaderboardPageFetchError !== undefined) {
+    return leaderboardPageFetchError;
   }
 
   if (isLoading || leaderboardPageData === null) {
+    const pageOffset =
+      (leaderboardPageLoadingData.currentPage - 1) * leaderboardPageLoadingData.itemsPerPage;
+
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
-        <Skeleton className="w-[200px] h-6 bg-gray-300" />
-        {[...Array(loadingStateData.itemsToDisplay).keys()].map((elem) => (
+        <Skeleton className="w-[225px] sm:w-[255px] h-[14px] sm:h-4 mt-[4px] mb-[3px] sm:my-1 bg-gray-300" />
+        {[...Array(leaderboardPageLoadingData.itemsPerPage).keys()].map((elem) => (
           <ReferrerCardLoading
-            key={`Referrer-loading-${loadingStateData.referrerRankOffset + elem}`}
-            rank={loadingStateData.referrerRankOffset + elem + 1}
+            key={`Referrer-loading-${pageOffset + elem}`}
+            rank={pageOffset + elem + 1}
           />
         ))}
       </div>
@@ -60,7 +63,7 @@ export function ReferrerLeaderboardPage({
     <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
       <div
         className={cn(
-          "w-full h-fit flex flex-row flex-nowrap items-center",
+          "w-full h-fit flex flex-row flex-nowrap items-end sm:items-center",
           header ? "justify-between" : "justify-end",
         )}
       >
