@@ -107,7 +107,8 @@ export function DisplayIdentity({
     identitifer = <Skeleton className={cn("h-4 w-24", className)} />;
   } else if (
     identity.resolutionStatus === ResolutionStatusIds.Unnamed ||
-    identity.resolutionStatus === ResolutionStatusIds.Unknown
+    identity.resolutionStatus === ResolutionStatusIds.Unknown ||
+    !identity.name
   ) {
     avatar = (
       <ChainIcon
