@@ -1,5 +1,5 @@
-import { ReferrersList } from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
-import { FetchingErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
+import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
+import { LeaderboardFetchErrorInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
@@ -9,32 +9,37 @@ import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/en
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 import { useEffect, useState } from "react";
 
-export interface TopReferrersProps {
-  onENSHolidayReferralsAwards: boolean;
+type GenerateReferralLinkAction = "scroll" | "link";
+
+export interface ReferrerLeaderboardSnippetProps {
+  generateReferralLinkAction: GenerateReferralLinkAction;
   snippetSize?: number;
   header?: string;
 }
-
-export function TopReferrers({
-  onENSHolidayReferralsAwards,
+/**
+ * Fetches {@link snippetSize} top referrers from the Referrer Leaderboard through ENSNode
+ * and displays them as a snippet of the whole leaderboard.
+ */
+export function ReferrerLeaderboardSnippet({
+  generateReferralLinkAction,
   header,
   snippetSize = 3,
-}: TopReferrersProps) {
+}: ReferrerLeaderboardSnippetProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [topReferrersData, setTopReferrersData] = useState<ReferrerLeaderboardPage | null>(null);
+  const [leaderboardSnippetData, setLeaderboardSnippetData] =
+    useState<ReferrerLeaderboardPage | null>(null);
   const client = new ENSNodeClient({
-    url: new URL("https://api.alpha.blue.ensnode.io/"), //TODO: replace with the line below later on
-    // url: getENSNodeUrl(),
+    url: getENSNodeUrl(),
   });
-  const ensNodeReactConfig = createConfig({
-    url: "https://api.alpha.blue.ensnode.io/",
-  }); //TODO: replace with getENSNodeUrl for prod
+  const ensNodeProviderConfig = createConfig({
+    url: getENSNodeUrl(),
+  });
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
   // and reuse this fetch wherever we need
-  async function startFetching() {
+  async function fetchReferrerLeaderboard() {
     setFetchErrorMessage("");
     setIsLoading(true);
     try {
@@ -50,10 +55,10 @@ export function TopReferrers({
         return;
       }
 
-      setTopReferrersData(response.data);
+      setLeaderboardSnippetData(response.data);
     } catch (error) {
       console.error(error);
-      setTopReferrersData(null);
+      setLeaderboardSnippetData(null);
       setFetchErrorMessage("An error has occurred while loading the leaderboard.");
     } finally {
       setIsLoading(false);
@@ -61,10 +66,10 @@ export function TopReferrers({
   }
 
   useEffect(() => {
-    startFetching();
+    fetchReferrerLeaderboard();
   }, []);
 
-  const emptyStateCTAStyles = cn(
+  const emptyLeaderboardCTAStyles = cn(
     shadcnButtonVariants({
       variant: "outline",
       size: "default",
@@ -72,40 +77,44 @@ export function TopReferrers({
     }),
   );
 
-  const emptyStateCTA = onENSHolidayReferralsAwards ? (
-    <a
-      className={emptyStateCTAStyles}
-      onClick={() => document.getElementById("referral award recipient")!.focus()}
-    >
-      Generate your referral link
-    </a>
-  ) : (
-    <a className={emptyStateCTAStyles} href="/ens-referral-awards">
-      Generate your referral link
-    </a>
-  );
+  const emptyReferrerLeaderboardCTA =
+    generateReferralLinkAction === "scroll" ? (
+      <a
+        className={emptyLeaderboardCTAStyles}
+        onClick={() => document.getElementById("referral award recipient")!.focus()}
+      >
+        Generate your referral link
+      </a>
+    ) : (
+      <a className={emptyLeaderboardCTAStyles} href="/ens-referral-awards">
+        Generate your referral link
+      </a>
+    );
 
   return (
-    <ENSNodeProvider config={ensNodeReactConfig}>
+    <ENSNodeProvider config={ensNodeProviderConfig}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
-        <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
-          <ReferrersList
-            referrersData={topReferrersData}
+        <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3 relative z-10">
+          <DisplayReferrerLeaderboardPage
+            leaderboardPageData={leaderboardSnippetData}
             isLoading={isLoading}
-            generateLinkCTA={emptyStateCTA}
-            error={
+            emptyLeaderboardCTA={emptyReferrerLeaderboardCTA}
+            leaderboardPageFetchError={
               fetchErrorMessage ? (
-                <FetchingErrorInfo errorMessage={fetchErrorMessage} retryFunction={startFetching} />
+                <LeaderboardFetchErrorInfo
+                  message={fetchErrorMessage}
+                  retryFunction={fetchReferrerLeaderboard}
+                />
               ) : undefined
             }
-            loadingStateData={{
-              numberOfItemsToDisplay: snippetSize,
-              referrerPositionOffset: 0,
+            leaderboardPageLoadingData={{
+              itemsPerPage: snippetSize,
+              currentPage: 1,
             }}
             header={header}
           />
-          {topReferrersData !== null &&
-            topReferrersData.paginationContext.totalRecords > snippetSize && (
+          {leaderboardSnippetData !== null &&
+            leaderboardSnippetData.paginationContext.totalRecords > snippetSize && (
               <a
                 href="/leaderboards/referrer"
                 className={cn(
