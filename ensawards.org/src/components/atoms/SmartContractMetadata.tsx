@@ -109,7 +109,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
           <CircleUser
             className={cn(
               "w-[18px] h-[18px] cursor-default",
-              metadata && metadata.audits ? "text-black" : "text-gray-300 hover:text-gray-500",
+              metadata && metadata.avatar ? "text-black" : "text-gray-300 hover:text-gray-500",
             )}
           />
         </GenericTooltip>

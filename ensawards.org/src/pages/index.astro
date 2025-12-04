@@ -11,6 +11,8 @@ import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
+import { daoContractsOnly } from "../contract-pipelines/filters";
+import { sortDaoLeaderboard } from "../contract-pipelines/sorting";
 import { APPS } from "../data/apps";
 import { BEST_PRACTICE_CATEGORIES } from "../data/bestPractices";
 import Layout from "../layouts/Layout.astro";
@@ -25,7 +27,10 @@ const placeIcons = [
   "/src/assets/thirdPlaceAward.svg",
 ];
 
-const daoScores = contractPipeline();
+const daoScores = contractPipeline({
+  filter: daoContractsOnly,
+  sort: sortDaoLeaderboard,
+});
 ---
 
 <Layout>
