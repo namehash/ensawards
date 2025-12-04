@@ -16,7 +16,10 @@ export interface ReferrerLeaderboardSnippetProps {
   snippetSize?: number;
   header?: string;
 }
-
+/**
+ * Fetches {@link snippetSize} top referrers from the Referrer Leaderboard through ENSNode
+ * and displays them as a snippet of the whole leaderboard.
+ */
 export function ReferrerLeaderboardSnippet({
   generateReferralLinkAction,
   header,

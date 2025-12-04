@@ -18,6 +18,9 @@ export interface DisplayReferrerLeaderboardPageProps {
   };
 }
 
+/**
+ * Display {@link ReferrerLeaderboardPage} as a list of ranked referrers.
+ */
 export function DisplayReferrerLeaderboardPage({
   leaderboardPageData,
   isLoading,

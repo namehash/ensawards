@@ -14,7 +14,9 @@ import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 export interface ReferrerLeaderboardProps {
   itemsPerPage?: number;
 }
-
+/**
+ * Fetches Referrer Leaderboard through ENSNode and displays a single page of the leaderboard and pagination.
+ */
 export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(1);

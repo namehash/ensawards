@@ -8,6 +8,13 @@ import type { ReactElement } from "react";
 export interface ReferrerLeaderboardLastUpdateTimeProps {
   timestamp: UnixTimestamp;
 }
+
+/**
+ * Displays the last time the leaderboard was updated in ENSNode.
+ *
+ * @param timestamp - last update of the leaderboard.
+ * More details at {@link ReferrerLeaderboardPage.accurateAsOf}
+ */
 export const ReferrerLeaderboardLastUpdateTime = ({
   timestamp,
 }: ReferrerLeaderboardLastUpdateTimeProps) => {
@@ -74,6 +81,10 @@ interface EmptyLeaderboardInfoProps {
   cta: ReactElement;
 }
 
+/**
+ * Displays an information that the current referrer leaderboard is empty
+ * (when {@link ReferrerLeaderboardPaginationContext.totalRecords} is 0)
+ */
 export const EmptyLeaderboardInfo = ({ cta }: EmptyLeaderboardInfoProps) => {
   const verticalContainerStyles = "w-full flex flex-col justify-start items-center";
 

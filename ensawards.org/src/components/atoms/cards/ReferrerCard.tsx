@@ -19,6 +19,9 @@ export interface ReferrerCardProps {
   aggregatedMetrics: AggregatedReferrerMetrics;
 }
 
+/**
+ * Display a single Referrer on the {@link ReferrerLeaderboardPage}.
+ */
 export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps) {
   const namespaceId = ENSNamespaceIds.Mainnet;
   const referrerIdentity = buildUnresolvedIdentity(
@@ -162,6 +165,9 @@ interface RankProps {
   className?: string;
 }
 
+/**
+ * Display {@link RankedReferrerMetrics.referrerRank}.
+ */
 const RankIcon = ({ rank, isQualified, className }: RankProps) => (
   <GenericTooltip
     content={
@@ -209,6 +215,9 @@ const RankIconLoading = ({ rank, className }: Omit<RankProps, "isQualified">) =>
   </GenericTooltip>
 );
 
+/**
+ * Display Referrer Card loading state
+ */
 export const ReferrerCardLoading = ({ rank }: Omit<RankProps, "className" | "isQualified">) => {
   const loadingStateStyles = "animate-pulse bg-gray-300 rounded-sm";
   return (
