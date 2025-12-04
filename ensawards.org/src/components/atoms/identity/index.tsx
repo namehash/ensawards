@@ -20,31 +20,40 @@ import { AddressDisplay, IdentityLink, IdentityTooltip, NameDisplay } from "./ut
 interface ResolveAndDisplayIdentityProps {
   identity: UnresolvedIdentity;
   namespaceId: ENSNamespaceId;
+  accelerate?: boolean;
   withLink?: boolean;
   withTooltip?: boolean;
   withAvatar?: boolean;
   withIdentifier?: boolean;
   className?: string;
+  avatarStyles?: string;
 }
 
 /**
  * Resolves the provided `UnresolvedIdentity` through ENSNode and displays the result.
  *
  * @param identity - The `UnresolvedIdentity` to resolve and display.
+ * @param namespaceId - The ENSNamespace identifier (e.g. 'mainnet', 'sepolia', 'holesky',
+ *  'ens-test-env')
+ * @param accelerate - Whether to attempt Protocol Acceleration (default: false)
+ *                      when resolving the primary name.
  * @param withLink - Whether to wrap the displayed identity in an `IdentityLink` component.
  * @param withTooltip - Whether to wrap the displayed identity in an `IdentityInfoTooltip` component.
  * @param withAvatar - Whether to display an avatar image.
  * @param withIdentifier - Whether to display identity's textual identifier (address or name).
  * @param className - The class name to apply to the displayed identity.
+ * @param avatarStyles - The class name to apply to the Avatar image (if withAvatar=true)
  */
 export function ResolveAndDisplayIdentity({
   identity,
   namespaceId,
+    accelerate = false,
   withLink = true,
   withTooltip = true,
   withAvatar = false,
   withIdentifier = true,
   className,
+    avatarStyles,
 }: ResolveAndDisplayIdentityProps) {
   // resolve the primary name for `identity` using ENSNode
   // TODO: extract out the concept of resolving an `Identity` into a provider that child
@@ -52,6 +61,7 @@ export function ResolveAndDisplayIdentity({
   const { identity: identityResult } = useResolvedIdentity({
     identity,
     namespaceId,
+    accelerate
   });
 
   return (
@@ -63,6 +73,7 @@ export function ResolveAndDisplayIdentity({
       withAvatar={withAvatar}
       withIdentifier={withIdentifier}
       className={className}
+      avatarStyles={avatarStyles}
     />
   );
 }
@@ -75,6 +86,7 @@ interface DisplayIdentityProps {
   withAvatar?: boolean;
   withIdentifier?: boolean;
   className?: string;
+  avatarStyles?: string;
 }
 
 /**
@@ -84,11 +96,14 @@ interface DisplayIdentityProps {
  *
  * @param identity - The identity to display. May be a `ResolvedIdentity` or an `UnresolvedIdentity`.
  *                      If not a `ResolvedIdentity` (and therefore just an `UnresolvedIdentity`) then displays a loading state.
+ * @param namespaceId - The ENSNamespace identifier (e.g. 'mainnet', 'sepolia', 'holesky',
+ *                        'ens-test-env')
  * @param withLink - Whether to wrap the displayed identity in an `IdentityLink` component.
  * @param withTooltip - Whether to wrap the displayed identity in an `IdentityInfoTooltip` component.
  * @param withAvatar - Whether to display an avatar image.
  * @param withIdentifier - Whether to display identity's textual identifier (address or name).
  * @param className - The class name to apply to the displayed identity.
+ * @param avatarStyles - The class name to apply to the Avatar image (if withAvatar=true)
  */
 export function DisplayIdentity({
   identity,
@@ -98,21 +113,22 @@ export function DisplayIdentity({
   withAvatar = false,
   withIdentifier = true,
   className,
+    avatarStyles,
 }: DisplayIdentityProps) {
   let avatar: React.ReactElement;
-  let identitifer: React.ReactElement;
+  let identifier: React.ReactElement;
 
   if (!isResolvedIdentity(identity)) {
     // identity is an `UnresolvedIdentity` which represents that it hasn't been resolved yet
     // display loading state
-    avatar = <Skeleton className="h-10 w-10 rounded-full" />;
-    identitifer = <Skeleton className={cn("h-4 w-24", className)} />;
+    avatar = <Skeleton className={cn("h-10 w-10 rounded-full", avatarStyles)} />;
+    identifier = <Skeleton className={cn("h-4 w-24", className)} />;
   } else if (
     identity.resolutionStatus === ResolutionStatusIds.Unnamed ||
     identity.resolutionStatus === ResolutionStatusIds.Unknown
   ) {
     avatar = (
-      <div className="w-10 h-10 flex justify-center items-center">
+      <div className={cn("w-10 h-10 flex justify-center items-center", avatarStyles)}>
         <ChainIcon
           chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
           height={24}
@@ -120,15 +136,15 @@ export function DisplayIdentity({
         />
       </div>
     );
-    identitifer = (
+    identifier = (
       <AddressDisplay
         address={identity.address}
         className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%]", className)}
       />
     );
   } else {
-    avatar = <EnsAvatar name={identity.name} namespaceId={namespaceId} className="h-10 w-10" />;
-    identitifer = (
+    avatar = <EnsAvatar name={identity.name} namespaceId={namespaceId} className={cn("h-10 w-10", avatarStyles)} />;
+    identifier = (
       <NameDisplay
         name={identity.name}
         className={cn(
@@ -144,7 +160,7 @@ export function DisplayIdentity({
       {/* TODO: extract the `EnsAvatar` / `ChainIcon` out of this component and remove the
       `withAvatar` prop. */}
       {withAvatar && avatar}
-      {withIdentifier && identitifer}
+      {withIdentifier && identifier}
     </div>
   );
 
@@ -163,7 +179,7 @@ export function DisplayIdentity({
       <IdentityLink
         identity={identity}
         namespaceId={namespaceId}
-        className={cn(withAvatar && "h-10")}
+        className={cn(withAvatar && avatarStyles, "w-fit")}
       >
         {result}
       </IdentityLink>
