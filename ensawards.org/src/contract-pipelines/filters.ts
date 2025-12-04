@@ -7,7 +7,7 @@ import { ContractTypes } from "@/types/contracts.ts";
  * This is useful for creating category-specific leaderboards where we want to ensure
  * we're comparing apples to apples. For example, on the DAO leaderboard, we only want
  * to include contracts that are DAO-related (governance, treasury, etc.) and exclude
- * DeFi protocol contracts, even if they belong to a DAO organization.
+ * DeFi protocol contracts, even if they belong to the same project the DAO is associated with.
  *
  * @param contractType - The type of contracts to include (e.g., ContractTypes.Dao)
  * @returns A filter function that can be passed to contractPipeline
