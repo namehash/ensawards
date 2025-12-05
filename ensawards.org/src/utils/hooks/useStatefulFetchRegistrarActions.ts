@@ -4,6 +4,7 @@ import {
   RegistrarActionsOrders,
   RegistrarActionsResponseCodes,
   registrarActionsPrerequisites,
+  type RegistrarActionsFilter,
 } from "@ensnode/ensnode-sdk";
 
 import type {
@@ -22,6 +23,7 @@ import {
 import {useIndexingStatusWithSwr} from "@/utils/hooks/useIndexingStatusWithSWR.ts";
 
 interface UseStatefulRegistrarActionsProps {
+  filters?: RegistrarActionsFilter[];
   itemsPerPage: number;
 }
 
@@ -40,6 +42,7 @@ const {
  */
 export function useStatefulRegistrarActions({
   itemsPerPage,
+  filters,
 }: UseStatefulRegistrarActionsProps): StatefulFetchRegistrarActions {
   const ensNodeConfigQuery = useENSNodeConfig();
   const indexingStatusQuery = useIndexingStatusWithSwr();
@@ -64,6 +67,7 @@ export function useStatefulRegistrarActions({
   const registrarActionsQuery = useRegistrarActions({
     order: RegistrarActionsOrders.LatestRegistrarActions,
     itemsPerPage,
+    filters,
     query: {
       enabled: isRegistrarActionsApiSupported,
     },

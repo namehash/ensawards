@@ -3,6 +3,8 @@ import {useStatefulRegistrarActions} from "@/utils/hooks/useStatefulFetchRegistr
 import {
   DisplayRegistrarActionsFeed
 } from "@/components/holiday-referral-awards/referrals/DisplayRegistrarActionsFeed.tsx";
+import { registrarActionsFilter, type RegistrarActionsFilter } from "@ensnode/ensnode-sdk";
+import { namehash } from "viem";
 
 export interface FetchAndDisplayRegistrarActionsFeedProps {
   itemsPerPage: number;
@@ -18,9 +20,16 @@ export function FetchAndDisplayRegistrarActionsFeed({
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
   const namespaceId = ENSNamespaceIds.Mainnet;
+  const filters: RegistrarActionsFilter[] = [
+    // Include records for direct subnames of `.eth`
+    registrarActionsFilter.byParentNode(namehash('eth')),
+    // Include records with `encodedReferrer` other than NULL and ZERO_ENCODED_REFERRER
+    registrarActionsFilter.withReferral(true),
+  ]
 
   const registrarActions = useStatefulRegistrarActions({
     itemsPerPage,
+    filters
   });
 
   return (
