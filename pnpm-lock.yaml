@@ -14,6 +14,7 @@ overrides:
   vite: '>=6.4.1'
   tar: '>=7.5.2'
   js-yaml@<4.1.1: '>=4.1.1'
+  mdast-util-to-hast@<13.2.1: '>=13.2.1'
 
 importers:
 
@@ -35,14 +36,14 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       '@ensnode/datasources':
-        specifier: ^1.0.3
-        version: 1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: ^1.1.0
+        version: 1.1.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@ensnode/ensnode-react':
-        specifier: ^1.0.3
-        version: 1.0.3(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: ^1.1.0
+        version: 1.1.0(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@ensnode/ensnode-sdk':
-        specifier: ^1.0.3
-        version: 1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: ^1.1.0
+        version: 1.1.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@headlessui/react':
         specifier: ^2.2.7
         version: 2.2.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -52,6 +53,9 @@ importers:
       '@lucide/astro':
         specifier: ^0.552.0
         version: 0.552.0(astro@5.16.0(@types/node@22.19.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1))
+      '@namehash/ens-referrals':
+        specifier: ^1.1.0
+        version: 1.1.0(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@radix-ui/react-avatar':
         specifier: ^1.1.10
         version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -371,19 +375,19 @@ packages:
   '@ensdomains/address-encoder@1.1.4':
     resolution: {integrity: sha512-hBY6VxVw9A1cMPOKDIvPB2nlmgaw2dvrrj/p/9tkGWmD+qdfKYZTdZuSdFcUGxhhzEB4HeLG/a98ytlTq84KcA==}
 
-  '@ensnode/datasources@1.0.3':
-    resolution: {integrity: sha512-HyJZEnZ/9w3DXqngSIpGiKVZk5KFENCg1K4wTYclQ3yCYEHSTc0vjzda2doJwv4MA7st0Ih6ZWutP5vZOIK0Gg==}
+  '@ensnode/datasources@1.1.0':
+    resolution: {integrity: sha512-OG4EcSTSsfS2wBLXA152FfmaML47KklRZRYlohn5NzNG/tzFx04ulblOBtwp7nomw1woUa6QY1CsbYfUEB5n5g==}
     peerDependencies:
       viem: ^2.22.13
 
-  '@ensnode/ensnode-react@1.0.3':
-    resolution: {integrity: sha512-ndDOuEu0kwhZW35+et/AdotJiw1RIub3+xz1z/iTLOL1T3UTRZ9wvajDAD3GXQHJGYlIzK07cOAcsGSW2AuaqQ==}
+  '@ensnode/ensnode-react@1.1.0':
+    resolution: {integrity: sha512-wvK78iy7xS9WARDUkL0iw7ftegpUbjwJ5/fwlUWFkaV7yP1K4lAycJYmspOJlCPVqZTrcEJ5xHttMSnkAtbUuA==}
     peerDependencies:
       '@tanstack/react-query': ^5.0.0
       react: ^18.0.0 || ^19.0.0
 
-  '@ensnode/ensnode-sdk@1.0.3':
-    resolution: {integrity: sha512-EQ0q0aJtw0d9MvDR+0+fOJbPYVtOwP9wGCI88RUXsvbvEDIz4bJJSDKSogC+Y6oARG5wn3XyB3eDlk7EH8KFgg==}
+  '@ensnode/ensnode-sdk@1.1.0':
+    resolution: {integrity: sha512-Sxdmi4MejeQQoR3Q5DU/l4VPjwMtW/T3P+zidKZaQDi5ySt3IOnPh0MkZhOBgP6bsjXc61mFiJTRp3DgMlIgoA==}
     peerDependencies:
       viem: ^2.22.13
 
@@ -734,8 +738,8 @@ packages:
     peerDependencies:
       astro: ^4 || ^5
 
-  '@namehash/ens-referrals@1.0.1':
-    resolution: {integrity: sha512-pFlBNtiVNObke4yx5m1HWDIFuc7X3NkBA2zb8IWjng0T7iwQrzhd/0XIzxqBjveso8UbrtoB9a0bztei2HcjbQ==}
+  '@namehash/ens-referrals@1.1.0':
+    resolution: {integrity: sha512-w4PqmVZ365mM3gD1vECERJ4OHtgdgDpvZI7T23dfBUP1vOXCzqi6ThPUpJZAHEG5ik574XvsUJqtXBZXmgbFGw==}
     peerDependencies:
       viem: ^2.22.13
 
@@ -2182,8 +2186,8 @@ packages:
   mdast-util-phrasing@4.1.0:
     resolution: {integrity: sha512-TqICwyvJJpBwvGAMZjj4J2n0X8QWp21b9l0o7eXyVJ25YNWYbJDVIyD1bZXE6WtV6RmKJVYmQAKWa0zWOABz2w==}
 
-  mdast-util-to-hast@13.2.0:
-    resolution: {integrity: sha512-QGYKEuUsYT9ykKBCMOEDLsU5JRObWQusAolFMeko/tYPufNkRffBAQjIE+99jbA87xv6FgmjLtwjh9wBWajwAA==}
+  mdast-util-to-hast@13.2.1:
+    resolution: {integrity: sha512-cctsq2wp5vTsLIcaymblUriiTcZd0CwWtCbLvrOzYCDZoWyMNV8sZ7krj09FSnsiJi3WVsHLM4k6Dq/yaPyCXA==}
 
   mdast-util-to-markdown@2.1.2:
     resolution: {integrity: sha512-xj68wMTvGXVOKonmog6LwyJKrYXZPvlwabaryTjLh9LuvovB/KAH+kvi8Gjj+7rJjsFi23nkUxRQv1KqSroMqA==}
@@ -3447,28 +3451,28 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
 
-  '@ensnode/datasources@1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@ensnode/datasources@1.1.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
       '@ponder/utils': 0.2.14(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
     transitivePeerDependencies:
       - typescript
 
-  '@ensnode/ensnode-react@1.0.3(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@ensnode/ensnode-react@1.1.0(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
-      '@ensnode/ensnode-sdk': 1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/ensnode-sdk': 1.1.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@tanstack/react-query': 5.90.11(react@19.2.0)
       react: 19.2.0
     transitivePeerDependencies:
       - typescript
       - viem
 
-  '@ensnode/ensnode-sdk@1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@ensnode/ensnode-sdk@1.1.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
       '@ensdomains/address-encoder': 1.1.4
-      '@ensnode/datasources': 1.0.3(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
-      '@namehash/ens-referrals': 1.0.1(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/datasources': 1.1.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@namehash/ens-referrals': 1.1.0(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       caip: 1.1.1
       date-fns: 4.1.0
       viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
@@ -3712,7 +3716,7 @@ snapshots:
     dependencies:
       astro: 5.16.0(@types/node@22.19.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1)
 
-  '@namehash/ens-referrals@1.0.1(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@namehash/ens-referrals@1.1.0(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
       viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
 
@@ -4969,7 +4973,7 @@ snapshots:
       hast-util-from-parse5: 8.0.3
       hast-util-to-parse5: 8.0.0
       html-void-elements: 3.0.0
-      mdast-util-to-hast: 13.2.0
+      mdast-util-to-hast: 13.2.1
       parse5: 7.3.0
       unist-util-position: 5.0.0
       unist-util-visit: 5.0.0
@@ -4985,7 +4989,7 @@ snapshots:
       comma-separated-tokens: 2.0.3
       hast-util-whitespace: 3.0.0
       html-void-elements: 3.0.0
-      mdast-util-to-hast: 13.2.0
+      mdast-util-to-hast: 13.2.1
       property-information: 7.1.0
       space-separated-tokens: 2.0.2
       stringify-entities: 4.0.4
@@ -5253,7 +5257,7 @@ snapshots:
       '@types/mdast': 4.0.4
       unist-util-is: 6.0.1
 
-  mdast-util-to-hast@13.2.0:
+  mdast-util-to-hast@13.2.1:
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
@@ -5687,7 +5691,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
-      mdast-util-to-hast: 13.2.0
+      mdast-util-to-hast: 13.2.1
       unified: 11.0.5
       vfile: 6.0.3
 

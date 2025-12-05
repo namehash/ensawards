@@ -56,74 +56,64 @@ const serializeEnsProfileForContract = (
 const testContractsCachedProfile = async (
   contractsCachedIdentity: ContractIdentityPrimaryNamed | ContractIdentityForwardNamed,
 ) => {
-  try {
-    const { records } = await client.resolveRecords(contractsCachedIdentity.name, {
-      addresses: [evmChainIdToCoinType(contractsCachedIdentity.contract.chain.id)],
-      texts: ["docs", "compiled-metadata", "avatar", "audits"],
-    });
+  const { records } = await client.resolveRecords(contractsCachedIdentity.name, {
+    addresses: [evmChainIdToCoinType(contractsCachedIdentity.contract.chain.id)],
+    texts: ["docs", "compiled-metadata", "avatar", "audits"],
+  });
 
-    // Expect the returned address to match our data
+  // Expect the returned address to match our data
 
-    // NOTE: This check is only relevant for the forward named contracts,
-    // as it is redundant for the primary named contracts that already passed the `testContractsPrimaryName` test.
-    // We perform it anyway for the sake of code simplicity, as well as,
-    // having a consistent data model for the `resolveRecords` response.
-    const resolvedAddress =
-      records.addresses[evmChainIdToCoinType(contractsCachedIdentity.contract.chain.id)];
+  // NOTE: This check is only relevant for the forward named contracts,
+  // as it is redundant for the primary named contracts that already passed the `testContractsPrimaryName` test.
+  // We perform it anyway for the sake of code simplicity, as well as,
+  // having a consistent data model for the `resolveRecords` response.
+  const resolvedAddress =
+    records.addresses[evmChainIdToCoinType(contractsCachedIdentity.contract.chain.id)];
 
-    expect(
-      resolvedAddress !== null &&
-        isAddressEqual(contractsCachedIdentity.contract.address, resolvedAddress as Address),
-      `Contract named=${contractsCachedIdentity.name} has a different address than the cached one on ${getChainName(contractsCachedIdentity.contract.chain.id)} chain.`,
-    ).toEqual(true);
+  expect(
+    resolvedAddress !== null &&
+      isAddressEqual(contractsCachedIdentity.contract.address, resolvedAddress as Address),
+    `Contract named=${contractsCachedIdentity.name} has a different address than the cached one on ${getChainName(contractsCachedIdentity.contract.chain.id)} chain.`,
+  ).toEqual(true);
 
-    // Expect records.texts from the response to equal our cached data
-    const serializedProfile = serializeEnsProfileForContract(contractsCachedIdentity.profile);
+  // Expect records.texts from the response to equal our cached data
+  const serializedProfile = serializeEnsProfileForContract(contractsCachedIdentity.profile);
 
-    expect(
-      records.texts.docs,
-      `profile.docs field for contract: ${contractsCachedIdentity.name} is stale`,
-    ).toEqual(serializedProfile.texts.docs);
-    expect(
-      records.texts.compiledMetadata,
-      `profile.compiledMetadata field for contract: ${contractsCachedIdentity.name} is stale`,
-    ).toEqual(serializedProfile.texts["compiled-metadata"]);
-    expect(
-      records.texts.avatar,
-      `profile.avatar field for contract: ${contractsCachedIdentity.name} is stale`,
-    ).toEqual(serializedProfile.texts.avatar);
-    expect(
-      records.texts.audits,
-      `profile.audits field for contract: ${contractsCachedIdentity.name} is stale`,
-    ).toEqual(serializedProfile.texts.audits);
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    console.error(errorMessage);
-  }
+  expect(
+    records.texts.docs,
+    `profile.docs field for contract: ${contractsCachedIdentity.name} is stale`,
+  ).toEqual(serializedProfile.texts.docs);
+  expect(
+    records.texts["compiled-metadata"],
+    `profile.compiledMetadata field for contract: ${contractsCachedIdentity.name} is stale`,
+  ).toEqual(serializedProfile.texts["compiled-metadata"]);
+  expect(
+    records.texts.avatar,
+    `profile.avatar field for contract: ${contractsCachedIdentity.name} is stale`,
+  ).toEqual(serializedProfile.texts.avatar);
+  expect(
+    records.texts.audits,
+    `profile.audits field for contract: ${contractsCachedIdentity.name} is stale`,
+  ).toEqual(serializedProfile.texts.audits);
 };
 
 const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentityResolved) => {
-  try {
-    const { name } = await client.resolvePrimaryName(
-      contractsCachedIdentity.contract.address,
-      contractsCachedIdentity.contract.chain.id,
-    );
+  const { name } = await client.resolvePrimaryName(
+    contractsCachedIdentity.contract.address,
+    contractsCachedIdentity.contract.chain.id,
+  );
 
-    // If contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed,
-    // expect response to match its cached name
-    if (contractsCachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed) {
-      expect(name).toEqual(contractsCachedIdentity.name);
-    }
+  // If contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed,
+  // expect response to match its cached name
+  if (contractsCachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed) {
+    expect(name).toEqual(contractsCachedIdentity.name);
+  }
 
-    // For forward named and unnamed contracts expect the response value to be null
-    // (the contract still isn't primary named)
-    else {
-      const expectedResponseValue = null;
-      expect(name).toEqual(expectedResponseValue);
-    }
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    console.error(errorMessage);
+  // For forward named and unnamed contracts expect the response value to be null
+  // (the contract still isn't primary named)
+  else {
+    const expectedResponseValue = null;
+    expect(name).toEqual(expectedResponseValue);
   }
 };
 

@@ -11,6 +11,8 @@ import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
+import { daoContractsOnly } from "../contract-pipelines/filters";
+import { sortDaoLeaderboard } from "../contract-pipelines/sorting";
 import { APPS } from "../data/apps";
 import { BEST_PRACTICE_CATEGORIES } from "../data/bestPractices";
 import Layout from "../layouts/Layout.astro";
@@ -25,7 +27,10 @@ const placeIcons = [
   "/src/assets/thirdPlaceAward.svg",
 ];
 
-const daoScores = contractPipeline();
+const daoScores = contractPipeline({
+  filter: daoContractsOnly,
+  sort: sortDaoLeaderboard,
+});
 ---
 
 <Layout>
@@ -133,11 +138,10 @@ const daoScores = contractPipeline();
         View full app leaderboard
       </a>
     </ItemsList>
-    <!--TODO: After PR #72 is merged, create a new PR reactivating the leaderboard functionality-->
-    <!--<TopReferrers-->
-    <!--  client:load-->
-    <!--  header="Top Referrers"-->
-    <!--  onENSHolidayReferralsAwards={false}-->
-    <!--/>-->
+    <TopReferrers
+      client:load
+      header="Top Referrers"
+      onENSHolidayReferralsAwards={false}
+    />
   </section>
 </Layout>

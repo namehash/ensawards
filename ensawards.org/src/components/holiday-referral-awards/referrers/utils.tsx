@@ -1,4 +1,4 @@
-import { RelativeTime } from "@/components/atoms/datetime/RelativeTime.tsx";
+import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
@@ -11,11 +11,18 @@ export interface ReferrersSnapshotTimeProps {
 export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshotTimeProps) => {
   return (
     <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap">
-      <RelativeTime
-        prefix="Last updated "
+      Last updated{" "}
+      <AbsoluteTime
         timestamp={lastUpdateTimestamp}
-        enforcePast={true}
-        conciseFormatting={true}
+        options={{
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+          hour12: false,
+        }}
       />
     </p>
   );

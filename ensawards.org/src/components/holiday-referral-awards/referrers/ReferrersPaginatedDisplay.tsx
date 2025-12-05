@@ -8,30 +8,26 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import {
-  ENSNodeClient,
-  type PaginatedAggregatedReferrers,
-  PaginatedAggregatedReferrersResponseCodes,
-} from "@ensnode/ensnode-sdk";
+import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
+import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 
 export interface ReferrersPaginatedDisplayProps {
   itemsPerPage?: number;
 }
 
-//TODO: think about additional props that this component could / should take
-export function ReferrersPaginatedDisplay({ itemsPerPage = 5 }: ReferrersPaginatedDisplayProps) {
+export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPaginatedDisplayProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [aggregatedReferrersData, setAggregatedReferrersData] =
-    useState<PaginatedAggregatedReferrers | null>(null);
+  const [referrersLeaderboardsData, setReferrersLeaderboardsData] =
+    useState<ReferrerLeaderboardPage | null>(null);
   const client = new ENSNodeClient({
-    url: new URL("https://api.alpha-sepolia.yellow.ensnode.io/"), //TODO: replace with the line below later on
+    url: new URL("https://api.alpha.blue.ensnode.io/"), //TODO: replace with the line below later on
     // url: getENSNodeUrl(),
   });
   const ensNodeReactConfig = createConfig({
-    url: "https://api.alpha-sepolia.yellow.ensnode.io/",
+    url: "https://api.alpha.blue.ensnode.io/",
   }); //TODO: replace with getENSNodeUrl for prod
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
@@ -41,24 +37,24 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 5 }: ReferrersPaginat
     setFetchErrorMessage("");
     setIsLoading(true);
     try {
-      const response = await client.getAggregatedReferrers({
+      const response = await client.getReferrerLeaderboard({
         page: currentPage,
         itemsPerPage: itemsPerPage,
       });
 
-      if (response.responseCode !== PaginatedAggregatedReferrersResponseCodes.Ok) {
-        setFetchErrorMessage(response.errorMessage);
+      if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
+        console.error(response.errorMessage);
+        setFetchErrorMessage("An error has occurred while loading the leaderboard.");
         setIsLoading(false);
         return;
       }
 
-      setAggregatedReferrersData(response.data);
-      setNumberOfPages(Math.ceil(response.data.total / itemsPerPage));
+      setReferrersLeaderboardsData(response.data);
+      setNumberOfPages(response.data.paginationContext.totalPages);
     } catch (error) {
       console.error(error);
-      const errorMessage = error instanceof Error ? error.message : "Unknown error";
-      setAggregatedReferrersData(null);
-      setFetchErrorMessage(errorMessage);
+      setReferrersLeaderboardsData(null);
+      setFetchErrorMessage("An error has occurred while loading the leaderboard.");
     } finally {
       setIsLoading(false);
     }
@@ -73,7 +69,7 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 5 }: ReferrersPaginat
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-5">
           <ReferrersList
-            aggregatedReferrersData={aggregatedReferrersData}
+            referrersData={referrersLeaderboardsData}
             isLoading={isLoading}
             generateLinkCTA={
               <a
@@ -94,11 +90,13 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 5 }: ReferrersPaginat
                 <FetchingErrorInfo errorMessage={fetchErrorMessage} retryFunction={startFetching} />
               ) : undefined
             }
-            referrerPositionOffset={(currentPage - 1) * itemsPerPage}
-            numberOfItemsToDisplay={itemsPerPage}
+            loadingStateData={{
+              referrerPositionOffset: (currentPage - 1) * itemsPerPage,
+              numberOfItemsToDisplay: itemsPerPage,
+            }}
           />
-          {aggregatedReferrersData !== null &&
-            aggregatedReferrersData.referrers.length > 0 &&
+          {referrersLeaderboardsData !== null &&
+            referrersLeaderboardsData.paginationContext.totalRecords > 0 &&
             numberOfPages > 1 && (
               <Pagination
                 numberOfPages={numberOfPages}

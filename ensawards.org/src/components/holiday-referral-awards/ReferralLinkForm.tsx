@@ -4,12 +4,14 @@ import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import type { FormField, ValidationErrors } from "@/components/molecules/form/types.ts";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { capitalizeFormLabel } from "@/utils";
+import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import { resolveEthAddress } from "@/utils/resolution.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { type NormalizedName } from "@ensnode/ensnode-sdk";
+import { buildEnsReferralUrl } from "@namehash/ens-referrals";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
-import { type Address, getAddress, isAddress } from "viem";
+import { isAddress } from "viem";
 import { normalize } from "viem/ens";
 import * as Yup from "yup";
 
@@ -22,7 +24,10 @@ const formFields: FormField[] = [
     label: "referral award recipient",
     type: "text",
     required: true,
-    placeholder: "Enter your ENS name or Ethereum Mainnet address",
+    placeholder: {
+      desktop: "Enter your ENS name or Ethereum Mainnet address",
+      mobile: "Enter your ENS name or address",
+    },
   },
 ];
 
@@ -42,19 +47,6 @@ const getInitialValidationErrorsState = (formFields: FormField[]): ValidationErr
   return validationErrorsInitialState;
 };
 
-// TODO: remove after ens-referrals package is published and use its function instead
-/**
- * Build a URL to the official ENS manager app
- * where the given {@link Address} is set as the referrer.
- */
-function buildEnsReferralUrl(address: Address): URL {
-  const ensAppUrl = new URL("https://app.ens.domains");
-
-  ensAppUrl.searchParams.set("referrer", getAddress(address));
-
-  return ensAppUrl;
-}
-
 export function ReferralLinkForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [overallFormErrorMessage, setOverallFormErrorMessage] = useState("");
@@ -63,6 +55,7 @@ export function ReferralLinkForm() {
     getInitialValidationErrorsState(formFields),
   );
   const [generatedLink, setGeneratedLink] = useState<string>("");
+  const isMobile = useIsMobile();
 
   const submitForm = async (e: FormEvent) => {
     setOverallFormErrorMessage("");
@@ -140,10 +133,8 @@ export function ReferralLinkForm() {
         // Likely a network error
         console.error("Network error: ", error);
         setOverallFormErrorMessage("Connection lost. Please check your connection and try again.");
-      } else if (error instanceof Error) {
-        console.log(error);
-        setOverallFormErrorMessage(error.message);
       } else {
+        console.log(error);
         setOverallFormErrorMessage("Request error. Please try again.");
       }
     }
@@ -249,7 +240,7 @@ export function ReferralLinkForm() {
                   type={field.type}
                   disabled={isLoading}
                   name={field.label}
-                  placeholder={field.placeholder}
+                  placeholder={isMobile ? field.placeholder?.mobile : field.placeholder?.desktop}
                   autoComplete="off"
                   onChange={handleInputChange}
                   error={validationErrors[field.label]}

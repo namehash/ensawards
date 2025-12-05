@@ -9,6 +9,8 @@ import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../../../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../../../contract-pipelines";
+import { daoContractsOnly } from "../../../contract-pipelines/filters";
+import { sortDaoLeaderboard } from "../../../contract-pipelines/sorting";
 import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
 import { nameYourSmartContracts } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
@@ -18,7 +20,10 @@ import { scrollWithOffset } from "../../../utils/domActions";
 import { markdownToHtml } from "../../../utils/markdown";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 
-const daoScores = contractPipeline();
+const daoScores = contractPipeline({
+  filter: daoContractsOnly,
+  sort: sortDaoLeaderboard,
+});
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
