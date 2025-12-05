@@ -3,9 +3,10 @@ import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type BenchmarkResult, type BenchmarkVerifier } from "@/types/apps.ts";
+import { chainIdToNamespaceId } from "@/utils/chains.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { ENSNamespaceIds, ENSNodeClient, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
+import { ENSNodeClient, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 import { Check, CheckCheck, X as XIcon } from "lucide-react";
 import React from "react";
 import { cn } from "../../../utils/tailwindClassConcatenation";
@@ -29,6 +30,8 @@ const TooltipContent = ({ verification }: { verification?: BenchmarkVerifier }) 
     resolutionStatus: "unresolved",
   };
 
+  const namespaceId = chainIdToNamespaceId(verification.chainId);
+
   const verifiedDate = new Date(verification.verifiedAt * 1000).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -41,7 +44,7 @@ const TooltipContent = ({ verification }: { verification?: BenchmarkVerifier }) 
         <p className="text-muted-foreground text-xs">Verifier info:</p>
         <ResolveAndDisplayIdentity
           identity={identity}
-          namespaceId={ENSNamespaceIds.Mainnet}
+          namespaceId={namespaceId}
           withLink={true}
           withTooltip={false}
           withAvatar={true}
