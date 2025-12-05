@@ -17,7 +17,7 @@ export function markdownToHtml(markdown: string): string {
   // Convert markdown links [text](url) to HTML <a> tags
   result = result.replace(
     /\[([^\]]+)\]\(([^)]+)\)/g,
-    '<a href="$2" class="underline underline-offset-2 text-blue-600 hover:text-blue-800 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>',
+    '<a href="$2" class="text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200" target="_blank" rel="noopener noreferrer">$1</a>',
   );
 
   return result;

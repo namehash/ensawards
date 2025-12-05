@@ -1,5 +1,6 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
+import { Skeleton } from "@/components/ui/skeleton";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type BenchmarkResult, type BenchmarkVerifier } from "@/types/apps.ts";
 import { getENSNodeUrl } from "@/utils/env";
@@ -14,6 +15,7 @@ export interface MatrixBadgeProps {
   className: string;
   result: BenchmarkResult;
   verification?: BenchmarkVerifier;
+  isLoading?: boolean;
 }
 
 const TooltipContent = ({ verification }: { verification?: BenchmarkVerifier }) => {
@@ -34,18 +36,19 @@ const TooltipContent = ({ verification }: { verification?: BenchmarkVerifier }) 
   });
 
   return (
-    <div className="max-w-[275px] flex flex-col gap-2">
-      <div className="text-sm">
+    <div className="flex flex-col gap-3 p-1">
+      <div className="flex flex-col gap-1">
+        <p className="text-muted-foreground text-xs">Verifier info:</p>
         <ResolveAndDisplayIdentity
           identity={identity}
           namespaceId={ENSNamespaceIds.Mainnet}
-          prefix="Verified by"
           withLink={true}
           withTooltip={false}
           withAvatar={true}
+          className="text-blue-400 hover:underline hover:underline-offset-[25%]"
         />
       </div>
-      <p className="text-xs text-muted-foreground">Verified on {verifiedDate}</p>
+      <p className="text-xs text-muted-foreground">Benchmarked on {verifiedDate}</p>
     </div>
   );
 };
@@ -58,7 +61,17 @@ const ensNodeReactConfig = createConfig({
   url: getENSNodeUrl(),
 });
 
-export function MatrixBadge({ text, className, result, verification }: MatrixBadgeProps) {
+export function MatrixBadge({
+  text,
+  className,
+  result,
+  verification,
+  isLoading = false,
+}: MatrixBadgeProps) {
+  if (isLoading) {
+    return <MatrixBadgeLoading />;
+  }
+
   const badgeContent = (
     <span
       className={cn(
@@ -86,5 +99,14 @@ export function MatrixBadge({ text, className, result, verification }: MatrixBad
         </GenericTooltip>
       </TooltipProvider>
     </ENSNodeProvider>
+  );
+}
+
+export function MatrixBadgeLoading() {
+  return (
+    <div className="w-fit flex flex-row flex-nowrap justify-center items-center gap-[6px] pl-[10px] pr-3 py-1 rounded-full">
+      <Skeleton className="h-4 w-4 rounded-full bg-gray-300" />
+      <Skeleton className="h-4 w-16 bg-gray-300" />
+    </div>
   );
 }
