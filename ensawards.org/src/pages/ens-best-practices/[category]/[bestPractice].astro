@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import MatrixBadge from "../../../components/atoms/badges/MatrixBadge.astro";
+import { MatrixBadge } from "../../../components/atoms/badges/MatrixBadge.tsx";
 import BenchmarkResultCard from "../../../components/atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
@@ -15,6 +15,7 @@ import {
   calculateAppsPassed,
   getBestPracticeBySlug,
 } from "../../../utils/dataAccess";
+import { markdownToHtml } from "../../../utils/markdown";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 export function getStaticPaths() {
@@ -38,14 +39,32 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
 
 const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
 
-const benchmarkedApps = APPS.filter(
-  (app) =>
-    app.benchmarks.find(
-      (benchmark) =>
-        benchmark.bestPracticeDetails.categorySlug === bestPracticeToDisplay.categorySlug &&
-        benchmark.bestPracticeDetails.id === bestPracticeToDisplay.id,
-    ) !== undefined,
+// Get apps that have benchmarks for this specific best practice
+const appsWithBenchmarks = APPS.map((app) => {
+  const matchingBenchmark = app.benchmarks.find(
+    (benchmark) =>
+      benchmark.bestPracticeDetails.categorySlug === bestPracticeToDisplay?.categorySlug &&
+      benchmark.bestPracticeDetails.id === bestPracticeToDisplay?.id,
+  );
+
+  return {
+    app,
+    benchmark: matchingBenchmark,
+  };
+});
+
+// Filter out apps that don't have a benchmark for this best practice
+const appsWithValidBenchmarks = appsWithBenchmarks.filter(
+  ({ benchmark }) => benchmark !== undefined,
 );
+
+// Sort apps by benchmark result (alphabetically descending)
+const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) =>
+  b.benchmark!.result.localeCompare(a.benchmark!.result),
+);
+
+// Extract just the app objects for final result
+const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
 ---
   {
       bestPracticeToDisplay === undefined ? (
@@ -118,7 +137,9 @@ const benchmarkedApps = APPS.filter(
                                                   className={
                                                       BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
                                                   }
-                                                  iconId={relatedBenchmark.result}
+                                                  verification={relatedBenchmark.verification}
+                                                  result={relatedBenchmark.result}
+                                                  client:load
                                           />
                                           <Image
                                                   src={images[app.iconPath]()}
@@ -143,9 +164,7 @@ const benchmarkedApps = APPS.filter(
                       <h2 class="text-2xl leading-none font-semibold text-black">
                         {bestPracticeToDisplay.technicalDetails.main.header}
                       </h2>
-                      <p class={technicalSectionContentStyles}>
-                        {bestPracticeToDisplay.technicalDetails.main.content}
-                      </p>
+                      <p class={technicalSectionContentStyles} set:html={markdownToHtml(bestPracticeToDisplay.technicalDetails.main.content)} />
                       {
                         bestPracticeToDisplay.technicalDetails.sides.map(
                             (additionalContent) => (
@@ -153,9 +172,7 @@ const benchmarkedApps = APPS.filter(
                                   <h3 class={technicalSectionMinorHeaderStyles}>
                                     {additionalContent.header}
                                   </h3>
-                                  <p class={technicalSectionContentStyles}>
-                                    {additionalContent.content}
-                                  </p>
+                                  <p class={technicalSectionContentStyles} set:html={markdownToHtml(additionalContent.content)} />
                                 </>
                             ),
                         )

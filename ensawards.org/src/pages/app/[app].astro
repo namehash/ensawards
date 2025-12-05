@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
-import MatrixBadge from "../../components/atoms/badges/MatrixBadge.astro";
+import { MatrixBadge } from "../../components/atoms/badges/MatrixBadge.tsx";
 import BenchmarkResultCard from "../../components/atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
@@ -107,7 +107,9 @@ if (appToDisplay !== undefined) {
                 slot="badge"
                 text={benchmark.result}
                 className={BenchmarkResultToBadgeStyles.get(benchmark.result)!}
-                iconId={benchmark.result}
+                verification={benchmark.verification}
+                result={benchmark.result}
+                client:load
               />
             </BenchmarkResultCard>
           ))}

@@ -17,7 +17,7 @@ import { EnsAvatar } from "./EnsAvatar.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { AddressDisplay, IdentityLink, IdentityTooltip, NameDisplay } from "./utils";
 
-interface ResolveAndDisplayIdentityProps {
+export interface ResolveAndDisplayIdentityProps {
   identity: UnresolvedIdentity;
   namespaceId: ENSNamespaceId;
   withLink?: boolean;
@@ -109,7 +109,8 @@ export function DisplayIdentity({
     identitifer = <Skeleton className={cn("h-4 w-24", className)} />;
   } else if (
     identity.resolutionStatus === ResolutionStatusIds.Unnamed ||
-    identity.resolutionStatus === ResolutionStatusIds.Unknown
+    identity.resolutionStatus === ResolutionStatusIds.Unknown ||
+    !identity.name
   ) {
     avatar = (
       <div className="w-10 h-10 flex justify-center items-center">

@@ -17,21 +17,24 @@ export const recognizeAllENSNames: BestPractice = {
     main: {
       header: "Technical Details",
       content:
-        "The following is temporary placeholder content. Technical details will be added soon. " +
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        // Using an approach of practical steps of how to implement with authoritative links with more details
+        "To properly support all valid ENS names, your application should implement a structured validation approach. " +
+        "Begin by handling empty input cases by prompting users to enter an ENS name or address. " +
+        "Then verify if the input represents an address format using a library such as [Viem](https://viem.sh/docs/utilities/isAddress), treating it as an address if valid. " +
+        "For non-address inputs, determine if the input can be normalized as an ENS name using `ens_normalize` from [ENSIP-15](https://docs.ens.domains/ensip/15). " +
+        "When `ens_normalize` executes without throwing an error, the input is considered normalizable (meaning normalization succeeds), which differs from being normalized (where input equals output). " +
+        "Then you should process the normalized result as the canonical ENS name representation. " +
+        "Libraries including [Viem](https://viem.sh/docs/ens/utilities/normalize), [ensjs](https://github.com/ensdomains/ensjs/blob/8b4c34840cdef8828961453554e12aea8c9bfe83/packages/ensjs/src/utils/normalise.ts#L34) and [ens-normalize.js](https://github.com/adraffy/ens-normalize.js) provide `ens_normalize` implementations, with additional options available in the [ENS Documentation](https://docs.ens.domains/web/libraries). " +
+        "Finally, display an appropriate error message when input fails validation as either a valid name or address. ",
     },
     sides: [
       {
         header: "Additional Details",
         content:
-          "The following is temporary placeholder content. Technical details will be added soon. " +
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "Once you have properly implemented ENS name detection, consider adding more details and records to your app. " +
+          // I'm using https://ensnode.io/docs/ as the main reference point for our docs since it will remain a static path no matter what we update in our docs. Ideally our quickstart will become more robust and be perfect for a callout like this.
+          "[ENSNode](https://ensnode.io/docs/) makes it simple and easy to fetch ENS profile data that can be used to enhance your user experience. " +
+          "This could include avatars, social media profiles, links to website, and much more listed in the official [ENS documentation](https://docs.ens.domains/web).",
       },
     ],
   },
@@ -42,7 +45,7 @@ export const nameYourSmartContracts: BestPractice = {
   slug: "name-your-smart-contracts",
   name: "Name your smart contracts",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Assign ENS names to your smart contracts to help users easily identify what they're interacting with and enhance transaction security.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
   appliesTo: [BestPracticeApplications.Dao],
@@ -50,21 +53,19 @@ export const nameYourSmartContracts: BestPractice = {
     main: {
       header: "Technical Details",
       content:
-        "The following is temporary placeholder content. Technical details will be added soon. " +
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "Contracts can be assigned ENS names during deployment or post-deployment. " +
+        "For deployment-time naming, see the [Enscribe documentation](https://www.enscribe.xyz/docs/introduction/naming-contracts) which goes into greater detail on the process. " +
+        "For post-deployment naming we recommend using the [Enscribe App](https://app.enscribe.xyz/). " +
+        "Note that setting a [primary name](https://docs.ens.domains/web/reverse) (reverse resolution) requires the contract to implement [Ownable](https://docs.openzeppelin.com/contracts/5.x/access-control#ownership-and-ownable). " +
+        "Contracts without Ownable can still have forward resolution configured (`name → address`) but cannot set a reverse record (`address → name`).",
     },
     sides: [
       {
         header: "Additional Details",
         content:
-          "The following is temporary placeholder content. Technical details will be added soon. " +
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "Assigning ENS names to contracts enables users to verify they're interacting with the correct contract address and provides human-readable context in transaction interfaces. " +
+          "This is particularly valuable for security, as users can confirm `uniswap.eth` instead of validating a long hexadecimal address. " +
+          "If you've deployed contracts without Ownable, you can still improve UX by configuring forward resolution, though full naming (with reverse resolution) provides the best user experience.",
       },
     ],
   },
@@ -75,7 +76,7 @@ export const displayNamedSmartContracts: BestPractice = {
   slug: "display-named-smart-contracts",
   name: "Display named smart contracts",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Display ENS names instead of addresses when users interact with named smart contracts.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
   appliesTo: [BestPracticeApplications.App],
@@ -83,21 +84,17 @@ export const displayNamedSmartContracts: BestPractice = {
     main: {
       header: "Technical Details",
       content:
-        "The following is temporary placeholder content. Technical details will be added soon. " +
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "Looking up the name of a smart contract uses the same process as looking up the name of any other account. " +
+        "You can use a variety of libraries and tools such as [Viem](https://viem.sh/docs/ens/actions/getEnsName) or [ensjs](https://github.com/ensdomains/ensjs/blob/main/docs/public/function.getName.md) which can perform a reverse lookup of a [primary name](https://docs.ens.domains/web/reverse) using the contract address. " +
+        "When users interact with a contract with a specific chain, be sure to use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard to query the primary name for that chain, rather than defaulting to Ethereum mainnet. " +
+        "[ENSNode](https://ensnode.io/docs) simplifies multichain primary lookups across all chains.",
     },
     sides: [
       {
         header: "Additional Details",
         content:
-          "The following is temporary placeholder content. Technical details will be added soon. " +
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "If a contract has an ENS name, you can use its ENS profile to power additional UX improvements such as avatars, metadata, audit information, and more. " +
+          "More information can be found at the [ENSIP Proposal](https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397).",
       },
     ],
   },
@@ -111,22 +108,22 @@ export const BEST_PRACTICES: BestPractice[] = [
 
 export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
   {
+    id: "contract-naming",
+    slug: "contract-naming",
+    name: "Contract naming",
+    description:
+      "Assign and display ENS names for smart contracts to improve security and enhance UX.",
+    status: CategoryStatus.Updated,
+    bestPractices: [nameYourSmartContracts, displayNamedSmartContracts],
+  },
+  {
     id: "forward-resolution",
     slug: "forward-resolution",
     name: "Forward Resolution",
     description:
       "Lookup social records, the contenthash of decentralized websites, avatar images, multichain deposit addresses, and more.",
-    status: CategoryStatus.Updated,
+    status: CategoryStatus.ComingSoon,
     bestPractices: [recognizeAllENSNames],
-  },
-  {
-    id: "contract-naming",
-    slug: "contract-naming",
-    name: "Contract naming",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    status: CategoryStatus.Updated,
-    bestPractices: [nameYourSmartContracts, displayNamedSmartContracts],
   },
   {
     id: "reverse-resolution",

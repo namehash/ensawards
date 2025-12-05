@@ -1,6 +1,6 @@
-import type { ChainId } from "@ensnode/ensnode-sdk";
+import { ENSNamespaceIds, type ChainId } from "@ensnode/ensnode-sdk";
 import type { Address } from "viem";
-import { arbitrum, base, linea, mainnet, optimism, scroll } from "viem/chains";
+import { arbitrum, base, linea, mainnet, optimism, scroll, sepolia, holesky } from "viem/chains";
 
 export const SUPPORTED_CHAINS = [mainnet, base, linea, optimism, arbitrum, scroll];
 
@@ -60,3 +60,25 @@ export const getBlockExplorerUrlForContract = (
 
   return new URL(`/address/${contractAddress}`, chainBlockExplorer.toString());
 };
+
+/**
+ * Converts a chainId to an ENSNamespaceId for use with ENSNode SDK.
+ *
+ * @param chainId - The chain ID to convert
+ * @returns The corresponding ENSNamespaceId, defaults to Mainnet if unknown
+ */
+export function chainIdToNamespaceId(
+  chainId: ChainId,
+): (typeof ENSNamespaceIds)[keyof typeof ENSNamespaceIds] {
+  switch (chainId) {
+    case mainnet.id:
+      return ENSNamespaceIds.Mainnet;
+    case sepolia.id:
+      return ENSNamespaceIds.Sepolia;
+    case holesky.id:
+      return ENSNamespaceIds.Holesky;
+    default:
+      // Default to Mainnet for L2s and unknown chains
+      return ENSNamespaceIds.Mainnet;
+  }
+}
