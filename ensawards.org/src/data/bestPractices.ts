@@ -72,12 +72,12 @@ export const nameYourSmartContracts: BestPractice = {
   },
 };
 
-export const displayNamedSmartContracts: BestPractice = {
-  id: "display-named-smart-contracts",
-  slug: "display-named-smart-contracts",
-  name: "Display named smart contracts",
+export const displayNamedSmartContractsMainnet: BestPractice = {
+  id: "display-named-smart-contracts-mainnet",
+  slug: "display-named-smart-contracts-mainnet",
+  name: "Display named smart contracts on Ethereum mainnet",
   description:
-    "Display ENS names instead of addresses when users interact with named smart contracts.",
+    "Display ENS names instead of addresses when users interact with named smart contracts on Ethereum mainnet.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
   appliesTo: [BestPracticeApplications.App],
@@ -85,10 +85,8 @@ export const displayNamedSmartContracts: BestPractice = {
     main: {
       header: "Technical Details",
       content:
-        "Looking up the name of a smart contract uses the same process as looking up the name of any other account. " +
-        "You can use a variety of libraries to lookup the [primary name](https://docs.ens.domains/web/reverse) of a contract address such as [Viem](https://viem.sh/docs/ens/actions/getEnsName), [ensjs](https://github.com/ensdomains/ensjs/blob/main/docs/public/function.getName.md), or [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md). " +
-        "When users interact with a contract with a specific chain, be sure to use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard to query the primary name for that chain, rather than defaulting to Ethereum mainnet. " +
-        "[ENSNode](https://ensnode.io/docs) simplifies multichain primary lookups across all chains.",
+        "Looking up the name of a smart contract on Ethereum mainnet uses the same process as looking up the name of any other account. " +
+        "You can use a variety of libraries to lookup the [primary name](https://docs.ens.domains/web/reverse) of a contract address such as [Viem](https://viem.sh/docs/ens/actions/getEnsName), [ensjs](https://github.com/ensdomains/ensjs/blob/main/docs/public/function.getName.md), or [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md).",
     },
     sides: [
       {
@@ -101,7 +99,41 @@ export const displayNamedSmartContracts: BestPractice = {
   },
 };
 
-export const BEST_PRACTICES: BestPractice[] = [nameYourSmartContracts, displayNamedSmartContracts];
+export const displayNamedSmartContractsL2: BestPractice = {
+  id: "display-named-smart-contracts-l2-chains",
+  slug: "display-named-smart-contracts-l2-chains",
+  name: "Display named smart contracts on L2 chains",
+  description:
+    "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",
+  categoryName: "Contract naming",
+  categorySlug: "contract-naming",
+  appliesTo: [BestPracticeApplications.App],
+  technicalDetails: {
+    main: {
+      header: "Technical Details",
+      content:
+        "When users interact with a contract on a L2 chain, use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard for multichain primary name resolution. " +
+        "ENSIP-19 provides chain-specific primary names for supported L2 networks (including Optimism, Arbitrum, Base, Linea, and Scroll), with automatic fallback to the default primary name from mainnet when no chain-specific name exists. " +
+        "You can use a variety of libraries to lookup the [primary name](https://docs.ens.domains/web/reverse) of a contract address that support ENSIP-19 such as [Viem](https://viem.sh/docs/ens/actions/getEnsName#chain-specific-resolution) or [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md).",
+    },
+    sides: [
+      {
+        header: "Additional Details",
+        content:
+          "ENSIP-19 enables a consistent identity resolution experience across the multichain ecosystem. " +
+          "Contracts can set chain-specific primary names for different L2 networks, allowing for context-appropriate naming while maintaining a fallback to their mainnet identity. " +
+          "If a contract has an ENS name, you can use its ENS profile to power additional UX improvements such as avatars, metadata, audit information, and more. " +
+          "More information can be found at the [ENSIP Proposal](https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397).",
+      },
+    ],
+  },
+};
+
+export const BEST_PRACTICES: BestPractice[] = [
+  nameYourSmartContracts,
+  displayNamedSmartContractsMainnet,
+  displayNamedSmartContractsL2,
+];
 
 export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
   {
@@ -110,7 +142,11 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
     name: "Contract naming",
     description: "Improve the UX and security of smart contract interactions.",
     status: CategoryStatus.Updated,
-    bestPractices: [nameYourSmartContracts, displayNamedSmartContracts],
+    bestPractices: [
+      nameYourSmartContracts,
+      displayNamedSmartContracts,
+      displayNamedSmartContractsL2,
+    ],
   },
   {
     id: "forward-resolution",
