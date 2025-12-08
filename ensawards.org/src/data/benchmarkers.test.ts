@@ -1,5 +1,5 @@
-import type { AccountId } from "@ensnode/ensnode-sdk";
 import { benchmarkers } from "@/data/benchmarkers";
+import type { AccountId } from "@ensnode/ensnode-sdk";
 import { isAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
