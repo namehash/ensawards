@@ -141,7 +141,7 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
     slug: "contract-naming",
     name: "Contract naming",
     description: "Improve the UX and security of smart contract interactions.",
-    status: CategoryStatus.Updated,
+    status: CategoryStatus.Active,
     bestPractices: [
       nameYourSmartContracts,
       displayNamedSmartContractsMainnet,
