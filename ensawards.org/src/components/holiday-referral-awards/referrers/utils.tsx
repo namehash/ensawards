@@ -28,43 +28,6 @@ export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshot
   );
 };
 
-export interface FetchingErrorProps {
-  errorMessage: string;
-  retryFunction: () => void;
-}
-export const FetchingErrorInfo = ({ errorMessage, retryFunction }: FetchingErrorProps) => {
-  const verticalContainerStyles = "w-full flex flex-col justify-start items-center";
-  return (
-    <div className={cn(verticalContainerStyles, "gap-5 justify-center md:min-h-[305px]")}>
-      <div className="w-[48px] h-[48px] flex flex-col justify-center items-center rounded-full bg-red-600/10">
-        <AlertIcon size={20} className="flex-shrink-0 text-red-600" />
-      </div>
-      <div className={cn(verticalContainerStyles, "gap-4")}>
-        <div className={cn(verticalContainerStyles, "gap-1")}>
-          <h3 className="text-xl leading-normal font-semibold text-black text-center">
-            Error loading referrer data
-          </h3>
-          <p className="text-base leading-normal font-normal text-muted-foreground text-center">
-            {errorMessage} Please try again later.
-          </p>
-        </div>
-        <button
-          className={cn(
-            shadcnButtonVariants({
-              variant: "outline",
-              size: "default",
-              className: "cursor-pointer rounded-full",
-            }),
-          )}
-          onClick={retryFunction}
-        >
-          Try again
-        </button>
-      </div>
-    </div>
-  );
-};
-
 interface NoReferrersInfoProps {
   cta: ReactElement;
 }

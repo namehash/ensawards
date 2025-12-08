@@ -2,12 +2,12 @@ import {
   ReferrersList,
   type ReferrersListProps,
 } from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
-import { FetchingErrorInfo } from "@/components/holiday-referral-awards/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { useMemo, useState } from "react";
+import {ErrorInfo} from "@/components/atoms/ErrorInfo.tsx";
 
 type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 
@@ -84,12 +84,13 @@ export function MockReferrersList() {
           isLoading: false,
           generateLinkCTA: <p>Placeholder</p>,
           error: (
-            <FetchingErrorInfo
-              errorMessage="Mock error message."
-              retryFunction={() => {
-                alert("Retry fetching");
-              }}
-            />
+              <ErrorInfo title="Error loading referrer data" description={["Mock error message. Please try again later."]} >
+                <button className={cn(shadcnButtonVariants({
+                  variant: "outline",
+                  size: "default",
+                  className: "rounded-full cursor-pointer"
+                }))} onClick={() => alert("Retry fetching")}>Try again</button>
+              </ErrorInfo>
           ),
         };
 

@@ -11,6 +11,7 @@ import {
 import {TooltipProvider} from "@/components/ui/tooltip.tsx";
 import {createConfig, ENSNodeProvider} from "@ensnode/ensnode-react";
 import {getENSNodeUrl} from "@/utils/env";
+import {ENSHolidayAwardsReferralIncentiveProgram} from "@/data/referralIncentivePrograms.ts";
 
 const variantIds = [...variants.keys()];
 
@@ -20,7 +21,7 @@ export function MockDisplayRegistrarActionsFeed() {
     });
 
     const namespaceId = ENSNamespaceIds.Sepolia;
-    const title = "DisplayRegistrarActionsMock";
+    const title = "ENS referrals live feed";
 
     const [selectedVariantId, setSelectedVariantId] = useState(variantIds[0]);
     const selectedVariant = variants.get(selectedVariantId);
@@ -51,12 +52,13 @@ export function MockDisplayRegistrarActionsFeed() {
                         ))}
                     </div>
             </div>
-            <div className="flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
+            <div className="w-full flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
                 <h3>Output:</h3>
                 <DisplayRegistrarActionsFeed
                     namespaceId={namespaceId}
                     title={title}
                     registrarActions={selectedVariant}
+                    referralIncentiveProgram={ENSHolidayAwardsReferralIncentiveProgram}
                 />
             </div>{" "}
         </section>

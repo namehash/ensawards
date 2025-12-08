@@ -1,5 +1,5 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
-import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type {OmnichainIndexingStatusId, UnixTimestamp} from "@ensnode/ensnode-sdk";
 import { getUnixTime } from "date-fns";
 import type { Address } from "viem";
 
@@ -78,3 +78,9 @@ export const truncateAddress = (address: Address) =>
 export const ENS_CONTRACT_NAMING_SEASON_APPROX_END: UnixTimestamp = getUnixTime(
   new Date("2026-04-30T23:59:59.000Z"),
 );
+
+export function formatOmnichainIndexingStatus(status: OmnichainIndexingStatusId): string {
+  const [, formattedStatus] = status.split("-");
+
+  return formattedStatus;
+}

@@ -1,5 +1,5 @@
 import type {ENSNamespaceId} from "@ensnode/datasources";
-import type {NamedRegistrarAction} from "@ensnode/ensnode-sdk";
+import {type NamedRegistrarAction, OmnichainIndexingStatusIds} from "@ensnode/ensnode-sdk";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import {
     type StatefulFetchRegistrarActions,
@@ -9,6 +9,10 @@ import {getENSNodeUrl} from "@/utils/env";
 import {ErrorInfo} from "@/components/atoms/ErrorInfo.tsx";
 import {RegistrarActionCardLoading, RegistrarActionCardMemo} from "@/components/atoms/cards/RegistrarActionCard.tsx";
 import type {ReferralIncentiveProgram} from "@/types/referralIncentivePrograms.ts";
+import {shadcnButtonVariants} from "@/components/ui/shadcnButtonStyles.ts";
+import {cn} from "@/utils/tailwindClassConcatenation.ts";
+import {formatOmnichainIndexingStatus} from "@/utils";
+import {Badge} from "@/components/ui/badge.tsx";
 
 interface DisplayRegistrarActionsListProps {
     namespaceId: ENSNamespaceId;
@@ -87,45 +91,47 @@ export function DisplayRegistrarActionsFeed({
 
         case StatefulFetchStatusIds.Unsupported:
             return (
-                <div>
-                    <p>The Registrar Actions API is unavailable on the connected ENSNode instance.</p>
-                    <p>The Registrar Actions API requires all of the following plugins to be activated:</p>
-
-                    <ul>
-                        {registrarActions.requiredPlugins.map((requiredPluginName) => (
-                            <li className="inline" key={requiredPluginName}>
-                                <span>{requiredPluginName}</span>{" "}
-                            </li>
+                <ErrorInfo title={title} description={["The Registrar Actions API is unavailable on the connected ENSNode instance.", "The Registrar Actions API requires all of the following plugins to be activated:"]}>
+                    <div className="w-full flex flex-col justify-start items-center gap-4">
+                        <div className="flex flex-row flex-wrap justify-center items-center gap-2">
+                            {registrarActions.requiredPlugins.map((requiredPluginName) => (
+                                    <Badge key={requiredPluginName} variant="secondary">{requiredPluginName}</Badge>
+                            ))}
+                        </div>
+                        <a className={cn(shadcnButtonVariants({
+                                variant: "outline",
+                                size: "default",
+                                className: "rounded-full cursor-pointer"
+                            }
                         ))}
-                    </ul>
-                    <a href={`https://admin.ensnode.io/connection?connection=${encodeURIComponent(getENSNodeUrl().href)}`} target="_blank">
-                        Check ENSIndexer plugins
-                    </a>
-                </div>
+                           href={`https://admin.ensnode.io/connection?connection=${encodeURIComponent(getENSNodeUrl().href)}`}
+                           target="_blank">
+                            Check ENSIndexer plugins
+                        </a>
+                    </div>
+                </ErrorInfo>
             );
 
         case StatefulFetchStatusIds.NotReady:
             return (
-                <div>
-                    <p>The Registrar Actions API on the connected ENSNode instance is not available yet.</p>
-                    <p>
-                        The Registrar Actions API will be available once the omnichain indexing status reaches
-                        one of the following:
-                    </p>
-                    <ul>
-                        {registrarActions.supportedIndexingStatusIds.map((supportedStatusId) => (
-                            <li className="inline" key={supportedStatusId}>
-                                <span>
-                                    {supportedStatusId.split("-")}
-                                </span>{" "}
-                            </li>
-                        ))}
-                    </ul>
-                    <a href={`https://admin.ensnode.io/status?connection=${encodeURIComponent(getENSNodeUrl().href)}`}
-                       target="_blank">
-                        Check status
-                    </a>
-                </div>
+                <ErrorInfo title={title} description={["The Registrar Actions API on the connected ENSNode instance is not available yet.", "The Registrar Actions API will be available once the omnichain indexing status reaches\n" +
+                "                            one of the following:"]}>
+                    <div className="w-full flex flex-col justify-start items-center gap-4">
+                        <div className="flex flex-row flex-wrap justify-center items-center gap-2">
+                            <Badge variant="secondary">{formatOmnichainIndexingStatus(OmnichainIndexingStatusIds.Completed)}</Badge>
+                            <Badge variant="secondary">{formatOmnichainIndexingStatus(OmnichainIndexingStatusIds.Following)}</Badge>
+                        </div>
+                        <a className={cn(shadcnButtonVariants({
+                            variant: "outline",
+                            size: "default",
+                            className: "rounded-full cursor-pointer"
+                            }
+                        ))} href={`https://admin.ensnode.io/status?connection=${encodeURIComponent(getENSNodeUrl().href)}`}
+                           target="_blank">
+                            Check status
+                        </a>
+                    </div>
+                </ErrorInfo>
             );
 
         case StatefulFetchStatusIds.Loading:
@@ -134,7 +140,13 @@ export function DisplayRegistrarActionsFeed({
             );
 
         case StatefulFetchStatusIds.Error:
-            return <ErrorInfo title={title} description={registrarActions.reason} />;
+            return <ErrorInfo title={title} description={[registrarActions.reason]} >
+                <button className={cn(shadcnButtonVariants({
+                    variant: "outline",
+                    size: "default",
+                    className: "rounded-full cursor-pointer"
+                }))} onClick={() => window.location.reload()}>Try again</button>
+            </ErrorInfo>;
 
         case StatefulFetchStatusIds.Loaded:
             return <DisplayRegistrarActionsList
