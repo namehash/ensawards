@@ -144,7 +144,7 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
     status: CategoryStatus.Updated,
     bestPractices: [
       nameYourSmartContracts,
-      displayNamedSmartContracts,
+      displayNamedSmartContractsMainnet,
       displayNamedSmartContractsL2,
     ],
   },
