@@ -1,6 +1,7 @@
 import { benchmarkers } from "@/data/benchmarkers.ts";
 import {
-  displayNamedSmartContracts,
+  displayNamedSmartContractsMainnet,
+  displayNamedSmartContractsL2,
   //  recognizeAllENSNames
 } from "@/data/bestPractices.ts";
 import { type App, AppTypes, BenchmarkResult, toUnixTimestamp } from "@/types/apps.ts";
@@ -27,10 +28,16 @@ export const APPS: App[] = [
       //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
+        bestPracticeDetails: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
+        benchmardAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
+      },
+      {
+        bestPracticeDetails: displayNamedSmartContractsL2,
+        result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
       },
     ],
     ogImagePath: "/app-rainbow-wallet_og_image.png",
@@ -57,10 +64,16 @@ export const APPS: App[] = [
       //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
+        bestPracticeDetails: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
+        benchmardAt: toUnixTimestamp("2025-12-08T18:22:55.716Z"),
+      },
+      {
+        bestPracticeDetails: displayNamedSmartContractsL2,
+        result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-08T18:22:55.716Z"),
       },
     ],
     ogImagePath: "/app-coinbase-wallet_og_image.png",
@@ -87,10 +100,16 @@ export const APPS: App[] = [
       //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
+        bestPracticeDetails: displayNamedSmartContractsMainnet,
+        result: BenchmarkResult.Pass,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
+      },
+      {
+        bestPracticeDetails: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
+        benchmardAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
       },
     ],
     ogImagePath: "/app-metamask_og_image.png",
@@ -116,10 +135,16 @@ export const APPS: App[] = [
       //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
+        bestPracticeDetails: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
+        benchmardAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
+      },
+      {
+        bestPracticeDetails: displayNamedSmartContractsL2,
+        result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
       },
     ],
     ogImagePath: "/app-etherscan_og_image.png",
@@ -144,10 +169,16 @@ export const APPS: App[] = [
       //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
+        bestPracticeDetails: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
+        benchmardAt: toUnixTimestamp("2025-12-08T18:28:32.410Z"),
+      },
+      {
+        bestPracticeDetails: displayNamedSmartContractsL2,
+        result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-08T18:28:32.410Z"),
       },
     ],
     ogImagePath: "/app-blockscout_og_image.png",
