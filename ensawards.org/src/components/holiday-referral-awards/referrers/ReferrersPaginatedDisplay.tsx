@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { ReferrersList } from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
 import { Pagination } from "@/components/molecules/Pagination.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
@@ -9,7 +10,6 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
-import {ErrorInfo} from "@/components/atoms/ErrorInfo.tsx";
 
 export interface ReferrersPaginatedDisplayProps {
   itemsPerPage?: number;
@@ -87,13 +87,23 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
             }
             error={
               fetchErrorMessage ? (
-                  <ErrorInfo title="Error loading referrer data" description={[`${fetchErrorMessage} Please try again later.`]} >
-                    <button className={cn(shadcnButtonVariants({
-                      variant: "outline",
-                      size: "default",
-                      className: "rounded-full cursor-pointer"
-                    }))} onClick={() => startFetching()}>Try again</button>
-                  </ErrorInfo>
+                <ErrorInfo
+                  title="Error loading referrer data"
+                  description={[`${fetchErrorMessage} Please try again later.`]}
+                >
+                  <button
+                    className={cn(
+                      shadcnButtonVariants({
+                        variant: "outline",
+                        size: "default",
+                        className: "rounded-full cursor-pointer",
+                      }),
+                    )}
+                    onClick={() => startFetching()}
+                  >
+                    Try again
+                  </button>
+                </ErrorInfo>
               ) : undefined
             }
             loadingStateData={{

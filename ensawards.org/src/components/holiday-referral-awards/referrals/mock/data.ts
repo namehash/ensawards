@@ -1,11 +1,9 @@
-import {
-  registrarActionsPrerequisites,
-} from "@ensnode/ensnode-sdk";
+import { registrarActionsPrerequisites } from "@ensnode/ensnode-sdk";
 import type {
   Duration,
   InterpretedName,
   NamedRegistrarAction,
-  RegistrarActionEventId
+  RegistrarActionEventId,
 } from "@ensnode/ensnode-sdk";
 import type {
   StatefulFetchRegistrarActions,
@@ -18,7 +16,7 @@ import type {
   StatefulFetchStatusId,
 } from "../types.ts";
 
-import {StatefulFetchStatusIds} from "../types.ts";
+import { StatefulFetchStatusIds } from "../types.ts";
 
 export const registrationWithReferral = {
   action: {
@@ -275,9 +273,21 @@ export const variants: Map<StatefulFetchStatusId, StatefulFetchRegistrarActions>
       fetchStatus: StatefulFetchStatusIds.Loaded,
       registrarActions: [
         renewalWithNoReferral,
-        registrarActionWithUpdatedIncrementalDuration(renewalWithNoReferral, 0, "176209761600000000111551110000000009545322000000000000006750000000000000068"),
-        registrarActionWithUpdatedIncrementalDuration(renewalWithNoReferral, 1, "176209761600000000111551110000000009545322000000000000006750000000000000069"),
-        registrarActionWithUpdatedIncrementalDuration(renewalWithNoReferral, 2, "176209761600000000111551110000000009545322000000000000006750000000000000070"),
+        registrarActionWithUpdatedIncrementalDuration(
+          renewalWithNoReferral,
+          0,
+          "176209761600000000111551110000000009545322000000000000006750000000000000068",
+        ),
+        registrarActionWithUpdatedIncrementalDuration(
+          renewalWithNoReferral,
+          1,
+          "176209761600000000111551110000000009545322000000000000006750000000000000069",
+        ),
+        registrarActionWithUpdatedIncrementalDuration(
+          renewalWithNoReferral,
+          2,
+          "176209761600000000111551110000000009545322000000000000006750000000000000070",
+        ),
         registrationWithReferral,
         registrationWithNoReferralAndEncodedLabelHashes,
         registrationWithZeroEncodedReferrer,

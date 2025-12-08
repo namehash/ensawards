@@ -1,10 +1,10 @@
 import { useENSNodeConfig, useRegistrarActions } from "@ensnode/ensnode-react";
 import {
   IndexingStatusResponseCodes,
+  type RegistrarActionsFilter,
   RegistrarActionsOrders,
   RegistrarActionsResponseCodes,
   registrarActionsPrerequisites,
-  type RegistrarActionsFilter,
 } from "@ensnode/ensnode-sdk";
 
 import type {
@@ -17,10 +17,8 @@ import type {
   StatefulFetchRegistrarActionsUnsupported,
 } from "@/components/holiday-referral-awards/referrals/types.ts";
 
-import {
-  StatefulFetchStatusIds,
-} from "@/components/holiday-referral-awards/referrals/types.ts";
-import {useIndexingStatusWithSwr} from "@/utils/hooks/useIndexingStatusWithSWR.ts";
+import { StatefulFetchStatusIds } from "@/components/holiday-referral-awards/referrals/types.ts";
+import { useIndexingStatusWithSwr } from "@/utils/hooks/useIndexingStatusWithSWR.ts";
 
 interface UseStatefulRegistrarActionsProps {
   filters?: RegistrarActionsFilter[];

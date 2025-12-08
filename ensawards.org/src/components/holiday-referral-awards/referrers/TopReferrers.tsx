@@ -1,3 +1,4 @@
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { ReferrersList } from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
@@ -7,7 +8,6 @@ import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 import { useEffect, useState } from "react";
-import {ErrorInfo} from "@/components/atoms/ErrorInfo.tsx";
 
 export interface TopReferrersProps {
   onENSHolidayReferralsAwards: boolean;
@@ -95,13 +95,23 @@ export function TopReferrers({
             generateLinkCTA={emptyStateCTA}
             error={
               fetchErrorMessage ? (
-                  <ErrorInfo title="Error loading referrer data" description={[`${fetchErrorMessage} Please try again later.`]} >
-                    <button className={cn(shadcnButtonVariants({
-                      variant: "outline",
-                      size: "default",
-                      className: "rounded-full cursor-pointer"
-                    }))} onClick={() => startFetching()}>Try again</button>
-                  </ErrorInfo>
+                <ErrorInfo
+                  title="Error loading referrer data"
+                  description={[`${fetchErrorMessage} Please try again later.`]}
+                >
+                  <button
+                    className={cn(
+                      shadcnButtonVariants({
+                        variant: "outline",
+                        size: "default",
+                        className: "rounded-full cursor-pointer",
+                      }),
+                    )}
+                    onClick={() => startFetching()}
+                  >
+                    Try again
+                  </button>
+                </ErrorInfo>
               ) : undefined
             }
             loadingStateData={{

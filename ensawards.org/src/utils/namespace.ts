@@ -1,7 +1,7 @@
 import { SUPPORTED_CHAINS } from "@/utils/chains.ts";
 import { type ENSNamespaceId, ENSNamespaceIds } from "@ensnode/datasources";
 import type { ChainId, Name } from "@ensnode/ensnode-sdk";
-import type {Address, Hash} from "viem";
+import type { Address, Hash } from "viem";
 
 /**
  * Get the ENS Manager App URL for the provided namespace.
@@ -119,8 +119,8 @@ export const getBlockExplorerUrlForAddress = (chainId: ChainId, address: Address
  * or null if the referenced chain doesn't have a known block explorer
  */
 export const getBlockExplorerUrlForTransactionHash = (
-    chainId: ChainId,
-    transactionHash: Hash,
+  chainId: ChainId,
+  transactionHash: Hash,
 ): URL | null => {
   const chainBlockExplorer = getChainBlockExplorerUrl(chainId);
   if (!chainBlockExplorer) return null;

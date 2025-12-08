@@ -47,13 +47,13 @@ export interface ResolveAndDisplayIdentityProps {
 export function ResolveAndDisplayIdentity({
   identity,
   namespaceId,
-    accelerate = false,
+  accelerate = false,
   withLink = true,
   withTooltip = true,
   withAvatar = false,
   withIdentifier = true,
   className,
-    avatarStyles,
+  avatarStyles,
 }: ResolveAndDisplayIdentityProps) {
   // resolve the primary name for `identity` using ENSNode
   // TODO: extract out the concept of resolving an `Identity` into a provider that child
@@ -61,7 +61,7 @@ export function ResolveAndDisplayIdentity({
   const { identity: identityResult } = useResolvedIdentity({
     identity,
     namespaceId,
-    accelerate
+    accelerate,
   });
 
   return (
@@ -113,7 +113,7 @@ export function DisplayIdentity({
   withAvatar = false,
   withIdentifier = true,
   className,
-    avatarStyles,
+  avatarStyles,
 }: DisplayIdentityProps) {
   let avatar: React.ReactElement;
   let identifier: React.ReactElement;
@@ -143,7 +143,13 @@ export function DisplayIdentity({
       />
     );
   } else {
-    avatar = <EnsAvatar name={identity.name} namespaceId={namespaceId} className={cn("h-10 w-10", avatarStyles)} />;
+    avatar = (
+      <EnsAvatar
+        name={identity.name}
+        namespaceId={namespaceId}
+        className={cn("h-10 w-10", avatarStyles)}
+      />
+    );
     identifier = (
       <NameDisplay
         name={identity.name}
