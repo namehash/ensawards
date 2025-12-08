@@ -101,7 +101,7 @@ export const displayNamedSmartContractsMainnet: BestPractice = {
 
 export const displayNamedSmartContractsL2: BestPractice = {
   id: "display-named-smart-contracts-l2-chains",
-  slug: "display-named-smart-contracts-l2-chains",
+  slug: "display-named-smart-contracts-layer-two-chains",
   name: "Display named smart contracts on L2 chains",
   description:
     "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",
