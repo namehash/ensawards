@@ -10,6 +10,7 @@ import {getENSNodeUrl} from "@/utils/env";
  */
 export function LiveReferralFeed({
                                      itemsPerPage,
+    referralIncentiveProgram,
                                      title,
                                  }: FetchAndDisplayRegistrarActionsFeedProps) {
     const ensNodeProviderConfig = createConfig({
@@ -18,7 +19,7 @@ export function LiveReferralFeed({
     return (
         <ENSNodeProvider config={ensNodeProviderConfig}>
             <TooltipProvider delayDuration={200} skipDelayDuration={0}>
-                <FetchAndDisplayRegistrarActionsFeed itemsPerPage={itemsPerPage} title={title} />
+                <FetchAndDisplayRegistrarActionsFeed itemsPerPage={itemsPerPage} title={title} referralIncentiveProgram={referralIncentiveProgram} />
             </TooltipProvider>
         </ENSNodeProvider>
     );

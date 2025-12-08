@@ -5,10 +5,11 @@ import {
 } from "@/components/holiday-referral-awards/referrals/DisplayRegistrarActionsFeed.tsx";
 import { registrarActionsFilter, type RegistrarActionsFilter } from "@ensnode/ensnode-sdk";
 import { namehash } from "viem";
+import type {ReferralIncentiveProgram} from "@/types/referralIncentivePrograms.ts";
 
 export interface FetchAndDisplayRegistrarActionsFeedProps {
   itemsPerPage: number;
-
+  referralIncentiveProgram: ReferralIncentiveProgram;
   title: string;
 }
 
@@ -17,6 +18,7 @@ export interface FetchAndDisplayRegistrarActionsFeedProps {
  */
 export function FetchAndDisplayRegistrarActionsFeed({
   itemsPerPage,
+    referralIncentiveProgram,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
   const namespaceId = ENSNamespaceIds.Mainnet;
@@ -37,6 +39,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
             namespaceId={namespaceId}
             title={title}
             registrarActions={registrarActions}
+            referralIncentiveProgram={referralIncentiveProgram}
           />
   );
 }

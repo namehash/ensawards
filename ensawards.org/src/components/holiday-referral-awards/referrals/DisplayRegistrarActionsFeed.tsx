@@ -8,10 +8,12 @@ import {
 import {getENSNodeUrl} from "@/utils/env";
 import {ErrorInfo} from "@/components/atoms/ErrorInfo.tsx";
 import {RegistrarActionCardLoading, RegistrarActionCardMemo} from "@/components/atoms/cards/RegistrarActionCard.tsx";
+import type {ReferralIncentiveProgram} from "@/types/referralIncentivePrograms.ts";
 
 interface DisplayRegistrarActionsListProps {
     namespaceId: ENSNamespaceId;
     registrarActions: NamedRegistrarAction[];
+    referralIncentiveProgram: ReferralIncentiveProgram;
 }
 
 // TODO: Restyle all elements accordingly to Figma
@@ -22,6 +24,7 @@ interface DisplayRegistrarActionsListProps {
 function DisplayRegistrarActionsList({
                                          namespaceId,
                                          registrarActions,
+    referralIncentiveProgram
                                      }: DisplayRegistrarActionsListProps) {
     const [animationParent] = useAutoAnimate();
 
@@ -35,6 +38,7 @@ function DisplayRegistrarActionsList({
                     key={namedRegistrarAction.action.id}
                     namespaceId={namespaceId}
                     namedRegistrarAction={namedRegistrarAction}
+                    referralIncentiveProgram={referralIncentiveProgram}
                 />
             ))}
         </div>
@@ -52,7 +56,7 @@ function DisplayRegistrarActionsListLoading({
                                                     itemsPerPage,
                                                 }: DisplayRegistrarActionsListPlaceholderProps) {
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 relative z-10">
             {[...Array(itemsPerPage)].map((_, idx) => (
                 <RegistrarActionCardLoading key={idx} />
             ))}
@@ -63,6 +67,7 @@ function DisplayRegistrarActionsListLoading({
 export interface DisplayRegistrarActionsPanelProps {
     namespaceId: ENSNamespaceId;
     registrarActions: StatefulFetchRegistrarActions;
+    referralIncentiveProgram: ReferralIncentiveProgram;
     title: string;
 }
 
@@ -72,6 +77,7 @@ export interface DisplayRegistrarActionsPanelProps {
 export function DisplayRegistrarActionsFeed({
                                                  namespaceId,
                                                  registrarActions,
+    referralIncentiveProgram,
                                                  title,
                                              }: DisplayRegistrarActionsPanelProps) {
     switch (registrarActions.fetchStatus) {
@@ -80,9 +86,6 @@ export function DisplayRegistrarActionsFeed({
             return null;
 
         case StatefulFetchStatusIds.Unsupported:
-            // TODO: I suppose it would make sense to hide such state from the end user (here in the ENSAwards),
-            //  especially that I suppose our publicly hosted alpha instance will always support it.
-            //  We could show some generic error message here and only display the detailed info in the console. Wdyt?
             return (
                 <div>
                     <p>The Registrar Actions API is unavailable on the connected ENSNode instance.</p>
@@ -137,6 +140,7 @@ export function DisplayRegistrarActionsFeed({
             return <DisplayRegistrarActionsList
                 namespaceId={namespaceId}
                 registrarActions={registrarActions.registrarActions}
+                referralIncentiveProgram={referralIncentiveProgram}
             />
     }
 }

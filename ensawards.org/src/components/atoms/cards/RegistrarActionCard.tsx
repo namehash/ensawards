@@ -18,10 +18,12 @@ import {cn} from "@/utils/tailwindClassConcatenation.ts";
 import {ResolveAndDisplayIdentity} from "@/components/atoms/identity";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
 import {buildExternalEnsAppProfileUrl, getBlockExplorerUrlForTransactionHash} from "@/utils/namespace.ts";
-import {RelativeTime} from "@/components/atoms/datetime/RelativeTime.tsx";
 import {NameDisplay} from "@/components/atoms/identity/utils.tsx";
 import {DisplayDuration} from "@/components/atoms/datetime/DisplayDuration.tsx";
 import {useIsMobile} from "@/utils/hooks/useMobile.tsx";
+import {isRegistrarActionQualifiedForIncentiveProgram} from "@/components/holiday-referral-awards/referrals/utils.ts";
+import {AbsoluteTime} from "@/components/atoms/datetime/AbsoluteTime.tsx";
+import type {ReferralIncentiveProgram} from "@/types/referralIncentivePrograms.ts";
 
 // TODO: Restyle all elements accordingly to Figma
 
@@ -143,6 +145,7 @@ export function RegistrarActionCardLoading() {
 export interface RegistrarActionCardProps {
     namespaceId: ENSNamespaceId;
     namedRegistrarAction: NamedRegistrarAction;
+    referralIncentiveProgram: ReferralIncentiveProgram
 }
 
 /**
@@ -151,6 +154,7 @@ export interface RegistrarActionCardProps {
 export function RegistrarActionCard({
                                                namespaceId,
                                                namedRegistrarAction,
+    referralIncentiveProgram,
                                            }: RegistrarActionCardProps) {
     const isMobile = useIsMobile();
     const {registrant, registrationLifecycle, type, referral, transactionHash} =
@@ -187,12 +191,21 @@ export function RegistrarActionCard({
                 fieldLabel={type === RegistrarActionTypes.Registration ? "Registered" : "Renewed"}
                 className="w-[15%] min-w-[140px]"
             >
-                <p className="h-[21px]"><RelativeTime
-                    timestamp={namedRegistrarAction.action.block.timestamp}
-                    tooltipPosition="top"
-                    conciseFormatting={true}
-                    contentWrapper={withTransactionLink}
-                /></p>
+                <p className="h-[21px]">
+                    {/*TODO: Rollback to using relative time that leverages useNow() hook. See: https://github.com/namehash/ensawards/issues/84*/}
+                    {withTransactionLink({children:
+                            <AbsoluteTime
+                                timestamp={namedRegistrarAction.action.block.timestamp}
+                                options={{
+                                    month: "short",
+                                    day: "numeric",
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                    second: "numeric",
+                                    hour12: false,
+                                }}
+                    />})}
+                </p>
             </LabeledField>
 
             <LabeledField fieldLabel="Duration" className="w-[10%]  min-w-[140px]">
@@ -235,8 +248,7 @@ export function RegistrarActionCard({
 
             <LabeledField fieldLabel="ENS Holiday Awards" className="w-[15%] min-w-[140px]">
                 <div className="w-fit h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
-                    {/*TODO: Should the qualification be determined somehow else? What about potential bulk registration?*/}
-                    {referral.decodedReferrer === null ? <XIcon size={20} className="text-red-600" /> : <CheckIcon size={20} className="text-emerald-600"/>}
+                    {isRegistrarActionQualifiedForIncentiveProgram(referralIncentiveProgram, namedRegistrarAction) ? <XIcon size={20} className="text-red-600" /> : <CheckIcon size={20} className="text-emerald-600"/>}
                     <p className="text-black font-medium">{referral.decodedReferrer === null ? "Not qualified" : "Qualified"}</p>
                 </div>
             </LabeledField>

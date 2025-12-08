@@ -17,6 +17,7 @@ import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../utils/tailwindClassConcatenation";
 import {LiveReferralFeed} from "../components/holiday-referral-awards/referrals/LiveReferralFeed";
+import {ENSHolidayAwardsReferralIncentiveProgram} from "../data/referralIncentivePrograms";
 
 interface ContentItemData {
   name: string;
@@ -82,6 +83,18 @@ const backgroundGreyStyles =
         Top referrers
       </h3>
       <TopReferrers client:load onENSHolidayReferralsAwards={true} />
+    </div>
+    <div
+        class={cn(
+            "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-5 " +
+            "py-6 sm:py-[80px] relative z-10",
+        )}>
+      <div class={backgroundGreyStyles}></div>
+      <div class="flex flex-col flex-nowrap justify-start items-center gap-3 relative z-10">
+        <h3 class={cn(sectionHeaderBaseStyles, "text-center")}>ENS referral live feed</h3>
+        <p class={cn(descriptionStyles, "text-center")}>Watch the latest referrals here as they stream in</p>
+      </div>
+      <LiveReferralFeed client:load title="ENS referral live feed" itemsPerPage={3} referralIncentiveProgram={ENSHolidayAwardsReferralIncentiveProgram} />
     </div>
     <div
       class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start sm:items-center gap-5 sm:gap-[60px]">
@@ -264,18 +277,6 @@ const backgroundGreyStyles =
           >
         </div>
       </div>
-    </div>
-    <div
-        class={cn(
-            "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-5 " +
-            "py-6 sm:py-[80px] relative z-10",
-        )}>
-      <div class={backgroundGreyStyles}></div>
-      <div class="flex flex-col flex-nowrap justify-start items-center gap-3 relative z-10">
-        <h3 class={cn(sectionHeaderBaseStyles, "text-center")}>ENS referral live feed</h3>
-        <p class={cn(descriptionStyles, "text-center")}>Watch the latest referrals here as they stream in</p>
-      </div>
-      <LiveReferralFeed client:load title="ENS referral live feed" itemsPerPage={3} />
     </div>
     <JoinTelegram
       header="Have questions?"
