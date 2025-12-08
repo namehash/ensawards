@@ -45,7 +45,7 @@ export const nameYourSmartContracts: BestPractice = {
   slug: "name-your-smart-contracts",
   name: "Name your smart contracts",
   description:
-    "Assign ENS names to your smart contracts to help users easily identify what they're interacting with and enhance transaction security.",
+    "Upgrade security and UX when users interact with your smart contracts.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
   appliesTo: [BestPracticeApplications.Dao],
@@ -53,7 +53,7 @@ export const nameYourSmartContracts: BestPractice = {
     main: {
       header: "Technical Details",
       content:
-        "Contracts can be assigned ENS names during deployment or post-deployment. " +
+        "Contracts can be assigned ENS names during or after deployment. " +
         "For deployment-time naming, see the [Enscribe documentation](https://www.enscribe.xyz/docs/introduction/naming-contracts) which goes into greater detail on the process. " +
         "For post-deployment naming we recommend using the [Enscribe App](https://app.enscribe.xyz/). " +
         "Note that setting a [primary name](https://docs.ens.domains/web/reverse) (reverse resolution) requires the contract to implement [Ownable](https://docs.openzeppelin.com/contracts/5.x/access-control#ownership-and-ownable). " +
@@ -63,7 +63,7 @@ export const nameYourSmartContracts: BestPractice = {
       {
         header: "Additional Details",
         content:
-          "Assigning ENS names to contracts enables users to verify they're interacting with the correct contract address and provides human-readable context in transaction interfaces. " +
+          "Assigning ENS names to contracts gives users confidence they're interacting with the correct contract. " +
           "This is particularly valuable for security, as users can confirm `uniswap.eth` instead of validating a long hexadecimal address. " +
           "If you've deployed contracts without Ownable, you can still improve UX by configuring forward resolution, though full naming (with reverse resolution) provides the best user experience.",
       },
@@ -112,7 +112,7 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
     slug: "contract-naming",
     name: "Contract naming",
     description:
-      "Assign and display ENS names for smart contracts to improve security and enhance UX.",
+      "Improve the UX and security of smart contract interactions.",
     status: CategoryStatus.Updated,
     bestPractices: [nameYourSmartContracts, displayNamedSmartContracts],
   },
@@ -121,7 +121,7 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
     slug: "forward-resolution",
     name: "Forward Resolution",
     description:
-      "Lookup social records, the contenthash of decentralized websites, avatar images, multichain deposit addresses, and more.",
+      "Lookup the details of an ENS name, such as its onchain addresses, avatar image, social records, and decentralized website.",
     status: CategoryStatus.ComingSoon,
     bestPractices: [recognizeAllENSNames],
   },
