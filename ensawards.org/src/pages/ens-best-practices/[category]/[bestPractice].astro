@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import { MatrixBadge } from "../../../components/atoms/badges/MatrixBadge.tsx";
+import { BenchmarkResultBadge } from "../../../components/atoms/badges/BenchmarkResultBadge.tsx";
 import BenchmarkResultCard from "../../../components/atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
@@ -131,14 +131,12 @@ const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
                                                       value: app.type,
                                                   },
                                               ]}>
-                                          <MatrixBadge
+                                                <BenchmarkResultBadge
                                                   slot="badge"
-                                                  text={relatedBenchmark.result}
+                                                  benchmark={relatedBenchmark}
                                                   className={
                                                       BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
                                                   }
-                                                  verification={relatedBenchmark.verification}
-                                                  result={relatedBenchmark.result}
                                                   client:load
                                           />
                                           <Image

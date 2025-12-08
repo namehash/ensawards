@@ -5,6 +5,8 @@ import {
   CategoryStatus,
 } from "@/types/bestPractices.ts";
 
+// TODO: In a future PR uncomment recogonizeAllENSNames best practice
+//
 // export const recognizeAllENSNames: BestPractice = {
 //   id: "recognize-all-ens-names",
 //   slug: "recognize-all-ens-names",

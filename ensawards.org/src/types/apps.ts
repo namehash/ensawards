@@ -1,17 +1,14 @@
 import type { BestPractice } from "@/types/bestPractices.ts";
-import type { ChainId, Name } from "@ensnode/ensnode-sdk";
-import type { Address } from "viem";
+import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
+/**
+ * TODO: Determine if we need PartialPass for benchmarks. If not we can simplify.
+ */
 export enum BenchmarkResult {
   Pass = "Pass",
   PartialPass = "Partial pass",
   Fail = "Fail",
 }
-
-/**
- * Unix timestamp in seconds.
- */
-export type UnixTimestamp = number;
 
 /**
  * Helper function to convert human-readable date to Unix timestamp.
@@ -29,31 +26,17 @@ export function toUnixTimestamp(date: Date | string): UnixTimestamp {
 }
 
 /**
- * Identity of the person who verified a benchmark result.
- * Uses ENSIP-19 reverse resolution pattern with chainId and address.
+ * Represents a benchmark result for a specific best practice within an app.
  */
-export interface BenchmarkVerifier {
-  /**
-   * The chain ID where the verifier's address exists.
-   * Using ChainId type from ensnode-sdk for consistency with contract naming pattern.
-   */
-  chainId: ChainId;
-
-  /**
-   * The Ethereum address of the verifier.
-   */
-  address: Address;
-
-  /**
-   * Unix timestamp (in seconds) of when the benchmark was last verified.
-   */
-  verifiedAt: UnixTimestamp;
-}
-
 export interface AppBenchmark {
+  /** The best practice being benchmarked */
   bestPracticeDetails: BestPractice;
+  /** The result of the benchmark */
   result: BenchmarkResult;
-  verification: BenchmarkVerifier;
+  /** The account ID of the person who performed the benchmark */
+  benchmarkedBy: AccountId;
+  /** Unix timestamp when the benchmark was performed */
+  benchmardAt: UnixTimestamp;
 }
 
 export const AppTypes = {

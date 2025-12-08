@@ -1,6 +1,6 @@
 import type { ChainId } from "@ensnode/ensnode-sdk";
 import type { Address } from "viem";
-import { arbitrum, base, linea, mainnet, optimism, scroll, sepolia, holesky } from "viem/chains";
+import { arbitrum, base, linea, mainnet, optimism, scroll } from "viem/chains";
 
 export const SUPPORTED_CHAINS = [mainnet, base, linea, optimism, arbitrum, scroll];
 

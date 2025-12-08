@@ -1,9 +1,9 @@
+import { benchmarkers } from "@/data/benchmarkers.ts";
 import {
   displayNamedSmartContracts,
   //  recognizeAllENSNames
 } from "@/data/bestPractices.ts";
 import { type App, AppTypes, BenchmarkResult, toUnixTimestamp } from "@/types/apps.ts";
-import { mainnet } from "viem/chains";
 
 export const APPS: App[] = [
   {
@@ -23,20 +23,14 @@ export const APPS: App[] = [
       // {
       //   bestPracticeDetails: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
-      //   verification: {
-      //     chainId: mainnet.id,
-      //     address: "0x0000000000000000000000000000000000000000", // Replace with your address
-      //     verifiedAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
-      //   },
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
-        verification: {
-          chainId: mainnet.id,
-          address: "0x464d18C13b4420E07eE85d5E6Fddfc3078eE9e23", // Replace with your address
-          verifiedAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
-        },
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
       },
     ],
     ogImagePath: "/app-rainbow-wallet_og_image.png",
@@ -59,20 +53,14 @@ export const APPS: App[] = [
       // {
       //   bestPracticeDetails: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
-      //   verification: {
-      //     chainId: mainnet.id,
-      //     address: "0x0000000000000000000000000000000000000000", // Replace with your address
-      //     verifiedAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
-      //   },
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Fail,
-        verification: {
-          chainId: mainnet.id,
-          address: "0x464d18C13b4420E07eE85d5E6Fddfc3078eE9e23", // Replace with your address
-          verifiedAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
-        },
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
       },
     ],
     ogImagePath: "/app-coinbase-wallet_og_image.png",
@@ -95,20 +83,14 @@ export const APPS: App[] = [
       // {
       //   bestPracticeDetails: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
-      //   verification: {
-      //     chainId: mainnet.id,
-      //     address: "0x0000000000000000000000000000000000000000", // Replace with your address
-      //     verifiedAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
-      //   },
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Fail,
-        verification: {
-          chainId: mainnet.id,
-          address: "0x464d18C13b4420E07eE85d5E6Fddfc3078eE9e23", // Replace with your address
-          verifiedAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
-        },
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
       },
     ],
     ogImagePath: "/app-metamask_og_image.png",
@@ -130,20 +112,14 @@ export const APPS: App[] = [
       // {
       //   bestPracticeDetails: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
-      //   verification: {
-      //     chainId: mainnet.id,
-      //     address: "0x0000000000000000000000000000000000000000", // Replace with your address
-      //     verifiedAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
-      //   },
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
-        verification: {
-          chainId: mainnet.id,
-          address: "0x464d18C13b4420E07eE85d5E6Fddfc3078eE9e23", // Replace with your address
-          verifiedAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
-        },
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
       },
     ],
     ogImagePath: "/app-etherscan_og_image.png",
@@ -164,20 +140,14 @@ export const APPS: App[] = [
       // {
       //   bestPracticeDetails: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
-      //   verification: {
-      //     chainId: mainnet.id,
-      //     address: "0x0000000000000000000000000000000000000000", // Replace with your address
-      //     verifiedAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
-      //   },
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPracticeDetails: displayNamedSmartContracts,
         result: BenchmarkResult.Pass,
-        verification: {
-          chainId: mainnet.id,
-          address: "0x464d18C13b4420E07eE85d5E6Fddfc3078eE9e23", // Replace with your address
-          verifiedAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
-        },
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmardAt: toUnixTimestamp("2025-12-04T00:38:02.864Z"),
       },
     ],
     ogImagePath: "/app-blockscout_og_image.png",
