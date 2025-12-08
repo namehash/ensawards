@@ -1,7 +1,7 @@
 import { benchmarkers } from "@/data/benchmarkers.ts";
 import {
-  displayNamedSmartContractsMainnet,
   displayNamedSmartContractsL2,
+  displayNamedSmartContractsMainnet,
   //  recognizeAllENSNames
 } from "@/data/bestPractices.ts";
 import { type App, AppTypes, BenchmarkResult, toUnixTimestamp } from "@/types/apps.ts";
