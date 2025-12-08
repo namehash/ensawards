@@ -109,8 +109,7 @@ export function DisplayIdentity({
     identitifer = <Skeleton className={cn("h-4 w-24", className)} />;
   } else if (
     identity.resolutionStatus === ResolutionStatusIds.Unnamed ||
-    identity.resolutionStatus === ResolutionStatusIds.Unknown ||
-    !identity.name
+    identity.resolutionStatus === ResolutionStatusIds.Unknown
   ) {
     avatar = (
       <div className="w-10 h-10 flex justify-center items-center">
