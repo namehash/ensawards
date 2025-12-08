@@ -54,7 +54,7 @@ export const nameYourSmartContracts: BestPractice = {
     main: {
       header: "Technical Details",
       content:
-        "Contracts can be assigned ENS names during or after deployment. " +
+        "Contracts can be [assigned ENS names](https://docs.ens.domains/web/naming-contracts/) during or after deployment. " +
         "For deployment-time naming, see the [Enscribe documentation](https://www.enscribe.xyz/docs/introduction/naming-contracts) which goes into greater detail on the process. " +
         "For post-deployment naming we recommend using the [Enscribe App](https://app.enscribe.xyz/). " +
         "Note that setting a [primary name](https://docs.ens.domains/web/reverse) (reverse resolution) requires the contract to implement [Ownable](https://docs.openzeppelin.com/contracts/5.x/access-control#ownership-and-ownable). " +
@@ -86,7 +86,7 @@ export const displayNamedSmartContracts: BestPractice = {
       header: "Technical Details",
       content:
         "Looking up the name of a smart contract uses the same process as looking up the name of any other account. " +
-        "You can use a variety of libraries and tools such as [Viem](https://viem.sh/docs/ens/actions/getEnsName) or [ensjs](https://github.com/ensdomains/ensjs/blob/main/docs/public/function.getName.md) which can perform a reverse lookup of a [primary name](https://docs.ens.domains/web/reverse) using the contract address. " +
+        "You can use a variety of libraries to lookup the [primary name](https://docs.ens.domains/web/reverse) of a contract address such as [Viem](https://viem.sh/docs/ens/actions/getEnsName), [ensjs](https://github.com/ensdomains/ensjs/blob/main/docs/public/function.getName.md), or [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md). " +
         "When users interact with a contract with a specific chain, be sure to use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard to query the primary name for that chain, rather than defaulting to Ethereum mainnet. " +
         "[ENSNode](https://ensnode.io/docs) simplifies multichain primary lookups across all chains.",
     },
