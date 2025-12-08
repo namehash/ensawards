@@ -38,7 +38,7 @@ const TooltipContent = ({ verification }: { verification?: BenchmarkVerifier }) 
   return (
     <div className="flex flex-col gap-3 p-1">
       <div className="flex flex-col gap-1">
-        <p className="text-muted-foreground text-xs">Verifier info:</p>
+        <p className="text-muted-foreground text-xs">Benchmarked by</p>
         <ResolveAndDisplayIdentity
           identity={identity}
           namespaceId={ENSNamespaceIds.Mainnet}
@@ -48,7 +48,7 @@ const TooltipContent = ({ verification }: { verification?: BenchmarkVerifier }) 
           className="text-blue-400 hover:underline hover:underline-offset-[25%]"
         />
       </div>
-      <p className="text-xs text-muted-foreground">Benchmarked on {verifiedDate}</p>
+      <p className="text-xs text-muted-foreground">on {verifiedDate}</p>
     </div>
   );
 };
