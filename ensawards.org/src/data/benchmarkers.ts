@@ -10,4 +10,4 @@ export const benchmarkers = {
     chainId: mainnet.id,
     address: "0x464d18C13b4420E07eE85d5E6Fddfc3078eE9e23",
   } as AccountId,
-} as const;
+} as const satisfies Record<string, AccountId>;
