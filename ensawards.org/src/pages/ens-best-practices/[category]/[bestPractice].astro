@@ -18,6 +18,7 @@ import {
 import { markdownToHtml } from "../../../utils/markdown";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
+import { BenchmarkResult } from "../../../types/apps";
 export function getStaticPaths() {
   const staticPaths = [];
 
@@ -58,10 +59,21 @@ const appsWithValidBenchmarks = appsWithBenchmarks.filter(
   ({ benchmark }) => benchmark !== undefined,
 );
 
-// Sort apps by benchmark result (alphabetically descending)
-const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) =>
-  b.benchmark!.result.localeCompare(a.benchmark!.result),
-);
+// Declare sort order for benchmark result (Pass → Partial Pass → Fail)
+const resultOrder = {
+  [BenchmarkResult.Pass]: 0,
+  [BenchmarkResult.PartialPass]: 1,
+  [BenchmarkResult.Fail]: 2,
+};
+
+// Sort benchmark results
+const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
+  // First sort by result
+  const resultDiff = resultOrder[a.benchmark!.result] - resultOrder[b.benchmark!.result];
+  if (resultDiff !== 0) return resultDiff;
+  // Then sort alphabetically within those categories
+  return a.app.name.localeCompare(b.app.name);
+});
 
 // Extract just the app objects for final result
 const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
