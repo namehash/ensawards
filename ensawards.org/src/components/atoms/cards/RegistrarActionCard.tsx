@@ -1,6 +1,6 @@
 import { memo, type PropsWithChildren } from "react";
 import { zeroAddress } from "viem";
-import { Info as InfoIcon, Check as CheckIcon, X as XIcon } from "lucide-react";
+import {Info as InfoIcon, CircleQuestionMark as QuestionmarkIcon} from "lucide-react";
 import type {
     DefaultableChainId,
     ENSNamespaceId,
@@ -15,8 +15,7 @@ import {
     ZERO_ENCODED_REFERRER,
 } from "@ensnode/ensnode-sdk";
 import {cn} from "@/utils/tailwindClassConcatenation.ts";
-import {ResolveAndDisplayIdentity} from "@/components/atoms/identity";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
+import {ResolveAndDisplayIdentity, type ResolveAndDisplayIdentityProps} from "@/components/atoms/identity";
 import {buildExternalEnsAppProfileUrl, getBlockExplorerUrlForTransactionHash} from "@/utils/namespace.ts";
 import {NameDisplay} from "@/components/atoms/identity/utils.tsx";
 import {DisplayDuration} from "@/components/atoms/datetime/DisplayDuration.tsx";
@@ -24,6 +23,7 @@ import {useIsMobile} from "@/utils/hooks/useMobile.tsx";
 import {isRegistrarActionQualifiedForIncentiveProgram} from "@/components/holiday-referral-awards/referrals/utils.ts";
 import {AbsoluteTime} from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import type {ReferralIncentiveProgram} from "@/types/referralIncentivePrograms.ts";
+import {GenericTooltip} from "@/components/atoms/GenericTooltip.tsx";
 
 // TODO: Restyle all elements accordingly to Figma
 
@@ -44,8 +44,7 @@ function LabeledField({ fieldLabel, className, children }: PropsWithChildren<Lab
     );
 }
 
-interface ResolveAndDisplayReferrerIdentityProps {
-    namespaceId: ENSNamespaceId;
+interface ResolveAndDisplayReferrerIdentityProps extends Omit<ResolveAndDisplayIdentityProps, "identity">{
     chainId: DefaultableChainId;
     referral: RegistrarActionReferral;
 }
@@ -56,40 +55,46 @@ interface ResolveAndDisplayReferrerIdentityProps {
  * Resolves and displays the identity of the decoded referrer, or a fallback UI.
  */
 function ResolveAndDisplayReferrerIdentity({
-                                               namespaceId,
-                                               chainId,
-                                               referral,
-                                           }: ResolveAndDisplayReferrerIdentityProps) {
+           namespaceId,
+           chainId,
+           referral,
+           accelerate = false,
+           withLink = true,
+           withTooltip = true,
+           withAvatar = false,
+           withIdentifier = true,
+           className,
+           avatarStyles,
+       }: ResolveAndDisplayReferrerIdentityProps) {
     // if encoded referrer is not available or is the zero encoded referrer then
-    // display a hyphen
     if (
         !isRegistrarActionReferralAvailable(referral) ||
         referral.encodedReferrer === ZERO_ENCODED_REFERRER
     ) {
-        return <p className="h-[21px]">-</p>;
+        // when we only want to display avatar (without textual identifier) don't display anything (return en empty placeholder).
+        // Otherwise, display a hyphen with no avatar
+        return withAvatar && !withIdentifier ? <div className="w-10 h-10" /> : <p className="h-[21px]">-</p>;
     }
 
     // if the encoded referrer was not the zeroEncodedReferrer but couldn't be
     // decoded according to the subjective interpretation rules of
     // ENS Holiday Awards then display a tooltip with details
     if (referral.decodedReferrer === zeroAddress) {
-        return (
-            <span className="inline-flex align-middle gap-1">
-        Unknown
-        <Tooltip delayDuration={1000}>
-          <TooltipTrigger>
-            <InfoIcon className="flex-shrink-0" />
-          </TooltipTrigger>
-          <TooltipContent
-              side="top"
-              className="bg-gray-50 text-sm text-black text-left shadow-md outline-none w-fit"
-          >
-            Encoded referrer
+        // when we only want to display avatar (without textual identifier) use a dedicated placeholder.
+        // Otherwise, display "unknown" with no avatar
+        const tooltipContent = <p>Encoded referrer
             <code className="block">{referral.encodedReferrer}</code> does not follow the formatting
-            requirements of ENS Holiday Awards.
-          </TooltipContent>
-        </Tooltip>
-      </span>
+            requirements of incentive programs.</p>;
+
+        return (
+            withAvatar && !withIdentifier ? <GenericTooltip tooltipOffset={0} content={tooltipContent}>
+                <div className="w-10 h-10 flex justify-center items-center rounded-full bg-gray-200"><QuestionmarkIcon size={24} className="text-gray-400"/></div>
+            </GenericTooltip> : <span className="h-[21px] inline-flex align-middle gap-1 font-medium">
+                Unknown
+                <GenericTooltip tooltipOffset={0} content={tooltipContent}>
+                    <InfoIcon size={16} className="flex-shrink-0 fill-neutral-300 text-white"/>
+                </GenericTooltip>
+            </span>
         );
     }
 
@@ -97,13 +102,17 @@ function ResolveAndDisplayReferrerIdentity({
     const referrerIdentity = buildUnresolvedIdentity(referral.decodedReferrer, namespaceId, chainId);
 
     return (
-        <ResolveAndDisplayIdentity
-            identity={referrerIdentity}
-            namespaceId={namespaceId}
-            withAvatar={false}
-            withTooltip={false}
-            className="font-medium"
-        />
+    <ResolveAndDisplayIdentity
+        identity={referrerIdentity}
+        namespaceId={namespaceId}
+        accelerate={accelerate}
+        withAvatar={withAvatar}
+        withTooltip={withTooltip}
+        withIdentifier={withIdentifier}
+        className={className}
+        avatarStyles={avatarStyles}
+        withLink={withLink}
+    />
     );
 }
 
@@ -134,8 +143,7 @@ export function RegistrarActionCardLoading() {
                 <div className=" animate-pulse mt-1 h-6 bg-muted rounded-sm w-full" />
             </LabeledField>
 
-            <LabeledField fieldLabel="ENS Holiday Awards" className="w-[15%] min-w-[140px]">
-                {/*TODO: Improve skeleton*/}
+            <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[140px]">
                 <div className=" animate-pulse mt-1 h-6 bg-muted rounded-sm w-full"/>
             </LabeledField>
         </div>
@@ -173,25 +181,23 @@ export function RegistrarActionCard({
     const registrantIdentity = buildUnresolvedIdentity(registrant, namespaceId, chainId);
 
     return (
-        <div className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
-            <LabeledField fieldLabel="Name" className="w-[15%] min-w-[192px]">
-                <div className="sm:w-full h-[21px] overflow-x-auto">
+        <div className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
+            <LabeledField fieldLabel="Name" className="w-[15%] min-w-[162px]">
                     {/*TODO: Temporarily assuming that for the registered (renewed) name we'd want to link to ENSManagerApp */}
                     <a
                         target="_blank"
                         href={buildExternalEnsAppProfileUrl(namedRegistrarAction.name, namespaceId)?.href}
-                        className="w-fit text-blue-600 font-medium hover:underline hover:underline-offset-[25%]"
+                        className="max-sm:max-w-3/4 sm:w-full box-border overflow-x-auto text-blue-600 font-medium hover:underline hover:underline-offset-[25%] whitespace-nowrap"
                     >
-                        <NameDisplay name={namedRegistrarAction.name} />
+                        <NameDisplay name={namedRegistrarAction.name} className="h-[21px]" />
                     </a>
-                </div>
             </LabeledField>
 
             <LabeledField
                 fieldLabel={type === RegistrarActionTypes.Registration ? "Registered" : "Renewed"}
-                className="w-[15%] min-w-[140px]"
+                className="w-[15%] min-w-[110px]"
             >
-                <p className="h-[21px]">
+                <p className="h-[21px] font-medium">
                     {/*TODO: Rollback to using relative time that leverages useNow() hook. See: https://github.com/namehash/ensawards/issues/84*/}
                     {withTransactionLink({children:
                             <AbsoluteTime
@@ -208,13 +214,13 @@ export function RegistrarActionCard({
                 </p>
             </LabeledField>
 
-            <LabeledField fieldLabel="Duration" className="w-[10%]  min-w-[140px]">
+            <LabeledField fieldLabel="Duration" className="w-[10%] min-w-[110px]">
                 <p className="h-[21px] font-medium">
                     <DisplayDuration duration={namedRegistrarAction.action.incrementalDuration}/>
                 </p>
             </LabeledField>
 
-            <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-1/5 min-w-[192px]">
+            <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
                 {!isMobile && <ResolveAndDisplayIdentity
                     identity={registrantIdentity}
                     namespaceId={namespaceId}
@@ -222,10 +228,9 @@ export function RegistrarActionCard({
                     withAvatar={true}
                     withTooltip={false}
                     withIdentifier={false}
-                    className="font-medium"
                     avatarStyles="w-10 h-10"
                 />}
-                <LabeledField fieldLabel="Registrant" className="sm:min-w-[140px]">
+                <LabeledField fieldLabel="Registrant" className="sm:min-w-[110px]">
                     <ResolveAndDisplayIdentity
                         identity={registrantIdentity}
                         namespaceId={namespaceId}
@@ -238,18 +243,30 @@ export function RegistrarActionCard({
                 </LabeledField>
             </div>
 
-            <LabeledField fieldLabel="Referrer" className="w-[15%] min-w-[140px]">
+            <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
+                {!isMobile && <ResolveAndDisplayReferrerIdentity
+                    chainId={chainId}
+                    namespaceId={namespaceId}
+                    referral={referral}
+                    withAvatar={true}
+                    withIdentifier={false}
+                    avatarStyles="w-10 h-10"
+                />}
+            <LabeledField fieldLabel="Referrer" className="w-[15%] min-w-[110px]">
                 <ResolveAndDisplayReferrerIdentity
                     chainId={chainId}
                     namespaceId={namespaceId}
                     referral={referral}
+                    withAvatar={isMobile}
+                    withIdentifier={true}
+                    avatarStyles="w-5 h-5"
                 />
             </LabeledField>
+            </div>
 
-            <LabeledField fieldLabel="ENS Holiday Awards" className="w-[15%] min-w-[140px]">
+            <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
                 <div className="w-fit h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
-                    {isRegistrarActionQualifiedForIncentiveProgram(referralIncentiveProgram, namedRegistrarAction) ? <XIcon size={20} className="text-red-600" /> : <CheckIcon size={20} className="text-emerald-600"/>}
-                    <p className="text-black font-medium">{referral.decodedReferrer === null ? "Not qualified" : "Qualified"}</p>
+                    <p className="text-black font-medium">{isRegistrarActionQualifiedForIncentiveProgram(referralIncentiveProgram, namedRegistrarAction) ? referralIncentiveProgram.name : "-"}</p>
                 </div>
             </LabeledField>
         </div>

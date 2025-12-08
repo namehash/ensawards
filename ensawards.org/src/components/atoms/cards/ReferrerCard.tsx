@@ -34,7 +34,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
   });
 
   return (
-    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs">
+    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs">
       {/*Desktop Header*/}
       <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-4">
         <PlaceIcon rank={referrer.rank} />
@@ -55,7 +55,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
               withIdentifier={true}
               withAvatar={false}
               withTooltip={false}
-              className="font-medium"
+              className="font-medium sm:max-w-[170px] sm:overflow-x-auto"
             />
           </div>
         </div>
