@@ -86,10 +86,16 @@ function ResolveAndDisplayReferrerIdentity({
             <code className="block">{referral.encodedReferrer}</code> does not follow the formatting
             requirements of incentive programs.</p>;
 
+        const unknownAvatarPlaceholder = (className?: string, iconSize = 24) => <div
+            className={cn("flex justify-center items-center rounded-full bg-gray-200", className, !withAvatar && "hidden")}><QuestionmarkIcon size={iconSize}
+                                                                                                              className="text-gray-400"/>
+        </div>
+
         return (
-            withAvatar && !withIdentifier ? <GenericTooltip tooltipOffset={0} content={tooltipContent}>
-                <div className="w-10 h-10 flex justify-center items-center rounded-full bg-gray-200"><QuestionmarkIcon size={24} className="text-gray-400"/></div>
-            </GenericTooltip> : <span className="h-[21px] inline-flex align-middle gap-1 font-medium">
+            withAvatar && !withIdentifier ?
+                unknownAvatarPlaceholder(avatarStyles, 24)
+            : <span className="h-[21px] inline-flex items-center gap-2 font-medium">
+                {unknownAvatarPlaceholder(avatarStyles, 16)}
                 Unknown
                 <GenericTooltip tooltipOffset={0} content={tooltipContent}>
                     <InfoIcon size={16} className="flex-shrink-0 fill-neutral-300 text-white"/>
@@ -120,31 +126,47 @@ function ResolveAndDisplayReferrerIdentity({
  * Display Registrar Action Card loading state
  */
 export function RegistrarActionCardLoading() {
+    const isMobile = useIsMobile();
+
     return (
-        <div className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
-            <LabeledField fieldLabel="Name" className="w-[15%] min-w-[192px]">
-                <div className="animate-pulse mt-1 h-6 bg-muted rounded-sm w-3/5" />
+        <div
+            className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
+            <LabeledField fieldLabel="Name" className="w-[15%] min-w-[162px]">
+                <div className="animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-4/5"/>
             </LabeledField>
 
-            <LabeledField fieldLabel="Registered" className="w-[15%] min-w-[140px]">
-                <div className="animate-pulse mt-1 h-6 bg-muted rounded-sm w-4/5" />
+            <LabeledField fieldLabel="Registrar action" className="w-[15%] min-w-[110px]">
+                <div className="animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/5 sm:w-3/4"/>
             </LabeledField>
 
-            <LabeledField fieldLabel="Duration" className="w-[10%] min-w-[140px]">
-                <div className=" animate-pulse mt-1 h-6 bg-muted rounded-sm w-4/5" />
+            <LabeledField fieldLabel="Duration" className="w-[10%] min-w-[110px]">
+                <div className=" animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-2/3"/>
             </LabeledField>
 
-            <LabeledField fieldLabel="Registrant" className="w-1/5 min-w-[192px]">
-                {/*TODO: Improve skeleton*/}
-                <div className="animate-pulse mt-1 h-6 bg-muted rounded-sm w-3/5" />
-            </LabeledField>
+            <div
+                className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
+                {!isMobile && <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full"/>}
+                <LabeledField fieldLabel="Registrant" className="sm:min-w-[110px]">
+                    <div className="w-full flex flex-row flex-nowrap max-sm:justify-end justify-start items-center gap-2">
+                        {isMobile && <div className="animate-pulse w-5 h-5 bg-gray-200 rounded-full"/>}
+                        <div className="animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-4/5"/>
+                    </div>
+                </LabeledField>
+            </div>
 
-            <LabeledField fieldLabel="Referrer" className="w-[15%]  min-w-[140px]">
-                <div className=" animate-pulse mt-1 h-6 bg-muted rounded-sm w-full" />
-            </LabeledField>
+            <div
+                className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
+                {!isMobile && <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full"/>}
+                <LabeledField fieldLabel="Referrer" className="sm:min-w-[110px]">
+                    <div className="w-full flex flex-row flex-nowrap max-sm:justify-end justify-start items-center gap-2">
+                        {isMobile && <div className="animate-pulse w-5 h-5 bg-gray-200 rounded-full"/>}
+                        <div className="animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-3/5"/>
+                    </div>
+                </LabeledField>
+            </div>
 
-            <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[140px]">
-                <div className=" animate-pulse mt-1 h-6 bg-muted rounded-sm w-full"/>
+            <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
+                <div className=" animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-4/5"/>
             </LabeledField>
         </div>
     );
@@ -160,10 +182,10 @@ export interface RegistrarActionCardProps {
  * Display a single Registrar Action
  */
 export function RegistrarActionCard({
-                                               namespaceId,
-                                               namedRegistrarAction,
-    referralIncentiveProgram,
-                                           }: RegistrarActionCardProps) {
+                                        namespaceId,
+                                        namedRegistrarAction,
+                                        referralIncentiveProgram,
+                                    }: RegistrarActionCardProps) {
     const isMobile = useIsMobile();
     const {registrant, registrationLifecycle, type, referral, transactionHash} =
         namedRegistrarAction.action;
@@ -237,7 +259,7 @@ export function RegistrarActionCard({
                         accelerate={true}
                         withAvatar={isMobile}
                         withTooltip={false}
-                        className="font-medium sm:max-w-[140px] sm:overflow-x-auto"
+                        className="font-medium sm:max-[1220px]:max-w-[110px] min-[1220px]:max-w-[140px]"
                         avatarStyles="w-5 h-5"
                     />
                 </LabeledField>

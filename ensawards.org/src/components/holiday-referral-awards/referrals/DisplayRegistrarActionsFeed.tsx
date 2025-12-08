@@ -60,7 +60,7 @@ function DisplayRegistrarActionsListLoading({
                                                     itemsPerPage,
                                                 }: DisplayRegistrarActionsListPlaceholderProps) {
     return (
-        <div className="space-y-4 relative z-10">
+        <div className="w-full space-y-4 relative z-10">
             {[...Array(itemsPerPage)].map((_, idx) => (
                 <RegistrarActionCardLoading key={idx} />
             ))}
@@ -106,7 +106,7 @@ export function DisplayRegistrarActionsFeed({
                         ))}
                            href={`https://admin.ensnode.io/connection?connection=${encodeURIComponent(getENSNodeUrl().href)}`}
                            target="_blank">
-                            Check ENSIndexer plugins
+                            Check indexing config
                         </a>
                     </div>
                 </ErrorInfo>
@@ -128,7 +128,7 @@ export function DisplayRegistrarActionsFeed({
                             }
                         ))} href={`https://admin.ensnode.io/status?connection=${encodeURIComponent(getENSNodeUrl().href)}`}
                            target="_blank">
-                            Check status
+                            Check indexing status
                         </a>
                     </div>
                 </ErrorInfo>
