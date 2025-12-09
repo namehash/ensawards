@@ -7,10 +7,10 @@ import type { Address } from "viem";
  * Checks whether a given string is a valid slug.
  * A valid slug:
  * - is non-empty
- * - contains only lowercase letters (a–z) and hyphens (-)
+ * - contains only lowercase letters (a–z), numbers (0-9), and hyphens (-)
  */
 export const isValidSlug = (maybeSlug: string) => {
-  const slugRegex = /^[a-z-]+$/;
+  const slugRegex = /^[a-z0-9-]+$/;
 
   if (maybeSlug.length == 0) {
     return false;

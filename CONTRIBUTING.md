@@ -172,7 +172,7 @@ export enum BenchmarkResult {
 }
 
 export interface AppBenchmark {
-    bestPracticeDetails: BestPractice;
+    bestPractice: BestPractice;
     result: BenchmarkResult;
 }
 ```

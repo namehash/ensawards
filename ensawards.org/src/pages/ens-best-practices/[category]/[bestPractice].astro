@@ -44,8 +44,8 @@ const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
 const appsWithBenchmarks = APPS.map((app) => {
   const matchingBenchmark = app.benchmarks.find(
     (benchmark) =>
-      benchmark.bestPracticeDetails.categorySlug === bestPracticeToDisplay?.categorySlug &&
-      benchmark.bestPracticeDetails.id === bestPracticeToDisplay?.id,
+      benchmark.bestPractice.categorySlug === bestPracticeToDisplay?.categorySlug &&
+      benchmark.bestPractice.id === bestPracticeToDisplay?.id,
   );
 
   return {
@@ -126,7 +126,7 @@ const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
                               // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
           const relatedBenchmark = app.benchmarks.find(
                                   (benchmark) =>
-                                      benchmark.bestPracticeDetails.name === bestPracticeToDisplay.name,
+                                      benchmark.bestPractice.name === bestPracticeToDisplay.name,
                               )!;
 
                               return (

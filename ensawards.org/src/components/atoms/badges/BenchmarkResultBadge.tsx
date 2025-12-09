@@ -3,7 +3,7 @@ import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import { type AppBenchmark } from "@/types/apps.ts";
+import { type AppBenchmark, BenchmarkResult } from "@/types/apps.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNamespaceIds, ENSNodeClient, buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
@@ -39,7 +39,7 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
       <p className="text-xs text-muted-foreground">
         on{" "}
         <AbsoluteTime
-          timestamp={benchmark.benchmardAt}
+          timestamp={benchmark.benchmarkedAt}
           options={{
             year: "numeric",
             month: "long",
@@ -66,8 +66,6 @@ const getResultIcon = (result: BenchmarkResult) => {
     case "Partial pass":
       return <PartialPassIcon width={16} height={16} />;
     case "Fail":
-      return <FailIcon width={16} height={16} />;
-    default:
       return <FailIcon width={16} height={16} />;
   }
 };

@@ -98,8 +98,8 @@ describe("App data", () => {
     data.forEach((app) => {
       app.benchmarks.forEach((benchmark, index) => {
         expect(
-          benchmark.bestPracticeDetails,
-          `Benchmark ${index} for app ${app.id} missing bestPracticeDetails`,
+          benchmark.bestPractice,
+          `Benchmark ${index} for app ${app.id} missing bestPractice`,
         ).toBeDefined();
         expect(
           benchmark.result,
@@ -110,11 +110,11 @@ describe("App data", () => {
           `Benchmark ${index} for app ${app.id} missing benchmarkedBy`,
         ).toBeDefined();
         expect(
-          benchmark.benchmardAt,
+          benchmark.benchmarkedAt,
           `Benchmark ${index} for app ${app.id} missing benchmardAt`,
         ).toBeDefined();
         expect(
-          typeof benchmark.benchmardAt === "number",
+          typeof benchmark.benchmarkedAt === "number",
           `Benchmark ${index} for app ${app.id} benchmardAt should be a number`,
         ).toEqual(true);
       });

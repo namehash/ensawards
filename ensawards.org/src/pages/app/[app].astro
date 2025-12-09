@@ -88,24 +88,24 @@ if (appToDisplay !== undefined) {
         <ItemsList header="Benchmark results">
           {appToDisplay.benchmarks.map((benchmark, idx) => (
             <BenchmarkResultCard
-              name={benchmark.bestPracticeDetails.name}
-              notes={benchmark.bestPracticeDetails.description}
+              name={benchmark.bestPractice.name}
+              notes={benchmark.bestPractice.description}
               viewDetails={{
                 text: "View best practice details",
-                link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}/${benchmark.bestPracticeDetails.slug}`,
+                link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.slug}`,
               }}
               additionalInfo={[
                 {
                   category: "Category",
-                  value: benchmark.bestPracticeDetails.categoryName,
-                  link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}`,
+                  value: benchmark.bestPractice.categoryName,
+                  link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}`,
                   linkStyles:
                     "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
                 },
               ]}>
                 <BenchmarkResultBadge
                 slot="badge"
-                className={BenchmarkResultToBadgeStyles.get(benchmark.result)!}
+                className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
                 benchmark={benchmark}
                 client:load
               />

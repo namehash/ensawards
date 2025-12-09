@@ -1,4 +1,5 @@
 import { benchmarkers } from "@/data/benchmarkers";
+import { SUPPORTED_CHAINS } from "@/utils/chains";
 import type { AccountId } from "@ensnode/ensnode-sdk";
 import { isAddress } from "viem";
 import { describe, expect, it } from "vitest";
@@ -16,11 +17,13 @@ describe("Benchmarkers data", () => {
       });
     });
 
-    it("Should have valid chain IDs", () => {
+    it("Should have valid chain IDs from supported chains", () => {
+      const supportedChainIds = SUPPORTED_CHAINS.map((chain) => chain.id);
+
       Object.entries(benchmarkersData).forEach(([name, benchmarker]: [string, AccountId]) => {
         expect(
-          typeof benchmarker.chainId === "number" && benchmarker.chainId > 0,
-          `Chain ID for benchmarker ${name} is not valid: ${benchmarker.chainId}`,
+          supportedChainIds.some((chainId) => chainId === benchmarker.chainId),
+          `Chain ID for benchmarker ${name} is not in SUPPORTED_CHAINS: ${benchmarker.chainId}`,
         ).toBe(true);
       });
     });

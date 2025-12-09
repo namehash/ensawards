@@ -30,7 +30,7 @@ export function toUnixTimestamp(date: Date | string): UnixTimestamp {
  */
 export interface AppBenchmark {
   /** The best practice being benchmarked */
-  bestPracticeDetails: BestPractice;
+  bestPractice: BestPractice;
   /** The result of the benchmark */
   result: BenchmarkResult;
   /** The account ID of the person who performed the benchmark */
