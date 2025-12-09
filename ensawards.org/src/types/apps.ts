@@ -36,7 +36,7 @@ export interface AppBenchmark {
   /** The account ID of the person who performed the benchmark */
   benchmarkedBy: AccountId;
   /** Unix timestamp when the benchmark was performed */
-  benchmardAt: UnixTimestamp;
+  benchmarkedAt: UnixTimestamp;
 }
 
 export const AppTypes = {

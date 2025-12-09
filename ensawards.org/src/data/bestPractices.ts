@@ -54,7 +54,7 @@ export const nameYourSmartContracts: BestPractice = {
     main: {
       header: "Technical Details",
       content:
-        "Contracts can be [assigned ENS names](https://docs.ens.domains/web/naming-contracts/) during or after deployment. " +
+        "Contracts should be [assigned ENS names](https://docs.ens.domains/web/naming-contracts/) during or after deployment. " +
         "For deployment-time naming, see the [Enscribe documentation](https://www.enscribe.xyz/docs/introduction/naming-contracts) which goes into greater detail on the process. " +
         "For post-deployment naming we recommend using the [Enscribe App](https://app.enscribe.xyz/). " +
         "Note that setting a [primary name](https://docs.ens.domains/web/reverse) (reverse resolution) requires the contract to implement [Ownable](https://docs.openzeppelin.com/contracts/5.x/access-control#ownership-and-ownable). " +
@@ -101,7 +101,7 @@ export const displayNamedSmartContractsMainnet: BestPractice = {
 
 export const displayNamedSmartContractsL2: BestPractice = {
   id: "display-named-smart-contracts-l2-chains",
-  slug: "display-named-smart-contracts-layer-two-chains",
+  slug: "display-named-smart-contracts-l2-chains",
   name: "Display named smart contracts on L2 chains",
   description:
     "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",
@@ -112,18 +112,18 @@ export const displayNamedSmartContractsL2: BestPractice = {
     main: {
       header: "Technical Details",
       content:
-        "When users interact with a contract on a L2 chain, use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard for multichain primary name resolution. " +
-        "ENSIP-19 provides chain-specific primary names for supported L2 networks (including Optimism, Arbitrum, Base, Linea, and Scroll), with automatic fallback to the default primary name from mainnet when no chain-specific name exists. " +
-        "You can use a variety of libraries to lookup the [primary name](https://docs.ens.domains/web/reverse) of a contract address that support ENSIP-19 such as [Viem](https://viem.sh/docs/ens/actions/getEnsName#chain-specific-resolution) or [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md).",
+        "When users interact with a contract on a L2 chain, use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard to lookup the primary name of the contract. " +
+        "ENSIP-19 provides chain-specific primary names for L2 networks (including Optimism, Arbitrum, Base, Linea, and Scroll), with an automatic fallback to a default primary name (defined on mainnet) if no chain-specific primary name is defined. " +
+        "A number of libraries already support ENSIP-19, such as [Viem](https://viem.sh/docs/ens/actions/getEnsName#chain-specific-resolution) or [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md). Use any of these libraries to lookup the [primary name](https://docs.ens.domains/web/reverse) of a contract that's deployed to an L2 chain.",
     },
     sides: [
       {
         header: "Additional Details",
         content:
-          "ENSIP-19 enables a consistent identity resolution experience across the multichain ecosystem. " +
-          "Contracts can set chain-specific primary names for different L2 networks, allowing for context-appropriate naming while maintaining a fallback to their mainnet identity. " +
-          "If a contract has an ENS name, you can use its ENS profile to power additional UX improvements such as avatars, metadata, audit information, and more. " +
-          "More information can be found at the [ENSIP Proposal](https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397).",
+          "ENSIP-19 enables primary names to be set on any chain. " +
+          "Contracts deployed to an L2 chain benefit from this, as the contract can then configure its name directly on the chain it is deployed to without any need to update state on mainnet. " +
+          "If a contract has an ENS name, you can use the contract's ENS profile to power additional UX improvements such as displaying the contract's avatar, metadata, audit information, and more. " +
+          "More information can be found at [this ENSIP](https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397).",
       },
     ],
   },

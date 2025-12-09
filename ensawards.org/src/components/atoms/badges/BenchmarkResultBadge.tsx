@@ -59,7 +59,7 @@ const ensNodeReactConfig = createConfig({
   url: getENSNodeUrl(),
 });
 
-const getResultIcon = (result: AppBenchmark["result"]) => {
+const getResultIcon = (result: BenchmarkResult) => {
   switch (result) {
     case "Pass":
       return <PassIcon width={16} height={16} />;
