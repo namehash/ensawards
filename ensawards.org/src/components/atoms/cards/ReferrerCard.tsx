@@ -1,6 +1,5 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
-import { getAppSupportColor } from "@/utils/styles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
@@ -35,7 +34,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
   });
 
   return (
-    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs">
+    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs">
       {/*Desktop Header*/}
       <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-4">
         <PlaceIcon rank={referrer.rank} />
@@ -55,7 +54,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
               withIdentifier={true}
               withAvatar={false}
               withTooltip={false}
-              className="font-medium"
+              className="font-medium sm:max-w-[170px] sm:overflow-x-auto"
             />
           </div>
         </div>
@@ -183,7 +182,7 @@ const PlaceIcon = ({ rank, className }: RankProps) => (
   </GenericTooltip>
 );
 export const ReferrerCardLoading = ({ rank }: Omit<RankProps, "className">) => {
-  const loadingStateStyles = "animate-pulse bg-gray-300 rounded-sm";
+  const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
   return (
     <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200">
       {/*Desktop Header*/}

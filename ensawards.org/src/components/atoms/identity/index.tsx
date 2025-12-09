@@ -14,12 +14,14 @@ import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EnsAvatar } from "./EnsAvatar.tsx";
 
+import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { AddressDisplay, IdentityLink, IdentityTooltip, NameDisplay } from "./utils";
 
-interface ResolveAndDisplayIdentityProps {
+export interface ResolveAndDisplayIdentityProps {
   identity: UnresolvedIdentity;
   namespaceId: ENSNamespaceId;
+  accelerate?: boolean;
   withLink?: boolean;
   withTooltip?: boolean;
   withAvatar?: boolean;
@@ -31,6 +33,10 @@ interface ResolveAndDisplayIdentityProps {
  * Resolves the provided `UnresolvedIdentity` through ENSNode and displays the result.
  *
  * @param identity - The `UnresolvedIdentity` to resolve and display.
+ * @param namespaceId - The ENSNamespace identifier (e.g. 'mainnet', 'sepolia', 'holesky',
+ *  'ens-test-env')
+ * @param accelerate - Whether to attempt Protocol Acceleration (default: false)
+ *                      when resolving the primary name.
  * @param withLink - Whether to wrap the displayed identity in an `IdentityLink` component.
  * @param withTooltip - Whether to wrap the displayed identity in an `IdentityInfoTooltip` component.
  * @param withAvatar - Whether to display an avatar image.
@@ -40,6 +46,7 @@ interface ResolveAndDisplayIdentityProps {
 export function ResolveAndDisplayIdentity({
   identity,
   namespaceId,
+  accelerate = false,
   withLink = true,
   withTooltip = true,
   withAvatar = false,
@@ -52,6 +59,7 @@ export function ResolveAndDisplayIdentity({
   const { identity: identityResult } = useResolvedIdentity({
     identity,
     namespaceId,
+    accelerate,
   });
 
   return (
@@ -84,6 +92,8 @@ interface DisplayIdentityProps {
  *
  * @param identity - The identity to display. May be a `ResolvedIdentity` or an `UnresolvedIdentity`.
  *                      If not a `ResolvedIdentity` (and therefore just an `UnresolvedIdentity`) then displays a loading state.
+ * @param namespaceId - The ENSNamespace identifier (e.g. 'mainnet', 'sepolia', 'holesky',
+ *                        'ens-test-env')
  * @param withLink - Whether to wrap the displayed identity in an `IdentityLink` component.
  * @param withTooltip - Whether to wrap the displayed identity in an `IdentityInfoTooltip` component.
  * @param withAvatar - Whether to display an avatar image.
@@ -100,35 +110,50 @@ export function DisplayIdentity({
   className,
 }: DisplayIdentityProps) {
   let avatar: React.ReactElement;
-  let identitifer: React.ReactElement;
+  let identifier: React.ReactElement;
+
+  const isMobile = useIsMobile();
 
   if (!isResolvedIdentity(identity)) {
     // identity is an `UnresolvedIdentity` which represents that it hasn't been resolved yet
     // display loading state
-    avatar = <Skeleton className="h-10 w-10 rounded-full" />;
-    identitifer = <Skeleton className={cn("h-4 w-24", className)} />;
+    avatar = (
+      <Skeleton className={cn("h-10 w-10 rounded-full", isMobile && withIdentifier && "w-5 h-5")} />
+    );
+    identifier = <Skeleton className={cn("h-4 w-24", className)} />;
   } else if (
     identity.resolutionStatus === ResolutionStatusIds.Unnamed ||
     identity.resolutionStatus === ResolutionStatusIds.Unknown
   ) {
     avatar = (
-      <div className="w-10 h-10 flex justify-center items-center">
+      <div
+        className={cn(
+          "w-10 h-10 flex justify-center items-center",
+          isMobile && withIdentifier && "w-5 h-5",
+        )}
+      >
         <ChainIcon
           chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
-          height={24}
-          width={24}
+          height={isMobile && withIdentifier ? 16 : 24}
+          width={isMobile && withIdentifier ? 16 : 24}
         />
       </div>
     );
-    identitifer = (
+    identifier = (
       <AddressDisplay
         address={identity.address}
         className={cn("whitespace-nowrap hover:underline hover:underline-offset-[25%]", className)}
       />
     );
   } else {
-    avatar = <EnsAvatar name={identity.name} namespaceId={namespaceId} className="h-10 w-10" />;
-    identitifer = (
+    avatar = (
+      <EnsAvatar
+        name={identity.name}
+        namespaceId={namespaceId}
+        className={cn("h-10 w-10", isMobile && withIdentifier && "w-5 h-5")}
+      />
+    );
+    identifier = (
       <NameDisplay
         name={identity.name}
         className={cn(
@@ -144,7 +169,7 @@ export function DisplayIdentity({
       {/* TODO: extract the `EnsAvatar` / `ChainIcon` out of this component and remove the
       `withAvatar` prop. */}
       {withAvatar && avatar}
-      {withIdentifier && identitifer}
+      {withIdentifier && identifier}
     </div>
   );
 
@@ -163,7 +188,10 @@ export function DisplayIdentity({
       <IdentityLink
         identity={identity}
         namespaceId={namespaceId}
-        className={cn(withAvatar && "h-10")}
+        className={cn(
+          withAvatar && (isMobile && withIdentifier ? "w-5 h-5" : "w-10 h-10"),
+          "w-fit",
+        )}
       >
         {result}
       </IdentityLink>
