@@ -48,7 +48,7 @@ export const APPS: App[] = [
     slug: "coinbase-wallet",
     name: "Coinbase Wallet",
     description:
-      "Coinbase Wallet helps you unlock one of the most significant features of crypto: the ability to send or receive peer-to-peer transfers without any financial intermediaries.",
+      "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications across multiple blockchains.",
     type: AppTypes.Wallet,
     socials: {
       website: new URL("https://www.coinbase.com/learn/wallet"),
@@ -83,8 +83,7 @@ export const APPS: App[] = [
     id: "metamask",
     slug: "metamask",
     name: "MetaMask",
-    description:
-      "MetaMask is a widely used, self-custodial cryptocurrency wallet that allows users to interact with the Ethereum blockchain and other compatible networks. ",
+    description: "MetaMask is a widely used, self-custodial cryptocurrency wallet.",
     type: AppTypes.Wallet,
     socials: {
       website: new URL("https://metamask.io/"),
