@@ -158,7 +158,6 @@ export function ReferralLinkForm() {
 
   return (
     <div
-      id="generateReferralLinkForm"
       className={cn(
         "w-full min-w-1/2 max-w-[600px] h-fit gap-12 p-5 pt-8 sm:p-8 box-border bg-neutral-50 rounded-2xl",
         verticalFlex,
