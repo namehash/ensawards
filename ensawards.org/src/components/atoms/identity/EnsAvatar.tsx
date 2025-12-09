@@ -51,7 +51,12 @@ interface EnsAvatarFallbackProps {
 const avatarFallbackColors = ["#000000", "#bedbff", "#5191c1", "#1e6495", "#0a4b75"];
 
 const EnsAvatarFallback = ({ name }: EnsAvatarFallbackProps) => (
-  <BoringAvatar name={name} colors={avatarFallbackColors} variant="beam" />
+  <BoringAvatar
+    name={name}
+    colors={avatarFallbackColors}
+    variant="beam"
+    className="w-full h-full"
+  />
 );
 
 const AvatarLoading = () => (

@@ -1,8 +1,8 @@
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import {
   DisplayReferrerLeaderboardPage,
   type DisplayReferrerLeaderboardPageProps,
 } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
-import { LeaderboardFetchErrorInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -83,13 +83,24 @@ export function MockDisplayReferrerLeaderboardPage() {
           leaderboardPageData: null,
           isLoading: false,
           emptyLeaderboardCTA: <p>Placeholder</p>,
-          leaderboardPageFetchError: (
-            <LeaderboardFetchErrorInfo
-              message="Mock error message."
-              retryFunction={() => {
-                alert("Retry fetching");
-              }}
-            />
+          error: (
+            <ErrorInfo
+              title="Error loading referrer data"
+              description={["Mock error message. Please try again later."]}
+            >
+              <button
+                className={cn(
+                  shadcnButtonVariants({
+                    variant: "outline",
+                    size: "default",
+                    className: "rounded-full cursor-pointer",
+                  }),
+                )}
+                onClick={() => alert("Retry fetching")}
+              >
+                Try again
+              </button>
+            </ErrorInfo>
           ),
         };
 

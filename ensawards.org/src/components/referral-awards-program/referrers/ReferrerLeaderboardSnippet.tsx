@@ -1,5 +1,5 @@
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
-import { LeaderboardFetchErrorInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
@@ -101,10 +101,23 @@ export function ReferrerLeaderboardSnippet({
             emptyLeaderboardCTA={emptyReferrerLeaderboardCTA}
             leaderboardPageFetchError={
               fetchErrorMessage ? (
-                <LeaderboardFetchErrorInfo
-                  message={fetchErrorMessage}
-                  retryFunction={fetchReferrerLeaderboard}
-                />
+                <ErrorInfo
+                  title="Error loading referrer data"
+                  description={[`${fetchErrorMessage} Please try again later.`]}
+                >
+                  <button
+                    className={cn(
+                      shadcnButtonVariants({
+                        variant: "outline",
+                        size: "default",
+                        className: "rounded-full cursor-pointer",
+                      }),
+                    )}
+                    onClick={() => fetchReferrerLeaderboard()}
+                  >
+                    Try again
+                  </button>
+                </ErrorInfo>
               ) : undefined
             }
             leaderboardPageLoadingData={{

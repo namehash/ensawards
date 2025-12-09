@@ -42,7 +42,7 @@ export function DisplayReferrerLeaderboardPage({
 
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
-        <Skeleton className="w-[225px] sm:w-[255px] h-[14px] sm:h-4 mt-[4px] mb-[3px] sm:my-1 bg-gray-300" />
+        <Skeleton className="w-[225px] sm:w-[255px] h-[14px] sm:h-4 mt-[4px] mb-[3px] sm:my-1 bg-gray-200" />
         {[...Array(leaderboardPageLoadingData.itemsPerPage).keys()].map((elem) => (
           <ReferrerCardLoading
             key={`Referrer-loading-${pageOffset + elem}`}

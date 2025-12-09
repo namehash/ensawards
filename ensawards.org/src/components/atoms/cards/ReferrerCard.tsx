@@ -1,6 +1,5 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
-import { getAppSupportColor } from "@/utils/styles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
@@ -36,7 +35,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
   });
 
   return (
-    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-8 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
+    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       {/*Desktop Header*/}
       <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-4">
         <RankIcon rank={referrer.rank} isQualified={referrer.isQualified} />
@@ -56,7 +55,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
               withIdentifier={true}
               withAvatar={false}
               withTooltip={false}
-              className="font-medium"
+              className="font-medium sm:max-w-[170px] sm:overflow-x-auto"
             />
           </div>
         </div>
@@ -219,7 +218,7 @@ const RankIconLoading = ({ rank, className }: Omit<RankProps, "isQualified">) =>
  * Display Referrer Card loading state
  */
 export const ReferrerCardLoading = ({ rank }: Omit<RankProps, "className" | "isQualified">) => {
-  const loadingStateStyles = "animate-pulse bg-gray-300 rounded-sm";
+  const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
   return (
     <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-8 rounded-2xl border border-gray-200 bg-white">
       {/*Desktop Header*/}

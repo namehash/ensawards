@@ -26,6 +26,8 @@ import ContractNamingIncentivesBanner from "../components/contract-naming-season
 import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAskedQuestions";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
+import { daoContractsOnly } from "../contract-pipelines/filters";
+import { sortDaoLeaderboard } from "../contract-pipelines/sorting";
 import Layout from "../layouts/Layout.astro";
 import { OrgId } from "../types/organizations";
 import { getOrgById } from "../utils/dataAccess";
@@ -140,7 +142,10 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
 const backgroundGreyStyles =
   "absolute w-screen h-full box-border py-6 sm:py-[50px] bg-neutral-50 bottom-0";
 
-const daoScores = contractPipeline();
+const daoScores = contractPipeline({
+  filter: daoContractsOnly,
+  sort: sortDaoLeaderboard,
+});
 ---
 
 <Layout

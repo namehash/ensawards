@@ -147,8 +147,7 @@ Categories sort best practices into topic-related groups based on their characte
 ```typescript
 export enum CategoryStatus {
     ComingSoon,
-    Updated,
-    Implemented,
+    Active
 }
 
 export interface BestPracticeCategory {
@@ -173,7 +172,7 @@ export enum BenchmarkResult {
 }
 
 export interface AppBenchmark {
-    bestPracticeDetails: BestPractice;
+    bestPractice: BestPractice;
     result: BenchmarkResult;
 }
 ```

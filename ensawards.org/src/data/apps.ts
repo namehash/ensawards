@@ -1,5 +1,10 @@
-import { displayNamedSmartContracts, recognizeAllENSNames } from "@/data/bestPractices.ts";
-import { type App, AppTypes, BenchmarkResult } from "@/types/apps.ts";
+import { benchmarkers } from "@/data/benchmarkers.ts";
+import {
+  displayNamedSmartContractsL2,
+  displayNamedSmartContractsMainnet,
+  //  recognizeAllENSNames
+} from "@/data/bestPractices.ts";
+import { type App, AppTypes, BenchmarkResult, toUnixTimestamp } from "@/types/apps.ts";
 
 export const APPS: App[] = [
   {
@@ -16,13 +21,23 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/rainbowIcon.svg",
     benchmarks: [
+      // {
+      //   bestPractice: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      // },
       {
-        bestPracticeDetails: recognizeAllENSNames,
+        bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
       },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
+        bestPractice: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
       },
     ],
     ogImagePath: "/app-rainbow-wallet_og_image.png",
@@ -33,7 +48,7 @@ export const APPS: App[] = [
     slug: "coinbase-wallet",
     name: "Coinbase Wallet",
     description:
-      "Coinbase Wallet helps you unlock one of the most significant features of crypto: the ability to send or receive peer-to-peer transfers without any financial intermediaries.",
+      "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications across multiple blockchains.",
     type: AppTypes.Wallet,
     socials: {
       website: new URL("https://www.coinbase.com/learn/wallet"),
@@ -42,13 +57,23 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/coinbaseWalletIcon.svg",
     benchmarks: [
+      // {
+      //   bestPractice: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      // },
       {
-        bestPracticeDetails: recognizeAllENSNames,
-        result: BenchmarkResult.Pass,
+        bestPractice: displayNamedSmartContractsMainnet,
+        result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:22:55.716Z"),
       },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
+        bestPractice: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:22:55.716Z"),
       },
     ],
     ogImagePath: "/app-coinbase-wallet_og_image.png",
@@ -58,8 +83,7 @@ export const APPS: App[] = [
     id: "metamask",
     slug: "metamask",
     name: "MetaMask",
-    description:
-      "MetaMask is a widely used, self-custodial cryptocurrency wallet that allows users to interact with the Ethereum blockchain and other compatible networks. ",
+    description: "MetaMask is a widely used, self-custodial cryptocurrency wallet.",
     type: AppTypes.Wallet,
     socials: {
       website: new URL("https://metamask.io/"),
@@ -68,13 +92,23 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/metamaskIcon.svg",
     benchmarks: [
+      // {
+      //   bestPractice: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      // },
       {
-        bestPracticeDetails: recognizeAllENSNames,
+        bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
       },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
+        bestPractice: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
       },
     ],
     ogImagePath: "/app-metamask_og_image.png",
@@ -93,13 +127,23 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/etherscanIcon.png",
     benchmarks: [
+      // {
+      //   bestPractice: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      // },
       {
-        bestPracticeDetails: recognizeAllENSNames,
+        bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
       },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
-        result: BenchmarkResult.Pass,
+        bestPractice: displayNamedSmartContractsL2,
+        result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
       },
     ],
     ogImagePath: "/app-etherscan_og_image.png",
@@ -117,13 +161,23 @@ export const APPS: App[] = [
     },
     iconPath: "/src/assets/blockscoutIcon.jpg",
     benchmarks: [
+      // {
+      //   bestPractice: recognizeAllENSNames,
+      //   result: BenchmarkResult.Pass,
+      //   benchmarkedBy: benchmarkers.stevedylan,
+      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      // },
       {
-        bestPracticeDetails: recognizeAllENSNames,
+        bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:28:32.410Z"),
       },
       {
-        bestPracticeDetails: displayNamedSmartContracts,
-        result: BenchmarkResult.Pass,
+        bestPractice: displayNamedSmartContractsL2,
+        result: BenchmarkResult.Fail,
+        benchmarkedBy: benchmarkers.stevedylandev,
+        benchmarkedAt: toUnixTimestamp("2025-12-08T18:28:32.410Z"),
       },
     ],
     ogImagePath: "/app-blockscout_og_image.png",

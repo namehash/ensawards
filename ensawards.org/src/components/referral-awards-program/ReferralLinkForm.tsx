@@ -134,7 +134,7 @@ export function ReferralLinkForm() {
         console.error("Network error: ", error);
         setOverallFormErrorMessage("Connection lost. Please check your connection and try again.");
       } else {
-        console.log(error);
+        console.error(error);
         setOverallFormErrorMessage("Request error. Please try again.");
       }
     }

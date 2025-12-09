@@ -1,5 +1,5 @@
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
-import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { OmnichainIndexingStatusId, UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { getUnixTime } from "date-fns";
 import type { Address } from "viem";
 
@@ -7,10 +7,10 @@ import type { Address } from "viem";
  * Checks whether a given string is a valid slug.
  * A valid slug:
  * - is non-empty
- * - contains only lowercase letters (a–z) and hyphens (-)
+ * - contains only lowercase letters (a–z), numbers (0-9), and hyphens (-)
  */
 export const isValidSlug = (maybeSlug: string) => {
-  const slugRegex = /^[a-z-]+$/;
+  const slugRegex = /^[a-z0-9-]+$/;
 
   if (maybeSlug.length == 0) {
     return false;
@@ -78,3 +78,9 @@ export const truncateAddress = (address: Address) =>
 export const ENS_CONTRACT_NAMING_SEASON_APPROX_END: UnixTimestamp = getUnixTime(
   new Date("2026-04-30T23:59:59.000Z"),
 );
+
+export function formatOmnichainIndexingStatus(status: OmnichainIndexingStatusId): string {
+  const [, formattedStatus] = status.split("-");
+
+  return formattedStatus;
+}
