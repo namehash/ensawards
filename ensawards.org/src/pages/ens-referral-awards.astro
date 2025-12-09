@@ -75,9 +75,10 @@ const backgroundGreyStyles =
   }}>
   <HolidayReferralAwardsHero />
   <section
-    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-[80px] pt-6 sm:pt-[80px] px-5 sm:px-8 overflow-hidden">
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-[80px] px-5 sm:px-8 overflow-hidden">
     <div
-      class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center max-md:gap-5">
+      id="top-referrers"
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center max-md:gap-5 pt-6 sm:pt-[80px] scroll-mt-[56px] sm:scroll-mt-[70px] snap-start">
       <h3
         class="text-2xl sm:text-3xl leading-normal font-semibold text-black text-center">
         Top referrers
@@ -85,9 +86,10 @@ const backgroundGreyStyles =
       <TopReferrers client:load onENSHolidayReferralsAwards={true} />
     </div>
     <div
+      id="live-feed"
       class={cn(
-        "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-5 " +
-          "py-6 sm:py-[80px] relative z-10",
+        "w-full max-w-[1216px] box-border h-fit min-h-[646px] sm:min-h-[592px] flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-5 " +
+          "py-6 sm:py-[80px] relative z-10 scroll-mt-[56px] sm:scroll-mt-[70px] snap-start",
       )}>
       <div class={backgroundGreyStyles}></div>
       <div
@@ -153,9 +155,11 @@ const backgroundGreyStyles =
       </div>
     </div>
     <div
+      id="generate-referral-link"
       class={cn(
         "w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-center items-center " +
           "gap-5 sm:gap-10 py-6 sm:py-[80px] relative z-10 bg-neutral-50",
+        "scroll-mt-[56px] sm:scroll-mt-[70px] snap-start",
       )}>
       <div
         class={cn(
