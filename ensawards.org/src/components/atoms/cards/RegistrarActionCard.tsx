@@ -16,7 +16,7 @@ import {
   type ResolveAndDisplayIdentityProps,
 } from "@/components/atoms/identity";
 import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
-import { isRegistrarActionQualifiedForIncentiveProgram } from "@/components/holiday-referral-awards/referrals/utils.ts";
+import { isQualifiedReferral } from "@/components/holiday-referral-awards/referrals/utils.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import {
@@ -233,7 +233,6 @@ export function RegistrarActionCard({
   return (
     <div className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
       <LabeledField fieldLabel="Name" className="w-[15%] min-w-[162px]">
-        {/*TODO: Temporarily assuming that for the registered (renewed) name we'd want to link to ENSManagerApp */}
         <a
           target="_blank"
           href={buildExternalEnsAppProfileUrl(namedRegistrarAction.name, namespaceId)?.href}
@@ -324,7 +323,7 @@ export function RegistrarActionCard({
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
         <div className="w-fit h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
           <p className="text-black font-medium">
-            {isRegistrarActionQualifiedForIncentiveProgram(
+            {isQualifiedReferral(
               referralIncentiveProgram,
               namedRegistrarAction,
             )

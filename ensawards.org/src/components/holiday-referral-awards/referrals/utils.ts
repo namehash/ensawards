@@ -1,13 +1,11 @@
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
-//TODO: not sure about the function name... Assume it should be shorter...
-// Maybe just `isRegistrarActionQualified` would suffice? Appreciate advice
 import {
   type NamedRegistrarAction,
-  isRegistrarActionReferralAvailable,
+  isRegistrarActionReferralAvailable, accountIdEqual,
 } from "@ensnode/ensnode-sdk";
 import { isAddressEqual, zeroAddress } from "viem";
 
-export function isRegistrarActionQualifiedForIncentiveProgram(
+export function isQualifiedReferral(
   incentiveProgram: ReferralIncentiveProgram,
   registrarAction: NamedRegistrarAction,
 ): boolean {
@@ -20,14 +18,7 @@ export function isRegistrarActionQualifiedForIncentiveProgram(
 
   // Check if the registrar action associated with the same subregistry
   // as the incentive program rules
-  if (
-    !isAddressEqual(
-      registrarAction.action.registrationLifecycle.subregistry.subregistryId.address,
-      incentiveProgram.rules.subregistryId.address,
-    ) ||
-    registrarAction.action.registrationLifecycle.subregistry.subregistryId.chainId !==
-      incentiveProgram.rules.subregistryId.chainId
-  )
+  if (!accountIdEqual(registrarAction.action.registrationLifecycle.subregistry.subregistryId, incentiveProgram.rules.subregistryId))
     return false;
 
   //Check if the registrar action has a non-null and non-zero decodedReferrer address

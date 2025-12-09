@@ -5,7 +5,7 @@ import { ENSNamespaceIds } from "@ensnode/datasources";
 import { DisplayRegistrarActionsFeed } from "@/components/holiday-referral-awards/referrals/DisplayRegistrarActionsFeed.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import { ENSHolidayAwardsReferralIncentiveProgram } from "@/data/referralIncentivePrograms.ts";
+import { ENSHolidayAwards } from "@/data/referralIncentivePrograms.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
@@ -60,7 +60,7 @@ export function MockDisplayRegistrarActionsFeed() {
               namespaceId={namespaceId}
               title={title}
               registrarActions={selectedVariant}
-              referralIncentiveProgram={ENSHolidayAwardsReferralIncentiveProgram}
+              referralIncentiveProgram={ENSHolidayAwards}
             />
           </div>{" "}
         </section>

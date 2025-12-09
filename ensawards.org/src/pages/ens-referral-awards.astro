@@ -15,7 +15,7 @@ import { TopReferrers } from "../components/holiday-referral-awards/referrers/To
 import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAskedQuestions";
 import JoinTelegram from "../components/molecules/JoinTelegram.astro";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
-import { ENSHolidayAwardsReferralIncentiveProgram } from "../data/referralIncentivePrograms";
+import { ENSHolidayAwards } from "../data/referralIncentivePrograms";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../utils/tailwindClassConcatenation";
 
@@ -103,7 +103,7 @@ const backgroundGreyStyles =
         client:load
         title="ENS referral live feed"
         itemsPerPage={3}
-        referralIncentiveProgram={ENSHolidayAwardsReferralIncentiveProgram}
+        referralIncentiveProgram={ENSHolidayAwards}
       />
     </div>
     <div
