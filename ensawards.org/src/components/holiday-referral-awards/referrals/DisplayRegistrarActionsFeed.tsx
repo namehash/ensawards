@@ -12,11 +12,11 @@ import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import { formatOmnichainIndexingStatus } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
+import { useNow } from "@/utils/hooks/useNow.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type NamedRegistrarAction, OmnichainIndexingStatusIds } from "@ensnode/ensnode-sdk";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import {useNow} from "@/utils/hooks/useNow.ts";
 
 interface DisplayRegistrarActionsListProps {
   namespaceId: ENSNamespaceId;

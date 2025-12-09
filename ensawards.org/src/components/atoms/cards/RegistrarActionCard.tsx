@@ -1,8 +1,9 @@
 import type {
-    DefaultableChainId,
-    ENSNamespaceId,
-    NamedRegistrarAction,
-    RegistrarActionReferral, UnixTimestamp,
+  DefaultableChainId,
+  ENSNamespaceId,
+  NamedRegistrarAction,
+  RegistrarActionReferral,
+  UnixTimestamp,
 } from "@ensnode/ensnode-sdk";
 import { Info as InfoIcon, CircleQuestionMark as QuestionmarkIcon } from "lucide-react";
 import { type PropsWithChildren, memo } from "react";
@@ -10,6 +11,7 @@ import { zeroAddress } from "viem";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { DisplayDuration } from "@/components/atoms/datetime/DisplayDuration.tsx";
+import { RelativeTime } from "@/components/atoms/datetime/RelativeTime.tsx";
 import {
   ResolveAndDisplayIdentity,
   type ResolveAndDisplayIdentityProps,
@@ -29,7 +31,6 @@ import {
   buildUnresolvedIdentity,
   isRegistrarActionReferralAvailable,
 } from "@ensnode/ensnode-sdk";
-import {RelativeTime} from "@/components/atoms/datetime/RelativeTime.tsx";
 
 interface LabeledFieldProps {
   fieldLabel: string;
@@ -206,7 +207,7 @@ export function RegistrarActionCard({
   namespaceId,
   namedRegistrarAction,
   referralIncentiveProgram,
-    now,
+  now,
 }: RegistrarActionCardProps) {
   const isMobile = useIsMobile();
   const { registrant, registrationLifecycle, type, referral, transactionHash } =
@@ -247,13 +248,13 @@ export function RegistrarActionCard({
         className="w-[15%] min-w-[110px]"
       >
         <p className="h-[21px] font-medium">
-            <RelativeTime
-                timestamp={namedRegistrarAction.action.block.timestamp}
-                tooltipPosition="top"
-                conciseFormatting={true}
-                contentWrapper={withTransactionLink}
-                relativeTo={now}
-            />
+          <RelativeTime
+            timestamp={namedRegistrarAction.action.block.timestamp}
+            tooltipPosition="top"
+            conciseFormatting={true}
+            contentWrapper={withTransactionLink}
+            relativeTo={now}
+          />
         </p>
       </LabeledField>
 
@@ -312,10 +313,7 @@ export function RegistrarActionCard({
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
         <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
           <p className="text-black font-medium max-sm:text-right">
-            {isQualifiedReferral(
-              referralIncentiveProgram,
-              namedRegistrarAction,
-            )
+            {isQualifiedReferral(referralIncentiveProgram, namedRegistrarAction)
               ? referralIncentiveProgram.name
               : "-"}
           </p>

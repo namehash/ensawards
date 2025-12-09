@@ -1,9 +1,8 @@
 import { getUnixTime } from "date-fns";
 import { useSyncExternalStore } from "react";
 
+import { systemClock } from "@/utils/systemClock.ts";
 import { type UnixTimestamp } from "@ensnode/ensnode-sdk";
-import {systemClock} from "@/utils/systemClock.ts";
-
 
 /**
  * Use System Clock

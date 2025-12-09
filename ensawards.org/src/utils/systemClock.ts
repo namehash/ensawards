@@ -1,4 +1,4 @@
-import {HighResolutionSyncedClock, type SyncedClock} from "@/utils/syncedClock.ts";
+import { HighResolutionSyncedClock, type SyncedClock } from "@/utils/syncedClock.ts";
 
 /**
  * Synced System Clock

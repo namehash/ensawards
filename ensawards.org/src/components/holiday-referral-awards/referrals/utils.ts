@@ -1,7 +1,8 @@
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import {
   type NamedRegistrarAction,
-  isRegistrarActionReferralAvailable, accountIdEqual,
+  accountIdEqual,
+  isRegistrarActionReferralAvailable,
 } from "@ensnode/ensnode-sdk";
 import { isAddressEqual, zeroAddress } from "viem";
 
@@ -18,7 +19,12 @@ export function isQualifiedReferral(
 
   // Check if the registrar action associated with the same subregistry
   // as the incentive program rules
-  if (!accountIdEqual(registrarAction.action.registrationLifecycle.subregistry.subregistryId, incentiveProgram.rules.subregistryId))
+  if (
+    !accountIdEqual(
+      registrarAction.action.registrationLifecycle.subregistry.subregistryId,
+      incentiveProgram.rules.subregistryId,
+    )
+  )
     return false;
 
   //Check if the registrar action has a non-null and non-zero decodedReferrer address
