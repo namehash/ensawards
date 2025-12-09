@@ -16,6 +16,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type NamedRegistrarAction, OmnichainIndexingStatusIds } from "@ensnode/ensnode-sdk";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import {useNow} from "@/utils/hooks/useNow.ts";
 
 interface DisplayRegistrarActionsListProps {
   namespaceId: ENSNamespaceId;
@@ -32,6 +33,7 @@ function DisplayRegistrarActionsList({
   referralIncentiveProgram,
 }: DisplayRegistrarActionsListProps) {
   const [animationParent] = useAutoAnimate();
+  const now = useNow();
 
   return (
     <div
@@ -44,6 +46,7 @@ function DisplayRegistrarActionsList({
           namespaceId={namespaceId}
           namedRegistrarAction={namedRegistrarAction}
           referralIncentiveProgram={referralIncentiveProgram}
+          now={now}
         />
       ))}
     </div>

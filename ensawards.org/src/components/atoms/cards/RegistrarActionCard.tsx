@@ -1,15 +1,14 @@
 import type {
-  DefaultableChainId,
-  ENSNamespaceId,
-  NamedRegistrarAction,
-  RegistrarActionReferral,
+    DefaultableChainId,
+    ENSNamespaceId,
+    NamedRegistrarAction,
+    RegistrarActionReferral, UnixTimestamp,
 } from "@ensnode/ensnode-sdk";
 import { Info as InfoIcon, CircleQuestionMark as QuestionmarkIcon } from "lucide-react";
 import { type PropsWithChildren, memo } from "react";
 import { zeroAddress } from "viem";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { DisplayDuration } from "@/components/atoms/datetime/DisplayDuration.tsx";
 import {
   ResolveAndDisplayIdentity,
@@ -30,6 +29,7 @@ import {
   buildUnresolvedIdentity,
   isRegistrarActionReferralAvailable,
 } from "@ensnode/ensnode-sdk";
+import {RelativeTime} from "@/components/atoms/datetime/RelativeTime.tsx";
 
 interface LabeledFieldProps {
   fieldLabel: string;
@@ -196,6 +196,7 @@ export interface RegistrarActionCardProps {
   namespaceId: ENSNamespaceId;
   namedRegistrarAction: NamedRegistrarAction;
   referralIncentiveProgram: ReferralIncentiveProgram;
+  now: UnixTimestamp;
 }
 
 /**
@@ -205,6 +206,7 @@ export function RegistrarActionCard({
   namespaceId,
   namedRegistrarAction,
   referralIncentiveProgram,
+    now,
 }: RegistrarActionCardProps) {
   const isMobile = useIsMobile();
   const { registrant, registrationLifecycle, type, referral, transactionHash } =
@@ -245,22 +247,13 @@ export function RegistrarActionCard({
         className="w-[15%] min-w-[110px]"
       >
         <p className="h-[21px] font-medium">
-          {/*TODO: Rollback to using relative time that leverages useNow() hook. See: https://github.com/namehash/ensawards/issues/84*/}
-          {withTransactionLink({
-            children: (
-              <AbsoluteTime
+            <RelativeTime
                 timestamp={namedRegistrarAction.action.block.timestamp}
-                options={{
-                  month: "short",
-                  day: "numeric",
-                  hour: "numeric",
-                  minute: "numeric",
-                  second: "numeric",
-                  hour12: false,
-                }}
-              />
-            ),
-          })}
+                tooltipPosition="top"
+                conciseFormatting={true}
+                contentWrapper={withTransactionLink}
+                relativeTo={now}
+            />
         </p>
       </LabeledField>
 
