@@ -55,7 +55,7 @@ describe("isQualifiedReferral", () => {
     eventIds: ["1"],
   };
 
-  it("Should recognize registrar actions made before the incentive program started as falsy", () => {
+  it("Should recognize registrar actions that happened before the incentive program started as falsy", () => {
     const registrarAction: NamedRegistrarAction = {
       action: {
         ...baseRegistrarAction,
@@ -70,7 +70,7 @@ describe("isQualifiedReferral", () => {
     expect(isQualifiedReferral(incentiveProgram, registrarAction)).toStrictEqual(false);
   });
 
-  it("Should recognize registrar actions made after the incentive program ended as falsy", () => {
+  it("Should recognize registrar actions that happened after the incentive program ended as falsy", () => {
     const registrarAction: NamedRegistrarAction = {
       action: {
         ...baseRegistrarAction,
