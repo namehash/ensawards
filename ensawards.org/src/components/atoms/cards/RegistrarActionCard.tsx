@@ -74,7 +74,6 @@ function ResolveAndDisplayReferrerIdentity({
   withAvatar = false,
   withIdentifier = true,
   className,
-  avatarStyles,
 }: ResolveAndDisplayReferrerIdentityProps) {
   // if encoded referrer is not available or is the zero encoded referrer then
   if (
@@ -117,10 +116,10 @@ function ResolveAndDisplayReferrerIdentity({
     );
 
     return withAvatar && !withIdentifier ? (
-      unknownAvatarPlaceholder(avatarStyles, 24)
+      unknownAvatarPlaceholder("w-10 h-10", 24)
     ) : (
       <span className="h-[21px] inline-flex items-center gap-2 font-medium">
-        {unknownAvatarPlaceholder(avatarStyles, 16)}
+        {unknownAvatarPlaceholder("w-5 h-5", 16)}
         Unknown
         <GenericTooltip tooltipOffset={0} content={tooltipContent}>
           <InfoIcon size={16} className="flex-shrink-0 fill-neutral-300 text-white" />
@@ -141,7 +140,6 @@ function ResolveAndDisplayReferrerIdentity({
       withTooltip={withTooltip}
       withIdentifier={withIdentifier}
       className={className}
-      avatarStyles={avatarStyles}
       withLink={withLink}
     />
   );
@@ -281,7 +279,6 @@ export function RegistrarActionCard({
             withAvatar={true}
             withTooltip={false}
             withIdentifier={false}
-            avatarStyles="w-10 h-10"
           />
         )}
         <LabeledField fieldLabel="Registrant" className="sm:min-w-[110px]">
@@ -292,7 +289,6 @@ export function RegistrarActionCard({
             withAvatar={isMobile}
             withTooltip={false}
             className="font-medium sm:max-[1220px]:max-w-[110px] min-[1220px]:max-w-[140px]"
-            avatarStyles="w-5 h-5"
           />
         </LabeledField>
       </div>
@@ -305,7 +301,7 @@ export function RegistrarActionCard({
             referral={referral}
             withAvatar={true}
             withIdentifier={false}
-            avatarStyles="w-10 h-10"
+            withTooltip={false}
           />
         )}
         <LabeledField fieldLabel="Referrer" className="w-[15%] min-w-[110px]">
@@ -315,14 +311,14 @@ export function RegistrarActionCard({
             referral={referral}
             withAvatar={isMobile}
             withIdentifier={true}
-            avatarStyles="w-5 h-5"
+            withTooltip={false}
           />
         </LabeledField>
       </div>
 
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
-        <div className="w-fit h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
-          <p className="text-black font-medium">
+        <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
+          <p className="text-black font-medium max-sm:text-right">
             {isQualifiedReferral(
               referralIncentiveProgram,
               namedRegistrarAction,

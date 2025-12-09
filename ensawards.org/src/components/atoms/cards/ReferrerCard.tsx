@@ -45,7 +45,6 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
             withIdentifier={false}
             withAvatar={true}
             withTooltip={false}
-            avatarStyles="w-10 h-10"
           />
           <div className="sm:min-w-[170px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
@@ -69,7 +68,6 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
           withIdentifier={false}
           withAvatar={true}
           withTooltip={false}
-          avatarStyles="w-10 h-10"
         />
       </div>
       <div className="min-w-[120px] sm:hidden flex flex-row flex-nowrap justify-between items-start self-stretch">

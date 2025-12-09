@@ -16,6 +16,7 @@ import { EnsAvatar } from "./EnsAvatar.tsx";
 
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { AddressDisplay, IdentityLink, IdentityTooltip, NameDisplay } from "./utils";
+import {useIsMobile} from "@/utils/hooks/useMobile.tsx";
 
 export interface ResolveAndDisplayIdentityProps {
   identity: UnresolvedIdentity;
@@ -26,7 +27,6 @@ export interface ResolveAndDisplayIdentityProps {
   withAvatar?: boolean;
   withIdentifier?: boolean;
   className?: string;
-  avatarStyles?: string;
 }
 
 /**
@@ -42,7 +42,6 @@ export interface ResolveAndDisplayIdentityProps {
  * @param withAvatar - Whether to display an avatar image.
  * @param withIdentifier - Whether to display identity's textual identifier (address or name).
  * @param className - The class name to apply to the displayed identity.
- * @param avatarStyles - The class name to apply to the Avatar image (if withAvatar=true)
  */
 export function ResolveAndDisplayIdentity({
   identity,
@@ -53,7 +52,6 @@ export function ResolveAndDisplayIdentity({
   withAvatar = false,
   withIdentifier = true,
   className,
-  avatarStyles,
 }: ResolveAndDisplayIdentityProps) {
   // resolve the primary name for `identity` using ENSNode
   // TODO: extract out the concept of resolving an `Identity` into a provider that child
@@ -73,7 +71,6 @@ export function ResolveAndDisplayIdentity({
       withAvatar={withAvatar}
       withIdentifier={withIdentifier}
       className={className}
-      avatarStyles={avatarStyles}
     />
   );
 }
@@ -86,7 +83,6 @@ interface DisplayIdentityProps {
   withAvatar?: boolean;
   withIdentifier?: boolean;
   className?: string;
-  avatarStyles?: string;
 }
 
 /**
@@ -103,7 +99,6 @@ interface DisplayIdentityProps {
  * @param withAvatar - Whether to display an avatar image.
  * @param withIdentifier - Whether to display identity's textual identifier (address or name).
  * @param className - The class name to apply to the displayed identity.
- * @param avatarStyles - The class name to apply to the Avatar image (if withAvatar=true)
  */
 export function DisplayIdentity({
   identity,
@@ -113,26 +108,27 @@ export function DisplayIdentity({
   withAvatar = false,
   withIdentifier = true,
   className,
-  avatarStyles,
 }: DisplayIdentityProps) {
   let avatar: React.ReactElement;
   let identifier: React.ReactElement;
 
+  const isMobile = useIsMobile();
+
   if (!isResolvedIdentity(identity)) {
     // identity is an `UnresolvedIdentity` which represents that it hasn't been resolved yet
     // display loading state
-    avatar = <Skeleton className={cn("h-10 w-10 rounded-full", avatarStyles)} />;
+    avatar = <Skeleton className={cn("h-10 w-10 rounded-full", isMobile && withIdentifier && "w-5 h-5")} />;
     identifier = <Skeleton className={cn("h-4 w-24", className)} />;
   } else if (
     identity.resolutionStatus === ResolutionStatusIds.Unnamed ||
     identity.resolutionStatus === ResolutionStatusIds.Unknown
   ) {
     avatar = (
-      <div className={cn("w-10 h-10 flex justify-center items-center", avatarStyles)}>
+      <div className={cn("w-10 h-10 flex justify-center items-center", isMobile && withIdentifier && "w-5 h-5")}>
         <ChainIcon
           chainId={translateDefaultableChainIdToChainId(identity.chainId, namespaceId)}
-          height={24}
-          width={24}
+          height={isMobile && withIdentifier ? 16 : 24}
+          width={isMobile && withIdentifier ? 16 : 24}
         />
       </div>
     );
@@ -147,7 +143,7 @@ export function DisplayIdentity({
       <EnsAvatar
         name={identity.name}
         namespaceId={namespaceId}
-        className={cn("h-10 w-10", avatarStyles)}
+        className={cn("h-10 w-10", isMobile && withIdentifier && "w-5 h-5")}
       />
     );
     identifier = (
@@ -185,7 +181,7 @@ export function DisplayIdentity({
       <IdentityLink
         identity={identity}
         namespaceId={namespaceId}
-        className={cn(withAvatar && avatarStyles, "w-fit")}
+        className={cn(withAvatar && (isMobile && withIdentifier ? "w-5 h-5" : "w-10 h-10"), "w-fit")}
       >
         {result}
       </IdentityLink>
