@@ -28,8 +28,7 @@ export type BestPracticeAppliesTo =
 
 export enum CategoryStatus {
   ComingSoon,
-  Updated,
-  Implemented,
+  Active,
 }
 
 export interface BestPracticeCategory {

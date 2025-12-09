@@ -17,6 +17,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { OrgId } from "../../../types/organizations";
 import { getOrgById } from "../../../utils/dataAccess";
 import { scrollWithOffset } from "../../../utils/domActions";
+import { markdownToHtml } from "../../../utils/markdown";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 
 const daoScores = contractPipeline({
@@ -121,9 +122,7 @@ export function getStaticPaths() {
         <h2 class="text-2xl leading-none font-semibold text-black">
           {nameYourSmartContracts.technicalDetails.main.header}
         </h2>
-        <p class={technicalSectionContentStyles}>
-          {nameYourSmartContracts.technicalDetails.main.content}
-        </p>
+        <p class={technicalSectionContentStyles} set:html={markdownToHtml(nameYourSmartContracts.technicalDetails.main.content)} />
         {
           nameYourSmartContracts.technicalDetails.sides.map(
             (additionalContent) => (
@@ -131,9 +130,7 @@ export function getStaticPaths() {
                 <h3 class={technicalSectionMinorHeaderStyles}>
                   {additionalContent.header}
                 </h3>
-                <p class={technicalSectionContentStyles}>
-                  {additionalContent.content}
-                </p>
+                <p class={technicalSectionContentStyles} set:html={markdownToHtml(additionalContent.content)} />
               </>
             ),
           )
@@ -150,11 +147,11 @@ export function getStaticPaths() {
         </h4>
         <p class={technicalSectionContentStyles}>
           With Enscribe, developers can easily assign ENS names to smart
-          contracts, while providing verification data to increase user trust.
+          contracts.
         </p>
         <div class="bg-gray-200 h-[1px] self-stretch"></div>
         <a
-          href="https://app.enscribe.xyz/"
+          href="https://www.enscribe.xyz/"
           target="_blank"
           rel="noreferrer"
           class={cn(

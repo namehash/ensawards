@@ -1,15 +1,42 @@
 import type { BestPractice } from "@/types/bestPractices.ts";
-import type { Name } from "@ensnode/ensnode-sdk";
+import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
+/**
+ * TODO: Determine if we need PartialPass for benchmarks. If not we can simplify.
+ */
 export enum BenchmarkResult {
   Pass = "Pass",
   PartialPass = "Partial pass",
   Fail = "Fail",
 }
 
+/**
+ * Helper function to convert human-readable date to Unix timestamp.
+ * Use this in data files for better readability.
+ *
+ * @param date - A Date object or ISO 8601 date string
+ * @returns Unix timestamp in seconds
+ *
+ * @example
+ * toUnixTimestamp("2025-12-03T10:00:00Z")
+ * toUnixTimestamp(new Date())
+ */
+export function toUnixTimestamp(date: Date | string): UnixTimestamp {
+  return Math.floor(new Date(date).getTime() / 1000);
+}
+
+/**
+ * Represents a benchmark result for a specific best practice within an app.
+ */
 export interface AppBenchmark {
-  bestPracticeDetails: BestPractice;
+  /** The best practice being benchmarked */
+  bestPractice: BestPractice;
+  /** The result of the benchmark */
   result: BenchmarkResult;
+  /** The account ID of the person who performed the benchmark */
+  benchmarkedBy: AccountId;
+  /** Unix timestamp when the benchmark was performed */
+  benchmarkedAt: UnixTimestamp;
 }
 
 export const AppTypes = {

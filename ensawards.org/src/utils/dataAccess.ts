@@ -68,7 +68,7 @@ export const calculateAppSupport = (bestPractice: BestPractice): number => {
 
   for (const app of APPS) {
     const appBenchmark = app.benchmarks.find(
-      (benchmark) => benchmark.bestPracticeDetails.id === bestPractice.id,
+      (benchmark) => benchmark.bestPractice.id === bestPractice.id,
     );
 
     if (appBenchmark === undefined) {
@@ -106,7 +106,7 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
 
   APPS.forEach((app) => {
     const appBenchmark = app.benchmarks.find(
-      (benchmark) => benchmark.bestPracticeDetails.id === bestPractice.id,
+      (benchmark) => benchmark.bestPractice.id === bestPractice.id,
     );
 
     if (

@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
-import MatrixBadge from "../../components/atoms/badges/MatrixBadge.astro";
+import { BenchmarkResultBadge } from "../../components/atoms/badges/BenchmarkResultBadge";
 import BenchmarkResultCard from "../../components/atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
@@ -88,26 +88,26 @@ if (appToDisplay !== undefined) {
         <ItemsList header="Benchmark results">
           {appToDisplay.benchmarks.map((benchmark, idx) => (
             <BenchmarkResultCard
-              name={benchmark.bestPracticeDetails.name}
-              notes={benchmark.bestPracticeDetails.description}
+              name={benchmark.bestPractice.name}
+              notes={benchmark.bestPractice.description}
               viewDetails={{
                 text: "View best practice details",
-                link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}/${benchmark.bestPracticeDetails.slug}`,
+                link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.slug}`,
               }}
               additionalInfo={[
                 {
                   category: "Category",
-                  value: benchmark.bestPracticeDetails.categoryName,
-                  link: `/ens-best-practices/${benchmark.bestPracticeDetails.categorySlug}`,
+                  value: benchmark.bestPractice.categoryName,
+                  link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}`,
                   linkStyles:
                     "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
                 },
               ]}>
-              <MatrixBadge
+                <BenchmarkResultBadge
                 slot="badge"
-                text={benchmark.result}
-                className={BenchmarkResultToBadgeStyles.get(benchmark.result)!}
-                iconId={benchmark.result}
+                className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
+                benchmark={benchmark}
+                client:load
               />
             </BenchmarkResultCard>
           ))}
