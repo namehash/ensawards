@@ -18,7 +18,10 @@ export function LiveReferralFeed({
     url: getENSNodeUrl(),
   });
   return (
-    <ENSNodeProvider config={ensNodeProviderConfig}>
+    <ENSNodeProvider
+      config={ensNodeProviderConfig}
+      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+    >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <FetchAndDisplayRegistrarActionsFeed
           itemsPerPage={itemsPerPage}

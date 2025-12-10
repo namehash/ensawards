@@ -86,7 +86,10 @@ export function TopReferrers({
   );
 
   return (
-    <ENSNodeProvider config={ensNodeReactConfig}>
+    <ENSNodeProvider
+      config={ensNodeReactConfig}
+      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+    >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
           <ReferrersList
