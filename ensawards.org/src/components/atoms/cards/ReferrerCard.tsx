@@ -178,21 +178,24 @@ const RankIcon = ({ rank, isQualified, className }: RankProps) => (
     }
     tooltipOffset={4}
   >
-    {rank <= 3 ? (
-      <img alt={`${rank}-place`} src={placeIcons[rank - 1].src} className={className} />
-    ) : (
-      <span
-        className={cn(
-          "w-8 h-8 box-border flex justify-center items-center text-sm leading-normal font-semibold text-muted-foreground rounded-lg border",
-          isQualified
-            ? "text-emerald-600 bg-emerald-50 border-emerald-600"
-            : "text-red-600 bg-red-50 border-red-600",
-          className,
-        )}
-      >
-        {rank}
-      </span>
-    )}
+    <div className="w-8 h-8 box-border flex justify-center items-center">
+      {rank <= 3 ? (
+        <img alt={`${rank}-place`} src={placeIcons[rank - 1].src} className={className} />
+      ) : (
+        <span
+          className={cn(
+            "w-fit h-6 box-border flex justify-center items-center text-xs leading-5 font-semibold rounded-full border px-2",
+            isQualified
+              ? "text-emerald-700 bg-[#10B9811A] border-[#0596691A]"
+              : "text-red-600 bg-[#EF44441A] border-[#DC26261A]",
+            rank < 10 && "w-6",
+            className,
+          )}
+        >
+          {rank}
+        </span>
+      )}
+    </div>
   </GenericTooltip>
 );
 
@@ -203,8 +206,9 @@ const RankIconLoading = ({ rank, className }: Omit<RankProps, "isQualified">) =>
     ) : (
       <span
         className={cn(
-          "w-8 h-8 box-border flex justify-center items-center text-sm leading-normal font-semibold text-muted-foreground rounded-lg border",
-          "text-gray-500 bg-gray-100 border-gray-500",
+          "w-fit h-6 box-border flex justify-center items-center text-xs leading-5 font-semibold text-muted-foreground rounded-full border px-2",
+          "text-gray-600 bg-gray-100 border-gray-200",
+          rank < 10 && "w-6",
           className,
         )}
       >
