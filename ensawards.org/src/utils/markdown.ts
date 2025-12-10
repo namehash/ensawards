@@ -6,6 +6,10 @@
  * - unordered lists (- item)
  * - newlines as line breaks
  * Can be extended to support more markdown features as needed.
+ *
+ * NOTE: Translating JSON strings into markdown is not the ideal setup, but for the current context * of this repo it is the simplest solution. If markdown needs increase then we will want to find a
+ * more robust solution.
+ *
  */
 export function markdownToHtml(markdown: string): string {
   let result = markdown;
