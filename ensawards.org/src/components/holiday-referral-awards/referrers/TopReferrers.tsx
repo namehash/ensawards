@@ -25,7 +25,6 @@ export function TopReferrers({
   const [topReferrersData, setTopReferrersData] = useState<ReferrerLeaderboardPage | null>(null);
   const ensNodeUrl = getENSNodeUrl();
   const client = useMemo(() => new ENSNodeClient({ url: ensNodeUrl }), [ensNodeUrl]);
-  const ensNodeReactConfig = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -82,7 +81,10 @@ export function TopReferrers({
   );
 
   return (
-    <ENSNodeProvider config={ensNodeReactConfig} queryClientOptions={{defaultOptions: {queries: {staleTime: 30 * 1000}}}}>
+    <ENSNodeProvider
+      config={{ client: { url: ensNodeUrl } }}
+      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+    >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
           <ReferrersList
