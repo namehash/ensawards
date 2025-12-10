@@ -23,9 +23,7 @@ export const resolveEthAddress = async (
   name: NormalizedName,
   timeout: Duration = 5,
 ): Promise<Address | null> => {
-  const client = new ENSNodeClient({
-    url: getENSNodeUrl(),
-  });
+  const client = new ENSNodeClient({ url: getENSNodeUrl() });
 
   // Define the selection of records to resolve. In this case, we only want to resolve the Ethereum Mainnet address.
   // The Ethereum Mainnet coin type is 60 as per `evmChainIdToCoinType(mainnet.id)`.

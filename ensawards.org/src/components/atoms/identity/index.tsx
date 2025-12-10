@@ -46,7 +46,7 @@ export interface ResolveAndDisplayIdentityProps {
 export function ResolveAndDisplayIdentity({
   identity,
   namespaceId,
-  accelerate = false,
+  accelerate = true,
   withLink = true,
   withTooltip = true,
   withAvatar = false,

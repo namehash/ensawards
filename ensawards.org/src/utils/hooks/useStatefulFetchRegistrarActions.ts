@@ -68,6 +68,7 @@ export function useStatefulRegistrarActions({
     filters,
     query: {
       enabled: isRegistrarActionsApiSupported,
+      staleTime: 5 * 1000, // 5 seconds
     },
   });
 
