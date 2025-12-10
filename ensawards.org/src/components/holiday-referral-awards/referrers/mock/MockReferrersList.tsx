@@ -13,9 +13,9 @@ type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 
 const DEFAULT_STATE = "loaded";
 export function MockReferrersList() {
-  const ensNodeReactConfig = createConfig({
+  const ensNodeReactConfig = useMemo(() => createConfig({
     url: "https://api.alpha-sepolia.yellow.ensnode.io/",
-  }); //TODO: replace with getENSNodeUrl for prod
+  }), []); //TODO: replace with getENSNodeUrl for prod
   const [selectedState, setSelectedState] = useState<ReferrersListState>(DEFAULT_STATE);
   const props: ReferrersListProps = useMemo(() => {
     switch (selectedState) {

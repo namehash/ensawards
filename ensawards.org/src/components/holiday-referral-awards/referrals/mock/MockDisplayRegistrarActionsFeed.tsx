@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
 
@@ -14,9 +14,7 @@ import { variants } from "./data.ts";
 const variantIds = [...variants.keys()];
 
 export function MockDisplayRegistrarActionsFeed() {
-  const ensNodeProviderConfig = createConfig({
-    url: getENSNodeUrl(),
-  });
+  const config = useMemo(() => createConfig({url: getENSNodeUrl()}), []);
 
   const namespaceId = ENSNamespaceIds.Sepolia;
   const title = "ENS referrals live feed";
@@ -29,7 +27,7 @@ export function MockDisplayRegistrarActionsFeed() {
   }
 
   return (
-    <ENSNodeProvider config={ensNodeProviderConfig}>
+    <ENSNodeProvider config={config}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <section className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
           <div className="flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-4">
