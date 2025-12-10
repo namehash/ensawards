@@ -4,7 +4,7 @@ import {
 } from "@/components/holiday-referral-awards/referrals/FetchAndDisplayRegistrarActionsFeed.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
-import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { useMemo } from "react";
 
 /**
@@ -15,7 +15,7 @@ export function LiveReferralFeed({
   referralIncentiveProgram,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
-  const config = useMemo(() => createConfig({url: getENSNodeUrl()}), []);
+  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   return (
     <ENSNodeProvider

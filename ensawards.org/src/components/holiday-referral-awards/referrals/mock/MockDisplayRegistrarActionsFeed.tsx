@@ -14,7 +14,7 @@ import { variants } from "./data.ts";
 const variantIds = [...variants.keys()];
 
 export function MockDisplayRegistrarActionsFeed() {
-  const config = useMemo(() => createConfig({url: getENSNodeUrl()}), []);
+  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   const namespaceId = ENSNamespaceIds.Sepolia;
   const title = "ENS referrals live feed";

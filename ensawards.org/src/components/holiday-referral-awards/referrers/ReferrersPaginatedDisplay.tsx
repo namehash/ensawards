@@ -24,7 +24,7 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
     useState<ReferrerLeaderboardPage | null>(null);
   const ensNodeUrl = getENSNodeUrl();
   const client = useMemo(() => new ENSNodeClient({ url: ensNodeUrl }), [ensNodeUrl]);
-  const config = useMemo(() => createConfig({url: ensNodeUrl}), [ensNodeUrl]);
+  const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin

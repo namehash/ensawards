@@ -6,7 +6,6 @@ import {
   type ResolverRecordsSelection,
 } from "@ensnode/ensnode-sdk";
 import { millisecondsInSecond } from "date-fns/constants";
-import { useMemo } from "react";
 import type { Address } from "viem";
 
 /**
