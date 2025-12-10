@@ -22,13 +22,13 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [referrersLeaderboardsData, setReferrersLeaderboardsData] =
     useState<ReferrerLeaderboardPage | null>(null);
+  const ensNodeUrl = getENSNodeUrl();
   const client = new ENSNodeClient({
-    url: new URL("https://api.alpha.blue.ensnode.io/"), //TODO: replace with the line below later on
-    // url: getENSNodeUrl(),
+    url: ensNodeUrl,
   });
   const ensNodeReactConfig = createConfig({
-    url: "https://api.alpha.blue.ensnode.io/",
-  }); //TODO: replace with getENSNodeUrl for prod
+    url: ensNodeUrl,
+  });
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
