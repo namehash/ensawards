@@ -1,8 +1,8 @@
 import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
-import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
-import { AlertCircle as AlertIcon, Award as AwardIcon } from "lucide-react";
+import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
+import { Award as AwardIcon } from "lucide-react";
 import type { ReactElement } from "react";
 
 export interface ReferrerLeaderboardLastUpdateTimeProps {
@@ -10,7 +10,7 @@ export interface ReferrerLeaderboardLastUpdateTimeProps {
 }
 
 /**
- * Displays the last time the leaderboard was updated in ENSNode.
+ * Displays the last time the leaderboard was updated in ENSAnalytics.
  *
  * @param timestamp - last update of the leaderboard.
  * More details at {@link ReferrerLeaderboardPage.accurateAsOf}
@@ -42,7 +42,7 @@ interface EmptyLeaderboardInfoProps {
 }
 
 /**
- * Displays an information that the current referrer leaderboard is empty
+ * Displays information that the current referrer leaderboard is empty
  * (when {@link ReferrerLeaderboardPaginationContext.totalRecords} is 0)
  */
 export const EmptyLeaderboardInfo = ({ cta }: EmptyLeaderboardInfoProps) => {

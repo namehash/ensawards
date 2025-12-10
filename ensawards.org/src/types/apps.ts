@@ -1,6 +1,6 @@
 import type { BestPractice } from "@/types/bestPractices.ts";
 import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
-import {millisecondsInSecond} from "date-fns/constants";
+import { millisecondsInSecond } from "date-fns/constants";
 
 /**
  * TODO: Determine if we need PartialPass for benchmarks. If not we can simplify.

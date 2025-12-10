@@ -122,7 +122,7 @@ export function ReferrerLeaderboardSnippet({
             }
             leaderboardPageLoadingData={{
               itemsPerPage: snippetSize,
-              currentPage: 1,
+              page: 1,
             }}
             header={header}
           />

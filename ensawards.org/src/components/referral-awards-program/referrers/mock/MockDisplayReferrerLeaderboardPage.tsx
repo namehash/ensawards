@@ -5,6 +5,7 @@ import {
 } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { useMemo, useState } from "react";
@@ -14,8 +15,8 @@ type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 const DEFAULT_STATE = "loaded";
 export function MockDisplayReferrerLeaderboardPage() {
   const ensNodeReactConfig = createConfig({
-    url: "https://api.alpha-sepolia.yellow.ensnode.io/",
-  }); //TODO: replace with getENSNodeUrl for prod
+    url: getENSNodeUrl(),
+  });
   const [selectedState, setSelectedState] = useState<ReferrersListState>(DEFAULT_STATE);
   const props: DisplayReferrerLeaderboardPageProps = useMemo(() => {
     switch (selectedState) {
@@ -73,7 +74,7 @@ export function MockDisplayReferrerLeaderboardPage() {
           isLoading: true,
           emptyLeaderboardCTA: <p>Placeholder</p>,
           leaderboardPageLoadingData: {
-            currentPage: 1,
+            page: 1,
             itemsPerPage: 4,
           },
         };
@@ -83,7 +84,7 @@ export function MockDisplayReferrerLeaderboardPage() {
           leaderboardPageData: null,
           isLoading: false,
           emptyLeaderboardCTA: <p>Placeholder</p>,
-          error: (
+          leaderboardPageFetchError: (
             <ErrorInfo
               title="Error loading referrer data"
               description={["Mock error message. Please try again later."]}
@@ -119,7 +120,7 @@ export function MockDisplayReferrerLeaderboardPage() {
             },
             referrers: [
               {
-                referrer: "0x03c098d2bed4609e6ed9beb2c4877741f45f290d",
+                referrer: "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
                 totalReferrals: 5,
                 totalIncrementalDuration: 22813200,
                 score: 0.722921529303591,
@@ -143,7 +144,7 @@ export function MockDisplayReferrerLeaderboardPage() {
                 awardPoolApproxValue: 165.1271544616,
               },
               {
-                referrer: "0xffa596cdf9a69676e689b1a92e5e681711227d75",
+                referrer: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
                 totalReferrals: 5,
                 totalIncrementalDuration: 12960000,
                 score: 0.410686051048276,
@@ -196,8 +197,9 @@ export function MockDisplayReferrerLeaderboardPage() {
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
           <div className="flex flex-wrap gap-2">
-            {["loading", "fetchError", "empty", "loaded"].map((variant) => (
+            {["loading", "fetchError", "empty", "loaded"].map((variant, idx) => (
               <button
+                key={`variant-button-${idx}`}
                 className={cn(
                   shadcnButtonVariants({
                     variant: selectedState === variant ? "default" : "outline",

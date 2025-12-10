@@ -3,7 +3,10 @@ import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/refer
 import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
+import type {
+  ReferrerLeaderboardPage,
+  ReferrerLeaderboardPaginationParams,
+} from "@namehash/ens-referrals";
 import type { ReactElement } from "react";
 
 export interface DisplayReferrerLeaderboardPageProps {
@@ -12,10 +15,7 @@ export interface DisplayReferrerLeaderboardPageProps {
   emptyLeaderboardCTA: ReactElement;
   leaderboardPageFetchError?: ReactElement;
   header?: string;
-  leaderboardPageLoadingData?: {
-    itemsPerPage: number;
-    currentPage: number;
-  };
+  leaderboardPageLoadingData?: Required<ReferrerLeaderboardPaginationParams>;
 }
 
 /**
@@ -28,7 +28,7 @@ export function DisplayReferrerLeaderboardPage({
   leaderboardPageFetchError,
   header,
   leaderboardPageLoadingData = {
-    currentPage: 0,
+    page: 0,
     itemsPerPage: 5,
   },
 }: DisplayReferrerLeaderboardPageProps) {
@@ -38,7 +38,7 @@ export function DisplayReferrerLeaderboardPage({
 
   if (isLoading || leaderboardPageData === null) {
     const pageOffset =
-      (leaderboardPageLoadingData.currentPage - 1) * leaderboardPageLoadingData.itemsPerPage;
+      (leaderboardPageLoadingData.page - 1) * leaderboardPageLoadingData.itemsPerPage;
 
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">

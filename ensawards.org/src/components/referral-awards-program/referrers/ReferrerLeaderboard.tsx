@@ -107,7 +107,7 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
               ) : undefined
             }
             leaderboardPageLoadingData={{
-              currentPage: currentPage,
+              page: currentPage,
               itemsPerPage: itemsPerPage,
             }}
           />
