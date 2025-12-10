@@ -24,8 +24,6 @@ export function markdownToHtml(markdown: string): string {
     '<a href="$2" class="text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200" target="_blank" rel="noopener noreferrer">$1</a>',
   );
 
-  // Now process block elements (lists and newlines)
-
   // Convert bullet points to HTML lists
   // Match sequences of lines starting with "- " (unordered list items)
   result = result.replace(/(?:^|\n)((?:- .+(?:\n|$))+)/g, (match, listContent) => {
@@ -37,17 +35,12 @@ export function markdownToHtml(markdown: string): string {
       .filter((item: string) => item.length > 0);
 
     // Build the <ul> with <li> items
-    const listItems = items.map((item: string) => `<li class="ml-5">${item}</li>`).join("");
+    const listItems = items
+      .map((item: string) => `<li class="ml-5 text-gray-500">${item}</li>`)
+      .join("");
 
-    return `\n<ul class="list-disc pl-5 space-y-1">${listItems}</ul>\n`;
+    return `</p><ul class="list-disc pl-5 space-y-1 text-gray-500">${listItems}</ul><p class="w-fit text-base font-normal leading-7 text-gray-500">`;
   });
-
-  // Convert remaining newlines to <br> tags
-  // But avoid adding <br> right before or after <ul> tags
-  result = result.replace(/\n(?!<ul|<\/ul>)/g, "<br>");
-
-  // Clean up any <br> tags that appear right after </ul>
-  result = result.replace(/<\/ul><br>/g, "</ul>");
 
   return result;
 }
