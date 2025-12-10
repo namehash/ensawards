@@ -6,6 +6,7 @@ import {
   type ResolverRecordsSelection,
 } from "@ensnode/ensnode-sdk";
 import { millisecondsInSecond } from "date-fns/constants";
+import { useMemo } from "react";
 import type { Address } from "viem";
 
 /**
@@ -23,9 +24,8 @@ export const resolveEthAddress = async (
   name: NormalizedName,
   timeout: Duration = 5,
 ): Promise<Address | null> => {
-  const client = new ENSNodeClient({
-    url: getENSNodeUrl(),
-  });
+  const ensNodeUrl = getENSNodeUrl();
+  const client = useMemo(() => new ENSNodeClient({ url: ensNodeUrl }), [ensNodeUrl]);
 
   // Define the selection of records to resolve. In this case, we only want to resolve the Ethereum Mainnet address.
   // The Ethereum Mainnet coin type is 60 as per `evmChainIdToCoinType(mainnet.id)`.
