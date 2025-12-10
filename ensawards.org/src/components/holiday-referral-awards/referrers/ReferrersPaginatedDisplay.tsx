@@ -24,10 +24,10 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
     useState<ReferrerLeaderboardPage | null>(null);
   const ensNodeUrl = getENSNodeUrl();
   const client = new ENSNodeClient({
-    url: ensNodeUrl
+    url: ensNodeUrl,
   });
   const ensNodeReactConfig = createConfig({
-    url: ensNodeUrl
+    url: ensNodeUrl,
   });
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
