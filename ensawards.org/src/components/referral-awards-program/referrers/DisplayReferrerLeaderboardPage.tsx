@@ -40,7 +40,6 @@ export function DisplayReferrerLeaderboardPage({
 
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
-        <Skeleton className="w-[225px] sm:w-[255px] h-[14px] sm:h-4 mt-[4px] mb-[3px] sm:my-1 bg-gray-200" />
         {[...Array(leaderboardPageLoadingData.itemsPerPage).keys()].map((elem) => (
           <ReferrerCardLoading
             key={`Referrer-loading-${pageOffset + elem}`}
@@ -55,7 +54,10 @@ export function DisplayReferrerLeaderboardPage({
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
         <EmptyLeaderboardInfo />
-        <ReferrerLeaderboardLastUpdateTime timestamp={leaderboardPageData.accurateAsOf} />
+        <ReferrerLeaderboardLastUpdateTime
+          timestamp={leaderboardPageData.accurateAsOf}
+          className="text-base"
+        />
       </div>
     );
   }
@@ -64,14 +66,13 @@ export function DisplayReferrerLeaderboardPage({
     <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
       <div
         className={cn(
-          "w-full h-fit flex flex-row flex-nowrap items-end sm:items-center",
-          header ? "justify-between" : "justify-end",
+          "w-full h-fit flex flex-row flex-nowrap items-end sm:items-center justify-start",
+          !header && "hidden",
         )}
       >
         {header && (
           <h3 className="text-xl sm:text-2xl leading-normal font-semibold text-black">{header}</h3>
         )}
-        <ReferrerLeaderboardLastUpdateTime timestamp={leaderboardPageData.accurateAsOf} />
       </div>
       {leaderboardPageData.referrers.map((referrer, idx) => (
         <ReferrerCard

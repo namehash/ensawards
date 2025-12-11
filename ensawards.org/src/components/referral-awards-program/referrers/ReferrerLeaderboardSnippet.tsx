@@ -1,6 +1,8 @@
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
+import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -12,6 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 export interface ReferrerLeaderboardSnippetProps {
   snippetSize?: number;
   header?: string;
+  showLastUpdateTime?: boolean;
 }
 /**
  * Fetches {@link snippetSize} top referrers from the Referrer Leaderboard through ENSNode
@@ -20,6 +23,7 @@ export interface ReferrerLeaderboardSnippetProps {
 export function ReferrerLeaderboardSnippet({
   header,
   snippetSize = 3,
+  showLastUpdateTime = false,
 }: ReferrerLeaderboardSnippetProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
@@ -71,6 +75,21 @@ export function ReferrerLeaderboardSnippet({
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3 relative z-10">
+          <div
+            className={cn(
+              "w-full flex justify-center items-center relative pb-2",
+              (fetchErrorMessage || !showLastUpdateTime) && "hidden",
+            )}
+          >
+            {isLoading || leaderboardSnippetData === null ? (
+              <Skeleton className="w-[225px] sm:w-[255px] h-[14px] sm:h-4 mt-[4px] mb-[3px] sm:my-1 bg-gray-200" />
+            ) : (
+              <ReferrerLeaderboardLastUpdateTime
+                timestamp={leaderboardSnippetData.accurateAsOf}
+                className="text-base"
+              />
+            )}
+          </div>
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardSnippetData}
             isLoading={isLoading}

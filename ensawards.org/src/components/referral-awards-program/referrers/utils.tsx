@@ -7,6 +7,7 @@ import { Award as AwardIcon } from "lucide-react";
 
 export interface ReferrerLeaderboardLastUpdateTimeProps {
   timestamp: UnixTimestamp;
+  className?: string;
 }
 
 /**
@@ -17,9 +18,15 @@ export interface ReferrerLeaderboardLastUpdateTimeProps {
  */
 export const ReferrerLeaderboardLastUpdateTime = ({
   timestamp,
+  className,
 }: ReferrerLeaderboardLastUpdateTimeProps) => {
   return (
-    <p className="text-sm sm:text-base leading-normal font-normal text-muted-foreground whitespace-nowrap">
+    <p
+      className={cn(
+        "text-sm sm:text-base leading-normal font-normal text-muted-foreground sm:whitespace-nowrap",
+        className,
+      )}
+    >
       Last updated{" "}
       <AbsoluteTime
         timestamp={timestamp}
@@ -27,6 +34,12 @@ export const ReferrerLeaderboardLastUpdateTime = ({
           year: "numeric",
           month: "short",
           day: "numeric",
+        }}
+      />{" "}
+      at{" "}
+      <AbsoluteTime
+        timestamp={timestamp}
+        options={{
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
