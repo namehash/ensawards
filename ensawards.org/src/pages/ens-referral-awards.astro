@@ -83,10 +83,7 @@ const backgroundGreyStyles =
         class="text-2xl sm:text-3xl leading-normal font-semibold text-black text-center relative z-10">
         Top referrers
       </h3>
-      <ReferrerLeaderboardSnippet
-        client:load
-        generateReferralLinkAction="scroll"
-      />
+      <ReferrerLeaderboardSnippet client:load />
     </div>
     <div
       id="live-feed"
@@ -148,7 +145,7 @@ const backgroundGreyStyles =
           </div>
           <p class="text-base leading-normal font-normal text-muted-foreground">
             <a
-              id="scroll-to-generate-referral-from-ECP-section"
+              href="/ens-referral-awards#generate-referral-link"
               class="text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200 cursor-pointer"
               >Generate your ENS Referral Program link</a
             > below and share it with your audience through social media or wherever
@@ -283,7 +280,7 @@ const backgroundGreyStyles =
             </p>
           </div>
           <a
-            id="fastAndEasyCardButton"
+            href="/ens-referral-awards#generate-referral-link"
             class={cn(
               shadcnButtonVariants({
                 variant: "secondary",
@@ -347,25 +344,6 @@ const backgroundGreyStyles =
     scrollToJoinTelegramElement.addEventListener("click", (event) => {
       event.preventDefault();
       scrollWithOffset(`joinTelegramCommunity`, 90);
-    });
-
-    const scrollFromDeveloperIntegrationsElement = document.getElementById(
-      "fastAndEasyCardButton",
-    );
-    scrollFromDeveloperIntegrationsElement.addEventListener(
-      "click",
-      (event) => {
-        event.preventDefault();
-        document.getElementById("referral award recipient").focus();
-      },
-    );
-
-    const scrollToGenerateLinkFormElement = document.getElementById(
-      "scroll-to-generate-referral-from-ECP-section",
-    );
-    scrollToGenerateLinkFormElement.addEventListener("click", (event) => {
-      event.preventDefault();
-      document.getElementById("referral award recipient").focus();
     });
   </script>
 </Layout>

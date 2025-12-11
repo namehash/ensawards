@@ -9,10 +9,7 @@ import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/en
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 import { useEffect, useMemo, useState } from "react";
 
-type GenerateReferralLinkAction = "scroll" | "link";
-
 export interface ReferrerLeaderboardSnippetProps {
-  generateReferralLinkAction: GenerateReferralLinkAction;
   snippetSize?: number;
   header?: string;
 }
@@ -21,7 +18,6 @@ export interface ReferrerLeaderboardSnippetProps {
  * and displays them as a snippet of the whole leaderboard.
  */
 export function ReferrerLeaderboardSnippet({
-  generateReferralLinkAction,
   header,
   snippetSize = 3,
 }: ReferrerLeaderboardSnippetProps) {
@@ -66,39 +62,18 @@ export function ReferrerLeaderboardSnippet({
     fetchReferrerLeaderboard();
   }, []);
 
-  const emptyLeaderboardCTAStyles = cn(
-    shadcnButtonVariants({
-      variant: "outline",
-      size: "default",
-      className: "cursor-pointer rounded-full",
-    }),
-  );
-
-  const emptyReferrerLeaderboardCTA =
-    generateReferralLinkAction === "scroll" ? (
-      <a
-        className={emptyLeaderboardCTAStyles}
-        onClick={() => document.getElementById("referral award recipient")!.focus()}
-      >
-        Generate your referral link
-      </a>
-    ) : (
-      <a className={emptyLeaderboardCTAStyles} href="/ens-referral-awards">
-        Generate your referral link
-      </a>
-    );
-
   return (
     <ENSNodeProvider
       config={config}
-      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+      queryClientOptions={{
+        defaultOptions: { queries: { staleTime: 30 * 1000 } },
+      }}
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3 relative z-10">
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardSnippetData}
             isLoading={isLoading}
-            emptyLeaderboardCTA={emptyReferrerLeaderboardCTA}
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo

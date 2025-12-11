@@ -20,7 +20,9 @@ export function LiveReferralFeed({
   return (
     <ENSNodeProvider
       config={config}
-      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+      queryClientOptions={{
+        defaultOptions: { queries: { staleTime: 30 * 1000 } },
+      }}
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <FetchAndDisplayRegistrarActionsFeed

@@ -12,7 +12,6 @@ import type { ReactElement } from "react";
 export interface DisplayReferrerLeaderboardPageProps {
   leaderboardPageData: ReferrerLeaderboardPage | null;
   isLoading: boolean;
-  emptyLeaderboardCTA: ReactElement;
   leaderboardPageFetchError?: ReactElement;
   header?: string;
   leaderboardPageLoadingData?: Required<ReferrerLeaderboardPaginationParams>;
@@ -24,7 +23,6 @@ export interface DisplayReferrerLeaderboardPageProps {
 export function DisplayReferrerLeaderboardPage({
   leaderboardPageData,
   isLoading,
-  emptyLeaderboardCTA,
   leaderboardPageFetchError,
   header,
   leaderboardPageLoadingData = {
@@ -56,7 +54,7 @@ export function DisplayReferrerLeaderboardPage({
   if (leaderboardPageData.paginationContext.totalRecords === 0) {
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
-        <EmptyLeaderboardInfo cta={emptyLeaderboardCTA} />
+        <EmptyLeaderboardInfo />
         <ReferrerLeaderboardLastUpdateTime timestamp={leaderboardPageData.accurateAsOf} />
       </div>
     );

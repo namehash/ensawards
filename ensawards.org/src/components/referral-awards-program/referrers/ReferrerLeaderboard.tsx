@@ -64,27 +64,15 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
   return (
     <ENSNodeProvider
       config={config}
-      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+      queryClientOptions={{
+        defaultOptions: { queries: { staleTime: 30 * 1000 } },
+      }}
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-5">
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardData}
             isLoading={isLoading}
-            emptyLeaderboardCTA={
-              <a
-                className={cn(
-                  shadcnButtonVariants({
-                    variant: "outline",
-                    size: "default",
-                    className: "cursor-pointer rounded-full",
-                  }),
-                )}
-                href="/ens-referral-awards"
-              >
-                Generate your referral link
-              </a>
-            }
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo
