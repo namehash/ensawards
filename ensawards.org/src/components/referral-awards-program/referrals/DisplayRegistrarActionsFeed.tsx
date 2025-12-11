@@ -38,7 +38,7 @@ function DisplayRegistrarActionsList({
   return (
     <div
       ref={animationParent}
-      className="w-full h-fit box-border flex flex-col justify-start items-center gap-3"
+      className="w-full h-fit box-border flex flex-col justify-start items-center gap-3 relative"
     >
       {registrarActions.map((namedRegistrarAction) => (
         <RegistrarActionCardMemo
