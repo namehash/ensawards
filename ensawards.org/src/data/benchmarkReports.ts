@@ -37,7 +37,7 @@ export const BENCHMARK_REPORTS: BenchmarkReport[] = [
             "Occaecat aliquip aute mollit do do quis velit aute sit aliqua aliquip nisi. Occaecat excepteur sit non sit consequat duis amet laborum. Deserunt duis sunt fugiat est aliquip aute ad Lorem excepteur incididunt excepteur. Aliqua id in amet velit proident ad et deserunt laborum enim adipisicing aute ipsum.",
           images: [
             {
-              src: "/src/assets/rainbow-testing-methodology.png",
+              src: "/src/assets/benchmarks/contract-naming-rainbow-mainnet-1.png",
               alt: "Rainbow Wallet testing methodology screenshot",
               caption: "Example of testing setup with named smart contracts",
             },
@@ -49,7 +49,7 @@ export const BENCHMARK_REPORTS: BenchmarkReport[] = [
             "Non minim tempor laboris. Sint in nulla ea deserunt do magna laboris consectetur id labore amet Lorem esse enim. Esse consequat esse incididunt ea laborum laboris minim ipsum in incididunt in. Elit laborum dolore id aliqua ad duis consectetur pariatur. Officia magna magna exercitation voluptate quis culpa cupidatat nulla laboris et excepteur laborum incididunt quis. Et et sit laborum ipsum adipisicing proident Lorem do.",
           images: [
             {
-              src: "/src/assets/rainbow-ens-display.png",
+              src: "/src/assets/benchmarks/contract-naming-rainbow-mainnet-2.png",
               alt: "Rainbow Wallet showing ENS names",
               caption:
                 "Rainbow Wallet correctly displaying uniswap.eth instead of the contract address",
