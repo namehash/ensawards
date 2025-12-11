@@ -6,13 +6,25 @@ import { PossibleSuggestions } from "../../molecules/contact-form/types";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
+  class?: string;
+  layout?: 'responsive' | 'column';
 }
 
-const { whatsSuggested }: SuggestionCardProps = Astro.props;
+const { whatsSuggested, class: className, layout = 'responsive' }: SuggestionCardProps = Astro.props;
+
+const getLayoutClasses = (layout: 'responsive' | 'column') => {
+  switch (layout) {
+    case 'column':
+      return 'flex-col gap-5 justify-start';
+    case 'responsive':
+    default:
+      return 'flex-col sm:flex-row max-sm:gap-5 sm:justify-between';
+  }
+};
 ---
 
 <div
-  class="w-full h-fit flex flex-col sm:flex-row flex-nowrap justify-start max-sm:gap-5 sm:justify-between items-center p-4 sm:py-5 sm:px-6 rounded-2xl border border-dashed border-gray-200">
+  class={cn("w-full h-fit flex flex-nowrap items-center p-4 sm:py-5 sm:px-6 rounded-2xl border border-dashed border-gray-200", getLayoutClasses(layout), className)}>
   <p
     class="text-sm sm:text-base leading-normal font-normal text-muted-foreground">
     {getSuggestionText(whatsSuggested)}

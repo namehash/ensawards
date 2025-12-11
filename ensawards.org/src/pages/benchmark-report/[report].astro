@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { BenchmarkResultBadge } from "../../components/atoms/badges/BenchmarkResultBadge";
 import { AuthorDisplay } from "../../components/atoms/AuthorDisplay";
-import BenchmarkReportUpdatePanel from "../../components/atoms/cards/BenchmarkReportUpdatePanel.astro";
+import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
@@ -15,8 +15,8 @@ import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 import { markdownToHtml } from "../../utils/markdown";
 
 export function getStaticPaths() {
-  return BENCHMARK_REPORTS.map((report) => ({ 
-    params: { report: report.slug } 
+  return BENCHMARK_REPORTS.map((report) => ({
+    params: { report: report.slug },
   }));
 }
 
@@ -31,12 +31,12 @@ const reportData = getBenchmarkReportBySlug(report);
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
 
-// Helper function to format timestamp 
+// Helper function to format timestamp
 function formatTimestamp(timestamp: number): string {
-  return new Date(timestamp * 1000).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  return new Date(timestamp * 1000).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 }
 ---
@@ -53,7 +53,7 @@ function formatTimestamp(timestamp: number): string {
         ogImage: reportData.meta.ogImagePath,
         twitterImage: reportData.meta.twitterOgImagePath,
       }}>
-      
+
       <SubpageHero
         header={`${reportData.app.name} - ${reportData.bestPractice.name}`}
         description={reportData.bestPractice.description}
@@ -64,7 +64,7 @@ function formatTimestamp(timestamp: number): string {
           slot="icon"
           class="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
-        
+
         <div
           slot="socialLinks"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
@@ -91,170 +91,199 @@ function formatTimestamp(timestamp: number): string {
           }
         </div>
 
-        <div slot="largerHeroItem" class="flex flex-col items-end gap-4">
-          <BenchmarkResultBadge
-            className={BenchmarkResultToBadgeStyles.get(reportData.benchmark.result)}
-            benchmark={reportData.benchmark}
-            client:load
-          />
-          <div class="text-right text-sm text-gray-300">
-            <div>Authored: {formatTimestamp(reportData.createdAt)}</div>
-            <div>Updated: {formatTimestamp(reportData.lastUpdatedAt)}</div>
-          </div>
-        </div>
+
       </SubpageHero>
 
-      <!-- Report Content -->
+      <!-- Report Content - 2 Column Layout -->
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
-        <div class="w-full max-w-[1216px] flex flex-nowrap flex-col justify-center items-start gap-8">
-          <!-- Introduction -->
-          <div class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">
-            <h2 class="text-2xl leading-none font-semibold text-black">
-              Report Summary
-            </h2>
-            <p class={technicalSectionContentStyles} set:html={markdownToHtml(reportData.content.introduction)} />
+        <div class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
+          <!-- Left Column - Report Content -->
+          <div class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-8">
+            <!-- Introduction -->
+            <div class="flex flex-nowrap flex-col justify-center items-start gap-6">
+              <h2 class="text-2xl leading-none font-semibold text-black">
+                Report Summary
+              </h2>
+              <p class={technicalSectionContentStyles} set:html={markdownToHtml(reportData.content.introduction)} />
+            </div>
+
+            <!-- Report Sections -->
+            {reportData.content.sections.map((section, index) => (
+              <div class="flex flex-nowrap flex-col justify-center items-start gap-6">
+                <h3 class={technicalSectionMinorHeaderStyles}>
+                  {section.heading}
+                </h3>
+                <p class={technicalSectionContentStyles} set:html={markdownToHtml(section.content)} />
+
+                {/* Section Images */}
+                {section.images && section.images.length > 0 && (
+                  <div class="space-y-4 w-full">
+                    {section.images.map((image) => (
+                      <figure class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          class="w-full rounded-md"
+                          width={image.width}
+                          height={image.height}
+                        />
+                        {image.caption && (
+                          <figcaption class="text-sm text-gray-600 mt-3 text-center italic">
+                            {image.caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+
+            <!-- Conclusion -->
+            {reportData.content.conclusion && (
+              <div class="flex flex-nowrap flex-col justify-center items-start gap-6">
+                <h3 class={technicalSectionMinorHeaderStyles}>Conclusion</h3>
+                <p class={technicalSectionContentStyles} set:html={markdownToHtml(reportData.content.conclusion)} />
+              </div>
+            )}
           </div>
 
-          <!-- Report Sections -->
-          {reportData.content.sections.map((section, index) => (
-            <div class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">
-              <h3 class={technicalSectionMinorHeaderStyles}>
-                {section.heading}
-              </h3>
-              <p class={technicalSectionContentStyles} set:html={markdownToHtml(section.content)} />
-              
-              {/* Section Images */}
-              {section.images && section.images.length > 0 && (
-                <div class="space-y-4 w-full">
-                  {section.images.map((image) => (
-                    <figure class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                      <img 
-                        src={image.src}
-                        alt={image.alt}
-                        class="w-full rounded-md"
-                        width={image.width}
-                        height={image.height}
-                      />
-                      {image.caption && (
-                        <figcaption class="text-sm text-gray-600 mt-3 text-center italic">
-                          {image.caption}
-                        </figcaption>
-                      )}
-                    </figure>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-
-          <!-- Conclusion -->
-          {reportData.content.conclusion && (
-            <div class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">
-              <h3 class={technicalSectionMinorHeaderStyles}>Conclusion</h3>
-              <p class={technicalSectionContentStyles} set:html={markdownToHtml(reportData.content.conclusion)} />
-            </div>
-          )}
-        </div>
-      </section>
-
-      <!-- Report Metadata Section -->
-      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pb-6 sm:pb-[60px] px-5 sm:px-8 bg-gray-50">
-        <div class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
-          <div class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">
-            <h2 class="text-2xl leading-none font-semibold text-black">
+          <!-- Right Column - Report Details Sidebar -->
+          <div class="w-1/2 min-w-[300px] max-w-[420px] box-border h-fit hidden lg:flex flex-col flex-nowrap justify-center items-start gap-6 bg-gray-50 rounded-xl py-6 px-6">
+            <h2 class="text-xl leading-none font-semibold text-black">
               Report Details
             </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-              <div class="space-y-6">
-                <h3 class={technicalSectionMinorHeaderStyles}>Best Practice Information</h3>
-                <div class="space-y-4">
-                  <div class="flex flex-col gap-1">
-                    <span class="text-sm leading-normal font-normal text-muted-foreground">Category:</span>
-                    <a 
-                      href={`/ens-best-practices/${reportData.bestPractice.categorySlug}`}
-                      class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
-                    >
-                      {reportData.bestPractice.categoryName}
-                    </a>
-                  </div>
-                  <div class="flex flex-col gap-1">
-                    <span class="text-sm leading-normal font-normal text-muted-foreground">Best Practice:</span>
-                    <a 
-                      href={`/ens-best-practices/${reportData.bestPractice.categorySlug}/${reportData.bestPractice.slug}`}
-                      class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
-                    >
-                      {reportData.bestPractice.name}
-                    </a>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="space-y-6">
-                <h3 class={technicalSectionMinorHeaderStyles}>Report Information</h3>
-                <div class="space-y-4">
-                  <div class="flex flex-col gap-1">
-                    <span class="text-sm leading-normal font-normal text-muted-foreground">Author:</span>
-                    <AuthorDisplay 
-                      author={reportData.author}
-                      className="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700"
-                      client:load
-                    />
-                  </div>
-                  <div class="flex flex-col gap-1">
-                    <span class="text-sm leading-normal font-normal text-muted-foreground">App Tested:</span>
-                    <a 
-                      href={`/app/${reportData.app.slug}`}
-                      class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
-                    >
-                      {reportData.app.name}
-                    </a>
-                  </div>
-                  <div class="flex flex-col gap-1">
-                    <span class="text-sm leading-normal font-normal text-muted-foreground">Report Date:</span>
-                    <span class="text-sm leading-normal font-medium text-black">
-                      {formatTimestamp(reportData.createdAt)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <!-- Update Panel -->
-            <div class="w-full mt-8">
-              <BenchmarkReportUpdatePanel report={reportData} />
-            </div>
-          </div>
-          
-          <!-- Sidebar with best practice summary (matching best practices page) -->
-          <div class="w-1/2 min-w-[300px] max-w-[420px] box-border h-fit hidden md:flex flex-col flex-nowrap justify-center items-start gap-4 bg-white rounded-xl py-5 px-6 border border-gray-200">
-            <h4 class={technicalSectionMinorHeaderStyles}>
-              {reportData.bestPractice.name}
-            </h4>
-            <p class={technicalSectionContentStyles}>
-              {reportData.bestPractice.description}
-            </p>
-            <div class="bg-gray-200 h-[1px] self-stretch"></div>
-            <div class="w-full flex flex-col gap-4">
-              <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-                <p class="text-sm leading-normal font-normal text-muted-foreground">Category</p>
-                <a href={`/ens-best-practices/${reportData.bestPractice.categorySlug}`} class="text-sm leading-normal font-semibold text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200">
+            <div class="flex flex-col gap-6 w-full">
+              <div class="flex flex-col gap-1">
+                <span class="text-sm leading-normal font-normal text-muted-foreground">Category:</span>
+                <a
+                  href={`/ens-best-practices/${reportData.bestPractice.categorySlug}`}
+                  class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
+                >
                   {reportData.bestPractice.categoryName}
                 </a>
               </div>
-              <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-                <p class="text-sm leading-normal font-normal text-muted-foreground">App Result</p>
-                <p class="text-sm leading-normal font-semibold text-black">
-                  {reportData.benchmark.result}
-                </p>
+
+              <div class="flex flex-col gap-1">
+                <span class="text-sm leading-normal font-normal text-muted-foreground">Best Practice:</span>
+                <a
+                  href={`/ens-best-practices/${reportData.bestPractice.categorySlug}/${reportData.bestPractice.slug}`}
+                  class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
+                >
+                  {reportData.bestPractice.name}
+                </a>
               </div>
-              <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-                <p class="text-sm leading-normal font-normal text-muted-foreground">Report Date</p>
-                <p class="text-sm leading-normal font-semibold text-black">
+
+              <div class="flex flex-col gap-1">
+                <span class="text-sm leading-normal font-normal text-muted-foreground">App Tested:</span>
+                <a
+                  href={`/app/${reportData.app.slug}`}
+                  class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
+                >
+                  {reportData.app.name}
+                </a>
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <span class="text-sm leading-normal font-normal text-muted-foreground">App Result:</span>
+                <BenchmarkResultBadge
+                  className={BenchmarkResultToBadgeStyles.get(reportData.benchmark.result)}
+                  benchmark={reportData.benchmark}
+                  client:load
+                />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <span class="text-sm leading-normal font-normal text-muted-foreground">Author:</span>
+                <AuthorDisplay
+                  author={reportData.author}
+                  className="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700"
+                  client:load
+                />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <span class="text-sm leading-normal font-normal text-muted-foreground">Report Date:</span>
+                <span class="text-sm leading-normal font-medium text-black">
                   {formatTimestamp(reportData.createdAt)}
-                </p>
+                </span>
               </div>
             </div>
+
+            <!-- Suggestion Card -->
+            <div class="w-full mt-2">
+              <SuggestionCard layout="column" whatsSuggested="benchmark result" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Report Details - Full Width -->
+        <div class="w-full max-w-[1216px] flex lg:hidden flex-col justify-center items-start gap-6 mt-12 p-6 bg-gray-50 rounded-xl">
+          <h2 class="text-xl leading-none font-semibold text-black">
+            Report Details
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm leading-normal font-normal text-muted-foreground">Category:</span>
+              <a
+                href={`/ens-best-practices/${reportData.bestPractice.categorySlug}`}
+                class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
+              >
+                {reportData.bestPractice.categoryName}
+              </a>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <span class="text-sm leading-normal font-normal text-muted-foreground">Best Practice:</span>
+              <a
+                href={`/ens-best-practices/${reportData.bestPractice.categorySlug}/${reportData.bestPractice.slug}`}
+                class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
+              >
+                {reportData.bestPractice.name}
+              </a>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <span class="text-sm leading-normal font-normal text-muted-foreground">App Tested:</span>
+              <a
+                href={`/app/${reportData.app.slug}`}
+                class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
+              >
+                {reportData.app.name}
+              </a>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <span class="text-sm leading-normal font-normal text-muted-foreground">App Result:</span>
+              <BenchmarkResultBadge
+                className={BenchmarkResultToBadgeStyles.get(reportData.benchmark.result)}
+                benchmark={reportData.benchmark}
+                client:load
+              />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <span class="text-sm leading-normal font-normal text-muted-foreground">Author:</span>
+              <AuthorDisplay
+                author={reportData.author}
+                className="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700"
+                client:load
+              />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <span class="text-sm leading-normal font-normal text-muted-foreground">Report Date:</span>
+              <span class="text-sm leading-normal font-medium text-black">
+                {formatTimestamp(reportData.createdAt)}
+              </span>
+            </div>
+          </div>
+
+          <!-- Mobile Suggestion Card -->
+          <div class="w-full mt-4">
+            <SuggestionCard whatsSuggested="benchmark result" />
           </div>
         </div>
       </section>
