@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import { BenchmarkResultBadge } from "../../components/atoms/badges/BenchmarkResultBadge";
 import { AuthorDisplay } from "../../components/atoms/AuthorDisplay";
+import { BenchmarkResultBadge } from "../../components/atoms/badges/BenchmarkResultBadge";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
@@ -11,8 +11,8 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { BENCHMARK_REPORTS, getBenchmarkReportBySlug } from "../../data/benchmarkReports";
 import Layout from "../../layouts/Layout.astro";
-import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 import { markdownToHtml } from "../../utils/markdown";
+import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 
 export function getStaticPaths() {
   return BENCHMARK_REPORTS.map((report) => ({

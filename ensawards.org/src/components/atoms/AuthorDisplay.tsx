@@ -1,7 +1,7 @@
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
 import { getENSNodeUrl } from "@/utils/env";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { buildUnresolvedIdentity, ENSNamespaceIds, type AccountId } from "@ensnode/ensnode-sdk";
+import { type AccountId, ENSNamespaceIds, buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 interface AuthorDisplayProps {
   author: AccountId;

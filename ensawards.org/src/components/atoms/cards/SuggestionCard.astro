@@ -7,18 +7,22 @@ import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
   class?: string;
-  layout?: 'responsive' | 'column';
+  layout?: "responsive" | "column";
 }
 
-const { whatsSuggested, class: className, layout = 'responsive' }: SuggestionCardProps = Astro.props;
+const {
+  whatsSuggested,
+  class: className,
+  layout = "responsive",
+}: SuggestionCardProps = Astro.props;
 
-const getLayoutClasses = (layout: 'responsive' | 'column') => {
+const getLayoutClasses = (layout: "responsive" | "column") => {
   switch (layout) {
-    case 'column':
-      return 'flex-col gap-5 justify-start';
-    case 'responsive':
+    case "column":
+      return "flex-col gap-5 justify-start";
+    case "responsive":
     default:
-      return 'flex-col sm:flex-row max-sm:gap-5 sm:justify-between';
+      return "flex-col sm:flex-row max-sm:gap-5 sm:justify-between";
   }
 };
 ---

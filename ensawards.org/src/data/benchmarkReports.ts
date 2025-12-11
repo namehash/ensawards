@@ -5,11 +5,11 @@
 import { APPS } from "@/data/apps.ts";
 import { benchmarkers } from "@/data/benchmarkers.ts";
 import {
-  displayNamedSmartContractsMainnet,
   displayNamedSmartContractsL2,
+  displayNamedSmartContractsMainnet,
 } from "@/data/bestPractices.ts";
-import type { BenchmarkReport } from "@/types/benchmarkReports.ts";
 import { toUnixTimestamp } from "@/types/apps.ts";
+import type { BenchmarkReport } from "@/types/benchmarkReports.ts";
 
 /**
  * Sample benchmark reports for demonstration.
