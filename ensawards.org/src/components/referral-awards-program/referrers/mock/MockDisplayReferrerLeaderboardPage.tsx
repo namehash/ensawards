@@ -14,9 +14,13 @@ type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 
 const DEFAULT_STATE = "loaded";
 export function MockDisplayReferrerLeaderboardPage() {
-  const ensNodeReactConfig = createConfig({
-    url: getENSNodeUrl(),
-  });
+  const ensNodeReactConfig = useMemo(
+    () =>
+      createConfig({
+        url: getENSNodeUrl(),
+      }),
+    [],
+  );
   const [selectedState, setSelectedState] = useState<ReferrersListState>(DEFAULT_STATE);
   const props: DisplayReferrerLeaderboardPageProps = useMemo(() => {
     switch (selectedState) {

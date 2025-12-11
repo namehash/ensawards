@@ -7,7 +7,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type GenerateReferralLinkAction = "scroll" | "link";
 
@@ -29,12 +29,9 @@ export function ReferrerLeaderboardSnippet({
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardSnippetData, setLeaderboardSnippetData] =
     useState<ReferrerLeaderboardPage | null>(null);
-  const client = new ENSNodeClient({
-    url: getENSNodeUrl(),
-  });
-  const ensNodeProviderConfig = createConfig({
-    url: getENSNodeUrl(),
-  });
+  const ensNodeUrl = getENSNodeUrl();
+  const client = useMemo(() => new ENSNodeClient({ url: ensNodeUrl }), [ensNodeUrl]);
+  const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -92,7 +89,10 @@ export function ReferrerLeaderboardSnippet({
     );
 
   return (
-    <ENSNodeProvider config={ensNodeProviderConfig}>
+    <ENSNodeProvider
+      config={config}
+      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+    >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3 relative z-10">
           <DisplayReferrerLeaderboardPage

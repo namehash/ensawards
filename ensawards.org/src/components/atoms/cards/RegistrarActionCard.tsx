@@ -69,7 +69,7 @@ function ResolveAndDisplayReferrerIdentity({
   namespaceId,
   chainId,
   referral,
-  accelerate = false,
+  accelerate = true,
   withLink = true,
   withTooltip = true,
   withAvatar = false,
@@ -269,7 +269,6 @@ export function RegistrarActionCard({
           <ResolveAndDisplayIdentity
             identity={registrantIdentity}
             namespaceId={namespaceId}
-            accelerate={true}
             withAvatar={true}
             withTooltip={false}
             withIdentifier={false}
@@ -279,7 +278,6 @@ export function RegistrarActionCard({
           <ResolveAndDisplayIdentity
             identity={registrantIdentity}
             namespaceId={namespaceId}
-            accelerate={true}
             withAvatar={isMobile}
             withTooltip={false}
             className="font-medium sm:max-[1220px]:max-w-[110px] min-[1220px]:max-w-[140px]"
