@@ -1,10 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
-import {
-  DisplayPagination,
-  DisplaySimplePagination,
-} from "@/components/molecules/Pagination.tsx";
+import { DisplayPagination, DisplaySimplePagination } from "@/components/molecules/Pagination.tsx";
 import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
 import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";

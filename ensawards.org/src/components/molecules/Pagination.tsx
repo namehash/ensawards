@@ -12,6 +12,93 @@ import type { ReferrerLeaderboardPaginationParams } from "@namehash/ens-referral
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Ellipsis } from "lucide-react";
 import React from "react";
 
+interface DisplayPaginationProps
+  extends PaginationProps,
+    Omit<ItemsPerPageSelectProps, "itemsPerPage"> {
+  containerClassName?: string;
+  quantityClassName?: string;
+}
+
+export function DisplayPagination({
+  numberOfPages,
+  totalRecords,
+  paginationParams,
+  onNext,
+  onPrevious,
+  onChosen,
+  onItemsPerPageChange,
+  possibleItemsPerPageValues,
+  selectorDescription,
+  containerClassName,
+  quantityClassName,
+}: DisplayPaginationProps) {
+  return (
+    <div
+      className={cn(
+        "w-full flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-center gap-y-3",
+        containerClassName,
+      )}
+    >
+      <QuantityInfo
+        paginationParams={paginationParams}
+        totalRecords={totalRecords}
+        className={quantityClassName}
+      />
+      <Pagination
+        numberOfPages={numberOfPages}
+        totalRecords={totalRecords}
+        paginationParams={paginationParams}
+        onPrevious={onPrevious}
+        onNext={onNext}
+        onChosen={onChosen}
+      />
+      <ItemsPerPageSelect
+        itemsPerPage={paginationParams.itemsPerPage}
+        onItemsPerPageChange={onItemsPerPageChange}
+        selectorDescription={selectorDescription}
+        possibleItemsPerPageValues={possibleItemsPerPageValues}
+      />
+    </div>
+  );
+}
+
+export function DisplaySimplePagination({
+  numberOfPages,
+  totalRecords,
+  paginationParams,
+  onNext,
+  onPrevious,
+  onChosen,
+  containerClassName,
+  quantityClassName,
+}: Omit<
+  DisplayPaginationProps,
+  "onItemsPerPageChange" | "possibleItemsPerPageValues" | "selectorDescription"
+>) {
+  return (
+    <div
+      className={cn(
+        "w-full flex flex-row flex-wrap justify-start items-center gap-3",
+        containerClassName,
+      )}
+    >
+      <QuantityInfo
+        paginationParams={paginationParams}
+        totalRecords={totalRecords}
+        className={quantityClassName}
+      />
+      <SimplePagination
+        numberOfPages={numberOfPages}
+        totalRecords={totalRecords}
+        paginationParams={paginationParams}
+        onPrevious={onPrevious}
+        onNext={onNext}
+        onChosen={onChosen}
+      />
+    </div>
+  );
+}
+
 export interface PaginationProps {
   numberOfPages: number;
   totalRecords: number;
@@ -165,93 +252,6 @@ export function SimplePagination({
       >
         <ChevronRight size={16} />
       </button>
-    </div>
-  );
-}
-
-interface DisplayPaginationProps
-  extends PaginationProps,
-    Omit<ItemsPerPageSelectProps, "itemsPerPage"> {
-  containerClassName?: string;
-  quantityClassName?: string;
-}
-
-export function DisplayPagination({
-  numberOfPages,
-  totalRecords,
-  paginationParams,
-  onNext,
-  onPrevious,
-  onChosen,
-  onItemsPerPageChange,
-  possibleItemsPerPageValues,
-  selectorDescription,
-  containerClassName,
-  quantityClassName,
-}: DisplayPaginationProps) {
-  return (
-    <div
-      className={cn(
-        "w-full flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-center gap-y-3",
-        containerClassName,
-      )}
-    >
-      <QuantityInfo
-        paginationParams={paginationParams}
-        totalRecords={totalRecords}
-        className={quantityClassName}
-      />
-      <Pagination
-        numberOfPages={numberOfPages}
-        totalRecords={totalRecords}
-        paginationParams={paginationParams}
-        onPrevious={onPrevious}
-        onNext={onNext}
-        onChosen={onChosen}
-      />
-      <ItemsPerPageSelect
-        itemsPerPage={paginationParams.itemsPerPage}
-        onItemsPerPageChange={onItemsPerPageChange}
-        selectorDescription={selectorDescription}
-        possibleItemsPerPageValues={possibleItemsPerPageValues}
-      />
-    </div>
-  );
-}
-
-export function DisplaySimplePagination({
-  numberOfPages,
-  totalRecords,
-  paginationParams,
-  onNext,
-  onPrevious,
-  onChosen,
-  containerClassName,
-  quantityClassName,
-}: Omit<
-  DisplayPaginationProps,
-  "onItemsPerPageChange" | "possibleItemsPerPageValues" | "selectorDescription"
->) {
-  return (
-    <div
-      className={cn(
-        "w-full flex flex-row flex-wrap justify-start items-center gap-3",
-        containerClassName,
-      )}
-    >
-      <QuantityInfo
-        paginationParams={paginationParams}
-        totalRecords={totalRecords}
-        className={quantityClassName}
-      />
-      <SimplePagination
-        numberOfPages={numberOfPages}
-        totalRecords={totalRecords}
-        paginationParams={paginationParams}
-        onPrevious={onPrevious}
-        onNext={onNext}
-        onChosen={onChosen}
-      />
     </div>
   );
 }
