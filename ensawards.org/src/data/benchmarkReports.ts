@@ -25,8 +25,8 @@ export const BENCHMARK_REPORTS: BenchmarkReport[] = [
       (b) => b.bestPractice.id === "display-named-smart-contracts-mainnet",
     )!,
     author: benchmarkers.stevedylandev,
-    createdAt: toUnixTimestamp("2025-12-08T18:19:28.672Z"),
-    lastUpdatedAt: toUnixTimestamp("2025-12-08T18:19:28.672Z"),
+    createdAt: toUnixTimestamp("2025-12-11T14:05:59.420Z"),
+    lastUpdatedAt: toUnixTimestamp("2025-12-11T14:05:59.420Z"),
     content: {
       introduction:
         "Aliquip Lorem fugiat labore deserunt laborum ex do anim mollit veniam adipisicing et voluptate. Minim proident cillum aliquip enim tempor fugiat ex ex sit labore irure aute sit. Irure cupidatat elit voluptate consectetur eu eiusmod reprehenderit cupidatat ut ullamco aute in.",
@@ -47,14 +47,6 @@ export const BENCHMARK_REPORTS: BenchmarkReport[] = [
           heading: "Results Analysis",
           content:
             "Non minim tempor laboris. Sint in nulla ea deserunt do magna laboris consectetur id labore amet Lorem esse enim. Esse consequat esse incididunt ea laborum laboris minim ipsum in incididunt in. Elit laborum dolore id aliqua ad duis consectetur pariatur. Officia magna magna exercitation voluptate quis culpa cupidatat nulla laboris et excepteur laborum incididunt quis. Et et sit laborum ipsum adipisicing proident Lorem do.",
-          images: [
-            {
-              src: "/src/assets/benchmarks/contract-naming-rainbow-mainnet-2.png",
-              alt: "Rainbow Wallet showing ENS names",
-              caption:
-                "Rainbow Wallet correctly displaying uniswap.eth instead of the contract address",
-            },
-          ],
         },
         {
           heading: "Technical Implementation",
