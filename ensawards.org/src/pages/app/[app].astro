@@ -13,6 +13,7 @@ import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { APPS } from "../../data/apps";
+import { getBenchmarkReportsByAppSlug } from "../../data/benchmarkReports";
 import Layout from "../../layouts/Layout.astro";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
@@ -31,6 +32,9 @@ let appScore: number;
 if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);
 }
+
+// Get available benchmark reports for this app
+const availableReports = appToDisplay ? getBenchmarkReportsByAppSlug(appToDisplay.slug) : [];
 ---
 
 {
@@ -86,31 +90,40 @@ if (appToDisplay !== undefined) {
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
           <ContractNamingBanner />
         <ItemsList header="Benchmark results">
-          {appToDisplay.benchmarks.map((benchmark, idx) => (
-            <BenchmarkResultCard
-              name={benchmark.bestPractice.name}
-              notes={benchmark.bestPractice.description}
-              viewDetails={{
-                text: "View best practice details",
-                link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.slug}`,
-              }}
-              additionalInfo={[
-                {
-                  category: "Category",
-                  value: benchmark.bestPractice.categoryName,
-                  link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}`,
-                  linkStyles:
-                    "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
-                },
-              ]}>
-                <BenchmarkResultBadge
-                slot="badge"
-                className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
-                benchmark={benchmark}
-                client:load
-              />
-            </BenchmarkResultCard>
-          ))}
+          {appToDisplay.benchmarks.map((benchmark, idx) => {
+            // Find if there's a benchmark report for this specific benchmark
+            const benchmarkReport = availableReports.find(
+              report => report.bestPractice.id === benchmark.bestPractice.id
+            );
+
+            return (
+              <BenchmarkResultCard
+                name={benchmark.bestPractice.name}
+                notes={benchmark.bestPractice.description}
+                viewDetails={{
+                  text: benchmarkReport ? "View detailed report" : "View best practice details",
+                  link: benchmarkReport
+                    ? `/benchmark-report/${benchmarkReport.slug}`
+                    : `/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.slug}`,
+                }}
+                additionalInfo={[
+                  {
+                    category: "Category",
+                    value: benchmark.bestPractice.categoryName,
+                    link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}`,
+                    linkStyles:
+                      "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
+                  },
+                ]}>
+                  <BenchmarkResultBadge
+                  slot="badge"
+                  className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
+                  benchmark={benchmark}
+                  client:load
+                />
+              </BenchmarkResultCard>
+            );
+          })}
           <SuggestionCard whatsSuggested="benchmark result" />
         </ItemsList>
       </section>

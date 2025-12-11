@@ -1,0 +1,78 @@
+---
+import type { BenchmarkReport } from "@/types/benchmarkReports.ts";
+
+interface Props {
+  report: BenchmarkReport;
+  className?: string;
+}
+
+const { report, className = "" } = Astro.props;
+---
+
+<div class={`bg-white border border-gray-200 rounded-lg p-6 ${className}`}>
+  <div class="space-y-4">
+    <div class="flex items-start justify-between">
+      <div>
+        <h3 class="text-lg font-semibold text-black mb-2">
+          Benchmark Result Updates
+        </h3>
+        <p class="text-gray-500 text-sm">
+          Have new information about this benchmark? Help keep our reports accurate and up-to-date.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <button 
+        type="button"
+        class="flex items-center justify-center px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+      >
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        Submit Update
+      </button>
+      
+      <button 
+        type="button"
+        class="flex items-center justify-center px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-white"
+      >
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10m0 0V6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m0 0v8a2 2 0 002 2h6a2 2 0 002-2V8"></path>
+        </svg>
+        Report Issue
+      </button>
+    </div>
+
+    <div class="pt-4 border-t border-gray-200">
+      <div class="flex items-center justify-between text-sm">
+        <div class="text-gray-500">
+          <span>Last updated:</span>
+          <time class="ml-1 text-black">
+            {new Date(report.lastUpdatedAt * 1000).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long', 
+              day: 'numeric'
+            })}
+          </time>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a 
+            href={`mailto:benchmarks@ensawards.org?subject=Update for ${report.app.name} - ${report.bestPractice.name}`}
+            class="text-blue-600 hover:text-blue-700 transition-colors duration-200"
+          >
+            Contact via email
+          </a>
+          <a 
+            href="https://github.com/ensdomains/ensawards/issues/new"
+            target="_blank"
+            rel="noreferrer"
+            class="text-blue-600 hover:text-blue-700 transition-colors duration-200"
+          >
+            GitHub issue
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
