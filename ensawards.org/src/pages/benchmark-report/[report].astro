@@ -21,7 +21,9 @@ export function getStaticPaths() {
 }
 
 const { report } = Astro.params;
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/**/*.{jpeg,jpg,png,gif,svg}",
+);
 
 const reportData = getBenchmarkReportBySlug(report);
 
@@ -118,22 +120,27 @@ function formatTimestamp(timestamp: number): string {
                 {/* Section Images */}
                 {section.images && section.images.length > 0 && (
                   <div class="space-y-4 w-full">
-                    {section.images.map((image) => (
-                      <figure class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          class="w-full rounded-md"
-                          width={image.width}
-                          height={image.height}
-                        />
-                        {image.caption && (
-                          <figcaption class="text-sm text-gray-600 mt-3 text-center italic">
-                            {image.caption}
-                          </figcaption>
-                        )}
-                      </figure>
-                    ))}
+                    {section.images.map((image) => {
+                      const imageModule = images[image.src];
+                      if (!imageModule) {
+                        console.warn(`Image not found: ${image.src}`);
+                        return null;
+                      }
+                      return (
+                        <figure class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                          <Image
+                            src={imageModule()}
+                            alt={image.alt}
+                            class="w-full rounded-md"
+                          />
+                          {image.caption && (
+                            <figcaption class="text-sm text-gray-600 mt-3 text-center italic">
+                              {image.caption}
+                            </figcaption>
+                          )}
+                        </figure>
+                      );
+                    })}
                   </div>
                 )}
               </div>
