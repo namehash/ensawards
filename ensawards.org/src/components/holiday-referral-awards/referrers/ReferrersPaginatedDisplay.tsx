@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { ReferrersList } from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
@@ -22,13 +22,9 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [referrersLeaderboardsData, setReferrersLeaderboardsData] =
     useState<ReferrerLeaderboardPage | null>(null);
-  const client = new ENSNodeClient({
-    url: new URL("https://api.alpha.blue.ensnode.io/"), //TODO: replace with the line below later on
-    // url: getENSNodeUrl(),
-  });
-  const ensNodeReactConfig = createConfig({
-    url: "https://api.alpha.blue.ensnode.io/",
-  }); //TODO: replace with getENSNodeUrl for prod
+  const ensNodeUrl = getENSNodeUrl();
+  const client = useMemo(() => new ENSNodeClient({ url: ensNodeUrl }), [ensNodeUrl]);
+  const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -65,7 +61,10 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
   }, [currentPage]);
 
   return (
-    <ENSNodeProvider config={ensNodeReactConfig}>
+    <ENSNodeProvider
+      config={config}
+      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+    >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-3 sm:gap-5">
           <ReferrersList

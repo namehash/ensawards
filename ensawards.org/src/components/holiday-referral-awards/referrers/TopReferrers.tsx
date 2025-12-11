@@ -7,7 +7,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export interface TopReferrersProps {
   onENSHolidayReferralsAwards: boolean;
@@ -23,13 +23,9 @@ export function TopReferrers({
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [topReferrersData, setTopReferrersData] = useState<ReferrerLeaderboardPage | null>(null);
-  const client = new ENSNodeClient({
-    url: new URL("https://api.alpha.blue.ensnode.io/"), //TODO: replace with the line below later on
-    // url: getENSNodeUrl(),
-  });
-  const ensNodeReactConfig = createConfig({
-    url: "https://api.alpha.blue.ensnode.io/",
-  }); //TODO: replace with getENSNodeUrl for prod
+  const ensNodeUrl = getENSNodeUrl();
+  const client = useMemo(() => new ENSNodeClient({ url: ensNodeUrl }), [ensNodeUrl]);
+  const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -86,7 +82,10 @@ export function TopReferrers({
   );
 
   return (
-    <ENSNodeProvider config={ensNodeReactConfig}>
+    <ENSNodeProvider
+      config={config}
+      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+    >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
           <ReferrersList
