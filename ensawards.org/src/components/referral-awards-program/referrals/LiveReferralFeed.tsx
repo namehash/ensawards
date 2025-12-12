@@ -11,7 +11,7 @@ import { useMemo } from "react";
  * Wrapper of the FetchAndDisplayRegistrarActionsFeed component, granting access to necessary providers
  */
 export function LiveReferralFeed({
-  itemsPerPage,
+  recordsPerPage,
   referralIncentiveProgram,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
@@ -26,7 +26,7 @@ export function LiveReferralFeed({
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <FetchAndDisplayRegistrarActionsFeed
-          itemsPerPage={itemsPerPage}
+          recordsPerPage={recordsPerPage}
           title={title}
           referralIncentiveProgram={referralIncentiveProgram}
         />

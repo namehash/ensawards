@@ -114,7 +114,7 @@ export function ReferrerLeaderboardSnippet({
                 </ErrorInfo>
               ) : undefined
             }
-            leaderboardPageLoadingData={{
+            paginationParams={{
               itemsPerPage: snippetSize,
               page: 1,
             }}

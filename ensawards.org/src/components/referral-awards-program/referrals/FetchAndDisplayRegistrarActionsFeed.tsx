@@ -6,7 +6,7 @@ import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/en
 import { namehash } from "viem";
 
 export interface FetchAndDisplayRegistrarActionsFeedProps {
-  itemsPerPage: number;
+  recordsPerPage: number;
   referralIncentiveProgram: ReferralIncentiveProgram;
   title: string;
 }
@@ -15,7 +15,7 @@ export interface FetchAndDisplayRegistrarActionsFeedProps {
  * Fetches Registrar Actions through ENSNode and displays the Registrar Actions Feed.
  */
 export function FetchAndDisplayRegistrarActionsFeed({
-  itemsPerPage,
+  recordsPerPage,
   referralIncentiveProgram,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
@@ -28,7 +28,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
   ];
 
   const registrarActions = useStatefulRegistrarActions({
-    itemsPerPage,
+    recordsPerPage,
     filters,
   });
 

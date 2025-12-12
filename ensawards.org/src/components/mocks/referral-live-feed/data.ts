@@ -14,9 +14,9 @@ import type {
   StatefulFetchRegistrarActionsNotReady,
   StatefulFetchRegistrarActionsUnsupported,
   StatefulFetchStatusId,
-} from "../types.ts";
+} from "../../referral-awards-program/referrals/types.ts";
 
-import { StatefulFetchStatusIds } from "../types.ts";
+import { StatefulFetchStatusIds } from "../../referral-awards-program/referrals/types.ts";
 
 export const registrationWithReferral = {
   action: {

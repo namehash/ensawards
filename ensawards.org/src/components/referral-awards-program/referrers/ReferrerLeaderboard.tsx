@@ -14,15 +14,15 @@ import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/en
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
 
 export interface ReferrerLeaderboardProps {
-  itemsPerPage?: number;
+  recordsPerPage?: number;
 }
 /**
  * Fetches Referrer Leaderboard through ENSNode and displays a single page of the leaderboard and pagination.
  */
-export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardProps) {
+export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboardProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentItemsPerPage, setCurrentItemsPerPage] = useState(itemsPerPage);
-  const [numberOfPages, setNumberOfPages] = useState(1);
+  const [currentRecordsPerPage, setCurrentRecordsPerPage] = useState(recordsPerPage);
+  const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPage | null>(null);
@@ -39,18 +39,19 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
     try {
       const response = await client.getReferrerLeaderboard({
         page: currentPage,
-        itemsPerPage: currentItemsPerPage,
+        itemsPerPage: currentRecordsPerPage,
       });
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
         console.error(response.errorMessage);
+        setLeaderboardData(null);
         setFetchErrorMessage("An error has occurred while loading the leaderboard.");
         setIsLoading(false);
         return;
       }
 
       setLeaderboardData(response.data);
-      setNumberOfPages(response.data.paginationContext.totalPages);
+      setTotalPages(response.data.paginationContext.totalPages);
     } catch (error) {
       console.error(error);
       setLeaderboardData(null);
@@ -62,7 +63,7 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
 
   useEffect(() => {
     fetchReferrerLeaderboard();
-  }, [currentPage, currentItemsPerPage]);
+  }, [currentPage, currentRecordsPerPage]);
 
   return (
     <ENSNodeProvider
@@ -89,11 +90,11 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
           </div>
           {leaderboardData !== null && leaderboardData.paginationContext.totalRecords > 0 && (
             <DisplaySimplePagination
-              numberOfPages={numberOfPages}
+              totalPages={totalPages}
               totalRecords={leaderboardData.paginationContext.totalRecords}
               paginationParams={{
                 page: currentPage,
-                itemsPerPage: currentItemsPerPage,
+                itemsPerPage: currentRecordsPerPage,
               }}
               onPrevious={() => {
                 setCurrentPage((prev) => prev - 1);
@@ -104,6 +105,7 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
               onChosen={(newPage) => {
                 setCurrentPage(newPage);
               }}
+              recordAlias={{ singular: "referrer", plural: "referrers" }}
               quantityClassName="text-base text-black font-semibold"
             />
           )}
@@ -131,18 +133,18 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
                 </ErrorInfo>
               ) : undefined
             }
-            leaderboardPageLoadingData={{
+            paginationParams={{
               page: currentPage,
-              itemsPerPage: itemsPerPage,
+              itemsPerPage: recordsPerPage,
             }}
           />
           {leaderboardData !== null && leaderboardData.paginationContext.totalRecords > 0 && (
             <DisplayPagination
-              numberOfPages={numberOfPages}
+              totalPages={totalPages}
               totalRecords={leaderboardData.paginationContext.totalRecords}
               paginationParams={{
                 page: currentPage,
-                itemsPerPage: currentItemsPerPage,
+                itemsPerPage: currentRecordsPerPage,
               }}
               onPrevious={() => {
                 setCurrentPage((prev) => prev - 1);
@@ -153,10 +155,13 @@ export function ReferrerLeaderboard({ itemsPerPage = 25 }: ReferrerLeaderboardPr
               onChosen={(newPage) => {
                 setCurrentPage(newPage);
               }}
-              onItemsPerPageChange={(newItemsPerPage) => setCurrentItemsPerPage(newItemsPerPage)}
-              possibleItemsPerPageValues={[
-                ...new Set([25, 50, itemsPerPage].sort((a, b) => (a > b ? 1 : a < b ? -1 : 0))),
+              onRecordsPerPageChange={(newItemsPerPage) =>
+                setCurrentRecordsPerPage(newItemsPerPage)
+              }
+              possibleRecordsPerPageValues={[
+                ...new Set([25, 50, recordsPerPage].sort((a, b) => (a > b ? 1 : a < b ? -1 : 0))),
               ]}
+              recordAlias={{ singular: "referrer", plural: "referrers" }}
               selectorDescription="Referrers per page"
               quantityClassName="text-muted-foreground hidden sm:block"
             />

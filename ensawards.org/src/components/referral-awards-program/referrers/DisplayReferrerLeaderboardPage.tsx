@@ -14,7 +14,7 @@ export interface DisplayReferrerLeaderboardPageProps {
   isLoading: boolean;
   leaderboardPageFetchError?: ReactElement;
   header?: string;
-  leaderboardPageLoadingData?: Required<ReferrerLeaderboardPaginationParams>;
+  paginationParams?: Required<ReferrerLeaderboardPaginationParams>;
 }
 
 /**
@@ -25,7 +25,7 @@ export function DisplayReferrerLeaderboardPage({
   isLoading,
   leaderboardPageFetchError,
   header,
-  leaderboardPageLoadingData = {
+  paginationParams = {
     page: 0,
     itemsPerPage: 5,
   },
@@ -35,12 +35,11 @@ export function DisplayReferrerLeaderboardPage({
   }
 
   if (isLoading || leaderboardPageData === null) {
-    const pageOffset =
-      (leaderboardPageLoadingData.page - 1) * leaderboardPageLoadingData.itemsPerPage;
+    const pageOffset = (paginationParams.page - 1) * paginationParams.itemsPerPage;
 
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
-        {[...Array(leaderboardPageLoadingData.itemsPerPage).keys()].map((elem) => (
+        {[...Array(paginationParams.itemsPerPage).keys()].map((elem) => (
           <ReferrerCardLoading
             key={`Referrer-loading-${pageOffset + elem}`}
             rank={pageOffset + elem + 1}

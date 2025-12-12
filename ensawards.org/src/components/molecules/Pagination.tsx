@@ -9,26 +9,40 @@ import {
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { ReferrerLeaderboardPaginationParams } from "@namehash/ens-referrals";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Ellipsis } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  Ellipsis as DistanceSymbol,
+} from "lucide-react";
 import React from "react";
+
+/**
+ * Display any of the additional pagination buttons if there are at least three pages
+ * (first page and last page are not 1 & 2)
+ */
+const MINIMAL_TOTAL_PAGES_TO_DISPLAY_ADDITIONAL_PAGINATION_BUTTONS = 3;
 
 interface DisplayPaginationProps
   extends PaginationProps,
-    Omit<ItemsPerPageSelectProps, "itemsPerPage"> {
+    Omit<RecordsPerPageSelectProps, "recordsPerPage"> {
+  recordAlias?: RecordAlias;
   containerClassName?: string;
   quantityClassName?: string;
 }
 
 export function DisplayPagination({
-  numberOfPages,
+  totalPages,
   totalRecords,
   paginationParams,
   onNext,
   onPrevious,
   onChosen,
-  onItemsPerPageChange,
-  possibleItemsPerPageValues,
+  onRecordsPerPageChange,
+  possibleRecordsPerPageValues,
   selectorDescription,
+  recordAlias,
   containerClassName,
   quantityClassName,
 }: DisplayPaginationProps) {
@@ -42,10 +56,11 @@ export function DisplayPagination({
       <QuantityInfo
         paginationParams={paginationParams}
         totalRecords={totalRecords}
+        recordAlias={recordAlias}
         className={quantityClassName}
       />
       <Pagination
-        numberOfPages={numberOfPages}
+        totalPages={totalPages}
         totalRecords={totalRecords}
         paginationParams={paginationParams}
         onPrevious={onPrevious}
@@ -53,27 +68,28 @@ export function DisplayPagination({
         onChosen={onChosen}
       />
       <ItemsPerPageSelect
-        itemsPerPage={paginationParams.itemsPerPage}
-        onItemsPerPageChange={onItemsPerPageChange}
+        recordsPerPage={paginationParams.itemsPerPage}
+        onRecordsPerPageChange={onRecordsPerPageChange}
         selectorDescription={selectorDescription}
-        possibleItemsPerPageValues={possibleItemsPerPageValues}
+        possibleRecordsPerPageValues={possibleRecordsPerPageValues}
       />
     </div>
   );
 }
 
 export function DisplaySimplePagination({
-  numberOfPages,
+  totalPages,
   totalRecords,
   paginationParams,
   onNext,
   onPrevious,
   onChosen,
+  recordAlias,
   containerClassName,
   quantityClassName,
 }: Omit<
   DisplayPaginationProps,
-  "onItemsPerPageChange" | "possibleItemsPerPageValues" | "selectorDescription"
+  "onRecordsPerPageChange" | "possibleRecordsPerPageValues" | "selectorDescription"
 >) {
   return (
     <div
@@ -85,10 +101,11 @@ export function DisplaySimplePagination({
       <QuantityInfo
         paginationParams={paginationParams}
         totalRecords={totalRecords}
+        recordAlias={recordAlias}
         className={quantityClassName}
       />
       <SimplePagination
-        numberOfPages={numberOfPages}
+        totalPages={totalPages}
         totalRecords={totalRecords}
         paginationParams={paginationParams}
         onPrevious={onPrevious}
@@ -100,7 +117,7 @@ export function DisplaySimplePagination({
 }
 
 export interface PaginationProps {
-  numberOfPages: number;
+  totalPages: number;
   totalRecords: number;
   paginationParams: Required<ReferrerLeaderboardPaginationParams>;
   onPrevious: () => void;
@@ -109,7 +126,7 @@ export interface PaginationProps {
 }
 
 export function Pagination({
-  numberOfPages,
+  totalPages,
   totalRecords,
   paginationParams,
   onNext,
@@ -119,10 +136,11 @@ export function Pagination({
   const buttonStyles = shadcnButtonVariants({
     variant: "ghost",
     size: "default",
-    className: "cursor-pointer rounded-md",
+    className: "cursor-pointer rounded-md border",
   });
 
-  if (totalRecords <= paginationParams.itemsPerPage) {
+  // do not show pagination controls when there is only one page of records
+  if (totalPages === 1) {
     return null;
   }
 
@@ -139,78 +157,95 @@ export function Pagination({
       </button>
       <button
         aria-disabled={paginationParams.page === 1}
-        className={cn(buttonStyles)}
+        className={cn(buttonStyles, "border-transparent")}
         onClick={onPrevious}
       >
         <ChevronLeft size={16} />
         <span className="hidden sm:inline">Previous</span>
       </button>
       <p className="inline sm:hidden text-sm leading-normal font-medium">
-        Page {paginationParams.page} of {numberOfPages}
+        Page {paginationParams.page} of {totalPages}
       </p>
       <div className="hidden sm:flex flex-row flex-nowrap justify-center items-center gap-1">
         <button
-          className={cn(buttonStyles, paginationParams.page == 1 && "border border-gray-200")}
+          className={cn(
+            buttonStyles,
+            paginationParams.page === 1 ? "border-gray-200 cursor-default hover:bg-white" : "border-transparent",
+          )}
           onClick={() => {
             onChosen(1);
           }}
         >
           1
         </button>
-        <Ellipsis className={cn(paginationParams.page >= 4 ? "block" : "hidden")} size={16} />
-        {paginationParams.page >= 3 && numberOfPages >= 3 && (
-          <button className={cn(buttonStyles)} onClick={onPrevious}>
+        <DistanceSymbol
+          className={cn(
+            shouldDisplayLeftDistanceSymbol(totalPages, paginationParams.page) ? "block" : "hidden",
+          )}
+          size={16}
+        />
+        {shouldDisplayAdditionalButtonForPreviousPage(totalPages, paginationParams.page) && (
+          <button
+            id="previousPageButton"
+            className={cn(buttonStyles, "border-transparent")}
+            onClick={onPrevious}
+          >
             {paginationParams.page - 1}
           </button>
         )}
-        {paginationParams.page >= 2 &&
-          paginationParams.page < numberOfPages &&
-          numberOfPages > 2 && (
-            <button
-              className={cn(buttonStyles, "border border-gray-200")}
-              onClick={() => {
-                onChosen(paginationParams.page);
-              }}
-            >
-              {paginationParams.page}
-            </button>
-          )}
-        {paginationParams.page + 1 < numberOfPages && numberOfPages > 2 && (
-          <button className={cn(buttonStyles)} onClick={onNext}>
+        {shouldDisplayAdditionalButtonForCurrentPage(totalPages, paginationParams.page) && (
+          <button
+            id="currentPageButton"
+            className={cn(buttonStyles, "border-gray-200")}
+            onClick={() => {
+              onChosen(paginationParams.page);
+            }}
+          >
+            {paginationParams.page}
+          </button>
+        )}
+        {shouldDisplayAdditionalButtonForNextPage(totalPages, paginationParams.page) && (
+          <button
+            id="nextPageButton"
+            className={cn(buttonStyles, "border-transparent")}
+            onClick={onNext}
+          >
             {paginationParams.page + 1}
           </button>
         )}
-        <Ellipsis
+        <DistanceSymbol
           className={cn(
-            paginationParams.page < numberOfPages - 2 && numberOfPages > 2 ? "block" : "hidden",
+            shouldDisplayRightDistanceSymbol(totalPages, paginationParams.page)
+              ? "block"
+              : "hidden",
           )}
           size={16}
         />
         <button
           className={cn(
             buttonStyles,
-            paginationParams.page == numberOfPages && "border border-gray-200",
+            paginationParams.page === totalPages ? "border-gray-200 cursor-default hover:bg-white" : "border-transparent",
           )}
           onClick={() => {
-            onChosen(numberOfPages);
+            onChosen(totalPages);
           }}
         >
-          {numberOfPages}
+          {totalPages}
         </button>
       </div>
       <button
-        aria-disabled={paginationParams.page === numberOfPages}
-        className={cn(buttonStyles)}
+        aria-disabled={paginationParams.page === totalPages}
+        className={cn(buttonStyles, "border-transparent")}
         onClick={onNext}
       >
         <span className="hidden sm:inline">Next</span>
         <ChevronRight size={16} />
       </button>
       <button
-        aria-disabled={paginationParams.page === numberOfPages}
+        aria-disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles, "block sm:hidden")}
         onClick={() => {
-          onChosen(numberOfPages);
+          onChosen(totalPages);
         }}
       >
         <ChevronsRight size={16} />
@@ -219,8 +254,78 @@ export function Pagination({
   );
 }
 
+const shouldDisplayAdditionalButtonForCurrentPage = (
+  totalPages: number,
+  currentPage: number,
+): boolean => {
+  // if there are at least three pages,
+  if (totalPages < MINIMAL_TOTAL_PAGES_TO_DISPLAY_ADDITIONAL_PAGINATION_BUTTONS) return false;
+
+  // and current page is not the last page,
+  if (currentPage === totalPages) return false;
+
+  // and current page is not the first page
+  if (currentPage === 1) return false;
+
+  return true;
+};
+
+const shouldDisplayAdditionalButtonForNextPage = (
+  totalPages: number,
+  currentPage: number,
+): boolean => {
+  const nextPage = Math.min(currentPage + 1, totalPages);
+
+  // if there are at least three pages,
+  if (totalPages < MINIMAL_TOTAL_PAGES_TO_DISPLAY_ADDITIONAL_PAGINATION_BUTTONS) return false;
+
+  // and next page is not the last page
+  if (nextPage === totalPages) return false;
+
+  return true;
+};
+
+const shouldDisplayAdditionalButtonForPreviousPage = (
+  totalPages: number,
+  currentPage: number,
+): boolean => {
+  const previousPage = Math.max(currentPage - 1, 1);
+
+  // if there are at least three pages,
+  if (totalPages < MINIMAL_TOTAL_PAGES_TO_DISPLAY_ADDITIONAL_PAGINATION_BUTTONS) return false;
+
+  // and previous page is not the first page
+  if (previousPage === 1) return false;
+
+  return true;
+};
+
+const shouldDisplayRightDistanceSymbol = (totalPages: number, currentPage: number): boolean => {
+  const nextPage = Math.min(currentPage + 1, totalPages);
+
+  // if there are at least three pages,
+  if (totalPages < MINIMAL_TOTAL_PAGES_TO_DISPLAY_ADDITIONAL_PAGINATION_BUTTONS) return false;
+
+  // and there is at least one page between next page and last page
+  if (totalPages - nextPage <= 1) return false;
+
+  return true;
+};
+
+const shouldDisplayLeftDistanceSymbol = (totalPages: number, currentPage: number): boolean => {
+  const previousPage = Math.max(currentPage - 1, 1);
+
+  // if there are at least three pages,
+  if (totalPages < MINIMAL_TOTAL_PAGES_TO_DISPLAY_ADDITIONAL_PAGINATION_BUTTONS) return false;
+
+  // and there is at least one page between previous page and first page
+  if (previousPage - 1 <= 1) return false;
+
+  return true;
+};
+
 export function SimplePagination({
-  numberOfPages,
+  totalPages,
   totalRecords,
   paginationParams,
   onNext,
@@ -232,7 +337,8 @@ export function SimplePagination({
     className: "cursor-pointer rounded-md",
   });
 
-  if (totalRecords <= paginationParams.itemsPerPage) {
+  // do not show pagination controls when there is only one page of records
+  if (totalPages === 1) {
     return null;
   }
 
@@ -246,7 +352,7 @@ export function SimplePagination({
         <ChevronLeft size={16} />
       </button>
       <button
-        aria-disabled={paginationParams.page === numberOfPages}
+        aria-disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles)}
         onClick={onNext}
       >
@@ -256,14 +362,24 @@ export function SimplePagination({
   );
 }
 
+type RecordAlias = {
+  plural: string;
+  singular: string;
+};
+
 interface QuantityInfoProps {
   paginationParams: Required<ReferrerLeaderboardPaginationParams>;
   totalRecords: number;
+  recordAlias?: RecordAlias;
   className?: string;
 }
 
-//TODO: appreciate advice about the name
-const QuantityInfo = ({ paginationParams, totalRecords, className }: QuantityInfoProps) => {
+const QuantityInfo = ({
+  paginationParams,
+  totalRecords,
+  recordAlias = { plural: "records", singular: "record" },
+  className,
+}: QuantityInfoProps) => {
   const numberFormat = new Intl.NumberFormat("en-US");
 
   // Edge-case of zero referrers
@@ -277,7 +393,7 @@ const QuantityInfo = ({ paginationParams, totalRecords, className }: QuantityInf
   if (paginationParams.itemsPerPage >= totalRecords) {
     return (
       <p className={cn("text-sm leading-normal font-medium", className)}>
-        {totalRecords} referrer{totalRecords > 1 && "s"}
+        {totalRecords} {totalRecords > 1 ? recordAlias.plural : recordAlias.singular}
       </p>
     );
   }
@@ -286,41 +402,41 @@ const QuantityInfo = ({ paginationParams, totalRecords, className }: QuantityInf
     <p className={cn("text-sm leading-normal font-medium", className)}>
       Rank {numberFormat.format((paginationParams.page - 1) * paginationParams.itemsPerPage + 1)}-
       {numberFormat.format(paginationParams.page * paginationParams.itemsPerPage)} of{" "}
-      {numberFormat.format(totalRecords)} referrers
+      {numberFormat.format(totalRecords)} {recordAlias.plural}
     </p>
   );
 };
 
-interface ItemsPerPageSelectProps {
-  itemsPerPage: number;
-  onItemsPerPageChange: (newItemsPerPage: number) => void;
-  possibleItemsPerPageValues?: number[];
+interface RecordsPerPageSelectProps {
+  recordsPerPage: number;
+  onRecordsPerPageChange: (newItemsPerPage: number) => void;
+  possibleRecordsPerPageValues?: number[];
   selectorDescription?: string;
 }
 
 const ItemsPerPageSelect = ({
-  itemsPerPage,
-  onItemsPerPageChange,
-  possibleItemsPerPageValues = [25, 50],
+  recordsPerPage,
+  onRecordsPerPageChange,
+  possibleRecordsPerPageValues = [25, 50],
   selectorDescription = "Items per page",
-}: ItemsPerPageSelectProps) => {
+}: RecordsPerPageSelectProps) => {
   const handleValueChange = (value: string) => {
     const newValue = Number(value);
 
-    onItemsPerPageChange(newValue);
+    onRecordsPerPageChange(newValue);
   };
   return (
     <div className="flex flex-row flex-nowrap justify-center items-center gap-3">
       <p className="text-sm leading-normal font-medium text-muted-foreground">
         {selectorDescription}
       </p>
-      <Select onValueChange={handleValueChange} value={itemsPerPage.toString()}>
+      <Select onValueChange={handleValueChange} value={recordsPerPage.toString()}>
         <SelectTrigger className="w-[75px] cursor-pointer shadow-none">
           <SelectValue placeholder={selectorDescription} />
         </SelectTrigger>
         <SelectContent position="popper" className="min-w-[75px] w-[75px]">
           <SelectGroup>
-            {possibleItemsPerPageValues.map((value) => (
+            {possibleRecordsPerPageValues.map((value) => (
               <SelectItem
                 key={`ItemsPerPageSelectItem-${value}`}
                 value={value.toString()}

@@ -54,18 +54,18 @@ function DisplayRegistrarActionsList({
 }
 
 interface DisplayRegistrarActionsListPlaceholderProps {
-  itemsPerPage: number;
+  recordsPerPage: number;
 }
 
 /**
  * Displays a loading state for a list of {@link NamedRegistrarAction}s.
  */
 function DisplayRegistrarActionsListLoading({
-  itemsPerPage,
+  recordsPerPage,
 }: DisplayRegistrarActionsListPlaceholderProps) {
   return (
     <div className="w-full space-y-4 relative z-10">
-      {[...Array(itemsPerPage)].map((_, idx) => (
+      {[...Array(recordsPerPage)].map((_, idx) => (
         <RegistrarActionCardLoading key={idx} />
       ))}
     </div>
@@ -164,7 +164,7 @@ export function DisplayRegistrarActionsFeed({
       );
 
     case StatefulFetchStatusIds.Loading:
-      return <DisplayRegistrarActionsListLoading itemsPerPage={registrarActions.itemsPerPage} />;
+      return <DisplayRegistrarActionsListLoading recordsPerPage={registrarActions.itemsPerPage} />;
 
     case StatefulFetchStatusIds.Error:
       return (

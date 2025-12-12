@@ -22,7 +22,7 @@ import { useIndexingStatusWithSwr } from "@/utils/hooks/useIndexingStatusWithSWR
 
 interface UseStatefulRegistrarActionsProps {
   filters?: RegistrarActionsFilter[];
-  itemsPerPage: number;
+  recordsPerPage: number;
 }
 
 const {
@@ -39,7 +39,7 @@ const {
  * a "stateful" data model around fetching Registrar Actions in relation to the state of the connected ENSNode instance.
  */
 export function useStatefulRegistrarActions({
-  itemsPerPage,
+  recordsPerPage,
   filters,
 }: UseStatefulRegistrarActionsProps): StatefulFetchRegistrarActions {
   const ensNodeConfigQuery = useENSNodeConfig();
@@ -64,7 +64,7 @@ export function useStatefulRegistrarActions({
   //       We use `isRegistrarActionsApiSupported` to enable query in those cases.
   const registrarActionsQuery = useRegistrarActions({
     order: RegistrarActionsOrders.LatestRegistrarActions,
-    itemsPerPage,
+    itemsPerPage: recordsPerPage,
     filters,
     query: {
       enabled: isRegistrarActionsApiSupported,
@@ -119,7 +119,7 @@ export function useStatefulRegistrarActions({
   if (registrarActionsQuery.isPending) {
     return {
       fetchStatus: StatefulFetchStatusIds.Loading,
-      itemsPerPage,
+      itemsPerPage: recordsPerPage,
     } satisfies StatefulFetchRegistrarActionsLoading;
   }
 

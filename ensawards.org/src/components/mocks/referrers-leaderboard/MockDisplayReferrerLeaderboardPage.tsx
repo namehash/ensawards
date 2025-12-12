@@ -77,7 +77,7 @@ export function MockDisplayReferrerLeaderboardPage() {
           leaderboardPageData: null,
           isLoading: true,
           emptyLeaderboardCTA: <p>Placeholder</p>,
-          leaderboardPageLoadingData: {
+          paginationParams: {
             page: 1,
             itemsPerPage: 4,
           },
