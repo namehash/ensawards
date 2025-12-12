@@ -25,7 +25,7 @@ const DEFAULT_TITLE = "ENSAwards: ENS leaderboards and best practices";
 const DEFAULT_DESCRIPTION = "Awarding the best in ENS.";
 const DEFAULT_URL = "https://ensawards.org/";
 const DEFAULT_OG_IMAGE = "/default_og_image.png";
-const DEFAULT_TWITTER_IMAGE = "/default_twitter_og_image.png";
+const DEFAULT_TWITTER_IMAGE = "https://ensawards.org/default_twitter_og_image.png";
 
 const DEFAULT_PAGE_METADATA: PageMetadata = {
   title: DEFAULT_TITLE,
@@ -84,6 +84,7 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
         image: pageMetadata.twitterImage || DEFAULT_TWITTER_IMAGE,
         description: pageMetadata.description || DEFAULT_DESCRIPTION,
         card: "summary_large_image",
+        site: "@NameHashLabs",
       }}
       extend={{
         link: [

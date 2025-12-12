@@ -41,7 +41,7 @@ export const APPS: App[] = [
       },
     ],
     ogImagePath: "/app-rainbow-wallet_og_image.png",
-    twitterOgImagePath: "/app-rainbow-wallet_twitter_og_image.png",
+    twitterOgImagePath: "https://ensawards.org/app-rainbow-wallet_twitter_og_image.png",
   },
   {
     id: "coinbase-wallet",
@@ -77,7 +77,7 @@ export const APPS: App[] = [
       },
     ],
     ogImagePath: "/app-coinbase-wallet_og_image.png",
-    twitterOgImagePath: "/app-coinbase-wallet_twitter_og_image.png",
+    twitterOgImagePath: "https://ensawards.org/app-coinbase-wallet_twitter_og_image.png",
   },
   {
     id: "metamask",
@@ -112,7 +112,7 @@ export const APPS: App[] = [
       },
     ],
     ogImagePath: "/app-metamask_og_image.png",
-    twitterOgImagePath: "/app-metamask_twitter_og_image.png",
+    twitterOgImagePath: "https://ensawards.org/app-metamask_twitter_og_image.png",
   },
   {
     id: "etherscan",
@@ -147,7 +147,7 @@ export const APPS: App[] = [
       },
     ],
     ogImagePath: "/app-etherscan_og_image.png",
-    twitterOgImagePath: "/app-etherscan_twitter_og_image.png",
+    twitterOgImagePath: "https://ensawards.org/app-etherscan_twitter_og_image.png",
   },
   {
     id: "blockscout",
@@ -181,6 +181,6 @@ export const APPS: App[] = [
       },
     ],
     ogImagePath: "/app-blockscout_og_image.png",
-    twitterOgImagePath: "/app-blockscout_twitter_og_image.png",
+    twitterOgImagePath: "https://ensawards.org/app-blockscout_twitter_og_image.png",
   },
 ];
