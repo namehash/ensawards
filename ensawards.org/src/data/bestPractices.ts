@@ -86,8 +86,8 @@ export const displayNamedSmartContractsMainnet: BestPractice = {
       header: "Technical Details",
       content:
         "Looking up the name of a smart contract on Ethereum mainnet uses the same process as looking up the name of any other account. " +
-        "There are a variety of libraries capable of looking up the [primary name](https://docs.ens.domains/web/reverse) of a contract address:\n" +
-        "- [ensnode-sdk (v1.0.0+)](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md)\n" +
+        "There are a variety of libraries capable of looking up the [primary name](https://docs.ens.domains/web/reverse) of a contract address according to all ENS best practices:\n" +
+        "- [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md) (v1.0.0+)\n" +
         "- [ensnode-react (v1.0.0+)](https://github.com/namehash/ensnode/blob/main/packages/ensnode-react/README.md)\n" +
         "- [Viem (v2.35.0+)](https://viem.sh/docs/ens/actions/getEnsName#chain-specific-resolution)\n" +
         "- [Wagmi (v2.18.0+)](https://wagmi.sh/react/api/hooks/useEnsName#chainid)\n" +
@@ -120,7 +120,7 @@ export const displayNamedSmartContractsL2: BestPractice = {
       content:
         "When users interact with a contract on a L2 chain, use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard to lookup the primary name of the contract. " +
         "ENSIP-19 provides chain-specific primary names for L2 networks (including Optimism, Arbitrum, Base, Linea, and Scroll), with an automatic fallback to a default primary name (defined on mainnet) if no chain-specific primary name is defined. " +
-        "There are several libraries to choose from that support ENSIP-19: \n" +
+        "There are several libraries to choose from that support ENSIP-19 and all ENS best practices: \n" +
         "- [ensnode-sdk (v1.0.0+)](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md)\n" +
         "- [ensnode-react (v1.0.0+)](https://github.com/namehash/ensnode/blob/main/packages/ensnode-react/README.md)\n" +
         "- [Viem (v2.35.0+)](https://viem.sh/docs/ens/actions/getEnsName#chain-specific-resolution)\n" +
