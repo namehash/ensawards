@@ -29,7 +29,7 @@ export const ENSDaoOrg: Organization = {
     ens: "ensdao.eth",
   },
   ogImagePath: "/org-ens-dao_og_image.png",
-  twitterOgImagePath: "/org-ens-dao_twitter_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/org-ens-dao_twitter_og_image.png",
 };
 
 export const UniswapDaoOrg: Organization = {
@@ -47,7 +47,7 @@ export const UniswapDaoOrg: Organization = {
     ens: "uniswap.eth",
   },
   ogImagePath: "/org-uniswap-dao_og_image.png",
-  twitterOgImagePath: "/org-uniswap-dao_twitter_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/org-uniswap-dao_twitter_og_image.png",
 };
 
 export const NounsDaoOrg: Organization = {
@@ -65,7 +65,7 @@ export const NounsDaoOrg: Organization = {
     ens: "nouns.eth",
   },
   ogImagePath: "/org-nouns-dao_og_image.png",
-  twitterOgImagePath: "/org-nouns-dao_twitter_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/org-nouns-dao_twitter_og_image.png",
 };
 
 export const ArbitrumDaoOrg: Organization = {
@@ -82,7 +82,7 @@ export const ArbitrumDaoOrg: Organization = {
     twitter: new URL("https://x.com/arbitrum"),
   },
   ogImagePath: "/org-arbitrum-dao_og_image.png",
-  twitterOgImagePath: "/org-arbitrum-dao_twitter_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/org-arbitrum-dao_twitter_og_image.png",
 };
 
 export const AaveDaoOrg: Organization = {
@@ -100,7 +100,7 @@ export const AaveDaoOrg: Organization = {
     ens: "aave.eth",
   },
   ogImagePath: "/org-aave-dao_og_image.png",
-  twitterOgImagePath: "/org-aave-dao_twitter_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/org-aave-dao_twitter_og_image.png",
 };
 
 export const TaikoDaoOrg: Organization = {
@@ -118,7 +118,7 @@ export const TaikoDaoOrg: Organization = {
     ens: "taiko.eth",
   },
   ogImagePath: "/org-taiko-dao_og_image.png",
-  twitterOgImagePath: "/org-taiko-dao_twitter_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/org-taiko-dao_twitter_og_image.png",
 };
 
 /**
