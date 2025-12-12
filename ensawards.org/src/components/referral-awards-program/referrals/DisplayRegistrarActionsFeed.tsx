@@ -6,7 +6,7 @@ import {
 import {
   type StatefulFetchRegistrarActions,
   StatefulFetchStatusIds,
-} from "@/components/holiday-referral-awards/referrals/types.ts";
+} from "@/components/referral-awards-program/referrals/types.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
@@ -38,7 +38,7 @@ function DisplayRegistrarActionsList({
   return (
     <div
       ref={animationParent}
-      className="w-full h-fit box-border flex flex-col justify-start items-center gap-3"
+      className="w-full h-fit box-border flex flex-col justify-start items-center gap-3 relative"
     >
       {registrarActions.map((namedRegistrarAction) => (
         <RegistrarActionCardMemo
@@ -54,18 +54,18 @@ function DisplayRegistrarActionsList({
 }
 
 interface DisplayRegistrarActionsListPlaceholderProps {
-  itemsPerPage: number;
+  recordsPerPage: number;
 }
 
 /**
  * Displays a loading state for a list of {@link NamedRegistrarAction}s.
  */
 function DisplayRegistrarActionsListLoading({
-  itemsPerPage,
+  recordsPerPage,
 }: DisplayRegistrarActionsListPlaceholderProps) {
   return (
     <div className="w-full space-y-4 relative z-10">
-      {[...Array(itemsPerPage)].map((_, idx) => (
+      {[...Array(recordsPerPage)].map((_, idx) => (
         <RegistrarActionCardLoading key={idx} />
       ))}
     </div>
@@ -164,7 +164,7 @@ export function DisplayRegistrarActionsFeed({
       );
 
     case StatefulFetchStatusIds.Loading:
-      return <DisplayRegistrarActionsListLoading itemsPerPage={registrarActions.itemsPerPage} />;
+      return <DisplayRegistrarActionsListLoading recordsPerPage={registrarActions.itemsPerPage} />;
 
     case StatefulFetchStatusIds.Error:
       return (

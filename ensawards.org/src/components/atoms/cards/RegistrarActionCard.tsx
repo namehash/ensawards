@@ -17,7 +17,7 @@ import {
   type ResolveAndDisplayIdentityProps,
 } from "@/components/atoms/identity";
 import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
-import { isQualifiedReferral } from "@/components/holiday-referral-awards/referrals/utils.ts";
+import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import {

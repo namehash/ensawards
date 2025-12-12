@@ -1,7 +1,7 @@
 import {
   FetchAndDisplayRegistrarActionsFeed,
   type FetchAndDisplayRegistrarActionsFeedProps,
-} from "@/components/holiday-referral-awards/referrals/FetchAndDisplayRegistrarActionsFeed.tsx";
+} from "@/components/referral-awards-program/referrals/FetchAndDisplayRegistrarActionsFeed.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
@@ -11,7 +11,7 @@ import { useMemo } from "react";
  * Wrapper of the FetchAndDisplayRegistrarActionsFeed component, granting access to necessary providers
  */
 export function LiveReferralFeed({
-  itemsPerPage,
+  recordsPerPage,
   referralIncentiveProgram,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
@@ -20,11 +20,13 @@ export function LiveReferralFeed({
   return (
     <ENSNodeProvider
       config={config}
-      queryClientOptions={{ defaultOptions: { queries: { staleTime: 30 * 1000 } } }}
+      queryClientOptions={{
+        defaultOptions: { queries: { staleTime: 30 * 1000 } },
+      }}
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <FetchAndDisplayRegistrarActionsFeed
-          itemsPerPage={itemsPerPage}
+          recordsPerPage={recordsPerPage}
           title={title}
           referralIncentiveProgram={referralIncentiveProgram}
         />

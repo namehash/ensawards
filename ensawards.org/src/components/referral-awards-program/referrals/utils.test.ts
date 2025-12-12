@@ -1,4 +1,4 @@
-import { isQualifiedReferral } from "@/components/holiday-referral-awards/referrals/utils.ts";
+import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import {

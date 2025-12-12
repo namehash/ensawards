@@ -28,7 +28,7 @@ export const ENSDaoOrg: Organization = {
     twitter: new URL("https://x.com/ENS_DAO"),
     ens: "ensdao.eth",
   },
-  ogImagePath: "/org-ens-dao_og_image.png",
+  ogImagePath: "https://ensawards.org/org-ens-dao_og_image.png",
   twitterOgImagePath: "https://ensawards.org/org-ens-dao_twitter_og_image.png",
 };
 
@@ -46,7 +46,7 @@ export const UniswapDaoOrg: Organization = {
     twitter: new URL("https://x.com/UniswapFND"),
     ens: "uniswap.eth",
   },
-  ogImagePath: "/org-uniswap-dao_og_image.png",
+  ogImagePath: "https://ensawards.org/org-uniswap-dao_og_image.png",
   twitterOgImagePath: "https://ensawards.org/org-uniswap-dao_twitter_og_image.png",
 };
 
@@ -64,7 +64,7 @@ export const NounsDaoOrg: Organization = {
     twitter: new URL("https://x.com/nounsdao"),
     ens: "nouns.eth",
   },
-  ogImagePath: "/org-nouns-dao_og_image.png",
+  ogImagePath: "https://ensawards.org/org-nouns-dao_og_image.png",
   twitterOgImagePath: "https://ensawards.org/org-nouns-dao_twitter_og_image.png",
 };
 
@@ -81,7 +81,7 @@ export const ArbitrumDaoOrg: Organization = {
     website: new URL("https://arbitrum.foundation/"),
     twitter: new URL("https://x.com/arbitrum"),
   },
-  ogImagePath: "/org-arbitrum-dao_og_image.png",
+  ogImagePath: "https://ensawards.org/org-arbitrum-dao_og_image.png",
   twitterOgImagePath: "https://ensawards.org/org-arbitrum-dao_twitter_og_image.png",
 };
 
@@ -99,7 +99,7 @@ export const AaveDaoOrg: Organization = {
     twitter: new URL("https://x.com/aave"),
     ens: "aave.eth",
   },
-  ogImagePath: "/org-aave-dao_og_image.png",
+  ogImagePath: "https://ensawards.org/org-aave-dao_og_image.png",
   twitterOgImagePath: "https://ensawards.org/org-aave-dao_twitter_og_image.png",
 };
 
@@ -117,7 +117,7 @@ export const TaikoDaoOrg: Organization = {
     twitter: new URL("https://x.com/taikoxyz"),
     ens: "taiko.eth",
   },
-  ogImagePath: "/org-taiko-dao_og_image.png",
+  ogImagePath: "https://ensawards.org/org-taiko-dao_og_image.png",
   twitterOgImagePath: "https://ensawards.org/org-taiko-dao_twitter_og_image.png",
 };
 

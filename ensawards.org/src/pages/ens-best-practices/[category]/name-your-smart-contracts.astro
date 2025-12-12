@@ -122,7 +122,12 @@ export function getStaticPaths() {
         <h2 class="text-2xl leading-none font-semibold text-black">
           {nameYourSmartContracts.technicalDetails.main.header}
         </h2>
-        <p class={technicalSectionContentStyles} set:html={markdownToHtml(nameYourSmartContracts.technicalDetails.main.content)} />
+        <p
+          class={technicalSectionContentStyles}
+          set:html={markdownToHtml(
+            nameYourSmartContracts.technicalDetails.main.content,
+          )}
+        />
         {
           nameYourSmartContracts.technicalDetails.sides.map(
             (additionalContent) => (
@@ -130,7 +135,10 @@ export function getStaticPaths() {
                 <h3 class={technicalSectionMinorHeaderStyles}>
                   {additionalContent.header}
                 </h3>
-                <p class={technicalSectionContentStyles} set:html={markdownToHtml(additionalContent.content)} />
+                <p
+                  class={technicalSectionContentStyles}
+                  set:html={markdownToHtml(additionalContent.content)}
+                />
               </>
             ),
           )

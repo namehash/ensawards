@@ -40,7 +40,7 @@ export const APPS: App[] = [
         benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
       },
     ],
-    ogImagePath: "/app-rainbow-wallet_og_image.png",
+    ogImagePath: "https://ensawards.org/app-rainbow-wallet_og_image.png",
     twitterOgImagePath: "https://ensawards.org/app-rainbow-wallet_twitter_og_image.png",
   },
   {
@@ -76,7 +76,7 @@ export const APPS: App[] = [
         benchmarkedAt: toUnixTimestamp("2025-12-08T18:22:55.716Z"),
       },
     ],
-    ogImagePath: "/app-coinbase-wallet_og_image.png",
+    ogImagePath: "https://ensawards.org/app-coinbase-wallet_og_image.png",
     twitterOgImagePath: "https://ensawards.org/app-coinbase-wallet_twitter_og_image.png",
   },
   {
@@ -111,7 +111,7 @@ export const APPS: App[] = [
         benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
       },
     ],
-    ogImagePath: "/app-metamask_og_image.png",
+    ogImagePath: "https://ensawards.org/app-metamask_og_image.png",
     twitterOgImagePath: "https://ensawards.org/app-metamask_twitter_og_image.png",
   },
   {
@@ -146,7 +146,7 @@ export const APPS: App[] = [
         benchmarkedAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
       },
     ],
-    ogImagePath: "/app-etherscan_og_image.png",
+    ogImagePath: "https://ensawards.org/app-etherscan_og_image.png",
     twitterOgImagePath: "https://ensawards.org/app-etherscan_twitter_og_image.png",
   },
   {
@@ -180,7 +180,7 @@ export const APPS: App[] = [
         benchmarkedAt: toUnixTimestamp("2025-12-08T18:28:32.410Z"),
       },
     ],
-    ogImagePath: "/app-blockscout_og_image.png",
+    ogImagePath: "https://ensawards.org/app-blockscout_og_image.png",
     twitterOgImagePath: "https://ensawards.org/app-blockscout_twitter_og_image.png",
   },
 ];

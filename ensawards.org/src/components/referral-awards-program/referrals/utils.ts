@@ -4,7 +4,7 @@ import {
   accountIdEqual,
   isRegistrarActionReferralAvailable,
 } from "@ensnode/ensnode-sdk";
-import { isAddressEqual, zeroAddress } from "viem";
+import { zeroAddress } from "viem";
 
 export function isQualifiedReferral(
   incentiveProgram: ReferralIncentiveProgram,

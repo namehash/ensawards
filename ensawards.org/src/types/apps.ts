@@ -1,5 +1,6 @@
 import type { BestPractice } from "@/types/bestPractices.ts";
 import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import { millisecondsInSecond } from "date-fns/constants";
 
 /**
  * TODO: Determine if we need PartialPass for benchmarks. If not we can simplify.
@@ -22,7 +23,7 @@ export enum BenchmarkResult {
  * toUnixTimestamp(new Date())
  */
 export function toUnixTimestamp(date: Date | string): UnixTimestamp {
-  return Math.floor(new Date(date).getTime() / 1000);
+  return Math.floor(new Date(date).getTime() / millisecondsInSecond);
 }
 
 /**
