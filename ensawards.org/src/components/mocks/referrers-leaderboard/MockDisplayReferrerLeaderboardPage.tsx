@@ -22,7 +22,7 @@ export function MockDisplayReferrerLeaderboardPage() {
     [],
   );
   const [selectedState, setSelectedState] = useState<ReferrersListState>(DEFAULT_STATE);
-  const props: DisplayReferrerLeaderboardPageProps = useMemo(() => {
+  const props = useMemo(() => {
     switch (selectedState) {
       case "empty":
         return {
@@ -44,9 +44,9 @@ export function MockDisplayReferrerLeaderboardPage() {
               grandTotalQualifiedReferrersFinalScore: 0,
               minFinalScoreToQualify: 0,
             },
-            paginationContext: {
+            pageContext: {
               page: 1,
-              itemsPerPage: 4,
+              recordsPerPage: 4,
               totalRecords: 0,
               totalPages: 1,
               hasNext: false,
@@ -57,37 +57,22 @@ export function MockDisplayReferrerLeaderboardPage() {
             accurateAsOf: 1764091210,
           },
           isLoading: false,
-          emptyLeaderboardCTA: (
-            <p
-              className={cn(
-                shadcnButtonVariants({
-                  variant: "outline",
-                  size: "default",
-                  className: "cursor-pointer rounded-full",
-                }),
-              )}
-            >
-              Placeholder
-            </p>
-          ),
-        };
+        } satisfies DisplayReferrerLeaderboardPageProps;
 
       case "loading":
         return {
           leaderboardPageData: null,
           isLoading: true,
-          emptyLeaderboardCTA: <p>Placeholder</p>,
           paginationParams: {
             page: 1,
-            itemsPerPage: 4,
+            recordsPerPage: 4,
           },
-        };
+        } satisfies DisplayReferrerLeaderboardPageProps;
 
       case "fetchError":
         return {
           leaderboardPageData: null,
           isLoading: false,
-          emptyLeaderboardCTA: <p>Placeholder</p>,
           leaderboardPageFetchError: (
             <ErrorInfo
               title="Error loading referrer data"
@@ -107,7 +92,7 @@ export function MockDisplayReferrerLeaderboardPage() {
               </button>
             </ErrorInfo>
           ),
-        };
+        } satisfies DisplayReferrerLeaderboardPageProps;
 
       default:
         return {
@@ -178,9 +163,9 @@ export function MockDisplayReferrerLeaderboardPage() {
               grandTotalQualifiedReferrersFinalScore: 29.0160469236699,
               minFinalScoreToQualify: 0.479133726222989,
             },
-            paginationContext: {
+            pageContext: {
               page: 1,
-              itemsPerPage: 4,
+              recordsPerPage: 4,
               totalRecords: 33,
               totalPages: 9,
               hasNext: true,
@@ -191,8 +176,7 @@ export function MockDisplayReferrerLeaderboardPage() {
             accurateAsOf: 1764580368,
           },
           isLoading: false,
-          emptyLeaderboardCTA: <p>Placeholder</p>,
-        };
+        } satisfies DisplayReferrerLeaderboardPageProps;
     }
   }, [selectedState]);
 

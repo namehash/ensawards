@@ -71,7 +71,7 @@ export interface StatefulFetchRegistrarActionsNotReady {
  */
 export interface StatefulFetchRegistrarActionsLoading {
   fetchStatus: typeof StatefulFetchStatusIds.Loading;
-  itemsPerPage: number;
+  recordsPerPage: number;
 }
 
 /**

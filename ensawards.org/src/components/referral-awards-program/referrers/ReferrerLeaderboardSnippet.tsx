@@ -40,9 +40,9 @@ export function ReferrerLeaderboardSnippet({
     setFetchErrorMessage("");
     setIsLoading(true);
     try {
-      const response = await client.getReferrerLeaderboard({
+      const response = await client.getReferrerLeaderboardPage({
         page: 1,
-        itemsPerPage: snippetSize,
+        recordsPerPage: snippetSize,
       });
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
@@ -115,13 +115,13 @@ export function ReferrerLeaderboardSnippet({
               ) : undefined
             }
             paginationParams={{
-              itemsPerPage: snippetSize,
+              recordsPerPage: snippetSize,
               page: 1,
             }}
             header={header}
           />
           {leaderboardSnippetData !== null &&
-            leaderboardSnippetData.paginationContext.totalRecords > snippetSize && (
+            leaderboardSnippetData.pageContext.totalRecords > snippetSize && (
               <a
                 href="/leaderboards/referrer"
                 className={cn(

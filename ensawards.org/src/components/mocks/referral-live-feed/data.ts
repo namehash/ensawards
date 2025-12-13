@@ -257,7 +257,7 @@ export const variants: Map<StatefulFetchStatusId, StatefulFetchRegistrarActions>
     StatefulFetchStatusIds.Loading,
     {
       fetchStatus: StatefulFetchStatusIds.Loading,
-      itemsPerPage: 8,
+      recordsPerPage: 8,
     } satisfies StatefulFetchRegistrarActionsLoading,
   ],
   [

@@ -64,7 +64,7 @@ export function useStatefulRegistrarActions({
   //       We use `isRegistrarActionsApiSupported` to enable query in those cases.
   const registrarActionsQuery = useRegistrarActions({
     order: RegistrarActionsOrders.LatestRegistrarActions,
-    itemsPerPage: recordsPerPage,
+    recordsPerPage: recordsPerPage,
     filters,
     query: {
       enabled: isRegistrarActionsApiSupported,
@@ -119,7 +119,7 @@ export function useStatefulRegistrarActions({
   if (registrarActionsQuery.isPending) {
     return {
       fetchStatus: StatefulFetchStatusIds.Loading,
-      itemsPerPage: recordsPerPage,
+      recordsPerPage: recordsPerPage,
     } satisfies StatefulFetchRegistrarActionsLoading;
   }
 

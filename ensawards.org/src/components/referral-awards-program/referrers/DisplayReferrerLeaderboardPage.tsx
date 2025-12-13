@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type {
   ReferrerLeaderboardPage,
-  ReferrerLeaderboardPaginationParams,
+  ReferrerLeaderboardPageParams,
 } from "@namehash/ens-referrals";
 import type { ReactElement } from "react";
 
@@ -14,7 +14,7 @@ export interface DisplayReferrerLeaderboardPageProps {
   isLoading: boolean;
   leaderboardPageFetchError?: ReactElement;
   header?: string;
-  paginationParams?: Required<ReferrerLeaderboardPaginationParams>;
+  paginationParams?: Required<ReferrerLeaderboardPageParams>;
 }
 
 /**
@@ -27,7 +27,7 @@ export function DisplayReferrerLeaderboardPage({
   header,
   paginationParams = {
     page: 0,
-    itemsPerPage: 5,
+    recordsPerPage: 5,
   },
 }: DisplayReferrerLeaderboardPageProps) {
   if (leaderboardPageFetchError !== undefined) {
@@ -35,11 +35,11 @@ export function DisplayReferrerLeaderboardPage({
   }
 
   if (isLoading || leaderboardPageData === null) {
-    const pageOffset = (paginationParams.page - 1) * paginationParams.itemsPerPage;
+    const pageOffset = (paginationParams.page - 1) * paginationParams.recordsPerPage;
 
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
-        {[...Array(paginationParams.itemsPerPage).keys()].map((elem) => (
+        {[...Array(paginationParams.recordsPerPage).keys()].map((elem) => (
           <ReferrerCardLoading
             key={`Referrer-loading-${pageOffset + elem}`}
             rank={pageOffset + elem + 1}
@@ -49,7 +49,7 @@ export function DisplayReferrerLeaderboardPage({
     );
   }
 
-  if (leaderboardPageData.paginationContext.totalRecords === 0) {
+  if (leaderboardPageData.pageContext.totalRecords === 0) {
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
         <EmptyLeaderboardInfo />
