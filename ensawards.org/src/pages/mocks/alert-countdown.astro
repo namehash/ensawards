@@ -18,9 +18,6 @@ const headerStyles = "text-white";
 const textStyles = "text-white/50";
 const timerStyles = "text-white";
 const timerLegendStyles = "text-white";
-
-const endingInUnderTwoMinutesUnixTimestamp =
-  (Date.now() + 1.75 * millisecondsInMinute) / millisecondsInSecond;
 ---
 
 <Layout>
@@ -68,7 +65,8 @@ const endingInUnderTwoMinutesUnixTimestamp =
         <p>
           Event ending in &lt; 2 minutes from now (<AbsoluteTime
             client:load
-            timestamp={endingInUnderTwoMinutesUnixTimestamp}
+            timestamp={(Date.now() + 1.75 * millisecondsInMinute) /
+              millisecondsInSecond}
             options={{
               year: "numeric",
               month: "short",
@@ -81,7 +79,8 @@ const endingInUnderTwoMinutesUnixTimestamp =
           />)
         </p><AlertCountdown
           eventText={baseEventText}
-          eventUnixTimestamp={endingInUnderTwoMinutesUnixTimestamp}
+          eventUnixTimestamp={(Date.now() + 1.75 * millisecondsInMinute) /
+            millisecondsInSecond}
           styles={{
             banner: bannerStyles,
             header: headerStyles,
