@@ -170,7 +170,9 @@ export function Pagination({
         <button
           className={cn(
             buttonStyles,
-            paginationParams.page === 1 ? "border-gray-200 cursor-default hover:bg-white" : "border-transparent",
+            paginationParams.page === 1
+              ? "border-gray-200 cursor-default hover:bg-white"
+              : "border-transparent",
           )}
           onClick={() => {
             onChosen(1);
@@ -224,7 +226,9 @@ export function Pagination({
         <button
           className={cn(
             buttonStyles,
-            paginationParams.page === totalPages ? "border-gray-200 cursor-default hover:bg-white" : "border-transparent",
+            paginationParams.page === totalPages
+              ? "border-gray-200 cursor-default hover:bg-white"
+              : "border-transparent",
           )}
           onClick={() => {
             onChosen(totalPages);

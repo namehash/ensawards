@@ -1,0 +1,111 @@
+---
+import {
+  millisecondsInDay,
+  millisecondsInMinute,
+  millisecondsInSecond,
+  millisecondsInWeek,
+} from "date-fns/constants";
+import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
+import { AbsoluteTime } from "../../components/atoms/datetime/AbsoluteTime";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import Layout from "../../layouts/Layout.astro";
+import { ENS_CONTRACT_NAMING_SEASON_APPROX_END } from "../../utils";
+
+const baseEventText = "Base event text";
+const bannerStyles = "bg-blue-700";
+const headerStyles = "text-white";
+const textStyles = "text-white/50";
+const timerStyles = "text-white";
+const timerLegendStyles = "text-white";
+
+const endingInUnderTwoMinutesUnixTimestamp =
+  (Date.now() + 1.75 * millisecondsInMinute) / millisecondsInSecond;
+---
+
+<Layout>
+  <SubpageHero header="AlertCountdown" breadcrumbs={["Mocks"]} />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ItemsList
+      header="AlertCountdown variants"
+      containerStyles="gap-4 sm:gap-4">
+      <p class="text-amber-600 font-semibold">
+        NOTE: Banners are styled to be best visible in the mock environment.
+        Their styles are customizable, hence the public banner's CSS is a bit
+        different. The UX remains identical in both scenarios.
+      </p>
+      <div class="w-full flex flex-col justify-start items-start gap-4">
+        <p>Event ending on April 30th 2026</p><AlertCountdown
+          eventText={baseEventText}
+          eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_APPROX_END}
+          styles={{
+            banner: bannerStyles,
+            header: headerStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
+        />
+      </div>
+      <div class="w-full h-[1px] bg-gray-200"></div>
+      <div class="w-full flex flex-col justify-start items-start gap-4">
+        <p>Event ending in 8 weeks from now</p><AlertCountdown
+          eventText={baseEventText}
+          eventUnixTimestamp={(Date.now() + 8 * millisecondsInWeek) /
+            millisecondsInSecond}
+          styles={{
+            banner: bannerStyles,
+            header: headerStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
+        />
+      </div>
+      <div class="w-full h-[1px] bg-gray-200"></div>
+      <div class="w-full flex flex-col justify-start items-start gap-4">
+        <p>
+          Event ending in < 2 minutes from now (<AbsoluteTime
+            client:load
+            timestamp={endingInUnderTwoMinutesUnixTimestamp}
+            options={{
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+              second: "numeric",
+              hour12: false,
+            }}
+          />)
+        </p><AlertCountdown
+          eventText={baseEventText}
+          eventUnixTimestamp={endingInUnderTwoMinutesUnixTimestamp}
+          styles={{
+            banner: bannerStyles,
+            header: headerStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
+        />
+      </div>
+      <div class="w-full h-[1px] bg-gray-200"></div>
+      <div class="w-full flex flex-col justify-start items-start gap-4">
+        <p>Event ending 2 days before now</p><AlertCountdown
+          eventText={baseEventText}
+          eventUnixTimestamp={(Date.now() - 2 * millisecondsInDay) /
+            millisecondsInSecond}
+          styles={{
+            banner: bannerStyles,
+            header: headerStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
+        />
+      </div>
+    </ItemsList>
+  </section>
+</Layout>

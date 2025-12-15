@@ -112,7 +112,7 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
     if (nowUnixTimestamp < eventUnixTimestamp) {
       root.style.display = "flex";
     } else {
-      // When the incentive window has closed this banner won't be displayed
+      // When the event has finished this banner won't be displayed
       root.style.display = "none";
       return;
     }
@@ -137,6 +137,8 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
         newDuration.minutes ? newDuration.minutes : 0,
       );
     } else {
+      // When the event's finish is further than threshold of days away
+      // The explicit countdown won't be displayed
       timerWrapper.style.display = "none";
     }
   }

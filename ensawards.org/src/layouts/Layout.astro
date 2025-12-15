@@ -96,7 +96,8 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
       }}
     />
   </head>
-  <body>
+  <body style={{ height: "fit-content" }}>
+    <slot name="alertBanner" />
     {isStatic ? <StaticHeader /> : <Header />}
     <slot />
     <div id="app-overlay" class="hidden">

@@ -1,0 +1,211 @@
+---
+import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import { secondsInDay } from "date-fns/constants";
+import { cn } from "../../utils/tailwindClassConcatenation";
+
+interface AlertCountdownProps {
+  eventUnixTimestamp: UnixTimestamp;
+  eventText: string;
+  styles?: {
+    banner?: string;
+    header?: string;
+    text?: string;
+    timer?: string;
+    timerLegend?: string;
+  };
+}
+
+const { eventUnixTimestamp, eventText, styles }: AlertCountdownProps = Astro.props;
+---
+
+<div
+  id="countdownAlertRoot"
+  data-timestamp={eventUnixTimestamp}
+  data-threshold={90 * secondsInDay}
+  style={{ display: "none" }}
+  class={cn(
+    "w-full h-[44px] box-border flex flex-row justify-center gap-2 sm:gap-5 items-center px-4 py-3 cursor-default",
+    styles?.banner,
+  )}>
+  <div class="flex flex-row flex-nowrap justify-start items-center gap-3">
+    <div class="flex flex-row justify-start items-center gap-1.5">
+      <h4
+        class={cn(
+          "hidden sm:block text-sm leading-normal font-semibold",
+          styles?.header,
+        )}>
+        ACT NOW!
+      </h4>
+      <p
+        class={cn(
+          "text-sm leading-5 sm:leading-normal font-normal max-sm:text-center",
+          styles?.text,
+        )}>
+        {eventText}
+      </p>
+    </div>
+  </div>
+  <div
+    id="timerWrapper"
+    style={{ display: "none" }}
+    class="h-8 box-border flex flex-row flex-nowrap justify-start items-center gap-3 px-3 py-1 rounded-full bg-black/10">
+    <div class="w-fit flex flex-row justify-center items-center gap-1">
+      <p
+        id="daysLeft"
+        class={cn("text-base leading-normal font-medium", styles?.timer)}>
+      </p>
+      <p
+        class={cn("text-base leading-normal font-medium", styles?.timerLegend)}>
+        days
+      </p>
+    </div>
+    <div class={cn("w-[1px] h-[24px] bg-white/20")}></div>
+    <div class="w-fit flex flex-row justify-center items-center gap-1">
+      <p
+        id="hoursLeft"
+        class={cn("text-base leading-normal font-medium", styles?.timer)}>
+      </p>
+      <p
+        class={cn("text-base leading-normal font-medium", styles?.timerLegend)}>
+        hours
+      </p>
+    </div>
+    <div class={cn("w-[1px] h-[24px] bg-white/20")}></div>
+    <div class="w-fit flex flex-row justify-center items-center gap-1">
+      <p
+        id="minutesLeft"
+        class={cn("text-base leading-normal font-medium", styles?.timer)}>
+      </p>
+      <p
+        class={cn("text-base leading-normal font-medium", styles?.timerLegend)}>
+        minutes
+      </p>
+    </div>
+  </div>
+  <div
+    id="mobileTimerWrapper"
+    style={{ display: "none" }}
+    class="h-[28px] w-fit box-border flex flex-row flex-nowrap justify-center items-center gap-1 px-3 py-1 rounded-full bg-black/10">
+    <p
+      id="unitsLeft"
+      class={cn("text-sm leading-normal font-medium", styles?.timer)}>
+    </p>
+  </div>
+</div>
+<script>
+  import { secondsInMinute, millisecondsInSecond } from "date-fns/constants";
+  import { differenceInDays, intervalToDuration } from "date-fns";
+
+  const countdownRoots = document.querySelectorAll("#countdownAlertRoot");
+
+  const mobileBreakpointInPixels = 640;
+
+  function updateCountdown(root) {
+    const isMobile = window.innerWidth < mobileBreakpointInPixels;
+
+    // mobile display
+    const mobileTimerWrapper = root.querySelector("#mobileTimerWrapper");
+
+    // desktop display
+    const timerWrapper = root.querySelector("#timerWrapper");
+    const daysDisplay = root.querySelector("#daysLeft");
+    const hoursDisplay = root.querySelector("#hoursLeft");
+    const minutesDisplay = root.querySelector("#minutesLeft");
+
+    // datetime variables
+    const nowUnixTimestamp = Date.now() / millisecondsInSecond;
+    const eventUnixTimestamp = Number(root.dataset.timestamp);
+    const threshold = Number(root.dataset.threshold);
+
+    if (nowUnixTimestamp < eventUnixTimestamp) {
+      root.style.display = "flex";
+    } else {
+      // When the event has finished this banner won't be displayed
+      root.style.display = "none";
+      return;
+    }
+
+    if (nowUnixTimestamp > eventUnixTimestamp - threshold) {
+      const eventTimestamp = eventUnixTimestamp * millisecondsInSecond;
+      const newDuration = intervalToDuration({
+        start: new Date(),
+        end: new Date(eventTimestamp),
+      });
+
+      // calculate remaining days, hours, minutes, seconds
+      const daysLeft = differenceInDays(new Date(eventTimestamp), new Date());
+      const hoursLeft = newDuration.hours ? newDuration.hours : 0;
+      const minutesLeft = newDuration.minutes ? newDuration.minutes : 0;
+      const secondsLeft = newDuration.seconds ? newDuration.seconds : 0;
+
+      // for mobile layouts display only the largest available unit
+      if (isMobile) {
+        handleMobileDisplay(
+          root,
+          daysLeft,
+          hoursLeft,
+          minutesLeft,
+          secondsLeft,
+        );
+      }
+      // otherwise display days, hours, minutes
+      else {
+        timerWrapper.style.display = "flex";
+        mobileTimerWrapper.style.display = "none";
+
+        daysDisplay.innerText = String(daysLeft);
+        hoursDisplay.innerText = String(hoursLeft);
+        minutesDisplay.innerText = String(minutesLeft);
+      }
+    } else {
+      // When the event's finish is further than threshold of days away
+      // The explicit countdown won't be displayed
+      timerWrapper.style.display = "none";
+    }
+  }
+
+  function handleMobileDisplay(
+    root,
+    daysLeft,
+    hoursLeft,
+    minutesLeft,
+    secondsLeft,
+  ) {
+    // desktop display
+    const timerWrapper = root.querySelector("#timerWrapper");
+
+    // mobile display
+    const mobileTimerWrapper = root.querySelector("#mobileTimerWrapper");
+    const singleUnitsDisplay = root.querySelector("#unitsLeft");
+
+    timerWrapper.style.display = "none";
+    mobileTimerWrapper.style.display = "flex";
+
+    if (daysLeft > 0) {
+      singleUnitsDisplay.innerText = `${daysLeft} days`;
+      return;
+    }
+
+    if (hoursLeft > 0) {
+      singleUnitsDisplay.innerText = `${hoursLeft} hours`;
+      return;
+    }
+
+    if (minutesLeft > 0) {
+      singleUnitsDisplay.innerText = `${minutesLeft} mins`;
+      return;
+    }
+
+    singleUnitsDisplay.innerText = `${secondsLeft} secs`;
+  }
+
+  function tick() {
+    countdownRoots.forEach(updateCountdown);
+  }
+
+  tick();
+
+  // refresh the countdown every second due to necessity
+  // of monitoring screen width for mobile adaptations
+  setInterval(tick, millisecondsInSecond);
+</script>
