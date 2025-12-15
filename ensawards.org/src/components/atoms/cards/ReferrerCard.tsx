@@ -34,7 +34,9 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
     currency: "USD",
   });
 
-  const numberFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
+  const numberFormat = new Intl.NumberFormat("en-US", {
+    maximumFractionDigits: 2,
+  });
 
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
