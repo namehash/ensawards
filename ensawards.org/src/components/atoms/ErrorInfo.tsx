@@ -21,8 +21,11 @@ export function ErrorInfo({ title, description, children }: PropsWithChildren<Er
         <div className={cn(verticalContainerStyles, "gap-1")}>
           <h3 className="text-xl leading-normal font-semibold text-black text-center">{title}</h3>
           <div className={cn(verticalContainerStyles, "gap-0")}>
-            {description?.map((description) => (
-              <p className="text-base leading-normal font-normal text-muted-foreground text-center">
+            {description?.map((description, idx) => (
+              <p
+                key={`error-description-${idx}`}
+                className="text-base leading-normal font-normal text-muted-foreground text-center"
+              >
                 {description}
               </p>
             ))}

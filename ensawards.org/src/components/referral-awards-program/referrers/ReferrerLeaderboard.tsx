@@ -155,9 +155,12 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
               onChosen={(newPage) => {
                 setCurrentPage(newPage);
               }}
-              onRecordsPerPageChange={(newItemsPerPage) =>
-                setCurrentRecordsPerPage(newItemsPerPage)
-              }
+              onRecordsPerPageChange={(newItemsPerPage) => {
+                if (newItemsPerPage !== currentRecordsPerPage) {
+                  setCurrentPage(1);
+                  setCurrentRecordsPerPage(newItemsPerPage);
+                }
+              }}
               possibleRecordsPerPageValues={[
                 ...new Set([25, 50, recordsPerPage].sort((a, b) => (a > b ? 1 : a < b ? -1 : 0))),
               ]}
