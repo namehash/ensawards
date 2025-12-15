@@ -1,4 +1,5 @@
 ---
+import { getCollection, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { AuthorDisplay } from "../../components/atoms/AuthorDisplay";
@@ -9,29 +10,40 @@ import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
-import { BENCHMARK_REPORTS, getBenchmarkReportBySlug } from "../../data/benchmarkReports";
+import { APPS } from "../../data/apps";
+import { benchmarkers } from "../../data/benchmarkers";
 import Layout from "../../layouts/Layout.astro";
-import { markdownToHtml } from "../../utils/markdown";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 
-export function getStaticPaths() {
-  return BENCHMARK_REPORTS.map((report) => ({
+export async function getStaticPaths() {
+  const reports = await getCollection("benchmark-reports");
+  return reports.map((report: CollectionEntry<"benchmark-reports">) => ({
     params: { report: report.slug },
+    props: { report },
   }));
 }
 
-const { report } = Astro.params;
+type Props = {
+  report: CollectionEntry<"benchmark-reports">;
+};
+
+const { report: reportEntry } = Astro.props;
+const { Content } = await reportEntry.render();
+const { data: frontmatter } = reportEntry;
+
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/**/*.{jpeg,jpg,png,gif,svg}",
 );
 
-const reportData = getBenchmarkReportBySlug(report);
+// Find the app and benchmark data using the slugs from frontmatter
+const app = APPS.find((a) => a.slug === frontmatter.appSlug);
+const benchmark = app?.benchmarks.find((b) => b.bestPractice.slug === frontmatter.bestPracticeSlug);
 
-// No need to build identity here, AuthorIdentity component handles it
+// Get author from benchmarkers
+const author = benchmarkers[frontmatter.authorSlug as keyof typeof benchmarkers];
 
-// Styling classes to match best practices page
-const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
-const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
+// Check if we have all required data
+const hasRequiredData = app && benchmark && author;
 
 // Helper function to format timestamp
 function formatTimestamp(timestamp: number): string {
@@ -44,25 +56,25 @@ function formatTimestamp(timestamp: number): string {
 ---
 
 {
-  reportData === undefined ? (
+  !hasRequiredData ? (
     <DataLoadingError />
   ) : (
     <Layout
       pageMetadata={{
-        title: reportData.meta.title,
-        description: reportData.meta.description,
-        url: `https://ensawards.org/benchmark-report/${report}`,
-        ogImage: reportData.meta.ogImagePath,
-        twitterImage: reportData.meta.twitterOgImagePath,
+        title: frontmatter.title,
+        description: frontmatter.description,
+        url: `https://ensawards.org/benchmark-report/${reportEntry.slug}`,
+        ogImage: frontmatter.ogImagePath,
+        twitterImage: frontmatter.twitterOgImagePath,
       }}>
 
       <SubpageHero
-        header={`${reportData.app.name} - ${reportData.bestPractice.name}`}
-        description={reportData.bestPractice.description}
-        breadcrumbs={["ENS leaderboards", "App leaderboard", reportData.app.name, "Benchmark report"]}>
+        header={`${app.name} - ${benchmark.bestPractice.name}`}
+        description={benchmark.bestPractice.description}
+        breadcrumbs={["ENS leaderboards", "App leaderboard", app.name, "Benchmark report"]}>
         <Image
-          src={images[reportData.app.iconPath]()}
-          alt={`${reportData.app.id}-icon`}
+          src={images[app.iconPath]()}
+          alt={`${app.id}-icon`}
           slot="icon"
           class="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
@@ -71,20 +83,20 @@ function formatTimestamp(timestamp: number): string {
           slot="socialLinks"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
           <a
-            href={reportData.app.socials.website}
+            href={app.socials.website}
             rel="noreferrer"
             target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
           <a
-            href={reportData.app.socials.twitter}
+            href={app.socials.twitter}
             rel="noreferrer"
             target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
-          {reportData.app.socials.ens &&
+          {app.socials.ens &&
             <a
-              href=`https://app.ens.domains/${encodeURIComponent(reportData.app.socials.ens)}`
+              href=`https://app.ens.domains/${encodeURIComponent(app.socials.ens)}`
               rel="noreferrer"
               target="_blank"
             >
@@ -101,58 +113,10 @@ function formatTimestamp(timestamp: number): string {
         <div class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
           <!-- Left Column - Report Content -->
           <div class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-8">
-            <!-- Introduction -->
-            <div class="flex flex-nowrap flex-col justify-center items-start gap-6">
-              <h2 class="text-2xl leading-none font-semibold text-black">
-                Report Summary
-              </h2>
-              <p class={technicalSectionContentStyles} set:html={markdownToHtml(reportData.content.introduction)} />
+            <!-- Markdown Content -->
+            <div class="prose prose-base prose-p:text-gray-500 font-normal prose-g max-w-none">
+              <Content />
             </div>
-
-            <!-- Report Sections -->
-            {reportData.content.sections.map((section, index) => (
-              <div class="flex flex-nowrap flex-col justify-center items-start gap-6">
-                <h3 class={technicalSectionMinorHeaderStyles}>
-                  {section.heading}
-                </h3>
-                <p class={technicalSectionContentStyles} set:html={markdownToHtml(section.content)} />
-
-                {/* Section Images */}
-                {section.images && section.images.length > 0 && (
-                  <div class="space-y-4 w-full">
-                    {section.images.map((image) => {
-                      const imageModule = images[image.src];
-                      if (!imageModule) {
-                        console.warn(`Image not found: ${image.src}`);
-                        return null;
-                      }
-                      return (
-                        <figure class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                          <Image
-                            src={imageModule()}
-                            alt={image.alt}
-                            class="w-full rounded-md"
-                          />
-                          {image.caption && (
-                            <figcaption class="text-sm text-gray-600 mt-3 text-center italic">
-                              {image.caption}
-                            </figcaption>
-                          )}
-                        </figure>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            ))}
-
-            <!-- Conclusion -->
-            {reportData.content.conclusion && (
-              <div class="flex flex-nowrap flex-col justify-center items-start gap-6">
-                <h3 class={technicalSectionMinorHeaderStyles}>Conclusion</h3>
-                <p class={technicalSectionContentStyles} set:html={markdownToHtml(reportData.content.conclusion)} />
-              </div>
-            )}
           </div>
 
           <!-- Right Column - Report Details Sidebar -->
@@ -165,38 +129,38 @@ function formatTimestamp(timestamp: number): string {
               <div class="flex flex-col gap-1">
                 <span class="text-sm leading-normal font-normal text-muted-foreground">Category:</span>
                 <a
-                  href={`/ens-best-practices/${reportData.bestPractice.categorySlug}`}
+                  href={`/ens-best-practices/${benchmark.bestPractice.categorySlug}`}
                   class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
                 >
-                  {reportData.bestPractice.categoryName}
+                  {benchmark.bestPractice.categoryName}
                 </a>
               </div>
 
               <div class="flex flex-col gap-1">
                 <span class="text-sm leading-normal font-normal text-muted-foreground">Best Practice:</span>
                 <a
-                  href={`/ens-best-practices/${reportData.bestPractice.categorySlug}/${reportData.bestPractice.slug}`}
+                  href={`/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.slug}`}
                   class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
                 >
-                  {reportData.bestPractice.name}
+                  {benchmark.bestPractice.name}
                 </a>
               </div>
 
               <div class="flex flex-col gap-1">
                 <span class="text-sm leading-normal font-normal text-muted-foreground">App Tested:</span>
                 <a
-                  href={`/app/${reportData.app.slug}`}
+                  href={`/app/${app.slug}`}
                   class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
                 >
-                  {reportData.app.name}
+                  {app.name}
                 </a>
               </div>
 
               <div class="flex flex-col gap-1">
                 <span class="text-sm leading-normal font-normal text-muted-foreground">App Result:</span>
                 <BenchmarkResultBadge
-                  className={BenchmarkResultToBadgeStyles.get(reportData.benchmark.result)}
-                  benchmark={reportData.benchmark}
+                  className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
+                  benchmark={benchmark}
                   client:load
                 />
               </div>
@@ -204,7 +168,7 @@ function formatTimestamp(timestamp: number): string {
               <div class="flex flex-col gap-1">
                 <span class="text-sm leading-normal font-normal text-muted-foreground">Author:</span>
                 <AuthorDisplay
-                  author={reportData.author}
+                  author={author}
                   className="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700"
                   client:load
                 />
@@ -213,7 +177,7 @@ function formatTimestamp(timestamp: number): string {
               <div class="flex flex-col gap-1">
                 <span class="text-sm leading-normal font-normal text-muted-foreground">Report Date:</span>
                 <span class="text-sm leading-normal font-medium text-black">
-                  {formatTimestamp(reportData.createdAt)}
+                  {formatTimestamp(frontmatter.createdAt)}
                 </span>
               </div>
             </div>
@@ -235,38 +199,38 @@ function formatTimestamp(timestamp: number): string {
             <div class="flex flex-col gap-1">
               <span class="text-sm leading-normal font-normal text-muted-foreground">Category:</span>
               <a
-                href={`/ens-best-practices/${reportData.bestPractice.categorySlug}`}
+                href={`/ens-best-practices/${benchmark.bestPractice.categorySlug}`}
                 class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
               >
-                {reportData.bestPractice.categoryName}
+                {benchmark.bestPractice.categoryName}
               </a>
             </div>
 
             <div class="flex flex-col gap-1">
               <span class="text-sm leading-normal font-normal text-muted-foreground">Best Practice:</span>
               <a
-                href={`/ens-best-practices/${reportData.bestPractice.categorySlug}/${reportData.bestPractice.slug}`}
+                href={`/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.slug}`}
                 class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
               >
-                {reportData.bestPractice.name}
+                {benchmark.bestPractice.name}
               </a>
             </div>
 
             <div class="flex flex-col gap-1">
               <span class="text-sm leading-normal font-normal text-muted-foreground">App Tested:</span>
               <a
-                href={`/app/${reportData.app.slug}`}
+                href={`/app/${app.slug}`}
                 class="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700 hover:underline underline-offset-[25%] w-fit"
               >
-                {reportData.app.name}
+                {app.name}
               </a>
             </div>
 
             <div class="flex flex-col gap-1">
               <span class="text-sm leading-normal font-normal text-muted-foreground">App Result:</span>
               <BenchmarkResultBadge
-                className={BenchmarkResultToBadgeStyles.get(reportData.benchmark.result)}
-                benchmark={reportData.benchmark}
+                className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
+                benchmark={benchmark}
                 client:load
               />
             </div>
@@ -274,7 +238,7 @@ function formatTimestamp(timestamp: number): string {
             <div class="flex flex-col gap-1">
               <span class="text-sm leading-normal font-normal text-muted-foreground">Author:</span>
               <AuthorDisplay
-                author={reportData.author}
+                author={author}
                 className="text-sm leading-normal font-medium text-blue-600 hover:text-blue-700"
                 client:load
               />
@@ -283,7 +247,7 @@ function formatTimestamp(timestamp: number): string {
             <div class="flex flex-col gap-1">
               <span class="text-sm leading-normal font-normal text-muted-foreground">Report Date:</span>
               <span class="text-sm leading-normal font-medium text-black">
-                {formatTimestamp(reportData.createdAt)}
+                {formatTimestamp(frontmatter.createdAt)}
               </span>
             </div>
           </div>

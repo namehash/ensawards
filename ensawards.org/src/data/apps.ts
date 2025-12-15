@@ -32,6 +32,7 @@ export const APPS: App[] = [
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
         benchmarkedAt: toUnixTimestamp("2025-12-11T14:05:59.420Z"),
+        reportSlug: "rainbow-wallet-smart-contracts-mainnet",
       },
       {
         bestPractice: displayNamedSmartContractsL2,

@@ -37,6 +37,8 @@ export interface AppBenchmark {
   benchmarkedBy: AccountId;
   /** Unix timestamp when the benchmark was performed */
   benchmarkedAt: UnixTimestamp;
+  /** Optional slug to link to a detailed benchmark report markdown file */
+  reportSlug?: string;
 }
 
 export const AppTypes = {
