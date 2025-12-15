@@ -37,9 +37,9 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
     setFetchErrorMessage("");
     setIsLoading(true);
     try {
-      const response = await client.getReferrerLeaderboard({
+      const response = await client.getReferrerLeaderboardPage({
         page: currentPage,
-        itemsPerPage: currentRecordsPerPage,
+        recordsPerPage: currentRecordsPerPage,
       });
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
@@ -51,7 +51,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
       }
 
       setLeaderboardData(response.data);
-      setTotalPages(response.data.paginationContext.totalPages);
+      setTotalPages(response.data.pageContext.totalPages);
     } catch (error) {
       console.error(error);
       setLeaderboardData(null);
@@ -88,13 +88,13 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
               )
             )}
           </div>
-          {leaderboardData !== null && leaderboardData.paginationContext.totalRecords > 0 && (
+          {leaderboardData !== null && leaderboardData.pageContext.totalRecords > 0 && (
             <DisplaySimplePagination
               totalPages={totalPages}
-              totalRecords={leaderboardData.paginationContext.totalRecords}
+              totalRecords={leaderboardData.pageContext.totalRecords}
               paginationParams={{
                 page: currentPage,
-                itemsPerPage: currentRecordsPerPage,
+                recordsPerPage: currentRecordsPerPage,
               }}
               onPrevious={() => {
                 setCurrentPage((prev) => prev - 1);
@@ -135,16 +135,16 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
             }
             paginationParams={{
               page: currentPage,
-              itemsPerPage: recordsPerPage,
+              recordsPerPage: recordsPerPage,
             }}
           />
-          {leaderboardData !== null && leaderboardData.paginationContext.totalRecords > 0 && (
+          {leaderboardData !== null && leaderboardData.pageContext.totalRecords > 0 && (
             <DisplayPagination
               totalPages={totalPages}
-              totalRecords={leaderboardData.paginationContext.totalRecords}
+              totalRecords={leaderboardData.pageContext.totalRecords}
               paginationParams={{
                 page: currentPage,
-                itemsPerPage: currentRecordsPerPage,
+                recordsPerPage: currentRecordsPerPage,
               }}
               onPrevious={() => {
                 setCurrentPage((prev) => prev - 1);

@@ -58,7 +58,7 @@ export function MockPagination() {
           totalRecords={mockTotalRecords}
           paginationParams={{
             page: currentPage,
-            itemsPerPage: mockRecordsPerPage,
+            recordsPerPage: mockRecordsPerPage,
           }}
           onPrevious={() => {
             setCurrentPage((prev) => prev - 1);
@@ -80,7 +80,7 @@ export function MockPagination() {
           totalRecords={mockTotalRecords}
           paginationParams={{
             page: currentPage,
-            itemsPerPage: mockRecordsPerPage,
+            recordsPerPage: mockRecordsPerPage,
           }}
           onPrevious={() => {
             setCurrentPage((prev) => prev - 1);

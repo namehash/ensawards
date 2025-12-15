@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/select.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { ReferrerLeaderboardPaginationParams } from "@namehash/ens-referrals";
+import type { ReferrerLeaderboardPageParams } from "@namehash/ens-referrals";
 import {
   ChevronLeft,
   ChevronRight,
@@ -16,7 +16,6 @@ import {
   ChevronsRight,
   Ellipsis as DistanceSymbol,
 } from "lucide-react";
-import React from "react";
 
 /**
  * Display any of the additional pagination buttons if there are at least three pages
@@ -68,7 +67,7 @@ export function DisplayPagination({
         onChosen={onChosen}
       />
       <ItemsPerPageSelect
-        recordsPerPage={paginationParams.itemsPerPage}
+        recordsPerPage={paginationParams.recordsPerPage}
         onRecordsPerPageChange={onRecordsPerPageChange}
         selectorDescription={selectorDescription}
         possibleRecordsPerPageValues={possibleRecordsPerPageValues}
@@ -119,7 +118,7 @@ export function DisplaySimplePagination({
 export interface PaginationProps {
   totalPages: number;
   totalRecords: number;
-  paginationParams: Required<ReferrerLeaderboardPaginationParams>;
+  paginationParams: Required<ReferrerLeaderboardPageParams>;
   onPrevious: () => void;
   onNext: () => void;
   onChosen: (newPage: number) => void;
@@ -372,7 +371,7 @@ type RecordAlias = {
 };
 
 interface QuantityInfoProps {
-  paginationParams: Required<ReferrerLeaderboardPaginationParams>;
+  paginationParams: Required<ReferrerLeaderboardPageParams>;
   totalRecords: number;
   recordAlias?: RecordAlias;
   className?: string;
@@ -394,7 +393,7 @@ const QuantityInfo = ({
   }
 
   // A single page case
-  if (paginationParams.itemsPerPage >= totalRecords) {
+  if (paginationParams.recordsPerPage >= totalRecords) {
     return (
       <p className={cn("text-sm leading-normal font-medium", className)}>
         {totalRecords} {totalRecords > 1 ? recordAlias.plural : recordAlias.singular}
@@ -404,8 +403,8 @@ const QuantityInfo = ({
 
   return (
     <p className={cn("text-sm leading-normal font-medium", className)}>
-      Rank {numberFormat.format((paginationParams.page - 1) * paginationParams.itemsPerPage + 1)}-
-      {numberFormat.format(paginationParams.page * paginationParams.itemsPerPage)} of{" "}
+      Rank {numberFormat.format((paginationParams.page - 1) * paginationParams.recordsPerPage + 1)}-
+      {numberFormat.format(paginationParams.page * paginationParams.recordsPerPage)} of{" "}
       {numberFormat.format(totalRecords)} {recordAlias.plural}
     </p>
   );

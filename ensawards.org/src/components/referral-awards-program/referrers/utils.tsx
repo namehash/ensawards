@@ -2,7 +2,10 @@ import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
-import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
+import type {
+  ReferrerLeaderboardPage,
+  ReferrerLeaderboardPageContext,
+} from "@namehash/ens-referrals";
 import { Award as AwardIcon } from "lucide-react";
 
 export interface ReferrerLeaderboardLastUpdateTimeProps {
@@ -52,7 +55,7 @@ export const ReferrerLeaderboardLastUpdateTime = ({
 
 /**
  * Displays information that the current referrer leaderboard is empty
- * (when {@link ReferrerLeaderboardPaginationContext.totalRecords} is 0)
+ * (when {@link ReferrerLeaderboardPageContext.totalRecords} is 0)
  */
 export const EmptyLeaderboardInfo = () => {
   const verticalContainerStyles = "w-full flex flex-col justify-start items-center";
