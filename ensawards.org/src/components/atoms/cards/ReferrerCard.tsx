@@ -29,10 +29,12 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
     getENSRootChainId(namespaceId),
   );
 
-  const numberFormat = new Intl.NumberFormat("en-US", {
+  const currencyFormat = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
+
+  const numberFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
 
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
@@ -93,13 +95,13 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal">Rank boost</p>
         <p className="text-sm leading-normal font-medium text-black">
-          {(referrer.finalScoreBoost * 100).toFixed(0)}%
+          {numberFormat.format(referrer.finalScoreBoost * 100)}%
         </p>
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal">Final score</p>
         <p className="text-sm leading-normal font-medium text-black">
-          {referrer.finalScore.toFixed(2)}
+          {numberFormat.format(referrer.finalScore)}
         </p>
       </div>
       <div className="sm:min-w-[180px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
@@ -115,14 +117,14 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
               ></div>
             </div>
             <p className="text-sm leading-normal font-medium sm:font-semibold text-emerald-600">
-              {(referrer.awardPoolShare * 100).toFixed(2)}%
+              {numberFormat.format(referrer.awardPoolShare * 100)}%
             </p>
           </div>
         ) : (
           <p className="text-sm leading-normal font-semibold text-black max-sm:text-end">
             Requires{" "}
-            {Math.max(0.01, aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore).toFixed(
-              2,
+            {numberFormat.format(
+              Math.max(0.01, aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore),
             )}{" "}
             more years
           </p>
@@ -137,7 +139,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
           )}
         >
           {referrer.isQualified ? (
-            <>US {numberFormat.format(referrer.awardPoolApproxValue)}</>
+            <>US {currencyFormat.format(referrer.awardPoolApproxValue)}</>
           ) : (
             "-"
           )}

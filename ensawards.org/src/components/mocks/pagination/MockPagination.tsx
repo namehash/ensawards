@@ -66,7 +66,7 @@ export function MockPagination() {
           onNext={() => {
             setCurrentPage((prev) => prev + 1);
           }}
-          onChosen={(newPage) => {
+          onSelectPage={(newPage) => {
             setCurrentPage(newPage);
           }}
         />
@@ -88,7 +88,7 @@ export function MockPagination() {
           onNext={() => {
             setCurrentPage((prev) => prev + 1);
           }}
-          onChosen={(newPage) => {
+          onSelectPage={(newPage) => {
             setCurrentPage(newPage);
           }}
         />

@@ -7,8 +7,9 @@ import {
   SelectValue,
 } from "@/components/ui/select.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { capitalizeText } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { ReferrerLeaderboardPageParams } from "@namehash/ens-referrals";
+import type { RequestPageParams } from "@ensnode/ensnode-sdk";
 import {
   ChevronLeft,
   ChevronRight,
@@ -23,11 +24,14 @@ import {
  */
 const MINIMAL_TOTAL_PAGES_TO_DISPLAY_ADDITIONAL_PAGINATION_BUTTONS = 3;
 
+const numberFormat = new Intl.NumberFormat("en-US");
+
 interface DisplayPaginationProps
   extends PaginationProps,
-    Omit<RecordsPerPageSelectProps, "recordsPerPage"> {
-  recordAlias?: RecordAlias;
+    Omit<RecordsPerPageSelectProps, "recordsPerPage" | "selectDescription"> {
+  recordAlias: RecordAlias;
   containerClassName?: string;
+  quantityInfoPrefix?: string;
   quantityClassName?: string;
 }
 
@@ -37,12 +41,12 @@ export function DisplayPagination({
   paginationParams,
   onNext,
   onPrevious,
-  onChosen,
-  onRecordsPerPageChange,
-  possibleRecordsPerPageValues,
-  selectorDescription,
+  onSelectPage,
+  onSelectRecordsPerPage,
+  recordsPerPageOptions,
   recordAlias,
   containerClassName,
+  quantityInfoPrefix,
   quantityClassName,
 }: DisplayPaginationProps) {
   return (
@@ -56,6 +60,7 @@ export function DisplayPagination({
         paginationParams={paginationParams}
         totalRecords={totalRecords}
         recordAlias={recordAlias}
+        prefix={quantityInfoPrefix}
         className={quantityClassName}
       />
       <Pagination
@@ -64,13 +69,13 @@ export function DisplayPagination({
         paginationParams={paginationParams}
         onPrevious={onPrevious}
         onNext={onNext}
-        onChosen={onChosen}
+        onSelectPage={onSelectPage}
       />
-      <ItemsPerPageSelect
+      <RecordsPerPageSelect
         recordsPerPage={paginationParams.recordsPerPage}
-        onRecordsPerPageChange={onRecordsPerPageChange}
-        selectorDescription={selectorDescription}
-        possibleRecordsPerPageValues={possibleRecordsPerPageValues}
+        onSelectRecordsPerPage={onSelectRecordsPerPage}
+        selectDescription={`${capitalizeText(recordAlias.plural)} per page`}
+        recordsPerPageOptions={recordsPerPageOptions}
       />
     </div>
   );
@@ -82,14 +87,12 @@ export function DisplaySimplePagination({
   paginationParams,
   onNext,
   onPrevious,
-  onChosen,
+  onSelectPage,
   recordAlias,
   containerClassName,
+  quantityInfoPrefix,
   quantityClassName,
-}: Omit<
-  DisplayPaginationProps,
-  "onRecordsPerPageChange" | "possibleRecordsPerPageValues" | "selectorDescription"
->) {
+}: Omit<DisplayPaginationProps, "onSelectRecordsPerPage" | "recordsPerPageOptions">) {
   return (
     <div
       className={cn(
@@ -101,6 +104,7 @@ export function DisplaySimplePagination({
         paginationParams={paginationParams}
         totalRecords={totalRecords}
         recordAlias={recordAlias}
+        prefix={quantityInfoPrefix}
         className={quantityClassName}
       />
       <SimplePagination
@@ -109,7 +113,7 @@ export function DisplaySimplePagination({
         paginationParams={paginationParams}
         onPrevious={onPrevious}
         onNext={onNext}
-        onChosen={onChosen}
+        onSelectPage={onSelectPage}
       />
     </div>
   );
@@ -118,10 +122,10 @@ export function DisplaySimplePagination({
 export interface PaginationProps {
   totalPages: number;
   totalRecords: number;
-  paginationParams: Required<ReferrerLeaderboardPageParams>;
+  paginationParams: Required<RequestPageParams>;
   onPrevious: () => void;
   onNext: () => void;
-  onChosen: (newPage: number) => void;
+  onSelectPage: (newPage: number) => void;
 }
 
 export function Pagination({
@@ -130,7 +134,7 @@ export function Pagination({
   paginationParams,
   onNext,
   onPrevious,
-  onChosen,
+  onSelectPage,
 }: PaginationProps) {
   const buttonStyles = shadcnButtonVariants({
     variant: "ghost",
@@ -149,7 +153,7 @@ export function Pagination({
         aria-disabled={paginationParams.page === 1}
         className={cn(buttonStyles, "block sm:hidden")}
         onClick={() => {
-          onChosen(1);
+          onSelectPage(1);
         }}
       >
         <ChevronsLeft size={16} />
@@ -163,7 +167,7 @@ export function Pagination({
         <span className="hidden sm:inline">Previous</span>
       </button>
       <p className="inline sm:hidden text-sm leading-normal font-medium">
-        Page {paginationParams.page} of {totalPages}
+        Page {numberFormat.format(paginationParams.page)} of {numberFormat.format(totalPages)}
       </p>
       <div className="hidden sm:flex flex-row flex-nowrap justify-center items-center gap-1">
         <button
@@ -174,7 +178,7 @@ export function Pagination({
               : "border-transparent",
           )}
           onClick={() => {
-            onChosen(1);
+            onSelectPage(1);
           }}
         >
           1
@@ -197,9 +201,9 @@ export function Pagination({
         {shouldDisplayAdditionalButtonForCurrentPage(totalPages, paginationParams.page) && (
           <button
             id="currentPageButton"
-            className={cn(buttonStyles, "border-gray-200")}
+            className={cn(buttonStyles, "border-gray-200 cursor-default hover:bg-white")}
             onClick={() => {
-              onChosen(paginationParams.page);
+              onSelectPage(paginationParams.page);
             }}
           >
             {paginationParams.page}
@@ -230,7 +234,7 @@ export function Pagination({
               : "border-transparent",
           )}
           onClick={() => {
-            onChosen(totalPages);
+            onSelectPage(totalPages);
           }}
         >
           {totalPages}
@@ -248,7 +252,7 @@ export function Pagination({
         aria-disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles, "block sm:hidden")}
         onClick={() => {
-          onChosen(totalPages);
+          onSelectPage(totalPages);
         }}
       >
         <ChevronsRight size={16} />
@@ -371,24 +375,26 @@ type RecordAlias = {
 };
 
 interface QuantityInfoProps {
-  paginationParams: Required<ReferrerLeaderboardPageParams>;
+  paginationParams: Required<RequestPageParams>;
   totalRecords: number;
-  recordAlias?: RecordAlias;
+  recordAlias: RecordAlias;
+  prefix?: string;
   className?: string;
 }
 
 const QuantityInfo = ({
   paginationParams,
   totalRecords,
-  recordAlias = { plural: "records", singular: "record" },
+  recordAlias,
+  prefix,
   className,
 }: QuantityInfoProps) => {
-  const numberFormat = new Intl.NumberFormat("en-US");
-
-  // Edge-case of zero referrers
+  // Edge-case of zero records
   if (totalRecords === 0) {
     return (
-      <p className={cn("text-sm leading-normal font-medium", className)}>No referrers found</p>
+      <p className={cn("text-sm leading-normal font-medium", className)}>
+        No {recordAlias.plural} found
+      </p>
     );
   }
 
@@ -403,7 +409,8 @@ const QuantityInfo = ({
 
   return (
     <p className={cn("text-sm leading-normal font-medium", className)}>
-      Rank {numberFormat.format((paginationParams.page - 1) * paginationParams.recordsPerPage + 1)}-
+      {prefix && prefix}{" "}
+      {numberFormat.format((paginationParams.page - 1) * paginationParams.recordsPerPage + 1)}-
       {numberFormat.format(paginationParams.page * paginationParams.recordsPerPage)} of{" "}
       {numberFormat.format(totalRecords)} {recordAlias.plural}
     </p>
@@ -412,36 +419,40 @@ const QuantityInfo = ({
 
 interface RecordsPerPageSelectProps {
   recordsPerPage: number;
-  onRecordsPerPageChange: (newItemsPerPage: number) => void;
-  possibleRecordsPerPageValues?: number[];
-  selectorDescription?: string;
+  onSelectRecordsPerPage: (newRecordsPerPage: number) => void;
+  recordsPerPageOptions?: number[];
+  selectDescription: string;
 }
 
-const ItemsPerPageSelect = ({
+const RecordsPerPageSelect = ({
   recordsPerPage,
-  onRecordsPerPageChange,
-  possibleRecordsPerPageValues = [25, 50],
-  selectorDescription = "Items per page",
+  onSelectRecordsPerPage,
+  recordsPerPageOptions = [25, 50],
+  selectDescription,
 }: RecordsPerPageSelectProps) => {
   const handleValueChange = (value: string) => {
     const newValue = Number(value);
 
-    onRecordsPerPageChange(newValue);
+    onSelectRecordsPerPage(newValue);
   };
+
+  const validatedRecordsPerPageOptions = [
+    ...new Set(recordsPerPageOptions.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0))),
+  ];
   return (
     <div className="flex flex-row flex-nowrap justify-center items-center gap-3">
       <p className="text-sm leading-normal font-medium text-muted-foreground">
-        {selectorDescription}
+        {selectDescription}
       </p>
       <Select onValueChange={handleValueChange} value={recordsPerPage.toString()}>
         <SelectTrigger className="w-[75px] cursor-pointer shadow-none">
-          <SelectValue placeholder={selectorDescription} />
+          <SelectValue placeholder={selectDescription} />
         </SelectTrigger>
         <SelectContent position="popper" className="min-w-[75px] w-[75px]">
           <SelectGroup>
-            {possibleRecordsPerPageValues.map((value) => (
+            {validatedRecordsPerPageOptions.map((value) => (
               <SelectItem
-                key={`ItemsPerPageSelectItem-${value}`}
+                key={`RecordsPerPageSelectItem-${value}`}
                 value={value.toString()}
                 className="cursor-pointer"
               >

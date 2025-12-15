@@ -45,7 +45,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
         console.error(response.errorMessage);
         setLeaderboardData(null);
-        setFetchErrorMessage("An error has occurred while loading the leaderboard.");
+        setFetchErrorMessage("An error occurred while loading the leaderboard.");
         setIsLoading(false);
         return;
       }
@@ -55,7 +55,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
     } catch (error) {
       console.error(error);
       setLeaderboardData(null);
-      setFetchErrorMessage("An error has occurred while loading the leaderboard.");
+      setFetchErrorMessage("An error occurred while loading the leaderboard.");
     } finally {
       setIsLoading(false);
     }
@@ -102,10 +102,11 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
               onNext={() => {
                 setCurrentPage((prev) => prev + 1);
               }}
-              onChosen={(newPage) => {
+              onSelectPage={(newPage) => {
                 setCurrentPage(newPage);
               }}
               recordAlias={{ singular: "referrer", plural: "referrers" }}
+              quantityInfoPrefix="Rank"
               quantityClassName="text-base text-black font-semibold"
             />
           )}
@@ -152,20 +153,18 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
               onNext={() => {
                 setCurrentPage((prev) => prev + 1);
               }}
-              onChosen={(newPage) => {
+              onSelectPage={(newPage) => {
                 setCurrentPage(newPage);
               }}
-              onRecordsPerPageChange={(newItemsPerPage) => {
+              onSelectRecordsPerPage={(newItemsPerPage) => {
                 if (newItemsPerPage !== currentRecordsPerPage) {
                   setCurrentPage(1);
                   setCurrentRecordsPerPage(newItemsPerPage);
                 }
               }}
-              possibleRecordsPerPageValues={[
-                ...new Set([25, 50, recordsPerPage].sort((a, b) => (a > b ? 1 : a < b ? -1 : 0))),
-              ]}
+              recordsPerPageOptions={[25, 50, recordsPerPage]}
               recordAlias={{ singular: "referrer", plural: "referrers" }}
-              selectorDescription="Referrers per page"
+              quantityInfoPrefix="Rank"
               quantityClassName="text-muted-foreground hidden sm:block"
             />
           )}

@@ -47,7 +47,7 @@ export function ReferrerLeaderboardSnippet({
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
         console.error(response.errorMessage);
-        setFetchErrorMessage("An error has occurred while loading the leaderboard.");
+        setFetchErrorMessage("An error occurred while loading the leaderboard.");
         setIsLoading(false);
         return;
       }
@@ -56,7 +56,7 @@ export function ReferrerLeaderboardSnippet({
     } catch (error) {
       console.error(error);
       setLeaderboardSnippetData(null);
-      setFetchErrorMessage("An error has occurred while loading the leaderboard.");
+      setFetchErrorMessage("An error occurred while loading the leaderboard.");
     } finally {
       setIsLoading(false);
     }

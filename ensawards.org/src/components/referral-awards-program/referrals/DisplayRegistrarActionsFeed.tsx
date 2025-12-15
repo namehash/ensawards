@@ -169,8 +169,12 @@ export function DisplayRegistrarActionsFeed({
       );
 
     case StatefulFetchStatusIds.Error:
+      console.error(registrarActions.reason);
       return (
-        <ErrorInfo title={title} description={[registrarActions.reason]}>
+        <ErrorInfo
+          title={title}
+          description={["ENSNode connection error occurred. Please try again later."]}
+        >
           <button
             className={cn(
               shadcnButtonVariants({
