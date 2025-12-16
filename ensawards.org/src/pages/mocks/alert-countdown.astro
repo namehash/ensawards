@@ -28,11 +28,6 @@ const timerLegendStyles = "text-white";
     <ItemsList
       header="AlertCountdown variants"
       containerStyles="gap-4 sm:gap-4">
-      <p class="text-amber-600 font-semibold">
-        NOTE: Banners are styled to be best visible in the mock environment.
-        Their styles are customizable, hence the public banner's CSS is a bit
-        different. The UX remains identical in both scenarios.
-      </p>
       <div class="w-full flex flex-col justify-start items-start gap-4">
         <p>Event ending on April 30th 2026 (with link)</p><AlertCountdown
           eventText={baseEventText}
@@ -91,7 +86,13 @@ const timerLegendStyles = "text-white";
                 hour12: false,
               }}
             /></b
-          >)
+          >)<br /><span class="text-amber-600"
+            >NOTE: Due to Astro's build-time generation this is only refreshable
+            in dev preview. The only way to alleviate that would be to translate
+            &lt;AlertCountdown /&gt; into a client component and we won't do
+            that since we prefer to keep as much of the page as .astro
+            components, and the current version satisfies our UI&UX needs.</span
+          >
         </p><AlertCountdown
           eventText={baseEventText}
           eventUnixTimestamp={(Date.now() + 1.75 * millisecondsInMinute) /
