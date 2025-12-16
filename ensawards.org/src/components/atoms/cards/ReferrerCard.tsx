@@ -141,7 +141,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         <p className="text-muted-foreground text-sm leading-normal font-normal">Tentative awards</p>
         <p
           className={cn(
-            "text-sm font-semibold",
+            "text-sm font-semibold leading-normal",
             referrer.isQualified ? "text-emerald-600" : "text-black font-normal",
           )}
         >
@@ -210,20 +210,22 @@ const RankIcon = ({ rank, isQualified, className }: RankProps) => (
 
 const RankIconLoading = ({ rank, className }: Omit<RankProps, "isQualified">) => (
   <GenericTooltip content={<p>Loading the data. Please wait.</p>} tooltipOffset={4}>
-    {rank <= 3 ? (
-      <img alt={`${rank}-place`} src={placeIcons[rank - 1].src} className={className} />
-    ) : (
-      <span
-        className={cn(
-          "w-fit h-6 box-border flex justify-center items-center text-xs leading-5 font-semibold text-muted-foreground rounded-full border px-2",
-          "text-gray-600 bg-gray-100 border-gray-200",
-          rank < 10 && "w-6",
-          className,
-        )}
-      >
-        {rank}
-      </span>
-    )}
+    <div className="w-8 h-8 box-border flex justify-center items-center">
+      {rank <= 3 ? (
+        <img alt={`${rank}-place`} src={placeIcons[rank - 1].src} className={className} />
+      ) : (
+        <span
+          className={cn(
+            "w-fit h-6 box-border flex justify-center items-center text-xs leading-5 font-semibold text-muted-foreground rounded-full border px-2",
+            "text-gray-600 bg-gray-100 border-gray-200",
+            rank < 10 && "w-6",
+            className,
+          )}
+        >
+          {rank}
+        </span>
+      )}
+    </div>
   </GenericTooltip>
 );
 
@@ -238,7 +240,7 @@ export const ReferrerCardLoading = ({ rank }: Omit<RankProps, "className" | "isQ
       <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-4">
         <RankIconLoading rank={rank} />
         <div className="flex flex-row justify-start items-center gap-3">
-          <div className="animate-pulse w-10 h-10 bg-gray-300 rounded-full" />
+          <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full" />
           <div className="sm:min-w-[170px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
             <div className="animate-pulse bg-gray-300 rounded-sm w-[100px] h-[14px] mt-[4px] mb-[3px]" />
@@ -247,7 +249,7 @@ export const ReferrerCardLoading = ({ rank }: Omit<RankProps, "className" | "isQ
       </div>
       {/*Mobile Header*/}
       <div className="sm:hidden flex flex-row flex-nowrap justify-start items-start gap-4 self-stretch relative">
-        <div className="animate-pulse w-10 h-10 bg-gray-300 rounded-full" />
+        <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full" />
         <RankIconLoading rank={rank} className="absolute top-0 right-0" />
       </div>
       {/*------------*/}

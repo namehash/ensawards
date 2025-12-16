@@ -35,8 +35,12 @@ export const scrollWithOffset = (id: string, offset: number) => {
 
   const y = element.getBoundingClientRect().top + window.scrollY - offset;
 
+  scrollToY(y);
+};
+
+export const scrollToY = (topPosition: number) => {
   window.scrollTo({
-    top: y,
+    top: topPosition,
     behavior: "smooth",
   });
 };
