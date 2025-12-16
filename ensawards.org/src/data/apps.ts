@@ -48,7 +48,7 @@ export const APPS: App[] = [
     slug: "coinbase-wallet",
     name: "Coinbase Wallet",
     description:
-      "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications across multiple blockchains.",
+      "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications.",
     type: AppTypes.Wallet,
     socials: {
       website: new URL("https://www.coinbase.com/learn/wallet"),

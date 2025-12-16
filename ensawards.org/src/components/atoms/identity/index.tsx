@@ -58,7 +58,6 @@ export function ResolveAndDisplayIdentity({
   //       components can then hook into.
   const { identity: identityResult } = useResolvedIdentity({
     identity,
-    namespaceId,
     accelerate,
   });
 
