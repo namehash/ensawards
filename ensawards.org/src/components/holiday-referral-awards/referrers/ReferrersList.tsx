@@ -47,7 +47,7 @@ export function ReferrersList({
     );
   }
 
-  if (referrersData.paginationContext.totalRecords === 0) {
+  if (referrersData.pageContext.totalRecords === 0) {
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
         <NoReferrersInfo cta={generateLinkCTA} />
