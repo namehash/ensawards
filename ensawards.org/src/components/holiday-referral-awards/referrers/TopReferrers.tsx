@@ -34,9 +34,9 @@ export function TopReferrers({
     setFetchErrorMessage("");
     setIsLoading(true);
     try {
-      const response = await client.getReferrerLeaderboard({
+      const response = await client.getReferrerLeaderboardPage({
         page: 1,
-        itemsPerPage: snippetSize,
+        recordsPerPage: snippetSize,
       });
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
@@ -119,21 +119,20 @@ export function TopReferrers({
             }}
             header={header}
           />
-          {topReferrersData !== null &&
-            topReferrersData.paginationContext.totalRecords > snippetSize && (
-              <a
-                href="/leaderboards/referrer"
-                className={cn(
-                  shadcnButtonVariants({
-                    variant: "ghost",
-                    size: "default",
-                    className: "cursor-pointer rounded-full text-sm max-sm:w-full",
-                  }),
-                )}
-              >
-                View full ENS referral leaderboard
-              </a>
-            )}
+          {topReferrersData !== null && topReferrersData.pageContext.totalRecords > snippetSize && (
+            <a
+              href="/leaderboards/referrer"
+              className={cn(
+                shadcnButtonVariants({
+                  variant: "ghost",
+                  size: "default",
+                  className: "cursor-pointer rounded-full text-sm max-sm:w-full",
+                }),
+              )}
+            >
+              View full ENS referral leaderboard
+            </a>
+          )}
         </div>
       </TooltipProvider>
     </ENSNodeProvider>

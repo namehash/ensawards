@@ -43,9 +43,9 @@ export function MockReferrersList() {
               grandTotalQualifiedReferrersFinalScore: 0,
               minFinalScoreToQualify: 0,
             },
-            paginationContext: {
+            pageContext: {
               page: 1,
-              itemsPerPage: 4,
+              recordsPerPage: 4,
               totalRecords: 0,
               totalPages: 1,
               hasNext: false,
@@ -177,9 +177,9 @@ export function MockReferrersList() {
               grandTotalQualifiedReferrersFinalScore: 29.0160469236699,
               minFinalScoreToQualify: 0.479133726222989,
             },
-            paginationContext: {
+            pageContext: {
               page: 1,
-              itemsPerPage: 4,
+              recordsPerPage: 4,
               totalRecords: 33,
               totalPages: 9,
               hasNext: true,

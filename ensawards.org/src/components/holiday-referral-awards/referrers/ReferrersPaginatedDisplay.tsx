@@ -33,9 +33,9 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
     setFetchErrorMessage("");
     setIsLoading(true);
     try {
-      const response = await client.getReferrerLeaderboard({
+      const response = await client.getReferrerLeaderboardPage({
         page: currentPage,
-        itemsPerPage: itemsPerPage,
+        recordsPerPage: itemsPerPage,
       });
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
@@ -46,7 +46,7 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
       }
 
       setReferrersLeaderboardsData(response.data);
-      setNumberOfPages(response.data.paginationContext.totalPages);
+      setNumberOfPages(response.data.pageContext.totalPages);
     } catch (error) {
       console.error(error);
       setReferrersLeaderboardsData(null);
@@ -111,7 +111,7 @@ export function ReferrersPaginatedDisplay({ itemsPerPage = 25 }: ReferrersPagina
             }}
           />
           {referrersLeaderboardsData !== null &&
-            referrersLeaderboardsData.paginationContext.totalRecords > 0 &&
+            referrersLeaderboardsData.pageContext.totalRecords > 0 &&
             numberOfPages > 1 && (
               <Pagination
                 numberOfPages={numberOfPages}

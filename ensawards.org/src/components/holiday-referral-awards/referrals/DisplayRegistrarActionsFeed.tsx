@@ -164,7 +164,7 @@ export function DisplayRegistrarActionsFeed({
       );
 
     case StatefulFetchStatusIds.Loading:
-      return <DisplayRegistrarActionsListLoading itemsPerPage={registrarActions.itemsPerPage} />;
+      return <DisplayRegistrarActionsListLoading itemsPerPage={registrarActions.recordsPerPage} />;
 
     case StatefulFetchStatusIds.Error:
       return (
