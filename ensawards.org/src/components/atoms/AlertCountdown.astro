@@ -6,19 +6,22 @@ import { cn } from "../../utils/tailwindClassConcatenation";
 interface AlertCountdownProps {
   eventUnixTimestamp: UnixTimestamp;
   eventText: string;
+  ctaText?: string;
+  link?: string;
   styles?: {
     banner?: string;
-    header?: string;
+    cta?: string;
     text?: string;
     timer?: string;
     timerLegend?: string;
   };
 }
 
-const { eventUnixTimestamp, eventText, styles }: AlertCountdownProps = Astro.props;
+const { eventUnixTimestamp, eventText, ctaText, link, styles }: AlertCountdownProps = Astro.props;
 ---
 
-<div
+<a
+  href={link}
   id="countdownAlertRoot"
   data-timestamp={eventUnixTimestamp}
   data-threshold={90 * secondsInDay}
@@ -26,16 +29,10 @@ const { eventUnixTimestamp, eventText, styles }: AlertCountdownProps = Astro.pro
   class={cn(
     "w-full h-[44px] box-border flex flex-row justify-center gap-2 sm:gap-5 items-center px-4 py-3 cursor-default",
     styles?.banner,
+    link !== undefined && "cursor-pointer",
   )}>
   <div class="flex flex-row flex-nowrap justify-start items-center gap-3">
     <div class="flex flex-row justify-start items-center gap-1.5">
-      <h4
-        class={cn(
-          "hidden sm:block text-sm leading-normal font-semibold",
-          styles?.header,
-        )}>
-        ACT NOW!
-      </h4>
       <p
         class={cn(
           "text-sm leading-5 sm:leading-normal font-normal max-sm:text-center",
@@ -91,7 +88,18 @@ const { eventUnixTimestamp, eventText, styles }: AlertCountdownProps = Astro.pro
       class={cn("text-sm leading-normal font-medium", styles?.timer)}>
     </p>
   </div>
-</div>
+  {
+    ctaText && (
+      <p
+        class={cn(
+          "hidden sm:block text-sm leading-normal font-semibold underline underline-offset-[25%] transition-all duration-200 cursor-pointer",
+          styles?.cta,
+        )}>
+        {ctaText}
+      </p>
+    )
+  }
+</a>
 <script>
   import { secondsInMinute, millisecondsInSecond } from "date-fns/constants";
   import { differenceInDays, intervalToDuration } from "date-fns";

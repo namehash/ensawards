@@ -1,4 +1,6 @@
 ---
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import { ChainIcon } from "../../components/atoms/ChainIcon";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
@@ -58,6 +60,20 @@ if (resolvedOrg) {
         ogImage: resolvedOrg.ogImagePath,
         twitterImage: resolvedOrg.twitterOgImagePath,
       }}>
+        <AlertCountdown
+                slot="alertBanner"
+                eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+                eventText="ENS Holiday Awards ends in"
+                ctaText="Learn more"
+                link="/ens-referral-awards"
+                styles={{
+                    banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+                    cta: "text-white decoration-white/40 hover:decoration-white",
+                    text: "text-white",
+                    timer: "text-white",
+                    timerLegend: "text-white",
+                }}
+        />
       <SubpageHero
         header={resolvedOrg.name}
         description={resolvedOrg.description}

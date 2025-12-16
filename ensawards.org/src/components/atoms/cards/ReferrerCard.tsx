@@ -38,6 +38,10 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
     maximumFractionDigits: 2,
   });
 
+  const yearsRequiredToBeQualified = numberFormat.format(
+    Math.max(0.01, aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore),
+  );
+
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       {/*Desktop Header*/}
@@ -92,7 +96,9 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal">Referral years</p>
-        <p className="text-sm leading-normal font-medium text-black">{referrer.score.toFixed(2)}</p>
+        <p className="text-sm leading-normal font-medium text-black">
+          {numberFormat.format(referrer.score)}
+        </p>
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal">Rank boost</p>
@@ -125,10 +131,9 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         ) : (
           <p className="text-sm leading-normal font-semibold text-black max-sm:text-end">
             Requires{" "}
-            {numberFormat.format(
-              Math.max(0.01, aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore),
-            )}{" "}
-            more years
+            {yearsRequiredToBeQualified === "1"
+              ? "1 more year"
+              : `${yearsRequiredToBeQualified} more years`}
           </p>
         )}
       </div>

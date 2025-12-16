@@ -1,4 +1,6 @@
 ---
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { ReferrerLeaderboard } from "../../components/referral-awards-program/referrers/ReferrerLeaderboard";
 import Layout from "../../layouts/Layout.astro";
@@ -14,6 +16,20 @@ import Layout from "../../layouts/Layout.astro";
     twitterImage:
       "https://ensawards.org/referrer_leaderboard_twitter_og_image.png",
   }}>
+  <AlertCountdown
+    slot="alertBanner"
+    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+    eventText="ENS Holiday Awards ends in"
+    ctaText="Learn more"
+    link="/ens-referral-awards"
+    styles={{
+      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+      cta: "text-white decoration-white/40 hover:decoration-white",
+      text: "text-white",
+      timer: "text-white",
+      timerLegend: "text-white",
+    }}
+  />
   <SubpageHero
     header="ENS Referral Leaderboard"
     description="Compare referrers by their performance in ENS Holiday Awards."

@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import type { ImageMetadata } from "astro";
+import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import LeaderboardCard from "../../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
@@ -34,6 +36,20 @@ const placeIcons = [
     ogImage: "https://ensawards.org/dao_leaderboard_og_image.png",
     twitterImage: "https://ensawards.org/dao_leaderboard_twitter_og_image.png",
   }}>
+  <AlertCountdown
+    slot="alertBanner"
+    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+    eventText="ENS Holiday Awards ends in"
+    ctaText="Learn more"
+    link="/ens-referral-awards"
+    styles={{
+      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+      cta: "text-white decoration-white/40 hover:decoration-white",
+      text: "text-white",
+      timer: "text-white",
+      timerLegend: "text-white",
+    }}
+  />
   <SubpageHero
     header="DAO leaderboard"
     description="Compare DAOs by their rank of following a selection of ENS best practices."
