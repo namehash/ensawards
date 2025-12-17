@@ -146,10 +146,16 @@ function ResolveAndDisplayReferrerIdentity({
   );
 }
 
+export interface RegistrarActionCardLoadingProps {
+  showReferrer?: boolean;
+}
+
 /**
  * Display Registrar Action Card loading state
  */
-export function RegistrarActionCardLoading() {
+export function RegistrarActionCardLoading({
+  showReferrer = true,
+}: RegistrarActionCardLoadingProps) {
   const isMobile = useIsMobile();
 
   return (
@@ -176,15 +182,17 @@ export function RegistrarActionCardLoading() {
         </LabeledField>
       </div>
 
-      <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
-        {!isMobile && <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full" />}
-        <LabeledField fieldLabel="Referrer" className="sm:min-w-[110px]">
-          <div className="w-full flex flex-row flex-nowrap max-sm:justify-end justify-start items-center gap-2">
-            {isMobile && <div className="animate-pulse w-5 h-5 bg-gray-200 rounded-full" />}
-            <div className="animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-3/5" />
-          </div>
-        </LabeledField>
-      </div>
+      {showReferrer && (
+        <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
+          {!isMobile && <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full" />}
+          <LabeledField fieldLabel="Referrer" className="sm:min-w-[110px]">
+            <div className="w-full flex flex-row flex-nowrap max-sm:justify-end justify-start items-center gap-2">
+              {isMobile && <div className="animate-pulse w-5 h-5 bg-gray-200 rounded-full" />}
+              <div className="animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-3/5" />
+            </div>
+          </LabeledField>
+        </div>
+      )}
 
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
         <div className=" animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-4/5" />
@@ -198,6 +206,7 @@ export interface RegistrarActionCardProps {
   namedRegistrarAction: NamedRegistrarAction;
   referralIncentiveProgram: ReferralIncentiveProgram;
   now: UnixTimestamp;
+  showReferrer?: boolean;
 }
 
 /**
@@ -208,6 +217,7 @@ export function RegistrarActionCard({
   namedRegistrarAction,
   referralIncentiveProgram,
   now,
+  showReferrer = true,
 }: RegistrarActionCardProps) {
   const isMobile = useIsMobile();
   const { registrant, registrationLifecycle, type, referral, transactionHash } =
@@ -285,28 +295,30 @@ export function RegistrarActionCard({
         </LabeledField>
       </div>
 
-      <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
-        {!isMobile && (
-          <ResolveAndDisplayReferrerIdentity
-            chainId={chainId}
-            namespaceId={namespaceId}
-            referral={referral}
-            withAvatar={true}
-            withIdentifier={false}
-            withTooltip={false}
-          />
-        )}
-        <LabeledField fieldLabel="Referrer" className="w-[15%] min-w-[110px]">
-          <ResolveAndDisplayReferrerIdentity
-            chainId={chainId}
-            namespaceId={namespaceId}
-            referral={referral}
-            withAvatar={isMobile}
-            withIdentifier={true}
-            withTooltip={false}
-          />
-        </LabeledField>
-      </div>
+      {showReferrer && (
+        <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
+          {!isMobile && (
+            <ResolveAndDisplayReferrerIdentity
+              chainId={chainId}
+              namespaceId={namespaceId}
+              referral={referral}
+              withAvatar={true}
+              withIdentifier={false}
+              withTooltip={false}
+            />
+          )}
+          <LabeledField fieldLabel="Referrer" className="w-[15%] min-w-[110px]">
+            <ResolveAndDisplayReferrerIdentity
+              chainId={chainId}
+              namespaceId={namespaceId}
+              referral={referral}
+              withAvatar={isMobile}
+              withIdentifier={true}
+              withTooltip={false}
+            />
+          </LabeledField>
+        </div>
+      )}
 
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
         <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">

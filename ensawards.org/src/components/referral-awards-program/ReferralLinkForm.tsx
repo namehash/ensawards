@@ -244,7 +244,7 @@ export function ReferralLinkForm() {
                   onChange={handleInputChange}
                   error={validationErrors[field.label]}
                   required={field.required}
-                  className="bg-white"
+                  className="bg-white h-[38px]"
                 />
               </div>
             ))}

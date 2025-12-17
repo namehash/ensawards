@@ -53,7 +53,7 @@ function DisplayRegistrarActionsList({
   );
 }
 
-interface DisplayRegistrarActionsListPlaceholderProps {
+interface DisplayRegistrarActionsListLoadingProps {
   recordsPerPage: number;
 }
 
@@ -62,9 +62,9 @@ interface DisplayRegistrarActionsListPlaceholderProps {
  */
 function DisplayRegistrarActionsListLoading({
   recordsPerPage,
-}: DisplayRegistrarActionsListPlaceholderProps) {
+}: DisplayRegistrarActionsListLoadingProps) {
   return (
-    <div className="w-full space-y-4 relative z-10">
+    <div className="w-full space-y-3 relative z-10">
       {[...Array(recordsPerPage)].map((_, idx) => (
         <RegistrarActionCardLoading key={idx} />
       ))}

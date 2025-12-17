@@ -6,6 +6,7 @@ import type { Name } from "@ensnode/ensnode-sdk";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { buildEnsMetadataServiceAvatarUrl } from "@/utils/namespace.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 interface EnsAvatarProps {
   name: Name;
@@ -39,7 +40,9 @@ export const EnsAvatar = ({ name, namespaceId, className }: EnsAvatarProps) => {
         }}
       />
       {loadingStatus === "error" && <EnsAvatarFallback name={name} />}
-      {(loadingStatus === "idle" || loadingStatus === "loading") && <AvatarLoading />}
+      {(loadingStatus === "idle" || loadingStatus === "loading") && (
+        <AvatarLoading className={className} />
+      )}
     </Avatar>
   );
 };
@@ -59,6 +62,7 @@ const EnsAvatarFallback = ({ name }: EnsAvatarFallbackProps) => (
   />
 );
 
-const AvatarLoading = () => (
-  <div className="h-full w-full rounded-full animate-pulse bg-gray-300" />
+type EnsAvatarLoadingProps = Omit<EnsAvatarProps, "name" | "namespaceId">;
+const AvatarLoading = ({ className }: EnsAvatarLoadingProps) => (
+  <div className={cn("h-full w-full rounded-full animate-pulse bg-gray-200", className)} />
 );

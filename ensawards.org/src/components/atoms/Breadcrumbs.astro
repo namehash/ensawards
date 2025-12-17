@@ -1,0 +1,82 @@
+---
+import { cn } from "../../utils/tailwindClassConcatenation";
+import ChevronRightIcon from "./icons/ChevronRightIcon.astro";
+import HomeIcon from "./icons/HomeIcon.astro";
+
+interface BreadcrumbsProps {
+  breadcrumbs: string[];
+  styles?: {
+    home?: string;
+    chevron?: string;
+    text?: string;
+  };
+}
+
+const { breadcrumbs, styles }: BreadcrumbsProps = Astro.props;
+
+let breadcrumbHref = "";
+
+const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
+
+const adaptBreadcrumb = (crumb: string): string => {
+  // We use switch case here to stay flexible in the future
+  switch (crumb) {
+    case "DAO leaderboard":
+      return "dao";
+    case "App leaderboard":
+      return "app";
+    case "ENS leaderboards":
+      return "leaderboards";
+    case "ENS Holiday Awards":
+      return "ens-referral-awards";
+    case "ENS advocates":
+      return "name";
+    default:
+      return crumb;
+  }
+};
+---
+
+<div
+  class="flex flex-row flex-wrap justify-start items-center gap-[10px] relative z-10">
+  <a
+    href="/"
+    class={cn(
+      "box-content p-1 hover:bg-white/5 rounded-[4px] transition-all duration-200",
+      styles?.home,
+    )}>
+    <HomeIcon className={cn("w-4 h-4")} />
+  </a>
+  <ChevronRightIcon className={cn("text-white", styles?.chevron)} />
+  {
+    breadcrumbs.map((crumb, idx) => {
+      const urlAdaptedCrumb = adaptBreadcrumb(crumb);
+      breadcrumbHref = breadcrumbHref.concat("/", urlAdaptedCrumb);
+      if (idx < breadcrumbs.length - 1) {
+        return (
+          <>
+            <a
+              class={cn(
+                "text-xs sm:text-sm leading-normal font-normal text-white hover:underline hover:underline-offset-[25%] transition-all duration-200",
+                styles?.text,
+              )}
+              href={decodeURI(normalizeText(breadcrumbHref))}>
+              {crumb}
+            </a>
+            <ChevronRightIcon className={cn("text-white", styles?.chevron)} />
+          </>
+        );
+      }
+      return (
+        <a
+          class={cn(
+            "text-xs sm:text-sm leading-normal font-normal text-white hover:underline hover:underline-offset-[25%] transition-all duration-200",
+            styles?.text,
+          )}
+          href={decodeURI(normalizeText(breadcrumbHref))}>
+          {crumb}
+        </a>
+      );
+    })
+  }
+</div>

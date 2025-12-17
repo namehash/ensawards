@@ -115,9 +115,6 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
                 onNext={() => {
                   setCurrentPage((prev) => prev + 1);
                 }}
-                onSelectPage={(newPage) => {
-                  setCurrentPage(newPage);
-                }}
                 recordAlias={{ singular: "referrer", plural: "referrers" }}
                 quantityInfoPrefix="Rank"
                 quantityClassName="text-base text-black font-semibold"

@@ -2,6 +2,7 @@ import { getENSNodeUrl } from "@/utils/env";
 import {
   type Duration,
   ENSNodeClient,
+  ETH_COIN_TYPE,
   type NormalizedName,
   type ResolverRecordsSelection,
 } from "@ensnode/ensnode-sdk";
@@ -29,7 +30,7 @@ export const resolveEthAddress = async (
   // The Ethereum Mainnet coin type is 60 as per `evmChainIdToCoinType(mainnet.id)`.
   // Hardcoding the coin type here since the type inference needs a concrete value.
   const recordSelection = {
-    addresses: [60],
+    addresses: [ETH_COIN_TYPE],
   } satisfies ResolverRecordsSelection;
 
   const resolutionPromise = client.resolveRecords(name, recordSelection);

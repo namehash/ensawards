@@ -87,12 +87,14 @@ export function DisplaySimplePagination({
   paginationParams,
   onNext,
   onPrevious,
-  onSelectPage,
   recordAlias,
   containerClassName,
   quantityInfoPrefix,
   quantityClassName,
-}: Omit<DisplayPaginationProps, "onSelectRecordsPerPage" | "recordsPerPageOptions">) {
+}: Omit<
+  DisplayPaginationProps,
+  "onSelectPage" | "onSelectRecordsPerPage" | "recordsPerPageOptions"
+>) {
   return (
     <div
       className={cn(
@@ -113,7 +115,6 @@ export function DisplaySimplePagination({
         paginationParams={paginationParams}
         onPrevious={onPrevious}
         onNext={onNext}
-        onSelectPage={onSelectPage}
       />
     </div>
   );
@@ -329,13 +330,19 @@ const shouldDisplayLeftDistanceIcon = (totalPages: number, currentPage: number):
   return true;
 };
 
+interface SimplePaginationProps extends Omit<PaginationProps, "onSelectPage"> {
+  showText?: boolean; //TODO: It's about showing the "Next" & "Previous" on the buttons, help with naming appreciated
+  containerClassName?: string;
+}
 export function SimplePagination({
   totalPages,
   totalRecords,
   paginationParams,
   onNext,
   onPrevious,
-}: PaginationProps) {
+  showText = false,
+  containerClassName,
+}: SimplePaginationProps) {
   const buttonStyles = shadcnButtonVariants({
     variant: "ghost",
     size: "default",
@@ -348,19 +355,26 @@ export function SimplePagination({
   }
 
   return (
-    <div className="flex flex-row flex-nowrap justify-start items-center gap-1">
+    <div
+      className={cn(
+        "flex flex-row flex-nowrap justify-start items-center gap-1",
+        containerClassName,
+      )}
+    >
       <button
         aria-disabled={paginationParams.page === 1}
         className={cn(buttonStyles)}
         onClick={onPrevious}
       >
         <PreviousPageIcon size={16} />
+        {showText && <span>Previous</span>}
       </button>
       <button
         aria-disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles)}
         onClick={onNext}
       >
+        {showText && <span>Next</span>}
         <NextPageIcon size={16} />
       </button>
     </div>

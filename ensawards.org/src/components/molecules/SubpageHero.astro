@@ -1,10 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import HomeIcon from "../../assets/homeIcon.svg";
 import SubpageHeroImage from "../../assets/subpageHeroImage.png";
 import { cn } from "../../utils/tailwindClassConcatenation";
-import ChevronRightIcon from "../atoms/icons/ChevronRightIcon.astro";
+import Breadcrumbs from "../atoms/Breadcrumbs.astro";
 
 interface additionalHeroElement {
   name: string;
@@ -37,26 +36,6 @@ const {
   customImage,
   additionalElements,
 }: SubpageHeroProps = Astro.props;
-
-let breadcrumbHref = "";
-
-const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
-
-const adaptBreadcrumb = (crumb: string): string => {
-  // We use switch case here to stay flexible in the future
-  switch (crumb) {
-    case "DAO leaderboard":
-      return "dao";
-    case "App leaderboard":
-      return "app";
-    case "ENS leaderboards":
-      return "leaderboards";
-    case "ENS Holiday Awards":
-      return "ens-referral-awards";
-    default:
-      return crumb;
-  }
-};
 ---
 
 <section
@@ -79,37 +58,10 @@ const adaptBreadcrumb = (crumb: string): string => {
     />
     {
       breadcrumbs && (
-        <div class="flex flex-row flex-wrap justify-start items-center gap-[10px] relative z-10">
-          <a
-            href="/"
-            class="box-content p-1 hover:bg-white/5 rounded-[4px] transition-all duration-200">
-            <HomeIcon width="16" height="16" />
-          </a>
-          <ChevronRightIcon className="text-white" />
-          {breadcrumbs.map((crumb, idx) => {
-            const urlAdaptedCrumb = adaptBreadcrumb(crumb);
-            breadcrumbHref = breadcrumbHref.concat("/", urlAdaptedCrumb);
-            if (idx < breadcrumbs.length - 1) {
-              return (
-                <>
-                  <a
-                    class="text-xs sm:text-sm leading-normal font-normal text-white hover:underline hover:underline-offset-[25%] transition-all duration-200"
-                    href={decodeURI(normalizeText(breadcrumbHref))}>
-                    {crumb}
-                  </a>
-                  <ChevronRightIcon className="text-white" />
-                </>
-              );
-            }
-            return (
-              <a
-                class="text-xs sm:text-sm leading-normal font-normal text-white hover:underline hover:underline-offset-[25%] transition-all duration-200"
-                href={decodeURI(normalizeText(breadcrumbHref))}>
-                {crumb}
-              </a>
-            );
-          })}
-        </div>
+        <Breadcrumbs
+          breadcrumbs={breadcrumbs}
+          styles={{ home: "text-white" }}
+        />
       )
     }
     <div
