@@ -13,9 +13,11 @@ import {
   TrendingUp,
   Trophy,
 } from "@lucide/astro";
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
 import VoicesFromTheCommunityBackgroundImage from "../assets/voicesFromTheCommunityBackground.png";
 import Web3NeedsToChangeImage from "../assets/web3UXNeedsToChangeImage.svg";
+import AlertCountdown from "../components/atoms/AlertCountdown.astro";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
 import { EnscribeSolidIcon } from "../components/atoms/icons/EnscribeSolidIcon";
@@ -153,9 +155,24 @@ const daoScores = contractPipeline({
     title: "ENSAwards: ENS Contract Naming Season",
     description: "Elevate your protocol’s onchain identity.",
     url: "https://ensawards.org/ens-contract-naming-season",
-    ogImage: "/contract-naming-season_og_image.png",
-    twitterImage: "https://ensawards.org/contract-naming-season_twitter_og_image.png",
+    ogImage: "https://ensawards.org/contract-naming-season_og_image.png",
+    twitterImage:
+      "https://ensawards.org/contract-naming-season_twitter_og_image.png",
   }}>
+  <AlertCountdown
+    slot="alertBanner"
+    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+    eventText="ENS Holiday Awards ends in"
+    ctaText="Learn more"
+    link="/ens-referral-awards"
+    styles={{
+      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+      cta: "text-white decoration-white/40 hover:decoration-white",
+      text: "text-white",
+      timer: "text-white",
+      timerLegend: "text-white",
+    }}
+  />
   <ContractNamingHero />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] pt-6 sm:pt-0 pb-0 px-5 sm:px-8 overflow-hidden">

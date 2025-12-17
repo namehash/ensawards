@@ -1,14 +1,16 @@
 ---
 import { Image } from "astro:assets";
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import type { ImageMetadata } from "astro";
+import AlertCountdown from "../components/atoms/AlertCountdown.astro";
 import ContractNamingBanner from "../components/atoms/ContractNamingBanner.astro";
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
-import HolidayReferralAwardsCTA from "../components/holiday-referral-awards/HolidayReferralAwardsCTA.astro";
-import { TopReferrers } from "../components/holiday-referral-awards/referrers/TopReferrers";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
+import HolidayReferralAwardsCTA from "../components/referral-awards-program/HolidayReferralAwardsCTA.astro";
+import { ReferrerLeaderboardSnippet } from "../components/referral-awards-program/referrers/ReferrerLeaderboardSnippet";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
 import { daoContractsOnly } from "../contract-pipelines/filters";
@@ -34,6 +36,20 @@ const daoScores = contractPipeline({
 ---
 
 <Layout>
+  <AlertCountdown
+    slot="alertBanner"
+    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+    eventText="ENS Holiday Awards ends in"
+    ctaText="Learn more"
+    link="/ens-referral-awards"
+    styles={{
+      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+      cta: "text-white decoration-white/40 hover:decoration-white",
+      text: "text-white",
+      timer: "text-white",
+      timerLegend: "text-white",
+    }}
+  />
   <Hero />
   <section
     id="previews-section"
@@ -138,10 +154,6 @@ const daoScores = contractPipeline({
         View full app leaderboard
       </a>
     </ItemsList>
-    <TopReferrers
-      client:load
-      header="Top Referrers"
-      onENSHolidayReferralsAwards={false}
-    />
+    <ReferrerLeaderboardSnippet client:load header="Top Referrers" />
   </section>
 </Layout>

@@ -117,9 +117,16 @@ export function DisplayIdentity({
     // identity is an `UnresolvedIdentity` which represents that it hasn't been resolved yet
     // display loading state
     avatar = (
-      <Skeleton className={cn("h-10 w-10 rounded-full", isMobile && withIdentifier && "w-5 h-5")} />
+      <Skeleton
+        className={cn(
+          "h-10 w-10 rounded-full bg-gray-200",
+          isMobile && withIdentifier && "w-5 h-5",
+        )}
+      />
     );
-    identifier = <Skeleton className={cn("h-4 w-24", className)} />;
+    identifier = (
+      <Skeleton className={cn("w-[100px] h-[14px] mt-[4px] mb-[3px] bg-gray-200", className)} />
+    );
   } else if (
     identity.resolutionStatus === ResolutionStatusIds.Unnamed ||
     identity.resolutionStatus === ResolutionStatusIds.Unknown
@@ -187,10 +194,7 @@ export function DisplayIdentity({
       <IdentityLink
         identity={identity}
         namespaceId={namespaceId}
-        className={cn(
-          withAvatar && (isMobile && withIdentifier ? "w-5 h-5" : "w-10 h-10"),
-          "w-fit",
-        )}
+        className={cn("inline-flex w-fit h-fit")}
       >
         {result}
       </IdentityLink>

@@ -36,13 +36,13 @@ export default function HeaderMobileNavigation({
   );
 
   return (
-    <div className="w-full max-w-[1050px]">
+    <div className="w-full max-w-[1085px]">
       <Popover className="relative">
         {({ open }) => (
           <>
             <PopoverButton
               className={cn(
-                "min-[1050px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200",
+                "min-[1085px]:hidden relative z-30 focus:outline-none cursor-pointer px-[11px] py-[13px] border-transparent rounded-lg transition-all duration-200",
                 popoverButtonClass,
               )}
             >
@@ -59,9 +59,9 @@ export default function HeaderMobileNavigation({
               leaveFrom="opacity-100 translate-x-0"
               leaveTo="opacity-0 translate-x-full"
             >
-              <PopoverPanel className="min-[1050px]:hidden fixed inset-0 z-30 h-screen w-full bg-white">
+              <PopoverPanel className="min-[1085px]:hidden fixed inset-0 z-30 h-screen w-full bg-white">
                 <div className="flex h-full flex-col justify-between px-5 sm:px-8 pb-5">
-                  <div className="w-full justify-between items-center flex absolute px-5 sm:px-8 h-[56px] sm:h-[70px] top-0 left-0 max-w-[1050px] border-b border-b-black/5">
+                  <div className="w-full justify-between items-center flex absolute px-5 sm:px-8 h-[56px] sm:h-[70px] top-0 left-0 max-w-[1085px] border-b border-b-black/5">
                     <a
                       href="/"
                       className="h-fit flex justify-center items-center gap-[10px] text-[19px] sm:text-2xl text-black not-italic font-bold leading-[25px] sm:leading-8"

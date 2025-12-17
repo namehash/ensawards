@@ -1,10 +1,11 @@
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import {
-  ReferrersList,
-  type ReferrersListProps,
-} from "@/components/holiday-referral-awards/referrers/ReferrersList.tsx";
+  DisplayReferrerLeaderboardPage,
+  type DisplayReferrerLeaderboardPageProps,
+} from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { useMemo, useState } from "react";
@@ -12,20 +13,20 @@ import { useMemo, useState } from "react";
 type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 
 const DEFAULT_STATE = "loaded";
-export function MockReferrersList() {
+export function MockDisplayReferrerLeaderboardPage() {
   const ensNodeReactConfig = useMemo(
     () =>
       createConfig({
-        url: "https://api.alpha-sepolia.yellow.ensnode.io/",
+        url: getENSNodeUrl(),
       }),
     [],
-  ); //TODO: replace with getENSNodeUrl for prod
+  );
   const [selectedState, setSelectedState] = useState<ReferrersListState>(DEFAULT_STATE);
-  const props: ReferrersListProps = useMemo(() => {
+  const props = useMemo(() => {
     switch (selectedState) {
       case "empty":
         return {
-          referrersData: {
+          leaderboardPageData: {
             rules: {
               totalAwardPoolValue: 10000,
               maxQualifiedReferrers: 10,
@@ -56,38 +57,23 @@ export function MockReferrersList() {
             accurateAsOf: 1764091210,
           },
           isLoading: false,
-          generateLinkCTA: (
-            <p
-              className={cn(
-                shadcnButtonVariants({
-                  variant: "outline",
-                  size: "default",
-                  className: "cursor-pointer rounded-full",
-                }),
-              )}
-            >
-              Placeholder
-            </p>
-          ),
-        };
+        } satisfies DisplayReferrerLeaderboardPageProps;
 
       case "loading":
         return {
-          referrersData: null,
+          leaderboardPageData: null,
           isLoading: true,
-          generateLinkCTA: <p>Placeholder</p>,
-          loadingStateData: {
-            referrerPositionOffset: 0,
-            numberOfItemsToDisplay: 4,
+          paginationParams: {
+            page: 1,
+            recordsPerPage: 4,
           },
-        };
+        } satisfies DisplayReferrerLeaderboardPageProps;
 
       case "fetchError":
         return {
-          referrersData: null,
+          leaderboardPageData: null,
           isLoading: false,
-          generateLinkCTA: <p>Placeholder</p>,
-          error: (
+          leaderboardPageFetchError: (
             <ErrorInfo
               title="Error loading referrer data"
               description={["Mock error message. Please try again later."]}
@@ -106,11 +92,11 @@ export function MockReferrersList() {
               </button>
             </ErrorInfo>
           ),
-        };
+        } satisfies DisplayReferrerLeaderboardPageProps;
 
       default:
         return {
-          referrersData: {
+          leaderboardPageData: {
             rules: {
               totalAwardPoolValue: 10000,
               maxQualifiedReferrers: 10,
@@ -123,7 +109,7 @@ export function MockReferrersList() {
             },
             referrers: [
               {
-                referrer: "0x03c098d2bed4609e6ed9beb2c4877741f45f290d",
+                referrer: "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
                 totalReferrals: 5,
                 totalIncrementalDuration: 22813200,
                 score: 0.722921529303591,
@@ -139,7 +125,7 @@ export function MockReferrersList() {
                 totalReferrals: 7,
                 totalIncrementalDuration: 15120000,
                 score: 0.479133726222989,
-                rank: 5,
+                rank: 4,
                 isQualified: true,
                 finalScoreBoost: 0,
                 finalScore: 0.479133726222989,
@@ -147,7 +133,7 @@ export function MockReferrersList() {
                 awardPoolApproxValue: 165.1271544616,
               },
               {
-                referrer: "0xffa596cdf9a69676e689b1a92e5e681711227d75",
+                referrer: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
                 totalReferrals: 5,
                 totalIncrementalDuration: 12960000,
                 score: 0.410686051048276,
@@ -163,7 +149,7 @@ export function MockReferrersList() {
                 totalReferrals: 5,
                 totalIncrementalDuration: 12096000,
                 score: 0.383306980978391,
-                rank: 23,
+                rank: 555,
                 isQualified: false,
                 finalScoreBoost: 0,
                 finalScore: 0.383306980978391,
@@ -190,8 +176,7 @@ export function MockReferrersList() {
             accurateAsOf: 1764580368,
           },
           isLoading: false,
-          generateLinkCTA: <p>Placeholder</p>,
-        };
+        } satisfies DisplayReferrerLeaderboardPageProps;
     }
   }, [selectedState]);
 
@@ -200,8 +185,9 @@ export function MockReferrersList() {
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
           <div className="flex flex-wrap gap-2">
-            {["loading", "fetchError", "empty", "loaded"].map((variant) => (
+            {["loading", "fetchError", "empty", "loaded"].map((variant, idx) => (
               <button
+                key={`variant-button-${idx}`}
                 className={cn(
                   shadcnButtonVariants({
                     variant: selectedState === variant ? "default" : "outline",
@@ -215,7 +201,7 @@ export function MockReferrersList() {
               </button>
             ))}
           </div>
-          <ReferrersList {...props} />
+          <DisplayReferrerLeaderboardPage {...props} />
         </div>
       </TooltipProvider>
     </ENSNodeProvider>

@@ -1,6 +1,8 @@
 ---
-import { ReferrersPaginatedDisplay } from "../../components/holiday-referral-awards/referrers/ReferrersPaginatedDisplay";
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { ReferrerLeaderboard } from "../../components/referral-awards-program/referrers/ReferrerLeaderboard";
 import Layout from "../../layouts/Layout.astro";
 ---
 
@@ -10,9 +12,24 @@ import Layout from "../../layouts/Layout.astro";
     description:
       "Compare referrers by their performance in ENS Holiday Awards.",
     url: "https://ensawards.org/leaderboards/referrer",
-    ogImage: "/referrer_leaderboard_og_image.png",
-    twitterImage: "https://ensawards.org/referrer_leaderboard_twitter_og_image.png",
+    ogImage: "https://ensawards.org/referrer_leaderboard_og_image.png",
+    twitterImage:
+      "https://ensawards.org/referrer_leaderboard_twitter_og_image.png",
   }}>
+  <AlertCountdown
+    slot="alertBanner"
+    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+    eventText="ENS Holiday Awards ends in"
+    ctaText="Learn more"
+    link="/ens-referral-awards"
+    styles={{
+      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+      cta: "text-white decoration-white/40 hover:decoration-white",
+      text: "text-white",
+      timer: "text-white",
+      timerLegend: "text-white",
+    }}
+  />
   <SubpageHero
     header="ENS Referral Leaderboard"
     description="Compare referrers by their performance in ENS Holiday Awards."
@@ -26,7 +43,6 @@ import Layout from "../../layouts/Layout.astro";
   />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-    <!--TODO: Rollback itemsPerPage to the default 25 after the fix of the "hasNext" bug is rolled out-->
-    <ReferrersPaginatedDisplay client:load itemsPerPage={100} />
+    <ReferrerLeaderboard client:load />
   </section>
 </Layout>

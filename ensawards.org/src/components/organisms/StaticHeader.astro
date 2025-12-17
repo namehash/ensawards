@@ -7,7 +7,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
 
 <header
   id="site-header"
-  class="fixed top-0 w-full z-20 h-[56px] sm:h-[70px] bg-white border-b border-b-black/10 flex flex-row justify-center items-center">
+  class="sticky top-0 w-full z-20 h-[56px] sm:h-[70px] bg-white border-b border-b-black/10 flex flex-row justify-center items-center">
   <div
     class="w-full max-w-[1280px] box-border flex flex-nowrap flex-row justify-between items-center px-5 sm:px-8">
     <a
@@ -20,7 +20,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
       </p>
     </a>
     <div
-      class="hidden min-[1050px]:flex flex-row flex-nowrap gap-2 justify-center items-center">
+      class="hidden min-[1085px]:flex flex-row flex-nowrap gap-2 justify-center items-center">
       <a
         href="/leaderboards"
         class={cn(
@@ -72,7 +72,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
         )}>ENS holiday referral awards</a
       >
     </div>
-    <div class="block min-[1050px]:hidden">
+    <div class="block min-[1085px]:hidden">
       <HeaderMobileNavigation
         popoverButtonClass="staticHeaderButton"
         client:load

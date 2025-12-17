@@ -80,7 +80,9 @@ const { name, notes, viewDetails, additionalInfo }: BenchmarkResultCardProps = A
       class="max-sm:hidden flex flex-col items-start justify-center min-w-[110px]">
       <slot name="badge" />
     </div>
-    <ChevronRightIcon className="max-sm:hidden w-10 h-10 hover:opacity-60 shrink-0" />
+    <ChevronRightIcon
+      className="max-sm:hidden w-10 h-10 hover:opacity-60 shrink-0"
+    />
   </div>
   <button
     class={cn(

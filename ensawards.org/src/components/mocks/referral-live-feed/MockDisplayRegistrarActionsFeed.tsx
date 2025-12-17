@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
 
-import { DisplayRegistrarActionsFeed } from "@/components/holiday-referral-awards/referrals/DisplayRegistrarActionsFeed.tsx";
+import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { ENSHolidayAwards } from "@/data/referralIncentivePrograms.ts";

@@ -1,4 +1,5 @@
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { ChevronRight } from "lucide-react";
 import { type PropsWithChildren, useState } from "react";
 
@@ -15,9 +16,11 @@ export function FoldableCard({
   children,
 }: PropsWithChildren<FoldableCardProps>) {
   const [isOpen, setIsOpen] = useState<boolean>(initiallyOpen);
+  const [animationParent] = useAutoAnimate();
   const chevronStyles = "text-black/30 hover:text-black/60";
   return (
     <div
+      ref={animationParent}
       id={`FAQ-${header}`}
       onClick={() => setIsOpen((prev) => !prev)}
       className={cn(

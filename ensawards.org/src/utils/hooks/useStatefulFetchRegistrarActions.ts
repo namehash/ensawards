@@ -15,14 +15,14 @@ import type {
   StatefulFetchRegistrarActionsLoading,
   StatefulFetchRegistrarActionsNotReady,
   StatefulFetchRegistrarActionsUnsupported,
-} from "@/components/holiday-referral-awards/referrals/types.ts";
+} from "@/components/referral-awards-program/referrals/types.ts";
 
-import { StatefulFetchStatusIds } from "@/components/holiday-referral-awards/referrals/types.ts";
+import { StatefulFetchStatusIds } from "@/components/referral-awards-program/referrals/types.ts";
 import { useIndexingStatusWithSwr } from "@/utils/hooks/useIndexingStatusWithSWR.ts";
 
 interface UseStatefulRegistrarActionsProps {
   filters?: RegistrarActionsFilter[];
-  itemsPerPage: number;
+  recordsPerPage: number;
 }
 
 const {
@@ -39,7 +39,7 @@ const {
  * a "stateful" data model around fetching Registrar Actions in relation to the state of the connected ENSNode instance.
  */
 export function useStatefulRegistrarActions({
-  itemsPerPage,
+  recordsPerPage,
   filters,
 }: UseStatefulRegistrarActionsProps): StatefulFetchRegistrarActions {
   const ensNodeConfigQuery = useENSNodeConfig();
@@ -64,7 +64,7 @@ export function useStatefulRegistrarActions({
   //       We use `isRegistrarActionsApiSupported` to enable query in those cases.
   const registrarActionsQuery = useRegistrarActions({
     order: RegistrarActionsOrders.LatestRegistrarActions,
-    recordsPerPage: itemsPerPage,
+    recordsPerPage: recordsPerPage,
     filters,
     query: {
       enabled: isRegistrarActionsApiSupported,
@@ -119,7 +119,7 @@ export function useStatefulRegistrarActions({
   if (registrarActionsQuery.isPending) {
     return {
       fetchStatus: StatefulFetchStatusIds.Loading,
-      recordsPerPage: itemsPerPage,
+      recordsPerPage: recordsPerPage,
     } satisfies StatefulFetchRegistrarActionsLoading;
   }
 

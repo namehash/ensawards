@@ -13,7 +13,7 @@ export interface ErrorInfoProps {
 export function ErrorInfo({ title, description, children }: PropsWithChildren<ErrorInfoProps>) {
   const verticalContainerStyles = "w-full flex flex-col justify-start items-center";
   return (
-    <div className={cn(verticalContainerStyles, "gap-5 justify-center md:min-h-[305px]")}>
+    <div className={cn(verticalContainerStyles, "gap-5 justify-center md:min-h-[305px] relative")}>
       <div className="w-[48px] h-[48px] flex flex-col justify-center items-center rounded-full bg-red-600/10">
         <AlertIcon size={20} className="flex-shrink-0 text-red-600" />
       </div>
@@ -21,8 +21,11 @@ export function ErrorInfo({ title, description, children }: PropsWithChildren<Er
         <div className={cn(verticalContainerStyles, "gap-1")}>
           <h3 className="text-xl leading-normal font-semibold text-black text-center">{title}</h3>
           <div className={cn(verticalContainerStyles, "gap-0")}>
-            {description?.map((description) => (
-              <p className="text-base leading-normal font-normal text-muted-foreground text-center">
+            {description?.map((description, idx) => (
+              <p
+                key={`error-description-${idx}`}
+                className="text-base leading-normal font-normal text-muted-foreground text-center"
+              >
                 {description}
               </p>
             ))}

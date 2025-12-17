@@ -1,0 +1,126 @@
+---
+import {
+  millisecondsInDay,
+  millisecondsInMinute,
+  millisecondsInSecond,
+  millisecondsInWeek,
+} from "date-fns/constants";
+import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
+import { AbsoluteTime } from "../../components/atoms/datetime/AbsoluteTime";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import Layout from "../../layouts/Layout.astro";
+import { ENS_CONTRACT_NAMING_SEASON_APPROX_END } from "../../utils";
+import { cn } from "../../utils/tailwindClassConcatenation";
+
+const baseEventText = "Base event text";
+const bannerStyles = "bg-blue-700";
+const ctaStyles = "text-white decoration-white/40 hover:decoration-white";
+const textStyles = "text-white/50";
+const timerStyles = "text-white";
+const timerLegendStyles = "text-white";
+---
+
+<Layout>
+  <SubpageHero header="AlertCountdown" breadcrumbs={["Mocks"]} />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ItemsList
+      header="AlertCountdown variants"
+      containerStyles="gap-4 sm:gap-4">
+      <div class="w-full flex flex-col justify-start items-start gap-4">
+        <p>Event ending on April 30th 2026 (with link)</p><AlertCountdown
+          eventText={baseEventText}
+          eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_APPROX_END}
+          ctaText="Learn more"
+          link="/ens-referral-awards"
+          styles={{
+            banner: cn(
+              bannerStyles,
+              "hover:bg-blue-700/90 transition-all duration-200",
+            ),
+            cta: ctaStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
+        />
+      </div>
+      <div class="w-full h-[1px] bg-gray-200"></div>
+      <div class="w-full flex flex-col justify-start items-start gap-4">
+        <p>Event ending in 8 weeks from now (with link)</p><AlertCountdown
+          eventText={baseEventText}
+          eventUnixTimestamp={(Date.now() + 8 * millisecondsInWeek) /
+            millisecondsInSecond}
+          ctaText="Learn more"
+          link="/ens-referral-awards"
+          styles={{
+            banner: cn(
+              bannerStyles,
+              "hover:bg-blue-700/90 transition-all duration-200",
+            ),
+            cta: ctaStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
+        />
+      </div>
+      <div class="w-full h-[1px] bg-gray-200"></div>
+      <div class="w-full flex flex-col justify-start items-start gap-4">
+        <p>
+          Event ending in &lt; 2 minutes from now (no link, <b
+            ><AbsoluteTime
+              client:load
+              timestamp={(Date.now() + 1.75 * millisecondsInMinute) /
+                millisecondsInSecond}
+              ctaText="Learn more"
+              link="/ens-referral-awards"
+              options={{
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+                hour12: false,
+              }}
+            /></b
+          >)<br /><span class="text-amber-600"
+            >NOTE: Due to Astro's build-time generation this is only refreshable
+            in dev preview. The only way to alleviate that would be to translate
+            &lt;AlertCountdown /&gt; into a client component and we won't do
+            that since we prefer to keep as much of the page as .astro
+            components, and the current version satisfies our UI&UX needs.</span
+          >
+        </p><AlertCountdown
+          eventText={baseEventText}
+          eventUnixTimestamp={(Date.now() + 1.75 * millisecondsInMinute) /
+            millisecondsInSecond}
+          styles={{
+            banner: bannerStyles,
+            cta: ctaStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
+        />
+      </div>
+      <div class="w-full h-[1px] bg-gray-200"></div>
+      <div class="w-full flex flex-col justify-start items-start gap-4">
+        <p>Event ending 2 days before now</p><AlertCountdown
+          eventText={baseEventText}
+          eventUnixTimestamp={(Date.now() - 2 * millisecondsInDay) /
+            millisecondsInSecond}
+          styles={{
+            banner: bannerStyles,
+            cta: ctaStyles,
+            text: textStyles,
+            timer: timerStyles,
+            timerLegend: timerLegendStyles,
+          }}
+        />
+      </div>
+    </ItemsList>
+  </section>
+</Layout>

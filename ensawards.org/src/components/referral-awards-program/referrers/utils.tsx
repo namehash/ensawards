@@ -2,22 +2,47 @@ import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
-import { AlertCircle as AlertIcon, Award as AwardIcon } from "lucide-react";
-import type { ReactElement } from "react";
+import type {
+  ReferrerLeaderboardPage,
+  ReferrerLeaderboardPageContext,
+} from "@namehash/ens-referrals";
+import { Award as AwardIcon } from "lucide-react";
 
-export interface ReferrersSnapshotTimeProps {
-  lastUpdateTimestamp: UnixTimestamp;
+export interface ReferrerLeaderboardLastUpdateTimeProps {
+  timestamp: UnixTimestamp;
+  className?: string;
 }
-export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshotTimeProps) => {
+
+/**
+ * Displays the last time the leaderboard was updated in ENSAnalytics.
+ *
+ * @param timestamp - last update of the leaderboard.
+ * More details at {@link ReferrerLeaderboardPage.accurateAsOf}
+ */
+export const ReferrerLeaderboardLastUpdateTime = ({
+  timestamp,
+  className,
+}: ReferrerLeaderboardLastUpdateTimeProps) => {
   return (
-    <p className="text-base leading-normal font-normal text-muted-foreground whitespace-nowrap">
+    <p
+      className={cn(
+        "text-sm sm:text-base leading-normal font-normal text-muted-foreground sm:whitespace-nowrap",
+        className,
+      )}
+    >
       Last updated{" "}
       <AbsoluteTime
-        timestamp={lastUpdateTimestamp}
+        timestamp={timestamp}
         options={{
           year: "numeric",
           month: "short",
           day: "numeric",
+        }}
+      />{" "}
+      at{" "}
+      <AbsoluteTime
+        timestamp={timestamp}
+        options={{
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
@@ -28,11 +53,11 @@ export const ReferrersSnapshotTime = ({ lastUpdateTimestamp }: ReferrersSnapshot
   );
 };
 
-interface NoReferrersInfoProps {
-  cta: ReactElement;
-}
-
-export const NoReferrersInfo = ({ cta }: NoReferrersInfoProps) => {
+/**
+ * Displays information that the current referrer leaderboard is empty
+ * (when {@link ReferrerLeaderboardPageContext.totalRecords} is 0)
+ */
+export const EmptyLeaderboardInfo = () => {
   const verticalContainerStyles = "w-full flex flex-col justify-start items-center";
 
   return (
@@ -49,7 +74,18 @@ export const NoReferrersInfo = ({ cta }: NoReferrersInfoProps) => {
             Wanna be first? Generate your referral link and earn awards!
           </p>
         </div>
-        {cta}
+        <a
+          className={cn(
+            shadcnButtonVariants({
+              variant: "outline",
+              size: "default",
+              className: "cursor-pointer rounded-full",
+            }),
+          )}
+          href="/ens-referral-awards#generate-referral-link"
+        >
+          Generate your referral link
+        </a>
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 ---
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import UnderConstructionBanner from "../../components/atoms/UnderConstructionBanner.astro";
 import CategoryCard from "../../components/atoms/cards/CategoryCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
@@ -14,6 +16,20 @@ import Layout from "../../layouts/Layout.astro";
     description: "Best practices for ENS integrations.",
     url: "https://ensawards.org/ens-best-practices",
   }}>
+  <AlertCountdown
+    slot="alertBanner"
+    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+    eventText="ENS Holiday Awards ends in"
+    ctaText="Learn more"
+    link="/ens-referral-awards"
+    styles={{
+      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+      cta: "text-white decoration-white/40 hover:decoration-white",
+      text: "text-white",
+      timer: "text-white",
+      timerLegend: "text-white",
+    }}
+  />
   <SubpageHero
     header="ENS best practices"
     description="Learn how to build the best possible ENS integration.">

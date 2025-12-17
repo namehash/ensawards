@@ -24,7 +24,7 @@ export interface LayoutProps {
 const DEFAULT_TITLE = "ENSAwards: ENS leaderboards and best practices";
 const DEFAULT_DESCRIPTION = "Awarding the best in ENS.";
 const DEFAULT_URL = "https://ensawards.org/";
-const DEFAULT_OG_IMAGE = "/default_og_image.png";
+const DEFAULT_OG_IMAGE = "https://ensawards.org/default_og_image.png";
 const DEFAULT_TWITTER_IMAGE = "https://ensawards.org/default_twitter_og_image.png";
 
 const DEFAULT_PAGE_METADATA: PageMetadata = {
@@ -41,7 +41,8 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
 <!doctype html>
 <html
   lang="en"
-  class="scroll-smooth snap-y scroll-pt-[56px] sm:scroll-pt-[70px]">
+  class="scroll-smooth snap-y scroll-pt-[56px] sm:scroll-pt-[70px]"
+  style={{ scrollbarGutter: "stable" }}>
   <head>
     <meta charset="UTF-8" />
     <AstroFont
@@ -95,7 +96,8 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
       }}
     />
   </head>
-  <body>
+  <body style={{ height: "fit-content" }}>
+    <slot name="alertBanner" />
     {isStatic ? <StaticHeader /> : <Header />}
     <slot />
     <div id="app-overlay" class="hidden">

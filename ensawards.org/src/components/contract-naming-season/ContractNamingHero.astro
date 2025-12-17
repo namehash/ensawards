@@ -9,7 +9,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
 ---
 
 <section
-  class="relative w-full h-[945px] sm:h-screen box-border flex flex-col justify-start sm:justify-center items-center gap-0 bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden max-sm:px-5 max-sm:pt-[96px] pt-[74px] max-sm:pb-[60px] md:max-h-[760px]">
+  class="relative w-full h-[889px] sm:h-[calc(100vh-70px)] box-border flex flex-col justify-start sm:justify-center items-center gap-0 bg-gradient-to-b from-[#161547] to-[#080E32] overflow-hidden max-sm:px-5 max-sm:pt-10 pt-1 max-sm:pb-[60px] md:max-h-[760px]">
   <div
     class="w-full max-w-[1280px] max-sm:h-full h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-center sm:px-8 max-sm:gap-6">
     <div
@@ -53,19 +53,31 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
           contracts.
         </p>
       </div>
-      <a
-        href="https://discuss.ens.domains/t/ens-contract-naming-season/21596"
-        target="_blank"
-        rel="noreferrer"
-        class={cn(
-          shadcnButtonVariants({
-            variant: "default",
-            size: "default",
-            className:
-              "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
-          }),
-        )}>Learn more on the forum</a
-      >
+      <div
+        class="w-fit h-fit flex flex-row max-sm:flex-wrap justify-start max-sm:justify-center items-center gap-3">
+        <a
+          href="/leaderboards/dao"
+          class={cn(
+            shadcnButtonVariants({
+              variant: "default",
+              size: "default",
+              className:
+                "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+            }),
+          )}>DAO leaderboard</a
+        >
+        <a
+          href="/leaderboards/app"
+          class={cn(
+            shadcnButtonVariants({
+              variant: "default",
+              size: "default",
+              className:
+                "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+            }),
+          )}>App leaderboard</a
+        >
+      </div>
       <Countdown
         eventText="10,000 $ENS incentive window closes soon"
         eventUnixTimestamp={ENS_CONTRACT_NAMING_SEASON_APPROX_END}

@@ -65,7 +65,11 @@ export const capitalizeFormLabel = (label: string): string => {
     return label.toUpperCase();
   }
 
-  return label.charAt(0).toUpperCase() + label.slice(1);
+  return capitalizeText(label);
+};
+
+export const capitalizeText = (text: string): string => {
+  return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
 export const truncateAddress = (address: Address) =>
