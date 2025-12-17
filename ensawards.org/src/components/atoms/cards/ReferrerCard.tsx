@@ -235,7 +235,7 @@ const RankIconLoading = ({ rank, className }: Omit<RankProps, "isQualified">) =>
 export const ReferrerCardLoading = ({ rank }: Omit<RankProps, "className" | "isQualified">) => {
   const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
   return (
-    <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-8 rounded-2xl border border-gray-200 bg-white">
+    <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 bg-white">
       {/*Desktop Header*/}
       <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-4">
         <RankIconLoading rank={rank} />
