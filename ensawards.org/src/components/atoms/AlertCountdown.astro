@@ -166,7 +166,7 @@ const { eventUnixTimestamp, eventText, ctaText, link, styles }: AlertCountdownPr
         minutesDisplay.innerText = String(minutesLeft);
       }
     } else {
-      // When the event's finish is further than threshold of days away
+      // When the eventUnixTimestamp is further than threshold of days away
       // The explicit countdown won't be displayed
       timerWrapper.style.display = "none";
     }

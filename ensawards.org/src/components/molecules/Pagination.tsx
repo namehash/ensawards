@@ -11,11 +11,11 @@ import { capitalizeText } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { RequestPageParams } from "@ensnode/ensnode-sdk";
 import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-  Ellipsis as DistanceSymbol,
+  Ellipsis as DistanceIcon,
+  ChevronsLeft as FirstPageIcon,
+  ChevronsRight as LastPageIcon,
+  ChevronRight as NextPageIcon,
+  ChevronLeft as PreviousPageIcon,
 } from "lucide-react";
 
 /**
@@ -24,7 +24,7 @@ import {
  */
 const MINIMAL_TOTAL_PAGES_TO_DISPLAY_ADDITIONAL_PAGINATION_BUTTONS = 3;
 
-const numberFormat = new Intl.NumberFormat("en-US");
+const numberFormatter = new Intl.NumberFormat("en-US");
 
 interface DisplayPaginationProps
   extends PaginationProps,
@@ -156,18 +156,18 @@ export function Pagination({
           onSelectPage(1);
         }}
       >
-        <ChevronsLeft size={16} />
+        <FirstPageIcon size={16} />
       </button>
       <button
         aria-disabled={paginationParams.page === 1}
         className={cn(buttonStyles, "border-transparent")}
         onClick={onPrevious}
       >
-        <ChevronLeft size={16} />
+        <PreviousPageIcon size={16} />
         <span className="hidden sm:inline">Previous</span>
       </button>
       <p className="inline sm:hidden text-sm leading-normal font-medium">
-        Page {numberFormat.format(paginationParams.page)} of {numberFormat.format(totalPages)}
+        Page {numberFormatter.format(paginationParams.page)} of {numberFormatter.format(totalPages)}
       </p>
       <div className="hidden sm:flex flex-row flex-nowrap justify-center items-center gap-1">
         <button
@@ -183,9 +183,9 @@ export function Pagination({
         >
           1
         </button>
-        <DistanceSymbol
+        <DistanceIcon
           className={cn(
-            shouldDisplayLeftDistanceSymbol(totalPages, paginationParams.page) ? "block" : "hidden",
+            shouldDisplayLeftDistanceIcon(totalPages, paginationParams.page) ? "block" : "hidden",
           )}
           size={16}
         />
@@ -218,11 +218,9 @@ export function Pagination({
             {paginationParams.page + 1}
           </button>
         )}
-        <DistanceSymbol
+        <DistanceIcon
           className={cn(
-            shouldDisplayRightDistanceSymbol(totalPages, paginationParams.page)
-              ? "block"
-              : "hidden",
+            shouldDisplayRightDistanceIcon(totalPages, paginationParams.page) ? "block" : "hidden",
           )}
           size={16}
         />
@@ -246,7 +244,7 @@ export function Pagination({
         onClick={onNext}
       >
         <span className="hidden sm:inline">Next</span>
-        <ChevronRight size={16} />
+        <NextPageIcon size={16} />
       </button>
       <button
         aria-disabled={paginationParams.page === totalPages}
@@ -255,7 +253,7 @@ export function Pagination({
           onSelectPage(totalPages);
         }}
       >
-        <ChevronsRight size={16} />
+        <LastPageIcon size={16} />
       </button>
     </div>
   );
@@ -307,7 +305,7 @@ const shouldDisplayAdditionalButtonForPreviousPage = (
   return true;
 };
 
-const shouldDisplayRightDistanceSymbol = (totalPages: number, currentPage: number): boolean => {
+const shouldDisplayRightDistanceIcon = (totalPages: number, currentPage: number): boolean => {
   const nextPage = Math.min(currentPage + 1, totalPages);
 
   // if there are at least three pages,
@@ -319,7 +317,7 @@ const shouldDisplayRightDistanceSymbol = (totalPages: number, currentPage: numbe
   return true;
 };
 
-const shouldDisplayLeftDistanceSymbol = (totalPages: number, currentPage: number): boolean => {
+const shouldDisplayLeftDistanceIcon = (totalPages: number, currentPage: number): boolean => {
   const previousPage = Math.max(currentPage - 1, 1);
 
   // if there are at least three pages,
@@ -356,14 +354,14 @@ export function SimplePagination({
         className={cn(buttonStyles)}
         onClick={onPrevious}
       >
-        <ChevronLeft size={16} />
+        <PreviousPageIcon size={16} />
       </button>
       <button
         aria-disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles)}
         onClick={onNext}
       >
-        <ChevronRight size={16} />
+        <NextPageIcon size={16} />
       </button>
     </div>
   );
@@ -410,9 +408,9 @@ const QuantityInfo = ({
   return (
     <p className={cn("text-sm leading-normal font-medium", className)}>
       {prefix && prefix}{" "}
-      {numberFormat.format((paginationParams.page - 1) * paginationParams.recordsPerPage + 1)}-
-      {numberFormat.format(paginationParams.page * paginationParams.recordsPerPage)} of{" "}
-      {numberFormat.format(totalRecords)} {recordAlias.plural}
+      {numberFormatter.format((paginationParams.page - 1) * paginationParams.recordsPerPage + 1)}-
+      {numberFormatter.format(paginationParams.page * paginationParams.recordsPerPage)} of{" "}
+      {numberFormatter.format(totalRecords)} {recordAlias.plural}
     </p>
   );
 };
