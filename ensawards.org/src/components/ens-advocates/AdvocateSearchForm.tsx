@@ -1,50 +1,59 @@
 import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { Name } from "@ensnode/ensnode-sdk";
-import { type ChangeEvent, useState } from "react";
+import React, { type ChangeEvent, useState } from "react";
+import { type Address, isAddress } from "viem";
 
 export function AdvocateSearchForm() {
-  const [rawInputName, setRawInputName] = useState<Name>("");
+  const [rawInputAddress, setRawInputAddress] = useState<Address | string>("");
+  const [inputErrorMessage, setInputErrorMessage] = useState("");
+  const isMobile = useIsMobile();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // TODO: Input validation and normalization.
-    // see: https://github.com/namehash/ensnode/issues/1140 --> Could probably use slightly changed logic from GenerateReferralLinkForm.tsx
+    // Check if the input is a valid address
+    if (!isAddress(rawInputAddress, { strict: false })) {
+      // if not, then set an error message
+      setInputErrorMessage("Invalid address");
+      return;
+    }
 
-    const href = `/name/${rawInputName}`;
-
-    // router.push(href);
-    console.log("Form submitted with", rawInputName);
+    //otherwise route to an advocate's profile
+    window.location.href = `/advocate/${rawInputAddress}`;
   };
 
   const handleRawInputNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    setRawInputName(e.target.value);
+    setInputErrorMessage("");
+    setRawInputAddress(e.target.value);
   };
   return (
     <form className="w-full max-w-[650px] flex flex-col gap-2" onSubmit={handleSubmit}>
-      <fieldset className="w-full flex flex-col sm:flex-row gap-2 justify-start items-center">
+      <fieldset className="w-full flex flex-col sm:flex-row gap-2 justify-start items-start">
         <Input
           autoFocus
           type="text"
           required
           id="ens-name"
           name="ens-name"
-          placeholder="Search for a name..."
-          value={rawInputName}
+          placeholder={
+            isMobile ? "Search for an address" : "Search for an Ethereum Mainnet address"
+          }
+          value={rawInputAddress}
           onChange={handleRawInputNameChange}
+          error={inputErrorMessage}
         />
         <button
           type="submit"
-          disabled={rawInputName.length === 0}
+          aria-disabled={rawInputAddress.length === 0}
           className={cn(
             shadcnButtonVariants({
               variant: "default",
               size: "default",
-              className: "max-sm:self-stretch",
+              className: "max-sm:self-stretch cursor-pointer",
             }),
           )}
         >

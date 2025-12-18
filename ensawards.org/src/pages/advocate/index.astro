@@ -1,6 +1,8 @@
 ---
 
+import { Name } from "@ensnode/ensnode-sdk";
 import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import { Address } from "viem";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import { AdvocateSearchForm } from "../../components/ens-advocates/AdvocateSearchForm";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
@@ -8,7 +10,16 @@ import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
 import Layout from "../../layouts/Layout.astro";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
-const EXAMPLE_NAMES = ["vitalik.eth", "james.eth", "brantly.eth", "lightwalker.eth"];
+interface AdvocateIdentity {
+  name: Name;
+  ethAddress: Address;
+}
+const EXAMPLE_ADVOCATES: AdvocateIdentity[] = [
+  { name: "vitalik.eth", ethAddress: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" }, //TODO: investigate why usePrimaryName fails for vitalik's address
+  { name: "james.eth", ethAddress: "0x6Dc43be93a8b5Fd37dC16f24872BaBc6dA5E5e3E" },
+  { name: "brantly.eth", ethAddress: "0x983110309620D911731Ac0932219af06091b6744" },
+  { name: "lightwalker.eth", ethAddress: "0x1a199654959140E5c1A2F4135fAA7Ba2748939C5" },
+];
 ---
 <Layout>
     <SubpageHero header="Explore ENS Advocates" />
@@ -33,7 +44,7 @@ const EXAMPLE_NAMES = ["vitalik.eth", "james.eth", "brantly.eth", "lightwalker.e
             <div class="flex flex-col gap-2 justify-center items-start">
                 <p class="text-sm leading-normal font-semibold">Examples:</p>
                 <div class="flex flex-row flex-wrap justify-start items-center gap-2">
-                    {EXAMPLE_NAMES.map((exampleName) => <a href=`/name/${exampleName}` class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "rounded-full cursor-pointer"}))}>{exampleName}</a>)}
+                    {EXAMPLE_ADVOCATES.map((exampleAdvocate) => <a href=`/advocate/${exampleAdvocate.ethAddress}` class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "rounded-full cursor-pointer"}))}>{exampleAdvocate.name}</a>)}
                 </div>
             </div>
         </div>

@@ -2,32 +2,23 @@
 
 import { EnsAvatar } from "@/components/atoms/identity/EnsAvatar.tsx";
 import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
+import type { FetchAndDisplayPrimaryNameBasedAdvocateProfileProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayPrimaryNameBasedAdvocateProfile.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import {
-  buildExternalEnsAppProfileUrl,
-  getBlockExplorerUrlForAddress,
-  getEnsManagerAppUrl,
-} from "@/utils/namespace.ts";
+import { buildExternalEnsAppProfileUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { ENSNamespaceId } from "@ensnode/datasources";
-import { type Name, getENSRootChainId } from "@ensnode/ensnode-sdk";
-import type { Address } from "viem";
+import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 
-interface AdvocateProfileHeaderProps {
-  name: Name;
-  namespaceId: ENSNamespaceId;
-  address: Address | null;
+interface PrimaryNameBasedAdvocateProfileProps
+  extends FetchAndDisplayPrimaryNameBasedAdvocateProfileProps {
   headerImage?: string | null;
-  websiteUrl?: string | null; //TODO: should this prop be removed? Afaik we don't use it anywhere in our current designs
 }
 
-export function AdvocateProfileHeader({
+export function PrimaryNameBasedAdvocateProfile({
   name,
   address,
   namespaceId,
   headerImage,
-  websiteUrl,
-}: AdvocateProfileHeaderProps) {
+}: PrimaryNameBasedAdvocateProfileProps) {
   // Parse header image URI and only use it if it's HTTP/HTTPS
   // TODO: Add support for more URI types as defined in ENSIP-12
   // See: https://docs.ens.domains/ensip/12#uri-types
@@ -64,7 +55,7 @@ export function AdvocateProfileHeader({
       </div>
       <div className="w-full flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3 sm:gap-[25px]">
         <EnsAvatar
-          className="w-[100px] h-[100px] rounded-xl"
+          className="w-[100px] h-[100px] rounded-xl border border-gray-200"
           name={name}
           namespaceId={namespaceId}
         />
