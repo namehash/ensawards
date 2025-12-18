@@ -13,6 +13,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
+import {millisecondsInSecond} from "date-fns/constants";
 
 export interface ReferrerLeaderboardProps {
   recordsPerPage?: number;
@@ -39,21 +40,10 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
     setIsLoading(true);
     scrollWithOffset("leaderboard-header", 75);
     try {
-      const response = await client.getReferrerLeaderboardPage({
-        page: currentPage,
-        recordsPerPage: currentRecordsPerPage,
-      });
-
-      if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
-        console.error(response.errorMessage);
+      setTimeout(() => {
+        setFetchErrorMessage("Testing for leaderboard loading error.");
         setLeaderboardData(null);
-        setFetchErrorMessage("An error occurred while loading the leaderboard.");
-        setIsLoading(false);
-        return;
-      }
-
-      setLeaderboardData(response.data);
-      setTotalPages(response.data.pageContext.totalPages);
+      }, 3 * millisecondsInSecond);
     } catch (error) {
       console.error(error);
       setLeaderboardData(null);
@@ -85,7 +75,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
             <h3 id="leaderboard-header" className="text-2xl leading-normal font-semibold">
               Leaderboard
             </h3>
-            {isLoading || leaderboardData === null ? (
+            {(isLoading || leaderboardData === null) ? (
               <Skeleton className="w-[225px] sm:w-[255px] sm:h-[14px] h-4 mt-1 mb-1 sm:mb-[3px] bg-gray-200" />
             ) : (
               !fetchErrorMessage && (
