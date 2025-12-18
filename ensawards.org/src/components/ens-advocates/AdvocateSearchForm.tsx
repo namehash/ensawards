@@ -1,3 +1,4 @@
+import { navigate } from "astro:transitions/client";
 import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
@@ -21,7 +22,7 @@ export function AdvocateSearchForm() {
     }
 
     //otherwise route to an advocate's profile
-    window.location.href = `/advocate/${rawInputAddress}`;
+    navigate(`/advocate/${rawInputAddress}`);
   };
 
   const handleRawInputNameChange = (e: ChangeEvent<HTMLInputElement>) => {
