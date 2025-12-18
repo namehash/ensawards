@@ -9,4 +9,5 @@ module.exports = {
     "text-amber-600",
     "text-red-600",
   ],
+  plugins: [require("@tailwindcss/typography")],
 };
