@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import { AstroFont } from "astro-font";
 import { SEO } from "astro-seo";
 import "../styles/global.css";
@@ -45,6 +46,7 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
   style={{ scrollbarGutter: "stable" }}>
   <head>
     <meta charset="UTF-8" />
+    <ClientRouter />
     <AstroFont
       config={[
         {
