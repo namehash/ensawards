@@ -1,100 +1,55 @@
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
-import {
-  RegistrarActionCardLoading,
-  RegistrarActionCardMemo,
-} from "@/components/atoms/cards/RegistrarActionCard.tsx";
+import { RegistrarActionCardLoading } from "@/components/atoms/cards/RegistrarActionCard.tsx";
+import { SimplePagination } from "@/components/molecules/Pagination.tsx";
+import { DisplayRegistrarActionsList } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
 import {
   type StatefulFetchRegistrarActions,
   StatefulFetchStatusIds,
 } from "@/components/referral-awards-program/referrals/types.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { formatOmnichainIndexingStatus } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
-import { useNow } from "@/utils/hooks/useNow.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { ENSNamespaceId } from "@ensnode/datasources";
-import { type NamedRegistrarAction, OmnichainIndexingStatusIds } from "@ensnode/ensnode-sdk";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { OmnichainIndexingStatusIds, type RequestPageParams } from "@ensnode/ensnode-sdk";
 
-interface DisplayRegistrarActionsListProps {
-  namespaceId: ENSNamespaceId;
-  registrarActions: NamedRegistrarAction[];
-  showReferrer?: boolean;
-}
-
-/**
- * Displays a list of {@link NamedRegistrarAction}s.
- */
-export function DisplayRegistrarActionsList({
-  namespaceId,
-  registrarActions,
-  showReferrer = false,
-}: DisplayRegistrarActionsListProps) {
-  const [animationParent] = useAutoAnimate();
-  const now = useNow();
-
-  return (
-    <div
-      ref={animationParent}
-      className="w-full h-fit box-border flex flex-col justify-start items-center gap-3 relative"
-    >
-      {registrarActions.map((namedRegistrarAction) => (
-        <RegistrarActionCardMemo
-          key={namedRegistrarAction.action.id}
-          namespaceId={namespaceId}
-          namedRegistrarAction={namedRegistrarAction}
-          now={now}
-          showReferrer={showReferrer}
-        />
-      ))}
-    </div>
-  );
-}
-
-interface DisplayRegistrarActionsListLoadingProps {
+interface AdvocateReferralsListLoadingProps {
   recordsPerPage: number;
 }
-
 /**
  * Displays a loading state for a list of {@link NamedRegistrarAction}s.
  */
-function DisplayRegistrarActionsListLoading({
-  recordsPerPage,
-}: DisplayRegistrarActionsListLoadingProps) {
+function AdvocateReferralsListLoading({ recordsPerPage }: AdvocateReferralsListLoadingProps) {
   return (
     <div className="w-full space-y-3 relative z-10">
       {[...Array(recordsPerPage)].map((_, idx) => (
-        <RegistrarActionCardLoading key={idx} />
+        <RegistrarActionCardLoading key={idx} showReferrer={false} />
       ))}
     </div>
   );
 }
 
-export interface DisplayRegistrarActionsFeedProps {
+export interface AdvocateReferralsListProps {
   namespaceId: ENSNamespaceId;
   registrarActions: StatefulFetchRegistrarActions;
-  title: string;
+  paginationParams: Required<RequestPageParams>;
+  onPrevious: () => void;
+  onNext: () => void;
 }
-
-/**
- * Display {@link NamedRegistrarAction}s Panel.
- */
-export function DisplayRegistrarActionsFeed({
+export function AdvocateReferralsList({
   namespaceId,
   registrarActions,
-  title,
-}: DisplayRegistrarActionsFeedProps) {
+  paginationParams,
+  onNext,
+  onPrevious,
+}: AdvocateReferralsListProps) {
   switch (registrarActions.fetchStatus) {
-    case StatefulFetchStatusIds.Connecting:
-      // we show nothing to avoid a flash of not essential content
-      return null;
-
     case StatefulFetchStatusIds.Unsupported:
       return (
         <ErrorInfo
-          title={title}
+          title="Advocate referral list"
           description={[
             "The Registrar Actions API is unavailable on the connected ENSNode instance.",
             "The Registrar Actions API requires all of the following plugins to be activated:",
@@ -128,7 +83,7 @@ export function DisplayRegistrarActionsFeed({
     case StatefulFetchStatusIds.NotReady:
       return (
         <ErrorInfo
-          title={title}
+          title="Advocate referral list"
           description={[
             "The Registrar Actions API on the connected ENSNode instance is not available yet.",
             "The Registrar Actions API will be available once the omnichain indexing status reaches\n" +
@@ -161,16 +116,22 @@ export function DisplayRegistrarActionsFeed({
         </ErrorInfo>
       );
 
-    case StatefulFetchStatusIds.Loading:
+    case StatefulFetchStatusIds.Loading || StatefulFetchStatusIds.Connecting:
       return (
-        <DisplayRegistrarActionsListLoading recordsPerPage={registrarActions.recordsPerPage} />
+        <>
+          <AdvocateReferralsListLoading recordsPerPage={paginationParams.recordsPerPage} />
+          <div className="w-full flex flex-row flex-nowrap justify-between items-center">
+            <Skeleton className="w-[106px] h-9 bg-gray-200 rounded-lg" />
+            <Skeleton className="w-20 h-9 bg-gray-200 rounded-lg" />
+          </div>
+        </>
       );
 
     case StatefulFetchStatusIds.Error:
       console.error(registrarActions.reason);
       return (
         <ErrorInfo
-          title={title}
+          title="Advocate referral list"
           description={["ENSNode connection error occurred. Please try again later."]}
         >
           <button
@@ -190,10 +151,32 @@ export function DisplayRegistrarActionsFeed({
 
     case StatefulFetchStatusIds.Loaded:
       return (
-        <DisplayRegistrarActionsList
-          namespaceId={namespaceId}
-          registrarActions={registrarActions.registrarActions}
-        />
+        <>
+          {registrarActions.pageContext.totalRecords === 0 ? (
+            "This advocate has no referrals."
+          ) : (
+            <>
+              {" "}
+              <DisplayRegistrarActionsList
+                namespaceId={namespaceId}
+                registrarActions={registrarActions.registrarActions}
+                showReferrer={false}
+              />
+              <SimplePagination
+                totalPages={registrarActions.pageContext.totalPages}
+                totalRecords={registrarActions.pageContext.totalRecords}
+                paginationParams={{
+                  page: paginationParams.page,
+                  recordsPerPage: paginationParams.recordsPerPage,
+                }}
+                onPrevious={onPrevious}
+                onNext={onNext}
+                showText={true}
+                containerClassName="w-full justify-between"
+              />
+            </>
+          )}
+        </>
       );
   }
 }

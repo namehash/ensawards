@@ -17,7 +17,6 @@ import { ReferralLinkForm } from "../components/referral-awards-program/Referral
 import { LiveReferralFeed } from "../components/referral-awards-program/referrals/LiveReferralFeed";
 import { ReferrerLeaderboardSnippet } from "../components/referral-awards-program/referrers/ReferrerLeaderboardSnippet";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
-import { ENSHolidayAwards } from "../data/referralIncentivePrograms";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../utils/tailwindClassConcatenation";
 
@@ -119,7 +118,6 @@ const backgroundGreyStyles =
         client:load
         title="ENS referral live feed"
         recordsPerPage={3}
-        referralIncentiveProgram={ENSHolidayAwards}
       />
     </div>
     <div

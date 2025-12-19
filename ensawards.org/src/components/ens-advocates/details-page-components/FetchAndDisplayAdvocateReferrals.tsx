@@ -1,6 +1,53 @@
-import { AdvocateReferralsList } from "@/components/ens-advocates/details-page-components/AdvocateReferralsList.tsx";
 import type { EnsAdvocateDetailsPageProps } from "@/components/ens-advocates/details-page-components/advocate-profile/types.ts";
+import { AdvocateReferralsList } from "@/components/ens-advocates/details-page-components/advocate-referrals/AdvocateReferralsList.tsx";
+import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
+import { ENSNamespaceIds } from "@ensnode/datasources";
+import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
+import { millisecondsInSecond } from "date-fns/constants";
+import { useState } from "react";
+import { namehash } from "viem";
 
-export function FetchAndDisplayAdvocateReferrals({ address }: EnsAdvocateDetailsPageProps) {
-  return <AdvocateReferralsList />;
+interface FetchAndDisplayAdvocateReferralsProps extends EnsAdvocateDetailsPageProps {
+  recordsPerPage: number;
+}
+export function FetchAndDisplayAdvocateReferrals({
+  address,
+  recordsPerPage,
+}: FetchAndDisplayAdvocateReferralsProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const namespaceId = ENSNamespaceIds.Mainnet;
+
+  const filters: RegistrarActionsFilter[] = [
+    // Include records for direct subnames of `.eth`
+    registrarActionsFilter.byParentNode(namehash("eth")),
+    // Include records with `encodedReferrer` other than NULL and ZERO_ENCODED_REFERRER
+    registrarActionsFilter.withReferral(true),
+    // Include records where `decodedReferrer` address equals the advocate's address
+    registrarActionsFilter.byDecodedReferrer(address),
+  ];
+
+  const registrarActions = useStatefulRegistrarActions({
+    paginationParams: { page: currentPage, recordsPerPage: recordsPerPage },
+    filters,
+    staleTime: 15 * millisecondsInSecond,
+  });
+
+  return (
+    <div className="w-full h-fit box-border flex flex-col justify-start items-center gap-6">
+      <div className="w-full flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center max-sm:gap-2">
+        <h3 className="text-2xl leading-normal font-semibold">Referrals</h3>
+      </div>
+      <AdvocateReferralsList
+        paginationParams={{ page: currentPage, recordsPerPage: recordsPerPage }}
+        onPrevious={() => {
+          setCurrentPage((prev) => prev - 1);
+        }}
+        onNext={() => {
+          setCurrentPage((prev) => prev + 1);
+        }}
+        namespaceId={namespaceId}
+        registrarActions={registrarActions}
+      />
+    </div>
+  );
 }

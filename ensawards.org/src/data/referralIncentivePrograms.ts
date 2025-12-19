@@ -18,3 +18,5 @@ export const ENSHolidayAwards: ReferralIncentiveProgram = {
     subregistryId: getEthnamesSubregistryId(ENSNamespaceIds.Mainnet),
   },
 };
+
+export const REFERRAL_INCENTIVE_PROGRAMS: ReferralIncentiveProgram[] = [ENSHolidayAwards];

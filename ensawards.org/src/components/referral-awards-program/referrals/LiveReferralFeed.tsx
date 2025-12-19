@@ -12,7 +12,6 @@ import { useMemo } from "react";
  */
 export function LiveReferralFeed({
   recordsPerPage,
-  referralIncentiveProgram,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
@@ -25,11 +24,7 @@ export function LiveReferralFeed({
       }}
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
-        <FetchAndDisplayRegistrarActionsFeed
-          recordsPerPage={recordsPerPage}
-          title={title}
-          referralIncentiveProgram={referralIncentiveProgram}
-        />
+        <FetchAndDisplayRegistrarActionsFeed recordsPerPage={recordsPerPage} title={title} />
       </TooltipProvider>
     </ENSNodeProvider>
   );

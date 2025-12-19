@@ -17,7 +17,7 @@ import {
   type ResolveAndDisplayIdentityProps,
 } from "@/components/atoms/identity";
 import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
-import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
+import { getReferralQualificationInfo } from "@/components/referral-awards-program/referrals/utils.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import {
@@ -204,7 +204,6 @@ export function RegistrarActionCardLoading({
 export interface RegistrarActionCardProps {
   namespaceId: ENSNamespaceId;
   namedRegistrarAction: NamedRegistrarAction;
-  referralIncentiveProgram: ReferralIncentiveProgram;
   now: UnixTimestamp;
   showReferrer?: boolean;
 }
@@ -215,7 +214,6 @@ export interface RegistrarActionCardProps {
 export function RegistrarActionCard({
   namespaceId,
   namedRegistrarAction,
-  referralIncentiveProgram,
   now,
   showReferrer = true,
 }: RegistrarActionCardProps) {
@@ -323,9 +321,7 @@ export function RegistrarActionCard({
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
         <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
           <p className="text-black font-medium max-sm:text-right">
-            {isQualifiedReferral(referralIncentiveProgram, namedRegistrarAction)
-              ? referralIncentiveProgram.name
-              : "-"}
+            {getReferralQualificationInfo(namedRegistrarAction)}
           </p>
         </div>
       </LabeledField>

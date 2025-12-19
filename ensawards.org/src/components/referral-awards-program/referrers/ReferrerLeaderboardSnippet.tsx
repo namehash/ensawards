@@ -25,7 +25,7 @@ export function ReferrerLeaderboardSnippet({
   snippetSize = 3,
   showLastUpdateTime = false,
 }: ReferrerLeaderboardSnippetProps) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardSnippetData, setLeaderboardSnippetData] =
     useState<ReferrerLeaderboardPage | null>(null);
@@ -81,13 +81,15 @@ export function ReferrerLeaderboardSnippet({
               (fetchErrorMessage || !showLastUpdateTime) && "hidden",
             )}
           >
-            {isLoading || leaderboardSnippetData === null ? (
+            {isLoading ? (
               <Skeleton className="w-[225px] sm:w-[255px] h-[14px] sm:h-4 mt-[4px] mb-[3px] sm:my-1 bg-gray-200" />
             ) : (
-              <ReferrerLeaderboardLastUpdateTime
-                timestamp={leaderboardSnippetData.accurateAsOf}
-                className="text-base"
-              />
+              leaderboardSnippetData !== null && (
+                <ReferrerLeaderboardLastUpdateTime
+                  timestamp={leaderboardSnippetData.accurateAsOf}
+                  className="text-base"
+                />
+              )
             )}
           </div>
           <DisplayReferrerLeaderboardPage
@@ -120,7 +122,8 @@ export function ReferrerLeaderboardSnippet({
             }}
             header={header}
           />
-          {leaderboardSnippetData !== null &&
+          {!isLoading &&
+            leaderboardSnippetData !== null &&
             leaderboardSnippetData.pageContext.totalRecords > snippetSize && (
               <a
                 href="/leaderboards/referrer"

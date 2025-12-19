@@ -17,7 +17,7 @@ export function FetchAndDisplayPrimaryNameBasedAdvocateProfile({
   name,
   namespaceId,
 }: FetchAndDisplayPrimaryNameBasedAdvocateProfileProps) {
-  // TODO: is it a valid assumption that we only care for Eth mainnet addresses?
+  // TODO: is it still a valid assumption that we only care for Eth mainnet addresses?
   const selection = {
     addresses: [ETH_COIN_TYPE],
     texts: HeaderPanelTextRecords,
