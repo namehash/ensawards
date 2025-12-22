@@ -116,7 +116,8 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
     return null;
   }
 
-  ScrollHeader();
+
+  document.addEventListener("astro:page-load", () => ScrollHeader());
 </script>
 
 <style>

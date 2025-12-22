@@ -110,6 +110,5 @@ function tick() {
 // refresh the countdown every second due to necessity
 // of monitoring screen width for mobile adaptations
 document.addEventListener("astro:page-load", () => {
-    console.log("after-load");
     setInterval(tick, millisecondsInSecond);
 });
