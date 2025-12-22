@@ -55,13 +55,18 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
 <script>
   import { scrollWithOffset } from "../../utils/domActions";
 
-  function initializeAutoScroll(){
+  function initializeContractNamingIncentivesAutoScroll() {
     const scrollAnchor = document.getElementById("scroll-to-faq");
-    scrollAnchor.addEventListener("click", (event) => {
-      event.preventDefault();
-      scrollWithOffset(`FAQ-What's an $ENS?`, 90);
-    });
+
+    if (scrollAnchor !== null) {
+      scrollAnchor.addEventListener("click", (event) => {
+        event.preventDefault();
+        scrollWithOffset(`FAQ-What's an $ENS?`, 90);
+      });
+    }
   }
 
-  document.addEventListener("astro:page-load", () => initializeAutoScroll());
+  document.addEventListener("astro:page-load", () =>
+    initializeContractNamingIncentivesAutoScroll(),
+  );
 </script>

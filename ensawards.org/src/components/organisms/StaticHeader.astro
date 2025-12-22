@@ -81,7 +81,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
   </div>
 </header>
 <script>
-  function ScrollHeader() {
+  function ScrollStaticHeader() {
     if (typeof window !== "undefined") {
       const header = document.getElementById("site-header");
       const headerButtons = document.getElementsByClassName("onScrollButton");
@@ -111,7 +111,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
     return null;
   }
 
-  document.addEventListener("astro:page-load", () => ScrollHeader());
+  document.addEventListener("astro:page-load", () => ScrollStaticHeader());
 </script>
 
 <style>

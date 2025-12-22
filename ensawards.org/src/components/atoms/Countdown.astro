@@ -141,13 +141,13 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
     }
   }
 
-  function tick() {
+  function countdownTick() {
     const countdownRoots = document.querySelectorAll("#countdownRoot");
     countdownRoots.forEach(updateCountdown);
   }
 
   document.addEventListener("astro:page-load", () => {
-    tick();
-    setInterval(tick, secondsInMinute * millisecondsInSecond);
+    countdownTick();
+    setInterval(countdownTick, secondsInMinute * millisecondsInSecond);
   });
 </script>

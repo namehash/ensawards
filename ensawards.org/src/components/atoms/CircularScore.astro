@@ -84,9 +84,14 @@ const circumference = 2 * Math.PI * radius;
   </div>
 </div>
 <script>
-  function initializeScore(){
+  function initializeScore() {
     // Set up of the numeric label
     const scoreLabel = document.getElementById("scoreNumber");
+
+    // If the function is triggered by the ClientRouter lifecycle event on some other page
+    // finish the call here
+    if (scoreLabel === null) return;
+
     const targetScore = Number(scoreLabel.dataset.score);
     scoreLabel.innerText = "0";
     let counter = 0;
@@ -113,7 +118,7 @@ const circumference = 2 * Math.PI * radius;
       if (counter !== targetScore) {
         // Delay grows when counter is closer to target
         delay =
-            counter > targetScore - 5 ? 40 * (5 - (targetScore - counter)) : 20;
+          counter > targetScore - 5 ? 40 * (5 - (targetScore - counter)) : 20;
 
         setTimeout(animateScore, delay);
       }
