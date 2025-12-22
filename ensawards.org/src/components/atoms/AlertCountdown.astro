@@ -211,9 +211,7 @@ const { eventUnixTimestamp, eventText, ctaText, link, styles }: AlertCountdownPr
     countdownRoots.forEach(updateCountdown);
   }
 
-  tick();
-
   // refresh the countdown every second due to necessity
   // of monitoring screen width for mobile adaptations
-  setInterval(tick, millisecondsInSecond);
+  document.addEventListener("astro:page-load", () => setInterval(tick, millisecondsInSecond));
 </script>
