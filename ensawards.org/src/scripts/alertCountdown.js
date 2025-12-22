@@ -1,4 +1,4 @@
-import { secondsInMinute, millisecondsInSecond } from "date-fns/constants";
+import { millisecondsInSecond } from "date-fns/constants";
 import { differenceInDays, intervalToDuration } from "date-fns";
 
 const mobileBreakpointInPixels = 640;
@@ -111,11 +111,5 @@ function tick() {
 // of monitoring screen width for mobile adaptations
 document.addEventListener("astro:page-load", () => {
     console.log("after-load");
-    setInterval(tick, millisecondsInSecond)
-});
-document.addEventListener("astro:after-preparation", () => {
-    console.log("after-preparation");
-});
-document.addEventListener("astro:after-swap", () => {
-    console.log("after-swap");
+    setInterval(tick, millisecondsInSecond);
 });
