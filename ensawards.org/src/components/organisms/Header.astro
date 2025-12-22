@@ -95,10 +95,13 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
       const navObserver = new IntersectionObserver(
         (entries) => {
           header.classList.toggle("scrolled", !entries[0].isIntersecting);
-          ensAwardsName.classList.toggle(
-            "scrolled",
-            !entries[0].isIntersecting,
-          );
+
+          if (ensAwardsName !== null) {
+            ensAwardsName.classList.toggle(
+              "scrolled",
+              !entries[0].isIntersecting,
+            );
+          }
 
           for (const headerButton of headerButtons) {
             headerButton.classList.toggle(

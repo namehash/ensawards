@@ -1,13 +1,17 @@
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
-import { AddressBasedAdvocateProfile } from "@/components/ens-advocates/details-page-components/advocate-profile/AddressBasedAdvocateProfile.tsx";
+import { AdvocateProfileWithoutName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithoutName.tsx";
 import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-page-components/advocate-profile/EnsAdvocateProfileLoading.tsx";
-import { FetchAndDisplayPrimaryNameBasedAdvocateProfile } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayPrimaryNameBasedAdvocateProfile.tsx";
-import type { EnsAdvocateDetailsPageProps } from "@/components/ens-advocates/details-page-components/advocate-profile/types.ts";
+import { FetchAndDisplayAdvocateProfileWithName } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+import type { Address } from "viem";
 
-export function FetchAndDisplayAdvocateProfile({ address }: EnsAdvocateDetailsPageProps) {
+interface FetchAndDisplayAdvocateProfileProps {
+  address: Address;
+}
+
+export function FetchAndDisplayAdvocateProfile({ address }: FetchAndDisplayAdvocateProfileProps) {
   const namespaceId = ENSNamespaceIds.Mainnet;
 
   const { data, isLoading, error } = usePrimaryName({
@@ -27,11 +31,15 @@ export function FetchAndDisplayAdvocateProfile({ address }: EnsAdvocateDetailsPa
       />
     );
 
+  // If the advocate's address doesn't have a defined primary name,
+  // display a UI based just on the address
   if (data.name === null)
-    return <AddressBasedAdvocateProfile address={address} namespaceId={namespaceId} />;
+    return <AdvocateProfileWithoutName address={address} namespaceId={namespaceId} />;
 
+  // Otherwise, use the primary name to obtain additional data about the profile
+  // and display it in the UI
   return (
-    <FetchAndDisplayPrimaryNameBasedAdvocateProfile
+    <FetchAndDisplayAdvocateProfileWithName
       name={data.name}
       address={address}
       namespaceId={namespaceId}

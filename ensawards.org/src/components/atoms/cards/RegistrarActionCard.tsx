@@ -238,6 +238,7 @@ export function RegistrarActionCard({
     );
 
   const registrantIdentity = buildUnresolvedIdentity(registrant, namespaceId, chainId);
+  const qualifiedReferralPrograms = getReferralQualificationInfo(namedRegistrarAction);
 
   return (
     <div className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
@@ -321,7 +322,9 @@ export function RegistrarActionCard({
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
         <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
           <p className="text-black font-medium max-sm:text-right">
-            {getReferralQualificationInfo(namedRegistrarAction)}
+            {qualifiedReferralPrograms.length === 0
+              ? "-"
+              : qualifiedReferralPrograms.map((referralProgram) => referralProgram.name).join(", ")}
           </p>
         </div>
       </LabeledField>

@@ -1,11 +1,17 @@
 ---
 import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import { isAddress } from "viem";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import Breadcrumbs from "../../components/atoms/Breadcrumbs.astro";
+import { ErrorInfo } from "../../components/atoms/ErrorInfo";
 import { EnsAdvocateDetailsPageProvider } from "../../components/ens-advocates/EnsAdvocateDetailsPageProvider";
 import Layout from "../../layouts/Layout.astro";
 export const prerender = false;
 const { advocate } = Astro.params;
+
+// TODO: once the search form is published and improved to also accept names,
+// refactor that logic so that it also allows names
+const isRouteParamAValidAddress = isAddress(advocate);
 ---
 
 <Layout isStatic={true}>
@@ -35,7 +41,18 @@ const { advocate } = Astro.params;
           text: "text-black",
         }}
       />
-      <EnsAdvocateDetailsPageProvider address={advocate} client:load />
+      {
+        isRouteParamAValidAddress ? (
+          <EnsAdvocateDetailsPageProvider address={advocate} client:load />
+        ) : (
+          <ErrorInfo
+            title="ENS Advocate profile"
+            description={[
+              "No Ethereum Mainnet address configured for this name.",
+            ]}
+          />
+        )
+      }
     </div>
   </section>
 </Layout>

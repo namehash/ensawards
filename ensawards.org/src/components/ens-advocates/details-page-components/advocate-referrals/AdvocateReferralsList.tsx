@@ -153,7 +153,17 @@ export function AdvocateReferralsList({
       return (
         <>
           {registrarActions.pageContext.totalRecords === 0 ? (
-            "This advocate has no referrals."
+            <p className="text-center">
+              This advocate hasn't made a referral yet.
+              <br />
+              <a
+                className="text-blue-600 font-medium hover:underline hover:underline-offset-[25%] whitespace-nowrap transition-all duration-200 cursor-pointer"
+                href="/ens-referral-awards"
+              >
+                Learn how to become a referrer
+              </a>
+              .
+            </p>
           ) : (
             <>
               {" "}
@@ -171,7 +181,7 @@ export function AdvocateReferralsList({
                 }}
                 onPrevious={onPrevious}
                 onNext={onNext}
-                showText={true}
+                labeledButtons={true}
                 containerClassName="w-full justify-between"
               />
             </>

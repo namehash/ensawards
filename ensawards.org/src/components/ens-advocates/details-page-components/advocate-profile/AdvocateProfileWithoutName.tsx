@@ -1,15 +1,19 @@
 import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
 import { AddressDisplay } from "@/components/atoms/identity/utils.tsx";
-import type { AdvocateProfileProps } from "@/components/ens-advocates/details-page-components/advocate-profile/types.ts";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { getAddressDetailsUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import type { ENSNamespaceId } from "@ensnode/datasources";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 import type * as React from "react";
+import type { Address } from "viem";
 
-interface AddressBasedAdvocateProfileProps extends AdvocateProfileProps {}
+interface AddressBasedAdvocateProfileProps {
+  address: Address;
+  namespaceId: ENSNamespaceId;
+}
 
-export function AddressBasedAdvocateProfile({
+export function AdvocateProfileWithoutName({
   address,
   namespaceId,
 }: AddressBasedAdvocateProfileProps) {

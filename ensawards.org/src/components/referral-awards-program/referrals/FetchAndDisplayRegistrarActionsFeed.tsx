@@ -26,7 +26,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
   ];
 
   const registrarActions = useStatefulRegistrarActions({
-    paginationParams: { page: 1, recordsPerPage: recordsPerPage },
+    paginationParams: { page: 1, recordsPerPage },
     filters,
   });
 

@@ -1,28 +1,28 @@
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import { AdvocateProfileWithName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithName.tsx";
 import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-page-components/advocate-profile/EnsAdvocateProfileLoading.tsx";
-import { PrimaryNameBasedAdvocateProfile } from "@/components/ens-advocates/details-page-components/advocate-profile/PrimaryNameBasedAdvocateProfile.tsx";
-import type { AdvocateProfileProps } from "@/components/ens-advocates/details-page-components/advocate-profile/types.ts";
+import type { ENSNamespaceId } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, useRecords } from "@ensnode/ensnode-react";
-import { ETH_COIN_TYPE, type Name, type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
+import { type Name, type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
+import type { Address } from "viem";
 
-const HeaderPanelTextRecords = ["url", "avatar", "header"];
+const HeaderPanelTextRecords = ["avatar", "header"];
 
-export interface FetchAndDisplayPrimaryNameBasedAdvocateProfileProps extends AdvocateProfileProps {
+export interface FetchAndDisplayPrimaryNameBasedAdvocateProfileProps {
+  address: Address;
+  namespaceId: ENSNamespaceId;
   name: Name;
 }
 
 //TODO: this name is way too long, but for now, I don't have any idea how to name it better
-export function FetchAndDisplayPrimaryNameBasedAdvocateProfile({
+export function FetchAndDisplayAdvocateProfileWithName({
   address,
   name,
   namespaceId,
 }: FetchAndDisplayPrimaryNameBasedAdvocateProfileProps) {
-  // TODO: is it still a valid assumption that we only care for Eth mainnet addresses?
   const selection = {
-    addresses: [ETH_COIN_TYPE],
     texts: HeaderPanelTextRecords,
   } satisfies ResolverRecordsSelection;
-  //TODO: 'as const satisfies ResolverRecordsSelection' from ensadmin forces addresses to be readonly and causes compiler issues -- double-check later
 
   // TODO: Each app (including ENSAdmin) should define their own "wrapper" data model around
   // their `useRecords` queries that is specific to their use case. For example, ENSAdmin should
@@ -52,7 +52,7 @@ export function FetchAndDisplayPrimaryNameBasedAdvocateProfile({
     );
 
   return (
-    <PrimaryNameBasedAdvocateProfile
+    <AdvocateProfileWithName
       name={name}
       address={address}
       namespaceId={namespaceId}

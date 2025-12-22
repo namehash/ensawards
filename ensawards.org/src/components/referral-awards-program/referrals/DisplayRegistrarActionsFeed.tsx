@@ -30,7 +30,7 @@ interface DisplayRegistrarActionsListProps {
 export function DisplayRegistrarActionsList({
   namespaceId,
   registrarActions,
-  showReferrer = false,
+  showReferrer = true,
 }: DisplayRegistrarActionsListProps) {
   const [animationParent] = useAutoAnimate();
   const now = useNow();

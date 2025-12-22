@@ -35,15 +35,16 @@ export function isQualifiedReferral(
   );
 }
 
-export function getReferralQualificationInfo(registrarAction: NamedRegistrarAction): string {
+export function getReferralQualificationInfo(
+  registrarAction: NamedRegistrarAction,
+): ReferralIncentiveProgram[] {
+  const qualifiedIncentivePrograms: ReferralIncentiveProgram[] = [];
   for (const incentiveProgram of REFERRAL_INCENTIVE_PROGRAMS) {
     // if the registrar action is qualified for a given referral incentive program,
-    // return the program's name
-    // TODO: this logic assumes that a registrar action can only be qualified for one referral program at time,
-    //  if that assumption is incorrect let me know!
-    if (isQualifiedReferral(incentiveProgram, registrarAction)) return incentiveProgram.name;
+    // add the program's name to the list.
+    if (isQualifiedReferral(incentiveProgram, registrarAction))
+      qualifiedIncentivePrograms.push(incentiveProgram);
   }
 
-  // if the registrar action is not qualified for any program, return "-"
-  return "-";
+  return qualifiedIncentivePrograms;
 }

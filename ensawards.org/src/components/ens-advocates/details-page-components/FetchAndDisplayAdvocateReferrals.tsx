@@ -1,13 +1,13 @@
-import type { EnsAdvocateDetailsPageProps } from "@/components/ens-advocates/details-page-components/advocate-profile/types.ts";
 import { AdvocateReferralsList } from "@/components/ens-advocates/details-page-components/advocate-referrals/AdvocateReferralsList.tsx";
 import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
-import { millisecondsInSecond } from "date-fns/constants";
+import { millisecondsInMinute } from "date-fns/constants";
 import { useState } from "react";
-import { namehash } from "viem";
+import { type Address, namehash } from "viem";
 
-interface FetchAndDisplayAdvocateReferralsProps extends EnsAdvocateDetailsPageProps {
+interface FetchAndDisplayAdvocateReferralsProps {
+  address: Address;
   recordsPerPage: number;
 }
 export function FetchAndDisplayAdvocateReferrals({
@@ -29,7 +29,7 @@ export function FetchAndDisplayAdvocateReferrals({
   const registrarActions = useStatefulRegistrarActions({
     paginationParams: { page: currentPage, recordsPerPage: recordsPerPage },
     filters,
-    staleTime: 15 * millisecondsInSecond,
+    staleTime: millisecondsInMinute,
   });
 
   return (

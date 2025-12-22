@@ -331,7 +331,7 @@ const shouldDisplayLeftDistanceIcon = (totalPages: number, currentPage: number):
 };
 
 interface SimplePaginationProps extends Omit<PaginationProps, "onSelectPage"> {
-  showText?: boolean; //TODO: It's about showing the "Next" & "Previous" on the buttons, help with naming appreciated
+  labeledButtons?: boolean;
   containerClassName?: string;
 }
 export function SimplePagination({
@@ -340,7 +340,7 @@ export function SimplePagination({
   paginationParams,
   onNext,
   onPrevious,
-  showText = false,
+  labeledButtons = false,
   containerClassName,
 }: SimplePaginationProps) {
   const buttonStyles = shadcnButtonVariants({
@@ -367,14 +367,14 @@ export function SimplePagination({
         onClick={onPrevious}
       >
         <PreviousPageIcon size={16} />
-        {showText && <span>Previous</span>}
+        {labeledButtons && <span>Previous</span>}
       </button>
       <button
         aria-disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles)}
         onClick={onNext}
       >
-        {showText && <span>Next</span>}
+        {labeledButtons && <span>Next</span>}
         <NextPageIcon size={16} />
       </button>
     </div>

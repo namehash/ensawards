@@ -2,7 +2,7 @@
 
 import { EnsAvatar } from "@/components/atoms/identity/EnsAvatar.tsx";
 import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
-import type { FetchAndDisplayPrimaryNameBasedAdvocateProfileProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayPrimaryNameBasedAdvocateProfile.tsx";
+import type { FetchAndDisplayPrimaryNameBasedAdvocateProfileProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { buildExternalEnsAppProfileUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -13,7 +13,7 @@ interface PrimaryNameBasedAdvocateProfileProps
   headerImage?: string | null;
 }
 
-export function PrimaryNameBasedAdvocateProfile({
+export function AdvocateProfileWithName({
   name,
   address,
   namespaceId,
