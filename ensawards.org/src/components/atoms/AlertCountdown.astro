@@ -100,7 +100,7 @@ const { eventUnixTimestamp, eventText, ctaText, link, styles }: AlertCountdownPr
     )
   }
 </a>
-<script>
+<script is:inline>
   import { secondsInMinute, millisecondsInSecond } from "date-fns/constants";
   import { differenceInDays, intervalToDuration } from "date-fns";
 
@@ -213,5 +213,14 @@ const { eventUnixTimestamp, eventText, ctaText, link, styles }: AlertCountdownPr
 
   // refresh the countdown every second due to necessity
   // of monitoring screen width for mobile adaptations
-  document.addEventListener("astro:page-load", () => setInterval(tick, millisecondsInSecond));
+  document.addEventListener("astro:page-load", () => {
+    console.log("after-load");
+    setInterval(tick, millisecondsInSecond)
+  });
+  document.addEventListener("astro:after-preparation", () => {
+    console.log("after-preparation");
+  });
+  document.addEventListener("astro:before-swap", () => {
+    console.log("before-swap");
+  });
 </script>
