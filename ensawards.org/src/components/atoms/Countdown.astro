@@ -96,8 +96,6 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
   import { secondsInMinute, millisecondsInSecond } from "date-fns/constants";
   import { differenceInDays, intervalToDuration } from "date-fns";
 
-  const countdownRoots = document.querySelectorAll("#countdownRoot");
-
   function updateCountdown(root) {
     const ensTokenIcon = root.querySelector("#ensTokenIcon");
     const timerWrapper = root.querySelector("#timerWrapper");
@@ -144,6 +142,7 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
   }
 
   function tick() {
+    const countdownRoots = document.querySelectorAll("#countdownRoot");
     countdownRoots.forEach(updateCountdown);
   }
 

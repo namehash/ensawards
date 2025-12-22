@@ -55,9 +55,13 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
 <script>
   import { scrollWithOffset } from "../../utils/domActions";
 
-  const scrollAnchor = document.getElementById("scroll-to-faq");
-  scrollAnchor.addEventListener("click", (event) => {
-    event.preventDefault();
-    scrollWithOffset(`FAQ-What's an $ENS?`, 90);
-  });
+  function initializeAutoScroll(){
+    const scrollAnchor = document.getElementById("scroll-to-faq");
+    scrollAnchor.addEventListener("click", (event) => {
+      event.preventDefault();
+      scrollWithOffset(`FAQ-What's an $ENS?`, 90);
+    });
+  }
+
+  document.addEventListener("astro:page-load", () => initializeAutoScroll());
 </script>

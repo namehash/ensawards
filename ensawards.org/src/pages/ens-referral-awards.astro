@@ -346,16 +346,20 @@ const backgroundGreyStyles =
   <script>
     import { scrollWithOffset } from "../utils/domActions";
 
-    const scrollToFaqElement = document.getElementById("scroll-to-faq");
-    scrollToFaqElement.addEventListener("click", (event) => {
-      event.preventDefault();
-      scrollWithOffset(`FAQ-Are there limitations to the referral links?`, 90);
-    });
+    function initializeAutoScroll(){
+      const scrollToFaqElement = document.getElementById("scroll-to-faq");
+      scrollToFaqElement.addEventListener("click", (event) => {
+        event.preventDefault();
+        scrollWithOffset(`FAQ-Are there limitations to the referral links?`, 90);
+      });
 
-    const scrollToJoinTelegramElement = document.getElementById("scroll-to-tg");
-    scrollToJoinTelegramElement.addEventListener("click", (event) => {
-      event.preventDefault();
-      scrollWithOffset(`joinTelegramCommunity`, 90);
-    });
+      const scrollToJoinTelegramElement = document.getElementById("scroll-to-tg");
+      scrollToJoinTelegramElement.addEventListener("click", (event) => {
+        event.preventDefault();
+        scrollWithOffset(`joinTelegramCommunity`, 90);
+      });
+    }
+
+    document.addEventListener("astro:page-load", () => initializeAutoScroll());
   </script>
 </Layout>
