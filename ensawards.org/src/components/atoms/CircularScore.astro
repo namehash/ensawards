@@ -117,7 +117,10 @@ const circumference = 2 * Math.PI * radius;
       setTimeout(animateScore, delay);
     }
   }
-  if (targetScore > 0) {
-    setTimeout(animateScore, delay);
-  }
+
+  document.addEventListener("astro:page-load", () => {
+    if (targetScore > 0) {
+      setTimeout(animateScore, delay);
+    }
+  });
 </script>

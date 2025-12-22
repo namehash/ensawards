@@ -147,6 +147,8 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
     countdownRoots.forEach(updateCountdown);
   }
 
-  tick();
-  setInterval(tick, secondsInMinute * millisecondsInSecond);
+  document.addEventListener("astro:page-load", () => {
+    tick();
+    setInterval(tick, secondsInMinute * millisecondsInSecond);
+  });
 </script>
