@@ -92,7 +92,7 @@ function ResolveAndDisplayReferrerIdentity({
 
   // if the encoded referrer was not the zeroEncodedReferrer but couldn't be
   // decoded according to the subjective interpretation rules of
-  // ENS Holiday Awards then display a tooltip with details
+  // the current ENS Referral Awards program then display a tooltip with details
   if (referral.decodedReferrer === zeroAddress) {
     // when we only want to display avatar (without textual identifier) use a dedicated placeholder.
     // Otherwise, display "unknown" plus the placeholder.
