@@ -191,11 +191,7 @@ export function DisplayIdentity({
   // TODO: extract the `IdentityLink` out of this component and remove the `withLink` prop.
   if (withLink) {
     result = (
-      <IdentityLink
-        identity={identity}
-        namespaceId={namespaceId}
-        className={cn("inline-flex w-fit h-fit")}
-      >
+      <IdentityLink identity={identity} className={cn("inline-flex w-fit h-fit")}>
         {result}
       </IdentityLink>
     );

@@ -1,0 +1,59 @@
+---
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import { isAddress } from "viem";
+import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
+import Breadcrumbs from "../../components/atoms/Breadcrumbs.astro";
+import { ErrorInfo } from "../../components/atoms/ErrorInfo";
+import { EnsAdvocateDetailsPageProvider } from "../../components/ens-advocates/EnsAdvocateDetailsPageProvider";
+import Layout from "../../layouts/Layout.astro";
+export const prerender = false;
+const { advocate } = Astro.params;
+
+// TODO: once the search form is published and improved to also accept names,
+// refactor that logic so that it also allows names
+const isRouteParamAValidAddress = isAddress(advocate);
+---
+
+<Layout isStatic={true}>
+  <AlertCountdown
+    slot="alertBanner"
+    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+    eventText="ENS Holiday Awards ends in"
+    ctaText="Learn more"
+    link="/ens-referral-awards"
+    styles={{
+      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+      cta: "text-white decoration-white/40 hover:decoration-white",
+      text: "text-white",
+      timer: "text-white",
+      timerLegend: "text-white",
+    }}
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-6 sm:pt-8 sm:pb-10 px-5 sm:px-8">
+    <div
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start gap-5 sm:gap-8">
+      <!--TODO: uncomment once the /advocate page is ready to be public-->
+      <!--<Breadcrumbs-->
+      <!--  breadcrumbs={["ENS advocates"]}-->
+      <!--  styles={{-->
+      <!--    home: "text-neutral-500 hover:bg-black/5",-->
+      <!--    chevron: "text-neutral-500 opacity-100",-->
+      <!--    text: "text-black",-->
+      <!--  }}-->
+      <!--/>-->
+      {
+        isRouteParamAValidAddress ? (
+          <EnsAdvocateDetailsPageProvider address={advocate} client:load />
+        ) : (
+          <ErrorInfo
+            title="ENS Advocate profile"
+            description={[
+              "Invalid Ethereum Mainnet address.",
+            ]}
+          />
+        )
+      }
+    </div>
+  </section>
+</Layout>

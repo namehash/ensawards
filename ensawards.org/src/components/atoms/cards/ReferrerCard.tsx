@@ -35,6 +35,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
   });
 
   const numberFormatter = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
 
@@ -103,7 +104,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal">Rank boost</p>
         <p className="text-sm leading-normal font-medium text-black">
-          {numberFormatter.format(referrer.finalScoreBoost * 100)}%
+          {Math.round(referrer.finalScoreBoost * 100)}%
         </p>
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
@@ -131,7 +132,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         ) : (
           <p className="text-sm leading-normal font-semibold text-black max-sm:text-end">
             Requires{" "}
-            {yearsRequiredToBeQualified === "1"
+            {yearsRequiredToBeQualified === "1.00"
               ? "1 more year"
               : `${yearsRequiredToBeQualified} more years`}
           </p>

@@ -88,9 +88,6 @@ export function MockPagination() {
           onNext={() => {
             setCurrentPage((prev) => prev + 1);
           }}
-          onSelectPage={(newPage) => {
-            setCurrentPage(newPage);
-          }}
         />
       </div>
     </div>

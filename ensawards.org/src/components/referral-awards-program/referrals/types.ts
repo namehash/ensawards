@@ -1,4 +1,8 @@
-import type { NamedRegistrarAction, OmnichainIndexingStatusId } from "@ensnode/ensnode-sdk";
+import type {
+  NamedRegistrarAction,
+  OmnichainIndexingStatusId,
+  ResponsePageContext,
+} from "@ensnode/ensnode-sdk";
 
 export const StatefulFetchStatusIds = {
   /**
@@ -92,6 +96,7 @@ export interface StatefulFetchRegistrarActionsError {
 export interface StatefulFetchRegistrarActionsLoaded {
   fetchStatus: typeof StatefulFetchStatusIds.Loaded;
   registrarActions: NamedRegistrarAction[];
+  pageContext: ResponsePageContext;
 }
 
 export type StatefulFetchRegistrarActions =

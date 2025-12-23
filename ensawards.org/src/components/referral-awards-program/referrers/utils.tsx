@@ -1,4 +1,4 @@
-import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
+import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
@@ -24,32 +24,23 @@ export const ReferrerLeaderboardLastUpdateTime = ({
   className,
 }: ReferrerLeaderboardLastUpdateTimeProps) => {
   return (
-    <p
-      className={cn(
-        "text-sm sm:text-base leading-normal font-normal text-muted-foreground sm:whitespace-nowrap",
-        className,
-      )}
-    >
-      Last updated{" "}
-      <AbsoluteTime
-        timestamp={timestamp}
-        options={{
+    <LastUpdateTime
+      timestamp={timestamp}
+      options={{
+        date: {
           year: "numeric",
           month: "short",
           day: "numeric",
-        }}
-      />{" "}
-      at{" "}
-      <AbsoluteTime
-        timestamp={timestamp}
-        options={{
+        },
+        time: {
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
           hour12: false,
-        }}
-      />
-    </p>
+        },
+      }}
+      className={className}
+    />
   );
 };
 

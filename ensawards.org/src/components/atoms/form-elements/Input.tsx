@@ -33,7 +33,7 @@ export const Input: React.FC<InputProps> = ({
   );
 
   return (
-    <div className="gap-1 self-stretch">
+    <div className="gap-1 w-full max-sm:self-stretch">
       <input id={inputId} className={inputClasses} disabled={disabled} {...props} />
       {error && <span className="mt-2 text-sm font-normal text-red-600">{error}</span>}
     </div>

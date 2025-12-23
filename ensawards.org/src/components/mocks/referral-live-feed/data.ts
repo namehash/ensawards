@@ -293,6 +293,16 @@ export const variants: Map<StatefulFetchStatusId, StatefulFetchRegistrarActions>
         registrationWithZeroEncodedReferrer,
         registrationWithReferrerNotMatchingENSHolidayAwardsFormat,
       ],
+      pageContext: {
+        totalPages: 1,
+        totalRecords: 8,
+        hasPrev: false,
+        hasNext: false,
+        endIndex: 7,
+        startIndex: 0,
+        page: 1,
+        recordsPerPage: 8,
+      },
     } satisfies StatefulFetchRegistrarActionsLoaded,
   ],
 ]);

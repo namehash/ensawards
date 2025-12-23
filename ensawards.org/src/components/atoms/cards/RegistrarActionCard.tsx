@@ -17,7 +17,7 @@ import {
   type ResolveAndDisplayIdentityProps,
 } from "@/components/atoms/identity";
 import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
-import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
+import { getReferralQualificationInfo } from "@/components/referral-awards-program/referrals/utils.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import {
@@ -146,10 +146,16 @@ function ResolveAndDisplayReferrerIdentity({
   );
 }
 
+export interface RegistrarActionCardLoadingProps {
+  showReferrer?: boolean;
+}
+
 /**
  * Display Registrar Action Card loading state
  */
-export function RegistrarActionCardLoading() {
+export function RegistrarActionCardLoading({
+  showReferrer = true,
+}: RegistrarActionCardLoadingProps) {
   const isMobile = useIsMobile();
 
   return (
@@ -176,15 +182,17 @@ export function RegistrarActionCardLoading() {
         </LabeledField>
       </div>
 
-      <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
-        {!isMobile && <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full" />}
-        <LabeledField fieldLabel="Referrer" className="sm:min-w-[110px]">
-          <div className="w-full flex flex-row flex-nowrap max-sm:justify-end justify-start items-center gap-2">
-            {isMobile && <div className="animate-pulse w-5 h-5 bg-gray-200 rounded-full" />}
-            <div className="animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-3/5" />
-          </div>
-        </LabeledField>
-      </div>
+      {showReferrer && (
+        <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
+          {!isMobile && <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full" />}
+          <LabeledField fieldLabel="Referrer" className="sm:min-w-[110px]">
+            <div className="w-full flex flex-row flex-nowrap max-sm:justify-end justify-start items-center gap-2">
+              {isMobile && <div className="animate-pulse w-5 h-5 bg-gray-200 rounded-full" />}
+              <div className="animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-3/5" />
+            </div>
+          </LabeledField>
+        </div>
+      )}
 
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
         <div className=" animate-pulse h-[14px] mt-[4px] mb-[3px] bg-gray-200 rounded-sm w-1/4 sm:w-4/5" />
@@ -196,8 +204,8 @@ export function RegistrarActionCardLoading() {
 export interface RegistrarActionCardProps {
   namespaceId: ENSNamespaceId;
   namedRegistrarAction: NamedRegistrarAction;
-  referralIncentiveProgram: ReferralIncentiveProgram;
   now: UnixTimestamp;
+  showReferrer?: boolean;
 }
 
 /**
@@ -206,8 +214,8 @@ export interface RegistrarActionCardProps {
 export function RegistrarActionCard({
   namespaceId,
   namedRegistrarAction,
-  referralIncentiveProgram,
   now,
+  showReferrer = true,
 }: RegistrarActionCardProps) {
   const isMobile = useIsMobile();
   const { registrant, registrationLifecycle, type, referral, transactionHash } =
@@ -230,6 +238,7 @@ export function RegistrarActionCard({
     );
 
   const registrantIdentity = buildUnresolvedIdentity(registrant, namespaceId, chainId);
+  const qualifiedReferralPrograms = getReferralQualificationInfo(namedRegistrarAction);
 
   return (
     <div className="w-full min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 text-sm bg-white">
@@ -285,35 +294,37 @@ export function RegistrarActionCard({
         </LabeledField>
       </div>
 
-      <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
-        {!isMobile && (
-          <ResolveAndDisplayReferrerIdentity
-            chainId={chainId}
-            namespaceId={namespaceId}
-            referral={referral}
-            withAvatar={true}
-            withIdentifier={false}
-            withTooltip={false}
-          />
-        )}
-        <LabeledField fieldLabel="Referrer" className="w-[15%] min-w-[110px]">
-          <ResolveAndDisplayReferrerIdentity
-            chainId={chainId}
-            namespaceId={namespaceId}
-            referral={referral}
-            withAvatar={isMobile}
-            withIdentifier={true}
-            withTooltip={false}
-          />
-        </LabeledField>
-      </div>
+      {showReferrer && (
+        <div className="flex flex-row flex-nowrap justify-start items-center gap-3 max-sm:w-full w-[15%] min-w-[162px]">
+          {!isMobile && (
+            <ResolveAndDisplayReferrerIdentity
+              chainId={chainId}
+              namespaceId={namespaceId}
+              referral={referral}
+              withAvatar={true}
+              withIdentifier={false}
+              withTooltip={false}
+            />
+          )}
+          <LabeledField fieldLabel="Referrer" className="w-[15%] min-w-[110px]">
+            <ResolveAndDisplayReferrerIdentity
+              chainId={chainId}
+              namespaceId={namespaceId}
+              referral={referral}
+              withAvatar={isMobile}
+              withIdentifier={true}
+              withTooltip={false}
+            />
+          </LabeledField>
+        </div>
+      )}
 
       <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
         <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
           <p className="text-black font-medium max-sm:text-right">
-            {isQualifiedReferral(referralIncentiveProgram, namedRegistrarAction)
-              ? referralIncentiveProgram.name
-              : "-"}
+            {qualifiedReferralPrograms.length === 0
+              ? "-"
+              : qualifiedReferralPrograms.map((referralProgram) => referralProgram.name).join(", ")}
           </p>
         </div>
       </LabeledField>

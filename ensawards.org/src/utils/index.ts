@@ -88,3 +88,7 @@ export function formatOmnichainIndexingStatus(status: OmnichainIndexingStatusId)
 
   return formattedStatus;
 }
+
+export function getEnsAdvocateDetailsRelativePath(address: Address): string {
+  return `/advocate/${encodeURIComponent(address)}`;
+}

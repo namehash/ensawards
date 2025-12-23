@@ -101,14 +101,11 @@ const { eventUnixTimestamp, eventText, ctaText, link, styles }: AlertCountdownPr
   }
 </a>
 <script>
-  import { secondsInMinute, millisecondsInSecond } from "date-fns/constants";
+  import { millisecondsInSecond } from "date-fns/constants";
   import { differenceInDays, intervalToDuration } from "date-fns";
 
-  const countdownRoots = document.querySelectorAll("#countdownAlertRoot");
-
-  const mobileBreakpointInPixels = 640;
-
   function updateCountdown(root) {
+    const mobileBreakpointInPixels = 640;
     const isMobile = window.innerWidth < mobileBreakpointInPixels;
 
     // mobile display
@@ -207,13 +204,14 @@ const { eventUnixTimestamp, eventText, ctaText, link, styles }: AlertCountdownPr
     singleUnitsDisplay.innerText = `${secondsLeft} secs`;
   }
 
-  function tick() {
+  function alertTick() {
+    const countdownRoots = document.querySelectorAll("#countdownAlertRoot");
     countdownRoots.forEach(updateCountdown);
   }
 
-  tick();
-
   // refresh the countdown every second due to necessity
   // of monitoring screen width for mobile adaptations
-  setInterval(tick, millisecondsInSecond);
+  document.addEventListener("astro:page-load", () => {
+    setInterval(alertTick, millisecondsInSecond);
+  });
 </script>

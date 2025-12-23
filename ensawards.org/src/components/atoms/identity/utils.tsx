@@ -17,6 +17,7 @@ import { CopyButton } from "@/components/atoms/CopyButton.tsx";
 import { ChainExplorerIcon } from "@/components/atoms/icons/ChainExplorerIcon.tsx";
 import { EnsSolidIcon } from "@/components/atoms/icons/EnsSolidIcon.tsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { getEnsAdvocateDetailsRelativePath } from "@/utils";
 import { getChainName } from "@/utils/chains.ts";
 import { getAddressDetailsUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -54,7 +55,6 @@ export function AddressDisplay({ address, className }: AddressDisplayProps) {
 
 interface IdentityLinkProps {
   identity: Identity;
-  namespaceId: ENSNamespaceId;
   className?: string;
 }
 
@@ -68,20 +68,14 @@ interface IdentityLinkProps {
  */
 export function IdentityLink({
   identity,
-  namespaceId,
   className,
   children,
 }: PropsWithChildren<IdentityLinkProps>) {
-  const ensAppAddressDetailsUrl = getAddressDetailsUrl(identity.address, namespaceId);
-
-  if (!ensAppAddressDetailsUrl) {
-    return <>{children}</>;
-  }
+  const addressDetailsRelativePath = getEnsAdvocateDetailsRelativePath(identity.address);
 
   return (
     <a
-      target="_blank"
-      href={ensAppAddressDetailsUrl.toString()}
+      href={addressDetailsRelativePath}
       className={cn("text-sm leading-normal font-medium text-blue-600", className)}
     >
       {children}

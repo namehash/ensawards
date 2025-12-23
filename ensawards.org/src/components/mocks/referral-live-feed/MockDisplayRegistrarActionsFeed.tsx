@@ -58,7 +58,6 @@ export function MockDisplayRegistrarActionsFeed() {
               namespaceId={namespaceId}
               title={title}
               registrarActions={selectedVariant}
-              referralIncentiveProgram={ENSHolidayAwards}
             />
           </div>{" "}
         </section>

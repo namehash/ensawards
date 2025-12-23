@@ -24,7 +24,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
   const [currentPage, setCurrentPage] = useState(1);
   const [currentRecordsPerPage, setCurrentRecordsPerPage] = useState(recordsPerPage);
   const [totalPages, setTotalPages] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPage | null>(null);
   const ensNodeUrl = getENSNodeUrl();
@@ -85,9 +85,10 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
             <h3 id="leaderboard-header" className="text-2xl leading-normal font-semibold">
               Leaderboard
             </h3>
-            {isLoading || leaderboardData === null ? (
+            {isLoading ? (
               <Skeleton className="w-[225px] sm:w-[255px] sm:h-[14px] h-4 mt-1 mb-1 sm:mb-[3px] bg-gray-200" />
             ) : (
+              leaderboardData !== null &&
               !fetchErrorMessage && (
                 <ReferrerLeaderboardLastUpdateTime
                   timestamp={leaderboardData.accurateAsOf}
@@ -96,11 +97,12 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
               )
             )}
           </div>
-          {isLoading || leaderboardData === null ? (
+          {isLoading ? (
             <div className="w-full  h-9 flex flex-row justify-start items-center">
               <Skeleton className="w-[205px] h-4 mt-1 mb-1 bg-gray-200" />
             </div>
           ) : (
+            leaderboardData !== null &&
             leaderboardData.pageContext.totalRecords > 0 && (
               <DisplaySimplePagination
                 totalPages={totalPages}
@@ -114,9 +116,6 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
                 }}
                 onNext={() => {
                   setCurrentPage((prev) => prev + 1);
-                }}
-                onSelectPage={(newPage) => {
-                  setCurrentPage(newPage);
                 }}
                 recordAlias={{ singular: "referrer", plural: "referrers" }}
                 quantityInfoPrefix="Rank"
@@ -153,7 +152,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
               recordsPerPage: recordsPerPage,
             }}
           />
-          {isLoading || leaderboardData === null ? (
+          {isLoading ? (
             <div className="w-full flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-center gap-y-3">
               <Skeleton className="w-[185px] h-[14px] mt-1 mb-[3px] bg-gray-200" />
               <Skeleton className="w-[330px] h-9 bg-gray-200" />
@@ -163,6 +162,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
               </div>
             </div>
           ) : (
+            leaderboardData !== null &&
             leaderboardData.pageContext.totalRecords > 0 && (
               <DisplayPagination
                 totalPages={totalPages}

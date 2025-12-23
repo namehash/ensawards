@@ -1,3 +1,4 @@
+import { REFERRAL_INCENTIVE_PROGRAMS } from "@/data/referralIncentivePrograms.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import {
   type NamedRegistrarAction,
@@ -32,4 +33,18 @@ export function isQualifiedReferral(
     isRegistrarActionReferralAvailable(registrarAction.action.referral) &&
     registrarAction.action.referral.decodedReferrer !== zeroAddress
   );
+}
+
+export function getReferralQualificationInfo(
+  registrarAction: NamedRegistrarAction,
+): ReferralIncentiveProgram[] {
+  const qualifiedIncentivePrograms: ReferralIncentiveProgram[] = [];
+  for (const incentiveProgram of REFERRAL_INCENTIVE_PROGRAMS) {
+    // if the registrar action is qualified for a given referral incentive program,
+    // add the program's name to the list.
+    if (isQualifiedReferral(incentiveProgram, registrarAction))
+      qualifiedIncentivePrograms.push(incentiveProgram);
+  }
+
+  return qualifiedIncentivePrograms;
 }

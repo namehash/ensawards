@@ -6,25 +6,27 @@ import type { Name } from "@ensnode/ensnode-sdk";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { buildEnsMetadataServiceAvatarUrl } from "@/utils/namespace.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 interface EnsAvatarProps {
   name: Name;
   namespaceId: ENSNamespaceId;
   className?: string;
+  isSquare?: boolean;
 }
 
 type ImageLoadingStatus = Parameters<
   NonNullable<React.ComponentProps<typeof AvatarImage>["onLoadingStatusChange"]>
 >[0];
 
-export const EnsAvatar = ({ name, namespaceId, className }: EnsAvatarProps) => {
+export const EnsAvatar = ({ name, namespaceId, className, isSquare = false }: EnsAvatarProps) => {
   const [loadingStatus, setLoadingStatus] = React.useState<ImageLoadingStatus>("idle");
   const avatarUrl = buildEnsMetadataServiceAvatarUrl(name, namespaceId);
 
   if (avatarUrl === null) {
     return (
       <Avatar className={className}>
-        <EnsAvatarFallback name={name} />
+        <EnsAvatarFallback name={name} isSquare={isSquare} />
       </Avatar>
     );
   }
@@ -38,27 +40,32 @@ export const EnsAvatar = ({ name, namespaceId, className }: EnsAvatarProps) => {
           setLoadingStatus(status);
         }}
       />
-      {loadingStatus === "error" && <EnsAvatarFallback name={name} />}
-      {(loadingStatus === "idle" || loadingStatus === "loading") && <AvatarLoading />}
+      {loadingStatus === "error" && <EnsAvatarFallback name={name} isSquare={isSquare} />}
+      {(loadingStatus === "idle" || loadingStatus === "loading") && (
+        <AvatarLoading className={className} />
+      )}
     </Avatar>
   );
 };
 
 interface EnsAvatarFallbackProps {
   name: Name;
+  isSquare: boolean;
 }
 
 const avatarFallbackColors = ["#000000", "#bedbff", "#5191c1", "#1e6495", "#0a4b75"];
 
-const EnsAvatarFallback = ({ name }: EnsAvatarFallbackProps) => (
+const EnsAvatarFallback = ({ name, isSquare }: EnsAvatarFallbackProps) => (
   <BoringAvatar
     name={name}
     colors={avatarFallbackColors}
     variant="beam"
     className="w-full h-full"
+    square={isSquare}
   />
 );
 
-const AvatarLoading = () => (
-  <div className="h-full w-full rounded-full animate-pulse bg-gray-300" />
+type EnsAvatarLoadingProps = Omit<EnsAvatarProps, "name" | "namespaceId">;
+const AvatarLoading = ({ className }: EnsAvatarLoadingProps) => (
+  <div className={cn("h-full w-full rounded-full animate-pulse bg-gray-200", className)} />
 );

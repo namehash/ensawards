@@ -7,7 +7,6 @@ import { namehash } from "viem";
 
 export interface FetchAndDisplayRegistrarActionsFeedProps {
   recordsPerPage: number;
-  referralIncentiveProgram: ReferralIncentiveProgram;
   title: string;
 }
 
@@ -16,7 +15,6 @@ export interface FetchAndDisplayRegistrarActionsFeedProps {
  */
 export function FetchAndDisplayRegistrarActionsFeed({
   recordsPerPage,
-  referralIncentiveProgram,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
   const namespaceId = ENSNamespaceIds.Mainnet;
@@ -28,7 +26,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
   ];
 
   const registrarActions = useStatefulRegistrarActions({
-    recordsPerPage,
+    paginationParams: { page: 1, recordsPerPage },
     filters,
   });
 
@@ -37,7 +35,6 @@ export function FetchAndDisplayRegistrarActionsFeed({
       namespaceId={namespaceId}
       title={title}
       registrarActions={registrarActions}
-      referralIncentiveProgram={referralIncentiveProgram}
     />
   );
 }
