@@ -1,12 +1,12 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
-import { Skeleton } from "@/components/ui/skeleton";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type AppBenchmark, BenchmarkResult } from "@/types/apps.ts";
 import { getENSNodeUrl } from "@/utils/env";
+import { DEFAULT_ENSAWARDS_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { ENSNamespaceIds, ENSNodeClient, buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
+import { ENSNodeClient, buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
 import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 
@@ -19,7 +19,7 @@ export interface BenchmarkResultBadgeProps {
 const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
   const identity = buildUnresolvedIdentity(
     benchmark.benchmarkedBy.address,
-    ENSNamespaceIds.Mainnet,
+    DEFAULT_ENSAWARDS_ENS_NAMESPACE,
     benchmark.benchmarkedBy.chainId,
   );
 
@@ -29,7 +29,7 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
         <p className="text-muted-foreground text-xs">Benchmarked by</p>
         <ResolveAndDisplayIdentity
           identity={identity}
-          namespaceId={ENSNamespaceIds.Mainnet}
+          namespaceId={DEFAULT_ENSAWARDS_ENS_NAMESPACE}
           withLink={true}
           withTooltip={false}
           withAvatar={true}

@@ -1,7 +1,7 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
+import { DEFAULT_ENSAWARDS_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { ENSNamespaceIds } from "@ensnode/datasources";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 import type {
   AggregatedReferrerMetrics,
@@ -22,7 +22,7 @@ export interface ReferrerCardProps {
  * Display a single Referrer on the {@link ReferrerLeaderboardPage}.
  */
 export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps) {
-  const namespaceId = ENSNamespaceIds.Mainnet;
+  const namespaceId = DEFAULT_ENSAWARDS_ENS_NAMESPACE;
   const referrerIdentity = buildUnresolvedIdentity(
     referrer.referrer,
     namespaceId,
