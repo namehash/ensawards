@@ -1,10 +1,8 @@
-//TODO: Should I specifically target 'ens advocate program' in naming or convert all these file names to be more generic?
-
 import { EnsAvatar } from "@/components/atoms/identity/EnsAvatar.tsx";
 import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
 import type { FetchAndDisplayPrimaryNameBasedAdvocateProfileProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { buildExternalEnsAppProfileUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
+import { getAddressDetailsUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 
@@ -43,7 +41,7 @@ export function AdvocateProfileWithName({
   return (
     <div className="w-full h-fit box-border flex flex-col gap-5 justify-start items-center">
       <div
-        className="w-full aspect-[152/35] bg-blue-500 rounded-xl relative"
+        className="w-full aspect-[67/28] sm:aspect-[152/35] bg-blue-500 rounded-xl relative"
         style={{
           backgroundImage: validHeaderImageUrl ? `url(${validHeaderImageUrl})` : undefined,
           backgroundSize: "cover",
@@ -51,20 +49,21 @@ export function AdvocateProfileWithName({
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="absolute w-full aspect-[152/35] bg-[linear-gradient(180deg,rgba(255,255,255,0.00)_0%,#FFF_100%)]" />
+        <div className="absolute w-full h-full bg-[linear-gradient(180deg,rgba(255,255,255,0.00)_0%,#FFF_100%)]" />
       </div>
       <div className="w-full flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3 sm:gap-[25px]">
         <EnsAvatar
-          className="w-[100px] h-[100px] rounded-xl border border-gray-200"
+          className="w-[100px] h-[100px] sm:w-[56px] sm:h-[56px] flex-shrink-0 rounded-xl sm:rounded-md border border-gray-200"
           name={name}
           namespaceId={namespaceId}
+          isSquare={true}
         />
-        <div className="w-full flex flex-col justify-center items-start gap-3 sm:gap-5">
+        <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-center sm:justify-between items-start sm:items-center gap-3 sm:gap-y-3">
           <NameDisplay
-            className="self-stretch text-center sm:text-left text-2xl sm:text-3xl font-bold"
+            className="max-sm:self-stretch text-center sm:text-left text-2xl sm:text-3xl font-bold"
             name={name}
           />
-          <div className="w-full flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3">
+          <div className="max-sm:w-full flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3">
             {address !== null && (
               <a
                 href={getBlockExplorerUrlForAddress(getENSRootChainId(namespaceId), address)?.href}
@@ -81,7 +80,7 @@ export function AdvocateProfileWithName({
               </a>
             )}
             <a
-              href={buildExternalEnsAppProfileUrl(name, namespaceId)?.href}
+              href={getAddressDetailsUrl(address, namespaceId)?.href}
               target="_blank"
               className={cn(
                 shadcnButtonVariants({

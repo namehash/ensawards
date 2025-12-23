@@ -12,20 +12,21 @@ interface EnsAvatarProps {
   name: Name;
   namespaceId: ENSNamespaceId;
   className?: string;
+  isSquare?: boolean;
 }
 
 type ImageLoadingStatus = Parameters<
   NonNullable<React.ComponentProps<typeof AvatarImage>["onLoadingStatusChange"]>
 >[0];
 
-export const EnsAvatar = ({ name, namespaceId, className }: EnsAvatarProps) => {
+export const EnsAvatar = ({ name, namespaceId, className, isSquare = false }: EnsAvatarProps) => {
   const [loadingStatus, setLoadingStatus] = React.useState<ImageLoadingStatus>("idle");
   const avatarUrl = buildEnsMetadataServiceAvatarUrl(name, namespaceId);
 
   if (avatarUrl === null) {
     return (
       <Avatar className={className}>
-        <EnsAvatarFallback name={name} />
+        <EnsAvatarFallback name={name} isSquare={isSquare} />
       </Avatar>
     );
   }
@@ -39,7 +40,7 @@ export const EnsAvatar = ({ name, namespaceId, className }: EnsAvatarProps) => {
           setLoadingStatus(status);
         }}
       />
-      {loadingStatus === "error" && <EnsAvatarFallback name={name} />}
+      {loadingStatus === "error" && <EnsAvatarFallback name={name} isSquare={isSquare} />}
       {(loadingStatus === "idle" || loadingStatus === "loading") && (
         <AvatarLoading className={className} />
       )}
@@ -49,16 +50,18 @@ export const EnsAvatar = ({ name, namespaceId, className }: EnsAvatarProps) => {
 
 interface EnsAvatarFallbackProps {
   name: Name;
+  isSquare: boolean;
 }
 
 const avatarFallbackColors = ["#000000", "#bedbff", "#5191c1", "#1e6495", "#0a4b75"];
 
-const EnsAvatarFallback = ({ name }: EnsAvatarFallbackProps) => (
+const EnsAvatarFallback = ({ name, isSquare }: EnsAvatarFallbackProps) => (
   <BoringAvatar
     name={name}
     colors={avatarFallbackColors}
     variant="beam"
     className="w-full h-full"
+    square={isSquare}
   />
 );
 

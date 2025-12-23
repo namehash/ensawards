@@ -1,4 +1,5 @@
 import { AdvocateReferralsList } from "@/components/ens-advocates/details-page-components/advocate-referrals/AdvocateReferralsList.tsx";
+import { scrollWithOffset } from "@/utils/domActions.ts";
 import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
@@ -35,15 +36,19 @@ export function FetchAndDisplayAdvocateReferrals({
   return (
     <div className="w-full h-fit box-border flex flex-col justify-start items-center gap-6">
       <div className="w-full flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center max-sm:gap-2">
-        <h3 className="text-2xl leading-normal font-semibold">Referrals</h3>
+        <h3 id="advocate-referrals-header" className="text-2xl leading-normal font-semibold">
+          Referrals
+        </h3>
       </div>
       <AdvocateReferralsList
         paginationParams={{ page: currentPage, recordsPerPage: recordsPerPage }}
         onPrevious={() => {
           setCurrentPage((prev) => prev - 1);
+          scrollWithOffset("advocate-referrals-header", 75);
         }}
         onNext={() => {
           setCurrentPage((prev) => prev + 1);
+          scrollWithOffset("advocate-referrals-header", 75);
         }}
         namespaceId={namespaceId}
         registrarActions={registrarActions}
