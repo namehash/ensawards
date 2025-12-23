@@ -2,7 +2,7 @@ import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { AdvocateProfileWithoutName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithoutName.tsx";
 import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-page-components/advocate-profile/EnsAdvocateProfileLoading.tsx";
 import { FetchAndDisplayAdvocateProfileWithName } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
-import { ENSNamespaceIds } from "@ensnode/datasources";
+import { DEFAULT_ENSAWARDS_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 import type { Address } from "viem";
@@ -12,11 +12,9 @@ interface FetchAndDisplayAdvocateProfileProps {
 }
 
 export function FetchAndDisplayAdvocateProfile({ address }: FetchAndDisplayAdvocateProfileProps) {
-  const namespaceId = ENSNamespaceIds.Mainnet;
-
   const { data, isLoading, error } = usePrimaryName({
     address: address,
-    chainId: getENSRootChainId(namespaceId),
+    chainId: getENSRootChainId(DEFAULT_ENSAWARDS_ENS_NAMESPACE),
     accelerate: true,
     query: ASSUME_IMMUTABLE_QUERY,
   });
@@ -33,16 +31,9 @@ export function FetchAndDisplayAdvocateProfile({ address }: FetchAndDisplayAdvoc
 
   // If the advocate's address doesn't have a defined primary name,
   // display a UI based just on the address
-  if (data.name === null)
-    return <AdvocateProfileWithoutName address={address} namespaceId={namespaceId} />;
+  if (data.name === null) return <AdvocateProfileWithoutName address={address} />;
 
   // Otherwise, use the primary name to obtain additional data about the profile
   // and display it in the UI
-  return (
-    <FetchAndDisplayAdvocateProfileWithName
-      name={data.name}
-      address={address}
-      namespaceId={namespaceId}
-    />
-  );
+  return <FetchAndDisplayAdvocateProfileWithName name={data.name} address={address} />;
 }

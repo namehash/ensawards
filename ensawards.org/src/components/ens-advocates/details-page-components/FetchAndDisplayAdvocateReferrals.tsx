@@ -1,7 +1,7 @@
 import { AdvocateReferralsList } from "@/components/ens-advocates/details-page-components/advocate-referrals/AdvocateReferralsList.tsx";
 import { scrollWithOffset } from "@/utils/domActions.ts";
 import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
-import { ENSNamespaceIds } from "@ensnode/datasources";
+import { DEFAULT_ENSAWARDS_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
 import { millisecondsInMinute } from "date-fns/constants";
 import { useState } from "react";
@@ -16,7 +16,7 @@ export function FetchAndDisplayAdvocateReferrals({
   recordsPerPage,
 }: FetchAndDisplayAdvocateReferralsProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const namespaceId = ENSNamespaceIds.Mainnet;
+  const namespaceId = DEFAULT_ENSAWARDS_ENS_NAMESPACE;
 
   const filters: RegistrarActionsFilter[] = [
     // Include records for direct subnames of `.eth`

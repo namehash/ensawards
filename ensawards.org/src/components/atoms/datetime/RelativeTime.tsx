@@ -99,7 +99,7 @@ export function RelativeTime({
       </TooltipTrigger>
       <TooltipContent
         side={tooltipPosition}
-        className="bg-[#171717] text-sm text-white text-center shadow-md outline-none w-fit"
+        className="bg-[#171717] text-sm text-white text-left shadow-md outline-none w-fit"
       >
         <AbsoluteTime
           timestamp={timestamp}
@@ -112,7 +112,23 @@ export function RelativeTime({
             second: "numeric",
             hour12: true,
           }}
-        />
+        />{" "}
+        (Local time)
+        <br />
+        <AbsoluteTime
+          timestamp={timestamp}
+          options={{
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+            timeZone: "UTC",
+          }}
+        />{" "}
+        (UTC)
       </TooltipContent>
     </Tooltip>
   );
