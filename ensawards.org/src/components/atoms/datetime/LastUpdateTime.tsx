@@ -1,4 +1,5 @@
 import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
@@ -27,3 +28,15 @@ export const LastUpdateTime = ({ timestamp, options, className }: LastUpdateTime
     </p>
   );
 };
+
+interface LastUpdateTimeLoadingProps {
+  className?: string;
+}
+export const LastUpdateTimeLoading = ({ className }: LastUpdateTimeLoadingProps) => (
+  <Skeleton
+    className={cn(
+      "w-[225px] sm:w-[255px] sm:h-[14px] h-4 mt-1 mb-1 sm:mb-[3px] bg-gray-200",
+      className,
+    )}
+  />
+);

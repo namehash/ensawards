@@ -1,8 +1,8 @@
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import { LastUpdateTimeLoading } from "@/components/atoms/datetime/LastUpdateTime.tsx";
 import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
 import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -82,7 +82,7 @@ export function ReferrerLeaderboardSnippet({
             )}
           >
             {isLoading ? (
-              <Skeleton className="w-[225px] sm:w-[255px] h-[14px] sm:h-4 mt-[4px] mb-[3px] sm:my-1 bg-gray-200" />
+              <LastUpdateTimeLoading />
             ) : (
               leaderboardSnippetData !== null && (
                 <ReferrerLeaderboardLastUpdateTime
