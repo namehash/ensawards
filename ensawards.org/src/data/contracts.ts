@@ -342,7 +342,7 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "auction.nouns.eth",
       contract: {
         address: "0x830BD73E4184ceF73443C15111a1DF14e495C706",
@@ -356,7 +356,7 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "candidates.nouns.eth",
       contract: {
         address: "0xf790A5f59678dd733fb3De93493A91f472ca1365",
@@ -370,7 +370,7 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "delegations.nouns.eth",
       contract: {
         address: "0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03",
@@ -398,7 +398,7 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "rewards.nouns.eth",
       contract: {
         address: "0x883860178F95d0C82413eDc1D6De530cB4771d55",
@@ -412,7 +412,7 @@ export const CONTRACTS: Contract[] = [
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "traits.nouns.eth",
       contract: {
         address: "0x33A9c445fb4FB21f2c030A6b2d3e2F12D017BFAC",
