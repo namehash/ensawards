@@ -1,0 +1,61 @@
+---
+import {
+  ENS_HOLIDAY_AWARDS_END_DATE,
+  ENS_HOLIDAY_AWARDS_START_DATE,
+} from "@namehash/ens-referrals";
+import { millisecondsInSecond, secondsInDay } from "date-fns/constants";
+import type * as React from "react";
+import { ReferralProgramTimeline } from "../../components/atoms/ReferralProgramTimeline";
+import { AbsoluteTime } from "../../components/atoms/datetime/AbsoluteTime";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const twoDaysAgoUnixTimestamp = Date.now() / millisecondsInSecond - 2 * secondsInDay;
+const inTwoDaysUnixTimestamp = Date.now() / millisecondsInSecond + 2 * secondsInDay;
+const january1st2030UnixTimestamp = 1893452400;
+const january1st2020UnixTimestamp = 1577833200;
+---
+
+<Layout>
+  <SubpageHero header="ReferralProgramTimeline" breadcrumbs={["Mocks"]} />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8 text-white">
+    <ItemsList
+      header="ReferralProgramTimeline variants"
+      containerStyles="gap-4 sm:gap-4">
+      <p class="text-amber-600 font-semibold">
+        NOTE: This preview is styled to be best visible in the mock environment.
+        The styles of the timeline component are customizable, hence the public
+        display may differ a bit. The UX remains identical in both scenarios.
+      </p>
+      <div
+        class="w-full flex flex-col justify-start items-start gap-4 bg-blue-900 rounded-md p-4">
+        <p>Referral Program starting 2 days from now</p>
+        <ReferralProgramTimeline
+          startDate={inTwoDaysUnixTimestamp}
+          endDate={january1st2030UnixTimestamp}
+          client:load
+        />
+      </div>
+      <div
+        class="w-full flex flex-col justify-start items-start gap-4 bg-blue-900 rounded-md p-4">
+        <p>Referral Program started 2 days ago and ending in 2 days</p>
+        <ReferralProgramTimeline
+          startDate={twoDaysAgoUnixTimestamp}
+          endDate={inTwoDaysUnixTimestamp}
+          client:load
+        />
+      </div>
+      <div
+        class="w-full flex flex-col justify-start items-start gap-4 bg-blue-900 rounded-md p-4">
+        <p>Referral Program ended 2 days ago</p>
+        <ReferralProgramTimeline
+          startDate={january1st2020UnixTimestamp}
+          endDate={twoDaysAgoUnixTimestamp}
+          client:load
+        />
+      </div>
+    </ItemsList>
+  </section>
+</Layout>
