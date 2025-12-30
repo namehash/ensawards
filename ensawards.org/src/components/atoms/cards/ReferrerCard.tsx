@@ -57,7 +57,9 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
             withTooltip={false}
           />
           <div className="sm:min-w-[170px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-            <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
+            <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
+              Referrer
+            </p>
             <ResolveAndDisplayIdentity
               identity={referrerIdentity}
               namespaceId={namespaceId}
@@ -85,7 +87,9 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         />
       </div>
       <div className="min-w-[120px] sm:hidden flex flex-row flex-nowrap justify-between items-start self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
+        <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
+          Referrer
+        </p>
         <ResolveAndDisplayIdentity
           identity={referrerIdentity}
           namespaceId={namespaceId}
