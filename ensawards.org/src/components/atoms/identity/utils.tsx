@@ -133,7 +133,7 @@ export const IdentityTooltip = ({
   const chainExplorerUrl = getBlockExplorerUrlForAddress(effectiveChainId, identity.address);
 
   return (
-    <Tooltip delayDuration={1000}>
+    <Tooltip delayDuration={250}>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent
         side="top"

@@ -1,7 +1,6 @@
 import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
-import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
-import { ENSNamespaceIds } from "@ensnode/datasources";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
 import { namehash } from "viem";
 
@@ -17,7 +16,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
   recordsPerPage,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
-  const namespaceId = ENSNamespaceIds.Mainnet;
+  const namespaceId = DEFAULT_ENS_NAMESPACE;
   const filters: RegistrarActionsFilter[] = [
     // Include records for direct subnames of `.eth`
     registrarActionsFilter.byParentNode(namehash("eth")),

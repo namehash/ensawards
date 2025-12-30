@@ -65,9 +65,9 @@ const {
       )
     }
     <div
-      class="h-fit flex flex-nowrap flex-col md:flex-row items-center sm:items-end justify-center sm:justify-between gap-4">
+      class="h-fit flex flex-nowrap flex-col md:flex-row items-center md:items-end justify-center md:justify-between gap-4">
       <div
-        class="max-sm:w-full flex flex-nowrap flex-col items-start justify-end gap-2 sm:gap-4 relative z-10">
+        class="max-md:w-full flex flex-nowrap flex-col items-start justify-end gap-2 sm:gap-4 relative z-10">
         <slot name="icon" />
         <div class="flex flex-nowrap flex-col items-start justify-start gap-2">
           <h1
@@ -82,7 +82,7 @@ const {
             )
           }
         </div>
-        <slot name="socialLinks" />
+        <slot name="ctaContent" />
       </div>
       {
         additionalElements && (

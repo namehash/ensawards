@@ -1,9 +1,13 @@
 ---
 import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
+import { ReferralProgramTimeline } from "../../components/atoms/ReferralProgramTimeline";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { ReferrerLeaderboard } from "../../components/referral-awards-program/referrers/ReferrerLeaderboard";
+import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
+import { ENSHolidayAwards } from "../../data/referralIncentivePrograms";
 import Layout from "../../layouts/Layout.astro";
+import { cn } from "../../utils/tailwindClassConcatenation";
 ---
 
 <Layout
@@ -31,16 +35,44 @@ import Layout from "../../layouts/Layout.astro";
     }}
   />
   <SubpageHero
-    header="ENS Referral Leaderboard"
+    header="ENS Holiday Awards"
     description="Compare referrers by their performance in ENS Holiday Awards."
     breadcrumbs={["ENS Holiday Awards"]}
     customImage={{
       source: "/src/assets/leaderboardsHeroImage.png",
       width: 371,
       height: 372,
-      styles: "-top-0 right-0",
+      styles: "-top-0 right-0 opacity-10",
     }}
-  />
+    additionalElements={[
+      {
+        name: "Award pool",
+        value: "$10,000 USD",
+      },
+      {
+        name: "Rules",
+        value: "Learn more",
+        link: "/ens-holiday-awards-rules",
+      },
+    ]}>
+    <a
+      slot="ctaContent"
+      href="/ens-referral-awards"
+      class={cn(
+        shadcnButtonVariants({
+          variant: "default",
+          size: "default",
+          className:
+            "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+        }),
+      )}>Learn more</a
+    >
+    <ReferralProgramTimeline
+      slot="extraAdditionalElement"
+      referralProgramRules={ENSHolidayAwards.rules}
+      client:load
+    />
+  </SubpageHero>
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <ReferrerLeaderboard client:load />

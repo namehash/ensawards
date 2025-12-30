@@ -2,23 +2,23 @@ import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
 import { AddressDisplay } from "@/components/atoms/identity/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
-import { getAddressDetailsUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
+import {
+  DEFAULT_ENS_NAMESPACE,
+  getAddressDetailsUrl,
+  getBlockExplorerUrlForAddress,
+} from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { ENSNamespaceId } from "@ensnode/datasources";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 import type * as React from "react";
 import type { Address } from "viem";
 
-interface AddressBasedAdvocateProfileProps {
+interface AdvocateProfileWithoutNameProps {
   address: Address;
-  namespaceId: ENSNamespaceId;
 }
 
-export function AdvocateProfileWithoutName({
-  address,
-  namespaceId,
-}: AddressBasedAdvocateProfileProps) {
+export function AdvocateProfileWithoutName({ address }: AdvocateProfileWithoutNameProps) {
   const isMobile = useIsMobile();
+  const namespaceId = DEFAULT_ENS_NAMESPACE;
   return (
     <div className="w-full h-fit box-border flex flex-col gap-5 justify-start items-center">
       <div className="w-full aspect-[67/28] sm:aspect-[152/35] bg-blue-500 rounded-xl relative">

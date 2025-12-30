@@ -94,7 +94,7 @@ export default function HeaderMobileNavigation({
                         ENS contract naming season
                       </a>
                       <a href="/ens-referral-awards" className={mainLinkClass}>
-                        ENS holiday referral awards
+                        ENS referral program
                       </a>
                     </ul>
                   </div>

@@ -1,7 +1,7 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { ENSNamespaceIds } from "@ensnode/datasources";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 import type {
   AggregatedReferrerMetrics,
@@ -22,7 +22,7 @@ export interface ReferrerCardProps {
  * Display a single Referrer on the {@link ReferrerLeaderboardPage}.
  */
 export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps) {
-  const namespaceId = ENSNamespaceIds.Mainnet;
+  const namespaceId = DEFAULT_ENS_NAMESPACE;
   const referrerIdentity = buildUnresolvedIdentity(
     referrer.referrer,
     namespaceId,
@@ -57,7 +57,9 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
             withTooltip={false}
           />
           <div className="sm:min-w-[170px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-            <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
+            <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
+              Referrer
+            </p>
             <ResolveAndDisplayIdentity
               identity={referrerIdentity}
               namespaceId={namespaceId}
@@ -85,7 +87,9 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         />
       </div>
       <div className="min-w-[120px] sm:hidden flex flex-row flex-nowrap justify-between items-start self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
+        <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
+          Referrer
+        </p>
         <ResolveAndDisplayIdentity
           identity={referrerIdentity}
           namespaceId={namespaceId}
@@ -96,25 +100,59 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         />
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Referral years</p>
+        <GenericTooltip
+          tooltipOffset={0}
+          content={
+            <p className="max-w-[140px]">
+              Total duration of all referred registrations and renewals
+            </p>
+          }
+        >
+          <p className="text-muted-foreground text-sm leading-normal font-normal">Referral years</p>
+        </GenericTooltip>
         <p className="text-sm leading-normal font-medium text-black">
           {numberFormatter.format(referrer.score)}
         </p>
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Rank boost</p>
+        <GenericTooltip
+          tooltipOffset={0}
+          content={
+            <p className="max-w-[140px]">Leaderboard rank multiplier boost to final score</p>
+          }
+        >
+          <p className="text-muted-foreground text-sm leading-normal font-normal">Rank boost</p>
+        </GenericTooltip>
         <p className="text-sm leading-normal font-medium text-black">
           {Math.round(referrer.finalScoreBoost * 100)}%
         </p>
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Final score</p>
+        <GenericTooltip
+          tooltipOffset={0}
+          content={
+            <p className="max-w-[140px]">One point per referral year with added rank boost</p>
+          }
+        >
+          <p className="text-muted-foreground text-sm leading-normal font-normal">Final score</p>
+        </GenericTooltip>
         <p className="text-sm leading-normal font-medium text-black">
           {numberFormatter.format(referrer.finalScore)}
         </p>
       </div>
       <div className="sm:min-w-[180px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Award pool share</p>
+        <GenericTooltip
+          tooltipOffset={0}
+          content={
+            <p className="max-w-[200px]">
+              Tentative share of total award pool based on final scores of all qualified referrers
+            </p>
+          }
+        >
+          <p className="text-muted-foreground text-sm leading-normal font-normal">
+            Award pool share
+          </p>
+        </GenericTooltip>
         {referrer.isQualified ? (
           <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
             <div className="max-sm:hidden flex relative w-20 h-[7px] rounded-[20px] bg-gray-200 z-0">
@@ -139,7 +177,14 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
         )}
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Tentative awards</p>
+        <GenericTooltip
+          tooltipOffset={0}
+          content={<p className="max-w-[140px]">Value of tentative award pool share</p>}
+        >
+          <p className="text-muted-foreground text-sm leading-normal font-normal">
+            Tentative awards
+          </p>
+        </GenericTooltip>
         <p
           className={cn(
             "text-sm font-semibold leading-normal",

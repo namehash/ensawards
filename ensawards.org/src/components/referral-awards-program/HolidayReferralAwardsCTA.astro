@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { Award as AwardIcon, Calendar as CalendarIcon } from "@lucide/astro";
+import { millisecondsInSecond } from "date-fns/constants";
 import ChristmasDecorationsImageLeft from "../../assets/christmastDecorationImageLeft.png";
 import ChristmasDecorationsImageRight from "../../assets/christmastDecorationImageRight.png";
 import { cn } from "../../utils/tailwindClassConcatenation";
@@ -13,6 +14,7 @@ const keyInformationTextStyles = "text-base font-normal leading-normal text-blac
 ---
 
 <div
+  id="ens-holiday-awards-cta-banner"
   class="w-full max-w-[1216px] box-border h-fit sm:min-h-[360px] flex flex-row flex-nowrap justify-center items-center bg-neutral-50 rounded-xl max-sm:py-5 max-sm:px-4">
   <Image
     quality={100}
@@ -68,3 +70,25 @@ const keyInformationTextStyles = "text-base font-normal leading-normal text-blac
     class="max-sm:hidden w-[30%]"
   />
 </div>
+<script>
+  import {
+    millisecondsInMinute,
+    millisecondsInSecond,
+  } from "date-fns/constants";
+  import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+
+  function updateHolidayAwardsCTA() {
+    const cta = document.getElementById("ens-holiday-awards-cta-banner");
+    const nowUnixTimestamp = Date.now() / millisecondsInSecond;
+
+    if (cta !== null && nowUnixTimestamp > ENS_HOLIDAY_AWARDS_END_DATE) {
+      // When the event has finished this banner won't be displayed
+      cta.style.display = "none";
+      return;
+    }
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    setInterval(updateHolidayAwardsCTA, millisecondsInMinute);
+  });
+</script>

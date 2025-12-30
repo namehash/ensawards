@@ -8,9 +8,8 @@ import type { Address } from "viem";
 
 const HeaderPanelTextRecords = ["avatar", "header"];
 
-export interface FetchAndDisplayPrimaryNameBasedAdvocateProfileProps {
+export interface FetchAndDisplayAdvocateProfileWithNameProps {
   address: Address;
-  namespaceId: ENSNamespaceId;
   name: Name;
 }
 
@@ -18,8 +17,7 @@ export interface FetchAndDisplayPrimaryNameBasedAdvocateProfileProps {
 export function FetchAndDisplayAdvocateProfileWithName({
   address,
   name,
-  namespaceId,
-}: FetchAndDisplayPrimaryNameBasedAdvocateProfileProps) {
+}: FetchAndDisplayAdvocateProfileWithNameProps) {
   const selection = {
     texts: HeaderPanelTextRecords,
   } satisfies ResolverRecordsSelection;
@@ -55,7 +53,6 @@ export function FetchAndDisplayAdvocateProfileWithName({
     <AdvocateProfileWithName
       name={name}
       address={address}
-      namespaceId={namespaceId}
       headerImage={data?.records?.texts?.header}
     />
   );

@@ -7,6 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { capitalizeText } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { RequestPageParams } from "@ensnode/ensnode-sdk";
@@ -477,3 +478,24 @@ const RecordsPerPageSelect = ({
     </div>
   );
 };
+
+export function DisplaySimplePaginationLoading() {
+  return (
+    <div className="w-full  h-9 flex flex-row justify-start items-center">
+      <Skeleton className="w-[205px] h-4 mt-1 mb-1 bg-gray-200" />
+    </div>
+  );
+}
+
+export function DisplayPaginationLoading() {
+  return (
+    <div className="w-full flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-center gap-y-3">
+      <Skeleton className="w-[185px] h-[14px] mt-1 mb-[3px] bg-gray-200" />
+      <Skeleton className="w-[330px] h-9 bg-gray-200" />
+      <div className="flex flex-row flex-nowrap justify-center items-center gap-3">
+        <Skeleton className="w-[125px] h-[14px] mt-1 mb-[3px] bg-gray-200" />
+        <Skeleton className="w-[75px] h-9 bg-gray-200" />
+      </div>
+    </div>
+  );
+}

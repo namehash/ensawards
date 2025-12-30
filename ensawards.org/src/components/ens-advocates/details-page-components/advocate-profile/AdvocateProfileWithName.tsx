@@ -1,25 +1,29 @@
 import { EnsAvatar } from "@/components/atoms/identity/EnsAvatar.tsx";
 import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
-import type { FetchAndDisplayPrimaryNameBasedAdvocateProfileProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
+import type { FetchAndDisplayAdvocateProfileWithNameProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { getAddressDetailsUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
+import {
+  DEFAULT_ENS_NAMESPACE,
+  getAddressDetailsUrl,
+  getBlockExplorerUrlForAddress,
+} from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 
-interface PrimaryNameBasedAdvocateProfileProps
-  extends FetchAndDisplayPrimaryNameBasedAdvocateProfileProps {
+interface AdvocateProfileWithNameProps extends FetchAndDisplayAdvocateProfileWithNameProps {
   headerImage?: string | null;
 }
 
 export function AdvocateProfileWithName({
   name,
   address,
-  namespaceId,
   headerImage,
-}: PrimaryNameBasedAdvocateProfileProps) {
+}: AdvocateProfileWithNameProps) {
   // Parse header image URI and only use it if it's HTTP/HTTPS
   // TODO: Add support for more URI types as defined in ENSIP-12
   // See: https://docs.ens.domains/ensip/12#uri-types
+
+  const namespaceId = DEFAULT_ENS_NAMESPACE;
   const getValidHeaderImageUrl = (headerImage: string | null | undefined): string | null => {
     if (!headerImage) return null;
 

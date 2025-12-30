@@ -20,6 +20,9 @@ import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../utils/tailwindClassConcatenation";
 
+// TODO: Structural changes planned in near future,
+// for more details see: https://www.figma.com/design/MMOsEIKk08Zzci2IssqBIv?node-id=2783-26615&m=dev#1571838160
+// and: https://namehash.slack.com/archives/C086Z6FNBHN/p1767017512391259?thread_ts=1766482284.352329&cid=C086Z6FNBHN
 interface ContentItemData {
   name: string;
   description: string;
@@ -43,7 +46,7 @@ const howItWorksItems: HowItWorksItemData[] = [
   {
     name: "Earn points",
     description:
-      "Each year of .eth name registrations or renewals attributed to you through referrals earns you 1 point.",
+      "Each year of .eth name registrations or renewals attributed to you through referrals during the program period earns you 1 point.",
     icon: TrendingUp,
     iconBackground: "bg-[rgba(111,66,193,0.10)]",
     iconColor: "text-[rgba(111,66,193,1.0)]",
@@ -69,7 +72,7 @@ const backgroundGreyStyles =
   pageMetadata={{
     title: "ENSAwards: ENS Referral Awards",
     description:
-      "Earn rewards for referring .eth name registrations and renewals. Join the ENS Holiday Awards program.",
+      "Earn rewards for referring .eth name registrations and renewals. Join the ENS Referral Awards program.",
     url: "https://ensawards.org/ens-referral-awards",
     ogImage: "https://ensawards.org/holiday-referral-awards_og_image.png",
     twitterImage:
@@ -94,7 +97,7 @@ const backgroundGreyStyles =
       class="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center max-md:gap-5 py-6 sm:pt-[80px] sm:pb-[40px] snap-start">
       <h3
         class="text-2xl sm:text-3xl leading-normal font-semibold text-black text-center relative z-10">
-        Top referrers
+        Top ENS Holiday Awards referrers
       </h3>
       <ReferrerLeaderboardSnippet client:load showLastUpdateTime={true} />
     </div>
@@ -176,7 +179,8 @@ const backgroundGreyStyles =
       <div
         class={cn(
           backgroundGreyStyles,
-          "sm:bg-[url(/src/assets/generateReferralLinkBackgroundImage.png)] bg-no-repeat bg-size-[1440px_578px] bg-top",
+          "sm:bg-gray-50 bg-no-repeat bg-size-[1440px_578px] bg-top",
+          // TODO: add new background image once the designs are ready
         )}>
       </div>
       <div

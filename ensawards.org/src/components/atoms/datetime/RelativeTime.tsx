@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip.tsx";
+import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip.tsx";
 
 /**
  * Formats a Unix timestamp as its relative distance with now
@@ -91,7 +91,7 @@ export function RelativeTime({
   );
 
   return (
-    <Tooltip delayDuration={1000}>
+    <Tooltip delayDuration={250}>
       <TooltipTrigger className="cursor-text">
         {typeof contentWrapper === "function"
           ? contentWrapper({ children: tooltipTriggerContent })
@@ -99,7 +99,7 @@ export function RelativeTime({
       </TooltipTrigger>
       <TooltipContent
         side={tooltipPosition}
-        className="bg-[#171717] text-sm text-white text-center shadow-md outline-none w-fit"
+        className="bg-[#171717] text-xs text-white text-left shadow-md outline-none w-fit duration-0"
       >
         <AbsoluteTime
           timestamp={timestamp}
@@ -112,7 +112,24 @@ export function RelativeTime({
             second: "numeric",
             hour12: true,
           }}
-        />
+        />{" "}
+        (Local time)
+        <br />
+        <AbsoluteTime
+          timestamp={timestamp}
+          options={{
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+            timeZone: "UTC",
+          }}
+        />{" "}
+        (UTC)
+        <TooltipArrow width={12} height={8} />
       </TooltipContent>
     </Tooltip>
   );

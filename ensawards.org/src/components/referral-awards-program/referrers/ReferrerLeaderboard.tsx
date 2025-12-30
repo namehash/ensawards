@@ -1,11 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
-import { DisplayPagination, DisplaySimplePagination } from "@/components/molecules/Pagination.tsx";
+import { LastUpdateTimeLoading } from "@/components/atoms/datetime/LastUpdateTime.tsx";
+import {
+  DisplayPagination,
+  DisplayPaginationLoading,
+  DisplaySimplePagination,
+  DisplaySimplePaginationLoading,
+} from "@/components/molecules/Pagination.tsx";
 import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
 import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { scrollWithOffset } from "@/utils/domActions.ts";
 import { getENSNodeUrl } from "@/utils/env";
@@ -86,7 +91,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
               Leaderboard
             </h3>
             {isLoading ? (
-              <Skeleton className="w-[225px] sm:w-[255px] sm:h-[14px] h-4 mt-1 mb-1 sm:mb-[3px] bg-gray-200" />
+              <LastUpdateTimeLoading />
             ) : (
               leaderboardData !== null &&
               !fetchErrorMessage && (
@@ -98,9 +103,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
             )}
           </div>
           {isLoading ? (
-            <div className="w-full  h-9 flex flex-row justify-start items-center">
-              <Skeleton className="w-[205px] h-4 mt-1 mb-1 bg-gray-200" />
-            </div>
+            <DisplaySimplePaginationLoading />
           ) : (
             leaderboardData !== null &&
             leaderboardData.pageContext.totalRecords > 0 && (
@@ -153,14 +156,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
             }}
           />
           {isLoading ? (
-            <div className="w-full flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-center gap-y-3">
-              <Skeleton className="w-[185px] h-[14px] mt-1 mb-[3px] bg-gray-200" />
-              <Skeleton className="w-[330px] h-9 bg-gray-200" />
-              <div className="flex flex-row flex-nowrap justify-center items-center gap-3">
-                <Skeleton className="w-[125px] h-[14px] mt-1 mb-[3px] bg-gray-200" />
-                <Skeleton className="w-[75px] h-9 bg-gray-200" />
-              </div>
-            </div>
+            <DisplayPaginationLoading />
           ) : (
             leaderboardData !== null &&
             leaderboardData.pageContext.totalRecords > 0 && (
