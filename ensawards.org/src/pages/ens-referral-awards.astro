@@ -117,11 +117,26 @@ const backgroundGreyStyles =
           Watch the latest referrals here as they stream in
         </p>
       </div>
-      <LiveReferralFeed
-        client:load
-        title="ENS referral live feed"
-        recordsPerPage={3}
-      />
+      <div class="w-full flex flex-col justify-start items-center gap-3">
+        <LiveReferralFeed
+          client:load
+          title="ENS referral live feed"
+          recordsPerPage={3}
+        />
+        <div
+          class="w-full flex flex-row justify-center sm:justify-start items-center">
+          <a
+            href="/ens-referral-live-feed"
+            class={cn(
+              shadcnButtonVariants({
+                variant: "outline",
+                size: "default",
+                className: "cursor-pointer rounded-full text-sm relative",
+              }),
+            )}>View full ENS referral live feed</a
+          >
+        </div>
+      </div>
     </div>
     <div
       class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start sm:items-center gap-5 sm:gap-[60px]">
