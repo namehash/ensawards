@@ -1,13 +1,11 @@
 ---
-import {
-  ENS_HOLIDAY_AWARDS_END_DATE,
-  ENS_HOLIDAY_AWARDS_START_DATE,
-} from "@namehash/ens-referrals";
+import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import { ReferralProgramTimeline } from "../../components/atoms/ReferralProgramTimeline";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { ReferrerLeaderboard } from "../../components/referral-awards-program/referrers/ReferrerLeaderboard";
 import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
+import { ENSHolidayAwards } from "../../data/referralIncentivePrograms";
 import Layout from "../../layouts/Layout.astro";
 import { cn } from "../../utils/tailwindClassConcatenation";
 ---
@@ -71,8 +69,7 @@ import { cn } from "../../utils/tailwindClassConcatenation";
     >
     <ReferralProgramTimeline
       slot="extraAdditionalElement"
-      startDate={ENS_HOLIDAY_AWARDS_START_DATE}
-      endDate={ENS_HOLIDAY_AWARDS_END_DATE}
+      referralProgramRules={ENSHolidayAwards.rules}
       client:load
     />
   </SubpageHero>

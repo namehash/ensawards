@@ -4,7 +4,7 @@ import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type AppBenchmark, BenchmarkResult } from "@/types/apps.ts";
 import { getENSNodeUrl } from "@/utils/env";
-import { DEFAULT_ENSAWARDS_ENS_NAMESPACE } from "@/utils/namespace.ts";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
 import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
@@ -19,7 +19,7 @@ export interface BenchmarkResultBadgeProps {
 const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
   const identity = buildUnresolvedIdentity(
     benchmark.benchmarkedBy.address,
-    DEFAULT_ENSAWARDS_ENS_NAMESPACE,
+    DEFAULT_ENS_NAMESPACE,
     benchmark.benchmarkedBy.chainId,
   );
 
@@ -29,7 +29,7 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
         <p className="text-muted-foreground text-xs">Benchmarked by</p>
         <ResolveAndDisplayIdentity
           identity={identity}
-          namespaceId={DEFAULT_ENSAWARDS_ENS_NAMESPACE}
+          namespaceId={DEFAULT_ENS_NAMESPACE}
           withLink={true}
           withTooltip={false}
           withAvatar={true}

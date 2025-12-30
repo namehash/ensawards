@@ -1,8 +1,8 @@
 import {
-  ReferralProgramBadge,
+  ReferralProgramStatusBadge,
   type ReferralProgramStatusId,
   ReferralProgramStatuses,
-} from "@/components/atoms/badges/ReferralProgramBadge.tsx";
+} from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import {
   Tooltip,
@@ -13,13 +13,13 @@ import {
 import { useNow } from "@/utils/hooks/useNow.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { ReferralProgramRules } from "@namehash/ens-referrals";
 import { secondsInMinute } from "date-fns/constants";
 import type * as React from "react";
 import { useMemo } from "react";
 
 interface ReferralProgramTimelineProps {
-  startDate: UnixTimestamp;
-  endDate: UnixTimestamp;
+  referralProgramRules: ReferralProgramRules;
   styles?: {
     mainContainer?: string;
     itemContainer?: string;
@@ -29,29 +29,27 @@ interface ReferralProgramTimelineProps {
 }
 
 const calculateReferralProgramStatus = (
-  startDate: UnixTimestamp,
-  endDate: UnixTimestamp,
+  referralProgramRules: ReferralProgramRules,
   now: UnixTimestamp,
 ): ReferralProgramStatusId => {
   // if the program has not started return "Scheduled"
-  if (now < startDate) return ReferralProgramStatuses.Scheduled;
+  if (now < referralProgramRules.startTime) return ReferralProgramStatuses.Scheduled;
 
   // if the program has ended return "Closed"
-  if (now > endDate) return ReferralProgramStatuses.Closed;
+  if (now > referralProgramRules.endTime) return ReferralProgramStatuses.Closed;
 
   // otherwise, return active
   return ReferralProgramStatuses.Active;
 };
 
 export function ReferralProgramTimeline({
-  startDate,
-  endDate,
+  referralProgramRules,
   styles,
 }: ReferralProgramTimelineProps) {
   // refresh the status every minute
   const now = useNow({ timeToRefresh: secondsInMinute });
   const referralProgramStatus = useMemo(
-    () => calculateReferralProgramStatus(startDate, endDate, now),
+    () => calculateReferralProgramStatus(referralProgramRules, now),
     [now],
   );
 
@@ -69,16 +67,16 @@ export function ReferralProgramTimeline({
           styles?.mainContainer,
         )}
       >
+        <div className={cn(containerStyles, "md:gap-0.5")}>
+          <p className={headerStyles}>Status</p>
+          <ReferralProgramStatusBadge status={referralProgramStatus} />
+        </div>
         <div className={containerStyles}>
           <p className={headerStyles}>Time period</p>
           <p className={cn("text-base leading-normal font-medium text-white", styles?.dates)}>
-            <ReferralProgramPeriodDate timestamp={startDate} /> -{" "}
-            <ReferralProgramPeriodDate timestamp={endDate} />
+            <ReferralProgramPeriodDate timestamp={referralProgramRules.startTime} /> -{" "}
+            <ReferralProgramPeriodDate timestamp={referralProgramRules.endTime} />
           </p>
-        </div>
-        <div className={containerStyles}>
-          <p className={headerStyles}>Status</p>
-          <ReferralProgramBadge status={referralProgramStatus} />
         </div>
       </div>
     </TooltipProvider>
@@ -100,6 +98,7 @@ const ReferralProgramPeriodDate = ({ timestamp }: ReferralProgramPeriodDateProps
               year: "numeric",
               month: "short",
               day: "numeric",
+              timeZone: "UTC",
             }}
           />
         </span>

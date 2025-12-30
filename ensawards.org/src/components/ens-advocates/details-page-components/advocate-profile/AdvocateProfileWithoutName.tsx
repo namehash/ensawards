@@ -3,7 +3,7 @@ import { AddressDisplay } from "@/components/atoms/identity/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import {
-  DEFAULT_ENSAWARDS_ENS_NAMESPACE,
+  DEFAULT_ENS_NAMESPACE,
   getAddressDetailsUrl,
   getBlockExplorerUrlForAddress,
 } from "@/utils/namespace.ts";
@@ -18,7 +18,7 @@ interface AdvocateProfileWithoutNameProps {
 
 export function AdvocateProfileWithoutName({ address }: AdvocateProfileWithoutNameProps) {
   const isMobile = useIsMobile();
-  const namespaceId = DEFAULT_ENSAWARDS_ENS_NAMESPACE;
+  const namespaceId = DEFAULT_ENS_NAMESPACE;
   return (
     <div className="w-full h-fit box-border flex flex-col gap-5 justify-start items-center">
       <div className="w-full aspect-[67/28] sm:aspect-[152/35] bg-blue-500 rounded-xl relative">

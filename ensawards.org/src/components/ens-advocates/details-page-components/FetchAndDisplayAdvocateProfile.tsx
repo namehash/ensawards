@@ -2,7 +2,7 @@ import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { AdvocateProfileWithoutName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithoutName.tsx";
 import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-page-components/advocate-profile/EnsAdvocateProfileLoading.tsx";
 import { FetchAndDisplayAdvocateProfileWithName } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
-import { DEFAULT_ENSAWARDS_ENS_NAMESPACE } from "@/utils/namespace.ts";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 import type { Address } from "viem";
@@ -14,7 +14,7 @@ interface FetchAndDisplayAdvocateProfileProps {
 export function FetchAndDisplayAdvocateProfile({ address }: FetchAndDisplayAdvocateProfileProps) {
   const { data, isLoading, error } = usePrimaryName({
     address: address,
-    chainId: getENSRootChainId(DEFAULT_ENSAWARDS_ENS_NAMESPACE),
+    chainId: getENSRootChainId(DEFAULT_ENS_NAMESPACE),
     accelerate: true,
     query: ASSUME_IMMUTABLE_QUERY,
   });

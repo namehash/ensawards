@@ -132,5 +132,4 @@ export const getBlockExplorerUrlForTransactionHash = (
  * Default {@link ENSNamespaceId} to be used across the whole ENSAwards
  */
 
-export const DEFAULT_ENSAWARDS_ENS_NAMESPACE = ENSNamespaceIds.Mainnet;
-//TODO: appreciate advice about naming
+export const DEFAULT_ENS_NAMESPACE = ENSNamespaceIds.Mainnet;

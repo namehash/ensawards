@@ -1,10 +1,7 @@
 ---
-import {
-  ENS_HOLIDAY_AWARDS_END_DATE,
-  ENS_HOLIDAY_AWARDS_START_DATE,
-} from "@namehash/ens-referrals";
+import { AccountId } from "@ensnode/ensnode-sdk";
 import { millisecondsInSecond, secondsInDay } from "date-fns/constants";
-import type * as React from "react";
+import { zeroAddress } from "viem";
 import { ReferralProgramTimeline } from "../../components/atoms/ReferralProgramTimeline";
 import { AbsoluteTime } from "../../components/atoms/datetime/AbsoluteTime";
 import ItemsList from "../../components/molecules/ItemsList.astro";
@@ -15,6 +12,11 @@ const twoDaysAgoUnixTimestamp = Date.now() / millisecondsInSecond - 2 * secondsI
 const inTwoDaysUnixTimestamp = Date.now() / millisecondsInSecond + 2 * secondsInDay;
 const january1st2030UnixTimestamp = 1893452400;
 const january1st2020UnixTimestamp = 1577833200;
+
+// Mock referral program rules
+const mockTotalAwardPoolValue = 10000;
+const mockMaxQualifiedReferrers = 10;
+const mockSubregistryId: AccountId = { chainId: 1, address: zeroAddress };
 ---
 
 <Layout>
@@ -33,8 +35,13 @@ const january1st2020UnixTimestamp = 1577833200;
         class="w-full flex flex-col justify-start items-start gap-4 bg-blue-900 rounded-md p-4">
         <p>Referral Program starting 2 days from now</p>
         <ReferralProgramTimeline
-          startDate={inTwoDaysUnixTimestamp}
-          endDate={january1st2030UnixTimestamp}
+          referralProgramRules={{
+            totalAwardPoolValue: mockTotalAwardPoolValue,
+            maxQualifiedReferrers: mockMaxQualifiedReferrers,
+            startTime: inTwoDaysUnixTimestamp,
+            endTime: january1st2030UnixTimestamp,
+            subregistryId: mockSubregistryId,
+          }}
           client:load
         />
       </div>
@@ -42,8 +49,13 @@ const january1st2020UnixTimestamp = 1577833200;
         class="w-full flex flex-col justify-start items-start gap-4 bg-blue-900 rounded-md p-4">
         <p>Referral Program started 2 days ago and ending in 2 days</p>
         <ReferralProgramTimeline
-          startDate={twoDaysAgoUnixTimestamp}
-          endDate={inTwoDaysUnixTimestamp}
+          referralProgramRules={{
+            totalAwardPoolValue: mockTotalAwardPoolValue,
+            maxQualifiedReferrers: mockMaxQualifiedReferrers,
+            startTime: twoDaysAgoUnixTimestamp,
+            endTime: inTwoDaysUnixTimestamp,
+            subregistryId: mockSubregistryId,
+          }}
           client:load
         />
       </div>
@@ -51,8 +63,13 @@ const january1st2020UnixTimestamp = 1577833200;
         class="w-full flex flex-col justify-start items-start gap-4 bg-blue-900 rounded-md p-4">
         <p>Referral Program ended 2 days ago</p>
         <ReferralProgramTimeline
-          startDate={january1st2020UnixTimestamp}
-          endDate={twoDaysAgoUnixTimestamp}
+          referralProgramRules={{
+            totalAwardPoolValue: mockTotalAwardPoolValue,
+            maxQualifiedReferrers: mockMaxQualifiedReferrers,
+            startTime: january1st2020UnixTimestamp,
+            endTime: twoDaysAgoUnixTimestamp,
+            subregistryId: mockSubregistryId,
+          }}
           client:load
         />
       </div>

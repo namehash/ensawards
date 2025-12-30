@@ -3,7 +3,7 @@ import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
 import type { FetchAndDisplayAdvocateProfileWithNameProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import {
-  DEFAULT_ENSAWARDS_ENS_NAMESPACE,
+  DEFAULT_ENS_NAMESPACE,
   getAddressDetailsUrl,
   getBlockExplorerUrlForAddress,
 } from "@/utils/namespace.ts";
@@ -23,7 +23,7 @@ export function AdvocateProfileWithName({
   // TODO: Add support for more URI types as defined in ENSIP-12
   // See: https://docs.ens.domains/ensip/12#uri-types
 
-  const namespaceId = DEFAULT_ENSAWARDS_ENS_NAMESPACE;
+  const namespaceId = DEFAULT_ENS_NAMESPACE;
   const getValidHeaderImageUrl = (headerImage: string | null | undefined): string | null => {
     if (!headerImage) return null;
 
