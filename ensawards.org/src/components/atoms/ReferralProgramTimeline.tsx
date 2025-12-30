@@ -6,6 +6,7 @@ import {
 import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import {
   Tooltip,
+  TooltipArrow,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
@@ -103,7 +104,7 @@ const ReferralProgramPeriodDate = ({ timestamp }: ReferralProgramPeriodDateProps
           />
         </span>
       </TooltipTrigger>
-      <TooltipContent className="bg-[#171717] text-sm text-white text-left shadow-md outline-none w-fit">
+      <TooltipContent className="bg-[#171717] text-xs text-white text-left shadow-md outline-none w-fit duration-0">
         <AbsoluteTime
           timestamp={timestamp}
           options={{
@@ -132,6 +133,7 @@ const ReferralProgramPeriodDate = ({ timestamp }: ReferralProgramPeriodDateProps
           }}
         />{" "}
         (UTC)
+        <TooltipArrow width={12} height={8} />
       </TooltipContent>
     </Tooltip>
   );
