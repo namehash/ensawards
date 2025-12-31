@@ -1,0 +1,77 @@
+---
+import SubpageHero from "../components/molecules/SubpageHero.astro";
+import { LiveReferralFeed } from "../components/referral-awards-program/referrals/LiveReferralFeed";
+import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
+import Layout from "../layouts/Layout.astro";
+import { cn } from "../utils/tailwindClassConcatenation";
+
+// TODO: the exact location of this page may change due to incoming major structural refinement of ens referral programs-related pages.
+// Then the url in the metadata, the links in the hero, and the breadcrumbs will also need to change
+---
+
+<Layout
+  pageMetadata={{
+    title: "ENSAwards: ENS referral live feed",
+    description: "Watch the latest ENS referrals as they stream in.",
+    url: "https://ensawards.org/ens-referral-live-feed",
+    ogImage:
+      "https://ensawards.org/ens_referral_live_feed_twitter_og_image.png",
+    twitterImage:
+      "https://ensawards.org/ens_referral_live_feed_twitter_og_image.png",
+  }}>
+  <SubpageHero
+    header="ENS referral live feed"
+    description="Watch the latest ENS referrals as they stream in."
+    breadcrumbs={["ENS Referral Program"]}
+    customImage={{
+      source: "/src/assets/referralLiveFeedHeroImage.png",
+      width: 315,
+      height: 311,
+      styles: "-top-8 right-5 opacity-100",
+    }}>
+    <div
+      slot="ctaContent"
+      class="flex flex-col sm:flex-row justify-start items-start gap-4">
+      <a
+        href="/leaderboards/referrer"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "default",
+            size: "default",
+            className:
+              "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+          }),
+        )}>View leaderboard</a
+      >
+      <a
+        href="/ens-referral-awards"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className:
+              "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-white hover:text-white bg-white/10 hover:bg-white/20",
+          }),
+        )}>Learn more</a
+      >
+    </div>
+  </SubpageHero>
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-[60px] px-5 py-6 sm:py-[80px] sm:px-8">
+    <div
+      class="w-full max-w-[1216px] flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-5">
+      <div
+        class="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between items-start sm:items-center gap-y-2">
+        <h3 class="text-2xl leading-normal font-semibold">Latest referrals</h3>
+        <!--TODO: once `accurateAsOf` is available for registrar action -->
+        <!--a refurbished version of last updated should be displayed here-->
+      </div>
+      <LiveReferralFeed
+        client:load
+        title="Latest referrals"
+        recordsPerPage={50}
+      />
+    </div>
+    <!--TODO: Here should be a banner pointing to the currently active referral program-->
+  </section>
+</Layout>
