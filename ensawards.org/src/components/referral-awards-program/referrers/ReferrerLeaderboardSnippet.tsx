@@ -9,12 +9,14 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
 import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
+import type { VariantProps } from "class-variance-authority";
 import { useEffect, useMemo, useState } from "react";
 
 export interface ReferrerLeaderboardSnippetProps {
   snippetSize?: number;
   header?: string;
   showLastUpdateTime?: boolean;
+  fullLeaderboardButtonVariant?: VariantProps<typeof shadcnButtonVariants>["variant"];
 }
 /**
  * Fetches {@link snippetSize} top referrers from the Referrer Leaderboard through ENSNode
@@ -24,6 +26,7 @@ export function ReferrerLeaderboardSnippet({
   header,
   snippetSize = 3,
   showLastUpdateTime = false,
+  fullLeaderboardButtonVariant = "ghost",
 }: ReferrerLeaderboardSnippetProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
@@ -74,7 +77,7 @@ export function ReferrerLeaderboardSnippet({
       }}
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
-        <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3 relative z-10">
+        <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start max-sm:items-center items-start gap-2 sm:gap-3 relative z-10">
           <div
             className={cn(
               "w-full flex justify-center items-center relative pb-2",
@@ -129,9 +132,12 @@ export function ReferrerLeaderboardSnippet({
                 href="/leaderboards/referrer"
                 className={cn(
                   shadcnButtonVariants({
-                    variant: "ghost",
+                    variant: fullLeaderboardButtonVariant,
                     size: "default",
-                    className: "cursor-pointer rounded-full text-sm max-sm:w-full",
+                    className: cn(
+                      "cursor-pointer rounded-full text-sm",
+                      fullLeaderboardButtonVariant === "ghost" && "max-sm:w-full",
+                    ),
                   }),
                 )}
               >

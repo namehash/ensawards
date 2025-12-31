@@ -99,7 +99,11 @@ const backgroundGreyStyles =
         class="text-2xl sm:text-3xl leading-normal font-semibold text-black text-center relative z-10">
         Top ENS Holiday Awards referrers
       </h3>
-      <ReferrerLeaderboardSnippet client:load showLastUpdateTime={true} />
+      <ReferrerLeaderboardSnippet
+        client:load
+        showLastUpdateTime={true}
+        fullLeaderboardButtonVariant="outline"
+      />
     </div>
     <div
       id="live-feed"
