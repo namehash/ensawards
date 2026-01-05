@@ -1,8 +1,4 @@
-import {
-  ReferralProgramStatusBadge,
-  type ReferralProgramStatusId,
-  ReferralProgramStatuses,
-} from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
+import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import {
   Tooltip,
@@ -14,7 +10,7 @@ import {
 import { useNow } from "@/utils/hooks/useNow.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
-import type { ReferralProgramRules } from "@namehash/ens-referrals";
+import { type ReferralProgramRules, calcReferralProgramStatus } from "@namehash/ens-referrals";
 import { secondsInMinute } from "date-fns/constants";
 import type * as React from "react";
 import { useMemo } from "react";
@@ -29,20 +25,6 @@ interface ReferralProgramTimelineProps {
   };
 }
 
-const calculateReferralProgramStatus = (
-  referralProgramRules: ReferralProgramRules,
-  now: UnixTimestamp,
-): ReferralProgramStatusId => {
-  // if the program has not started return "Scheduled"
-  if (now < referralProgramRules.startTime) return ReferralProgramStatuses.Scheduled;
-
-  // if the program has ended return "Closed"
-  if (now > referralProgramRules.endTime) return ReferralProgramStatuses.Closed;
-
-  // otherwise, return active
-  return ReferralProgramStatuses.Active;
-};
-
 export function ReferralProgramTimeline({
   referralProgramRules,
   styles,
@@ -50,7 +32,7 @@ export function ReferralProgramTimeline({
   // refresh the status every minute
   const now = useNow({ timeToRefresh: secondsInMinute });
   const referralProgramStatus = useMemo(
-    () => calculateReferralProgramStatus(referralProgramRules, now),
+    () => calcReferralProgramStatus(referralProgramRules, now),
     [now],
   );
 
