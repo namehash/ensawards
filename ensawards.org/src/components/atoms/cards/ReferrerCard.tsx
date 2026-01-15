@@ -187,13 +187,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
         <GenericTooltip
           tooltipOffset={0}
-          content={
-            <p className="max-w-[140px]">
-              {calculateReferralProgramStatus(referralRules, now) === ReferralProgramStatuses.Closed
-                ? "Estimated value of $ENS awards in USD"
-                : "Value of tentative award pool share"}
-            </p>
-          }
+          content={<p className="max-w-[140px]">Estimated value of $ENS awards in USD</p>}
         >
           <p className="text-muted-foreground text-sm leading-normal font-normal">
             {calculateReferralProgramStatus(referralRules, now) === ReferralProgramStatuses.Closed
