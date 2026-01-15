@@ -1,13 +1,18 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { calculateReferralProgramStatus } from "@/components/atoms/ReferralProgramTimeline.tsx";
+import { ReferralProgramStatuses } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
+import { useNow } from "@/utils/hooks/useNow.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 import type {
   AggregatedReferrerMetrics,
   AwardedReferrerMetrics,
+  ReferralProgramRules,
   ReferrerRank,
 } from "@namehash/ens-referrals";
+import { secondsInMinute } from "date-fns/constants";
 import type * as React from "react";
 import firstPlaceIcon from "../../../assets/firstPlaceAward.svg";
 import secondPlaceIcon from "../../../assets/secondPlaceAward.svg";
@@ -16,18 +21,21 @@ import thirdPlaceIcon from "../../../assets/thirdPlaceAward.svg";
 export interface ReferrerCardProps {
   referrer: AwardedReferrerMetrics;
   aggregatedMetrics: AggregatedReferrerMetrics;
+  referralRules: ReferralProgramRules;
 }
 
 /**
  * Display a single Referrer on the {@link ReferrerLeaderboardPage}.
  */
-export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps) {
+export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: ReferrerCardProps) {
   const namespaceId = DEFAULT_ENS_NAMESPACE;
   const referrerIdentity = buildUnresolvedIdentity(
     referrer.referrer,
     namespaceId,
     getENSRootChainId(namespaceId),
   );
+
+  const now = useNow({ timeToRefresh: secondsInMinute });
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -179,10 +187,19 @@ export function ReferrerCard({ referrer, aggregatedMetrics }: ReferrerCardProps)
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
         <GenericTooltip
           tooltipOffset={0}
-          content={<p className="max-w-[140px]">Value of tentative award pool share</p>}
+          content={
+            <p className="max-w-[140px]">
+              {calculateReferralProgramStatus(referralRules, now) === ReferralProgramStatuses.Closed
+                ? "Estimated value of $ENS awards in USD"
+                : "Value of tentative award pool share"}
+            </p>
+          }
         >
           <p className="text-muted-foreground text-sm leading-normal font-normal">
-            Tentative awards
+            {calculateReferralProgramStatus(referralRules, now) === ReferralProgramStatuses.Closed
+              ? "Estimated"
+              : "Tentative"}{" "}
+            awards
           </p>
         </GenericTooltip>
         <p
