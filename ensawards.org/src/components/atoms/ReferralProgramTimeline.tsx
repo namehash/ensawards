@@ -29,7 +29,7 @@ interface ReferralProgramTimelineProps {
   };
 }
 
-const calculateReferralProgramStatus = (
+export const calculateReferralProgramStatus = (
   referralProgramRules: ReferralProgramRules,
   now: UnixTimestamp,
 ): ReferralProgramStatusId => {

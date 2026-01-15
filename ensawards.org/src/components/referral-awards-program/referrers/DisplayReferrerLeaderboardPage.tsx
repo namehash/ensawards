@@ -77,6 +77,7 @@ export function DisplayReferrerLeaderboardPage({
           key={`Referrer-${referrer.referrer}`}
           referrer={referrer}
           aggregatedMetrics={leaderboardPageData.aggregatedMetrics}
+          referralRules={leaderboardPageData.rules}
         />
       ))}
     </div>
