@@ -59,7 +59,7 @@ export const EmptyLeaderboardInfo = () => {
       <div className={cn(verticalContainerStyles, "gap-4")}>
         <div className={cn(verticalContainerStyles, "gap-1")}>
           <h3 className="text-xl leading-normal font-semibold text-black text-center">
-            Looks like there's no referrals in December yet
+            Looks like there's no referrals in this program yet
           </h3>
           <p className="text-base leading-normal font-normal text-muted-foreground text-center">
             Wanna be first? Generate your referral link and earn awards!

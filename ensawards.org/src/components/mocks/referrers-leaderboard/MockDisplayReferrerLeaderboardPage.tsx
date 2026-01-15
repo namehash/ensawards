@@ -43,7 +43,7 @@ export function MockDisplayReferrerLeaderboardPage() {
               grandTotalIncrementalDuration: 0,
               grandTotalQualifiedReferrersFinalScore: 0,
               minFinalScoreToQualify: 0,
-              grandTotalRevenueContribution: BigInt(0),
+              grandTotalRevenueContribution: 0n,
             },
             pageContext: {
               page: 1,
@@ -120,7 +120,7 @@ export function MockDisplayReferrerLeaderboardPage() {
                 finalScore: 0.803246143670656,
                 awardPoolShare: 0.0276828248101365,
                 awardPoolApproxValue: 3276.828248101365,
-                totalRevenueContribution: BigInt(0),
+                totalRevenueContribution: 0n,
               },
               {
                 referrer: "0xabe3fdb4d2cd5f2e7193a4ac380ecb68e899896a",
@@ -133,7 +133,7 @@ export function MockDisplayReferrerLeaderboardPage() {
                 finalScore: 0.479133726222989,
                 awardPoolShare: 0.01651271544616,
                 awardPoolApproxValue: 165.1271544616,
-                totalRevenueContribution: BigInt(0),
+                totalRevenueContribution: 0n,
               },
               {
                 referrer: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
@@ -146,7 +146,7 @@ export function MockDisplayReferrerLeaderboardPage() {
                 finalScore: 0.410686051048276,
                 awardPoolShare: 0,
                 awardPoolApproxValue: 0,
-                totalRevenueContribution: BigInt(0),
+                totalRevenueContribution: 0n,
               },
               {
                 referrer: "0x2a614b7984854177d22fa23a4034a13ea82e4f97",
@@ -159,7 +159,7 @@ export function MockDisplayReferrerLeaderboardPage() {
                 finalScore: 0.383306980978391,
                 awardPoolShare: 0,
                 awardPoolApproxValue: 0,
-                totalRevenueContribution: BigInt(0),
+                totalRevenueContribution: 0n,
               },
             ],
             aggregatedMetrics: {
@@ -167,7 +167,7 @@ export function MockDisplayReferrerLeaderboardPage() {
               grandTotalIncrementalDuration: 651636003,
               grandTotalQualifiedReferrersFinalScore: 29.0160469236699,
               minFinalScoreToQualify: 0.479133726222989,
-              grandTotalRevenueContribution: BigInt(0),
+              grandTotalRevenueContribution: 0n,
             },
             pageContext: {
               page: 1,
