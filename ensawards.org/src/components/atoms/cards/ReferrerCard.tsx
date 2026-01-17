@@ -1,16 +1,16 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { calculateReferralProgramStatus } from "@/components/atoms/ReferralProgramTimeline.tsx";
-import { ReferralProgramStatuses } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
 import { useNow } from "@/utils/hooks/useNow.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
-import type {
-  AggregatedReferrerMetrics,
-  AwardedReferrerMetrics,
-  ReferralProgramRules,
-  ReferrerRank,
+import {
+  type AggregatedReferrerMetrics,
+  type AwardedReferrerMetrics,
+  type ReferralProgramRules,
+  ReferralProgramStatuses,
+  type ReferrerRank,
+  calcReferralProgramStatus,
 } from "@namehash/ens-referrals";
 import { secondsInMinute } from "date-fns/constants";
 import type * as React from "react";
@@ -190,7 +190,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
           content={<p className="max-w-[140px]">Estimated value of $ENS awards in USD</p>}
         >
           <p className="text-muted-foreground text-sm leading-normal font-normal">
-            {calculateReferralProgramStatus(referralRules, now) === ReferralProgramStatuses.Closed
+            {calcReferralProgramStatus(referralRules, now) === ReferralProgramStatuses.Closed
               ? "Estimated"
               : "Tentative"}{" "}
             awards

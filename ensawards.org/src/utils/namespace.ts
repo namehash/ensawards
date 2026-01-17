@@ -16,8 +16,6 @@ export function getEnsManagerAppUrl(namespaceId: ENSNamespaceId): URL | null {
       return new URL(`https://app.ens.domains/`);
     case ENSNamespaceIds.Sepolia:
       return new URL(`https://sepolia.app.ens.domains/`);
-    case ENSNamespaceIds.Holesky:
-      return new URL(`https://holesky.app.ens.domains/`);
     case ENSNamespaceIds.EnsTestEnv:
       // ens-test-env runs on a local chain and is not supported by app.ens.domains
       return null;
@@ -47,9 +45,6 @@ export function buildEnsMetadataServiceAvatarUrl(
       return new URL(name, `https://metadata.ens.domains/mainnet/avatar/`);
     case ENSNamespaceIds.Sepolia:
       return new URL(name, `https://metadata.ens.domains/sepolia/avatar/`);
-    case ENSNamespaceIds.Holesky:
-      // metadata.ens.domains doesn't currently support holesky
-      return null;
     case ENSNamespaceIds.EnsTestEnv:
       // ens-test-env runs on a local chain and is not supported by metadata.ens.domains
       // TODO: Above comment is not true. Details at https://github.com/namehash/ensnode/issues/1078

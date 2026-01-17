@@ -1,16 +1,6 @@
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { type ReferralProgramStatusId } from "@namehash/ens-referrals";
 
-export const ReferralProgramStatuses = {
-  Scheduled: "Scheduled",
-  Active: "Active",
-  Closed: "Closed",
-} as const;
-
-/**
- * The derived string union of possible {@link ReferralProgramStatuses}.
- */
-export type ReferralProgramStatusId =
-  (typeof ReferralProgramStatuses)[keyof typeof ReferralProgramStatuses];
 interface ReferralProgramStatusBadgeProps {
   status: ReferralProgramStatusId;
 }
