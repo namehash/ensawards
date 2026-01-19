@@ -1,12 +1,11 @@
 ---
 import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
-import { ChainIcon, TwitterIcon, getChainName } from "@namehash/namehash-ui";
+import { ChainIcon, EnsIcon, TwitterIcon, getChainName } from "@namehash/namehash-ui";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
-import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
 import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
@@ -102,7 +101,7 @@ if (resolvedOrg) {
                             rel="noreferrer"
                             target="_blank"
                     >
-                        <EnsSolidIcon width={24} height={24} className="hover:text-white text-gray-400 transition-all duration-200"/>
+                        <EnsIcon width={24} height={18} className="hover:text-white text-gray-400 transition-all duration-200"/>
                     </a>
             }
         </div>

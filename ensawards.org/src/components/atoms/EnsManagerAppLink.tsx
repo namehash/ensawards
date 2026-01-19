@@ -1,7 +1,7 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { EnsSolidIcon } from "@/components/atoms/icons/EnsSolidIcon.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { EnsIcon } from "@namehash/namehash-ui";
 
 export interface EnsManagerAppLinkProps {
   link: string;
@@ -32,10 +32,10 @@ export const EnsManagerAppLink = ({
   return (
     <TooltipProvider delayDuration={200} skipDelayDuration={0}>
       <a href={link} rel="noreferrer" target="_blank">
-        <GenericTooltip tooltipOffset={0} content={<p>{text}</p>}>
-          <EnsSolidIcon
+        <GenericTooltip tooltipOffset={4} content={<p>{text}</p>}>
+          <EnsIcon
             width={20}
-            height={20}
+            height={16}
             className={cn("text-[#0080BC] cursor-pointer", className)}
           />
         </GenericTooltip>

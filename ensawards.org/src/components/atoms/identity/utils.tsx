@@ -13,13 +13,11 @@ import {
 } from "@ensnode/ensnode-sdk";
 
 import { CopyButton } from "@/components/atoms/CopyButton.tsx";
-import { ChainExplorerIcon } from "@/components/atoms/icons/ChainExplorerIcon.tsx";
-import { EnsSolidIcon } from "@/components/atoms/icons/EnsSolidIcon.tsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { getEnsAdvocateDetailsRelativePath } from "@/utils";
 import { getAddressDetailsUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { ChainIcon, getChainName } from "@namehash/namehash-ui";
+import { ChainExplorerIcon, ChainIcon, EnsIcon, getChainName } from "@namehash/namehash-ui";
 
 interface NameDisplayProps {
   name: Name;
@@ -167,9 +165,9 @@ export const IdentityTooltip = ({
             )}
             {ensAppAddressDetailsUrl && (
               <a target="_blank" href={ensAppAddressDetailsUrl.toString()}>
-                <EnsSolidIcon
+                <EnsIcon
                   height={24}
-                  width={24}
+                  width={18}
                   className="text-gray-500 hover:text-gray-700 transition-colors"
                 />
               </a>
