@@ -15,6 +15,7 @@ export default defineConfig({
   integrations: [react(), sitemap()],
 
   vite: {
+    // @ts-expect-error
     plugins: [tailwindcss()],
   },
 
