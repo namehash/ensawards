@@ -1,6 +1,5 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
-import { useNow } from "@/utils/hooks/useNow.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
@@ -12,6 +11,7 @@ import {
   type ReferrerRank,
   calcReferralProgramStatus,
 } from "@namehash/ens-referrals";
+import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import type * as React from "react";
 import firstPlaceIcon from "../../../assets/firstPlaceAward.svg";
