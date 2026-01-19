@@ -117,69 +117,79 @@ const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentit
   }
 };
 
-describe("contracts data", () => {
+describe("CachedIdentity", () => {
   const data = CONTRACTS;
-  describe("CachedIdentity", () => {
-    it("For `cachedIdentity` of type `ContractIdentityPrimaryNamed` or `ContractIdentityForwardNamed`, `name` must be a non-empty normalized ENS name", () => {
-      data.forEach((contract) => {
-        if (
-          contract.cachedIdentity.resolutionStatus == ContractResolutionStatusIds.PrimaryNamed ||
-          contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
-        ) {
-          expect(
-            contract.cachedIdentity.name.length > 0 &&
-              isNormalizedName(contract.cachedIdentity.name),
-            `Name={${contract.cachedIdentity.name}} is empty or is not ENS normalized`,
-          ).toEqual(true);
-        }
-      });
-    });
 
-    it("The `ContractDeployment.address` must be a valid and in checksum format", () => {
-      data.forEach((contract) =>
+  it("For `cachedIdentity` of type `ContractIdentityPrimaryNamed` or `ContractIdentityForwardNamed`, `name` must be a non-empty normalized ENS name", () => {
+    data.forEach((contract) => {
+      if (
+        contract.cachedIdentity.resolutionStatus == ContractResolutionStatusIds.PrimaryNamed ||
+        contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
+      ) {
         expect(
-          isAddress(contract.cachedIdentity.contract.address),
-          `The address=${contract.cachedIdentity.contract.address} is not valid or not in checksum format.`,
-        ).toEqual(true),
-      );
+          contract.cachedIdentity.name.length > 0 && isNormalizedName(contract.cachedIdentity.name),
+          `Name={${contract.cachedIdentity.name}} is empty or is not ENS normalized`,
+        ).toEqual(true);
+      }
     });
+  });
 
-    it("No two contracts share the same address and chainId", () => {
-      const contractAddressesPerChain = new Map<ChainId, Set<Address>>();
+  it("The `ContractDeployment.address` must be a valid and in checksum format", () => {
+    data.forEach((contract) =>
+      expect(
+        isAddress(contract.cachedIdentity.contract.address),
+        `The address=${contract.cachedIdentity.contract.address} is not valid or not in checksum format.`,
+      ).toEqual(true),
+    );
+  });
 
-      data.forEach((contract) => {
-        const contractsChainId = contract.cachedIdentity.contract.chain.id;
-        const contractsAddress = contract.cachedIdentity.contract.address;
+  it("No two contracts share the same address and chainId", () => {
+    const contractAddressesPerChain = new Map<ChainId, Set<Address>>();
 
-        if (!contractAddressesPerChain.has(contractsChainId)) {
-          contractAddressesPerChain.set(contractsChainId, new Set<Address>());
-        }
+    data.forEach((contract) => {
+      const contractsChainId = contract.cachedIdentity.contract.chain.id;
+      const contractsAddress = contract.cachedIdentity.contract.address;
 
-        // The set will always be defined. We made sure with the if statement above
-        const setOfAddressesForChain = contractAddressesPerChain.get(contractsChainId)!;
+      if (!contractAddressesPerChain.has(contractsChainId)) {
+        contractAddressesPerChain.set(contractsChainId, new Set<Address>());
+      }
 
-        setOfAddressesForChain.forEach((address) =>
-          expect(
-            isAddressEqual(address, contractsAddress),
-            `Address=${contractsAddress} is duplicated for ${getChainName(contractsChainId)} chain.`,
-          ).toEqual(false),
-        );
+      // The set will always be defined. We made sure with the if statement above
+      const setOfAddressesForChain = contractAddressesPerChain.get(contractsChainId)!;
 
-        setOfAddressesForChain.add(contractsAddress);
-      });
-    });
-
-    it("The `ContractDeployment.codeName` must be a non-empty string", () => {
-      data.forEach((contract) =>
+      setOfAddressesForChain.forEach((address) =>
         expect(
-          contract.cachedIdentity.contract.codeName.length,
-          `The codeName for contract with address=${contract.cachedIdentity.contract.address} is an empty string`,
-        ).toBeGreaterThan(0),
+          isAddressEqual(address, contractsAddress),
+          `Address=${contractsAddress} is duplicated for ${getChainName(contractsChainId)} chain.`,
+        ).toEqual(false),
       );
-    });
 
-    it("All cached ENS identities match the current state in ENS", async () => {
-      for (const contract of data) {
+      setOfAddressesForChain.add(contractsAddress);
+    });
+  });
+
+  it("The `ContractDeployment.codeName` must be a non-empty string", () => {
+    data.forEach((contract) =>
+      expect(
+        contract.cachedIdentity.contract.codeName.length,
+        `The codeName for contract with address=${contract.cachedIdentity.contract.address} is an empty string`,
+      ).toBeGreaterThan(0),
+    );
+  });
+
+  describe("ENS current state match", () => {
+    it.concurrent.each(
+      data.map((contract) => {
+        const address = contract.cachedIdentity.contract.address;
+        const chainName = getChainName(contract.cachedIdentity.contract.chain.id);
+        return {
+          ...contract,
+          __testId: `${contract.org.name}-${address}-${chainName}`,
+        };
+      }),
+    )(
+      "$__testId",
+      async (contract) => {
         // 1) Check if the contract's primary name is unchanged
         // (either still the same or still not set)
         await testContractsPrimaryName(contract.cachedIdentity);
@@ -192,10 +202,8 @@ describe("contracts data", () => {
           // 2) Check that records from the response to equal our cached profile data
           await testContractsCachedProfile(contract.cachedIdentity);
         }
-      }
-    }, 60000);
-    // wait 60s before terminating
-    // Might need longer if we add more data
-    // For current "prod" data (only 23 contracts) lasts around 10 seconds
+      },
+      3000,
+    );
   });
 });
