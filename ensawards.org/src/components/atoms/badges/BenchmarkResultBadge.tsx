@@ -1,5 +1,4 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type AppBenchmark, BenchmarkResult } from "@/types/apps.ts";
@@ -7,6 +6,7 @@ import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import { ENSNodeClient, buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
+import { AbsoluteTime } from "@namehash/namehash-ui";
 import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 

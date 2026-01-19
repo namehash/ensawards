@@ -10,8 +10,6 @@ import { type PropsWithChildren, memo } from "react";
 import { zeroAddress } from "viem";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { DisplayDuration } from "@/components/atoms/datetime/DisplayDuration.tsx";
-import { RelativeTime } from "@/components/atoms/datetime/RelativeTime.tsx";
 import {
   ResolveAndDisplayIdentity,
   type ResolveAndDisplayIdentityProps,
@@ -31,6 +29,7 @@ import {
   buildUnresolvedIdentity,
   isRegistrarActionReferralAvailable,
 } from "@ensnode/ensnode-sdk";
+import { DisplayDuration, RelativeTime } from "@namehash/namehash-ui";
 
 interface LabeledFieldProps {
   fieldLabel: string;
