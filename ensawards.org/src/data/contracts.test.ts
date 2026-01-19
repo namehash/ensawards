@@ -101,6 +101,9 @@ const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentit
   const { name } = await client.resolvePrimaryName(
     contractsCachedIdentity.contract.address,
     contractsCachedIdentity.contract.chain.id,
+    {
+      accelerate: true,
+    },
   );
 
   // If contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed,

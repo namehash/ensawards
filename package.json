@@ -8,7 +8,7 @@
 		"lint:ci": "pnpm -r --parallel --aggregate-output lint:ci",
 		"typecheck": "pnpm --filter ensawards astro sync && pnpm -r --parallel --aggregate-output typecheck",
 		"test": "vitest --silent passed-only",
-		"test:cache": "vitest --run --silent passed-only --testNamePattern=\"contracts data\""
+		"test:cache": "pnpm test -t 'CachedIdentity'"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
