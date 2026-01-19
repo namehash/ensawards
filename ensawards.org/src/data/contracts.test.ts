@@ -187,11 +187,11 @@ describe("CachedIdentity", () => {
         const chainName = getChainName(contract.cachedIdentity.contract.chain.id);
         return {
           ...contract,
-          __testId: `${contract.org.name}-${address}-${chainName}`,
+          testCaseName: `${contract.org.name}-${address}-${chainName}`,
         };
       }),
     )(
-      "$__testId",
+      "$testCaseName",
       async (contract) => {
         // 1) Check if the contract's primary name is unchanged
         // (either still the same or still not set)
