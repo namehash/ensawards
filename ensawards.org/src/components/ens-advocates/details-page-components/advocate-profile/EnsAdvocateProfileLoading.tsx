@@ -1,4 +1,3 @@
-import { RegistrarActionCardLoading } from "@/components/atoms/cards/RegistrarActionCard.tsx";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 
 export function EnsAdvocateProfileLoading() {
