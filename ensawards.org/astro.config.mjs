@@ -15,6 +15,9 @@ export default defineConfig({
   integrations: [react(), sitemap()],
 
   vite: {
+    // Disable TS error for Tailwind plugin as it is not typed properly in Vite 6 yet
+    // Related issue: https://github.com/tailwindlabs/tailwindcss/issues/18802
+    // @ts-expect-error
     plugins: [tailwindcss()],
   },
 
