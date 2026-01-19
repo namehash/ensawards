@@ -17,3 +17,5 @@ export function useIsMobile() {
 
   return !!isMobile;
 }
+
+//TODO: Replace after new @next version of namehash-ui is pushed with adjusting changes (added export of useIsMobile)
