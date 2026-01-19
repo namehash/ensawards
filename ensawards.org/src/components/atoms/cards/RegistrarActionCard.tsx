@@ -10,18 +10,10 @@ import { type PropsWithChildren, memo } from "react";
 import { zeroAddress } from "viem";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import {
-  ResolveAndDisplayIdentity,
-  type ResolveAndDisplayIdentityProps,
-} from "@/components/atoms/identity";
-import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
 import { getReferralQualificationInfo } from "@/components/referral-awards-program/referrals/utils.ts";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
+import { getEnsAdvocateDetailsRelativePath } from "@/utils";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
-import {
-  buildExternalEnsAppProfileUrl,
-  getBlockExplorerUrlForTransactionHash,
-} from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import {
   RegistrarActionTypes,
@@ -29,6 +21,13 @@ import {
   buildUnresolvedIdentity,
   isRegistrarActionReferralAvailable,
 } from "@ensnode/ensnode-sdk";
+import {
+  NameDisplay,
+  ResolveAndDisplayIdentity,
+  type ResolveAndDisplayIdentityProps,
+  getBlockExplorerTransactionDetailsUrl,
+  getEnsManagerNameDetailsUrl,
+} from "@namehash/namehash-ui";
 import { DisplayDuration, RelativeTime } from "@namehash/namehash-ui";
 
 interface LabeledFieldProps {
@@ -141,6 +140,13 @@ function ResolveAndDisplayReferrerIdentity({
       withIdentifier={withIdentifier}
       className={className}
       withLink={withLink}
+      identityLinkDetails={{
+        isExternal: false,
+        link: new URL(
+          getEnsAdvocateDetailsRelativePath(referrerIdentity.address),
+          "https:ensawards.org/",
+        ),
+      }}
     />
   );
 }
@@ -221,7 +227,7 @@ export function RegistrarActionCard({
     namedRegistrarAction.action;
   const { chainId } = registrationLifecycle.subregistry.subregistryId;
 
-  const transactionDetailUrl = getBlockExplorerUrlForTransactionHash(chainId, transactionHash);
+  const transactionDetailUrl = getBlockExplorerTransactionDetailsUrl(chainId, transactionHash);
   const withTransactionLink = ({ children }: PropsWithChildren) =>
     // wrap `children` content with a transaction link only if the URL is defined
     transactionDetailUrl ? (
@@ -244,7 +250,7 @@ export function RegistrarActionCard({
       <LabeledField fieldLabel="Name" className="w-[15%] min-w-[162px]">
         <a
           target="_blank"
-          href={buildExternalEnsAppProfileUrl(namedRegistrarAction.name, namespaceId)?.href}
+          href={getEnsManagerNameDetailsUrl(namedRegistrarAction.name, namespaceId)?.href}
           className="max-sm:max-w-3/4 sm:w-full box-border overflow-x-auto text-blue-600 font-medium hover:underline hover:underline-offset-[25%] whitespace-nowrap"
         >
           <NameDisplay name={namedRegistrarAction.name} className="h-[21px]" />
@@ -280,6 +286,13 @@ export function RegistrarActionCard({
             withAvatar={true}
             withTooltip={false}
             withIdentifier={false}
+            identityLinkDetails={{
+              isExternal: false,
+              link: new URL(
+                getEnsAdvocateDetailsRelativePath(namedRegistrarAction.action.registrant),
+                "https:ensawards.org/",
+              ),
+            }}
           />
         )}
         <LabeledField fieldLabel="Registrant" className="sm:min-w-[110px]">
@@ -288,6 +301,13 @@ export function RegistrarActionCard({
             namespaceId={namespaceId}
             withAvatar={isMobile}
             withTooltip={false}
+            identityLinkDetails={{
+              isExternal: false,
+              link: new URL(
+                getEnsAdvocateDetailsRelativePath(namedRegistrarAction.action.registrant),
+                "https:ensawards.org/",
+              ),
+            }}
             className="font-medium sm:max-[1220px]:max-w-[110px] min-[1220px]:max-w-[140px]"
           />
         </LabeledField>
