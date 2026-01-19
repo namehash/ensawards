@@ -127,6 +127,9 @@ importers:
       sharp:
         specifier: ^0.34.1
         version: 0.34.5
+      sonner:
+        specifier: ^2.0.7
+        version: 2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.4.0
