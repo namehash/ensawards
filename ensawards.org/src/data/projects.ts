@@ -1,5 +1,5 @@
-import { ArbitrumIcon } from "@/components/atoms/icons/chains/ArbitrumIcon.tsx";
 import { AaveProjectIcon } from "@/components/atoms/icons/projects-and-daos/AaveProjectIcon.tsx";
+import { ArbitrumProjectIcon } from "@/components/atoms/icons/projects-and-daos/ArbitrumProjectIcon.tsx";
 import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
 import { TaikoIcon } from "@/components/atoms/icons/projects-and-daos/TaikoIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
@@ -46,7 +46,7 @@ export const ArbitrumProject: Project = {
   name: "Arbitrum",
   description:
     "Arbitrum is a unified blockchain for everyone, where ideas thrive and boundaries fade.",
-  icon: ArbitrumIcon,
+  icon: ArbitrumProjectIcon,
   socials: {
     website: new URL("https://arbitrum.io/"),
     twitter: new URL("https://x.com/arbitrum"),

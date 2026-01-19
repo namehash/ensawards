@@ -6,7 +6,6 @@ import {
   ContractResolutionStatusIds,
   type EnsProfileForContract,
 } from "@/types/contracts.ts";
-import { getChainName } from "@/utils/chains.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import {
   type ChainId,
@@ -16,6 +15,8 @@ import {
   evmChainIdToCoinType,
   isNormalizedName,
 } from "@ensnode/ensnode-sdk";
+import { getChainName } from "@namehash/namehash-ui";
+import { millisecondsInSecond } from "date-fns/constants";
 import { type Address, isAddress, isAddressEqual } from "viem";
 import { describe, expect, it } from "vitest";
 
@@ -178,24 +179,29 @@ describe("contracts data", () => {
       );
     });
 
-    it("All cached ENS identities match the current state in ENS", async () => {
-      for (const contract of data) {
-        // 1) Check if the contract's primary name is unchanged
-        // (either still the same or still not set)
-        await testContractsPrimaryName(contract.cachedIdentity);
+    it(
+      "All cached ENS identities match the current state in ENS",
+      async () => {
+        for (const contract of data) {
+          // 1) Check if the contract's primary name is unchanged
+          // (either still the same or still not set)
+          await testContractsPrimaryName(contract.cachedIdentity);
 
-        // If the contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed or ContractResolutionStatusIds.ForwardNamed,
-        if (
-          contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
-          contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
-        ) {
-          // 2) Check that records from the response to equal our cached profile data
-          await testContractsCachedProfile(contract.cachedIdentity);
+          // If the contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed or ContractResolutionStatusIds.ForwardNamed,
+          if (
+            contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
+            contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
+          ) {
+            // 2) Check that records from the response to equal our cached profile data
+            await testContractsCachedProfile(contract.cachedIdentity);
+          }
         }
-      }
-    }, 60000);
-    // wait 60s before terminating
-    // Might need longer if we add more data
-    // For current "prod" data (only 23 contracts) lasts around 10 seconds
+      },
+      300 * millisecondsInSecond,
+    );
+    // wait 5 mins before terminating
+    // Might need longer if we add more data (was 60s, now is 300s & seems like it's still not enough)
+    // For current "prod" data (94 contracts) previously set up 60s
+    // were too short for consistent pass (always timed out)
   });
 });

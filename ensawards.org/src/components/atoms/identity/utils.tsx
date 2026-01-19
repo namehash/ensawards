@@ -12,15 +12,14 @@ import {
   translateDefaultableChainIdToChainId,
 } from "@ensnode/ensnode-sdk";
 
-import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
 import { CopyButton } from "@/components/atoms/CopyButton.tsx";
 import { ChainExplorerIcon } from "@/components/atoms/icons/ChainExplorerIcon.tsx";
 import { EnsSolidIcon } from "@/components/atoms/icons/EnsSolidIcon.tsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { getEnsAdvocateDetailsRelativePath } from "@/utils";
-import { getChainName } from "@/utils/chains.ts";
 import { getAddressDetailsUrl, getBlockExplorerUrlForAddress } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { ChainIcon, getChainName } from "@namehash/namehash-ui";
 
 interface NameDisplayProps {
   name: Name;

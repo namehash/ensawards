@@ -1,7 +1,7 @@
 ---
 import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import { ChainIcon, getChainName } from "@namehash/namehash-ui";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
-import { ChainIcon } from "../../components/atoms/ChainIcon";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
@@ -20,7 +20,7 @@ import { CONTRACTS } from "../../data/contracts";
 import { ORGANIZATIONS } from "../../data/organizations";
 import Layout from "../../layouts/Layout.astro";
 import { Contract, ContractTypes } from "../../types/contracts";
-import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
+import { SUPPORTED_CHAINS } from "../../utils/chains";
 import { getOrgBySlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 

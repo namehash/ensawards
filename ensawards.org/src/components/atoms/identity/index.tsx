@@ -10,8 +10,8 @@ import {
   translateDefaultableChainIdToChainId,
 } from "@ensnode/ensnode-sdk";
 
-import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ChainIcon } from "@namehash/namehash-ui";
 import { EnsAvatar } from "./EnsAvatar.tsx";
 
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";

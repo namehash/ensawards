@@ -1,4 +1,3 @@
-import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
 import { AddressDisplay } from "@/components/atoms/identity/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
@@ -9,6 +8,7 @@ import {
 } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+import { ChainIcon } from "@namehash/namehash-ui";
 import type * as React from "react";
 import type { Address } from "viem";
 
