@@ -94,7 +94,7 @@ export function getEnsAdvocateDetailsRelativePath(address: Address): string {
 }
 
 export function getEnsAwardsBaseUrl() {
-  if (typeof document !== undefined) {
+  if (typeof document !== "undefined") {
     return document.baseURI;
   }
 
