@@ -51,6 +51,11 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
     Math.max(0.01, aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore),
   );
 
+  const advocateDetailsUrl = new URL(
+    getEnsAdvocateDetailsRelativePath(referrer.referrer),
+    "https://ensawards.org/",
+  );
+
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       {/*Desktop Header*/}
@@ -65,10 +70,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
             withTooltip={false}
             identityLinkDetails={{
               isExternal: false,
-              link: new URL(
-                getEnsAdvocateDetailsRelativePath(referrer.referrer),
-                "https://ensawards.org/",
-              ),
+              link: advocateDetailsUrl,
             }}
           />
           <div className="sm:min-w-[170px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
@@ -83,10 +85,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
               withTooltip={false}
               identityLinkDetails={{
                 isExternal: false,
-                link: new URL(
-                  getEnsAdvocateDetailsRelativePath(referrer.referrer),
-                  "https://ensawards.org/",
-                ),
+                link: advocateDetailsUrl,
               }}
               className="font-medium sm:max-w-[170px] sm:overflow-x-auto"
             />
@@ -108,10 +107,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
           withTooltip={false}
           identityLinkDetails={{
             isExternal: false,
-            link: new URL(
-              getEnsAdvocateDetailsRelativePath(referrer.referrer),
-              "https://ensawards.org/",
-            ),
+            link: advocateDetailsUrl,
           }}
         />
       </div>
@@ -127,10 +123,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
           withTooltip={false}
           identityLinkDetails={{
             isExternal: false,
-            link: new URL(
-              getEnsAdvocateDetailsRelativePath(referrer.referrer),
-              "https://ensawards.org/",
-            ),
+            link: advocateDetailsUrl,
           }}
           className="font-medium"
         />
