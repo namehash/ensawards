@@ -1,5 +1,4 @@
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
@@ -8,6 +7,7 @@ import {
   ChainIcon,
   getBlockExplorerAddressDetailsUrl,
   getEnsManagerAddressDetailsUrl,
+  useIsMobile,
 } from "@namehash/namehash-ui";
 import type * as React from "react";
 import type { Address } from "viem";

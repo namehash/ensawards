@@ -13,11 +13,12 @@ import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type NamedRegistrarAction, OmnichainIndexingStatusIds } from "@ensnode/ensnode-sdk";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import {
+  LabeledField,
   RegistrarActionCardLoading,
   RegistrarActionCardMemo,
   getEnsManagerNameDetailsUrl,
+  useNow,
 } from "@namehash/namehash-ui";
-import { useNow } from "@namehash/namehash-ui";
 
 interface DisplayRegistrarActionsListProps {
   namespaceId: ENSNamespaceId;
@@ -63,22 +64,22 @@ export function DisplayRegistrarActionsList({
                   "https:ensawards.org/",
                 ),
               },
+              referrerLinkFunction: (address, namespaceId) =>
+                new URL(getEnsAdvocateDetailsRelativePath(address), "https://ensawards.org/"),
             }}
-            // TODO: add referrer to links after the changes to the type are made
-            // TODO: Add referral program field after it's exported from the package
-            // referralProgramField={
-            //   <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
-            //     <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
-            //       <p className="text-black font-medium max-sm:text-right">
-            //         {qualifiedReferralPrograms.length === 0
-            //           ? "-"
-            //           : qualifiedReferralPrograms
-            //               .map((referralProgram) => referralProgram.name)
-            //               .join(", ")}
-            //       </p>
-            //     </div>
-            //   </LabeledField>
-            // }
+            referralProgramField={
+              <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
+                <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
+                  <p className="text-black font-medium max-sm:text-right">
+                    {qualifiedReferralPrograms.length === 0
+                      ? "-"
+                      : qualifiedReferralPrograms
+                          .map((referralProgram) => referralProgram.name)
+                          .join(", ")}
+                  </p>
+                </div>
+              </LabeledField>
+            }
           />
         );
       })}

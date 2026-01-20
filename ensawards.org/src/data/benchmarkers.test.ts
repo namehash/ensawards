@@ -1,6 +1,6 @@
 import { benchmarkers } from "@/data/benchmarkers";
-import { SUPPORTED_CHAINS } from "@/utils/chains";
 import type { AccountId } from "@ensnode/ensnode-sdk";
+import { SUPPORTED_CHAINS } from "@namehash/namehash-ui";
 import { isAddress } from "viem";
 import { describe, expect, it } from "vitest";
 

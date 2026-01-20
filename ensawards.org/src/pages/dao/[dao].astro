@@ -1,6 +1,12 @@
 ---
 import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
-import { ChainIcon, EnsIcon, TwitterIcon, getChainName } from "@namehash/namehash-ui";
+import {
+  ChainIcon,
+  EnsIcon,
+  SUPPORTED_CHAINS,
+  TwitterIcon,
+  getChainName,
+} from "@namehash/namehash-ui";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
@@ -18,7 +24,6 @@ import { CONTRACTS } from "../../data/contracts";
 import { ORGANIZATIONS } from "../../data/organizations";
 import Layout from "../../layouts/Layout.astro";
 import { Contract, ContractTypes } from "../../types/contracts";
-import { SUPPORTED_CHAINS } from "../../utils/chains";
 import { getOrgBySlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
