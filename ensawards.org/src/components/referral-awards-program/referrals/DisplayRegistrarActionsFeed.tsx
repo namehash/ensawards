@@ -6,7 +6,11 @@ import {
 import { getReferralQualificationInfo } from "@/components/referral-awards-program/referrals/utils.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { formatOmnichainIndexingStatus, getEnsAdvocateDetailsRelativePath } from "@/utils";
+import {
+  formatOmnichainIndexingStatus,
+  getEnsAdvocateDetailsRelativePath,
+  getEnsAwardsBaseUrl,
+} from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { ENSNamespaceId } from "@ensnode/datasources";
@@ -62,13 +66,13 @@ export function DisplayRegistrarActionsList({
                 isExternal: false,
                 link: new URL(
                   getEnsAdvocateDetailsRelativePath(namedRegistrarAction.action.registrant),
-                  import.meta.url,
+                  getEnsAwardsBaseUrl(),
                 ),
               },
               referrer: {
                 isExternal: false,
                 getLink: (address: Address, _namespaceId: ENSNamespaceId) =>
-                  new URL(getEnsAdvocateDetailsRelativePath(address), import.meta.url),
+                  new URL(getEnsAdvocateDetailsRelativePath(address), getEnsAwardsBaseUrl()),
               },
             }}
             referralProgramField={

@@ -1,7 +1,7 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type AppBenchmark, BenchmarkResult } from "@/types/apps.ts";
-import { getEnsAdvocateDetailsRelativePath } from "@/utils";
+import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
@@ -35,7 +35,10 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
           withAvatar={true}
           identityLinkDetails={{
             isExternal: false,
-            link: new URL(getEnsAdvocateDetailsRelativePath(identity.address), import.meta.url),
+            link: new URL(
+              getEnsAdvocateDetailsRelativePath(identity.address),
+              getEnsAwardsBaseUrl(),
+            ),
           }}
           className="text-blue-400 hover:underline hover:underline-offset-[25%]"
         />

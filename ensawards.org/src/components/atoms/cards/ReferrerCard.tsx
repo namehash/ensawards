@@ -1,5 +1,5 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { getEnsAdvocateDetailsRelativePath } from "@/utils";
+import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
@@ -53,7 +53,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
 
   const advocateDetailsUrl = new URL(
     getEnsAdvocateDetailsRelativePath(referrer.referrer),
-    import.meta.url,
+    getEnsAwardsBaseUrl(),
   );
 
   return (

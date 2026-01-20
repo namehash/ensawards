@@ -92,3 +92,11 @@ export function formatOmnichainIndexingStatus(status: OmnichainIndexingStatusId)
 export function getEnsAdvocateDetailsRelativePath(address: Address): string {
   return `/advocate/${encodeURIComponent(address)}`;
 }
+
+export function getEnsAwardsBaseUrl() {
+  if (typeof document !== undefined) {
+    return document.baseURI;
+  }
+
+  return "https://ensawards.org/";
+}
