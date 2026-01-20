@@ -53,7 +53,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
 
   const advocateDetailsUrl = new URL(
     getEnsAdvocateDetailsRelativePath(referrer.referrer),
-    document.baseURI,
+    import.meta.url,
   );
 
   return (

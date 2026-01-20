@@ -62,13 +62,13 @@ export function DisplayRegistrarActionsList({
                 isExternal: false,
                 link: new URL(
                   getEnsAdvocateDetailsRelativePath(namedRegistrarAction.action.registrant),
-                  document.baseURI,
+                  import.meta.url,
                 ),
               },
               referrer: {
                 isExternal: false,
                 getLink: (address: Address, _namespaceId: ENSNamespaceId) =>
-                  new URL(getEnsAdvocateDetailsRelativePath(address), document.baseURI),
+                  new URL(getEnsAdvocateDetailsRelativePath(address), import.meta.url),
               },
             }}
             referralProgramField={

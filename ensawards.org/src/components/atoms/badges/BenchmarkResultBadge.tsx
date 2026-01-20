@@ -5,7 +5,7 @@ import { getEnsAdvocateDetailsRelativePath } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { ENSNodeClient, buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
+import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
 import { AbsoluteTime, ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
 import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
 import { cn } from "../../../utils/tailwindClassConcatenation";
@@ -35,10 +35,7 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
           withAvatar={true}
           identityLinkDetails={{
             isExternal: false,
-            link: new URL(
-              getEnsAdvocateDetailsRelativePath(identity.address),
-              "https://ensawards.org/",
-            ),
+            link: new URL(getEnsAdvocateDetailsRelativePath(identity.address), import.meta.url),
           }}
           className="text-blue-400 hover:underline hover:underline-offset-[25%]"
         />
@@ -57,10 +54,6 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
     </div>
   );
 };
-
-const client = new ENSNodeClient({
-  url: getENSNodeUrl(),
-});
 
 const ensNodeReactConfig = createConfig({
   url: getENSNodeUrl(),
