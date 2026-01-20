@@ -16,7 +16,6 @@ import {
   isNormalizedName,
 } from "@ensnode/ensnode-sdk";
 import { getChainName } from "@namehash/namehash-ui";
-import { millisecondsInSecond } from "date-fns/constants";
 import { type Address, isAddress, isAddressEqual } from "viem";
 import { describe, expect, it } from "vitest";
 
