@@ -67,7 +67,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
               isExternal: false,
               link: new URL(
                 getEnsAdvocateDetailsRelativePath(referrer.referrer),
-                "https:ensawards.org/",
+                "https://ensawards.org/",
               ),
             }}
           />
@@ -85,7 +85,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
                 isExternal: false,
                 link: new URL(
                   getEnsAdvocateDetailsRelativePath(referrer.referrer),
-                  "https:ensawards.org/",
+                  "https://ensawards.org/",
                 ),
               }}
               className="font-medium sm:max-w-[170px] sm:overflow-x-auto"
@@ -110,7 +110,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
             isExternal: false,
             link: new URL(
               getEnsAdvocateDetailsRelativePath(referrer.referrer),
-              "https:ensawards.org/",
+              "https://ensawards.org/",
             ),
           }}
         />
@@ -129,7 +129,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
             isExternal: false,
             link: new URL(
               getEnsAdvocateDetailsRelativePath(referrer.referrer),
-              "https:ensawards.org/",
+              "https://ensawards.org/",
             ),
           }}
           className="font-medium"

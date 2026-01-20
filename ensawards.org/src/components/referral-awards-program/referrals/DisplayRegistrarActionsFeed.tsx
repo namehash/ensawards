@@ -61,7 +61,7 @@ export function DisplayRegistrarActionsList({
                 isExternal: false,
                 link: new URL(
                   getEnsAdvocateDetailsRelativePath(namedRegistrarAction.action.registrant),
-                  "https:ensawards.org/",
+                  "https://ensawards.org/",
                 ),
               },
               referrerLinkFunction: (address, namespaceId) =>

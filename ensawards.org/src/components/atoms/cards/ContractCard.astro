@@ -58,7 +58,7 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
       href={getBlockExplorerAddressDetailsUrl(
         contract.cachedIdentity.contract.chain.id,
         contract.cachedIdentity.contract.address,
-      )}
+      )?.href}
       target="_blank"
       rel="noreferrer"
       class="text-sm leading-[20px] font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"

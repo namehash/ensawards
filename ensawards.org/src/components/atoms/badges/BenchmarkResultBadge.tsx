@@ -37,7 +37,7 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
             isExternal: false,
             link: new URL(
               getEnsAdvocateDetailsRelativePath(identity.address),
-              "https:ensawards.org/",
+              "https://ensawards.org/",
             ),
           }}
           className="text-blue-400 hover:underline hover:underline-offset-[25%]"
