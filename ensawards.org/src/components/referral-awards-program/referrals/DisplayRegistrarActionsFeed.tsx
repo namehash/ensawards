@@ -19,6 +19,7 @@ import {
   getEnsManagerNameDetailsUrl,
   useNow,
 } from "@namehash/namehash-ui";
+import type { Address } from "viem";
 
 interface DisplayRegistrarActionsListProps {
   namespaceId: ENSNamespaceId;
@@ -64,8 +65,11 @@ export function DisplayRegistrarActionsList({
                   "https://ensawards.org/",
                 ),
               },
-              referrerLinkFunction: (address, namespaceId) =>
-                new URL(getEnsAdvocateDetailsRelativePath(address), "https://ensawards.org/"),
+              referrer: {
+                isExternal: false,
+                getLink: (address: Address, namespaceId: ENSNamespaceId) =>
+                  new URL(getEnsAdvocateDetailsRelativePath(address), "https://ensawards.org/"),
+              },
             }}
             referralProgramField={
               <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">

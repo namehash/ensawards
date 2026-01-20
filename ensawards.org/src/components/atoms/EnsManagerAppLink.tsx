@@ -34,7 +34,7 @@ export const EnsManagerAppLink = ({
       <a href={link} rel="noreferrer" target="_blank">
         <GenericTooltip tooltipOffset={4} content={<p>{text}</p>}>
           <EnsIcon
-            width={20}
+            width={16}
             height={16}
             className={cn("text-[#0080BC] cursor-pointer", className)}
           />
