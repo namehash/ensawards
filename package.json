@@ -8,7 +8,7 @@
 		"lint:ci": "pnpm -r --parallel --aggregate-output lint:ci",
 		"typecheck": "pnpm --filter ensawards astro sync && pnpm -r --parallel --aggregate-output typecheck",
 		"test": "vitest --silent passed-only",
-		"test:cache": "vitest --run --silent passed-only --testNamePattern=\"contracts data\""
+		"test:cache": "pnpm test -t 'CachedIdentity'"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
@@ -16,12 +16,8 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"vite": ">=6.4.1",
-			"tar": ">=7.5.2",
-			"js-yaml@<4.1.1": ">=4.1.1",
-			"mdast-util-to-hast@<13.2.1": ">=13.2.1",
-			"devalue@<5.6.2": ">=5.6.2",
-			"unstorage@<1.17.4": ">=1.17.4"
+			"vite@<6.4.1": ">=6.4.1",
+			"tar@<7.5.3": ">=7.5.3"
 		}
 	}
 }

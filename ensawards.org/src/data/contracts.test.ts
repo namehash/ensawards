@@ -102,6 +102,9 @@ const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentit
   const { name } = await client.resolvePrimaryName(
     contractsCachedIdentity.contract.address,
     contractsCachedIdentity.contract.chain.id,
+    {
+      accelerate: true,
+    },
   );
 
   // If contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed,
@@ -118,90 +121,93 @@ const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentit
   }
 };
 
-describe("contracts data", () => {
+describe("CachedIdentity", () => {
   const data = CONTRACTS;
-  describe("CachedIdentity", () => {
-    it("For `cachedIdentity` of type `ContractIdentityPrimaryNamed` or `ContractIdentityForwardNamed`, `name` must be a non-empty normalized ENS name", () => {
-      data.forEach((contract) => {
+
+  it("For `cachedIdentity` of type `ContractIdentityPrimaryNamed` or `ContractIdentityForwardNamed`, `name` must be a non-empty normalized ENS name", () => {
+    data.forEach((contract) => {
+      if (
+        contract.cachedIdentity.resolutionStatus == ContractResolutionStatusIds.PrimaryNamed ||
+        contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
+      ) {
+        expect(
+          contract.cachedIdentity.name.length > 0 && isNormalizedName(contract.cachedIdentity.name),
+          `Name={${contract.cachedIdentity.name}} is empty or is not ENS normalized`,
+        ).toEqual(true);
+      }
+    });
+  });
+
+  it("The `ContractDeployment.address` must be a valid and in checksum format", () => {
+    data.forEach((contract) =>
+      expect(
+        isAddress(contract.cachedIdentity.contract.address),
+        `The address=${contract.cachedIdentity.contract.address} is not valid or not in checksum format.`,
+      ).toEqual(true),
+    );
+  });
+
+  it("No two contracts share the same address and chainId", () => {
+    const contractAddressesPerChain = new Map<ChainId, Set<Address>>();
+
+    data.forEach((contract) => {
+      const contractsChainId = contract.cachedIdentity.contract.chain.id;
+      const contractsAddress = contract.cachedIdentity.contract.address;
+
+      if (!contractAddressesPerChain.has(contractsChainId)) {
+        contractAddressesPerChain.set(contractsChainId, new Set<Address>());
+      }
+
+      // The set will always be defined. We made sure with the if statement above
+      const setOfAddressesForChain = contractAddressesPerChain.get(contractsChainId)!;
+
+      setOfAddressesForChain.forEach((address) =>
+        expect(
+          isAddressEqual(address, contractsAddress),
+          `Address=${contractsAddress} is duplicated for ${getChainName(contractsChainId)} chain.`,
+        ).toEqual(false),
+      );
+
+      setOfAddressesForChain.add(contractsAddress);
+    });
+  });
+
+  it("The `ContractDeployment.codeName` must be a non-empty string", () => {
+    data.forEach((contract) =>
+      expect(
+        contract.cachedIdentity.contract.codeName.length,
+        `The codeName for contract with address=${contract.cachedIdentity.contract.address} is an empty string`,
+      ).toBeGreaterThan(0),
+    );
+  });
+
+  describe("ENS current state match", () => {
+    it.concurrent.each(
+      data.map((contract) => {
+        const address = contract.cachedIdentity.contract.address;
+        const chainName = getChainName(contract.cachedIdentity.contract.chain.id);
+        return {
+          ...contract,
+          testCaseName: `${contract.org.name}-${address}-${chainName}`,
+        };
+      }),
+    )(
+      "$testCaseName",
+      async (contract) => {
+        // 1) Check if the contract's primary name is unchanged
+        // (either still the same or still not set)
+        await testContractsPrimaryName(contract.cachedIdentity);
+
+        // If the contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed or ContractResolutionStatusIds.ForwardNamed,
         if (
-          contract.cachedIdentity.resolutionStatus == ContractResolutionStatusIds.PrimaryNamed ||
+          contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
           contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
         ) {
-          expect(
-            contract.cachedIdentity.name.length > 0 &&
-              isNormalizedName(contract.cachedIdentity.name),
-            `Name={${contract.cachedIdentity.name}} is empty or is not ENS normalized`,
-          ).toEqual(true);
-        }
-      });
-    });
-
-    it("The `ContractDeployment.address` must be a valid and in checksum format", () => {
-      data.forEach((contract) =>
-        expect(
-          isAddress(contract.cachedIdentity.contract.address),
-          `The address=${contract.cachedIdentity.contract.address} is not valid or not in checksum format.`,
-        ).toEqual(true),
-      );
-    });
-
-    it("No two contracts share the same address and chainId", () => {
-      const contractAddressesPerChain = new Map<ChainId, Set<Address>>();
-
-      data.forEach((contract) => {
-        const contractsChainId = contract.cachedIdentity.contract.chain.id;
-        const contractsAddress = contract.cachedIdentity.contract.address;
-
-        if (!contractAddressesPerChain.has(contractsChainId)) {
-          contractAddressesPerChain.set(contractsChainId, new Set<Address>());
-        }
-
-        // The set will always be defined. We made sure with the if statement above
-        const setOfAddressesForChain = contractAddressesPerChain.get(contractsChainId)!;
-
-        setOfAddressesForChain.forEach((address) =>
-          expect(
-            isAddressEqual(address, contractsAddress),
-            `Address=${contractsAddress} is duplicated for ${getChainName(contractsChainId)} chain.`,
-          ).toEqual(false),
-        );
-
-        setOfAddressesForChain.add(contractsAddress);
-      });
-    });
-
-    it("The `ContractDeployment.codeName` must be a non-empty string", () => {
-      data.forEach((contract) =>
-        expect(
-          contract.cachedIdentity.contract.codeName.length,
-          `The codeName for contract with address=${contract.cachedIdentity.contract.address} is an empty string`,
-        ).toBeGreaterThan(0),
-      );
-    });
-
-    it(
-      "All cached ENS identities match the current state in ENS",
-      async () => {
-        for (const contract of data) {
-          // 1) Check if the contract's primary name is unchanged
-          // (either still the same or still not set)
-          await testContractsPrimaryName(contract.cachedIdentity);
-
-          // If the contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed or ContractResolutionStatusIds.ForwardNamed,
-          if (
-            contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
-            contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
-          ) {
-            // 2) Check that records from the response to equal our cached profile data
-            await testContractsCachedProfile(contract.cachedIdentity);
-          }
+          // 2) Check that records from the response to equal our cached profile data
+          await testContractsCachedProfile(contract.cachedIdentity);
         }
       },
-      300 * millisecondsInSecond,
+      3000,
     );
-    // wait 5 mins before terminating
-    // Might need longer if we add more data (was 60s, now is 300s & seems like it's still not enough)
-    // For current "prod" data (94 contracts) previously set up 60s
-    // were too short for consistent pass (always timed out)
   });
 });
