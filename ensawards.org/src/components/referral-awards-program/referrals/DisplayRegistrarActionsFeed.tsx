@@ -45,7 +45,6 @@ export function DisplayRegistrarActionsList({
     >
       {registrarActions.map((namedRegistrarAction) => {
         const qualifiedReferralPrograms = getReferralQualificationInfo(namedRegistrarAction);
-        const ensAwardsBaseUrl = "https://ensawards.org/";
 
         return (
           <RegistrarActionCardMemo
@@ -63,13 +62,13 @@ export function DisplayRegistrarActionsList({
                 isExternal: false,
                 link: new URL(
                   getEnsAdvocateDetailsRelativePath(namedRegistrarAction.action.registrant),
-                  ensAwardsBaseUrl,
+                  document.baseURI,
                 ),
               },
               referrer: {
                 isExternal: false,
                 getLink: (address: Address, _namespaceId: ENSNamespaceId) =>
-                  new URL(getEnsAdvocateDetailsRelativePath(address), ensAwardsBaseUrl),
+                  new URL(getEnsAdvocateDetailsRelativePath(address), document.baseURI),
               },
             }}
             referralProgramField={
