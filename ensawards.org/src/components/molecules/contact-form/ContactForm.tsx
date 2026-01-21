@@ -138,7 +138,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
     setErrorMessage("");
     setValidationErrors(getInitialValidationErrorsState(formFields));
 
-    // biome-ignore lint: All DOM objects accessed in this file are guaranteed to exist for the entirety of runtime (forms in modal view)
+    // biome-ignore lint/style/noNonNullAssertion: All DOM objects accessed in this file are guaranteed to exist for the entirety of runtime (forms in modal view)
     document.querySelector(`#${whatsSuggested.replace(" ", "-")}-overlay`)!.classList.add("hidden");
     document.body.classList.remove("no-scroll");
 
