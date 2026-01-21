@@ -1,10 +1,12 @@
+import { BookOpen, Braces, CircleUser, ShieldCheck } from "lucide-react";
+import React from "react";
+
+import type { Name } from "@ensnode/ensnode-sdk";
+
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import type { EnsProfileForContract } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { Name } from "@ensnode/ensnode-sdk";
-import { BookOpen, Braces, CircleUser, ShieldCheck } from "lucide-react";
-import React from "react";
 
 export interface SmartContractMetadataProps {
   name: Name;

@@ -1,12 +1,14 @@
-import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime.tsx";
-import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 import type {
   ReferrerLeaderboardPage,
   ReferrerLeaderboardPageContext,
 } from "@namehash/ens-referrals";
 import { Award as AwardIcon } from "lucide-react";
+
+import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+
+import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime.tsx";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferrerLeaderboardLastUpdateTimeProps {
   timestamp: UnixTimestamp;

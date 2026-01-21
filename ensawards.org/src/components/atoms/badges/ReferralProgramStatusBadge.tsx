@@ -1,5 +1,6 @@
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { type ReferralProgramStatusId } from "@namehash/ens-referrals";
+
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 interface ReferralProgramStatusBadgeProps {
   status: ReferralProgramStatusId;

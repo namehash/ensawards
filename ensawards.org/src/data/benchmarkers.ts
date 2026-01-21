@@ -1,5 +1,6 @@
-import type { AccountId } from "@ensnode/ensnode-sdk";
 import { mainnet } from "viem/chains";
+
+import type { AccountId } from "@ensnode/ensnode-sdk";
 
 /**
  * Benchmarkers are identified by their AccountId (chainId + address).

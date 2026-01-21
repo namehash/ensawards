@@ -1,3 +1,7 @@
+import { useMemo, useState } from "react";
+
+import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import {
   DisplayReferrerLeaderboardPage,
@@ -7,8 +11,6 @@ import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { useMemo, useState } from "react";
 
 type ReferrersListState = "loading" | "fetchError" | "empty" | "loaded";
 

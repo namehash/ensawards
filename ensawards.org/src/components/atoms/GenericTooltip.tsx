@@ -1,5 +1,6 @@
-import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip.tsx";
 import React, { type PropsWithChildren, type ReactElement } from "react";
+
+import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip.tsx";
 
 export interface GenericTooltipProps {
   content: ReactElement;

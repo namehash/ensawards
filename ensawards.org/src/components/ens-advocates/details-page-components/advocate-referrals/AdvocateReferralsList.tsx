@@ -1,3 +1,8 @@
+import { RegistrarActionCardLoading } from "@namehash/namehash-ui";
+
+import type { ENSNamespaceId } from "@ensnode/datasources";
+import { OmnichainIndexingStatusIds, type RequestPageParams } from "@ensnode/ensnode-sdk";
+
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { SimplePagination } from "@/components/molecules/Pagination.tsx";
 import { DisplayRegistrarActionsList } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
@@ -11,9 +16,6 @@ import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { formatOmnichainIndexingStatus } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { ENSNamespaceId } from "@ensnode/datasources";
-import { OmnichainIndexingStatusIds, type RequestPageParams } from "@ensnode/ensnode-sdk";
-import { RegistrarActionCardLoading } from "@namehash/namehash-ui";
 
 interface AdvocateReferralsListLoadingProps {
   recordsPerPage: number;

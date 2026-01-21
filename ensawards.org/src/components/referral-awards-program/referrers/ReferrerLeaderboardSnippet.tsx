@@ -1,12 +1,3 @@
-import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
-import { LastUpdateTimeLoading } from "@/components/atoms/datetime/LastUpdateTime.tsx";
-import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
-import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
-import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import { getENSNodeUrl } from "@/utils/env";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
 import {
   ENSReferralsClient,
   type ReferrerLeaderboardPage,
@@ -14,6 +5,17 @@ import {
 } from "@namehash/ens-referrals";
 import type { VariantProps } from "class-variance-authority";
 import { useEffect, useMemo, useState } from "react";
+
+import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+
+import { LastUpdateTimeLoading } from "@/components/atoms/datetime/LastUpdateTime.tsx";
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
+import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import { getENSNodeUrl } from "@/utils/env";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferrerLeaderboardSnippetProps {
   snippetSize?: number;

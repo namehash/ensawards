@@ -1,6 +1,7 @@
-import { BEST_PRACTICES, BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
-import { areStringsUnique, isValidSlug } from "@/utils";
 import { describe, expect, it } from "vitest";
+
+import { BEST_PRACTICE_CATEGORIES, BEST_PRACTICES } from "@/data/bestPractices.ts";
+import { areStringsUnique, isValidSlug } from "@/utils";
 
 describe("Best Practices data", () => {
   const categoriesData = BEST_PRACTICE_CATEGORIES;

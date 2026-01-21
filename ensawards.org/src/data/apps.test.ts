@@ -1,7 +1,9 @@
+import { describe, expect, it } from "vitest";
+
+import { isNormalizedName } from "@ensnode/ensnode-sdk";
+
 import { APPS } from "@/data/apps.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
-import { isNormalizedName } from "@ensnode/ensnode-sdk";
-import { describe, expect, it } from "vitest";
 
 describe("App data", () => {
   const data = APPS;

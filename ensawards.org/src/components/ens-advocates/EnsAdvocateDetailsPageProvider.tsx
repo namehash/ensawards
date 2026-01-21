@@ -1,10 +1,12 @@
+import { useMemo } from "react";
+import type { Address } from "viem";
+
+import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+
 import { FetchAndDisplayAdvocateProfile } from "@/components/ens-advocates/details-page-components/FetchAndDisplayAdvocateProfile.tsx";
 import { FetchAndDisplayAdvocateReferrals } from "@/components/ens-advocates/details-page-components/FetchAndDisplayAdvocateReferrals.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
-import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { useMemo } from "react";
-import type { Address } from "viem";
 
 interface EnsAdvocateDetailsPageProviderProps {
   address: Address;

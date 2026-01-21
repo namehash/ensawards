@@ -1,10 +1,11 @@
-import { registrarActionsPrerequisites } from "@ensnode/ensnode-sdk";
 import type {
   Duration,
   InterpretedName,
   NamedRegistrarAction,
   RegistrarActionEventId,
 } from "@ensnode/ensnode-sdk";
+import { registrarActionsPrerequisites } from "@ensnode/ensnode-sdk";
+
 import type {
   StatefulFetchRegistrarActions,
   StatefulFetchRegistrarActionsConnecting,
@@ -15,7 +16,6 @@ import type {
   StatefulFetchRegistrarActionsUnsupported,
   StatefulFetchStatusId,
 } from "../../referral-awards-program/referrals/types.ts";
-
 import { StatefulFetchStatusIds } from "../../referral-awards-program/referrals/types.ts";
 
 export const registrationWithReferral = {

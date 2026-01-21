@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
+import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 
 import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
@@ -8,7 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { ENSHolidayAwards } from "@/data/referralIncentivePrograms.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
+
 import { variants } from "./data.ts";
 
 const variantIds = [...variants.keys()];

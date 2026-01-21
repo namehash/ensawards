@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+
 import { FoldableCard } from "../atoms/cards/FoldableCard.tsx";
 
 export interface FrequentlyAskedQuestion {

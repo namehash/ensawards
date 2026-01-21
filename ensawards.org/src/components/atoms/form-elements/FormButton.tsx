@@ -1,6 +1,7 @@
+import React from "react";
+
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import React from "react";
 
 export interface FormButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;

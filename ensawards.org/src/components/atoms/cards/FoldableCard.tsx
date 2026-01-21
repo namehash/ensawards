@@ -1,7 +1,8 @@
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { ChevronRight } from "lucide-react";
 import { type PropsWithChildren, useState } from "react";
+
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 interface FoldableCardProps {
   header: string;

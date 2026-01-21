@@ -1,7 +1,8 @@
+import { EnsIcon } from "@namehash/namehash-ui";
+
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { EnsIcon } from "@namehash/namehash-ui";
 
 export interface EnsManagerAppLinkProps {
   link: string;

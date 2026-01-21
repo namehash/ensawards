@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import { Pagination, SimplePagination } from "@/components/molecules/Pagination.tsx";
 import {
   Select,
@@ -7,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select.tsx";
-import React, { useState } from "react";
 
 export function MockPagination() {
   const [totalPages, setTotalPages] = useState(1);

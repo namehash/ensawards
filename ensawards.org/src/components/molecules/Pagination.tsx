@@ -1,4 +1,14 @@
 import {
+  Ellipsis as DistanceIcon,
+  ChevronsLeft as FirstPageIcon,
+  ChevronsRight as LastPageIcon,
+  ChevronRight as NextPageIcon,
+  ChevronLeft as PreviousPageIcon,
+} from "lucide-react";
+
+import type { RequestPageParams } from "@ensnode/ensnode-sdk";
+
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -10,14 +20,6 @@ import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { capitalizeText } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { RequestPageParams } from "@ensnode/ensnode-sdk";
-import {
-  Ellipsis as DistanceIcon,
-  ChevronsLeft as FirstPageIcon,
-  ChevronsRight as LastPageIcon,
-  ChevronRight as NextPageIcon,
-  ChevronLeft as PreviousPageIcon,
-} from "lucide-react";
 
 /**
  * Display any of the additional pagination buttons if there are at least three pages

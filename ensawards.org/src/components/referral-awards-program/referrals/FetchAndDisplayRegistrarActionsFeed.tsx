@@ -1,8 +1,10 @@
+import { namehash } from "viem";
+
+import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
+
 import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
 import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
-import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
-import { namehash } from "viem";
 
 export interface FetchAndDisplayRegistrarActionsFeedProps {
   recordsPerPage: number;

@@ -1,10 +1,11 @@
 import { navigate } from "astro:transitions/client";
-import { Input } from "@/components/atoms/form-elements/Input.tsx";
-import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { useIsMobile } from "@namehash/namehash-ui";
 import React, { type ChangeEvent, useState } from "react";
 import { type Address, isAddress } from "viem";
+
+import { Input } from "@/components/atoms/form-elements/Input.tsx";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export function AdvocateSearchForm() {
   const [rawInputAddress, setRawInputAddress] = useState<Address | string>("");

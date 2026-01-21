@@ -1,3 +1,7 @@
+import { CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import React, { type FormEvent, useEffect, useState } from "react";
+import * as Yup from "yup";
+
 import { FormButton } from "@/components/atoms/form-elements/FormButton.tsx";
 import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import { TextArea } from "@/components/atoms/form-elements/TextArea.tsx";
@@ -17,9 +21,6 @@ import {
 import type { ValidationErrors } from "@/components/molecules/form/types.ts";
 import { capitalizeFormLabel } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { CheckIcon, XCircleIcon } from "@heroicons/react/24/solid";
-import React, { type FormEvent, useEffect, useState } from "react";
-import * as Yup from "yup";
 
 interface FormProps {
   whatsSuggested: PossibleSuggestions;
@@ -137,6 +138,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
     setErrorMessage("");
     setValidationErrors(getInitialValidationErrorsState(formFields));
 
+    // biome-ignore lint/style/noNonNullAssertion: All DOM objects accessed in this file are guaranteed to exist for the entirety of runtime (forms in modal view)
     document.querySelector(`#${whatsSuggested.replace(" ", "-")}-overlay`)!.classList.add("hidden");
     document.body.classList.remove("no-scroll");
 
@@ -171,6 +173,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
 
     try {
       // Validate form data against the schema
+      // biome-ignore lint/style/noNonNullAssertion: the mapping is guaranteed to exist (constant list of forms during runtime)
       await validationSchemaMap[whatsSuggested]!.validate(data, {
         abortEarly: false,
       });
@@ -213,10 +216,12 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
       ]);
 
       const dataToSend: ContactFormDataProps = {
-        name: nameMap.get(whatsSuggested)!, // the mapping exists for sure, per the assignment above
+        // biome-ignore lint/style/noNonNullAssertion: the mapping is guaranteed to exist, per the assignment above
+        name: nameMap.get(whatsSuggested)!,
         email: PLACEHOLDER_EMAIL,
         telegram: "",
-        message: descriptionMap.get(whatsSuggested)!, // the mapping exists for sure, per the assignment above
+        // biome-ignore lint/style/noNonNullAssertion: the mapping is guaranteed to exist, per the assignment above
+        message: descriptionMap.get(whatsSuggested)!,
         source: data.source,
       };
       await sendData(dataToSend);
@@ -310,6 +315,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
         <div className="flex flex-col flex-nowrap justify-start items-start gap-2">
           <div className="flex flex-row flex-nowrap justify-between items-center self-stretch">
             <h2 className="text-lg leading-7 font-semibold text-foreground">
+              {/*biome-ignore lint/style/noNonNullAssertion: the mapping is guaranteed to exist (the key is hardcoded) */}
               {formTextContentsAdaptations.get("header")!.get(whatsSuggested)}
             </h2>
             <button
@@ -328,6 +334,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
               successfulFormSubmit ? "opacity-0 z-[-1]" : "opacity-100",
             )}
           >
+            {/*biome-ignore lint/style/noNonNullAssertion: the mapping is guaranteed to exist (the key is hardcoded) */}
             {formTextContentsAdaptations.get("description")!.get(whatsSuggested)}
           </p>
         </div>

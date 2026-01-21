@@ -1,6 +1,7 @@
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { AlertCircle as AlertIcon } from "lucide-react";
 import type { PropsWithChildren } from "react";
+
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ErrorInfoProps {
   title?: string;

@@ -12,7 +12,7 @@ import {
   TaikoProject,
   UniswapProject,
 } from "@/data/projects.ts";
-import { OrgIds, type Organization, OrganizationTypes } from "@/types/organizations.ts";
+import { type Organization, OrganizationTypes, OrgIds } from "@/types/organizations.ts";
 
 export const ENSDaoOrg: Organization = {
   id: OrgIds.Ens,

@@ -1,5 +1,6 @@
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import React from "react";
+
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;

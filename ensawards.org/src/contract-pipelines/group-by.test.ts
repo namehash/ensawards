@@ -1,8 +1,9 @@
-import { type SupportedGroupByCategory, groupByOrg } from "@/contract-pipelines/group-by.ts";
+import { describe, expect, it } from "vitest";
+
+import { groupByOrg, type SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { CONTRACTS_TEST_DATA } from "@/data/contracts-test.ts";
 import type { Contract } from "@/types/contracts.ts";
 import { OrgIds } from "@/types/organizations.ts";
-import { describe, expect, it } from "vitest";
 
 describe("group-by functions", () => {
   describe("groupByOrg", () => {

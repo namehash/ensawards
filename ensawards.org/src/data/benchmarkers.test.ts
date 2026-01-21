@@ -1,8 +1,10 @@
-import { benchmarkers } from "@/data/benchmarkers";
-import type { AccountId } from "@ensnode/ensnode-sdk";
 import { SUPPORTED_CHAINS } from "@namehash/namehash-ui";
 import { isAddress } from "viem";
 import { describe, expect, it } from "vitest";
+
+import type { AccountId } from "@ensnode/ensnode-sdk";
+
+import { benchmarkers } from "@/data/benchmarkers";
 
 describe("Benchmarkers data", () => {
   const benchmarkersData = benchmarkers;

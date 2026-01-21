@@ -1,14 +1,16 @@
+import {
+  EnsAvatar,
+  getBlockExplorerAddressDetailsUrl,
+  getEnsManagerAddressDetailsUrl,
+  NameDisplay,
+} from "@namehash/namehash-ui";
+
+import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+
 import type { FetchAndDisplayAdvocateProfileWithNameProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { getENSRootChainId } from "@ensnode/ensnode-sdk";
-import {
-  EnsAvatar,
-  NameDisplay,
-  getBlockExplorerAddressDetailsUrl,
-  getEnsManagerAddressDetailsUrl,
-} from "@namehash/namehash-ui";
 
 interface AdvocateProfileWithNameProps extends FetchAndDisplayAdvocateProfileWithNameProps {
   headerImage?: string | null;

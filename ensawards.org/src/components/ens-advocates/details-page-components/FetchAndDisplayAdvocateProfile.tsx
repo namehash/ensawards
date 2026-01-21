@@ -1,11 +1,13 @@
+import type { Address } from "viem";
+
+import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
+import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { AdvocateProfileWithoutName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithoutName.tsx";
 import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-page-components/advocate-profile/EnsAdvocateProfileLoading.tsx";
 import { FetchAndDisplayAdvocateProfileWithName } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
-import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
-import { getENSRootChainId } from "@ensnode/ensnode-sdk";
-import type { Address } from "viem";
 
 interface FetchAndDisplayAdvocateProfileProps {
   address: Address;

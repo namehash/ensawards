@@ -1,11 +1,12 @@
 ---
 import { getBlockExplorerAddressDetailsUrl } from "@namehash/namehash-ui";
+
 import { Contract, ContractResolutionStatusIds } from "../../../types/contracts";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import { ContractBadge } from "../badges/ContractBadge";
 import { EnsManagerAppLink } from "../EnsManagerAppLink";
 import { SmartContractMetadata } from "../SmartContractMetadata";
-import { ContractBadge } from "../badges/ContractBadge";
 export interface ContractCardProps {
   contract: Contract;
 }
