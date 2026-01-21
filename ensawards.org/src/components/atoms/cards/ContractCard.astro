@@ -1,12 +1,11 @@
 ---
+import { getBlockExplorerAddressDetailsUrl } from "@namehash/namehash-ui";
 import { Contract, ContractResolutionStatusIds } from "../../../types/contracts";
-import { getBlockExplorerUrlForContract } from "../../../utils/chains";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { EnsManagerAppLink } from "../EnsManagerAppLink";
 import { SmartContractMetadata } from "../SmartContractMetadata";
 import { ContractBadge } from "../badges/ContractBadge";
-import { EnsSolidIcon } from "../icons/EnsSolidIcon";
 export interface ContractCardProps {
   contract: Contract;
 }
@@ -56,10 +55,10 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
     {breakLongWordsAtCapitals(contract.cachedIdentity.contract.codeName).map((word) => <p class="text-sm leading-normal font-normal text-muted-foreground">{word}</p>)}
       </div>
     <a
-      href={getBlockExplorerUrlForContract(
+      href={getBlockExplorerAddressDetailsUrl(
         contract.cachedIdentity.contract.chain.id,
         contract.cachedIdentity.contract.address,
-      )}
+      )?.href}
       target="_blank"
       rel="noreferrer"
       class="text-sm leading-[20px] font-medium text-black max-sm:break-all hover:underline hover:underline-offset-[25%]"

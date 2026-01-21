@@ -12,6 +12,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
+		"typescript": "catalog:",
 		"vitest": "catalog:"
 	},
 	"pnpm": {

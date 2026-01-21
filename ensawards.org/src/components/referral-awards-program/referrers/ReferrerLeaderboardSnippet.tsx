@@ -7,8 +7,11 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
-import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
+import {
+  ENSReferralsClient,
+  type ReferrerLeaderboardPage,
+  ReferrerLeaderboardPageResponseCodes,
+} from "@namehash/ens-referrals";
 import type { VariantProps } from "class-variance-authority";
 import { useEffect, useMemo, useState } from "react";
 
@@ -33,7 +36,7 @@ export function ReferrerLeaderboardSnippet({
   const [leaderboardSnippetData, setLeaderboardSnippetData] =
     useState<ReferrerLeaderboardPage | null>(null);
   const ensNodeUrl = getENSNodeUrl();
-  const client = useMemo(() => new ENSNodeClient({ url: ensNodeUrl }), [ensNodeUrl]);
+  const client = useMemo(() => new ENSReferralsClient({ url: ensNodeUrl }), [ensNodeUrl]);
   const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)

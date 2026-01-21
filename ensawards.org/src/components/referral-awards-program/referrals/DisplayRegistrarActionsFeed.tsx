@@ -1,22 +1,29 @@
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import {
-  RegistrarActionCardLoading,
-  RegistrarActionCardMemo,
-} from "@/components/atoms/cards/RegistrarActionCard.tsx";
-import {
   type StatefulFetchRegistrarActions,
   StatefulFetchStatusIds,
 } from "@/components/referral-awards-program/referrals/types.ts";
+import { getReferralQualificationInfo } from "@/components/referral-awards-program/referrals/utils.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
-import { formatOmnichainIndexingStatus } from "@/utils";
+import {
+  formatOmnichainIndexingStatus,
+  getEnsAdvocateDetailsRelativePath,
+  getEnsAwardsBaseUrl,
+} from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
-import { useNow } from "@/utils/hooks/useNow.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type NamedRegistrarAction, OmnichainIndexingStatusIds } from "@ensnode/ensnode-sdk";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import {
+  LabeledField,
+  RegistrarActionCardLoading,
+  RegistrarActionCardMemo,
+  getEnsManagerNameDetailsUrl,
+  useNow,
+} from "@namehash/namehash-ui";
+import type { Address } from "viem";
 
 interface DisplayRegistrarActionsListProps {
   namespaceId: ENSNamespaceId;
@@ -40,15 +47,50 @@ export function DisplayRegistrarActionsList({
       ref={animationParent}
       className="w-full h-fit box-border flex flex-col justify-start items-center gap-3 relative"
     >
-      {registrarActions.map((namedRegistrarAction) => (
-        <RegistrarActionCardMemo
-          key={namedRegistrarAction.action.id}
-          namespaceId={namespaceId}
-          namedRegistrarAction={namedRegistrarAction}
-          now={now}
-          showReferrer={showReferrer}
-        />
-      ))}
+      {registrarActions.map((namedRegistrarAction) => {
+        const qualifiedReferralPrograms = getReferralQualificationInfo(namedRegistrarAction);
+
+        return (
+          <RegistrarActionCardMemo
+            key={namedRegistrarAction.action.id}
+            namespaceId={namespaceId}
+            namedRegistrarAction={namedRegistrarAction}
+            now={now}
+            showReferrer={showReferrer}
+            links={{
+              name: {
+                isExternal: true,
+                link: getEnsManagerNameDetailsUrl(namedRegistrarAction.name, namespaceId),
+              },
+              registrant: {
+                isExternal: false,
+                link: new URL(
+                  getEnsAdvocateDetailsRelativePath(namedRegistrarAction.action.registrant),
+                  getEnsAwardsBaseUrl(),
+                ),
+              },
+              referrer: {
+                isExternal: false,
+                getLink: (address: Address, _namespaceId: ENSNamespaceId) =>
+                  new URL(getEnsAdvocateDetailsRelativePath(address), getEnsAwardsBaseUrl()),
+              },
+            }}
+            referralProgramField={
+              <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
+                <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
+                  <p className="text-black font-medium max-sm:text-right">
+                    {qualifiedReferralPrograms.length === 0
+                      ? "-"
+                      : qualifiedReferralPrograms
+                          .map((referralProgram) => referralProgram.name)
+                          .join(", ")}
+                  </p>
+                </div>
+              </LabeledField>
+            }
+          />
+        );
+      })}
     </div>
   );
 }

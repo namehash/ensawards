@@ -1,7 +1,7 @@
-import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import { AbsoluteTime } from "@namehash/namehash-ui";
 
 export interface LastUpdateTimeProps {
   timestamp: UnixTimestamp;

@@ -1,14 +1,14 @@
-import { ChainIcon } from "@/components/atoms/ChainIcon.tsx";
-import { AddressDisplay } from "@/components/atoms/identity/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { useIsMobile } from "@/utils/hooks/useMobile.tsx";
-import {
-  DEFAULT_ENS_NAMESPACE,
-  getAddressDetailsUrl,
-  getBlockExplorerUrlForAddress,
-} from "@/utils/namespace.ts";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+import {
+  AddressDisplay,
+  ChainIcon,
+  getBlockExplorerAddressDetailsUrl,
+  getEnsManagerAddressDetailsUrl,
+  useIsMobile,
+} from "@namehash/namehash-ui";
 import type * as React from "react";
 import type { Address } from "viem";
 
@@ -40,7 +40,9 @@ export function AdvocateProfileWithoutName({ address }: AdvocateProfileWithoutNa
           <div className="max-sm:w-full flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3">
             {address !== null && (
               <a
-                href={getBlockExplorerUrlForAddress(getENSRootChainId(namespaceId), address)?.href}
+                href={
+                  getBlockExplorerAddressDetailsUrl(getENSRootChainId(namespaceId), address)?.href
+                }
                 target="_blank"
                 className={cn(
                   shadcnButtonVariants({
@@ -54,7 +56,7 @@ export function AdvocateProfileWithoutName({ address }: AdvocateProfileWithoutNa
               </a>
             )}
             <a
-              href={getAddressDetailsUrl(address, namespaceId)?.href}
+              href={getEnsManagerAddressDetailsUrl(address, namespaceId)?.href}
               target="_blank"
               className={cn(
                 shadcnButtonVariants({

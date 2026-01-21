@@ -1,15 +1,19 @@
 ---
 import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import {
+  ChainIcon,
+  EnsIcon,
+  SUPPORTED_CHAINS,
+  TwitterIcon,
+  getChainName,
+} from "@namehash/namehash-ui";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
-import { ChainIcon } from "../../components/atoms/ChainIcon";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
-import { EnsSolidIcon } from "../../components/atoms/icons/EnsSolidIcon";
 import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
-import TwitterIcon from "../../components/atoms/icons/TwitterIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
@@ -20,7 +24,6 @@ import { CONTRACTS } from "../../data/contracts";
 import { ORGANIZATIONS } from "../../data/organizations";
 import Layout from "../../layouts/Layout.astro";
 import { Contract, ContractTypes } from "../../types/contracts";
-import { SUPPORTED_CHAINS, getChainName } from "../../utils/chains";
 import { getOrgBySlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
@@ -103,7 +106,7 @@ if (resolvedOrg) {
                             rel="noreferrer"
                             target="_blank"
                     >
-                        <EnsSolidIcon width={24} height={24} className="hover:text-white text-gray-400 transition-all duration-200"/>
+                        <EnsIcon width={18} height={18} className="hover:text-white text-gray-400 transition-all duration-200"/>
                     </a>
             }
         </div>

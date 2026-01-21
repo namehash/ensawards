@@ -1,6 +1,5 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
-import { useNow } from "@/utils/hooks/useNow.ts";
+import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
@@ -12,6 +11,7 @@ import {
   type ReferrerRank,
   calcReferralProgramStatus,
 } from "@namehash/ens-referrals";
+import { ResolveAndDisplayIdentity, useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import type * as React from "react";
 import firstPlaceIcon from "../../../assets/firstPlaceAward.svg";
@@ -51,6 +51,11 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
     Math.max(0.01, aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore),
   );
 
+  const advocateDetailsUrl = new URL(
+    getEnsAdvocateDetailsRelativePath(referrer.referrer),
+    getEnsAwardsBaseUrl(),
+  );
+
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       {/*Desktop Header*/}
@@ -63,6 +68,10 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
             withIdentifier={false}
             withAvatar={true}
             withTooltip={false}
+            identityLinkDetails={{
+              isExternal: false,
+              link: advocateDetailsUrl,
+            }}
           />
           <div className="sm:min-w-[170px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
@@ -74,6 +83,10 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
               withIdentifier={true}
               withAvatar={false}
               withTooltip={false}
+              identityLinkDetails={{
+                isExternal: false,
+                link: advocateDetailsUrl,
+              }}
               className="font-medium sm:max-w-[170px] sm:overflow-x-auto"
             />
           </div>
@@ -92,6 +105,10 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
           withIdentifier={false}
           withAvatar={true}
           withTooltip={false}
+          identityLinkDetails={{
+            isExternal: false,
+            link: advocateDetailsUrl,
+          }}
         />
       </div>
       <div className="min-w-[120px] sm:hidden flex flex-row flex-nowrap justify-between items-start self-stretch">
@@ -104,6 +121,10 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
           withIdentifier={true}
           withAvatar={false}
           withTooltip={false}
+          identityLinkDetails={{
+            isExternal: false,
+            link: advocateDetailsUrl,
+          }}
           className="font-medium"
         />
       </div>

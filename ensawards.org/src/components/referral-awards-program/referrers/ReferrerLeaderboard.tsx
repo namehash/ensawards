@@ -16,8 +16,11 @@ import { scrollWithOffset } from "@/utils/domActions.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { ENSNodeClient, ReferrerLeaderboardPageResponseCodes } from "@ensnode/ensnode-sdk";
-import type { ReferrerLeaderboardPage } from "@namehash/ens-referrals";
+import {
+  ENSReferralsClient,
+  type ReferrerLeaderboardPage,
+  ReferrerLeaderboardPageResponseCodes,
+} from "@namehash/ens-referrals";
 
 export interface ReferrerLeaderboardProps {
   recordsPerPage?: number;
@@ -33,7 +36,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPage | null>(null);
   const ensNodeUrl = getENSNodeUrl();
-  const client = useMemo(() => new ENSNodeClient({ url: ensNodeUrl }), [ensNodeUrl]);
+  const client = useMemo(() => new ENSReferralsClient({ url: ensNodeUrl }), [ensNodeUrl]);
   const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)

@@ -1,11 +1,12 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { Toaster } from "@/components/ui/sonner";
 import { AstroFont } from "astro-font";
 import { SEO } from "astro-seo";
 import "../styles/global.css";
+import { Footer } from "@namehash/namehash-ui";
 import Overlay from "../components/molecules/Overlay.astro";
 import { EnsAwardsContactFormFields } from "../components/molecules/contact-form/types";
-import Footer from "../components/organisms/Footer.astro";
 import Header from "../components/organisms/Header.astro";
 import StaticHeader from "../components/organisms/StaticHeader.astro";
 import SuggestionForm from "../components/organisms/SuggestionForm.astro";
@@ -102,6 +103,7 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
     <slot name="alertBanner" />
     {isStatic ? <StaticHeader /> : <Header />}
     <slot />
+    <Toaster client:load />
     <div id="app-overlay" class="hidden">
       <Overlay>
         <SuggestionForm

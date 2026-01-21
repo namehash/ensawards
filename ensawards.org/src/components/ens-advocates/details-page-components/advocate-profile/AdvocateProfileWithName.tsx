@@ -1,14 +1,14 @@
-import { EnsAvatar } from "@/components/atoms/identity/EnsAvatar.tsx";
-import { NameDisplay } from "@/components/atoms/identity/utils.tsx";
 import type { FetchAndDisplayAdvocateProfileWithNameProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import {
-  DEFAULT_ENS_NAMESPACE,
-  getAddressDetailsUrl,
-  getBlockExplorerUrlForAddress,
-} from "@/utils/namespace.ts";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+import {
+  EnsAvatar,
+  NameDisplay,
+  getBlockExplorerAddressDetailsUrl,
+  getEnsManagerAddressDetailsUrl,
+} from "@namehash/namehash-ui";
 
 interface AdvocateProfileWithNameProps extends FetchAndDisplayAdvocateProfileWithNameProps {
   headerImage?: string | null;
@@ -70,7 +70,9 @@ export function AdvocateProfileWithName({
           <div className="max-sm:w-full flex flex-col sm:flex-row flex-nowrap justify-start items-center gap-3">
             {address !== null && (
               <a
-                href={getBlockExplorerUrlForAddress(getENSRootChainId(namespaceId), address)?.href}
+                href={
+                  getBlockExplorerAddressDetailsUrl(getENSRootChainId(namespaceId), address)?.href
+                }
                 target="_blank"
                 className={cn(
                   shadcnButtonVariants({
@@ -84,7 +86,7 @@ export function AdvocateProfileWithName({
               </a>
             )}
             <a
-              href={getAddressDetailsUrl(address, namespaceId)?.href}
+              href={getEnsManagerAddressDetailsUrl(address, namespaceId)?.href}
               target="_blank"
               className={cn(
                 shadcnButtonVariants({

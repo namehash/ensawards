@@ -1,4 +1,5 @@
 ---
+import { AbsoluteTime } from "@namehash/namehash-ui";
 import {
   millisecondsInDay,
   millisecondsInMinute,
@@ -6,7 +7,6 @@ import {
   millisecondsInWeek,
 } from "date-fns/constants";
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
-import { AbsoluteTime } from "../../components/atoms/datetime/AbsoluteTime";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import Layout from "../../layouts/Layout.astro";
@@ -74,8 +74,6 @@ const timerLegendStyles = "text-white";
               client:load
               timestamp={(Date.now() + 1.75 * millisecondsInMinute) /
                 millisecondsInSecond}
-              ctaText="Learn more"
-              link="/ens-referral-awards"
               options={{
                 year: "numeric",
                 month: "short",

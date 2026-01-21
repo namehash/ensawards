@@ -1,12 +1,12 @@
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { AbsoluteTime } from "@/components/atoms/datetime/AbsoluteTime.tsx";
-import { ResolveAndDisplayIdentity } from "@/components/atoms/identity";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type AppBenchmark, BenchmarkResult } from "@/types/apps.ts";
+import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { ENSNodeClient, buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
+import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
+import { AbsoluteTime, ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
 import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 
@@ -33,6 +33,13 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
           withLink={true}
           withTooltip={false}
           withAvatar={true}
+          identityLinkDetails={{
+            isExternal: false,
+            link: new URL(
+              getEnsAdvocateDetailsRelativePath(identity.address),
+              getEnsAwardsBaseUrl(),
+            ),
+          }}
           className="text-blue-400 hover:underline hover:underline-offset-[25%]"
         />
       </div>
@@ -50,10 +57,6 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
     </div>
   );
 };
-
-const client = new ENSNodeClient({
-  url: getENSNodeUrl(),
-});
 
 const ensNodeReactConfig = createConfig({
   url: getENSNodeUrl(),

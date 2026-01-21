@@ -6,7 +6,6 @@ import {
   ContractResolutionStatusIds,
   type EnsProfileForContract,
 } from "@/types/contracts.ts";
-import { getChainName } from "@/utils/chains.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import {
   type ChainId,
@@ -16,6 +15,7 @@ import {
   evmChainIdToCoinType,
   isNormalizedName,
 } from "@ensnode/ensnode-sdk";
+import { getChainName } from "@namehash/namehash-ui";
 import { type Address, isAddress, isAddressEqual } from "viem";
 import { describe, expect, it } from "vitest";
 
