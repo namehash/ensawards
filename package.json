@@ -1,24 +1,24 @@
 {
-	"name": "ensawards-monorepo",
-	"version": "0.0.1",
-	"private": true,
-	"packageManager": "pnpm@10.18.1",
-	"scripts": {
-		"lint": "biome check --write",
-		"lint:ci": "pnpm -r --parallel --aggregate-output lint:ci",
-		"typecheck": "pnpm --filter ensawards astro sync && pnpm -r --parallel --aggregate-output typecheck",
-		"test": "vitest --silent passed-only",
-		"test:cache": "pnpm test -t 'CachedIdentity'"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"typescript": "catalog:",
-		"vitest": "catalog:"
-	},
-	"pnpm": {
-		"overrides": {
-			"vite@<6.4.1": ">=6.4.1",
-			"tar@<7.5.3": ">=7.5.3"
-		}
-	}
+  "name": "ensawards-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@10.18.1",
+  "scripts": {
+    "lint": "biome check --write",
+    "lint:ci": "pnpm -r --parallel --aggregate-output lint:ci",
+    "typecheck": "pnpm --filter ensawards astro sync && pnpm -r --parallel --aggregate-output typecheck",
+    "test": "vitest --silent passed-only",
+    "test:cache": "pnpm test -t 'CachedIdentity'"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.2",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite@<6.4.1": ">=6.4.1",
+      "tar@<7.5.3": ">=7.5.3"
+    }
+  }
 }

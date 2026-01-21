@@ -1,12 +1,15 @@
-import { ReferrerCard, ReferrerCardLoading } from "@/components/atoms/cards/ReferrerCard.tsx";
-import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
-import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import type {
   ReferrerLeaderboardPage,
   ReferrerLeaderboardPageParams,
 } from "@namehash/ens-referrals";
 import type { ReactElement } from "react";
+
+import { ReferrerCard, ReferrerCardLoading } from "@/components/atoms/cards/ReferrerCard.tsx";
+import {
+  EmptyLeaderboardInfo,
+  ReferrerLeaderboardLastUpdateTime,
+} from "@/components/referral-awards-program/referrers/utils.tsx";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface DisplayReferrerLeaderboardPageProps {
   leaderboardPageData: ReferrerLeaderboardPage | null;

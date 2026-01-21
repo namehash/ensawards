@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
 
 import {
-  type QueryParameter,
-  type WithSDKConfigParameter,
   createIndexingStatusQueryOptions,
+  type QueryParameter,
   useENSNodeSDKConfig,
   type useIndexingStatus,
   useSwrQuery,
+  type WithSDKConfigParameter,
 } from "@ensnode/ensnode-react";
 import {
   type IndexingStatusRequest,

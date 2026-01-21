@@ -4,6 +4,7 @@ import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.
 import { TaikoIcon } from "@/components/atoms/icons/projects-and-daos/TaikoIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
 import { type Project, ProjectIds } from "@/types/projects.ts";
+
 import { EnsProjectIcon } from "../components/atoms/icons/projects-and-daos/EnsProjectIcon.tsx";
 
 export const ENSProject: Project = {

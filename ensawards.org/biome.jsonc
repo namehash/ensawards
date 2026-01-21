@@ -1,0 +1,45 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.11/schema.json",
+  "extends": "//",
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "linter": {
+    "rules": {
+      "recommended": false,
+      "style": {
+        "noNonNullAssertion": "on"
+      }
+    }
+  },
+  "overrides": [
+    // Turn off noNonNullAssertion in .astro files
+    // The use of them is oftentimes valid due to Astro's
+    // SSG-like nature
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noNonNullAssertion": "off"
+          }
+        }
+      },
+      // Do not organize imports in .astro files
+      // because linter throws false errors because of Astro's frontmatter
+      // see: https://biomejs.dev/internals/language-support/
+      // & https://github.com/biomejs/biome/issues/7912
+      "assist": {
+        "actions": {
+          "source": {
+            "organizeImports": {
+              "level": "off"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

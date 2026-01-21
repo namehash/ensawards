@@ -1,15 +1,17 @@
-import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
-import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
-import { ENSNamespaceIds } from "@ensnode/datasources";
-import {
-  type InterpretedName,
-  type NamedRegistrarAction,
-  type RegistrarAction,
-  getEthnamesSubregistryId,
-} from "@ensnode/ensnode-sdk";
 import { millisecondsInSecond } from "date-fns/constants";
 import { zeroAddress } from "viem";
 import { describe, expect, it } from "vitest";
+
+import { ENSNamespaceIds } from "@ensnode/datasources";
+import {
+  getEthnamesSubregistryId,
+  type InterpretedName,
+  type NamedRegistrarAction,
+  type RegistrarAction,
+} from "@ensnode/ensnode-sdk";
+
+import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
+import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 
 describe("isQualifiedReferral", () => {
   const incentiveProgram: ReferralIncentiveProgram = {

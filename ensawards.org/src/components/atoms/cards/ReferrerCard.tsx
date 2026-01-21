@@ -1,19 +1,22 @@
-import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
-import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 import {
   type AggregatedReferrerMetrics,
   type AwardedReferrerMetrics,
+  calcReferralProgramStatus,
   type ReferralProgramRules,
   ReferralProgramStatuses,
   type ReferrerRank,
-  calcReferralProgramStatus,
 } from "@namehash/ens-referrals";
 import { ResolveAndDisplayIdentity, useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import type * as React from "react";
+
+import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
+
+import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
+
 import firstPlaceIcon from "../../../assets/firstPlaceAward.svg";
 import secondPlaceIcon from "../../../assets/secondPlaceAward.svg";
 import thirdPlaceIcon from "../../../assets/thirdPlaceAward.svg";

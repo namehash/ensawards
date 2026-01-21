@@ -1,7 +1,3 @@
-import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 import {
   AddressDisplay,
   ChainIcon,
@@ -11,6 +7,12 @@ import {
 } from "@namehash/namehash-ui";
 import type * as React from "react";
 import type { Address } from "viem";
+
+import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 interface AdvocateProfileWithoutNameProps {
   address: Address;

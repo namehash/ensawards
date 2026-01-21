@@ -1,13 +1,16 @@
+import { AbsoluteTime, ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
+import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
+
+import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
+
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { type AppBenchmark, BenchmarkResult } from "@/types/apps.ts";
 import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
-import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
-import { AbsoluteTime, ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
-import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
+
 import { cn } from "../../../utils/tailwindClassConcatenation";
 
 export interface BenchmarkResultBadgeProps {

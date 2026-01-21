@@ -1,3 +1,5 @@
+// biome-ignore-start lint: All DOM objects accessed in this file
+// are guaranteed to exist for the entirety of runtime (forms in modal view)
 export function openSuggestionOverlay(whatsSuggested: string) {
   const scrollValue = window.scrollY;
   switch (whatsSuggested) {
@@ -28,6 +30,7 @@ export function openSuggestionOverlay(whatsSuggested: string) {
   document.body.classList.add("no-scroll");
   document.body.style.top = `-${scrollValue}px`;
 }
+// biome-ignore-end lint: see lines 1&2
 
 export const scrollWithOffset = (id: string, offset: number) => {
   const element = document.getElementById(id);

@@ -1,3 +1,16 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import {
+  getEnsManagerNameDetailsUrl,
+  LabeledField,
+  RegistrarActionCardLoading,
+  RegistrarActionCardMemo,
+  useNow,
+} from "@namehash/namehash-ui";
+import type { Address } from "viem";
+
+import type { ENSNamespaceId } from "@ensnode/datasources";
+import { type NamedRegistrarAction, OmnichainIndexingStatusIds } from "@ensnode/ensnode-sdk";
+
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import {
   type StatefulFetchRegistrarActions,
@@ -13,17 +26,6 @@ import {
 } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import type { ENSNamespaceId } from "@ensnode/datasources";
-import { type NamedRegistrarAction, OmnichainIndexingStatusIds } from "@ensnode/ensnode-sdk";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import {
-  LabeledField,
-  RegistrarActionCardLoading,
-  RegistrarActionCardMemo,
-  getEnsManagerNameDetailsUrl,
-  useNow,
-} from "@namehash/namehash-ui";
-import type { Address } from "viem";
 
 interface DisplayRegistrarActionsListProps {
   namespaceId: ENSNamespaceId;

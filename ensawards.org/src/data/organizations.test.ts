@@ -1,8 +1,10 @@
+import { describe, expect, it } from "vitest";
+
+import { isNormalizedName } from "@ensnode/ensnode-sdk";
+
 import { ORGANIZATIONS } from "@/data/organizations.ts";
 import { OrgIds } from "@/types/organizations.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
-import { isNormalizedName } from "@ensnode/ensnode-sdk";
-import { describe, expect, it } from "vitest";
 
 describe("organizations data", () => {
   const data = ORGANIZATIONS;
