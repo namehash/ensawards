@@ -6,7 +6,7 @@ import type { BestPractice, BestPracticeCategory } from "@/types/bestPractices.t
 import type { Organization, OrgId } from "@/types/organizations.ts";
 
 export const getOrgById = (orgId: OrgId): Organization => {
-  // biome-ignore lint: Because of invariant that ORGANIZATIONS array satisfies we are guaranteed to find corresponding org
+  // biome-ignore lint/style/noNonNullAssertion: Because of invariant that ORGANIZATIONS array satisfies we are guaranteed to find corresponding org
   return ORGANIZATIONS.find((org) => org.id === orgId)!;
 };
 
