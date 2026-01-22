@@ -22,7 +22,7 @@ export default defineConfig({
   },
 
   redirects: {
-    "/benchmarks": "/leaderboards/app",
+    "/benchmarks": "/leaderboards",
     "/benchmarks/[app]": "/app/[app]",
   },
 
