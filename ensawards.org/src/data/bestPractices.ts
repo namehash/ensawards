@@ -1,8 +1,9 @@
+import { AppTypes } from "@/types/apps.ts";
 import {
   type BestPractice,
-  BestPracticeApplications,
   type BestPracticeCategory,
   CategoryStatus,
+  NonAppBestPracticeApplications,
 } from "@/types/bestPractices.ts";
 
 // TODO: In a future PR uncomment recogonizeAllENSNames best practice
@@ -14,7 +15,7 @@ import {
 //   description: "Support user input of all valid ENS names (not only .eth names).",
 //   categoryName: "Forward Resolution",
 //   categorySlug: "forward-resolution",
-//   appliesTo: [BestPracticeApplications.App],
+//   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
 //   technicalDetails: {
 //     main: {
 //       header: "Technical Details",
@@ -49,7 +50,7 @@ export const nameYourSmartContracts: BestPractice = {
   description: "Upgrade security and UX when users interact with your smart contracts.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  appliesTo: [BestPracticeApplications.Dao],
+  appliesTo: [NonAppBestPracticeApplications.Dao],
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -80,7 +81,7 @@ export const displayNamedSmartContractsMainnet: BestPractice = {
     "Display ENS names instead of addresses when users interact with named smart contracts on Ethereum mainnet.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  appliesTo: [BestPracticeApplications.App],
+  appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -112,7 +113,7 @@ export const displayNamedSmartContractsL2: BestPractice = {
     "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  appliesTo: [BestPracticeApplications.App],
+  appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
   technicalDetails: {
     main: {
       header: "Technical Details",

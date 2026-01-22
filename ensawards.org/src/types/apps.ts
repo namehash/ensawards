@@ -40,6 +40,9 @@ export interface AppBenchmark {
   benchmarkedAt: UnixTimestamp;
 }
 
+/**
+ * Represents all types of apps that are currently benchmarked on ENSAwards.
+ */
 export const AppTypes = {
   Wallet: "Wallet",
   Explorer: "Explorer",

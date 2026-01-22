@@ -1,3 +1,5 @@
+import type { AppType } from "@/types/apps.ts";
+
 export interface BestPractice {
   id: string;
   slug: string;
@@ -18,13 +20,14 @@ export interface BestPractice {
   };
 }
 
-export const BestPracticeApplications = {
+export const NonAppBestPracticeApplications = {
   Dao: "DAOs",
-  App: "Apps",
 } as const;
 
-export type BestPracticeAppliesTo =
-  (typeof BestPracticeApplications)[keyof typeof BestPracticeApplications];
+export type NonAppBestPracticeAppliesTo =
+  (typeof NonAppBestPracticeApplications)[keyof typeof NonAppBestPracticeApplications];
+
+export type BestPracticeAppliesTo = AppType | NonAppBestPracticeAppliesTo;
 
 export enum CategoryStatus {
   ComingSoon,

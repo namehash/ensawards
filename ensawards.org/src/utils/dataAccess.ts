@@ -1,8 +1,12 @@
 import { APPS } from "@/data/apps.ts";
 import { BEST_PRACTICES, BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
 import { ORGANIZATIONS } from "@/data/organizations.ts";
-import { type App, BenchmarkResult } from "@/types/apps.ts";
-import type { BestPractice, BestPracticeCategory } from "@/types/bestPractices.ts";
+import { type App, AppTypes, BenchmarkResult } from "@/types/apps.ts";
+import type {
+  BestPractice,
+  BestPracticeAppliesTo,
+  BestPracticeCategory,
+} from "@/types/bestPractices.ts";
 import type { OrgId, Organization } from "@/types/organizations.ts";
 
 export const getOrgById = (orgId: OrgId): Organization => {
@@ -119,4 +123,21 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
   });
 
   return appsPassed;
+};
+
+/**
+ * Checks if the ENS best practice applies to all types that are specified in {@link AppType}.
+ */
+
+// TODO: This name sucks, appreciate advice on improving it
+export const bestPracticeAppliesToAllApps = (
+  bestPracticeApplications: BestPracticeAppliesTo[],
+): boolean => {
+  const allAppTypes = Object.values(AppTypes);
+
+  for (const appType of allAppTypes) {
+    if (!bestPracticeApplications.includes(appType)) return false;
+  }
+
+  return true;
 };

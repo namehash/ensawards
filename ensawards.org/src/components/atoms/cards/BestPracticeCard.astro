@@ -1,11 +1,6 @@
 ---
-import { BestPracticeApplications, BestPracticeAppliesTo } from "../../../types/bestPractices";
-import {
-  calculateAppSupport,
-  calculateAppsPassed,
-  getBestPracticeById,
-} from "../../../utils/dataAccess";
-import { getAppSupportColor } from "../../../utils/styles";
+import { BestPracticeAppliesTo } from "../../../types/bestPractices";
+import { bestPracticeAppliesToAllApps, getBestPracticeById } from "../../../utils/dataAccess";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 export interface BestPracticeCardProps {
@@ -18,16 +13,11 @@ export interface BestPracticeCardProps {
 
 const { id, name, description, viewReviewsLink, appliesTo }: BestPracticeCardProps = Astro.props;
 
-let appsPassed: number;
-let appSupport: number;
-
 // Theoretically, because of Astro's build-time page generation, this best practice should always be defined
 const bestPracticeToDisplay = getBestPracticeById(id);
 
-if (appliesTo.includes(BestPracticeApplications.App) && bestPracticeToDisplay !== undefined) {
-  appsPassed = calculateAppsPassed(bestPracticeToDisplay);
-  appSupport = calculateAppSupport(bestPracticeToDisplay);
-}
+const appliesToBadgeStyles =
+  "flex justify-center items-center px-2 py-[2px] rounded-md border border-gray-200 bg-white text-black text-xs leading-4 font-semibold";
 ---
 
 <a
@@ -64,53 +54,27 @@ if (appliesTo.includes(BestPracticeApplications.App) && bestPracticeToDisplay !=
       )}>
       View details
     </button>
-    <div
-      class="flex flex-nowrap flex-col sm:flex-row justify-start items-center gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
-      {
-        // TODO: Hacky approach to display this info only for contract-related BPs --> to be refactored later
-        name.includes("contract") && (
+    {
+      bestPracticeToDisplay !== undefined && (
+        <div class="flex flex-nowrap flex-col sm:flex-row justify-start items-center gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
           <div class="flex flex-row justify-between sm:justify-start items-center sm:gap-2 max-sm:self-stretch">
             <p class="text-sm leading-normal font-normal text-muted-foreground">
               Applies to
             </p>
-            <div class="flex flex-row justify-start items-center gap-1">
-              {appliesTo.map((bestPracticeApplication) => (
-                <span class="flex justify-center items-center px-2 py-[2px] rounded-md border border-gray-200 bg-white text-black text-xs leading-4 font-semibold">
-                  {bestPracticeApplication}
-                </span>
-              ))}
-            </div>
+            {bestPracticeAppliesToAllApps(bestPracticeToDisplay.appliesTo) ? (
+              <span class={appliesToBadgeStyles}>Apps</span>
+            ) : (
+              <div class="flex flex-row justify-start items-center gap-1">
+                {appliesTo.map((bestPracticeApplication) => (
+                  <span class={appliesToBadgeStyles}>
+                    {bestPracticeApplication}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
-        )
-      }
-      {
-        // TODO: Hacky approach to not display this info for contract-related BPs --> to be refactored later
-        appliesTo.includes(BestPracticeApplications.App) &&
-          !name.includes("contract") && (
-            <>
-              <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
-                <p class="text-muted-foreground text-sm leading-normal font-normal">
-                  Apps passed
-                </p>
-                <p class="text-sm leading-normal font-semibold text-accent-foreground">
-                  {appsPassed}
-                </p>
-              </div>
-              <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 max-sm:self-stretch">
-                <p class="text-muted-foreground text-sm leading-normal font-normal">
-                  App support
-                </p>
-                <p
-                  class={cn(
-                    "text-sm leading-normal font-semibold",
-                    `text-${getAppSupportColor(appSupport)}`,
-                  )}>
-                  {appSupport}%
-                </p>
-              </div>
-            </>
-          )
-      }
-    </div>
+        </div>
+      )
+    }
   </div>
 </a>
