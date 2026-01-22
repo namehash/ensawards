@@ -126,18 +126,11 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
 };
 
 /**
- * Checks if the ENS best practice applies to all types that are specified in {@link AppType}.
+ * Checks if the ENS best practice applies to all types that are specified in {@link AppTypes}.
  */
 
 // TODO: This name sucks, appreciate advice on improving it
 export const bestPracticeAppliesToAllApps = (
   bestPracticeApplications: BestPracticeAppliesTo[],
-): boolean => {
-  const allAppTypes = Object.values(AppTypes);
-
-  for (const appType of allAppTypes) {
-    if (!bestPracticeApplications.includes(appType)) return false;
-  }
-
-  return true;
-};
+): boolean =>
+  Object.values(AppTypes).every((appType) => bestPracticeApplications.includes(appType));
