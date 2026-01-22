@@ -24,6 +24,7 @@ export default defineConfig({
   redirects: {
     "/benchmarks": "/leaderboards",
     "/benchmarks/[app]": "/app/[app]",
+    "/leaderboards/app": "/leaderboards",
   },
 
   adapter: vercel(),
