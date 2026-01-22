@@ -176,8 +176,10 @@ const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
                                     );
                                 })
                             }
-                            <SuggestionCard whatsSuggested="benchmark result"/>
                         </ItemsList>)}
+                <div class="w-full max-w-[1216px] box-border h-fit">
+                    <SuggestionCard whatsSuggested="benchmark result"/>
+                </div>
             </section>
             <section
                     id={`${bestPracticeToDisplay.id}-technical-info`}
