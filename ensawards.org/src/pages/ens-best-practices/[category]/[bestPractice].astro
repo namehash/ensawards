@@ -77,8 +77,8 @@ const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
   return a.app.name.localeCompare(b.app.name);
 });
 
-// Extract just the app objects for final result
-const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
+const appsPassed = calculateAppsPassed(bestPracticeToDisplay);
+const appSupport = calculateAppSupport(bestPracticeToDisplay);
 ---
 {
     bestPracticeToDisplay === undefined ? (
@@ -119,11 +119,11 @@ const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
                         },
                         {
                             name: "Apps passed",
-                            value: calculateAppsPassed(bestPracticeToDisplay),
+                            value: appsPassed,
                         },
                         {
                             name: "App support",
-                            value: `${calculateAppSupport(bestPracticeToDisplay)}%`,
+                            value: `${appSupport}%`,
                         },
                     ]}>
                 <technical-info-anchor
@@ -141,13 +141,8 @@ const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
                 {bestPracticeToDisplay.appliesTo.map((appliesTo) =>
                         <ItemsList header={`${appliesTo} benchmarks`} containerStyles="sm:gap-2">
                             {
-                                benchmarkedApps.filter((benchmarkedApp) => benchmarkedApp.type === appliesTo).map((app) => {
+                                sortedAppsByBenchmark.filter(({app}) => app.type === appliesTo).map(({app, benchmark}) => {
                                     // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
-
-                                    const relatedBenchmark = app.benchmarks.find(
-                                        (benchmark) =>
-                                            benchmark.bestPractice.id === bestPracticeToDisplay.id,
-                                    )!;
 
                                     return (
                                             <BenchmarkResultCard
@@ -155,14 +150,14 @@ const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
                                                     notes={app.description}
                                                     viewDetails={{
                                                         text: "App details",
-                                                        link: `/app/${app.id}`,
+                                                        link: `/app/${app.slug}`,
                                                     }}
                                             >
                                                 <BenchmarkResultBadge
                                                         slot="badge"
-                                                        benchmark={relatedBenchmark}
+                                                        benchmark={benchmark}
                                                         className={
-                                                            BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
+                                                            BenchmarkResultToBadgeStyles.get(benchmark.result)!
                                                         }
                                                         client:load
                                                 />
@@ -228,13 +223,13 @@ const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
                             <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
                                 <p class="text-sm leading-normal font-normal text-muted-foreground">Apps passed</p>
                                 <p class="text-sm leading-normal font-semibold text-black">
-                                    {calculateAppsPassed(bestPracticeToDisplay)}
+                                    {appsPassed}
                                 </p>
                             </div>
                             <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
                                 <p class="text-sm leading-normal font-normal text-muted-foreground">App support</p>
-                                <p class={cn("text-sm leading-normal font-semibold", `text-${getAppSupportColor(calculateAppSupport(bestPracticeToDisplay))}`)}>
-                                    {calculateAppSupport(bestPracticeToDisplay)}%
+                                <p class={cn("text-sm leading-normal font-semibold", `text-${getAppSupportColor(appSupport)}`)}>
+                                    {appSupport}%
                                 </p>
                             </div>
                         </div>
