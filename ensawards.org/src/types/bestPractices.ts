@@ -21,7 +21,7 @@ export interface BestPractice {
 }
 
 export const NonAppBestPracticeApplications = {
-  Dao: "DAOs",
+  Dao: "DAO",
 } as const;
 
 export type NonAppBestPracticeAppliesTo =
