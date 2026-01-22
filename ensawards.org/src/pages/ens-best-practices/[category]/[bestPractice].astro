@@ -135,50 +135,45 @@ const benchmarkedApps = sortedAppsByBenchmark.map(({ app }) => app);
                   >
                 </SubpageHero>
                 <section
-                    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8">
-                  <ItemsList header="App benchmarks" containerStyles="sm:gap-2">
-                      {
-                          benchmarkedApps.map((app) => {
-                              // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
+                    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8 gap-5 sm:gap-[60px]">
+                    {bestPracticeToDisplay.appliesTo.map((appliesTo) =>                   <ItemsList header={`${appliesTo} benchmarks`} containerStyles="sm:gap-2">
+                        {
+                            benchmarkedApps.filter((benchmarkedApp) => benchmarkedApp.type === appliesTo).map((app) => {
+                                // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
           const relatedBenchmark = app.benchmarks.find(
-                                  (benchmark) =>
-                                      benchmark.bestPractice.name === bestPracticeToDisplay.name,
-                              )!;
+                                    (benchmark) =>
+                                        benchmark.bestPractice.name === bestPracticeToDisplay.name,
+                                )!;
 
-                              return (
-                                      <BenchmarkResultCard
-                                              name={app.name}
-                                              notes={app.description}
-                                              viewDetails={{
-                                                  text: "App details",
-                                                  link: `/app/${app.id}`,
-                                              }}
-                                              additionalInfo={[
-                                                  {
-                                                      category: "Type",
-                                                      value: app.type,
-                                                  },
-                                              ]}>
-                                                <BenchmarkResultBadge
-                                                  slot="badge"
-                                                  benchmark={relatedBenchmark}
-                                                  className={
-                                                      BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
-                                                  }
-                                                  client:load
-                                          />
-                                          <Image
-                                                  src={images[app.iconPath]()}
-                                                  alt={`${app.name}-logo`}
-                                                  slot="icon"
-                                                  class="shrink-0 rounded-md w-10 h-10"
-                                          />
-                                      </BenchmarkResultCard>
-                              );
-                          })
-                      }
-                    <SuggestionCard whatsSuggested="benchmark result" />
-                  </ItemsList>
+                                return (
+                                        <BenchmarkResultCard
+                                                name={app.name}
+                                                notes={app.description}
+                                                viewDetails={{
+                                                    text: "App details",
+                                                    link: `/app/${app.id}`,
+                                                }}
+                                        >
+                                            <BenchmarkResultBadge
+                                                    slot="badge"
+                                                    benchmark={relatedBenchmark}
+                                                    className={
+                                                        BenchmarkResultToBadgeStyles.get(relatedBenchmark.result)!
+                                                    }
+                                                    client:load
+                                            />
+                                            <Image
+                                                    src={images[app.iconPath]()}
+                                                    alt={`${app.name}-logo`}
+                                                    slot="icon"
+                                                    class="shrink-0 rounded-md w-10 h-10"
+                                            />
+                                        </BenchmarkResultCard>
+                                );
+                            })
+                        }
+                        <SuggestionCard whatsSuggested="benchmark result" />
+                    </ItemsList>)}
                 </section>
                 <section
                     id={`${bestPracticeToDisplay.id}-technical-info`}
