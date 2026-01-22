@@ -11,7 +11,11 @@ import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppTypes } from "../../types/apps";
 import { OrgId } from "../../types/organizations";
-import { calculateAppEnsAwardsScore, getOrgById } from "../../utils/dataAccess";
+import {
+  calculateAppEnsAwardsScore,
+  getOrgById,
+  pluralizeBestPracticeApplication,
+} from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
@@ -88,7 +92,7 @@ const referrerLeaderboardDescription =
           return (
             <LeaderboardSnippetCard
               name={`${appType} leaderboard`}
-              description={`See how ${appType.toLowerCase()}s rank for following ENS best practices.`}
+              description={`See how ${pluralizeBestPracticeApplication(appType).toLowerCase()} rank for following ENS best practices.`}
               link={`/leaderboards/${appType.toLowerCase()}`}>
               <div
                 slot="bestResultsIcons"

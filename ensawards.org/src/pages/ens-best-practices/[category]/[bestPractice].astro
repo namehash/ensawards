@@ -75,8 +75,13 @@ const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
   return a.app.name.localeCompare(b.app.name);
 });
 
-const appsPassed = calculateAppsPassed(bestPracticeToDisplay);
-const appSupport = calculateAppSupport(bestPracticeToDisplay);
+let appsPassed: number;
+let appSupport: number;
+
+if (bestPracticeToDisplay !== undefined) {
+  appsPassed = calculateAppsPassed(bestPracticeToDisplay);
+  appSupport = calculateAppSupport(bestPracticeToDisplay);
+}
 ---
 {
     bestPracticeToDisplay === undefined ? (

@@ -7,6 +7,7 @@ import type {
   BestPracticeAppliesTo,
   BestPracticeCategory,
 } from "@/types/bestPractices.ts";
+import { NonAppBestPracticeApplications } from "@/types/bestPractices.ts";
 import type { OrgId, Organization } from "@/types/organizations.ts";
 
 export const getOrgById = (orgId: OrgId): Organization => {
@@ -129,8 +130,27 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
  * Checks if the ENS best practice applies to all types that are specified in {@link AppTypes}.
  */
 
-// TODO: This name sucks, appreciate advice on improving it
+// TODO: These names are baaad, appreciate advice on improving it
 export const bestPracticeAppliesToAllApps = (
   bestPracticeApplications: BestPracticeAppliesTo[],
 ): boolean =>
   Object.values(AppTypes).every((appType) => bestPracticeApplications.includes(appType));
+
+const pluralizedBestPracticeApplications = new Map<BestPracticeAppliesTo, string>([
+  [AppTypes.Explorer, "Explorers"],
+  [AppTypes.Wallet, "Wallets"],
+  [NonAppBestPracticeApplications.Dao, "DAOs"],
+]);
+
+export const pluralizeBestPracticeApplication = (
+  bestPracticeAppliesTo: BestPracticeAppliesTo,
+): string => {
+  const mappedPluralization = pluralizedBestPracticeApplications.get(bestPracticeAppliesTo);
+
+  // if no mapping is found attempt basic pluralization
+  if (mappedPluralization === undefined) {
+    return `${bestPracticeAppliesTo}s`;
+  }
+
+  return mappedPluralization;
+};

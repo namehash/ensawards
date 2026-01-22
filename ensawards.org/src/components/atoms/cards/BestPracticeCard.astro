@@ -1,6 +1,10 @@
 ---
 import { BestPracticeAppliesTo } from "../../../types/bestPractices";
-import { bestPracticeAppliesToAllApps, getBestPracticeById } from "../../../utils/dataAccess";
+import {
+  bestPracticeAppliesToAllApps,
+  getBestPracticeById,
+  pluralizeBestPracticeApplication,
+} from "../../../utils/dataAccess";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 export interface BestPracticeCardProps {
@@ -67,7 +71,7 @@ const appliesToBadgeStyles =
               <div class="flex flex-row justify-start items-center gap-1">
                 {appliesTo.map((bestPracticeApplication) => (
                   <span class={appliesToBadgeStyles}>
-                    {bestPracticeApplication}s
+                    {pluralizeBestPracticeApplication(bestPracticeApplication)}
                   </span>
                 ))}
               </div>

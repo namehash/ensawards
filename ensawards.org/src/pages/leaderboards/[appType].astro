@@ -9,7 +9,10 @@ import DataLoadingError from "../../components/organisms/DataLoadingError.astro"
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppType, AppTypes } from "../../types/apps";
-import { calculateAppEnsAwardsScore } from "../../utils/dataAccess";
+import {
+  calculateAppEnsAwardsScore,
+  pluralizeBestPracticeApplication,
+} from "../../utils/dataAccess";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({
@@ -41,14 +44,14 @@ const resolvedAppType = pathToAppType.get(appType);
     <Layout
       pageMetadata={{
         title: `ENSAwards: ENS Leaderboard for ${resolvedAppType} Integrations`,
-        description: `See how ${resolvedAppType.toLowerCase()}s score on ENS integration benchmarks.`,
+        description: `See how ${pluralizeBestPracticeApplication(resolvedAppType).toLowerCase()} score on ENS integration benchmarks.`,
         url: `https://ensawards.org/leaderboards/${resolvedAppType.toLowerCase()}`,
         ogImage: `https://ensawards.org/${resolvedAppType.toLowerCase()}_leaderboard_og_image.png`,
         twitterImage: `https://ensawards.org/${resolvedAppType.toLowerCase()}_leaderboard_twitter_og_image.png`,
       }}>
       <SubpageHero
         header={`${resolvedAppType} leaderboard`}
-        description={`Compare ${resolvedAppType.toLowerCase()}s by their rank of following a selection of ENS best practices.`}
+        description={`Compare ${pluralizeBestPracticeApplication(resolvedAppType).toLowerCase()} by their rank of following a selection of ENS best practices.`}
         breadcrumbs={["ENS leaderboards"]}
         customImage={{
           source: "/src/assets/leaderboardsHeroImage.png",
