@@ -133,19 +133,12 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
 export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
   Object.values(AppTypes).every((appType) => targets.includes(appType));
 
-const pluralizedBestPracticeTargets = new Map<BestPracticeTarget, string>([
-  [AppTypes.Explorer, "Explorers"],
-  [AppTypes.Wallet, "Wallets"],
-  [ProtocolTypes.Dao, "DAOs"],
-]);
+const pluralizedBestPracticeTargets: Record<BestPracticeTarget, string> = {
+  [AppTypes.Explorer]: "Explorers",
+  [AppTypes.Wallet]: "Wallets",
+  [ProtocolTypes.Dao]: "DAOs",
+};
 
 export const pluralizeBestPracticeTarget = (target: BestPracticeTarget): string => {
-  const pluralization = pluralizedBestPracticeTargets.get(target);
-
-  // if no mapping is found attempt basic pluralization
-  if (pluralization === undefined) {
-    return `${target}s`;
-  }
-
-  return pluralization;
+  return pluralizedBestPracticeTargets[target];
 };
