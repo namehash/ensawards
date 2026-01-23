@@ -1,8 +1,14 @@
 import { APPS } from "@/data/apps.ts";
 import { BEST_PRACTICES, BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
 import { ORGANIZATIONS } from "@/data/organizations.ts";
-import { type App, BenchmarkResult } from "@/types/apps.ts";
-import type { BestPractice, BestPracticeCategory } from "@/types/bestPractices.ts";
+import { type App, AppTypes } from "@/types/apps.ts";
+import { BenchmarkResult } from "@/types/benchmarks";
+import type {
+  BestPractice,
+  BestPracticeCategory,
+  BestPracticeTarget,
+} from "@/types/bestPractices.ts";
+import { ProtocolTypes } from "@/types/bestPractices.ts";
 import type { OrgId, Organization } from "@/types/organizations.ts";
 
 export const getOrgById = (orgId: OrgId): Organization => {
@@ -119,4 +125,20 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
   });
 
   return appsPassed;
+};
+
+/**
+ * Checks if the ENS best practice applies to all types that are specified in {@link AppTypes}.
+ */
+export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
+  Object.values(AppTypes).every((appType) => targets.includes(appType));
+
+const pluralizedBestPracticeTargets: Record<BestPracticeTarget, string> = {
+  [AppTypes.Explorer]: "Explorers",
+  [AppTypes.Wallet]: "Wallets",
+  [ProtocolTypes.Dao]: "DAOs",
+};
+
+export const pluralizeBestPracticeTarget = (target: BestPracticeTarget): string => {
+  return pluralizedBestPracticeTargets[target];
 };
