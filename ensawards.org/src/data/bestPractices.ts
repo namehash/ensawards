@@ -1,7 +1,10 @@
 import { AppTypes } from "@/types/apps.ts";
 import {
   type BestPractice,
+  type BestPracticeApp,
   type BestPracticeCategory,
+  type BestPracticeProtocol,
+  BestPracticeTypes,
   CategoryStatus,
   ProtocolTypes,
 } from "@/types/bestPractices.ts";
@@ -43,7 +46,8 @@ import {
 //   },
 // };
 
-export const nameYourSmartContracts: BestPractice = {
+export const nameYourSmartContracts: BestPracticeProtocol = {
+  type: BestPracticeTypes.Protocol,
   id: "name-your-smart-contracts",
   slug: "name-your-smart-contracts",
   name: "Name your smart contracts",
@@ -73,7 +77,8 @@ export const nameYourSmartContracts: BestPractice = {
   },
 };
 
-export const displayNamedSmartContractsMainnet: BestPractice = {
+export const displayNamedSmartContractsMainnet: BestPracticeApp = {
+  type: BestPracticeTypes.App,
   id: "display-named-smart-contracts-mainnet",
   slug: "display-named-smart-contracts-mainnet",
   name: "Display named smart contracts on Ethereum mainnet",
@@ -105,7 +110,8 @@ export const displayNamedSmartContractsMainnet: BestPractice = {
   },
 };
 
-export const displayNamedSmartContractsL2: BestPractice = {
+export const displayNamedSmartContractsL2: BestPracticeApp = {
+  type: BestPracticeTypes.App,
   id: "display-named-smart-contracts-l2-chains",
   slug: "display-named-smart-contracts-l2-chains",
   name: "Display named smart contracts on L2 chains",
