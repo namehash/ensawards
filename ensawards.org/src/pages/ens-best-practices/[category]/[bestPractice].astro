@@ -11,7 +11,6 @@ import { APPS } from "../../../data/apps";
 import { BEST_PRACTICE_CATEGORIES, nameYourSmartContracts } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
 import { BenchmarkResult } from "../../../types/benchmarks";
-import { ProtocolTypes } from "../../../types/bestPractices";
 import {
   calculateAppSupport,
   calculateAppsPassed,
@@ -25,11 +24,9 @@ export function getStaticPaths() {
 
   for (let category of BEST_PRACTICE_CATEGORIES) {
     category.bestPractices
-      .filter((bestPractice) =>
-        bestPractice.appliesTo.every(
-          (appliesTo) => !Object.values(ProtocolTypes).includes(appliesTo),
-        ),
-      )
+      // only exclude nameYourSmartContracts because
+      // it has a dedicated subpage @ ensawards.org/src/pages/ens-best-practices/[category]/name-your-smart-contracts.astro
+      .filter((bestPractice) => bestPractice.id !== nameYourSmartContracts.id)
       .forEach((bestPractice) =>
         staticPaths.push({ params: { category: category.slug, bestPractice: bestPractice.slug } }),
       );
@@ -80,13 +77,10 @@ const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
   return a.app.name.localeCompare(b.app.name);
 });
 
-let appsPassed: number;
-let appSupport: number;
-
-if (bestPracticeToDisplay !== undefined) {
-  appsPassed = calculateAppsPassed(bestPracticeToDisplay);
-  appSupport = calculateAppSupport(bestPracticeToDisplay);
-}
+const appsPassed =
+  bestPracticeToDisplay !== undefined ? calculateAppsPassed(bestPracticeToDisplay) : 0;
+const appSupport =
+  bestPracticeToDisplay !== undefined ? calculateAppSupport(bestPracticeToDisplay) : 0;
 ---
 {
     bestPracticeToDisplay === undefined ? (
@@ -132,8 +126,7 @@ if (bestPracticeToDisplay !== undefined) {
             </SubpageHero>
             <section
                     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8 gap-5 sm:gap-[60px]">
-                <!--Explicitly filter out all protocol types-->
-                {bestPracticeToDisplay.appliesTo.filter((appliesTo) => !Object.values(ProtocolTypes).includes(appliesTo)).map((appliesTo) =>
+                {bestPracticeToDisplay.appliesTo.map((appliesTo) =>
                         <ItemsList header={`${appliesTo} benchmarks`} containerStyles="sm:gap-2">
                             {
                                 sortedAppsByBenchmark.filter(({app}) => app.type === appliesTo).map(({app, benchmark}) => {
