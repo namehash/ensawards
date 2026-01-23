@@ -11,6 +11,7 @@ import { APPS } from "../../../data/apps";
 import { BEST_PRACTICE_CATEGORIES, nameYourSmartContracts } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
 import { BenchmarkResult } from "../../../types/benchmarks";
+import { ProtocolTypes } from "../../../types/bestPractices";
 import {
   calculateAppSupport,
   calculateAppsPassed,
@@ -127,12 +128,11 @@ if (bestPracticeToDisplay !== undefined) {
             </SubpageHero>
             <section
                     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8 gap-5 sm:gap-[60px]">
-                {bestPracticeToDisplay.appliesTo.map((appliesTo) =>
+                <!--Explicitly filter out all protocol types-->
+                {bestPracticeToDisplay.appliesTo.filter((appliesTo) => !Object.values(ProtocolTypes).includes(appliesTo)).map((appliesTo) =>
                         <ItemsList header={`${appliesTo} benchmarks`} containerStyles="sm:gap-2">
                             {
                                 sortedAppsByBenchmark.filter(({app}) => app.type === appliesTo).map(({app, benchmark}) => {
-                                    // the benchmark is certainly here because it was the reason an app was chosen for benchmarkedApps
-
                                     return (
                                             <BenchmarkResultCard
                                                     name={app.name}
