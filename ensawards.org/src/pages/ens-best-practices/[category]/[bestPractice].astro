@@ -25,7 +25,11 @@ export function getStaticPaths() {
 
   for (let category of BEST_PRACTICE_CATEGORIES) {
     category.bestPractices
-      .filter((bestPractice) => bestPractice.id !== nameYourSmartContracts.id)
+      .filter((bestPractice) =>
+        bestPractice.appliesTo.every(
+          (appliesTo) => !Object.values(ProtocolTypes).includes(appliesTo),
+        ),
+      )
       .forEach((bestPractice) =>
         staticPaths.push({ params: { category: category.slug, bestPractice: bestPractice.slug } }),
       );
