@@ -1,9 +1,9 @@
 ---
-import { BestPracticeAppliesTo } from "../../../types/bestPractices";
+import { BestPracticeTarget } from "../../../types/bestPractices";
 import {
-  bestPracticeAppliesToAllApps,
+  appliesToAllApps,
   getBestPracticeById,
-  pluralizeBestPracticeApplication,
+  pluralizeBestPracticeTarget,
 } from "../../../utils/dataAccess";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
@@ -12,7 +12,7 @@ export interface BestPracticeCardProps {
   name: string;
   description: string;
   viewReviewsLink: string;
-  appliesTo: BestPracticeAppliesTo[];
+  appliesTo: BestPracticeTarget[];
 }
 
 const { id, name, description, viewReviewsLink, appliesTo }: BestPracticeCardProps = Astro.props;
@@ -65,20 +65,20 @@ const appliesToBadgeStyles =
             <p class="text-sm leading-normal font-normal text-muted-foreground">
               Applies to
             </p>
-            {bestPracticeAppliesToAllApps(bestPracticeToDisplay.appliesTo) ? (
+            {appliesToAllApps(bestPracticeToDisplay.appliesTo) ? (
               <span class={appliesToBadgeStyles}>Apps</span>
             ) : (
               <div class="flex flex-row justify-start items-center gap-1">
-                {appliesTo.map((bestPracticeApplication) => (
+                {appliesTo.map((target) => (
                   <span class={appliesToBadgeStyles}>
-                    {pluralizeBestPracticeApplication(bestPracticeApplication)}
+                    {pluralizeBestPracticeTarget(target)}
+                    {pluralizeBestPracticeTarget(target)}
                   </span>
                 ))}
-              </div>
-            )}
+              </div>)}
           </div>
         </div>
-      )
-    }
-  </div>
-</a>
+      )}
+    </div>
+  </a>
+</div>

@@ -14,7 +14,7 @@ import { OrgId } from "../../types/organizations";
 import {
   calculateAppEnsAwardsScore,
   getOrgById,
-  pluralizeBestPracticeApplication,
+  pluralizeBestPracticeTarget,
 } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
@@ -92,7 +92,7 @@ const referrerLeaderboardDescription =
           return (
             <LeaderboardSnippetCard
               name={`${appType} leaderboard`}
-              description={`See how ${pluralizeBestPracticeApplication(appType).toLowerCase()} rank for following ENS best practices.`}
+              description={`See how ${pluralizeBestPracticeTarget(appType).toLowerCase()} rank for following ENS best practices.`}
               link={`/leaderboards/${appType.toLowerCase()}`}>
               <div
                 slot="bestResultsIcons"
