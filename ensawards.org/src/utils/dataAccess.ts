@@ -1,13 +1,14 @@
 import { APPS } from "@/data/apps.ts";
 import { BEST_PRACTICES, BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
 import { ORGANIZATIONS } from "@/data/organizations.ts";
-import { type App, AppTypes, BenchmarkResult } from "@/types/apps.ts";
+import { type App, AppTypes } from "@/types/apps.ts";
+import { BenchmarkResult } from "@/types/benchmarks";
 import type {
   BestPractice,
-  BestPracticeAppliesTo,
   BestPracticeCategory,
+  BestPracticeTarget,
 } from "@/types/bestPractices.ts";
-import { NonAppBestPracticeApplications } from "@/types/bestPractices.ts";
+import { ProtocolTypes } from "@/types/bestPractices.ts";
 import type { OrgId, Organization } from "@/types/organizations.ts";
 
 export const getOrgById = (orgId: OrgId): Organization => {
@@ -129,28 +130,22 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
 /**
  * Checks if the ENS best practice applies to all types that are specified in {@link AppTypes}.
  */
+export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
+  Object.values(AppTypes).every((appType) => targets.includes(appType));
 
-// TODO: These names are baaad, appreciate advice on improving it
-export const bestPracticeAppliesToAllApps = (
-  bestPracticeApplications: BestPracticeAppliesTo[],
-): boolean =>
-  Object.values(AppTypes).every((appType) => bestPracticeApplications.includes(appType));
-
-const pluralizedBestPracticeApplications = new Map<BestPracticeAppliesTo, string>([
+const pluralizedBestPracticeTargets = new Map<BestPracticeTarget, string>([
   [AppTypes.Explorer, "Explorers"],
   [AppTypes.Wallet, "Wallets"],
-  [NonAppBestPracticeApplications.Dao, "DAOs"],
+  [ProtocolTypes.Dao, "DAOs"],
 ]);
 
-export const pluralizeBestPracticeApplication = (
-  bestPracticeAppliesTo: BestPracticeAppliesTo,
-): string => {
-  const mappedPluralization = pluralizedBestPracticeApplications.get(bestPracticeAppliesTo);
+export const pluralizeBestPracticeTarget = (target: BestPracticeTarget): string => {
+  const pluralization = pluralizedBestPracticeTargets.get(target);
 
   // if no mapping is found attempt basic pluralization
-  if (mappedPluralization === undefined) {
-    return `${bestPracticeAppliesTo}s`;
+  if (pluralization === undefined) {
+    return `${target}s`;
   }
 
-  return mappedPluralization;
+  return pluralization;
 };

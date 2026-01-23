@@ -7,7 +7,7 @@ export interface BestPractice {
   description: string;
   categoryName: string;
   categorySlug: string; //TODO: Refactor this dependency
-  appliesTo: BestPracticeAppliesTo[];
+  appliesTo: BestPracticeTarget[];
   technicalDetails: {
     main: {
       header: string;
@@ -20,14 +20,13 @@ export interface BestPractice {
   };
 }
 
-export const NonAppBestPracticeApplications = {
+export const ProtocolTypes = {
   Dao: "DAO",
 } as const;
 
-export type NonAppBestPracticeAppliesTo =
-  (typeof NonAppBestPracticeApplications)[keyof typeof NonAppBestPracticeApplications];
+export type ProtocolType = (typeof ProtocolTypes)[keyof typeof ProtocolTypes];
 
-export type BestPracticeAppliesTo = AppType | NonAppBestPracticeAppliesTo;
+export type BestPracticeTarget = AppType | ProtocolType;
 
 export enum CategoryStatus {
   ComingSoon,

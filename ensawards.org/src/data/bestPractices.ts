@@ -3,7 +3,7 @@ import {
   type BestPractice,
   type BestPracticeCategory,
   CategoryStatus,
-  NonAppBestPracticeApplications,
+  ProtocolTypes,
 } from "@/types/bestPractices.ts";
 
 // TODO: In a future PR uncomment recogonizeAllENSNames best practice
@@ -50,7 +50,7 @@ export const nameYourSmartContracts: BestPractice = {
   description: "Upgrade security and UX when users interact with your smart contracts.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  appliesTo: [NonAppBestPracticeApplications.Dao],
+  appliesTo: [ProtocolTypes.Dao],
   technicalDetails: {
     main: {
       header: "Technical Details",
