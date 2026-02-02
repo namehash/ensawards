@@ -4,8 +4,9 @@ import {
   displayNamedSmartContractsMainnet,
   //  recognizeAllENSNames
 } from "@/data/bestPractices.ts";
-import { type App, AppTypes, BenchmarkResult, toUnixTimestamp } from "@/types/apps.ts";
-
+import { type App, AppTypes } from "@/types/apps.ts";
+import { BenchmarkResult } from "@/types/benchmarks";
+import { toUnixTimestamp } from "@/utils/time";
 export const APPS: App[] = [
   {
     id: "rainbow-wallet",

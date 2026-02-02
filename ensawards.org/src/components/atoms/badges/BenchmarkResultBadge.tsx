@@ -6,7 +6,8 @@ import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import { type AppBenchmark, BenchmarkResult } from "@/types/apps.ts";
+import { type AppBenchmark } from "@/types/apps.ts";
+import { BenchmarkResult } from "@/types/benchmarks";
 import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";

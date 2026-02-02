@@ -1,16 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import type { ImageMetadata } from "astro";
-
-import AlertCountdown from "../components/atoms/AlertCountdown.astro";
 import ContractNamingBanner from "../components/atoms/ContractNamingBanner.astro";
 import CategoryCard from "../components/atoms/cards/CategoryCard.astro";
 import LeaderboardCard from "../components/atoms/cards/LeaderboardCard.astro";
 import SuggestionCard from "../components/atoms/cards/SuggestionCard.astro";
 import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
-import HolidayReferralAwardsCTA from "../components/referral-awards-program/HolidayReferralAwardsCTA.astro";
 import { ReferrerLeaderboardSnippet } from "../components/referral-awards-program/referrers/ReferrerLeaderboardSnippet";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
@@ -19,8 +15,13 @@ import { sortDaoLeaderboard } from "../contract-pipelines/sorting";
 import { APPS } from "../data/apps";
 import { BEST_PRACTICE_CATEGORIES } from "../data/bestPractices";
 import Layout from "../layouts/Layout.astro";
+import { AppTypes } from "../types/apps";
 import { OrgId } from "../types/organizations";
-import { calculateAppEnsAwardsScore, getOrgById } from "../utils/dataAccess";
+import {
+  calculateAppEnsAwardsScore,
+  getOrgById,
+  pluralizeBestPracticeTarget,
+} from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
@@ -37,25 +38,59 @@ const daoScores = contractPipeline({
 ---
 
 <Layout>
-  <AlertCountdown
-    slot="alertBanner"
-    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
-    eventText="ENS Holiday Awards ends in"
-    ctaText="Learn more"
-    link="/ens-referral-awards"
-    styles={{
-      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
-      cta: "text-white decoration-white/40 hover:decoration-white",
-      text: "text-white",
-      timer: "text-white",
-      timerLegend: "text-white",
-    }}
-  />
   <Hero />
   <section
     id="previews-section"
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
     <ContractNamingBanner />
+    {
+      Object.values(AppTypes).map((appType) => {
+        const relevantApps = APPS.filter((app) => app.type === appType);
+        const rankedApps = relevantApps
+          .map((app) => ({ app, score: calculateAppEnsAwardsScore(app) }))
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 3);
+
+        return (
+          <ItemsList
+            header={`Top ${pluralizeBestPracticeTarget(appType)}`}
+            containerStyles="gap-3 sm:gap-2 sm:justify-start max-sm:justify-center">
+            {rankedApps.map(({ app, score }, idx) => (
+              <LeaderboardCard
+                key={`${appType.toLowerCase()}-review-card-${app.id}`}
+                name={app.name}
+                ensAwardsScore={score}
+                viewDetailsLink={`/app/${app.slug}`}
+                viewDetailsText={`${appType} report`}>
+                <Image
+                  src={images[app.iconPath]()}
+                  alt={`${app.id}`}
+                  slot="appIcon"
+                  class="w-10 h-10 rounded-md"
+                />
+                <Image
+                  alt={`${idx + 1}-place`}
+                  src={images[placeIcons[idx]]()}
+                  slot="placeIcon"
+                />
+              </LeaderboardCard>
+            ))}
+            <a
+              href={`/leaderboards/${appType.toLowerCase()}`}
+              class={cn(
+                shadcnButtonVariants({
+                  variant: "ghost",
+                  size: "default",
+                  className:
+                    "cursor-pointer rounded-full text-sm max-sm:w-full",
+                }),
+              )}>
+              View full {appType.toLowerCase()} leaderboard
+            </a>
+          </ItemsList>
+        );
+      })
+    }
     <ItemsList
       header="Top DAOs"
       containerStyles="gap-3 sm:gap-2 sm:justify-start max-sm:justify-center">
@@ -73,19 +108,11 @@ const daoScores = contractPipeline({
                 ensAwardsScore={value}
                 viewDetailsLink={`/dao/${org.slug}`}
                 viewDetailsText="DAO report">
-                {idx < 3 ? (
-                  <Image
-                    alt={`${idx + 1}-place`}
-                    src={images[placeIcons[idx]]()}
-                    slot="placeIcon"
-                  />
-                ) : (
-                  <p
-                    slot="placeIcon"
-                    class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                    {idx + 1}
-                  </p>
-                )}
+                <Image
+                  alt={`${idx + 1}-place`}
+                  src={images[placeIcons[idx]]()}
+                  slot="placeIcon"
+                />
                 <OrgIcon slot="appIcon" className="w-10 h-10 rounded-md" />
               </LeaderboardCard>
             );
@@ -101,57 +128,6 @@ const daoScores = contractPipeline({
           }),
         )}>
         View full DAO leaderboard
-      </a>
-    </ItemsList>
-    <ItemsList
-      header="Top Apps"
-      containerStyles="gap-3 sm:gap-2 sm:justify-start max-sm:justify-center">
-      {
-        APPS.sort(
-          (a, b) =>
-            calculateAppEnsAwardsScore(b) - calculateAppEnsAwardsScore(a),
-        )
-          .slice(0, 3)
-          .map((app, idx) => (
-            <LeaderboardCard
-              key={`app-review-card-${app.id}`}
-              name={app.name}
-              ensAwardsScore={calculateAppEnsAwardsScore(app)}
-              type={app.type}
-              viewDetailsLink={`/app/${app.slug}`}
-              viewDetailsText="App report">
-              <Image
-                src={images[app.iconPath]()}
-                alt={`${app.id}`}
-                slot="appIcon"
-                class="w-10 h-10 rounded-md"
-              />
-              {idx < 3 ? (
-                <Image
-                  alt={`${idx + 1}-place`}
-                  src={images[placeIcons[idx]]()}
-                  slot="placeIcon"
-                />
-              ) : (
-                <p
-                  slot="placeIcon"
-                  class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                  {idx + 1}
-                </p>
-              )}
-            </LeaderboardCard>
-          ))
-      }
-      <a
-        href="/leaderboards/app"
-        class={cn(
-          shadcnButtonVariants({
-            variant: "ghost",
-            size: "default",
-            className: "cursor-pointer rounded-full text-sm max-sm:w-full",
-          }),
-        )}>
-        View full app leaderboard
       </a>
     </ItemsList>
     <ReferrerLeaderboardSnippet client:load header="Top Referrers" />

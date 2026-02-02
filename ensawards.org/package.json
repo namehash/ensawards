@@ -40,7 +40,7 @@
     "@types/react-dom": "^19.1.7",
     "astro": "^5.16.10",
     "astro-font": "^1.0.0",
-    "astro-seo": "^0.8.4",
+    "astro-seo": "^1.1.0",
     "boring-avatars": "^2.0.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

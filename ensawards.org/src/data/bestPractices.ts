@@ -1,8 +1,12 @@
+import { AppTypes } from "@/types/apps.ts";
 import {
   type BestPractice,
-  BestPracticeApplications,
+  type BestPracticeApp,
   type BestPracticeCategory,
+  type BestPracticeProtocol,
+  BestPracticeTypes,
   CategoryStatus,
+  ProtocolTypes,
 } from "@/types/bestPractices.ts";
 
 // TODO: In a future PR uncomment recogonizeAllENSNames best practice
@@ -14,7 +18,7 @@ import {
 //   description: "Support user input of all valid ENS names (not only .eth names).",
 //   categoryName: "Forward Resolution",
 //   categorySlug: "forward-resolution",
-//   appliesTo: [BestPracticeApplications.App],
+//   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
 //   technicalDetails: {
 //     main: {
 //       header: "Technical Details",
@@ -42,14 +46,15 @@ import {
 //   },
 // };
 
-export const nameYourSmartContracts: BestPractice = {
+export const nameYourSmartContracts: BestPracticeProtocol = {
+  type: BestPracticeTypes.Protocol,
   id: "name-your-smart-contracts",
   slug: "name-your-smart-contracts",
   name: "Name your smart contracts",
   description: "Upgrade security and UX when users interact with your smart contracts.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  appliesTo: [BestPracticeApplications.Dao],
+  appliesTo: [ProtocolTypes.Dao],
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -72,7 +77,8 @@ export const nameYourSmartContracts: BestPractice = {
   },
 };
 
-export const displayNamedSmartContractsMainnet: BestPractice = {
+export const displayNamedSmartContractsMainnet: BestPracticeApp = {
+  type: BestPracticeTypes.App,
   id: "display-named-smart-contracts-mainnet",
   slug: "display-named-smart-contracts-mainnet",
   name: "Display named smart contracts on Ethereum mainnet",
@@ -80,7 +86,7 @@ export const displayNamedSmartContractsMainnet: BestPractice = {
     "Display ENS names instead of addresses when users interact with named smart contracts on Ethereum mainnet.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  appliesTo: [BestPracticeApplications.App],
+  appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
   technicalDetails: {
     main: {
       header: "Technical Details",
@@ -104,7 +110,8 @@ export const displayNamedSmartContractsMainnet: BestPractice = {
   },
 };
 
-export const displayNamedSmartContractsL2: BestPractice = {
+export const displayNamedSmartContractsL2: BestPracticeApp = {
+  type: BestPracticeTypes.App,
   id: "display-named-smart-contracts-l2-chains",
   slug: "display-named-smart-contracts-l2-chains",
   name: "Display named smart contracts on L2 chains",
@@ -112,7 +119,7 @@ export const displayNamedSmartContractsL2: BestPractice = {
     "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  appliesTo: [BestPracticeApplications.App],
+  appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
   technicalDetails: {
     main: {
       header: "Technical Details",

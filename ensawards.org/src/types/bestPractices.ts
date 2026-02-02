@@ -1,11 +1,32 @@
-export interface BestPractice {
+import type { AppType } from "@/types/apps.ts";
+
+export const BestPracticeTypes = {
+  Protocol: "Protocol",
+  App: "App",
+} as const;
+
+export type BestPracticeType = (typeof BestPracticeTypes)[keyof typeof BestPracticeTypes];
+
+export const ProtocolTypes = {
+  Dao: "DAO",
+} as const;
+
+export type ProtocolType = (typeof ProtocolTypes)[keyof typeof ProtocolTypes];
+
+export type BestPracticeTarget = AppType | ProtocolType;
+
+export interface BestPracticeAbstract<
+  BestPracticeT extends BestPracticeType,
+  AppliesToT extends BestPracticeTarget,
+> {
+  type: BestPracticeT;
   id: string;
   slug: string;
   name: string;
   description: string;
   categoryName: string;
   categorySlug: string; //TODO: Refactor this dependency
-  appliesTo: BestPracticeAppliesTo[];
+  appliesTo: AppliesToT[];
   technicalDetails: {
     main: {
       header: string;
@@ -18,13 +39,13 @@ export interface BestPractice {
   };
 }
 
-export const BestPracticeApplications = {
-  Dao: "DAOs",
-  App: "Apps",
-} as const;
+export interface BestPracticeProtocol
+  extends BestPracticeAbstract<typeof BestPracticeTypes.Protocol, ProtocolType> {}
 
-export type BestPracticeAppliesTo =
-  (typeof BestPracticeApplications)[keyof typeof BestPracticeApplications];
+export interface BestPracticeApp
+  extends BestPracticeAbstract<typeof BestPracticeTypes.App, AppType> {}
+
+export type BestPractice = BestPracticeProtocol | BestPracticeApp;
 
 export enum CategoryStatus {
   ComingSoon,

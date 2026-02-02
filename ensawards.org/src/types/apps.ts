@@ -1,32 +1,8 @@
-import { millisecondsInSecond } from "date-fns/constants";
-
 import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { BestPractice } from "@/types/bestPractices.ts";
 
-/**
- * TODO: Determine if we need PartialPass for benchmarks. If not we can simplify.
- */
-export enum BenchmarkResult {
-  Pass = "Pass",
-  PartialPass = "Partial pass",
-  Fail = "Fail",
-}
-
-/**
- * Helper function to convert human-readable date to Unix timestamp.
- * Use this in data files for better readability.
- *
- * @param date - A Date object or ISO 8601 date string
- * @returns Unix timestamp in seconds
- *
- * @example
- * toUnixTimestamp("2025-12-03T10:00:00Z")
- * toUnixTimestamp(new Date())
- */
-export function toUnixTimestamp(date: Date | string): UnixTimestamp {
-  return Math.floor(new Date(date).getTime() / millisecondsInSecond);
-}
+import type { BenchmarkResult } from "./benchmarks";
 
 /**
  * Represents a benchmark result for a specific best practice within an app.
@@ -42,10 +18,13 @@ export interface AppBenchmark {
   benchmarkedAt: UnixTimestamp;
 }
 
+/**
+ * Represents all types of apps that are currently benchmarked on ENSAwards.
+ */
 export const AppTypes = {
   Wallet: "Wallet",
   Explorer: "Explorer",
-};
+} as const;
 
 /**
  * The derived string union of possible {@link AppTypes}.
