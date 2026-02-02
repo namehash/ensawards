@@ -2,6 +2,7 @@
 import { BestPracticeTarget } from "../../../types/bestPractices";
 import {
   appliesToAllApps,
+  appliesToAllProtocols,
   getBestPracticeById,
   pluralizeBestPracticeTarget,
 } from "../../../utils/dataAccess";
@@ -67,6 +68,8 @@ const appliesToBadgeStyles =
             </p>
             {appliesToAllApps(bestPracticeToDisplay.appliesTo) ? (
               <span class={appliesToBadgeStyles}>Apps</span>
+            ) : appliesToAllProtocols(bestPracticeToDisplay.appliesTo) ? (
+              <span class={appliesToBadgeStyles}>Protocols</span>
             ) : (
               <div class="flex flex-row justify-start items-center gap-1">
                 {appliesTo.map((target) => (

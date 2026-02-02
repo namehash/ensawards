@@ -133,10 +133,17 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
 export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
   Object.values(AppTypes).every((appType) => targets.includes(appType));
 
+/**
+ * Checks if the ENS best practice applies to all types that are specified in {@link ProtocolTypes}.
+ */
+export const appliesToAllProtocols = (targets: BestPracticeTarget[]): boolean =>
+  Object.values(ProtocolTypes).every((appType) => targets.includes(appType));
+
 const pluralizedBestPracticeTargets: Record<BestPracticeTarget, string> = {
   [AppTypes.Explorer]: "Explorers",
   [AppTypes.Wallet]: "Wallets",
   [ProtocolTypes.Dao]: "DAOs",
+  [ProtocolTypes.Defi]: "Defi Protocols",
 };
 
 export const pluralizeBestPracticeTarget = (target: BestPracticeTarget): string => {
