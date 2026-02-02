@@ -1,4 +1,4 @@
-import { type SupportedGroupByCategory, groupByOrg } from "@/contract-pipelines/group-by.ts";
+import { type SupportedGroupByCategory, groupByProtocol } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
 import { CONTRACTS } from "@/data/contracts.ts";
 import type { Contract } from "@/types/contracts.ts";
@@ -21,7 +21,7 @@ export type LeaderboardSortFn = (
 export interface ContractPipelineOptions {
   /**
    * Function to group contracts by category.
-   * @default groupByOrg
+   * @default groupByProtocol
    */
   groupBy?: (contracts: Contract[]) => Record<SupportedGroupByCategory, Contract[]>;
 
@@ -61,7 +61,13 @@ export interface ContractPipelineOptions {
 export function contractPipeline(
   options: ContractPipelineOptions = {},
 ): Record<SupportedGroupByCategory, number> {
-  const { groupBy = groupByOrg, weights = binaryWeights, filter, sort, data = CONTRACTS } = options;
+  const {
+    groupBy = groupByProtocol,
+    weights = binaryWeights,
+    filter,
+    sort,
+    data = CONTRACTS,
+  } = options;
 
   let contracts = data;
 

@@ -8,16 +8,16 @@ If you’re here, you likely want to propose changes to our data — perhaps add
 
 Below, you’ll find detailed instructions for each contribution type. If your change doesn’t fit one of these categories, feel free to open a pull request (PR) and describe your proposal there.
 
-### Adding a new `DAO` 
-1. Define it as an independent constant in the [@/data/organizations.ts](ensawards.org/src/data/organizations.ts) file.
-2. Add it to the `ORGANIZATIONS` list in the same file.
-3. Make sure to follow its data model that you can look up in the [@/types/organizations.ts](ensawards.org/src/types/organizations.ts) file. Below you can see its most important interface and type:
+### Adding a new `Protocol` 
+1. Define it as an independent constant in the [@/data/protocols.ts](ensawards.org/src/data/protocols.ts) file.
+2. Add it to the `DAO_PROTOCOLS` or `DEFI_PROTOCOLS` list in the same file appropriately to its type.
+3. Make sure to follow its data model that you can look up in the [@/types/protocols.ts](ensawards.org/src/types/protocols.ts) file. Remember that the Protocol can represent either a `DAO` or a `Defi protocol`. Below you can see its most important interface and type:
 ```typescript
-export interface DAO {
-    id: OrgId;
+export interface ProtocolAbstract<ProtocolT extends ProtocolType> {
+    id: ProtocolId;
     slug: string;
-    orgType: typeof OrganizationTypes.Dao;
-    project: Project; // each organization belongs to a single project.
+    protocolType: ProtocolT;
+    project: Project; // each protocol belongs to a single project.
     name: string;
     description: string;
     icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
@@ -30,16 +30,21 @@ export interface DAO {
     twitterOgImagePath?: string;
 }
 
-export type Organization = DAO;
+export interface DAO extends ProtocolAbstract<typeof ProtocolTypes.Dao> {}
+
+export interface Defi extends ProtocolAbstract<typeof ProtocolTypes.Defi> {}
+
+export type Protocol = DAO | Defi;
+
 ```
 
 > **NOTE**
 >
-> We recommend to skip defining the OG image-related fields. They are optional, and we have a fallback mechanism in place, so the SEO of DAO's details page won't be degraded.
+> We recommend to skip defining the OG image-related fields. They are optional, and we have a fallback mechanism in place, so the SEO of Protocol's details page won't be degraded.
 >
-> When your PR with a new `DAO` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
+> When your PR with a new `Protocol` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
-4. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-daos/](ensawards.org/src/components/atoms/icons/projects-and-daos/) directory. For reference, see [@/components/atoms/icons/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-daos/EnsDaoIcon.tsx).
+4. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsDaoIcon.tsx).
 5. In your PR describe your reasoning for adding this `DAO`.
 6. If you’re part of an existing DAO, you can also suggest updates to its details.
 
@@ -59,7 +64,7 @@ export interface Project {
     };
 }
 ```
-* Same as in the `DAO`, you also have to include the project's icon. Please put it in the [@/components/atoms/icons/projects-and-daos/](ensawards.org/src/components/atoms/icons/projects-and-daos/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-daos/EnsProjectIcon.tsx).
+* Same as in the `PROTOCOL`, you also have to include the project's icon. Please put it in the [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsProjectIcon.tsx).
 * If you are a part of an already added project feel free to suggest changes to any of its details.
 
 ### Add a new `Contract`
@@ -67,7 +72,7 @@ export interface Project {
 2. Make sure to follow the data model defined in the [@/types/contracts.ts](ensawards.org/src/types/contracts.ts) file.
 ```typescript
 export interface Contract {
-    org: Organization;
+    protocol: Protocol;
     type: ContractType;
     subtype: ContractSubtype;
     cachedIdentity: ContractIdentityResolved;

@@ -1,6 +1,6 @@
 import { APPS } from "@/data/apps.ts";
 import { BEST_PRACTICES, BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
-import { ORGANIZATIONS } from "@/data/organizations.ts";
+import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
 import { type App, AppTypes } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks";
 import type {
@@ -9,15 +9,33 @@ import type {
   BestPracticeTarget,
 } from "@/types/bestPractices.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
-import type { OrgId, Organization } from "@/types/organizations.ts";
+import type { DAO, Defi, Protocol, ProtocolId } from "@/types/protocols.ts";
 
-export const getOrgById = (orgId: OrgId): Organization => {
-  //Because of invariant that ORGANIZATIONS array satisfies we are guaranteed to find corresponding org
-  return ORGANIZATIONS.find((org) => org.id === orgId)!;
+export const getProtocolById = (protocolId: ProtocolId): Protocol => {
+  //Because of invariant that PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
+  return PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
 };
 
-export const getOrgBySlug = (orgSlug: string): Organization | undefined => {
-  return ORGANIZATIONS.find((org) => org.slug === orgSlug);
+export const getProtocolBySlug = (protocolSlug: string): Protocol | undefined => {
+  return PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
+};
+
+export const getDaoProtocolById = (protocolId: ProtocolId): DAO => {
+  //Because of invariant that DAO_PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
+  return DAO_PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
+};
+
+export const getDaoProtocolBySlug = (protocolSlug: string): DAO | undefined => {
+  return DAO_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
+};
+
+export const getDefiProtocolById = (protocolId: ProtocolId): Defi => {
+  //Because of invariant that DEFI_PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
+  return DEFI_PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
+};
+
+export const getDefiProtocolBySlug = (protocolSlug: string): Defi | undefined => {
+  return DEFI_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
 };
 
 export const getAppBySlug = (appSlug: string): App | undefined => {

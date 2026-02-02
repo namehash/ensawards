@@ -187,7 +187,7 @@ describe("CachedIdentity", () => {
         const chainName = getChainName(contract.cachedIdentity.contract.chain.id);
         return {
           ...contract,
-          testCaseName: `${contract.org.name}-${address}-${chainName}`,
+          testCaseName: `${contract.protocol.name}-${address}-${chainName}`,
         };
       }),
     )(

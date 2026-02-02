@@ -1,11 +1,11 @@
 import {
-  AaveDaoOrg,
-  ArbitrumDaoOrg,
-  ENSDaoOrg,
-  NounsDaoOrg,
-  TaikoDaoOrg,
-  UniswapDaoOrg,
-} from "@/data/organizations.ts";
+  AaveDaoProtocol,
+  ArbitrumDaoProtocol,
+  ENSDaoProtocol,
+  NounsDaoProtocol,
+  TaikoDaoProtocol,
+  UniswapDaoProtocol,
+} from "@/data/protocols.ts";
 import {
   type Contract,
   ContractResolutionStatusIds,
@@ -16,7 +16,7 @@ import { arbitrum, mainnet } from "viem/chains";
 
 export const CONTRACTS: Contract[] = [
   {
-    org: ENSDaoOrg,
+    protocol: ENSDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -30,7 +30,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ENSDaoOrg,
+    protocol: ENSDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -44,7 +44,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ENSDaoOrg,
+    protocol: ENSDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -58,7 +58,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ENSDaoOrg,
+    protocol: ENSDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -72,7 +72,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ENSDaoOrg,
+    protocol: ENSDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -86,7 +86,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ENSDaoOrg,
+    protocol: ENSDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -100,7 +100,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ENSDaoOrg,
+    protocol: ENSDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -114,7 +114,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -128,7 +128,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -142,7 +142,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -156,7 +156,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -169,7 +169,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -182,7 +182,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -195,7 +195,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -208,7 +208,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -221,7 +221,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -234,7 +234,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -247,7 +247,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -260,7 +260,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -273,7 +273,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -286,7 +286,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -299,7 +299,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -312,7 +312,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -325,7 +325,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: UniswapDaoOrg,
+    protocol: UniswapDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -338,7 +338,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: NounsDaoOrg,
+    protocol: NounsDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -352,7 +352,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: NounsDaoOrg,
+    protocol: NounsDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -366,7 +366,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: NounsDaoOrg,
+    protocol: NounsDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -380,7 +380,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: NounsDaoOrg,
+    protocol: NounsDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -394,7 +394,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: NounsDaoOrg,
+    protocol: NounsDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -408,7 +408,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: NounsDaoOrg,
+    protocol: NounsDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -422,7 +422,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: NounsDaoOrg,
+    protocol: NounsDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -436,7 +436,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: NounsDaoOrg,
+    protocol: NounsDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -450,7 +450,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -463,7 +463,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -476,7 +476,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -489,7 +489,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -502,7 +502,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -515,7 +515,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -528,7 +528,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -541,7 +541,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -554,7 +554,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -567,7 +567,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -580,7 +580,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -593,7 +593,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -606,7 +606,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -619,7 +619,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -632,7 +632,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -645,7 +645,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -658,7 +658,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -671,7 +671,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -684,7 +684,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -697,7 +697,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -710,7 +710,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -723,7 +723,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: ArbitrumDaoOrg,
+    protocol: ArbitrumDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -736,7 +736,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -749,7 +749,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -762,7 +762,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -775,7 +775,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -788,7 +788,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -801,7 +801,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -814,7 +814,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -827,7 +827,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -840,7 +840,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: AaveDaoOrg,
+    protocol: AaveDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -853,7 +853,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -867,7 +867,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -880,7 +880,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -897,7 +897,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -911,7 +911,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -925,7 +925,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -938,7 +938,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -952,7 +952,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -966,7 +966,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -980,7 +980,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -993,7 +993,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1006,7 +1006,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1019,7 +1019,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1033,7 +1033,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1046,7 +1046,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1059,7 +1059,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1072,7 +1072,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1085,7 +1085,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1098,7 +1098,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1111,7 +1111,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1124,7 +1124,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -1137,7 +1137,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -1150,7 +1150,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -1164,7 +1164,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1177,7 +1177,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1190,7 +1190,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1203,7 +1203,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1216,7 +1216,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1229,7 +1229,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1242,7 +1242,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1255,7 +1255,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    org: TaikoDaoOrg,
+    protocol: TaikoDaoProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {

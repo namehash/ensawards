@@ -1,4 +1,4 @@
-import { type SupportedGroupByCategory, groupByOrg } from "@/contract-pipelines/group-by.ts";
+import { type SupportedGroupByCategory, groupByProtocol } from "@/contract-pipelines/group-by.ts";
 import { type LeaderboardSortFn, contractPipeline } from "@/contract-pipelines/index.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
 import { CONTRACTS_TEST_DATA } from "@/data/contracts-test.ts";
@@ -9,12 +9,12 @@ describe("contract pipelines", () => {
   describe("default pipeline", () => {
     it("should return correct scores for both projects", () => {
       const expectedResult = {
-        "org-ens-dao": 80,
-        "org-uniswap-dao": 30,
+        "protocol-ens-dao": 80,
+        "protocol-uniswap-dao": 30,
       } as Record<SupportedGroupByCategory, number>;
 
       const result = contractPipeline({
-        groupBy: groupByOrg,
+        groupBy: groupByProtocol,
         weights: binaryWeights,
         data: CONTRACTS_TEST_DATA,
       });
@@ -26,15 +26,15 @@ describe("contract pipelines", () => {
 
     it("should sort by score descending by default", () => {
       const result = contractPipeline({
-        groupBy: groupByOrg,
+        groupBy: groupByProtocol,
         weights: binaryWeights,
         data: CONTRACTS_TEST_DATA,
       });
       const keys = Object.keys(result);
 
       // ENS DAO (80%) should be first, Uniswap DAO (30%) should be second
-      expect(keys[0]).toBe("org-ens-dao");
-      expect(keys[1]).toBe("org-uniswap-dao");
+      expect(keys[0]).toBe("protocol-ens-dao");
+      expect(keys[1]).toBe("protocol-uniswap-dao");
     });
   });
 
@@ -54,16 +54,16 @@ describe("contract pipelines", () => {
       };
 
       const result = contractPipeline({
-        groupBy: groupByOrg,
+        groupBy: groupByProtocol,
         weights: binaryWeights,
         data: CONTRACTS_TEST_DATA,
         sort: customSort,
       });
       const keys = Object.keys(result);
 
-      // With reverse alphabetical sort, "org-uniswap-dao" should come before "org-ens-dao"
-      expect(keys[0]).toBe("org-uniswap-dao");
-      expect(keys[1]).toBe("org-ens-dao");
+      // With reverse alphabetical sort, "protocol-uniswap-dao" should come before "protocol-ens-dao"
+      expect(keys[0]).toBe("protocol-uniswap-dao");
+      expect(keys[1]).toBe("protocol-ens-dao");
     });
 
     it("should pass scores and grouped contracts to custom sort function", () => {
@@ -80,7 +80,7 @@ describe("contract pipelines", () => {
       };
 
       contractPipeline({
-        groupBy: groupByOrg,
+        groupBy: groupByProtocol,
         weights: binaryWeights,
         data: CONTRACTS_TEST_DATA,
         sort: customSort,
@@ -89,10 +89,10 @@ describe("contract pipelines", () => {
       // Verify the sort function received the expected data
       expect(receivedScores).not.toBeNull();
       expect(receivedGroupedContracts).not.toBeNull();
-      expect(receivedScores?.["org-ens-dao"]).toBe(80);
-      expect(receivedScores?.["org-uniswap-dao"]).toBe(30);
-      expect(receivedGroupedContracts?.["org-ens-dao"]).toHaveLength(10);
-      expect(receivedGroupedContracts?.["org-uniswap-dao"]).toHaveLength(10);
+      expect(receivedScores?.["protocol-ens-dao"]).toBe(80);
+      expect(receivedScores?.["protocol-uniswap-dao"]).toBe(30);
+      expect(receivedGroupedContracts?.["protocol-ens-dao"]).toHaveLength(10);
+      expect(receivedGroupedContracts?.["protocol-uniswap-dao"]).toHaveLength(10);
     });
   });
 });

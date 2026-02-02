@@ -1,4 +1,4 @@
-import type { Organization } from "@/types/organizations.ts";
+import type { Protocol } from "@/types/protocols.ts";
 import type { Name } from "@ensnode/ensnode-sdk";
 import type { Address, Chain } from "viem";
 
@@ -239,7 +239,7 @@ export type ContractIdentity = ContractIdentityResolved | ContractIdentityUnreso
  * Describes a contract for use on the ENS Awards leaderboards.
  */
 export interface Contract {
-  org: Organization;
+  protocol: Protocol;
   type: ContractType;
   subtype: ContractSubtype;
 

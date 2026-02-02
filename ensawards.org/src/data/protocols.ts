@@ -1,9 +1,9 @@
-import { AaveDaoIcon } from "@/components/atoms/icons/projects-and-daos/AaveDaoIcon.tsx";
-import { ArbitrumIcon } from "@/components/atoms/icons/projects-and-daos/ArbitrumIcon.tsx";
-import { EnsDaoIcon } from "@/components/atoms/icons/projects-and-daos/EnsDaoIcon.tsx";
-import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
-import { TaikoIcon } from "@/components/atoms/icons/projects-and-daos/TaikoIcon.tsx";
-import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
+import { AaveDaoIcon } from "@/components/atoms/icons/projects-and-protocols/AaveDaoIcon.tsx";
+import { ArbitrumIcon } from "@/components/atoms/icons/projects-and-protocols/ArbitrumIcon.tsx";
+import { EnsDaoIcon } from "@/components/atoms/icons/projects-and-protocols/EnsDaoIcon.tsx";
+import { NounsIcon } from "@/components/atoms/icons/projects-and-protocols/NounsIcon.tsx";
+import { TaikoIcon } from "@/components/atoms/icons/projects-and-protocols/TaikoIcon.tsx";
+import { UniswapIcon } from "@/components/atoms/icons/projects-and-protocols/UniswapIcon.tsx";
 import {
   AaveProject,
   ArbitrumProject,
@@ -12,12 +12,13 @@ import {
   TaikoProject,
   UniswapProject,
 } from "@/data/projects.ts";
-import { OrgIds, type Organization, OrganizationTypes } from "@/types/organizations.ts";
+import { ProtocolTypes } from "@/types/bestPractices.ts";
+import { type DAO, type Defi, type Protocol, ProtocolIds } from "@/types/protocols.ts";
 
-export const ENSDaoOrg: Organization = {
-  id: OrgIds.Ens,
+export const ENSDaoProtocol: Protocol = {
+  id: ProtocolIds.Ens,
   slug: "ens",
-  orgType: OrganizationTypes.Dao,
+  protocolType: ProtocolTypes.Dao,
   project: ENSProject,
   name: "ENS DAO",
   description:
@@ -32,10 +33,10 @@ export const ENSDaoOrg: Organization = {
   twitterOgImagePath: "https://ensawards.org/org-ens-dao_twitter_og_image.png",
 };
 
-export const UniswapDaoOrg: Organization = {
-  id: OrgIds.Uniswap,
+export const UniswapDaoProtocol: Protocol = {
+  id: ProtocolIds.Uniswap,
   slug: "uniswap",
-  orgType: OrganizationTypes.Dao,
+  protocolType: ProtocolTypes.Dao,
   project: UniswapProject,
   name: "Uniswap DAO",
   description:
@@ -50,10 +51,10 @@ export const UniswapDaoOrg: Organization = {
   twitterOgImagePath: "https://ensawards.org/org-uniswap-dao_twitter_og_image.png",
 };
 
-export const NounsDaoOrg: Organization = {
-  id: OrgIds.Nouns,
+export const NounsDaoProtocol: Protocol = {
+  id: ProtocolIds.Nouns,
   slug: "nouns",
-  orgType: OrganizationTypes.Dao,
+  protocolType: ProtocolTypes.Dao,
   project: NounsProject,
   name: "Nouns DAO",
   description:
@@ -68,10 +69,10 @@ export const NounsDaoOrg: Organization = {
   twitterOgImagePath: "https://ensawards.org/org-nouns-dao_twitter_og_image.png",
 };
 
-export const ArbitrumDaoOrg: Organization = {
-  id: OrgIds.Arbitrum,
+export const ArbitrumDaoProtocol: Protocol = {
+  id: ProtocolIds.Arbitrum,
   slug: "arbitrum",
-  orgType: OrganizationTypes.Dao,
+  protocolType: ProtocolTypes.Dao,
   project: ArbitrumProject,
   name: "Arbitrum DAO",
   description:
@@ -85,10 +86,10 @@ export const ArbitrumDaoOrg: Organization = {
   twitterOgImagePath: "https://ensawards.org/org-arbitrum-dao_twitter_og_image.png",
 };
 
-export const AaveDaoOrg: Organization = {
-  id: OrgIds.Aave,
+export const AaveDaoProtocol: Protocol = {
+  id: ProtocolIds.Aave,
   slug: "aave",
-  orgType: OrganizationTypes.Dao,
+  protocolType: ProtocolTypes.Dao,
   project: AaveProject,
   name: "Aave DAO",
   description:
@@ -103,10 +104,10 @@ export const AaveDaoOrg: Organization = {
   twitterOgImagePath: "https://ensawards.org/org-aave-dao_twitter_og_image.png",
 };
 
-export const TaikoDaoOrg: Organization = {
-  id: OrgIds.Taiko,
+export const TaikoDaoProtocol: Protocol = {
+  id: ProtocolIds.Taiko,
   slug: "taiko",
-  orgType: OrganizationTypes.Dao,
+  protocolType: ProtocolTypes.Dao,
   project: TaikoProject,
   name: "Taiko DAO",
   description:
@@ -122,15 +123,30 @@ export const TaikoDaoOrg: Organization = {
 };
 
 /**
- * Array of supported organizations.
+ * Array of supported DAO protocols.
  *
- * Invariant: This array should contain exactly one {@link Organization} for each {@link OrgId}.
+ * Invariant: This array should contain exactly one {@link Dao} for each DAO-related {@link ProtocolId}.
  */
-export const ORGANIZATIONS: Organization[] = [
-  ENSDaoOrg,
-  UniswapDaoOrg,
-  NounsDaoOrg,
-  ArbitrumDaoOrg,
-  AaveDaoOrg,
-  TaikoDaoOrg,
+
+export const DAO_PROTOCOLS: DAO[] = [
+  ENSDaoProtocol,
+  UniswapDaoProtocol,
+  NounsDaoProtocol,
+  ArbitrumDaoProtocol,
+  AaveDaoProtocol,
+  TaikoDaoProtocol,
 ];
+
+/**
+ * Array of supported Defi protocols.
+ *
+ * Invariant: This array should contain exactly one {@link Defi} for each Defi protocol-related {@link ProtocolId}.
+ */
+export const DEFI_PROTOCOLS: Defi[] = [];
+
+/**
+ * Array of supported protocols. Combines {@link DAO_PROTOCOLS} and {@link DEFI_PROTOCOLS}.
+ *
+ * Invariant: This array should contain exactly one {@link Protocol} for each {@link ProtocolId}.
+ */
+export const PROTOCOLS: Protocol[] = [...DAO_PROTOCOLS, ...DEFI_PROTOCOLS];
