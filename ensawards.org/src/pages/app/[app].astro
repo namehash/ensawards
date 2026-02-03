@@ -56,35 +56,42 @@ if (appToDisplay !== undefined) {
           slot="icon"
           class="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
-          <div
-                  slot="ctaContent"
-                  class="flex flex-row flex-nowrap justify-start items-center gap-2">
-              <a
-                      href={appToDisplay.socials.website}
-                      rel="noreferrer"
-                      target="_blank">
-                  <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
-              </a>
-              <a
-                      href={appToDisplay.socials.twitter}
-                      rel="noreferrer"
-                      target="_blank">
-                  <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
-              </a>
-              {appToDisplay.socials.ens &&
-                      <a
-                              href=`https://app.ens.domains/${encodeURIComponent(appToDisplay.socials.ens)}`
-                              rel="noreferrer"
-                              target="_blank"
-                      >
-                          <EnsIcon width={18} height={18} className="hover:text-white text-gray-400 transition-all duration-200"/>
-                      </a>
-              }
-          </div>
-          <EnsAwardsScore slot="largerHeroItem" score={appScore} label="ENSAwards score" />
+        <div
+          slot="ctaContent"
+          class="flex flex-row flex-nowrap justify-start items-center gap-2">
+          <a
+            href={appToDisplay.socials.website}
+            rel="noreferrer"
+            target="_blank">
+            <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
+          </a>
+          <a
+            href={appToDisplay.socials.twitter}
+            rel="noreferrer"
+            target="_blank">
+            <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
+          </a>
+          {appToDisplay.socials.ens && (
+            <a
+              href={`https://app.ens.domains/${encodeURIComponent(appToDisplay.socials.ens)}`}
+              rel="noreferrer"
+              target="_blank">
+              <EnsIcon
+                width={18}
+                height={18}
+                className="hover:text-white text-gray-400 transition-all duration-200"
+              />
+            </a>
+          )}
+        </div>
+        <EnsAwardsScore
+          slot="largerHeroItem"
+          score={appScore}
+          label="ENSAwards score"
+        />
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
-          <ContractNamingBanner />
+        <ContractNamingBanner />
         <ItemsList header="Benchmark results">
           {appToDisplay.benchmarks.map((benchmark, idx) => (
             <BenchmarkResultCard
@@ -103,7 +110,7 @@ if (appToDisplay !== undefined) {
                     "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
                 },
               ]}>
-                <BenchmarkResultBadge
+              <BenchmarkResultBadge
                 slot="badge"
                 className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
                 benchmark={benchmark}

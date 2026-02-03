@@ -72,7 +72,8 @@
     }
   },
   "overrides": [
-    // Allow test files to do things
+    // Allow non-null assertions in test files
+    // as the possible nulls are usually handled by `expect` checks
     {
       "includes": ["**/*.test.ts"],
       "linter": {
