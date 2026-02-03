@@ -22,39 +22,32 @@ describe("protocols data", () => {
     const data = DAO_PROTOCOLS;
     const expectedLengthOfFoundDaoProtocols = 1;
 
-    Object.values(ProtocolIds).forEach((protocolId) => {
-      const foundProtocol = data.filter(
-        (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Dao,
-      );
+    Object.values(ProtocolIds)
+      .filter((protocolId) => protocolId.includes("-dao"))
+      .forEach((protocolId) => {
+        const foundProtocol = data.filter(
+          (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Dao,
+        );
 
-      expect(foundProtocol.length).toEqual(expectedLengthOfFoundDaoProtocols);
-      expect(foundProtocol[0].id).toEqual(protocolId);
-    });
+        expect(foundProtocol.length).toEqual(expectedLengthOfFoundDaoProtocols);
+        expect(foundProtocol[0].id).toEqual(protocolId);
+      });
   });
 
-  //TODO: Uncomment once Liquity is added
+  it("Should have exactly one Defi protocol per Defi-related ProtocolId", () => {
+    const data = DEFI_PROTOCOLS;
+    const expectedLengthOfFoundDefiProtocols = 1;
 
-  // it("Should have exactly one Defi protocol per Defi-related ProtocolId", () => {
-  //   const data = DEFI_PROTOCOLS;
-  //   const expectedLengthOfFoundDefiProtocols = 1;
-  //
-  //   Object.values(ProtocolIds).forEach((protocolId) => {
-  //     const foundProtocol = data.filter((protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Defi);
-  //
-  //     expect(foundProtocol.length).toEqual(expectedLengthOfFoundDefiProtocols);
-  //     expect(foundProtocol[0].id).toEqual(protocolId);
-  //   });
-  // });
+    Object.values(ProtocolIds)
+      .filter((protocolId) => protocolId.includes("-defi"))
+      .forEach((protocolId) => {
+        const foundProtocol = data.filter(
+          (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Defi,
+        );
 
-  it("Should have exactly one protocol per ProtocolId", () => {
-    const expectedLengthOfFoundProtocols = 1;
-
-    Object.values(ProtocolIds).forEach((protocolId) => {
-      const foundProtocol = data.filter((protocol) => protocol.id === protocolId);
-
-      expect(foundProtocol.length).toEqual(expectedLengthOfFoundProtocols);
-      expect(foundProtocol[0].id).toEqual(protocolId);
-    });
+        expect(foundProtocol.length).toEqual(expectedLengthOfFoundDefiProtocols);
+        expect(foundProtocol[0].id).toEqual(protocolId);
+      });
   });
 
   it("Should have valid and unique slugs", () => {

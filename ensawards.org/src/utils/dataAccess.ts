@@ -155,7 +155,7 @@ export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
  * Checks if the ENS best practice applies to all types that are specified in {@link ProtocolTypes}.
  */
 export const appliesToAllProtocols = (targets: BestPracticeTarget[]): boolean =>
-  Object.values(ProtocolTypes).every((appType) => targets.includes(appType));
+  Object.values(ProtocolTypes).every((protocolType) => targets.includes(protocolType));
 
 const pluralizedBestPracticeTargets: Record<BestPracticeTarget, string> = {
   [AppTypes.Explorer]: "Explorers",

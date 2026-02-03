@@ -47,6 +47,9 @@ const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
           const scrollAnchor = document.getElementById(
               `${this.dataset.id}-technical-info-anchor`,
           );
+
+          if (!scrollAnchor) return;
+
           scrollAnchor.addEventListener("click", (event) => {
               event.preventDefault();
               scrollWithOffset(`${this.dataset.id}-technical-info`, 60);

@@ -15,7 +15,7 @@ import {
 import { ProtocolTypes } from "@/types/bestPractices.ts";
 import { type DAO, type Defi, type Protocol, ProtocolIds } from "@/types/protocols.ts";
 
-export const ENSDaoProtocol: Protocol = {
+export const ENSDaoProtocol: DAO = {
   id: ProtocolIds.Ens,
   slug: "ens",
   protocolType: ProtocolTypes.Dao,
@@ -33,7 +33,7 @@ export const ENSDaoProtocol: Protocol = {
   twitterOgImagePath: "https://ensawards.org/org-ens-dao_twitter_og_image.png",
 };
 
-export const UniswapDaoProtocol: Protocol = {
+export const UniswapDaoProtocol: DAO = {
   id: ProtocolIds.Uniswap,
   slug: "uniswap",
   protocolType: ProtocolTypes.Dao,
@@ -51,7 +51,7 @@ export const UniswapDaoProtocol: Protocol = {
   twitterOgImagePath: "https://ensawards.org/org-uniswap-dao_twitter_og_image.png",
 };
 
-export const NounsDaoProtocol: Protocol = {
+export const NounsDaoProtocol: DAO = {
   id: ProtocolIds.Nouns,
   slug: "nouns",
   protocolType: ProtocolTypes.Dao,
@@ -69,7 +69,7 @@ export const NounsDaoProtocol: Protocol = {
   twitterOgImagePath: "https://ensawards.org/org-nouns-dao_twitter_og_image.png",
 };
 
-export const ArbitrumDaoProtocol: Protocol = {
+export const ArbitrumDaoProtocol: DAO = {
   id: ProtocolIds.Arbitrum,
   slug: "arbitrum",
   protocolType: ProtocolTypes.Dao,
@@ -86,7 +86,7 @@ export const ArbitrumDaoProtocol: Protocol = {
   twitterOgImagePath: "https://ensawards.org/org-arbitrum-dao_twitter_og_image.png",
 };
 
-export const AaveDaoProtocol: Protocol = {
+export const AaveDaoProtocol: DAO = {
   id: ProtocolIds.Aave,
   slug: "aave",
   protocolType: ProtocolTypes.Dao,
@@ -104,7 +104,7 @@ export const AaveDaoProtocol: Protocol = {
   twitterOgImagePath: "https://ensawards.org/org-aave-dao_twitter_og_image.png",
 };
 
-export const TaikoDaoProtocol: Protocol = {
+export const TaikoDaoProtocol: DAO = {
   id: ProtocolIds.Taiko,
   slug: "taiko",
   protocolType: ProtocolTypes.Dao,
@@ -125,7 +125,7 @@ export const TaikoDaoProtocol: Protocol = {
 /**
  * Array of supported DAO protocols.
  *
- * Invariant: This array should contain exactly one {@link Dao} for each DAO-related {@link ProtocolId}.
+ * Invariant: This array should contain exactly one {@link DAO} for each DAO-related {@link ProtocolId}.
  */
 
 export const DAO_PROTOCOLS: DAO[] = [
