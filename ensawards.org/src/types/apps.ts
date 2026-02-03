@@ -1,5 +1,7 @@
-import type { BestPractice } from "@/types/bestPractices.ts";
 import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
+
+import type { BestPractice } from "@/types/bestPractices.ts";
+
 import type { BenchmarkResult } from "./benchmarks";
 
 /**

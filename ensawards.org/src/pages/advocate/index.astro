@@ -1,7 +1,9 @@
 ---
-import { Name } from "@ensnode/ensnode-sdk";
 import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import { Address } from "viem";
+
+import { Name } from "@ensnode/ensnode-sdk";
+
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import { AdvocateSearchForm } from "../../components/ens-advocates/AdvocateSearchForm";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
@@ -14,39 +16,70 @@ interface AdvocateIdentity {
   ethAddress: Address;
 }
 const EXAMPLE_ADVOCATES: AdvocateIdentity[] = [
-  { name: "vitalik.eth", ethAddress: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" },
-  { name: "james.eth", ethAddress: "0x6Dc43be93a8b5Fd37dC16f24872BaBc6dA5E5e3E" },
-  { name: "brantly.eth", ethAddress: "0x983110309620D911731Ac0932219af06091b6744" },
-  { name: "lightwalker.eth", ethAddress: "0x1a199654959140E5c1A2F4135fAA7Ba2748939C5" },
-  { name: "grailsmarket.eth", ethAddress: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d" },
+  {
+    name: "vitalik.eth",
+    ethAddress: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+  },
+  {
+    name: "james.eth",
+    ethAddress: "0x6Dc43be93a8b5Fd37dC16f24872BaBc6dA5E5e3E",
+  },
+  {
+    name: "brantly.eth",
+    ethAddress: "0x983110309620D911731Ac0932219af06091b6744",
+  },
+  {
+    name: "lightwalker.eth",
+    ethAddress: "0x1a199654959140E5c1A2F4135fAA7Ba2748939C5",
+  },
+  {
+    name: "grailsmarket.eth",
+    ethAddress: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
+  },
 ];
 ---
+
 <Layout>
-    <SubpageHero header="Explore ENS Advocates" />
-    <AlertCountdown
-            slot="alertBanner"
-            eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
-            eventText="ENS Holiday Awards ends in"
-            ctaText="Learn more"
-            link="/ens-referral-awards"
-            styles={{
-                banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
-                cta: "text-white decoration-white/40 hover:decoration-white",
-                text: "text-white",
-                timer: "text-white",
-                timerLegend: "text-white",
-            }}
-    />
-    <section
-            class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
-        <div class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start gap-5 sm:gap-8">
-            <AdvocateSearchForm client:load />
-            <div class="flex flex-col gap-2 justify-center items-start">
-                <p class="text-sm leading-normal font-semibold">Examples:</p>
-                <div class="flex flex-row flex-wrap justify-start items-center gap-2">
-                    {EXAMPLE_ADVOCATES.map((exampleAdvocate) => <a href=`/advocate/${exampleAdvocate.ethAddress}` class={cn(shadcnButtonVariants({variant: "outline", size: "default", className: "rounded-full cursor-pointer"}))}>{exampleAdvocate.name}</a>)}
-                </div>
-            </div>
+  <SubpageHero header="Explore ENS Advocates" />
+  <AlertCountdown
+    slot="alertBanner"
+    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
+    eventText="ENS Holiday Awards ends in"
+    ctaText="Learn more"
+    link="/ens-referral-awards"
+    styles={{
+      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
+      cta: "text-white decoration-white/40 hover:decoration-white",
+      text: "text-white",
+      timer: "text-white",
+      timerLegend: "text-white",
+    }}
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
+    <div
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start gap-5 sm:gap-8">
+      <AdvocateSearchForm client:load />
+      <div class="flex flex-col gap-2 justify-center items-start">
+        <p class="text-sm leading-normal font-semibold">Examples:</p>
+        <div class="flex flex-row flex-wrap justify-start items-center gap-2">
+          {
+            EXAMPLE_ADVOCATES.map((exampleAdvocate) => (
+              <a
+                href={`/advocate/${exampleAdvocate.ethAddress}`}
+                class={cn(
+                  shadcnButtonVariants({
+                    variant: "outline",
+                    size: "default",
+                    className: "rounded-full cursor-pointer",
+                  }),
+                )}>
+                {exampleAdvocate.name}
+              </a>
+            ))
+          }
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </Layout>

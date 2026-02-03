@@ -1,11 +1,13 @@
-import { REFERRAL_INCENTIVE_PROGRAMS } from "@/data/referralIncentivePrograms.ts";
-import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
+import { zeroAddress } from "viem";
+
 import {
-  type NamedRegistrarAction,
   accountIdEqual,
   isRegistrarActionReferralAvailable,
+  type NamedRegistrarAction,
 } from "@ensnode/ensnode-sdk";
-import { zeroAddress } from "viem";
+
+import { REFERRAL_INCENTIVE_PROGRAMS } from "@/data/referralIncentivePrograms.ts";
+import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 
 export function isQualifiedReferral(
   incentiveProgram: ReferralIncentiveProgram,

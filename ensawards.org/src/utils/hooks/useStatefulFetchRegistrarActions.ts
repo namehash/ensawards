@@ -1,3 +1,5 @@
+import { millisecondsInSecond } from "date-fns/constants";
+
 import { useENSNodeConfig, useRegistrarActions } from "@ensnode/ensnode-react";
 import {
   type Duration,
@@ -19,10 +21,8 @@ import type {
   StatefulFetchRegistrarActionsNotReady,
   StatefulFetchRegistrarActionsUnsupported,
 } from "@/components/referral-awards-program/referrals/types.ts";
-
 import { StatefulFetchStatusIds } from "@/components/referral-awards-program/referrals/types.ts";
 import { useIndexingStatusWithSwr } from "@/utils/hooks/useIndexingStatusWithSWR.ts";
-import { millisecondsInSecond } from "date-fns/constants";
 
 interface UseStatefulRegistrarActionsProps {
   filters?: RegistrarActionsFilter[];

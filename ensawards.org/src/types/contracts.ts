@@ -1,6 +1,8 @@
-import type { Organization } from "@/types/organizations.ts";
-import type { Name } from "@ensnode/ensnode-sdk";
 import type { Address, Chain } from "viem";
+
+import type { Name } from "@ensnode/ensnode-sdk";
+
+import type { Organization } from "@/types/organizations.ts";
 
 export const ContractTypes = {
   Dao: "DAO",

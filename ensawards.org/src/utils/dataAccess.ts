@@ -1,5 +1,5 @@
 import { APPS } from "@/data/apps.ts";
-import { BEST_PRACTICES, BEST_PRACTICE_CATEGORIES } from "@/data/bestPractices.ts";
+import { BEST_PRACTICE_CATEGORIES, BEST_PRACTICES } from "@/data/bestPractices.ts";
 import { ORGANIZATIONS } from "@/data/organizations.ts";
 import { type App, AppTypes } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks";
@@ -9,10 +9,10 @@ import type {
   BestPracticeTarget,
 } from "@/types/bestPractices.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
-import type { OrgId, Organization } from "@/types/organizations.ts";
+import type { Organization, OrgId } from "@/types/organizations.ts";
 
 export const getOrgById = (orgId: OrgId): Organization => {
-  //Because of invariant that ORGANIZATIONS array satisfies we are guaranteed to find corresponding org
+  // biome-ignore lint/style/noNonNullAssertion: Because of invariant that ORGANIZATIONS array satisfies we are guaranteed to find corresponding org
   return ORGANIZATIONS.find((org) => org.id === orgId)!;
 };
 

@@ -1,5 +1,6 @@
-import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { millisecondsInSecond } from "date-fns/constants";
+
+import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 /**
  * Helper function to convert human-readable date to Unix timestamp.

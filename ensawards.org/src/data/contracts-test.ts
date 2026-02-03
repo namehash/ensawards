@@ -1,3 +1,5 @@
+import { mainnet } from "viem/chains";
+
 import { ENSDaoOrg, UniswapDaoOrg } from "@/data/organizations.ts";
 import {
   type Contract,
@@ -5,7 +7,6 @@ import {
   ContractSubtypes,
   ContractTypes,
 } from "@/types/contracts.ts";
-import { mainnet } from "viem/chains";
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
   {
