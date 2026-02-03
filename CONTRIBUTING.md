@@ -67,7 +67,7 @@ export interface Project {
     };
 }
 ```
-* Same as in the `PROTOCOL`, you also have to include the project's icon. Please put it in the [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsProjectIcon.tsx).
+* Same as in the `Protocol`, you also have to include the project's icon. Please put it in the [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsProjectIcon.tsx).
 * If you are a part of an already added project feel free to suggest changes to any of its details.
 
 ### Add a new `Contract`
