@@ -82,7 +82,7 @@ export interface Contract {
     cachedIdentity: ContractIdentityResolved;
 }
 ```
-* If you’re part of a project or DAO that owns any of the listed contracts, you may suggest updates, ex. let us know that you've named your contract.
+* If you’re part of a project that owns any of the listed contracts, you may suggest updates, ex. let us know that you've named your contract.
 
 
 ### Add a new `App`
@@ -121,7 +121,7 @@ Best practices are structured hierarchically and can be added on two levels:
 
 #### `BestPractice`
 
-Defines a specific requirement that an app or DAO must meet to pass a benchmark test. They are grouped into categories.
+Defines a specific requirement that an app or protocol must meet to pass a benchmark test. They are grouped into categories.
 
 1. To add a `BestPractice` create it as an independent exported constant in the [@/data/bestPractices.ts](ensawards.org/src/data/bestPractices.ts) file.
 2. Add it to the appropriate category’s list.
