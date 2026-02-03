@@ -57,7 +57,9 @@ const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
         }
       }
 
-      customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
+      if (!customElements.get("technical-info-anchor")) {
+          customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
+      }
       </script>
   </Layout>
 }

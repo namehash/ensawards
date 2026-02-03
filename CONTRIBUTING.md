@@ -47,12 +47,12 @@ export type Protocol = DAO | Defi;
 > When your PR with a new `Protocol` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
 4. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsDaoIcon.tsx).
-5. In your PR describe your reasoning for adding this `DAO`.
-6. If you’re part of an existing DAO, you can also suggest updates to its details.
+5. In your PR describe your reasoning for adding this `Protocol`.
+6. If you’re part of an existing DAO/Defi, you can also suggest updates to its details.
 
 ### Adding a new `Project`
 
-1. Each new `DAO` must have a corresponding `Project`.
+1. Each new `Protocol` must have a corresponding `Project`.
 2. Define it as an independent constant in the [@/data/projects.ts](ensawards.org/src/data/projects.ts) file and then add the new project to the `PROJECTS` list in the same file.
 3. Follow its data model that you can look up in the [@/types/projects.ts](ensawards.org/src/types/projects.ts) file. You can also have a quick glance at it below.
 ```typescript
