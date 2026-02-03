@@ -1,5 +1,6 @@
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import React, { useId } from "react";
+
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   className?: string;

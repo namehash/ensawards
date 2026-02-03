@@ -1,11 +1,13 @@
+import { useMemo } from "react";
+
+import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+
 import {
   FetchAndDisplayRegistrarActionsFeed,
   type FetchAndDisplayRegistrarActionsFeedProps,
 } from "@/components/referral-awards-program/referrals/FetchAndDisplayRegistrarActionsFeed.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
-import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import { useMemo } from "react";
 
 /**
  * Wrapper of the FetchAndDisplayRegistrarActionsFeed component, granting access to necessary providers

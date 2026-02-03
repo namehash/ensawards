@@ -1,3 +1,5 @@
+import { arbitrum, mainnet } from "viem/chains";
+
 import {
   AaveDaoProtocol,
   ArbitrumDaoProtocol,
@@ -12,7 +14,6 @@ import {
   ContractSubtypes,
   ContractTypes,
 } from "@/types/contracts.ts";
-import { arbitrum, mainnet } from "viem/chains";
 
 export const CONTRACTS: Contract[] = [
   {

@@ -3,15 +3,16 @@ import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import {
   ChainIcon,
   EnsIcon,
+  getChainName,
   SUPPORTED_CHAINS,
   TwitterIcon,
-  getChainName,
 } from "@namehash/namehash-ui";
+
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
-import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
 import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
+import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
@@ -132,10 +133,8 @@ if (resolvedDaoProtocol) {
             rel="noreferrer"
             slot="ctaButton"
             class="w-[225px] flex flex-row flex-nowrap justify-start items-center gap-3 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 text-sm text-gray-400 whitespace-nowrap hover:text-gray-500 font-normal leading-7 hover:shadow-xs transition duration-200">
-            <>
-              <span>Powered by</span>
-              <EnscribeIcon />
-            </>
+            <span>Powered by</span>
+            <EnscribeIcon />
           </a>
           {SUPPORTED_CHAINS.map((supportedChain, idx) => {
             const contractsOnChain = protocolContracts.filter(

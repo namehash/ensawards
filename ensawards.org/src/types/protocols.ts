@@ -1,7 +1,9 @@
+import type { JSX } from "astro/jsx-runtime";
+
+import type { Name } from "@ensnode/ensnode-sdk";
+
 import { type ProtocolType, ProtocolTypes } from "@/types/bestPractices.ts";
 import type { Project } from "@/types/projects.ts";
-import type { Name } from "@ensnode/ensnode-sdk";
-import type { JSX } from "astro/jsx-runtime";
 
 export const ProtocolIds = {
   Ens: "protocol-ens-dao",

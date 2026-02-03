@@ -1,4 +1,4 @@
-import { type SupportedGroupByCategory, groupByProtocol } from "@/contract-pipelines/group-by.ts";
+import { groupByProtocol, type SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
 import { CONTRACTS } from "@/data/contracts.ts";
 import type { Contract } from "@/types/contracts.ts";

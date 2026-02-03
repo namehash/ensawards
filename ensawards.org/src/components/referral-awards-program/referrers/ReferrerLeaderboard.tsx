@@ -1,7 +1,14 @@
+import {
+  ENSReferralsClient,
+  type ReferrerLeaderboardPage,
+  ReferrerLeaderboardPageResponseCodes,
+} from "@namehash/ens-referrals";
 import { useEffect, useMemo, useState } from "react";
 
-import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+
 import { LastUpdateTimeLoading } from "@/components/atoms/datetime/LastUpdateTime.tsx";
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import {
   DisplayPagination,
   DisplayPaginationLoading,
@@ -15,12 +22,6 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { scrollWithOffset } from "@/utils/domActions.ts";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { ENSNodeProvider, createConfig } from "@ensnode/ensnode-react";
-import {
-  ENSReferralsClient,
-  type ReferrerLeaderboardPage,
-  ReferrerLeaderboardPageResponseCodes,
-} from "@namehash/ens-referrals";
 
 export interface ReferrerLeaderboardProps {
   recordsPerPage?: number;

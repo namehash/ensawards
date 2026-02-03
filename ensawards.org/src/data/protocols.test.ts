@@ -1,9 +1,11 @@
+import { describe, expect, it } from "vitest";
+
+import { isNormalizedName } from "@ensnode/ensnode-sdk";
+
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
 import { ProtocolIds } from "@/types/protocols.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
-import { isNormalizedName } from "@ensnode/ensnode-sdk";
-import { describe, expect, it } from "vitest";
 
 describe("protocols data", () => {
   const data = PROTOCOLS;

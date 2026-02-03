@@ -1,10 +1,12 @@
-import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
-import { AdvocateProfileWithName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithName.tsx";
-import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-page-components/advocate-profile/EnsAdvocateProfileLoading.tsx";
+import type { Address } from "viem";
+
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, useRecords } from "@ensnode/ensnode-react";
 import { type Name, type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
-import type { Address } from "viem";
+
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import { AdvocateProfileWithName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithName.tsx";
+import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-page-components/advocate-profile/EnsAdvocateProfileLoading.tsx";
 
 const HeaderPanelTextRecords = ["avatar", "header"];
 

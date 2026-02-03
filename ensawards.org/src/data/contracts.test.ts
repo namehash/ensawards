@@ -1,3 +1,16 @@
+import { getChainName } from "@namehash/namehash-ui";
+import { type Address, isAddress, isAddressEqual } from "viem";
+import { describe, expect, it } from "vitest";
+
+import {
+  type ChainId,
+  ENSNodeClient,
+  evmChainIdToCoinType,
+  isNormalizedName,
+  type ResolveRecordsResponse,
+  type ResolverRecordsResponseBase,
+} from "@ensnode/ensnode-sdk";
+
 import { CONTRACTS } from "@/data/contracts.ts";
 import {
   type ContractIdentityForwardNamed,
@@ -7,17 +20,6 @@ import {
   type EnsProfileForContract,
 } from "@/types/contracts.ts";
 import { getENSNodeUrl } from "@/utils/env";
-import {
-  type ChainId,
-  ENSNodeClient,
-  type ResolveRecordsResponse,
-  type ResolverRecordsResponseBase,
-  evmChainIdToCoinType,
-  isNormalizedName,
-} from "@ensnode/ensnode-sdk";
-import { getChainName } from "@namehash/namehash-ui";
-import { type Address, isAddress, isAddressEqual } from "viem";
-import { describe, expect, it } from "vitest";
 
 const client = new ENSNodeClient({
   url: getENSNodeUrl(),
@@ -190,23 +192,19 @@ describe("CachedIdentity", () => {
           testCaseName: `${contract.protocol.name}-${address}-${chainName}`,
         };
       }),
-    )(
-      "$testCaseName",
-      async (contract) => {
-        // 1) Check if the contract's primary name is unchanged
-        // (either still the same or still not set)
-        await testContractsPrimaryName(contract.cachedIdentity);
+    )("$testCaseName", async (contract) => {
+      // 1) Check if the contract's primary name is unchanged
+      // (either still the same or still not set)
+      await testContractsPrimaryName(contract.cachedIdentity);
 
-        // If the contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed or ContractResolutionStatusIds.ForwardNamed,
-        if (
-          contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
-          contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
-        ) {
-          // 2) Check that records from the response to equal our cached profile data
-          await testContractsCachedProfile(contract.cachedIdentity);
-        }
-      },
-      3000,
-    );
+      // If the contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed or ContractResolutionStatusIds.ForwardNamed,
+      if (
+        contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
+        contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
+      ) {
+        // 2) Check that records from the response to equal our cached profile data
+        await testContractsCachedProfile(contract.cachedIdentity);
+      }
+    }, 3000);
   });
 });

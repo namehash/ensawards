@@ -1,4 +1,6 @@
-import { getENSNodeUrl } from "@/utils/env";
+import { millisecondsInSecond } from "date-fns/constants";
+import type { Address } from "viem";
+
 import {
   type Duration,
   ENSNodeClient,
@@ -6,8 +8,8 @@ import {
   type NormalizedName,
   type ResolverRecordsSelection,
 } from "@ensnode/ensnode-sdk";
-import { millisecondsInSecond } from "date-fns/constants";
-import type { Address } from "viem";
+
+import { getENSNodeUrl } from "@/utils/env";
 
 /**
  * Resolves the Ethereum Mainnet address for the given name.
