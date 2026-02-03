@@ -74,9 +74,9 @@ export function sortProtocolLeaderboard(
       }
 
       // Tie-breaker 2: by display name (alphabetically)
-      const orgA = getProtocolById(protocolIdA as ProtocolId);
-      const orgB = getProtocolById(protocolIdB as ProtocolId);
+      const protocolA = getProtocolById(protocolIdA as ProtocolId);
+      const protocolB = getProtocolById(protocolIdB as ProtocolId);
 
-      return orgA.name.localeCompare(orgB.name);
+      return protocolA.name.localeCompare(protocolB.name);
     });
 }

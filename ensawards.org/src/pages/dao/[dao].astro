@@ -28,7 +28,7 @@ import { getDaoProtocolBySlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
 export function getStaticPaths() {
-  return Object.values(DAO_PROTOCOLS).map((dao) => ({
+  return DAO_PROTOCOLS.map((dao) => ({
     params: { dao: dao.slug },
   }));
 }
