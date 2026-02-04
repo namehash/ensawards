@@ -9,9 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "biome check --write .",
-    "lint:ci": "biome ci",
-    "prettier": "pnpm exec prettier --write \"**/*.astro\"",
+    "lint": "pnpm exec prettier --write \"**/*.astro\" && biome check --write .",
+    "lint:ci": "pnpm exec prettier --check \"**/*.astro\" && biome ci",
     "test": "vitest",
     "test:cache": "vitest --run --testNamePattern=\"CachedIdentity\"",
     "typecheck": "tsc --noEmit"

@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10.18.1",
   "scripts": {
-    "lint": "biome check --write",
+    "lint": "pnpm -r --parallel --aggregate-output lint",
     "lint:ci": "pnpm -r --parallel --aggregate-output lint:ci",
     "typecheck": "pnpm --filter ensawards astro sync && pnpm -r --parallel --aggregate-output typecheck",
     "test": "vitest --silent passed-only",
