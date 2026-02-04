@@ -8,5 +8,6 @@
       }
     }
   ],
-  "bracketSameLine": true
+  "bracketSameLine": true,
+  "astroSkipFrontmatter": true
 }

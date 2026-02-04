@@ -19,6 +19,8 @@ import {
 import { markdownToHtml } from "../../../utils/markdown";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../../utils/styles";
 import { cn } from "../../../utils/tailwindClassConcatenation";
+import TechnicalInfoAnchorScript from "../../../components/atoms/TechnicalInfoAnchorScript.astro";
+
 export function getStaticPaths() {
   const staticPaths = [];
 
@@ -82,163 +84,158 @@ const appsPassed =
 const appSupport =
   bestPracticeToDisplay !== undefined ? calculateAppSupport(bestPracticeToDisplay) : 0;
 ---
+
 {
-    bestPracticeToDisplay === undefined ? (
-        // theoretically, because of Astro's build-time page generation, this should never happen
+  bestPracticeToDisplay === undefined ? (
+    // theoretically, because of Astro's build-time page generation, this should never happen
 
-    <DataLoadingError/>
-        )
-        :
-        (
-        <Layout pageMetadata={{
-            title: `ENSAwards: ${bestPracticeToDisplay.name}`,
-            description: bestPracticeToDisplay.description,
-            url: `https://ensawards.org/ens-best-practices/${category}/${bestPractice}`
-        }}>
-            <SubpageHero
-                    header={bestPracticeToDisplay.name}
-                    description={bestPracticeToDisplay.description}
-                    breadcrumbs={["ENS best practices", bestPracticeToDisplay.categoryName]}
-                    additionalElements={[
-                        {
-                            name: "Category",
-                            value: bestPracticeToDisplay.categoryName,
-                            link: `/ens-best-practices/${category}`,
-                        },
-                        {
-                            name: "Apps passed",
-                            value: appsPassed,
-                        },
-                        {
-                            name: "App support",
-                            value: `${appSupport}%`,
-                        },
-                    ]}>
-                <technical-info-anchor
-                        data-id={bestPracticeToDisplay.id}
-                        href={`#${bestPracticeToDisplay.id}-technical-info`}
-                        id={`${bestPracticeToDisplay.id}-technical-info-anchor`}
-                        slot="technicalSectionAnchor"
-                        class="text-white transition-all duration-200 decoration-white/40 hover:decoration-white underline underline-offset-[25%] decoration-from-font hover:cursor-pointer"
-                >Learn More
-                </technical-info-anchor
-                >
-            </SubpageHero>
-            <section
-                    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8 gap-5 sm:gap-[60px]">
-                {bestPracticeToDisplay.appliesTo.map((appliesTo) =>
-                        <ItemsList header={`${appliesTo} benchmarks`} containerStyles="sm:gap-2">
-                            {
-                                sortedAppsByBenchmark.filter(({app}) => app.type === appliesTo).map(({app, benchmark}) => {
-                                    return (
-                                            <BenchmarkResultCard
-                                                    name={app.name}
-                                                    notes={app.description}
-                                                    viewDetails={{
-                                                        text: "App details",
-                                                        link: `/app/${app.slug}`,
-                                                    }}
-                                            >
-                                                <BenchmarkResultBadge
-                                                        slot="badge"
-                                                        benchmark={benchmark}
-                                                        className={
-                                                            BenchmarkResultToBadgeStyles.get(benchmark.result)!
-                                                        }
-                                                        client:load
-                                                />
-                                                <Image
-                                                        src={images[app.iconPath]()}
-                                                        alt={`${app.name}-logo`}
-                                                        slot="icon"
-                                                        class="shrink-0 rounded-md w-10 h-10"
-                                                />
-                                            </BenchmarkResultCard>
-                                    );
-                                })
-                            }
-                        </ItemsList>)}
-                <div class="w-full max-w-[1216px] box-border h-fit">
-                    <SuggestionCard whatsSuggested="benchmark result"/>
-                </div>
-            </section>
-            <section
-                    id={`${bestPracticeToDisplay.id}-technical-info`}
-                    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
-                <div
-                        class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
-                    <div
-                            class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
-                        <h2 class="text-2xl leading-none font-semibold text-black">
-                            {bestPracticeToDisplay.technicalDetails.main.header}
-                        </h2>
-                        <p class={technicalSectionContentStyles}
-                           set:html={markdownToHtml(bestPracticeToDisplay.technicalDetails.main.content)}/>
-                        {
-                            bestPracticeToDisplay.technicalDetails.sides.map(
-                                (additionalContent) => (
-                                        <>
-                                            <h3 class={technicalSectionMinorHeaderStyles}>
-                                                {additionalContent.header}
-                                            </h3>
-                                            <p class={technicalSectionContentStyles}
-                                               set:html={markdownToHtml(additionalContent.content)}/>
-                                        </>
-                                ),
-                            )
-                        }
-                    </div>
-                    <div
-                            class="w-1/2 min-w-[300px] max-w-[420px] box-border h-fit hidden md:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
-                        <h4 class={technicalSectionMinorHeaderStyles}>
-                            {bestPracticeToDisplay.name}
-                        </h4>
-                        <p class={technicalSectionContentStyles}>
-                            {bestPracticeToDisplay.description}
-                        </p>
-                        <div class="bg-gray-200 h-[1px] self-stretch"></div>
-                        <div
-                                class="w-full flex flex-row flex-wrap justify-between items-center gap-6">
-                            <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-                                <p class="text-sm leading-normal font-normal text-muted-foreground">Category</p>
-                                <a href={`/ens-best-practices/${category}`}
-                                   class="text-sm leading-normal font-semibold text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200">
-                                    {bestPracticeToDisplay.categoryName}
-                                </a>
-                            </div>
-                            <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-                                <p class="text-sm leading-normal font-normal text-muted-foreground">Apps passed</p>
-                                <p class="text-sm leading-normal font-semibold text-black">
-                                    {appsPassed}
-                                </p>
-                            </div>
-                            <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-                                <p class="text-sm leading-normal font-normal text-muted-foreground">App support</p>
-                                <p class={cn("text-sm leading-normal font-semibold", `text-${getAppSupportColor(appSupport)}`)}>
-                                    {appSupport}%
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <script>
-                import {scrollWithOffset} from "../../../utils/domActions";
-
-                class AnchorToTechnicalInfo extends HTMLElement {
-                    connectedCallback() {
-                        const scrollAnchor = document.getElementById(
-                            `${this.dataset.id}-technical-info-anchor`,
-                        );
-                        scrollAnchor.addEventListener("click", (event) => {
-                            event.preventDefault();
-                            scrollWithOffset(`${this.dataset.id}-technical-info`, 60);
-                        });
-                    }
-                }
-
-                customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
-            </script>
-        </Layout>
-            )
-    }
+    <DataLoadingError />
+  ) : (
+    <Layout
+      pageMetadata={{
+        title: `ENSAwards: ${bestPracticeToDisplay.name}`,
+        description: bestPracticeToDisplay.description,
+        url: `https://ensawards.org/ens-best-practices/${category}/${bestPractice}`,
+      }}>
+      <SubpageHero
+        header={bestPracticeToDisplay.name}
+        description={bestPracticeToDisplay.description}
+        breadcrumbs={["ENS best practices", bestPracticeToDisplay.categoryName]}
+        additionalElements={[
+          {
+            name: "Category",
+            value: bestPracticeToDisplay.categoryName,
+            link: `/ens-best-practices/${category}`,
+          },
+          {
+            name: "Apps passed",
+            value: appsPassed,
+          },
+          {
+            name: "App support",
+            value: `${appSupport}%`,
+          },
+        ]}>
+        <technical-info-anchor
+          data-id={bestPracticeToDisplay.id}
+          href={`#${bestPracticeToDisplay.id}-technical-info`}
+          id={`${bestPracticeToDisplay.id}-technical-info-anchor`}
+          slot="technicalSectionAnchor"
+          class="text-white transition-all duration-200 decoration-white/40 hover:decoration-white underline underline-offset-[25%] decoration-from-font hover:cursor-pointer">
+          Learn More
+        </technical-info-anchor>
+      </SubpageHero>
+      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8 gap-5 sm:gap-[60px]">
+        {bestPracticeToDisplay.appliesTo.map((appliesTo) => (
+          <ItemsList
+            header={`${appliesTo} benchmarks`}
+            containerStyles="sm:gap-2">
+            {sortedAppsByBenchmark
+              .filter(({ app }) => app.type === appliesTo)
+              .map(({ app, benchmark }) => {
+                return (
+                  <BenchmarkResultCard
+                    name={app.name}
+                    notes={app.description}
+                    viewDetails={{
+                      text: "App details",
+                      link: `/app/${app.slug}`,
+                    }}>
+                    <BenchmarkResultBadge
+                      slot="badge"
+                      benchmark={benchmark}
+                      className={
+                        BenchmarkResultToBadgeStyles.get(benchmark.result)!
+                      }
+                      client:load
+                    />
+                    <Image
+                      src={images[app.iconPath]()}
+                      alt={`${app.name}-logo`}
+                      slot="icon"
+                      class="shrink-0 rounded-md w-10 h-10"
+                    />
+                  </BenchmarkResultCard>
+                );
+              })}
+          </ItemsList>
+        ))}
+        <div class="w-full max-w-[1216px] box-border h-fit">
+          <SuggestionCard whatsSuggested="benchmark result" />
+        </div>
+      </section>
+      <section
+        id={`${bestPracticeToDisplay.id}-technical-info`}
+        class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
+        <div class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
+          <div class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
+            <h2 class="text-2xl leading-none font-semibold text-black">
+              {bestPracticeToDisplay.technicalDetails.main.header}
+            </h2>
+            <p
+              class={technicalSectionContentStyles}
+              set:html={markdownToHtml(
+                bestPracticeToDisplay.technicalDetails.main.content,
+              )}
+            />
+            {bestPracticeToDisplay.technicalDetails.sides.map(
+              (additionalContent) => (
+                <>
+                  <h3 class={technicalSectionMinorHeaderStyles}>
+                    {additionalContent.header}
+                  </h3>
+                  <p
+                    class={technicalSectionContentStyles}
+                    set:html={markdownToHtml(additionalContent.content)}
+                  />
+                </>
+              ),
+            )}
+          </div>
+          <div class="w-1/2 min-w-[300px] max-w-[420px] box-border h-fit hidden md:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
+            <h4 class={technicalSectionMinorHeaderStyles}>
+              {bestPracticeToDisplay.name}
+            </h4>
+            <p class={technicalSectionContentStyles}>
+              {bestPracticeToDisplay.description}
+            </p>
+            <div class="bg-gray-200 h-[1px] self-stretch" />
+            <div class="w-full flex flex-row flex-wrap justify-between items-center gap-6">
+              <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+                <p class="text-sm leading-normal font-normal text-muted-foreground">
+                  Category
+                </p>
+                <a
+                  href={`/ens-best-practices/${category}`}
+                  class="text-sm leading-normal font-semibold text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200">
+                  {bestPracticeToDisplay.categoryName}
+                </a>
+              </div>
+              <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+                <p class="text-sm leading-normal font-normal text-muted-foreground">
+                  Apps passed
+                </p>
+                <p class="text-sm leading-normal font-semibold text-black">
+                  {appsPassed}
+                </p>
+              </div>
+              <div class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+                <p class="text-sm leading-normal font-normal text-muted-foreground">
+                  App support
+                </p>
+                <p
+                  class={cn(
+                    "text-sm leading-normal font-semibold",
+                    `text-${getAppSupportColor(appSupport)}`,
+                  )}>
+                  {appSupport}%
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <TechnicalInfoAnchorScript />
+    </Layout>
+  )
+}

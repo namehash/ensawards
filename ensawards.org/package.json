@@ -11,7 +11,7 @@
     "astro": "astro",
     "lint": "biome check --write .",
     "lint:ci": "biome ci",
-    "prettier": "pnpm exec prettier . --write",
+    "prettier": "pnpm exec prettier --write \"**/*.astro\"",
     "test": "vitest",
     "test:cache": "vitest --run --testNamePattern=\"CachedIdentity\"",
     "typecheck": "tsc --noEmit"
