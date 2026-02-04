@@ -44,8 +44,8 @@ For this reason, every new `Protocol` must be associated with a corresponding `P
 3. Make sure to follow its data model that you can look up in the [@/types/protocols.ts](ensawards.org/src/types/protocols.ts) file. Remember that the Protocol can represent either a `DAO` or a `Defi protocol`. Below you can see its most important interface and type:
 
 ```typescript
-export interface ProtocolAbstract<ProtocolT extends ProtocolType> {
-    id: ProtocolId;
+export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
+    id: ProtocolIdT;
     slug: string;
     protocolType: ProtocolT;
     project: Project; // each protocol belongs to a single project.
@@ -61,9 +61,9 @@ export interface ProtocolAbstract<ProtocolT extends ProtocolType> {
     twitterOgImagePath?: string;
 }
 
-export interface DAOProtocol extends ProtocolAbstract<typeof ProtocolTypes.Dao> {}
+export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.Dao> {}
 
-export interface DefiProtocol extends ProtocolAbstract<typeof ProtocolTypes.Defi> {}
+export interface DefiProtocol extends ProtocolAbstract<DefiProtocolId, typeof ProtocolTypes.Defi> {}
 
 export type Protocol = DAOProtocol | DefiProtocol;
 
