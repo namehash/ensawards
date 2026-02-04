@@ -10,10 +10,10 @@ import { sortProtocolLeaderboard } from "../../contract-pipelines/sorting";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppTypes } from "../../types/apps";
-import { ProtocolId } from "../../types/protocols";
+import { DAOProtocolId } from "../../types/protocols";
 import {
   calculateAppEnsAwardsScore,
-  getDaoProtocolById,
+  getDaoByProtocolId,
   pluralizeBestPracticeTarget,
 } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
@@ -63,8 +63,8 @@ const referrerLeaderboardDescription =
             Object.entries(daoScores)
               .slice(0, 3)
               .map(([scoreCategory, value], idx) => {
-                const daoId = scoreCategory as ProtocolId;
-                const daoProtocol = getDaoProtocolById(daoId);
+                const daoId = scoreCategory as DAOProtocolId;
+                const daoProtocol = getDaoByProtocolId(daoId);
                 const DaoProtocolIcon = daoProtocol.icon;
                 return (
                   <div

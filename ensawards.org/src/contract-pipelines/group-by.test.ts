@@ -12,8 +12,8 @@ describe("group-by functions", () => {
 
       const result = groupByProtocol(CONTRACTS_TEST_DATA);
 
-      expect(result[ProtocolIds.Ens].length).toEqual(expectedLengthOfEachEntry);
-      expect(result[ProtocolIds.Uniswap].length).toEqual(expectedLengthOfEachEntry);
+      expect(result[ProtocolIds.EnsDao].length).toEqual(expectedLengthOfEachEntry);
+      expect(result[ProtocolIds.UniswapDao].length).toEqual(expectedLengthOfEachEntry);
 
       for (const [key, values] of Object.entries(result) as [
         SupportedGroupByCategory,

@@ -9,7 +9,14 @@ import type {
   BestPracticeTarget,
 } from "@/types/bestPractices.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
-import type { DAO, Defi, Protocol, ProtocolId } from "@/types/protocols.ts";
+import type {
+  DAOProtocol,
+  DAOProtocolId,
+  DefiProtocol,
+  DefiProtocolId,
+  Protocol,
+  ProtocolId,
+} from "@/types/protocols.ts";
 
 export const getProtocolById = (protocolId: ProtocolId): Protocol => {
   // biome-ignore lint/style/noNonNullAssertion: Because of invariant that PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
@@ -20,21 +27,21 @@ export const getProtocolBySlug = (protocolSlug: string): Protocol | undefined =>
   return PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
 };
 
-export const getDaoProtocolById = (protocolId: ProtocolId): DAO => {
+export const getDaoByProtocolId = (protocolId: DAOProtocolId): DAOProtocol => {
   // biome-ignore lint/style/noNonNullAssertion: Because of invariant that DAO_PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
   return DAO_PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
 };
 
-export const getDaoProtocolBySlug = (protocolSlug: string): DAO | undefined => {
+export const getDaoByProtocolSlug = (protocolSlug: string): DAOProtocol | undefined => {
   return DAO_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
 };
 
-export const getDefiProtocolById = (protocolId: ProtocolId): Defi => {
+export const getDefiProtocolByProtocolId = (protocolId: DefiProtocolId): DefiProtocol => {
   // biome-ignore lint/style/noNonNullAssertion: Because of invariant that DEFI_PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
   return DEFI_PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
 };
 
-export const getDefiProtocolBySlug = (protocolSlug: string): Defi | undefined => {
+export const getDefiProtocolByProtocolSlug = (protocolSlug: string): DefiProtocol | undefined => {
   return DEFI_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
 };
 

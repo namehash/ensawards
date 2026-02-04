@@ -5,8 +5,8 @@ import { contractPipeline } from "../../contract-pipelines";
 import { daoContractsOnly } from "../../contract-pipelines/filters";
 import { sortProtocolLeaderboard } from "../../contract-pipelines/sorting";
 import { type BestPracticeProtocol } from "../../types/bestPractices";
-import { ProtocolId } from "../../types/protocols";
-import { getDaoProtocolById } from "../../utils/dataAccess";
+import { DAOProtocolId } from "../../types/protocols";
+import { getDaoByProtocolId } from "../../utils/dataAccess";
 import { markdownToHtml } from "../../utils/markdown";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import ContractNamingBanner from "../atoms/ContractNamingBanner.astro";
@@ -73,8 +73,8 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
   <ItemsList header="DAO Leaderboard" containerStyles="gap-3 sm:gap-3">
     {
       Object.entries(daoScores).map(([scoreCategory, value], idx) => {
-        const daoId = scoreCategory as ProtocolId;
-        const daoProtocol = getDaoProtocolById(daoId);
+        const daoId = scoreCategory as DAOProtocolId;
+        const daoProtocol = getDaoByProtocolId(daoId);
         const DaoProtocolIcon = daoProtocol.icon;
         return (
           <LeaderboardCard

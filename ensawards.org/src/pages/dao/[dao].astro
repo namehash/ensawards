@@ -25,7 +25,7 @@ import { CONTRACTS } from "../../data/contracts";
 import { DAO_PROTOCOLS } from "../../data/protocols";
 import Layout from "../../layouts/Layout.astro";
 import { Contract, ContractTypes } from "../../types/contracts";
-import { getDaoProtocolBySlug } from "../../utils/dataAccess";
+import { getDaoByProtocolSlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
 export function getStaticPaths() {
@@ -36,34 +36,33 @@ export function getStaticPaths() {
 
 const { dao } = Astro.params;
 
-const resolvedDaoProtocol = getDaoProtocolBySlug(dao);
+const resolvedDao = getDaoByProtocolSlug(dao);
 
 let protocolContracts: Contract[];
-let DaoProtocolIcon;
+let DaoIcon;
 let daoScore: number;
 
-if (resolvedDaoProtocol) {
+if (resolvedDao) {
   protocolContracts = CONTRACTS.filter(
-    (contract) =>
-      contract.protocol.id === resolvedDaoProtocol.id && contract.type === ContractTypes.Dao,
+    (contract) => contract.protocol.id === resolvedDao.id && contract.type === ContractTypes.Dao,
   );
-  DaoProtocolIcon = resolvedDaoProtocol.icon;
-  daoScore = contractPipeline({ filter: daoContractsOnly })[resolvedDaoProtocol.id];
+  DaoIcon = resolvedDao.icon;
+  daoScore = contractPipeline({ filter: daoContractsOnly })[resolvedDao.id];
 }
 ---
 
 {
-  resolvedDaoProtocol === undefined ? (
+  resolvedDao === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ${resolvedDaoProtocol.name} ENS Integration Benchmarks`,
-        description: resolvedDaoProtocol.description,
+        title: `ENSAwards: ${resolvedDao.name} ENS Integration Benchmarks`,
+        description: resolvedDao.description,
         url: `https://ensawards.org/dao/${dao}`,
-        ogImage: resolvedDaoProtocol.ogImagePath,
-        twitterImage: resolvedDaoProtocol.twitterOgImagePath,
+        ogImage: resolvedDao.ogImagePath,
+        twitterImage: resolvedDao.twitterOgImagePath,
       }}>
       <AlertCountdown
         slot="alertBanner"
@@ -81,10 +80,10 @@ if (resolvedDaoProtocol) {
         }}
       />
       <SubpageHero
-        header={resolvedDaoProtocol.name}
-        description={resolvedDaoProtocol.description}
+        header={resolvedDao.name}
+        description={resolvedDao.description}
         breadcrumbs={["ENS leaderboards", "DAO leaderboard"]}>
-        <DaoProtocolIcon
+        <DaoIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
@@ -92,20 +91,20 @@ if (resolvedDaoProtocol) {
           slot="ctaContent"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
           <a
-            href={resolvedDaoProtocol.socials.website}
+            href={resolvedDao.socials.website}
             rel="noreferrer"
             target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
           <a
-            href={resolvedDaoProtocol.socials.twitter}
+            href={resolvedDao.socials.twitter}
             rel="noreferrer"
             target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
-          {resolvedDaoProtocol.socials.ens && (
+          {resolvedDao.socials.ens && (
             <a
-              href={`https://app.ens.domains/${encodeURIComponent(resolvedDaoProtocol.socials.ens)}`}
+              href={`https://app.ens.domains/${encodeURIComponent(resolvedDao.socials.ens)}`}
               rel="noreferrer"
               target="_blank">
               <EnsIcon

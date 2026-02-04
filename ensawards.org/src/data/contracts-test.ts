@@ -1,6 +1,6 @@
 import { mainnet } from "viem/chains";
 
-import { ENSDaoProtocol, UniswapDaoProtocol } from "@/data/protocols.ts";
+import { ENSDao, UniswapDao } from "@/data/protocols.ts";
 import {
   type Contract,
   ContractResolutionStatusIds,
@@ -10,7 +10,7 @@ import {
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -23,7 +23,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -36,7 +36,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -50,7 +50,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -64,7 +64,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -78,7 +78,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -92,7 +92,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -106,7 +106,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -120,7 +120,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -134,7 +134,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: ENSDaoProtocol,
+    protocol: ENSDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -148,7 +148,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -161,7 +161,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -174,7 +174,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -187,7 +187,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -200,7 +200,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -213,7 +213,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -226,7 +226,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -239,7 +239,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -253,7 +253,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -267,7 +267,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     },
   },
   {
-    protocol: UniswapDaoProtocol,
+    protocol: UniswapDao,
     type: ContractTypes.Dao,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {

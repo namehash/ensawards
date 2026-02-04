@@ -33,8 +33,8 @@ import { contractPipeline } from "../contract-pipelines";
 import { daoContractsOnly } from "../contract-pipelines/filters";
 import { sortProtocolLeaderboard } from "../contract-pipelines/sorting";
 import Layout from "../layouts/Layout.astro";
-import { ProtocolId } from "../types/protocols";
-import { getDaoProtocolById } from "../utils/dataAccess";
+import { DAOProtocolId } from "../types/protocols";
+import { getDaoByProtocolId } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 
 interface ContentItemData {
@@ -307,8 +307,8 @@ const daoScores = contractPipeline({
             Object.entries(daoScores)
               .slice(0, 3)
               .map(([scoreCategory, value], idx) => {
-                const daoId = scoreCategory as ProtocolId;
-                const daoProtocol = getDaoProtocolById(daoId);
+                const daoId = scoreCategory as DAOProtocolId;
+                const daoProtocol = getDaoByProtocolId(daoId);
                 const DaoProtocolIcon = daoProtocol.icon;
                 return (
                   <div

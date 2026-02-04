@@ -13,10 +13,15 @@ import {
   UniswapProject,
 } from "@/data/projects.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
-import { type DAO, type Defi, type Protocol, ProtocolIds } from "@/types/protocols.ts";
+import {
+  type DAOProtocol,
+  DAOProtocolIds,
+  type DefiProtocol,
+  type Protocol,
+} from "@/types/protocols.ts";
 
-export const ENSDaoProtocol: DAO = {
-  id: ProtocolIds.Ens,
+export const ENSDao: DAOProtocol = {
+  id: DAOProtocolIds.EnsDao,
   slug: "ens",
   protocolType: ProtocolTypes.Dao,
   project: ENSProject,
@@ -33,8 +38,8 @@ export const ENSDaoProtocol: DAO = {
   twitterOgImagePath: "https://ensawards.org/org-ens-dao_twitter_og_image.png",
 };
 
-export const UniswapDaoProtocol: DAO = {
-  id: ProtocolIds.Uniswap,
+export const UniswapDao: DAOProtocol = {
+  id: DAOProtocolIds.UniswapDao,
   slug: "uniswap",
   protocolType: ProtocolTypes.Dao,
   project: UniswapProject,
@@ -51,8 +56,8 @@ export const UniswapDaoProtocol: DAO = {
   twitterOgImagePath: "https://ensawards.org/org-uniswap-dao_twitter_og_image.png",
 };
 
-export const NounsDaoProtocol: DAO = {
-  id: ProtocolIds.Nouns,
+export const NounsDao: DAOProtocol = {
+  id: DAOProtocolIds.NounsDao,
   slug: "nouns",
   protocolType: ProtocolTypes.Dao,
   project: NounsProject,
@@ -69,8 +74,8 @@ export const NounsDaoProtocol: DAO = {
   twitterOgImagePath: "https://ensawards.org/org-nouns-dao_twitter_og_image.png",
 };
 
-export const ArbitrumDaoProtocol: DAO = {
-  id: ProtocolIds.Arbitrum,
+export const ArbitrumDao: DAOProtocol = {
+  id: DAOProtocolIds.ArbitrumDao,
   slug: "arbitrum",
   protocolType: ProtocolTypes.Dao,
   project: ArbitrumProject,
@@ -86,8 +91,8 @@ export const ArbitrumDaoProtocol: DAO = {
   twitterOgImagePath: "https://ensawards.org/org-arbitrum-dao_twitter_og_image.png",
 };
 
-export const AaveDaoProtocol: DAO = {
-  id: ProtocolIds.Aave,
+export const AaveDao: DAOProtocol = {
+  id: DAOProtocolIds.AaveDao,
   slug: "aave",
   protocolType: ProtocolTypes.Dao,
   project: AaveProject,
@@ -104,8 +109,8 @@ export const AaveDaoProtocol: DAO = {
   twitterOgImagePath: "https://ensawards.org/org-aave-dao_twitter_og_image.png",
 };
 
-export const TaikoDaoProtocol: DAO = {
-  id: ProtocolIds.Taiko,
+export const TaikoDao: DAOProtocol = {
+  id: DAOProtocolIds.TaikoDao,
   slug: "taiko",
   protocolType: ProtocolTypes.Dao,
   project: TaikoProject,
@@ -125,24 +130,24 @@ export const TaikoDaoProtocol: DAO = {
 /**
  * Array of supported DAO protocols.
  *
- * Invariant: This array should contain exactly one {@link DAO} for each DAO-related {@link ProtocolId}.
+ * Invariant: This array should contain exactly one {@link DAOProtocol} for each DAO-related {@link ProtocolId}.
  */
 
-export const DAO_PROTOCOLS: DAO[] = [
-  ENSDaoProtocol,
-  UniswapDaoProtocol,
-  NounsDaoProtocol,
-  ArbitrumDaoProtocol,
-  AaveDaoProtocol,
-  TaikoDaoProtocol,
+export const DAO_PROTOCOLS: DAOProtocol[] = [
+  ENSDao,
+  UniswapDao,
+  NounsDao,
+  ArbitrumDao,
+  AaveDao,
+  TaikoDao,
 ];
 
 /**
  * Array of supported Defi protocols.
  *
- * Invariant: This array should contain exactly one {@link Defi} for each Defi protocol-related {@link ProtocolId}.
+ * Invariant: This array should contain exactly one {@link DefiProtocol} for each Defi protocol-related {@link ProtocolId}.
  */
-export const DEFI_PROTOCOLS: Defi[] = [];
+export const DEFI_PROTOCOLS: DefiProtocol[] = [];
 
 /**
  * Array of supported protocols. Combines {@link DAO_PROTOCOLS} and {@link DEFI_PROTOCOLS}.

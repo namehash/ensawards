@@ -4,7 +4,7 @@ import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
-import { ProtocolIds } from "@/types/protocols.ts";
+import { DAOProtocolIds, DefiProtocolIds, ProtocolIds } from "@/types/protocols.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
 
 describe("protocols data", () => {
@@ -24,32 +24,28 @@ describe("protocols data", () => {
     const data = DAO_PROTOCOLS;
     const expectedLengthOfFoundDaoProtocols = 1;
 
-    Object.values(ProtocolIds)
-      .filter((protocolId) => protocolId.includes("-dao"))
-      .forEach((protocolId) => {
-        const foundProtocol = data.filter(
-          (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Dao,
-        );
+    Object.values(DAOProtocolIds).forEach((protocolId) => {
+      const foundProtocol = data.filter(
+        (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Dao,
+      );
 
-        expect(foundProtocol.length).toEqual(expectedLengthOfFoundDaoProtocols);
-        expect(foundProtocol[0].id).toEqual(protocolId);
-      });
+      expect(foundProtocol.length).toEqual(expectedLengthOfFoundDaoProtocols);
+      expect(foundProtocol[0].id).toEqual(protocolId);
+    });
   });
 
   it("Should have exactly one Defi protocol per Defi-related ProtocolId", () => {
     const data = DEFI_PROTOCOLS;
     const expectedLengthOfFoundDefiProtocols = 1;
 
-    Object.values(ProtocolIds)
-      .filter((protocolId) => protocolId.includes("-defi"))
-      .forEach((protocolId) => {
-        const foundProtocol = data.filter(
-          (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Defi,
-        );
+    Object.values(DefiProtocolIds).forEach((protocolId) => {
+      const foundProtocol = data.filter(
+        (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Defi,
+      );
 
-        expect(foundProtocol.length).toEqual(expectedLengthOfFoundDefiProtocols);
-        expect(foundProtocol[0].id).toEqual(protocolId);
-      });
+      expect(foundProtocol.length).toEqual(expectedLengthOfFoundDefiProtocols);
+      expect(foundProtocol[0].id).toEqual(protocolId);
+    });
   });
 
   it("Should have valid and unique slugs", () => {

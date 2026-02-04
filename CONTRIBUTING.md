@@ -8,6 +8,35 @@ If you’re here, you likely want to propose changes to our data — perhaps add
 
 Below, you’ll find detailed instructions for each contribution type. If your change doesn’t fit one of these categories, feel free to open a pull request (PR) and describe your proposal there.
 
+### Adding a new `Project`
+
+1. Define it as an independent constant in the [@/data/projects.ts](ensawards.org/src/data/projects.ts) file and then add the new project to the `PROJECTS` list in the same file.
+2. Follow its data model that you can look up in the [@/types/projects.ts](ensawards.org/src/types/projects.ts) file. You can also have a quick glance at it below.
+```typescript
+export interface Project {
+    id: ProjectId;
+    name: string;
+    description: string;
+    icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+    socials: {
+        website: URL;
+        twitter: URL;
+    };
+}
+```
+3. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsProjectIcon.tsx).
+4. You are welcome to propose updates to already added projects using the same approach.
+
+### Relationship between `Projects`, `Protocols` and `Apps`
+
+Although related, these entity types represent different real-world concepts.
+
+* `Protocols` refer to specific sets of deployed smart contracts.
+* `Apps` refer to specific software applications.
+* `Projects` represent a higher-level initiatives or organizations that might produce multiple related protocols and apps. A project can include multiple protocols and multiple apps.
+
+For this reason, every new `Protocol` must be associated with a corresponding `Project`. Our long-term goal is to enforce the same requirement for every `App`.
+
 ### Adding a new `Protocol`
 
 1. Define it as an independent constant in the [@/data/protocols.ts](ensawards.org/src/data/protocols.ts) file.
@@ -32,11 +61,11 @@ export interface ProtocolAbstract<ProtocolT extends ProtocolType> {
     twitterOgImagePath?: string;
 }
 
-export interface DAO extends ProtocolAbstract<typeof ProtocolTypes.Dao> {}
+export interface DAOProtocol extends ProtocolAbstract<typeof ProtocolTypes.Dao> {}
 
-export interface Defi extends ProtocolAbstract<typeof ProtocolTypes.Defi> {}
+export interface DefiProtocol extends ProtocolAbstract<typeof ProtocolTypes.Defi> {}
 
-export type Protocol = DAO | Defi;
+export type Protocol = DAOProtocol | DefiProtocol;
 
 ```
 
@@ -48,27 +77,7 @@ export type Protocol = DAO | Defi;
 
 4. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsDaoIcon.tsx).
 5. In your PR describe your reasoning for adding this `Protocol`.
-6. If you’re part of an existing DAO/Defi, you can also suggest updates to its details.
-
-### Adding a new `Project`
-
-1. Each new `Protocol` must have a corresponding `Project`.
-2. Define it as an independent constant in the [@/data/projects.ts](ensawards.org/src/data/projects.ts) file and then add the new project to the `PROJECTS` list in the same file.
-3. Follow its data model that you can look up in the [@/types/projects.ts](ensawards.org/src/types/projects.ts) file. You can also have a quick glance at it below.
-```typescript
-export interface Project {
-    id: ProjectId;
-    name: string;
-    description: string;
-    icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-    socials: {
-        website: URL;
-        twitter: URL;
-    };
-}
-```
-* Same as in the `Protocol`, you also have to include the project's icon. Please put it in the [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsProjectIcon.tsx).
-* If you are a part of an already added project feel free to suggest changes to any of its details.
+6. You are welcome to propose updates to existing protocols using the same approach.
 
 ### Add a new `Contract`
 
@@ -82,7 +91,7 @@ export interface Contract {
     cachedIdentity: ContractIdentityResolved;
 }
 ```
-* If you’re part of a project that owns any of the listed contracts, you may suggest updates, ex. let us know that you've named your contract.
+* Instead of adding entirely new contracts, you may also suggest updates, ex. let us know that a contract has been named.
 
 
 ### Add a new `App`
@@ -114,6 +123,7 @@ export interface App {
 > When your PR with a new `App` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
 4. In your PR describe your reasoning for adding that new `App`.
+5. You are welcome to propose updates to already added apps using the same approach.
 
 ### Add a new `Best Practice`
 

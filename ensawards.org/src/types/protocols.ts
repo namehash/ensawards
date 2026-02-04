@@ -5,22 +5,45 @@ import type { Name } from "@ensnode/ensnode-sdk";
 import { type ProtocolType, ProtocolTypes } from "@/types/bestPractices.ts";
 import type { Project } from "@/types/projects.ts";
 
-export const ProtocolIds = {
-  Ens: "protocol-ens-dao",
-  Uniswap: "protocol-uniswap-dao",
-  Nouns: "protocol-nouns-dao",
-  Arbitrum: "protocol-arbitrum-dao",
-  Aave: "protocol-aave-dao",
-  Taiko: "protocol-taiko-dao",
+export const DAOProtocolIds = {
+  EnsDao: "protocol-ens-dao",
+  UniswapDao: "protocol-uniswap-dao",
+  NounsDao: "protocol-nouns-dao",
+  ArbitrumDao: "protocol-arbitrum-dao",
+  AaveDao: "protocol-aave-dao",
+  TaikoDao: "protocol-taiko-dao",
 } as const;
 
 /**
- * The derived string union of possible {@link ProtocolIds}.
+ * The derived string union of possible {@link DAOProtocolIds}.
+ */
+export type DAOProtocolId = (typeof DAOProtocolIds)[keyof typeof DAOProtocolIds];
+
+export const DefiProtocolIds = {
+  Liquity: "protocol-liquity-defi",
+} as const;
+
+/**
+ * The derived string union of possible {@link DefiProtocolIds}.
+ */
+export type DefiProtocolId = (typeof DefiProtocolIds)[keyof typeof DefiProtocolIds];
+
+/**
+ * Combined {@link DAOProtocolIds} and {@link DefiProtocolIds}.
+ */
+export const ProtocolIds = {
+  ...DAOProtocolIds,
+  ...DefiProtocolIds,
+} as const;
+
+/**
+ * The union of all {@link DAOProtocolId} and {@link DefiProtocolId}
+ * representing all supported protocols.
  */
 export type ProtocolId = (typeof ProtocolIds)[keyof typeof ProtocolIds];
 
-export interface ProtocolAbstract<ProtocolT extends ProtocolType> {
-  id: ProtocolId;
+export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
+  id: ProtocolIdT;
   slug: string;
   protocolType: ProtocolT;
   project: Project; // each protocol belongs to a single project.
@@ -36,8 +59,8 @@ export interface ProtocolAbstract<ProtocolT extends ProtocolType> {
   twitterOgImagePath?: string;
 }
 
-export interface DAO extends ProtocolAbstract<typeof ProtocolTypes.Dao> {}
+export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.Dao> {}
 
-export interface Defi extends ProtocolAbstract<typeof ProtocolTypes.Defi> {}
+export interface DefiProtocol extends ProtocolAbstract<DefiProtocolId, typeof ProtocolTypes.Defi> {}
 
-export type Protocol = DAO | Defi;
+export type Protocol = DAOProtocol | DefiProtocol;
