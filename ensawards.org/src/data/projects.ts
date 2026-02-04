@@ -1,6 +1,7 @@
 import { AaveProjectIcon } from "@/components/atoms/icons/projects-and-protocols/AaveProjectIcon.tsx";
 import { ArbitrumProjectIcon } from "@/components/atoms/icons/projects-and-protocols/ArbitrumProjectIcon.tsx";
 import { EnsProjectIcon } from "@/components/atoms/icons/projects-and-protocols/EnsProjectIcon.tsx";
+import { LiquityIcon } from "@/components/atoms/icons/projects-and-protocols/LiquityIcon.tsx";
 import { NounsIcon } from "@/components/atoms/icons/projects-and-protocols/NounsIcon.tsx";
 import { TaikoIcon } from "@/components/atoms/icons/projects-and-protocols/TaikoIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/projects-and-protocols/UniswapIcon.tsx";
@@ -77,6 +78,17 @@ export const TaikoProject: Project = {
   },
 };
 
+export const LiquityProject: Project = {
+  id: ProjectIds.Liquity,
+  name: "Liquity",
+  description: "Defi protocol for borrowing against ETH & staked ETH.",
+  icon: LiquityIcon,
+  socials: {
+    twitter: new URL("https://x.com/LiquityProtocol"),
+    website: new URL("https://www.liquity.org/"),
+  },
+};
+
 /**
  * Array of supported projects.
  *
@@ -89,4 +101,5 @@ export const PROJECTS: Project[] = [
   ArbitrumProject,
   AaveProject,
   TaikoProject,
+  LiquityProject,
 ];

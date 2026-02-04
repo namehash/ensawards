@@ -1,6 +1,7 @@
 import { AaveDaoIcon } from "@/components/atoms/icons/projects-and-protocols/AaveDaoIcon.tsx";
 import { ArbitrumIcon } from "@/components/atoms/icons/projects-and-protocols/ArbitrumIcon.tsx";
 import { EnsDaoIcon } from "@/components/atoms/icons/projects-and-protocols/EnsDaoIcon.tsx";
+import { LiquityIcon } from "@/components/atoms/icons/projects-and-protocols/LiquityIcon.tsx";
 import { NounsIcon } from "@/components/atoms/icons/projects-and-protocols/NounsIcon.tsx";
 import { TaikoIcon } from "@/components/atoms/icons/projects-and-protocols/TaikoIcon.tsx";
 import { UniswapIcon } from "@/components/atoms/icons/projects-and-protocols/UniswapIcon.tsx";
@@ -8,6 +9,7 @@ import {
   AaveProject,
   ArbitrumProject,
   ENSProject,
+  LiquityProject,
   NounsProject,
   TaikoProject,
   UniswapProject,
@@ -17,6 +19,7 @@ import {
   type DAOProtocol,
   DAOProtocolIds,
   type DefiProtocol,
+  DefiProtocolIds,
   type Protocol,
 } from "@/types/protocols.ts";
 
@@ -34,8 +37,8 @@ export const ENSDao: DAOProtocol = {
     twitter: new URL("https://x.com/ENS_DAO"),
     ens: "ensdao.eth",
   },
-  ogImagePath: "https://ensawards.org/org-ens-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/org-ens-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/protocol-ens-dao_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-ens-dao_twitter_og_image.png",
 };
 
 export const UniswapDao: DAOProtocol = {
@@ -52,8 +55,8 @@ export const UniswapDao: DAOProtocol = {
     twitter: new URL("https://x.com/UniswapFND"),
     ens: "uniswap.eth",
   },
-  ogImagePath: "https://ensawards.org/org-uniswap-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/org-uniswap-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/protocol-uniswap-dao_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-uniswap-dao_twitter_og_image.png",
 };
 
 export const NounsDao: DAOProtocol = {
@@ -70,8 +73,8 @@ export const NounsDao: DAOProtocol = {
     twitter: new URL("https://x.com/nounsdao"),
     ens: "nouns.eth",
   },
-  ogImagePath: "https://ensawards.org/org-nouns-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/org-nouns-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/protocol-nouns-dao_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-nouns-dao_twitter_og_image.png",
 };
 
 export const ArbitrumDao: DAOProtocol = {
@@ -87,8 +90,8 @@ export const ArbitrumDao: DAOProtocol = {
     website: new URL("https://arbitrum.foundation/"),
     twitter: new URL("https://x.com/arbitrum"),
   },
-  ogImagePath: "https://ensawards.org/org-arbitrum-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/org-arbitrum-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/protocol-arbitrum-dao_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-arbitrum-dao_twitter_og_image.png",
 };
 
 export const AaveDao: DAOProtocol = {
@@ -105,8 +108,8 @@ export const AaveDao: DAOProtocol = {
     twitter: new URL("https://x.com/aave"),
     ens: "aave.eth",
   },
-  ogImagePath: "https://ensawards.org/org-aave-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/org-aave-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/protocol-aave-dao_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-aave-dao_twitter_og_image.png",
 };
 
 export const TaikoDao: DAOProtocol = {
@@ -123,8 +126,25 @@ export const TaikoDao: DAOProtocol = {
     twitter: new URL("https://x.com/taikoxyz"),
     ens: "taiko.eth",
   },
-  ogImagePath: "https://ensawards.org/org-taiko-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/org-taiko-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/protocol-taiko-dao_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-taiko-dao_twitter_og_image.png",
+};
+
+export const LiquityDefiProtocol: DefiProtocol = {
+  id: DefiProtocolIds.Liquity,
+  slug: "liquity",
+  protocolType: ProtocolTypes.Defi,
+  project: LiquityProject,
+  name: "Liquity Defi", //TODO: should it be just "Liquity"?
+  description: "Defi protocol for borrowing against ETH & staked ETH.",
+  icon: LiquityIcon,
+  socials: {
+    website: new URL("https://www.liquity.org/"),
+    twitter: new URL("https://x.com/LiquityProtocol"),
+    ens: "liquity-protocol.eth",
+  },
+  ogImagePath: "https://ensawards.org/protocol-liquity-defi_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-liquity-defi_twitter_og_image.png",
 };
 
 /**
@@ -147,7 +167,7 @@ export const DAO_PROTOCOLS: DAOProtocol[] = [
  *
  * Invariant: This array should contain exactly one {@link DefiProtocol} for each Defi protocol-related {@link ProtocolId}.
  */
-export const DEFI_PROTOCOLS: DefiProtocol[] = [];
+export const DEFI_PROTOCOLS: DefiProtocol[] = [LiquityDefiProtocol];
 
 /**
  * Array of supported protocols. Combines {@link DAO_PROTOCOLS} and {@link DEFI_PROTOCOLS}.
