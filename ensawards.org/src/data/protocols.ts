@@ -1,10 +1,10 @@
-import { AaveDaoIcon } from "@/components/atoms/icons/projects-and-protocols/AaveDaoIcon.tsx";
-import { ArbitrumIcon } from "@/components/atoms/icons/projects-and-protocols/ArbitrumIcon.tsx";
-import { EnsDaoIcon } from "@/components/atoms/icons/projects-and-protocols/EnsDaoIcon.tsx";
-import { LiquityIcon } from "@/components/atoms/icons/projects-and-protocols/LiquityIcon.tsx";
-import { NounsIcon } from "@/components/atoms/icons/projects-and-protocols/NounsIcon.tsx";
-import { TaikoIcon } from "@/components/atoms/icons/projects-and-protocols/TaikoIcon.tsx";
-import { UniswapIcon } from "@/components/atoms/icons/projects-and-protocols/UniswapIcon.tsx";
+import { AaveDaoIcon } from "@/components/atoms/icons/ens-integrating-entities/dao-protocols/AaveDaoIcon.tsx";
+import { ArbitrumDaoIcon } from "@/components/atoms/icons/ens-integrating-entities/dao-protocols/ArbitrumDaoIcon.tsx";
+import { EnsDaoIcon } from "@/components/atoms/icons/ens-integrating-entities/dao-protocols/EnsDaoIcon.tsx";
+import { LiquityIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/LiquityIcon.tsx";
+import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
+import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
+import { UniswapIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/UniswapIcon.tsx";
 import {
   AaveProject,
   ArbitrumProject,
@@ -85,7 +85,7 @@ export const ArbitrumDao: DAOProtocol = {
   name: "Arbitrum DAO",
   description:
     "The Arbitrum DAO provides governance for Arbitrum, a unified blockchain for everyone, where ideas thrive and boundaries fade.",
-  icon: ArbitrumIcon,
+  icon: ArbitrumDaoIcon,
   socials: {
     website: new URL("https://arbitrum.foundation/"),
     twitter: new URL("https://x.com/arbitrum"),

@@ -54,26 +54,24 @@ const daoScores = contractPipeline({
           <ItemsList
             header={`Top ${pluralizeBestPracticeTarget(appType)}`}
             containerStyles="gap-3 sm:gap-2 sm:justify-start max-sm:justify-center">
-            {rankedApps.map(({ app, score }, idx) => (
-              <LeaderboardCard
-                key={`${appType.toLowerCase()}-review-card-${app.id}`}
-                name={app.name}
-                ensAwardsScore={score}
-                viewDetailsLink={`/app/${app.slug}`}
-                viewDetailsText={`${appType} report`}>
-                <Image
-                  src={images[app.iconPath]()}
-                  alt={`${app.id}`}
-                  slot="appIcon"
-                  class="w-10 h-10 rounded-md"
-                />
-                <Image
-                  alt={`${idx + 1}-place`}
-                  src={images[placeIcons[idx]]()}
-                  slot="placeIcon"
-                />
-              </LeaderboardCard>
-            ))}
+            {rankedApps.map(({ app, score }, idx) => {
+              const AppIcon = app.icon;
+              return (
+                <LeaderboardCard
+                  key={`${appType.toLowerCase()}-review-card-${app.id}`}
+                  name={app.name}
+                  ensAwardsScore={score}
+                  viewDetailsLink={`/app/${app.slug}`}
+                  viewDetailsText={`${appType} report`}>
+                  <AppIcon slot="appIcon" className="w-10 h-10 rounded-md" />
+                  <Image
+                    alt={`${idx + 1}-place`}
+                    src={images[placeIcons[idx]]()}
+                    slot="placeIcon"
+                  />
+                </LeaderboardCard>
+              );
+            })}
             <a
               href={`/leaderboards/${appType.toLowerCase()}`}
               class={cn(

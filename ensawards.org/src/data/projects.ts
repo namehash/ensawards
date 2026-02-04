@@ -1,10 +1,10 @@
-import { AaveProjectIcon } from "@/components/atoms/icons/projects-and-protocols/AaveProjectIcon.tsx";
-import { ArbitrumProjectIcon } from "@/components/atoms/icons/projects-and-protocols/ArbitrumProjectIcon.tsx";
-import { EnsProjectIcon } from "@/components/atoms/icons/projects-and-protocols/EnsProjectIcon.tsx";
-import { LiquityIcon } from "@/components/atoms/icons/projects-and-protocols/LiquityIcon.tsx";
-import { NounsIcon } from "@/components/atoms/icons/projects-and-protocols/NounsIcon.tsx";
-import { TaikoIcon } from "@/components/atoms/icons/projects-and-protocols/TaikoIcon.tsx";
-import { UniswapIcon } from "@/components/atoms/icons/projects-and-protocols/UniswapIcon.tsx";
+import { AaveProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/AaveProjectIcon.tsx";
+import { ArbitrumProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/ArbitrumProjectIcon.tsx";
+import { EnsProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/EnsProjectIcon.tsx";
+import { LiquityIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/LiquityIcon.tsx";
+import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
+import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
+import { UniswapIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/UniswapIcon.tsx";
 import { type Project, ProjectIds } from "@/types/projects.ts";
 
 export const ENSProject: Project = {

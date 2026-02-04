@@ -1,3 +1,8 @@
+import { BlockscoutIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/BlockscoutIcon.tsx";
+import { CoinbaseWalletIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/CoinbaseWalletIcon.tsx";
+import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/EtherscanIcon.tsx";
+import { MetaMaskIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/MetaMaskIcon.tsx";
+import { RainbowWalletIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/RainbowWalletIcon.tsx";
 import { benchmarkers } from "@/data/benchmarkers.ts";
 import {
   displayNamedSmartContractsL2,
@@ -20,7 +25,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/rainbowdotme"),
       ens: "rainbowwallet.eth",
     },
-    iconPath: "/src/assets/rainbowIcon.svg",
+    icon: RainbowWalletIcon,
     benchmarks: [
       // {
       //   bestPractice: recognizeAllENSNames,
@@ -56,7 +61,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/coinbase"),
       ens: "coinbase.eth",
     },
-    iconPath: "/src/assets/coinbaseWalletIcon.svg",
+    icon: CoinbaseWalletIcon,
     benchmarks: [
       // {
       //   bestPractice: recognizeAllENSNames,
@@ -91,7 +96,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/MetaMask"),
       ens: "metamask.eth",
     },
-    iconPath: "/src/assets/metamaskIcon.svg",
+    icon: MetaMaskIcon,
     benchmarks: [
       // {
       //   bestPractice: recognizeAllENSNames,
@@ -126,7 +131,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/etherscan"),
       ens: "etherscan.eth",
     },
-    iconPath: "/src/assets/etherscanIcon.png",
+    icon: EtherscanIcon,
     benchmarks: [
       // {
       //   bestPractice: recognizeAllENSNames,
@@ -160,7 +165,7 @@ export const APPS: App[] = [
       website: new URL("https://www.blockscout.com/"),
       twitter: new URL("https://x.com/blockscout"),
     },
-    iconPath: "/src/assets/blockscoutIcon.jpg",
+    icon: BlockscoutIcon,
     benchmarks: [
       // {
       //   bestPractice: recognizeAllENSNames,

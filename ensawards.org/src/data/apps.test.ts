@@ -55,14 +55,6 @@ describe("App data", () => {
     });
   });
 
-  it("Should have non-empty iconPath", () => {
-    data.forEach((app) => {
-      expect(app.iconPath.length > 0, `IconPath for app with id={${app.id}} is empty`).toEqual(
-        true,
-      );
-    });
-  });
-
   it("Should have valid socials with URLs", () => {
     data.forEach((app) => {
       expect(

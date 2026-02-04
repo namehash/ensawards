@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
 import { APPS } from "../../data/apps";
 import { BenchmarkResult } from "../../types/benchmarks";
 import type { BestPracticeApp } from "../../types/bestPractices";
@@ -13,8 +11,6 @@ import BenchmarkResultCard from "../atoms/cards/BenchmarkResultCard.astro";
 import SuggestionCard from "../atoms/cards/SuggestionCard.astro";
 import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
-
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
 export interface AppBestPracticeDetailsProps {
   bestPractice: BestPracticeApp;
@@ -100,6 +96,7 @@ const appSupport = calculateAppSupport(bestPractice);
         {sortedAppsByBenchmark
           .filter(({ app }) => app.type === appliesTo)
           .map(({ app, benchmark }) => {
+            const AppIcon = app.icon;
             return (
               <BenchmarkResultCard
                 name={app.name}
@@ -116,11 +113,9 @@ const appSupport = calculateAppSupport(bestPractice);
                   }
                   client:load
                 />
-                <Image
-                  src={images[app.iconPath]()}
-                  alt={`${app.name}-logo`}
+                <AppIcon
                   slot="icon"
-                  class="shrink-0 rounded-md w-10 h-10"
+                  className="shrink-0 rounded-md w-10 h-10"
                 />
               </BenchmarkResultCard>
             );

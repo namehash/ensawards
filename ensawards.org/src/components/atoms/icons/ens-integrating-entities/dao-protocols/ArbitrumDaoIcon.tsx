@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ArbitrumIcon = (props: React.SVGProps<SVGSVGElement>) => (
+export const ArbitrumDaoIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     version="1.1"
     id="Layer_1"

@@ -24,7 +24,7 @@ export interface Project {
     };
 }
 ```
-3. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsProjectIcon.tsx).
+3. Include an icon as a React functional component inside [@/components/atoms/icons/ens-integrating-entities/](ensawards.org/src/components/atoms/icons/ens-integrating-entities/) directory. For reference, see [@/components/atoms/icons/ens-integrating-entities/projects/EnsProjectIcon.tsx](ensawards.org/src/components/atoms/icons/ens-integrating-entities/projects/EnsProjectIcon.tsx). Keep in mind that projects and the entities they include can share the same icon. In that case it should be placed in [@/components/atoms/icons/ens-integrating-entities/shared](ensawards.org/src/components/atoms/icons/ens-integrating-entities/shared) directory.
 4. You are welcome to propose updates to already added projects using the same approach.
 
 ### Relationship between `Projects`, `Protocols` and `Apps`
@@ -75,7 +75,7 @@ export type Protocol = DAOProtocol | DefiProtocol;
 >
 > When your PR with a new `Protocol` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
-4. Include an icon as a React functional component inside [@/components/atoms/icons/projects-and-protocols/](ensawards.org/src/components/atoms/icons/projects-and-protocols/) directory. For reference, see [@/components/atoms/icons/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/projects-and-protocols/EnsDaoIcon.tsx).
+4. Include an icon as a React functional component inside [@/components/atoms/icons/ens-integrating-entities/](ensawards.org/src/components/atoms/icons/ens-integrating-entities/) directory. For reference, see [@/components/atoms/icons/ens-integrating-entities/dao-protocols/EnsDaoIcon.tsx](ensawards.org/src/components/atoms/icons/ens-integrating-entities/dao-protocols/EnsDaoIcon.tsx). Keep in mind that projects and the entities they include can share the same icon. In that case it should be placed in [@/components/atoms/icons/ens-integrating-entities/shared](ensawards.org/src/components/atoms/icons/ens-integrating-entities/shared) directory.
 5. In your PR describe your reasoning for adding this `Protocol`.
 6. You are welcome to propose updates to existing protocols using the same approach.
 
@@ -105,7 +105,7 @@ export interface App {
     name: string;
     description: string;
     type: AppType;
-    iconPath: string;
+    icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
     benchmarks: AppBenchmark[];
     socials: {
         website: URL;
@@ -122,8 +122,9 @@ export interface App {
 > 
 > When your PR with a new `App` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
-4. In your PR describe your reasoning for adding that new `App`.
-5. You are welcome to propose updates to already added apps using the same approach.
+4. Include an icon as a React functional component inside [@/components/atoms/icons/ens-integrating-entities/apps/](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps) directory. For reference, see [@/components/atoms/icons/ens-integrating-entities/apps/RainbowWalletIcon.tsx](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps/RainbowWalletIcon.tsx). Keep in mind that projects and the entities they include can share the same icon. In that case it should be placed in [@/components/atoms/icons/ens-integrating-entities/shared](ensawards.org/src/components/atoms/icons/ens-integrating-entities/shared) directory.
+5. In your PR describe your reasoning for adding that new `App`.
+6. You are welcome to propose updates to already added apps using the same approach.
 
 ### Add a new `Best Practice`
 

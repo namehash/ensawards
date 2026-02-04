@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
 import LeaderboardSnippetCard from "../../components/atoms/cards/LeaderboardSnippetCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
@@ -17,8 +15,6 @@ import {
   pluralizeBestPracticeTarget,
 } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
-
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
 const daoScores = contractPipeline({
   filter: daoContractsOnly,
@@ -105,6 +101,7 @@ const referrerLeaderboardDescription =
                   )
                   .slice(0, 3)
                   .map((app, idx) => {
+                    const AppIcon = app.icon;
                     return (
                       <div
                         style={{ right: `${12 * idx}px` }}
@@ -112,11 +109,7 @@ const referrerLeaderboardDescription =
                           idx > 0 && "relative",
                           "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
                         )}>
-                        <Image
-                          src={images[app.iconPath]()}
-                          alt={`${app.id}`}
-                          class="w-10 h-10 rounded-md"
-                        />
+                        <AppIcon className="w-10 h-10 rounded-md" />
                       </div>
                     );
                   })}
