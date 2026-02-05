@@ -188,7 +188,7 @@ However, support for Astro files is still experimental. Currently, Biome only fo
 To ensure CI checks pass and the codebase is formatted correctly, run `pnpm lint` command from the repository root. This will run both Biome and Prettier formatting.
 
 > **NOTE (Windows users)**: After running these steps, you may see many diffs with `Contents have differences only in line separators` comment. 
-> 
+>
 > These files won't be included in your commit.
 > For easier self-review either ignore them or (if valid in your case) run the `git add --all` command. This normalizes line endings and removes those entries from the diff.
 
