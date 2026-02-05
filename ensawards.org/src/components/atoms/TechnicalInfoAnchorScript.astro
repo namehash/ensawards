@@ -1,0 +1,25 @@
+---
+---
+
+<script>
+  import { scrollWithOffset } from "../../utils/domActions";
+
+  class AnchorToTechnicalInfo extends HTMLElement {
+    connectedCallback() {
+      const scrollAnchor = document.getElementById(
+        `${this.dataset.id}-technical-info-anchor`,
+      );
+
+      if (!scrollAnchor) return;
+
+      scrollAnchor.addEventListener("click", (event) => {
+        event.preventDefault();
+        scrollWithOffset(`${this.dataset.id}-technical-info`, 60);
+      });
+    }
+  }
+
+  if (!customElements.get("technical-info-anchor")) {
+    customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
+  }
+</script>

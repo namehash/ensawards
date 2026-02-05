@@ -201,7 +201,7 @@ export interface AppBenchmark {
 }
 ```
 
-## Using `Biome` and `Prettier` Together
+## Using `Biome` and `Prettier` together
 
 We use `Biome` as our primary code formatter, and our long-term goal is to rely on it exclusively.
 
@@ -209,18 +209,14 @@ However, support for Astro files is still experimental. Currently, Biome only fo
 
 ### Applying both formatters
 
-In our CI, we validate formatting using Biome only. This is intentional because Prettier’s Astro support can produce false-positive formatting errors.
-
-To ensure CI checks pass and the codebase is formatted correctly, follow these steps:
-1. Run the `prettier` script from [ensawards.org/package.json](ensawards.org/package.json) or execute the `pnpm exec prettier . --write` command from inside the `ensawards.org` package (running this from the correct location is required).
-2. Run `pnpm lint` command from the repository root.
+To ensure CI checks pass and the codebase is formatted correctly, run `pnpm lint` command from the repository root. This will run both Biome and Prettier formatting.
 
 > **NOTE (Windows users)**: After running these steps, you may see many diffs with `Contents have differences only in line separators` comment. 
-> 
+>
 > These files won't be included in your commit.
 > For easier self-review either ignore them or (if valid in your case) run the `git add --all` command. This normalizes line endings and removes those entries from the diff.
 
-## Getting Help
+## Getting help
 
 If you have questions or need help, please:
 

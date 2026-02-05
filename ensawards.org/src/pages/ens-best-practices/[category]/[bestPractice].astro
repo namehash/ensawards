@@ -6,6 +6,7 @@ import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
 import { BestPracticeTypes } from "../../../types/bestPractices";
 import { getBestPracticeBySlug } from "../../../utils/dataAccess";
+import TechnicalInfoAnchorScript from "../../../components/atoms/TechnicalInfoAnchorScript.astro";
 export function getStaticPaths() {
   const staticPaths = [];
 
@@ -28,38 +29,19 @@ const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
   bestPracticeToDisplay === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
-  ) :
-  <Layout
+  ) : (
+    <Layout
       pageMetadata={{
-          title: `ENSAwards: ${bestPracticeToDisplay.name}`,
-          description: bestPracticeToDisplay.description,
-          url: `https://ensawards.org/ens-best-practices/${bestPracticeToDisplay.categorySlug}/${bestPracticeToDisplay.slug}`,
+        title: `ENSAwards: ${bestPracticeToDisplay.name}`,
+        description: bestPracticeToDisplay.description,
+        url: `https://ensawards.org/ens-best-practices/${bestPracticeToDisplay.categorySlug}/${bestPracticeToDisplay.slug}`,
       }}>
       {bestPracticeToDisplay.type === BestPracticeTypes.App ? (
         <AppBestPracticeDetails bestPractice={bestPracticeToDisplay} />
       ) : (
         <ProtocolBestPracticeDetails bestPractice={bestPracticeToDisplay} />
       )}
-      <script>
-      import {scrollWithOffset} from "../../../utils/domActions";
-      class AnchorToTechnicalInfo extends HTMLElement {
-      connectedCallback() {
-          const scrollAnchor = document.getElementById(
-              `${this.dataset.id}-technical-info-anchor`,
-          );
-
-          if (!scrollAnchor) return;
-
-          scrollAnchor.addEventListener("click", (event) => {
-              event.preventDefault();
-              scrollWithOffset(`${this.dataset.id}-technical-info`, 60);
-          });
-        }
-      }
-
-      if (!customElements.get("technical-info-anchor")) {
-          customElements.define("technical-info-anchor", AnchorToTechnicalInfo);
-      }
-      </script>
-  </Layout>
+      <TechnicalInfoAnchorScript />
+    </Layout>
+  )
 }
