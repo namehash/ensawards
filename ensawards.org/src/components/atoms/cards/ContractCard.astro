@@ -9,9 +9,12 @@ import { EnsManagerAppLink } from "../EnsManagerAppLink";
 import { SmartContractMetadata } from "../SmartContractMetadata";
 export interface ContractCardProps {
   contract: Contract;
+  className?: {
+    ensName?: string;
+  };
 }
 
-const { contract }: ContractCardProps = Astro.props;
+const { contract, className = { ensName: "sm:min-w-[225px]" } }: ContractCardProps = Astro.props;
 
 const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
   if (word.length < minLength) {
@@ -76,7 +79,10 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
     >
   </div>
   <div
-    class="sm:min-w-[225px] flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start">
+    class={cn(
+      "flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start",
+      className.ensName,
+    )}>
     <p
       class="text-sm leading-[20px] font-normal text-muted-foreground max-sm:min-w-[105px]">
       ENS name

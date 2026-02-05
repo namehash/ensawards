@@ -11,7 +11,6 @@ import {
   TrendingUp,
   Trophy,
 } from "@lucide/astro";
-import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import { TelegramIcon } from "@namehash/namehash-ui";
 
 import { SquareReplyIcon } from "@/components/atoms/icons/SquareReplyIcon.tsx";
@@ -20,7 +19,6 @@ import { type QuoteCardData } from "@/utils/types.ts";
 import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
 import VoicesFromTheCommunityBackgroundImage from "../assets/voicesFromTheCommunityBackground.png";
 import Web3NeedsToChangeImage from "../assets/web3UXNeedsToChangeImage.svg";
-import AlertCountdown from "../components/atoms/AlertCountdown.astro";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
 import QuoteCard from "../components/atoms/cards/QuoteCard.astro";
 import { EnscribeSolidIcon } from "../components/atoms/icons/EnscribeSolidIcon";
@@ -30,11 +28,11 @@ import ContractNamingIncentivesBanner from "../components/contract-naming-season
 import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAskedQuestions";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
-import { daoContractsOnly } from "../contract-pipelines/filters";
+import { daoContractsOnly, defiContractsOnly } from "../contract-pipelines/filters";
 import { sortProtocolLeaderboard } from "../contract-pipelines/sorting";
 import Layout from "../layouts/Layout.astro";
-import { DAOProtocolId } from "../types/protocols";
-import { getDaoByProtocolId } from "../utils/dataAccess";
+import { DAOProtocolId, ProtocolId } from "../types/protocols";
+import { getDaoByProtocolId, getProtocolById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 
 interface ContentItemData {
@@ -150,6 +148,11 @@ const daoScores = contractPipeline({
   filter: daoContractsOnly,
   sort: sortProtocolLeaderboard,
 });
+
+const defiScores = contractPipeline({
+  filter: defiContractsOnly,
+  sort: sortProtocolLeaderboard,
+});
 ---
 
 <Layout
@@ -161,20 +164,6 @@ const daoScores = contractPipeline({
     twitterImage:
       "https://ensawards.org/contract-naming-season_twitter_og_image.png",
   }}>
-  <AlertCountdown
-    slot="alertBanner"
-    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
-    eventText="ENS Holiday Awards ends in"
-    ctaText="Learn more"
-    link="/ens-referral-awards"
-    styles={{
-      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
-      cta: "text-white decoration-white/40 hover:decoration-white",
-      text: "text-white",
-      timer: "text-white",
-      timerLegend: "text-white",
-    }}
-  />
   <ContractNamingHero />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-10 gap-[60px] pt-6 sm:pt-0 pb-0 px-5 sm:px-8 overflow-hidden">
@@ -278,8 +267,8 @@ const daoScores = contractPipeline({
     <div
       class={cn(
         containerBaseStyles,
-        "sm:flex-row sm:flex-wrap gap-10 sm:min-h-[400px]",
-        "sm:bg-[url(/src/assets/getInspiredBackgroundImage.png)] bg-no-repeat bg-size-[auto_330px] bg-right",
+        "gap-10 sm:items-start",
+        "sm:bg-[url(/src/assets/getInspiredBackgroundImage.png)] bg-no-repeat bg-size-[auto_375px] bg-right",
       )}>
       <div
         class="w-full md:w-[calc(50%-40px)] flex flex-col justify-start items-start gap-5">
@@ -296,39 +285,79 @@ const daoScores = contractPipeline({
           protocol!
         </p>
       </div>
-      <LeaderboardSnippetCard
-        name="DAO leaderboard"
-        description="See how DAOs rank for following ENS best practices."
-        link="/leaderboards/dao">
-        <div
-          slot="bestResultsIcons"
-          class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
-          {
-            Object.entries(daoScores)
-              .slice(0, 3)
-              .map(([scoreCategory, value], idx) => {
-                const daoId = scoreCategory as DAOProtocolId;
-                const daoProtocol = getDaoByProtocolId(daoId);
-                const DaoIcon = daoProtocol.icon;
-                return (
-                  <div
-                    style={{ right: `${12 * idx}px` }}
-                    class={cn(
-                      idx > 0 && "relative",
-                      "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
-                    )}>
-                    <DaoIcon className="w-10 h-10 rounded-md" />
-                  </div>
-                );
-              })
-          }
-          <p
-            class="relative text-sm leading-normal font-medium text-muted-foreground"
-            style={{ right: "16px" }}>
-            + more
-          </p>
-        </div>
-      </LeaderboardSnippetCard>
+      <div
+        class="w-full h-fit flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-5">
+        <LeaderboardSnippetCard
+          name="DAO leaderboard"
+          description="See how DAOs rank for following ENS best practices."
+          link="/leaderboards/dao">
+          <div
+            slot="bestResultsIcons"
+            class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
+            {
+              Object.entries(daoScores)
+                .slice(0, 3)
+                .map(([scoreCategory, value], idx) => {
+                  const daoId = scoreCategory as DAOProtocolId;
+                  const daoProtocol = getDaoByProtocolId(daoId);
+                  const DaoIcon = daoProtocol.icon;
+                  return (
+                    <div
+                      style={{ right: `${12 * idx}px` }}
+                      class={cn(
+                        idx > 0 && "relative",
+                        "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
+                      )}>
+                      <DaoIcon className="w-10 h-10 rounded-md" />
+                    </div>
+                  );
+                })
+            }
+            <p
+              class="relative text-sm leading-normal font-medium text-muted-foreground"
+              style={{ right: "16px" }}>
+              + more
+            </p>
+          </div>
+        </LeaderboardSnippetCard>
+        <LeaderboardSnippetCard
+          name="Defi leaderboard"
+          description="See how Defi protocols rank for following ENS best practices."
+          link="/leaderboards/defi">
+          <div
+            slot="bestResultsIcons"
+            class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
+            {
+              Object.entries(defiScores)
+                .slice(0, 3)
+                .map(([scoreCategory, value], idx) => {
+                  const defiId = scoreCategory as ProtocolId;
+                  const defiProtocol = getProtocolById(defiId); //TODO: Make it Defi-only as part of Issue #119
+                  const DefiIcon = defiProtocol.icon;
+                  return (
+                    <div
+                      style={{ right: `${12 * idx}px` }}
+                      class={cn(
+                        idx > 0 && "relative",
+                        "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
+                      )}>
+                      <DefiIcon className="w-10 h-10 rounded-md" />
+                    </div>
+                  );
+                })
+            }
+            {
+              Object.entries(defiScores).length > 3 && (
+                <p
+                  class="relative text-sm leading-normal font-medium text-muted-foreground"
+                  style={{ right: "16px" }}>
+                  + more
+                </p>
+              )
+            }
+          </div>
+        </LeaderboardSnippetCard>
+      </div>
     </div>
     <!--TODO: After quote authors confirm they are happy with their quotes make a PR that only uncomments this section to "launch" it-->
     <!--<div-->

@@ -6,14 +6,14 @@ import LeaderboardCard from "../../components/atoms/cards/LeaderboardCard.astro"
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { contractPipeline } from "../../contract-pipelines";
-import { daoContractsOnly } from "../../contract-pipelines/filters";
+import { defiContractsOnly } from "../../contract-pipelines/filters";
 import { sortProtocolLeaderboard } from "../../contract-pipelines/sorting";
 import Layout from "../../layouts/Layout.astro";
-import { DAOProtocolId } from "../../types/protocols";
-import { getDaoByProtocolId } from "../../utils/dataAccess";
+import { ProtocolId } from "../../types/protocols";
+import { getProtocolById } from "../../utils/dataAccess";
 
-const daoScores = contractPipeline({
-  filter: daoContractsOnly,
+const defiScores = contractPipeline({
+  filter: defiContractsOnly,
   sort: sortProtocolLeaderboard,
 });
 
@@ -27,15 +27,15 @@ const placeIcons = [
 
 <Layout
   pageMetadata={{
-    title: "ENSAwards: ENS Leaderboard for DAO Integrations",
-    description: "See how DAOs score on ENS integration benchmarks.",
-    url: "https://ensawards.org/leaderboards/dao",
-    ogImage: "https://ensawards.org/dao_leaderboard_og_image.png",
-    twitterImage: "https://ensawards.org/dao_leaderboard_twitter_og_image.png",
+    title: "ENSAwards: ENS Leaderboard for Defi protocol Integrations",
+    description: "See how Defi protocols score on ENS integration benchmarks.",
+    url: "https://ensawards.org/leaderboards/defi",
+    ogImage: "https://ensawards.org/defi_leaderboard_og_image.png",
+    twitterImage: "https://ensawards.org/defi_leaderboard_twitter_og_image.png",
   }}>
   <SubpageHero
-    header="DAO leaderboard"
-    description="Compare DAOs by their rank of following a selection of ENS best practices."
+    header="Defi leaderboard"
+    description="Compare Defi protocols by their rank of following a selection of ENS best practices."
     breadcrumbs={["ENS leaderboards"]}
     customImage={{
       source: "/src/assets/leaderboardsHeroImage.png",
@@ -48,16 +48,16 @@ const placeIcons = [
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList containerStyles="gap-3 sm:gap-3">
       {
-        Object.entries(daoScores).map(([scoreCategory, value], idx) => {
-          const daoId = scoreCategory as DAOProtocolId;
-          const daoProtocol = getDaoByProtocolId(daoId);
-          const DaoIcon = daoProtocol.icon;
+        Object.entries(defiScores).map(([scoreCategory, value], idx) => {
+          const defiId = scoreCategory as ProtocolId; //TODO: Make it Defi-only as part of Issue #119
+          const defiProtocol = getProtocolById(defiId);
+          const DefiIcon = defiProtocol.icon;
           return (
             <LeaderboardCard
-              key={`dao-leaderboard-card-${daoProtocol.id}`}
-              name={daoProtocol.name}
+              key={`dao-leaderboard-card-${defiProtocol.id}`}
+              name={defiProtocol.name}
               ensAwardsScore={value}
-              viewDetailsLink={`/dao/${daoProtocol.slug}`}
+              viewDetailsLink={`/defi/${defiProtocol.slug}`}
               viewDetailsText="DAO report">
               {idx < 3 ? (
                 <Image
@@ -72,7 +72,7 @@ const placeIcons = [
                   {idx + 1}
                 </p>
               )}
-              <DaoIcon slot="appIcon" className="w-10 h-10 rounded-md" />
+              <DefiIcon slot="appIcon" className="w-10 h-10 rounded-md" />
             </LeaderboardCard>
           );
         })

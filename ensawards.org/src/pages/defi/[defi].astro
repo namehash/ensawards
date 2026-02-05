@@ -17,56 +17,56 @@ import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { contractPipeline } from "../../contract-pipelines";
-import { daoContractsOnly } from "../../contract-pipelines/filters";
+import { defiContractsOnly } from "../../contract-pipelines/filters";
 import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { CONTRACTS } from "../../data/contracts";
-import { DAO_PROTOCOLS } from "../../data/protocols";
+import { DEFI_PROTOCOLS } from "../../data/protocols";
 import Layout from "../../layouts/Layout.astro";
 import { Contract, ContractTypes } from "../../types/contracts";
-import { getDaoByProtocolSlug } from "../../utils/dataAccess";
+import { getDefiProtocolByProtocolSlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
 export function getStaticPaths() {
-  return DAO_PROTOCOLS.map((dao) => ({
-    params: { dao: dao.slug },
+  return DEFI_PROTOCOLS.map((defi) => ({
+    params: { defi: defi.slug },
   }));
 }
 
-const { dao } = Astro.params;
+const { defi } = Astro.params;
 
-const resolvedDao = getDaoByProtocolSlug(dao);
+const resolvedDefi = getDefiProtocolByProtocolSlug(defi);
 
 let protocolContracts: Contract[];
-let DaoIcon;
-let daoScore: number;
+let DefiIcon;
+let defiScore: number;
 
-if (resolvedDao) {
+if (resolvedDefi) {
   protocolContracts = CONTRACTS.filter(
-    (contract) => contract.protocol.id === resolvedDao.id && contract.type === ContractTypes.Dao,
+    (contract) => contract.protocol.id === resolvedDefi.id && contract.type === ContractTypes.Defi,
   );
-  DaoIcon = resolvedDao.icon;
-  daoScore = contractPipeline({ filter: daoContractsOnly })[resolvedDao.id];
+  DefiIcon = resolvedDefi.icon;
+  defiScore = contractPipeline({ filter: defiContractsOnly })[resolvedDefi.id];
 }
 ---
 
 {
-  resolvedDao === undefined ? (
+  resolvedDefi === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ${resolvedDao.name} ENS Integration Benchmarks`,
-        description: resolvedDao.description,
-        url: `https://ensawards.org/dao/${dao}`,
-        ogImage: resolvedDao.ogImagePath,
-        twitterImage: resolvedDao.twitterOgImagePath,
+        title: `ENSAwards: ${resolvedDefi.name} ENS Integration Benchmarks`,
+        description: resolvedDefi.description,
+        url: `https://ensawards.org/defi/${defi}`,
+        ogImage: resolvedDefi.ogImagePath,
+        twitterImage: resolvedDefi.twitterOgImagePath,
       }}>
       <SubpageHero
-        header={resolvedDao.name}
-        description={resolvedDao.description}
-        breadcrumbs={["ENS leaderboards", "DAO leaderboard"]}>
-        <DaoIcon
+        header={resolvedDefi.name}
+        description={resolvedDefi.description}
+        breadcrumbs={["ENS leaderboards", "Defi leaderboard"]}>
+        <DefiIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
@@ -74,20 +74,20 @@ if (resolvedDao) {
           slot="ctaContent"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
           <a
-            href={resolvedDao.socials.website}
+            href={resolvedDefi.socials.website}
             rel="noreferrer"
             target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
           <a
-            href={resolvedDao.socials.twitter}
+            href={resolvedDefi.socials.twitter}
             rel="noreferrer"
             target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
-          {resolvedDao.socials.ens && (
+          {resolvedDefi.socials.ens && (
             <a
-              href={`https://app.ens.domains/${encodeURIComponent(resolvedDao.socials.ens)}`}
+              href={`https://app.ens.domains/${encodeURIComponent(resolvedDefi.socials.ens)}`}
               rel="noreferrer"
               target="_blank">
               <EnsIcon
@@ -100,7 +100,7 @@ if (resolvedDao) {
         </div>
         <EnsAwardsScore
           slot="largerHeroItem"
-          score={daoScore}
+          score={defiScore}
           label="ENSAwards score"
         />
       </SubpageHero>
@@ -147,7 +147,10 @@ if (resolvedDao) {
                   </>
                 </div>
                 {sortedContracts.map((contract) => (
-                  <ContractCard contract={contract} />
+                  <ContractCard
+                    contract={contract}
+                    className={{ ensName: "sm:min-w-[310px]" }}
+                  />
                 ))}
               </>
             );
