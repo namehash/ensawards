@@ -69,7 +69,7 @@ const placeIcons = [
         Object.entries(daoScores).map(([scoreCategory, value], idx) => {
           const daoId = scoreCategory as DAOProtocolId;
           const daoProtocol = getDaoByProtocolId(daoId);
-          const DaoProtocolIcon = daoProtocol.icon;
+          const DaoIcon = daoProtocol.icon;
           return (
             <LeaderboardCard
               key={`dao-leaderboard-card-${daoProtocol.id}`}
@@ -90,10 +90,7 @@ const placeIcons = [
                   {idx + 1}
                 </p>
               )}
-              <DaoProtocolIcon
-                slot="appIcon"
-                className="w-10 h-10 rounded-md"
-              />
+              <DaoIcon slot="appIcon" className="w-10 h-10 rounded-md" />
             </LeaderboardCard>
           );
         })

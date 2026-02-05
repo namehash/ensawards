@@ -35,7 +35,7 @@ Although related, these entity types represent different real-world concepts.
 * `Apps` refer to specific software applications.
 * `Projects` represent a higher-level initiatives or organizations that might produce multiple related protocols and apps. A project can include multiple protocols and multiple apps.
 
-For this reason, every new `Protocol` must be associated with a corresponding `Project`. Our long-term goal is to enforce the same requirement for every `App`.
+For this reason, every new `Protocol` must be associated with a corresponding `Project`. We will soon enforce the same requirement for every `App`.
 
 ### Adding a new `Protocol`
 
@@ -91,7 +91,7 @@ export interface Contract {
     cachedIdentity: ContractIdentityResolved;
 }
 ```
-* Instead of adding entirely new contracts, you may also suggest updates, ex. let us know that a contract has been named.
+* In addition to adding entirely new contracts, you may also suggest updates, ex. let us know that a contract has been named.
 
 
 ### Add a new `App`

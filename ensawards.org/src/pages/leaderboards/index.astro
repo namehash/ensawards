@@ -61,7 +61,7 @@ const referrerLeaderboardDescription =
               .map(([scoreCategory, value], idx) => {
                 const daoId = scoreCategory as DAOProtocolId;
                 const daoProtocol = getDaoByProtocolId(daoId);
-                const DaoProtocolIcon = daoProtocol.icon;
+                const DaoIcon = daoProtocol.icon;
                 return (
                   <div
                     style={{ right: `${12 * idx}px` }}
@@ -69,7 +69,7 @@ const referrerLeaderboardDescription =
                       idx > 0 && "relative",
                       "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
                     )}>
-                    <DaoProtocolIcon className="w-10 h-10 rounded-md" />
+                    <DaoIcon className="w-10 h-10 rounded-md" />
                   </div>
                 );
               })

@@ -135,7 +135,7 @@ export const LiquityDefiProtocol: DefiProtocol = {
   slug: "liquity",
   protocolType: ProtocolTypes.Defi,
   project: LiquityProject,
-  name: "Liquity Defi", //TODO: should it be just "Liquity"?
+  name: "Liquity",
   description: "Defi protocol for borrowing against ETH & staked ETH.",
   icon: LiquityIcon,
   socials: {
