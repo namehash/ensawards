@@ -1,3 +1,5 @@
+import type { JSX } from "astro/jsx-runtime";
+
 import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { BestPractice } from "@/types/bestPractices.ts";
@@ -37,7 +39,7 @@ export interface App {
   name: string;
   description: string;
   type: AppType;
-  iconPath: string;
+  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
   benchmarks: AppBenchmark[];
   socials: {
     website: URL;

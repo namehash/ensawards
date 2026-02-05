@@ -1,6 +1,6 @@
 import { APPS } from "@/data/apps.ts";
 import { BEST_PRACTICE_CATEGORIES, BEST_PRACTICES } from "@/data/bestPractices.ts";
-import { ORGANIZATIONS } from "@/data/organizations.ts";
+import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
 import { type App, AppTypes } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks";
 import type {
@@ -9,15 +9,40 @@ import type {
   BestPracticeTarget,
 } from "@/types/bestPractices.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
-import type { Organization, OrgId } from "@/types/organizations.ts";
+import type {
+  DAOProtocol,
+  DAOProtocolId,
+  DefiProtocol,
+  DefiProtocolId,
+  Protocol,
+  ProtocolId,
+} from "@/types/protocols.ts";
 
-export const getOrgById = (orgId: OrgId): Organization => {
-  // biome-ignore lint/style/noNonNullAssertion: Because of invariant that ORGANIZATIONS array satisfies we are guaranteed to find corresponding org
-  return ORGANIZATIONS.find((org) => org.id === orgId)!;
+export const getProtocolById = (protocolId: ProtocolId): Protocol => {
+  // biome-ignore lint/style/noNonNullAssertion: Because of invariant that PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
+  return PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
 };
 
-export const getOrgBySlug = (orgSlug: string): Organization | undefined => {
-  return ORGANIZATIONS.find((org) => org.slug === orgSlug);
+export const getProtocolBySlug = (protocolSlug: string): Protocol | undefined => {
+  return PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
+};
+
+export const getDaoByProtocolId = (protocolId: DAOProtocolId): DAOProtocol => {
+  // biome-ignore lint/style/noNonNullAssertion: Because of invariant that DAO_PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
+  return DAO_PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
+};
+
+export const getDaoByProtocolSlug = (protocolSlug: string): DAOProtocol | undefined => {
+  return DAO_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
+};
+
+export const getDefiProtocolByProtocolId = (protocolId: DefiProtocolId): DefiProtocol => {
+  // biome-ignore lint/style/noNonNullAssertion: Because of invariant that DEFI_PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
+  return DEFI_PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
+};
+
+export const getDefiProtocolByProtocolSlug = (protocolSlug: string): DefiProtocol | undefined => {
+  return DEFI_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
 };
 
 export const getAppBySlug = (appSlug: string): App | undefined => {
@@ -133,10 +158,17 @@ export const calculateAppsPassed = (bestPractice: BestPractice): number => {
 export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
   Object.values(AppTypes).every((appType) => targets.includes(appType));
 
+/**
+ * Checks if the ENS best practice applies to all types that are specified in {@link ProtocolTypes}.
+ */
+export const appliesToAllProtocols = (targets: BestPracticeTarget[]): boolean =>
+  Object.values(ProtocolTypes).every((protocolType) => targets.includes(protocolType));
+
 const pluralizedBestPracticeTargets: Record<BestPracticeTarget, string> = {
   [AppTypes.Explorer]: "Explorers",
   [AppTypes.Wallet]: "Wallets",
   [ProtocolTypes.Dao]: "DAOs",
+  [ProtocolTypes.Defi]: "Defi Protocols",
 };
 
 export const pluralizeBestPracticeTarget = (target: BestPracticeTarget): string => {

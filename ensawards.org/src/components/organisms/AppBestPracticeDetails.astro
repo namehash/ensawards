@@ -1,0 +1,205 @@
+---
+import { APPS } from "../../data/apps";
+import { BenchmarkResult } from "../../types/benchmarks";
+import type { BestPracticeApp } from "../../types/bestPractices";
+import { calculateAppSupport, calculateAppsPassed } from "../../utils/dataAccess";
+import { markdownToHtml } from "../../utils/markdown";
+import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../utils/styles";
+import { cn } from "../../utils/tailwindClassConcatenation";
+import { BenchmarkResultBadge } from "../atoms/badges/BenchmarkResultBadge";
+import BenchmarkResultCard from "../atoms/cards/BenchmarkResultCard.astro";
+import SuggestionCard from "../atoms/cards/SuggestionCard.astro";
+import ItemsList from "../molecules/ItemsList.astro";
+import SubpageHero from "../molecules/SubpageHero.astro";
+
+export interface AppBestPracticeDetailsProps {
+  bestPractice: BestPracticeApp;
+}
+
+const { bestPractice }: AppBestPracticeDetailsProps = Astro.props;
+
+const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
+const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
+
+// Get apps that have benchmarks for this specific best practice
+const appsWithBenchmarks = APPS.map((app) => {
+  const matchingBenchmark = app.benchmarks.find(
+    (benchmark) =>
+      benchmark.bestPractice.categorySlug === bestPractice.categorySlug &&
+      benchmark.bestPractice.id === bestPractice.id,
+  );
+
+  return {
+    app,
+    benchmark: matchingBenchmark,
+  };
+});
+
+// Filter out apps that don't have a benchmark for this best practice
+const appsWithValidBenchmarks = appsWithBenchmarks.filter(
+  ({ benchmark }) => benchmark !== undefined,
+);
+
+// Declare sort order for benchmark result (Pass → Partial Pass → Fail)
+const resultOrder = {
+  [BenchmarkResult.Pass]: 0,
+  [BenchmarkResult.PartialPass]: 1,
+  [BenchmarkResult.Fail]: 2,
+};
+
+// Sort benchmark results
+const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
+  // First sort by result
+  const resultDiff = resultOrder[a.benchmark!.result] - resultOrder[b.benchmark!.result];
+  if (resultDiff !== 0) return resultDiff;
+  // Then sort alphabetically within those categories
+  return a.app.name.localeCompare(b.app.name);
+});
+
+const appsPassed = calculateAppsPassed(bestPractice);
+const appSupport = calculateAppSupport(bestPractice);
+---
+
+<SubpageHero
+  header={bestPractice.name}
+  description={bestPractice.description}
+  breadcrumbs={["ENS best practices", bestPractice.categoryName]}
+  additionalElements={[
+    {
+      name: "Category",
+      value: bestPractice.categoryName,
+      link: `/ens-best-practices/${bestPractice.categorySlug}`,
+    },
+    {
+      name: "Apps passed",
+      value: appsPassed,
+    },
+    {
+      name: "App support",
+      value: `${appSupport}%`,
+    },
+  ]}>
+  <technical-info-anchor
+    data-id={bestPractice.id}
+    href={`#${bestPractice.id}-technical-info`}
+    id={`${bestPractice.id}-technical-info-anchor`}
+    slot="technicalSectionAnchor"
+    class="text-white transition-all duration-200 decoration-white/40 hover:decoration-white underline underline-offset-[25%] decoration-from-font hover:cursor-pointer"
+    >Learn More
+  </technical-info-anchor>
+</SubpageHero>
+<section
+  class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8 gap-5 sm:gap-[60px]">
+  {
+    bestPractice.appliesTo.map((appliesTo) => (
+      <ItemsList header={`${appliesTo} benchmarks`} containerStyles="sm:gap-2">
+        {sortedAppsByBenchmark
+          .filter(({ app }) => app.type === appliesTo)
+          .map(({ app, benchmark }) => {
+            const AppIcon = app.icon;
+            return (
+              <BenchmarkResultCard
+                name={app.name}
+                notes={app.description}
+                viewDetails={{
+                  text: "App details",
+                  link: `/app/${app.slug}`,
+                }}>
+                <BenchmarkResultBadge
+                  slot="badge"
+                  benchmark={benchmark}
+                  className={
+                    BenchmarkResultToBadgeStyles.get(benchmark.result)!
+                  }
+                  client:load
+                />
+                <AppIcon
+                  slot="icon"
+                  className="shrink-0 rounded-md w-10 h-10"
+                />
+              </BenchmarkResultCard>
+            );
+          })}
+      </ItemsList>
+    ))
+  }
+  <div class="w-full max-w-[1216px] box-border h-fit">
+    <SuggestionCard whatsSuggested="benchmark result" />
+  </div>
+</section>
+<section
+  id={`${bestPractice.id}-technical-info`}
+  class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
+  <div
+    class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
+    <div
+      class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
+      <h2 class="text-2xl leading-none font-semibold text-black">
+        {bestPractice.technicalDetails.main.header}
+      </h2>
+      <p
+        class={technicalSectionContentStyles}
+        set:html={markdownToHtml(bestPractice.technicalDetails.main.content)}
+      />
+      {
+        bestPractice.technicalDetails.sides.map((additionalContent) => (
+          <>
+            <h3 class={technicalSectionMinorHeaderStyles}>
+              {additionalContent.header}
+            </h3>
+            <p
+              class={technicalSectionContentStyles}
+              set:html={markdownToHtml(additionalContent.content)}
+            />
+          </>
+        ))
+      }
+    </div>
+    <div
+      class="w-1/2 min-w-[300px] max-w-[420px] box-border h-fit hidden md:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
+      <h4 class={technicalSectionMinorHeaderStyles}>
+        {bestPractice.name}
+      </h4>
+      <p class={technicalSectionContentStyles}>
+        {bestPractice.description}
+      </p>
+      <div class="bg-gray-200 h-[1px] self-stretch"></div>
+      <div
+        class="w-full flex flex-row flex-wrap justify-between items-center gap-6">
+        <div
+          class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+          <p class="text-sm leading-normal font-normal text-muted-foreground">
+            Category
+          </p>
+          <a
+            href={`/ens-best-practices/${bestPractice.categorySlug}`}
+            class="text-sm leading-normal font-semibold text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200">
+            {bestPractice.categoryName}
+          </a>
+        </div>
+        <div
+          class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+          <p class="text-sm leading-normal font-normal text-muted-foreground">
+            Apps passed
+          </p>
+          <p class="text-sm leading-normal font-semibold text-black">
+            {appsPassed}
+          </p>
+        </div>
+        <div
+          class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
+          <p class="text-sm leading-normal font-normal text-muted-foreground">
+            App support
+          </p>
+          <p
+            class={cn(
+              "text-sm leading-normal font-semibold",
+              `text-${getAppSupportColor(appSupport)}`,
+            )}>
+            {appSupport}%
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

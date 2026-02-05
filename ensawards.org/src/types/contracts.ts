@@ -2,7 +2,7 @@ import type { Address, Chain } from "viem";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
-import type { Organization } from "@/types/organizations.ts";
+import type { Protocol } from "@/types/protocols.ts";
 
 export const ContractTypes = {
   Dao: "DAO",
@@ -241,7 +241,7 @@ export type ContractIdentity = ContractIdentityResolved | ContractIdentityUnreso
  * Describes a contract for use on the ENS Awards leaderboards.
  */
 export interface Contract {
-  org: Organization;
+  protocol: Protocol;
   type: ContractType;
   subtype: ContractSubtype;
 
