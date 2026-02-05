@@ -1,16 +1,18 @@
 import type { Contract, ContractSubtype, ContractType } from "@/types/contracts.ts";
-import type { OrgId } from "@/types/organizations.ts";
+import type { ProtocolId } from "@/types/protocols.ts";
 
-export type SupportedGroupByCategory = OrgId | ContractType | ContractSubtype;
+export type SupportedGroupByCategory = ProtocolId | ContractType | ContractSubtype;
 
-export function groupByOrg(contracts: Contract[]): Record<SupportedGroupByCategory, Contract[]> {
+export function groupByProtocol(
+  contracts: Contract[],
+): Record<SupportedGroupByCategory, Contract[]> {
   const groupedContracts = {} as Record<SupportedGroupByCategory, Contract[]>;
 
   contracts.forEach((contract) => {
-    if (contract.org.id in groupedContracts) {
-      groupedContracts[contract.org.id].push(contract);
+    if (contract.protocol.id in groupedContracts) {
+      groupedContracts[contract.protocol.id].push(contract);
     } else {
-      groupedContracts[contract.org.id] = [contract];
+      groupedContracts[contract.protocol.id] = [contract];
     }
   });
 

@@ -1,8 +1,8 @@
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds } from "@/types/contracts.ts";
-import type { OrgId } from "@/types/organizations.ts";
-import { getOrgById } from "@/utils/dataAccess.ts";
+import type { ProtocolId } from "@/types/protocols.ts";
+import { getProtocolById } from "@/utils/dataAccess.ts";
 
 /**
  * Sorts contracts by their resolution status in priority order.
@@ -14,7 +14,7 @@ import { getOrgById } from "@/utils/dataAccess.ts";
  * 4. Unresolved - Contracts that couldn't be resolved
  *
  * This is useful for displaying contracts in a way that highlights
- * organizations with better ENS adoption at the top of the list.
+ * protocols with better ENS adoption at the top of the list.
  *
  * @param contracts - Array of contracts to sort
  * @returns A new array of contracts sorted by resolution status
@@ -35,48 +35,48 @@ export function sortByResolutionStatus(contracts: Contract[]): Contract[] {
 }
 
 /**
- * Sorts DAO leaderboard entries with explicit tie-breaking rules.
+ * Sorts Protocol (DAO or Defi) leaderboard entries with explicit tie-breaking rules.
  *
  * Sort order:
  * 1. Primary: By ENS Awards score (descending)
- * 2. Tie-breaker 1: By number of DAO contracts (descending)
- * 3. Tie-breaker 2: By DAO display name (alphabetically)
+ * 2. Tie-breaker 1: By number of protocol contracts (descending)
+ * 3. Tie-breaker 2: By protocol display name (alphabetically)
  *
- * This ensures that when two DAOs have the same score, the DAO with more
+ * This ensures that when two protocols have the same score, the one with more
  * contracts ranks higher. If they also have the same number of contracts,
  * they are sorted alphabetically by name.
  *
- * @param scores - The calculated scores for each organization
+ * @param scores - The calculated scores for each protocol
  * @param groupedContracts - The grouped contracts used to calculate scores
- * @returns An array of [orgId, score] tuples in the desired sort order
+ * @returns An array of [protocolId, score] tuples in the desired sort order
  */
-export function sortDaoLeaderboard(
+export function sortProtocolLeaderboard(
   scores: Record<SupportedGroupByCategory, number>,
   groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
 ): [SupportedGroupByCategory, number][] {
   return Object.entries(scores)
     .map(
-      ([orgId, score]) =>
-        [orgId as SupportedGroupByCategory, score] as [SupportedGroupByCategory, number],
+      ([protocolId, score]) =>
+        [protocolId as SupportedGroupByCategory, score] as [SupportedGroupByCategory, number],
     )
-    .sort(([orgIdA, scoreA], [orgIdB, scoreB]) => {
+    .sort(([protocolIdA, scoreA], [protocolIdB, scoreB]) => {
       // Primary sort: by score (descending)
       if (scoreA !== scoreB) {
         return scoreB - scoreA;
       }
 
       // Tie-breaker 1: by number of contracts (descending)
-      const contractCountA = groupedContracts[orgIdA]?.length || 0;
-      const contractCountB = groupedContracts[orgIdB]?.length || 0;
+      const contractCountA = groupedContracts[protocolIdA]?.length || 0;
+      const contractCountB = groupedContracts[protocolIdB]?.length || 0;
 
       if (contractCountA !== contractCountB) {
         return contractCountB - contractCountA;
       }
 
       // Tie-breaker 2: by display name (alphabetically)
-      const orgA = getOrgById(orgIdA as OrgId);
-      const orgB = getOrgById(orgIdB as OrgId);
+      const protocolA = getProtocolById(protocolIdA as ProtocolId);
+      const protocolB = getProtocolById(protocolIdB as ProtocolId);
 
-      return orgA.name.localeCompare(orgB.name);
+      return protocolA.name.localeCompare(protocolB.name);
     });
 }

@@ -54,7 +54,7 @@ export const nameYourSmartContracts: BestPracticeProtocol = {
   description: "Upgrade security and UX when users interact with your smart contracts.",
   categoryName: "Contract naming",
   categorySlug: "contract-naming",
-  appliesTo: [ProtocolTypes.Dao],
+  appliesTo: [ProtocolTypes.Dao, ProtocolTypes.Defi],
   technicalDetails: {
     main: {
       header: "Technical Details",

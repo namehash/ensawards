@@ -31,10 +31,10 @@ import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAske
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { contractPipeline } from "../contract-pipelines";
 import { daoContractsOnly } from "../contract-pipelines/filters";
-import { sortDaoLeaderboard } from "../contract-pipelines/sorting";
+import { sortProtocolLeaderboard } from "../contract-pipelines/sorting";
 import Layout from "../layouts/Layout.astro";
-import { OrgId } from "../types/organizations";
-import { getOrgById } from "../utils/dataAccess";
+import { DAOProtocolId } from "../types/protocols";
+import { getDaoByProtocolId } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 
 interface ContentItemData {
@@ -148,7 +148,7 @@ const backgroundGreyStyles =
 
 const daoScores = contractPipeline({
   filter: daoContractsOnly,
-  sort: sortDaoLeaderboard,
+  sort: sortProtocolLeaderboard,
 });
 ---
 
@@ -307,9 +307,9 @@ const daoScores = contractPipeline({
             Object.entries(daoScores)
               .slice(0, 3)
               .map(([scoreCategory, value], idx) => {
-                const daoId = scoreCategory as OrgId;
-                const org = getOrgById(daoId);
-                const OrgIcon = org.icon;
+                const daoId = scoreCategory as DAOProtocolId;
+                const daoProtocol = getDaoByProtocolId(daoId);
+                const DaoIcon = daoProtocol.icon;
                 return (
                   <div
                     style={{ right: `${12 * idx}px` }}
@@ -317,7 +317,7 @@ const daoScores = contractPipeline({
                       idx > 0 && "relative",
                       "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
                     )}>
-                    <OrgIcon className="w-10 h-10 rounded-md" />
+                    <DaoIcon className="w-10 h-10 rounded-md" />
                   </div>
                 );
               })

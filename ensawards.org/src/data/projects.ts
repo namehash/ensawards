@@ -1,9 +1,10 @@
-import { AaveProjectIcon } from "@/components/atoms/icons/projects-and-daos/AaveProjectIcon.tsx";
-import { ArbitrumProjectIcon } from "@/components/atoms/icons/projects-and-daos/ArbitrumProjectIcon.tsx";
-import { EnsProjectIcon } from "@/components/atoms/icons/projects-and-daos/EnsProjectIcon.tsx";
-import { NounsIcon } from "@/components/atoms/icons/projects-and-daos/NounsIcon.tsx";
-import { TaikoIcon } from "@/components/atoms/icons/projects-and-daos/TaikoIcon.tsx";
-import { UniswapIcon } from "@/components/atoms/icons/projects-and-daos/UniswapIcon.tsx";
+import { AaveProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/AaveProjectIcon.tsx";
+import { ArbitrumProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/ArbitrumProjectIcon.tsx";
+import { EnsProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/EnsProjectIcon.tsx";
+import { LiquityIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/LiquityIcon.tsx";
+import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
+import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
+import { UniswapIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/UniswapIcon.tsx";
 import { type Project, ProjectIds } from "@/types/projects.ts";
 
 export const ENSProject: Project = {
@@ -77,6 +78,17 @@ export const TaikoProject: Project = {
   },
 };
 
+export const LiquityProject: Project = {
+  id: ProjectIds.Liquity,
+  name: "Liquity",
+  description: "Defi protocol for borrowing against ETH & staked ETH.",
+  icon: LiquityIcon,
+  socials: {
+    twitter: new URL("https://x.com/LiquityProtocol"),
+    website: new URL("https://www.liquity.org/"),
+  },
+};
+
 /**
  * Array of supported projects.
  *
@@ -89,4 +101,5 @@ export const PROJECTS: Project[] = [
   ArbitrumProject,
   AaveProject,
   TaikoProject,
+  LiquityProject,
 ];

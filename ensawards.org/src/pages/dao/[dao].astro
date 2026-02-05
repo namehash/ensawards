@@ -22,47 +22,47 @@ import { contractPipeline } from "../../contract-pipelines";
 import { daoContractsOnly } from "../../contract-pipelines/filters";
 import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { CONTRACTS } from "../../data/contracts";
-import { ORGANIZATIONS } from "../../data/organizations";
+import { DAO_PROTOCOLS } from "../../data/protocols";
 import Layout from "../../layouts/Layout.astro";
 import { Contract, ContractTypes } from "../../types/contracts";
-import { getOrgBySlug } from "../../utils/dataAccess";
+import { getDaoByProtocolSlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 
 export function getStaticPaths() {
-  return Object.values(ORGANIZATIONS).map((org) => ({
-    params: { dao: org.slug },
+  return DAO_PROTOCOLS.map((dao) => ({
+    params: { dao: dao.slug },
   }));
 }
 
 const { dao } = Astro.params;
 
-const resolvedOrg = getOrgBySlug(dao);
+const resolvedDao = getDaoByProtocolSlug(dao);
 
-let orgContracts: Contract[];
-let OrgIcon;
+let protocolContracts: Contract[];
+let DaoIcon;
 let daoScore: number;
 
-if (resolvedOrg) {
-  orgContracts = CONTRACTS.filter(
-    (contract) => contract.org.id === resolvedOrg.id && contract.type === ContractTypes.Dao,
+if (resolvedDao) {
+  protocolContracts = CONTRACTS.filter(
+    (contract) => contract.protocol.id === resolvedDao.id && contract.type === ContractTypes.Dao,
   );
-  OrgIcon = resolvedOrg.icon;
-  daoScore = contractPipeline({ filter: daoContractsOnly })[resolvedOrg.id];
+  DaoIcon = resolvedDao.icon;
+  daoScore = contractPipeline({ filter: daoContractsOnly })[resolvedDao.id];
 }
 ---
 
 {
-  resolvedOrg === undefined ? (
+  resolvedDao === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ${resolvedOrg.name} ENS Integration Benchmarks`,
-        description: resolvedOrg.description,
+        title: `ENSAwards: ${resolvedDao.name} ENS Integration Benchmarks`,
+        description: resolvedDao.description,
         url: `https://ensawards.org/dao/${dao}`,
-        ogImage: resolvedOrg.ogImagePath,
-        twitterImage: resolvedOrg.twitterOgImagePath,
+        ogImage: resolvedDao.ogImagePath,
+        twitterImage: resolvedDao.twitterOgImagePath,
       }}>
       <AlertCountdown
         slot="alertBanner"
@@ -80,10 +80,10 @@ if (resolvedOrg) {
         }}
       />
       <SubpageHero
-        header={resolvedOrg.name}
-        description={resolvedOrg.description}
+        header={resolvedDao.name}
+        description={resolvedDao.description}
         breadcrumbs={["ENS leaderboards", "DAO leaderboard"]}>
-        <OrgIcon
+        <DaoIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
@@ -91,20 +91,20 @@ if (resolvedOrg) {
           slot="ctaContent"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
           <a
-            href={resolvedOrg.socials.website}
+            href={resolvedDao.socials.website}
             rel="noreferrer"
             target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
           <a
-            href={resolvedOrg.socials.twitter}
+            href={resolvedDao.socials.twitter}
             rel="noreferrer"
             target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
-          {resolvedOrg.socials.ens && (
+          {resolvedDao.socials.ens && (
             <a
-              href={`https://app.ens.domains/${encodeURIComponent(resolvedOrg.socials.ens)}`}
+              href={`https://app.ens.domains/${encodeURIComponent(resolvedDao.socials.ens)}`}
               rel="noreferrer"
               target="_blank">
               <EnsIcon
@@ -136,7 +136,7 @@ if (resolvedOrg) {
             <EnscribeIcon />
           </a>
           {SUPPORTED_CHAINS.map((supportedChain, idx) => {
-            const contractsOnChain = orgContracts.filter(
+            const contractsOnChain = protocolContracts.filter(
               (contract) =>
                 contract.cachedIdentity.contract.chain.id === supportedChain.id,
             );
