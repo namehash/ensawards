@@ -177,7 +177,7 @@ export interface AppBenchmark {
 }
 ```
 
-## Using `Biome` and `Prettier` Together
+## Using `Biome` and `Prettier` together
 
 We use `Biome` as our primary code formatter, and our long-term goal is to rely on it exclusively.
 
@@ -192,7 +192,7 @@ To ensure CI checks pass and the codebase is formatted correctly, run `pnpm lint
 > These files won't be included in your commit.
 > For easier self-review either ignore them or (if valid in your case) run the `git add --all` command. This normalizes line endings and removes those entries from the diff.
 
-## Getting Help
+## Getting help
 
 If you have questions or need help, please:
 
