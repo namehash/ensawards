@@ -13,7 +13,7 @@
     "lint:ci": "pnpm exec prettier --check \"**/*.astro\" && biome ci",
     "test": "vitest",
     "test:cache": "vitest --run --testNamePattern=\"CachedIdentity\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "pnpm astro sync && tsc --noEmit"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
