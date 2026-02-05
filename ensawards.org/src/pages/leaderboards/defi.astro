@@ -54,11 +54,11 @@ const placeIcons = [
           const DefiIcon = defiProtocol.icon;
           return (
             <LeaderboardCard
-              key={`dao-leaderboard-card-${defiProtocol.id}`}
+              key={`defi-leaderboard-card-${defiProtocol.id}`}
               name={defiProtocol.name}
               ensAwardsScore={value}
               viewDetailsLink={`/defi/${defiProtocol.slug}`}
-              viewDetailsText="DAO report">
+              viewDetailsText="Defi report">
               {idx < 3 ? (
                 <Image
                   alt={`${idx + 1}-place`}
