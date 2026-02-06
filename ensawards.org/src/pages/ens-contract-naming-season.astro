@@ -16,7 +16,6 @@ import { TelegramIcon } from "@namehash/namehash-ui";
 import { SquareReplyIcon } from "@/components/atoms/icons/SquareReplyIcon.tsx";
 import { type QuoteCardData } from "@/utils/types.ts";
 
-import GetInspiredBackgroundImage from "../assets/getInspiredBackgroundImage.png";
 import VoicesFromTheCommunityBackgroundImage from "../assets/voicesFromTheCommunityBackground.png";
 import Web3NeedsToChangeImage from "../assets/web3UXNeedsToChangeImage.svg";
 import LeaderboardSnippetCard from "../components/atoms/cards/LeaderboardSnippetCard.astro";
@@ -264,14 +263,9 @@ const defiScores = contractPipeline({
         }
       </div>
     </div>
-    <div
-      class={cn(
-        containerBaseStyles,
-        "gap-10 sm:items-start",
-        "sm:bg-[url(/src/assets/getInspiredBackgroundImage.png)] bg-no-repeat bg-size-[auto_375px] bg-right",
-      )}>
+    <div class={cn(containerBaseStyles, "gap-10 sm:items-start")}>
       <div
-        class="w-full md:w-[calc(50%-40px)] flex flex-col justify-start items-start gap-5">
+        class="w-full md:w-[calc(50%-12px)] flex flex-col justify-start items-start gap-5">
         <h3
           class={cn(
             sectionHeaderBaseStyles,
@@ -281,12 +275,12 @@ const defiScores = contractPipeline({
         </h3>
         <p class={itemTextBaseStyles}>
           See examples for how other protocols are naming their smart contracts.
-          Join the race to the top of the ENSAwards leaderboards with your
+          Join&nbsp;the race to the top of the ENSAwards leaderboards with your
           protocol!
         </p>
       </div>
       <div
-        class="w-full h-fit flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-5">
+        class="w-full h-fit flex flex-col sm:flex-row sm:flex-wrap justify-center sm:justify-start items-center gap-5">
         <LeaderboardSnippetCard
           name="DAO leaderboard"
           description="See how DAOs rank for following ENS best practices."
