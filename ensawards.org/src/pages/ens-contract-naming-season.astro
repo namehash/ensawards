@@ -30,8 +30,8 @@ import { contractPipeline } from "../contract-pipelines";
 import { daoContractsOnly, defiContractsOnly } from "../contract-pipelines/filters";
 import { sortProtocolLeaderboard } from "../contract-pipelines/sorting";
 import Layout from "../layouts/Layout.astro";
-import { DAOProtocolId, ProtocolId } from "../types/protocols";
-import { getDaoByProtocolId, getProtocolById } from "../utils/dataAccess";
+import { DAOProtocolId, DefiProtocolId } from "../types/protocols";
+import { getDaoByProtocolId, getDefiProtocolByProtocolId } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 
 interface ContentItemData {
@@ -325,8 +325,8 @@ const defiScores = contractPipeline({
               Object.entries(defiScores)
                 .slice(0, 3)
                 .map(([scoreCategory, value], idx) => {
-                  const defiId = scoreCategory as ProtocolId;
-                  const defiProtocol = getProtocolById(defiId); //TODO: Make it Defi-only as part of Issue #119
+                  const defiId = scoreCategory as DefiProtocolId;
+                  const defiProtocol = getDefiProtocolByProtocolId(defiId);
                   const DefiIcon = defiProtocol.icon;
                   return (
                     <div

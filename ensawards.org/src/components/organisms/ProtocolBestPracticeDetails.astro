@@ -5,8 +5,8 @@ import { contractPipeline } from "../../contract-pipelines";
 import { daoContractsOnly, defiContractsOnly } from "../../contract-pipelines/filters";
 import { sortProtocolLeaderboard } from "../../contract-pipelines/sorting";
 import { type BestPracticeProtocol } from "../../types/bestPractices";
-import { DAOProtocolId, ProtocolId } from "../../types/protocols";
-import { getDaoByProtocolId, getProtocolById } from "../../utils/dataAccess";
+import { DAOProtocolId, DefiProtocolId } from "../../types/protocols";
+import { getDaoByProtocolId, getDefiProtocolByProtocolId } from "../../utils/dataAccess";
 import { markdownToHtml } from "../../utils/markdown";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import ContractNamingBanner from "../atoms/ContractNamingBanner.astro";
@@ -110,8 +110,8 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
   <ItemsList header="Defi Leaderboard" containerStyles="gap-3 sm:gap-3">
     {
       Object.entries(defiScores).map(([scoreCategory, value], idx) => {
-        const defiId = scoreCategory as ProtocolId; //TODO: Make it Defi-only as part of Issue #119
-        const defiProtocol = getProtocolById(defiId);
+        const defiId = scoreCategory as DefiProtocolId;
+        const defiProtocol = getDefiProtocolByProtocolId(defiId);
         const DefiIcon = defiProtocol.icon;
         return (
           <LeaderboardCard

@@ -145,14 +145,12 @@ const ensNameFieldStyles = new Map<DefiProtocolId, string>([
                     "h-fit w-full flex flex-row flex-nowrap justify-start items-center gap-4 pb-1 sm:pb-4",
                     idx > 0 && "pt-1 sm:pt-8",
                   )}>
-                  <>
-                    <span class="w-10 h-10 bg-white flex flex-col justify-center items-center rounded-lg border border-gray-200">
-                      <ChainIcon chainId={supportedChain.id} />
-                    </span>
-                    <h4 class="text-xl text-black leading-normal font-semibold">
-                      {getChainName(supportedChain.id)}
-                    </h4>
-                  </>
+                  <span class="w-10 h-10 bg-white flex flex-col justify-center items-center rounded-lg border border-gray-200">
+                    <ChainIcon chainId={supportedChain.id} />
+                  </span>
+                  <h4 class="text-xl text-black leading-normal font-semibold">
+                    {getChainName(supportedChain.id)}
+                  </h4>
                 </div>
                 {sortedContracts.map((contract) => (
                   <ContractCard
