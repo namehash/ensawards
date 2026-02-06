@@ -7,6 +7,7 @@ export const LiquityIcon = (props: React.SVGProps<SVGSVGElement>) => (
     viewBox="0 0 540 540"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    style={{ padding: "4px" }}
     {...props}
   >
     <ellipse cx="270" cy="270" rx="200" ry="200" fill="#95CBF3" />

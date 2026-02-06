@@ -9,11 +9,13 @@ interface LeaderboardSnippetCardProps {
 }
 
 const { name, description, link }: LeaderboardSnippetCardProps = Astro.props;
+
+const phrasesToRemainUnnormalized = ["DAO", "Defi"];
 ---
 
 <a
   href={link}
-  class="w-full min-lg:w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[175px] box-border
+  class="w-full min-lg:w-[calc(50%-12px)] max-w-[596px] h-fit min-h-[175px] box-border
         flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4
         rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer bg-white">
   <div
@@ -36,7 +38,12 @@ const { name, description, link }: LeaderboardSnippetCardProps = Astro.props;
           size: "default",
           className: "cursor-pointer rounded-full max-sm:self-stretch",
         }),
-      )}>View {name.includes("DAO") ? name : name.toLowerCase()}</button
+      )}
+      >View {
+        phrasesToRemainUnnormalized.some((phrase) => name.includes(phrase))
+          ? name
+          : name.toLowerCase()
+      }</button
     >
     <slot name="bestResultsIcons" />
   </div>

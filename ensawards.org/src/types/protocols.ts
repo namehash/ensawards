@@ -21,6 +21,8 @@ export type DAOProtocolId = (typeof DAOProtocolIds)[keyof typeof DAOProtocolIds]
 
 export const DefiProtocolIds = {
   Liquity: "protocol-liquity-defi",
+  Taiko: "protocol-taiko-defi",
+  Uniswap: "protocol-uniswap-defi",
 } as const;
 
 /**
