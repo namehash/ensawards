@@ -7,7 +7,9 @@ import {
   LiquityDefiProtocol,
   NounsDao,
   TaikoDao,
+  TaikoDefiProtocol,
   UniswapDao,
+  UniswapDefiProtocol,
 } from "@/data/protocols.ts";
 import {
   type Contract,
@@ -249,7 +251,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDao,
+    protocol: UniswapDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -262,7 +264,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDao,
+    protocol: UniswapDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -275,7 +277,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDao,
+    protocol: UniswapDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -288,7 +290,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDao,
+    protocol: UniswapDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -301,7 +303,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDao,
+    protocol: UniswapDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -314,7 +316,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDao,
+    protocol: UniswapDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -327,7 +329,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDao,
+    protocol: UniswapDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -869,7 +871,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -899,7 +901,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -913,7 +915,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -927,7 +929,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -940,7 +942,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -954,7 +956,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -968,7 +970,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -982,7 +984,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -995,7 +997,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1008,7 +1010,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1021,7 +1023,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1035,7 +1037,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1048,7 +1050,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1061,7 +1063,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1074,7 +1076,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1087,7 +1089,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1100,7 +1102,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1113,7 +1115,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1139,7 +1141,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -1166,7 +1168,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1179,7 +1181,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1192,7 +1194,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1205,7 +1207,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1218,7 +1220,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1231,7 +1233,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1244,7 +1246,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.DefiApp,
     cachedIdentity: {
@@ -1257,7 +1259,7 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDao,
+    protocol: TaikoDefiProtocol,
     type: ContractTypes.Defi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -1325,7 +1327,7 @@ export const CONTRACTS: Contract[] = [
   {
     protocol: LiquityDefiProtocol,
     type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {

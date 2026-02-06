@@ -25,6 +25,7 @@ import Layout from "../../layouts/Layout.astro";
 import { Contract, ContractTypes } from "../../types/contracts";
 import { getDefiProtocolByProtocolSlug } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
+import { DefiProtocolId, DefiProtocolIds } from "../../types/protocols";
 
 export function getStaticPaths() {
   return DEFI_PROTOCOLS.map((defi) => ({
@@ -47,6 +48,13 @@ if (resolvedDefi) {
   DefiIcon = resolvedDefi.icon;
   defiScore = contractPipeline({ filter: defiContractsOnly })[resolvedDefi.id];
 }
+
+// Special styling for `ENS name` field because some protocols' contracts have really long names.
+const ensNameFieldStyles = new Map<DefiProtocolId, string>([
+  [DefiProtocolIds.Liquity, "sm:min-w-[310px]"],
+  [DefiProtocolIds.Taiko, "sm:min-w-[245px]"],
+  [DefiProtocolIds.Uniswap, "sm:min-w-[225px]"],
+]);
 ---
 
 {
@@ -149,7 +157,12 @@ if (resolvedDefi) {
                 {sortedContracts.map((contract) => (
                   <ContractCard
                     contract={contract}
-                    className={{ ensName: "sm:min-w-[310px]" }}
+                    className={{
+                      ensName: cn(
+                        ensNameFieldStyles.get(resolvedDefi.id) ||
+                          "sm:min-w-[225px]",
+                      ),
+                    }}
                   />
                 ))}
               </>

@@ -8,11 +8,11 @@ import { sortProtocolLeaderboard } from "../../contract-pipelines/sorting";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppTypes } from "../../types/apps";
-import { DAOProtocolId, ProtocolId } from "../../types/protocols";
+import { DAOProtocolId, DefiProtocolId } from "../../types/protocols";
 import {
   calculateAppEnsAwardsScore,
   getDaoByProtocolId,
-  getProtocolById,
+  getDefiProtocolByProtocolId,
   pluralizeBestPracticeTarget,
 } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
@@ -145,8 +145,8 @@ const referrerLeaderboardDescription =
             Object.entries(defiScores)
               .slice(0, 3)
               .map(([scoreCategory, value], idx) => {
-                const defiId = scoreCategory as ProtocolId;
-                const defiProtocol = getProtocolById(defiId); //TODO: Make it Defi-only as part of Issue #119
+                const defiId = scoreCategory as DefiProtocolId;
+                const defiProtocol = getDefiProtocolByProtocolId(defiId);
                 const DefiIcon = defiProtocol.icon;
                 return (
                   <div

@@ -147,6 +147,42 @@ export const LiquityDefiProtocol: DefiProtocol = {
   twitterOgImagePath: "https://ensawards.org/protocol-liquity-defi_twitter_og_image.png",
 };
 
+export const UniswapDefiProtocol: DefiProtocol = {
+  id: DefiProtocolIds.Uniswap,
+  slug: "uniswap",
+  protocolType: ProtocolTypes.Defi,
+  project: UniswapProject,
+  name: "Uniswap",
+  description:
+    "Decentralized exchange protocol for swapping crypto tokens via automated market makers.", //TODO: improve(?!)
+  icon: UniswapIcon,
+  socials: {
+    website: new URL("https://app.uniswap.org/"),
+    twitter: new URL("https://x.com/Uniswap"),
+    //TODO: Should it have the same "ens" field as Uniswap DAO?
+  },
+  ogImagePath: "https://ensawards.org/protocol-uniswap-dao_og_image.png", // TODO: Need new OG images for the non-DAO option
+  twitterOgImagePath: "https://ensawards.org/protocol-uniswap-dao_twitter_og_image.png",
+};
+
+export const TaikoDefiProtocol: DefiProtocol = {
+  id: DefiProtocolIds.Taiko,
+  slug: "taiko",
+  protocolType: ProtocolTypes.Defi,
+  project: TaikoProject,
+  name: "Taiko",
+  description:
+    "Ethereum-equivalent zkRollup protocol enabling decentralized, permissionless Layer-2 scaling secured by Ethereum.", //TODO: improve(?!)
+  icon: TaikoIcon,
+  socials: {
+    website: new URL("https://taiko.xyz/"),
+    twitter: new URL("https://x.com/taikoxyz"),
+    //TODO: Should it have the same "ens" field as Taiko DAO?
+  },
+  ogImagePath: "https://ensawards.org/protocol-taiko-dao_og_image.png", // TODO: Need new OG images for the non-DAO option
+  twitterOgImagePath: "https://ensawards.org/protocol-taiko-dao_twitter_og_image.png",
+};
+
 /**
  * Array of supported DAO protocols.
  *
@@ -167,7 +203,11 @@ export const DAO_PROTOCOLS: DAOProtocol[] = [
  *
  * Invariant: This array should contain exactly one {@link DefiProtocol} for each Defi protocol-related {@link ProtocolId}.
  */
-export const DEFI_PROTOCOLS: DefiProtocol[] = [LiquityDefiProtocol];
+export const DEFI_PROTOCOLS: DefiProtocol[] = [
+  LiquityDefiProtocol,
+  UniswapDefiProtocol,
+  TaikoDefiProtocol,
+];
 
 /**
  * Array of supported protocols. Combines {@link DAO_PROTOCOLS} and {@link DEFI_PROTOCOLS}.
