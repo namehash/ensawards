@@ -16,7 +16,7 @@ export interface ContractCardProps {
 
 const { contract, className = { ensName: "sm:min-w-[225px]" } }: ContractCardProps = Astro.props;
 
-const breakLongWords = (word: string, breakRegex: string, minLength = 15): string[] => {
+const breakLongWords = (word: string, breakRegex: string | RegExp, minLength = 15): string[] => {
   if (word.length < minLength) {
     return [word];
   }
@@ -39,11 +39,12 @@ const breakLongWords = (word: string, breakRegex: string, minLength = 15): strin
   return result;
 };
 
+// The fallback should never be used. Only introduced for type safety.
 const ensNameForMobileDisplay =
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
     ? breakLongWords(contract.cachedIdentity.name, /(\.)/, 25)
-    : "unnamed contract";
+    : ["unnamed contract"];
 ---
 
 <div
