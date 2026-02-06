@@ -49,9 +49,9 @@ describe("protocols data", () => {
   });
 
   it("Should have valid and unique slugs for each ProtocolType", () => {
-    const data = [DAO_PROTOCOLS, DEFI_PROTOCOLS];
+    const protocolGroups = [DAO_PROTOCOLS, DEFI_PROTOCOLS];
 
-    data.forEach((protocolTypeData) => {
+    protocolGroups.forEach((protocolTypeData) => {
       const slugArray: string[] = [];
 
       protocolTypeData.forEach((protocol) => {
@@ -60,7 +60,10 @@ describe("protocols data", () => {
         slugArray.push(protocol.slug);
       });
 
-      expect(areStringsUnique(slugArray), `Slugs for protocols are not unique`).toEqual(true);
+      expect(
+        areStringsUnique(slugArray),
+        `Slugs for ${protocolTypeData[0]?.protocolType ?? "unknown"} protocols are not unique`,
+      ).toEqual(true);
     });
   });
 
