@@ -75,7 +75,7 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
 <section
   class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
   <ContractNamingBanner />
-  <ItemsList header="DAO Leaderboard" containerStyles="gap-3 sm:gap-3">
+  <ItemsList header="DAO Leaderboard" containerStyles="gap-3">
     {
       Object.entries(daoScores).map(([scoreCategory, value], idx) => {
         const daoId = scoreCategory as DAOProtocolId;
@@ -107,7 +107,7 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
       })
     }
   </ItemsList>
-  <ItemsList header="Defi Leaderboard" containerStyles="gap-3 sm:gap-3">
+  <ItemsList header="Defi Leaderboard" containerStyles="gap-3">
     {
       Object.entries(defiScores).map(([scoreCategory, value], idx) => {
         const defiId = scoreCategory as DefiProtocolId;

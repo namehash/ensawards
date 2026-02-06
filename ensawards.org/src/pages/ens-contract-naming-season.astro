@@ -291,7 +291,7 @@ const defiScores = contractPipeline({
             {
               Object.entries(daoScores)
                 .slice(0, 3)
-                .map(([scoreCategory, value], idx) => {
+                .map(([scoreCategory, _value], idx) => {
                   const daoId = scoreCategory as DAOProtocolId;
                   const daoProtocol = getDaoByProtocolId(daoId);
                   const DaoIcon = daoProtocol.icon;
@@ -324,7 +324,7 @@ const defiScores = contractPipeline({
             {
               Object.entries(defiScores)
                 .slice(0, 3)
-                .map(([scoreCategory, value], idx) => {
+                .map(([scoreCategory, _value], idx) => {
                   const defiId = scoreCategory as DefiProtocolId;
                   const defiProtocol = getDefiProtocolByProtocolId(defiId);
                   const DefiIcon = defiProtocol.icon;
