@@ -50,7 +50,7 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
   <div
     id="timerWrapper"
     style={{ display: "none" }}
-    class="flex flex-row flex-nowrap justify-start items-center gap-2">
+    class="flex flex-row flex-nowrap justify-start items-center gap-2.5">
     <div class="w-fit flex flex-col justify-center items-center gap-0">
       <p
         id="daysLeft"
@@ -61,7 +61,7 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
           "text-xs leading-tight font-normal opacity-60",
           styles?.timerLegend,
         )}>
-        Days
+        days
       </p>
     </div>
     <div class={cn("w-[1px] h-[45px] bg-white/20")}></div>
@@ -75,7 +75,7 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
           "text-xs leading-tight font-normal opacity-60",
           styles?.timerLegend,
         )}>
-        Hours
+        hours
       </p>
     </div>
     <div class={cn("w-[1px] h-[45px] bg-white/20")}></div>
@@ -89,7 +89,7 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
           "text-xs leading-tight font-normal opacity-50",
           styles?.timerLegend,
         )}>
-        Minutes
+        minutes
       </p>
     </div>
   </div>
