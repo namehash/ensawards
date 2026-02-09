@@ -8,8 +8,8 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
-import { AppType, AppTypes } from "../../types/apps";
-import { calculateAppEnsAwardsScore } from "../../utils/dataAccess";
+import { AppTypes } from "../../types/apps";
+import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "../../utils/dataAccess";
 import { normalizePhrase, pluralizeBestPracticeTarget } from "../../utils/textModifications";
 
 export function getStaticPaths() {
@@ -27,11 +27,7 @@ const placeIcons = [
   "/src/assets/thirdPlaceAward.svg",
 ];
 
-const pathToAppType = new Map<string, AppType>([]);
-
-Object.values(AppTypes).forEach((appType) => pathToAppType.set(normalizePhrase(appType), appType));
-
-const resolvedAppType = pathToAppType.get(appType);
+const resolvedAppType = getAppTypeBySlug(appType);
 
 // The fallbacks should never be used. Only introduced for type safety.
 const normalizedAppType = resolvedAppType ? normalizePhrase(resolvedAppType) : "-";

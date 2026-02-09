@@ -5,7 +5,7 @@ import { sortProtocolLeaderboard } from "@/contract-pipelines/sorting.ts";
 import { APPS } from "@/data/apps.ts";
 import { BEST_PRACTICE_CATEGORIES, BEST_PRACTICES } from "@/data/bestPractices.ts";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
-import { type App, AppTypes } from "@/types/apps.ts";
+import { type App, type AppType, AppTypes } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks";
 import type {
   BestPractice,
@@ -56,14 +56,22 @@ export const getDeFiProtocolByProtocolSlug = (protocolSlug: string): DeFiProtoco
   return DEFI_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
 };
 
-const ProtocolTypeSlugToProtocolType = new Map<string, ProtocolType>([
+const ProtocolTypeSlugMapping = new Map<string, ProtocolType>([
   ["dao", ProtocolTypes.DAO],
   ["defi", ProtocolTypes.DeFi],
 ]);
 
 export const getProtocolTypeBySlug = (protocolTypeSlug: string): ProtocolType | undefined => {
-  return ProtocolTypeSlugToProtocolType.get(protocolTypeSlug);
+  return ProtocolTypeSlugMapping.get(protocolTypeSlug);
 };
+
+const AppTypeSlugMapping = new Map<string, AppType>([
+  ["wallet", AppTypes.Wallet],
+  ["explorer", AppTypes.Explorer],
+]);
+
+export const getAppTypeBySlug = (appTypeSlug: string): AppType | undefined =>
+  AppTypeSlugMapping.get(appTypeSlug);
 
 export const getAppBySlug = (appSlug: string): App | undefined => {
   return APPS.find((app) => app.slug === appSlug);
