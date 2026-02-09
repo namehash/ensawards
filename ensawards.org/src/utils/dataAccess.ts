@@ -198,7 +198,11 @@ export const getContractNamingScoresByProtocolType = (
 ): Record<SupportedGroupByCategory, number> => {
   const filter = contractPipelineFilterByProtocolType.get(protocolType);
 
-  //if the filter for a given ProtocolType is undefined, proceed without it
+  // if the filter for a given ProtocolType is undefined throw an error
+  if (filter === undefined) {
+    throw new Error(`No contract pipeline filter registered for ProtocolType: ${protocolType}`);
+  }
+
   return contractPipeline({
     filter: filter,
     sort: sortProtocolLeaderboard,

@@ -21,8 +21,5 @@ const ensNameFieldStyles = new Map<ProtocolId, string>([
   [DeFiProtocolIds.Taiko, "sm:min-w-[245px]"],
 ]);
 
-export const getENSNameFieldStyles = (protocolId: ProtocolId): string => {
-  const fieldStyles = ensNameFieldStyles.get(protocolId);
-
-  return fieldStyles !== undefined ? fieldStyles : "sm:min-w-[225px]";
-};
+export const getENSNameFieldStyles = (protocolId: ProtocolId): string =>
+  ensNameFieldStyles.get(protocolId) ?? "sm:min-w-[225px]";

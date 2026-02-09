@@ -83,7 +83,7 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
                 name={protocol.name}
                 ensAwardsScore={value}
                 viewDetailsLink={`/${protocolPathParameter}/${protocol.slug}`}
-                viewDetailsText={`${protocolType} ${protocolType !== ProtocolTypes.DAO ? "protocol" : ""} report`}>
+                viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                 {idx < 3 ? (
                   <Image
                     alt={`${idx + 1}-place`}

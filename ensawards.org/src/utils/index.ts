@@ -3,8 +3,6 @@ import type { Address } from "viem";
 
 import type { OmnichainIndexingStatusId, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
-import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
-
 /**
  * Checks whether a given string is a valid slug.
  * A valid slug:

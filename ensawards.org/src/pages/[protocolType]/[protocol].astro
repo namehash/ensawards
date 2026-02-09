@@ -68,7 +68,8 @@ if (resolvedProtocolType) {
 if (resolvedProtocol && resolvedProtocolType) {
   protocolContracts = CONTRACTS.filter((contract) => contract.protocol.id === resolvedProtocol.id);
   ProtocolIcon = resolvedProtocol.icon;
-  protocolScore = getContractNamingScoresByProtocolType(resolvedProtocolType)[resolvedProtocol.id];
+  protocolScore =
+    getContractNamingScoresByProtocolType(resolvedProtocolType)[resolvedProtocol.id] ?? 0;
 }
 ---
 

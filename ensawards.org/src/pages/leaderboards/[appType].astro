@@ -29,7 +29,7 @@ const placeIcons = [
 
 const pathToAppType = new Map<string, AppType>([]);
 
-Object.values(AppTypes).forEach((appType) => pathToAppType.set(appType.toLowerCase(), appType));
+Object.values(AppTypes).forEach((appType) => pathToAppType.set(normalizePhrase(appType), appType));
 
 const resolvedAppType = pathToAppType.get(appType);
 
