@@ -18,15 +18,15 @@ import { ProtocolTypes } from "@/types/bestPractices.ts";
 import {
   type DAOProtocol,
   DAOProtocolIds,
-  type DefiProtocol,
-  DefiProtocolIds,
+  type DeFiProtocol,
+  DeFiProtocolIds,
   type Protocol,
 } from "@/types/protocols.ts";
 
 export const ENSDao: DAOProtocol = {
   id: DAOProtocolIds.EnsDao,
   slug: "ens",
-  protocolType: ProtocolTypes.Dao,
+  protocolType: ProtocolTypes.DAO,
   project: ENSProject,
   name: "ENS DAO",
   description:
@@ -44,7 +44,7 @@ export const ENSDao: DAOProtocol = {
 export const UniswapDao: DAOProtocol = {
   id: DAOProtocolIds.UniswapDao,
   slug: "uniswap",
-  protocolType: ProtocolTypes.Dao,
+  protocolType: ProtocolTypes.DAO,
   project: UniswapProject,
   name: "Uniswap DAO",
   description:
@@ -62,7 +62,7 @@ export const UniswapDao: DAOProtocol = {
 export const NounsDao: DAOProtocol = {
   id: DAOProtocolIds.NounsDao,
   slug: "nouns",
-  protocolType: ProtocolTypes.Dao,
+  protocolType: ProtocolTypes.DAO,
   project: NounsProject,
   name: "Nouns DAO",
   description:
@@ -80,7 +80,7 @@ export const NounsDao: DAOProtocol = {
 export const ArbitrumDao: DAOProtocol = {
   id: DAOProtocolIds.ArbitrumDao,
   slug: "arbitrum",
-  protocolType: ProtocolTypes.Dao,
+  protocolType: ProtocolTypes.DAO,
   project: ArbitrumProject,
   name: "Arbitrum DAO",
   description:
@@ -97,7 +97,7 @@ export const ArbitrumDao: DAOProtocol = {
 export const AaveDao: DAOProtocol = {
   id: DAOProtocolIds.AaveDao,
   slug: "aave",
-  protocolType: ProtocolTypes.Dao,
+  protocolType: ProtocolTypes.DAO,
   project: AaveProject,
   name: "Aave DAO",
   description:
@@ -115,7 +115,7 @@ export const AaveDao: DAOProtocol = {
 export const TaikoDao: DAOProtocol = {
   id: DAOProtocolIds.TaikoDao,
   slug: "taiko",
-  protocolType: ProtocolTypes.Dao,
+  protocolType: ProtocolTypes.DAO,
   project: TaikoProject,
   name: "Taiko DAO",
   description:
@@ -130,13 +130,13 @@ export const TaikoDao: DAOProtocol = {
   twitterOgImagePath: "https://ensawards.org/protocol-taiko-dao_twitter_og_image.png",
 };
 
-export const LiquityDefiProtocol: DefiProtocol = {
-  id: DefiProtocolIds.Liquity,
+export const LiquityDeFiProtocol: DeFiProtocol = {
+  id: DeFiProtocolIds.Liquity,
   slug: "liquity",
-  protocolType: ProtocolTypes.Defi,
+  protocolType: ProtocolTypes.DeFi,
   project: LiquityProject,
   name: "Liquity",
-  description: "Defi protocol for borrowing against ETH & staked ETH.",
+  description: "DeFi protocol for borrowing against ETH & staked ETH.",
   icon: LiquityIcon,
   socials: {
     website: new URL("https://www.liquity.org/"),
@@ -147,37 +147,37 @@ export const LiquityDefiProtocol: DefiProtocol = {
   twitterOgImagePath: "https://ensawards.org/protocol-liquity-defi_twitter_og_image.png",
 };
 
-export const UniswapDefiProtocol: DefiProtocol = {
-  id: DefiProtocolIds.Uniswap,
+export const UniswapDeFiProtocol: DeFiProtocol = {
+  id: DeFiProtocolIds.Uniswap,
   slug: "uniswap",
-  protocolType: ProtocolTypes.Defi,
+  protocolType: ProtocolTypes.DeFi,
   project: UniswapProject,
   name: "Uniswap",
   description:
-    "Decentralized exchange protocol for swapping crypto tokens via automated market makers.", //TODO: improve(?!)
+    "Decentralized exchange protocol for swapping crypto tokens via automated market makers.",
   icon: UniswapIcon,
   socials: {
     website: new URL("https://app.uniswap.org/"),
     twitter: new URL("https://x.com/Uniswap"),
-    //TODO: Should it have the same "ens" field as Uniswap DAO?
+    ens: "uniswap.eth",
   },
   ogImagePath: "https://ensawards.org/protocol-uniswap-defi_og_image.png",
   twitterOgImagePath: "https://ensawards.org/protocol-uniswap-defi_twitter_og_image.png",
 };
 
-export const TaikoDefiProtocol: DefiProtocol = {
-  id: DefiProtocolIds.Taiko,
+export const TaikoDeFiProtocol: DeFiProtocol = {
+  id: DeFiProtocolIds.Taiko,
   slug: "taiko",
-  protocolType: ProtocolTypes.Defi,
+  protocolType: ProtocolTypes.DeFi,
   project: TaikoProject,
   name: "Taiko",
   description:
-    "Ethereum-equivalent zkRollup protocol enabling decentralized, permissionless Layer-2 scaling secured by Ethereum.", //TODO: improve(?!)
+    "Ethereum-equivalent zkRollup protocol enabling decentralized, permissionless Layer-2 scaling secured by Ethereum.",
   icon: TaikoIcon,
   socials: {
     website: new URL("https://taiko.xyz/"),
     twitter: new URL("https://x.com/taikoxyz"),
-    //TODO: Should it have the same "ens" field as Taiko DAO?
+    ens: "taiko.eth",
   },
   ogImagePath: "https://ensawards.org/protocol-taiko-defi_og_image.png",
   twitterOgImagePath: "https://ensawards.org/protocol-taiko-defi_twitter_og_image.png",
@@ -199,14 +199,14 @@ export const DAO_PROTOCOLS: DAOProtocol[] = [
 ];
 
 /**
- * Array of supported Defi protocols.
+ * Array of supported DeFi protocols.
  *
- * Invariant: This array should contain exactly one {@link DefiProtocol} for each Defi protocol-related {@link ProtocolId}.
+ * Invariant: This array should contain exactly one {@link DeFiProtocol} for each DeFi protocol-related {@link ProtocolId}.
  */
-export const DEFI_PROTOCOLS: DefiProtocol[] = [
-  LiquityDefiProtocol,
-  UniswapDefiProtocol,
-  TaikoDefiProtocol,
+export const DEFI_PROTOCOLS: DeFiProtocol[] = [
+  LiquityDeFiProtocol,
+  UniswapDeFiProtocol,
+  TaikoDeFiProtocol,
 ];
 
 /**

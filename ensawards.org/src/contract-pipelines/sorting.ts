@@ -35,7 +35,7 @@ export function sortByResolutionStatus(contracts: Contract[]): Contract[] {
 }
 
 /**
- * Sorts Protocol (DAO or Defi) leaderboard entries with explicit tie-breaking rules.
+ * Sorts Protocol (DAO or DeFi) leaderboard entries with explicit tie-breaking rules.
  *
  * Sort order:
  * 1. Primary: By ENS Awards score (descending)

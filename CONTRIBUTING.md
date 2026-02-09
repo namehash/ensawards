@@ -41,7 +41,7 @@ For this reason, every new `Protocol` must be associated with a corresponding `P
 
 1. Define it as an independent constant in the [@/data/protocols.ts](ensawards.org/src/data/protocols.ts) file.
 2. Add it to the `DAO_PROTOCOLS` or `DEFI_PROTOCOLS` list in the same file appropriately to its type.
-3. Make sure to follow its data model that you can look up in the [@/types/protocols.ts](ensawards.org/src/types/protocols.ts) file. Remember that the Protocol can represent either a `DAO` or a `Defi protocol`. Below you can see its most important interface and type:
+3. Make sure to follow its data model that you can look up in the [@/types/protocols.ts](ensawards.org/src/types/protocols.ts) file. Remember that the Protocol can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:
 
 ```typescript
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
@@ -61,11 +61,11 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
     twitterOgImagePath?: string;
 }
 
-export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.Dao> {}
+export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.DAO> {}
 
-export interface DefiProtocol extends ProtocolAbstract<DefiProtocolId, typeof ProtocolTypes.Defi> {}
+export interface DeFiProtocol extends ProtocolAbstract<DeFiProtocolId, typeof ProtocolTypes.DeFi> {}
 
-export type Protocol = DAOProtocol | DefiProtocol;
+export type Protocol = DAOProtocol | DeFiProtocol;
 
 ```
 

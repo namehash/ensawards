@@ -7,6 +7,7 @@ import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { ContractBadge } from "../badges/ContractBadge";
 import { EnsManagerAppLink } from "../EnsManagerAppLink";
 import { SmartContractMetadata } from "../SmartContractMetadata";
+import { breakLongWords } from "../../../utils/textModifications";
 export interface ContractCardProps {
   contract: Contract;
   className?: {
@@ -16,35 +17,17 @@ export interface ContractCardProps {
 
 const { contract, className = { ensName: "sm:min-w-[225px]" } }: ContractCardProps = Astro.props;
 
-const breakLongWords = (word: string, breakRegex: string | RegExp, minLength = 15): string[] => {
-  if (word.length < minLength) {
-    return [word];
-  }
-
-  const elements = word.split(breakRegex);
-  const result: string[] = [];
-  let current = elements[0];
-
-  for (let i = 1; i < elements.length; i++) {
-    const next = elements[i];
-    if ((current + next).length < minLength) {
-      current += next; // merge if still short
-    } else {
-      result.push(current);
-      current = next;
-    }
-  }
-
-  if (current) result.push(current);
-  return result;
-};
-
 // The fallback should never be used. Only introduced for type safety.
 const ensNameForMobileDisplay =
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
     ? breakLongWords(contract.cachedIdentity.name, /(\.)/, 25)
     : ["unnamed contract"];
+
+const contractCodeNameForMobileDisplay = breakLongWords(
+  contract.cachedIdentity.contract.codeName,
+  /(?=[A-Z])/,
+);
 ---
 
 <div
@@ -65,10 +48,7 @@ const ensNameForMobileDisplay =
     <div
       class="sm:hidden flex flex-col justify-start items-start gap-0 max-sm:min-w-[105px]">
       {
-        breakLongWords(
-          contract.cachedIdentity.contract.codeName,
-          /(?=[A-Z])/,
-        ).map((word) => (
+        contractCodeNameForMobileDisplay.map((word) => (
           <p class="text-sm leading-normal font-normal text-muted-foreground">
             {word}
           </p>

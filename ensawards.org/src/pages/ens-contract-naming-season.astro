@@ -30,9 +30,11 @@ import { contractPipeline } from "../contract-pipelines";
 import { daoContractsOnly, defiContractsOnly } from "../contract-pipelines/filters";
 import { sortProtocolLeaderboard } from "../contract-pipelines/sorting";
 import Layout from "../layouts/Layout.astro";
-import { DAOProtocolId, DefiProtocolId } from "../types/protocols";
-import { getDaoByProtocolId, getDefiProtocolByProtocolId } from "../utils/dataAccess";
+import { ProtocolId } from "../types/protocols";
+import { getContractNamingScoresByProtocolType, getProtocolById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
+import { ProtocolTypes } from "../types/bestPractices";
+import { normalizePhrase, pluralizeBestPracticeTarget } from "../utils/textModifications";
 
 interface ContentItemData {
   name: string;
@@ -142,16 +144,6 @@ const itemHeadersBaseStyles = "text-lg leading-normal font-semibold text-black";
 const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-foreground";
 const backgroundGreyStyles =
   "absolute w-screen h-full box-border py-6 sm:py-[50px] bg-neutral-50 bottom-0";
-
-const daoScores = contractPipeline({
-  filter: daoContractsOnly,
-  sort: sortProtocolLeaderboard,
-});
-
-const defiScores = contractPipeline({
-  filter: defiContractsOnly,
-  sort: sortProtocolLeaderboard,
-});
 ---
 
 <Layout
@@ -281,76 +273,48 @@ const defiScores = contractPipeline({
       </div>
       <div
         class="w-full h-fit flex flex-col sm:flex-row sm:flex-wrap justify-center sm:justify-start items-center gap-5">
-        <LeaderboardSnippetCard
-          name="DAO leaderboard"
-          description="See how DAOs rank for following ENS best practices."
-          link="/leaderboards/dao">
-          <div
-            slot="bestResultsIcons"
-            class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
-            {
-              Object.entries(daoScores)
-                .slice(0, 3)
-                .map(([scoreCategory, _value], idx) => {
-                  const daoId = scoreCategory as DAOProtocolId;
-                  const daoProtocol = getDaoByProtocolId(daoId);
-                  const DaoIcon = daoProtocol.icon;
-                  return (
-                    <div
-                      style={{ right: `${12 * idx}px` }}
-                      class={cn(
-                        idx > 0 && "relative",
-                        "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
-                      )}>
-                      <DaoIcon className="w-10 h-10 rounded-md" />
-                    </div>
-                  );
-                })
-            }
-            <p
-              class="relative text-sm leading-normal font-medium text-muted-foreground"
-              style={{ right: "16px" }}>
-              + more
-            </p>
-          </div>
-        </LeaderboardSnippetCard>
-        <LeaderboardSnippetCard
-          name="Defi leaderboard"
-          description="See how Defi protocols rank for following ENS best practices."
-          link="/leaderboards/defi">
-          <div
-            slot="bestResultsIcons"
-            class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
-            {
-              Object.entries(defiScores)
-                .slice(0, 3)
-                .map(([scoreCategory, _value], idx) => {
-                  const defiId = scoreCategory as DefiProtocolId;
-                  const defiProtocol = getDefiProtocolByProtocolId(defiId);
-                  const DefiIcon = defiProtocol.icon;
-                  return (
-                    <div
-                      style={{ right: `${12 * idx}px` }}
-                      class={cn(
-                        idx > 0 && "relative",
-                        "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
-                      )}>
-                      <DefiIcon className="w-10 h-10 rounded-md" />
-                    </div>
-                  );
-                })
-            }
-            {
-              Object.entries(defiScores).length > 3 && (
-                <p
-                  class="relative text-sm leading-normal font-medium text-muted-foreground"
-                  style={{ right: "16px" }}>
-                  + more
-                </p>
-              )
-            }
-          </div>
-        </LeaderboardSnippetCard>
+        {
+          Object.values(ProtocolTypes).map((protocolType) => {
+            const protocolScores =
+              getContractNamingScoresByProtocolType(protocolType);
+
+            return (
+              <LeaderboardSnippetCard
+                name={`${protocolType} leaderboard`}
+                description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
+                link={`/leaderboards/${normalizePhrase(protocolType)}`}>
+                <div
+                  slot="bestResultsIcons"
+                  class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
+                  {Object.entries(protocolScores)
+                    .slice(0, 3)
+                    .map(([scoreCategory, _value], idx) => {
+                      const protocolId = scoreCategory as ProtocolId;
+                      const protocol = getProtocolById(protocolId);
+                      const ProtocolIcon = protocol.icon;
+                      return (
+                        <div
+                          style={{ right: `${12 * idx}px` }}
+                          class={cn(
+                            idx > 0 && "relative",
+                            "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
+                          )}>
+                          <ProtocolIcon className="w-10 h-10 rounded-md" />
+                        </div>
+                      );
+                    })}
+                  {Object.entries(protocolScores).length > 3 && (
+                    <p
+                      class="relative text-sm leading-normal font-medium text-muted-foreground"
+                      style={{ right: "16px" }}>
+                      + more
+                    </p>
+                  )}
+                </div>
+              </LeaderboardSnippetCard>
+            );
+          })
+        }
       </div>
     </div>
     <!--TODO: After quote authors confirm they are happy with their quotes make a PR that only uncomments this section to "launch" it-->

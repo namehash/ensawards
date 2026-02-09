@@ -4,12 +4,12 @@ import {
   AaveDao,
   ArbitrumDao,
   ENSDao,
-  LiquityDefiProtocol,
+  LiquityDeFiProtocol,
   NounsDao,
   TaikoDao,
-  TaikoDefiProtocol,
+  TaikoDeFiProtocol,
   UniswapDao,
-  UniswapDefiProtocol,
+  UniswapDeFiProtocol,
 } from "@/data/protocols.ts";
 import {
   type Contract,
@@ -21,7 +21,7 @@ import {
 export const CONTRACTS: Contract[] = [
   {
     protocol: ENSDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -35,7 +35,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -49,7 +49,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -63,7 +63,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -77,7 +77,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -91,7 +91,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -105,7 +105,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -119,7 +119,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -133,7 +133,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -147,7 +147,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -161,7 +161,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -174,7 +174,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -187,7 +187,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -200,7 +200,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -213,7 +213,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -226,7 +226,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -239,7 +239,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -251,9 +251,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: UniswapDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -264,9 +264,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: UniswapDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -277,9 +277,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: UniswapDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -290,9 +290,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: UniswapDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -303,9 +303,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: UniswapDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -316,9 +316,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: UniswapDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -329,9 +329,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: UniswapDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: UniswapDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -343,8 +343,8 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.DefiApp,
+    type: ContractTypes.DAO,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "auction.nouns.eth",
@@ -357,7 +357,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -371,7 +371,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -385,7 +385,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -399,8 +399,8 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.DefiApp,
+    type: ContractTypes.DAO,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "rewards.nouns.eth",
@@ -413,8 +413,8 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.DefiApp,
+    type: ContractTypes.DAO,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "traits.nouns.eth",
@@ -427,7 +427,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -441,8 +441,8 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.Dao,
-    subtype: ContractSubtypes.DefiApp,
+    type: ContractTypes.DAO,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "streams.nouns.eth",
@@ -455,7 +455,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -468,7 +468,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -481,7 +481,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -494,7 +494,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -507,7 +507,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -520,7 +520,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -533,7 +533,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -546,7 +546,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -559,7 +559,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -572,7 +572,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -585,7 +585,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -598,7 +598,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -611,7 +611,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -624,7 +624,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -637,7 +637,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -650,7 +650,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -663,7 +663,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -676,7 +676,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -689,7 +689,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -702,7 +702,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -715,7 +715,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -728,7 +728,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -741,7 +741,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -754,7 +754,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -767,7 +767,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -780,7 +780,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -793,7 +793,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -806,7 +806,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -819,7 +819,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -832,7 +832,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -845,7 +845,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: AaveDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -858,7 +858,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: TaikoDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -871,9 +871,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -885,7 +885,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: TaikoDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -901,9 +901,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -915,9 +915,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -929,9 +929,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -942,9 +942,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -956,9 +956,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -970,9 +970,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -984,9 +984,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -997,9 +997,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1010,9 +1010,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1023,9 +1023,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -1037,9 +1037,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1050,9 +1050,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1063,9 +1063,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1076,9 +1076,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1089,9 +1089,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1102,9 +1102,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1115,9 +1115,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1129,7 +1129,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: TaikoDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -1141,8 +1141,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -1155,7 +1155,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     protocol: TaikoDao,
-    type: ContractTypes.Dao,
+    type: ContractTypes.DAO,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
@@ -1168,9 +1168,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1181,9 +1181,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1194,9 +1194,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1207,9 +1207,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1220,9 +1220,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1233,9 +1233,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1246,9 +1246,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1259,8 +1259,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: TaikoDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: TaikoDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -1272,8 +1272,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -1286,8 +1286,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -1299,8 +1299,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -1312,8 +1312,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -1325,8 +1325,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -1338,9 +1338,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1352,9 +1352,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1365,9 +1365,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1378,9 +1378,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1391,9 +1391,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1404,9 +1404,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1417,9 +1417,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1430,9 +1430,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1444,9 +1444,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1457,9 +1457,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1470,9 +1470,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1483,9 +1483,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1497,9 +1497,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1511,9 +1511,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1525,9 +1525,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1538,9 +1538,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1551,9 +1551,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1564,9 +1564,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1577,9 +1577,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1590,9 +1590,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1604,9 +1604,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1617,9 +1617,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1630,9 +1630,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1643,9 +1643,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1657,9 +1657,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1670,9 +1670,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1683,9 +1683,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1696,9 +1696,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1710,9 +1710,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1724,9 +1724,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1738,9 +1738,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1751,9 +1751,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1764,9 +1764,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1777,9 +1777,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1790,9 +1790,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1803,9 +1803,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1817,9 +1817,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1830,9 +1830,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1843,9 +1843,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1856,9 +1856,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1870,9 +1870,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1883,9 +1883,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1896,9 +1896,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1909,9 +1909,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1923,9 +1923,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1937,9 +1937,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -1951,9 +1951,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1964,9 +1964,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1977,9 +1977,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -1990,9 +1990,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -2003,9 +2003,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -2016,9 +2016,9 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
-    subtype: ContractSubtypes.DefiApp,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
+    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -2030,8 +2030,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -2044,8 +2044,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -2057,8 +2057,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -2070,8 +2070,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -2083,8 +2083,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -2096,8 +2096,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -2109,8 +2109,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -2122,8 +2122,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -2135,8 +2135,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
@@ -2148,8 +2148,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
@@ -2162,8 +2162,8 @@ export const CONTRACTS: Contract[] = [
     },
   },
   {
-    protocol: LiquityDefiProtocol,
-    type: ContractTypes.Defi,
+    protocol: LiquityDeFiProtocol,
+    type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,

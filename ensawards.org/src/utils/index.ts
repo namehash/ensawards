@@ -39,44 +39,6 @@ export const areStringsUnique = (stringArray: string[]): boolean => {
   return true;
 };
 
-export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
-  switch (whatsSuggested) {
-    case "app":
-      return "Want to add an app? Suggest the app for review or add the app review yourself on GitHub.";
-
-    case "best practice":
-      return "Want to add best practice? Suggest it for review or add it yourself on GitHub.";
-
-    case "benchmark result":
-      return "Benchmark result updates to report? Notify us of the change or update it yourself on GitHub.";
-
-    case "dao":
-      return "Want to add a DAO? Suggest the DAO for review or add the DAO review yourself on GitHub.";
-
-    case "contract":
-      return "Contracts to add or update? Notify us of the change or update it yourself on GitHub.";
-
-    default:
-      throw new Error(`${whatsSuggested} is not a valid suggestion category`);
-  }
-};
-
-export const capitalizeFormLabel = (label: string): string => {
-  //Special treatment for URL field
-  if (label === "url") {
-    return label.toUpperCase();
-  }
-
-  return capitalizeText(label);
-};
-
-export const capitalizeText = (text: string): string => {
-  return text.charAt(0).toUpperCase() + text.slice(1);
-};
-
-export const truncateAddress = (address: Address) =>
-  `${address.slice(0, 6)}...${address.slice(-4)}`;
-
 /**
  * Date marking the approximate end of the ENS contract naming season event.
  * April 30th 2026 at 23:59:59 UTC

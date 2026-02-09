@@ -24,7 +24,7 @@ export function filterByContractType(contractType: ContractType) {
  * Use this filter when building DAO leaderboards to ensure only DAO governance
  * contracts are included in the scoring calculations.
  */
-export const daoContractsOnly = filterByContractType(ContractTypes.Dao);
+export const daoContractsOnly = filterByContractType(ContractTypes.DAO);
 
 /**
  * Pre-configured filter for DeFi contracts only.
@@ -32,4 +32,4 @@ export const daoContractsOnly = filterByContractType(ContractTypes.Dao);
  * Use this filter when building DeFi protocol leaderboards to ensure only
  * DeFi protocol contracts are included in the scoring calculations.
  */
-export const defiContractsOnly = filterByContractType(ContractTypes.Defi);
+export const defiContractsOnly = filterByContractType(ContractTypes.DeFi);

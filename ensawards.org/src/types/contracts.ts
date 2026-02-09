@@ -5,8 +5,8 @@ import type { Name } from "@ensnode/ensnode-sdk";
 import type { Protocol } from "@/types/protocols.ts";
 
 export const ContractTypes = {
-  Dao: "DAO",
-  Defi: "DeFi",
+  DAO: "DAO",
+  DeFi: "DeFi",
 } as const;
 
 /**
@@ -16,7 +16,7 @@ export type ContractType = (typeof ContractTypes)[keyof typeof ContractTypes];
 
 export const ContractSubtypes = {
   Governance: "Governance",
-  DefiApp: "DeFi App",
+  DeFiApp: "DeFi App",
   Utility: "Utility",
 } as const;
 

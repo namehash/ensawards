@@ -19,8 +19,8 @@ import {
   contractSuggestionFormSchema,
 } from "@/components/molecules/contact-form/validation.ts";
 import type { ValidationErrors } from "@/components/molecules/form/types.ts";
-import { capitalizeFormLabel } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { capitalizeFormLabel } from "@/utils/textModifications.ts";
 
 interface FormProps {
   whatsSuggested: PossibleSuggestions;

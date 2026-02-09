@@ -9,11 +9,12 @@ import DataLoadingError from "../../components/organisms/DataLoadingError.astro"
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppType, AppTypes } from "../../types/apps";
-import { calculateAppEnsAwardsScore, pluralizeBestPracticeTarget } from "../../utils/dataAccess";
+import { calculateAppEnsAwardsScore } from "../../utils/dataAccess";
+import { normalizePhrase, pluralizeBestPracticeTarget } from "../../utils/textModifications";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({
-    params: { appType: appType.toLowerCase() },
+    params: { appType: normalizePhrase(appType) },
   }));
 }
 
@@ -31,6 +32,12 @@ const pathToAppType = new Map<string, AppType>([]);
 Object.values(AppTypes).forEach((appType) => pathToAppType.set(appType.toLowerCase(), appType));
 
 const resolvedAppType = pathToAppType.get(appType);
+
+// The fallbacks should never be used. Only introduced for type safety.
+const normalizedAppType = resolvedAppType ? normalizePhrase(resolvedAppType) : "-";
+const pluralizedBestPracticeTarget = resolvedAppType
+  ? normalizePhrase(pluralizeBestPracticeTarget(resolvedAppType))
+  : "-";
 ---
 
 {
@@ -41,14 +48,14 @@ const resolvedAppType = pathToAppType.get(appType);
     <Layout
       pageMetadata={{
         title: `ENSAwards: ENS Leaderboard for ${resolvedAppType} Integrations`,
-        description: `See how ${pluralizeBestPracticeTarget(resolvedAppType).toLowerCase()} score on ENS integration benchmarks.`,
-        url: `https://ensawards.org/leaderboards/${resolvedAppType.toLowerCase()}`,
-        ogImage: `https://ensawards.org/${resolvedAppType.toLowerCase()}_leaderboard_og_image.png`,
-        twitterImage: `https://ensawards.org/${resolvedAppType.toLowerCase()}_leaderboard_twitter_og_image.png`,
+        description: `See how ${pluralizedBestPracticeTarget} score on ENS integration benchmarks.`,
+        url: `https://ensawards.org/leaderboards/${normalizedAppType}`,
+        ogImage: `https://ensawards.org/${normalizedAppType}_leaderboard_og_image.png`,
+        twitterImage: `https://ensawards.org/${normalizedAppType}_leaderboard_twitter_og_image.png`,
       }}>
       <SubpageHero
         header={`${resolvedAppType} leaderboard`}
-        description={`Compare ${pluralizeBestPracticeTarget(resolvedAppType).toLowerCase()} by their rank of following a selection of ENS best practices.`}
+        description={`Compare ${pluralizedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
         breadcrumbs={["ENS leaderboards"]}
         customImage={{
           source: "/src/assets/leaderboardsHeroImage.png",
@@ -73,7 +80,10 @@ const resolvedAppType = pathToAppType.get(appType);
                   ensAwardsScore={calculateAppEnsAwardsScore(app)}
                   viewDetailsLink={`/app/${app.slug}`}
                   viewDetailsText="App report">
-                  <AppIcon slot="appIcon" className="w-10 h-10 rounded-md" />
+                  <AppIcon
+                    slot="rankedEntityIcon"
+                    className="w-10 h-10 rounded-md"
+                  />
                   {idx < 3 ? (
                     <Image
                       alt={`${idx + 1}-place`}

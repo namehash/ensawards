@@ -18,8 +18,8 @@ import {
 } from "@/components/ui/select.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
-import { capitalizeText } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { capitalizeText } from "@/utils/textModifications.ts";
 
 /**
  * Display any of the additional pagination buttons if there are at least three pages

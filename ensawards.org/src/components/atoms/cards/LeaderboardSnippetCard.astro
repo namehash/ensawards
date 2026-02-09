@@ -1,6 +1,7 @@
 ---
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import { normalizeLeaderboardSnippetPhrase } from "../../../utils/textModifications";
 
 interface LeaderboardSnippetCardProps {
   name: string;
@@ -9,8 +10,6 @@ interface LeaderboardSnippetCardProps {
 }
 
 const { name, description, link }: LeaderboardSnippetCardProps = Astro.props;
-
-const phrasesToRemainUnnormalized = ["DAO", "Defi"];
 ---
 
 <a
@@ -38,12 +37,7 @@ const phrasesToRemainUnnormalized = ["DAO", "Defi"];
           size: "default",
           className: "cursor-pointer rounded-full max-sm:self-stretch",
         }),
-      )}
-      >View {
-        phrasesToRemainUnnormalized.some((phrase) => name.includes(phrase))
-          ? name
-          : name.toLowerCase()
-      }</button
+      )}>View {normalizeLeaderboardSnippetPhrase(name)}</button
     >
     <slot name="bestResultsIcons" />
   </div>

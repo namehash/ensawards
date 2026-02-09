@@ -1,3 +1,7 @@
+import { contractPipeline } from "@/contract-pipelines";
+import { daoContractsOnly, defiContractsOnly } from "@/contract-pipelines/filters.ts";
+import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
+import { sortProtocolLeaderboard } from "@/contract-pipelines/sorting.ts";
 import { APPS } from "@/data/apps.ts";
 import { BEST_PRACTICE_CATEGORIES, BEST_PRACTICES } from "@/data/bestPractices.ts";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
@@ -7,13 +11,15 @@ import type {
   BestPractice,
   BestPracticeCategory,
   BestPracticeTarget,
+  ProtocolType,
 } from "@/types/bestPractices.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
+import type { Contract } from "@/types/contracts.ts";
 import type {
   DAOProtocol,
   DAOProtocolId,
-  DefiProtocol,
-  DefiProtocolId,
+  DeFiProtocol,
+  DeFiProtocolId,
   Protocol,
   ProtocolId,
 } from "@/types/protocols.ts";
@@ -23,26 +29,40 @@ export const getProtocolById = (protocolId: ProtocolId): Protocol => {
   return PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
 };
 
-export const getProtocolBySlug = (protocolSlug: string): Protocol | undefined => {
-  return PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
+export const getProtocolBySlug = (
+  protocolType: ProtocolType,
+  protocolSlug: string,
+): Protocol | undefined => {
+  return PROTOCOLS.find(
+    (protocol) => protocolType === protocol.protocolType && protocol.slug === protocolSlug,
+  );
 };
 
-export const getDaoByProtocolId = (protocolId: DAOProtocolId): DAOProtocol => {
+export const getDAOByProtocolId = (protocolId: DAOProtocolId): DAOProtocol => {
   // biome-ignore lint/style/noNonNullAssertion: Because of invariant that DAO_PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
   return DAO_PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
 };
 
-export const getDaoByProtocolSlug = (protocolSlug: string): DAOProtocol | undefined => {
+export const getDAOByProtocolSlug = (protocolSlug: string): DAOProtocol | undefined => {
   return DAO_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
 };
 
-export const getDefiProtocolByProtocolId = (protocolId: DefiProtocolId): DefiProtocol => {
+export const getDeFiProtocolByProtocolId = (protocolId: DeFiProtocolId): DeFiProtocol => {
   // biome-ignore lint/style/noNonNullAssertion: Because of invariant that DEFI_PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
   return DEFI_PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
 };
 
-export const getDefiProtocolByProtocolSlug = (protocolSlug: string): DefiProtocol | undefined => {
+export const getDeFiProtocolByProtocolSlug = (protocolSlug: string): DeFiProtocol | undefined => {
   return DEFI_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
+};
+
+const ProtocolTypeSlugToProtocolType = new Map<string, ProtocolType>([
+  ["dao", ProtocolTypes.DAO],
+  ["defi", ProtocolTypes.DeFi],
+]);
+
+export const getProtocolTypeBySlug = (protocolTypeSlug: string): ProtocolType | undefined => {
+  return ProtocolTypeSlugToProtocolType.get(protocolTypeSlug);
 };
 
 export const getAppBySlug = (appSlug: string): App | undefined => {
@@ -164,13 +184,23 @@ export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
 export const appliesToAllProtocols = (targets: BestPracticeTarget[]): boolean =>
   Object.values(ProtocolTypes).every((protocolType) => targets.includes(protocolType));
 
-const pluralizedBestPracticeTargets: Record<BestPracticeTarget, string> = {
-  [AppTypes.Explorer]: "Explorers",
-  [AppTypes.Wallet]: "Wallets",
-  [ProtocolTypes.Dao]: "DAOs",
-  [ProtocolTypes.Defi]: "Defi Protocols",
-};
+const contractPipelineFilterByProtocolType = new Map<
+  ProtocolType,
+  (contracts: Contract[]) => Contract[]
+>([
+  [ProtocolTypes.DAO, daoContractsOnly],
+  [ProtocolTypes.DeFi, defiContractsOnly],
+]);
 
-export const pluralizeBestPracticeTarget = (target: BestPracticeTarget): string => {
-  return pluralizedBestPracticeTargets[target];
+// TODO: Should this name be more generic?
+export const getContractNamingScoresByProtocolType = (
+  protocolType: ProtocolType,
+): Record<SupportedGroupByCategory, number> => {
+  const filter = contractPipelineFilterByProtocolType.get(protocolType);
+
+  //if the filter for a given ProtocolType is undefined, proceed without it
+  return contractPipeline({
+    filter: filter,
+    sort: sortProtocolLeaderboard,
+  });
 };

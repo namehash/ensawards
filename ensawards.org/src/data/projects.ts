@@ -81,7 +81,7 @@ export const TaikoProject: Project = {
 export const LiquityProject: Project = {
   id: ProjectIds.Liquity,
   name: "Liquity",
-  description: "Defi protocol for borrowing against ETH & staked ETH.",
+  description: "DeFi protocol for borrowing against ETH & staked ETH.",
   icon: LiquityIcon,
   socials: {
     twitter: new URL("https://x.com/LiquityProtocol"),
