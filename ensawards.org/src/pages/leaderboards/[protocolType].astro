@@ -78,7 +78,7 @@ if (resolvedProtocolType) {
                 name={protocol.name}
                 ensAwardsScore={value}
                 viewDetailsLink={`/${normalizedProtocolType}/${protocol.slug}`}
-                viewDetailsText={`${resolvedProtocolType} ${resolvedProtocolType !== ProtocolTypes.DAO ? "protocol" : ""} report`}>
+                viewDetailsText={`${resolvedProtocolType}${resolvedProtocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                 {idx < 3 ? (
                   <Image
                     alt={`${idx + 1}-place`}

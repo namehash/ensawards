@@ -9,7 +9,7 @@ import { ContractTypes } from "@/types/contracts.ts";
  * to include contracts that are DAO-related (governance, treasury, etc.) and exclude
  * DeFi protocol contracts, even if they belong to the same project the DAO is associated with.
  *
- * @param contractType - The type of contracts to include (e.g., ContractTypes.Dao)
+ * @param contractType - The type of contracts to include (e.g., ContractTypes.DAO)
  * @returns A filter function that can be passed to contractPipeline
  */
 export function filterByContractType(contractType: ContractType) {
