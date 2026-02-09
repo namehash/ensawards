@@ -161,8 +161,8 @@ export const UniswapDefiProtocol: DefiProtocol = {
     twitter: new URL("https://x.com/Uniswap"),
     //TODO: Should it have the same "ens" field as Uniswap DAO?
   },
-  ogImagePath: "https://ensawards.org/protocol-uniswap-dao_og_image.png", // TODO: Need new OG images for the non-DAO option
-  twitterOgImagePath: "https://ensawards.org/protocol-uniswap-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/protocol-uniswap-defi_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-uniswap-defi_twitter_og_image.png",
 };
 
 export const TaikoDefiProtocol: DefiProtocol = {
@@ -179,8 +179,8 @@ export const TaikoDefiProtocol: DefiProtocol = {
     twitter: new URL("https://x.com/taikoxyz"),
     //TODO: Should it have the same "ens" field as Taiko DAO?
   },
-  ogImagePath: "https://ensawards.org/protocol-taiko-dao_og_image.png", // TODO: Need new OG images for the non-DAO option
-  twitterOgImagePath: "https://ensawards.org/protocol-taiko-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/protocol-taiko-defi_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-taiko-defi_twitter_og_image.png",
 };
 
 /**
