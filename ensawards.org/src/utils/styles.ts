@@ -19,6 +19,7 @@ export const BenchmarkResultToBadgeStyles = new Map<BenchmarkResult, string>([
 const ensNameFieldStyles = new Map<ProtocolId, string>([
   [DeFiProtocolIds.Liquity, "sm:min-w-[310px]"],
   [DeFiProtocolIds.Taiko, "sm:min-w-[245px]"],
+  [DeFiProtocolIds.Cork, "sm:min-w-[310px]"],
 ]);
 
 export const getENSNameFieldStyles = (protocolId: ProtocolId): string =>
