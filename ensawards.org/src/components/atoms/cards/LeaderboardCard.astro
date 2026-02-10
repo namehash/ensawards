@@ -24,7 +24,7 @@ const { name, viewDetailsLink, viewDetailsText, ensAwardsScore, type }: Leaderbo
     <slot name="placeIcon" />
     <div
       class="w-fit flex flex-nowrap flex-row justify-start items-center gap-3">
-      <slot name="appIcon" />
+      <slot name="rankedEntityIcon" />
       <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
       <slot name="badge" />
     </div>
@@ -34,7 +34,7 @@ const { name, viewDetailsLink, viewDetailsText, ensAwardsScore, type }: Leaderbo
     class="sm:hidden flex flex-col flex-nowrap justify-start items-start gap-4 self-stretch">
     <div
       class="w-full h-fit flex flex-row flex-nowrap justify-between items-center">
-      <slot name="appIcon" />
+      <slot name="rankedEntityIcon" />
       <slot name="placeIcon" />
     </div>
     <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>

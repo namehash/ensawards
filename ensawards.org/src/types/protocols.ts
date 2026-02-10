@@ -19,25 +19,27 @@ export const DAOProtocolIds = {
  */
 export type DAOProtocolId = (typeof DAOProtocolIds)[keyof typeof DAOProtocolIds];
 
-export const DefiProtocolIds = {
+export const DeFiProtocolIds = {
   Liquity: "protocol-liquity-defi",
+  Taiko: "protocol-taiko-defi",
+  Uniswap: "protocol-uniswap-defi",
 } as const;
 
 /**
- * The derived string union of possible {@link DefiProtocolIds}.
+ * The derived string union of possible {@link DeFiProtocolIds}.
  */
-export type DefiProtocolId = (typeof DefiProtocolIds)[keyof typeof DefiProtocolIds];
+export type DeFiProtocolId = (typeof DeFiProtocolIds)[keyof typeof DeFiProtocolIds];
 
 /**
- * Combined {@link DAOProtocolIds} and {@link DefiProtocolIds}.
+ * Combined {@link DAOProtocolIds} and {@link DeFiProtocolIds}.
  */
 export const ProtocolIds = {
   ...DAOProtocolIds,
-  ...DefiProtocolIds,
+  ...DeFiProtocolIds,
 } as const;
 
 /**
- * The union of all {@link DAOProtocolId} and {@link DefiProtocolId}
+ * The union of all {@link DAOProtocolId} and {@link DeFiProtocolId}
  * representing all supported protocols.
  */
 export type ProtocolId = (typeof ProtocolIds)[keyof typeof ProtocolIds];
@@ -59,8 +61,8 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
   twitterOgImagePath?: string;
 }
 
-export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.Dao> {}
+export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.DAO> {}
 
-export interface DefiProtocol extends ProtocolAbstract<DefiProtocolId, typeof ProtocolTypes.Defi> {}
+export interface DeFiProtocol extends ProtocolAbstract<DeFiProtocolId, typeof ProtocolTypes.DeFi> {}
 
-export type Protocol = DAOProtocol | DefiProtocol;
+export type Protocol = DAOProtocol | DeFiProtocol;

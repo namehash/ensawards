@@ -7,34 +7,27 @@ import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { ContractBadge } from "../badges/ContractBadge";
 import { EnsManagerAppLink } from "../EnsManagerAppLink";
 import { SmartContractMetadata } from "../SmartContractMetadata";
+import { breakLongWords } from "../../../utils/textModifications";
 export interface ContractCardProps {
   contract: Contract;
+  className?: {
+    ensName?: string;
+  };
 }
 
-const { contract }: ContractCardProps = Astro.props;
+const { contract, className = { ensName: "sm:min-w-[225px]" } }: ContractCardProps = Astro.props;
 
-const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
-  if (word.length < minLength) {
-    return [word];
-  }
+// The fallback should never be used. Only introduced for type safety.
+const ensNameForMobileDisplay =
+  contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
+  contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
+    ? breakLongWords(contract.cachedIdentity.name, /(\.)/, 25)
+    : ["unnamed contract"];
 
-  const elements = word.split(/(?=[A-Z])/);
-  const result: string[] = [];
-  let current = elements[0];
-
-  for (let i = 1; i < elements.length; i++) {
-    const next = elements[i];
-    if ((current + next).length < minLength) {
-      current += next; // merge if still short
-    } else {
-      result.push(current);
-      current = next;
-    }
-  }
-
-  if (current) result.push(current);
-  return result;
-};
+const contractCodeNameForMobileDisplay = breakLongWords(
+  contract.cachedIdentity.contract.codeName,
+  /(?=[A-Z])/,
+);
 ---
 
 <div
@@ -55,13 +48,11 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
     <div
       class="sm:hidden flex flex-col justify-start items-start gap-0 max-sm:min-w-[105px]">
       {
-        breakLongWordsAtCapitals(contract.cachedIdentity.contract.codeName).map(
-          (word) => (
-            <p class="text-sm leading-normal font-normal text-muted-foreground">
-              {word}
-            </p>
-          ),
-        )
+        contractCodeNameForMobileDisplay.map((word) => (
+          <p class="text-sm leading-normal font-normal text-muted-foreground">
+            {word}
+          </p>
+        ))
       }
     </div>
     <a
@@ -76,7 +67,10 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
     >
   </div>
   <div
-    class="sm:min-w-[225px] flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start">
+    class={cn(
+      "flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start",
+      className.ensName,
+    )}>
     <p
       class="text-sm leading-[20px] font-normal text-muted-foreground max-sm:min-w-[105px]">
       ENS name
@@ -86,22 +80,61 @@ const breakLongWordsAtCapitals = (word: string, minLength = 15): string[] => {
         ContractResolutionStatusIds.PrimaryNamed ||
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
-        <div class="h-[20px] flex flex-row flex-nowrap justify-start items-start gap-1.5">
-          <a
-            href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
-            target="_blank"
-            rel="noreferrer"
-            class="text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-            {contract.cachedIdentity.name}
-          </a>
-          <EnsManagerAppLink
-            client:load
-            link={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
-            text="View on ENS Manager"
-            withIcon={true}
-            className="relative bottom-0.5"
-          />
-        </div>
+        <>
+          <div class="h-[20px] max-sm:hidden flex flex-row flex-nowrap justify-start items-start gap-1.5">
+            <a
+              href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
+              target="_blank"
+              rel="noreferrer"
+              class="max-sm:hidden text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
+              {contract.cachedIdentity.name}
+            </a>
+            <EnsManagerAppLink
+              client:load
+              link={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
+              text="View on ENS Manager"
+              withIcon={true}
+              className="relative bottom-0.5 max-sm:hidden"
+            />
+          </div>
+          <div class="sm:hidden flex flex-col justify-start items-start gap-0 max-sm:min-w-[105px]">
+            {ensNameForMobileDisplay.map((word, idx) => {
+              const nameLinkHref = `https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`;
+              const nameLinkStyles =
+                "text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]";
+
+              if (idx < ensNameForMobileDisplay.length - 1) {
+                return (
+                  <a
+                    href={nameLinkHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    class={nameLinkStyles}>
+                    {word}
+                  </a>
+                );
+              }
+
+              return (
+                <div class="flex flex-row flex-wrap justify-start items-center gap-1.5">
+                  <a
+                    href={nameLinkHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    class={nameLinkStyles}>
+                    {word}
+                  </a>
+                  <EnsManagerAppLink
+                    client:load
+                    link={`https://app.ens.domains/${encodeURIComponent(contract.cachedIdentity.name)}`}
+                    text="View on ENS Manager"
+                    withIcon={true}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </>
       ) : (
         <p class="text-sm leading-normal font-medium text-red-600">
           Unnamed contract

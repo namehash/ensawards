@@ -8,8 +8,8 @@ export const BestPracticeTypes = {
 export type BestPracticeType = (typeof BestPracticeTypes)[keyof typeof BestPracticeTypes];
 
 export const ProtocolTypes = {
-  Dao: "DAO",
-  Defi: "Defi",
+  DAO: "DAO",
+  DeFi: "DeFi",
 } as const;
 
 export type ProtocolType = (typeof ProtocolTypes)[keyof typeof ProtocolTypes];

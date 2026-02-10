@@ -2,26 +2,19 @@
 import LeaderboardSnippetCard from "../../components/atoms/cards/LeaderboardSnippetCard.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import { contractPipeline } from "../../contract-pipelines";
-import { daoContractsOnly } from "../../contract-pipelines/filters";
-import { sortProtocolLeaderboard } from "../../contract-pipelines/sorting";
 import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppTypes } from "../../types/apps";
-import { DAOProtocolId } from "../../types/protocols";
+import { ProtocolId } from "../../types/protocols";
 import {
   calculateAppEnsAwardsScore,
-  getDaoByProtocolId,
-  pluralizeBestPracticeTarget,
+  getContractNamingScoresByProtocolType,
+  getProtocolById,
 } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
+import { ProtocolTypes } from "../../types/bestPractices";
+import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
 
-const daoScores = contractPipeline({
-  filter: daoContractsOnly,
-  sort: sortProtocolLeaderboard,
-});
-
-const daoLeaderboardDescription = "See how DAOs rank for following ENS best practices.";
 const referrerLeaderboardDescription =
   "Compare referrers by their performance in ENS Holiday Awards.";
 ---
@@ -30,14 +23,14 @@ const referrerLeaderboardDescription =
   pageMetadata={{
     title: "ENSAwards: ENS Leaderboards",
     description:
-      "Compare projects by their rank of following a selection of ENS best practices.",
+      "Explore how top ENS advocates contribute to the growth of ENS.",
     url: "https://ensawards.org/leaderboards",
     ogImage: "https://ensawards.org/ens_leaderboards_og_image.png",
     twitterImage: "https://ensawards.org/ens_leaderboards_twitter_og_image.png",
   }}>
   <SubpageHero
     header="ENS leaderboards"
-    description="Compare projects by their rank of following a selection of ENS best practices."
+    description="Explore how top ENS advocates contribute to the growth of ENS."
     customImage={{
       source: "/src/assets/leaderboardsHeroImage.png",
       width: 371,
@@ -47,40 +40,7 @@ const referrerLeaderboardDescription =
   />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ItemsList>
-      <LeaderboardSnippetCard
-        name="DAO leaderboard"
-        description={daoLeaderboardDescription}
-        link="/leaderboards/dao">
-        <div
-          slot="bestResultsIcons"
-          class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
-          {
-            Object.entries(daoScores)
-              .slice(0, 3)
-              .map(([scoreCategory, value], idx) => {
-                const daoId = scoreCategory as DAOProtocolId;
-                const daoProtocol = getDaoByProtocolId(daoId);
-                const DaoIcon = daoProtocol.icon;
-                return (
-                  <div
-                    style={{ right: `${12 * idx}px` }}
-                    class={cn(
-                      idx > 0 && "relative",
-                      "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
-                    )}>
-                    <DaoIcon className="w-10 h-10 rounded-md" />
-                  </div>
-                );
-              })
-          }
-          <p
-            class="relative text-sm leading-normal font-medium text-muted-foreground"
-            style={{ right: "16px" }}>
-            + more
-          </p>
-        </div>
-      </LeaderboardSnippetCard>
+    <ItemsList header="Apps" containerStyles="sm:gap-6">
       {
         Object.values(AppTypes).map((appType) => {
           const relevantApps = APPS.filter((app) => app.type === appType);
@@ -125,6 +85,52 @@ const referrerLeaderboardDescription =
           );
         })
       }
+    </ItemsList>
+    <ItemsList header="Protocols" containerStyles="sm:gap-6">
+      {
+        Object.values(ProtocolTypes).map((protocolType) => {
+          const protocolScores =
+            getContractNamingScoresByProtocolType(protocolType);
+
+          return (
+            <LeaderboardSnippetCard
+              name={`${protocolType} leaderboard`}
+              description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
+              link={`/leaderboards/${protocolType.toLowerCase()}`}>
+              <div
+                slot="bestResultsIcons"
+                class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
+                {Object.entries(protocolScores)
+                  .slice(0, 3)
+                  .map(([scoreCategory, _value], idx) => {
+                    const protocolId = scoreCategory as ProtocolId;
+                    const protocol = getProtocolById(protocolId);
+                    const ProtocolIcon = protocol.icon;
+                    return (
+                      <div
+                        style={{ right: `${12 * idx}px` }}
+                        class={cn(
+                          idx > 0 && "relative",
+                          "flex flex-col items-center justify-center box-border w-fit h-fit border border-gray-200 rounded-md bg-white",
+                        )}>
+                        <ProtocolIcon className="w-10 h-10 rounded-md" />
+                      </div>
+                    );
+                  })}
+                {Object.entries(protocolScores).length > 3 && (
+                  <p
+                    class="relative text-sm leading-normal font-medium text-muted-foreground"
+                    style={{ right: "16px" }}>
+                    + more
+                  </p>
+                )}
+              </div>
+            </LeaderboardSnippetCard>
+          );
+        })
+      }
+    </ItemsList>
+    <ItemsList header="Referrers" containerStyles="sm:gap-6">
       <LeaderboardSnippetCard
         name="Referrer leaderboard"
         description={referrerLeaderboardDescription}

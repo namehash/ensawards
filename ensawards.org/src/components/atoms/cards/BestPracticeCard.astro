@@ -4,10 +4,10 @@ import {
   appliesToAllApps,
   appliesToAllProtocols,
   getBestPracticeById,
-  pluralizeBestPracticeTarget,
 } from "../../../utils/dataAccess";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import { pluralizeBestPracticeTarget } from "../../../utils/textModifications";
 export interface BestPracticeCardProps {
   id: string;
   name: string;

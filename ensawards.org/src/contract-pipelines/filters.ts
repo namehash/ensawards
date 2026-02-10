@@ -9,7 +9,7 @@ import { ContractTypes } from "@/types/contracts.ts";
  * to include contracts that are DAO-related (governance, treasury, etc.) and exclude
  * DeFi protocol contracts, even if they belong to the same project the DAO is associated with.
  *
- * @param contractType - The type of contracts to include (e.g., ContractTypes.Dao)
+ * @param contractType - The type of contracts to include (e.g., ContractTypes.DAO)
  * @returns A filter function that can be passed to contractPipeline
  */
 export function filterByContractType(contractType: ContractType) {
@@ -24,7 +24,7 @@ export function filterByContractType(contractType: ContractType) {
  * Use this filter when building DAO leaderboards to ensure only DAO governance
  * contracts are included in the scoring calculations.
  */
-export const daoContractsOnly = filterByContractType(ContractTypes.Dao);
+export const daoContractsOnly = filterByContractType(ContractTypes.DAO);
 
 /**
  * Pre-configured filter for DeFi contracts only.
@@ -32,4 +32,4 @@ export const daoContractsOnly = filterByContractType(ContractTypes.Dao);
  * Use this filter when building DeFi protocol leaderboards to ensure only
  * DeFi protocol contracts are included in the scoring calculations.
  */
-export const defiContractsOnly = filterByContractType(ContractTypes.Defi);
+export const defiContractsOnly = filterByContractType(ContractTypes.DeFi);

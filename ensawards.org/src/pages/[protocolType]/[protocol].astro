@@ -1,5 +1,16 @@
 ---
-import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
+import { ProtocolTypes } from "../../types/bestPractices";
+import { PROTOCOLS } from "../../data/protocols";
+import {
+  getContractNamingScoresByProtocolType,
+  getProtocolBySlug,
+  getProtocolTypeBySlug,
+} from "../../utils/dataAccess";
+import { type Contract } from "../../types/contracts";
+import { CONTRACTS } from "../../data/contracts";
+import { EnsDaoIcon } from "../../components/atoms/icons/ens-integrating-entities/dao-protocols/EnsDaoIcon";
+import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
+import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import {
   ChainIcon,
   EnsIcon,
@@ -7,83 +18,81 @@ import {
   SUPPORTED_CHAINS,
   TwitterIcon,
 } from "@namehash/namehash-ui";
-
-import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
-import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import ContractCard from "../../components/atoms/cards/ContractCard.astro";
-import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
-import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
-import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
-import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
-import ItemsList from "../../components/molecules/ItemsList.astro";
-import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
-import { contractPipeline } from "../../contract-pipelines";
-import { daoContractsOnly } from "../../contract-pipelines/filters";
-import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
-import { CONTRACTS } from "../../data/contracts";
-import { DAO_PROTOCOLS } from "../../data/protocols";
 import Layout from "../../layouts/Layout.astro";
-import { Contract, ContractTypes } from "../../types/contracts";
-import { getDaoByProtocolSlug } from "../../utils/dataAccess";
+import ItemsList from "../../components/molecules/ItemsList.astro";
+import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
+import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
+import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
+import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
+import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
+import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { cn } from "../../utils/tailwindClassConcatenation";
-
+import { getENSNameFieldStyles } from "../../utils/styles";
+import { type Protocol } from "../../types/protocols";
 export function getStaticPaths() {
-  return DAO_PROTOCOLS.map((dao) => ({
-    params: { dao: dao.slug },
-  }));
+  const staticPaths = [];
+
+  Object.values(ProtocolTypes).forEach((protocolType) => {
+    const relevantProtocols = PROTOCOLS.filter(
+      (protocol) => protocol.protocolType === protocolType,
+    );
+    relevantProtocols.forEach((protocol) =>
+      staticPaths.push({
+        params: {
+          protocolType: protocolType.toLowerCase(),
+          protocol: protocol.slug,
+        },
+      }),
+    );
+  });
+
+  return staticPaths;
 }
 
-const { dao } = Astro.params;
+const { protocolType, protocol } = Astro.params;
 
-const resolvedDao = getDaoByProtocolSlug(dao);
+const resolvedProtocolType = getProtocolTypeBySlug(protocolType);
 
-let protocolContracts: Contract[];
-let DaoIcon;
-let daoScore: number;
+// The default values should never be used. Only introduced for type safety.
+let resolvedProtocol: Protocol | undefined = undefined;
+let protocolContracts: Contract[] = [];
+let protocolScore = 0;
+let ProtocolIcon = EnsDaoIcon;
 
-if (resolvedDao) {
-  protocolContracts = CONTRACTS.filter(
-    (contract) => contract.protocol.id === resolvedDao.id && contract.type === ContractTypes.Dao,
-  );
-  DaoIcon = resolvedDao.icon;
-  daoScore = contractPipeline({ filter: daoContractsOnly })[resolvedDao.id];
+if (resolvedProtocolType) {
+  resolvedProtocol = getProtocolBySlug(resolvedProtocolType, protocol);
+}
+
+if (resolvedProtocol && resolvedProtocolType) {
+  protocolContracts = CONTRACTS.filter((contract) => contract.protocol.id === resolvedProtocol.id);
+  ProtocolIcon = resolvedProtocol.icon;
+  protocolScore =
+    getContractNamingScoresByProtocolType(resolvedProtocolType)[resolvedProtocol.id] ?? 0;
 }
 ---
 
 {
-  resolvedDao === undefined ? (
+  resolvedProtocol === undefined || resolvedProtocolType === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ${resolvedDao.name} ENS Integration Benchmarks`,
-        description: resolvedDao.description,
-        url: `https://ensawards.org/dao/${dao}`,
-        ogImage: resolvedDao.ogImagePath,
-        twitterImage: resolvedDao.twitterOgImagePath,
+        title: `ENSAwards: ${resolvedProtocol.name} ENS Integration Benchmarks`,
+        description: resolvedProtocol.description,
+        url: `https://ensawards.org/${resolvedProtocolType.toLowerCase()}/${resolvedProtocol.slug}`,
+        ogImage: resolvedProtocol.ogImagePath,
+        twitterImage: resolvedProtocol.twitterOgImagePath,
       }}>
-      <AlertCountdown
-        slot="alertBanner"
-        eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
-        eventText="ENS Holiday Awards ends in"
-        ctaText="Learn more"
-        link="/ens-referral-awards"
-        styles={{
-          banner:
-            "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
-          cta: "text-white decoration-white/40 hover:decoration-white",
-          text: "text-white",
-          timer: "text-white",
-          timerLegend: "text-white",
-        }}
-      />
       <SubpageHero
-        header={resolvedDao.name}
-        description={resolvedDao.description}
-        breadcrumbs={["ENS leaderboards", "DAO leaderboard"]}>
-        <DaoIcon
+        header={resolvedProtocol.name}
+        description={resolvedProtocol.description}
+        breadcrumbs={[
+          "ENS leaderboards",
+          `${resolvedProtocolType} leaderboard`,
+        ]}>
+        <ProtocolIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"
         />
@@ -91,20 +100,20 @@ if (resolvedDao) {
           slot="ctaContent"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
           <a
-            href={resolvedDao.socials.website}
+            href={resolvedProtocol.socials.website}
             rel="noreferrer"
             target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
           <a
-            href={resolvedDao.socials.twitter}
+            href={resolvedProtocol.socials.twitter}
             rel="noreferrer"
             target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
-          {resolvedDao.socials.ens && (
+          {resolvedProtocol.socials.ens && (
             <a
-              href={`https://app.ens.domains/${encodeURIComponent(resolvedDao.socials.ens)}`}
+              href={`https://app.ens.domains/${encodeURIComponent(resolvedProtocol.socials.ens)}`}
               rel="noreferrer"
               target="_blank">
               <EnsIcon
@@ -117,7 +126,7 @@ if (resolvedDao) {
         </div>
         <EnsAwardsScore
           slot="largerHeroItem"
-          score={daoScore}
+          score={protocolScore}
           label="ENSAwards score"
         />
       </SubpageHero>
@@ -164,7 +173,12 @@ if (resolvedDao) {
                   </>
                 </div>
                 {sortedContracts.map((contract) => (
-                  <ContractCard contract={contract} />
+                  <ContractCard
+                    contract={contract}
+                    className={{
+                      ensName: cn(getENSNameFieldStyles(resolvedProtocol.id)),
+                    }}
+                  />
                 ))}
               </>
             );

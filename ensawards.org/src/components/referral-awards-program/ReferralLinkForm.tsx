@@ -12,9 +12,9 @@ import { FormButton } from "@/components/atoms/form-elements/FormButton.tsx";
 import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import type { FormField, ValidationErrors } from "@/components/molecules/form/types.ts";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { capitalizeFormLabel } from "@/utils";
 import { resolveEthAddress } from "@/utils/resolution.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { capitalizeFormLabel } from "@/utils/textModifications.ts";
 
 interface ReferralLinkFormDataProps {
   "referral award recipient": string;

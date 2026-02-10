@@ -4,7 +4,7 @@ import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
-import { DAOProtocolIds, DefiProtocolIds, ProtocolIds } from "@/types/protocols.ts";
+import { DAOProtocolIds, DeFiProtocolIds, ProtocolIds } from "@/types/protocols.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
 
 describe("protocols data", () => {
@@ -26,7 +26,7 @@ describe("protocols data", () => {
 
     Object.values(DAOProtocolIds).forEach((protocolId) => {
       const foundProtocol = data.filter(
-        (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Dao,
+        (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.DAO,
       );
 
       expect(foundProtocol.length).toEqual(expectedLengthOfFoundDaoProtocols);
@@ -34,30 +34,37 @@ describe("protocols data", () => {
     });
   });
 
-  it("Should have exactly one Defi protocol per Defi-related ProtocolId", () => {
+  it("Should have exactly one DeFi protocol per DeFi-related ProtocolId", () => {
     const data = DEFI_PROTOCOLS;
-    const expectedLengthOfFoundDefiProtocols = 1;
+    const expectedLengthOfFoundDeFiProtocols = 1;
 
-    Object.values(DefiProtocolIds).forEach((protocolId) => {
+    Object.values(DeFiProtocolIds).forEach((protocolId) => {
       const foundProtocol = data.filter(
-        (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.Defi,
+        (protocol) => protocol.id === protocolId && protocol.protocolType === ProtocolTypes.DeFi,
       );
 
-      expect(foundProtocol.length).toEqual(expectedLengthOfFoundDefiProtocols);
+      expect(foundProtocol.length).toEqual(expectedLengthOfFoundDeFiProtocols);
       expect(foundProtocol[0].id).toEqual(protocolId);
     });
   });
 
-  it("Should have valid and unique slugs", () => {
-    const slugArray: string[] = [];
+  it("Should have valid and unique slugs for each ProtocolType", () => {
+    const protocolGroups = [DAO_PROTOCOLS, DEFI_PROTOCOLS];
 
-    data.forEach((protocol) => {
-      expect(isValidSlug(protocol.slug), `Slug={${protocol.slug}} is not valid`).toEqual(true);
+    protocolGroups.forEach((protocolTypeData) => {
+      const slugArray: string[] = [];
 
-      slugArray.push(protocol.slug);
+      protocolTypeData.forEach((protocol) => {
+        expect(isValidSlug(protocol.slug), `Slug={${protocol.slug}} is not valid`).toEqual(true);
+
+        slugArray.push(protocol.slug);
+      });
+
+      expect(
+        areStringsUnique(slugArray),
+        `Slugs for ${protocolTypeData[0]?.protocolType ?? "unknown"} protocols are not unique`,
+      ).toEqual(true);
     });
-
-    expect(areStringsUnique(slugArray), `Slugs for protocols are not unique`).toEqual(true);
   });
 
   it("In `socials`, `ens`, if defined, must be a non-empty normalized ENS name", () => {
