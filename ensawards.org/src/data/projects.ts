@@ -1,6 +1,7 @@
 import { AaveProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/AaveProjectIcon.tsx";
 import { ArbitrumProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/ArbitrumProjectIcon.tsx";
 import { EnsProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/EnsProjectIcon.tsx";
+import { CorkIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/CorkIcon.tsx";
 import { LiquityIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/LiquityIcon.tsx";
 import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
 import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
@@ -89,6 +90,18 @@ export const LiquityProject: Project = {
   },
 };
 
+export const CorkProject: Project = {
+  id: ProjectIds.Cork,
+  name: "Cork",
+  description:
+    "Programmable risk layer for onchain assets such as vault tokens, yield-bearing stablecoins, LSTs and RWAs.",
+  icon: CorkIcon,
+  socials: {
+    twitter: new URL("https://x.com/Corkprotocol"),
+    website: new URL("https://www.cork.tech/"),
+  },
+};
+
 /**
  * Array of supported projects.
  *
@@ -102,4 +115,5 @@ export const PROJECTS: Project[] = [
   AaveProject,
   TaikoProject,
   LiquityProject,
+  CorkProject,
 ];

@@ -1,6 +1,7 @@
 import { AaveDaoIcon } from "@/components/atoms/icons/ens-integrating-entities/dao-protocols/AaveDaoIcon.tsx";
 import { ArbitrumDaoIcon } from "@/components/atoms/icons/ens-integrating-entities/dao-protocols/ArbitrumDaoIcon.tsx";
 import { EnsDaoIcon } from "@/components/atoms/icons/ens-integrating-entities/dao-protocols/EnsDaoIcon.tsx";
+import { CorkIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/CorkIcon.tsx";
 import { LiquityIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/LiquityIcon.tsx";
 import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
 import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
@@ -8,6 +9,7 @@ import { UniswapIcon } from "@/components/atoms/icons/ens-integrating-entities/s
 import {
   AaveProject,
   ArbitrumProject,
+  CorkProject,
   ENSProject,
   LiquityProject,
   NounsProject,
@@ -183,6 +185,24 @@ export const TaikoDeFiProtocol: DeFiProtocol = {
   twitterOgImagePath: "https://ensawards.org/protocol-taiko-defi_twitter_og_image.png",
 };
 
+export const CorkDeFiProtocol: DeFiProtocol = {
+  id: DeFiProtocolIds.Cork,
+  slug: "cork",
+  protocolType: ProtocolTypes.DeFi,
+  project: CorkProject,
+  name: "Cork",
+  description:
+    "Programmable risk layer for onchain assets such as vault tokens, yield-bearing stablecoins, LSTs and RWAs.",
+  icon: CorkIcon,
+  socials: {
+    twitter: new URL("https://x.com/Corkprotocol"),
+    website: new URL("https://www.cork.tech/"),
+    ens: "phoenix.cork.eth",
+  },
+  ogImagePath: "https://ensawards.org/protocol-cork-defi_og_image.png",
+  twitterOgImagePath: "https://ensawards.org/protocol-cork-defi_twitter_og_image.png",
+};
+
 /**
  * Array of supported DAO protocols.
  *
@@ -207,6 +227,7 @@ export const DEFI_PROTOCOLS: DeFiProtocol[] = [
   LiquityDeFiProtocol,
   UniswapDeFiProtocol,
   TaikoDeFiProtocol,
+  CorkDeFiProtocol,
 ];
 
 /**
