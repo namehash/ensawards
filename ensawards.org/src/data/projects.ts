@@ -2,6 +2,7 @@ import { AaveProjectIcon } from "@/components/atoms/icons/ens-integrating-entiti
 import { ArbitrumProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/ArbitrumProjectIcon.tsx";
 import { EnsProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/EnsProjectIcon.tsx";
 import { CorkIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/CorkIcon.tsx";
+import { GivethIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/GivethIcon.tsx";
 import { LiquityIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/LiquityIcon.tsx";
 import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
 import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
@@ -102,6 +103,18 @@ export const CorkProject: Project = {
   },
 };
 
+export const GivethProject: Project = {
+  id: ProjectIds.Giveth,
+  name: "Giveth",
+  description:
+    "Crypto donation and public-goods funding platform that enables zero-fee giving and community-driven impact projects.",
+  icon: GivethIcon,
+  socials: {
+    twitter: new URL("https://x.com/giveth"),
+    website: new URL("https://giveth.io/"),
+  },
+};
+
 /**
  * Array of supported projects.
  *
@@ -116,4 +129,5 @@ export const PROJECTS: Project[] = [
   TaikoProject,
   LiquityProject,
   CorkProject,
+  GivethProject,
 ];

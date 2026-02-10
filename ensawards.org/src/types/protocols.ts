@@ -24,6 +24,7 @@ export const DeFiProtocolIds = {
   Taiko: "protocol-taiko-defi",
   Uniswap: "protocol-uniswap-defi",
   Cork: "protocol-cork-defi",
+  Giveth: "protocol-giveth-defi",
 } as const;
 
 /**
