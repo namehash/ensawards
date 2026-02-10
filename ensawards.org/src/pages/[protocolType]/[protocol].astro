@@ -6,7 +6,7 @@ import {
   getProtocolBySlug,
   getProtocolTypeBySlug,
 } from "../../utils/dataAccess";
-import { Contract } from "../../types/contracts";
+import { type Contract } from "../../types/contracts";
 import { CONTRACTS } from "../../data/contracts";
 import { EnsDaoIcon } from "../../components/atoms/icons/ens-integrating-entities/dao-protocols/EnsDaoIcon";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
@@ -29,7 +29,7 @@ import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "../../utils/styles";
-import { Protocol } from "../../types/protocols";
+import { type Protocol } from "../../types/protocols";
 export function getStaticPaths() {
   const staticPaths = [];
 

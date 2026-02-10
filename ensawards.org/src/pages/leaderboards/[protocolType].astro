@@ -33,7 +33,10 @@ const resolvedProtocolType = getProtocolTypeBySlug(protocolType);
 // The default values should never be used. Only introduced for type safety.
 let normalizedProtocolType = "-";
 let pluralizedBestPracticeTarget = "-";
-let protocolScores: Record<SupportedGroupByCategory, number> = {};
+let protocolScores: Record<SupportedGroupByCategory, number> = {} as Record<
+  SupportedGroupByCategory,
+  number
+>;
 
 if (resolvedProtocolType) {
   normalizedProtocolType = resolvedProtocolType.toLowerCase();
