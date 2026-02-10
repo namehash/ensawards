@@ -20,7 +20,7 @@ import {
 } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 import { ProtocolTypes } from "../types/bestPractices";
-import { normalizePhrase, pluralizeBestPracticeTarget } from "../utils/textModifications";
+import { pluralizeBestPracticeTarget } from "../utils/textModifications";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -89,7 +89,7 @@ const placeIcons = [
       Object.values(ProtocolTypes).map((protocolType) => {
         const protocolScores =
           getContractNamingScoresByProtocolType(protocolType);
-        const protocolPathParameter = normalizePhrase(protocolType);
+        const protocolPathParameter = protocolType.toLowerCase();
 
         return (
           <ItemsList

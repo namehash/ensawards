@@ -1,6 +1,5 @@
 ---
 import { ProtocolTypes } from "../../types/bestPractices";
-import { normalizePhrase } from "../../utils/textModifications";
 import { PROTOCOLS } from "../../data/protocols";
 import {
   getContractNamingScoresByProtocolType,
@@ -41,7 +40,7 @@ export function getStaticPaths() {
     relevantProtocols.forEach((protocol) =>
       staticPaths.push({
         params: {
-          protocolType: normalizePhrase(protocolType),
+          protocolType: protocolType.toLowerCase(),
           protocol: protocol.slug,
         },
       }),
@@ -82,7 +81,7 @@ if (resolvedProtocol && resolvedProtocolType) {
       pageMetadata={{
         title: `ENSAwards: ${resolvedProtocol.name} ENS Integration Benchmarks`,
         description: resolvedProtocol.description,
-        url: `https://ensawards.org/${normalizePhrase(resolvedProtocolType)}/${resolvedProtocol.slug}`,
+        url: `https://ensawards.org/${resolvedProtocolType.toLowerCase()}/${resolvedProtocol.slug}`,
         ogImage: resolvedProtocol.ogImagePath,
         twitterImage: resolvedProtocol.twitterOgImagePath,
       }}>

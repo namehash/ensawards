@@ -1,7 +1,7 @@
 ---
-import { normalizePhrase, pluralizeBestPracticeTarget } from "../../utils/textModifications";
+import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
 import type { ImageMetadata } from "astro";
-import { ProtocolType, ProtocolTypes } from "../../types/bestPractices";
+import { ProtocolTypes } from "../../types/bestPractices";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { ProtocolId } from "../../types/protocols";
 import { getProtocolById, getProtocolTypeBySlug } from "../../utils/dataAccess";
@@ -15,7 +15,7 @@ import { SupportedGroupByCategory } from "../../contract-pipelines/group-by";
 
 export function getStaticPaths() {
   return Object.values(ProtocolTypes).map((protocolType) => ({
-    params: { protocolType: normalizePhrase(protocolType) },
+    params: { protocolType: protocolType.toLowerCase() },
   }));
 }
 
@@ -36,7 +36,7 @@ let pluralizedBestPracticeTarget = "-";
 let protocolScores: Record<SupportedGroupByCategory, number> = {};
 
 if (resolvedProtocolType) {
-  normalizedProtocolType = normalizePhrase(resolvedProtocolType);
+  normalizedProtocolType = resolvedProtocolType.toLowerCase();
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedProtocolType);
   protocolScores = getContractNamingScoresByProtocolType(resolvedProtocolType);
 }

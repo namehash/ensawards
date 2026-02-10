@@ -31,7 +31,7 @@ import { ProtocolId } from "../types/protocols";
 import { getContractNamingScoresByProtocolType, getProtocolById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 import { ProtocolTypes } from "../types/bestPractices";
-import { normalizePhrase, pluralizeBestPracticeTarget } from "../utils/textModifications";
+import { pluralizeBestPracticeTarget } from "../utils/textModifications";
 
 interface ContentItemData {
   name: string;
@@ -279,7 +279,7 @@ const backgroundGreyStyles =
               <LeaderboardSnippetCard
                 name={`${protocolType} leaderboard`}
                 description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
-                link={`/leaderboards/${normalizePhrase(protocolType)}`}>
+                link={`/leaderboards/${protocolType.toLowerCase()}`}>
                 <div
                   slot="bestResultsIcons"
                   class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">

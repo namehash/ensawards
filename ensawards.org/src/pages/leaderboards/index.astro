@@ -13,7 +13,7 @@ import {
 } from "../../utils/dataAccess";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { ProtocolTypes } from "../../types/bestPractices";
-import { normalizePhrase, pluralizeBestPracticeTarget } from "../../utils/textModifications";
+import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
 
 const referrerLeaderboardDescription =
   "Compare referrers by their performance in ENS Holiday Awards.";
@@ -96,7 +96,7 @@ const referrerLeaderboardDescription =
             <LeaderboardSnippetCard
               name={`${protocolType} leaderboard`}
               description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
-              link={`/leaderboards/${normalizePhrase(protocolType)}`}>
+              link={`/leaderboards/${protocolType.toLowerCase()}`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">

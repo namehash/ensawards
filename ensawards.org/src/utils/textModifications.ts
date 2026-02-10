@@ -5,17 +5,11 @@ import { AppTypes } from "@/types/apps.ts";
 import type { BestPracticeTarget } from "@/types/bestPractices.ts";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
 
-const LEADERBOARDS_SNIPPETS_PHRASES_TO_REMAIN_UNNORMALIZED = ["DAO", "DeFi"];
+const CAPITALIZED_ACRONYMS = ["DAO", "DeFi"];
 
 export const normalizeLeaderboardSnippetPhrase = (text: string): string => {
-  return LEADERBOARDS_SNIPPETS_PHRASES_TO_REMAIN_UNNORMALIZED.some((phrase) =>
-    text.includes(phrase),
-  )
-    ? text
-    : text.toLowerCase();
+  return CAPITALIZED_ACRONYMS.some((phrase) => text.includes(phrase)) ? text : text.toLowerCase();
 };
-
-export const normalizePhrase = (phrase: string) => phrase.toLowerCase();
 
 export const breakLongWords = (
   word: string,

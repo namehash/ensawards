@@ -13,7 +13,6 @@ import EnscribeIconLight from "../atoms/icons/EnscribeIconLight.astro";
 import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
-import { normalizePhrase } from "../../utils/textModifications";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
@@ -67,7 +66,7 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
     Object.values(ProtocolTypes).map((protocolType) => {
       const protocolScores =
         getContractNamingScoresByProtocolType(protocolType);
-      const protocolPathParameter = normalizePhrase(protocolType);
+      const protocolPathParameter = protocolType.toLowerCase();
 
       return (
         <ItemsList

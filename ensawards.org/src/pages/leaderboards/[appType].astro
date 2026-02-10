@@ -10,11 +10,11 @@ import { APPS } from "../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppTypes } from "../../types/apps";
 import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "../../utils/dataAccess";
-import { normalizePhrase, pluralizeBestPracticeTarget } from "../../utils/textModifications";
+import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({
-    params: { appType: normalizePhrase(appType) },
+    params: { appType: appType.toLowerCase() },
   }));
 }
 
@@ -30,9 +30,9 @@ const placeIcons = [
 const resolvedAppType = getAppTypeBySlug(appType);
 
 // The fallbacks should never be used. Only introduced for type safety.
-const normalizedAppType = resolvedAppType ? normalizePhrase(resolvedAppType) : "-";
+const normalizedAppType = resolvedAppType ? resolvedAppType.toLowerCase() : "-";
 const pluralizedBestPracticeTarget = resolvedAppType
-  ? normalizePhrase(pluralizeBestPracticeTarget(resolvedAppType))
+  ? pluralizeBestPracticeTarget(resolvedAppType).toLowerCase()
   : "-";
 ---
 
