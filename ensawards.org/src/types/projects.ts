@@ -8,6 +8,11 @@ export const ProjectIds = {
   Aave: "project-aave",
   Taiko: "project-taiko",
   Liquity: "project-liquity",
+  Rainbow: "project-rainbow",
+  Consensys: "project-consensys",
+  Coinbase: "project-coinbase",
+  Blockscout: "project-blockscout",
+  Etherscan: "project-etherscan",
 } as const;
 
 /**

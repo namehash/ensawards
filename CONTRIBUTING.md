@@ -35,7 +35,7 @@ Although related, these entity types represent different real-world concepts.
 * `Apps` refer to specific software applications.
 * `Projects` represent a higher-level initiatives or organizations that might produce multiple related protocols and apps. A project can include multiple protocols and multiple apps.
 
-For this reason, every new `Protocol` must be associated with a corresponding `Project`. We will soon enforce the same requirement for every `App`.
+For this reason, every new `App` or `Protocol` must be associated with a corresponding `Project`.
 
 ### Adding a new `Protocol`
 
@@ -102,6 +102,7 @@ export interface Contract {
 export interface App {
     id: string;
     slug: string;
+    project: Project; // each app belongs to a single project.
     name: string;
     description: string;
     type: AppType;
@@ -122,7 +123,7 @@ export interface App {
 > 
 > When your PR with a new `App` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
-4. Include an icon as a React functional component inside [@/components/atoms/icons/ens-integrating-entities/apps/](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps) directory. For reference, see [@/components/atoms/icons/ens-integrating-entities/apps/RainbowWalletIcon.tsx](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps/RainbowWalletIcon.tsx). Keep in mind that projects and the entities they include can share the same icon. In that case it should be placed in [@/components/atoms/icons/ens-integrating-entities/shared](ensawards.org/src/components/atoms/icons/ens-integrating-entities/shared) directory.
+4. Include an icon as a React functional component inside [@/components/atoms/icons/ens-integrating-entities/apps/](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps) directory. For reference, see [@/components/atoms/icons/ens-integrating-entities/apps/MetaMaskIcon.tsx](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps/MetaMaskIcon.tsx). Keep in mind that projects and the entities they include can share the same icon. In that case it should be placed in [@/components/atoms/icons/ens-integrating-entities/shared](ensawards.org/src/components/atoms/icons/ens-integrating-entities/shared) directory.
 5. In your PR describe your reasoning for adding that new `App`.
 6. You are welcome to propose updates to already added apps using the same approach.
 

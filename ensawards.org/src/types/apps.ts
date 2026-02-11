@@ -3,6 +3,7 @@ import type { JSX } from "astro/jsx-runtime";
 import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { BestPractice } from "@/types/bestPractices.ts";
+import type { Project } from "@/types/projects.ts";
 
 import type { BenchmarkResult } from "./benchmarks";
 
@@ -36,6 +37,7 @@ export type AppType = (typeof AppTypes)[keyof typeof AppTypes];
 export interface App {
   id: string; // normalized app name, might be redundant
   slug: string;
+  project: Project; // each app belongs to a single project.
   name: string;
   description: string;
   type: AppType;

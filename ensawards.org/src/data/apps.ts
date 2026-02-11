@@ -1,14 +1,21 @@
-import { BlockscoutIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/BlockscoutIcon.tsx";
 import { CoinbaseWalletIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/CoinbaseWalletIcon.tsx";
-import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/EtherscanIcon.tsx";
 import { MetaMaskIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/MetaMaskIcon.tsx";
-import { RainbowWalletIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/RainbowWalletIcon.tsx";
+import { BlockscoutIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/BlockscoutIcon.tsx";
+import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/EtherscanIcon.tsx";
+import { RainbowIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/RainbowIcon.tsx";
 import { benchmarkers } from "@/data/benchmarkers.ts";
 import {
   displayNamedSmartContractsL2,
   displayNamedSmartContractsMainnet,
   //  recognizeAllENSNames
 } from "@/data/bestPractices.ts";
+import {
+  BlockscoutProject,
+  CoinbaseProject,
+  ConsensysProject,
+  EtherscanProject,
+  RainbowProject,
+} from "@/data/projects.ts";
 import { type App, AppTypes } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks";
 import { toUnixTimestamp } from "@/utils/time";
@@ -16,6 +23,7 @@ export const APPS: App[] = [
   {
     id: "rainbow-wallet",
     slug: "rainbow-wallet",
+    project: RainbowProject,
     name: "Rainbow Wallet",
     description:
       "Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum.",
@@ -25,7 +33,7 @@ export const APPS: App[] = [
       twitter: new URL("https://x.com/rainbowdotme"),
       ens: "rainbowwallet.eth",
     },
-    icon: RainbowWalletIcon,
+    icon: RainbowIcon,
     benchmarks: [
       // {
       //   bestPractice: recognizeAllENSNames,
@@ -52,6 +60,7 @@ export const APPS: App[] = [
   {
     id: "coinbase-wallet",
     slug: "coinbase-wallet",
+    project: CoinbaseProject,
     name: "Coinbase Wallet",
     description:
       "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications.",
@@ -88,6 +97,7 @@ export const APPS: App[] = [
   {
     id: "metamask",
     slug: "metamask",
+    project: ConsensysProject,
     name: "MetaMask",
     description: "MetaMask is a widely used, self-custodial cryptocurrency wallet.",
     type: AppTypes.Wallet,
@@ -123,6 +133,7 @@ export const APPS: App[] = [
   {
     id: "etherscan",
     slug: "etherscan",
+    project: EtherscanProject,
     name: "Etherscan",
     description: "Etherscan is a Block Explorer and Analytics Platform for Ethereum.",
     type: AppTypes.Explorer,
@@ -158,6 +169,7 @@ export const APPS: App[] = [
   {
     id: "blockscout",
     slug: "blockscout",
+    project: BlockscoutProject,
     name: "Blockscout",
     description: "Blockscout is a tool for inspecting and analyzing EVM based blockchains.",
     type: AppTypes.Explorer,
