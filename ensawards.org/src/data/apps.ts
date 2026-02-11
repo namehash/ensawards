@@ -1,7 +1,7 @@
 import { CoinbaseWalletIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/CoinbaseWalletIcon.tsx";
-import { MetaMaskIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/MetaMaskIcon.tsx";
 import { BlockscoutIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/BlockscoutIcon.tsx";
 import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/EtherscanIcon.tsx";
+import { MetaMaskIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/MetaMaskIcon.tsx";
 import { RainbowIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/RainbowIcon.tsx";
 import { benchmarkers } from "@/data/benchmarkers.ts";
 import {
@@ -12,8 +12,8 @@ import {
 import {
   BlockscoutProject,
   CoinbaseProject,
-  ConsensysProject,
   EtherscanProject,
+  MetaMaskProject,
   RainbowProject,
 } from "@/data/projects.ts";
 import { type App, AppTypes } from "@/types/apps.ts";
@@ -97,7 +97,7 @@ export const APPS: App[] = [
   {
     id: "metamask",
     slug: "metamask",
-    project: ConsensysProject,
+    project: MetaMaskProject,
     name: "MetaMask",
     description: "MetaMask is a widely used, self-custodial cryptocurrency wallet.",
     type: AppTypes.Wallet,

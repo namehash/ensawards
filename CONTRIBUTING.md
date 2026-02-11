@@ -123,7 +123,7 @@ export interface App {
 > 
 > When your PR with a new `App` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
-3. Include an icon as a React functional component inside [@/components/atoms/icons/ens-integrating-entities/apps/](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps) directory. For reference, see [@/components/atoms/icons/ens-integrating-entities/apps/MetaMaskIcon.tsx](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps/MetaMaskIcon.tsx). Keep in mind that projects and the entities they include can share the same icon. In that case it should be placed in [@/components/atoms/icons/ens-integrating-entities/shared](ensawards.org/src/components/atoms/icons/ens-integrating-entities/shared) directory.
+3. Include an icon as a React functional component inside [@/components/atoms/icons/ens-integrating-entities/apps/](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps) directory. For reference, see [@/components/atoms/icons/ens-integrating-entities/apps/CoinbaseWalletIcon.tsx](ensawards.org/src/components/atoms/icons/ens-integrating-entities/apps/CoinbaseWalletIcon.tsx). Keep in mind that projects and the entities they include can share the same icon. In that case it should be placed in [@/components/atoms/icons/ens-integrating-entities/shared](ensawards.org/src/components/atoms/icons/ens-integrating-entities/shared) directory.
 4. In your PR describe your reasoning for adding that new `App`.
 5. You are welcome to propose updates to already added apps using the same approach.
 

@@ -9,7 +9,7 @@ export const ProjectIds = {
   Taiko: "project-taiko",
   Liquity: "project-liquity",
   Rainbow: "project-rainbow",
-  Consensys: "project-consensys",
+  MetaMask: "project-metamask",
   Coinbase: "project-coinbase",
   Blockscout: "project-blockscout",
   Etherscan: "project-etherscan",

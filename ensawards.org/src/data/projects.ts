@@ -1,11 +1,11 @@
 import { AaveProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/AaveProjectIcon.tsx";
 import { ArbitrumProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/ArbitrumProjectIcon.tsx";
 import { CoinbaseProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/CoinbaseProjectIcon.tsx";
-import { ConsensysProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/ConsensysProjectIcon.tsx";
 import { EnsProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/EnsProjectIcon.tsx";
 import { BlockscoutIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/BlockscoutIcon.tsx";
 import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/EtherscanIcon.tsx";
 import { LiquityIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/LiquityIcon.tsx";
+import { MetaMaskIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/MetaMaskIcon.tsx";
 import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
 import { RainbowIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/RainbowIcon.tsx";
 import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
@@ -94,7 +94,6 @@ export const LiquityProject: Project = {
   },
 };
 
-//TODO: I'd appreciate help regarding descriptions and a double-check of socials for the new projects
 export const RainbowProject: Project = {
   id: ProjectIds.Rainbow,
   name: "Rainbow",
@@ -119,15 +118,14 @@ export const CoinbaseProject: Project = {
   },
 };
 
-export const ConsensysProject: Project = {
-  id: ProjectIds.Consensys,
-  name: "Consensys",
-  description:
-    "Blockchain software and infrastructure company building and scaling Ethereum-based developer tools, wallets (like MetaMask), APIs and enterprise solutions to enable access to Web3 and DeFi.",
-  icon: ConsensysProjectIcon,
+export const MetaMaskProject: Project = {
+  id: ProjectIds.MetaMask,
+  name: "MetaMask",
+  description: "MetaMask is a widely used, self-custodial cryptocurrency wallet.",
+  icon: MetaMaskIcon,
   socials: {
-    website: new URL("https://consensys.io/"),
-    twitter: new URL("https://x.com/consensys"),
+    website: new URL("https://metamask.io/"),
+    twitter: new URL("https://x.com/MetaMask"),
   },
 };
 
@@ -168,7 +166,7 @@ export const PROJECTS: Project[] = [
   LiquityProject,
   RainbowProject,
   CoinbaseProject,
-  ConsensysProject,
+  MetaMaskProject,
   EtherscanProject,
   BlockscoutProject,
 ];
