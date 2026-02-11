@@ -123,7 +123,7 @@ export const ConsensysProject: Project = {
   id: ProjectIds.Consensys,
   name: "Consensys",
   description:
-    "Blockchain software and infrastructure company building and scaling Ethereum-based developer tools, wallets (like MetaMask), APIs and enterprise solutions to enable access to Web3 and decentralized finance.",
+    "Blockchain software and infrastructure company building and scaling Ethereum-based developer tools, wallets (like MetaMask), APIs and enterprise solutions to enable access to Web3 and DeFi.",
   icon: ConsensysProjectIcon,
   socials: {
     website: new URL("https://consensys.io/"),
