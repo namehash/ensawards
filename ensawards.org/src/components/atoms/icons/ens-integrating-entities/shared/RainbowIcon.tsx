@@ -1,6 +1,6 @@
 import React from "react";
 
-export const RainbowWalletIcon = (props: React.SVGProps<SVGSVGElement>) => (
+export const RainbowIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="40"
     height="40"
