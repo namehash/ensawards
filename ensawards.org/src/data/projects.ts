@@ -143,7 +143,7 @@ export const EtherscanProject: Project = {
 export const BlockscoutProject: Project = {
   id: ProjectIds.Blockscout,
   name: "Blockscout",
-  description: "Blockscout is a tool for inspecting and analyzing EVM based blockchains.",
+  description: "Blockscout is a tool for inspecting and analyzing EVM-based blockchains.",
   icon: BlockscoutIcon,
   socials: {
     website: new URL("https://www.blockscout.com/"),
