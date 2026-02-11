@@ -171,7 +171,7 @@ export const APPS: App[] = [
     slug: "blockscout",
     project: BlockscoutProject,
     name: "Blockscout",
-    description: "Blockscout is a tool for inspecting and analyzing EVM based blockchains.",
+    description: "Blockscout is a tool for inspecting and analyzing EVM-based blockchains.",
     type: AppTypes.Explorer,
     socials: {
       website: new URL("https://www.blockscout.com/"),
