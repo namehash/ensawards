@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.2",
+    "baseline-browser-mapping": "^2.9.19",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
