@@ -40,7 +40,7 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: parseTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
@@ -77,7 +77,7 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: parseTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
@@ -113,7 +113,7 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: parseTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
@@ -149,7 +149,7 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: parseTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
@@ -184,7 +184,7 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: parseTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
