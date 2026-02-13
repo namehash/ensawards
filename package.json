@@ -2,7 +2,7 @@
   "name": "ensawards-monorepo",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.18.1",
+  "packageManager": "pnpm@10.29.3",
   "scripts": {
     "lint": "pnpm -r --parallel --aggregate-output lint && biome check --write",
     "lint:ci": "pnpm -r --parallel --aggregate-output lint:ci && biome ci",
@@ -12,12 +12,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.2",
+    "baseline-browser-mapping": "^2.9.19",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
   "pnpm": {
     "overrides": {
-      "vite@<6.4.1": ">=6.4.1",
+      "vite@<7.3.1": ">=7.3.1 <8.0.0",
       "tar@<7.5.7": ">=7.5.7",
       "lodash@<4.17.23": ">=4.17.23"
     }
