@@ -6,10 +6,10 @@ import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import { ENSHolidayAwards } from "@/data/referral-programs";
 import { getENSNodeUrl } from "@/utils/env";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
+import { ENSHolidayAwards } from "../../../../data/referral-programs";
 import { variants } from "./data.ts";
 
 const variantIds = [...variants.keys()];

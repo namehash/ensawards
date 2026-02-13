@@ -6,8 +6,9 @@ import {
   type NamedRegistrarAction,
 } from "@ensnode/ensnode-sdk";
 
-import { REFERRAL_INCENTIVE_PROGRAMS } from "@/data/referral-programs";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
+
+import { REFERRAL_INCENTIVE_PROGRAMS } from "../../../../data/referral-programs";
 
 export function isQualifiedReferral(
   incentiveProgram: ReferralIncentiveProgram,

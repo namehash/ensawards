@@ -1,13 +1,13 @@
 ---
 import { ProtocolTypes } from "../../types/bestPractices";
-import { PROTOCOLS } from "../../data/protocols";
+import { PROTOCOLS } from "../../../data/protocols";
 import {
   getContractNamingScoresByProtocolType,
   getProtocolBySlug,
   getProtocolTypeBySlug,
 } from "../../utils/dataAccess";
 import { type Contract } from "../../types/contracts";
-import { CONTRACTS } from "../../data/protocols/contracts";
+import { CONTRACTS } from "../../../data/protocols/contracts";
 import { EnsDaoIcon } from "../../components/atoms/icons/ens-integrating-entities/dao-protocols/EnsDaoIcon";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";

@@ -1,7 +1,8 @@
 import { groupByProtocol, type SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
-import { CONTRACTS } from "@/data/protocols/contracts.ts";
 import type { Contract } from "@/types/contracts.ts";
+
+import { CONTRACTS } from "../../data/protocols/contracts.ts";
 
 /**
  * Custom sort function type for sorting leaderboard entries.

@@ -1,13 +1,14 @@
 import { mainnet } from "viem/chains";
 
-import { ENSDao } from "@/data/protocols/ens-dao";
-import { UniswapDao } from "@/data/protocols/uniswap-dao";
 import {
   type Contract,
   ContractResolutionStatusIds,
   ContractSubtypes,
   ContractTypes,
 } from "@/types/contracts.ts";
+
+import { ENSDao } from "../../data/protocols/ens-dao";
+import { UniswapDao } from "../../data/protocols/uniswap-dao";
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
   {

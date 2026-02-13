@@ -2,10 +2,6 @@ import { contractPipeline } from "@/contract-pipelines";
 import { daoContractsOnly, defiContractsOnly } from "@/contract-pipelines/filters.ts";
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { sortProtocolLeaderboard } from "@/contract-pipelines/sorting.ts";
-import { APPS } from "@/data/apps";
-import { ENS_BEST_PRACTICES } from "@/data/ens-best-practices";
-import { BEST_PRACTICE_CATEGORIES } from "@/data/ens-best-practices/categories";
-import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols";
 import { type App, type AppType, AppTypes } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks";
 import type {
@@ -24,6 +20,11 @@ import type {
   Protocol,
   ProtocolId,
 } from "@/types/protocols.ts";
+
+import { APPS } from "../../data/apps";
+import { ENS_BEST_PRACTICES } from "../../data/ens-best-practices";
+import { BEST_PRACTICE_CATEGORIES } from "../../data/ens-best-practices/categories";
+import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "../../data/protocols";
 
 export const getProtocolById = (protocolId: ProtocolId): Protocol => {
   // biome-ignore lint/style/noNonNullAssertion: Because of invariant that PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
