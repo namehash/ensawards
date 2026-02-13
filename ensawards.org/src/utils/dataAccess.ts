@@ -2,9 +2,10 @@ import { contractPipeline } from "@/contract-pipelines";
 import { daoContractsOnly, defiContractsOnly } from "@/contract-pipelines/filters.ts";
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { sortProtocolLeaderboard } from "@/contract-pipelines/sorting.ts";
-import { APPS } from "@/data/apps.ts";
-import { BEST_PRACTICE_CATEGORIES, BEST_PRACTICES } from "@/data/bestPractices.ts";
-import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
+import { APPS } from "@/data/apps";
+import { ENS_BEST_PRACTICES } from "@/data/ens-best-practices";
+import { BEST_PRACTICE_CATEGORIES } from "@/data/ens-best-practices/categories";
+import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols";
 import { type App, type AppType, AppTypes } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks";
 import type {
@@ -90,11 +91,11 @@ export const getCategoryById = (categoryId: string): BestPracticeCategory | unde
 };
 
 export const getBestPracticeBySlug = (bestPracticeSlug: string): BestPractice | undefined => {
-  return BEST_PRACTICES.find((bestPractice) => bestPractice.slug === bestPracticeSlug);
+  return ENS_BEST_PRACTICES.find((bestPractice) => bestPractice.slug === bestPracticeSlug);
 };
 
 export const getBestPracticeById = (bestPracticeId: string): BestPractice | undefined =>
-  BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
+  ENS_BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
 
 export const calculateAppEnsAwardsScore = (app: App) => {
   const accumulatedBenchmarks = app.benchmarks.reduce((sum, benchmark) => {

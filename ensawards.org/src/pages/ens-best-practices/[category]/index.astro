@@ -10,10 +10,10 @@ import UnderConstructionBanner from "../../../components/atoms/UnderConstruction
 import ItemsList from "../../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
-import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
 import { CategoryStatus } from "../../../types/bestPractices";
 import { getCategoryBySlug } from "../../../utils/dataAccess";
+import { BEST_PRACTICE_CATEGORIES } from "../../../data/ens-best-practices/categories";
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
     params: { category: category.slug },

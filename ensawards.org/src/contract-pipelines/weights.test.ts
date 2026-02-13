@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
+import { CONTRACTS_TEST_DATA } from "@/contract-pipelines/contractsTestData.ts";
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
-import { CONTRACTS_TEST_DATA } from "@/data/contracts-test.ts";
 import type { Contract } from "@/types/contracts.ts";
 
 describe("weight functions", () => {

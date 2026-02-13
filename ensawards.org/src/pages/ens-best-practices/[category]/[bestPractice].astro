@@ -2,11 +2,11 @@
 import AppBestPracticeDetails from "../../../components/organisms/AppBestPracticeDetails.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 import ProtocolBestPracticeDetails from "../../../components/organisms/ProtocolBestPracticeDetails.astro";
-import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
 import { BestPracticeTypes } from "../../../types/bestPractices";
 import { getBestPracticeBySlug } from "../../../utils/dataAccess";
 import TechnicalInfoAnchorScript from "../../../components/atoms/TechnicalInfoAnchorScript.astro";
+import { BEST_PRACTICE_CATEGORIES } from "../../../data/ens-best-practices/categories";
 export function getStaticPaths() {
   const staticPaths = [];
 

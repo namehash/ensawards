@@ -10,8 +10,8 @@ Below, you’ll find detailed instructions for each contribution type. If your c
 
 ### Adding a new `Project`
 
-1. Define it as an independent constant in the [@/data/projects.ts](ensawards.org/src/data/projects.ts) file and then add the new project to the `PROJECTS` list in the same file.
-2. Follow its data model that you can look up in the [@/types/projects.ts](ensawards.org/src/types/projects.ts) file. You can also have a quick glance at it below.
+1. Define it as an independent constant in the [@/data/index.ts](ensawards.org/src/data/projects/index.ts) file and then add the new project to the `Index` list in the same file.
+2. Follow its data model that you can look up in the [@/types/index.ts](ensawards.org/src/types/projects.ts) file. You can also have a quick glance at it below.
 ```typescript
 export interface Project {
     id: ProjectId;
@@ -39,9 +39,9 @@ For this reason, every new `App` or `Protocol` must be associated with a corresp
 
 ### Adding a new `Protocol`
 
-1. Define it as an independent constant in the [@/data/protocols.ts](ensawards.org/src/data/protocols.ts) file.
+1. Define it as an independent constant in the [@/data/index.ts](ensawards.org/src/data/protocols/index.ts) file.
 2. Add it to the `DAO_PROTOCOLS` or `DEFI_PROTOCOLS` list in the same file appropriately to its type.
-3. Make sure to follow its data model that you can look up in the [@/types/protocols.ts](ensawards.org/src/types/protocols.ts) file. Remember that the Protocol can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:
+3. Make sure to follow its data model that you can look up in the [@/types/index.ts](ensawards.org/src/types/protocols.ts) file. Remember that the Protocol can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:
 
 ```typescript
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
@@ -81,7 +81,7 @@ export type Protocol = DAOProtocol | DeFiProtocol;
 
 ### Add a new `Contract`
 
-1. Add the new contract object to the `CONTRACTS` list inside the [@/data/contracts.ts](ensawards.org/src/data/contracts.ts) file.
+1. Add the new contract object to the `CONTRACTS` list inside the [@/data/contracts.ts](ensawards.org/src/data/protocols/contracts.ts) file.
 2. Make sure to follow the data model defined in the [@/types/contracts.ts](ensawards.org/src/types/contracts.ts) file.
 ```typescript
 export interface Contract {
@@ -96,8 +96,8 @@ export interface Contract {
 
 ### Add a new `App`
 
-1. Add your `App` to the `APPS` list available in the [@/data/apps.ts](ensawards.org/src/data/apps.ts) file.
-2. Follow the corresponding data model available in the [@/types/apps.ts](ensawards.org/src/types/apps.ts) file.
+1. Add your `App` to the `APPS` list available in the [@/data/index.ts](ensawards.org/src/data/apps/index.ts) file.
+2. Follow the corresponding data model available in the [@/types/index.ts](ensawards.org/src/types/apps.ts) file.
 ```typescript
 export interface App {
     id: string;
@@ -135,9 +135,9 @@ Best practices are structured hierarchically and can be added on two levels:
 
 Defines a specific requirement that an app or protocol must meet to pass a benchmark test. They are grouped into categories.
 
-1. To add a `BestPractice` create it as an independent exported constant in the [@/data/bestPractices.ts](ensawards.org/src/data/bestPractices.ts) file.
+1. To add a `BestPractice` create it as an independent exported constant in the [@/data/index.ts](ensawards.org/src/data/best-practices/index.ts) file.
 2. Add it to the appropriate category’s list.
-3. Make sure to follow its data model defined in the [@/types/bestPractices.ts](ensawards.org/src/types/bestPractices.ts) file.
+3. Make sure to follow its data model defined in the [@/types/index.ts](ensawards.org/src/types/bestPractices.ts) file.
 ```typescript
 export interface BestPractice {
     id: string;
@@ -166,8 +166,8 @@ export interface BestPractice {
 
 Categories sort best practices into topic-related groups based on their characteristics. They are a level above the basic `BestPractice` objects in the "Best Practices" hierarchy.
 
-1. Add new `BestPracticeCategory` to the `BEST_PRACTICE_CATEGORIES` list available in the [@/data/bestPractices.ts](ensawards.org/src/data/bestPractices.ts) file.
-2. Follow its data model available in the [@/types/bestPractices.ts](ensawards.org/src/types/bestPractices.ts) file.
+1. Add new `BestPracticeCategory` to the `BEST_PRACTICE_CATEGORIES` list available in the [@/data/index.ts](ensawards.org/src/data/best-practices/index.ts) file.
+2. Follow its data model available in the [@/types/index.ts](ensawards.org/src/types/bestPractices.ts) file.
 ```typescript
 export enum CategoryStatus {
     ComingSoon,
@@ -187,8 +187,8 @@ export interface BestPracticeCategory {
 
 ### Suggest a `benchmark update`
 
-1. To suggest a benchmark update for an existing app, modify its `App.benchmarks` field in the [@/data/apps.ts](ensawards.org/src/data/apps.ts) file.
-2. Make sure to follow benchmark's data model. It's available in the [@/types/apps.ts](ensawards.org/src/types/apps.ts) file.
+1. To suggest a benchmark update for an existing app, modify its `App.benchmarks` field in the [@/data/index.ts](ensawards.org/src/data/apps/index.ts) file.
+2. Make sure to follow benchmark's data model. It's available in the [@/types/index.ts](ensawards.org/src/types/apps.ts) file.
 ```typescript
 export enum BenchmarkResult {
     Pass = "Pass",
