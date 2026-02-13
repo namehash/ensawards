@@ -1,3 +1,5 @@
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import { CoinbaseWalletIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/CoinbaseWalletIcon.tsx";
 import { BlockscoutIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/BlockscoutIcon.tsx";
 import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/EtherscanIcon.tsx";
@@ -18,7 +20,6 @@ import {
 } from "@/data/projects.ts";
 import { type App, AppTypes } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks";
-import { toUnixTimestamp } from "@/utils/time";
 export const APPS: App[] = [
   {
     id: "rainbow-wallet",
@@ -39,19 +40,19 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:19:28.672Z"),
       },
       {
         bestPractice: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:19:28.672Z"),
       },
     ],
     ogImagePath: "https://ensawards.org/app-rainbow-wallet_og_image.png",
@@ -76,19 +77,19 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:22:55.716Z"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:22:55.716Z"),
       },
       {
         bestPractice: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:22:55.716Z"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:22:55.716Z"),
       },
     ],
     ogImagePath: "https://ensawards.org/app-coinbase-wallet_og_image.png",
@@ -112,19 +113,19 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:24:39.561Z"),
       },
       {
         bestPractice: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:24:39.561Z"),
       },
     ],
     ogImagePath: "https://ensawards.org/app-metamask_og_image.png",
@@ -148,19 +149,19 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:26:20.566Z"),
       },
       {
         bestPractice: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:26:20.566Z"),
       },
     ],
     ogImagePath: "https://ensawards.org/app-etherscan_og_image.png",
@@ -183,19 +184,19 @@ export const APPS: App[] = [
       //   bestPractice: recognizeAllENSNames,
       //   result: BenchmarkResult.Pass,
       //   benchmarkedBy: benchmarkers.stevedylan,
-      //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+      //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
       // },
       {
         bestPractice: displayNamedSmartContractsMainnet,
         result: BenchmarkResult.Pass,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:28:32.410Z"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:28:32.410Z"),
       },
       {
         bestPractice: displayNamedSmartContractsL2,
         result: BenchmarkResult.Fail,
         benchmarkedBy: benchmarkers.stevedylandev,
-        benchmarkedAt: toUnixTimestamp("2025-12-08T18:28:32.410Z"),
+        benchmarkedAt: parseTimestamp("2025-12-08T18:28:32.410Z"),
       },
     ],
     ogImagePath: "https://ensawards.org/app-blockscout_og_image.png",
