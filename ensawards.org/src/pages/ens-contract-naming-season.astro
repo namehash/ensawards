@@ -314,36 +314,35 @@ const backgroundGreyStyles =
         }
       </div>
     </div>
-    <!--TODO: After quote authors confirm they are happy with their quotes make a PR that only uncomments this section to "launch" it-->
-    <!--<div-->
-    <!--  class={cn(-->
-    <!--    containerBaseStyles,-->
-    <!--    "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",-->
-    <!--  )}>-->
-    <!--  <div-->
-    <!--    class={cn(-->
-    <!--      backgroundGreyStyles,-->
-    <!--      "sm:h-[calc(100%+30px)] flex justify-center items-center",-->
-    <!--    )}>-->
-    <!--    <Image-->
-    <!--      quality={100}-->
-    <!--      src={VoicesFromTheCommunityBackgroundImage}-->
-    <!--      alt="avatars of ENS community"-->
-    <!--      class="max-sm:hidden relative bottom-0 sm:h-full sm:w-auto"-->
-    <!--    />-->
-    <!--  </div>-->
-    <!--  <h3-->
-    <!--    class={cn(-->
-    <!--      sectionHeaderBaseStyles,-->
-    <!--      "relative z-10 self-stretch text-left",-->
-    <!--    )}>-->
-    <!--    Voices from the community-->
-    <!--  </h3>-->
-    <!--  <div-->
-    <!--    class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-start items-start gap-4 sm:gap-5">-->
-    <!--    {voicesFromTheCommunity.map((quote) => <QuoteCard {...quote} />)}-->
-    <!--  </div>-->
-    <!--</div>-->
+    <div
+      class={cn(
+        containerBaseStyles,
+        "gap-5 sm:gap-10 py-6 sm:py-[40px] relative z-10",
+      )}>
+      <div
+        class={cn(
+          backgroundGreyStyles,
+          "sm:h-[calc(100%+30px)] flex justify-center items-center",
+        )}>
+        <Image
+          quality={100}
+          src={VoicesFromTheCommunityBackgroundImage}
+          alt="avatars of ENS community"
+          class="max-sm:hidden relative bottom-0 sm:h-full sm:w-auto"
+        />
+      </div>
+      <h3
+        class={cn(
+          sectionHeaderBaseStyles,
+          "relative z-10 self-stretch text-left",
+        )}>
+        Voices from the community
+      </h3>
+      <div
+        class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-start items-start gap-4 sm:gap-5">
+        {voicesFromTheCommunity.map((quote) => <QuoteCard {...quote} />)}
+      </div>
+    </div>
     <div
       class={cn(
         containerBaseStyles,
