@@ -1,8 +1,9 @@
 // Read CONTRIBUTING.md for additional advice on adding and modifying app benchmarks
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import type { AppBenchmark } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks.ts";
-import { toUnixTimestamp } from "@/utils/time.ts";
 
 import { benchmarkers } from "../../benchmarkers";
 import { displayNamedSmartContractsL2 } from "../../ens-best-practices/categories/contract-naming/displayNamedSmartContractsL2.ts";
@@ -13,18 +14,18 @@ export const MetaMaskWalletBenchmarks: AppBenchmark[] = [
   //   bestPractice: recognizeAllENSNames,
   //   result: BenchmarkResult.Pass,
   //   benchmarkedBy: benchmarkers.stevedylandev,
-  //   benchmarkedAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+  //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
   // },
   {
     bestPractice: displayNamedSmartContractsMainnet,
     result: BenchmarkResult.Pass,
     benchmarkedBy: benchmarkers.stevedylandev,
-    benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
+    benchmarkedAt: parseTimestamp("2025-12-08T18:24:39.561Z"),
   },
   {
     bestPractice: displayNamedSmartContractsL2,
     result: BenchmarkResult.Fail,
     benchmarkedBy: benchmarkers.stevedylandev,
-    benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
+    benchmarkedAt: parseTimestamp("2025-12-08T18:24:39.561Z"),
   },
 ];
