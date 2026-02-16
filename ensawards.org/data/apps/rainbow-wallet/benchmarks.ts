@@ -19,12 +19,12 @@ export const RainbowWalletBenchmarks: AppBenchmark[] = [
     bestPractice: displayNamedSmartContractsMainnet,
     result: BenchmarkResult.Pass,
     benchmarkedBy: benchmarkers.stevedylandev,
-    benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
+    benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672Z"),
   },
   {
     bestPractice: displayNamedSmartContractsL2,
     result: BenchmarkResult.Fail,
     benchmarkedBy: benchmarkers.stevedylandev,
-    benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672"),
+    benchmarkedAt: toUnixTimestamp("2025-12-08T18:19:28.672Z"),
   },
 ];
