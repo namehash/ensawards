@@ -1,4 +1,4 @@
-// TODO: In a future PR uncomment recogonizeAllENSNames best practice
+// TODO: In a future PR uncomment recognizeAllENSNames best practice
 //
 // export const recognizeAllENSNames: BestPractice = {
 //   id: "recognize-all-ens-names",

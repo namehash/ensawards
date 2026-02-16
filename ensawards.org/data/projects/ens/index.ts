@@ -1,6 +1,5 @@
 import { EnsProjectIcon } from "@/components/atoms/icons/ens-integrating-entities/projects/EnsProjectIcon.tsx";
-import type { Project } from "@/types/projects.ts";
-import { ProjectIds } from "@/types/projects.ts";
+import { type Project, ProjectIds } from "@/types/projects.ts";
 
 export const ENSProject: Project = {
   id: ProjectIds.Ens,

@@ -4,7 +4,7 @@ import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
 import { areStringsUnique, isValidSlug } from "@/utils";
 
-import { APPS } from "../apps";
+import { APPS } from ".";
 
 describe("App data", () => {
   const data = APPS;

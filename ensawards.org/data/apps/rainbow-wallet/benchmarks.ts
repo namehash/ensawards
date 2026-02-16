@@ -11,7 +11,7 @@ export const RainbowWalletBenchmarks: AppBenchmark[] = [
   //   bestPractice: recognizeAllENSNames,
   //   result: BenchmarkResult.Pass,
   //   benchmarkedBy: benchmarkers.stevedylan,
-  //   benchmardAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
+  //   benchmarkedAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
   // },
   {
     bestPractice: displayNamedSmartContractsMainnet,

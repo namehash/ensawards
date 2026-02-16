@@ -16,7 +16,7 @@ export const displayNamedSmartContractsL2: BestPracticeApp = {
     main: {
       header: "Technical Details",
       content:
-        "When users interact with a contract on a L2 chain, use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard to lookup the primary name of the contract. " +
+        "When users interact with a contract on an L2 chain, use the [ENSIP-19](https://docs.ens.domains/ensip/19) standard to lookup the primary name of the contract. " +
         "ENSIP-19 provides chain-specific primary names for L2 networks (including Optimism, Arbitrum, Base, Linea, and Scroll), with an automatic fallback to a default primary name (defined on mainnet) if no chain-specific primary name is defined. " +
         "There are several libraries to choose from that support ENSIP-19 and all ENS best practices: \n" +
         "- [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md) (v1.0.0+)\n" +

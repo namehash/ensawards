@@ -44,7 +44,7 @@ export const UniswapDaoContracts: Contract[] = [
       contract: {
         address: "0x5e4be8bc9637f0eaa1a755019e06a68ce081d58f",
         chain: mainnet,
-        codeName: "GovernerAlpha",
+        codeName: "GovernorAlpha",
       },
     },
   },
