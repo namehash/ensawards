@@ -6,8 +6,7 @@ import { benchmarkers } from "../../benchmarkers";
 import { displayNamedSmartContractsL2 } from "../../ens-best-practices/categories/contract-naming/displayNamedSmartContractsL2.ts";
 import { displayNamedSmartContractsMainnet } from "../../ens-best-practices/categories/contract-naming/displayNamedSmartContractsMainnet.ts";
 
-export let EtherscanBenchmarks: AppBenchmark[];
-EtherscanBenchmarks = [
+export const MetaMaskWalletBenchmarks: AppBenchmark[] = [
   // {
   //   bestPractice: recognizeAllENSNames,
   //   result: BenchmarkResult.Pass,
@@ -18,12 +17,12 @@ EtherscanBenchmarks = [
     bestPractice: displayNamedSmartContractsMainnet,
     result: BenchmarkResult.Pass,
     benchmarkedBy: benchmarkers.stevedylandev,
-    benchmarkedAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
+    benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
   },
   {
     bestPractice: displayNamedSmartContractsL2,
     result: BenchmarkResult.Fail,
     benchmarkedBy: benchmarkers.stevedylandev,
-    benchmarkedAt: toUnixTimestamp("2025-12-08T18:26:20.566Z"),
+    benchmarkedAt: toUnixTimestamp("2025-12-08T18:24:39.561Z"),
   },
 ];

@@ -2,7 +2,7 @@ import { MetaMaskIcon } from "@/components/atoms/icons/ens-integrating-entities/
 import { type App, AppTypes } from "@/types/apps.ts";
 
 import { MetaMaskProject } from "../../projects/metamask";
-import { MetaMaskBenchmarks } from "./benchmarks.ts";
+import { MetaMaskWalletBenchmarks } from "./benchmarks.ts";
 
 export const MetaMaskWallet: App = {
   id: "metamask",
@@ -17,7 +17,7 @@ export const MetaMaskWallet: App = {
     ens: "metamask.eth",
   },
   icon: MetaMaskIcon,
-  benchmarks: MetaMaskBenchmarks,
+  benchmarks: MetaMaskWalletBenchmarks,
   ogImagePath: "https://ensawards.org/app-metamask_og_image.png",
   twitterOgImagePath: "https://ensawards.org/app-metamask_twitter_og_image.png",
 };

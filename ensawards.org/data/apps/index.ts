@@ -1,9 +1,9 @@
 import { type App } from "@/types/apps.ts";
 
-import { BlockscoutExplorer } from "./blockscout";
+import { BlockscoutExplorer } from "./blockscout-explorer";
 import { CoinbaseWallet } from "./coinbase-wallet";
-import { EtherscanExplorer } from "./etherscan";
-import { MetaMaskWallet } from "./metamask";
+import { EtherscanExplorer } from "./etherscan-explorer";
+import { MetaMaskWallet } from "./metamask-wallet";
 import { RainbowWallet } from "./rainbow-wallet";
 
 export const APPS: App[] = [

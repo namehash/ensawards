@@ -6,7 +6,7 @@ import { benchmarkers } from "../../benchmarkers";
 import { displayNamedSmartContractsL2 } from "../../ens-best-practices/categories/contract-naming/displayNamedSmartContractsL2.ts";
 import { displayNamedSmartContractsMainnet } from "../../ens-best-practices/categories/contract-naming/displayNamedSmartContractsMainnet.ts";
 
-export const BlockscoutBenchmarks: AppBenchmark[] = [
+export const BlockscoutExplorerBenchmarks: AppBenchmark[] = [
   // {
   //   bestPractice: recognizeAllENSNames,
   //   result: BenchmarkResult.Pass,

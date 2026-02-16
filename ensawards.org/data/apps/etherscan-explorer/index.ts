@@ -2,7 +2,7 @@ import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities
 import { type App, AppTypes } from "@/types/apps.ts";
 
 import { EtherscanProject } from "../../projects/etherscan";
-import { EtherscanBenchmarks } from "./benchmarks.ts";
+import { EtherscanExplorerBenchmarks } from "./benchmarks.ts";
 
 export const EtherscanExplorer: App = {
   id: "etherscan",
@@ -17,7 +17,7 @@ export const EtherscanExplorer: App = {
     ens: "etherscan.eth",
   },
   icon: EtherscanIcon,
-  benchmarks: EtherscanBenchmarks,
+  benchmarks: EtherscanExplorerBenchmarks,
   ogImagePath: "https://ensawards.org/app-etherscan_og_image.png",
   twitterOgImagePath: "https://ensawards.org/app-etherscan_twitter_og_image.png",
 };

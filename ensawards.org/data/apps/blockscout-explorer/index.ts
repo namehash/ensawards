@@ -3,7 +3,7 @@ import type { App } from "@/types/apps.ts";
 import { AppTypes } from "@/types/apps.ts";
 
 import { BlockscoutProject } from "../../projects/blockscout";
-import { BlockscoutBenchmarks } from "./benchmarks.ts";
+import { BlockscoutExplorerBenchmarks } from "./benchmarks.ts";
 
 export const BlockscoutExplorer: App = {
   id: "blockscout",
@@ -17,7 +17,7 @@ export const BlockscoutExplorer: App = {
     twitter: new URL("https://x.com/blockscout"),
   },
   icon: BlockscoutIcon,
-  benchmarks: BlockscoutBenchmarks,
+  benchmarks: BlockscoutExplorerBenchmarks,
   ogImagePath: "https://ensawards.org/app-blockscout_og_image.png",
   twitterOgImagePath: "https://ensawards.org/app-blockscout_twitter_og_image.png",
 };
