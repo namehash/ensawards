@@ -1570,19 +1570,6 @@ export const CONTRACTS: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x807DEf5E7d057DF05C796F4bc75C3Fe82Bd6EeE1",
-        chain: mainnet,
-        codeName: "ETHBranch.interestRouter",
-      },
-    },
-  },
-  {
-    protocol: LiquityDeFiProtocol,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
         address: "0x7022A4f4A2b9f0C30A5eB0B0073a8Bb4C8e70C1f",
         chain: mainnet,
         codeName: "ETHBranch.wethZapper",
@@ -1783,19 +1770,6 @@ export const CONTRACTS: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x807DEf5E7d057DF05C796F4bc75C3Fe82Bd6EeE1",
-        chain: mainnet,
-        codeName: "wstETHBranch.interestRouter",
-      },
-    },
-  },
-  {
-    protocol: LiquityDeFiProtocol,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
         address: "0xBD69D3e0eA967d146E925b7572B765c8E9C4127D",
         chain: mainnet,
         codeName: "wstETHBranch.gasCompZapper",
@@ -1986,19 +1960,6 @@ export const CONTRACTS: Contract[] = [
         address: "0x45c81dcE308389e1Bee63ae30A04Fb1e148dad41",
         chain: mainnet,
         codeName: "rETHBranch.gasPool",
-      },
-    },
-  },
-  {
-    protocol: LiquityDeFiProtocol,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
-        address: "0x807DEf5E7d057DF05C796F4bc75C3Fe82Bd6EeE1",
-        chain: mainnet,
-        codeName: "rETHBranch.interestRouter",
       },
     },
   },
