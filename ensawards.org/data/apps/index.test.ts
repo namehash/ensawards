@@ -106,11 +106,11 @@ describe("App data", () => {
         ).toBeDefined();
         expect(
           benchmark.benchmarkedAt,
-          `Benchmark ${index} for app ${app.id} missing benchmardAt`,
+          `Benchmark ${index} for app ${app.id} missing benchmarkedAt`,
         ).toBeDefined();
         expect(
           typeof benchmark.benchmarkedAt === "number",
-          `Benchmark ${index} for app ${app.id} benchmardAt should be a number`,
+          `Benchmark ${index} for app ${app.id} benchmarkedAt should be a number`,
         ).toEqual(true);
       });
     });

@@ -41,7 +41,7 @@ For this reason, every new `App` or `Protocol` must be associated with a corresp
 
 ### Adding a new `Protocol`
 
-1. Create a new subdirectory in the [ensawards.org/data/protocols/](ensawards.org/data/protocols) named after the project you want to add. The directory name should follow the format `[lowercase protocol name]-[protocol type]`, where protocol type is the lowercase representation of [ProtocolType](ensawards.org/src/types/protocols.ts) enum. If the name contains multiple words, join them with hyphens ("-").
+1. Create a new subdirectory in the [ensawards.org/data/protocols/](ensawards.org/data/protocols) named after the protocol you want to add. The directory name should follow the format `[lowercase protocol name]-[protocol type]`, where protocol type is the lowercase representation of [ProtocolType](ensawards.org/src/types/protocols.ts) enum. If the name contains multiple words, join them with hyphens ("-").
 2. Inside the new directory create an `index.ts` file and define the new protocol as an independent exported constant.
 3. Add it to the `DAO_PROTOCOLS` or `DEFI_PROTOCOLS` list in the [ensawards.org/data/protocols/index.ts](ensawards.org/data/protocols/index.ts) file appropriately to its type.
 4. Make sure to follow its data model that you can look up in the [@/types/protocols.ts](ensawards.org/src/types/protocols.ts) file. Remember that the `Protocol` can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:

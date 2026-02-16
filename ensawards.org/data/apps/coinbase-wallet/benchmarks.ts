@@ -12,7 +12,7 @@ export const CoinbaseWalletBenchmarks: AppBenchmark[] = [
   // {
   //   bestPractice: recognizeAllENSNames,
   //   result: BenchmarkResult.Pass,
-  //   benchmarkedBy: benchmarkers.stevedylan,
+  //   benchmarkedBy: benchmarkers.stevedylandev,
   //   benchmarkedAt: toUnixTimestamp("2025-12-03T14:00:00Z"),
   // },
   {
