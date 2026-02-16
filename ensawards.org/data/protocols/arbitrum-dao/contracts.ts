@@ -1,3 +1,5 @@
+// Read CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
+
 import { arbitrum, mainnet } from "viem/chains";
 
 import type { Contract } from "@/types/contracts.ts";

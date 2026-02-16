@@ -6,7 +6,7 @@ import { CoinbaseWalletBenchmarks } from "./benchmarks.ts";
 
 export const CoinbaseWallet: App = {
   id: "coinbase-wallet",
-  slug: "coinbase-wallet",
+  slug: "coinbase",
   project: CoinbaseProject,
   name: "Coinbase Wallet",
   description: "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications.",

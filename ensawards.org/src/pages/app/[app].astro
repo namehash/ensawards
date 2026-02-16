@@ -115,7 +115,10 @@ if (appToDisplay !== undefined) {
               />
             </BenchmarkResultCard>
           ))}
-          <SuggestionCard whatsSuggested="benchmark result" />
+          <SuggestionCard
+            whatsSuggested="benchmark result"
+            targetHref={`https://github.com/namehash/ensawards/blob/main/data/apps/${appToDisplay.slug}-${appToDisplay.type.toLowerCase()}/benchmarks.ts`}
+          />
         </ItemsList>
       </section>
     </Layout>

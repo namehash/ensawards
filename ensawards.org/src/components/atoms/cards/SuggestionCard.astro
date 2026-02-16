@@ -6,9 +6,13 @@ import { PossibleSuggestions } from "../../molecules/contact-form/types";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
+  targetHref?: string;
 }
 
-const { whatsSuggested }: SuggestionCardProps = Astro.props;
+const {
+  whatsSuggested,
+  targetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
+}: SuggestionCardProps = Astro.props;
 ---
 
 <div
@@ -32,7 +36,7 @@ const { whatsSuggested }: SuggestionCardProps = Astro.props;
       Contact us
     </suggest-form-button>
     <a
-      href="https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md"
+      href={targetHref}
       target="_blank"
       rel="noreferrer"
       class={cn(

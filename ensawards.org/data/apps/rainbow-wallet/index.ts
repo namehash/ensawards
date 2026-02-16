@@ -6,7 +6,7 @@ import { RainbowWalletBenchmarks } from "./benchmarks.ts";
 
 export const RainbowWallet: App = {
   id: "rainbow-wallet",
-  slug: "rainbow-wallet",
+  slug: "rainbow",
   project: RainbowProject,
   name: "Rainbow Wallet",
   description:

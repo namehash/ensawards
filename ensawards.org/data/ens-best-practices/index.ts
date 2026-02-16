@@ -1,3 +1,5 @@
+// Read CONTRIBUTING.md for additional advice on adding and modifying best practices
+
 import { type BestPractice } from "@/types/bestPractices.ts";
 
 import { displayNamedSmartContractsL2 } from "./categories/contract-naming/displayNamedSmartContractsL2.ts";

@@ -95,7 +95,10 @@ const categoryToDisplay = getCategoryBySlug(category);
               appliesTo={bestPractice.appliesTo}
             />
           ))}
-          <SuggestionCard whatsSuggested="best practice" />
+          <SuggestionCard
+            whatsSuggested="best practice"
+            targetHref="https://github.com/namehash/ensawards/blob/main/data/ens-best-practices/index.ts"
+          />
         </ItemsList>
       </section>
     </Layout>

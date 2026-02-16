@@ -1,3 +1,5 @@
+// Read CONTRIBUTING.md for additional advice on adding and modifying best practice categories
+
 import type { BestPracticeCategory } from "@/types/bestPractices.ts";
 
 import { ContractNamingCategory } from "./contract-naming";

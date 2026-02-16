@@ -1,3 +1,5 @@
+// Read CONTRIBUTING.md for additional advice on adding and modifying app benchmarks
+
 import type { AppBenchmark } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks.ts";
 import { toUnixTimestamp } from "@/utils/time.ts";
