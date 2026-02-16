@@ -19,6 +19,8 @@ export default defineConfig({
     "/benchmarks": "/leaderboards",
     "/benchmarks/[app]": "/app/[app]",
     "/leaderboards/app": "/leaderboards",
+    "/app/coinbase-wallet": "/app/coinbase",
+    "/app/rainbow-wallet": "/app/rainbow",
   },
 
   adapter: vercel(),
