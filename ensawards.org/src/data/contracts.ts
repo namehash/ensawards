@@ -1570,19 +1570,6 @@ export const CONTRACTS: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x807DEf5E7d057DF05C796F4bc75C3Fe82Bd6EeE1",
-        chain: mainnet,
-        codeName: "ETHBranch.interestRouter",
-      },
-    },
-  },
-  {
-    protocol: LiquityDeFiProtocol,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
         address: "0x7022A4f4A2b9f0C30A5eB0B0073a8Bb4C8e70C1f",
         chain: mainnet,
         codeName: "ETHBranch.wethZapper",
@@ -1773,19 +1760,6 @@ export const CONTRACTS: Contract[] = [
         address: "0x8C44FBa379D8A8608C0e29B2729DeB75a981Db1f",
         chain: mainnet,
         codeName: "wstETHBranch.gasPool",
-      },
-    },
-  },
-  {
-    protocol: LiquityDeFiProtocol,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
-        address: "0x807DEf5E7d057DF05C796F4bc75C3Fe82Bd6EeE1",
-        chain: mainnet,
-        codeName: "wstETHBranch.interestRouter",
       },
     },
   },
@@ -1996,19 +1970,6 @@ export const CONTRACTS: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x807DEf5E7d057DF05C796F4bc75C3Fe82Bd6EeE1",
-        chain: mainnet,
-        codeName: "rETHBranch.interestRouter",
-      },
-    },
-  },
-  {
-    protocol: LiquityDeFiProtocol,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
         address: "0xbE8B230dCd12E246F5eDc5c103CC98be68ab636F",
         chain: mainnet,
         codeName: "rETHBranch.gasCompZapper",
@@ -2118,19 +2079,6 @@ export const CONTRACTS: Contract[] = [
         address: "0x0c76eaE597AfA2Aa163A8C845F7E7e870256aC7E",
         chain: mainnet,
         codeName: "governance.curveLusdBoldInitiative",
-      },
-    },
-  },
-  {
-    protocol: LiquityDeFiProtocol,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
-        address: "0xDc6f869d2D34E4aee3E89A51f2Af6D54F0F7f690",
-        chain: mainnet,
-        codeName: "governance.defiCollectiveInitiative",
       },
     },
   },
