@@ -4,7 +4,7 @@ import { type App, AppTypes } from "@/types/apps.ts";
 import { CoinbaseProject } from "../../projects/coinbase";
 import { CoinbaseWalletBenchmarks } from "./benchmarks.ts";
 
-export const CoinbaseWalletApp: App = {
+export const CoinbaseWallet: App = {
   id: "coinbase-wallet",
   slug: "coinbase-wallet",
   project: CoinbaseProject,

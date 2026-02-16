@@ -4,7 +4,7 @@ import { type App, AppTypes } from "@/types/apps.ts";
 import { MetaMaskProject } from "../../projects/metamask";
 import { MetaMaskBenchmarks } from "./benchmarks.ts";
 
-export const MetaMaskApp: App = {
+export const MetaMaskWallet: App = {
   id: "metamask",
   slug: "metamask",
   project: MetaMaskProject,

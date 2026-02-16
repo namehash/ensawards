@@ -3,11 +3,11 @@ import { mainnet } from "viem/chains";
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { TaikoDeFiProtocol } from ".";
+import { TaikoDeFi } from ".";
 
 export const TaikoDeFiProtocolContracts: Contract[] = [
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -20,7 +20,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -34,7 +34,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -48,7 +48,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -61,7 +61,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -75,7 +75,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -89,7 +89,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -103,7 +103,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -116,7 +116,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -129,7 +129,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -142,7 +142,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -156,7 +156,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -169,7 +169,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -182,7 +182,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -195,7 +195,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -208,7 +208,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -221,7 +221,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -234,7 +234,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -247,7 +247,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -260,7 +260,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -273,7 +273,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -286,7 +286,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -299,7 +299,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -312,7 +312,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -325,7 +325,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -338,7 +338,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -351,7 +351,7 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: TaikoDeFiProtocol,
+    protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {

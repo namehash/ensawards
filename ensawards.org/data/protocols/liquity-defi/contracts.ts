@@ -3,11 +3,11 @@ import { arbitrum, base, mainnet, optimism, scroll } from "viem/chains";
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { LiquityDeFiProtocol } from ".";
+import { LiquityDeFi } from ".";
 
 export const LiquityDeFiProtocolContracts: Contract[] = [
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -21,7 +21,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -34,7 +34,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -47,7 +47,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -60,7 +60,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Utility,
     cachedIdentity: {
@@ -73,7 +73,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -87,7 +87,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -100,7 +100,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -113,7 +113,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -126,7 +126,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -139,7 +139,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -152,7 +152,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -165,7 +165,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -179,7 +179,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -192,7 +192,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -205,7 +205,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -218,7 +218,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -232,7 +232,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -246,7 +246,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -260,7 +260,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -273,7 +273,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -286,7 +286,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -299,7 +299,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -312,7 +312,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -326,7 +326,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -339,7 +339,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -352,7 +352,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -365,7 +365,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -379,7 +379,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -392,7 +392,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -405,7 +405,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -418,7 +418,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -432,7 +432,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -446,7 +446,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -460,7 +460,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -473,7 +473,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -486,7 +486,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -499,7 +499,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -512,7 +512,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -526,7 +526,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -539,7 +539,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -552,7 +552,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -565,7 +565,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -579,7 +579,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -592,7 +592,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -605,7 +605,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -618,7 +618,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -632,7 +632,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -646,7 +646,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -660,7 +660,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -673,7 +673,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -686,7 +686,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -699,7 +699,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -712,7 +712,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -726,7 +726,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -740,7 +740,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -753,7 +753,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -766,7 +766,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -779,7 +779,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -792,7 +792,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -805,7 +805,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -818,7 +818,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -831,7 +831,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {
@@ -845,7 +845,7 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: LiquityDeFiProtocol,
+    protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.Governance,
     cachedIdentity: {

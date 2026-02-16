@@ -5,7 +5,7 @@ import { DeFiProtocolIds } from "@/types/protocols.ts";
 
 import { UniswapProject } from "../../projects/uniswap";
 
-export const UniswapDeFiProtocol: DeFiProtocol = {
+export const UniswapDeFi: DeFiProtocol = {
   id: DeFiProtocolIds.Uniswap,
   slug: "uniswap",
   protocolType: ProtocolTypes.DeFi,

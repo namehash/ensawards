@@ -1,9 +1,9 @@
 import type { BestPracticeCategory } from "@/types/bestPractices.ts";
 import { CategoryStatus } from "@/types/bestPractices.ts";
 
-import { displayNamedSmartContractsL2 } from "./best-practices/displayNamedSmartContractsL2.ts";
-import { displayNamedSmartContractsMainnet } from "./best-practices/displayNamedSmartContractsMainnet.ts";
-import { nameYourSmartContracts } from "./best-practices/nameYourSmartContracts.ts";
+import { displayNamedSmartContractsL2 } from "./displayNamedSmartContractsL2.ts";
+import { displayNamedSmartContractsMainnet } from "./displayNamedSmartContractsMainnet.ts";
+import { nameYourSmartContracts } from "./nameYourSmartContracts.ts";
 
 export const ContractNamingCategory: BestPracticeCategory = {
   id: "contract-naming",
@@ -17,6 +17,3 @@ export const ContractNamingCategory: BestPracticeCategory = {
     displayNamedSmartContractsL2,
   ],
 };
-
-// TODO: Appreciate advice about the structure and naming of the whole /best-practices directory
-//  as I feel like currently it's too complicated

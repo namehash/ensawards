@@ -5,24 +5,6 @@ import { DAOProtocolIds } from "@/types/protocols.ts";
 
 import { UniswapProject } from "../../projects/uniswap";
 
-//TODO: The way I understood our previous talks we do not want to do that, but just to confirm:
-// WE DO NOT WANT A COMMON DIRECTORY FOR PROTOCOLS THAT HAVE BOTH THE DAO AND THE DEFI VARIANT:
-// -----------
-// example:
-// /uniswap
-//     /dao
-//         index.ts
-//     /defi
-//         index.ts
-// ---------------
-// I understand that we don't want that and the goal is to keep them separate,
-// like this:
-// /uniswap-dao
-//     index.ts
-// /uniswap-defi
-//     index.ts
-// ---------------
-// Let me know which option is better and I'll adjust the code to satisfy it
 export const UniswapDao: DAOProtocol = {
   id: DAOProtocolIds.UniswapDao,
   slug: "uniswap",

@@ -5,7 +5,7 @@ import { DeFiProtocolIds } from "@/types/protocols.ts";
 
 import { LiquityProject } from "../../projects/liquity";
 
-export const LiquityDeFiProtocol: DeFiProtocol = {
+export const LiquityDeFi: DeFiProtocol = {
   id: DeFiProtocolIds.Liquity,
   slug: "liquity",
   protocolType: ProtocolTypes.DeFi,

@@ -1,15 +1,15 @@
 import { type App } from "@/types/apps.ts";
 
-import { BlockscoutApp } from "./blockscout";
-import { CoinbaseWalletApp } from "./coinbase-wallet";
-import { EtherscanApp } from "./etherscan";
-import { MetaMaskApp } from "./metamask";
-import { RainbowWalletApp } from "./rainbow-wallet";
+import { BlockscoutExplorer } from "./blockscout";
+import { CoinbaseWallet } from "./coinbase-wallet";
+import { EtherscanExplorer } from "./etherscan";
+import { MetaMaskWallet } from "./metamask";
+import { RainbowWallet } from "./rainbow-wallet";
 
 export const APPS: App[] = [
-  RainbowWalletApp,
-  CoinbaseWalletApp,
-  MetaMaskApp,
-  EtherscanApp,
-  BlockscoutApp,
+  RainbowWallet,
+  CoinbaseWallet,
+  MetaMaskWallet,
+  EtherscanExplorer,
+  BlockscoutExplorer,
 ];

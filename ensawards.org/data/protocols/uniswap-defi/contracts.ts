@@ -3,11 +3,11 @@ import { mainnet } from "viem/chains";
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { UniswapDeFiProtocol } from ".";
+import { UniswapDeFi } from ".";
 
 export const UniswapDeFiProtocolContracts: Contract[] = [
   {
-    protocol: UniswapDeFiProtocol,
+    protocol: UniswapDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -20,7 +20,7 @@ export const UniswapDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: UniswapDeFiProtocol,
+    protocol: UniswapDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -33,7 +33,7 @@ export const UniswapDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: UniswapDeFiProtocol,
+    protocol: UniswapDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -46,7 +46,7 @@ export const UniswapDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: UniswapDeFiProtocol,
+    protocol: UniswapDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -59,7 +59,7 @@ export const UniswapDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: UniswapDeFiProtocol,
+    protocol: UniswapDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -72,7 +72,7 @@ export const UniswapDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: UniswapDeFiProtocol,
+    protocol: UniswapDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
@@ -85,7 +85,7 @@ export const UniswapDeFiProtocolContracts: Contract[] = [
     },
   },
   {
-    protocol: UniswapDeFiProtocol,
+    protocol: UniswapDeFi,
     type: ContractTypes.DeFi,
     subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {

@@ -5,7 +5,7 @@ import { AppTypes } from "@/types/apps.ts";
 import { BlockscoutProject } from "../../projects/blockscout";
 import { BlockscoutBenchmarks } from "./benchmarks.ts";
 
-export const BlockscoutApp: App = {
+export const BlockscoutExplorer: App = {
   id: "blockscout",
   slug: "blockscout",
   project: BlockscoutProject,

@@ -4,7 +4,7 @@ import { type App, AppTypes } from "@/types/apps.ts";
 import { RainbowProject } from "../../projects/rainbow";
 import { RainbowWalletBenchmarks } from "./benchmarks.ts";
 
-export const RainbowWalletApp: App = {
+export const RainbowWallet: App = {
   id: "rainbow-wallet",
   slug: "rainbow-wallet",
   project: RainbowProject,

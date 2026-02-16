@@ -11,8 +11,9 @@ import { getEthnamesSubregistryId } from "@ensnode/ensnode-sdk";
 import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
 
 // TODO: Now that the `ReferralProgramEditionConfig` was created
-//  should we remove this file and
+//  we should remove this file and
 //  use the `getDefaultReferralProgramEditionConfigSet()` to fetch the necessary data instead?
+//  (apply in a separate PR)
 
 export const ENSHolidayAwards: ReferralIncentiveProgram = {
   name: "ENS Holiday Awards",

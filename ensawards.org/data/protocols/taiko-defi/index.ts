@@ -5,7 +5,7 @@ import { DeFiProtocolIds } from "@/types/protocols.ts";
 
 import { TaikoProject } from "../../projects/taiko";
 
-export const TaikoDeFiProtocol: DeFiProtocol = {
+export const TaikoDeFi: DeFiProtocol = {
   id: DeFiProtocolIds.Taiko,
   slug: "taiko",
   protocolType: ProtocolTypes.DeFi,

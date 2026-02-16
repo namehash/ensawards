@@ -4,11 +4,7 @@ import { type App, AppTypes } from "@/types/apps.ts";
 import { EtherscanProject } from "../../projects/etherscan";
 import { EtherscanBenchmarks } from "./benchmarks.ts";
 
-//TODO: Should we add app type (explorer) to the name?
-// Or maybe we should remove this from wallet's names?
-// Seems reasonable for Rainbow as all they do is the wallet, but questionable for coinbase,
-// cause they have more endeavors
-export const EtherscanApp: App = {
+export const EtherscanExplorer: App = {
   id: "etherscan",
   slug: "etherscan",
   project: EtherscanProject,
