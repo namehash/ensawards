@@ -2089,19 +2089,6 @@ export const CONTRACTS: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xDc6f869d2D34E4aee3E89A51f2Af6D54F0F7f690",
-        chain: mainnet,
-        codeName: "governance.defiCollectiveInitiative",
-      },
-    },
-  },
-  {
-    protocol: LiquityDeFiProtocol,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.Unnamed,
-      contract: {
         address: "0x4f9Fbb3f1E99B56e0Fe2892e623Ed36A76Fc605d",
         chain: mainnet,
         codeName: "governance.stakingV1",
