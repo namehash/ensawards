@@ -1,6 +1,5 @@
 import { type Project, ProjectIds } from "@/types/projects.ts";
 
-import AaveProject from "../aave";
 import EnsIcon from "./icon.tsx";
 
 const ENSProject: Project = {

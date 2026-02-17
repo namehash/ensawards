@@ -1,7 +1,6 @@
 import type { Project } from "@/types/projects.ts";
 import { ProjectIds } from "@/types/projects.ts";
 
-import AaveProject from "../aave";
 import BlockscoutIcon from "./icon.tsx";
 
 const BlockscoutProject: Project = {
