@@ -6,6 +6,7 @@
   "packageManager": "pnpm@10.29.3",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/copy-og-images.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

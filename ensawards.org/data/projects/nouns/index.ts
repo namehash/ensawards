@@ -1,8 +1,10 @@
-import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
 import type { Project } from "@/types/projects.ts";
 import { ProjectIds } from "@/types/projects.ts";
 
-export const NounsProject: Project = {
+import AaveProject from "../aave";
+import NounsIcon from "./icon.tsx";
+
+const NounsProject: Project = {
   id: ProjectIds.Nouns,
   name: "Nouns",
   description:
@@ -13,3 +15,5 @@ export const NounsProject: Project = {
     twitter: new URL("https://x.com/nounsdao"),
   },
 };
+
+export default NounsProject;

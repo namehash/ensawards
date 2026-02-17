@@ -1,12 +1,12 @@
-import { RainbowIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/RainbowIcon.tsx";
 import { type App, AppTypes } from "@/types/apps.ts";
 
-import { RainbowProject } from "../../projects/rainbow";
+import RainbowProject from "../../projects/rainbow";
 import { RainbowWalletBenchmarks } from "./benchmarks.ts";
+import RainbowIcon from "./icon.tsx";
 
 export const RainbowWallet: App = {
   id: "rainbow-wallet",
-  slug: "rainbow",
+  slug: "rainbow-wallet",
   project: RainbowProject,
   name: "Rainbow Wallet",
   description:
@@ -19,6 +19,8 @@ export const RainbowWallet: App = {
   },
   icon: RainbowIcon,
   benchmarks: RainbowWalletBenchmarks,
-  ogImagePath: "https://ensawards.org/app-rainbow-wallet_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/app-rainbow-wallet_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/apps/rainbow-wallet/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/apps/rainbow-wallet/twitter-og.png",
 };
+
+export default RainbowWallet;

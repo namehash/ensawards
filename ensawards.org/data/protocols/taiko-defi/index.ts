@@ -1,11 +1,11 @@
-import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
 import type { DeFiProtocol } from "@/types/protocols.ts";
 import { DeFiProtocolIds } from "@/types/protocols.ts";
 
-import { TaikoProject } from "../../projects/taiko";
+import TaikoProject from "../../projects/taiko";
+import TaikoIcon from "./icon.tsx";
 
-export const TaikoDeFi: DeFiProtocol = {
+const TaikoDeFi: DeFiProtocol = {
   id: DeFiProtocolIds.Taiko,
   slug: "taiko",
   protocolType: ProtocolTypes.DeFi,
@@ -19,6 +19,8 @@ export const TaikoDeFi: DeFiProtocol = {
     twitter: new URL("https://x.com/taikoxyz"),
     ens: "taiko.eth",
   },
-  ogImagePath: "https://ensawards.org/protocol-taiko-defi_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/protocol-taiko-defi_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/protocols/taiko-defi/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/protocols/taiko-defi/twitter-og.png",
 };
+
+export default TaikoDeFi;

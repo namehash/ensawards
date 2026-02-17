@@ -8,7 +8,6 @@ import {
 } from "../../utils/dataAccess";
 import { type Contract } from "../../types/contracts";
 import { CONTRACTS } from "../../../data/protocols/contracts";
-import { EnsDaoIcon } from "../../components/atoms/icons/ens-integrating-entities/dao-protocols/EnsDaoIcon";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import {
@@ -58,7 +57,7 @@ const resolvedProtocolType = getProtocolTypeBySlug(protocolType);
 let resolvedProtocol: Protocol | undefined = undefined;
 let protocolContracts: Contract[] = [];
 let protocolScore = 0;
-let ProtocolIcon = EnsDaoIcon;
+let ProtocolIcon = GlobeIcon;
 
 if (resolvedProtocolType) {
   resolvedProtocol = getProtocolBySlug(resolvedProtocolType, protocol);
@@ -186,7 +185,7 @@ if (resolvedProtocol && resolvedProtocolType) {
           <div class="w-full h-fit pt-1 sm:pt-8">
             <SuggestionCard
               whatsSuggested="contract"
-              targetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.slug}-${resolvedProtocolType.toLowerCase()}/contracts.ts`}
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.slug}-${resolvedProtocolType.toLowerCase()}/contracts.ts`}
             />
           </div>
         </ItemsList>

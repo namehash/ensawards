@@ -2,8 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { areStringsUnique, isValidSlug } from "@/utils";
 
-import { ENS_BEST_PRACTICES } from ".";
-import { BEST_PRACTICE_CATEGORIES } from "./categories";
+import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from ".";
 
 describe("Best Practices data", () => {
   const categoriesData = BEST_PRACTICE_CATEGORIES;

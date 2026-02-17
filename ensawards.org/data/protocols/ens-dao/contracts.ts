@@ -1,13 +1,13 @@
-// Read CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { ENSDao } from ".";
+import ENSDao from ".";
 
-export const ENSDaoContracts: Contract[] = [
+const contracts: Contract[] = [
   {
     protocol: ENSDao,
     type: ContractTypes.DAO,
@@ -107,3 +107,5 @@ export const ENSDaoContracts: Contract[] = [
     },
   },
 ];
+
+export default contracts;

@@ -1,13 +1,13 @@
-// Read CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
 import { arbitrum, base, mainnet, optimism, scroll } from "viem/chains";
 
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { LiquityDeFi } from ".";
+import LiquityDeFi from ".";
 
-export const LiquityDeFiProtocolContracts: Contract[] = [
+const contracts: Contract[] = [
   {
     protocol: LiquityDeFi,
     type: ContractTypes.DeFi,
@@ -861,3 +861,5 @@ export const LiquityDeFiProtocolContracts: Contract[] = [
     },
   },
 ];
+
+export default contracts;

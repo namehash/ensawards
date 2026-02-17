@@ -7,8 +7,8 @@ import {
   ContractTypes,
 } from "@/types/contracts.ts";
 
-import { ENSDao } from "../../data/protocols/ens-dao";
-import { UniswapDao } from "../../data/protocols/uniswap-dao";
+import ENSDao from "../../data/protocols/ens-dao";
+import UniswapDao from "../../data/protocols/uniswap-dao";
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
   {

@@ -140,8 +140,8 @@ Best practices are structured hierarchically and can be added on two levels:
 
 Defines a specific requirement that an app or protocol must meet to pass a benchmark test. They are grouped into categories.
 
-1. To add a `BestPractice` create it as an independent exported constant in the [ensawards.org/data/ens-best-practices/categories/[category]/[newBestPracticeName].ts](ensawards.org/data/ens-best-practices/categories/contract-naming/nameYourSmartContracts.ts) file, where `[category]` and `[newBestPracticeName]` represent the category that the new best practice belongs to and the practice's name written in camel case.
-2. Add it to `BestPracticeCategory.bestPractices` array of the appropriate category in the [ensawards.org/data/ens-best-practices/categories/[category]/index.ts](ensawards.org/data/ens-best-practices/categories/contract-naming/index.ts) file.
+1. To add a `BestPractice` create it as an independent exported constant in the [ensawards.org/data/ens-best-practices/categories/[category]/[newBestPracticeName].ts](ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts.ts) file, where `[category]` and `[newBestPracticeName]` represent the category that the new best practice belongs to and the practice's name written in camel case.
+2. Add it to `BestPracticeCategory.bestPractices` array of the appropriate category in the [ensawards.org/data/ens-best-practices/categories/[category]/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts) file.
 3. Add it to `ENS_BEST_PRACTICES` array in the [ensawards.org/data/ens-best-practices/index.ts](ensawards.org/data/ens-best-practices/index.ts) file.
 4. Make sure to follow its data model defined in the [@/types/bestPractices.ts](ensawards.org/src/types/bestPractices.ts) file.
 ```typescript

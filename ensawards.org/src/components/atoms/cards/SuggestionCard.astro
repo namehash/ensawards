@@ -2,16 +2,16 @@
 import GitHubOutlineIcon from "../../../assets/githubOutlineIcon.svg";
 import { getSuggestionText } from "../../../utils/textModifications";
 import { cn } from "../../../utils/tailwindClassConcatenation";
-import { PossibleSuggestions } from "../../molecules/contact-form/types";
+import { type PossibleSuggestions } from "../../molecules/contact-form/types";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
-  targetHref?: string;
+  gitHubTargetHref?: string;
 }
 
 const {
   whatsSuggested,
-  targetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
+  gitHubTargetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
 }: SuggestionCardProps = Astro.props;
 ---
 
@@ -36,7 +36,7 @@ const {
       Contact us
     </suggest-form-button>
     <a
-      href={targetHref}
+      href={gitHubTargetHref}
       target="_blank"
       rel="noreferrer"
       class={cn(

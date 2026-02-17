@@ -1,11 +1,11 @@
-import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
 import type { DAOProtocol } from "@/types/protocols.ts";
 import { DAOProtocolIds } from "@/types/protocols.ts";
 
-import { TaikoProject } from "../../projects/taiko";
+import TaikoProject from "../../projects/taiko";
+import TaikoIcon from "./icon.tsx";
 
-export const TaikoDao: DAOProtocol = {
+const TaikoDao: DAOProtocol = {
   id: DAOProtocolIds.TaikoDao,
   slug: "taiko",
   protocolType: ProtocolTypes.DAO,
@@ -19,6 +19,8 @@ export const TaikoDao: DAOProtocol = {
     twitter: new URL("https://x.com/taikoxyz"),
     ens: "taiko.eth",
   },
-  ogImagePath: "https://ensawards.org/protocol-taiko-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/protocol-taiko-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/protocols/taiko-dao/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/protocols/taiko-dao/twitter-og.png",
 };
+
+export default TaikoDao;

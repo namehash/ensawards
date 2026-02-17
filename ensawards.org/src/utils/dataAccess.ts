@@ -22,8 +22,7 @@ import type {
 } from "@/types/protocols.ts";
 
 import { APPS } from "../../data/apps";
-import { ENS_BEST_PRACTICES } from "../../data/ens-best-practices";
-import { BEST_PRACTICE_CATEGORIES } from "../../data/ens-best-practices/categories";
+import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from "../../data/ens-best-practices";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "../../data/protocols";
 
 export const getProtocolById = (protocolId: ProtocolId): Protocol => {

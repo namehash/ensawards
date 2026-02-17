@@ -1,13 +1,13 @@
-// Read CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { TaikoDeFi } from ".";
+import TaikoDeFi from ".";
 
-export const TaikoDeFiProtocolContracts: Contract[] = [
+const contracts: Contract[] = [
   {
     protocol: TaikoDeFi,
     type: ContractTypes.DeFi,
@@ -366,3 +366,5 @@ export const TaikoDeFiProtocolContracts: Contract[] = [
     },
   },
 ];
+
+export default contracts;

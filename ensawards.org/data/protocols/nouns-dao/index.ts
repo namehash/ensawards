@@ -1,11 +1,11 @@
-import { NounsIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/NounsIcon.tsx";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
 import type { DAOProtocol } from "@/types/protocols.ts";
 import { DAOProtocolIds } from "@/types/protocols.ts";
 
-import { NounsProject } from "../../projects/nouns";
+import NounsProject from "../../projects/nouns";
+import NounsIcon from "./icon.tsx";
 
-export const NounsDao: DAOProtocol = {
+const NounsDao: DAOProtocol = {
   id: DAOProtocolIds.NounsDao,
   slug: "nouns",
   protocolType: ProtocolTypes.DAO,
@@ -19,6 +19,8 @@ export const NounsDao: DAOProtocol = {
     twitter: new URL("https://x.com/nounsdao"),
     ens: "nouns.eth",
   },
-  ogImagePath: "https://ensawards.org/protocol-nouns-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/protocol-nouns-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/protocols/nouns-dao/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/protocols/nouns-dao/twitter-og.png",
 };
+
+export default NounsDao;

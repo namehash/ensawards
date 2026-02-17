@@ -1,17 +1,17 @@
 import { type Project } from "@/types/projects.ts";
 
-import { AaveProject } from "./aave";
-import { ArbitrumProject } from "./arbitrum";
-import { BlockscoutProject } from "./blockscout";
-import { CoinbaseProject } from "./coinbase";
-import { ENSProject } from "./ens";
-import { EtherscanProject } from "./etherscan";
-import { LiquityProject } from "./liquity";
-import { MetaMaskProject } from "./metamask";
-import { NounsProject } from "./nouns";
-import { RainbowProject } from "./rainbow";
-import { TaikoProject } from "./taiko";
-import { UniswapProject } from "./uniswap";
+import AaveProject from "./aave";
+import ArbitrumProject from "./arbitrum";
+import BlockscoutProject from "./blockscout";
+import CoinbaseProject from "./coinbase";
+import ENSProject from "./ens";
+import EtherscanProject from "./etherscan";
+import LiquityProject from "./liquity";
+import MetaMaskProject from "./metamask";
+import NounsProject from "./nouns";
+import RainbowProject from "./rainbow";
+import TaikoProject from "./taiko";
+import UniswapProject from "./uniswap";
 
 /**
  * Array of supported projects.

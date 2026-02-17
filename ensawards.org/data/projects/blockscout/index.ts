@@ -1,8 +1,10 @@
-import { BlockscoutIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/BlockscoutIcon.tsx";
 import type { Project } from "@/types/projects.ts";
 import { ProjectIds } from "@/types/projects.ts";
 
-export const BlockscoutProject: Project = {
+import AaveProject from "../aave";
+import BlockscoutIcon from "./icon.tsx";
+
+const BlockscoutProject: Project = {
   id: ProjectIds.Blockscout,
   name: "Blockscout",
   description: "Blockscout is a tool for inspecting and analyzing EVM-based blockchains.",
@@ -12,3 +14,5 @@ export const BlockscoutProject: Project = {
     twitter: new URL("https://x.com/blockscout"),
   },
 };
+
+export default BlockscoutProject;

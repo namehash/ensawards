@@ -1,12 +1,12 @@
-import { CoinbaseWalletIcon } from "@/components/atoms/icons/ens-integrating-entities/apps/CoinbaseWalletIcon.tsx";
 import { type App, AppTypes } from "@/types/apps.ts";
 
-import { CoinbaseProject } from "../../projects/coinbase";
+import CoinbaseProject from "../../projects/coinbase";
 import { CoinbaseWalletBenchmarks } from "./benchmarks.ts";
+import CoinbaseIcon from "./icon.tsx";
 
-export const CoinbaseWallet: App = {
+const CoinbaseWallet: App = {
   id: "coinbase-wallet",
-  slug: "coinbase",
+  slug: "coinbase-wallet",
   project: CoinbaseProject,
   name: "Coinbase Wallet",
   description: "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications.",
@@ -16,8 +16,10 @@ export const CoinbaseWallet: App = {
     twitter: new URL("https://x.com/coinbase"),
     ens: "coinbase.eth",
   },
-  icon: CoinbaseWalletIcon,
+  icon: CoinbaseIcon,
   benchmarks: CoinbaseWalletBenchmarks,
-  ogImagePath: "https://ensawards.org/app-coinbase-wallet_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/app-coinbase-wallet_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/apps/coinbase-wallet/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/apps/coinbase-wallet/twitter-og.png",
 };
+
+export default CoinbaseWallet;

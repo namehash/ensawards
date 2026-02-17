@@ -1,13 +1,13 @@
-// Read CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { AaveDao } from ".";
+import AaveDao from ".";
 
-export const AaveDaoContracts: Contract[] = [
+const contracts: Contract[] = [
   {
     protocol: AaveDao,
     type: ContractTypes.DAO,
@@ -126,3 +126,5 @@ export const AaveDaoContracts: Contract[] = [
     },
   },
 ];
+
+export default contracts;

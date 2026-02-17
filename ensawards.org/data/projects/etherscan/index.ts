@@ -1,8 +1,10 @@
-import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/EtherscanIcon.tsx";
 import type { Project } from "@/types/projects.ts";
 import { ProjectIds } from "@/types/projects.ts";
 
-export const EtherscanProject: Project = {
+import AaveProject from "../aave";
+import EtherscanIcon from "./icon.tsx";
+
+const EtherscanProject: Project = {
   id: ProjectIds.Etherscan,
   name: "Etherscan",
   description: "Etherscan is a Block Explorer and Analytics Platform for Ethereum.",
@@ -12,3 +14,5 @@ export const EtherscanProject: Project = {
     twitter: new URL("https://x.com/etherscan"),
   },
 };
+
+export default EtherscanProject;

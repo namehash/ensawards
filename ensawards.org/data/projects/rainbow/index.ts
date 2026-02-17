@@ -1,8 +1,10 @@
-import { RainbowIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/RainbowIcon.tsx";
 import type { Project } from "@/types/projects.ts";
 import { ProjectIds } from "@/types/projects.ts";
 
-export const RainbowProject: Project = {
+import AaveProject from "../aave";
+import RainbowIcon from "./icon.tsx";
+
+const RainbowProject: Project = {
   id: ProjectIds.Rainbow,
   name: "Rainbow",
   description:
@@ -13,3 +15,5 @@ export const RainbowProject: Project = {
     twitter: new URL("https://x.com/rainbowdotme"),
   },
 };
+
+export default RainbowProject;

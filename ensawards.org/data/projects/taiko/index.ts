@@ -1,8 +1,10 @@
-import { TaikoIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/TaikoIcon.tsx";
 import type { Project } from "@/types/projects.ts";
 import { ProjectIds } from "@/types/projects.ts";
 
-export const TaikoProject: Project = {
+import AaveProject from "../aave";
+import TaikoIcon from "./icon.tsx";
+
+const TaikoProject: Project = {
   id: ProjectIds.Taiko,
   name: "Taiko",
   description:
@@ -13,3 +15,5 @@ export const TaikoProject: Project = {
     twitter: new URL("https://x.com/taikoxyz"),
   },
 };
+
+export default TaikoProject;

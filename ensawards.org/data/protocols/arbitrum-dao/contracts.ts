@@ -1,13 +1,13 @@
-// Read CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
 import { arbitrum, mainnet } from "viem/chains";
 
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { ArbitrumDao } from ".";
+import ArbitrumDao from ".";
 
-export const ArbitrumDaoContracts: Contract[] = [
+const contracts: Contract[] = [
   {
     protocol: ArbitrumDao,
     type: ContractTypes.DAO,
@@ -295,3 +295,5 @@ export const ArbitrumDaoContracts: Contract[] = [
     },
   },
 ];
+
+export default contracts;

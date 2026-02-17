@@ -1,11 +1,11 @@
-import { UniswapIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/UniswapIcon.tsx";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
 import type { DAOProtocol } from "@/types/protocols.ts";
 import { DAOProtocolIds } from "@/types/protocols.ts";
 
-import { UniswapProject } from "../../projects/uniswap";
+import UniswapProject from "../../projects/uniswap";
+import UniswapIcon from "./icon.tsx";
 
-export const UniswapDao: DAOProtocol = {
+const UniswapDao: DAOProtocol = {
   id: DAOProtocolIds.UniswapDao,
   slug: "uniswap",
   protocolType: ProtocolTypes.DAO,
@@ -19,6 +19,8 @@ export const UniswapDao: DAOProtocol = {
     twitter: new URL("https://x.com/UniswapFND"),
     ens: "uniswap.eth",
   },
-  ogImagePath: "https://ensawards.org/protocol-uniswap-dao_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/protocol-uniswap-dao_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/protocols/uniswap-dao/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/protocols/uniswap-dao/twitter-og.png",
 };
+
+export default UniswapDao;

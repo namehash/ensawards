@@ -13,7 +13,7 @@ import DataLoadingError from "../../../components/organisms/DataLoadingError.ast
 import Layout from "../../../layouts/Layout.astro";
 import { CategoryStatus } from "../../../types/bestPractices";
 import { getCategoryBySlug } from "../../../utils/dataAccess";
-import { BEST_PRACTICE_CATEGORIES } from "../../../../data/ens-best-practices/categories";
+import { BEST_PRACTICE_CATEGORIES } from "../../../../data/ens-best-practices";
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
     params: { category: category.slug },
@@ -97,7 +97,7 @@ const categoryToDisplay = getCategoryBySlug(category);
           ))}
           <SuggestionCard
             whatsSuggested="best practice"
-            targetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/index.ts"
+            gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${categoryToDisplay.slug}`}
           />
         </ItemsList>
       </section>

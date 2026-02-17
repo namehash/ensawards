@@ -1,11 +1,11 @@
-import { UniswapIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/UniswapIcon.tsx";
 import { ProtocolTypes } from "@/types/bestPractices.ts";
 import type { DeFiProtocol } from "@/types/protocols.ts";
 import { DeFiProtocolIds } from "@/types/protocols.ts";
 
-import { UniswapProject } from "../../projects/uniswap";
+import UniswapProject from "../../projects/uniswap";
+import UniswapIcon from "./icon.tsx";
 
-export const UniswapDeFi: DeFiProtocol = {
+const UniswapDeFi: DeFiProtocol = {
   id: DeFiProtocolIds.Uniswap,
   slug: "uniswap",
   protocolType: ProtocolTypes.DeFi,
@@ -19,6 +19,8 @@ export const UniswapDeFi: DeFiProtocol = {
     twitter: new URL("https://x.com/Uniswap"),
     ens: "uniswap.eth",
   },
-  ogImagePath: "https://ensawards.org/protocol-uniswap-defi_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/protocol-uniswap-defi_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/protocols/uniswap-defi/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/protocols/uniswap-defi/twitter-og.png",
 };
+
+export default UniswapDeFi;

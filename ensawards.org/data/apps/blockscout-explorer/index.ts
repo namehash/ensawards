@@ -1,11 +1,11 @@
-import { BlockscoutIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/BlockscoutIcon.tsx";
 import type { App } from "@/types/apps.ts";
 import { AppTypes } from "@/types/apps.ts";
 
-import { BlockscoutProject } from "../../projects/blockscout";
+import BlockscoutProject from "../../projects/blockscout";
 import { BlockscoutExplorerBenchmarks } from "./benchmarks.ts";
+import BlockscoutIcon from "./icon.tsx";
 
-export const BlockscoutExplorer: App = {
+const BlockscoutExplorer: App = {
   id: "blockscout",
   slug: "blockscout",
   project: BlockscoutProject,
@@ -18,6 +18,8 @@ export const BlockscoutExplorer: App = {
   },
   icon: BlockscoutIcon,
   benchmarks: BlockscoutExplorerBenchmarks,
-  ogImagePath: "https://ensawards.org/app-blockscout_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/app-blockscout_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/apps/blockscout-explorer/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/apps/blockscout-explorer/twitter-og.png",
 };
+
+export default BlockscoutExplorer;

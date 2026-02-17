@@ -1,4 +1,4 @@
-// Read CONTRIBUTING.md for additional advice on adding and modifying app benchmarks
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying app benchmarks
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
@@ -6,8 +6,8 @@ import type { AppBenchmark } from "@/types/apps.ts";
 import { BenchmarkResult } from "@/types/benchmarks.ts";
 
 import { benchmarkers } from "../../benchmarkers";
-import { displayNamedSmartContractsL2 } from "../../ens-best-practices/categories/contract-naming/displayNamedSmartContractsL2.ts";
-import { displayNamedSmartContractsMainnet } from "../../ens-best-practices/categories/contract-naming/displayNamedSmartContractsMainnet.ts";
+import { displayNamedSmartContractsL2 } from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
+import { displayNamedSmartContractsMainnet } from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
 
 export const BlockscoutExplorerBenchmarks: AppBenchmark[] = [
   // {

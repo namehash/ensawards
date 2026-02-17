@@ -1,10 +1,10 @@
-import { EtherscanIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/EtherscanIcon.tsx";
 import { type App, AppTypes } from "@/types/apps.ts";
 
-import { EtherscanProject } from "../../projects/etherscan";
+import EtherscanProject from "../../projects/etherscan";
 import { EtherscanExplorerBenchmarks } from "./benchmarks.ts";
+import EtherscanIcon from "./icon.tsx";
 
-export const EtherscanExplorer: App = {
+const EtherscanExplorer: App = {
   id: "etherscan",
   slug: "etherscan",
   project: EtherscanProject,
@@ -18,6 +18,8 @@ export const EtherscanExplorer: App = {
   },
   icon: EtherscanIcon,
   benchmarks: EtherscanExplorerBenchmarks,
-  ogImagePath: "https://ensawards.org/app-etherscan_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/app-etherscan_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/apps/etherscan-explorer/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/apps/etherscan-explorer/twitter-og.png",
 };
+
+export default EtherscanExplorer;

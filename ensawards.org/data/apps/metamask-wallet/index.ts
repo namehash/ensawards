@@ -1,10 +1,10 @@
-import { MetaMaskIcon } from "@/components/atoms/icons/ens-integrating-entities/shared/MetaMaskIcon.tsx";
 import { type App, AppTypes } from "@/types/apps.ts";
 
-import { MetaMaskProject } from "../../projects/metamask";
+import MetaMaskProject from "../../projects/metamask";
 import { MetaMaskWalletBenchmarks } from "./benchmarks.ts";
+import MetaMaskIcon from "./icon.tsx";
 
-export const MetaMaskWallet: App = {
+const MetaMaskWallet: App = {
   id: "metamask",
   slug: "metamask",
   project: MetaMaskProject,
@@ -18,6 +18,8 @@ export const MetaMaskWallet: App = {
   },
   icon: MetaMaskIcon,
   benchmarks: MetaMaskWalletBenchmarks,
-  ogImagePath: "https://ensawards.org/app-metamask_og_image.png",
-  twitterOgImagePath: "https://ensawards.org/app-metamask_twitter_og_image.png",
+  ogImagePath: "https://ensawards.org/data/apps/metamask-wallet/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/apps/metamask-wallet/twitter-og.png",
 };
+
+export default MetaMaskWallet;

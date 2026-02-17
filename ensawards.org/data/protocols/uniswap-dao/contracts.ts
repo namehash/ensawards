@@ -1,13 +1,13 @@
-// Read CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "@/types/contracts.ts";
 import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
 
-import { UniswapDao } from ".";
+import UniswapDao from ".";
 
-export const UniswapDaoContracts: Contract[] = [
+const contracts: Contract[] = [
   {
     protocol: UniswapDao,
     type: ContractTypes.DAO,
@@ -142,3 +142,5 @@ export const UniswapDaoContracts: Contract[] = [
     },
   },
 ];
+
+export default contracts;
