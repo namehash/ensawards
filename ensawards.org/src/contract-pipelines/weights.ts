@@ -1,5 +1,9 @@
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
-import { type Contract, ContractResolutionStatusIds } from "@/types/contracts.ts";
+
+import {
+  type Contract,
+  ContractResolutionStatusIds,
+} from "../../data/protocols/contracts-types.ts";
 
 export function binaryWeights(
   groupedContracts: Record<SupportedGroupByCategory, Contract[]>,

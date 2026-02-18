@@ -1,8 +1,11 @@
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
-import type { Contract } from "@/types/contracts.ts";
-import { ContractResolutionStatusIds } from "@/types/contracts.ts";
-import type { ProtocolId } from "@/types/protocols.ts";
 import { getProtocolById } from "@/utils/dataAccess.ts";
+
+import {
+  type Contract,
+  ContractResolutionStatusIds,
+} from "../../data/protocols/contracts-types.ts";
+import type { ProtocolId } from "../../data/protocols/types.ts";
 
 /**
  * Sorts contracts by their resolution status in priority order.

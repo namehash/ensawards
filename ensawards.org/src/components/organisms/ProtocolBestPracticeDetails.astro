@@ -1,8 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import { type BestPracticeProtocol, ProtocolTypes } from "../../types/bestPractices";
-import { ProtocolId } from "../../types/protocols";
+import {
+  type BestPracticeProtocol,
+  ProtocolTypes,
+} from "../../../data/ens-best-practices/types.ts";
+import { type ProtocolId } from "../../../data/protocols/types.ts";
 import { getContractNamingScoresByProtocolType, getProtocolById } from "../../utils/dataAccess";
 import { markdownToHtml } from "../../utils/markdown";
 import { cn } from "../../utils/tailwindClassConcatenation";
@@ -66,7 +69,6 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
     Object.values(ProtocolTypes).map((protocolType) => {
       const protocolScores =
         getContractNamingScoresByProtocolType(protocolType);
-      const protocolPathParameter = protocolType.toLowerCase();
 
       return (
         <ItemsList
@@ -78,10 +80,10 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
             const ProtocolIcon = protocol.icon;
             return (
               <LeaderboardCard
-                key={`${protocolPathParameter}-leaderboard-card-${protocol.id}`}
+                key={`leaderboard-card-${protocol.protocolSlug}`}
                 name={protocol.name}
                 ensAwardsScore={value}
-                viewDetailsLink={`/${protocolPathParameter}/${protocol.slug}`}
+                viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
                 viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                 {idx < 3 ? (
                   <Image

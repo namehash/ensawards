@@ -2,19 +2,20 @@ import { contractPipeline } from "@/contract-pipelines";
 import { daoContractsOnly, defiContractsOnly } from "@/contract-pipelines/filters.ts";
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { sortProtocolLeaderboard } from "@/contract-pipelines/sorting.ts";
-import { APPS } from "@/data/apps.ts";
-import { BEST_PRACTICE_CATEGORIES, BEST_PRACTICES } from "@/data/bestPractices.ts";
-import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "@/data/protocols.ts";
-import { type App, type AppType, AppTypes } from "@/types/apps.ts";
-import { BenchmarkResult } from "@/types/benchmarks";
+
+import { APPS } from "../../data/apps";
+import { BenchmarkResult } from "../../data/apps/benchmarks-types.ts";
+import { type App, type AppType, AppTypes } from "../../data/apps/types.ts";
+import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from "../../data/ens-best-practices";
 import type {
   BestPractice,
   BestPracticeCategory,
   BestPracticeTarget,
   ProtocolType,
-} from "@/types/bestPractices.ts";
-import { ProtocolTypes } from "@/types/bestPractices.ts";
-import type { Contract } from "@/types/contracts.ts";
+} from "../../data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "../../data/ens-best-practices/types.ts";
+import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "../../data/protocols";
+import type { Contract } from "../../data/protocols/contracts-types.ts";
 import type {
   DAOProtocol,
   DAOProtocolId,
@@ -22,20 +23,15 @@ import type {
   DeFiProtocolId,
   Protocol,
   ProtocolId,
-} from "@/types/protocols.ts";
+} from "../../data/protocols/types.ts";
 
 export const getProtocolById = (protocolId: ProtocolId): Protocol => {
   // biome-ignore lint/style/noNonNullAssertion: Because of invariant that PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
   return PROTOCOLS.find((protocol) => protocol.id === protocolId)!;
 };
 
-export const getProtocolBySlug = (
-  protocolType: ProtocolType,
-  protocolSlug: string,
-): Protocol | undefined => {
-  return PROTOCOLS.find(
-    (protocol) => protocolType === protocol.protocolType && protocol.slug === protocolSlug,
-  );
+export const getProtocolBySlug = (protocolSlug: string): Protocol | undefined => {
+  return PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
 export const getDAOByProtocolId = (protocolId: DAOProtocolId): DAOProtocol => {
@@ -44,7 +40,7 @@ export const getDAOByProtocolId = (protocolId: DAOProtocolId): DAOProtocol => {
 };
 
 export const getDAOByProtocolSlug = (protocolSlug: string): DAOProtocol | undefined => {
-  return DAO_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
+  return DAO_PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
 export const getDeFiProtocolByProtocolId = (protocolId: DeFiProtocolId): DeFiProtocol => {
@@ -53,7 +49,7 @@ export const getDeFiProtocolByProtocolId = (protocolId: DeFiProtocolId): DeFiPro
 };
 
 export const getDeFiProtocolByProtocolSlug = (protocolSlug: string): DeFiProtocol | undefined => {
-  return DEFI_PROTOCOLS.find((protocol) => protocol.slug === protocolSlug);
+  return DEFI_PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
 const ProtocolTypeSlugMapping = new Map<string, ProtocolType>([
@@ -74,7 +70,7 @@ export const getAppTypeBySlug = (appTypeSlug: string): AppType | undefined =>
   AppTypeSlugMapping.get(appTypeSlug);
 
 export const getAppBySlug = (appSlug: string): App | undefined => {
-  return APPS.find((app) => app.slug === appSlug);
+  return APPS.find((app) => app.appSlug === appSlug);
 };
 
 export const getAppById = (appId: string): App | undefined => {
@@ -82,7 +78,7 @@ export const getAppById = (appId: string): App | undefined => {
 };
 
 export const getCategoryBySlug = (categorySlug: string): BestPracticeCategory | undefined => {
-  return BEST_PRACTICE_CATEGORIES.find((category) => category.slug === categorySlug);
+  return BEST_PRACTICE_CATEGORIES.find((category) => category.categorySlug === categorySlug);
 };
 
 export const getCategoryById = (categoryId: string): BestPracticeCategory | undefined => {
@@ -90,11 +86,13 @@ export const getCategoryById = (categoryId: string): BestPracticeCategory | unde
 };
 
 export const getBestPracticeBySlug = (bestPracticeSlug: string): BestPractice | undefined => {
-  return BEST_PRACTICES.find((bestPractice) => bestPractice.slug === bestPracticeSlug);
+  return ENS_BEST_PRACTICES.find(
+    (bestPractice) => bestPractice.bestPracticeSlug === bestPracticeSlug,
+  );
 };
 
 export const getBestPracticeById = (bestPracticeId: string): BestPractice | undefined =>
-  BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
+  ENS_BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
 
 export const calculateAppEnsAwardsScore = (app: App) => {
   const accumulatedBenchmarks = app.benchmarks.reduce((sum, benchmark) => {
@@ -200,7 +198,6 @@ const contractPipelineFilterByProtocolType = new Map<
   [ProtocolTypes.DeFi, defiContractsOnly],
 ]);
 
-// TODO: Should this name be more generic?
 export const getContractNamingScoresByProtocolType = (
   protocolType: ProtocolType,
 ): Record<SupportedGroupByCategory, number> => {

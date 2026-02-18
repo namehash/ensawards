@@ -19,6 +19,21 @@ export default defineConfig({
     "/benchmarks": "/leaderboards",
     "/benchmarks/[app]": "/app/[app]",
     "/leaderboards/app": "/leaderboards",
+
+    "/app/blockscout": "/app/blockscout-explorer",
+    "/app/etherscan": "/app/etherscan-explorer",
+    "/app/metamask": "/app/metamask-wallet",
+
+    "/dao/aave": "/protocol/aave-dao",
+    "/dao/arbitrum": "/protocol/arbitrum-dao",
+    "/dao/ens": "/protocol/ens-dao",
+    "/dao/nouns": "/protocol/nouns-dao",
+    "/dao/taiko": "/protocol/taiko-dao",
+    "/dao/uniswap": "/protocol/uniswap-dao",
+
+    "/defi/liquity": "/protocol/liquity-defi",
+    "/defi/taiko": "/protocol/taiko-defi",
+    "/defi/uniswap": "/protocol/uniswap-defi",
   },
 
   adapter: vercel(),

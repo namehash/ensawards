@@ -6,12 +6,11 @@ import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import { type AppBenchmark } from "@/types/apps.ts";
-import { BenchmarkResult } from "@/types/benchmarks";
 import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 
+import { type AppBenchmark, BenchmarkResult } from "../../../../data/apps/benchmarks-types.ts";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 
 export interface BenchmarkResultBadgeProps {
@@ -68,11 +67,11 @@ const ensNodeReactConfig = createConfig({
 
 const getResultIcon = (result: BenchmarkResult) => {
   switch (result) {
-    case "Pass":
+    case BenchmarkResult.Pass:
       return <PassIcon width={16} height={16} />;
-    case "Partial pass":
+    case BenchmarkResult.PartialPass:
       return <PartialPassIcon width={16} height={16} />;
-    case "Fail":
+    case BenchmarkResult.Fail:
       return <FailIcon width={16} height={16} />;
   }
 };

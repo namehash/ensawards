@@ -2,18 +2,18 @@
 import AppBestPracticeDetails from "../../../components/organisms/AppBestPracticeDetails.astro";
 import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
 import ProtocolBestPracticeDetails from "../../../components/organisms/ProtocolBestPracticeDetails.astro";
-import { BEST_PRACTICE_CATEGORIES } from "../../../data/bestPractices";
 import Layout from "../../../layouts/Layout.astro";
-import { BestPracticeTypes } from "../../../types/bestPractices";
+import { BestPracticeTypes } from "../../../../data/ens-best-practices/types.ts";
 import { getBestPracticeBySlug } from "../../../utils/dataAccess";
 import TechnicalInfoAnchorScript from "../../../components/atoms/TechnicalInfoAnchorScript.astro";
+import { BEST_PRACTICE_CATEGORIES } from "../../../../data/ens-best-practices";
 export function getStaticPaths() {
   const staticPaths = [];
 
   for (let category of BEST_PRACTICE_CATEGORIES) {
     category.bestPractices.forEach((bestPractice) =>
       staticPaths.push({
-        params: { category: category.slug, bestPractice: bestPractice.slug },
+        params: { category: category.categorySlug, bestPractice: bestPractice.bestPracticeSlug },
       }),
     );
   }
@@ -34,7 +34,7 @@ const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
       pageMetadata={{
         title: `ENSAwards: ${bestPracticeToDisplay.name}`,
         description: bestPracticeToDisplay.description,
-        url: `https://ensawards.org/ens-best-practices/${bestPracticeToDisplay.categorySlug}/${bestPracticeToDisplay.slug}`,
+        url: `https://ensawards.org/ens-best-practices/${bestPracticeToDisplay.categorySlug}/${bestPracticeToDisplay.bestPracticeSlug}`,
       }}>
       {bestPracticeToDisplay.type === BestPracticeTypes.App ? (
         <AppBestPracticeDetails bestPractice={bestPracticeToDisplay} />

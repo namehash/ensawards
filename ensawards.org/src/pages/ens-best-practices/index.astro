@@ -3,11 +3,10 @@ import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 
 import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import CategoryCard from "../../components/atoms/cards/CategoryCard.astro";
-import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import UnderConstructionBanner from "../../components/atoms/UnderConstructionBanner.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import { BEST_PRACTICE_CATEGORIES } from "../../data/bestPractices";
+import { BEST_PRACTICE_CATEGORIES } from "../../../data/ens-best-practices";
 import Layout from "../../layouts/Layout.astro";
 ---
 
@@ -51,13 +50,12 @@ import Layout from "../../layouts/Layout.astro";
             key={`best-practice-card-${idx}`}
             name={category.name}
             description={category.description}
-            viewBestPracticesLink={`/ens-best-practices/${category.slug}`}
+            viewBestPracticesLink={`/ens-best-practices/${category.categorySlug}`}
             comingSoon={category.status}
             numberOfBestPractices={category.bestPractices.length}
           />
         ))
       }
-      <SuggestionCard whatsSuggested="best practice" />
     </ItemsList>
   </section>
 </Layout>

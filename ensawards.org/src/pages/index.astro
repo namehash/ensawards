@@ -9,17 +9,17 @@ import Hero from "../components/molecules/Hero.astro";
 import ItemsList from "../components/molecules/ItemsList.astro";
 import { ReferrerLeaderboardSnippet } from "../components/referral-awards-program/referrers/ReferrerLeaderboardSnippet";
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
-import { APPS } from "../data/apps";
+import { APPS } from "../../data/apps";
 import Layout from "../layouts/Layout.astro";
-import { AppTypes } from "../types/apps";
-import { ProtocolId } from "../types/protocols";
+import { AppTypes } from "../../data/apps/types.ts";
+import { type ProtocolId } from "../../data/protocols/types.ts";
 import {
   calculateAppEnsAwardsScore,
   getContractNamingScoresByProtocolType,
   getProtocolById,
 } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
-import { ProtocolTypes } from "../types/bestPractices";
+import { ProtocolTypes } from "../../data/ens-best-practices/types.ts";
 import { pluralizeBestPracticeTarget } from "../utils/textModifications";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
@@ -55,7 +55,7 @@ const placeIcons = [
                   key={`${appType.toLowerCase()}-review-card-${app.id}`}
                   name={app.name}
                   ensAwardsScore={score}
-                  viewDetailsLink={`/app/${app.slug}`}
+                  viewDetailsLink={`/app/${app.appSlug}`}
                   viewDetailsText={`${appType} report`}>
                   <AppIcon
                     slot="rankedEntityIcon"
@@ -89,7 +89,6 @@ const placeIcons = [
       Object.values(ProtocolTypes).map((protocolType) => {
         const protocolScores =
           getContractNamingScoresByProtocolType(protocolType);
-        const protocolPathParameter = protocolType.toLowerCase();
 
         return (
           <ItemsList
@@ -103,10 +102,10 @@ const placeIcons = [
                 const ProtocolIcon = protocol.icon;
                 return (
                   <LeaderboardCard
-                    key={`${protocolPathParameter}-leaderboard-card-${protocol.id}`}
+                    key={`leaderboard-card-${protocol.protocolSlug}`}
                     name={protocol.name}
                     ensAwardsScore={value}
-                    viewDetailsLink={`/${protocolPathParameter}/${protocol.slug}`}
+                    viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
                     viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                     <Image
                       alt={`${idx + 1}-place`}
@@ -121,7 +120,7 @@ const placeIcons = [
                 );
               })}
             <a
-              href={`/leaderboards/${protocolPathParameter}`}
+              href={`/leaderboards/${protocolType.toLowerCase()}`}
               class={cn(
                 shadcnButtonVariants({
                   variant: "ghost",

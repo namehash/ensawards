@@ -10,13 +10,13 @@ import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
-import { APPS } from "../../data/apps";
+import { APPS } from "../../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 
 export function getStaticPaths() {
-  return APPS.map((app) => ({ params: { app: app.slug } }));
+  return APPS.map((app) => ({ params: { app: app.appSlug } }));
 }
 
 const { app } = Astro.params;
@@ -96,7 +96,7 @@ if (appToDisplay !== undefined) {
               notes={benchmark.bestPractice.description}
               viewDetails={{
                 text: "View best practice details",
-                link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.slug}`,
+                link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
               }}
               additionalInfo={[
                 {
@@ -115,7 +115,10 @@ if (appToDisplay !== undefined) {
               />
             </BenchmarkResultCard>
           ))}
-          <SuggestionCard whatsSuggested="benchmark result" />
+          <SuggestionCard
+            whatsSuggested="benchmark result"
+            gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
+          />
         </ItemsList>
       </section>
     </Layout>

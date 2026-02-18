@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
 
+import { CONTRACTS_TEST_DATA } from "@/contract-pipelines/contractsTestData.ts";
 import { groupByProtocol, type SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { contractPipeline, type LeaderboardSortFn } from "@/contract-pipelines/index.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
-import { CONTRACTS_TEST_DATA } from "@/data/contracts-test.ts";
-import type { Contract } from "@/types/contracts.ts";
+
+import type { Contract } from "../../data/protocols/contracts-types.ts";
 
 describe("contract pipelines", () => {
   describe("default pipeline", () => {

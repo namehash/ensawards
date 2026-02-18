@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 
+import { CONTRACTS_TEST_DATA } from "@/contract-pipelines/contractsTestData.ts";
 import { groupByProtocol, type SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
-import { CONTRACTS_TEST_DATA } from "@/data/contracts-test.ts";
-import type { Contract } from "@/types/contracts.ts";
-import { ProtocolIds } from "@/types/protocols.ts";
+
+import type { Contract } from "../../data/protocols/contracts-types.ts";
+import { ProtocolIds } from "../../data/protocols/types.ts";
 
 describe("group-by functions", () => {
   describe("groupByProtocol", () => {

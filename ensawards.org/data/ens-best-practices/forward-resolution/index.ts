@@ -1,0 +1,17 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying best practice categories
+
+import type { BestPracticeCategory } from "../types.ts";
+import { CategoryStatus } from "../types.ts";
+
+export const ForwardResolutionCategory: BestPracticeCategory = {
+  id: "forward-resolution",
+  categorySlug: "forward-resolution",
+  name: "Forward Resolution",
+  description:
+    "Lookup the details of an ENS name, such as its onchain addresses, avatar image, social records, and decentralized website.",
+  status: CategoryStatus.ComingSoon,
+  bestPractices: [
+    //   recognizeAllENSNames
+  ],
+};
