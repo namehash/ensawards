@@ -1,12 +1,11 @@
-﻿import type { DAOProtocol, DeFiProtocol, Protocol } from "@/types/protocols.ts";
-
-import AaveDao from "./aave-dao";
+﻿import AaveDao from "./aave-dao";
 import ArbitrumDao from "./arbitrum-dao";
 import ENSDao from "./ens-dao";
 import LiquityDeFi from "./liquity-defi";
 import NounsDao from "./nouns-dao";
 import TaikoDao from "./taiko-dao";
 import TaikoDeFi from "./taiko-defi";
+import type { DAOProtocol, DeFiProtocol, Protocol } from "./types.ts";
 import UniswapDao from "./uniswap-dao";
 import UniswapDeFi from "./uniswap-defi";
 

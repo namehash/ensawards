@@ -1,5 +1,3 @@
-import { type Project } from "@/types/projects.ts";
-
 import AaveProject from "./aave";
 import ArbitrumProject from "./arbitrum";
 import BlockscoutProject from "./blockscout";
@@ -11,6 +9,7 @@ import MetaMaskProject from "./metamask";
 import NounsProject from "./nouns";
 import RainbowProject from "./rainbow";
 import TaikoProject from "./taiko";
+import { type Project } from "./types.ts";
 import UniswapProject from "./uniswap";
 
 /**

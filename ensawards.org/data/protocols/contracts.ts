@@ -1,7 +1,6 @@
-import { type Contract } from "@/types/contracts.ts";
-
 import AaveDaoContracts from "./aave-dao/contracts.ts";
 import ArbitrumDaoContracts from "./arbitrum-dao/contracts.ts";
+import { type Contract } from "./contracts-types.ts";
 import ENSDaoContracts from "./ens-dao/contracts.ts";
 import LiquityDeFiProtocolContracts from "./liquity-defi/contracts.ts";
 import NounsDaoContracts from "./nouns-dao/contracts.ts";

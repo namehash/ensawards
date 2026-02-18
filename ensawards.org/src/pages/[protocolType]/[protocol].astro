@@ -1,12 +1,12 @@
 ---
-import { ProtocolTypes } from "../../types/bestPractices";
+import { ProtocolTypes } from "../../../data/ens-best-practices/types.ts";
 import { PROTOCOLS } from "../../../data/protocols";
 import {
   getContractNamingScoresByProtocolType,
   getProtocolBySlug,
   getProtocolTypeBySlug,
 } from "../../utils/dataAccess";
-import { type Contract } from "../../types/contracts";
+import { type Contract } from "../../../data/protocols/contracts-types.ts";
 import { CONTRACTS } from "../../../data/protocols/contracts";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
@@ -28,7 +28,7 @@ import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "../../utils/styles";
-import { type Protocol } from "../../types/protocols";
+import { type Protocol } from "../../../data/protocols/types.ts";
 export function getStaticPaths() {
   const staticPaths = [];
 

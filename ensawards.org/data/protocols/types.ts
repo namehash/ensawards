@@ -2,8 +2,8 @@ import type { JSX } from "astro/jsx-runtime";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
-import { type ProtocolType, ProtocolTypes } from "@/types/bestPractices.ts";
-import type { Project } from "@/types/projects.ts";
+import { type ProtocolType, ProtocolTypes } from "../ens-best-practices/types.ts";
+import type { Project } from "../projects/types.ts";
 
 export const DAOProtocolIds = {
   EnsDao: "protocol-ens-dao",
@@ -46,7 +46,7 @@ export type ProtocolId = (typeof ProtocolIds)[keyof typeof ProtocolIds];
 
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
   id: ProtocolIdT;
-  slug: string;
+  slug: string; // TODO: rename to protocolSlug to make it more self-documenting
   protocolType: ProtocolT;
   project: Project; // each protocol belongs to a single project.
   name: string;

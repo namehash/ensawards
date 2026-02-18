@@ -1,5 +1,9 @@
-import type { Contract, ContractSubtype, ContractType } from "@/types/contracts.ts";
-import type { ProtocolId } from "@/types/protocols.ts";
+import type {
+  Contract,
+  ContractSubtype,
+  ContractType,
+} from "../../data/protocols/contracts-types.ts";
+import type { ProtocolId } from "../../data/protocols/types.ts";
 
 export type SupportedGroupByCategory = ProtocolId | ContractType | ContractSubtype;
 

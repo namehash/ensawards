@@ -5,8 +5,9 @@ import type { Name } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import type { EnsProfileForContract } from "@/types/contracts.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+
+import type { EnsProfileForContract } from "../../../data/protocols/contracts-types.ts";
 
 export interface SmartContractMetadataProps {
   name: Name;

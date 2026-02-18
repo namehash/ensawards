@@ -2,7 +2,7 @@ import type { Address, Chain } from "viem";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
-import type { Protocol } from "@/types/protocols.ts";
+import type { Protocol } from "./types.ts";
 
 export const ContractTypes = {
   DAO: "DAO",

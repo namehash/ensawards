@@ -1,5 +1,5 @@
-import type { Contract, ContractType } from "@/types/contracts.ts";
-import { ContractTypes } from "@/types/contracts.ts";
+import type { Contract, ContractType } from "../../data/protocols/contracts-types.ts";
+import { ContractTypes } from "../../data/protocols/contracts-types.ts";
 
 /**
  * Filters contracts by their type field.

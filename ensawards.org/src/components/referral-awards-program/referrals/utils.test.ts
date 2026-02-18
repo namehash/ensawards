@@ -11,7 +11,8 @@ import {
 } from "@ensnode/ensnode-sdk";
 
 import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
-import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
+
+import type { ReferralIncentiveProgram } from "../../../../data/referral-programs/types.ts";
 
 describe("isQualifiedReferral", () => {
   const incentiveProgram: ReferralIncentiveProgram = {

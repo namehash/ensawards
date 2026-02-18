@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { ProjectIds } from "@/types/projects.ts";
-
 import { PROJECTS } from ".";
+import { ProjectIds } from "./types.ts";
 
 describe("projects data", () => {
   const data = PROJECTS;

@@ -1,8 +1,7 @@
-import { ProtocolTypes } from "@/types/bestPractices.ts";
-import type { DAOProtocol } from "@/types/protocols.ts";
-import { DAOProtocolIds } from "@/types/protocols.ts";
-
+import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import TaikoProject from "../../projects/taiko";
+import type { DAOProtocol } from "../types.ts";
+import { DAOProtocolIds } from "../types.ts";
 import TaikoIcon from "./icon.tsx";
 
 const TaikoDao: DAOProtocol = {

@@ -1,8 +1,8 @@
 import { groupByProtocol, type SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
-import type { Contract } from "@/types/contracts.ts";
 
 import { CONTRACTS } from "../../data/protocols/contracts.ts";
+import type { Contract } from "../../data/protocols/contracts-types.ts";
 
 /**
  * Custom sort function type for sorting leaderboard entries.
@@ -56,7 +56,7 @@ export interface ContractPipelineOptions {
  * and returns a score (in %) achieved by a group of contracts,
  * defined by the provided functions.
  *
- * By default, it operates on the data from /data/contracts.ts,
+ * By default, it operates on the data from /data/contracts-benchmarks-types.ts,
  * but can also take data from other sources
  */
 export function contractPipeline(

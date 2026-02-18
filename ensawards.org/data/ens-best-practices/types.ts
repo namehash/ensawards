@@ -1,4 +1,4 @@
-import type { AppType } from "@/types/apps.ts";
+import type { AppType } from "../apps/types.ts";
 
 export const BestPracticeTypes = {
   Protocol: "Protocol",

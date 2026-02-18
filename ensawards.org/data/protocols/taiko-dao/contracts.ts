@@ -2,9 +2,12 @@
 
 import { mainnet } from "viem/chains";
 
-import type { Contract } from "@/types/contracts.ts";
-import { ContractResolutionStatusIds, ContractSubtypes, ContractTypes } from "@/types/contracts.ts";
-
+import type { Contract } from "../contracts-types.ts";
+import {
+  ContractResolutionStatusIds,
+  ContractSubtypes,
+  ContractTypes,
+} from "../contracts-types.ts";
 import TaikoDao from ".";
 
 const contracts: Contract[] = [

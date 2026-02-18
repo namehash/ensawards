@@ -1,7 +1,7 @@
 ---
 import { APPS } from "../../../data/apps";
-import { BenchmarkResult } from "../../types/benchmarks";
-import type { BestPracticeApp } from "../../types/bestPractices";
+import type { BenchmarkResult } from "../../../data/apps/benchmarks-types.ts";
+import type { BestPracticeApp } from "../../../data/ens-best-practices/types.ts";
 import { calculateAppSupport, calculateAppsPassed } from "../../utils/dataAccess";
 import { markdownToHtml } from "../../utils/markdown";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../utils/styles";

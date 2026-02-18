@@ -1,25 +1,9 @@
 import type { JSX } from "astro/jsx-runtime";
 
-import type { AccountId, Name, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { Name } from "@ensnode/ensnode-sdk";
 
-import type { BestPractice } from "@/types/bestPractices.ts";
-import type { Project } from "@/types/projects.ts";
-
-import type { BenchmarkResult } from "./benchmarks";
-
-/**
- * Represents a benchmark result for a specific best practice within an app.
- */
-export interface AppBenchmark {
-  /** The best practice being benchmarked */
-  bestPractice: BestPractice;
-  /** The result of the benchmark */
-  result: BenchmarkResult;
-  /** The account ID of the person who performed the benchmark */
-  benchmarkedBy: AccountId;
-  /** Unix timestamp when the benchmark was performed */
-  benchmarkedAt: UnixTimestamp;
-}
+import type { Project } from "../projects/types.ts";
+import type { AppBenchmark } from "./benchmarks-types.ts";
 
 /**
  * Represents all types of apps that are currently benchmarked on ENSAwards.

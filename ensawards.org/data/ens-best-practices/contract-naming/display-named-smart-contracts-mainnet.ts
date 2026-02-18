@@ -1,6 +1,6 @@
-import { AppTypes } from "@/types/apps.ts";
-import type { BestPracticeApp } from "@/types/bestPractices.ts";
-import { BestPracticeTypes } from "@/types/bestPractices.ts";
+import { AppTypes } from "../../apps/types.ts";
+import type { BestPracticeApp } from "../types.ts";
+import { BestPracticeTypes } from "../types.ts";
 
 export const displayNamedSmartContractsMainnet: BestPracticeApp = {
   type: BestPracticeTypes.App,

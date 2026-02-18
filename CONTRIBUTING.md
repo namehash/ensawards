@@ -13,7 +13,7 @@ Below, you’ll find detailed instructions for each contribution type. If your c
 1. Create a new subdirectory in the [ensawards.org/data/projects/](ensawards.org/data/projects) named after the project you want to add. The directory name should be the lowercase project name. If the name contains multiple words, join them with hyphens ("-").
 2. Inside the new directory create an `index.ts` file and define the new project as an independent exported constant.
 3. Add the new project to the `PROJECTS` array in the [ensawards.org/data/projects/index.ts](ensawards.org/data/projects/index.ts) file.
-4. Follow its data model that you can look up in the [@/types/projects.ts](ensawards.org/src/types/projects.ts) file. You can also have a quick glance at it below.
+4. Follow its data model that you can look up in the [@/types/benchmarks-types.ts](ensawards.org/data/projects/types.ts) file. You can also have a quick glance at it below.
 ```typescript
 export interface Project {
     id: ProjectId;
@@ -41,10 +41,10 @@ For this reason, every new `App` or `Protocol` must be associated with a corresp
 
 ### Adding a new `Protocol`
 
-1. Create a new subdirectory in the [ensawards.org/data/protocols/](ensawards.org/data/protocols) named after the protocol you want to add. The directory name should follow the format `[lowercase protocol name]-[protocol type]`, where protocol type is the lowercase representation of [ProtocolType](ensawards.org/src/types/protocols.ts) enum. If the name contains multiple words, join them with hyphens ("-").
+1. Create a new subdirectory in the [ensawards.org/data/protocols/](ensawards.org/data/protocols) named after the protocol you want to add. The directory name should follow the format `[lowercase protocol name]-[protocol type]`, where protocol type is the lowercase representation of [ProtocolType](ensawards.org/data/protocols/types.ts) enum. If the name contains multiple words, join them with hyphens ("-").
 2. Inside the new directory create an `index.ts` file and define the new protocol as an independent exported constant.
 3. Add it to the `DAO_PROTOCOLS` or `DEFI_PROTOCOLS` list in the [ensawards.org/data/protocols/index.ts](ensawards.org/data/protocols/index.ts) file appropriately to its type.
-4. Make sure to follow its data model that you can look up in the [@/types/protocols.ts](ensawards.org/src/types/protocols.ts) file. Remember that the `Protocol` can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:
+4. Make sure to follow its data model that you can look up in the [@/types/benchmarks-types.ts](ensawards.org/data/protocols/types.ts) file. Remember that the `Protocol` can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:
 
 ```typescript
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
@@ -84,8 +84,8 @@ export type Protocol = DAOProtocol | DeFiProtocol;
 
 ### Adding a new `Contract`
 
-1. Add the new contract object to the `[protocolObjectName]Contracts` array in the [ensawards.org/data/protocols/[protocol-directory]/contracts.ts](ensawards.org/data/protocols/aave-dao/contracts.ts) file where `[protocolObjectName]` and `[protocol-directory]` represent the name of the relevant protocol's object name and directory.
-2. Make sure to follow the data model defined in the [@/types/contracts.ts](ensawards.org/src/types/contracts.ts) file.
+1. Add the new contract object to the `[protocolObjectName]Contracts` array in the [ensawards.org/data/protocols/[protocol-directory]/contracts-benchmarks-types.ts](ensawards.org/data/protocols/aave-dao/contracts.ts) file where `[protocolObjectName]` and `[protocol-directory]` represent the name of the relevant protocol's object name and directory.
+2. Make sure to follow the data model defined in the [@/types/contracts-benchmarks-types.ts](ensawards.org/data/protocols/contracts-types.ts) file.
 ```typescript
 export interface Contract {
     protocol: Protocol;
@@ -99,10 +99,10 @@ export interface Contract {
 
 ### Adding a new `App`
 
-1. Create a new subdirectory in the [ensawards.org/data/apps/](ensawards.org/data/apps) named after the app you want to add. The directory name should follow the format `[lowercase app name]-[app type]`, where app type is the lowercase representation of [AppType](ensawards.org/src/types/apps.ts) enum. If the name contains multiple words, join them with hyphens ("-").
+1. Create a new subdirectory in the [ensawards.org/data/apps/](ensawards.org/data/apps) named after the app you want to add. The directory name should follow the format `[lowercase app name]-[app type]`, where app type is the lowercase representation of [AppType](ensawards.org/data/apps/types.ts) enum. If the name contains multiple words, join them with hyphens ("-").
 2. Inside the new directory create an `index.ts` file and define the new app as an independent exported constant.
 3. Add your `App` to the `APPS` array available in the [ensawards.org/data/apps/index.ts](ensawards.org/data/apps/index.ts) file.
-4. Follow the corresponding data model available in the [@/types/apps.ts](ensawards.org/src/types/apps.ts) file.
+4. Follow the corresponding data model available in the [@/types/benchmarks-types.ts](ensawards.org/data/apps/types.ts) file.
 ```typescript
 export interface App {
     id: string;
@@ -143,7 +143,7 @@ Defines a specific requirement that an app or protocol must meet to pass a bench
 1. To add a `BestPractice` create it as an independent exported constant in the [ensawards.org/data/ens-best-practices/categories/[category]/[newBestPracticeName].ts](ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts.ts) file, where `[category]` and `[newBestPracticeName]` represent the category that the new best practice belongs to and the practice's name written in camel case.
 2. Add it to `BestPracticeCategory.bestPractices` array of the appropriate category in the [ensawards.org/data/ens-best-practices/categories/[category]/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts) file.
 3. Add it to `ENS_BEST_PRACTICES` array in the [ensawards.org/data/ens-best-practices/index.ts](ensawards.org/data/ens-best-practices/index.ts) file.
-4. Make sure to follow its data model defined in the [@/types/bestPractices.ts](ensawards.org/src/types/bestPractices.ts) file.
+4. Make sure to follow its data model defined in the [@/types/benchmarks-types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
 export interface BestPracticeAbstract<
     BestPracticeT extends BestPracticeType,
@@ -187,7 +187,7 @@ Categories sort best practices into topic-related groups based on their characte
 1. To add a new category, create a new subdirectory in the [ensawards.org/data/ens-best-practices/categories](ensawards.org/data/ens-best-practices/categories) named after the best practice category you want to add. The directory name should be the lower case category name. If the name contains multiple words, join them with hyphens ("-").
 2. Inside the new directory create an `index.ts` file and define the new category as an independent exported constant.
 3. Add new `BestPracticeCategory` to the `BEST_PRACTICE_CATEGORIES` array available in the [ensawards.org/data/ens-best-practices/categories/index.ts](ensawards.org/data/ens-best-practices/categories/index.ts) file.
-4. Follow its data model available in the [@/types/bestPractices.ts](ensawards.org/src/types/bestPractices.ts) file.
+4. Follow its data model available in the [@/types/benchmarks-types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
 export enum CategoryStatus {
     ComingSoon,
@@ -207,8 +207,8 @@ export interface BestPracticeCategory {
 
 ### Suggest a `benchmark update`
 
-1. To suggest a benchmark update for an existing app, modify its `[appObjectName]Benchmarks` array in the [ensawards.org/data/apps/[app-directory]/benchmarks.ts](ensawards.org/data/apps/rainbow-wallet/benchmarks.ts) file where `[appObjectName]` and `[app-directory]` represent the name of the relevant app's object name and directory.
-2. Make sure to follow benchmark's data model. It's available in the [@/types/apps.ts](ensawards.org/src/types/apps.ts) file.
+1. To suggest a benchmark update for an existing app, modify its `[appObjectName]Benchmarks` array in the [ensawards.org/data/apps/[app-directory]/benchmarks-types.ts](ensawards.org/data/apps/rainbow-wallet/benchmarks.ts) file where `[appObjectName]` and `[app-directory]` represent the name of the relevant app's object name and directory.
+2. Make sure to follow benchmark's data model. It's available in the [@/types/benchmarks-types.ts](ensawards.org/data/apps/types.ts) file.
 ```typescript
 export enum BenchmarkResult {
     Pass = "Pass",

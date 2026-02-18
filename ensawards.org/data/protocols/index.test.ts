@@ -2,11 +2,11 @@ import { describe, expect, it } from "vitest";
 
 import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
-import { ProtocolTypes } from "@/types/bestPractices.ts";
-import { DAOProtocolIds, DeFiProtocolIds, ProtocolIds } from "@/types/protocols.ts";
 import { areStringsUnique, isValidSlug } from "@/utils";
 
+import { ProtocolTypes } from "../ens-best-practices/types.ts";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from ".";
+import { DAOProtocolIds, DeFiProtocolIds, ProtocolIds } from "./types.ts";
 
 describe("protocols data", () => {
   const data = PROTOCOLS;

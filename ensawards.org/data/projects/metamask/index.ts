@@ -1,6 +1,5 @@
-import type { Project } from "@/types/projects.ts";
-import { ProjectIds } from "@/types/projects.ts";
-
+import type { Project } from "../types.ts";
+import { ProjectIds } from "../types.ts";
 import MetaMaskIcon from "./icon.tsx";
 
 const MetaMaskProject: Project = {

@@ -7,7 +7,7 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { APPS } from "../../../data/apps";
 import Layout from "../../layouts/Layout.astro";
-import { AppTypes } from "../../types/apps";
+import { AppTypes } from "../../../data/apps/types.ts";
 import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "../../utils/dataAccess";
 import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
 

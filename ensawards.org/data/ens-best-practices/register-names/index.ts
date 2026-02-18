@@ -1,5 +1,5 @@
-import type { BestPracticeCategory } from "@/types/bestPractices.ts";
-import { CategoryStatus } from "@/types/bestPractices.ts";
+import type { BestPracticeCategory } from "../types.ts";
+import { CategoryStatus } from "../types.ts";
 
 export const RegisterNamesCategory: BestPracticeCategory = {
   id: "register-names",

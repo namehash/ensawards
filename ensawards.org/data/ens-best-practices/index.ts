@@ -1,7 +1,5 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying best practices
 
-import { type BestPractice, type BestPracticeCategory } from "@/types/bestPractices.ts";
-
 import { ContractNamingCategory } from "./contract-naming";
 import { displayNamedSmartContractsL2 } from "./contract-naming/display-named-smart-contracts-l2-chains.ts";
 import { displayNamedSmartContractsMainnet } from "./contract-naming/display-named-smart-contracts-mainnet.ts";
@@ -12,6 +10,7 @@ import { ManageNamesCategory } from "./manage-names";
 import { RegisterNamesCategory } from "./register-names";
 import { RenewNamesCategory } from "./renew-names";
 import { ReverseResolutionCategory } from "./reverse-resolution";
+import { type BestPractice, type BestPracticeCategory } from "./types.ts";
 
 export const ENS_BEST_PRACTICES: BestPractice[] = [
   nameYourSmartContracts,

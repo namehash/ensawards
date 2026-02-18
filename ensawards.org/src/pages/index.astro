@@ -11,15 +11,15 @@ import { ReferrerLeaderboardSnippet } from "../components/referral-awards-progra
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import { APPS } from "../../data/apps";
 import Layout from "../layouts/Layout.astro";
-import { AppTypes } from "../types/apps";
-import { ProtocolId } from "../types/protocols";
+import { AppTypes } from "../../data/apps/types.ts";
+import { type ProtocolId } from "../../data/protocols/types.ts";
 import {
   calculateAppEnsAwardsScore,
   getContractNamingScoresByProtocolType,
   getProtocolById,
 } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
-import { ProtocolTypes } from "../types/bestPractices";
+import { ProtocolTypes } from "../../data/ens-best-practices/types.ts";
 import { pluralizeBestPracticeTarget } from "../utils/textModifications";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");

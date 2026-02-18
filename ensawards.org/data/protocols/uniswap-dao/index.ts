@@ -1,8 +1,7 @@
-import { ProtocolTypes } from "@/types/bestPractices.ts";
-import type { DAOProtocol } from "@/types/protocols.ts";
-import { DAOProtocolIds } from "@/types/protocols.ts";
-
+import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import UniswapProject from "../../projects/uniswap";
+import type { DAOProtocol } from "../types.ts";
+import { DAOProtocolIds } from "../types.ts";
 import UniswapIcon from "./icon.tsx";
 
 const UniswapDao: DAOProtocol = {

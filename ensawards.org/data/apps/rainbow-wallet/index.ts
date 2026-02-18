@@ -1,6 +1,5 @@
-import { type App, AppTypes } from "@/types/apps.ts";
-
 import RainbowProject from "../../projects/rainbow";
+import { type App, AppTypes } from "../types.ts";
 import { RainbowWalletBenchmarks } from "./benchmarks.ts";
 import RainbowIcon from "./icon.tsx";
 

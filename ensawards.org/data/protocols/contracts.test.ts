@@ -4,25 +4,25 @@ import { describe, expect, it } from "vitest";
 
 import {
   type ChainId,
-  ENSNodeClient,
+  EnsApiClient,
   evmChainIdToCoinType,
   isNormalizedName,
   type ResolveRecordsResponse,
   type ResolverRecordsResponseBase,
 } from "@ensnode/ensnode-sdk";
 
+import { getENSNodeUrl } from "@/utils/env";
+
+import { CONTRACTS } from "./contracts.ts";
 import {
   type ContractIdentityForwardNamed,
   type ContractIdentityPrimaryNamed,
   type ContractIdentityResolved,
   ContractResolutionStatusIds,
   type EnsProfileForContract,
-} from "@/types/contracts.ts";
-import { getENSNodeUrl } from "@/utils/env";
+} from "./contracts-types.ts";
 
-import { CONTRACTS } from "./contracts.ts";
-
-const client = new ENSNodeClient({
+const client = new EnsApiClient({
   url: getENSNodeUrl(),
 });
 

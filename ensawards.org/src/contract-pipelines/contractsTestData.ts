@@ -5,8 +5,7 @@ import {
   ContractResolutionStatusIds,
   ContractSubtypes,
   ContractTypes,
-} from "@/types/contracts.ts";
-
+} from "../../data/protocols/contracts-types.ts";
 import ENSDao from "../../data/protocols/ens-dao";
 import UniswapDao from "../../data/protocols/uniswap-dao";
 

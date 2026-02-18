@@ -8,7 +8,7 @@ import {
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import { getEthnamesSubregistryId } from "@ensnode/ensnode-sdk";
 
-import type { ReferralIncentiveProgram } from "@/types/referralIncentivePrograms.ts";
+import type { ReferralIncentiveProgram } from "./types.ts";
 
 // TODO: Now that the `ReferralProgramEditionConfig` was created
 //  we should remove this file and

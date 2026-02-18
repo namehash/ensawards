@@ -1,8 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import { type BestPracticeProtocol, ProtocolTypes } from "../../types/bestPractices";
-import { ProtocolId } from "../../types/protocols";
+import {
+  type BestPracticeProtocol,
+  ProtocolTypes,
+} from "../../../data/ens-best-practices/types.ts";
+import { type ProtocolId } from "../../../data/protocols/types.ts";
 import { getContractNamingScoresByProtocolType, getProtocolById } from "../../utils/dataAccess";
 import { markdownToHtml } from "../../utils/markdown";
 import { cn } from "../../utils/tailwindClassConcatenation";

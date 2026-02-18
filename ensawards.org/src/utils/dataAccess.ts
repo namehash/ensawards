@@ -2,16 +2,20 @@ import { contractPipeline } from "@/contract-pipelines";
 import { daoContractsOnly, defiContractsOnly } from "@/contract-pipelines/filters.ts";
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { sortProtocolLeaderboard } from "@/contract-pipelines/sorting.ts";
-import { type App, type AppType, AppTypes } from "@/types/apps.ts";
-import { BenchmarkResult } from "@/types/benchmarks";
+
+import { APPS } from "../../data/apps";
+import { BenchmarkResult } from "../../data/apps/benchmarks-types.ts";
+import { type App, type AppType, AppTypes } from "../../data/apps/types.ts";
+import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from "../../data/ens-best-practices";
 import type {
   BestPractice,
   BestPracticeCategory,
   BestPracticeTarget,
   ProtocolType,
-} from "@/types/bestPractices.ts";
-import { ProtocolTypes } from "@/types/bestPractices.ts";
-import type { Contract } from "@/types/contracts.ts";
+} from "../../data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "../../data/ens-best-practices/types.ts";
+import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "../../data/protocols";
+import type { Contract } from "../../data/protocols/contracts-types.ts";
 import type {
   DAOProtocol,
   DAOProtocolId,
@@ -19,11 +23,7 @@ import type {
   DeFiProtocolId,
   Protocol,
   ProtocolId,
-} from "@/types/protocols.ts";
-
-import { APPS } from "../../data/apps";
-import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from "../../data/ens-best-practices";
-import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "../../data/protocols";
+} from "../../data/protocols/types.ts";
 
 export const getProtocolById = (protocolId: ProtocolId): Protocol => {
   // biome-ignore lint/style/noNonNullAssertion: Because of invariant that PROTOCOLS array satisfies we are guaranteed to find corresponding protocol
