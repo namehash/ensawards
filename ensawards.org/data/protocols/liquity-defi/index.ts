@@ -6,7 +6,7 @@ import LiquityIcon from "./icon.tsx";
 
 const LiquityDeFi: DeFiProtocol = {
   id: DeFiProtocolIds.Liquity,
-  slug: "liquity",
+  protocolSlug: "liquity-defi",
   protocolType: ProtocolTypes.DeFi,
   project: LiquityProject,
   name: "Liquity",

@@ -6,7 +6,7 @@ import UniswapIcon from "./icon.tsx";
 
 const UniswapDeFi: DeFiProtocol = {
   id: DeFiProtocolIds.Uniswap,
-  slug: "uniswap",
+  protocolSlug: "uniswap-defi",
   protocolType: ProtocolTypes.DeFi,
   project: UniswapProject,
   name: "Uniswap",

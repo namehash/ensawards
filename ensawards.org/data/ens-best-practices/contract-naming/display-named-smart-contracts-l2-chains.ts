@@ -5,7 +5,7 @@ import { BestPracticeTypes } from "../types.ts";
 export const displayNamedSmartContractsL2: BestPracticeApp = {
   type: BestPracticeTypes.App,
   id: "display-named-smart-contracts-l2-chains",
-  slug: "display-named-smart-contracts-l2-chains",
+  bestPracticeSlug: "display-named-smart-contracts-l2-chains",
   name: "Display named smart contracts on L2 chains",
   description:
     "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",

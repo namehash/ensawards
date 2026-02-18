@@ -6,7 +6,7 @@ import TaikoIcon from "./icon.tsx";
 
 const TaikoDao: DAOProtocol = {
   id: DAOProtocolIds.TaikoDao,
-  slug: "taiko",
+  protocolSlug: "taiko-dao",
   protocolType: ProtocolTypes.DAO,
   project: TaikoProject,
   name: "Taiko DAO",

@@ -4,8 +4,8 @@ import { MetaMaskWalletBenchmarks } from "./benchmarks.ts";
 import MetaMaskIcon from "./icon.tsx";
 
 const MetaMaskWallet: App = {
-  id: "metamask",
-  slug: "metamask",
+  id: "metamask-wallet",
+  appSlug: "metamask-wallet",
   project: MetaMaskProject,
   name: "MetaMask",
   description: "MetaMask is a widely used, self-custodial cryptocurrency wallet.",

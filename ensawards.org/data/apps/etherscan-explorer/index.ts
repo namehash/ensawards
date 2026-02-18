@@ -4,8 +4,8 @@ import { EtherscanExplorerBenchmarks } from "./benchmarks.ts";
 import EtherscanIcon from "./icon.tsx";
 
 const EtherscanExplorer: App = {
-  id: "etherscan",
-  slug: "etherscan",
+  id: "etherscan-explorer",
+  appSlug: "etherscan-explorer",
   project: EtherscanProject,
   name: "Etherscan",
   description: "Etherscan is a Block Explorer and Analytics Platform for Ethereum.",

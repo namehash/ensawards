@@ -84,7 +84,7 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
                 key={`${protocolPathParameter}-leaderboard-card-${protocol.id}`}
                 name={protocol.name}
                 ensAwardsScore={value}
-                viewDetailsLink={`/${protocolPathParameter}/${protocol.slug}`}
+                viewDetailsLink={`/${protocolPathParameter}/${protocol.protocolSlug}`}
                 viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                 {idx < 3 ? (
                   <Image

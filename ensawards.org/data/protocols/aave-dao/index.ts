@@ -6,7 +6,7 @@ import AaveIcon from "./icon.tsx";
 
 const AaveDao: DAOProtocol = {
   id: DAOProtocolIds.AaveDao,
-  slug: "aave",
+  protocolSlug: "aave-dao",
   protocolType: ProtocolTypes.DAO,
   project: AaveProject,
   name: "Aave DAO",

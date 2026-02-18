@@ -6,7 +6,7 @@ import EnsIcon from "./icon.tsx";
 
 const ENSDao: DAOProtocol = {
   id: DAOProtocolIds.EnsDao,
-  slug: "ens",
+  protocolSlug: "ens-dao",
   protocolType: ProtocolTypes.DAO,
   project: ENSProject,
   name: "ENS DAO",

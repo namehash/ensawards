@@ -20,7 +20,7 @@ export type AppType = (typeof AppTypes)[keyof typeof AppTypes];
 
 export interface App {
   id: string; // normalized app name, might be redundant
-  slug: string;
+  appSlug: string;
   project: Project; // each app belongs to a single project.
   name: string;
   description: string;

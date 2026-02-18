@@ -50,7 +50,7 @@ import Layout from "../../layouts/Layout.astro";
             key={`best-practice-card-${idx}`}
             name={category.name}
             description={category.description}
-            viewBestPracticesLink={`/ens-best-practices/${category.slug}`}
+            viewBestPracticesLink={`/ens-best-practices/${category.categorySlug}`}
             comingSoon={category.status}
             numberOfBestPractices={category.bestPractices.length}
           />

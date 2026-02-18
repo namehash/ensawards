@@ -22,7 +22,7 @@ export interface BestPracticeAbstract<
 > {
   type: BestPracticeT;
   id: string;
-  slug: string;
+  bestPracticeSlug: string;
   name: string;
   description: string;
   categoryName: string;
@@ -55,7 +55,7 @@ export enum CategoryStatus {
 
 export interface BestPracticeCategory {
   id: string;
-  slug: string;
+  categorySlug: string;
   name: string;
   description: string;
   status: CategoryStatus;

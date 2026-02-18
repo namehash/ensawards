@@ -55,7 +55,7 @@ const placeIcons = [
                   key={`${appType.toLowerCase()}-review-card-${app.id}`}
                   name={app.name}
                   ensAwardsScore={score}
-                  viewDetailsLink={`/app/${app.slug}`}
+                  viewDetailsLink={`/app/${app.appSlug}`}
                   viewDetailsText={`${appType} report`}>
                   <AppIcon
                     slot="rankedEntityIcon"
@@ -89,7 +89,6 @@ const placeIcons = [
       Object.values(ProtocolTypes).map((protocolType) => {
         const protocolScores =
           getContractNamingScoresByProtocolType(protocolType);
-        const protocolPathParameter = protocolType.toLowerCase();
 
         return (
           <ItemsList
@@ -103,10 +102,10 @@ const placeIcons = [
                 const ProtocolIcon = protocol.icon;
                 return (
                   <LeaderboardCard
-                    key={`${protocolPathParameter}-leaderboard-card-${protocol.id}`}
+                    key={`leaderboard-card-${protocol.protocolSlug}`}
                     name={protocol.name}
                     ensAwardsScore={value}
-                    viewDetailsLink={`/${protocolPathParameter}/${protocol.slug}`}
+                    viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
                     viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                     <Image
                       alt={`${idx + 1}-place`}
@@ -121,7 +120,7 @@ const placeIcons = [
                 );
               })}
             <a
-              href={`/leaderboards/${protocolPathParameter}`}
+              href={`/leaderboards/${protocolType.toLowerCase()}`}
               class={cn(
                 shadcnButtonVariants({
                   variant: "ghost",

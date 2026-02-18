@@ -5,7 +5,7 @@ import RainbowIcon from "./icon.tsx";
 
 export const RainbowWallet: App = {
   id: "rainbow-wallet",
-  slug: "rainbow-wallet",
+  appSlug: "rainbow-wallet",
   project: RainbowProject,
   name: "Rainbow Wallet",
   description:

@@ -6,7 +6,7 @@ import TaikoIcon from "./icon.tsx";
 
 const TaikoDeFi: DeFiProtocol = {
   id: DeFiProtocolIds.Taiko,
-  slug: "taiko",
+  protocolSlug: "taiko-defi",
   protocolType: ProtocolTypes.DeFi,
   project: TaikoProject,
   name: "Taiko",

@@ -4,7 +4,7 @@ import { BestPracticeTypes, ProtocolTypes } from "../types.ts";
 export const nameYourSmartContracts: BestPracticeProtocol = {
   type: BestPracticeTypes.Protocol,
   id: "name-your-smart-contracts",
-  slug: "name-your-smart-contracts",
+  bestPracticeSlug: "name-your-smart-contracts",
   name: "Name your smart contracts",
   description: "Upgrade security and UX when users interact with your smart contracts.",
   categoryName: "Contract naming",

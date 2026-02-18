@@ -6,7 +6,7 @@ import ArbitrumIcon from "./icon.tsx";
 
 const ArbitrumDao: DAOProtocol = {
   id: DAOProtocolIds.ArbitrumDao,
-  slug: "arbitrum",
+  protocolSlug: "arbitrum-dao",
   protocolType: ProtocolTypes.DAO,
   project: ArbitrumProject,
   name: "Arbitrum DAO",

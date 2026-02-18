@@ -6,7 +6,7 @@ import UniswapIcon from "./icon.tsx";
 
 const UniswapDao: DAOProtocol = {
   id: DAOProtocolIds.UniswapDao,
-  slug: "uniswap",
+  protocolSlug: "uniswap-dao",
   protocolType: ProtocolTypes.DAO,
   project: UniswapProject,
   name: "Uniswap DAO",

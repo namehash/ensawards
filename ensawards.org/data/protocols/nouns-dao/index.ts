@@ -6,7 +6,7 @@ import NounsIcon from "./icon.tsx";
 
 const NounsDao: DAOProtocol = {
   id: DAOProtocolIds.NounsDao,
-  slug: "nouns",
+  protocolSlug: "nouns-dao",
   protocolType: ProtocolTypes.DAO,
   project: NounsProject,
   name: "Nouns DAO",

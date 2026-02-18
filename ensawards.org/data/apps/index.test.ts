@@ -13,9 +13,9 @@ describe("App data", () => {
     const slugArray: string[] = [];
 
     data.forEach((app) => {
-      expect(isValidSlug(app.slug), `Slug={${app.slug}} is not valid`).toEqual(true);
+      expect(isValidSlug(app.appSlug), `Slug={${app.appSlug}} is not valid`).toEqual(true);
 
-      slugArray.push(app.slug);
+      slugArray.push(app.appSlug);
     });
 
     expect(areStringsUnique(slugArray), `Slugs for Apps are not unique`).toEqual(true);

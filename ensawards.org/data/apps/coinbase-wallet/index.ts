@@ -5,7 +5,7 @@ import CoinbaseIcon from "./icon.tsx";
 
 const CoinbaseWallet: App = {
   id: "coinbase-wallet",
-  slug: "coinbase-wallet",
+  appSlug: "coinbase-wallet",
   project: CoinbaseProject,
   name: "Coinbase Wallet",
   description: "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications.",

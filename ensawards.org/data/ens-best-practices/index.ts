@@ -1,4 +1,5 @@
-// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying best practices
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying best practices and best practice categories
 
 import { ContractNamingCategory } from "./contract-naming";
 import { displayNamedSmartContractsL2 } from "./contract-naming/display-named-smart-contracts-l2-chains.ts";

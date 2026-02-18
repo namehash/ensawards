@@ -12,9 +12,12 @@ describe("Best Practices data", () => {
       const slugArray: string[] = [];
 
       categoriesData.forEach((category) => {
-        expect(isValidSlug(category.slug), `Slug={${category.slug}} is not valid`).toEqual(true);
+        expect(
+          isValidSlug(category.categorySlug),
+          `Slug={${category.categorySlug}} is not valid`,
+        ).toEqual(true);
 
-        slugArray.push(category.slug);
+        slugArray.push(category.categorySlug);
       });
 
       expect(
@@ -28,11 +31,12 @@ describe("Best Practices data", () => {
     it("Should have valid and unique slugs", () => {
       const slugArray: string[] = [];
       bestPracticesData.forEach((bestPractice) => {
-        expect(isValidSlug(bestPractice.slug), `Slug={${bestPractice.slug}} is not valid`).toEqual(
-          true,
-        );
+        expect(
+          isValidSlug(bestPractice.bestPracticeSlug),
+          `Slug={${bestPractice.bestPracticeSlug}} is not valid`,
+        ).toEqual(true);
 
-        slugArray.push(bestPractice.slug);
+        slugArray.push(bestPractice.bestPracticeSlug);
       });
 
       expect(areStringsUnique(slugArray), `Slugs for best practices are not unique`).toEqual(true);

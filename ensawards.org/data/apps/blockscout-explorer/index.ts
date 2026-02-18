@@ -5,8 +5,8 @@ import { BlockscoutExplorerBenchmarks } from "./benchmarks.ts";
 import BlockscoutIcon from "./icon.tsx";
 
 const BlockscoutExplorer: App = {
-  id: "blockscout",
-  slug: "blockscout",
+  id: "blockscout-explorer",
+  appSlug: "blockscout-explorer",
   project: BlockscoutProject,
   name: "Blockscout",
   description: "Blockscout is a tool for inspecting and analyzing EVM-based blockchains.",

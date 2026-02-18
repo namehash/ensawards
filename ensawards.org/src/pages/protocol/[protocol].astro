@@ -1,12 +1,7 @@
 ---
-import { ProtocolTypes } from "../../../data/ens-best-practices/types.ts";
 import { PROTOCOLS } from "../../../data/protocols";
-import {
-  getContractNamingScoresByProtocolType,
-  getProtocolBySlug,
-  getProtocolTypeBySlug,
-} from "../../utils/dataAccess";
-import { type Contract } from "../../../data/protocols/contracts-types.ts";
+import { getContractNamingScoresByProtocolType, getProtocolBySlug } from "../../utils/dataAccess";
+import { type Contract } from "../../../data/protocols/contracts-types";
 import { CONTRACTS } from "../../../data/protocols/contracts";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
@@ -28,51 +23,39 @@ import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "../../utils/styles";
-import { type Protocol } from "../../../data/protocols/types.ts";
+import { type Protocol } from "../../../data/protocols/types";
 export function getStaticPaths() {
   const staticPaths = [];
 
-  Object.values(ProtocolTypes).forEach((protocolType) => {
-    const relevantProtocols = PROTOCOLS.filter(
-      (protocol) => protocol.protocolType === protocolType,
-    );
-    relevantProtocols.forEach((protocol) =>
-      staticPaths.push({
-        params: {
-          protocolType: protocolType.toLowerCase(),
-          protocol: protocol.slug,
-        },
-      }),
-    );
-  });
-
+  PROTOCOLS.forEach((protocol) =>
+    staticPaths.push({
+      params: {
+        protocol: protocol.protocolSlug,
+      },
+    }),
+  );
   return staticPaths;
 }
 
-const { protocolType, protocol } = Astro.params;
+const { protocol } = Astro.params;
 
-const resolvedProtocolType = getProtocolTypeBySlug(protocolType);
+const resolvedProtocol = getProtocolBySlug(protocol);
 
 // The default values should never be used. Only introduced for type safety.
-let resolvedProtocol: Protocol | undefined = undefined;
 let protocolContracts: Contract[] = [];
 let protocolScore = 0;
 let ProtocolIcon = GlobeIcon;
 
-if (resolvedProtocolType) {
-  resolvedProtocol = getProtocolBySlug(resolvedProtocolType, protocol);
-}
-
-if (resolvedProtocol && resolvedProtocolType) {
+if (resolvedProtocol) {
   protocolContracts = CONTRACTS.filter((contract) => contract.protocol.id === resolvedProtocol.id);
   ProtocolIcon = resolvedProtocol.icon;
   protocolScore =
-    getContractNamingScoresByProtocolType(resolvedProtocolType)[resolvedProtocol.id] ?? 0;
+    getContractNamingScoresByProtocolType(resolvedProtocol.protocolType)[resolvedProtocol.id] ?? 0;
 }
 ---
 
 {
-  resolvedProtocol === undefined || resolvedProtocolType === undefined ? (
+  resolvedProtocol === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
@@ -80,7 +63,7 @@ if (resolvedProtocol && resolvedProtocolType) {
       pageMetadata={{
         title: `ENSAwards: ${resolvedProtocol.name} ENS Integration Benchmarks`,
         description: resolvedProtocol.description,
-        url: `https://ensawards.org/${resolvedProtocolType.toLowerCase()}/${resolvedProtocol.slug}`,
+        url: `https://ensawards.org/${resolvedProtocol.protocolType.toLowerCase()}/${resolvedProtocol.protocolSlug}`,
         ogImage: resolvedProtocol.ogImagePath,
         twitterImage: resolvedProtocol.twitterOgImagePath,
       }}>
@@ -89,7 +72,7 @@ if (resolvedProtocol && resolvedProtocolType) {
         description={resolvedProtocol.description}
         breadcrumbs={[
           "ENS leaderboards",
-          `${resolvedProtocolType} leaderboard`,
+          `${resolvedProtocol.protocolType} leaderboard`,
         ]}>
         <ProtocolIcon
           slot="icon"
@@ -185,7 +168,7 @@ if (resolvedProtocol && resolvedProtocolType) {
           <div class="w-full h-fit pt-1 sm:pt-8">
             <SuggestionCard
               whatsSuggested="contract"
-              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.slug}-${resolvedProtocolType.toLowerCase()}/contracts.ts`}
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
             />
           </div>
         </ItemsList>

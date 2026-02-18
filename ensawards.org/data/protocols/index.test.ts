@@ -49,23 +49,19 @@ describe("protocols data", () => {
     });
   });
 
-  it("Should have valid and unique slugs for each ProtocolType", () => {
-    const protocolGroups = [DAO_PROTOCOLS, DEFI_PROTOCOLS];
+  it("Should have valid and unique slugs", () => {
+    const slugArray: string[] = [];
 
-    protocolGroups.forEach((protocolTypeData) => {
-      const slugArray: string[] = [];
-
-      protocolTypeData.forEach((protocol) => {
-        expect(isValidSlug(protocol.slug), `Slug={${protocol.slug}} is not valid`).toEqual(true);
-
-        slugArray.push(protocol.slug);
-      });
-
+    data.forEach((protocol) => {
       expect(
-        areStringsUnique(slugArray),
-        `Slugs for ${protocolTypeData[0]?.protocolType ?? "unknown"} protocols are not unique`,
+        isValidSlug(protocol.protocolSlug),
+        `Slug={${protocol.protocolSlug}} is not valid`,
       ).toEqual(true);
+
+      slugArray.push(protocol.protocolSlug);
     });
+
+    expect(areStringsUnique(slugArray), `Slugs for Protocols are not unique`).toEqual(true);
   });
 
   it("In `socials`, `ens`, if defined, must be a non-empty normalized ENS name", () => {

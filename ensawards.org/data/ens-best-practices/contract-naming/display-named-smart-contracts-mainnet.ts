@@ -5,7 +5,7 @@ import { BestPracticeTypes } from "../types.ts";
 export const displayNamedSmartContractsMainnet: BestPracticeApp = {
   type: BestPracticeTypes.App,
   id: "display-named-smart-contracts-mainnet",
-  slug: "display-named-smart-contracts-mainnet",
+  bestPracticeSlug: "display-named-smart-contracts-mainnet",
   name: "Display named smart contracts on Ethereum mainnet",
   description:
     "Display ENS names instead of addresses when users interact with named smart contracts on Ethereum mainnet.",

@@ -46,7 +46,7 @@ export type ProtocolId = (typeof ProtocolIds)[keyof typeof ProtocolIds];
 
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
   id: ProtocolIdT;
-  slug: string; // TODO: rename to protocolSlug to make it more self-documenting
+  protocolSlug: string;
   protocolType: ProtocolT;
   project: Project; // each protocol belongs to a single project.
   name: string;

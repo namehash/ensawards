@@ -19,6 +19,11 @@ export default defineConfig({
     "/benchmarks": "/leaderboards",
     "/benchmarks/[app]": "/app/[app]",
     "/leaderboards/app": "/leaderboards",
+    "/app/blockscout": "/app/blockscout-explorer",
+    "/app/etherscan": "/app/etherscan-explorer",
+    "/app/metamask": "/app/metamask-wallet",
+    "/dao/[...slug]": "/protocol/[...slug]-dao",
+    "/defi/[...slug]": "/protocol/[...slug]-defi",
   },
 
   adapter: vercel(),
