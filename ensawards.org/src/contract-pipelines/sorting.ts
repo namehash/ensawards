@@ -1,8 +1,10 @@
 import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
 import { getProtocolById } from "@/utils/dataAccess.ts";
 
-import type { Contract } from "../../data/protocols/contracts-types.ts";
-import { ContractResolutionStatusIds } from "../../data/protocols/contracts-types.ts";
+import {
+  type Contract,
+  ContractResolutionStatusIds,
+} from "../../data/protocols/contracts-types.ts";
 import type { ProtocolId } from "../../data/protocols/types.ts";
 
 /**

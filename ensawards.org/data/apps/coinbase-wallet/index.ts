@@ -11,7 +11,7 @@ const CoinbaseWallet: App = {
   description: "A self-custodial wallet for accessing DeFi, NFTs, and decentralized applications.",
   type: AppTypes.Wallet,
   socials: {
-    website: new URL("https://www.coinbase.com/learn/wallet"),
+    website: new URL("https://wallet.coinbase.com/"),
     twitter: new URL("https://x.com/coinbase"),
     ens: "coinbase.eth",
   },

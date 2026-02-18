@@ -69,7 +69,6 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
     Object.values(ProtocolTypes).map((protocolType) => {
       const protocolScores =
         getContractNamingScoresByProtocolType(protocolType);
-      const protocolPathParameter = protocolType.toLowerCase();
 
       return (
         <ItemsList
@@ -81,10 +80,10 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
             const ProtocolIcon = protocol.icon;
             return (
               <LeaderboardCard
-                key={`${protocolPathParameter}-leaderboard-card-${protocol.id}`}
+                key={`leaderboard-card-${protocol.protocolSlug}`}
                 name={protocol.name}
                 ensAwardsScore={value}
-                viewDetailsLink={`/${protocolPathParameter}/${protocol.protocolSlug}`}
+                viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
                 viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                 {idx < 3 ? (
                   <Image

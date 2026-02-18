@@ -1,7 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import AaveProject from "../../projects/aave";
-import type { DAOProtocol } from "../types.ts";
-import { DAOProtocolIds } from "../types.ts";
+import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
 import AaveIcon from "./icon.tsx";
 
 const AaveDao: DAOProtocol = {

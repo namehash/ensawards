@@ -25,7 +25,7 @@ async function walk(dir) {
     if (!imageExt.has(ext)) {
       continue;
     }
-    if (!entry.name.toLowerCase().includes("og")) {
+    if (!entry.name.toLowerCase().includes("og.png")) {
       continue;
     }
 
@@ -36,6 +36,10 @@ async function walk(dir) {
     await cp(absolutePath, destinationPath, { force: true });
   }
 }
-
-await walk(sourceRoot);
-console.log("Copied OG images from data/ to public/data/.");
+try {
+  await walk(sourceRoot);
+  console.log("Copied OG images from data/ to public/data/.");
+} catch (err) {
+  console.error("Failed to copy OG images:", err);
+  process.exit(1);
+}

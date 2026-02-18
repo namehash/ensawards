@@ -1,7 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import ArbitrumProject from "../../projects/arbitrum";
-import type { DAOProtocol } from "../types.ts";
-import { DAOProtocolIds } from "../types.ts";
+import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
 import ArbitrumIcon from "./icon.tsx";
 
 const ArbitrumDao: DAOProtocol = {

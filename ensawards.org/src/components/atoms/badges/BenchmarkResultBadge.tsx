@@ -67,11 +67,11 @@ const ensNodeReactConfig = createConfig({
 
 const getResultIcon = (result: BenchmarkResult) => {
   switch (result) {
-    case "Pass":
+    case BenchmarkResult.Pass:
       return <PassIcon width={16} height={16} />;
-    case "Partial pass":
+    case BenchmarkResult.PartialPass:
       return <PartialPassIcon width={16} height={16} />;
-    case "Fail":
+    case BenchmarkResult.Fail:
       return <FailIcon width={16} height={16} />;
   }
 };

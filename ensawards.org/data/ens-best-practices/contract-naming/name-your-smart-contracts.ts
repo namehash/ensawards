@@ -1,5 +1,4 @@
-import type { BestPracticeProtocol } from "../types.ts";
-import { BestPracticeTypes, ProtocolTypes } from "../types.ts";
+import { type BestPracticeProtocol, BestPracticeTypes, ProtocolTypes } from "../types.ts";
 
 export const nameYourSmartContracts: BestPracticeProtocol = {
   type: BestPracticeTypes.Protocol,

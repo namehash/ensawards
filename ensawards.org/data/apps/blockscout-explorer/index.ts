@@ -1,6 +1,5 @@
 import BlockscoutProject from "../../projects/blockscout";
-import type { App } from "../types.ts";
-import { AppTypes } from "../types.ts";
+import { type App, AppTypes } from "../types.ts";
 import BlockscoutExplorerBenchmarks from "./benchmarks.ts";
 import BlockscoutIcon from "./icon.tsx";
 

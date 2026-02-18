@@ -3,8 +3,7 @@ import type { Address } from "viem";
 import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
 
 import { AppTypes } from "../../data/apps/types.ts";
-import type { BestPracticeTarget } from "../../data/ens-best-practices/types.ts";
-import { ProtocolTypes } from "../../data/ens-best-practices/types.ts";
+import { type BestPracticeTarget, ProtocolTypes } from "../../data/ens-best-practices/types.ts";
 
 const CAPITALIZED_ACRONYMS = ["DAO", "DeFi"];
 

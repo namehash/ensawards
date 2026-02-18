@@ -56,7 +56,7 @@ export interface ContractPipelineOptions {
  * and returns a score (in %) achieved by a group of contracts,
  * defined by the provided functions.
  *
- * By default, it operates on the data from /data/contracts-benchmarks-types.ts,
+ * By default, it operates on the data from /data/protocols/contracts.ts,
  * but can also take data from other sources
  */
 export function contractPipeline(

@@ -1,7 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import NounsProject from "../../projects/nouns";
-import type { DAOProtocol } from "../types.ts";
-import { DAOProtocolIds } from "../types.ts";
+import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
 import NounsIcon from "./icon.tsx";
 
 const NounsDao: DAOProtocol = {

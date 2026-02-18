@@ -1,6 +1,5 @@
 import { BenchmarkResult } from "../../data/apps/benchmarks-types.ts";
-import type { ProtocolId } from "../../data/protocols/types.ts";
-import { DeFiProtocolIds } from "../../data/protocols/types.ts";
+import { DeFiProtocolIds, type ProtocolId } from "../../data/protocols/types.ts";
 
 export const getAppSupportColor = (value: number): string =>
   value > 75 ? "emerald-600" : value > 35 ? "amber-600" : "red-600";

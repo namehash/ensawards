@@ -1,6 +1,6 @@
 import type { AccountId, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
-import type { BestPractice } from "../ens-best-practices/types.ts";
+import type { BestPracticeApp } from "../ens-best-practices/types.ts";
 
 export enum BenchmarkResult {
   Pass = "Pass",
@@ -13,7 +13,7 @@ export enum BenchmarkResult {
  */
 export interface AppBenchmark {
   /** The best practice being benchmarked */
-  bestPractice: BestPractice;
+  bestPractice: BestPracticeApp;
   /** The result of the benchmark */
   result: BenchmarkResult;
   /** The account ID of the person who performed the benchmark */

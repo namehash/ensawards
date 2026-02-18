@@ -1,7 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import TaikoProject from "../../projects/taiko";
-import type { DeFiProtocol } from "../types.ts";
-import { DeFiProtocolIds } from "../types.ts";
+import { type DeFiProtocol, DeFiProtocolIds } from "../types.ts";
 import TaikoIcon from "./icon.tsx";
 
 const TaikoDeFi: DeFiProtocol = {

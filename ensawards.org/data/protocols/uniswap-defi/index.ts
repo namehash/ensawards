@@ -1,7 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import UniswapProject from "../../projects/uniswap";
-import type { DeFiProtocol } from "../types.ts";
-import { DeFiProtocolIds } from "../types.ts";
+import { type DeFiProtocol, DeFiProtocolIds } from "../types.ts";
 import UniswapIcon from "./icon.tsx";
 
 const UniswapDeFi: DeFiProtocol = {
