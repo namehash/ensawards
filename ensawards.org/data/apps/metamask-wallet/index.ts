@@ -1,6 +1,6 @@
 import MetaMaskProject from "../../projects/metamask";
 import { type App, AppTypes } from "../types.ts";
-import { MetaMaskWalletBenchmarks } from "./benchmarks.ts";
+import MetaMaskWalletBenchmarks from "./benchmarks.ts";
 import MetaMaskIcon from "./icon.tsx";
 
 const MetaMaskWallet: App = {

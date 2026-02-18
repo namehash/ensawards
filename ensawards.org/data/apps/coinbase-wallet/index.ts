@@ -1,6 +1,6 @@
 import CoinbaseProject from "../../projects/coinbase";
 import { type App, AppTypes } from "../types.ts";
-import { CoinbaseWalletBenchmarks } from "./benchmarks.ts";
+import CoinbaseWalletBenchmarks from "./benchmarks.ts";
 import CoinbaseIcon from "./icon.tsx";
 
 const CoinbaseWallet: App = {

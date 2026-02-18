@@ -1,6 +1,6 @@
 import EtherscanProject from "../../projects/etherscan";
 import { type App, AppTypes } from "../types.ts";
-import { EtherscanExplorerBenchmarks } from "./benchmarks.ts";
+import EtherscanExplorerBenchmarks from "./benchmarks.ts";
 import EtherscanIcon from "./icon.tsx";
 
 const EtherscanExplorer: App = {
