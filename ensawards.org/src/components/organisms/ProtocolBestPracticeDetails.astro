@@ -6,7 +6,6 @@ import {
   ProtocolTypes,
 } from "../../../data/ens-best-practices/types.ts";
 import { type ProtocolId } from "../../../data/protocols/types.ts";
-import { getContractNamingScoresByProtocolType, getProtocolById } from "../../utils/dataAccess";
 import { markdownToHtml } from "../../utils/markdown";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import ContractNamingBanner from "../atoms/ContractNamingBanner.astro";
@@ -16,6 +15,8 @@ import EnscribeIconLight from "../atoms/icons/EnscribeIconLight.astro";
 import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
+import { getProtocolById } from "../../../data/protocols/utils.ts";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
