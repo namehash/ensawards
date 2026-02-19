@@ -1,4 +1,8 @@
-import type { BestPractice, BestPracticeTarget } from "../ens-best-practices/types.ts";
+import type {
+  BestPractice,
+  BestPracticeApp,
+  BestPracticeTarget,
+} from "../ens-best-practices/types.ts";
 import { BenchmarkResult } from "./benchmarks-types.ts";
 import { APPS } from "./index.ts";
 import { type App, type AppType, AppTypes } from "./types.ts";
@@ -13,6 +17,7 @@ const AppTypeSlugMapping = new Map<string, AppType>([
  */
 export const getAppTypeBySlug = (appTypeSlug: string): AppType | undefined =>
   AppTypeSlugMapping.get(appTypeSlug);
+
 /**
  * Returns an {@link App} by {@link App.appSlug}.
  */
@@ -49,6 +54,8 @@ export const calculateAppEnsAwardsScore = (app: App) => {
     }
   }, 0);
 
+  if (app.benchmarks.length === 0) return 0;
+
   return (accumulatedBenchmarks * 100) / app.benchmarks.length;
 };
 
@@ -60,7 +67,7 @@ export const calculateAppEnsAwardsScore = (app: App) => {
  * {@link BenchmarkResult.PartialPass} = 0.5
  * {@link BenchmarkResult.Fail} = 0.0
  */
-export const calculateAppSupport = (bestPractice: BestPractice): number => {
+export const calculateAppSupport = (bestPractice: BestPracticeApp): number => {
   let benchmarkedApps = 0;
   let appSupport = 0;
 
@@ -90,6 +97,8 @@ export const calculateAppSupport = (bestPractice: BestPractice): number => {
         break;
     }
   }
+
+  if (benchmarkedApps === 0) return 0;
 
   return (appSupport * 100) / benchmarkedApps;
 };

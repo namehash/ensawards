@@ -27,5 +27,6 @@ export const getBestPracticeBySlug = (bestPracticeSlug: string): BestPractice | 
 /**
  * Returns an ENS {@link BestPractice} by {@link BestPractice.id}.
  */
-export const getBestPracticeById = (bestPracticeId: string): BestPractice | undefined =>
-  ENS_BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
+export const getBestPracticeById = (bestPracticeId: string): BestPractice | undefined => {
+  return ENS_BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
+};
