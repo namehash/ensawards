@@ -23,7 +23,7 @@ describe("contract pipelines", () => {
         data: CONTRACTS_TEST_DATA,
       });
 
-      for (const [key, values] of Object.entries(result) as [ProtocolId, number][]) {
+      for (const key of Object.keys(result) as ProtocolId[]) {
         expect(result[key]).toEqual(expectedResult[key]);
       }
     });

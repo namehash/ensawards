@@ -89,7 +89,6 @@ export type Protocol = DAOProtocol | DeFiProtocol;
 ```typescript
 export interface Contract {
     protocol: Protocol;
-    type: ContractType;
     cachedIdentity: ContractIdentityResolved;
 }
 ```

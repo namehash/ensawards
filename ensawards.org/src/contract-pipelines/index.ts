@@ -1,10 +1,9 @@
-import type { ProtocolId } from "data/protocols/types.ts";
-
 import { groupByProtocol } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
 
 import { CONTRACTS } from "../../data/protocols/contracts.ts";
 import type { Contract } from "../../data/protocols/contracts-types.ts";
+import type { ProtocolId } from "../../data/protocols/types.ts";
 
 /**
  * Custom sort function type for sorting leaderboard entries.

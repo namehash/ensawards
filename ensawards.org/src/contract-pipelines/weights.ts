@@ -1,9 +1,8 @@
-import type { ProtocolId } from "data/protocols/types.ts";
-
 import {
   type Contract,
   ContractResolutionStatusIds,
 } from "../../data/protocols/contracts-types.ts";
+import type { ProtocolId } from "../../data/protocols/types.ts";
 
 export function binaryWeights(
   groupedContracts: Record<ProtocolId, Contract[]>,

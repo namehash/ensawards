@@ -72,8 +72,8 @@ export function sortProtocolLeaderboard(
       }
 
       // Tie-breaker 2: by display name (alphabetically)
-      const protocolA = getProtocolById(protocolIdA as ProtocolId);
-      const protocolB = getProtocolById(protocolIdB as ProtocolId);
+      const protocolA = getProtocolById(protocolIdA);
+      const protocolB = getProtocolById(protocolIdB);
 
       return protocolA.name.localeCompare(protocolB.name);
     });

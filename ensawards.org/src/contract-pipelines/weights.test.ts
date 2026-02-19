@@ -1,10 +1,10 @@
-import { DAOProtocolIds, DeFiProtocolIds, type ProtocolId } from "data/protocols/types.ts";
 import { describe, expect, it } from "vitest";
 
 import { CONTRACTS_TEST_DATA } from "@/contract-pipelines/contractsTestData.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
 
 import type { Contract } from "../../data/protocols/contracts-types.ts";
+import { DAOProtocolIds, DeFiProtocolIds, type ProtocolId } from "../../data/protocols/types.ts";
 
 describe("weight functions", () => {
   const mockGroupedTestData = {

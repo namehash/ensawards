@@ -2,7 +2,7 @@ import { type ProtocolType, ProtocolTypes } from "../../data/ens-best-practices/
 import { type Contract } from "../../data/protocols/contracts-types.ts";
 
 /**
- * Filters contracts by their type field.
+ * Filters contracts by their protocol's type.
  *
  * This is useful for creating category-specific leaderboards where we want to ensure
  * we're comparing apples to apples. For example, on the DAO leaderboard, we only want

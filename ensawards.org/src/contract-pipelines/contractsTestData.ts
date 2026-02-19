@@ -293,7 +293,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         chain: mainnet,
         codeName: "Project3NamedContract1",
       },
-      name: "name.p3c2.eth",
+      name: "name.p3c1.eth",
     },
   },
   {
