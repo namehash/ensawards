@@ -14,17 +14,6 @@ export const ContractTypes = {
  */
 export type ContractType = (typeof ContractTypes)[keyof typeof ContractTypes];
 
-export const ContractSubtypes = {
-  Governance: "Governance",
-  DeFiApp: "DeFi App",
-  Utility: "Utility",
-} as const;
-
-/**
- * ContractSubtype is the derived string union of {@link ContractSubtypes}.
- */
-export type ContractSubtype = (typeof ContractSubtypes)[keyof typeof ContractSubtypes];
-
 export interface ContractAudit {
   /**
    * Auditor's name.
@@ -243,7 +232,6 @@ export type ContractIdentity = ContractIdentityResolved | ContractIdentityUnreso
 export interface Contract {
   protocol: Protocol;
   type: ContractType;
-  subtype: ContractSubtype;
 
   /**
    * The cached resolution result of the contract's ENS identity.

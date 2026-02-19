@@ -1,11 +1,7 @@
-import type {
-  Contract,
-  ContractSubtype,
-  ContractType,
-} from "../../data/protocols/contracts-types.ts";
+import type { Contract, ContractType } from "../../data/protocols/contracts-types.ts";
 import type { ProtocolId } from "../../data/protocols/types.ts";
 
-export type SupportedGroupByCategory = ProtocolId | ContractType | ContractSubtype;
+export type SupportedGroupByCategory = ProtocolId | ContractType;
 
 export function groupByProtocol(
   contracts: Contract[],
