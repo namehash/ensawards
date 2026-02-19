@@ -108,7 +108,7 @@ export const calculateAppSupport = (bestPractice: BestPracticeApp): number => {
  *
  * For now, both {@link BenchmarkResult.Pass} and {@link BenchmarkResult.PartialPass} are treated as a pass.
  */
-export const calculateAppsPassed = (bestPractice: BestPractice): number => {
+export const calculateAppsPassed = (bestPractice: BestPracticeApp): number => {
   let appsPassed = 0;
 
   APPS.forEach((app) => {
