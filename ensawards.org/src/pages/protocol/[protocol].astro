@@ -1,6 +1,5 @@
 ---
 import { PROTOCOLS } from "../../../data/protocols";
-import { getContractNamingScoresByProtocolType, getProtocolBySlug } from "../../utils/dataAccess";
 import { type Contract } from "../../../data/protocols/contracts-types";
 import { CONTRACTS } from "../../../data/protocols/contracts";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
@@ -24,6 +23,9 @@ import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "../../utils/styles";
 import { type Protocol } from "../../../data/protocols/types";
+import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
+import { getProtocolBySlug } from "../../../data/protocols/utils.ts";
+
 export function getStaticPaths() {
   const staticPaths = [];
 

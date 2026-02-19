@@ -1,13 +1,11 @@
 ---
 import { BestPracticeTarget } from "../../../../data/ens-best-practices/types.ts";
-import {
-  appliesToAllApps,
-  appliesToAllProtocols,
-  getBestPracticeById,
-} from "../../../utils/dataAccess";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { pluralizeBestPracticeTarget } from "../../../utils/textModifications";
+import { appliesToAllProtocols } from "../../../../data/protocols/utils.ts";
+import { appliesToAllApps } from "../../../../data/apps/utils.ts";
+import { getBestPracticeById } from "../../../../data/ens-best-practices/utils.ts";
 export interface BestPracticeCardProps {
   id: string;
   name: string;

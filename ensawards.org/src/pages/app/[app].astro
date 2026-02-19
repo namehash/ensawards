@@ -12,8 +12,8 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
 import { APPS } from "../../../data/apps";
 import Layout from "../../layouts/Layout.astro";
-import { calculateAppEnsAwardsScore, getAppBySlug } from "../../utils/dataAccess";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
+import { calculateAppEnsAwardsScore, getAppBySlug } from "../../../data/apps/utils.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));

@@ -8,8 +8,8 @@ import DataLoadingError from "../../components/organisms/DataLoadingError.astro"
 import { APPS } from "../../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppTypes } from "../../../data/apps/types.ts";
-import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "../../utils/dataAccess";
 import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
+import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "../../../data/apps/utils.ts";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({

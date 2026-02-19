@@ -2,7 +2,6 @@
 import { APPS } from "../../../data/apps";
 import { BenchmarkResult } from "../../../data/apps/benchmarks-types.ts";
 import type { BestPracticeApp } from "../../../data/ens-best-practices/types.ts";
-import { calculateAppSupport, calculateAppsPassed } from "../../utils/dataAccess";
 import { markdownToHtml } from "../../utils/markdown";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../utils/styles";
 import { cn } from "../../utils/tailwindClassConcatenation";
@@ -10,6 +9,7 @@ import { BenchmarkResultBadge } from "../atoms/badges/BenchmarkResultBadge";
 import BenchmarkResultCard from "../atoms/cards/BenchmarkResultCard.astro";
 import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
+import { calculateAppsPassed, calculateAppSupport } from "../../../data/apps/utils.ts";
 
 export interface AppBestPracticeDetailsProps {
   bestPractice: BestPracticeApp;

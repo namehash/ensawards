@@ -28,10 +28,11 @@ import { FrequentlyAskedQuestions } from "../components/molecules/FrequentlyAske
 import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import Layout from "../layouts/Layout.astro";
 import { type ProtocolId } from "../../data/protocols/types.ts";
-import { getContractNamingScoresByProtocolType, getProtocolById } from "../utils/dataAccess";
 import { cn } from "../utils/tailwindClassConcatenation";
 import { ProtocolTypes } from "../../data/ens-best-practices/types.ts";
 import { pluralizeBestPracticeTarget } from "../utils/textModifications";
+import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
+import { getProtocolById } from "../../data/protocols/utils.ts";
 
 interface ContentItemData {
   name: string;
