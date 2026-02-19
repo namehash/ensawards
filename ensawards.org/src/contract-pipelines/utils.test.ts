@@ -26,12 +26,23 @@ describe("getContractNamingScoresByProtocolType", () => {
     ]);
 
     for (const protocolType of Object.values(ProtocolTypes)) {
-      const expectedResult = expectedResultMapping.get(protocolType)!;
+      const expectedResult = expectedResultMapping.get(protocolType);
       const result = getContractNamingScoresByProtocolType(protocolType, data);
 
-      expect(result, `Result is not valid for ProtocolType={${protocolType}}`).toEqual(
+      expect(
         expectedResult,
+        `No expected result defined in the test for ProtocolType={${protocolType}}`,
+      ).toBeDefined();
+
+      expect(result, `Result is not valid for ProtocolType={${protocolType}}`).toEqual(
+        expectedResult!,
       );
     }
+  });
+
+  it("Throws for an unregistered ProtocolType", () => {
+    expect(() =>
+      getContractNamingScoresByProtocolType("unregistered-type" as ProtocolType, data),
+    ).toThrow("No contract pipeline filter registered for ProtocolType: unregistered-type");
   });
 });
