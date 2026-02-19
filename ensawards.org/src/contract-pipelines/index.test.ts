@@ -39,9 +39,9 @@ describe("contract pipelines", () => {
       // ENS DAO (80%) should be first,
       // Liquity DeFi Protocol (60%) should be second,
       // and Uniswap DAO (30%) should be third
-      expect(keys[0]).toBe("protocol-ens-dao");
-      expect(keys[1]).toBe("protocol-liquity-defi");
-      expect(keys[2]).toBe("protocol-uniswap-dao");
+      expect(keys[0]).toBe(DAOProtocolIds.EnsDao);
+      expect(keys[1]).toBe(DeFiProtocolIds.Liquity);
+      expect(keys[2]).toBe(DAOProtocolIds.UniswapDao);
     });
   });
 
@@ -65,11 +65,11 @@ describe("contract pipelines", () => {
       });
       const keys = Object.keys(result);
 
-      // With reverse alphabetical sort, "protocol-uniswap-dao" should come before
-      // "protocol-liquity-defi" and "protocol-ens-dao"
-      expect(keys[0]).toBe("protocol-uniswap-dao");
-      expect(keys[1]).toBe("protocol-liquity-defi");
-      expect(keys[2]).toBe("protocol-ens-dao");
+      // With reverse alphabetical sort, DAOProtocolIds.UniswapDao should come before
+      // DeFiProtocolIds.Liquity and DAOProtocolIds.EnsDao
+      expect(keys[0]).toBe(DAOProtocolIds.UniswapDao);
+      expect(keys[1]).toBe(DeFiProtocolIds.Liquity);
+      expect(keys[2]).toBe(DAOProtocolIds.EnsDao);
     });
 
     it("should pass scores and grouped contracts to custom sort function", () => {
@@ -94,12 +94,12 @@ describe("contract pipelines", () => {
       // Verify the sort function received the expected data
       expect(receivedScores).not.toBeNull();
       expect(receivedGroupedContracts).not.toBeNull();
-      expect(receivedScores?.["protocol-ens-dao"]).toBe(80);
-      expect(receivedScores?.["protocol-liquity-defi"]).toBe(60);
-      expect(receivedScores?.["protocol-uniswap-dao"]).toBe(30);
-      expect(receivedGroupedContracts?.["protocol-ens-dao"]).toHaveLength(10);
-      expect(receivedGroupedContracts?.["protocol-liquity-defi"]).toHaveLength(10);
-      expect(receivedGroupedContracts?.["protocol-uniswap-dao"]).toHaveLength(10);
+      expect(receivedScores?.[DAOProtocolIds.EnsDao]).toBe(80);
+      expect(receivedScores?.[DeFiProtocolIds.Liquity]).toBe(60);
+      expect(receivedScores?.[DAOProtocolIds.UniswapDao]).toBe(30);
+      expect(receivedGroupedContracts?.[DAOProtocolIds.EnsDao]).toHaveLength(10);
+      expect(receivedGroupedContracts?.[DeFiProtocolIds.Liquity]).toHaveLength(10);
+      expect(receivedGroupedContracts?.[DAOProtocolIds.UniswapDao]).toHaveLength(10);
     });
   });
 });
