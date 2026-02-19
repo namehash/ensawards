@@ -3,15 +3,14 @@ import { mainnet } from "viem/chains";
 import {
   type Contract,
   ContractResolutionStatusIds,
-  ContractTypes,
 } from "../../data/protocols/contracts-types.ts";
 import ENSDao from "../../data/protocols/ens-dao";
+import LiquityDefi from "../../data/protocols/liquity-defi";
 import UniswapDao from "../../data/protocols/uniswap-dao";
 
 export const CONTRACTS_TEST_DATA: Contract[] = [
   {
     protocol: ENSDao,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -23,7 +22,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -35,7 +33,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -48,7 +45,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -61,7 +57,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -74,7 +69,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -87,7 +81,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -100,7 +93,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -113,7 +105,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -126,7 +117,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -139,7 +129,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -151,7 +140,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -163,7 +151,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -175,7 +162,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -187,7 +173,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -199,7 +184,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -211,7 +195,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -223,7 +206,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -236,7 +218,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -249,7 +230,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -258,6 +238,122 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project2ForwardNamedContract1",
       },
       name: "forward.name.p2c1.eth",
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000020",
+        chain: mainnet,
+        codeName: "Project3UnnamedContract1",
+      },
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000021",
+        chain: mainnet,
+        codeName: "Project3UnnamedContract2",
+      },
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000022",
+        chain: mainnet,
+        codeName: "Project3UnnamedContract3",
+      },
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.Unnamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000023",
+        chain: mainnet,
+        codeName: "Project3UnnamedContract4",
+      },
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000024",
+        chain: mainnet,
+        codeName: "Project3NamedContract1",
+      },
+      name: "name.p3c2.eth",
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000025",
+        chain: mainnet,
+        codeName: "Project3NamedContract2",
+      },
+      name: "name.p3c2.eth",
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000026",
+        chain: mainnet,
+        codeName: "Project3NamedContract3",
+      },
+      name: "name.p3c3.eth",
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000027",
+        chain: mainnet,
+        codeName: "Project3NamedContract4",
+      },
+      name: "name.p3c4.eth",
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000028",
+        chain: mainnet,
+        codeName: "Project3NamedContract5",
+      },
+      name: "name.p3c5.eth",
+    },
+  },
+  {
+    protocol: LiquityDefi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      contract: {
+        address: "0x0000000000000000000000000000000000000029",
+        chain: mainnet,
+        codeName: "Project3ForwardNamedContract1",
+      },
+      name: "forward.name.p3c1.eth",
     },
   },
 ];

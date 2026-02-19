@@ -3,13 +3,12 @@
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "../contracts-types.ts";
-import { ContractResolutionStatusIds, ContractTypes } from "../contracts-types.ts";
+import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import ENSDao from ".";
 
 const contracts: Contract[] = [
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -22,7 +21,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -35,7 +33,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -48,7 +45,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -61,7 +57,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -74,7 +69,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -87,7 +81,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ENSDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {

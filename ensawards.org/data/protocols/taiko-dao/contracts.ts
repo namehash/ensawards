@@ -3,13 +3,12 @@
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "../contracts-types.ts";
-import { ContractResolutionStatusIds, ContractTypes } from "../contracts-types.ts";
+import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import TaikoDao from ".";
 
 const contracts: Contract[] = [
   {
     protocol: TaikoDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -22,7 +21,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -38,7 +36,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -50,7 +47,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {

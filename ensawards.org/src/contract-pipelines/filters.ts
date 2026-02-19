@@ -1,8 +1,5 @@
-import {
-  type Contract,
-  type ContractType,
-  ContractTypes,
-} from "../../data/protocols/contracts-types.ts";
+import { type ProtocolType, ProtocolTypes } from "../../data/ens-best-practices/types.ts";
+import { type Contract } from "../../data/protocols/contracts-types.ts";
 
 /**
  * Filters contracts by their type field.
@@ -12,27 +9,27 @@ import {
  * to include contracts that are DAO-related (governance, treasury, etc.) and exclude
  * DeFi protocol contracts, even if they belong to the same project the DAO is associated with.
  *
- * @param contractType - The type of contracts to include (e.g., ContractTypes.DAO)
+ * @param protocolType - The type of protocols whose contracts we want to include (e.g., ProtocolTypes.DAO)
  * @returns A filter function that can be passed to contractPipeline
  */
-export function filterByContractType(contractType: ContractType) {
+export function filterByProtocolType(protocolType: ProtocolType) {
   return (contracts: Contract[]): Contract[] => {
-    return contracts.filter((contract) => contract.type === contractType);
+    return contracts.filter((contract) => contract.protocol.protocolType === protocolType);
   };
 }
 
 /**
  * Pre-configured filter for DAO contracts only.
  *
- * Use this filter when building DAO leaderboards to ensure only DAO governance
- * contracts are included in the scoring calculations.
+ * Use this filter when building DAO leaderboards to ensure only the
+ * contracts of DAO protocols are included in the scoring calculations.
  */
-export const daoContractsOnly = filterByContractType(ContractTypes.DAO);
+export const daoContractsOnly = filterByProtocolType(ProtocolTypes.DAO);
 
 /**
  * Pre-configured filter for DeFi contracts only.
  *
- * Use this filter when building DeFi protocol leaderboards to ensure only
- * DeFi protocol contracts are included in the scoring calculations.
+ * Use this filter when building DeFi protocol leaderboards to ensure only the
+ * contracts of DeFi protocols are included in the scoring calculations.
  */
-export const defiContractsOnly = filterByContractType(ContractTypes.DeFi);
+export const defiContractsOnly = filterByProtocolType(ProtocolTypes.DeFi);

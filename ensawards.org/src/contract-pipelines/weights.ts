@@ -1,4 +1,4 @@
-import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
+import type { ProtocolId } from "data/protocols/types.ts";
 
 import {
   type Contract,
@@ -6,14 +6,11 @@ import {
 } from "../../data/protocols/contracts-types.ts";
 
 export function binaryWeights(
-  groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
-): Record<SupportedGroupByCategory, number[]> {
-  const weightedContracts = {} as Record<SupportedGroupByCategory, number[]>;
+  groupedContracts: Record<ProtocolId, Contract[]>,
+): Record<ProtocolId, number[]> {
+  const weightedContracts = {} as Record<ProtocolId, number[]>;
 
-  for (const [key, values] of Object.entries(groupedContracts) as [
-    SupportedGroupByCategory,
-    Contract[],
-  ][]) {
+  for (const [key, values] of Object.entries(groupedContracts) as [ProtocolId, Contract[]][]) {
     // Verification of the `cachedIdentity.resolutionStatus` field is enough because then
     // the `name` field has to be defined and valid
     weightedContracts[key] = values.map((contract) =>

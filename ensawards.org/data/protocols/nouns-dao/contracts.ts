@@ -3,13 +3,12 @@
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "../contracts-types.ts";
-import { ContractResolutionStatusIds, ContractTypes } from "../contracts-types.ts";
+import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import NounsDao from ".";
 
 const contracts: Contract[] = [
   {
     protocol: NounsDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "auction.nouns.eth",
@@ -22,7 +21,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "candidates.nouns.eth",
@@ -35,7 +33,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "delegations.nouns.eth",
@@ -48,7 +45,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "proposals.nouns.eth",
@@ -61,7 +57,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "rewards.nouns.eth",
@@ -74,7 +69,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "traits.nouns.eth",
@@ -87,7 +81,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -100,7 +93,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: NounsDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "streams.nouns.eth",

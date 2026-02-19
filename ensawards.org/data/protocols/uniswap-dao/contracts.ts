@@ -3,13 +3,12 @@
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "../contracts-types.ts";
-import { ContractResolutionStatusIds, ContractTypes } from "../contracts-types.ts";
+import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import UniswapDao from ".";
 
 const contracts: Contract[] = [
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "uni.uniswap.eth",
@@ -22,7 +21,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -35,7 +33,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "governance.uniswap.eth",
@@ -48,7 +45,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -60,7 +56,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -72,7 +67,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -84,7 +78,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -96,7 +89,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -108,7 +100,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -120,7 +111,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDao,
-    type: ContractTypes.DAO,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {

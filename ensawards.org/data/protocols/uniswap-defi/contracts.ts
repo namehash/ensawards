@@ -3,13 +3,12 @@
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "../contracts-types.ts";
-import { ContractResolutionStatusIds, ContractTypes } from "../contracts-types.ts";
+import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import UniswapDeFi from ".";
 
 const contracts: Contract[] = [
   {
     protocol: UniswapDeFi,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -21,7 +20,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDeFi,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -33,7 +31,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDeFi,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -45,7 +42,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDeFi,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -57,7 +53,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDeFi,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -69,7 +64,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDeFi,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -81,7 +75,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: UniswapDeFi,
-    type: ContractTypes.DeFi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {

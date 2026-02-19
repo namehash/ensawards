@@ -1,5 +1,3 @@
-import type { SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
-
 import {
   type Contract,
   ContractResolutionStatusIds,
@@ -54,14 +52,11 @@ export function sortByResolutionStatus(contracts: Contract[]): Contract[] {
  * @returns An array of [protocolId, score] tuples in the desired sort order
  */
 export function sortProtocolLeaderboard(
-  scores: Record<SupportedGroupByCategory, number>,
-  groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
-): [SupportedGroupByCategory, number][] {
+  scores: Record<ProtocolId, number>,
+  groupedContracts: Record<ProtocolId, Contract[]>,
+): [ProtocolId, number][] {
   return Object.entries(scores)
-    .map(
-      ([protocolId, score]) =>
-        [protocolId as SupportedGroupByCategory, score] as [SupportedGroupByCategory, number],
-    )
+    .map(([protocolId, score]) => [protocolId as ProtocolId, score] as [ProtocolId, number])
     .sort(([protocolIdA, scoreA], [protocolIdB, scoreB]) => {
       // Primary sort: by score (descending)
       if (scoreA !== scoreB) {
