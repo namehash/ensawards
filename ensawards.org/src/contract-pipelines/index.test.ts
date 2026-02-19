@@ -1,19 +1,21 @@
 import { describe, expect, it } from "vitest";
 
 import { CONTRACTS_TEST_DATA } from "@/contract-pipelines/contractsTestData.ts";
-import { groupByProtocol, type SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
+import { groupByProtocol } from "@/contract-pipelines/group-by.ts";
 import { contractPipeline, type LeaderboardSortFn } from "@/contract-pipelines/index.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
 
 import type { Contract } from "../../data/protocols/contracts-types.ts";
+import { DAOProtocolIds, DeFiProtocolIds, type ProtocolId } from "../../data/protocols/types.ts";
 
 describe("contract pipelines", () => {
   describe("default pipeline", () => {
     it("should return correct scores for both projects", () => {
       const expectedResult = {
-        "protocol-ens-dao": 80,
-        "protocol-uniswap-dao": 30,
-      } as Record<SupportedGroupByCategory, number>;
+        [DAOProtocolIds.EnsDao]: 80,
+        [DeFiProtocolIds.Liquity]: 60,
+        [DAOProtocolIds.UniswapDao]: 30,
+      } as Record<ProtocolId, number>;
 
       const result = contractPipeline({
         groupBy: groupByProtocol,
@@ -21,7 +23,7 @@ describe("contract pipelines", () => {
         data: CONTRACTS_TEST_DATA,
       });
 
-      for (const [key, values] of Object.entries(result) as [SupportedGroupByCategory, number][]) {
+      for (const key of Object.keys(result) as ProtocolId[]) {
         expect(result[key]).toEqual(expectedResult[key]);
       }
     });
@@ -34,9 +36,12 @@ describe("contract pipelines", () => {
       });
       const keys = Object.keys(result);
 
-      // ENS DAO (80%) should be first, Uniswap DAO (30%) should be second
-      expect(keys[0]).toBe("protocol-ens-dao");
-      expect(keys[1]).toBe("protocol-uniswap-dao");
+      // ENS DAO (80%) should be first,
+      // Liquity DeFi Protocol (60%) should be second,
+      // and Uniswap DAO (30%) should be third
+      expect(keys[0]).toBe(DAOProtocolIds.EnsDao);
+      expect(keys[1]).toBe(DeFiProtocolIds.Liquity);
+      expect(keys[2]).toBe(DAOProtocolIds.UniswapDao);
     });
   });
 
@@ -44,14 +49,11 @@ describe("contract pipelines", () => {
     it("should use custom sort function when provided", () => {
       // Custom sort that reverses alphabetical order
       const customSort: LeaderboardSortFn = (
-        scores: Record<SupportedGroupByCategory, number>,
-        _groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
+        scores: Record<ProtocolId, number>,
+        _groupedContracts: Record<ProtocolId, Contract[]>,
       ) => {
         return Object.entries(scores)
-          .map(
-            ([key, value]) =>
-              [key as SupportedGroupByCategory, value] as [SupportedGroupByCategory, number],
-          )
+          .map(([key, value]) => [key as ProtocolId, value] as [ProtocolId, number])
           .sort(([keyA], [keyB]) => keyB.localeCompare(keyA));
       };
 
@@ -63,21 +65,22 @@ describe("contract pipelines", () => {
       });
       const keys = Object.keys(result);
 
-      // With reverse alphabetical sort, "protocol-uniswap-dao" should come before "protocol-ens-dao"
-      expect(keys[0]).toBe("protocol-uniswap-dao");
-      expect(keys[1]).toBe("protocol-ens-dao");
+      // With reverse alphabetical sort, DAOProtocolIds.UniswapDao should come before
+      // DeFiProtocolIds.Liquity and DAOProtocolIds.EnsDao
+      expect(keys[0]).toBe(DAOProtocolIds.UniswapDao);
+      expect(keys[1]).toBe(DeFiProtocolIds.Liquity);
+      expect(keys[2]).toBe(DAOProtocolIds.EnsDao);
     });
 
     it("should pass scores and grouped contracts to custom sort function", () => {
-      let receivedScores: Record<SupportedGroupByCategory, number> | null = null;
-      let receivedGroupedContracts: Record<SupportedGroupByCategory, Contract[]> | null = null;
+      let receivedScores: Record<ProtocolId, number> | null = null;
+      let receivedGroupedContracts: Record<ProtocolId, Contract[]> | null = null;
 
       const customSort: LeaderboardSortFn = (scores, groupedContracts) => {
         receivedScores = scores;
         receivedGroupedContracts = groupedContracts;
         return Object.entries(scores).map(
-          ([key, value]) =>
-            [key as SupportedGroupByCategory, value] as [SupportedGroupByCategory, number],
+          ([key, value]) => [key as ProtocolId, value] as [ProtocolId, number],
         );
       };
 
@@ -91,10 +94,12 @@ describe("contract pipelines", () => {
       // Verify the sort function received the expected data
       expect(receivedScores).not.toBeNull();
       expect(receivedGroupedContracts).not.toBeNull();
-      expect(receivedScores?.["protocol-ens-dao"]).toBe(80);
-      expect(receivedScores?.["protocol-uniswap-dao"]).toBe(30);
-      expect(receivedGroupedContracts?.["protocol-ens-dao"]).toHaveLength(10);
-      expect(receivedGroupedContracts?.["protocol-uniswap-dao"]).toHaveLength(10);
+      expect(receivedScores?.[DAOProtocolIds.EnsDao]).toBe(80);
+      expect(receivedScores?.[DeFiProtocolIds.Liquity]).toBe(60);
+      expect(receivedScores?.[DAOProtocolIds.UniswapDao]).toBe(30);
+      expect(receivedGroupedContracts?.[DAOProtocolIds.EnsDao]).toHaveLength(10);
+      expect(receivedGroupedContracts?.[DeFiProtocolIds.Liquity]).toHaveLength(10);
+      expect(receivedGroupedContracts?.[DAOProtocolIds.UniswapDao]).toHaveLength(10);
     });
   });
 });

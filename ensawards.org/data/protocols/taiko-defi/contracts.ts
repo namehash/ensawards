@@ -3,18 +3,12 @@
 import { mainnet } from "viem/chains";
 
 import type { Contract } from "../contracts-types.ts";
-import {
-  ContractResolutionStatusIds,
-  ContractSubtypes,
-  ContractTypes,
-} from "../contracts-types.ts";
+import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import TaikoDeFi from ".";
 
 const contracts: Contract[] = [
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -26,8 +20,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -40,8 +32,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -54,8 +44,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -67,8 +55,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -81,8 +67,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -95,8 +79,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -109,8 +91,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -122,8 +102,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -135,8 +113,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -148,8 +124,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
@@ -162,8 +136,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -175,8 +147,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -188,8 +158,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -201,8 +169,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -214,8 +180,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -227,8 +191,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -240,8 +202,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -253,8 +213,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -266,8 +224,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -279,8 +235,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -292,8 +246,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -305,8 +257,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -318,8 +268,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -331,8 +279,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -344,8 +290,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -357,8 +301,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: TaikoDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {

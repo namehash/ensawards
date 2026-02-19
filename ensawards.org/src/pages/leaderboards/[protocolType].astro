@@ -9,7 +9,6 @@ import Layout from "../../layouts/Layout.astro";
 import LeaderboardCard from "../../components/atoms/cards/LeaderboardCard.astro";
 import { Image } from "astro:assets";
 import ItemsList from "../../components/molecules/ItemsList.astro";
-import type { SupportedGroupByCategory } from "../../contract-pipelines/group-by";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById, getProtocolTypeBySlug } from "../../../data/protocols/utils.ts";
 
@@ -33,10 +32,7 @@ const resolvedProtocolType = getProtocolTypeBySlug(protocolType);
 // The default values should never be used. Only introduced for type safety.
 let normalizedProtocolType = "-";
 let pluralizedBestPracticeTarget = "-";
-let protocolScores: Record<SupportedGroupByCategory, number> = {} as Record<
-  SupportedGroupByCategory,
-  number
->;
+let protocolScores: Record<ProtocolId, number> = {} as Record<ProtocolId, number>;
 
 if (resolvedProtocolType) {
   normalizedProtocolType = resolvedProtocolType.toLowerCase();

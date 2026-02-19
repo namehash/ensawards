@@ -1,8 +1,9 @@
-import { groupByProtocol, type SupportedGroupByCategory } from "@/contract-pipelines/group-by.ts";
+import { groupByProtocol } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
 
 import { CONTRACTS } from "../../data/protocols/contracts.ts";
 import type { Contract } from "../../data/protocols/contracts-types.ts";
+import type { ProtocolId } from "../../data/protocols/types.ts";
 
 /**
  * Custom sort function type for sorting leaderboard entries.
@@ -12,9 +13,9 @@ import type { Contract } from "../../data/protocols/contracts-types.ts";
  * @returns An array of [category, score] tuples in the desired sort order
  */
 export type LeaderboardSortFn = (
-  scores: Record<SupportedGroupByCategory, number>,
-  groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
-) => [SupportedGroupByCategory, number][];
+  scores: Record<ProtocolId, number>,
+  groupedContracts: Record<ProtocolId, Contract[]>,
+) => [ProtocolId, number][];
 
 /**
  * Options for configuring the contract pipeline.
@@ -24,15 +25,13 @@ export interface ContractPipelineOptions {
    * Function to group contracts by category.
    * @default groupByProtocol
    */
-  groupBy?: (contracts: Contract[]) => Record<SupportedGroupByCategory, Contract[]>;
+  groupBy?: (contracts: Contract[]) => Record<ProtocolId, Contract[]>;
 
   /**
    * Function to apply weights to grouped contracts.
    * @default binaryWeights
    */
-  weights?: (
-    groupedContracts: Record<SupportedGroupByCategory, Contract[]>,
-  ) => Record<SupportedGroupByCategory, number[]>;
+  weights?: (groupedContracts: Record<ProtocolId, Contract[]>) => Record<ProtocolId, number[]>;
 
   /**
    * Function to filter contracts before processing.
@@ -61,7 +60,7 @@ export interface ContractPipelineOptions {
  */
 export function contractPipeline(
   options: ContractPipelineOptions = {},
-): Record<SupportedGroupByCategory, number> {
+): Record<ProtocolId, number> {
   const {
     groupBy = groupByProtocol,
     weights = binaryWeights,
@@ -81,13 +80,10 @@ export function contractPipeline(
   const groupedContracts = groupBy(contracts);
   const weightedContracts = weights(groupedContracts);
 
-  const scores = {} as Record<SupportedGroupByCategory, number>;
+  const scores = {} as Record<ProtocolId, number>;
 
   // Count scores in % for weighted results
-  for (const [key, values] of Object.entries(weightedContracts) as [
-    SupportedGroupByCategory,
-    number[],
-  ][]) {
+  for (const [key, values] of Object.entries(weightedContracts) as [ProtocolId, number[]][]) {
     scores[key] =
       values.length > 0
         ? Math.round((values.reduce((sum, v) => sum + v, 0) * 100) / values.length)
@@ -95,19 +91,17 @@ export function contractPipeline(
   }
 
   // Sort results
-  const sortedScores = {} as Record<SupportedGroupByCategory, number>;
+  const sortedScores = {} as Record<ProtocolId, number>;
 
-  let sortedEntries: [SupportedGroupByCategory, number][];
+  let sortedEntries: [ProtocolId, number][];
   if (sort) {
     // Use custom sort function if provided
     sortedEntries = sort(scores, groupedContracts);
   } else {
     // Default sort: descending by score only
     sortedEntries = Object.keys(scores)
-      .sort((idA, idB) =>
-        scores[idA as SupportedGroupByCategory] > scores[idB as SupportedGroupByCategory] ? -1 : 1,
-      )
-      .map((key) => [key as SupportedGroupByCategory, scores[key as SupportedGroupByCategory]]);
+      .sort((idA, idB) => (scores[idA as ProtocolId] > scores[idB as ProtocolId] ? -1 : 1))
+      .map((key) => [key as ProtocolId, scores[key as ProtocolId]]);
   }
 
   sortedEntries.forEach(([key, value]) => {

@@ -3,18 +3,12 @@
 import { arbitrum, mainnet } from "viem/chains";
 
 import type { Contract } from "../contracts-types.ts";
-import {
-  ContractResolutionStatusIds,
-  ContractSubtypes,
-  ContractTypes,
-} from "../contracts-types.ts";
+import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import ArbitrumDao from ".";
 
 const contracts: Contract[] = [
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -26,8 +20,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -39,8 +31,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -52,8 +42,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -65,8 +53,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -78,8 +64,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -91,8 +75,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -104,8 +86,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -117,8 +97,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -130,8 +108,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -143,8 +119,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -156,8 +130,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -169,8 +141,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -182,8 +152,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -195,8 +163,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -208,8 +174,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -221,8 +185,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -234,8 +196,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -247,8 +207,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -260,8 +218,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -273,8 +229,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -286,8 +240,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: ArbitrumDao,
-    type: ContractTypes.DAO,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {

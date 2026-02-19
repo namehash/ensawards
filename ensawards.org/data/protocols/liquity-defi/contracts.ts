@@ -3,18 +3,12 @@
 import { arbitrum, base, mainnet, optimism, scroll } from "viem/chains";
 
 import type { Contract } from "../contracts-types.ts";
-import {
-  ContractResolutionStatusIds,
-  ContractSubtypes,
-  ContractTypes,
-} from "../contracts-types.ts";
+import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import LiquityDeFi from ".";
 
 const contracts: Contract[] = [
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -27,8 +21,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -40,8 +32,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -53,8 +43,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -66,8 +54,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Utility,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -79,8 +65,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -93,8 +77,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -106,8 +88,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -119,8 +99,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -132,8 +110,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -145,8 +121,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -158,8 +132,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -171,8 +143,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -185,8 +155,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -198,8 +166,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -211,8 +177,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -224,8 +188,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -238,8 +200,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -252,8 +212,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -266,8 +224,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -279,8 +235,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -292,8 +246,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -305,8 +257,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -318,8 +268,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -332,8 +280,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -345,8 +291,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -358,8 +302,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -371,8 +313,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -385,8 +325,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -398,8 +336,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -411,8 +347,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -424,8 +358,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -438,8 +370,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -452,8 +382,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -466,8 +394,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -479,8 +405,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -492,8 +416,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -505,8 +427,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -518,8 +438,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -532,8 +450,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -545,8 +461,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -558,8 +472,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -571,8 +483,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -585,8 +495,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -598,8 +506,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -611,8 +517,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -624,8 +528,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -638,8 +540,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -652,8 +552,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -666,8 +564,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -679,8 +575,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -692,8 +586,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -705,8 +597,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -718,8 +608,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.DeFiApp,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -732,8 +620,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -746,8 +632,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -759,8 +643,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -772,8 +654,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -785,8 +665,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -798,8 +676,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -811,8 +687,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -824,8 +698,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
@@ -837,8 +709,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
@@ -851,8 +721,6 @@ const contracts: Contract[] = [
   },
   {
     protocol: LiquityDeFi,
-    type: ContractTypes.DeFi,
-    subtype: ContractSubtypes.Governance,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
