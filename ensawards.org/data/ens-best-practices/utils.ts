@@ -30,3 +30,10 @@ export const getBestPracticeBySlug = (bestPracticeSlug: string): BestPractice | 
 export const getBestPracticeById = (bestPracticeId: string): BestPractice | undefined => {
   return ENS_BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
 };
+
+/**
+ * Returns all {@link BestPractice}s belonging to the provided {@link BestPracticeCategory}.
+ */
+export const getAllBestPracticesOfCategory = (category: BestPracticeCategory): BestPractice[] => {
+  return ENS_BEST_PRACTICES.filter((bestPractice) => bestPractice.category.id === category.id);
+};

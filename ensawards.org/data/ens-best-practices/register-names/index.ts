@@ -11,5 +11,4 @@ export const RegisterNamesCategory: BestPracticeCategory = {
   description:
     "Provide smooth onboarding when supporting users to find and register their own names.",
   status: CategoryStatus.ComingSoon,
-  bestPractices: [],
 };

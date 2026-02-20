@@ -1,30 +1,23 @@
 ---
-import { BestPracticeTarget } from "../../../../data/ens-best-practices/types.ts";
+import { type BestPractice } from "../../../../data/ens-best-practices/types.ts";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { pluralizeBestPracticeTarget } from "../../../utils/textModifications";
 import { appliesToAllProtocols } from "../../../../data/protocols/utils.ts";
 import { appliesToAllApps } from "../../../../data/apps/utils.ts";
-import { getBestPracticeById } from "../../../../data/ens-best-practices/utils.ts";
+
 export interface BestPracticeCardProps {
-  id: string;
-  name: string;
-  description: string;
-  viewReviewsLink: string;
-  appliesTo: BestPracticeTarget[];
+  bestPractice: BestPractice;
 }
 
-const { id, name, description, viewReviewsLink, appliesTo }: BestPracticeCardProps = Astro.props;
-
-// Theoretically, because of Astro's build-time page generation, this best practice should always be defined
-const bestPracticeToDisplay = getBestPracticeById(id);
+const { bestPractice }: BestPracticeCardProps = Astro.props;
 
 const appliesToBadgeStyles =
   "flex justify-center items-center px-2 py-[2px] rounded-md border border-gray-200 bg-white text-black text-xs leading-4 font-semibold";
 ---
 
 <a
-  href={viewReviewsLink}
+  href={`/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
   class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
             justify-center items-start gap-3 sm:gap-4 p-5 sm:px-6 sm:pt-6 sm:pb-4 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <div
@@ -34,12 +27,14 @@ const appliesToBadgeStyles =
       class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
       <div
         class="w-fit flex flex-nowrap flex-row justify-start items-center gap-3">
-        <h3 class="text-lg leading-normal font-semibold text-black">{name}</h3>
+        <h3 class="text-lg leading-normal font-semibold text-black">
+          {bestPractice.name}
+        </h3>
         <slot name="badge" />
       </div>
       <p
         class="text-muted-foreground text-sm sm:text-base leading-normal font-normal">
-        {description}
+        {bestPractice.description}
       </p>
     </div>
   </div>
@@ -57,29 +52,29 @@ const appliesToBadgeStyles =
       )}>
       View details
     </button>
-    {
-      bestPracticeToDisplay !== undefined && (
-        <div class="flex flex-nowrap flex-col sm:flex-row justify-start items-center gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
-          <div class="flex flex-row justify-between sm:justify-start items-center sm:gap-2 max-sm:self-stretch">
-            <p class="text-sm leading-normal font-normal text-muted-foreground">
-              Applies to
-            </p>
-            {appliesToAllApps(bestPracticeToDisplay.appliesTo) ? (
-              <span class={appliesToBadgeStyles}>Apps</span>
-            ) : appliesToAllProtocols(bestPracticeToDisplay.appliesTo) ? (
-              <span class={appliesToBadgeStyles}>Protocols</span>
-            ) : (
-              <div class="flex flex-row justify-start items-center gap-1">
-                {appliesTo.map((target) => (
-                  <span class={appliesToBadgeStyles}>
-                    {pluralizeBestPracticeTarget(target)}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )
-    }
+    <div
+      class="flex flex-nowrap flex-col sm:flex-row justify-start items-center gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
+      <div
+        class="flex flex-row justify-between sm:justify-start items-center sm:gap-2 max-sm:self-stretch">
+        <p class="text-sm leading-normal font-normal text-muted-foreground">
+          Applies to
+        </p>
+        {
+          appliesToAllApps(bestPractice.appliesTo) ? (
+            <span class={appliesToBadgeStyles}>Apps</span>
+          ) : appliesToAllProtocols(bestPractice.appliesTo) ? (
+            <span class={appliesToBadgeStyles}>Protocols</span>
+          ) : (
+            <div class="flex flex-row justify-start items-center gap-1">
+              {bestPractice.appliesTo.map((target) => (
+                <span class={appliesToBadgeStyles}>
+                  {pluralizeBestPracticeTarget(target)}
+                </span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </div>
   </div>
 </a>

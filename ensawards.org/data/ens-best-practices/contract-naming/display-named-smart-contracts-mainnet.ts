@@ -1,5 +1,6 @@
 import { AppTypes } from "../../apps/types.ts";
 import { type BestPracticeApp, BestPracticeTypes } from "../types.ts";
+import { ContractNamingCategory } from ".";
 
 const technicalDetailsMainContent = `Looking up the name of a smart contract on Ethereum mainnet uses the same process as looking up the name of any other account. 
 There are a variety of libraries capable of looking up the [primary name](https://docs.ens.domains/web/reverse) of a contract address according to all ENS best practices:
@@ -20,8 +21,7 @@ export const displayNamedSmartContractsMainnet: BestPracticeApp = {
   name: "Display named smart contracts on Ethereum mainnet",
   description:
     "Display ENS names instead of addresses when users interact with named smart contracts on Ethereum mainnet.",
-  categoryName: "Contract naming",
-  categorySlug: "contract-naming",
+  category: ContractNamingCategory,
   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
   technicalDetails: {
     main: {

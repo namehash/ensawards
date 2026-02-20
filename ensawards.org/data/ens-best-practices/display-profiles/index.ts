@@ -11,5 +11,4 @@ export const DisplayProfilesCategory: BestPracticeCategory = {
   description:
     "Avatar images, social records, address records, and more. Ensure each ENS profile is displayed optimally.",
   status: CategoryStatus.ComingSoon,
-  bestPractices: [],
 };

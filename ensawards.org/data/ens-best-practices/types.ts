@@ -25,8 +25,7 @@ export interface BestPracticeAbstract<
   bestPracticeSlug: string;
   name: string;
   description: string;
-  categoryName: string;
-  categorySlug: string; //TODO: Refactor this dependency
+  category: BestPracticeCategory; // each best practice belongs to exactly one category
   appliesTo: AppliesToT[];
   technicalDetails: {
     main: {
@@ -59,5 +58,4 @@ export interface BestPracticeCategory {
   name: string;
   description: string;
   status: CategoryStatus;
-  bestPractices: BestPractice[];
 }

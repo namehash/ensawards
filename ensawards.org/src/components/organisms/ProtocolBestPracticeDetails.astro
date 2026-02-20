@@ -38,12 +38,12 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
 <SubpageHero
   header={bestPractice.name}
   description={bestPractice.description}
-  breadcrumbs={["ENS best practices", bestPractice.categoryName]}
+  breadcrumbs={["ENS best practices", bestPractice.category.name]}
   additionalElements={[
     {
       name: "Category",
-      value: bestPractice.categoryName,
-      link: `/ens-best-practices/${bestPractice.categorySlug}`,
+      value: bestPractice.category.name,
+      link: `/ens-best-practices/${bestPractice.category.categorySlug}`,
     },
   ]}>
   <technical-info-anchor

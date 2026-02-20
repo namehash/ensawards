@@ -10,5 +10,4 @@ export const ReverseResolutionCategory: BestPracticeCategory = {
   name: "Reverse Resolution",
   description: "Reverse records, primary names, default primary names, L2 primary names, and more.",
   status: CategoryStatus.ComingSoon,
-  bestPractices: [],
 };

@@ -41,26 +41,5 @@ describe("Best Practices data", () => {
 
       expect(areStringsUnique(slugArray), `Slugs for best practices are not unique`).toEqual(true);
     });
-
-    it("Should have valid and unique categorySlugs for each category", () => {
-      const slugArray: string[] = [];
-      categoriesData.forEach((category) => {
-        // All best practices in one category have the same categorySlug
-        if (category.bestPractices.length > 0) {
-          slugArray.push(category.bestPractices[0].categorySlug);
-        }
-
-        category.bestPractices.forEach((bestPractice) => {
-          expect(
-            isValidSlug(bestPractice.categorySlug),
-            `Slug={${bestPractice.categorySlug}} is not valid`,
-          ).toEqual(true);
-        });
-      });
-      expect(
-        areStringsUnique(slugArray),
-        `CategorySlugs for best practices are not unique`,
-      ).toEqual(true);
-    });
   });
 });
