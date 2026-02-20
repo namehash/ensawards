@@ -7,7 +7,7 @@ import { BestPracticeTypes } from "../../../../data/ens-best-practices/types.ts"
 import TechnicalInfoAnchorScript from "../../../components/atoms/TechnicalInfoAnchorScript.astro";
 import { BEST_PRACTICE_CATEGORIES } from "../../../../data/ens-best-practices";
 import {
-  getAllBestPracticesOfCategory,
+  getBestPracticesByCategory,
   getBestPracticeBySlug,
 } from "../../../../data/ens-best-practices/utils.ts";
 
@@ -15,7 +15,7 @@ export function getStaticPaths() {
   const staticPaths = [];
 
   for (let category of BEST_PRACTICE_CATEGORIES) {
-    getAllBestPracticesOfCategory(category).forEach((bestPractice) =>
+    getBestPracticesByCategory(category).forEach((bestPractice) =>
       staticPaths.push({
         params: { category: category.categorySlug, bestPractice: bestPractice.bestPracticeSlug },
       }),

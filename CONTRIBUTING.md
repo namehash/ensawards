@@ -139,7 +139,7 @@ Best practices are structured hierarchically and can be added on two levels:
 Defines a specific requirement that an app or protocol must meet to pass a benchmark test. They are grouped into categories.
 
 1. Create a new `BestPractice` as an exported constant in `ensawards.org/data/ens-best-practices/[category]/[bestPractice].ts`, where `[category]` is the category slug and `[bestPractice]` is the practice slug.
-2. Add it to `ENS_BEST_PRACTICES` array in the [ensawards.org/data/ens-best-practices/index.ts](ensawards.org/data/ens-best-practices/index.ts) file.
+2. Add it to the `ENS_BEST_PRACTICES` array in the [ensawards.org/data/ens-best-practices/index.ts](ensawards.org/data/ens-best-practices/index.ts) file.
 3. Make sure to follow its data model defined in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
 export interface BestPracticeAbstract<

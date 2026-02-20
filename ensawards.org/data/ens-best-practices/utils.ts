@@ -34,6 +34,6 @@ export const getBestPracticeById = (bestPracticeId: string): BestPractice | unde
 /**
  * Returns all {@link BestPractice}s belonging to the provided {@link BestPracticeCategory}.
  */
-export const getAllBestPracticesOfCategory = (category: BestPracticeCategory): BestPractice[] => {
+export const getBestPracticesByCategory = (category: BestPracticeCategory): BestPractice[] => {
   return ENS_BEST_PRACTICES.filter((bestPractice) => bestPractice.category.id === category.id);
 };
