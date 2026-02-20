@@ -96,13 +96,13 @@ if (appToDisplay !== undefined) {
               notes={benchmark.bestPractice.description}
               viewDetails={{
                 text: "View best practice details",
-                link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
+                link: `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
               }}
               additionalInfo={[
                 {
                   category: "Category",
-                  value: benchmark.bestPractice.categoryName,
-                  link: `/ens-best-practices/${benchmark.bestPractice.categorySlug}`,
+                  value: benchmark.bestPractice.category.name,
+                  link: `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}`,
                   linkStyles:
                     "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
                 },
