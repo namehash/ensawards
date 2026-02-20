@@ -1,4 +1,5 @@
 import { type BestPracticeProtocol, BestPracticeTypes, ProtocolTypes } from "../types.ts";
+import { ContractNamingCategory } from ".";
 
 const technicalDetailsMainContent = `Contracts should be [assigned ENS names](https://docs.ens.domains/web/naming-contracts/) during or after deployment. 
 For deployment-time naming, see the [Enscribe documentation](https://www.enscribe.xyz/docs/introduction/naming-contracts) which goes into greater detail on the process. 
@@ -17,8 +18,7 @@ export const nameYourSmartContracts: BestPracticeProtocol = {
   bestPracticeSlug: "name-your-smart-contracts",
   name: "Name your smart contracts",
   description: "Upgrade security and UX when users interact with your smart contracts.",
-  categoryName: "Contract naming",
-  categorySlug: "contract-naming",
+  category: ContractNamingCategory,
   appliesTo: [ProtocolTypes.DAO, ProtocolTypes.DeFi],
   technicalDetails: {
     main: {

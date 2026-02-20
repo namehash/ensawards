@@ -24,8 +24,7 @@
 //   bestPracticeSlug: "recognize-all-ens-names",
 //   name: "Recognize all valid ENS names",
 //   description: "Support user input of all valid ENS names (not only .eth names).",
-//   categoryName: "Forward Resolution",
-//   categorySlug: "forward-resolution",
+//   category: ForwardResolutionCategory,
 //   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
 //   technicalDetails: {
 //     main: {

@@ -1,42 +1,39 @@
 ---
-import { CategoryStatus } from "../../../../data/ens-best-practices/types.ts";
+import {
+  type BestPracticeCategory,
+  CategoryStatus,
+} from "../../../../data/ens-best-practices/types.ts";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import { getBestPracticesByCategory } from "../../../../data/ens-best-practices/utils.ts";
+
 export interface CategoryCardProps {
-  name: string;
-  description: string;
-  viewBestPracticesLink: string;
-  comingSoon: CategoryStatus;
-  numberOfBestPractices?: number;
+  category: BestPracticeCategory;
 }
 
-const {
-  name,
-  description,
-  viewBestPracticesLink,
-  comingSoon,
-  numberOfBestPractices,
-}: CategoryCardProps = Astro.props;
+const { category }: CategoryCardProps = Astro.props;
 
 const cardWrapperStyles =
   "w-full min-md:w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap\n" +
   " justify-center items-start gap-3 sm:gap-4 p-4 sm:px-6 sm:pt-6 pb-4 rounded-2xl border border-gray-200";
+
+const categoryBestPractices = getBestPracticesByCategory(category);
 ---
 
 {
-  comingSoon === CategoryStatus.ComingSoon ? (
+  category.status === CategoryStatus.ComingSoon ? (
     <div class={cardWrapperStyles}>
       <div class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
         <div class="flex flex-row flex-nowrap justify-start items-center gap-3">
           <h3 class="text-lg leading-normal font-semibold text-black">
-            {name}
+            {category.name}
           </h3>
-          <span class="w-fit min-w-[95px] h-fit rounded-md bg-black py-[2px] px-2 text-xs leading-normal font-semibold text-white">
+          <span class="w-fit min-w-[95px] h-fit rounded-md bg-black py-0.5 px-2 text-xs leading-normal font-semibold text-white">
             Coming soon
           </span>
         </div>
-        <p class="sm:min-h-[56px] text-muted-foreground text-sm sm:text-base leading-normal font-normal">
-          {description}
+        <p class="sm:min-h-14 text-muted-foreground text-sm sm:text-base leading-normal font-normal">
+          {category.description}
         </p>
       </div>
       <div class="bg-gray-200 h-[1px] self-stretch" />
@@ -58,7 +55,7 @@ const cardWrapperStyles =
     </div>
   ) : (
     <a
-      href={viewBestPracticesLink}
+      href={`/ens-best-practices/${category.categorySlug}`}
       class={cn(
         cardWrapperStyles,
         "hover:border-gray-300 hover:shadow-xs cursor-pointer",
@@ -66,11 +63,11 @@ const cardWrapperStyles =
       <div class="flex flex-col flex-nowrap justify-center items-start gap-3 sm:gap-2 self-stretch">
         <div class="flex flex-row flex-nowrap justify-start items-center gap-3">
           <h3 class="text-lg leading-normal font-semibold text-black">
-            {name}
+            {category.name}
           </h3>
         </div>
-        <p class="sm:min-h-[56px] text-muted-foreground text-sm sm:text-base leading-normal font-normal">
-          {description}
+        <p class="sm:min-h-14 text-muted-foreground text-sm sm:text-base leading-normal font-normal">
+          {category.description}
         </p>
       </div>
       <div class="bg-gray-200 h-[1px] self-stretch" />
@@ -93,7 +90,7 @@ const cardWrapperStyles =
             Best practices
           </p>
           <p class="text-sm leading-normal font-semibold">
-            {numberOfBestPractices}
+            {categoryBestPractices.length}
           </p>
         </div>
       </div>

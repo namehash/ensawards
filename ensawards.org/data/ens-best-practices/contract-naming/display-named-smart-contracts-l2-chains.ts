@@ -1,5 +1,6 @@
 import { AppTypes } from "../../apps/types.ts";
 import { type BestPracticeApp, BestPracticeTypes } from "../types.ts";
+import { ContractNamingCategory } from ".";
 
 const technicalDetailsMainContent = `When users interact with a contract on an L2 chain, use the 
 [ENSIP-19](https://docs.ens.domains/ensip/19) standard to lookup the primary name of the contract. 
@@ -27,8 +28,7 @@ export const displayNamedSmartContractsL2: BestPracticeApp = {
   name: "Display named smart contracts on L2 chains",
   description:
     "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",
-  categoryName: "Contract naming",
-  categorySlug: "contract-naming",
+  category: ContractNamingCategory,
   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
   technicalDetails: {
     main: {

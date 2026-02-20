@@ -24,7 +24,7 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
 const appsWithBenchmarks = APPS.map((app) => {
   const matchingBenchmark = app.benchmarks.find(
     (benchmark) =>
-      benchmark.bestPractice.categorySlug === bestPractice.categorySlug &&
+      benchmark.bestPractice.category.id === bestPractice.category.id &&
       benchmark.bestPractice.id === bestPractice.id,
   );
 
@@ -62,12 +62,12 @@ const appSupport = calculateAppSupport(bestPractice);
 <SubpageHero
   header={bestPractice.name}
   description={bestPractice.description}
-  breadcrumbs={["ENS best practices", bestPractice.categoryName]}
+  breadcrumbs={["ENS best practices", bestPractice.category.name]}
   additionalElements={[
     {
       name: "Category",
-      value: bestPractice.categoryName,
-      link: `/ens-best-practices/${bestPractice.categorySlug}`,
+      value: bestPractice.category.name,
+      link: `/ens-best-practices/${bestPractice.category.categorySlug}`,
     },
     {
       name: "Apps passed",
@@ -168,9 +168,9 @@ const appSupport = calculateAppSupport(bestPractice);
             Category
           </p>
           <a
-            href={`/ens-best-practices/${bestPractice.categorySlug}`}
+            href={`/ens-best-practices/${bestPractice.category.categorySlug}`}
             class="text-sm leading-normal font-semibold text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200">
-            {bestPractice.categoryName}
+            {bestPractice.category.name}
           </a>
         </div>
         <div
