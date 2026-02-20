@@ -1,3 +1,4 @@
+import { defineProject } from "../registry.ts";
 import type { Project } from "../types.ts";
 import { ProjectIds } from "../types.ts";
 import LiquityIcon from "./icon.tsx";
@@ -12,5 +13,7 @@ const LiquityProject: Project = {
     website: new URL("https://www.liquity.org/"),
   },
 };
+
+defineProject(LiquityProject);
 
 export default LiquityProject;

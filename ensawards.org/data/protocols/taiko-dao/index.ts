@@ -1,5 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import TaikoProject from "../../projects/taiko";
+import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
 import TaikoIcon from "./icon.tsx";
 
@@ -20,5 +21,7 @@ const TaikoDao: DAOProtocol = {
   ogImagePath: "https://ensawards.org/data/protocols/taiko-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/taiko-dao/twitter-og.png",
 };
+
+defineProtocol(TaikoDao);
 
 export default TaikoDao;

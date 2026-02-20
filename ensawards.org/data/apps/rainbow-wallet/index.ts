@@ -1,9 +1,10 @@
 import RainbowProject from "../../projects/rainbow";
+import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import RainbowWalletBenchmarks from "./benchmarks.ts";
 import RainbowIcon from "./icon.tsx";
 
-export const RainbowWallet: App = {
+const RainbowWallet: App = {
   id: "rainbow-wallet",
   appSlug: "rainbow-wallet",
   project: RainbowProject,
@@ -21,5 +22,7 @@ export const RainbowWallet: App = {
   ogImagePath: "https://ensawards.org/data/apps/rainbow-wallet/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/rainbow-wallet/twitter-og.png",
 };
+
+defineApp(RainbowWallet);
 
 export default RainbowWallet;

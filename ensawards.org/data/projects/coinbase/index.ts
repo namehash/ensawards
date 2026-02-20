@@ -1,3 +1,4 @@
+import { defineProject } from "../registry.ts";
 import type { Project } from "../types.ts";
 import { ProjectIds } from "../types.ts";
 import CoinbaseIcon from "./icon.tsx";
@@ -13,5 +14,7 @@ const CoinbaseProject: Project = {
     twitter: new URL("https://x.com/coinbase"),
   },
 };
+
+defineProject(CoinbaseProject);
 
 export default CoinbaseProject;

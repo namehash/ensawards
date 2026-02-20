@@ -1,5 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import ArbitrumProject from "../../projects/arbitrum";
+import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
 import ArbitrumIcon from "./icon.tsx";
 
@@ -19,5 +20,7 @@ const ArbitrumDao: DAOProtocol = {
   ogImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/twitter-og.png",
 };
+
+defineProtocol(ArbitrumDao);
 
 export default ArbitrumDao;

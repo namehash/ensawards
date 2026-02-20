@@ -1,5 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import NounsProject from "../../projects/nouns";
+import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
 import NounsIcon from "./icon.tsx";
 
@@ -20,5 +21,7 @@ const NounsDao: DAOProtocol = {
   ogImagePath: "https://ensawards.org/data/protocols/nouns-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/nouns-dao/twitter-og.png",
 };
+
+defineProtocol(NounsDao);
 
 export default NounsDao;

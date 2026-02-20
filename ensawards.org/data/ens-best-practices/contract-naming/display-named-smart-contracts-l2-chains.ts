@@ -1,6 +1,7 @@
 import { AppTypes } from "../../apps/types.ts";
+import { defineBestPractice } from "../registry.ts";
 import { type BestPracticeApp, BestPracticeTypes } from "../types.ts";
-import { ContractNamingCategory } from ".";
+import ContractNamingCategory from ".";
 
 const technicalDetailsMainContent = `When users interact with a contract on an L2 chain, use the 
 [ENSIP-19](https://docs.ens.domains/ensip/19) standard to lookup the primary name of the contract. 
@@ -21,7 +22,7 @@ has an ENS name, you can use the contract's ENS profile to power additional UX i
 displaying the contract's avatar, metadata, audit information, and more. More information can be found 
 at [this ENSIP](https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397).`;
 
-export const displayNamedSmartContractsL2: BestPracticeApp = {
+const displayNamedSmartContractsL2: BestPracticeApp = {
   type: BestPracticeTypes.App,
   id: "display-named-smart-contracts-l2-chains",
   bestPracticeSlug: "display-named-smart-contracts-l2-chains",
@@ -43,3 +44,7 @@ export const displayNamedSmartContractsL2: BestPracticeApp = {
     ],
   },
 };
+
+defineBestPractice(displayNamedSmartContractsL2);
+
+export default displayNamedSmartContractsL2;

@@ -1,5 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import LiquityProject from "../../projects/liquity";
+import { defineProtocol } from "../registry.ts";
 import { type DeFiProtocol, DeFiProtocolIds } from "../types.ts";
 import LiquityIcon from "./icon.tsx";
 
@@ -19,5 +20,7 @@ const LiquityDeFi: DeFiProtocol = {
   ogImagePath: "https://ensawards.org/data/protocols/liquity-defi/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/liquity-defi/twitter-og.png",
 };
+
+defineProtocol(LiquityDeFi);
 
 export default LiquityDeFi;

@@ -2,6 +2,7 @@
 
 import { mainnet } from "viem/chains";
 
+import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import NounsDao from ".";
@@ -104,5 +105,7 @@ const contracts: Contract[] = [
     },
   },
 ];
+
+defineContracts(contracts);
 
 export default contracts;
