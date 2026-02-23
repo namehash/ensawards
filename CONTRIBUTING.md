@@ -11,9 +11,8 @@ Below, you’ll find detailed instructions for each contribution type. If your c
 ### Adding a new `Project`
 
 1. Create a new subdirectory in the [ensawards.org/data/projects/](ensawards.org/data/projects) named after the project you want to add. The directory name should be the lowercase project name. If the name contains multiple words, join them with hyphens ("-").
-2. Inside the new directory, create an `index.ts` file and export the project definition as the default export.
-3. Add the new project to the `PROJECTS` array in the [ensawards.org/data/projects/index.ts](ensawards.org/data/projects/index.ts) file.
-4. Follow its data model that you can look up in the [ensawards.org/data/projects/types.ts](ensawards.org/data/projects/types.ts) file. You can also have a quick glance at it below.
+2. Inside the new directory, create an `index.ts` file and default-export the project definition. Make sure to also call `defineProject()` on it. For reference see [ensawards.org/data/projects/aave/index.ts](ensawards.org/data/projects/aave/index.ts).
+3. Follow its data model that you can look up in the [ensawards.org/data/projects/types.ts](ensawards.org/data/projects/types.ts) file. You can also have a quick glance at it below.
 ```typescript
 export interface Project {
     id: ProjectId;
@@ -26,8 +25,8 @@ export interface Project {
     };
 }
 ```
-5. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/projects/aave/icon.tsx](ensawards.org/data/projects/aave/icon.tsx).
-6. You are welcome to propose updates to already added projects using the same approach.
+4. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/projects/aave/icon.tsx](ensawards.org/data/projects/aave/icon.tsx).
+5. You are welcome to propose updates to already added projects using the same approach.
 
 ### Relationship between `Projects`, `Protocols` and `Apps`
 
@@ -42,9 +41,8 @@ For this reason, every new `App` or `Protocol` must be associated with a corresp
 ### Adding a new `Protocol`
 
 1. Create a new subdirectory in the [ensawards.org/data/protocols/](ensawards.org/data/protocols) named after the protocol you want to add. The directory name should be the same as the slug of the protocol (for reference see [ensawards.org/data/protocols/ens-dao/index.ts](ensawards.org/data/protocols/ens-dao/index.ts)).
-2. Inside the new directory, create an `index.ts` file and export the protocol definition as the default export.
-3. Add it to the `DAO_PROTOCOLS` or `DEFI_PROTOCOLS` list in the [ensawards.org/data/protocols/index.ts](ensawards.org/data/protocols/index.ts) file appropriately to its type.
-4. Make sure to follow its data model that you can look up in the [ensawards.org/data/protocols/types.ts](ensawards.org/data/protocols/types.ts) file. Remember that the `Protocol` can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:
+2. Inside the new directory, create an `index.ts` file and default-export the protocol definition. Make sure to also call `defineProtocol()` on it. For reference see [ensawards.org/data/protocols/ens-dao/index.ts](ensawards.org/data/protocols/ens-dao/index.ts).
+3. Make sure to follow its data model that you can look up in the [ensawards.org/data/protocols/types.ts](ensawards.org/data/protocols/types.ts) file. Remember that the `Protocol` can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:
 
 ```typescript
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
@@ -78,9 +76,9 @@ export type Protocol = DAOProtocol | DeFiProtocol;
 >
 > When your PR with a new `Protocol` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
-5. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/protocols/ens-dao/icon.tsx](ensawards.org/data/protocols/ens-dao/icon.tsx).
-6. In your PR describe your reasoning for adding this `Protocol`.
-7. You are welcome to propose updates to existing protocols using the same approach.
+4. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/protocols/ens-dao/icon.tsx](ensawards.org/data/protocols/ens-dao/icon.tsx).
+5. In your PR describe your reasoning for adding this `Protocol`.
+6. You are welcome to propose updates to existing protocols using the same approach.
 
 ### Adding a new `Contract`
 
@@ -98,9 +96,8 @@ export interface Contract {
 ### Adding a new `App`
 
 1. Create a new subdirectory in the [ensawards.org/data/apps/](ensawards.org/data/apps) named after the app you want to add. The directory name should be the same as the slug of the app (for reference see [ensawards.org/data/apps/metamask-wallet/index.ts](ensawards.org/data/apps/metamask-wallet/index.ts)).
-2. Inside the new directory, create an `index.ts` file and export the app definition as the default export.
-3. Add your `App` to the `APPS` array available in the [ensawards.org/data/apps/index.ts](ensawards.org/data/apps/index.ts) file.
-4. Follow the corresponding data model available in the [ensawards.org/data/apps/types.ts](ensawards.org/data/apps/types.ts) file.
+2. Inside the new directory, create an `index.ts` file and default-export the app definition. Make sure to also call `defineApp()` on it. For reference see [ensawards.org/data/apps/rainbow-wallet/index.ts](ensawards.org/data/apps/rainbow-wallet/index.ts).
+3. Follow the corresponding data model available in the [ensawards.org/data/apps/types.ts](ensawards.org/data/apps/types.ts) file.
 ```typescript
 export interface App {
     id: string;
@@ -126,9 +123,9 @@ export interface App {
 > 
 > When your PR with a new `App` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
-5. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/apps/blockscout-explorer/icon.tsx](ensawards.org/data/apps/blockscout-explorer/icon.tsx).
-6. In your PR describe your reasoning for adding that new `App`.
-7. You are welcome to propose updates to already added apps using the same approach.
+4. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/apps/blockscout-explorer/icon.tsx](ensawards.org/data/apps/blockscout-explorer/icon.tsx).
+5. In your PR describe your reasoning for adding that new `App`.
+6. You are welcome to propose updates to already added apps using the same approach.
 
 ### Adding a new `Best Practice`
 
@@ -138,9 +135,8 @@ Best practices are structured hierarchically and can be added on two levels:
 
 Defines a specific requirement that an app or protocol must meet to pass a benchmark test. They are grouped into categories.
 
-1. Create a new `BestPractice` as an exported constant in `ensawards.org/data/ens-best-practices/[category]/[bestPractice].ts`, where `[category]` is the category slug and `[bestPractice]` is the practice slug.
-2. Add it to the `ENS_BEST_PRACTICES` array in the [ensawards.org/data/ens-best-practices/index.ts](ensawards.org/data/ens-best-practices/index.ts) file.
-3. Make sure to follow its data model defined in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
+1. Create a new `BestPractice` default-export and its definition in `ensawards.org/data/ens-best-practices/[category]/[bestPractice].ts`, where `[category]` is the category slug and `[bestPractice]` is the practice slug. Make sure to also call `defineBestPractice()` on it. For reference see [ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts.ts](ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts.ts).
+2. Make sure to follow its data model defined in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
 export interface BestPracticeAbstract<
     BestPracticeT extends BestPracticeType,
@@ -173,17 +169,16 @@ export interface BestPracticeApp
 
 export type BestPractice = BestPracticeProtocol | BestPracticeApp;
 ```
-4. In your PR describe your reasoning for adding it.
-5. If you want your best practice to be a part of a new category, learn how to add one below.
+3. In your PR describe your reasoning for adding it.
+4. If you want your best practice to be a part of a new category, learn how to add one below.
 
 #### `BestPracticeCategory`
 
 Categories sort best practices into topic-related groups based on their characteristics. They are a level above the basic `BestPractice` objects in the "Best Practices" hierarchy.
 
 1. To add a new category, create a new subdirectory in the [ensawards.org/data/ens-best-practices/](ensawards.org/data/ens-best-practices/) named after the best practice category you want to add. The directory name should be the same as the slug of the category (for reference see [ensawards.org/data/ens-best-practices/contract-naming/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts)).
-2. Inside the new directory create an `index.ts` file and define the new category as an independent exported constant.
-3. Add new `BestPracticeCategory` to the `BEST_PRACTICE_CATEGORIES` array available in the [ensawards.org/data/ens-best-practices/index.ts](ensawards.org/data/ens-best-practices/index.ts) file.
-4. Follow its data model available in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
+2. Inside the new directory, create an `index.ts` file and default-export the category definition. Make sure to also call `defineBestPracticeCategory()` on it. For reference see [ensawards.org/data/ens-best-practices/contract-naming/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts).
+3. Follow its data model available in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
 export enum CategoryStatus {
     ComingSoon,
@@ -198,7 +193,7 @@ export interface BestPracticeCategory {
     status: CategoryStatus;
 }
 ```
-5. In your PR describe your reasoning for adding it.
+4. In your PR describe your reasoning for adding it.
 
 ### Suggest a `benchmark update`
 
