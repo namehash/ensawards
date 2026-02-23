@@ -15,4 +15,4 @@ Looking to the future, we hope ENSAwards can act as a guide for developers seeki
 ENSAwards is a product of [NameHash Labs](https://namehashlabs.org). App benchmarks and scoring is based on our assessments and is not officially endorsed by the ENS DAO.
 
 ## What is the prize for a top ranking on ENSAwards?
-🏆 Epic clout! 🏆 or perhaps some [ENS Referral Awards](https://ensawards.org/ens-referral-awards) if you're building an app that contributes to registrations or renewals of .eth names.
+🏆 Epic clout! 🏆 or perhaps some [ENS Referral Awards](https://ensawards.org/ens-referral-program) if you're building an app that contributes to registrations or renewals of .eth names.

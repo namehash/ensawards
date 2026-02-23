@@ -75,7 +75,7 @@ export const EmptyLeaderboardInfo = () => {
               className: "cursor-pointer rounded-full",
             }),
           )}
-          href="/ens-referral-awards#generate-referral-link"
+          href="/ens-referral-program#generate-referral-link"
         >
           Generate your referral link
         </a>

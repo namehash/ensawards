@@ -1,0 +1,78 @@
+---
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getReferralProgramEditionConfigBySlug } from "@/utils/referralProgram.ts";
+import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { ReferrerLeaderboard } from "@/components/referral-awards-program/referrers/ReferrerLeaderboard.tsx";
+import { ReferralProgramEditionCard } from "@/components/atoms/cards/ReferralProgramEditionCard";
+import { TooltipProvider } from "@/components/ui/Tooltip";
+
+export const prerender = false;
+
+const { referralProgram } = Astro.params;
+getReferralProgramEditionConfigBySlug;
+const resolvedReferralProgramEditionConfig =
+  await getReferralProgramEditionConfigBySlug(referralProgram);
+
+if (resolvedReferralProgramEditionConfig === undefined) {
+  Astro.response.status = 404;
+}
+---
+
+<Layout
+  pageMetadata={{
+    title: `ENSAwards: ENS Leaderboard for ${resolvedReferralProgramEditionConfig.displayName} Referrers`,
+    description: `Compare referrers by their performance in ${resolvedReferralProgramEditionConfig.displayName}.`,
+    url: `https://ensawards.org/leaderboards/referral-program/${resolvedReferralProgramEditionConfig.slug}`,
+    ogImage: `https://ensawards.org/referrer_leaderboard_og_image.png`,
+    twitterImage: `https://ensawards.org/referrer_leaderboard_twitter_og_image.png`,
+  }}>
+  <SubpageHero
+    header={`${resolvedReferralProgramEditionConfig.displayName} leaderboard`}
+    description={`Compare referrers by their performance in ${resolvedReferralProgramEditionConfig.displayName}.`}
+    breadcrumbs={["ENS Referral Program"]}
+    customImage={{
+      source: "/src/assets/leaderboardsHeroImage.png",
+      width: 371,
+      height: 372,
+      styles: "-top-0 right-0 opacity-10",
+    }}>
+    <ReferralProgramEditionCard
+      client:load
+      slot="largerHeroItem"
+      referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+      showMobileVariant={true}
+    />
+    <div
+      slot="ctaContent"
+      class="flex flex-col sm:flex-row justify-start items-start gap-4">
+      <a
+        href={`/ens-referral-program/rules/${resolvedReferralProgramEditionConfig.slug}`}
+        class={cn(
+          shadcnButtonVariants({
+            variant: "default",
+            size: "default",
+            className:
+              "cursor-pointer rounded-full px-5 h-12 box-border text-black bg-white hover:bg-white/90",
+          }),
+        )}>Learn more</a
+      >
+      <a
+        href="/ens-referral-program/live-feed"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "ghost",
+            size: "default",
+            className:
+              "cursor-pointer rounded-full px-5 h-12 box-border text-white hover:text-white bg-white/10 hover:bg-white/20",
+          }),
+        )}>Live feed</a
+      >
+    </div>
+  </SubpageHero>
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ReferrerLeaderboard client:load />
+  </section>
+</Layout>

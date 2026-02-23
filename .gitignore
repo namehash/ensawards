@@ -19,3 +19,6 @@ dist
 
 #jetbrains elements
 .idea
+
+# personal ai tools
+.codex

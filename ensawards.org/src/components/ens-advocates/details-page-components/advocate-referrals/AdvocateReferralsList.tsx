@@ -160,7 +160,7 @@ export function AdvocateReferralsList({
               <br />
               <a
                 className="text-blue-600 font-medium hover:underline hover:underline-offset-[25%] whitespace-nowrap transition-all duration-200 cursor-pointer"
-                href="/ens-referral-awards"
+                href="/ens-referral-program"
               >
                 Learn how to become a referrer
               </a>

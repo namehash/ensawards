@@ -34,6 +34,10 @@ export default defineConfig({
     "/defi/liquity": "/protocol/liquity-defi",
     "/defi/taiko": "/protocol/taiko-defi",
     "/defi/uniswap": "/protocol/uniswap-defi",
+
+    "/ens-referral-awards": "/ens-referral-program",
+    "/ens-holiday-awards-rules": "/ens-referral-program/rules/2025-12",
+    "/ens-referral-live-feed": "/ens-referral-program/live-feed",
   },
 
   adapter: vercel(),
