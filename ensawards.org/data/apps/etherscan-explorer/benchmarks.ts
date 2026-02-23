@@ -4,8 +4,8 @@
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { benchmarkers } from "../../benchmarkers";
-import { displayNamedSmartContractsL2 } from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
-import { displayNamedSmartContractsMainnet } from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
+import displayNamedSmartContractsL2 from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
+import displayNamedSmartContractsMainnet from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
 import type { AppBenchmark } from "../benchmarks-types.ts";
 import { BenchmarkResult } from "../benchmarks-types.ts";
 

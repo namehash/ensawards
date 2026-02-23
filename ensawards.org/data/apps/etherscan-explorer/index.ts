@@ -1,4 +1,5 @@
 import EtherscanProject from "../../projects/etherscan";
+import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import EtherscanExplorerBenchmarks from "./benchmarks.ts";
 import EtherscanIcon from "./icon.tsx";
@@ -20,5 +21,7 @@ const EtherscanExplorer: App = {
   ogImagePath: "https://ensawards.org/data/apps/etherscan-explorer/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/etherscan-explorer/twitter-og.png",
 };
+
+defineApp(EtherscanExplorer);
 
 export default EtherscanExplorer;

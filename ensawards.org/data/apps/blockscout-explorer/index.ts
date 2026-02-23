@@ -1,4 +1,5 @@
 import BlockscoutProject from "../../projects/blockscout";
+import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import BlockscoutExplorerBenchmarks from "./benchmarks.ts";
 import BlockscoutIcon from "./icon.tsx";
@@ -19,5 +20,7 @@ const BlockscoutExplorer: App = {
   ogImagePath: "https://ensawards.org/data/apps/blockscout-explorer/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/blockscout-explorer/twitter-og.png",
 };
+
+defineApp(BlockscoutExplorer);
 
 export default BlockscoutExplorer;

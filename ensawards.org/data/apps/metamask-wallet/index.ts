@@ -1,4 +1,5 @@
 import MetaMaskProject from "../../projects/metamask";
+import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import MetaMaskWalletBenchmarks from "./benchmarks.ts";
 import MetaMaskIcon from "./icon.tsx";
@@ -20,5 +21,7 @@ const MetaMaskWallet: App = {
   ogImagePath: "https://ensawards.org/data/apps/metamask-wallet/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/metamask-wallet/twitter-og.png",
 };
+
+defineApp(MetaMaskWallet);
 
 export default MetaMaskWallet;

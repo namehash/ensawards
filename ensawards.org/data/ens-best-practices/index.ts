@@ -1,30 +1,21 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying best practices and best practice categories
 
-import { ContractNamingCategory } from "./contract-naming";
-import { displayNamedSmartContractsL2 } from "./contract-naming/display-named-smart-contracts-l2-chains.ts";
-import { displayNamedSmartContractsMainnet } from "./contract-naming/display-named-smart-contracts-mainnet.ts";
-import { nameYourSmartContracts } from "./contract-naming/name-your-smart-contracts.ts";
-import { DisplayProfilesCategory } from "./display-profiles";
-import { ForwardResolutionCategory } from "./forward-resolution";
-import { ManageNamesCategory } from "./manage-names";
-import { RegisterNamesCategory } from "./register-names";
-import { RenewNamesCategory } from "./renew-names";
-import { ReverseResolutionCategory } from "./reverse-resolution";
-import { type BestPractice, type BestPracticeCategory } from "./types.ts";
+import { getDefinedBestPracticeCategories, getDefinedBestPractices } from "./registry.ts";
+import { type BestPractice, type BestPracticeCategory, CategoryStatus } from "./types.ts";
+
+import.meta.glob("./*/*.ts", { eager: true });
 
 export const ENS_BEST_PRACTICES: BestPractice[] = [
-  nameYourSmartContracts,
-  displayNamedSmartContractsMainnet,
-  displayNamedSmartContractsL2,
+  ...getDefinedBestPractices().sort((a, b) => a.name.localeCompare(b.name)),
 ];
 
 export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
-  ContractNamingCategory,
-  ForwardResolutionCategory,
-  ReverseResolutionCategory,
-  DisplayProfilesCategory,
-  RegisterNamesCategory,
-  RenewNamesCategory,
-  ManageNamesCategory,
+  ...getDefinedBestPracticeCategories().sort((a, b) => {
+    if (a.status === b.status) return a.name.localeCompare(b.name);
+
+    if (a.status === CategoryStatus.Active) return -1;
+
+    return 1;
+  }),
 ];

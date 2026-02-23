@@ -1,5 +1,6 @@
+import { defineBestPractice } from "../registry.ts";
 import { type BestPracticeProtocol, BestPracticeTypes, ProtocolTypes } from "../types.ts";
-import { ContractNamingCategory } from ".";
+import ContractNamingCategory from ".";
 
 const technicalDetailsMainContent = `Contracts should be [assigned ENS names](https://docs.ens.domains/web/naming-contracts/) during or after deployment. 
 For deployment-time naming, see the [Enscribe documentation](https://www.enscribe.xyz/docs/introduction/naming-contracts) which goes into greater detail on the process. 
@@ -12,7 +13,7 @@ const technicalDetailsAdditionalContent = `Assigning ENS names to contracts give
 This is particularly valuable for security, as users can confirm \`uniswap.eth\` instead of validating a long hexadecimal address. 
 If you've deployed contracts without Ownable, you can still improve UX by configuring forward resolution, though full naming (with reverse resolution) provides the best user experience.`;
 
-export const nameYourSmartContracts: BestPracticeProtocol = {
+const nameYourSmartContracts: BestPracticeProtocol = {
   type: BestPracticeTypes.Protocol,
   id: "name-your-smart-contracts",
   bestPracticeSlug: "name-your-smart-contracts",
@@ -33,3 +34,7 @@ export const nameYourSmartContracts: BestPracticeProtocol = {
     ],
   },
 };
+
+defineBestPractice(nameYourSmartContracts);
+
+export default nameYourSmartContracts;

@@ -2,6 +2,7 @@
 
 import { arbitrum, base, mainnet, optimism, scroll } from "viem/chains";
 
+import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import LiquityDeFi from ".";
@@ -732,5 +733,7 @@ const contracts: Contract[] = [
     },
   },
 ];
+
+defineContracts(contracts);
 
 export default contracts;

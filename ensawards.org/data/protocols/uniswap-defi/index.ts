@@ -1,5 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import UniswapProject from "../../projects/uniswap";
+import { defineProtocol } from "../registry.ts";
 import { type DeFiProtocol, DeFiProtocolIds } from "../types.ts";
 import UniswapIcon from "./icon.tsx";
 
@@ -20,5 +21,7 @@ const UniswapDeFi: DeFiProtocol = {
   ogImagePath: "https://ensawards.org/data/protocols/uniswap-defi/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/uniswap-defi/twitter-og.png",
 };
+
+defineProtocol(UniswapDeFi);
 
 export default UniswapDeFi;

@@ -1,3 +1,4 @@
+import { defineProject } from "../registry.ts";
 import type { Project } from "../types.ts";
 import { ProjectIds } from "../types.ts";
 import TaikoIcon from "./icon.tsx";
@@ -13,5 +14,7 @@ const TaikoProject: Project = {
     twitter: new URL("https://x.com/taikoxyz"),
   },
 };
+
+defineProject(TaikoProject);
 
 export default TaikoProject;

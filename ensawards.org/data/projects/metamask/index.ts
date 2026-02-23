@@ -1,3 +1,4 @@
+import { defineProject } from "../registry.ts";
 import type { Project } from "../types.ts";
 import { ProjectIds } from "../types.ts";
 import MetaMaskIcon from "./icon.tsx";
@@ -12,5 +13,7 @@ const MetaMaskProject: Project = {
     twitter: new URL("https://x.com/MetaMask"),
   },
 };
+
+defineProject(MetaMaskProject);
 
 export default MetaMaskProject;

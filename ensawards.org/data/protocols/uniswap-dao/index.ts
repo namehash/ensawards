@@ -1,5 +1,6 @@
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import UniswapProject from "../../projects/uniswap";
+import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
 import UniswapIcon from "./icon.tsx";
 
@@ -20,5 +21,7 @@ const UniswapDao: DAOProtocol = {
   ogImagePath: "https://ensawards.org/data/protocols/uniswap-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/uniswap-dao/twitter-og.png",
 };
+
+defineProtocol(UniswapDao);
 
 export default UniswapDao;
