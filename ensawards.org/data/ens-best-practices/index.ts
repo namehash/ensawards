@@ -2,13 +2,20 @@
 // on adding and modifying best practices and best practice categories
 
 import { getDefinedBestPracticeCategories, getDefinedBestPractices } from "./registry.ts";
-import { type BestPractice, type BestPracticeCategory } from "./types.ts";
+import { type BestPractice, type BestPracticeCategory, CategoryStatus } from "./types.ts";
 
-import.meta.glob("./*/index.ts", { eager: true });
 import.meta.glob("./*/*.ts", { eager: true });
 
-export const ENS_BEST_PRACTICES: BestPractice[] = [...getDefinedBestPractices()];
+export const ENS_BEST_PRACTICES: BestPractice[] = [
+  ...getDefinedBestPractices().sort((a, b) => a.name.localeCompare(b.name)),
+];
 
 export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
-  ...getDefinedBestPracticeCategories(),
+  ...getDefinedBestPracticeCategories().sort((a, b) => {
+    if (a.status === b.status) return a.name.localeCompare(b.name);
+
+    if (a.status === CategoryStatus.Active) return -1;
+
+    return 1;
+  }),
 ];
