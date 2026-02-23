@@ -4,7 +4,7 @@ const definedBestPractices = new Map<string, BestPractice>();
 const definedBestPracticeCategories = new Map<string, BestPracticeCategory>();
 
 export function defineBestPractice(bestPractice: BestPractice): void {
-  // enforce best practices's id uniqueness
+  // enforce best practice's id uniqueness
   if (definedBestPractices.has(bestPractice.id)) {
     throw new Error(`Best Practice with id=${bestPractice.id} is already defined`);
   }

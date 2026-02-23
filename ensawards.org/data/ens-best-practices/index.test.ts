@@ -25,19 +25,19 @@ describe("Best Practices data", () => {
         `Slugs for best practice categories are not unique`,
       ).toEqual(true);
     });
-  });
 
-  it("Should have valid and unique ids", () => {
-    const idArray: string[] = [];
+    it("Should have valid and unique ids", () => {
+      const idArray: string[] = [];
 
-    categoriesData.forEach((category) => {
-      expect(category.id.length > 0, `ID={${category.id}} is empty`).toEqual(true);
-      idArray.push(category.id);
+      categoriesData.forEach((category) => {
+        expect(category.id.length > 0, `ID={${category.id}} is empty`).toEqual(true);
+        idArray.push(category.id);
+      });
+
+      expect(areStringsUnique(idArray), `IDs for Best Practice categories are not unique`).toEqual(
+        true,
+      );
     });
-
-    expect(areStringsUnique(idArray), `IDs for Best Practice categories are not unique`).toEqual(
-      true,
-    );
   });
 
   describe("Best Practice data", () => {
