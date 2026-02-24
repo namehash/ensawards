@@ -9,6 +9,9 @@ import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
 import { ENSHolidayAwards } from "../../../data/referral-programs";
 import Layout from "../../layouts/Layout.astro";
 import { cn } from "../../utils/tailwindClassConcatenation";
+import { getReferralProgramEditionConfigBySlug } from "@/utils/referralProgram.ts";
+
+const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConfigBySlug("2025-12");
 ---
 
 <Layout
@@ -76,6 +79,14 @@ import { cn } from "../../utils/tailwindClassConcatenation";
   </SubpageHero>
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ReferrerLeaderboard client:load />
+    <!-- This leaderboard will soon be deleted so the fix is just temporary -->
+    {
+      resolvedReferralProgramEditionConfig && (
+        <ReferrerLeaderboard
+          client:load
+          referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+        />
+      )
+    }
   </section>
 </Layout>

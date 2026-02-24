@@ -10,12 +10,14 @@ import { ReferralProgramEditionCard } from "@/components/atoms/cards/referralPro
 export const prerender = false;
 
 const { referralProgram } = Astro.params;
-getReferralProgramEditionConfigBySlug;
+
 const resolvedReferralProgramEditionConfig =
   await getReferralProgramEditionConfigBySlug(referralProgram);
 
+// If the referral program edition config cannot be found based on the slug in the URL, redirect to a 404 page
 if (resolvedReferralProgramEditionConfig === undefined) {
   Astro.response.status = 404;
+  return Astro.redirect("/404");
 }
 ---
 
