@@ -8,7 +8,7 @@ import { ChevronRightIcon } from "lucide-react";
 import type * as React from "react";
 import { useMemo } from "react";
 
-import type { PriceUsdc } from "@ensnode/ensnode-sdk";
+import type { PriceUsdc, UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { getCurrencyInfo } from "@ensnode/ensnode-sdk";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
@@ -34,32 +34,6 @@ export const ReferralProgramEditionCard = ({
     () => calcReferralProgramStatus(referralProgramEditionConfig.rules, now),
     [now],
   );
-
-  const currencyFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
-  //TODO: Maybe we already have a function for it? I couldn't find such...
-  // If it turns out we really need this function then it should be moved to /src/utils
-  /**
-   * Converts the parsed currency representation in its smallest unit back to its original value.
-   *
-   * **Note** For large values this parsing may lead to loss of precision
-   *
-   * @param referralProgramTotalAwardShare - a {@link PriceUsdc} object with the amount in the smallest unit (6 decimals)
-   * @returns A number representing the actual amount of the given currency
-   *
-   * @example
-   * Based on the USDC currency
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 123456780n }) // returns 123.4567
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 1000000n }) // returns 1
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 1000n }) // returns 0.001
-   */
-  const parseReferralProgramCurrency = (referralProgramTotalAwardShare: PriceUsdc): number => {
-    const currencyInfo = getCurrencyInfo(referralProgramTotalAwardShare.currency);
-    return Number(referralProgramTotalAwardShare.amount) / Math.pow(10, currencyInfo.decimals);
-  };
 
   // TODO: Should we include tooltips here as well (same as we do in Referrer cards)?
   return (
@@ -98,98 +72,60 @@ export const ReferralProgramEditionCard = ({
         >
           {referralProgramEditionConfig.displayName}
         </h3>
-        <div
-          className={cn(
-            "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
-            !showMobileVariant &&
-              "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
-          )}
-        >
-          <GenericTooltip
-            tooltipOffset={0}
-            content={<p className="max-w-[140px]">Start date and end date of the program.</p>}
-          >
-            <p
-              className={cn(
-                "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
-                !showMobileVariant && "cursor-pointer",
-              )}
-            >
-              Time period
-            </p>
-          </GenericTooltip>
-          <p
-            className={cn(
+        <ReferralProgramEditionTimePeriod
+          startTime={referralProgramEditionConfig.rules.startTime}
+          endTime={referralProgramEditionConfig.rules.endTime}
+          styles={{
+            container: cn(
+              "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
+              !showMobileVariant &&
+                "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
+            ),
+            label: cn(
+              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
+              !showMobileVariant && "cursor-pointer",
+            ),
+            value: cn(
               "text-sm leading-normal font-medium text-black cursor-pointer max-sm:text-right",
               showMobileVariant && "text-right cursor-default",
-            )}
-          >
-            <ReferralProgramPeriodDate
-              timestamp={referralProgramEditionConfig.rules.startTime}
-              className={cn("cursor-pointer", showMobileVariant && "cursor-default")}
-            />{" "}
-            -{" "}
-            <ReferralProgramPeriodDate
-              timestamp={referralProgramEditionConfig.rules.endTime}
-              className={cn("cursor-pointer", showMobileVariant && "cursor-default")}
-            />
-          </p>
-        </div>
-        <div
+            ),
+            date: cn("cursor-pointer", showMobileVariant && "cursor-default"),
+          }}
+        />
+        <ReferralProgramEditionBudget
+          totalAwardPoolValue={referralProgramEditionConfig.rules.totalAwardPoolValue}
+          styles={{
+            container: cn(
+              "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
+              !showMobileVariant &&
+                "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
+            ),
+            label: cn(
+              "text-muted-foreground text-sm leading-normal font-normal",
+              !showMobileVariant && "cursor-pointer",
+            ),
+          }}
+        />
+        <ReferralProgramEditionRules
+          rulesUrl={referralProgramEditionConfig.rules.rulesUrl}
+          styles={{
+            container: cn(
+              "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
+              !showMobileVariant &&
+                "sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
+            ),
+            label: cn(
+              "text-muted-foreground text-sm leading-normal font-normal",
+              !showMobileVariant && "cursor-pointer",
+            ),
+          }}
+        />
+        <span
           className={cn(
-            "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
-            !showMobileVariant &&
-              "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
+            "hidden min-w-[80px]",
+            !showMobileVariant && "max-sm:hidden flex sm:flex-row sm:justify-end",
           )}
         >
-          <GenericTooltip
-            tooltipOffset={0}
-            content={<p className="max-w-[140px]">Estimated value of $ENS awards in USD</p>}
-          >
-            <p
-              className={cn(
-                "text-muted-foreground text-sm leading-normal font-normal",
-                !showMobileVariant && "cursor-pointer",
-              )}
-            >
-              Budget
-            </p>
-          </GenericTooltip>
-          <p className="text-sm leading-normal font-medium text-black">
-            {currencyFormatter.format(
-              parseReferralProgramCurrency(referralProgramEditionConfig.rules.totalAwardPoolValue),
-            )}{" "}
-            USD
-          </p>
-        </div>
-        <div
-          className={cn(
-            "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
-            !showMobileVariant &&
-              "sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
-          )}
-        >
-          <GenericTooltip
-            tooltipOffset={0}
-            content={<p className="max-w-[140px]">All rules of the program in detail.</p>}
-          >
-            <p
-              className={cn(
-                "text-muted-foreground text-sm leading-normal font-normal",
-                !showMobileVariant && "cursor-pointer",
-              )}
-            >
-              Rules
-            </p>
-          </GenericTooltip>
-          <a
-            href={referralProgramEditionConfig.rules.rulesUrl.href}
-            className="text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-          >
-            Learn more
-          </a>
-        </div>
-        <span className={cn("hidden min-w-[80px]", !showMobileVariant && "max-sm:hidden flex")}>
           <ReferralProgramStatusBadge
             status={referralProgramStatus}
             className={cn("cursor-pointer", showMobileVariant && "cursor-default")}
@@ -217,6 +153,167 @@ export const ReferralProgramEditionCard = ({
         </button>
       </div>
     </TooltipProvider>
+  );
+};
+
+export interface ReferralProgramEditionTimePeriodProps {
+  startTime: UnixTimestamp;
+  endTime: UnixTimestamp;
+  styles?: {
+    container?: string;
+    label?: string;
+    value?: string;
+    date?: string;
+  };
+}
+
+export const ReferralProgramEditionTimePeriod = ({
+  startTime,
+  endTime,
+  styles,
+}: ReferralProgramEditionTimePeriodProps) => {
+  return (
+    <div
+      className={cn(
+        styles?.container ??
+          "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
+      )}
+    >
+      <GenericTooltip
+        tooltipOffset={0}
+        content={<p className="max-w-[140px]">Start date and end date of the program.</p>}
+      >
+        <p
+          className={cn(
+            styles?.label ??
+              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
+          )}
+        >
+          Time period
+        </p>
+      </GenericTooltip>
+      <p
+        className={cn(
+          styles?.value ??
+            "text-sm leading-normal font-medium text-black cursor-default max-sm:text-right",
+        )}
+      >
+        <ReferralProgramPeriodDate timestamp={startTime} className={styles?.date} /> -{" "}
+        <ReferralProgramPeriodDate timestamp={endTime} className={styles?.date} />
+      </p>
+    </div>
+  );
+};
+
+export interface ReferralProgramEditionBudgetProps {
+  totalAwardPoolValue: PriceUsdc;
+  styles?: {
+    container?: string;
+    label?: string;
+    value?: string;
+  };
+}
+
+export const ReferralProgramEditionBudget = ({
+  totalAwardPoolValue,
+  styles,
+}: ReferralProgramEditionBudgetProps) => {
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  //TODO: Maybe we already have a function for it? I couldn't find such...
+  // If it turns out we really need this function then it should be moved to /src/utils
+  /**
+   * Converts the parsed currency representation in its smallest unit back to its original value.
+   *
+   * **Note** For large values this parsing may lead to loss of precision
+   *
+   * @param referralProgramTotalAwardShare - a {@link PriceUsdc} object with the amount in the smallest unit (6 decimals)
+   * @returns A number representing the actual amount of the given currency
+   *
+   * @example
+   * Based on the USDC currency
+   * parseReferralProgramCurrency({ currency: "USDC", amount: 123456780n }) // returns 123.4567
+   * parseReferralProgramCurrency({ currency: "USDC", amount: 1000000n }) // returns 1
+   * parseReferralProgramCurrency({ currency: "USDC", amount: 1000n }) // returns 0.001
+   */
+  const parseReferralProgramCurrency = (referralProgramTotalAwardShare: PriceUsdc): number => {
+    const currencyInfo = getCurrencyInfo(referralProgramTotalAwardShare.currency);
+    return Number(referralProgramTotalAwardShare.amount) / Math.pow(10, currencyInfo.decimals);
+  };
+
+  return (
+    <div
+      className={cn(
+        styles?.container ??
+          "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
+      )}
+    >
+      <GenericTooltip
+        tooltipOffset={0}
+        content={<p className="max-w-[140px]">Estimated value of $ENS awards in USD</p>}
+      >
+        <p
+          className={cn(
+            styles?.label ??
+              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
+          )}
+        >
+          Budget
+        </p>
+      </GenericTooltip>
+      <p
+        className={cn(
+          styles?.value ?? "text-sm leading-normal font-medium text-black max-sm:text-right",
+        )}
+      >
+        {currencyFormatter.format(parseReferralProgramCurrency(totalAwardPoolValue))} USD
+      </p>
+    </div>
+  );
+};
+
+export interface ReferralProgramEditionRulesProps {
+  rulesUrl: URL;
+  styles?: {
+    container?: string;
+    label?: string;
+  };
+}
+
+export const ReferralProgramEditionRules = ({
+  rulesUrl,
+  styles,
+}: ReferralProgramEditionRulesProps) => {
+  return (
+    <div
+      className={cn(
+        styles?.container ??
+          "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
+      )}
+    >
+      <GenericTooltip
+        tooltipOffset={0}
+        content={<p className="max-w-[140px]">All rules of the program in detail.</p>}
+      >
+        <p
+          className={cn(
+            styles?.label ??
+              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
+          )}
+        >
+          Rules
+        </p>
+      </GenericTooltip>
+      <a
+        href={rulesUrl.href}
+        className="text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%] max-sm:text-right"
+      >
+        Learn more
+      </a>
+    </div>
   );
 };
 
@@ -305,7 +402,12 @@ export function ReferralProgramEditionCardLoading({
           </GenericTooltip>
           <Skeleton className={cn("w-[76px] h-[14px] mt-[4px] mb-[3px]", loadingStateStyles)} />
         </div>
-        <span className={cn("hidden", !showMobileVariant && "max-sm:hidden sm:flex")}>
+        <span
+          className={cn(
+            "hidden",
+            !showMobileVariant && "max-sm:hidden sm:flex sm:flex-row sm:justify-end",
+          )}
+        >
           <Skeleton className={cn(loadingStateStyles, "h-[22px] w-[60px] rounded-full")} />
         </span>
         <ChevronRightIcon
