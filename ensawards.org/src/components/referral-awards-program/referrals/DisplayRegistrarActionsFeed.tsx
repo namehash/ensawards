@@ -1,4 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { type ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import {
   getEnsManagerNameDetailsUrl,
   LabeledField,
@@ -16,7 +17,7 @@ import {
   type StatefulFetchRegistrarActions,
   StatefulFetchStatusIds,
 } from "@/components/referral-awards-program/referrals/types.ts";
-import { getReferralQualificationInfo } from "@/components/referral-awards-program/referrals/utils.ts";
+import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils";
 import { Badge } from "@/components/ui/badge.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import {
@@ -30,6 +31,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 interface DisplayRegistrarActionsListProps {
   namespaceId: ENSNamespaceId;
   registrarActions: NamedRegistrarAction[];
+  referralProgramEditions: ReferralProgramEditionConfig[];
   showReferrer?: boolean;
 }
 
@@ -39,6 +41,7 @@ interface DisplayRegistrarActionsListProps {
 export function DisplayRegistrarActionsList({
   namespaceId,
   registrarActions,
+  referralProgramEditions,
   showReferrer = true,
 }: DisplayRegistrarActionsListProps) {
   const [animationParent] = useAutoAnimate();
@@ -50,7 +53,11 @@ export function DisplayRegistrarActionsList({
       className="w-full h-fit box-border flex flex-col justify-start items-center gap-3 relative"
     >
       {registrarActions.map((namedRegistrarAction) => {
-        const qualifiedReferralPrograms = getReferralQualificationInfo(namedRegistrarAction);
+        // if the registrar action is qualified for a given referral program edition,
+        // add the program edition's config to the list.
+        const qualifiedReferralPrograms = referralProgramEditions.filter((edition) =>
+          isQualifiedReferral(edition, namedRegistrarAction),
+        );
 
         return (
           <RegistrarActionCardMemo
@@ -78,13 +85,13 @@ export function DisplayRegistrarActionsList({
               },
             }}
             referralProgramField={
-              <LabeledField fieldLabel="Incentive program" className="w-[15%] min-w-[162px]">
+              <LabeledField fieldLabel="Incentive program" className="sm:w-[15%] min-w-[162px]">
                 <div className="w-fit sm:h-[21px] flex flex-row flex-nowrap justify-start items-center gap-2">
                   <p className="text-black font-medium max-sm:text-right">
                     {qualifiedReferralPrograms.length === 0
                       ? "-"
                       : qualifiedReferralPrograms
-                          .map((referralProgram) => referralProgram.name)
+                          .map((referralProgram) => referralProgram.displayName)
                           .join(", ")}
                   </p>
                 </div>
@@ -119,6 +126,7 @@ function DisplayRegistrarActionsListLoading({
 export interface DisplayRegistrarActionsFeedProps {
   namespaceId: ENSNamespaceId;
   registrarActions: StatefulFetchRegistrarActions;
+  referralProgramEditions: ReferralProgramEditionConfig[];
   title: string;
 }
 
@@ -128,6 +136,7 @@ export interface DisplayRegistrarActionsFeedProps {
 export function DisplayRegistrarActionsFeed({
   namespaceId,
   registrarActions,
+  referralProgramEditions,
   title,
 }: DisplayRegistrarActionsFeedProps) {
   switch (registrarActions.fetchStatus) {
@@ -237,6 +246,7 @@ export function DisplayRegistrarActionsFeed({
         <DisplayRegistrarActionsList
           namespaceId={namespaceId}
           registrarActions={registrarActions.registrarActions}
+          referralProgramEditions={referralProgramEditions}
         />
       );
   }

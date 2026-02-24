@@ -1,3 +1,4 @@
+import { getDefaultReferralProgramEditionConfigSet } from "@namehash/ens-referrals/v1";
 import { useMemo, useState } from "react";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
@@ -7,6 +8,7 @@ import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-progra
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
+import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 import { variants } from "./data.ts";
@@ -58,6 +60,9 @@ export function MockDisplayRegistrarActionsFeed() {
               namespaceId={namespaceId}
               title={title}
               registrarActions={selectedVariant}
+              referralProgramEditions={Array.from(
+                getDefaultReferralProgramEditionConfigSet(DEFAULT_ENS_NAMESPACE).values(),
+              )}
             />
           </div>{" "}
         </section>

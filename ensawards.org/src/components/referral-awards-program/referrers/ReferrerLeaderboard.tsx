@@ -3,11 +3,18 @@ import {
   type ReferrerLeaderboardPage,
   ReferrerLeaderboardPageResponseCodes,
 } from "@namehash/ens-referrals";
+import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+import { useNow } from "@namehash/namehash-ui";
+import { fromUnixTime, intlFormat } from "date-fns";
+import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useMemo, useState } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 
-import { LastUpdateTimeLoading } from "@/components/atoms/datetime/LastUpdateTime.tsx";
+import {
+  LastUpdateTime,
+  LastUpdateTimeLoading,
+} from "@/components/atoms/datetime/LastUpdateTime.tsx";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import {
   DisplayPagination,
@@ -16,7 +23,7 @@ import {
   DisplaySimplePaginationLoading,
 } from "@/components/molecules/Pagination.tsx";
 import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
-import { ReferrerLeaderboardLastUpdateTime } from "@/components/referral-awards-program/referrers/utils.tsx";
+import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { scrollWithOffset } from "@/utils/domActions.ts";
@@ -25,11 +32,15 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferrerLeaderboardProps {
   recordsPerPage?: number;
+  referralProgramEditionConfig: ReferralProgramEditionConfig;
 }
 /**
  * Fetches Referrer Leaderboard through ENSNode and displays a single page of the leaderboard and pagination.
  */
-export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboardProps) {
+export function ReferrerLeaderboard({
+  recordsPerPage = 25,
+  referralProgramEditionConfig,
+}: ReferrerLeaderboardProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentRecordsPerPage, setCurrentRecordsPerPage] = useState(recordsPerPage);
   const [totalPages, setTotalPages] = useState(1);
@@ -40,6 +51,13 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
   const client = useMemo(() => new ENSReferralsClient({ url: ensNodeUrl }), [ensNodeUrl]);
   const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
+  // refresh for status changes every minute
+  const now = useNow({ timeToRefresh: secondsInMinute });
+  const hasReferralProgramEditionStarted = useMemo(
+    () => referralProgramEditionConfig.rules.startTime <= now,
+    [referralProgramEditionConfig.rules.startTime, now],
+  );
+
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
   // and reuse this fetch wherever we need
@@ -48,6 +66,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
     setIsLoading(true);
     scrollWithOffset("leaderboard-header", 75);
     try {
+      // TODO: Update this call once the new API is working on one of our instances
       const response = await client.getReferrerLeaderboardPage({
         page: currentPage,
         recordsPerPage: currentRecordsPerPage,
@@ -81,6 +100,29 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
     fetchReferrerLeaderboard();
   }, [currentPage, currentRecordsPerPage]);
 
+  if (!hasReferralProgramEditionStarted) {
+    return (
+      <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
+        <EmptyLeaderboardInfo
+          header={`The ${referralProgramEditionConfig.displayName} edition is not active yet`}
+          description={`The ${referralProgramEditionConfig.displayName} edition begins ${intlFormat(
+            fromUnixTime(referralProgramEditionConfig.rules.startTime),
+            {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              timeZone: "UTC",
+            },
+          )}`}
+          buttonData={{
+            label: "Read the rules",
+            href: referralProgramEditionConfig.rules.rulesUrl.href,
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <ENSNodeProvider
       config={config}
@@ -99,7 +141,7 @@ export function ReferrerLeaderboard({ recordsPerPage = 25 }: ReferrerLeaderboard
             ) : (
               leaderboardData !== null &&
               !fetchErrorMessage && (
-                <ReferrerLeaderboardLastUpdateTime
+                <LastUpdateTime
                   timestamp={leaderboardData.accurateAsOf}
                   className="text-base sm:text-sm"
                 />

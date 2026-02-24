@@ -5,8 +5,7 @@ import { getReferralProgramEditionConfigBySlug } from "@/utils/referralProgram.t
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { ReferrerLeaderboard } from "@/components/referral-awards-program/referrers/ReferrerLeaderboard.tsx";
-import { ReferralProgramEditionCard } from "@/components/atoms/cards/ReferralProgramEditionCard";
-import { TooltipProvider } from "@/components/ui/Tooltip";
+import { ReferralProgramEditionCard } from "@/components/atoms/cards/referralProgramEditionCard";
 
 export const prerender = false;
 
@@ -73,6 +72,9 @@ if (resolvedReferralProgramEditionConfig === undefined) {
   </SubpageHero>
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ReferrerLeaderboard client:load />
+    <ReferrerLeaderboard
+      client:load
+      referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+    />
   </section>
 </Layout>

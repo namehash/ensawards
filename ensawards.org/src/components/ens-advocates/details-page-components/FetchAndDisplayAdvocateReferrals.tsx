@@ -1,5 +1,6 @@
+import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import { millisecondsInMinute } from "date-fns/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type Address, namehash } from "viem";
 
 import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
@@ -8,6 +9,7 @@ import { AdvocateReferralsList } from "@/components/ens-advocates/details-page-c
 import { scrollWithOffset } from "@/utils/domActions.ts";
 import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
+import { fetchReferralProgramEditions } from "@/utils/referralProgram";
 
 interface FetchAndDisplayAdvocateReferralsProps {
   address: Address;
@@ -35,6 +37,14 @@ export function FetchAndDisplayAdvocateReferrals({
     staleTime: millisecondsInMinute,
   });
 
+  const [referralProgramEditions, setReferralProgramEditions] = useState<
+    ReferralProgramEditionConfig[]
+  >([]);
+
+  useEffect(() => {
+    fetchReferralProgramEditions().then(setReferralProgramEditions);
+  }, []);
+
   return (
     <div className="w-full h-fit box-border flex flex-col justify-start items-center gap-6">
       <div className="w-full flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center max-sm:gap-2">
@@ -54,6 +64,7 @@ export function FetchAndDisplayAdvocateReferrals({
         }}
         namespaceId={namespaceId}
         registrarActions={registrarActions}
+        referralProgramEditions={referralProgramEditions}
       />
     </div>
   );

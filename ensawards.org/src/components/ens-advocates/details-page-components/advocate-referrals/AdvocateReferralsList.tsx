@@ -1,3 +1,4 @@
+import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import { RegistrarActionCardLoading } from "@namehash/namehash-ui";
 
 import type { ENSNamespaceId } from "@ensnode/datasources";
@@ -36,6 +37,7 @@ function AdvocateReferralsListLoading({ recordsPerPage }: AdvocateReferralsListL
 export interface AdvocateReferralsListProps {
   namespaceId: ENSNamespaceId;
   registrarActions: StatefulFetchRegistrarActions;
+  referralProgramEditions: ReferralProgramEditionConfig[];
   paginationParams: Required<RequestPageParams>;
   onPrevious: () => void;
   onNext: () => void;
@@ -43,6 +45,7 @@ export interface AdvocateReferralsListProps {
 export function AdvocateReferralsList({
   namespaceId,
   registrarActions,
+  referralProgramEditions,
   paginationParams,
   onNext,
   onPrevious,
@@ -173,6 +176,7 @@ export function AdvocateReferralsList({
                 namespaceId={namespaceId}
                 registrarActions={registrarActions.registrarActions}
                 showReferrer={false}
+                referralProgramEditions={referralProgramEditions}
               />
               <SimplePagination
                 totalPages={registrarActions.pageContext.totalPages}

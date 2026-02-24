@@ -6,10 +6,8 @@ import {
 } from "@namehash/ens-referrals/v1";
 import { Fragment, useEffect, useMemo, useState } from "react";
 
-import {
-  ReferralProgramEditionCard,
-  ReferralProgramEditionCardLoading,
-} from "@/components/atoms/cards/ReferralProgramEditionCard";
+import { ReferralProgramEditionCard } from "@/components/atoms/cards/referralProgramEditionCard";
+import { ReferralProgramEditionCardLoading } from "@/components/atoms/cards/referralProgramEditionCard/loading.tsx";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
@@ -26,6 +24,9 @@ export function ReferralProgramEditionsList() {
 
   // this value should be adjusted as new editions are launched, we could also turn it into an env variable
   const numberOfLoadingStateEditions = 2;
+
+  // TODO: in the future this should be completely powered by the backend (so the fetch is done by the client),
+  // but for now we should used the default get function and only display the holiday awards edition
   async function fetchReferralProgramEditionConfigs() {
     setFetchErrorMessage("");
     setIsLoading(true);

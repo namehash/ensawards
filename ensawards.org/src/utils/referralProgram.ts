@@ -40,3 +40,25 @@ export async function getReferralProgramEditionConfigBySlug(
     return fallback.find((edition) => edition.slug === referralProgramSlug);
   }
 }
+
+export async function fetchReferralProgramEditions(): Promise<ReferralProgramEditionConfig[]> {
+  const fallback = Array.from(
+    getDefaultReferralProgramEditionConfigSet(DEFAULT_ENS_NAMESPACE).values(),
+  );
+
+  try {
+    const client = new ENSReferralsClient({ url: getENSNodeUrl() });
+    const response = await client.getEditionConfigSet();
+
+    return response.responseCode === ReferralProgramEditionConfigSetResponseCodes.Ok
+      ? response.data.editions
+      : fallback;
+  } catch (error) {
+    console.error(
+      "Error fetching referral program:",
+      error,
+      "Falling back to default referral program editions.",
+    );
+    return fallback;
+  }
+}

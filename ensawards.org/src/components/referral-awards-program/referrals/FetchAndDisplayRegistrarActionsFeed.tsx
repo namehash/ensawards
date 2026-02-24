@@ -1,3 +1,5 @@
+import { type ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+import { useEffect, useState } from "react";
 import { namehash } from "viem";
 
 import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
@@ -5,6 +7,7 @@ import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/en
 import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
 import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
+import { fetchReferralProgramEditions } from "@/utils/referralProgram.ts";
 
 export interface FetchAndDisplayRegistrarActionsFeedProps {
   recordsPerPage: number;
@@ -31,11 +34,20 @@ export function FetchAndDisplayRegistrarActionsFeed({
     filters,
   });
 
+  const [referralProgramEditions, setReferralProgramEditions] = useState<
+    ReferralProgramEditionConfig[]
+  >([]);
+
+  useEffect(() => {
+    fetchReferralProgramEditions().then(setReferralProgramEditions);
+  }, []);
+
   return (
     <DisplayRegistrarActionsFeed
       namespaceId={namespaceId}
       title={title}
       registrarActions={registrarActions}
+      referralProgramEditions={referralProgramEditions}
     />
   );
 }
