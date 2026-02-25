@@ -130,8 +130,8 @@ export const ReferralProgramEditionCard = ({
         />
         <span
           className={cn(
-            "hidden min-w-[80px]",
-            !showMobileVariant && "max-sm:hidden flex sm:flex-row sm:justify-end",
+            "min-w-[80px]",
+            !showMobileVariant ? "max-sm:hidden flex sm:flex-row sm:justify-end" : "hidden",
           )}
         >
           <ReferralProgramStatusBadge
@@ -141,8 +141,8 @@ export const ReferralProgramEditionCard = ({
         </span>
         <ChevronRightIcon
           className={cn(
-            "hidden w-6 h-6 text-gray-400 hover:text-gray-500 shrink-0",
-            !showMobileVariant && "max-sm:hidden block",
+            "w-6 h-6 text-gray-400 hover:text-gray-500 shrink-0",
+            !showMobileVariant ? "max-sm:hidden block" : "hidden",
           )}
         />
         <button

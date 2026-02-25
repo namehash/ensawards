@@ -65,8 +65,9 @@ interface LastUpdateTimeLoadingProps {
 }
 export const LastUpdateTimeLoading = ({ className }: LastUpdateTimeLoadingProps) => (
   <div className={cn("inline-flex items-center gap-2 py-1 rounded-full", className)}>
+    <p className={cn("text-sm text-muted-foreground leading-normal font-normal")}>Last updated:</p>
     <span className="size-[6px] shrink-0 rounded-full bg-gray-300" />
-    <div className="w-[108px] h-5 flex items-center">
+    <div className="w-[85px] h-5 flex items-center">
       <Skeleton className="w-full h-1 rounded-full bg-gray-200" />
     </div>
   </div>

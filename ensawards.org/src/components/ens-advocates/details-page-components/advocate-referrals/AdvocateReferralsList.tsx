@@ -122,16 +122,6 @@ export function AdvocateReferralsList({
       );
 
     case StatefulFetchStatusIds.Loading:
-      return (
-        <>
-          <AdvocateReferralsListLoading recordsPerPage={paginationParams.recordsPerPage} />
-          <div className="w-full flex flex-row flex-nowrap justify-between items-center">
-            <Skeleton className="w-[106px] h-9 bg-gray-200 rounded-lg" />
-            <Skeleton className="w-20 h-9 bg-gray-200 rounded-lg" />
-          </div>
-        </>
-      );
-
     case StatefulFetchStatusIds.Connecting:
       return (
         <>
