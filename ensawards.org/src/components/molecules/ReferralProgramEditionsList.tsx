@@ -1,7 +1,6 @@
 import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import {
   ENSReferralsClient,
-  getDefaultReferralProgramEditionConfigSet,
   ReferralProgramEditionConfigSetResponseCodes,
 } from "@namehash/ens-referrals/v1";
 import { Fragment, useEffect, useMemo, useState } from "react";
@@ -10,7 +9,7 @@ import { ReferralProgramEditionCard } from "@/components/atoms/cards/referralPro
 import { ReferralProgramEditionCardLoading } from "@/components/atoms/cards/referralProgramEditionCard/loading.tsx";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { getENSNodeUrl } from "@/utils/env";
-import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
+import { DEFAULT_REFERRAL_PROGRAM_EDITIONS } from "@/utils/referralProgram";
 
 export function ReferralProgramEditionsList() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,38 +22,35 @@ export function ReferralProgramEditionsList() {
   >(null);
 
   // this value should be adjusted as new editions are launched, we could also turn it into an env variable
-  const numberOfLoadingStateEditions = 2;
+  const numberOfLoadingStateEditions = 1;
 
   // TODO: in the future this should be completely powered by the backend (so the fetch is done by the client),
-  // but for now we should used the default get function and only display the holiday awards edition
+  // but for now we should used the default get function and only display the holiday awards edition.
+  // For more details see the TODO @ ensawards.org\src\utils\referralProgram.ts
   async function fetchReferralProgramEditionConfigs() {
     setFetchErrorMessage("");
     setIsLoading(true);
 
     try {
-      const response = await client.getEditionConfigSet();
+      // const response = await client.getEditionConfigSet();
 
-      if (response.responseCode !== ReferralProgramEditionConfigSetResponseCodes.Ok) {
-        console.error(response.errorMessage);
-        setReferralProgramEditionConfigs(null);
-        setFetchErrorMessage("An error occurred while loading the Referral program editions.");
-        setIsLoading(false);
-        return;
-      }
+      // if (response.responseCode !== ReferralProgramEditionConfigSetResponseCodes.Ok) {
+      //   console.error(response.errorMessage);
+      //   setReferralProgramEditionConfigs(null);
+      //   setFetchErrorMessage("An error occurred while loading the Referral program editions.");
+      //   setIsLoading(false);
+      //   return;
+      // }
 
-      setReferralProgramEditionConfigs(response.data.editions);
-      setIsLoading(false);
+      // setReferralProgramEditionConfigs(response.data.editions);
+
+      //TODO: A temporary mock to only display holiday awards edition
+      setReferralProgramEditionConfigs(DEFAULT_REFERRAL_PROGRAM_EDITIONS);
     } catch (error) {
-      console.error(error);
-      setReferralProgramEditionConfigs(null);
-      setFetchErrorMessage("An error occurred while loading the Referral program editions.");
+      // console.error(error);
+      // setReferralProgramEditionConfigs(null);
+      // setFetchErrorMessage("An error occurred while loading the Referral program editions.");
     } finally {
-      //TODO: A temporary mock to show how the display would look like
-      setFetchErrorMessage("");
-      setReferralProgramEditionConfigs(
-        Array.from(getDefaultReferralProgramEditionConfigSet(DEFAULT_ENS_NAMESPACE).values()),
-      );
-      // -----------
       setIsLoading(false);
     }
   }

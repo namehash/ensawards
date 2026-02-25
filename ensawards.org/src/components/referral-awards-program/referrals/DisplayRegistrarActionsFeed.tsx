@@ -22,7 +22,6 @@ import {
 import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils";
 import { Badge } from "@/components/ui/badge.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   formatOmnichainIndexingStatus,
   getEnsAdvocateDetailsRelativePath,
