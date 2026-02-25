@@ -9,9 +9,17 @@ import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegis
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { fetchReferralProgramEditions } from "@/utils/referralProgram.ts";
 
+export interface ReferralLiveFeedTitle {
+  text: string;
+  styles?: {
+    container?: string;
+    text?: string;
+  };
+}
+
 export interface FetchAndDisplayRegistrarActionsFeedProps {
   recordsPerPage: number;
-  title: string;
+  title: ReferralLiveFeedTitle;
 }
 
 /**

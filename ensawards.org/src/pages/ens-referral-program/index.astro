@@ -82,36 +82,31 @@ const backgroundGreyStyles =
     <div
       id="live-feed"
       class={cn(
-        "w-full max-w-[1216px] box-border h-fit min-h-[746px] sm:min-h-[404px] flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-5 " +
+        "w-full max-w-[1216px] box-border h-fit min-h-[746px] sm:min-h-[404px] flex flex-col justify-start items-center sm:items-start gap-3 " +
           "py-6 sm:pt-[80px] sm:pb-[0px] relative z-10 snap-start",
       )}>
-      <div
-        class="flex flex-col flex-nowrap justify-start items-center gap-3 relative z-10">
-        <h3 class={cn(sectionHeaderBaseStyles, "text-center")}>
-          ENS referral live feed
-        </h3>
-        <p class={cn(descriptionStyles, "text-center")}>
-          Watch the latest referrals here as they stream in
-        </p>
-      </div>
-      <div
-        class="w-full flex flex-col justify-start items-center sm:items-start gap-3">
-        <LiveReferralFeed
-          client:load
-          title="ENS referral live feed"
-          recordsPerPage={3}
-        />
-        <a
-          href="/ens-referral-program/live-feed"
-          class={cn(
-            shadcnButtonVariants({
-              variant: "outline",
-              size: "default",
-              className: "cursor-pointer rounded-full text-sm relative",
-            }),
-          )}>View full ENS referral live feed</a
-        >
-      </div>
+      <LiveReferralFeed
+        client:load
+        title={{
+          text: "ENS referral live feed",
+          styles: {
+            container:
+              "w-full h-fit  flex flex-col flex-nowrap justify-start items-center gap-3",
+            text: "text-2xl sm:text-3xl leading-normal font-semibold text-black text-center",
+          },
+        }}
+        recordsPerPage={3}
+      />
+      <a
+        href="/ens-referral-program/live-feed"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "outline",
+            size: "default",
+            className: "cursor-pointer rounded-full text-sm relative",
+          }),
+        )}>View full ENS referral live feed</a
+      >
     </div>
     <div
       class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-center gap-6 sm:gap-[60px] py-6 sm:py-[80px] relative z-10">

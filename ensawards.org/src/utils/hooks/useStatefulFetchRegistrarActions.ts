@@ -151,5 +151,6 @@ export function useStatefulRegistrarActions({
     fetchStatus: StatefulFetchStatusIds.Loaded,
     registrarActions: registrarActionsQuery.data.registrarActions,
     pageContext: registrarActionsQuery.data.pageContext,
+    accurateAsOf: registrarActionsQuery.data.accurateAsOf,
   } satisfies StatefulFetchRegistrarActionsLoaded;
 }

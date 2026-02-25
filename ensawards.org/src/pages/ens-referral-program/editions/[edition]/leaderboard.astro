@@ -6,6 +6,7 @@ import { ReferrerLeaderboard } from "../../../../components/referral-awards-prog
 import { getReferralProgramEditionConfigBySlug } from "../../../../utils/referralProgram";
 import { cn } from "../../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../../../components/ui/shadcnButtonStyles";
+import { ReferralProgramLeaderboardHeroButtons } from "@/components/atoms/ReferralProgramLeaderboardHeroButtons";
 
 export const prerender = false;
 
@@ -44,32 +45,11 @@ if (resolvedReferralProgramEditionConfig === undefined) {
       referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
       showMobileVariant={true}
     />
-    <div
+    <ReferralProgramLeaderboardHeroButtons
+      client:load
       slot="ctaContent"
-      class="flex flex-col sm:flex-row justify-start items-start gap-4">
-      <a
-        href={`/ens-referral-program/rules/${resolvedReferralProgramEditionConfig.slug}`}
-        class={cn(
-          shadcnButtonVariants({
-            variant: "default",
-            size: "default",
-            className:
-              "cursor-pointer rounded-full px-5 h-12 box-border text-black bg-white hover:bg-white/90",
-          }),
-        )}>Learn more</a
-      >
-      <a
-        href="/ens-referral-program/live-feed"
-        class={cn(
-          shadcnButtonVariants({
-            variant: "ghost",
-            size: "default",
-            className:
-              "cursor-pointer rounded-full px-5 h-12 box-border text-white hover:text-white bg-white/10 hover:bg-white/20",
-          }),
-        )}>Live feed</a
-      >
-    </div>
+      referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+    />
   </SubpageHero>
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">

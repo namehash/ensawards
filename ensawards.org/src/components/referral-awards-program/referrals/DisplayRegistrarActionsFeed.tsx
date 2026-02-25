@@ -12,7 +12,9 @@ import type { Address } from "viem";
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type NamedRegistrarAction, OmnichainIndexingStatusIds } from "@ensnode/ensnode-sdk";
 
+import { LastUpdateTime, LastUpdateTimeLoading } from "@/components/atoms/datetime/LastUpdateTime";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import type { ReferralLiveFeedTitle } from "@/components/referral-awards-program/referrals/FetchAndDisplayRegistrarActionsFeed";
 import {
   type StatefulFetchRegistrarActions,
   StatefulFetchStatusIds,
@@ -20,6 +22,7 @@ import {
 import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils";
 import { Badge } from "@/components/ui/badge.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   formatOmnichainIndexingStatus,
   getEnsAdvocateDetailsRelativePath,
@@ -127,7 +130,7 @@ export interface DisplayRegistrarActionsFeedProps {
   namespaceId: ENSNamespaceId;
   registrarActions: StatefulFetchRegistrarActions;
   referralProgramEditions: ReferralProgramEditionConfig[];
-  title: string;
+  title: ReferralLiveFeedTitle;
 }
 
 /**
@@ -139,6 +142,8 @@ export function DisplayRegistrarActionsFeed({
   referralProgramEditions,
   title,
 }: DisplayRegistrarActionsFeedProps) {
+  // TODO: Refactor all utilites (including this component) related to Registrar Actions
+  // to match the newest RegistrarActionsResponse model (in a new, separate PR)
   switch (registrarActions.fetchStatus) {
     case StatefulFetchStatusIds.Connecting:
       // we show nothing to avoid a flash of not essential content
@@ -147,7 +152,7 @@ export function DisplayRegistrarActionsFeed({
     case StatefulFetchStatusIds.Unsupported:
       return (
         <ErrorInfo
-          title={title}
+          title={title.text}
           description={[
             "The Registrar Actions API is unavailable on the connected ENSNode instance.",
             "The Registrar Actions API requires all of the following plugins to be activated:",
@@ -181,7 +186,7 @@ export function DisplayRegistrarActionsFeed({
     case StatefulFetchStatusIds.NotReady:
       return (
         <ErrorInfo
-          title={title}
+          title={title.text}
           description={[
             "The Registrar Actions API on the connected ENSNode instance is not available yet.",
             "The Registrar Actions API will be available once the omnichain indexing status reaches\n" +
@@ -216,14 +221,27 @@ export function DisplayRegistrarActionsFeed({
 
     case StatefulFetchStatusIds.Loading:
       return (
-        <DisplayRegistrarActionsListLoading recordsPerPage={registrarActions.recordsPerPage} />
+        <div className="w-full h-fit flex flex-col justify-start items-center gap-6">
+          <div
+            className={cn(
+              title.styles?.container ??
+                "w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between items-start sm:items-center gap-y-2",
+            )}
+          >
+            <h2 className={cn(title.styles?.text ?? "text-2xl leading-normal font-semibold")}>
+              {title.text}
+            </h2>
+            <LastUpdateTimeLoading />
+          </div>
+          <DisplayRegistrarActionsListLoading recordsPerPage={registrarActions.recordsPerPage} />
+        </div>
       );
 
     case StatefulFetchStatusIds.Error:
       console.error(registrarActions.reason);
       return (
         <ErrorInfo
-          title={title}
+          title={title.text}
           description={["ENSNode connection error occurred. Please try again later."]}
         >
           <button
@@ -243,11 +261,29 @@ export function DisplayRegistrarActionsFeed({
 
     case StatefulFetchStatusIds.Loaded:
       return (
-        <DisplayRegistrarActionsList
-          namespaceId={namespaceId}
-          registrarActions={registrarActions.registrarActions}
-          referralProgramEditions={referralProgramEditions}
-        />
+        <div className="w-full h-fit flex flex-col justify-start items-center gap-6">
+          <div
+            className={cn(
+              title.styles?.container ??
+                "w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between items-start sm:items-center gap-y-2",
+            )}
+          >
+            <h2 className={cn(title.styles?.text ?? "text-2xl leading-normal font-semibold")}>
+              {title.text}
+            </h2>
+            {registrarActions.accurateAsOf && (
+              <LastUpdateTime
+                timestamp={registrarActions.accurateAsOf}
+                className="text-base sm:text-sm"
+              />
+            )}
+          </div>
+          <DisplayRegistrarActionsList
+            namespaceId={namespaceId}
+            registrarActions={registrarActions.registrarActions}
+            referralProgramEditions={referralProgramEditions}
+          />
+        </div>
       );
   }
 }

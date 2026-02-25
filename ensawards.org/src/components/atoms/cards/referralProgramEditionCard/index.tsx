@@ -141,7 +141,7 @@ export const ReferralProgramEditionCard = ({
               variant: "secondary",
               size: "default",
               className: cn(
-                "sm:hidden cursor-pointer rounded-full self-stretch pt-1",
+                "sm:hidden cursor-pointer rounded-full self-stretch",
                 showMobileVariant && "hidden",
               ),
             }),

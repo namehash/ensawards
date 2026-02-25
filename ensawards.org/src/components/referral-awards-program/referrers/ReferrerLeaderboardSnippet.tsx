@@ -202,7 +202,7 @@ export function ReferrerLeaderboardSnippet({
             leaderboardSnippetData !== null &&
             leaderboardSnippetData.pageContext.totalRecords > snippetSize && (
               <a
-                href="/leaderboards/referrer"
+                href={`/ens-referral-program/editions/${latestActiveReferralProgramEdition?.slug ?? "2025-12"}/leaderboard`}
                 className={cn(
                   shadcnButtonVariants({
                     variant: fullLeaderboardButtonVariant,
@@ -214,7 +214,7 @@ export function ReferrerLeaderboardSnippet({
                   }),
                 )}
               >
-                View full ENS referral leaderboard
+                View full referrer leaderboard
               </a>
             )}
         </div>
