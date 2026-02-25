@@ -36,8 +36,9 @@ export default defineConfig({
     "/defi/uniswap": "/protocol/uniswap-defi",
 
     "/ens-referral-awards": "/ens-referral-program",
-    "/ens-holiday-awards-rules": "/ens-referral-program/rules/2025-12",
+    "/ens-holiday-awards-rules": "/ens-referral-program/editions/2025-12/rules",
     "/ens-referral-live-feed": "/ens-referral-program/live-feed",
+    "/leaderboards/referrer": "/ens-referral-program/editions/2025-12/leaderboard",
   },
 
   adapter: vercel(),

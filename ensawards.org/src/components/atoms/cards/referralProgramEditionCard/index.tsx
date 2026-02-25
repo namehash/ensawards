@@ -42,7 +42,7 @@ export const ReferralProgramEditionCard = ({
         onClick={(event) => {
           const target = event.target as Element;
           if (!target.closest("a") && !showMobileVariant)
-            window.location.href = `/leaderboards/referral-program/${referralProgramEditionConfig.slug}`; //TODO: exact path to be established
+            window.location.href = `/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`;
         }}
         className={cn(
           "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
