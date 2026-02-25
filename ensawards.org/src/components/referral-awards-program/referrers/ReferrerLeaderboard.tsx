@@ -47,9 +47,8 @@ export function ReferrerLeaderboard({
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPage | null>(null);
-  const ensNodeUrl = getENSNodeUrl();
-  const client = useMemo(() => new ENSReferralsClient({ url: ensNodeUrl }), [ensNodeUrl]);
-  const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
+  const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
+  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   // refresh for status changes every minute
   const now = useNow({ timeToRefresh: secondsInMinute });
@@ -97,8 +96,10 @@ export function ReferrerLeaderboard({
   }
 
   useEffect(() => {
+    if (!hasReferralProgramEditionStarted) return;
+
     fetchReferrerLeaderboard();
-  }, [currentPage, currentRecordsPerPage]);
+  }, [currentPage, currentRecordsPerPage, hasReferralProgramEditionStarted]);
 
   if (!hasReferralProgramEditionStarted) {
     return (

@@ -1,7 +1,5 @@
 import { RelativeTime, useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
-import { DotIcon } from "lucide-react";
-import { useMemo } from "react";
 
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
@@ -26,7 +24,7 @@ export interface LastUpdateTimeProps {
 export const LastUpdateTime = ({ timestamp, className }: LastUpdateTimeProps) => {
   // refresh the update time every minute
   const now = useNow({ timeToRefresh: secondsInMinute });
-  const isLive = useMemo(() => now - timestamp <= secondsInMinute, [now, timestamp]);
+  const isLive = now - timestamp <= secondsInMinute;
 
   if (isLive) {
     return (

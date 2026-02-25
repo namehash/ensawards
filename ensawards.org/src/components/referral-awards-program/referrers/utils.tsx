@@ -1,4 +1,3 @@
-import type { ReferrerLeaderboardPageContext } from "@namehash/ens-referrals";
 import { Award as AwardIcon } from "lucide-react";
 
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";

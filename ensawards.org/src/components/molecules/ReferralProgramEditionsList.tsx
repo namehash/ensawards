@@ -14,8 +14,7 @@ import { DEFAULT_REFERRAL_PROGRAM_EDITIONS } from "@/utils/referralProgram";
 export function ReferralProgramEditionsList() {
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const ensNodeUrl = getENSNodeUrl();
-  const client = useMemo(() => new ENSReferralsClient({ url: ensNodeUrl }), [ensNodeUrl]);
+  const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
 
   const [referralProgramEditionConfigs, setReferralProgramEditionConfigs] = useState<
     ReferralProgramEditionConfig[] | null

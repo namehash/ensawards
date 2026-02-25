@@ -16,7 +16,7 @@ import ReferralProgramsHero from "@/components/referral-awards-program/ReferralP
 import { LiveReferralFeed } from "@/components/referral-awards-program/referrals/LiveReferralFeed";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import Layout from "../../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 
 // TODO: Structural changes planned in near future,
 // for more details see: https://www.figma.com/design/MMOsEIKk08Zzci2IssqBIv?node-id=2783-26615&m=dev#1571838160
@@ -68,13 +68,12 @@ const backgroundGreyStyles =
 
 <Layout
   pageMetadata={{
-    title: "ENSAwards: ENS Referral Awards",
-    description:
-      "Earn rewards for referring .eth name registrations and renewals. Join the ENS Referral Awards program.",
+    title: "ENSAwards: ENS Referral Program",
+    description: "Grow .eth name registrations and renewals. Earn $ENS. ",
     url: "https://ensawards.org/ens-referral-program",
-    ogImage: "https://ensawards.org/holiday-referral-awards_og_image.png",
+    ogImage: "https://ensawards.org/ens_referral_program_og_image.png",
     twitterImage:
-      "https://ensawards.org/holiday-referral-awards_twitter_og_image.png",
+      "https://ensawards.org/ens_referral_program_twitter_og_image.png",
   }}>
   <ReferralProgramsHero />
   <section

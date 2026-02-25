@@ -19,7 +19,7 @@ export function isQualifiedReferral(
     return false;
 
   // Check if the registrar action associated with the same subregistry
-  // as the incentive program rules
+  // as the referral program edition's rules
   if (
     !accountIdEqual(
       registrarAction.action.registrationLifecycle.subregistry.subregistryId,

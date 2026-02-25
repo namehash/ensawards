@@ -62,9 +62,8 @@ export function ReferrerLeaderboardSnippet({
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardSnippetData, setLeaderboardSnippetData] =
     useState<ReferrerLeaderboardPage | null>(null);
-  const ensNodeUrl = getENSNodeUrl();
-  const client = useMemo(() => new ENSReferralsClient({ url: ensNodeUrl }), [ensNodeUrl]);
-  const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
+  const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
+  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -98,7 +97,7 @@ export function ReferrerLeaderboardSnippet({
 
   useEffect(() => {
     fetchReferrerLeaderboard();
-  }, [now, latestActiveReferralProgramEdition]);
+  }, [now]);
 
   useEffect(() => {
     fetchReferralProgramEditions().then((editions) => {
@@ -109,6 +108,9 @@ export function ReferrerLeaderboardSnippet({
       // which is guaranteed to exist from default edition config set.
       if (startedEditions.length === 0) {
         const fallbackEdition = editions[0];
+
+        if (!fallbackEdition) return;
+
         setLatestActiveReferralProgramEdition(fallbackEdition);
         setLatestReferralProgramEditionStatus(
           calcReferralProgramStatus(fallbackEdition.rules, now),

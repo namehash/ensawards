@@ -7,7 +7,6 @@ import type { ReactElement } from "react";
 import { ReferrerCard, ReferrerCardLoading } from "@/components/atoms/cards/ReferrerCard.tsx";
 import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime";
 import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface DisplayReferrerLeaderboardPageProps {
   leaderboardPageData: ReferrerLeaderboardPage | null;

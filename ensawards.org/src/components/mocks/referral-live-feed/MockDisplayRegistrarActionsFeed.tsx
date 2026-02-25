@@ -64,7 +64,7 @@ export function MockDisplayRegistrarActionsFeed() {
               title={title}
               registrarActions={selectedVariant}
               referralProgramEditions={Array.from(
-                getDefaultReferralProgramEditionConfigSet(DEFAULT_ENS_NAMESPACE).values(),
+                getDefaultReferralProgramEditionConfigSet(namespaceId).values(),
               )}
             />
           </div>{" "}

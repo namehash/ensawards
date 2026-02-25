@@ -5,6 +5,8 @@ import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
+const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
+
 export interface ReferralProgramEditionFieldLoadingProps {
   label: string;
   tooltipText: string;
@@ -20,8 +22,6 @@ export const ReferralProgramEditionFieldLoading = ({
   tooltipText,
   styles,
 }: ReferralProgramEditionFieldLoadingProps) => {
-  const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
-
   return (
     <div
       className={cn(
@@ -52,7 +52,6 @@ export interface ReferralProgramEditionCardLoadingProps {
 export function ReferralProgramEditionCardLoading({
   showMobileVariant = false,
 }: ReferralProgramEditionCardLoadingProps) {
-  const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
   return (
     <TooltipProvider delayDuration={250} skipDelayDuration={0}>
       <div

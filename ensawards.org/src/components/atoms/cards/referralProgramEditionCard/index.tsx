@@ -30,8 +30,10 @@ export const ReferralProgramEditionCard = ({
   const now = useNow({ timeToRefresh: secondsInMinute });
   const referralProgramStatus = useMemo(
     () => calcReferralProgramStatus(referralProgramEditionConfig.rules, now),
-    [now],
+    [now, referralProgramEditionConfig.rules],
   );
+
+  const cardInternalLink = `/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`;
 
   // TODO: Should we include tooltips here as well (same as we do in Referrer cards)?
   return (
@@ -39,10 +41,18 @@ export const ReferralProgramEditionCard = ({
       {/* The "onClick" here is hacky, but allows us to have two different links (as before) and the
       requested hover behavior */}
       <div
+        role={!showMobileVariant ? "link" : undefined}
+        tabIndex={!showMobileVariant ? 0 : undefined}
+        onKeyDown={(event) => {
+          if (showMobileVariant) return;
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            window.location.href = cardInternalLink;
+          }
+        }}
         onClick={(event) => {
           const target = event.target as Element;
-          if (!target.closest("a") && !showMobileVariant)
-            window.location.href = `/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`;
+          if (!target.closest("a") && !showMobileVariant) window.location.href = cardInternalLink;
         }}
         className={cn(
           "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
