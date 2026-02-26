@@ -89,7 +89,5 @@ const keyInformationTextStyles = "text-base font-normal leading-normal text-blac
     }
   }
 
-  document.addEventListener("astro:page-load", () => {
-    setInterval(updateHolidayAwardsCTA, millisecondsInMinute);
-  });
+  setInterval(updateHolidayAwardsCTA, millisecondsInMinute);
 </script>
