@@ -3,6 +3,7 @@ import { calcReferralProgramStatus } from "@namehash/ens-referrals/v1";
 // TODO: Remember to roll back to "v0" / adapt imports
 //  when implementing final version of the logic for the new referral program
 import { useNow } from "@namehash/namehash-ui";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { secondsInMinute } from "date-fns/constants";
 import { ChevronRightIcon } from "lucide-react";
 import { useMemo } from "react";
@@ -11,10 +12,9 @@ import type { PriceUsdc, UnixTimestamp } from "@ensnode/ensnode-sdk";
 import { getCurrencyInfo } from "@ensnode/ensnode-sdk";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
-import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramTimeline.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { getEnsAwardsBaseUrl } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferralProgramEditionCardProps {
@@ -33,134 +33,106 @@ export const ReferralProgramEditionCard = ({
     [now, referralProgramEditionConfig.rules],
   );
 
-  const cardInternalLink = `/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`;
-
-  // TODO: Should we include tooltips here as well (same as we do in Referrer cards)?
   return (
-    <TooltipProvider delayDuration={250} skipDelayDuration={0}>
-      {/* The "onClick" here is hacky, but allows us to have two different links (as before) and the
-      requested hover behavior */}
+    <a
+      href={`/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`}
+      target="_self"
+      className={cn(
+        "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
+        "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10",
+        !showMobileVariant &&
+          "sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
+      )}
+    >
       <div
-        role={!showMobileVariant ? "link" : undefined}
-        tabIndex={!showMobileVariant ? 0 : undefined}
-        onKeyDown={(event) => {
-          if (showMobileVariant) return;
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            window.location.href = cardInternalLink;
-          }
-        }}
-        onClick={(event) => {
-          const target = event.target as Element;
-          if (!target.closest("a") && !showMobileVariant) window.location.href = cardInternalLink;
-        }}
         className={cn(
-          "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
-          "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10",
-          !showMobileVariant &&
-            "sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
+          "w-full flex flex-row justify-between items-start gap-5 pb-1",
+          !showMobileVariant && "sm:hidden",
         )}
       >
-        <div
-          className={cn(
-            "w-full flex flex-row justify-between items-start gap-5 pb-1",
-            !showMobileVariant && "sm:hidden",
-          )}
-        >
-          <h3 className="text-lg leading-normal font-semibold text-black text-ellipsis">
-            {referralProgramEditionConfig.displayName}
-          </h3>
-          <ReferralProgramStatusBadge status={referralProgramStatus} />
-        </div>
-        <h3
-          className={cn(
-            "hidden w-2/5 text-lg leading-normal font-semibold text-black text-ellipsis",
-            !showMobileVariant && "sm:block",
-          )}
-        >
+        <h3 className="text-lg leading-normal font-semibold text-black text-ellipsis">
           {referralProgramEditionConfig.displayName}
         </h3>
-        <ReferralProgramEditionTimePeriod
-          startTime={referralProgramEditionConfig.rules.startTime}
-          endTime={referralProgramEditionConfig.rules.endTime}
-          styles={{
-            container: cn(
-              "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
-              !showMobileVariant &&
-                "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
-            ),
-            label: cn(
-              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
-              !showMobileVariant && "cursor-pointer",
-            ),
-            value: cn(
-              "text-sm leading-normal font-medium text-black cursor-pointer max-sm:text-right",
-              showMobileVariant && "text-right cursor-default",
-            ),
-            date: cn("cursor-pointer", showMobileVariant && "cursor-default"),
-          }}
-        />
-        <ReferralProgramEditionBudget
-          totalAwardPoolValue={referralProgramEditionConfig.rules.totalAwardPoolValue}
-          styles={{
-            container: cn(
-              "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
-              !showMobileVariant &&
-                "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
-            ),
-            label: cn(
-              "text-muted-foreground text-sm leading-normal font-normal",
-              !showMobileVariant && "cursor-pointer",
-            ),
-          }}
-        />
-        <ReferralProgramEditionRules
-          rulesUrl={referralProgramEditionConfig.rules.rulesUrl}
-          styles={{
-            container: cn(
-              "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
-              !showMobileVariant &&
-                "sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
-            ),
-            label: cn(
-              "text-muted-foreground text-sm leading-normal font-normal",
-              !showMobileVariant && "cursor-pointer",
-            ),
-          }}
-        />
-        <span
-          className={cn(
-            "min-w-[80px]",
-            !showMobileVariant ? "max-sm:hidden flex sm:flex-row sm:justify-end" : "hidden",
-          )}
-        >
-          <ReferralProgramStatusBadge
-            status={referralProgramStatus}
-            className={cn("cursor-pointer", showMobileVariant && "cursor-default")}
-          />
-        </span>
-        <ChevronRightIcon
-          className={cn(
-            "w-6 h-6 text-gray-400 hover:text-gray-500 shrink-0",
-            !showMobileVariant ? "max-sm:hidden block" : "hidden",
-          )}
-        />
-        <button
-          className={cn(
-            shadcnButtonVariants({
-              variant: "secondary",
-              size: "default",
-              className: cn(
-                "sm:hidden cursor-pointer rounded-full self-stretch",
-                showMobileVariant && "hidden",
-              ),
-            }),
-          )}
-        >
-          View leaderboard
-        </button>
+        <ReferralProgramStatusBadge status={referralProgramStatus} />
       </div>
-    </TooltipProvider>
+      <h3
+        className={cn(
+          "hidden w-2/5 text-lg leading-normal font-semibold text-black text-ellipsis",
+          !showMobileVariant && "sm:block",
+        )}
+      >
+        {referralProgramEditionConfig.displayName}
+      </h3>
+      <ReferralProgramEditionTimePeriod
+        startTime={referralProgramEditionConfig.rules.startTime}
+        endTime={referralProgramEditionConfig.rules.endTime}
+        styles={{
+          container: cn(
+            "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
+            !showMobileVariant &&
+              "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
+          ),
+          label: cn(
+            "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
+            !showMobileVariant ? "cursor-pointer" : "cursor-default",
+          ),
+          value: cn(
+            "text-sm leading-normal font-medium text-black cursor-pointer max-sm:text-right",
+            showMobileVariant ? "text-right cursor-default" : "cursor-pointer",
+          ),
+          date: cn("cursor-pointer", showMobileVariant && "cursor-default"),
+        }}
+      />
+      <ReferralProgramEditionBudget
+        totalAwardPoolValue={referralProgramEditionConfig.rules.totalAwardPoolValue}
+        styles={{
+          container: cn(
+            "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
+            !showMobileVariant &&
+              "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
+          ),
+          label: cn(
+            "text-muted-foreground text-sm leading-normal font-normal",
+            !showMobileVariant ? "cursor-pointer" : "cursor-default",
+          ),
+          value: cn(
+            "text-sm leading-normal font-medium text-black max-sm:text-right cursor-default",
+            !showMobileVariant ? "cursor-pointer" : "cursor-default",
+          ),
+        }}
+      />
+      <span
+        className={cn(
+          "min-w-[80px]",
+          !showMobileVariant ? "max-sm:hidden flex sm:flex-row sm:justify-end" : "hidden",
+        )}
+      >
+        <ReferralProgramStatusBadge
+          status={referralProgramStatus}
+          className={cn("cursor-pointer", showMobileVariant && "cursor-default")}
+        />
+      </span>
+      <ChevronRightIcon
+        className={cn(
+          "w-6 h-6 text-gray-400 hover:text-gray-500 shrink-0",
+          !showMobileVariant ? "max-sm:hidden block" : "hidden",
+        )}
+      />
+      <button
+        className={cn(
+          shadcnButtonVariants({
+            variant: "secondary",
+            size: "default",
+            className: cn(
+              "sm:hidden cursor-pointer rounded-full self-stretch",
+              showMobileVariant && "hidden",
+            ),
+          }),
+        )}
+      >
+        View leaderboard
+      </button>
+    </a>
   );
 };
 
@@ -181,35 +153,32 @@ export const ReferralProgramEditionTimePeriod = ({
   styles,
 }: ReferralProgramEditionTimePeriodProps) => {
   return (
-    <div
-      className={cn(
-        styles?.container ??
-          "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
-      )}
-    >
-      <GenericTooltip
-        tooltipOffset={0}
-        content={<p className="max-w-[140px]">Start date and end date of the program.</p>}
+    <TooltipProvider delayDuration={250} skipDelayDuration={0}>
+      <div
+        className={cn(
+          styles?.container ??
+            "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
+        )}
       >
         <p
           className={cn(
             styles?.label ??
-              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
+              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default",
           )}
         >
           Time period
         </p>
-      </GenericTooltip>
-      <p
-        className={cn(
-          styles?.value ??
-            "text-sm leading-normal font-medium text-black cursor-default max-sm:text-right",
-        )}
-      >
-        <ReferralProgramPeriodDate timestamp={startTime} className={styles?.date} /> -{" "}
-        <ReferralProgramPeriodDate timestamp={endTime} className={styles?.date} />
-      </p>
-    </div>
+        <p
+          className={cn(
+            styles?.value ??
+              "text-sm leading-normal font-medium text-black cursor-default max-sm:text-right",
+          )}
+        >
+          <ReferralProgramPeriodDate timestamp={startTime} className={styles?.date} /> -{" "}
+          <ReferralProgramPeriodDate timestamp={endTime} className={styles?.date} />
+        </p>
+      </div>
+    </TooltipProvider>
   );
 };
 
@@ -259,22 +228,18 @@ export const ReferralProgramEditionBudget = ({
           "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
       )}
     >
-      <GenericTooltip
-        tooltipOffset={0}
-        content={<p className="max-w-[140px]">Estimated value of $ENS awards in USD</p>}
-      >
-        <p
-          className={cn(
-            styles?.label ??
-              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
-          )}
-        >
-          Budget
-        </p>
-      </GenericTooltip>
       <p
         className={cn(
-          styles?.value ?? "text-sm leading-normal font-medium text-black max-sm:text-right",
+          styles?.label ??
+            "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default",
+        )}
+      >
+        Budget
+      </p>
+      <p
+        className={cn(
+          styles?.value ??
+            "text-sm leading-normal font-medium text-black max-sm:text-right cursor-default",
         )}
       >
         {currencyFormatter.format(parseReferralProgramCurrency(totalAwardPoolValue))} USD
@@ -302,19 +267,14 @@ export const ReferralProgramEditionRules = ({
           "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch",
       )}
     >
-      <GenericTooltip
-        tooltipOffset={0}
-        content={<p className="max-w-[140px]">All rules of the program in detail.</p>}
+      <p
+        className={cn(
+          styles?.label ??
+            "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default",
+        )}
       >
-        <p
-          className={cn(
-            styles?.label ??
-              "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
-          )}
-        >
-          Rules
-        </p>
-      </GenericTooltip>
+        Rules
+      </p>
       <a
         href={rulesUrl.href}
         className="text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%] max-sm:text-right"

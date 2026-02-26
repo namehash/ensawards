@@ -4,7 +4,6 @@ import { LiveReferralFeed } from "../../components/referral-awards-program/refer
 import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
 import Layout from "../../layouts/Layout.astro";
 import { cn } from "../../utils/tailwindClassConcatenation";
-import { ReferrerLeaderboardSnippet } from "../../components/referral-awards-program/referrers/ReferrerLeaderboardSnippet";
 ---
 
 <Layout
@@ -39,7 +38,7 @@ import { ReferrerLeaderboardSnippet } from "../../components/referral-awards-pro
             className:
               "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
           }),
-        )}>Learn about ENS referral program</a
+        )}>Learn about the ENS referral program</a
       >
     </div>
   </SubpageHero>
@@ -59,6 +58,5 @@ import { ReferrerLeaderboardSnippet } from "../../components/referral-awards-pro
         recordsPerPage={50}
       />
     </div>
-    <ReferrerLeaderboardSnippet client:load header="Top Referrers" />
   </section>
 </Layout>

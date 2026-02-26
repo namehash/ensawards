@@ -426,8 +426,10 @@ const QuantityInfo = ({
     <p className={cn("text-sm leading-normal font-medium", className)}>
       {prefix && prefix}{" "}
       {numberFormatter.format((paginationParams.page - 1) * paginationParams.recordsPerPage + 1)}-
-      {numberFormatter.format(paginationParams.page * paginationParams.recordsPerPage)} of{" "}
-      {numberFormatter.format(totalRecords)} {recordAlias.plural}
+      {numberFormatter.format(
+        Math.min(paginationParams.page * paginationParams.recordsPerPage, totalRecords),
+      )}{" "}
+      of {numberFormatter.format(totalRecords)} {recordAlias.plural}
     </p>
   );
 };

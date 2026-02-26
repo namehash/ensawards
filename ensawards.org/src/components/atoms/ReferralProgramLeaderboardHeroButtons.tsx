@@ -36,7 +36,7 @@ export const ReferralProgramLeaderboardHeroButtons = ({
           }),
         )}
       >
-        Learn more
+        View edition rules
       </a>
       {referralProgramStatus === ReferralProgramStatuses.Active && (
         <a

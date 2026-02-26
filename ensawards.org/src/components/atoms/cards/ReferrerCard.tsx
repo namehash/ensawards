@@ -172,7 +172,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
           {numberFormatter.format(referrer.finalScore)}
         </p>
       </div>
-      <div className="sm:min-w-[180px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+      <div className="sm:min-w-[190px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <GenericTooltip
           tooltipOffset={0}
           content={
@@ -213,12 +213,7 @@ export function ReferrerCard({ referrer, aggregatedMetrics, referralRules }: Ref
           tooltipOffset={0}
           content={<p className="max-w-[140px]">Estimated value of $ENS awards in USD</p>}
         >
-          <p className="text-muted-foreground text-sm leading-normal font-normal">
-            {calcReferralProgramStatus(referralRules, now) === ReferralProgramStatuses.Closed
-              ? "Estimated"
-              : "Tentative"}{" "}
-            awards
-          </p>
+          <p className="text-muted-foreground text-sm leading-normal font-normal">Awards</p>
         </GenericTooltip>
         <p
           className={cn(
@@ -350,14 +345,14 @@ export const ReferrerCardLoading = ({ rank }: Omit<RankProps, "className" | "isQ
         <p className="text-muted-foreground text-sm leading-normal font-normal">Final score</p>
         <div className={cn(loadingStateStyles, "w-[48px] h-[14px] mt-[4px] mb-[3px]")} />
       </div>
-      <div className="sm:min-w-[180px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+      <div className="sm:min-w-[190px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal">Award pool share</p>
         <div
           className={cn(loadingStateStyles, "w-[48px] sm:w-[130px] h-[14px] mt-[4px] mb-[3px]")}
         />
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Tentative awards</p>
+        <p className="text-muted-foreground text-sm leading-normal font-normal">Awards</p>
         <div className={cn(loadingStateStyles, "w-[88px] h-[14px] mt-[4px] mb-[3px]")} />
       </div>
     </div>

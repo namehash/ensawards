@@ -32,6 +32,7 @@ import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-pro
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
+import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 import { fetchReferralProgramEditions } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
@@ -39,7 +40,6 @@ import { ReferralProgramEditionFieldLoading } from "../../atoms/cards/referralPr
 
 export interface ReferrerLeaderboardSnippetProps {
   snippetSize?: number;
-  header?: string;
   showLastUpdateTime?: boolean;
   fullLeaderboardButtonVariant?: VariantProps<typeof shadcnButtonVariants>["variant"];
 }
@@ -48,7 +48,6 @@ export interface ReferrerLeaderboardSnippetProps {
  * and displays them as a snippet of the whole leaderboard.
  */
 export function ReferrerLeaderboardSnippet({
-  header,
   snippetSize = 3,
   showLastUpdateTime = false,
   fullLeaderboardButtonVariant = "ghost",
@@ -140,11 +139,10 @@ export function ReferrerLeaderboardSnippet({
     >
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start max-sm:items-center items-start gap-2 sm:gap-3 relative z-10">
-          {header && (
-            <h3 className="w-full text-left text-xl sm:text-2xl leading-normal font-semibold text-black">
-              {header}
-            </h3>
-          )}
+          <h3 className="w-full text-left text-xl sm:text-2xl leading-normal font-semibold text-black">
+            Top {latestActiveReferralProgramEdition?.displayName ?? "Referral program edition"}{" "}
+            Referrers
+          </h3>
           {latestActiveReferralProgramEdition && (
             <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start items-center gap-2 sm:gap-10 py-1 sm:pt-1 sm:pb-3">
               <ReferralProgramEditionInfo
@@ -216,7 +214,8 @@ export function ReferrerLeaderboardSnippet({
                   }),
                 )}
               >
-                View full referrer leaderboard
+                View full {latestActiveReferralProgramEdition?.displayName ?? ""} referrer
+                leaderboard
               </a>
             )}
         </div>
@@ -241,7 +240,6 @@ const ReferralProgramEditionInfo = ({
       {isLoading ? (
         <ReferralProgramEditionFieldLoading
           label="Time period"
-          tooltipText="Start date and end date of the program."
           styles={{
             skeleton: "w-[185px] h-[14px] mt-[4px] mb-[3px]",
           }}
@@ -255,7 +253,6 @@ const ReferralProgramEditionInfo = ({
       {isLoading ? (
         <ReferralProgramEditionFieldLoading
           label="Budget"
-          tooltipText="Estimated value of $ENS awards in USD"
           styles={{
             skeleton: "w-[91px] h-[14px] mt-[4px] mb-[3px]",
           }}
@@ -266,33 +263,28 @@ const ReferralProgramEditionInfo = ({
         />
       )}
       {isLoading ? (
-        <ReferralProgramEditionFieldLoading
-          label="Rules"
-          tooltipText="All rules of the program in detail."
-        />
+        <ReferralProgramEditionFieldLoading label="Rules" />
       ) : (
-        <ReferralProgramEditionRules rulesUrl={referralProgramEdition.rules.rulesUrl} />
+        <ReferralProgramEditionRules
+          rulesUrl={
+            new URL(
+              `${getEnsAwardsBaseUrl()}/ens-referral-program/editions/${referralProgramEdition.slug}/rules`,
+            )
+          }
+        />
       )}
       {isLoading ? (
         <ReferralProgramEditionFieldLoading
           label="Status"
-          tooltipText="Current status of the referral program edition."
           styles={{
             skeleton: "h-[22px] w-[60px] rounded-full",
           }}
         />
       ) : (
         <div className="flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch">
-          <GenericTooltip
-            tooltipOffset={0}
-            content={
-              <p className="max-w-[140px]">Current status of the referral program edition.</p>
-            }
-          >
-            <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left">
-              Status
-            </p>
-          </GenericTooltip>
+          <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default">
+            Status
+          </p>
           <ReferralProgramStatusBadge status={referralProgramStatus} />
         </div>
       )}
