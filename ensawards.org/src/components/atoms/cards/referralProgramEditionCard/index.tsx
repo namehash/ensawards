@@ -95,7 +95,7 @@ export const ReferralProgramEditionCard = ({
             !showMobileVariant ? "cursor-pointer" : "cursor-default",
           ),
           value: cn(
-            "text-sm leading-normal font-medium text-black max-sm:text-right cursor-default",
+            "text-sm leading-normal font-medium text-black max-sm:text-right",
             !showMobileVariant ? "cursor-pointer" : "cursor-default",
           ),
         }}
@@ -117,7 +117,7 @@ export const ReferralProgramEditionCard = ({
           !showMobileVariant ? "max-sm:hidden block" : "hidden",
         )}
       />
-      <button
+      <div
         className={cn(
           shadcnButtonVariants({
             variant: "secondary",
@@ -130,7 +130,7 @@ export const ReferralProgramEditionCard = ({
         )}
       >
         View leaderboard
-      </button>
+      </div>
     </a>
   );
 };
