@@ -18,8 +18,8 @@ export interface LastUpdateTimeProps {
  * 1) Live - a badge for when the last update was less than a minute ago,
  * 2) X time ago - for when the last update was more than a minute ago, showing the exact time of the last update.
  *
- * @param timestamp - last update of the leaderboard.
- * More details at {@link ReferrerLeaderboardPage.accurateAsOf}
+ * @param timestamp - last update of the leaderboard or registrar actions.
+ * More details at {@link ReferrerLeaderboardPage.accurateAsOf} and {@link RegistrarActionsResponseOk.accurateAsOf}.
  */
 export const LastUpdateTime = ({ timestamp, className }: LastUpdateTimeProps) => {
   // refresh the update time every minute
