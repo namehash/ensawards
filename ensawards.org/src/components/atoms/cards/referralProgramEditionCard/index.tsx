@@ -14,7 +14,6 @@ import { getCurrencyInfo } from "@ensnode/ensnode-sdk";
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramTimeline.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
-import { getEnsAwardsBaseUrl } from "@/utils";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferralProgramEditionCardProps {
