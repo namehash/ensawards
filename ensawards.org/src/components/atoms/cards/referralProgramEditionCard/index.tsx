@@ -3,7 +3,6 @@ import { calcReferralProgramStatus } from "@namehash/ens-referrals/v1";
 // TODO: Remember to roll back to "v0" / adapt imports
 //  when implementing final version of the logic for the new referral program
 import { useNow } from "@namehash/namehash-ui";
-import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { secondsInMinute } from "date-fns/constants";
 import { ChevronRightIcon } from "lucide-react";
 import { useMemo } from "react";
@@ -14,6 +13,7 @@ import { getCurrencyInfo } from "@ensnode/ensnode-sdk";
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramTimeline.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferralProgramEditionCardProps {
@@ -95,7 +95,7 @@ export const ReferralProgramEditionCard = ({
             !showMobileVariant ? "cursor-pointer" : "cursor-default",
           ),
           value: cn(
-            "text-sm leading-normal font-medium text-black max-sm:text-right cursor-default",
+            "text-sm leading-normal font-medium text-black max-sm:text-right",
             !showMobileVariant ? "cursor-pointer" : "cursor-default",
           ),
         }}
@@ -117,7 +117,7 @@ export const ReferralProgramEditionCard = ({
           !showMobileVariant ? "max-sm:hidden block" : "hidden",
         )}
       />
-      <button
+      <div
         className={cn(
           shadcnButtonVariants({
             variant: "secondary",
@@ -130,7 +130,7 @@ export const ReferralProgramEditionCard = ({
         )}
       >
         View leaderboard
-      </button>
+      </div>
     </a>
   );
 };

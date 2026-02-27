@@ -27,7 +27,6 @@ import {
   LastUpdateTimeLoading,
 } from "@/components/atoms/datetime/LastUpdateTime.tsx";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
-import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
@@ -268,7 +267,8 @@ const ReferralProgramEditionInfo = ({
         <ReferralProgramEditionRules
           rulesUrl={
             new URL(
-              `${getEnsAwardsBaseUrl()}/ens-referral-program/editions/${referralProgramEdition.slug}/rules`,
+              `/ens-referral-program/editions/${referralProgramEdition.slug}/rules`,
+              getEnsAwardsBaseUrl(),
             )
           }
         />
