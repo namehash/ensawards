@@ -213,8 +213,7 @@ export function ReferrerLeaderboardSnippet({
                   }),
                 )}
               >
-                View full {latestActiveReferralProgramEdition?.displayName ?? ""} referrer
-                leaderboard
+                View full referrer leaderboard
               </a>
             )}
         </div>
