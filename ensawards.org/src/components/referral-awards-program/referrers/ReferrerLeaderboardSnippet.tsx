@@ -116,13 +116,9 @@ export function ReferrerLeaderboardSnippet({
         return;
       }
 
-      let latestEdition = startedEditions[0];
-
-      for (const edition of startedEditions) {
-        if (edition.rules.startTime > latestEdition.rules.startTime) {
-          latestEdition = edition;
-        }
-      }
+      let latestEdition = startedEditions.reduce((latest, edition) =>
+        edition.rules.startTime > latest.rules.startTime ? edition : latest,
+      );
 
       setLatestActiveReferralProgramEdition(latestEdition);
       setLatestReferralProgramEditionStatus(calcReferralProgramStatus(latestEdition.rules, now));
