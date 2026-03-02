@@ -8,6 +8,45 @@ If you’re here, you likely want to propose changes to our data — perhaps add
 
 Below, you’ll find detailed instructions for each contribution type. If your change doesn’t fit one of these categories, feel free to open a pull request (PR) and describe your proposal there.
 
+### Adding yourself as a `Contributor`
+
+All data models in [@ensawards.org/data](@ensawards.org/data) include a `contributors` field. Its type definition is shown below.
+
+```typescript
+export interface Project {
+  ...
+  contributors: [Contributor, ...Contributor[]];
+}
+
+---
+
+import type { AccountId } from "@ensnode/ensnode-sdk";
+
+export type Contributor = AccountId;
+
+---
+
+/**
+ * Represents an account (contract or EOA) at `address` on chain `chainId`.
+ *
+ * @see https://chainagnostic.org/CAIPs/caip-10
+ */
+export interface AccountId {
+  chainId: ChainId;
+  address: Address;
+}
+```
+
+This is our way to show appreciation to the people who contributed to our cause. When you add yourself to this list your ENS profile will be displayed on our site, giving you some well-deserved social credit 💪.
+
+> TODO: Add a screenshot with the new CTA component.
+
+To add yourself:
+1. Add your `AccountId` to the `contributors` collection in [ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) (if this is your first contribution).
+2. Reference yourself in the contributors array of the entity you are updating.
+
+For reference see [ensawards.org/data/apps/metamask-wallet/index.ts](ensawards.org/data/apps/metamask-wallet/index.ts).
+
 ### Adding a new `Project`
 
 1. Create a new subdirectory in the [ensawards.org/data/projects/](ensawards.org/data/projects) named after the project you want to add. The directory name should be the lowercase project name. If the name contains multiple words, join them with hyphens ("-").
@@ -15,14 +54,15 @@ Below, you’ll find detailed instructions for each contribution type. If your c
 3. Follow its data model that you can look up in the [ensawards.org/data/projects/types.ts](ensawards.org/data/projects/types.ts) file. You can also have a quick glance at it below.
 ```typescript
 export interface Project {
-    id: ProjectId;
-    name: string;
-    description: string;
-    icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-    socials: {
-        website: URL;
-        twitter: URL;
-    };
+  id: ProjectId;
+  name: string;
+  description: string;
+  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  socials: {
+    website: URL;
+    twitter: URL;
+  };
+  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
 }
 ```
 4. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/projects/aave/icon.tsx](ensawards.org/data/projects/aave/icon.tsx).
@@ -46,20 +86,21 @@ For this reason, every new `App` or `Protocol` must be associated with a corresp
 
 ```typescript
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
-    id: ProtocolIdT;
-    protocolSlug: string;
-    protocolType: ProtocolT;
-    project: Project; // each protocol belongs to a single project.
-    name: string;
-    description: string;
-    icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-    socials: {
-        website: URL;
-        twitter: URL;
-        ens?: Name;
-    };
-    ogImagePath?: string;
-    twitterOgImagePath?: string;
+  id: ProtocolIdT;
+  protocolSlug: string;
+  protocolType: ProtocolT;
+  project: Project; // each protocol belongs to a single project.
+  name: string;
+  description: string;
+  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  socials: {
+    website: URL;
+    twitter: URL;
+    ens?: Name;
+  };
+  ogImagePath?: string;
+  twitterOgImagePath?: string;
+  contributors: [Contributor, ...Contributor[]];  // Remember to add yourself as a contributor
 }
 
 export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.DAO> {}
@@ -86,8 +127,9 @@ export type Protocol = DAOProtocol | DeFiProtocol;
 2. Make sure to follow the data model defined in the [ensawards.org/data/protocols/contracts-types.ts](ensawards.org/data/protocols/contracts-types.ts) file.
 ```typescript
 export interface Contract {
-    protocol: Protocol;
-    cachedIdentity: ContractIdentityResolved;
+  protocol: Protocol;
+  cachedIdentity: ContractIdentityResolved;
+  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
 }
 ```
 * In addition to adding entirely new contracts, you may also suggest updates, ex. let us know that a contract has been named.
@@ -100,21 +142,22 @@ export interface Contract {
 3. Follow the corresponding data model available in the [ensawards.org/data/apps/types.ts](ensawards.org/data/apps/types.ts) file.
 ```typescript
 export interface App {
-    id: string;
-    appSlug: string;
-    project: Project; // each app belongs to a single project.
-    name: string;
-    description: string;
-    type: AppType;
-    icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-    benchmarks: AppBenchmark[];
-    socials: {
-        website: URL;
-        twitter: URL;
-        ens?: Name;
-    };
-    ogImagePath?: string;
-    twitterOgImagePath?: string;
+  id: string;
+  appSlug: string;
+  project: Project; // each app belongs to a single project.
+  name: string;
+  description: string;
+  type: AppType;
+  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  benchmarks: AppBenchmark[];
+  socials: {
+    website: URL;
+    twitter: URL;
+    ens?: Name;
+  };
+  ogImagePath?: string;
+  twitterOgImagePath?: string;
+  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
 }
 ```
 > **NOTE**
@@ -139,33 +182,34 @@ Defines a specific requirement that an app or protocol must meet to pass a bench
 2. Make sure to follow its data model defined in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
 export interface BestPracticeAbstract<
-    BestPracticeT extends BestPracticeType,
-    AppliesToT extends BestPracticeTarget,
+  BestPracticeT extends BestPracticeType,
+  AppliesToT extends BestPracticeTarget,
 > {
-    type: BestPracticeT;
-    id: string;
-    bestPracticeSlug: string;
-    name: string;
-    description: string;
-    category: BestPracticeCategory; // each best practice belongs to exactly one category
-    appliesTo: AppliesToT[];
-    technicalDetails: {
-        main: {
-            header: string;
-            content: string;
-        };
-        sides: {
-            header: string;
-            content: string;
-        }[];
+  type: BestPracticeT;
+  id: string;
+  bestPracticeSlug: string;
+  name: string;
+  description: string;
+  category: BestPracticeCategory; // each best practice belongs to exactly one category
+  appliesTo: AppliesToT[];
+  technicalDetails: {
+    main: {
+      header: string;
+      content: string;
     };
+    sides: {
+      header: string;
+      content: string;
+    }[];
+  };
+  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
 }
 
 export interface BestPracticeProtocol
-    extends BestPracticeAbstract<typeof BestPracticeTypes.Protocol, ProtocolType> {}
+  extends BestPracticeAbstract<typeof BestPracticeTypes.Protocol, ProtocolType> {}
 
 export interface BestPracticeApp
-    extends BestPracticeAbstract<typeof BestPracticeTypes.App, AppType> {}
+  extends BestPracticeAbstract<typeof BestPracticeTypes.App, AppType> {}
 
 export type BestPractice = BestPracticeProtocol | BestPracticeApp;
 ```
@@ -186,11 +230,12 @@ export enum CategoryStatus {
 }
 
 export interface BestPracticeCategory {
-    id: string;
-    categorySlug: string;
-    name: string;
-    description: string;
-    status: CategoryStatus;
+  id: string;
+  categorySlug: string;
+  name: string;
+  description: string;
+  status: CategoryStatus;
+  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
 }
 ```
 4. In your PR describe your reasoning for adding it.
@@ -207,21 +252,17 @@ export enum BenchmarkResult {
 }
 
 export interface AppBenchmark {
-    /** The best practice being benchmarked */
-    bestPractice: BestPractice;
-    /** The result of the benchmark */
-    result: BenchmarkResult;
-    /** The account ID of the person who performed the benchmark */
-    benchmarkedBy: AccountId;
-    /** Unix timestamp when the benchmark was performed */
-    benchmarkedAt: UnixTimestamp;
+  /** The best practice being benchmarked */
+  bestPractice: BestPracticeApp;
+  /** The result of the benchmark */
+  result: BenchmarkResult;
+  /** The account ID of the person who performed the latest benchmark */
+  benchmarkedBy: Contributor;
+  /** Unix timestamp when the benchmark was performed */
+  benchmarkedAt: UnixTimestamp;
+  /** All contributors involved in the addition or maintenance of the benchmark's data */
+  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
 }
-```
-3. If you're suggesting an update or adding a new benchmark for the first time you must also create a `benchmarker` profile for yourself inside the [ensawards.org/data/benchmarkers/index.ts](ensawards.org/data/benchmarkers/index.ts) file. Make sure to match the required benchmarker definition.
-```typescript
-export const benchmarkers = {
-    "benchmarked nickname": AccountId,
-} as const satisfies Record<string, AccountId>;
 ```
 
 ## Using `Biome` and `Prettier` together
