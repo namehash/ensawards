@@ -13,6 +13,8 @@ export const ProjectIds = {
   Coinbase: "project-coinbase",
   Blockscout: "project-blockscout",
   Etherscan: "project-etherscan",
+  Cork: "project-cork",
+  Giveth: "project-giveth",
 } as const;
 
 /**
