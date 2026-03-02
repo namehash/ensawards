@@ -47,10 +47,10 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
       return "Want to add best practice? Suggest it for review or add it yourself on GitHub.";
 
     case "benchmark result":
-      return "Benchmark result updates to report? Notify us of the change or update it yourself on GitHub.";
+      return "All benchmarks on ENSAwards are open for public contribution";
 
-    case "dao":
-      return "Want to add a DAO? Suggest the DAO for review or add the DAO review yourself on GitHub.";
+    case "protocol":
+      return "Want to add a protocol? Suggest the protocol for review or add the protocol review yourself on GitHub.";
 
     case "contract":
       return "Contracts to add or update? Notify us of the change or update it yourself on GitHub.";

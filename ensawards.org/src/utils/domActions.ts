@@ -15,8 +15,8 @@ export function openSuggestionOverlay(whatsSuggested: string) {
       document.querySelector("#benchmark-result-overlay")!.classList.remove("hidden");
       break;
 
-    case "dao":
-      document.querySelector("#dao-overlay")!.classList.remove("hidden");
+    case "protocol":
+      document.querySelector("#protocol-overlay")!.classList.remove("hidden");
       break;
 
     case "contract":

@@ -1,10 +1,6 @@
 ---
-import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
-
-import AlertCountdown from "../../../components/atoms/AlertCountdown.astro";
 import ContractNamingBanner from "../../../components/atoms/ContractNamingBanner.astro";
 import BestPracticeCard from "../../../components/atoms/cards/BestPracticeCard.astro";
-import SuggestionCard from "../../../components/atoms/cards/SuggestionCard.astro";
 import EnscribeIcon from "../../../components/atoms/icons/EnscribeIconDark.astro";
 import UnderConstructionBanner from "../../../components/atoms/UnderConstructionBanner.astro";
 import ItemsList from "../../../components/molecules/ItemsList.astro";
@@ -17,6 +13,7 @@ import {
   getBestPracticesByCategory,
   getCategoryBySlug,
 } from "../../../../data/ens-best-practices/utils.ts";
+import { SuggestionCard } from "../../../components/atoms/cards/SuggestionCard.tsx";
 
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
@@ -47,21 +44,6 @@ if (categoryToDisplay !== undefined) {
         description: categoryToDisplay.description,
         url: `https://ensawards.org/ens-best-practices/${category}`,
       }}>
-      <AlertCountdown
-        slot="alertBanner"
-        eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
-        eventText="ENS Holiday Awards ends in"
-        ctaText="Learn more"
-        link="/ens-referral-program"
-        styles={{
-          banner:
-            "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
-          cta: "text-white decoration-white/40 hover:decoration-white",
-          text: "text-white",
-          timer: "text-white",
-          timerLegend: "text-white",
-        }}
-      />
       <SubpageHero
         header={categoryToDisplay.name}
         description={categoryToDisplay.description}
@@ -95,6 +77,12 @@ if (categoryToDisplay !== undefined) {
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px]">
         {categoryToDisplay.id.includes("contract") && <ContractNamingBanner />}
+        <SuggestionCard
+          client:load
+          whatsSuggested="best practice"
+          dataCollection={categoryBestPractices}
+          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${categoryToDisplay.categorySlug}/index.ts`}
+        />
         <ItemsList header="Best practices">
           {categoryBestPractices.map((bestPractice, idx) => (
             <BestPracticeCard
@@ -102,10 +90,6 @@ if (categoryToDisplay !== undefined) {
               bestPractice={bestPractice}
             />
           ))}
-          <SuggestionCard
-            whatsSuggested="best practice"
-            gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${categoryToDisplay.categorySlug}/index.ts`}
-          />
         </ItemsList>
       </section>
     </Layout>
