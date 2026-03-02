@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying apps
+
 import EtherscanProject from "../../projects/etherscan";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -20,6 +23,7 @@ const EtherscanExplorer: App = {
   benchmarks: EtherscanExplorerBenchmarks,
   ogImagePath: "https://ensawards.org/data/apps/etherscan-explorer/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/etherscan-explorer/twitter-og.png",
+  contributors: [],
 };
 
 defineApp(EtherscanExplorer);

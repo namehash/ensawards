@@ -13,6 +13,7 @@ const CorkProject: Project = {
     twitter: new URL("https://x.com/Corkprotocol"),
     website: new URL("https://www.cork.tech/"),
   },
+  contributors: [],
 };
 
 defineProject(CorkProject);

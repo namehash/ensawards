@@ -19,6 +19,7 @@ const contracts: Contract[] = [
       },
       name: "bold.token.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -30,6 +31,7 @@ const contracts: Contract[] = [
         codeName: "boldToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -41,6 +43,7 @@ const contracts: Contract[] = [
         codeName: "boldToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -52,6 +55,7 @@ const contracts: Contract[] = [
         codeName: "boldToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -63,6 +67,7 @@ const contracts: Contract[] = [
         codeName: "boldToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -75,6 +80,7 @@ const contracts: Contract[] = [
       },
       name: "redeem.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -86,6 +92,7 @@ const contracts: Contract[] = [
         codeName: "shared.hintHelpers",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -97,6 +104,7 @@ const contracts: Contract[] = [
         codeName: "shared.multiTroveGetter",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -108,6 +116,7 @@ const contracts: Contract[] = [
         codeName: "shared.exchangeHelpers",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -119,6 +128,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.collToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -130,6 +140,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.addressesRegistry",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -141,6 +152,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.activePool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -153,6 +165,7 @@ const contracts: Contract[] = [
       },
       name: "borrower-ops.eth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -164,6 +177,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.collSurplusPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -175,6 +189,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.defaultPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -186,6 +201,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.sortedTroves",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -198,6 +214,7 @@ const contracts: Contract[] = [
       },
       name: "stability-pool.eth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -210,6 +227,7 @@ const contracts: Contract[] = [
       },
       name: "trove-manager.eth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -222,6 +240,7 @@ const contracts: Contract[] = [
       },
       name: "trove.eth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -233,6 +252,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.metadataNFT",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -244,6 +264,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.priceFeed",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -255,6 +276,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.gasPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -266,6 +288,7 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.wethZapper",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -278,6 +301,7 @@ const contracts: Contract[] = [
       },
       name: "leverage-zapper.eth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -289,6 +313,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.collToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -300,6 +325,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.addressesRegistry",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -311,6 +337,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.activePool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -323,6 +350,7 @@ const contracts: Contract[] = [
       },
       name: "borrower-ops.wsteth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -334,6 +362,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.collSurplusPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -345,6 +374,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.defaultPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -356,6 +386,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.sortedTroves",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -368,6 +399,7 @@ const contracts: Contract[] = [
       },
       name: "stability-pool.wsteth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -380,6 +412,7 @@ const contracts: Contract[] = [
       },
       name: "trove-manager.wsteth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -392,6 +425,7 @@ const contracts: Contract[] = [
       },
       name: "trove.wsteth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -403,6 +437,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.metadataNFT",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -414,6 +449,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.priceFeed",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -425,6 +461,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.gasPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -436,6 +473,7 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.gasCompZapper",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -448,6 +486,7 @@ const contracts: Contract[] = [
       },
       name: "leverage-zapper.wsteth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -459,6 +498,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.collToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -470,6 +510,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.addressesRegistry",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -481,6 +522,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.activePool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -493,6 +535,7 @@ const contracts: Contract[] = [
       },
       name: "borrower-ops.reth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -504,6 +547,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.collSurplusPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -515,6 +559,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.defaultPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -526,6 +571,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.sortedTroves",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -538,6 +584,7 @@ const contracts: Contract[] = [
       },
       name: "stability-pool.reth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -550,6 +597,7 @@ const contracts: Contract[] = [
       },
       name: "trove-manager.reth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -562,6 +610,7 @@ const contracts: Contract[] = [
       },
       name: "trove.reth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -573,6 +622,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.metadataNFT",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -584,6 +634,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.priceFeed",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -595,6 +646,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.gasPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -606,6 +658,7 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.gasCompZapper",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -618,6 +671,7 @@ const contracts: Contract[] = [
       },
       name: "leverage-zapper.reth.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -630,6 +684,7 @@ const contracts: Contract[] = [
       },
       name: "governance.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -641,6 +696,7 @@ const contracts: Contract[] = [
         codeName: "governance.curveUsdcBoldPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -652,6 +708,7 @@ const contracts: Contract[] = [
         codeName: "governance.curveUsdcBoldGauge",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -663,6 +720,7 @@ const contracts: Contract[] = [
         codeName: "governance.curveUsdcBoldInitiative",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -674,6 +732,7 @@ const contracts: Contract[] = [
         codeName: "governance.curveLusdBoldPool",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -685,6 +744,7 @@ const contracts: Contract[] = [
         codeName: "governance.curveLusdBoldGauge",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -696,6 +756,7 @@ const contracts: Contract[] = [
         codeName: "governance.curveLusdBoldInitiative",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -707,6 +768,7 @@ const contracts: Contract[] = [
         codeName: "governance.stakingV1",
       },
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -719,6 +781,7 @@ const contracts: Contract[] = [
       },
       name: "lqty.token.liquity-protocol.eth",
     },
+    contributors: [],
   },
   {
     protocol: LiquityDeFi,
@@ -731,6 +794,7 @@ const contracts: Contract[] = [
       },
       name: "lusd.token.liquity-protocol.eth",
     },
+    contributors: [],
   },
 ];
 

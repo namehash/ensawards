@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying apps
+
 import BlockscoutProject from "../../projects/blockscout";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -19,6 +22,7 @@ const BlockscoutExplorer: App = {
   benchmarks: BlockscoutExplorerBenchmarks,
   ogImagePath: "https://ensawards.org/data/apps/blockscout-explorer/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/blockscout-explorer/twitter-og.png",
+  contributors: [],
 };
 
 defineApp(BlockscoutExplorer);

@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying protocols
+
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import CorkProject from "../../projects/cork";
 import { defineProtocol } from "../registry.ts";
@@ -20,6 +23,7 @@ const CorkDeFi: DeFiProtocol = {
   },
   ogImagePath: "https://ensawards.org/data/protocols/cork-defi/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/cork-defi/twitter-og.png",
+  contributors: [],
 };
 
 defineProtocol(CorkDeFi);

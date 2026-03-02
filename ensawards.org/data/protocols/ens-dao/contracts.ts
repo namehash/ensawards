@@ -19,6 +19,7 @@ const contracts: Contract[] = [
       },
       name: "token.ensdao.eth",
     },
+    contributors: [],
   },
   {
     protocol: ENSDao,
@@ -31,6 +32,7 @@ const contracts: Contract[] = [
       },
       name: "tokenlock.ensdao.eth",
     },
+    contributors: [],
   },
   {
     protocol: ENSDao,
@@ -43,6 +45,7 @@ const contracts: Contract[] = [
       },
       name: "governor.ensdao.eth",
     },
+    contributors: [],
   },
   {
     protocol: ENSDao,
@@ -55,6 +58,7 @@ const contracts: Contract[] = [
       },
       name: "wallet.ensdao.eth",
     },
+    contributors: [],
   },
   {
     protocol: ENSDao,
@@ -67,6 +71,7 @@ const contracts: Contract[] = [
       },
       name: "twap.ensdao.eth",
     },
+    contributors: [],
   },
   {
     protocol: ENSDao,
@@ -79,6 +84,7 @@ const contracts: Contract[] = [
       },
       name: "veto.ensdao.eth",
     },
+    contributors: [],
   },
   {
     protocol: ENSDao,
@@ -91,6 +97,7 @@ const contracts: Contract[] = [
       },
       name: "endowment.ensdao.eth",
     },
+    contributors: [],
   },
 ];
 

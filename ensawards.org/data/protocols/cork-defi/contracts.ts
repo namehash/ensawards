@@ -19,6 +19,7 @@ const contracts: Contract[] = [
       },
       name: "timelock-upgrade.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -31,6 +32,7 @@ const contracts: Contract[] = [
       },
       name: "timelock-admin.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -43,6 +45,7 @@ const contracts: Contract[] = [
       },
       name: "timelock-operational.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -55,6 +58,7 @@ const contracts: Contract[] = [
       },
       name: "constraint-rate-adapter.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -67,6 +71,7 @@ const contracts: Contract[] = [
       },
       name: "constraint-rate-adapter-impl.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -79,6 +84,7 @@ const contracts: Contract[] = [
       },
       name: "whitelist.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -91,6 +97,7 @@ const contracts: Contract[] = [
       },
       name: "whitelist-impl.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -103,6 +110,7 @@ const contracts: Contract[] = [
       },
       name: "controller.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -115,6 +123,7 @@ const contracts: Contract[] = [
       },
       name: "pool-manager.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -127,6 +136,7 @@ const contracts: Contract[] = [
       },
       name: "pool-manager-impl.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -139,6 +149,7 @@ const contracts: Contract[] = [
       },
       name: "shares-factory.phoenix.cork.eth",
     },
+    contributors: [],
   },
   {
     protocol: CorkDeFi,
@@ -151,6 +162,7 @@ const contracts: Contract[] = [
       },
       name: "adapter.phoenix.cork.eth",
     },
+    contributors: [],
   },
 ];
 

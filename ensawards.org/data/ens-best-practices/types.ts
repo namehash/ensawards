@@ -1,3 +1,5 @@
+import type { Contributor } from "data/contributors/types.ts";
+
 import type { AppType } from "../apps/types.ts";
 
 export const BestPracticeTypes = {
@@ -37,6 +39,7 @@ export interface BestPracticeAbstract<
       content: string;
     }[];
   };
+  contributors: [Contributor, ...Contributor[]];
 }
 
 export interface BestPracticeProtocol
@@ -58,4 +61,5 @@ export interface BestPracticeCategory {
   name: string;
   description: string;
   status: CategoryStatus;
+  contributors: [Contributor, ...Contributor[]];
 }

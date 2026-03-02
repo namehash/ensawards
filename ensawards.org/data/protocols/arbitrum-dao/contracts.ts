@@ -18,6 +18,7 @@ const contracts: Contract[] = [
         codeName: "ArbitrumDaoTreasury",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -29,6 +30,7 @@ const contracts: Contract[] = [
         codeName: "ARBGatewayL1",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -40,6 +42,7 @@ const contracts: Contract[] = [
         codeName: "ARBGatewayL2",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -51,6 +54,7 @@ const contracts: Contract[] = [
         codeName: "L1UpgradeExecutor",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -62,6 +66,7 @@ const contracts: Contract[] = [
         codeName: "L1Timelock",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -73,6 +78,7 @@ const contracts: Contract[] = [
         codeName: "CoreGovernor",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -84,6 +90,7 @@ const contracts: Contract[] = [
         codeName: "TreasuryGovernor",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -95,6 +102,7 @@ const contracts: Contract[] = [
         codeName: "ArbOneUpgradeExecutor",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -106,6 +114,7 @@ const contracts: Contract[] = [
         codeName: "L2CoreTimelock",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -117,6 +126,7 @@ const contracts: Contract[] = [
         codeName: "L2TreasuryTimelock",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -128,6 +138,7 @@ const contracts: Contract[] = [
         codeName: "SecurityCouncilL1Emergency",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -139,6 +150,7 @@ const contracts: Contract[] = [
         codeName: "SecurityCouncilL2Emergency",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -150,6 +162,7 @@ const contracts: Contract[] = [
         codeName: "NomineeElectionGovernor",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -161,6 +174,7 @@ const contracts: Contract[] = [
         codeName: "MemberElectionGovernor",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -172,6 +186,7 @@ const contracts: Contract[] = [
         codeName: "Manager",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -183,6 +198,7 @@ const contracts: Contract[] = [
         codeName: "UpgradeExecRouteBuilder",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -194,6 +210,7 @@ const contracts: Contract[] = [
         codeName: "MemberRemovalGovernor",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -205,6 +222,7 @@ const contracts: Contract[] = [
         codeName: "MemberSyncActionL2",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -216,6 +234,7 @@ const contracts: Contract[] = [
         codeName: "MemberSyncActionL1",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -227,6 +246,7 @@ const contracts: Contract[] = [
         codeName: "ConstitutionHash",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -238,6 +258,7 @@ const contracts: Contract[] = [
         codeName: "L1ProxyAdmin",
       },
     },
+    contributors: [],
   },
   {
     protocol: ArbitrumDao,
@@ -249,6 +270,7 @@ const contracts: Contract[] = [
         codeName: "ArbOneProxyAdmin",
       },
     },
+    contributors: [],
   },
 ];
 

@@ -13,6 +13,7 @@ const UniswapProject: Project = {
     website: new URL("https://app.uniswap.org/"),
     twitter: new URL("https://x.com/Uniswap"),
   },
+  contributors: [],
 };
 
 defineProject(UniswapProject);

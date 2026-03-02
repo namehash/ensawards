@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying apps
+
 import MetaMaskProject from "../../projects/metamask";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -20,6 +23,7 @@ const MetaMaskWallet: App = {
   benchmarks: MetaMaskWalletBenchmarks,
   ogImagePath: "https://ensawards.org/data/apps/metamask-wallet/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/metamask-wallet/twitter-og.png",
+  contributors: [],
 };
 
 defineApp(MetaMaskWallet);

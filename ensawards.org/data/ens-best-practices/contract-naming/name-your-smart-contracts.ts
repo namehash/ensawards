@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying best practices
+
 import { defineBestPractice } from "../registry.ts";
 import { type BestPracticeProtocol, BestPracticeTypes, ProtocolTypes } from "../types.ts";
 import ContractNamingCategory from ".";
@@ -33,6 +36,7 @@ const nameYourSmartContracts: BestPracticeProtocol = {
       },
     ],
   },
+  contributors: [],
 };
 
 defineBestPractice(nameYourSmartContracts);

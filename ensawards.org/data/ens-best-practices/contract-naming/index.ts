@@ -11,6 +11,7 @@ const ContractNamingCategory: BestPracticeCategory = {
   name: "Contract naming",
   description: "Improve the UX and security of smart contract interactions.",
   status: CategoryStatus.Active,
+  contributors: [],
 };
 
 defineBestPracticeCategory(ContractNamingCategory);

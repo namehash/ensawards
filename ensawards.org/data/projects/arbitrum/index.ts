@@ -13,6 +13,7 @@ const ArbitrumProject: Project = {
     website: new URL("https://arbitrum.io/"),
     twitter: new URL("https://x.com/arbitrum"),
   },
+  contributors: [],
 };
 
 defineProject(ArbitrumProject);

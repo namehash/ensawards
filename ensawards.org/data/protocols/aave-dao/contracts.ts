@@ -18,6 +18,7 @@ const contracts: Contract[] = [
         codeName: "AaveGovernance",
       },
     },
+    contributors: [],
   },
   {
     protocol: AaveDao,
@@ -29,6 +30,7 @@ const contracts: Contract[] = [
         codeName: "GovernancePowerStrategy",
       },
     },
+    contributors: [],
   },
   {
     protocol: AaveDao,
@@ -40,6 +42,7 @@ const contracts: Contract[] = [
         codeName: "VotingPortalEth",
       },
     },
+    contributors: [],
   },
   {
     protocol: AaveDao,
@@ -51,6 +54,7 @@ const contracts: Contract[] = [
         codeName: "VotingMachine",
       },
     },
+    contributors: [],
   },
   {
     protocol: AaveDao,
@@ -62,6 +66,7 @@ const contracts: Contract[] = [
         codeName: "VotingStrategy",
       },
     },
+    contributors: [],
   },
   {
     protocol: AaveDao,
@@ -73,6 +78,7 @@ const contracts: Contract[] = [
         codeName: "DataWarehouse",
       },
     },
+    contributors: [],
   },
   {
     protocol: AaveDao,
@@ -84,6 +90,7 @@ const contracts: Contract[] = [
         codeName: "ExecutorLvl1",
       },
     },
+    contributors: [],
   },
   {
     protocol: AaveDao,
@@ -95,6 +102,7 @@ const contracts: Contract[] = [
         codeName: "ExecutorLvl2",
       },
     },
+    contributors: [],
   },
   {
     protocol: AaveDao,
@@ -106,6 +114,7 @@ const contracts: Contract[] = [
         codeName: "PayloadsController",
       },
     },
+    contributors: [],
   },
 ];
 

@@ -13,6 +13,7 @@ const AaveProject: Project = {
     website: new URL("https://aave.com/"),
     twitter: new URL("https://x.com/aave"),
   },
+  contributors: [],
 };
 
 defineProject(AaveProject);

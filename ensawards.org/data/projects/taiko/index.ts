@@ -13,6 +13,7 @@ const TaikoProject: Project = {
     website: new URL("https://taiko.xyz/"),
     twitter: new URL("https://x.com/taikoxyz"),
   },
+  contributors: [],
 };
 
 defineProject(TaikoProject);

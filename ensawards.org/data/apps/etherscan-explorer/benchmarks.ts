@@ -3,7 +3,7 @@
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
-import { benchmarkers } from "../../benchmarkers";
+import contributors from "../../contributors";
 import displayNamedSmartContractsL2 from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
 import displayNamedSmartContractsMainnet from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
 import type { AppBenchmark } from "../benchmarks-types.ts";
@@ -13,20 +13,23 @@ const benchmarks: AppBenchmark[] = [
   // {
   //   bestPractice: recognizeAllENSNames,
   //   result: BenchmarkResult.Pass,
-  //   benchmarkedBy: benchmarkers.stevedylandev,
+  //   benchmarkedBy: contributors.stevedylan,
   //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
+  //   contributors: [contributors.stevedylan],
   // },
   {
     bestPractice: displayNamedSmartContractsMainnet,
     result: BenchmarkResult.Pass,
-    benchmarkedBy: benchmarkers.stevedylandev,
+    benchmarkedBy: contributors.stevedylan,
     benchmarkedAt: parseTimestamp("2025-12-08T18:26:20.566Z"),
+    contributors: [contributors.stevedylan],
   },
   {
     bestPractice: displayNamedSmartContractsL2,
     result: BenchmarkResult.Fail,
-    benchmarkedBy: benchmarkers.stevedylandev,
+    benchmarkedBy: contributors.stevedylan,
     benchmarkedAt: parseTimestamp("2025-12-08T18:26:20.566Z"),
+    contributors: [contributors.stevedylan],
   },
 ];
 

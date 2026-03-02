@@ -12,6 +12,7 @@ const RenewNamesCategory: BestPracticeCategory = {
   description:
     "Help your users avoid unintentionally losing the names they love. Renewal reminders and name renewal best practices.",
   status: CategoryStatus.ComingSoon,
+  contributors: [],
 };
 
 defineBestPracticeCategory(RenewNamesCategory);

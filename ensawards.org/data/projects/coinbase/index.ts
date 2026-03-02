@@ -13,6 +13,7 @@ const CoinbaseProject: Project = {
     website: new URL("https://www.coinbase.com/"),
     twitter: new URL("https://x.com/coinbase"),
   },
+  contributors: [],
 };
 
 defineProject(CoinbaseProject);

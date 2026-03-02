@@ -19,6 +19,7 @@ const contracts: Contract[] = [
       },
       name: "givtoken.giv.eth",
     },
+    contributors: [],
   },
   {
     protocol: GivethDeFi,
@@ -31,6 +32,7 @@ const contracts: Contract[] = [
       },
       name: "distro.giv.eth",
     },
+    contributors: [],
   },
   {
     protocol: GivethDeFi,
@@ -46,6 +48,7 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
     },
+    contributors: [],
   },
   {
     protocol: GivethDeFi,
@@ -58,6 +61,7 @@ const contracts: Contract[] = [
       },
       name: "givtoken.giv.eth",
     },
+    contributors: [],
   },
   {
     protocol: GivethDeFi,
@@ -70,6 +74,7 @@ const contracts: Contract[] = [
       },
       name: "distro.giv.eth",
     },
+    contributors: [],
   },
   {
     protocol: GivethDeFi,
@@ -85,6 +90,7 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
     },
+    contributors: [],
   },
   {
     protocol: GivethDeFi,
@@ -97,6 +103,7 @@ const contracts: Contract[] = [
       },
       name: "givpower.giv.eth",
     },
+    contributors: [],
   },
   {
     protocol: GivethDeFi,
@@ -109,6 +116,7 @@ const contracts: Contract[] = [
       },
       name: "devouch.giv.eth",
     },
+    contributors: [],
   },
 ];
 

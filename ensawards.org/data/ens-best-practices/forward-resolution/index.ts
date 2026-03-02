@@ -12,6 +12,7 @@ const ForwardResolutionCategory: BestPracticeCategory = {
   description:
     "Lookup the details of an ENS name, such as its onchain addresses, avatar image, social records, and decentralized website.",
   status: CategoryStatus.ComingSoon,
+  contributors: [],
 };
 
 defineBestPracticeCategory(ForwardResolutionCategory);

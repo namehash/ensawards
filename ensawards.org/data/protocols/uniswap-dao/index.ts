@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying protocols
+
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import UniswapProject from "../../projects/uniswap";
 import { defineProtocol } from "../registry.ts";
@@ -20,6 +23,7 @@ const UniswapDao: DAOProtocol = {
   },
   ogImagePath: "https://ensawards.org/data/protocols/uniswap-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/uniswap-dao/twitter-og.png",
+  contributors: [],
 };
 
 defineProtocol(UniswapDao);

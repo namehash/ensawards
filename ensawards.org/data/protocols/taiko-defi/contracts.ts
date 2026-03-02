@@ -18,6 +18,7 @@ const contracts: Contract[] = [
         codeName: "SharedResolver",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -30,6 +31,7 @@ const contracts: Contract[] = [
       },
       name: "signals.based.taiko.eth",
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -42,6 +44,7 @@ const contracts: Contract[] = [
       },
       name: "bridge.based.taiko.eth",
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -53,6 +56,7 @@ const contracts: Contract[] = [
         codeName: "QuotaManager",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -65,6 +69,7 @@ const contracts: Contract[] = [
       },
       name: "v20.based.taiko.eth",
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -77,6 +82,7 @@ const contracts: Contract[] = [
       },
       name: "v721.based.taiko.eth",
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -89,6 +95,7 @@ const contracts: Contract[] = [
       },
       name: "v1155.based.taiko.eth",
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -100,6 +107,7 @@ const contracts: Contract[] = [
         codeName: "BridgedERC20",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -111,6 +119,7 @@ const contracts: Contract[] = [
         codeName: "BridgedERC721",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -122,6 +131,7 @@ const contracts: Contract[] = [
         codeName: "BridgedERC1155",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -134,6 +144,7 @@ const contracts: Contract[] = [
       },
       name: "inbox.based.taiko.eth",
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -145,6 +156,7 @@ const contracts: Contract[] = [
         codeName: "TaikoWrapper",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -156,6 +168,7 @@ const contracts: Contract[] = [
         codeName: "ComposeVerifier",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -167,6 +180,7 @@ const contracts: Contract[] = [
         codeName: "SgxRethVerifier",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -178,6 +192,7 @@ const contracts: Contract[] = [
         codeName: "SgxGethVerifier",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -189,6 +204,7 @@ const contracts: Contract[] = [
         codeName: "Risc0RethVerifier",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -200,6 +216,7 @@ const contracts: Contract[] = [
         codeName: "SP1RethVerifier",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -211,6 +228,7 @@ const contracts: Contract[] = [
         codeName: "SP1RemoteVerifier",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -222,6 +240,7 @@ const contracts: Contract[] = [
         codeName: "labprover",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -233,6 +252,7 @@ const contracts: Contract[] = [
         codeName: "ForcedInclusionStore",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -244,6 +264,7 @@ const contracts: Contract[] = [
         codeName: "RollupAddressResolver",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -255,6 +276,7 @@ const contracts: Contract[] = [
         codeName: "Risc0Groth16Verifier",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -266,6 +288,7 @@ const contracts: Contract[] = [
         codeName: "AutomataDcapAttestation",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -277,6 +300,7 @@ const contracts: Contract[] = [
         codeName: "SgxGethAutomata",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -288,6 +312,7 @@ const contracts: Contract[] = [
         codeName: "PemCertChainLib",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -299,6 +324,7 @@ const contracts: Contract[] = [
         codeName: "P256Verifier",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDeFi,
@@ -310,6 +336,7 @@ const contracts: Contract[] = [
         codeName: "SigVerifyLib",
       },
     },
+    contributors: [],
   },
 ];
 

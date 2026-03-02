@@ -1,4 +1,5 @@
 import type { JSX } from "astro/jsx-runtime";
+import type { Contributor } from "data/contributors/types";
 
 export const ProjectIds = {
   Ens: "project-ens",
@@ -34,4 +35,5 @@ export interface Project {
     website: URL;
     twitter: URL;
   };
+  contributors: [Contributor, ...Contributor[]];
 }

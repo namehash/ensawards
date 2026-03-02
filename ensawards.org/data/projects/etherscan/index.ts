@@ -12,6 +12,7 @@ const EtherscanProject: Project = {
     website: new URL("https://etherscan.io/"),
     twitter: new URL("https://x.com/etherscan"),
   },
+  contributors: [],
 };
 
 defineProject(EtherscanProject);

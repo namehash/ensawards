@@ -13,6 +13,7 @@ const RainbowProject: Project = {
     website: new URL("https://rainbow.me/"),
     twitter: new URL("https://x.com/rainbowdotme"),
   },
+  contributors: [],
 };
 
 defineProject(RainbowProject);

@@ -11,6 +11,7 @@ const ENSProject: Project = {
     website: new URL("https://ens.domains/"),
     twitter: new URL("https://x.com/ensdomains"),
   },
+  contributors: [],
 };
 
 defineProject(ENSProject);

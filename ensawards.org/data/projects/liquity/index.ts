@@ -12,6 +12,7 @@ const LiquityProject: Project = {
     twitter: new URL("https://x.com/LiquityProtocol"),
     website: new URL("https://www.liquity.org/"),
   },
+  contributors: [],
 };
 
 defineProject(LiquityProject);

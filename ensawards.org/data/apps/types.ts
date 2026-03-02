@@ -1,4 +1,5 @@
 import type { JSX } from "astro/jsx-runtime";
+import type { Contributor } from "data/contributors/types.ts";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
@@ -34,4 +35,5 @@ export interface App {
   };
   ogImagePath?: string;
   twitterOgImagePath?: string;
+  contributors: [Contributor, ...Contributor[]];
 }

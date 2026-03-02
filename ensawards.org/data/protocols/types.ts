@@ -1,4 +1,5 @@
 import type { JSX } from "astro/jsx-runtime";
+import type { Contributor } from "data/contributors/types.ts";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
@@ -61,6 +62,7 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
   };
   ogImagePath?: string;
   twitterOgImagePath?: string;
+  contributors: [Contributor, ...Contributor[]];
 }
 
 export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.DAO> {}

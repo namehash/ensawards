@@ -19,6 +19,7 @@ const contracts: Contract[] = [
       },
       name: "dao.taiko.eth",
     },
+    contributors: [],
   },
   {
     protocol: TaikoDao,
@@ -34,6 +35,7 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/token.taiko.eth"),
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDao,
@@ -45,6 +47,7 @@ const contracts: Contract[] = [
         codeName: "TokenUnlock",
       },
     },
+    contributors: [],
   },
   {
     protocol: TaikoDao,
@@ -57,6 +60,7 @@ const contracts: Contract[] = [
       },
       name: "controller.taiko.eth",
     },
+    contributors: [],
   },
 ];
 

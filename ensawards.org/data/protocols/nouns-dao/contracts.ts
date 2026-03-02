@@ -19,6 +19,7 @@ const contracts: Contract[] = [
         codeName: "NounsAuctionHouseProxy",
       },
     },
+    contributors: [],
   },
   {
     protocol: NounsDao,
@@ -31,6 +32,7 @@ const contracts: Contract[] = [
         codeName: "NounsDataDaoProxy",
       },
     },
+    contributors: [],
   },
   {
     protocol: NounsDao,
@@ -43,6 +45,7 @@ const contracts: Contract[] = [
         codeName: "NounsToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: NounsDao,
@@ -55,6 +58,7 @@ const contracts: Contract[] = [
         codeName: "NounsDaoProxy",
       },
     },
+    contributors: [],
   },
   {
     protocol: NounsDao,
@@ -67,6 +71,7 @@ const contracts: Contract[] = [
         codeName: "NounsRewardsProxy",
       },
     },
+    contributors: [],
   },
   {
     protocol: NounsDao,
@@ -79,6 +84,7 @@ const contracts: Contract[] = [
         codeName: "NounsDescriptorV3",
       },
     },
+    contributors: [],
   },
   {
     protocol: NounsDao,
@@ -91,6 +97,7 @@ const contracts: Contract[] = [
       },
       name: "nouns.eth",
     },
+    contributors: [],
   },
   {
     protocol: NounsDao,
@@ -103,6 +110,7 @@ const contracts: Contract[] = [
         codeName: "NounsStreamFactory",
       },
     },
+    contributors: [],
   },
 ];
 

@@ -13,6 +13,7 @@ const GivethProject: Project = {
     twitter: new URL("https://x.com/giveth"),
     website: new URL("https://giveth.io/"),
   },
+  contributors: [],
 };
 
 defineProject(GivethProject);

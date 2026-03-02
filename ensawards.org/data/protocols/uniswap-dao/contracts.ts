@@ -19,6 +19,7 @@ const contracts: Contract[] = [
         codeName: "UNIToken",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -31,6 +32,7 @@ const contracts: Contract[] = [
       },
       name: "uniswap.eth",
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -43,6 +45,7 @@ const contracts: Contract[] = [
         codeName: "GovernorAlpha",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -54,6 +57,7 @@ const contracts: Contract[] = [
         codeName: "GovernorBravo",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -65,6 +69,7 @@ const contracts: Contract[] = [
         codeName: "UniMerkleDistributor",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -76,6 +81,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewardsFactory",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -87,6 +93,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewards1",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -98,6 +105,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewards2",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -109,6 +117,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewards3",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDao,
@@ -120,6 +129,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewards4",
       },
     },
+    contributors: [],
   },
 ];
 

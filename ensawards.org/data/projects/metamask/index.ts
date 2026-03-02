@@ -12,6 +12,7 @@ const MetaMaskProject: Project = {
     website: new URL("https://metamask.io/"),
     twitter: new URL("https://x.com/MetaMask"),
   },
+  contributors: [],
 };
 
 defineProject(MetaMaskProject);

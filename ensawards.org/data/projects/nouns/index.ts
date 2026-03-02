@@ -13,6 +13,7 @@ const NounsProject: Project = {
     website: new URL("https://nouns.wtf/"),
     twitter: new URL("https://x.com/nounsdao"),
   },
+  contributors: [],
 };
 
 defineProject(NounsProject);

@@ -18,6 +18,7 @@ const contracts: Contract[] = [
         codeName: "PoolManager",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDeFi,
@@ -29,6 +30,7 @@ const contracts: Contract[] = [
         codeName: "TransparentUpgradeableProxy",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDeFi,
@@ -40,6 +42,7 @@ const contracts: Contract[] = [
         codeName: "PositionManager",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDeFi,
@@ -51,6 +54,7 @@ const contracts: Contract[] = [
         codeName: "V4Quoter",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDeFi,
@@ -62,6 +66,7 @@ const contracts: Contract[] = [
         codeName: "StateView",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDeFi,
@@ -73,6 +78,7 @@ const contracts: Contract[] = [
         codeName: "UniversalRouter",
       },
     },
+    contributors: [],
   },
   {
     protocol: UniswapDeFi,
@@ -84,6 +90,7 @@ const contracts: Contract[] = [
         codeName: "Permit2",
       },
     },
+    contributors: [],
   },
 ];
 

@@ -12,6 +12,7 @@ const BlockscoutProject: Project = {
     website: new URL("https://www.blockscout.com/"),
     twitter: new URL("https://x.com/blockscout"),
   },
+  contributors: [],
 };
 
 defineProject(BlockscoutProject);

@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying protocols
+
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import TaikoProject from "../../projects/taiko";
 import { defineProtocol } from "../registry.ts";
@@ -20,6 +23,7 @@ const TaikoDao: DAOProtocol = {
   },
   ogImagePath: "https://ensawards.org/data/protocols/taiko-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/taiko-dao/twitter-og.png",
+  contributors: [],
 };
 
 defineProtocol(TaikoDao);

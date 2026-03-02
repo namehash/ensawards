@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying protocols
+
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import ArbitrumProject from "../../projects/arbitrum";
 import { defineProtocol } from "../registry.ts";
@@ -19,6 +22,7 @@ const ArbitrumDao: DAOProtocol = {
   },
   ogImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/twitter-og.png",
+  contributors: [],
 };
 
 defineProtocol(ArbitrumDao);
