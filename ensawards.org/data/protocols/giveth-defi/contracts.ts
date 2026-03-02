@@ -98,6 +98,18 @@ const contracts: Contract[] = [
       name: "givpower.giv.eth",
     },
   },
+  {
+    protocol: GivethDeFi,
+    cachedIdentity: {
+      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      contract: {
+        address: "0x4F9368DDd665D5652f9786cd57f1b7d7469d95F7",
+        chain: optimism,
+        codeName: "DeVouchResolverUpgradeable",
+      },
+      name: "devouch.giv.eth",
+    },
+  },
 ];
 
 defineContracts(contracts);
