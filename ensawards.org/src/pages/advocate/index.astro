@@ -1,10 +1,8 @@
 ---
-import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
-import { Address } from "viem";
+import { type Address } from "viem";
 
-import { Name } from "@ensnode/ensnode-sdk";
+import { type Name } from "@ensnode/ensnode-sdk";
 
-import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
 import { AdvocateSearchForm } from "../../components/ens-advocates/AdvocateSearchForm";
 import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
@@ -41,20 +39,6 @@ const EXAMPLE_ADVOCATES: AdvocateIdentity[] = [
 
 <Layout>
   <SubpageHero header="Explore ENS Advocates" />
-  <AlertCountdown
-    slot="alertBanner"
-    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
-    eventText="ENS Holiday Awards ends in"
-    ctaText="Learn more"
-    link="/ens-referral-awards"
-    styles={{
-      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
-      cta: "text-white decoration-white/40 hover:decoration-white",
-      text: "text-white",
-      timer: "text-white",
-      timerLegend: "text-white",
-    }}
-  />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
     <div

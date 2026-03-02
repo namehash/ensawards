@@ -69,13 +69,17 @@ export function ReferralProgramTimeline({
 
 interface ReferralProgramPeriodDateProps {
   timestamp: UnixTimestamp;
+  className?: string;
 }
 
-const ReferralProgramPeriodDate = ({ timestamp }: ReferralProgramPeriodDateProps) => {
+export const ReferralProgramPeriodDate = ({
+  timestamp,
+  className,
+}: ReferralProgramPeriodDateProps) => {
   return (
     <Tooltip>
       <TooltipTrigger>
-        <span className="whitespace-nowrap">
+        <span className={cn("whitespace-nowrap", className)}>
           <AbsoluteTime
             timestamp={timestamp}
             options={{

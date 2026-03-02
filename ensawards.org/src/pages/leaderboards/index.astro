@@ -5,16 +5,14 @@ import SubpageHero from "../../components/molecules/SubpageHero.astro";
 import { APPS } from "../../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { AppTypes } from "../../../data/apps/types.ts";
-import { ProtocolId } from "../../../data/protocols/types.ts";
+import { type ProtocolId } from "../../../data/protocols/types.ts";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { ProtocolTypes } from "../../../data/ens-best-practices/types.ts";
 import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById } from "../../../data/protocols/utils.ts";
 import { calculateAppEnsAwardsScore } from "../../../data/apps/utils.ts";
-
-const referrerLeaderboardDescription =
-  "Compare referrers by their performance in ENS Holiday Awards.";
+import { ReferralProgramEditionsList } from "../../components/molecules/ReferralProgramEditionsList.tsx";
 ---
 
 <Layout
@@ -129,11 +127,7 @@ const referrerLeaderboardDescription =
       }
     </ItemsList>
     <ItemsList header="Referrers" containerStyles="sm:gap-6">
-      <LeaderboardSnippetCard
-        name="Referrer leaderboard"
-        description={referrerLeaderboardDescription}
-        link="/leaderboards/referrer"
-      />
+      <ReferralProgramEditionsList client:load />
     </ItemsList>
   </section>
 </Layout>

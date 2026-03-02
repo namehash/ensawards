@@ -303,6 +303,7 @@ export const variants: Map<StatefulFetchStatusId, StatefulFetchRegistrarActions>
         page: 1,
         recordsPerPage: 8,
       },
+      accurateAsOf: 1763052924,
     } satisfies StatefulFetchRegistrarActionsLoaded,
   ],
 ]);

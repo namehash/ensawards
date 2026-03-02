@@ -1,3 +1,4 @@
+import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import { RegistrarActionCardLoading } from "@namehash/namehash-ui";
 
 import type { ENSNamespaceId } from "@ensnode/datasources";
@@ -36,6 +37,7 @@ function AdvocateReferralsListLoading({ recordsPerPage }: AdvocateReferralsListL
 export interface AdvocateReferralsListProps {
   namespaceId: ENSNamespaceId;
   registrarActions: StatefulFetchRegistrarActions;
+  referralProgramEditions: ReferralProgramEditionConfig[];
   paginationParams: Required<RequestPageParams>;
   onPrevious: () => void;
   onNext: () => void;
@@ -43,6 +45,7 @@ export interface AdvocateReferralsListProps {
 export function AdvocateReferralsList({
   namespaceId,
   registrarActions,
+  referralProgramEditions,
   paginationParams,
   onNext,
   onPrevious,
@@ -118,7 +121,8 @@ export function AdvocateReferralsList({
         </ErrorInfo>
       );
 
-    case StatefulFetchStatusIds.Loading || StatefulFetchStatusIds.Connecting:
+    case StatefulFetchStatusIds.Loading:
+    case StatefulFetchStatusIds.Connecting:
       return (
         <>
           <AdvocateReferralsListLoading recordsPerPage={paginationParams.recordsPerPage} />
@@ -160,7 +164,7 @@ export function AdvocateReferralsList({
               <br />
               <a
                 className="text-blue-600 font-medium hover:underline hover:underline-offset-[25%] whitespace-nowrap transition-all duration-200 cursor-pointer"
-                href="/ens-referral-awards"
+                href="/ens-referral-program"
               >
                 Learn how to become a referrer
               </a>
@@ -173,6 +177,7 @@ export function AdvocateReferralsList({
                 namespaceId={namespaceId}
                 registrarActions={registrarActions.registrarActions}
                 showReferrer={false}
+                referralProgramEditions={referralProgramEditions}
               />
               <SimplePagination
                 totalPages={registrarActions.pageContext.totalPages}

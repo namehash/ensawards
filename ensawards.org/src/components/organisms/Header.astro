@@ -66,7 +66,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
         )}>ENS contract naming season</a
       >
       <a
-        href="/ens-referral-awards"
+        href="/ens-referral-program"
         class={cn(
           shadcnButtonVariants({
             variant: "ghost",
@@ -120,7 +120,7 @@ import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
     return null;
   }
 
-  document.addEventListener("astro:page-load", () => ScrollHeader());
+  ScrollHeader();
 </script>
 
 <style>

@@ -1,0 +1,60 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import { ReferralProgramEditionCard } from "@/components/atoms/cards/referralProgramEditionCard";
+import { ReferrerLeaderboard } from "@/components/referral-awards-program/referrers/ReferrerLeaderboard";
+import { getReferralProgramEditionConfigBySlug } from "@/utils/referralProgram";
+import { ReferralProgramLeaderboardHeroButtons } from "@/components/atoms/ReferralProgramLeaderboardHeroButtons";
+
+export const prerender = false;
+
+const { edition } = Astro.params;
+
+const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConfigBySlug(edition);
+
+// If the referral program edition config cannot be found based on the slug in the URL, redirect to a 404 page
+if (resolvedReferralProgramEditionConfig === undefined) {
+  return Astro.redirect("/404");
+}
+---
+
+<!-- TODO: Add dedicated OG and Twitter images for this page (per program edition) once they are available 
+ (and once we publish multiple editions) -->
+<Layout
+  pageMetadata={{
+    title: `ENSAwards: ENS Leaderboard for ${resolvedReferralProgramEditionConfig.displayName} Referrers`,
+    description: `Compare referrers by their performance in ${resolvedReferralProgramEditionConfig.displayName}.`,
+    url: `https://ensawards.org/ens-referral-program/editions/${resolvedReferralProgramEditionConfig.slug}/leaderboard`,
+    ogImage: `https://ensawards.org/referrer_leaderboard_og_image.png`,
+    twitterImage: `https://ensawards.org/referrer_leaderboard_twitter_og_image.png`,
+  }}>
+  <SubpageHero
+    header={`${resolvedReferralProgramEditionConfig.displayName} leaderboard`}
+    description={`Compare referrers by their performance in ${resolvedReferralProgramEditionConfig.displayName}.`}
+    breadcrumbs={["ENS Referral Program"]}
+    customImage={{
+      source: "/src/assets/leaderboardsHeroImage.png",
+      width: 371,
+      height: 372,
+      styles: "-top-0 right-0 opacity-10",
+    }}>
+    <ReferralProgramEditionCard
+      client:load
+      slot="largerHeroItem"
+      referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+      showMobileVariant={true}
+    />
+    <ReferralProgramLeaderboardHeroButtons
+      client:load
+      slot="ctaContent"
+      referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+    />
+  </SubpageHero>
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <ReferrerLeaderboard
+      client:load
+      referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+    />
+  </section>
+</Layout>

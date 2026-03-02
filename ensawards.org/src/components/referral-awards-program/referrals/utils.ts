@@ -1,3 +1,4 @@
+import { type ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import { zeroAddress } from "viem";
 
 import {
@@ -6,26 +7,23 @@ import {
   type NamedRegistrarAction,
 } from "@ensnode/ensnode-sdk";
 
-import { REFERRAL_INCENTIVE_PROGRAMS } from "../../../../data/referral-programs";
-import type { ReferralIncentiveProgram } from "../../../../data/referral-programs/types.ts";
-
 export function isQualifiedReferral(
-  incentiveProgram: ReferralIncentiveProgram,
+  referralProgramEdition: ReferralProgramEditionConfig,
   registrarAction: NamedRegistrarAction,
 ): boolean {
   // Check if the registrar action occurred within program's duration
   if (
-    registrarAction.action.block.timestamp < incentiveProgram.rules.startTime ||
-    registrarAction.action.block.timestamp > incentiveProgram.rules.endTime
+    registrarAction.action.block.timestamp < referralProgramEdition.rules.startTime ||
+    registrarAction.action.block.timestamp > referralProgramEdition.rules.endTime
   )
     return false;
 
   // Check if the registrar action associated with the same subregistry
-  // as the incentive program rules
+  // as the referral program edition's rules
   if (
     !accountIdEqual(
       registrarAction.action.registrationLifecycle.subregistry.subregistryId,
-      incentiveProgram.rules.subregistryId,
+      referralProgramEdition.rules.subregistryId,
     )
   )
     return false;
@@ -35,18 +33,4 @@ export function isQualifiedReferral(
     isRegistrarActionReferralAvailable(registrarAction.action.referral) &&
     registrarAction.action.referral.decodedReferrer !== zeroAddress
   );
-}
-
-export function getReferralQualificationInfo(
-  registrarAction: NamedRegistrarAction,
-): ReferralIncentiveProgram[] {
-  const qualifiedIncentivePrograms: ReferralIncentiveProgram[] = [];
-  for (const incentiveProgram of REFERRAL_INCENTIVE_PROGRAMS) {
-    // if the registrar action is qualified for a given referral incentive program,
-    // add the program's name to the list.
-    if (isQualifiedReferral(incentiveProgram, registrarAction))
-      qualifiedIncentivePrograms.push(incentiveProgram);
-  }
-
-  return qualifiedIncentivePrograms;
 }

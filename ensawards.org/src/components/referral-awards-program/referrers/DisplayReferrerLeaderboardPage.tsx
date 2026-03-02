@@ -5,17 +5,13 @@ import type {
 import type { ReactElement } from "react";
 
 import { ReferrerCard, ReferrerCardLoading } from "@/components/atoms/cards/ReferrerCard.tsx";
-import {
-  EmptyLeaderboardInfo,
-  ReferrerLeaderboardLastUpdateTime,
-} from "@/components/referral-awards-program/referrers/utils.tsx";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime";
+import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 
 export interface DisplayReferrerLeaderboardPageProps {
   leaderboardPageData: ReferrerLeaderboardPage | null;
   isLoading: boolean;
   leaderboardPageFetchError?: ReactElement;
-  header?: string;
   paginationParams?: Required<ReferrerLeaderboardPageParams>;
 }
 
@@ -26,7 +22,6 @@ export function DisplayReferrerLeaderboardPage({
   leaderboardPageData,
   isLoading,
   leaderboardPageFetchError,
-  header,
   paginationParams = {
     page: 1,
     recordsPerPage: 5,
@@ -54,27 +49,21 @@ export function DisplayReferrerLeaderboardPage({
   if (leaderboardPageData.pageContext.totalRecords === 0) {
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
-        <EmptyLeaderboardInfo />
-        <ReferrerLeaderboardLastUpdateTime
-          timestamp={leaderboardPageData.accurateAsOf}
-          className="text-base"
+        <EmptyLeaderboardInfo
+          header="Looks like there's no referrals in this referral program cycle yet"
+          description="Wanna be first? Generate your referral link and earn awards!"
+          buttonData={{
+            label: "Generate your referral link",
+            href: "/ens-referral-program#generate-referral-link",
+          }}
         />
+        <LastUpdateTime timestamp={leaderboardPageData.accurateAsOf} className="text-base" />
       </div>
     );
   }
 
   return (
     <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
-      <div
-        className={cn(
-          "w-full h-fit flex flex-row flex-nowrap items-end sm:items-center justify-start",
-          !header && "hidden",
-        )}
-      >
-        {header && (
-          <h3 className="text-xl sm:text-2xl leading-normal font-semibold text-black">{header}</h3>
-        )}
-      </div>
       {leaderboardPageData.referrers.map((referrer, idx) => (
         <ReferrerCard
           key={`Referrer-${referrer.referrer}`}

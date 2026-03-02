@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import { Award as AwardIcon, Calendar as CalendarIcon } from "@lucide/astro";
-import { millisecondsInSecond } from "date-fns/constants";
 
 import ChristmasDecorationsImageLeft from "../../assets/christmastDecorationImageLeft.png";
 import ChristmasDecorationsImageRight from "../../assets/christmastDecorationImageRight.png";
@@ -54,7 +53,7 @@ const keyInformationTextStyles = "text-base font-normal leading-normal text-blac
       </div>
     </div>
     <a
-      href="/ens-referral-awards"
+      href="/ens-referral-program"
       class={cn(
         shadcnButtonVariants({
           variant: "default",
@@ -89,7 +88,6 @@ const keyInformationTextStyles = "text-base font-normal leading-normal text-blac
     }
   }
 
-  document.addEventListener("astro:page-load", () => {
-    setInterval(updateHolidayAwardsCTA, millisecondsInMinute);
-  });
+  updateHolidayAwardsCTA();
+  setInterval(updateHolidayAwardsCTA, millisecondsInMinute);
 </script>

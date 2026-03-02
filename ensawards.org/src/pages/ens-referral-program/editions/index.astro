@@ -1,0 +1,53 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import SubpageHero from "../../../components/molecules/SubpageHero.astro";
+import { ReferralProgramEditionsList } from "../../../components/molecules/ReferralProgramEditionsList";
+import { cn } from "../../../utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "../../../components/ui/shadcnButtonStyles";
+---
+
+<!-- TODO: Add dedicated OG and Twitter images for this page once they are available -->
+<Layout
+  pageMetadata={{
+    title: "ENSAwards: ENS Referral Program Editions",
+    description: "View all the ENS referral program editions.",
+    url: "https://ensawards.org/ens-referral-program/editions",
+    ogImage: "https://ensawards.org/ens_referral_program_og_image.png",
+    twitterImage:
+      "https://ensawards.org/ens_referral_program_twitter_og_image.png",
+  }}>
+  <SubpageHero
+    header="ENS referral program editions"
+    description="View all the ENS referral program editions."
+    breadcrumbs={["ENS Referral Program"]}
+    customImage={{
+      source: "/src/assets/referralLiveFeedHeroImage.png",
+      width: 315,
+      height: 311,
+      styles:
+        "top-0 sm:-top-8 right-0 sm:right-5 opacity-100 max-sm:block max-sm:relative max-sm:w-full max-sm:h-auto",
+    }}>
+    <div
+      slot="ctaContent"
+      class="flex flex-col sm:flex-row justify-start items-start gap-4">
+      <a
+        href="/ens-referral-program"
+        class={cn(
+          shadcnButtonVariants({
+            variant: "default",
+            size: "default",
+            className:
+              "cursor-pointer rounded-full px-5 h-11 sm:h-[50px] box-border text-black bg-white hover:bg-white/90",
+          }),
+        )}>Learn about the ENS referral program</a
+      >
+    </div>
+  </SubpageHero>
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[80px] sm:px-8">
+    <div
+      class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-center gap-6">
+      <ReferralProgramEditionsList client:load />
+    </div>
+  </section>
+</Layout>

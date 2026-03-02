@@ -1,9 +1,11 @@
+import { getDefaultReferralProgramEditionConfigSet } from "@namehash/ens-referrals/v1";
 import { useMemo, useState } from "react";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 
 import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
+import type { ReferralLiveFeedTitle } from "@/components/referral-awards-program/referrals/FetchAndDisplayRegistrarActionsFeed.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
@@ -17,7 +19,9 @@ export function MockDisplayRegistrarActionsFeed() {
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   const namespaceId = ENSNamespaceIds.Sepolia;
-  const title = "ENS referrals live feed";
+  const title: ReferralLiveFeedTitle = {
+    text: "ENS referrals live feed",
+  };
 
   const [selectedVariantId, setSelectedVariantId] = useState(variantIds[0]);
   const selectedVariant = variants.get(selectedVariantId);
@@ -58,6 +62,9 @@ export function MockDisplayRegistrarActionsFeed() {
               namespaceId={namespaceId}
               title={title}
               registrarActions={selectedVariant}
+              referralProgramEditions={Array.from(
+                getDefaultReferralProgramEditionConfigSet(namespaceId).values(),
+              )}
             />
           </div>{" "}
         </section>

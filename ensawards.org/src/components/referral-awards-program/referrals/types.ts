@@ -2,6 +2,7 @@ import type {
   NamedRegistrarAction,
   OmnichainIndexingStatusId,
   ResponsePageContext,
+  UnixTimestamp,
 } from "@ensnode/ensnode-sdk";
 
 export const StatefulFetchStatusIds = {
@@ -97,6 +98,7 @@ export interface StatefulFetchRegistrarActionsLoaded {
   fetchStatus: typeof StatefulFetchStatusIds.Loaded;
   registrarActions: NamedRegistrarAction[];
   pageContext: ResponsePageContext;
+  accurateAsOf?: UnixTimestamp;
 }
 
 export type StatefulFetchRegistrarActions =

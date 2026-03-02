@@ -10,7 +10,7 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
 ---
 
 <div
-  class="relative w-full max-w-[1216px] h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start items-center max-sm:gap-5 gap-0 bg-white border border-gray-200 rounded-2xl max-sm:p-5">
+  class="relative w-full max-w-[1216px] h-fit box-border flex flex-col-reverse sm:flex-row flex-nowrap justify-start items-center max-sm:gap-5 gap-0 bg-white border border-gray-200 rounded-2xl max-sm:p-5">
   <div
     class="w-full sm:w-1/2 sm:min-h-[400px] box-border flex flex-col max-sm:justify-start justify-between items-start max-sm:gap-5 sm:p-10">
     <div class="flex flex-col justify-start items-start gap-6">
@@ -67,7 +67,5 @@ const itemTextBaseStyles = "text-base leading-normal font-normal text-muted-fore
     }
   }
 
-  document.addEventListener("astro:page-load", () =>
-    initializeContractNamingIncentivesAutoScroll(),
-  );
+  initializeContractNamingIncentivesAutoScroll();
 </script>

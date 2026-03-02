@@ -1,3 +1,4 @@
+import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import { millisecondsInSecond } from "date-fns/constants";
 import { zeroAddress } from "viem";
 import { describe, expect, it } from "vitest";
@@ -7,22 +8,23 @@ import {
   getEthnamesSubregistryId,
   type InterpretedName,
   type NamedRegistrarAction,
+  parseUsdc,
   type RegistrarAction,
 } from "@ensnode/ensnode-sdk";
 
 import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
 
-import type { ReferralIncentiveProgram } from "../../../../data/referral-programs/types.ts";
-
 describe("isQualifiedReferral", () => {
-  const incentiveProgram: ReferralIncentiveProgram = {
-    name: "Test Incentive Program",
+  const mockReferralProgramEdition: ReferralProgramEditionConfig = {
+    slug: "test-slug",
+    displayName: "Test Incentive Program",
     rules: {
-      totalAwardPoolValue: 1000,
+      totalAwardPoolValue: parseUsdc("10000"),
       maxQualifiedReferrers: 10,
       startTime: new Date(2025, 0, 1).getTime() / millisecondsInSecond,
       endTime: new Date(2026, 0, 1).getTime() / millisecondsInSecond,
       subregistryId: getEthnamesSubregistryId(ENSNamespaceIds.Mainnet),
+      rulesUrl: new URL("https://example.com/rules"),
     },
   };
 
@@ -70,7 +72,7 @@ describe("isQualifiedReferral", () => {
       name: "too.early.action.eth" as InterpretedName,
     };
 
-    expect(isQualifiedReferral(incentiveProgram, registrarAction)).toStrictEqual(false);
+    expect(isQualifiedReferral(mockReferralProgramEdition, registrarAction)).toStrictEqual(false);
   });
 
   it("Should recognize registrar actions that happened after the incentive program ended as falsy", () => {
@@ -85,7 +87,7 @@ describe("isQualifiedReferral", () => {
       name: "too.late.action.eth" as InterpretedName,
     };
 
-    expect(isQualifiedReferral(incentiveProgram, registrarAction)).toStrictEqual(false);
+    expect(isQualifiedReferral(mockReferralProgramEdition, registrarAction)).toStrictEqual(false);
   });
 
   it("Should recognize registrar actions associated with different subregistry than the incentive program as falsy", () => {
@@ -103,7 +105,7 @@ describe("isQualifiedReferral", () => {
       name: "wrong.subregistry.action.eth" as InterpretedName,
     };
 
-    expect(isQualifiedReferral(incentiveProgram, registrarAction)).toStrictEqual(false);
+    expect(isQualifiedReferral(mockReferralProgramEdition, registrarAction)).toStrictEqual(false);
   });
 
   it("Should recognize registrar actions with null or zero-address decodedReferrer as falsy", () => {
@@ -129,10 +131,12 @@ describe("isQualifiedReferral", () => {
       name: "zero.address.decoded.referrer.action.eth" as InterpretedName,
     };
 
-    expect(isQualifiedReferral(incentiveProgram, nullReferrerRegistrarAction)).toStrictEqual(false);
-    expect(isQualifiedReferral(incentiveProgram, zeroAddressReferrerRegistrarAction)).toStrictEqual(
-      false,
-    );
+    expect(
+      isQualifiedReferral(mockReferralProgramEdition, nullReferrerRegistrarAction),
+    ).toStrictEqual(false);
+    expect(
+      isQualifiedReferral(mockReferralProgramEdition, zeroAddressReferrerRegistrarAction),
+    ).toStrictEqual(false);
   });
 
   it("Should accept registrar actions as valid referrals if all requirements are met", () => {
@@ -141,6 +145,6 @@ describe("isQualifiedReferral", () => {
       name: "qualified.action.eth" as InterpretedName,
     };
 
-    expect(isQualifiedReferral(incentiveProgram, registrarAction)).toStrictEqual(true);
+    expect(isQualifiedReferral(mockReferralProgramEdition, registrarAction)).toStrictEqual(true);
   });
 });

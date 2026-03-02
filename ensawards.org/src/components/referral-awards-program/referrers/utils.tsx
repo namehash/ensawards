@@ -1,56 +1,29 @@
-import type {
-  ReferrerLeaderboardPage,
-  ReferrerLeaderboardPageContext,
-} from "@namehash/ens-referrals";
 import { Award as AwardIcon } from "lucide-react";
 
-import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
-
-import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-export interface ReferrerLeaderboardLastUpdateTimeProps {
-  timestamp: UnixTimestamp;
-  className?: string;
+export interface EmptyLeaderboardInfoProps {
+  header: string;
+  description: string;
+  buttonData: {
+    label: string;
+    href: string;
+  };
 }
-
-/**
- * Displays the last time the leaderboard was updated in ENSAnalytics.
- *
- * @param timestamp - last update of the leaderboard.
- * More details at {@link ReferrerLeaderboardPage.accurateAsOf}
- */
-export const ReferrerLeaderboardLastUpdateTime = ({
-  timestamp,
-  className,
-}: ReferrerLeaderboardLastUpdateTimeProps) => {
-  return (
-    <LastUpdateTime
-      timestamp={timestamp}
-      options={{
-        date: {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        },
-        time: {
-          hour: "numeric",
-          minute: "numeric",
-          second: "numeric",
-          hour12: false,
-        },
-      }}
-      className={className}
-    />
-  );
-};
 
 /**
  * Displays information that the current referrer leaderboard is empty
  * (when {@link ReferrerLeaderboardPageContext.totalRecords} is 0)
+ *
+ * or when that particular referral program edition has not started yet
+ * (when current time is before {@link ReferralProgramEditionConfig.rules.startTime})
  */
-export const EmptyLeaderboardInfo = () => {
+export const EmptyLeaderboardInfo = ({
+  header,
+  description,
+  buttonData,
+}: EmptyLeaderboardInfoProps) => {
   const verticalContainerStyles = "w-full flex flex-col justify-start items-center";
 
   return (
@@ -60,11 +33,9 @@ export const EmptyLeaderboardInfo = () => {
       </div>
       <div className={cn(verticalContainerStyles, "gap-4")}>
         <div className={cn(verticalContainerStyles, "gap-1")}>
-          <h3 className="text-xl leading-normal font-semibold text-black text-center">
-            Looks like there's no referrals in this referral program cycle yet
-          </h3>
+          <h3 className="text-xl leading-normal font-semibold text-black text-center">{header}</h3>
           <p className="text-base leading-normal font-normal text-muted-foreground text-center">
-            Wanna be first? Generate your referral link and earn awards!
+            {description}
           </p>
         </div>
         <a
@@ -75,9 +46,9 @@ export const EmptyLeaderboardInfo = () => {
               className: "cursor-pointer rounded-full",
             }),
           )}
-          href="/ens-referral-awards#generate-referral-link"
+          href={buttonData.href}
         >
-          Generate your referral link
+          {buttonData.label}
         </a>
       </div>
     </div>
