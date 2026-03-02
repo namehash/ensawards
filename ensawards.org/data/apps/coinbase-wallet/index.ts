@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
+import contributors from "data/contributors/index.ts";
+
 import CoinbaseProject from "../../projects/coinbase";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -23,7 +25,12 @@ const CoinbaseWallet: App = {
   benchmarks: CoinbaseWalletBenchmarks,
   ogImagePath: "https://ensawards.org/data/apps/coinbase-wallet/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/coinbase-wallet/twitter-og.png",
-  contributors: [],
+  contributors: [
+    contributors.lightwalker,
+    contributors.y3drk,
+    contributors.theloner,
+    contributors.stevedylan,
+  ],
 };
 
 defineApp(CoinbaseWallet);

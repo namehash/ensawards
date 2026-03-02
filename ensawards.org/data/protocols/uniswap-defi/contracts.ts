@@ -2,6 +2,7 @@
 
 import { mainnet } from "viem/chains";
 
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -18,7 +19,7 @@ const contracts: Contract[] = [
         codeName: "PoolManager",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: UniswapDeFi,
@@ -30,7 +31,7 @@ const contracts: Contract[] = [
         codeName: "TransparentUpgradeableProxy",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: UniswapDeFi,
@@ -42,7 +43,7 @@ const contracts: Contract[] = [
         codeName: "PositionManager",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: UniswapDeFi,
@@ -54,7 +55,7 @@ const contracts: Contract[] = [
         codeName: "V4Quoter",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: UniswapDeFi,
@@ -66,7 +67,7 @@ const contracts: Contract[] = [
         codeName: "StateView",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: UniswapDeFi,
@@ -78,7 +79,7 @@ const contracts: Contract[] = [
         codeName: "UniversalRouter",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: UniswapDeFi,
@@ -90,7 +91,7 @@ const contracts: Contract[] = [
         codeName: "Permit2",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
 ];
 

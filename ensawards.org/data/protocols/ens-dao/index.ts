@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import contributors from "data/contributors/index.ts";
+
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import ENSProject from "../../projects/ens";
 import { defineProtocol } from "../registry.ts";
@@ -23,7 +25,7 @@ const ENSDao: DAOProtocol = {
   },
   ogImagePath: "https://ensawards.org/data/protocols/ens-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/ens-dao/twitter-og.png",
-  contributors: [],
+  contributors: [contributors.y3drk, contributors.lightwalker, contributors.theloner],
 };
 
 defineProtocol(ENSDao);

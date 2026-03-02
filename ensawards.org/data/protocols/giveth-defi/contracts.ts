@@ -2,6 +2,7 @@
 
 import { mainnet, optimism } from "viem/chains";
 
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,7 +20,7 @@ const contracts: Contract[] = [
       },
       name: "givtoken.giv.eth",
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: GivethDeFi,
@@ -32,7 +33,7 @@ const contracts: Contract[] = [
       },
       name: "distro.giv.eth",
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: GivethDeFi,
@@ -48,7 +49,7 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: GivethDeFi,
@@ -61,7 +62,7 @@ const contracts: Contract[] = [
       },
       name: "givtoken.giv.eth",
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: GivethDeFi,
@@ -74,7 +75,7 @@ const contracts: Contract[] = [
       },
       name: "distro.giv.eth",
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: GivethDeFi,
@@ -90,7 +91,7 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: GivethDeFi,
@@ -103,7 +104,7 @@ const contracts: Contract[] = [
       },
       name: "givpower.giv.eth",
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: GivethDeFi,
@@ -116,7 +117,7 @@ const contracts: Contract[] = [
       },
       name: "devouch.giv.eth",
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
 ];
 

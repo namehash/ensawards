@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import contributors from "data/contributors/index.ts";
+
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import LiquityProject from "../../projects/liquity";
 import { defineProtocol } from "../registry.ts";
@@ -22,7 +24,7 @@ const LiquityDeFi: DeFiProtocol = {
   },
   ogImagePath: "https://ensawards.org/data/protocols/liquity-defi/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/liquity-defi/twitter-og.png",
-  contributors: [],
+  contributors: [contributors.y3drk, contributors.lightwalker, contributors.theloner],
 };
 
 defineProtocol(LiquityDeFi);

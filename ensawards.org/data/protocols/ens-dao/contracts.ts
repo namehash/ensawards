@@ -2,6 +2,7 @@
 
 import { mainnet } from "viem/chains";
 
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,7 +20,7 @@ const contracts: Contract[] = [
       },
       name: "token.ensdao.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: ENSDao,
@@ -32,7 +33,7 @@ const contracts: Contract[] = [
       },
       name: "tokenlock.ensdao.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: ENSDao,
@@ -45,7 +46,7 @@ const contracts: Contract[] = [
       },
       name: "governor.ensdao.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: ENSDao,
@@ -58,7 +59,7 @@ const contracts: Contract[] = [
       },
       name: "wallet.ensdao.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: ENSDao,
@@ -71,7 +72,7 @@ const contracts: Contract[] = [
       },
       name: "twap.ensdao.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: ENSDao,
@@ -84,7 +85,7 @@ const contracts: Contract[] = [
       },
       name: "veto.ensdao.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: ENSDao,
@@ -97,7 +98,7 @@ const contracts: Contract[] = [
       },
       name: "endowment.ensdao.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
 ];
 

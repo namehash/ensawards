@@ -1,3 +1,5 @@
+import contributors from "data/contributors/index.ts";
+
 import { defineProject } from "../registry.ts";
 import type { Project } from "../types.ts";
 import { ProjectIds } from "../types.ts";
@@ -13,7 +15,7 @@ const TaikoProject: Project = {
     website: new URL("https://taiko.xyz/"),
     twitter: new URL("https://x.com/taikoxyz"),
   },
-  contributors: [],
+  contributors: [contributors.y3drk, contributors.lightwalker, contributors.theloner],
 };
 
 defineProject(TaikoProject);

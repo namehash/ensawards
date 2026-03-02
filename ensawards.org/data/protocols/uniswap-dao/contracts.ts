@@ -2,6 +2,7 @@
 
 import { mainnet } from "viem/chains";
 
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,7 +20,7 @@ const contracts: Contract[] = [
         codeName: "UNIToken",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: UniswapDao,
@@ -32,7 +33,7 @@ const contracts: Contract[] = [
       },
       name: "uniswap.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: UniswapDao,
@@ -45,7 +46,7 @@ const contracts: Contract[] = [
         codeName: "GovernorAlpha",
       },
     },
-    contributors: [],
+    contributors: [contributors.stevedylan],
   },
   {
     protocol: UniswapDao,
@@ -57,7 +58,7 @@ const contracts: Contract[] = [
         codeName: "GovernorBravo",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: UniswapDao,
@@ -69,7 +70,7 @@ const contracts: Contract[] = [
         codeName: "UniMerkleDistributor",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: UniswapDao,
@@ -81,7 +82,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewardsFactory",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: UniswapDao,
@@ -93,7 +94,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewards1",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: UniswapDao,
@@ -105,7 +106,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewards2",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: UniswapDao,
@@ -117,7 +118,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewards3",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
   {
     protocol: UniswapDao,
@@ -129,7 +130,7 @@ const contracts: Contract[] = [
         codeName: "StakingRewards4",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker],
   },
 ];
 

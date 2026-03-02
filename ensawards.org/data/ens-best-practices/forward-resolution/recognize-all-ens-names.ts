@@ -38,5 +38,5 @@
 //       },
 //     ],
 //   },
-//   contributors: [],
+//   contributors: [contributors.stevedylan],
 // };

@@ -2,6 +2,7 @@
 
 import { arbitrum, mainnet } from "viem/chains";
 
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -18,7 +19,7 @@ const contracts: Contract[] = [
         codeName: "ArbitrumDaoTreasury",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -30,7 +31,7 @@ const contracts: Contract[] = [
         codeName: "ARBGatewayL1",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -42,7 +43,7 @@ const contracts: Contract[] = [
         codeName: "ARBGatewayL2",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -54,7 +55,7 @@ const contracts: Contract[] = [
         codeName: "L1UpgradeExecutor",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -66,7 +67,7 @@ const contracts: Contract[] = [
         codeName: "L1Timelock",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -78,7 +79,7 @@ const contracts: Contract[] = [
         codeName: "CoreGovernor",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -90,7 +91,7 @@ const contracts: Contract[] = [
         codeName: "TreasuryGovernor",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -102,7 +103,7 @@ const contracts: Contract[] = [
         codeName: "ArbOneUpgradeExecutor",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -114,7 +115,7 @@ const contracts: Contract[] = [
         codeName: "L2CoreTimelock",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -126,7 +127,7 @@ const contracts: Contract[] = [
         codeName: "L2TreasuryTimelock",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -138,7 +139,7 @@ const contracts: Contract[] = [
         codeName: "SecurityCouncilL1Emergency",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -150,7 +151,7 @@ const contracts: Contract[] = [
         codeName: "SecurityCouncilL2Emergency",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -162,7 +163,7 @@ const contracts: Contract[] = [
         codeName: "NomineeElectionGovernor",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -174,7 +175,7 @@ const contracts: Contract[] = [
         codeName: "MemberElectionGovernor",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -186,7 +187,7 @@ const contracts: Contract[] = [
         codeName: "Manager",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -198,7 +199,7 @@ const contracts: Contract[] = [
         codeName: "UpgradeExecRouteBuilder",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -210,7 +211,7 @@ const contracts: Contract[] = [
         codeName: "MemberRemovalGovernor",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -222,7 +223,7 @@ const contracts: Contract[] = [
         codeName: "MemberSyncActionL2",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -234,7 +235,7 @@ const contracts: Contract[] = [
         codeName: "MemberSyncActionL1",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -246,7 +247,7 @@ const contracts: Contract[] = [
         codeName: "ConstitutionHash",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -258,7 +259,7 @@ const contracts: Contract[] = [
         codeName: "L1ProxyAdmin",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: ArbitrumDao,
@@ -270,7 +271,7 @@ const contracts: Contract[] = [
         codeName: "ArbOneProxyAdmin",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
 ];
 

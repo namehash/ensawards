@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying best practice categories
 
+import contributors from "data/contributors/index.ts";
+
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
 import { CategoryStatus } from "../types.ts";
@@ -11,7 +13,7 @@ const ReverseResolutionCategory: BestPracticeCategory = {
   name: "Reverse Resolution",
   description: "Reverse records, primary names, default primary names, L2 primary names, and more.",
   status: CategoryStatus.ComingSoon,
-  contributors: [],
+  contributors: [contributors.lightwalker],
 };
 
 defineBestPracticeCategory(ReverseResolutionCategory);

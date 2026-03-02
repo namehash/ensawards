@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying best practices
 
+import contributors from "data/contributors/index.ts";
+
 import { AppTypes } from "../../apps/types.ts";
 import { defineBestPractice } from "../registry.ts";
 import { type BestPracticeApp, BestPracticeTypes } from "../types.ts";
@@ -46,7 +48,7 @@ const displayNamedSmartContractsL2: BestPracticeApp = {
       },
     ],
   },
-  contributors: [],
+  contributors: [contributors.lightwalker, contributors.stevedylan],
 };
 
 defineBestPractice(displayNamedSmartContractsL2);

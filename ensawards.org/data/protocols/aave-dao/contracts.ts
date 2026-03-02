@@ -2,6 +2,7 @@
 
 import { mainnet } from "viem/chains";
 
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -18,7 +19,7 @@ const contracts: Contract[] = [
         codeName: "AaveGovernance",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: AaveDao,
@@ -30,7 +31,7 @@ const contracts: Contract[] = [
         codeName: "GovernancePowerStrategy",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: AaveDao,
@@ -42,7 +43,7 @@ const contracts: Contract[] = [
         codeName: "VotingPortalEth",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: AaveDao,
@@ -54,7 +55,7 @@ const contracts: Contract[] = [
         codeName: "VotingMachine",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: AaveDao,
@@ -66,7 +67,7 @@ const contracts: Contract[] = [
         codeName: "VotingStrategy",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: AaveDao,
@@ -78,7 +79,7 @@ const contracts: Contract[] = [
         codeName: "DataWarehouse",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: AaveDao,
@@ -90,7 +91,7 @@ const contracts: Contract[] = [
         codeName: "ExecutorLvl1",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: AaveDao,
@@ -102,7 +103,7 @@ const contracts: Contract[] = [
         codeName: "ExecutorLvl2",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
   {
     protocol: AaveDao,
@@ -114,7 +115,7 @@ const contracts: Contract[] = [
         codeName: "PayloadsController",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe],
   },
 ];
 

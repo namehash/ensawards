@@ -2,6 +2,7 @@
 
 import { mainnet } from "viem/chains";
 
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,7 +20,7 @@ const contracts: Contract[] = [
         codeName: "NounsAuctionHouseProxy",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -32,7 +33,7 @@ const contracts: Contract[] = [
         codeName: "NounsDataDaoProxy",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -45,7 +46,7 @@ const contracts: Contract[] = [
         codeName: "NounsToken",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -58,7 +59,7 @@ const contracts: Contract[] = [
         codeName: "NounsDaoProxy",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -71,7 +72,7 @@ const contracts: Contract[] = [
         codeName: "NounsRewardsProxy",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -84,7 +85,7 @@ const contracts: Contract[] = [
         codeName: "NounsDescriptorV3",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -97,7 +98,7 @@ const contracts: Contract[] = [
       },
       name: "nouns.eth",
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -110,7 +111,7 @@ const contracts: Contract[] = [
         codeName: "NounsStreamFactory",
       },
     },
-    contributors: [],
+    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
   },
 ];
 

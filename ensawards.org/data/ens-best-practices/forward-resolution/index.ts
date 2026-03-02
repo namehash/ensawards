@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying best practice categories
 
+import contributors from "data/contributors/index.ts";
+
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
 import { CategoryStatus } from "../types.ts";
@@ -12,7 +14,7 @@ const ForwardResolutionCategory: BestPracticeCategory = {
   description:
     "Lookup the details of an ENS name, such as its onchain addresses, avatar image, social records, and decentralized website.",
   status: CategoryStatus.ComingSoon,
-  contributors: [],
+  contributors: [contributors.lightwalker, contributors.stevedylan],
 };
 
 defineBestPracticeCategory(ForwardResolutionCategory);

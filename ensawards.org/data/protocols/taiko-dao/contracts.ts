@@ -2,6 +2,7 @@
 
 import { mainnet } from "viem/chains";
 
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,7 +20,7 @@ const contracts: Contract[] = [
       },
       name: "dao.taiko.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: TaikoDao,
@@ -35,7 +36,7 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/token.taiko.eth"),
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: TaikoDao,
@@ -47,7 +48,7 @@ const contracts: Contract[] = [
         codeName: "TokenUnlock",
       },
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
   {
     protocol: TaikoDao,
@@ -60,7 +61,7 @@ const contracts: Contract[] = [
       },
       name: "controller.taiko.eth",
     },
-    contributors: [],
+    contributors: [contributors.lightwalker, contributors.stevedylan],
   },
 ];
 

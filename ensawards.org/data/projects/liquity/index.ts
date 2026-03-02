@@ -1,3 +1,5 @@
+import contributors from "data/contributors/index.ts";
+
 import { defineProject } from "../registry.ts";
 import type { Project } from "../types.ts";
 import { ProjectIds } from "../types.ts";
@@ -12,7 +14,7 @@ const LiquityProject: Project = {
     twitter: new URL("https://x.com/LiquityProtocol"),
     website: new URL("https://www.liquity.org/"),
   },
-  contributors: [],
+  contributors: [contributors.y3drk, contributors.lightwalker, contributors.theloner],
 };
 
 defineProject(LiquityProject);
