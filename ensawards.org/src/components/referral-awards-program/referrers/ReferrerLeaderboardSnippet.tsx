@@ -196,6 +196,7 @@ export function ReferrerLeaderboardSnippet({
           {!isLoading &&
             leaderboardSnippetData !== null &&
             leaderboardSnippetData.pageContext.totalRecords > snippetSize && (
+              // TODO: Remove the hardcoded fallback slug when we add more editions and the slug is guaranteed to exist
               <a
                 href={`/ens-referral-program/editions/${latestActiveReferralProgramEdition?.slug ?? "2025-12"}/leaderboard`}
                 className={cn(

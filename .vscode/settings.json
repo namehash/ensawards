@@ -28,6 +28,5 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
-  },
-  "chat.mcp.enabled": true
+  }
 }
