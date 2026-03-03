@@ -16,25 +16,32 @@ import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensno
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { getEnsAdvocateDetailsRelativePath } from "@/utils";
 import { openSuggestionOverlay } from "@/utils/domActions";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 
 import GitHubOutlineIcon from "../../../assets/githubOutlineIcon.svg";
 import { cn } from "../../../utils/tailwindClassConcatenation";
-import { getSuggestionText } from "../../../utils/textModifications";
 import { type PossibleSuggestions } from "../../molecules/contact-form/types";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 
+const orderContributorsByAppearances = (contributors: Contributor[]): Contributor[] => {
+  const appearancesMap = countContributorAppearances(contributors);
+  return Array.from(appearancesMap.entries())
+    .sort((a, b) => b[1] - a[1]) // Sort by number of appearances
+    .map(([contributor]) => contributor);
+};
+
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
-  dataCollection: AppBenchmark[] | Contract[] | BestPractice[] | Protocol[]; //TODO: This list might be extended in the future, depending on the type of suggestions we want to enable. Consider refactoring if it gets too long or complicated.
+  allContributions: Contributor[];
   gitHubTargetHref?: string;
 }
 
 export const SuggestionCard = ({
   whatsSuggested,
-  dataCollection,
+  allContributions,
   gitHubTargetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
 }: SuggestionCardProps) => {
   const ensNodeReactConfig = useMemo(
@@ -45,12 +52,10 @@ export const SuggestionCard = ({
     [],
   );
 
-  const rawContributorProfiles = dataCollection.map((item) => item.contributors).flat();
-  const orderedContributorProfiles = Array.from(
-    countContributorAppearances(rawContributorProfiles).entries(),
-  )
-    .sort((a, b) => b[1] - a[1]) // Sort by number of appearances
-    .map(([contributor]) => contributor);
+  const orderedContributorProfiles = useMemo(
+    () => orderContributorsByAppearances(allContributions),
+    [allContributions],
+  );
 
   return (
     <ENSNodeProvider config={ensNodeReactConfig}>
@@ -60,7 +65,7 @@ export const SuggestionCard = ({
             <div className="w-full flex flex-col gap-1">
               <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
               <p className="text-base leading-6 font-normal text-muted-foreground">
-                {getSuggestionText(whatsSuggested)}
+                All benchmarks on ENSAwards are open for public contribution.
               </p>
             </div>
           </div>
@@ -165,12 +170,10 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
           className="text-sm text-white leading-normal font-semibold hover:no-underline cursor-default"
         />
         <a
-          target="_blank"
-          rel="noreferrer"
-          href={getBlockExplorerAddressDetailsUrl(contributor.chainId, contributor.address)?.href}
+          href={getEnsAdvocateDetailsRelativePath(contributor.address)}
           className="text-xs leading-normal text-blue-500 font-normal hover:underline hover:underline-offset-[25%]"
         >
-          View on Etherscan
+          View ENS Advocate details
         </a>
       </div>
     </div>

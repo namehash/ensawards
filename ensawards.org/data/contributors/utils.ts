@@ -1,13 +1,6 @@
-import { type Contributor } from "./types.ts";
+import { formatAccountId } from "@ensnode/ensnode-sdk";
 
-/**
- * Returns a unique identifier for a {@link Contributor} based on their {@link ChainId} and {@link Address}.
- */
-export const getContributorIdentifier = (contributor: Contributor): string => {
-  // TODO: Pretty sure that such a function is not defined anywhere already. Happy to move it to ensnode-sdk
-  // if suggested or replace it with an already existing function if I missed it somehow.
-  return `${contributor.chainId}-${contributor.address}`;
-};
+import { type Contributor } from "./types.ts";
 
 /**
  * Returns a map of contributors to the number of times they appear in the provided list of contributors.
@@ -18,7 +11,7 @@ export const countContributorAppearances = (
   const appearancesMap = new Map<string, { contributor: Contributor; count: number }>();
 
   for (const contributor of contributors) {
-    const identifier = getContributorIdentifier(contributor);
+    const identifier = formatAccountId(contributor);
     const currentCount = appearancesMap.get(identifier)?.count || 0;
     appearancesMap.set(identifier, { contributor, count: currentCount + 1 });
   }

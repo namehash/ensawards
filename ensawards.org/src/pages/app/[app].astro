@@ -13,7 +13,11 @@ import { APPS } from "../../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "../../../data/apps/utils.ts";
-import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
+import {
+  SuggestionCard,
+  SuggestionCardSimplified,
+} from "../../components/atoms/cards/SuggestionCard.tsx";
+import { type Contributor } from "../../../data/contributors/types.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -25,10 +29,14 @@ const appToDisplay = getAppBySlug(app);
 
 let appScore: number;
 let AppIcon;
+let appBenchmarksDataContributors: Contributor[] = [];
 
 if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);
   AppIcon = appToDisplay.icon;
+  appBenchmarksDataContributors = appToDisplay.benchmarks
+    .map((benchmark) => benchmark.contributors)
+    .flat();
 }
 ---
 
@@ -92,7 +100,7 @@ if (appToDisplay !== undefined) {
         <SuggestionCard
           client:load
           whatsSuggested="benchmark result"
-          dataCollection={appToDisplay.benchmarks}
+          allContributions={appBenchmarksDataContributors}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
         />
         <ItemsList header="Benchmark results">

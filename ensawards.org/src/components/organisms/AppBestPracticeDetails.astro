@@ -10,6 +10,7 @@ import BenchmarkResultCard from "../atoms/cards/BenchmarkResultCard.astro";
 import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { calculateAppsPassed, calculateAppSupport } from "../../../data/apps/utils.ts";
+import { SuggestionCard } from "../atoms/cards/SuggestionCard.tsx";
 
 export interface AppBestPracticeDetailsProps {
   bestPractice: BestPracticeApp;
@@ -89,6 +90,12 @@ const appSupport = calculateAppSupport(bestPractice);
 </SubpageHero>
 <section
   class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8 gap-5 sm:gap-[60px]">
+  <SuggestionCard
+    client:load
+    whatsSuggested="best practice"
+    allContributions={bestPractice.contributors}
+    gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}
+  />
   {
     bestPractice.appliesTo.map((appliesTo) => (
       <ItemsList header={`${appliesTo} benchmarks`} containerStyles="sm:gap-2">

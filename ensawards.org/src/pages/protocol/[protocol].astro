@@ -25,6 +25,7 @@ import { type Protocol } from "../../../data/protocols/types";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolBySlug } from "../../../data/protocols/utils.ts";
 import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
+import { type Contributor } from "../../../data/contributors/types.ts";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -47,12 +48,16 @@ const resolvedProtocol = getProtocolBySlug(protocol);
 let protocolContracts: Contract[] = [];
 let protocolScore = 0;
 let ProtocolIcon = GlobeIcon;
+let protocolContractsDataContributors: Contributor[] = [];
 
 if (resolvedProtocol) {
   protocolContracts = CONTRACTS.filter((contract) => contract.protocol.id === resolvedProtocol.id);
   ProtocolIcon = resolvedProtocol.icon;
   protocolScore =
     getContractNamingScoresByProtocolType(resolvedProtocol.protocolType)[resolvedProtocol.id] ?? 0;
+  protocolContractsDataContributors = protocolContracts
+    .map((contract) => contract.contributors)
+    .flat();
 }
 ---
 
@@ -119,7 +124,7 @@ if (resolvedProtocol) {
         <SuggestionCard
           client:load
           whatsSuggested="contract"
-          dataCollection={protocolContracts}
+          allContributions={protocolContractsDataContributors}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
         />
         <ItemsList

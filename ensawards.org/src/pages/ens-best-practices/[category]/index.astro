@@ -14,6 +14,7 @@ import {
   getCategoryBySlug,
 } from "../../../../data/ens-best-practices/utils.ts";
 import { SuggestionCard } from "../../../components/atoms/cards/SuggestionCard.tsx";
+import { type Contributor } from "../../../../data/contributors/types.ts";
 
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
@@ -27,9 +28,13 @@ const categoryToDisplay = getCategoryBySlug(category);
 
 // The default value should never be used. Only introduced for type safety.
 let categoryBestPractices: BestPractice[] = [];
+let categoryDataContributors: Contributor[] = [];
 
 if (categoryToDisplay !== undefined) {
   categoryBestPractices = getBestPracticesByCategory(categoryToDisplay);
+  categoryDataContributors = categoryBestPractices
+    .map((bestPractice) => bestPractice.contributors)
+    .flat();
 }
 ---
 
@@ -80,7 +85,7 @@ if (categoryToDisplay !== undefined) {
         <SuggestionCard
           client:load
           whatsSuggested="best practice"
-          dataCollection={categoryBestPractices}
+          allContributions={categoryDataContributors}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${categoryToDisplay.categorySlug}/index.ts`}
         />
         <ItemsList header="Best practices">

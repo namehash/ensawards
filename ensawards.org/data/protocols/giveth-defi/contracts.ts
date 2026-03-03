@@ -20,7 +20,7 @@ const contracts: Contract[] = [
       },
       name: "givtoken.giv.eth",
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: GivethDeFi,
@@ -33,7 +33,7 @@ const contracts: Contract[] = [
       },
       name: "distro.giv.eth",
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: GivethDeFi,
@@ -49,7 +49,7 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: GivethDeFi,
@@ -62,7 +62,7 @@ const contracts: Contract[] = [
       },
       name: "givtoken.giv.eth",
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: GivethDeFi,
@@ -75,7 +75,7 @@ const contracts: Contract[] = [
       },
       name: "distro.giv.eth",
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: GivethDeFi,
@@ -91,7 +91,7 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: GivethDeFi,
@@ -104,7 +104,7 @@ const contracts: Contract[] = [
       },
       name: "givpower.giv.eth",
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: GivethDeFi,
@@ -117,7 +117,7 @@ const contracts: Contract[] = [
       },
       name: "devouch.giv.eth",
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
 ];
 

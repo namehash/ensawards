@@ -20,7 +20,7 @@ const contracts: Contract[] = [
         codeName: "NounsAuctionHouseProxy",
       },
     },
-    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
+    contributors: [contributors.nischal, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -33,7 +33,7 @@ const contracts: Contract[] = [
         codeName: "NounsDataDaoProxy",
       },
     },
-    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
+    contributors: [contributors.nischal, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -46,7 +46,7 @@ const contracts: Contract[] = [
         codeName: "NounsToken",
       },
     },
-    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
+    contributors: [contributors.nischal, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -59,7 +59,7 @@ const contracts: Contract[] = [
         codeName: "NounsDaoProxy",
       },
     },
-    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
+    contributors: [contributors.nischal, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -72,7 +72,7 @@ const contracts: Contract[] = [
         codeName: "NounsRewardsProxy",
       },
     },
-    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
+    contributors: [contributors.nischal, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -85,7 +85,7 @@ const contracts: Contract[] = [
         codeName: "NounsDescriptorV3",
       },
     },
-    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
+    contributors: [contributors.nischal, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -98,7 +98,7 @@ const contracts: Contract[] = [
       },
       name: "nouns.eth",
     },
-    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
+    contributors: [contributors.nischal, contributors.stevedylan],
   },
   {
     protocol: NounsDao,
@@ -111,7 +111,7 @@ const contracts: Contract[] = [
         codeName: "NounsStreamFactory",
       },
     },
-    contributors: [contributors.nischalEnscribe, contributors.stevedylan],
+    contributors: [contributors.nischal, contributors.stevedylan],
   },
 ];
 

@@ -2,9 +2,6 @@ import { mainnet } from "viem/chains";
 
 import type { Contributor } from "./types";
 
-// TODO: Should we consider having some special naming convention for the keys here?
-// Ex. We could add 'dev' suffix to all contributors from NameHashLabs
-// and then `<companyName>` suffix for all external contributors (provided that they belong to one).
 const contributors = {
   stevedylan: {
     chainId: mainnet.id,
@@ -22,7 +19,7 @@ const contributors = {
     chainId: mainnet.id,
     address: "0x6D99E3D9287C0e7f39d24472a066B4DE24Bfe657",
   },
-  nischalEnscribe: {
+  nischal: {
     chainId: mainnet.id,
     address: "0xD1DA830E7D175eC8a51103bCfbBbE32A9362a6b2",
   },

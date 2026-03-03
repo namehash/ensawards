@@ -11,7 +11,6 @@ import { Image } from "astro:assets";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById, getProtocolTypeBySlug } from "../../../data/protocols/utils.ts";
-import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
 
 export function getStaticPaths() {
   return Object.values(ProtocolTypes).map((protocolType) => ({
@@ -67,17 +66,7 @@ if (resolvedProtocolType) {
         }}
       />
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-        <SuggestionCard
-          client:load
-          whatsSuggested="protocol"
-          dataCollection={Object.keys(protocolScores).map((protocolId) =>
-            getProtocolById(protocolId as ProtocolId),
-          )}
-          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/index.ts`}
-        />
-        <ItemsList
-          header={`${resolvedProtocolType} leaderboard`}
-          containerStyles="gap-3 sm:gap-3">
+        <ItemsList containerStyles="gap-3 sm:gap-3">
           {Object.entries(protocolScores).map(([scoreCategory, value], idx) => {
             const protocolId = scoreCategory as ProtocolId;
             const protocol = getProtocolById(protocolId);

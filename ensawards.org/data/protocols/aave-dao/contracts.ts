@@ -19,7 +19,7 @@ const contracts: Contract[] = [
         codeName: "AaveGovernance",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: AaveDao,
@@ -31,7 +31,7 @@ const contracts: Contract[] = [
         codeName: "GovernancePowerStrategy",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: AaveDao,
@@ -43,7 +43,7 @@ const contracts: Contract[] = [
         codeName: "VotingPortalEth",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: AaveDao,
@@ -55,7 +55,7 @@ const contracts: Contract[] = [
         codeName: "VotingMachine",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: AaveDao,
@@ -67,7 +67,7 @@ const contracts: Contract[] = [
         codeName: "VotingStrategy",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: AaveDao,
@@ -79,7 +79,7 @@ const contracts: Contract[] = [
         codeName: "DataWarehouse",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: AaveDao,
@@ -91,7 +91,7 @@ const contracts: Contract[] = [
         codeName: "ExecutorLvl1",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: AaveDao,
@@ -103,7 +103,7 @@ const contracts: Contract[] = [
         codeName: "ExecutorLvl2",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
   {
     protocol: AaveDao,
@@ -115,7 +115,7 @@ const contracts: Contract[] = [
         codeName: "PayloadsController",
       },
     },
-    contributors: [contributors.nischalEnscribe],
+    contributors: [contributors.nischal],
   },
 ];
 
