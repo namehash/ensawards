@@ -39,7 +39,7 @@ export interface AccountId {
 
 This is our way to show appreciation to the people who contributed to our cause. When you add yourself to this list your ENS profile will be displayed on our site, giving you some well-deserved social credit 💪.
 
-> TODO: Add a screenshot with the new CTA component.
+![Social credit for contributors](./ensawards.org/src/assets/contributorsDocsSocialCredit.png)
 
 To add yourself:
 1. Add your `AccountId` to the `contributors` collection in [ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) (if this is your first contribution).
