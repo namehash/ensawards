@@ -13,10 +13,7 @@ import { APPS } from "../../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "../../../data/apps/utils.ts";
-import {
-  SuggestionCard,
-  SuggestionCardSimplified,
-} from "../../components/atoms/cards/SuggestionCard.tsx";
+import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
 import { type Contributor } from "../../../data/contributors/types.ts";
 
 export function getStaticPaths() {
