@@ -1,5 +1,4 @@
 import type { JSX } from "astro/jsx-runtime";
-import type { Contributor } from "data/contributors/types";
 
 export const ProjectIds = {
   Ens: "project-ens",

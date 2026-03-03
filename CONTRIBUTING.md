@@ -12,25 +12,24 @@ Below, you’ll find detailed instructions for each contribution type. If your c
 
 Certain data models in [ensawards.org/data](ensawards.org/data) include a `contributors` field. Its type definition is shown below.
 
+The `contributors` field type is a non-empty array of `Contributor`:
+
 ```typescript
-export interface Project {
-  ...
+export interface Contract {
+  // ...
   contributors: [Contributor, ...Contributor[]];
 }
+```
 
----
+`Contributor` is an alias for `AccountId` from `@ensnode/ensnode-sdk`:
 
-import type { AccountId } from "@ensnode/ensnode-sdk";
-
+```typescript
 export type Contributor = AccountId;
+```
 
----
+`AccountId` is a CAIP-10 account identifier:
 
-/**
- * Represents an account (contract or EOA) at `address` on chain `chainId`.
- *
- * @see https://chainagnostic.org/CAIPs/caip-10
- */
+```typescript
 export interface AccountId {
   chainId: ChainId;
   address: Address;
