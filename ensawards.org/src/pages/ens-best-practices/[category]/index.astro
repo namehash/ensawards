@@ -32,9 +32,10 @@ let categoryDataContributors: Contributor[] = [];
 
 if (categoryToDisplay !== undefined) {
   categoryBestPractices = getBestPracticesByCategory(categoryToDisplay);
-  categoryDataContributors = categoryBestPractices
-    .map((bestPractice) => bestPractice.contributors)
-    .flat();
+  categoryDataContributors = [
+    ...categoryToDisplay.contributors,
+    ...categoryBestPractices.map((bestPractice) => bestPractice.contributors).flat(),
+  ];
 }
 ---
 
