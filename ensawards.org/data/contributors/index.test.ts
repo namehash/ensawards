@@ -1,5 +1,5 @@
 import { SUPPORTED_CHAINS } from "@namehash/namehash-ui";
-import { isAddress } from "viem";
+import { getAddress, isAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
 import type { AccountId, ChainId } from "@ensnode/ensnode-sdk";
@@ -15,7 +15,7 @@ describe("Contributors data", () => {
         expect(
           isAddress(contributor.address),
           `Address for contributor ${name} is not valid: ${contributor.address}`,
-        ).toBe(true);
+        ).toEqual(true);
       });
     });
 
@@ -37,17 +37,18 @@ describe("Contributors data", () => {
         if (!addressesPerChain[contributor.chainId]) {
           addressesPerChain[contributor.chainId] = new Set();
         }
-        addressesPerChain[contributor.chainId].add(contributor.address);
+        addressesPerChain[contributor.chainId].add(getAddress(contributor.address));
       });
 
       Object.entries(addressesPerChain).forEach(([chainId, addresses]) => {
         expect(
-          addresses.size ===
-            Object.values(contributorsData).filter(
-              (contributor: AccountId) => contributor.chainId === Number(chainId),
-            ).length,
+          addresses.size,
           `Contributor addresses are not unique for chain ID ${chainId}`,
-        ).toBe(true);
+        ).toEqual(
+          Object.values(contributorsData).filter(
+            (contributor: AccountId) => contributor.chainId === Number(chainId),
+          ).length,
+        );
       });
     });
   });

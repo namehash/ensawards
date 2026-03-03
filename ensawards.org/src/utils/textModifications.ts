@@ -47,7 +47,7 @@ export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string =
       return "Want to add best practice? Suggest it for review or add it yourself on GitHub.";
 
     case "benchmark result":
-      return "All benchmarks on ENSAwards are open for public contribution";
+      return "All benchmarks on ENSAwards are open for public contribution.";
 
     case "protocol":
       return "Want to add a protocol? Suggest the protocol for review or add the protocol review yourself on GitHub.";

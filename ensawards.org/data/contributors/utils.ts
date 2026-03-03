@@ -5,7 +5,7 @@ import { type Contributor } from "./types.ts";
  */
 export const getContributorIdentifier = (contributor: Contributor): string => {
   // TODO: Pretty sure that such a function is not defined anywhere already. Happy to move it to ensnode-sdk
-  // if suggested or repalce it with an already existing function if I missed it somehow.
+  // if suggested or replace it with an already existing function if I missed it somehow.
   return `${contributor.chainId}-${contributor.address}`;
 };
 

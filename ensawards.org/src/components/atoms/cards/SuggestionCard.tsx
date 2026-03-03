@@ -8,13 +8,13 @@ import { countContributorAppearances } from "data/contributors/utils";
 import type { BestPractice } from "data/ens-best-practices/types";
 import type { Contract } from "data/protocols/contracts-types";
 import type { Protocol } from "data/protocols/types";
+import { useMemo } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { openSuggestionOverlay } from "@/utils/domActions";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
@@ -36,9 +36,13 @@ export const SuggestionCard = ({
   dataCollection,
   gitHubTargetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
 }: SuggestionCardProps) => {
-  const ensNodeReactConfig = createConfig({
-    url: getENSNodeUrl(),
-  });
+  const ensNodeReactConfig = useMemo(
+    () =>
+      createConfig({
+        url: getENSNodeUrl(),
+      }),
+    [],
+  );
 
   const rawContributorProfiles = dataCollection.map((item) => item.contributors).flat();
   const orderedContributorProfiles = Array.from(
@@ -62,7 +66,7 @@ export const SuggestionCard = ({
 
           <div className="w-full lg:w-[560px] flex flex-col gap-4">
             <div className="flex flex-wrap items-start gap-3 py-1.5">
-              {orderedContributorProfiles.map((profile, idx) => {
+              {orderedContributorProfiles.map((profile) => {
                 const identity = buildUnresolvedIdentity(
                   profile.address,
                   DEFAULT_ENS_NAMESPACE,
@@ -71,7 +75,7 @@ export const SuggestionCard = ({
 
                 return (
                   <GenericTooltip
-                    key={`contributor-${idx}`}
+                    key={`contributor-${profile.chainId}-${profile.address}`}
                     content={
                       <ContributorTooltipContent contributor={profile} identity={identity} />
                     }

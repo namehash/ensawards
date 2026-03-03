@@ -1,6 +1,8 @@
+import type { PossibleSuggestions } from "@/components/molecules/contact-form/types";
+
 // biome-ignore-start lint/style/noNonNullAssertion: All DOM objects accessed in this file
 // are guaranteed to exist for the entirety of runtime (forms in modal view)
-export function openSuggestionOverlay(whatsSuggested: string) {
+export function openSuggestionOverlay(whatsSuggested: PossibleSuggestions) {
   const scrollValue = window.scrollY;
   switch (whatsSuggested) {
     case "app":

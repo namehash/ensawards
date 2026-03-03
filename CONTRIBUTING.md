@@ -10,7 +10,7 @@ Below, you’ll find detailed instructions for each contribution type. If your c
 
 ### Adding yourself as a `Contributor`
 
-All data models in [@ensawards.org/data](@ensawards.org/data) include a `contributors` field. Its type definition is shown below.
+All data models in [ensawards.org/data](ensawards.org/data) include a `contributors` field. Its type definition is shown below.
 
 ```typescript
 export interface Project {
@@ -52,6 +52,7 @@ For reference see [ensawards.org/data/apps/metamask-wallet/index.ts](ensawards.o
 1. Create a new subdirectory in the [ensawards.org/data/projects/](ensawards.org/data/projects) named after the project you want to add. The directory name should be the lowercase project name. If the name contains multiple words, join them with hyphens ("-").
 2. Inside the new directory, create an `index.ts` file and default-export the project definition. Make sure to also call `defineProject()` on it. For reference see [ensawards.org/data/projects/aave/index.ts](ensawards.org/data/projects/aave/index.ts).
 3. Follow its data model that you can look up in the [ensawards.org/data/projects/types.ts](ensawards.org/data/projects/types.ts) file. You can also have a quick glance at it below.
+
 ```typescript
 export interface Project {
   id: ProjectId;

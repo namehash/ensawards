@@ -73,6 +73,7 @@ const PLACEHOLDER_EMAIL = "placeholder@gmail.com";
  */
 const MESSAGE_SEPARATOR = "\n----------\n";
 const APP_SUGGESTION_DESCRIPTION_HEADER = "\nAPP SUGGESTION from ensawards.org";
+const PROTOCOL_SUGGESTION_DESCRIPTION_HEADER = "\nPROTOCOL SUGGESTION from ensawards.org";
 const BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER = "\nBEST PRACTICE SUGGESTION from ensawards.org";
 const BENCHMARK_UPDATE_REQUEST_HEADER = "\nBENCHMARK UPDATE REQUEST from ensawards.org";
 const CONTRACT_SUGGESTION_DESCRIPTION_HEADER = "\nCONTRACT SUGGESTION from ensawards.org";
@@ -199,7 +200,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
         ],
         [
           "protocol",
-          `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`,
+          `${PROTOCOL_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`,
         ],
         [
           "contract",
