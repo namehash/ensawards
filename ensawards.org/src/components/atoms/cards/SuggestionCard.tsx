@@ -1,13 +1,6 @@
-import {
-  getBlockExplorerAddressDetailsUrl,
-  ResolveAndDisplayIdentity,
-} from "@namehash/namehash-ui";
-import type { AppBenchmark } from "data/apps/benchmarks-types";
+import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
 import type { Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
-import type { BestPractice } from "data/ens-best-practices/types";
-import type { Contract } from "data/protocols/contracts-types";
-import type { Protocol } from "data/protocols/types";
 import { useMemo } from "react";
 import { getAddress } from "viem";
 
@@ -28,9 +21,9 @@ import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 
 const orderContributorsByAppearances = (contributors: Contributor[]): Contributor[] => {
   const appearancesMap = countContributorAppearances(contributors);
-  return Array.from(appearancesMap.entries())
-    .sort((a, b) => b[1] - a[1]) // Sort by number of appearances
-    .map(([contributor]) => contributor);
+  return Array.from(appearancesMap.values())
+    .sort((a, b) => b.count - a.count) // Sort by number of appearances
+    .map(({ contributor }) => contributor);
 };
 
 export interface SuggestionCardProps {

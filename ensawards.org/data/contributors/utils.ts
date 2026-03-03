@@ -7,7 +7,7 @@ import { type Contributor } from "./types.ts";
  */
 export const countContributorAppearances = (
   contributors: Contributor[],
-): Map<Contributor, number> => {
+): Map<string, { contributor: Contributor; count: number }> => {
   const appearancesMap = new Map<string, { contributor: Contributor; count: number }>();
 
   for (const contributor of contributors) {
@@ -16,7 +16,5 @@ export const countContributorAppearances = (
     appearancesMap.set(identifier, { contributor, count: currentCount + 1 });
   }
 
-  return new Map(
-    Array.from(appearancesMap.values()).map(({ contributor, count }) => [contributor, count]),
-  );
+  return appearancesMap;
 };
