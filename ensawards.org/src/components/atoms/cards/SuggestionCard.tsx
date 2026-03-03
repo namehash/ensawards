@@ -9,6 +9,7 @@ import type { BestPractice } from "data/ens-best-practices/types";
 import type { Contract } from "data/protocols/contracts-types";
 import type { Protocol } from "data/protocols/types";
 import { useMemo } from "react";
+import { getAddress } from "viem";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
@@ -54,7 +55,7 @@ export const SuggestionCard = ({
   return (
     <ENSNodeProvider config={ensNodeReactConfig}>
       <TooltipProvider delayDuration={250} skipDelayDuration={0}>
-        <div className="w-full max-w-[1216px] h-fit flex flex-col gap-5 lg:flex-row lg:justify-between lg:items-start p-4 sm:px-[21px] sm:py-[17px] rounded-2xl border border-gray-200 bg-white">
+        <div className="w-full max-w-[1216px] h-fit flex flex-col gap-3 sm:gap-5 lg:flex-row lg:justify-between lg:items-start p-4 sm:px-5 sm:py-4 rounded-2xl border border-gray-200 bg-white">
           <div className="w-full flex-1 min-w-0">
             <div className="w-full flex flex-col gap-1">
               <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
@@ -64,7 +65,7 @@ export const SuggestionCard = ({
             </div>
           </div>
 
-          <div className="w-full lg:w-[560px] flex flex-col gap-4">
+          <div className="w-full lg:w-1/2 flex flex-col gap-3 sm:gap-4">
             <div className="flex flex-wrap items-start gap-3 py-1.5">
               {orderedContributorProfiles.map((profile) => {
                 const identity = buildUnresolvedIdentity(
@@ -75,7 +76,7 @@ export const SuggestionCard = ({
 
                 return (
                   <GenericTooltip
-                    key={`contributor-${profile.chainId}-${profile.address}`}
+                    key={`contributor-${profile.chainId}-${getAddress(profile.address)}`}
                     content={
                       <ContributorTooltipContent contributor={profile} identity={identity} />
                     }
@@ -100,7 +101,7 @@ export const SuggestionCard = ({
               <p className="text-base leading-6 font-normal text-muted-foreground">
                 Submit a contribution
               </p>
-              <div className="flex flex-col-reverse sm:flex-row items-center gap-2 max-sm:self-stretch">
+              <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
                 <button
                   onClick={() => openSuggestionOverlay(whatsSuggested)}
                   className={cn(
