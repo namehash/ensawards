@@ -12,7 +12,7 @@ export const countContributorAppearances = (
 
   for (const contributor of contributors) {
     const identifier = formatAccountId(contributor);
-    const currentCount = appearancesMap.get(identifier)?.count || 0;
+    const currentCount = appearancesMap.get(identifier)?.count ?? 0;
     appearancesMap.set(identifier, { contributor, count: currentCount + 1 });
   }
 

@@ -141,7 +141,6 @@ interface ContributorTooltipContentProps {
   identity: UnresolvedIdentity;
 }
 
-// TODO: The Figma design for the tooltip seems to be outdated. Ask about a new version
 const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltipContentProps) => {
   return (
     <div className="w-full flex flex-row justify-start items-center py-1.5 gap-3">
