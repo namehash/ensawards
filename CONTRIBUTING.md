@@ -10,7 +10,7 @@ Below, you’ll find detailed instructions for each contribution type. If your c
 
 ### Adding yourself as a `Contributor`
 
-All data models in [ensawards.org/data](ensawards.org/data) include a `contributors` field. Its type definition is shown below.
+Certain data models in [ensawards.org/data](ensawards.org/data) include a `contributors` field. Its type definition is shown below.
 
 ```typescript
 export interface Project {
@@ -45,7 +45,7 @@ To add yourself:
 1. Add your `AccountId` to the `contributors` collection in [ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) (if this is your first contribution).
 2. Reference yourself in the contributors array of the entity you are updating.
 
-For reference see [ensawards.org/data/apps/metamask-wallet/index.ts](ensawards.org/data/apps/metamask-wallet/index.ts).
+For reference see [ensawards.org/data/apps/metamask-wallet/benchmarks.ts](ensawards.org/data/apps/metamask-wallet/benchmarks.ts).
 
 ### Adding a new `Project`
 
@@ -63,7 +63,6 @@ export interface Project {
     website: URL;
     twitter: URL;
   };
-  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
 }
 ```
 4. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/projects/aave/icon.tsx](ensawards.org/data/projects/aave/icon.tsx).
@@ -101,7 +100,6 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
   };
   ogImagePath?: string;
   twitterOgImagePath?: string;
-  contributors: [Contributor, ...Contributor[]];  // Remember to add yourself as a contributor
 }
 
 export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.DAO> {}
@@ -158,7 +156,6 @@ export interface App {
   };
   ogImagePath?: string;
   twitterOgImagePath?: string;
-  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
 }
 ```
 > **NOTE**

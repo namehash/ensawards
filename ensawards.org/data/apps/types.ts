@@ -35,5 +35,4 @@ export interface App {
   };
   ogImagePath?: string;
   twitterOgImagePath?: string;
-  contributors: [Contributor, ...Contributor[]];
 }

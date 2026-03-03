@@ -35,5 +35,4 @@ export interface Project {
     website: URL;
     twitter: URL;
   };
-  contributors: [Contributor, ...Contributor[]];
 }

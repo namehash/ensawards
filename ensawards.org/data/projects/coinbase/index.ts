@@ -1,5 +1,3 @@
-import contributors from "data/contributors/index.ts";
-
 import { defineProject } from "../registry.ts";
 import type { Project } from "../types.ts";
 import { ProjectIds } from "../types.ts";
@@ -15,7 +13,6 @@ const CoinbaseProject: Project = {
     website: new URL("https://www.coinbase.com/"),
     twitter: new URL("https://x.com/coinbase"),
   },
-  contributors: [contributors.y3drk, contributors.lightwalker, contributors.theloner],
 };
 
 defineProject(CoinbaseProject);

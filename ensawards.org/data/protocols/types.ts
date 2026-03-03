@@ -62,7 +62,6 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
   };
   ogImagePath?: string;
   twitterOgImagePath?: string;
-  contributors: [Contributor, ...Contributor[]];
 }
 
 export interface DAOProtocol extends ProtocolAbstract<DAOProtocolId, typeof ProtocolTypes.DAO> {}

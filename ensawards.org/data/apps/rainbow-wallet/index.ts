@@ -1,8 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
-import contributors from "data/contributors/index.ts";
-
 import RainbowProject from "../../projects/rainbow";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -26,7 +24,6 @@ const RainbowWallet: App = {
   benchmarks: RainbowWalletBenchmarks,
   ogImagePath: "https://ensawards.org/data/apps/rainbow-wallet/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/rainbow-wallet/twitter-og.png",
-  contributors: [contributors.lightwalker, contributors.y3drk, contributors.theloner],
 };
 
 defineApp(RainbowWallet);
