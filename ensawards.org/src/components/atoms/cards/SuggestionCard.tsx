@@ -165,7 +165,7 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
           href={getEnsAdvocateDetailsRelativePath(contributor.address)}
           className="text-xs leading-normal text-blue-500 font-normal hover:underline hover:underline-offset-[25%]"
         >
-          View ENS Advocate details
+          View ENS Advocate profile
         </a>
       </div>
     </div>
