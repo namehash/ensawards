@@ -1,10 +1,9 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying app benchmarks
 
-import contributors from "data/contributors";
-
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
+import contributors from "../../contributors";
 import displayNamedSmartContractsL2 from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
 import displayNamedSmartContractsMainnet from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
 import type { AppBenchmark } from "../benchmarks-types.ts";
