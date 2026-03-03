@@ -1,4 +1,7 @@
-import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
+import {
+  getBlockExplorerAddressDetailsUrl,
+  ResolveAndDisplayIdentity,
+} from "@namehash/namehash-ui";
 import type { AppBenchmark } from "data/apps/benchmarks-types";
 import type { Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
@@ -7,7 +10,7 @@ import type { Contract } from "data/protocols/contracts-types";
 import type { Protocol } from "data/protocols/types";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
-import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
+import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -66,45 +69,21 @@ export const SuggestionCard = ({
                   profile.chainId,
                 );
 
-                // TODO: The Figma design for the tooltip seems to be outdated. Ask about a new version
-                const tooltipContent = (
-                  <ResolveAndDisplayIdentity
-                    identity={identity}
-                    namespaceId={DEFAULT_ENS_NAMESPACE}
-                    withLink={true}
-                    withTooltip={false}
-                    withAvatar={true}
-                    identityLinkDetails={{
-                      isExternal: false,
-                      link: new URL(
-                        getEnsAdvocateDetailsRelativePath(identity.address),
-                        getEnsAwardsBaseUrl(),
-                      ),
-                    }}
-                    className="text-blue-400 hover:underline hover:underline-offset-[25%]"
-                  />
-                );
                 return (
                   <GenericTooltip
                     key={`contributor-${idx}`}
-                    content={tooltipContent}
+                    content={
+                      <ContributorTooltipContent contributor={profile} identity={identity} />
+                    }
                     tooltipOffset={1}
                   >
                     <ResolveAndDisplayIdentity
                       identity={identity}
                       namespaceId={DEFAULT_ENS_NAMESPACE}
-                      withLink={true}
+                      withLink={false}
                       withTooltip={false}
                       withAvatar={true}
                       withIdentifier={false}
-                      identityLinkDetails={{
-                        isExternal: false,
-                        link: new URL(
-                          getEnsAdvocateDetailsRelativePath(identity.address),
-                          getEnsAwardsBaseUrl(),
-                        ),
-                      }}
-                      className="text-blue-400 hover:underline hover:underline-offset-[25%]"
                     />
                   </GenericTooltip>
                 );
@@ -151,5 +130,44 @@ export const SuggestionCard = ({
         </div>
       </TooltipProvider>
     </ENSNodeProvider>
+  );
+};
+
+interface ContributorTooltipContentProps {
+  contributor: Contributor;
+  identity: UnresolvedIdentity;
+}
+
+// TODO: The Figma design for the tooltip seems to be outdated. Ask about a new version
+const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltipContentProps) => {
+  return (
+    <div className="w-full flex flex-row justify-start items-center py-1.5 gap-3">
+      <ResolveAndDisplayIdentity
+        identity={identity}
+        namespaceId={DEFAULT_ENS_NAMESPACE}
+        withLink={false}
+        withTooltip={false}
+        withAvatar={true}
+        withIdentifier={false}
+      />
+      <div className="flex flex-col justify-start items-start gap-0.5">
+        <ResolveAndDisplayIdentity
+          identity={identity}
+          namespaceId={DEFAULT_ENS_NAMESPACE}
+          withLink={false}
+          withTooltip={false}
+          withAvatar={false}
+          className="text-sm text-white leading-normal font-semibold hover:no-underline cursor-default"
+        />
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href={getBlockExplorerAddressDetailsUrl(contributor.chainId, contributor.address)?.href}
+          className="text-xs leading-normal text-blue-500 font-normal hover:underline hover:underline-offset-[25%]"
+        >
+          View on Etherscan
+        </a>
+      </div>
+    </div>
   );
 };
