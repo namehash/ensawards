@@ -13,7 +13,7 @@ import Layout from "../../layouts/Layout.astro";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "../../../data/apps/utils.ts";
 import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
-import { type Contributor } from "../../../data/contributors/types.ts";
+import { type Contribution } from "../../../data/contributors/types.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -25,7 +25,7 @@ const appToDisplay = getAppBySlug(app);
 
 let appScore: number;
 let AppIcon;
-let appBenchmarksDataContributors: Contributor[] = [];
+let appBenchmarksDataContributors: Contribution[] = [];
 
 if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);

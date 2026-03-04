@@ -47,7 +47,7 @@ This is our way to show appreciation to the people who contributed to our cause.
 
 To add yourself:
 1. Add your `AccountId` to the `contributors` collection in [ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) (if this is your first contribution).
-2. Reference yourself in the contributions array of the entity you are updating.If you update the same entity multiple times, add a separate entry for each update with the corresponding timestamp.
+2. Reference yourself in the contributions array of the entity you are updating. If you update the same entity multiple times, add a separate entry for each update with the corresponding timestamp.
 
 For reference see [ensawards.org/data/apps/metamask-wallet/benchmarks.ts](ensawards.org/data/apps/metamask-wallet/benchmarks.ts).
 
