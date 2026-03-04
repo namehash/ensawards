@@ -25,12 +25,12 @@ const appToDisplay = getAppBySlug(app);
 
 let appScore: number;
 let AppIcon;
-let appBenchmarksDataContributors: Contribution[] = [];
+let appBenchmarksDataContributions: Contribution[] = [];
 
 if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);
   AppIcon = appToDisplay.icon;
-  appBenchmarksDataContributors = appToDisplay.benchmarks
+  appBenchmarksDataContributions = appToDisplay.benchmarks
     .map((benchmark) => benchmark.contributions)
     .flat();
 }
@@ -95,7 +95,7 @@ if (appToDisplay !== undefined) {
         <SuggestionCard
           client:load
           whatsSuggested="benchmark result"
-          allContributions={appBenchmarksDataContributors}
+          allContributions={appBenchmarksDataContributions}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
         />
         <ItemsList header="Benchmark results">
