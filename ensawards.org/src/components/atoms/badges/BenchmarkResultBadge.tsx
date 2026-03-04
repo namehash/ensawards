@@ -20,10 +20,13 @@ export interface BenchmarkResultBadgeProps {
 }
 
 const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
+  // It is guaranteed that there is at least one contributor.
+  const latestContributor = benchmark.contributors.at(-1)!;
+
   const identity = buildUnresolvedIdentity(
-    benchmark.benchmarkedBy.address,
+    latestContributor.address,
     DEFAULT_ENS_NAMESPACE,
-    benchmark.benchmarkedBy.chainId,
+    latestContributor.chainId,
   );
 
   return (
@@ -49,7 +52,7 @@ const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
       <p className="text-xs text-muted-foreground">
         on{" "}
         <AbsoluteTime
-          timestamp={benchmark.benchmarkedAt}
+          timestamp={benchmark.lastUpdated}
           options={{
             year: "numeric",
             month: "long",

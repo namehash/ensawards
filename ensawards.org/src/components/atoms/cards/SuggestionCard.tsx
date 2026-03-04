@@ -30,12 +30,14 @@ export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
   allContributions: Contributor[];
   gitHubTargetHref?: string;
+  sidebarVariant?: boolean;
 }
 
 export const SuggestionCard = ({
   whatsSuggested,
   allContributions,
   gitHubTargetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
+  sidebarVariant = false,
 }: SuggestionCardProps) => {
   const ensNodeReactConfig = useMemo(
     () =>
@@ -53,7 +55,12 @@ export const SuggestionCard = ({
   return (
     <ENSNodeProvider config={ensNodeReactConfig}>
       <TooltipProvider delayDuration={250} skipDelayDuration={0}>
-        <div className="w-full max-w-[1216px] h-fit flex flex-col gap-3 sm:gap-5 lg:flex-row lg:justify-between lg:items-start p-4 sm:px-5 sm:py-4 rounded-2xl border border-gray-200 bg-white">
+        <div
+          className={cn(
+            "w-full max-w-[1216px] h-fit flex flex-col gap-3 sm:gap-5 p-4 sm:px-5 sm:py-4 rounded-2xl border border-gray-200 bg-white",
+            !sidebarVariant && "lg:flex-row lg:justify-between lg:items-start",
+          )}
+        >
           <div className="w-full flex-1 min-w-0">
             <div className="w-full flex flex-col gap-1">
               <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
@@ -63,7 +70,7 @@ export const SuggestionCard = ({
             </div>
           </div>
 
-          <div className="w-full lg:w-1/2 flex flex-col gap-3 sm:gap-4">
+          <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
             <div className="flex flex-wrap items-start gap-3 py-1.5">
               {orderedContributorProfiles.map((profile) => {
                 const identity = buildUnresolvedIdentity(
@@ -95,7 +102,12 @@ export const SuggestionCard = ({
 
             <div className="w-full h-px bg-border"></div>
 
-            <div className="w-full flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
+            <div
+              className={cn(
+                "w-full flex flex-col gap-3",
+                !sidebarVariant && "sm:flex-row sm:justify-between sm:items-center",
+              )}
+            >
               <p className="text-base leading-6 font-normal text-muted-foreground">
                 Submit a contribution
               </p>

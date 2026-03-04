@@ -13,22 +13,19 @@ const benchmarks: AppBenchmark[] = [
   // {
   //   bestPractice: recognizeAllENSNames,
   //   result: BenchmarkResult.Pass,
-  //   benchmarkedBy: contributors.stevedylan,
-  //   benchmarkedAt: parseTimestamp("2025-12-03T14:00:00Z"),
+  //   lastUpdated: parseTimestamp("2025-12-03T14:00:00Z"),
   //   contributors: [contributors.stevedylan],
   // },
   {
     bestPractice: displayNamedSmartContractsMainnet,
     result: BenchmarkResult.Pass,
-    benchmarkedBy: contributors.stevedylan,
-    benchmarkedAt: parseTimestamp("2025-12-08T18:28:32.410Z"),
+    lastUpdated: parseTimestamp("2025-12-08T18:28:32.410Z"),
     contributors: [contributors.stevedylan],
   },
   {
     bestPractice: displayNamedSmartContractsL2,
     result: BenchmarkResult.Fail,
-    benchmarkedBy: contributors.stevedylan,
-    benchmarkedAt: parseTimestamp("2025-12-08T18:28:32.410Z"),
+    lastUpdated: parseTimestamp("2025-12-08T18:28:32.410Z"),
     contributors: [contributors.stevedylan],
   },
 ];

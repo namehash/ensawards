@@ -18,10 +18,8 @@ export interface AppBenchmark {
   bestPractice: BestPracticeApp;
   /** The result of the benchmark */
   result: BenchmarkResult;
-  /** The account ID of the person who performed the latest benchmark */
-  benchmarkedBy: Contributor;
-  /** Unix timestamp when the benchmark was performed */
-  benchmarkedAt: UnixTimestamp;
+  /** Unix timestamp when the benchmark was last updated */
+  lastUpdated: UnixTimestamp;
   /** All contributors involved in the addition or maintenance of the benchmark's data */
   contributors: [Contributor, ...Contributor[]];
 }
