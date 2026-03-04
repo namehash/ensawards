@@ -1,6 +1,8 @@
+import type { PossibleSuggestions } from "@/components/molecules/contact-form/types";
+
 // biome-ignore-start lint/style/noNonNullAssertion: All DOM objects accessed in this file
 // are guaranteed to exist for the entirety of runtime (forms in modal view)
-export function openSuggestionOverlay(whatsSuggested: string) {
+export function openSuggestionOverlay(whatsSuggested: PossibleSuggestions) {
   const scrollValue = window.scrollY;
   switch (whatsSuggested) {
     case "app":
@@ -15,8 +17,8 @@ export function openSuggestionOverlay(whatsSuggested: string) {
       document.querySelector("#benchmark-result-overlay")!.classList.remove("hidden");
       break;
 
-    case "dao":
-      document.querySelector("#dao-overlay")!.classList.remove("hidden");
+    case "protocol":
+      document.querySelector("#protocol-overlay")!.classList.remove("hidden");
       break;
 
     case "contract":

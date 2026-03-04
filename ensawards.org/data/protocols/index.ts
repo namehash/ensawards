@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying protocols
+
 import { ProtocolTypes } from "../ens-best-practices/types.ts";
 import { getDefinedProtocols } from "./registry.ts";
 import type { DAOProtocol, DeFiProtocol, Protocol } from "./types.ts";

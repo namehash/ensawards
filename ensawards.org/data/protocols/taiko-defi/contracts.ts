@@ -2,6 +2,9 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -18,6 +21,9 @@ const contracts: Contract[] = [
         codeName: "SharedResolver",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -30,6 +36,9 @@ const contracts: Contract[] = [
       },
       name: "signals.based.taiko.eth",
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -42,6 +51,9 @@ const contracts: Contract[] = [
       },
       name: "bridge.based.taiko.eth",
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -53,6 +65,9 @@ const contracts: Contract[] = [
         codeName: "QuotaManager",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -65,6 +80,9 @@ const contracts: Contract[] = [
       },
       name: "v20.based.taiko.eth",
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -77,6 +95,9 @@ const contracts: Contract[] = [
       },
       name: "v721.based.taiko.eth",
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -89,6 +110,9 @@ const contracts: Contract[] = [
       },
       name: "v1155.based.taiko.eth",
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -100,6 +124,9 @@ const contracts: Contract[] = [
         codeName: "BridgedERC20",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -111,6 +138,9 @@ const contracts: Contract[] = [
         codeName: "BridgedERC721",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -122,6 +152,9 @@ const contracts: Contract[] = [
         codeName: "BridgedERC1155",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -134,6 +167,9 @@ const contracts: Contract[] = [
       },
       name: "inbox.based.taiko.eth",
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -145,6 +181,9 @@ const contracts: Contract[] = [
         codeName: "TaikoWrapper",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -156,6 +195,9 @@ const contracts: Contract[] = [
         codeName: "ComposeVerifier",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -167,6 +209,9 @@ const contracts: Contract[] = [
         codeName: "SgxRethVerifier",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -178,6 +223,9 @@ const contracts: Contract[] = [
         codeName: "SgxGethVerifier",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -189,6 +237,9 @@ const contracts: Contract[] = [
         codeName: "Risc0RethVerifier",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -200,6 +251,9 @@ const contracts: Contract[] = [
         codeName: "SP1RethVerifier",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -211,6 +265,9 @@ const contracts: Contract[] = [
         codeName: "SP1RemoteVerifier",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -222,6 +279,9 @@ const contracts: Contract[] = [
         codeName: "labprover",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -233,6 +293,9 @@ const contracts: Contract[] = [
         codeName: "ForcedInclusionStore",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -244,6 +307,9 @@ const contracts: Contract[] = [
         codeName: "RollupAddressResolver",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -255,6 +321,9 @@ const contracts: Contract[] = [
         codeName: "Risc0Groth16Verifier",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -266,6 +335,9 @@ const contracts: Contract[] = [
         codeName: "AutomataDcapAttestation",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -277,6 +349,9 @@ const contracts: Contract[] = [
         codeName: "SgxGethAutomata",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -288,6 +363,9 @@ const contracts: Contract[] = [
         codeName: "PemCertChainLib",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -299,6 +377,9 @@ const contracts: Contract[] = [
         codeName: "P256Verifier",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDeFi,
@@ -310,6 +391,10 @@ const contracts: Contract[] = [
         codeName: "SigVerifyLib",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
 ];
 

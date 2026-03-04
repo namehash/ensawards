@@ -18,13 +18,14 @@ import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
-import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "../../utils/styles";
 import { type Protocol } from "../../../data/protocols/types";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolBySlug } from "../../../data/protocols/utils.ts";
+import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
+import { type Contribution } from "../../../data/contributors/types.ts";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -47,12 +48,16 @@ const resolvedProtocol = getProtocolBySlug(protocol);
 let protocolContracts: Contract[] = [];
 let protocolScore = 0;
 let ProtocolIcon = GlobeIcon;
+let protocolContractsDataContributions: Contribution[] = [];
 
 if (resolvedProtocol) {
   protocolContracts = CONTRACTS.filter((contract) => contract.protocol.id === resolvedProtocol.id);
   ProtocolIcon = resolvedProtocol.icon;
   protocolScore =
     getContractNamingScoresByProtocolType(resolvedProtocol.protocolType)[resolvedProtocol.id] ?? 0;
+  protocolContractsDataContributions = protocolContracts
+    .map((contract) => contract.contributions)
+    .flat();
 }
 ---
 
@@ -116,6 +121,12 @@ if (resolvedProtocol) {
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ContractNamingBanner />
+        <SuggestionCard
+          client:load
+          whatsSuggested="contract"
+          allContributions={protocolContractsDataContributions}
+          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
+        />
         <ItemsList
           header="Smart contract naming"
           containerStyles="gap-3 sm:gap-2">
@@ -167,12 +178,6 @@ if (resolvedProtocol) {
               </>
             );
           })}
-          <div class="w-full h-fit pt-1 sm:pt-8">
-            <SuggestionCard
-              whatsSuggested="contract"
-              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
-            />
-          </div>
         </ItemsList>
       </section>
     </Layout>

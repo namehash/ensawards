@@ -1,5 +1,7 @@
 // TODO: In a future PR uncomment recognizeAllENSNames best practice
 
+// import contributors from "data/contributors";
+
 // // Using an approach of practical steps of how to implement with authoritative links with more details
 // const technicalDetailsMainContent = `To properly support all valid ENS names, your application should implement a structured validation approach.
 // Begin by handling empty input cases by prompting users to enter an ENS name or address.
@@ -38,4 +40,7 @@
 //       },
 //     ],
 //   },
+// contributions: [
+//   { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-09T11:03:00.000Z") },
+// ],
 // };

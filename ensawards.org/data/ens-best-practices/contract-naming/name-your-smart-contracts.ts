@@ -1,3 +1,10 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying best practices
+
+import contributors from "data/contributors/index.ts";
+
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import { defineBestPractice } from "../registry.ts";
 import { type BestPracticeProtocol, BestPracticeTypes, ProtocolTypes } from "../types.ts";
 import ContractNamingCategory from ".";
@@ -33,6 +40,10 @@ const nameYourSmartContracts: BestPracticeProtocol = {
       },
     ],
   },
+  contributions: [
+    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+    { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-12T14:51:00.000Z") },
+  ],
 };
 
 defineBestPractice(nameYourSmartContracts);

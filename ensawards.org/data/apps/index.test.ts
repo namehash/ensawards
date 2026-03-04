@@ -101,17 +101,17 @@ describe("App data", () => {
           `Benchmark ${index} for app ${app.id} missing result`,
         ).toBeDefined();
         expect(
-          benchmark.benchmarkedBy,
-          `Benchmark ${index} for app ${app.id} missing benchmarkedBy`,
+          benchmark.lastUpdated,
+          `Benchmark ${index} for app ${app.id} missing lastUpdated`,
         ).toBeDefined();
         expect(
-          benchmark.benchmarkedAt,
-          `Benchmark ${index} for app ${app.id} missing benchmarkedAt`,
-        ).toBeDefined();
-        expect(
-          typeof benchmark.benchmarkedAt === "number",
-          `Benchmark ${index} for app ${app.id} benchmarkedAt should be a number`,
+          typeof benchmark.lastUpdated === "number",
+          `Benchmark ${index} for app ${app.id} lastUpdated should be a number`,
         ).toEqual(true);
+        expect(
+          benchmark.contributions,
+          `Benchmark ${index} for app ${app.id} missing contributions`,
+        ).toBeDefined();
       });
     });
   });

@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying protocols
+
 import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import AaveProject from "../../projects/aave";
 import { defineProtocol } from "../registry.ts";

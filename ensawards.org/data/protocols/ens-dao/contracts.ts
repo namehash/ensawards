@@ -2,6 +2,9 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,6 +22,9 @@ const contracts: Contract[] = [
       },
       name: "token.ensdao.eth",
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
@@ -31,6 +37,9 @@ const contracts: Contract[] = [
       },
       name: "tokenlock.ensdao.eth",
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
@@ -43,6 +52,9 @@ const contracts: Contract[] = [
       },
       name: "governor.ensdao.eth",
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
@@ -55,6 +67,9 @@ const contracts: Contract[] = [
       },
       name: "wallet.ensdao.eth",
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
@@ -67,6 +82,9 @@ const contracts: Contract[] = [
       },
       name: "twap.ensdao.eth",
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
@@ -79,6 +97,9 @@ const contracts: Contract[] = [
       },
       name: "veto.ensdao.eth",
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
@@ -91,6 +112,9 @@ const contracts: Contract[] = [
       },
       name: "endowment.ensdao.eth",
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
 ];
 

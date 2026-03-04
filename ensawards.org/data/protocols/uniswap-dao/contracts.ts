@@ -2,6 +2,9 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,6 +22,9 @@ const contracts: Contract[] = [
         codeName: "UNIToken",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -31,6 +37,11 @@ const contracts: Contract[] = [
       },
       name: "uniswap.eth",
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -43,6 +54,9 @@ const contracts: Contract[] = [
         codeName: "GovernorAlpha",
       },
     },
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -54,6 +68,9 @@ const contracts: Contract[] = [
         codeName: "GovernorBravo",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -65,6 +82,9 @@ const contracts: Contract[] = [
         codeName: "UniMerkleDistributor",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -76,6 +96,9 @@ const contracts: Contract[] = [
         codeName: "StakingRewardsFactory",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -87,6 +110,9 @@ const contracts: Contract[] = [
         codeName: "StakingRewards1",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -98,6 +124,9 @@ const contracts: Contract[] = [
         codeName: "StakingRewards2",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -109,6 +138,9 @@ const contracts: Contract[] = [
         codeName: "StakingRewards3",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
@@ -120,6 +152,9 @@ const contracts: Contract[] = [
         codeName: "StakingRewards4",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+    ],
   },
 ];
 

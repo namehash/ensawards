@@ -1,4 +1,6 @@
-import type { AccountId, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { Contribution } from "data/contributors/types.ts";
+
+import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { BestPracticeApp } from "../ens-best-practices/types.ts";
 
@@ -16,8 +18,8 @@ export interface AppBenchmark {
   bestPractice: BestPracticeApp;
   /** The result of the benchmark */
   result: BenchmarkResult;
-  /** The account ID of the person who performed the benchmark */
-  benchmarkedBy: AccountId;
-  /** Unix timestamp when the benchmark was performed */
-  benchmarkedAt: UnixTimestamp;
+  /** Unix timestamp when the benchmark was last updated */
+  lastUpdated: UnixTimestamp;
+  /** A record of all contributors involved in the addition or maintenance of the benchmark's data */
+  contributions: [Contribution, ...Contribution[]];
 }

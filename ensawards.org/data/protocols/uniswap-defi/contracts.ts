@@ -2,6 +2,9 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -18,6 +21,11 @@ const contracts: Contract[] = [
         codeName: "PoolManager",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -29,6 +37,12 @@ const contracts: Contract[] = [
         codeName: "TransparentUpgradeableProxy",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -40,6 +54,11 @@ const contracts: Contract[] = [
         codeName: "PositionManager",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -51,6 +70,12 @@ const contracts: Contract[] = [
         codeName: "V4Quoter",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -62,6 +87,11 @@ const contracts: Contract[] = [
         codeName: "StateView",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -73,6 +103,11 @@ const contracts: Contract[] = [
         codeName: "UniversalRouter",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -84,6 +119,11 @@ const contracts: Contract[] = [
         codeName: "Permit2",
       },
     },
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
 ];
 

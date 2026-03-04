@@ -38,7 +38,7 @@ const formTextContentsAdaptations = new Map<
       ["app", "Suggest an app for review"],
       ["best practice", "Suggest best practice"],
       ["benchmark result", "Request benchmark result update"],
-      ["dao", "Suggest a DAO for review"],
+      ["protocol", "Suggest a protocol for review"],
       ["contract", "Suggest contract to update"],
     ]),
   ],
@@ -48,7 +48,7 @@ const formTextContentsAdaptations = new Map<
       ["app", "Provide details of the app you’d like us to add to ENSAwards."],
       ["best practice", "Suggest a best practice you’d like us to add to ENSAwards."],
       ["benchmark result", "Suggest a benchmark result update for review"],
-      ["dao", "Provide details of the DAO you’d like us to add to ENSAwards."],
+      ["protocol", "Provide details of the protocol you’d like us to add to ENSAwards."],
       ["contract", "Provide details of the contract you'd like us to update."],
     ]),
   ],
@@ -58,7 +58,7 @@ const validationSchemaMap = {
   app: appSuggestionFormSchema,
   "best practice": bestPracticeSuggestionFormSchema,
   "benchmark result": benchmarkResultUpdateRequestSchema,
-  dao: appSuggestionFormSchema,
+  protocol: appSuggestionFormSchema,
   contract: contractSuggestionFormSchema,
 } as const;
 
@@ -73,6 +73,7 @@ const PLACEHOLDER_EMAIL = "placeholder@gmail.com";
  */
 const MESSAGE_SEPARATOR = "\n----------\n";
 const APP_SUGGESTION_DESCRIPTION_HEADER = "\nAPP SUGGESTION from ensawards.org";
+const PROTOCOL_SUGGESTION_DESCRIPTION_HEADER = "\nPROTOCOL SUGGESTION from ensawards.org";
 const BEST_PRACTICE_SUGGESTION_DESCRIPTION_HEADER = "\nBEST PRACTICE SUGGESTION from ensawards.org";
 const BENCHMARK_UPDATE_REQUEST_HEADER = "\nBENCHMARK UPDATE REQUEST from ensawards.org";
 const CONTRACT_SUGGESTION_DESCRIPTION_HEADER = "\nCONTRACT SUGGESTION from ensawards.org";
@@ -110,7 +111,7 @@ const addPrefixToLabel = (label: string, whatsSuggested: PossibleSuggestions): s
   const labelsToPrefix = ["Name", "URL"];
   const prefixes: Record<PossibleSuggestions, string> = {
     app: "App ",
-    dao: "DAO ",
+    protocol: "Protocol ",
     "best practice": "",
     "benchmark result": "",
     contract: "",
@@ -198,8 +199,8 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
           `${BENCHMARK_UPDATE_REQUEST_HEADER}${MESSAGE_SEPARATOR}App: ${data.app}${MESSAGE_SEPARATOR}Benchmark: ${data.benchmark}${MESSAGE_SEPARATOR}New result: ${data["requested benchmark result update"]}`,
         ],
         [
-          "dao",
-          `${APP_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`,
+          "protocol",
+          `${PROTOCOL_SUGGESTION_DESCRIPTION_HEADER}${MESSAGE_SEPARATOR}Sender suggested URL: ${data.url}${MESSAGE_SEPARATOR}Sender description:\n${data.description}`,
         ],
         [
           "contract",
@@ -211,7 +212,7 @@ export const ContactForm = ({ whatsSuggested, formFields, submissionEndpoint }: 
         ["app", data.name],
         ["best practice", "New best practice suggested"],
         ["benchmark result", `Update benchmark result for: ${data.app}`],
-        ["dao", data.name],
+        ["protocol", data.name],
         ["contract", `Update request for contract=${data["contract address"]} in ${data.project}`],
       ]);
 

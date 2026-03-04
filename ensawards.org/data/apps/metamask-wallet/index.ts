@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
+// on adding and modifying apps
+
 import MetaMaskProject from "../../projects/metamask";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";

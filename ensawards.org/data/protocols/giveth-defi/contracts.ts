@@ -2,6 +2,9 @@
 
 import { mainnet, optimism } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,6 +22,9 @@ const contracts: Contract[] = [
       },
       name: "givtoken.giv.eth",
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+    ],
   },
   {
     protocol: GivethDeFi,
@@ -31,6 +37,9 @@ const contracts: Contract[] = [
       },
       name: "distro.giv.eth",
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+    ],
   },
   {
     protocol: GivethDeFi,
@@ -46,6 +55,9 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+    ],
   },
   {
     protocol: GivethDeFi,
@@ -58,6 +70,9 @@ const contracts: Contract[] = [
       },
       name: "givtoken.giv.eth",
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+    ],
   },
   {
     protocol: GivethDeFi,
@@ -70,6 +85,9 @@ const contracts: Contract[] = [
       },
       name: "distro.giv.eth",
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+    ],
   },
   {
     protocol: GivethDeFi,
@@ -85,6 +103,9 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+    ],
   },
   {
     protocol: GivethDeFi,
@@ -97,6 +118,9 @@ const contracts: Contract[] = [
       },
       name: "givpower.giv.eth",
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+    ],
   },
   {
     protocol: GivethDeFi,
@@ -109,6 +133,9 @@ const contracts: Contract[] = [
       },
       name: "devouch.giv.eth",
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+    ],
   },
 ];
 

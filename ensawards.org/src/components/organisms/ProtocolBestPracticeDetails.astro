@@ -17,6 +17,7 @@ import SubpageHero from "../molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById } from "../../../data/protocols/utils.ts";
+import { SuggestionCard } from "../atoms/cards/SuggestionCard.tsx";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
@@ -115,7 +116,7 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
   id={`${bestPractice.id}-technical-info`}
   class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
   <div
-    class="w-full max-w-[1216px] flex flex-nowrap flex-row gap-20 justify-center items-start">
+    class="w-full max-w-[1216px] flex flex-nowrap flex-col sm:flex-row gap-6 sm:gap-20 justify-start sm:justify-center items-start">
     <div
       class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
       <h2 class="text-2xl leading-none font-semibold text-black">
@@ -139,32 +140,41 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
         ))
       }
     </div>
-    <div
-      class="w-1/2 min-w-[300px] max-w-[420px] box-border h-fit hidden sm:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
-      <h4
-        class={cn(
-          technicalSectionMinorHeaderStyles,
-          "flex flex-row justify-start items-center gap-5",
-        )}>
-        Powered by <EnscribeIconLight />
-      </h4>
-      <p class={technicalSectionContentStyles}>
-        With Enscribe, developers can easily assign ENS names to smart
-        contracts.
-      </p>
-      <div class="bg-gray-200 h-[1px] self-stretch"></div>
-      <a
-        href="https://www.enscribe.xyz/"
-        target="_blank"
-        rel="noreferrer"
-        class={cn(
-          shadcnButtonVariants({
-            variant: "secondary",
-            size: "default",
-            className: "cursor-pointer rounded-full self-stretch",
-          }),
-        )}>Learn more about Enscribe</a
-      >
+    <div class="w-full sm:w-1/2 h-fit box-border flex flex-col gap-5">
+      <div
+        class="w-full min-w-[300px] max-w-[420px] box-border h-fit hidden sm:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
+        <h4
+          class={cn(
+            technicalSectionMinorHeaderStyles,
+            "flex flex-row justify-start items-center gap-5",
+          )}>
+          Powered by <EnscribeIconLight />
+        </h4>
+        <p class={technicalSectionContentStyles}>
+          With Enscribe, developers can easily assign ENS names to smart
+          contracts.
+        </p>
+        <div class="bg-gray-200 h-[1px] self-stretch"></div>
+        <a
+          href="https://www.enscribe.xyz/"
+          target="_blank"
+          rel="noreferrer"
+          class={cn(
+            shadcnButtonVariants({
+              variant: "secondary",
+              size: "default",
+              className: "cursor-pointer rounded-full self-stretch",
+            }),
+          )}>Learn more about Enscribe</a
+        >
+      </div>
+      <SuggestionCard
+        client:load
+        sidebarVariant
+        whatsSuggested="best practice"
+        allContributions={bestPractice.contributions}
+        gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}
+      />
     </div>
   </div>
 </section>

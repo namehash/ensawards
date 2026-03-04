@@ -1,7 +1,5 @@
 import type { Address } from "viem";
 
-import type { PossibleSuggestions } from "@/components/molecules/contact-form/types.ts";
-
 import { AppTypes } from "../../data/apps/types.ts";
 import { type BestPracticeTarget, ProtocolTypes } from "../../data/ens-best-practices/types.ts";
 
@@ -36,28 +34,6 @@ export const breakLongWords = (
 
   if (current) result.push(current);
   return result;
-};
-
-export const getSuggestionText = (whatsSuggested: PossibleSuggestions): string => {
-  switch (whatsSuggested) {
-    case "app":
-      return "Want to add an app? Suggest the app for review or add the app review yourself on GitHub.";
-
-    case "best practice":
-      return "Want to add best practice? Suggest it for review or add it yourself on GitHub.";
-
-    case "benchmark result":
-      return "Benchmark result updates to report? Notify us of the change or update it yourself on GitHub.";
-
-    case "dao":
-      return "Want to add a DAO? Suggest the DAO for review or add the DAO review yourself on GitHub.";
-
-    case "contract":
-      return "Contracts to add or update? Notify us of the change or update it yourself on GitHub.";
-
-    default:
-      throw new Error(`${whatsSuggested} is not a valid suggestion category`);
-  }
 };
 
 export const capitalizeFormLabel = (label: string): string => {

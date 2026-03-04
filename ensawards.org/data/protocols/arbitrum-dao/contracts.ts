@@ -2,6 +2,9 @@
 
 import { arbitrum, mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -18,6 +21,9 @@ const contracts: Contract[] = [
         codeName: "ArbitrumDaoTreasury",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -29,6 +35,9 @@ const contracts: Contract[] = [
         codeName: "ARBGatewayL1",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -40,6 +49,9 @@ const contracts: Contract[] = [
         codeName: "ARBGatewayL2",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -51,6 +63,9 @@ const contracts: Contract[] = [
         codeName: "L1UpgradeExecutor",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -62,6 +77,9 @@ const contracts: Contract[] = [
         codeName: "L1Timelock",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -73,6 +91,9 @@ const contracts: Contract[] = [
         codeName: "CoreGovernor",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -84,6 +105,9 @@ const contracts: Contract[] = [
         codeName: "TreasuryGovernor",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -95,6 +119,9 @@ const contracts: Contract[] = [
         codeName: "ArbOneUpgradeExecutor",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -106,6 +133,9 @@ const contracts: Contract[] = [
         codeName: "L2CoreTimelock",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -117,6 +147,9 @@ const contracts: Contract[] = [
         codeName: "L2TreasuryTimelock",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -128,6 +161,9 @@ const contracts: Contract[] = [
         codeName: "SecurityCouncilL1Emergency",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -139,6 +175,9 @@ const contracts: Contract[] = [
         codeName: "SecurityCouncilL2Emergency",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -150,6 +189,9 @@ const contracts: Contract[] = [
         codeName: "NomineeElectionGovernor",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -161,6 +203,9 @@ const contracts: Contract[] = [
         codeName: "MemberElectionGovernor",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -172,6 +217,9 @@ const contracts: Contract[] = [
         codeName: "Manager",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -183,6 +231,9 @@ const contracts: Contract[] = [
         codeName: "UpgradeExecRouteBuilder",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -194,6 +245,9 @@ const contracts: Contract[] = [
         codeName: "MemberRemovalGovernor",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -205,6 +259,9 @@ const contracts: Contract[] = [
         codeName: "MemberSyncActionL2",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -216,6 +273,9 @@ const contracts: Contract[] = [
         codeName: "MemberSyncActionL1",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -227,6 +287,9 @@ const contracts: Contract[] = [
         codeName: "ConstitutionHash",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -238,6 +301,9 @@ const contracts: Contract[] = [
         codeName: "L1ProxyAdmin",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: ArbitrumDao,
@@ -249,6 +315,9 @@ const contracts: Contract[] = [
         codeName: "ArbOneProxyAdmin",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
 ];
 

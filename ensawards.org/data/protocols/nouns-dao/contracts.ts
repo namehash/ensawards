@@ -2,6 +2,9 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
 import { ContractResolutionStatusIds } from "../contracts-types.ts";
@@ -19,6 +22,11 @@ const contracts: Contract[] = [
         codeName: "NounsAuctionHouseProxy",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -31,6 +39,11 @@ const contracts: Contract[] = [
         codeName: "NounsDataDaoProxy",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -43,6 +56,11 @@ const contracts: Contract[] = [
         codeName: "NounsToken",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -55,6 +73,10 @@ const contracts: Contract[] = [
         codeName: "NounsDaoProxy",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -67,6 +89,11 @@ const contracts: Contract[] = [
         codeName: "NounsRewardsProxy",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -79,6 +106,11 @@ const contracts: Contract[] = [
         codeName: "NounsDescriptorV3",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -91,6 +123,10 @@ const contracts: Contract[] = [
       },
       name: "nouns.eth",
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -103,6 +139,10 @@ const contracts: Contract[] = [
         codeName: "NounsStreamFactory",
       },
     },
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
 ];
 

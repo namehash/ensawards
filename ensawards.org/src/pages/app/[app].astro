@@ -2,9 +2,7 @@
 import { EnsIcon, TwitterIcon } from "@namehash/namehash-ui";
 
 import { BenchmarkResultBadge } from "../../components/atoms/badges/BenchmarkResultBadge";
-import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
 import BenchmarkResultCard from "../../components/atoms/cards/BenchmarkResultCard.astro";
-import SuggestionCard from "../../components/atoms/cards/SuggestionCard.astro";
 import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
 import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
 import ItemsList from "../../components/molecules/ItemsList.astro";
@@ -14,6 +12,8 @@ import { APPS } from "../../../data/apps";
 import Layout from "../../layouts/Layout.astro";
 import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "../../../data/apps/utils.ts";
+import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
+import { type Contribution } from "../../../data/contributors/types.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -25,10 +25,14 @@ const appToDisplay = getAppBySlug(app);
 
 let appScore: number;
 let AppIcon;
+let appBenchmarksDataContributions: Contribution[] = [];
 
 if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);
   AppIcon = appToDisplay.icon;
+  appBenchmarksDataContributions = appToDisplay.benchmarks
+    .map((benchmark) => benchmark.contributions)
+    .flat();
 }
 ---
 
@@ -87,8 +91,13 @@ if (appToDisplay !== undefined) {
           label="ENSAwards score"
         />
       </SubpageHero>
-      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:gap-10 sm:py-[60px] sm:px-8">
-        <ContractNamingBanner />
+      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 gap-5 sm:gap-10 sm:py-[60px] sm:px-8">
+        <SuggestionCard
+          client:load
+          whatsSuggested="benchmark result"
+          allContributions={appBenchmarksDataContributions}
+          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
+        />
         <ItemsList header="Benchmark results">
           {appToDisplay.benchmarks.map((benchmark, idx) => (
             <BenchmarkResultCard
@@ -115,10 +124,6 @@ if (appToDisplay !== undefined) {
               />
             </BenchmarkResultCard>
           ))}
-          <SuggestionCard
-            whatsSuggested="benchmark result"
-            gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
-          />
         </ItemsList>
       </section>
     </Layout>

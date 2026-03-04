@@ -44,7 +44,12 @@ export interface SuggestionFormDataProps {
   "contract address": string;
 }
 
-export type PossibleSuggestions = "app" | "best practice" | "benchmark result" | "dao" | "contract";
+export type PossibleSuggestions =
+  | "app"
+  | "best practice"
+  | "benchmark result"
+  | "protocol"
+  | "contract";
 
 export interface ContactFormField extends Omit<FormField, "label"> {
   label: EnsAwardsContactFormFields;
