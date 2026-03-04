@@ -2,6 +2,8 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
@@ -20,7 +22,9 @@ const contracts: Contract[] = [
       },
       name: "timelock-upgrade.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -33,7 +37,9 @@ const contracts: Contract[] = [
       },
       name: "timelock-admin.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -46,7 +52,9 @@ const contracts: Contract[] = [
       },
       name: "timelock-operational.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -59,7 +67,9 @@ const contracts: Contract[] = [
       },
       name: "constraint-rate-adapter.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -72,7 +82,9 @@ const contracts: Contract[] = [
       },
       name: "constraint-rate-adapter-impl.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -85,7 +97,9 @@ const contracts: Contract[] = [
       },
       name: "whitelist.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -98,7 +112,9 @@ const contracts: Contract[] = [
       },
       name: "whitelist-impl.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -111,7 +127,9 @@ const contracts: Contract[] = [
       },
       name: "controller.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -124,7 +142,9 @@ const contracts: Contract[] = [
       },
       name: "pool-manager.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -137,7 +157,9 @@ const contracts: Contract[] = [
       },
       name: "pool-manager-impl.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -150,7 +172,9 @@ const contracts: Contract[] = [
       },
       name: "shares-factory.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
   {
     protocol: CorkDeFi,
@@ -163,7 +187,9 @@ const contracts: Contract[] = [
       },
       name: "adapter.phoenix.cork.eth",
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+    ],
   },
 ];
 

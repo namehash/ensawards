@@ -3,6 +3,8 @@
 
 import contributors from "data/contributors/index.ts";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import { AppTypes } from "../../apps/types.ts";
 import { defineBestPractice } from "../registry.ts";
 import { type BestPracticeApp, BestPracticeTypes } from "../types.ts";
@@ -41,7 +43,10 @@ const displayNamedSmartContractsMainnet: BestPracticeApp = {
       },
     ],
   },
-  contributors: [contributors.lightwalker, contributors.stevedylan],
+  contributions: [
+    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+    { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-12T14:51:00.000Z") },
+  ],
 };
 
 defineBestPractice(displayNamedSmartContractsMainnet);

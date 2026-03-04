@@ -31,7 +31,7 @@ if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);
   AppIcon = appToDisplay.icon;
   appBenchmarksDataContributors = appToDisplay.benchmarks
-    .map((benchmark) => benchmark.contributors)
+    .map((benchmark) => benchmark.contributions)
     .flat();
 }
 ---

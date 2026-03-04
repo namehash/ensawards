@@ -2,6 +2,8 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
@@ -20,7 +22,11 @@ const contracts: Contract[] = [
         codeName: "NounsAuctionHouseProxy",
       },
     },
-    contributors: [contributors.nischal, contributors.stevedylan],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -33,7 +39,11 @@ const contracts: Contract[] = [
         codeName: "NounsDataDaoProxy",
       },
     },
-    contributors: [contributors.nischal, contributors.stevedylan],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -46,7 +56,11 @@ const contracts: Contract[] = [
         codeName: "NounsToken",
       },
     },
-    contributors: [contributors.nischal, contributors.stevedylan],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -59,7 +73,10 @@ const contracts: Contract[] = [
         codeName: "NounsDaoProxy",
       },
     },
-    contributors: [contributors.nischal, contributors.stevedylan],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -72,7 +89,11 @@ const contracts: Contract[] = [
         codeName: "NounsRewardsProxy",
       },
     },
-    contributors: [contributors.nischal, contributors.stevedylan],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -85,7 +106,11 @@ const contracts: Contract[] = [
         codeName: "NounsDescriptorV3",
       },
     },
-    contributors: [contributors.nischal, contributors.stevedylan],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-12-29T10:45:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -98,7 +123,10 @@ const contracts: Contract[] = [
       },
       name: "nouns.eth",
     },
-    contributors: [contributors.nischal, contributors.stevedylan],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: NounsDao,
@@ -111,7 +139,10 @@ const contracts: Contract[] = [
         codeName: "NounsStreamFactory",
       },
     },
-    contributors: [contributors.nischal, contributors.stevedylan],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
 ];
 

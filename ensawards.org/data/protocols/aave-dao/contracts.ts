@@ -2,6 +2,8 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
@@ -19,7 +21,9 @@ const contracts: Contract[] = [
         codeName: "AaveGovernance",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: AaveDao,
@@ -31,7 +35,9 @@ const contracts: Contract[] = [
         codeName: "GovernancePowerStrategy",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: AaveDao,
@@ -43,7 +49,9 @@ const contracts: Contract[] = [
         codeName: "VotingPortalEth",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: AaveDao,
@@ -55,7 +63,9 @@ const contracts: Contract[] = [
         codeName: "VotingMachine",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: AaveDao,
@@ -67,7 +77,9 @@ const contracts: Contract[] = [
         codeName: "VotingStrategy",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: AaveDao,
@@ -79,7 +91,9 @@ const contracts: Contract[] = [
         codeName: "DataWarehouse",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: AaveDao,
@@ -91,7 +105,9 @@ const contracts: Contract[] = [
         codeName: "ExecutorLvl1",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: AaveDao,
@@ -103,7 +119,9 @@ const contracts: Contract[] = [
         codeName: "ExecutorLvl2",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
   {
     protocol: AaveDao,
@@ -115,7 +133,9 @@ const contracts: Contract[] = [
         codeName: "PayloadsController",
       },
     },
-    contributors: [contributors.nischal],
+    contributions: [
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+    ],
   },
 ];
 

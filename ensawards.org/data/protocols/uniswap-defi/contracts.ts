@@ -2,6 +2,8 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
@@ -19,7 +21,11 @@ const contracts: Contract[] = [
         codeName: "PoolManager",
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -31,7 +37,12 @@ const contracts: Contract[] = [
         codeName: "TransparentUpgradeableProxy",
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -43,7 +54,11 @@ const contracts: Contract[] = [
         codeName: "PositionManager",
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -55,7 +70,12 @@ const contracts: Contract[] = [
         codeName: "V4Quoter",
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -67,7 +87,11 @@ const contracts: Contract[] = [
         codeName: "StateView",
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -79,7 +103,11 @@ const contracts: Contract[] = [
         codeName: "UniversalRouter",
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: UniswapDeFi,
@@ -91,7 +119,11 @@ const contracts: Contract[] = [
         codeName: "Permit2",
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.nischal, updatedAt: parseTimestamp("2025-12-02T17:06:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
 ];
 

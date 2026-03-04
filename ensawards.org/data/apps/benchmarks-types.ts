@@ -1,4 +1,4 @@
-import type { Contributor } from "data/contributors/types.ts";
+import type { Contribution } from "data/contributors/types.ts";
 
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
@@ -20,6 +20,6 @@ export interface AppBenchmark {
   result: BenchmarkResult;
   /** Unix timestamp when the benchmark was last updated */
   lastUpdated: UnixTimestamp;
-  /** All contributors involved in the addition or maintenance of the benchmark's data */
-  contributors: [Contributor, ...Contributor[]];
+  /** A record of all contributors involved in the addition or maintenance of the benchmark's data */
+  contributions: [Contribution, ...Contribution[]];
 }

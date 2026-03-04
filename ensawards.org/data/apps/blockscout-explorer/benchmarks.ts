@@ -14,19 +14,25 @@ const benchmarks: AppBenchmark[] = [
   //   bestPractice: recognizeAllENSNames,
   //   result: BenchmarkResult.Pass,
   //   lastUpdated: parseTimestamp("2025-12-03T14:00:00Z"),
-  //   contributors: [contributors.stevedylan],
+  //   contributions: [
+  //   { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-03T14:00:00Z") },
+  // ],
   // },
   {
     bestPractice: displayNamedSmartContractsMainnet,
     result: BenchmarkResult.Pass,
     lastUpdated: parseTimestamp("2025-12-08T18:28:32.410Z"),
-    contributors: [contributors.stevedylan],
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-08T18:28:32.410Z") },
+    ],
   },
   {
     bestPractice: displayNamedSmartContractsL2,
     result: BenchmarkResult.Fail,
     lastUpdated: parseTimestamp("2025-12-08T18:28:32.410Z"),
-    contributors: [contributors.stevedylan],
+    contributions: [
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-08T18:28:32.410Z") },
+    ],
   },
 ];
 

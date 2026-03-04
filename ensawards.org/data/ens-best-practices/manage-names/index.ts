@@ -3,6 +3,8 @@
 
 import contributors from "data/contributors/index.ts";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
 import { CategoryStatus } from "../types.ts";
@@ -14,7 +16,9 @@ const ManageNamesCategory: BestPracticeCategory = {
   description:
     "Updating profiles, transferring ownership, configuring resolvers, and more. There's a lot to managing ENS names!",
   status: CategoryStatus.ComingSoon,
-  contributors: [contributors.lightwalker],
+  contributions: [
+    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+  ],
 };
 
 defineBestPracticeCategory(ManageNamesCategory);

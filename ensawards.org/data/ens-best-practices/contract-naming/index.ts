@@ -3,6 +3,8 @@
 
 import contributors from "data/contributors/index.ts";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
 import { CategoryStatus } from "../types.ts";
@@ -13,7 +15,10 @@ const ContractNamingCategory: BestPracticeCategory = {
   name: "Contract naming",
   description: "Improve the UX and security of smart contract interactions.",
   status: CategoryStatus.Active,
-  contributors: [contributors.lightwalker, contributors.stevedylan],
+  contributions: [
+    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
+    { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-12T14:51:00.000Z") },
+  ],
 };
 
 defineBestPracticeCategory(ContractNamingCategory);

@@ -109,8 +109,8 @@ describe("App data", () => {
           `Benchmark ${index} for app ${app.id} lastUpdated should be a number`,
         ).toEqual(true);
         expect(
-          benchmark.contributors,
-          `Benchmark ${index} for app ${app.id} missing contributors`,
+          benchmark.contributions,
+          `Benchmark ${index} for app ${app.id} missing contributions`,
         ).toBeDefined();
       });
     });

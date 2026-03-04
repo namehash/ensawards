@@ -1,4 +1,4 @@
-import type { Contributor } from "data/contributors/types.ts";
+import type { Contribution } from "data/contributors/types.ts";
 import type { Address, Chain } from "viem";
 
 import type { Name } from "@ensnode/ensnode-sdk";
@@ -233,6 +233,6 @@ export interface Contract {
    */
   cachedIdentity: ContractIdentityResolved;
 
-  /** All contributors involved in the addition or maintenance of the contract's data. */
-  contributors: [Contributor, ...Contributor[]];
+  /** A record of all contributors involved in the addition or maintenance of the contract's data. */
+  contributions: [Contribution, ...Contribution[]];
 }

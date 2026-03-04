@@ -20,8 +20,8 @@ export interface BenchmarkResultBadgeProps {
 }
 
 const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
-  // It is guaranteed that there is at least one contributor.
-  const latestContributor = benchmark.contributors.at(-1)!;
+  // biome-ignore lint/style/noNonNullAssertion: It is guaranteed that there is at least one contribution.
+  const latestContributor = benchmark.contributions.at(-1)!.from;
 
   const identity = buildUnresolvedIdentity(
     latestContributor.address,

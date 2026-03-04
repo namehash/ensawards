@@ -1,5 +1,5 @@
 import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
-import type { Contributor } from "data/contributors/types";
+import type { Contribution, Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
 import { useMemo } from "react";
 import { getAddress } from "viem";
@@ -28,7 +28,7 @@ const orderContributorsByAppearances = (contributors: Contributor[]): Contributo
 
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
-  allContributions: Contributor[];
+  allContributions: Contribution[];
   gitHubTargetHref?: string;
   sidebarVariant?: boolean;
 }
@@ -48,7 +48,7 @@ export const SuggestionCard = ({
   );
 
   const orderedContributorProfiles = useMemo(
-    () => orderContributorsByAppearances(allContributions),
+    () => orderContributorsByAppearances(allContributions.map((contribution) => contribution.from)),
     [allContributions],
   );
 

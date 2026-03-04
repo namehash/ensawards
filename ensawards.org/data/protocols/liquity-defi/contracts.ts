@@ -2,6 +2,8 @@
 
 import { arbitrum, base, mainnet, optimism, scroll } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
@@ -20,7 +22,9 @@ const contracts: Contract[] = [
       },
       name: "bold.token.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -32,7 +36,9 @@ const contracts: Contract[] = [
         codeName: "boldToken",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -44,7 +50,9 @@ const contracts: Contract[] = [
         codeName: "boldToken",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -56,7 +64,9 @@ const contracts: Contract[] = [
         codeName: "boldToken",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -68,7 +78,9 @@ const contracts: Contract[] = [
         codeName: "boldToken",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -81,7 +93,9 @@ const contracts: Contract[] = [
       },
       name: "redeem.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -93,7 +107,9 @@ const contracts: Contract[] = [
         codeName: "shared.hintHelpers",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -105,7 +121,9 @@ const contracts: Contract[] = [
         codeName: "shared.multiTroveGetter",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -117,7 +135,9 @@ const contracts: Contract[] = [
         codeName: "shared.exchangeHelpers",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -129,7 +149,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.collToken",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -141,7 +163,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.addressesRegistry",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -153,7 +177,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.activePool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -166,7 +192,9 @@ const contracts: Contract[] = [
       },
       name: "borrower-ops.eth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -178,7 +206,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.collSurplusPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -190,7 +220,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.defaultPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -202,7 +234,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.sortedTroves",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -215,7 +249,9 @@ const contracts: Contract[] = [
       },
       name: "stability-pool.eth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -228,7 +264,9 @@ const contracts: Contract[] = [
       },
       name: "trove-manager.eth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -241,7 +279,9 @@ const contracts: Contract[] = [
       },
       name: "trove.eth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -253,7 +293,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.metadataNFT",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -265,7 +307,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.priceFeed",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -277,7 +321,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.gasPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -289,7 +335,9 @@ const contracts: Contract[] = [
         codeName: "ETHBranch.wethZapper",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -302,7 +350,9 @@ const contracts: Contract[] = [
       },
       name: "leverage-zapper.eth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -314,7 +364,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.collToken",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -326,7 +378,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.addressesRegistry",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -338,7 +392,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.activePool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -351,7 +407,9 @@ const contracts: Contract[] = [
       },
       name: "borrower-ops.wsteth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -363,7 +421,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.collSurplusPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -375,7 +435,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.defaultPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -387,7 +449,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.sortedTroves",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -400,7 +464,9 @@ const contracts: Contract[] = [
       },
       name: "stability-pool.wsteth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -413,7 +479,9 @@ const contracts: Contract[] = [
       },
       name: "trove-manager.wsteth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -426,7 +494,9 @@ const contracts: Contract[] = [
       },
       name: "trove.wsteth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -438,7 +508,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.metadataNFT",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -450,7 +522,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.priceFeed",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -462,7 +536,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.gasPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -474,7 +550,9 @@ const contracts: Contract[] = [
         codeName: "wstETHBranch.gasCompZapper",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -487,7 +565,9 @@ const contracts: Contract[] = [
       },
       name: "leverage-zapper.wsteth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -499,7 +579,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.collToken",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -511,7 +593,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.addressesRegistry",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -523,7 +607,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.activePool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -536,7 +622,9 @@ const contracts: Contract[] = [
       },
       name: "borrower-ops.reth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -548,7 +636,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.collSurplusPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -560,7 +650,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.defaultPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -572,7 +664,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.sortedTroves",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -585,7 +679,9 @@ const contracts: Contract[] = [
       },
       name: "stability-pool.reth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -598,7 +694,9 @@ const contracts: Contract[] = [
       },
       name: "trove-manager.reth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -611,7 +709,9 @@ const contracts: Contract[] = [
       },
       name: "trove.reth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -623,7 +723,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.metadataNFT",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -635,7 +737,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.priceFeed",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -647,7 +751,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.gasPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -659,7 +765,9 @@ const contracts: Contract[] = [
         codeName: "rETHBranch.gasCompZapper",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -672,7 +780,9 @@ const contracts: Contract[] = [
       },
       name: "leverage-zapper.reth.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -685,7 +795,9 @@ const contracts: Contract[] = [
       },
       name: "governance.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -697,7 +809,9 @@ const contracts: Contract[] = [
         codeName: "governance.curveUsdcBoldPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -709,7 +823,9 @@ const contracts: Contract[] = [
         codeName: "governance.curveUsdcBoldGauge",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -721,7 +837,9 @@ const contracts: Contract[] = [
         codeName: "governance.curveUsdcBoldInitiative",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -733,7 +851,9 @@ const contracts: Contract[] = [
         codeName: "governance.curveLusdBoldPool",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -745,7 +865,9 @@ const contracts: Contract[] = [
         codeName: "governance.curveLusdBoldGauge",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -757,7 +879,9 @@ const contracts: Contract[] = [
         codeName: "governance.curveLusdBoldInitiative",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -769,7 +893,9 @@ const contracts: Contract[] = [
         codeName: "governance.stakingV1",
       },
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -782,7 +908,9 @@ const contracts: Contract[] = [
       },
       name: "lqty.token.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
   {
     protocol: LiquityDeFi,
@@ -795,7 +923,9 @@ const contracts: Contract[] = [
       },
       name: "lusd.token.liquity-protocol.eth",
     },
-    contributors: [contributors.lightwalker],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+    ],
   },
 ];
 

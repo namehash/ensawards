@@ -20,7 +20,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project1UnnamedContract1",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -32,7 +32,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project1UnnamedContract2",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -45,7 +45,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p1c1.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -58,7 +58,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p1c2.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -71,7 +71,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p1c3.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -84,7 +84,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p1c4.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -97,7 +97,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p1c5.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -110,7 +110,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p1c6.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -123,7 +123,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p1c7.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: ENSDao,
@@ -136,7 +136,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "forward.name.p1c1.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -148,7 +148,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project2UnnamedContract1",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -160,7 +160,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project2UnnamedContract2",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -172,7 +172,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project2UnnamedContract3",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -184,7 +184,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project2UnnamedContract4",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -196,7 +196,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project2UnnamedContract5",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -208,7 +208,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project2UnnamedContract6",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -220,7 +220,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project2UnnamedContract7",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -233,7 +233,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p2c1.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -246,7 +246,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p2c2.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: UniswapDao,
@@ -259,7 +259,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "forward.name.p2c1.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -271,7 +271,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project3UnnamedContract1",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -283,7 +283,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project3UnnamedContract2",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -295,7 +295,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project3UnnamedContract3",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -307,7 +307,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
         codeName: "Project3UnnamedContract4",
       },
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -320,7 +320,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p3c1.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -333,7 +333,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p3c2.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -346,7 +346,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p3c3.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -359,7 +359,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p3c4.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -372,7 +372,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "name.p3c5.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
   {
     protocol: LiquityDefi,
@@ -385,6 +385,6 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
       },
       name: "forward.name.p3c1.eth",
     },
-    contributors: [contributors.y3drk],
+    contributions: [{ from: contributors.y3drk, updatedAt: 1772614147 }],
   },
 ];

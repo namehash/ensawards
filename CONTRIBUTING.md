@@ -10,24 +10,29 @@ Below, you’ll find detailed instructions for each contribution type. If your c
 
 ### Adding yourself as a `Contributor`
 
-Certain data models in [ensawards.org/data](ensawards.org/data) include a `contributors` field. Its type definition is shown below.
+Certain data models in [ensawards.org/data](ensawards.org/data) include a `contributions` field. Its type definition is shown below.
 
-The `contributors` field type is a non-empty array of `Contributor`:
+The `contributions` field type is a non-empty array of `Contribution`:
 
 ```typescript
 export interface Contract {
   // ...
-  contributors: [Contributor, ...Contributor[]];
+  contributions: [Contribution, ...Contribution[]];
 }
 ```
 
-`Contributor` is an alias for `AccountId` from `@ensnode/ensnode-sdk`:
-
 ```typescript
 export type Contributor = AccountId;
+
+export type Contribution = {
+  /** The contributor who made the contribution */
+  from: Contributor;
+  /** The Unix timestamp of when the contribution was made */
+  updatedAt: UnixTimestamp;
+};
 ```
 
-`AccountId` is a CAIP-10 account identifier:
+`Contributor` is an alias for `AccountId`, which is a CAIP-10 account identifier from `@ensnode/ensnode-sdk`:
 
 ```typescript
 export interface AccountId {
@@ -42,7 +47,7 @@ This is our way to show appreciation to the people who contributed to our cause.
 
 To add yourself:
 1. Add your `AccountId` to the `contributors` collection in [ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) (if this is your first contribution).
-2. Reference yourself in the contributors array of the entity you are updating.
+2. Reference yourself in the contributions array of the entity you are updating.If you update the same entity multiple times, add a separate entry for each update with the corresponding timestamp.
 
 For reference see [ensawards.org/data/apps/metamask-wallet/benchmarks.ts](ensawards.org/data/apps/metamask-wallet/benchmarks.ts).
 
@@ -127,7 +132,7 @@ export type Protocol = DAOProtocol | DeFiProtocol;
 export interface Contract {
   protocol: Protocol;
   cachedIdentity: ContractIdentityResolved;
-  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
+  contributions: [Contribution, ...Contribution[]]; // Remember to add yourself as a contributor
 }
 ```
 * In addition to adding entirely new contracts, you may also suggest updates, ex. let us know that a contract has been named.
@@ -199,7 +204,7 @@ export interface BestPracticeAbstract<
       content: string;
     }[];
   };
-  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
+  contributions: [Contribution, ...Contribution[]]; // Remember to add yourself as a contributor
 }
 
 export interface BestPracticeProtocol
@@ -232,7 +237,7 @@ export interface BestPracticeCategory {
   name: string;
   description: string;
   status: CategoryStatus;
-  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
+  contributions: [Contribution, ...Contribution[]]; // Remember to add yourself as a contributor
 }
 ```
 4. In your PR describe your reasoning for adding it.
@@ -253,12 +258,10 @@ export interface AppBenchmark {
   bestPractice: BestPracticeApp;
   /** The result of the benchmark */
   result: BenchmarkResult;
-  /** The account ID of the person who performed the latest benchmark */
-  benchmarkedBy: Contributor;
-  /** Unix timestamp when the benchmark was performed */
-  benchmarkedAt: UnixTimestamp;
-  /** All contributors involved in the addition or maintenance of the benchmark's data */
-  contributors: [Contributor, ...Contributor[]]; // Remember to add yourself as a contributor
+  /** Unix timestamp when the benchmark was last updated */
+  lastUpdated: UnixTimestamp;
+  /** A record of all contributors involved in the addition or maintenance of the benchmark's data */
+  contributions: [Contribution, ...Contribution[]];
 }
 ```
 

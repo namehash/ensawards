@@ -14,7 +14,7 @@ import {
   getCategoryBySlug,
 } from "../../../../data/ens-best-practices/utils.ts";
 import { SuggestionCard } from "../../../components/atoms/cards/SuggestionCard.tsx";
-import { type Contributor } from "../../../../data/contributors/types.ts";
+import { type Contribution } from "../../../../data/contributors/types.ts";
 
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
@@ -28,13 +28,13 @@ const categoryToDisplay = getCategoryBySlug(category);
 
 // The default value should never be used. Only introduced for type safety.
 let categoryBestPractices: BestPractice[] = [];
-let categoryDataContributors: Contributor[] = [];
+let categoryDataContributions: Contribution[] = [];
 
 if (categoryToDisplay !== undefined) {
   categoryBestPractices = getBestPracticesByCategory(categoryToDisplay);
-  categoryDataContributors = [
-    ...categoryToDisplay.contributors,
-    ...categoryBestPractices.map((bestPractice) => bestPractice.contributors).flat(),
+  categoryDataContributions = [
+    ...categoryToDisplay.contributions,
+    ...categoryBestPractices.map((bestPractice) => bestPractice.contributions).flat(),
   ];
 }
 ---
@@ -86,7 +86,7 @@ if (categoryToDisplay !== undefined) {
         <SuggestionCard
           client:load
           whatsSuggested="best practice"
-          allContributions={categoryDataContributors}
+          allContributions={categoryDataContributions}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${categoryToDisplay.categorySlug}/index.ts`}
         />
         <ItemsList header="Best practices">

@@ -2,6 +2,8 @@
 
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import contributors from "../../contributors";
 import { defineContracts } from "../contracts-registry.ts";
 import type { Contract } from "../contracts-types.ts";
@@ -20,7 +22,10 @@ const contracts: Contract[] = [
       },
       name: "dao.taiko.eth",
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-28T14:30:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDao,
@@ -36,7 +41,10 @@ const contracts: Contract[] = [
         avatar: new URL("https://euc.li/token.taiko.eth"),
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-28T14:30:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDao,
@@ -48,7 +56,10 @@ const contracts: Contract[] = [
         codeName: "TokenUnlock",
       },
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-28T14:30:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
   {
     protocol: TaikoDao,
@@ -61,7 +72,10 @@ const contracts: Contract[] = [
       },
       name: "controller.taiko.eth",
     },
-    contributors: [contributors.lightwalker, contributors.stevedylan],
+    contributions: [
+      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-28T14:30:00.000Z") },
+      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+    ],
   },
 ];
 
