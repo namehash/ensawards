@@ -225,55 +225,54 @@ function registrarActionWithUpdatedIncrementalDuration(
 
 type RegistrarActionsVariants = "Loading" | "Error" | "Loaded";
 
-export const variants: Map<RegistrarActionsVariants, RegistrarActionsResponse | undefined> =
-  new Map([
-    ["Loading", undefined],
-    [
-      "Error",
-      {
-        responseCode: RegistrarActionsResponseCodes.Error,
-        error: {
-          message: "An error occurred while fetching Registrar Actions.",
-        },
-      } satisfies RegistrarActionsResponseError,
-    ],
-    [
-      "Loaded",
-      {
-        responseCode: RegistrarActionsResponseCodes.Ok,
-        registrarActions: [
+export const variants: Map<RegistrarActionsVariants, RegistrarActionsResponse | null> = new Map([
+  ["Loading", null],
+  [
+    "Error",
+    {
+      responseCode: RegistrarActionsResponseCodes.Error,
+      error: {
+        message: "An error occurred while fetching Registrar Actions.",
+      },
+    } satisfies RegistrarActionsResponseError,
+  ],
+  [
+    "Loaded",
+    {
+      responseCode: RegistrarActionsResponseCodes.Ok,
+      registrarActions: [
+        renewalWithNoReferral,
+        registrarActionWithUpdatedIncrementalDuration(
           renewalWithNoReferral,
-          registrarActionWithUpdatedIncrementalDuration(
-            renewalWithNoReferral,
-            0,
-            "176209761600000000111551110000000009545322000000000000006750000000000000068",
-          ),
-          registrarActionWithUpdatedIncrementalDuration(
-            renewalWithNoReferral,
-            1,
-            "176209761600000000111551110000000009545322000000000000006750000000000000069",
-          ),
-          registrarActionWithUpdatedIncrementalDuration(
-            renewalWithNoReferral,
-            2,
-            "176209761600000000111551110000000009545322000000000000006750000000000000070",
-          ),
-          registrationWithReferral,
-          registrationWithNoReferralAndEncodedLabelHashes,
-          registrationWithZeroEncodedReferrer,
-          registrationWithReferrerNotMatchingENSHolidayAwardsFormat,
-        ],
-        pageContext: {
-          totalPages: 1,
-          totalRecords: 8,
-          hasPrev: false,
-          hasNext: false,
-          endIndex: 7,
-          startIndex: 0,
-          page: 1,
-          recordsPerPage: 8,
-        },
-        accurateAsOf: 1763052924,
-      } satisfies RegistrarActionsResponseOk,
-    ],
-  ]);
+          0,
+          "176209761600000000111551110000000009545322000000000000006750000000000000068",
+        ),
+        registrarActionWithUpdatedIncrementalDuration(
+          renewalWithNoReferral,
+          1,
+          "176209761600000000111551110000000009545322000000000000006750000000000000069",
+        ),
+        registrarActionWithUpdatedIncrementalDuration(
+          renewalWithNoReferral,
+          2,
+          "176209761600000000111551110000000009545322000000000000006750000000000000070",
+        ),
+        registrationWithReferral,
+        registrationWithNoReferralAndEncodedLabelHashes,
+        registrationWithZeroEncodedReferrer,
+        registrationWithReferrerNotMatchingENSHolidayAwardsFormat,
+      ],
+      pageContext: {
+        totalPages: 1,
+        totalRecords: 8,
+        hasPrev: false,
+        hasNext: false,
+        endIndex: 7,
+        startIndex: 0,
+        page: 1,
+        recordsPerPage: 8,
+      },
+      accurateAsOf: 1763052924,
+    } satisfies RegistrarActionsResponseOk,
+  ],
+]);

@@ -35,6 +35,10 @@ export function MockDisplayRegistrarActionsFeed() {
   const [selectedVariantId, setSelectedVariantId] = useState(variantIds[0]);
   const selectedVariant = variants.get(selectedVariantId);
 
+  if (selectedVariant === undefined) {
+    return <>No variant defined for variant id "{selectedVariantId}".</>;
+  }
+
   return (
     <ENSNodeProvider config={config}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
