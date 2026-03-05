@@ -2,12 +2,24 @@ import { type ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import { useEffect, useState } from "react";
 import { namehash } from "viem";
 
-import { type RegistrarActionsFilter, registrarActionsFilter } from "@ensnode/ensnode-sdk";
+import { useRegistrarActions } from "@ensnode/ensnode-react";
+import {
+  type RegistrarActionsFilter,
+  RegistrarActionsOrders,
+  RegistrarActionsResponseCodes,
+  registrarActionsFilter,
+} from "@ensnode/ensnode-sdk";
 
-import { DisplayRegistrarActionsFeed } from "@/components/referral-awards-program/referrals/DisplayRegistrarActionsFeed.tsx";
-import { useStatefulRegistrarActions } from "@/utils/hooks/useStatefulFetchRegistrarActions.ts";
+import { LastUpdateTime, LastUpdateTimeLoading } from "@/components/atoms/datetime/LastUpdateTime";
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import {
+  DisplayRegistrarActionsList,
+  DisplayRegistrarActionsListLoading,
+} from "@/components/referral-awards-program/referrals/RegistrarActionsList";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { fetchReferralProgramEditions } from "@/utils/referralProgram.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface ReferralLiveFeedTitle {
   text: string;
@@ -37,25 +49,112 @@ export function FetchAndDisplayRegistrarActionsFeed({
     registrarActionsFilter.withReferral(true),
   ];
 
-  const registrarActions = useStatefulRegistrarActions({
-    paginationParams: { page: 1, recordsPerPage },
-    filters,
-  });
-
   const [referralProgramEditions, setReferralProgramEditions] = useState<
     ReferralProgramEditionConfig[]
   >([]);
+
+  const registrarActionsQuery = useRegistrarActions({
+    page: 1,
+    recordsPerPage,
+    order: RegistrarActionsOrders.LatestRegistrarActions,
+    filters,
+  });
 
   useEffect(() => {
     fetchReferralProgramEditions().then(setReferralProgramEditions);
   }, []);
 
+  if (registrarActionsQuery.isPending) {
+    return (
+      <div className="w-full h-fit flex flex-col justify-start items-center gap-6">
+        <div
+          className={cn(
+            title.styles?.container ??
+              "w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between items-start sm:items-center gap-y-2",
+          )}
+        >
+          <h2 className={cn(title.styles?.text ?? "text-2xl leading-normal font-semibold")}>
+            {title.text}
+          </h2>
+          <LastUpdateTimeLoading />
+        </div>
+        <DisplayRegistrarActionsListLoading recordsPerPage={recordsPerPage} />
+      </div>
+    );
+  }
+
+  if (registrarActionsQuery.isError) {
+    console.error(registrarActionsQuery.error.message);
+    return (
+      <ErrorInfo
+        title={title.text}
+        description={["ENSNode connection error occurred. Please try again later."]}
+      >
+        <button
+          className={cn(
+            shadcnButtonVariants({
+              variant: "outline",
+              size: "default",
+              className: "rounded-full cursor-pointer",
+            }),
+          )}
+          onClick={() => window.location.reload()}
+        >
+          Try again
+        </button>
+      </ErrorInfo>
+    );
+  }
+
+  if (registrarActionsQuery.data.responseCode === RegistrarActionsResponseCodes.Error) {
+    console.error(registrarActionsQuery.data.error.message);
+    return (
+      <ErrorInfo
+        title={title.text}
+        description={[
+          registrarActionsQuery.data.error.message,
+          String(registrarActionsQuery.data.error.details),
+        ]}
+      >
+        <button
+          className={cn(
+            shadcnButtonVariants({
+              variant: "outline",
+              size: "default",
+              className: "rounded-full cursor-pointer",
+            }),
+          )}
+          onClick={() => window.location.reload()}
+        >
+          Try again
+        </button>
+      </ErrorInfo>
+    );
+  }
+
   return (
-    <DisplayRegistrarActionsFeed
-      namespaceId={namespaceId}
-      title={title}
-      registrarActions={registrarActions}
-      referralProgramEditions={referralProgramEditions}
-    />
+    <div className="w-full h-fit flex flex-col justify-start items-center gap-6">
+      <div
+        className={cn(
+          title.styles?.container ??
+            "w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between items-start sm:items-center gap-y-2",
+        )}
+      >
+        <h2 className={cn(title.styles?.text ?? "text-2xl leading-normal font-semibold")}>
+          {title.text}
+        </h2>
+        {registrarActionsQuery.data.accurateAsOf && (
+          <LastUpdateTime
+            timestamp={registrarActionsQuery.data.accurateAsOf}
+            className="text-base sm:text-sm"
+          />
+        )}
+      </div>
+      <DisplayRegistrarActionsList
+        namespaceId={namespaceId}
+        registrarActions={registrarActionsQuery.data.registrarActions}
+        referralProgramEditions={referralProgramEditions}
+      />
+    </div>
   );
 }

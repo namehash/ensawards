@@ -3,20 +3,11 @@ import type {
   InterpretedName,
   NamedRegistrarAction,
   RegistrarActionEventId,
+  RegistrarActionsResponse,
+  RegistrarActionsResponseError,
+  RegistrarActionsResponseOk,
 } from "@ensnode/ensnode-sdk";
-import { registrarActionsPrerequisites } from "@ensnode/ensnode-sdk";
-
-import type {
-  StatefulFetchRegistrarActions,
-  StatefulFetchRegistrarActionsConnecting,
-  StatefulFetchRegistrarActionsError,
-  StatefulFetchRegistrarActionsLoaded,
-  StatefulFetchRegistrarActionsLoading,
-  StatefulFetchRegistrarActionsNotReady,
-  StatefulFetchRegistrarActionsUnsupported,
-  StatefulFetchStatusId,
-} from "../../referral-awards-program/referrals/types.ts";
-import { StatefulFetchStatusIds } from "../../referral-awards-program/referrals/types.ts";
+import { RegistrarActionsResponseCodes } from "@ensnode/ensnode-sdk";
 
 export const registrationWithReferral = {
   action: {
@@ -232,78 +223,57 @@ function registrarActionWithUpdatedIncrementalDuration(
   } satisfies NamedRegistrarAction;
 }
 
-export const variants: Map<StatefulFetchStatusId, StatefulFetchRegistrarActions> = new Map([
-  [
-    StatefulFetchStatusIds.Connecting,
-    {
-      fetchStatus: StatefulFetchStatusIds.Connecting,
-    } satisfies StatefulFetchRegistrarActionsConnecting,
-  ],
-  [
-    StatefulFetchStatusIds.Unsupported,
-    {
-      fetchStatus: StatefulFetchStatusIds.Unsupported,
-      requiredPlugins: registrarActionsPrerequisites.requiredPlugins,
-    } satisfies StatefulFetchRegistrarActionsUnsupported,
-  ],
-  [
-    StatefulFetchStatusIds.NotReady,
-    {
-      fetchStatus: StatefulFetchStatusIds.NotReady,
-      supportedIndexingStatusIds: registrarActionsPrerequisites.supportedIndexingStatusIds,
-    } satisfies StatefulFetchRegistrarActionsNotReady,
-  ],
-  [
-    StatefulFetchStatusIds.Loading,
-    {
-      fetchStatus: StatefulFetchStatusIds.Loading,
-      recordsPerPage: 8,
-    } satisfies StatefulFetchRegistrarActionsLoading,
-  ],
-  [
-    StatefulFetchStatusIds.Error,
-    {
-      fetchStatus: StatefulFetchStatusIds.Error,
-      reason: "ENSNode connection error. Please check your selected connection.",
-    } satisfies StatefulFetchRegistrarActionsError,
-  ],
-  [
-    StatefulFetchStatusIds.Loaded,
-    {
-      fetchStatus: StatefulFetchStatusIds.Loaded,
-      registrarActions: [
-        renewalWithNoReferral,
-        registrarActionWithUpdatedIncrementalDuration(
+type RegistrarActionsVariants = "Loading" | "Error" | "Loaded";
+
+export const variants: Map<RegistrarActionsVariants, RegistrarActionsResponse | undefined> =
+  new Map([
+    ["Loading", undefined],
+    [
+      "Error",
+      {
+        responseCode: RegistrarActionsResponseCodes.Error,
+        error: {
+          message: "An error occurred while fetching Registrar Actions.",
+        },
+      } satisfies RegistrarActionsResponseError,
+    ],
+    [
+      "Loaded",
+      {
+        responseCode: RegistrarActionsResponseCodes.Ok,
+        registrarActions: [
           renewalWithNoReferral,
-          0,
-          "176209761600000000111551110000000009545322000000000000006750000000000000068",
-        ),
-        registrarActionWithUpdatedIncrementalDuration(
-          renewalWithNoReferral,
-          1,
-          "176209761600000000111551110000000009545322000000000000006750000000000000069",
-        ),
-        registrarActionWithUpdatedIncrementalDuration(
-          renewalWithNoReferral,
-          2,
-          "176209761600000000111551110000000009545322000000000000006750000000000000070",
-        ),
-        registrationWithReferral,
-        registrationWithNoReferralAndEncodedLabelHashes,
-        registrationWithZeroEncodedReferrer,
-        registrationWithReferrerNotMatchingENSHolidayAwardsFormat,
-      ],
-      pageContext: {
-        totalPages: 1,
-        totalRecords: 8,
-        hasPrev: false,
-        hasNext: false,
-        endIndex: 7,
-        startIndex: 0,
-        page: 1,
-        recordsPerPage: 8,
-      },
-      accurateAsOf: 1763052924,
-    } satisfies StatefulFetchRegistrarActionsLoaded,
-  ],
-]);
+          registrarActionWithUpdatedIncrementalDuration(
+            renewalWithNoReferral,
+            0,
+            "176209761600000000111551110000000009545322000000000000006750000000000000068",
+          ),
+          registrarActionWithUpdatedIncrementalDuration(
+            renewalWithNoReferral,
+            1,
+            "176209761600000000111551110000000009545322000000000000006750000000000000069",
+          ),
+          registrarActionWithUpdatedIncrementalDuration(
+            renewalWithNoReferral,
+            2,
+            "176209761600000000111551110000000009545322000000000000006750000000000000070",
+          ),
+          registrationWithReferral,
+          registrationWithNoReferralAndEncodedLabelHashes,
+          registrationWithZeroEncodedReferrer,
+          registrationWithReferrerNotMatchingENSHolidayAwardsFormat,
+        ],
+        pageContext: {
+          totalPages: 1,
+          totalRecords: 8,
+          hasPrev: false,
+          hasNext: false,
+          endIndex: 7,
+          startIndex: 0,
+          page: 1,
+          recordsPerPage: 8,
+        },
+        accurateAsOf: 1763052924,
+      } satisfies RegistrarActionsResponseOk,
+    ],
+  ]);
