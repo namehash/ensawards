@@ -2,11 +2,7 @@ import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import { RegistrarActionCardLoading } from "@namehash/namehash-ui";
 
 import type { ENSNamespaceId } from "@ensnode/datasources";
-import {
-  type NamedRegistrarAction,
-  type RegistrarActionsResponseOk,
-  type RequestPageParams,
-} from "@ensnode/ensnode-sdk";
+import { type RegistrarActionsResponseOk, type RequestPageParams } from "@ensnode/ensnode-sdk";
 
 import { SimplePagination } from "@/components/molecules/Pagination.tsx";
 import { DisplayRegistrarActionsList } from "@/components/referral-awards-program/referrals/RegistrarActionsList";

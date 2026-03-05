@@ -64,6 +64,21 @@ export function FetchAndDisplayRegistrarActionsFeed({
     fetchReferralProgramEditions().then(setReferralProgramEditions);
   }, []);
 
+  const TryAgainButton = (
+    <button
+      className={cn(
+        shadcnButtonVariants({
+          variant: "outline",
+          size: "default",
+          className: "rounded-full cursor-pointer",
+        }),
+      )}
+      onClick={() => window.location.reload()}
+    >
+      Try again
+    </button>
+  );
+
   if (registrarActionsQuery.isPending) {
     return (
       <div className="w-full h-fit flex flex-col justify-start items-center gap-6">
@@ -90,18 +105,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
         title={title.text}
         description={["ENSNode connection error occurred. Please try again later."]}
       >
-        <button
-          className={cn(
-            shadcnButtonVariants({
-              variant: "outline",
-              size: "default",
-              className: "rounded-full cursor-pointer",
-            }),
-          )}
-          onClick={() => window.location.reload()}
-        >
-          Try again
-        </button>
+        {TryAgainButton}
       </ErrorInfo>
     );
   }
@@ -116,18 +120,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
           String(registrarActionsQuery.data.error.details),
         ]}
       >
-        <button
-          className={cn(
-            shadcnButtonVariants({
-              variant: "outline",
-              size: "default",
-              className: "rounded-full cursor-pointer",
-            }),
-          )}
-          onClick={() => window.location.reload()}
-        >
-          Try again
-        </button>
+        {TryAgainButton}
       </ErrorInfo>
     );
   }

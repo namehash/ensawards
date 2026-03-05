@@ -1,6 +1,5 @@
 import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
-import { millisecondsInMinute } from "date-fns/constants";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { type Address, namehash } from "viem";
 
 import { useRegistrarActions } from "@ensnode/ensnode-react";
@@ -138,7 +137,7 @@ export function FetchAndDisplayAdvocateReferrals({
   );
 }
 
-const AdvocateReferralsContainer = ({ children }: { children: React.ReactNode }) => {
+const AdvocateReferralsContainer = ({ children }: { children: ReactNode }) => {
   return (
     <div className="w-full h-fit box-border flex flex-col justify-start items-center gap-6">
       <div className="w-full flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center max-sm:gap-2">
