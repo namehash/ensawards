@@ -56,6 +56,21 @@ export function FetchAndDisplayAdvocateReferrals({
     fetchReferralProgramEditions().then(setReferralProgramEditions);
   }, []);
 
+  const TryAgainButton = (
+    <button
+      className={cn(
+        shadcnButtonVariants({
+          variant: "outline",
+          size: "default",
+          className: "rounded-full cursor-pointer",
+        }),
+      )}
+      onClick={() => window.location.reload()}
+    >
+      Try again
+    </button>
+  );
+
   if (registrarActionsQuery.isPending) {
     return (
       <AdvocateReferralsContainer>
@@ -72,18 +87,7 @@ export function FetchAndDisplayAdvocateReferrals({
           title="ENS Advocate Referrals"
           description={["ENSNode connection error occurred. Please try again later."]}
         >
-          <button
-            className={cn(
-              shadcnButtonVariants({
-                variant: "outline",
-                size: "default",
-                className: "rounded-full cursor-pointer",
-              }),
-            )}
-            onClick={() => window.location.reload()}
-          >
-            Try again
-          </button>
+          {TryAgainButton}
         </ErrorInfo>
       </AdvocateReferralsContainer>
     );
@@ -91,27 +95,23 @@ export function FetchAndDisplayAdvocateReferrals({
 
   if (registrarActionsQuery.data.responseCode === RegistrarActionsResponseCodes.Error) {
     console.error(registrarActionsQuery.data.error.message);
+
+    let formattedErrorDetails = null;
+
+    if (
+      registrarActionsQuery.data.error.details !== undefined &&
+      typeof registrarActionsQuery.data.error.details === "string"
+    ) {
+      formattedErrorDetails = registrarActionsQuery.data.error.details;
+    }
+
     return (
       <AdvocateReferralsContainer>
         <ErrorInfo
           title="ENS Advocate Referrals"
-          description={[
-            registrarActionsQuery.data.error.message,
-            String(registrarActionsQuery.data.error.details),
-          ]}
+          description={[registrarActionsQuery.data.error.message, formattedErrorDetails ?? ""]}
         >
-          <button
-            className={cn(
-              shadcnButtonVariants({
-                variant: "outline",
-                size: "default",
-                className: "rounded-full cursor-pointer",
-              }),
-            )}
-            onClick={() => window.location.reload()}
-          >
-            Try again
-          </button>
+          {TryAgainButton}
         </ErrorInfo>
       </AdvocateReferralsContainer>
     );

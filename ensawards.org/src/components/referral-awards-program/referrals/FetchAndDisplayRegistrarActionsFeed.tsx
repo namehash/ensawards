@@ -112,13 +112,20 @@ export function FetchAndDisplayRegistrarActionsFeed({
 
   if (registrarActionsQuery.data.responseCode === RegistrarActionsResponseCodes.Error) {
     console.error(registrarActionsQuery.data.error.message);
+
+    let formattedErrorDetails = null;
+
+    if (
+      registrarActionsQuery.data.error.details !== undefined &&
+      typeof registrarActionsQuery.data.error.details === "string"
+    ) {
+      formattedErrorDetails = registrarActionsQuery.data.error.details;
+    }
+
     return (
       <ErrorInfo
         title={title.text}
-        description={[
-          registrarActionsQuery.data.error.message,
-          String(registrarActionsQuery.data.error.details),
-        ]}
+        description={[registrarActionsQuery.data.error.message, formattedErrorDetails ?? ""]}
       >
         {TryAgainButton}
       </ErrorInfo>
