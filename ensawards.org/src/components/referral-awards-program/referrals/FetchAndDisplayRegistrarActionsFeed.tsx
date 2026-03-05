@@ -73,7 +73,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
           className: "rounded-full cursor-pointer",
         }),
       )}
-      onClick={() => window.location.reload()}
+      onClick={() => registrarActionsQuery.refetch()}
     >
       Try again
     </button>
@@ -125,7 +125,10 @@ export function FetchAndDisplayRegistrarActionsFeed({
     return (
       <ErrorInfo
         title={title.text}
-        description={[registrarActionsQuery.data.error.message, formattedErrorDetails ?? ""]}
+        description={[
+          registrarActionsQuery.data.error.message,
+          ...(formattedErrorDetails ? [formattedErrorDetails] : []),
+        ]}
       >
         {TryAgainButton}
       </ErrorInfo>

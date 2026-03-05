@@ -65,7 +65,7 @@ export function FetchAndDisplayAdvocateReferrals({
           className: "rounded-full cursor-pointer",
         }),
       )}
-      onClick={() => window.location.reload()}
+      onClick={() => registrarActionsQuery.refetch()}
     >
       Try again
     </button>
@@ -109,7 +109,10 @@ export function FetchAndDisplayAdvocateReferrals({
       <AdvocateReferralsContainer>
         <ErrorInfo
           title="ENS Advocate Referrals"
-          description={[registrarActionsQuery.data.error.message, formattedErrorDetails ?? ""]}
+          description={[
+            registrarActionsQuery.data.error.message,
+            ...(formattedErrorDetails ? [formattedErrorDetails] : []),
+          ]}
         >
           {TryAgainButton}
         </ErrorInfo>
