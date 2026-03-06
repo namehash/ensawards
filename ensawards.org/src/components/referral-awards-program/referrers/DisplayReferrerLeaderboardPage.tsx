@@ -4,7 +4,8 @@ import type {
 } from "@namehash/ens-referrals";
 import type { ReactElement } from "react";
 
-import { ReferrerCard, ReferrerCardLoading } from "@/components/atoms/cards/ReferrerCard.tsx";
+import { ReferrerCardLoading } from "@/components/atoms/cards/referrerCard/ReferrerCardLoading";
+import { ReferrerCardPieSplit } from "@/components/atoms/cards/referrerCard/ReferrerCardPieSplit";
 import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime";
 import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 
@@ -65,7 +66,7 @@ export function DisplayReferrerLeaderboardPage({
   return (
     <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
       {leaderboardPageData.referrers.map((referrer, idx) => (
-        <ReferrerCard
+        <ReferrerCardPieSplit
           key={`Referrer-${referrer.referrer}`}
           referrer={referrer}
           aggregatedMetrics={leaderboardPageData.aggregatedMetrics}
