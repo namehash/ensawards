@@ -45,7 +45,7 @@ export function AdvocateReferralsList({
     <>
       {registrarActions.pageContext.totalRecords === 0 ? (
         <p className="text-center">
-          This advocate hasn't made a referral yet.
+          This ENS advocate hasn't made a referral yet.
           <br />
           <a
             className="text-blue-600 font-medium hover:underline hover:underline-offset-[25%] whitespace-nowrap transition-all duration-200 cursor-pointer"
