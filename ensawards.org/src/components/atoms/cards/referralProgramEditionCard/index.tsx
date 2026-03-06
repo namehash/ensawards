@@ -1,7 +1,5 @@
 import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
-import { calcReferralProgramStatus } from "@namehash/ens-referrals/v1";
-// TODO: Remember to roll back to "v0" / adapt imports
-//  when implementing final version of the logic for the new referral program
+import { calcReferralProgramStatus, ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import { ChevronRightIcon } from "lucide-react";
@@ -31,6 +29,11 @@ export const ReferralProgramEditionCard = ({
     () => calcReferralProgramStatus(referralProgramEditionConfig.rules, now),
     [now, referralProgramEditionConfig.rules],
   );
+
+  // The config of an unrecognized edition will never be passed here,
+  // but we perform the check for the type safety
+  if (referralProgramEditionConfig.rules.awardModel === ReferralProgramAwardModels.Unrecognized)
+    return null;
 
   return (
     <a

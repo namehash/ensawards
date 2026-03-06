@@ -9,7 +9,10 @@ import { ReferralProgramEditionCard } from "@/components/atoms/cards/referralPro
 import { ReferralProgramEditionCardLoading } from "@/components/atoms/cards/referralProgramEditionCard/loading.tsx";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { getENSNodeUrl } from "@/utils/env";
-import { DEFAULT_REFERRAL_PROGRAM_EDITIONS } from "@/utils/referralProgram";
+import {
+  DEFAULT_REFERRAL_PROGRAM_EDITIONS,
+  filterOutUnrecognizedEditions,
+} from "@/utils/referralProgram";
 
 export function ReferralProgramEditionsList() {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,35 +23,27 @@ export function ReferralProgramEditionsList() {
     ReferralProgramEditionConfig[] | null
   >(null);
 
-  // this value should be adjusted as new editions are launched, we could also turn it into an env variable
-  const numberOfLoadingStateEditions = 1;
+  const numberOfLoadingStateEditions = DEFAULT_REFERRAL_PROGRAM_EDITIONS.length;
 
-  // TODO: in the future this should be completely powered by the backend (so the fetch is done by the client),
-  // but for now we should used the default get function and only display the holiday awards edition.
-  // For more details see the TODO @ ensawards.org\src\utils\referralProgram.ts
+  //TODO: Should we sort editions here on the FE? Do we want to display the newest editions at the top? Or maybe the oldest ones?
   async function fetchReferralProgramEditionConfigs() {
     setFetchErrorMessage("");
     setIsLoading(true);
 
     try {
-      // const response = await client.getEditionConfigSet();
-
-      // if (response.responseCode !== ReferralProgramEditionConfigSetResponseCodes.Ok) {
-      //   console.error(response.errorMessage);
-      //   setReferralProgramEditionConfigs(null);
-      //   setFetchErrorMessage("An error occurred while loading the Referral program editions.");
-      //   setIsLoading(false);
-      //   return;
-      // }
-
-      // setReferralProgramEditionConfigs(response.data.editions);
-
-      //TODO: A temporary mock to only display holiday awards edition
-      setReferralProgramEditionConfigs(DEFAULT_REFERRAL_PROGRAM_EDITIONS);
+      const response = await client.getEditionConfigSet();
+      if (response.responseCode !== ReferralProgramEditionConfigSetResponseCodes.Ok) {
+        console.error(response.errorMessage);
+        setReferralProgramEditionConfigs(null);
+        setFetchErrorMessage("An error occurred while loading the Referral program editions.");
+        setIsLoading(false);
+        return;
+      }
+      setReferralProgramEditionConfigs(filterOutUnrecognizedEditions(response.data.editions));
     } catch (error) {
-      // console.error(error);
-      // setReferralProgramEditionConfigs(null);
-      // setFetchErrorMessage("An error occurred while loading the Referral program editions.");
+      console.error(error);
+      setReferralProgramEditionConfigs(null);
+      setFetchErrorMessage("An error occurred while loading the Referral program editions.");
     } finally {
       setIsLoading(false);
     }

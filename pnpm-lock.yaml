@@ -72,8 +72,8 @@ importers:
         specifier: ^0.552.0
         version: 0.552.0(astro@5.16.10(@types/node@22.19.1)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.1))
       '@namehash/ens-referrals':
-        specifier: 0.0.0-next-20260217213247
-        version: 0.0.0-next-20260217213247(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: 1.6.0
+        version: 1.6.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@namehash/namehash-ui':
         specifier: 1.6.0
         version: 1.6.0(@ensnode/ensnode-react@1.6.0(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76)))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
@@ -423,11 +423,6 @@ packages:
   '@ensdomains/address-encoder@1.1.4':
     resolution: {integrity: sha512-hBY6VxVw9A1cMPOKDIvPB2nlmgaw2dvrrj/p/9tkGWmD+qdfKYZTdZuSdFcUGxhhzEB4HeLG/a98ytlTq84KcA==}
 
-  '@ensnode/datasources@0.0.0-next-20260217213247':
-    resolution: {integrity: sha512-4lo0sAcHDYwEKJQoZxpAKSLdPjYTC3Eudlc/lctnmYAXvM6KOfjTBv1JagtA7nxyMmE7WTrjztrRo+kU+AVpYg==}
-    peerDependencies:
-      viem: ^2.22.13
-
   '@ensnode/datasources@1.6.0':
     resolution: {integrity: sha512-5ZkhlL/5J0R42eZyFN/qPdv7iH/XOnNgQV9mLjyVBOsUNflb5C7GYlMBNxUHXaH2Eua6vNnJwy5oYDcnQ1hmRA==}
     peerDependencies:
@@ -438,11 +433,6 @@ packages:
     peerDependencies:
       '@tanstack/react-query': ^5.0.0
       react: ^18.0.0 || ^19.0.0
-
-  '@ensnode/ensnode-sdk@0.0.0-next-20260217213247':
-    resolution: {integrity: sha512-sl3Jds6jW5nU95jM3VPNS4yHSi59MHtWk5t9j/GnpySy4IAHwwdezXP8NSZtpCsqYAvmsu++WWtz9e29fUgjjw==}
-    peerDependencies:
-      viem: ^2.22.13
 
   '@ensnode/ensnode-sdk@1.6.0':
     resolution: {integrity: sha512-11FT5yEymQ6vHcsgl8XGYKnRO6Ze8gdOVUAhpj0BbOlKubQEisNBKVu0d6hTK67pL1emi2mHwaxJcVT7bfjQcA==}
@@ -984,8 +974,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@namehash/ens-referrals@0.0.0-next-20260217213247':
-    resolution: {integrity: sha512-AbEoI0UN4rQN84MBuxuBowmS+EMg8OldvPBh67wUfYnglGORcO+S7wEDMKZVX+foGjPOS5gfzrMYMwylA1pugg==}
+  '@namehash/ens-referrals@1.6.0':
+    resolution: {integrity: sha512-E0Mp+SMeXXfqURgXDnZkq524fV7EWkHlUspNdSTsTxWiIXCz37j+W+wU7UXCGJumGzpmk8ZSARGKgnq3A+cfeg==}
     peerDependencies:
       viem: ^2.22.13
 
@@ -4082,13 +4072,6 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
 
-  '@ensnode/datasources@0.0.0-next-20260217213247(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
-    dependencies:
-      '@ponder/utils': 0.2.16(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
-      viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
-    transitivePeerDependencies:
-      - typescript
-
   '@ensnode/datasources@1.6.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
       '@ponder/utils': 0.2.16(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
@@ -4104,18 +4087,6 @@ snapshots:
     transitivePeerDependencies:
       - typescript
       - viem
-
-  '@ensnode/ensnode-sdk@0.0.0-next-20260217213247(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
-    dependencies:
-      '@adraffy/ens-normalize': 1.11.1
-      '@ensdomains/address-encoder': 1.1.4
-      '@ensnode/datasources': 0.0.0-next-20260217213247(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
-      caip: 1.1.1
-      date-fns: 4.1.0
-      viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
-      zod: 4.3.6
-    transitivePeerDependencies:
-      - typescript
 
   '@ensnode/ensnode-sdk@1.6.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
@@ -4471,9 +4442,9 @@ snapshots:
       - encoding
       - supports-color
 
-  '@namehash/ens-referrals@0.0.0-next-20260217213247(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@namehash/ens-referrals@1.6.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
-      '@ensnode/ensnode-sdk': 0.0.0-next-20260217213247(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/ensnode-sdk': 1.6.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
       zod: 4.3.6
     transitivePeerDependencies:

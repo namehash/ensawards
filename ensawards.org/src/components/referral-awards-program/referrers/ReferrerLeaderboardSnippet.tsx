@@ -5,6 +5,7 @@ import {
 } from "@namehash/ens-referrals";
 import {
   calcReferralProgramStatus,
+  ReferralProgramAwardModels,
   type ReferralProgramEditionConfig,
   ReferralProgramStatuses,
   type ReferralProgramStatusId,
@@ -230,6 +231,12 @@ const ReferralProgramEditionInfo = ({
   referralProgramEditionStatus: referralProgramStatus,
   isLoading,
 }: ReferralProgramEditionInfoProps) => {
+  // The config of an unrecognized edition will never be passed here,
+  // but we perform the check for the type safety
+  if (referralProgramEdition.rules.awardModel === ReferralProgramAwardModels.Unrecognized) {
+    return null;
+  }
+
   return (
     <>
       {isLoading ? (

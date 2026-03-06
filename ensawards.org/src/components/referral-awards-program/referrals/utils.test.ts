@@ -1,4 +1,7 @@
-import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+import {
+  ReferralProgramAwardModels,
+  type ReferralProgramEditionConfig,
+} from "@namehash/ens-referrals/v1";
 import { millisecondsInSecond } from "date-fns/constants";
 import { zeroAddress } from "viem";
 import { describe, expect, it } from "vitest";
@@ -19,6 +22,7 @@ describe("isQualifiedReferral", () => {
     slug: "test-slug",
     displayName: "Test Incentive Program",
     rules: {
+      awardModel: ReferralProgramAwardModels.PieSplit,
       totalAwardPoolValue: parseUsdc("10000"),
       maxQualifiedReferrers: 10,
       startTime: new Date(2025, 0, 1).getTime() / millisecondsInSecond,
