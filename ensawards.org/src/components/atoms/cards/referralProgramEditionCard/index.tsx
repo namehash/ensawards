@@ -35,17 +35,15 @@ export const ReferralProgramEditionCard = ({
   if (referralProgramEditionConfig.rules.awardModel === ReferralProgramAwardModels.Unrecognized)
     return null;
 
-  return (
-    <a
-      href={`/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`}
-      target="_self"
-      className={cn(
-        "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
-        "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10",
-        !showMobileVariant &&
-          "sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
-      )}
-    >
+  const cardClassName = cn(
+    "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
+    "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10 cursor-default",
+    !showMobileVariant &&
+      "sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
+  );
+
+  const cardContent = (
+    <>
       <div
         className={cn(
           "w-full flex flex-row justify-between items-start gap-5 pb-1",
@@ -72,7 +70,7 @@ export const ReferralProgramEditionCard = ({
           container: cn(
             "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
             !showMobileVariant &&
-              "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
+              "sm:min-w-[185px] sm:flex-col sm:justify-center max-sm:self-stretch",
           ),
           label: cn(
             "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
@@ -105,7 +103,7 @@ export const ReferralProgramEditionCard = ({
       />
       <span
         className={cn(
-          "min-w-[80px]",
+          "min-w-[90px]",
           !showMobileVariant ? "max-sm:hidden flex sm:flex-row sm:justify-end" : "hidden",
         )}
       >
@@ -134,6 +132,18 @@ export const ReferralProgramEditionCard = ({
       >
         View leaderboard
       </div>
+    </>
+  );
+
+  if (showMobileVariant) return <div className={cardClassName}>{cardContent}</div>;
+
+  return (
+    <a
+      href={`/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`}
+      target="_self"
+      className={cardClassName}
+    >
+      {cardContent}
     </a>
   );
 };

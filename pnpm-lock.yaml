@@ -51,14 +51,14 @@ importers:
         specifier: ^9.0.2
         version: 9.0.2(astro@5.16.10(@types/node@22.19.1)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.1))(react@19.2.0)(rollup@4.59.0)
       '@ensnode/datasources':
-        specifier: 0.0.0-next-20260309065756
-        version: 0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: 1.7.0
+        version: 1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@ensnode/ensnode-react':
-        specifier: 0.0.0-next-20260309065756
-        version: 0.0.0-next-20260309065756(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: 1.7.0
+        version: 1.7.0(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@ensnode/ensnode-sdk':
-        specifier: 0.0.0-next-20260309065756
-        version: 0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: 1.7.0
+        version: 1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@formkit/auto-animate':
         specifier: ^0.9.0
         version: 0.9.0
@@ -72,11 +72,11 @@ importers:
         specifier: ^0.552.0
         version: 0.552.0(astro@5.16.10(@types/node@22.19.1)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.1))
       '@namehash/ens-referrals':
-        specifier: 0.0.0-next-20260309065756
-        version: 0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: 1.7.0
+        version: 1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@namehash/namehash-ui':
-        specifier: 0.0.0-next-20260309065756
-        version: 0.0.0-next-20260309065756(@ensnode/ensnode-react@0.0.0-next-20260309065756(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76)))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+        specifier: 1.7.0
+        version: 1.7.0(@ensnode/ensnode-react@1.7.0(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76)))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@radix-ui/react-avatar':
         specifier: ^1.1.10
         version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -423,19 +423,19 @@ packages:
   '@ensdomains/address-encoder@1.1.4':
     resolution: {integrity: sha512-hBY6VxVw9A1cMPOKDIvPB2nlmgaw2dvrrj/p/9tkGWmD+qdfKYZTdZuSdFcUGxhhzEB4HeLG/a98ytlTq84KcA==}
 
-  '@ensnode/datasources@0.0.0-next-20260309065756':
-    resolution: {integrity: sha512-2/E0XFhUenotgW4RYoZ0MSM0c2pvqhclfPdz13qwKFuPFDofrBcFRvJrZ3xzeO+uKTVIbPRK3Oc8qrlxpKSdFA==}
+  '@ensnode/datasources@1.7.0':
+    resolution: {integrity: sha512-Z5x9ipgZM9JYzfcQrOF8klXbLJYiX1UVBUj2trS6mkCXujCZWF+pXj85qd5eu9whdOySmH5S82XLZ+g670PrGg==}
     peerDependencies:
       viem: ^2.22.13
 
-  '@ensnode/ensnode-react@0.0.0-next-20260309065756':
-    resolution: {integrity: sha512-ehucZC4bYJy/zyFhwZP4oJDT+tJwiqwzq6i7qkCy5X0+nS4Trcqw42OgVij6D6cPk7tVuZpzxRAC/uNF/c95aA==}
+  '@ensnode/ensnode-react@1.7.0':
+    resolution: {integrity: sha512-SwF9sI+d8bjImXQE1As/OnsNQ+23mXD6uuxnlqCdgMh99Zr+5KDxTXq79Mo+V8gFMYJ8yz+iUskJK7Ssz1GGBg==}
     peerDependencies:
       '@tanstack/react-query': ^5.0.0
       react: ^18.0.0 || ^19.0.0
 
-  '@ensnode/ensnode-sdk@0.0.0-next-20260309065756':
-    resolution: {integrity: sha512-dR0wJj7NY9OcNJJ27iKCnoZ0YhTxuyZs+srN2DvAhzeL5abib3SpqPbBpKd5A1ODANnFkDcPPaX+Fkthk1jr8g==}
+  '@ensnode/ensnode-sdk@1.7.0':
+    resolution: {integrity: sha512-w78w7bphLj1/iKWdhNv3LTK1q7HHbymA0eIu9covsgvGTpX1WVi2vr8OHDl4eNSf3mSP8qqurEmCdHyuQsontg==}
     peerDependencies:
       viem: ^2.22.13
 
@@ -974,15 +974,15 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@namehash/ens-referrals@0.0.0-next-20260309065756':
-    resolution: {integrity: sha512-pVaiaVBrgIGyo84QypIoltGEO75OfWvW2KWM15bMcEyFwU2OhzHYGSXA+6xDyml7+UA6IhcXME8IE56tPeK2qg==}
+  '@namehash/ens-referrals@1.7.0':
+    resolution: {integrity: sha512-PMlkPkCiuGw0NzDm2R4SKgmPCWWTaFPyJJ3rYNxjJZLL2udd+DPmd1Nd+RfTjyV9gmyxH6kmTIVBjVrOSqKuqQ==}
     peerDependencies:
       viem: ^2.22.13
 
-  '@namehash/namehash-ui@0.0.0-next-20260309065756':
-    resolution: {integrity: sha512-nOhy5IFK6ZlkKZW9ZHJNPOQkzAMKjdh9yuUGXKl4VUdRYeT9iRlLPwI98hlnJsvF2/78EjwSDuo44Pw2HT++aQ==}
+  '@namehash/namehash-ui@1.7.0':
+    resolution: {integrity: sha512-rr5xzlrlVNjlkYv9ZgD/mdUrWtRn1T4OikbQSjXKssuhG6sovH+zmyKPRNHTKxEOVHmXB1wuENyR48O2bzbLZg==}
     peerDependencies:
-      '@ensnode/ensnode-react': 0.0.0-next-20260309065756
+      '@ensnode/ensnode-react': 1.7.0
       react: ^19.0.0
       react-dom: ^19.0.0
       sonner: ^2.0.3
@@ -4072,27 +4072,27 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
 
-  '@ensnode/datasources@0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@ensnode/datasources@1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
       '@ponder/utils': 0.2.16(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
     transitivePeerDependencies:
       - typescript
 
-  '@ensnode/ensnode-react@0.0.0-next-20260309065756(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@ensnode/ensnode-react@1.7.0(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
-      '@ensnode/ensnode-sdk': 0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/ensnode-sdk': 1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@tanstack/react-query': 5.90.11(react@19.2.0)
       react: 19.2.0
     transitivePeerDependencies:
       - typescript
       - viem
 
-  '@ensnode/ensnode-sdk@0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@ensnode/ensnode-sdk@1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
       '@ensdomains/address-encoder': 1.1.4
-      '@ensnode/datasources': 0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/datasources': 1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       caip: 1.1.1
       date-fns: 4.1.0
       viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
@@ -4442,19 +4442,19 @@ snapshots:
       - encoding
       - supports-color
 
-  '@namehash/ens-referrals@0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@namehash/ens-referrals@1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
-      '@ensnode/ensnode-sdk': 0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/ensnode-sdk': 1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       viem: 2.39.3(typescript@5.9.3)(zod@3.25.76)
       zod: 4.3.6
     transitivePeerDependencies:
       - typescript
 
-  '@namehash/namehash-ui@0.0.0-next-20260309065756(@ensnode/ensnode-react@0.0.0-next-20260309065756(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76)))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
+  '@namehash/namehash-ui@1.7.0(@ensnode/ensnode-react@1.7.0(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76)))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))':
     dependencies:
-      '@ensnode/datasources': 0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
-      '@ensnode/ensnode-react': 0.0.0-next-20260309065756(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
-      '@ensnode/ensnode-sdk': 0.0.0-next-20260309065756(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/datasources': 1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/ensnode-react': 1.7.0(@tanstack/react-query@5.90.11(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
+      '@ensnode/ensnode-sdk': 1.7.0(typescript@5.9.3)(viem@2.39.3(typescript@5.9.3)(zod@3.25.76))
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@radix-ui/react-slot': 1.2.4(@types/react@19.2.6)(react@19.2.0)
       '@radix-ui/react-tooltip': 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)

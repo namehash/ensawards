@@ -59,7 +59,7 @@ export function ReferralProgramEditionCardLoading({
           !showMobileVariant && "sm:hidden",
         )}
       >
-        <Skeleton className={cn("h-[18px] mt-[4px] mb-[3px] w-2/3", loadingStateStyles)} />
+        <Skeleton className={cn("h-[18px] mt-[5px] mb-[4px] w-2/3", loadingStateStyles)} />
         <Skeleton className={cn(loadingStateStyles, "h-[22px] w-[60px] rounded-full")} />
       </div>
       <div
@@ -68,7 +68,7 @@ export function ReferralProgramEditionCardLoading({
           !showMobileVariant && "sm:flex",
         )}
       >
-        <Skeleton className={cn("h-[18px] mt-[4px] mb-[3px] w-1/2", loadingStateStyles)} />
+        <Skeleton className={cn("h-[18px] mt-[5px] mb-[4px] w-1/2", loadingStateStyles)} />
       </div>
       <ReferralProgramEditionFieldLoading
         label="Time period"
@@ -95,7 +95,7 @@ export function ReferralProgramEditionCardLoading({
       <span
         className={cn(
           "hidden",
-          !showMobileVariant && "max-sm:hidden sm:flex sm:flex-row sm:justify-end",
+          !showMobileVariant && "max-sm:hidden sm:flex sm:flex-row sm:justify-end w-[90px]",
         )}
       >
         <Skeleton className={cn(loadingStateStyles, "h-[22px] w-[60px] rounded-full")} />
@@ -109,7 +109,7 @@ export function ReferralProgramEditionCardLoading({
       <div
         className={cn(
           loadingStateStyles,
-          "w-full h-10 rounded-full self-stretch pt-1",
+          "w-full h-9 rounded-full self-stretch",
           !showMobileVariant && "sm:hidden",
         )}
       ></div>
