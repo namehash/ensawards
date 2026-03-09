@@ -1,14 +1,13 @@
 import {
-  ENSReferralsClient,
-  type ReferrerLeaderboardPage,
-  ReferrerLeaderboardPageResponseCodes,
-} from "@namehash/ens-referrals";
-import {
   calcReferralProgramStatus,
+  ENSReferralsClient,
   ReferralProgramAwardModels,
   type ReferralProgramEditionConfig,
   ReferralProgramStatuses,
   type ReferralProgramStatusId,
+  type ReferrerLeaderboardPagePieSplit,
+  ReferrerLeaderboardPageResponseCodes,
+  type ReferrerLeaderboardPageRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import type { VariantProps } from "class-variance-authority";
@@ -59,8 +58,9 @@ export function ReferrerLeaderboardSnippet({
     useState<ReferralProgramStatusId>(ReferralProgramStatuses.Active);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [leaderboardSnippetData, setLeaderboardSnippetData] =
-    useState<ReferrerLeaderboardPage | null>(null);
+  const [leaderboardSnippetData, setLeaderboardSnippetData] = useState<
+    ReferrerLeaderboardPageRevShareLimit | ReferrerLeaderboardPagePieSplit | null
+  >(null);
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
@@ -70,9 +70,16 @@ export function ReferrerLeaderboardSnippet({
   async function fetchReferrerLeaderboard() {
     setFetchErrorMessage("");
     setIsLoading(true);
+
+    if (!latestActiveReferralProgramEdition) {
+      setFetchErrorMessage("No active referral program edition found.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      //TODO: Update after V1 api is available (no longer returns 404)
       const response = await client.getReferrerLeaderboardPage({
+        edition: latestActiveReferralProgramEdition.slug,
         page: 1,
         recordsPerPage: snippetSize,
       });
@@ -80,6 +87,13 @@ export function ReferrerLeaderboardSnippet({
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
         console.error(response.errorMessage);
         setFetchErrorMessage("An error occurred while loading the leaderboard.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Display an error for the unrecognized award model
+      if (response.data.awardModel === ReferralProgramAwardModels.Unrecognized) {
+        setFetchErrorMessage("Unrecognized referral program edition award model.");
         setIsLoading(false);
         return;
       }
@@ -96,7 +110,7 @@ export function ReferrerLeaderboardSnippet({
 
   useEffect(() => {
     fetchReferrerLeaderboard();
-  }, [now]);
+  }, [now, latestActiveReferralProgramEdition]);
 
   useEffect(() => {
     fetchReferralProgramEditions().then((editions) => {
@@ -196,10 +210,10 @@ export function ReferrerLeaderboardSnippet({
           />
           {!isLoading &&
             leaderboardSnippetData !== null &&
+            latestActiveReferralProgramEdition &&
             leaderboardSnippetData.pageContext.totalRecords > snippetSize && (
-              // TODO: Remove the hardcoded fallback slug when we add more editions and the slug is guaranteed to exist
               <a
-                href={`/ens-referral-program/editions/${latestActiveReferralProgramEdition?.slug ?? "2025-12"}/leaderboard`}
+                href={`/ens-referral-program/editions/${latestActiveReferralProgramEdition.slug}/leaderboard`}
                 className={cn(
                   shadcnButtonVariants({
                     variant: fullLeaderboardButtonVariant,

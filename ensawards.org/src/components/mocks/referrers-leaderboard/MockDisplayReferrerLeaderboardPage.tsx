@@ -1,6 +1,8 @@
+import { ReferralProgramAwardModels, ReferralProgramStatuses } from "@namehash/ens-referrals/v1";
 import { useMemo, useState } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { CurrencyIds } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import {
@@ -29,8 +31,10 @@ export function MockDisplayReferrerLeaderboardPage() {
       case "empty":
         return {
           leaderboardPageData: {
+            awardModel: ReferralProgramAwardModels.PieSplit,
             rules: {
-              totalAwardPoolValue: 10000,
+              awardModel: ReferralProgramAwardModels.PieSplit,
+              totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
               maxQualifiedReferrers: 10,
               startTime: 1764547200,
               endTime: 1767225599,
@@ -38,6 +42,7 @@ export function MockDisplayReferrerLeaderboardPage() {
                 chainId: 1,
                 address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
               },
+              rulesUrl: new URL("https://example.com/rules"),
             },
             referrers: [],
             aggregatedMetrics: {
@@ -45,7 +50,7 @@ export function MockDisplayReferrerLeaderboardPage() {
               grandTotalIncrementalDuration: 0,
               grandTotalQualifiedReferrersFinalScore: 0,
               minFinalScoreToQualify: 0,
-              grandTotalRevenueContribution: 0n,
+              grandTotalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
             },
             pageContext: {
               page: 1,
@@ -57,6 +62,7 @@ export function MockDisplayReferrerLeaderboardPage() {
               startIndex: undefined,
               endIndex: undefined,
             },
+            status: ReferralProgramStatuses.Active,
             accurateAsOf: 1764091210,
           },
           isLoading: false,
@@ -100,8 +106,10 @@ export function MockDisplayReferrerLeaderboardPage() {
       default:
         return {
           leaderboardPageData: {
+            awardModel: ReferralProgramAwardModels.PieSplit,
             rules: {
-              totalAwardPoolValue: 10000,
+              awardModel: ReferralProgramAwardModels.PieSplit,
+              totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
               maxQualifiedReferrers: 10,
               startTime: 1764547200,
               endTime: 1767225599,
@@ -109,6 +117,7 @@ export function MockDisplayReferrerLeaderboardPage() {
                 chainId: 1,
                 address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
               },
+              rulesUrl: new URL("https://example.com/rules"),
             },
             referrers: [
               {
@@ -121,8 +130,8 @@ export function MockDisplayReferrerLeaderboardPage() {
                 finalScoreBoost: 0.111111111111111,
                 finalScore: 0.803246143670656,
                 awardPoolShare: 0.0276828248101365,
-                awardPoolApproxValue: 3276.828248101365,
-                totalRevenueContribution: 0n,
+                awardPoolApproxValue: { currency: CurrencyIds.USDC, amount: 3276828248n },
+                totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
               },
               {
                 referrer: "0xabe3fdb4d2cd5f2e7193a4ac380ecb68e899896a",
@@ -134,8 +143,8 @@ export function MockDisplayReferrerLeaderboardPage() {
                 finalScoreBoost: 0,
                 finalScore: 0.479133726222989,
                 awardPoolShare: 0.01651271544616,
-                awardPoolApproxValue: 165.1271544616,
-                totalRevenueContribution: 0n,
+                awardPoolApproxValue: { currency: CurrencyIds.USDC, amount: 165127154n },
+                totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
               },
               {
                 referrer: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
@@ -147,8 +156,8 @@ export function MockDisplayReferrerLeaderboardPage() {
                 finalScoreBoost: 0,
                 finalScore: 0.410686051048276,
                 awardPoolShare: 0,
-                awardPoolApproxValue: 0,
-                totalRevenueContribution: 0n,
+                awardPoolApproxValue: { currency: CurrencyIds.USDC, amount: 0n },
+                totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
               },
               {
                 referrer: "0x2a614b7984854177d22fa23a4034a13ea82e4f97",
@@ -160,8 +169,8 @@ export function MockDisplayReferrerLeaderboardPage() {
                 finalScoreBoost: 0,
                 finalScore: 0.383306980978391,
                 awardPoolShare: 0,
-                awardPoolApproxValue: 0,
-                totalRevenueContribution: 0n,
+                awardPoolApproxValue: { currency: CurrencyIds.USDC, amount: 0n },
+                totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
               },
             ],
             aggregatedMetrics: {
@@ -169,7 +178,7 @@ export function MockDisplayReferrerLeaderboardPage() {
               grandTotalIncrementalDuration: 651636003,
               grandTotalQualifiedReferrersFinalScore: 29.0160469236699,
               minFinalScoreToQualify: 0.479133726222989,
-              grandTotalRevenueContribution: 0n,
+              grandTotalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
             },
             pageContext: {
               page: 1,
@@ -181,6 +190,7 @@ export function MockDisplayReferrerLeaderboardPage() {
               startIndex: 0,
               endIndex: 3,
             },
+            status: ReferralProgramStatuses.Active,
             accurateAsOf: 1764580368,
           },
           isLoading: false,

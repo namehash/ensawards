@@ -6,12 +6,12 @@ import { ChevronRightIcon } from "lucide-react";
 import { useMemo } from "react";
 
 import type { PriceUsdc, UnixTimestamp } from "@ensnode/ensnode-sdk";
-import { getCurrencyInfo } from "@ensnode/ensnode-sdk";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramTimeline.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { parseReferralProgramCurrency } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferralProgramEditionCardProps {
@@ -211,27 +211,6 @@ export const ReferralProgramEditionBudget = ({
     style: "currency",
     currency: "USD",
   });
-
-  //TODO: Maybe we already have a function for it? I couldn't find such...
-  // If it turns out we really need this function then it should be moved to /src/utils
-  /**
-   * Converts the parsed currency representation in its smallest unit back to its original value.
-   *
-   * **Note** For large values this parsing may lead to loss of precision
-   *
-   * @param referralProgramTotalAwardShare - a {@link PriceUsdc} object with the amount in the smallest unit (6 decimals)
-   * @returns A number representing the actual amount of the given currency
-   *
-   * @example
-   * Based on the USDC currency
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 123456780n }) // returns 123.4567
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 1000000n }) // returns 1
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 1000n }) // returns 0.001
-   */
-  const parseReferralProgramCurrency = (referralProgramTotalAwardShare: PriceUsdc): number => {
-    const currencyInfo = getCurrencyInfo(referralProgramTotalAwardShare.currency);
-    return Number(referralProgramTotalAwardShare.amount) / Math.pow(10, currencyInfo.decimals);
-  };
 
   return (
     <div
