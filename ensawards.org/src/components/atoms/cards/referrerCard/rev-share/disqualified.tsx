@@ -31,7 +31,7 @@ const ReferrerCardRevShareLimitDisqualified = ({
     <ReferrerCardHeader
       referrer={referrer.referrer}
       rank={referrer.rank}
-      isQualified={false} // because the referrer is disqualified
+      isQualified={referrer.isQualified}
     />
     <ReferralYearsField referralYears={referrer.totalIncrementalDuration / SECONDS_PER_YEAR} />
     <BaseRevenueContributionField referrer={referrer} />
@@ -40,7 +40,7 @@ const ReferrerCardRevShareLimitDisqualified = ({
       <GenericTooltip
         tooltipOffset={0}
         content={
-          <p className="max-w-[140px]">
+          <p className="max-w-[200px]">
             The amount actually claimed from the pool by this referrer, capped by the remaining pool
             at the time of their qualifying events.
           </p>
@@ -54,7 +54,7 @@ const ReferrerCardRevShareLimitDisqualified = ({
         <p className="text-sm font-semibold leading-normal text-red-600 text-right">DISQUALIFIED</p>
         <GenericTooltip
           tooltipOffset={0}
-          content={<p className="max-w-[140px]">{referrer.adminDisqualificationReason}</p>}
+          content={<p className="max-w-[200px]">{referrer.adminDisqualificationReason}</p>}
         >
           <DisqualifiedIcon size={18} className="text-red-600" />
         </GenericTooltip>

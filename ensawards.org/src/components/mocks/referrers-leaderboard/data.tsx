@@ -324,7 +324,7 @@ export const mockReferrersLeaderboardData = new Map<
                   amount: 2452384374n,
                 },
                 rank: 2,
-                isQualified: true,
+                isQualified: false,
                 standardAwardValue: {
                   currency: CurrencyIds.USDC,
                   amount: 1226192187n,

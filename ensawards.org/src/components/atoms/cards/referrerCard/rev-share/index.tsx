@@ -56,7 +56,7 @@ function ReferrerCardRevShareLimit({ referrer, editionRules }: ReferrerCardRevSh
         <GenericTooltip
           tooltipOffset={0}
           content={
-            <p className="max-w-[140px]">
+            <p className="max-w-[200px]">
               The amount actually claimed from the pool by this referrer, capped by the remaining
               pool at the time of their qualifying events.
             </p>
@@ -102,7 +102,7 @@ export const BaseRevenueContributionField = ({
     <GenericTooltip
       tooltipOffset={0}
       content={
-        <p className="max-w-[140px]">
+        <p className="max-w-[200px]">
           The referrer's base revenue contribution (base-fee-only: $5 × years of incremental
           duration).
         </p>
@@ -142,7 +142,7 @@ export const UncappedAwardValueField = ({
     </GenericTooltip>
     <p
       className={cn(
-        "text-sm font-semibold leading-normal max-sm:text-right",
+        "text-sm font-normal leading-normal max-sm:text-right",
         referrer.isQualified ? "text-emerald-600" : "text-black",
       )}
     >

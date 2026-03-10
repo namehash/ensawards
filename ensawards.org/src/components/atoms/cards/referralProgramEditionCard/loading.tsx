@@ -48,9 +48,9 @@ export function ReferralProgramEditionCardLoading({
     <div
       className={cn(
         "max-w-[335px] w-full h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
-        "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10",
+        "rounded-2xl border border-gray-200 relative z-10",
         !showMobileVariant &&
-          "max-w-full w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
+          "max-w-full w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5",
       )}
     >
       <div
