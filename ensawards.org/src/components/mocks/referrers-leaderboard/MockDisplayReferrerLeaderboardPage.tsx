@@ -38,7 +38,7 @@ export function MockDisplayReferrerLeaderboardPage() {
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
           <div className="flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-4">
             <p>
-              Select a mock <b>ReferralProgramEditionsList</b> variant and state
+              Select a mock <b>DisplayReferrerLeaderboardPage</b> variant and state
             </p>
             <div className="flex flex-wrap gap-2">
               {Object.values(MockReferrersListStates).map((stateId) => (

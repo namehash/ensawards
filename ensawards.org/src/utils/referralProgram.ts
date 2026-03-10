@@ -94,7 +94,7 @@ export async function fetchReferralProgramEditions(): Promise<ReferralProgramEdi
  *
  * @example
  * Based on the USDC currency
- * parseReferralProgramCurrency({ currency: "USDC", amount: 123456780n }) // returns 123.4567
+ * parseReferralProgramCurrency({ currency: "USDC", amount: 123456780n }) // returns 123.45678
  * parseReferralProgramCurrency({ currency: "USDC", amount: 1000000n }) // returns 1
  * parseReferralProgramCurrency({ currency: "USDC", amount: 1000n }) // returns 0.001
  */
