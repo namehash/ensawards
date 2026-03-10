@@ -25,6 +25,7 @@ export type MockReferrersListState =
 const fetchErrorProps = {
   leaderboardPageData: null,
   isLoading: false,
+  expectedAwardModel: ReferralProgramAwardModels.PieSplit, // not important in this scenarion
   leaderboardPageFetchError: (
     <ErrorInfo
       title="Error loading referrer data"
@@ -94,6 +95,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: emptyPieSplitLeaderboardData,
           isLoading: false,
+          expectedAwardModel: ReferralProgramAwardModels.PieSplit,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
       [
@@ -101,6 +103,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: emptyPieSplitLeaderboardData,
           isLoading: true,
+          expectedAwardModel: ReferralProgramAwardModels.PieSplit,
           paginationParams: {
             page: 1,
             recordsPerPage: 4,
@@ -200,6 +203,7 @@ export const mockReferrersLeaderboardData = new Map<
             accurateAsOf: 1764580368,
           },
           isLoading: false,
+          expectedAwardModel: ReferralProgramAwardModels.PieSplit,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
     ]),
@@ -247,6 +251,7 @@ export const mockReferrersLeaderboardData = new Map<
             accurateAsOf: 1764091210,
           },
           isLoading: false,
+          expectedAwardModel: ReferralProgramAwardModels.RevShareLimit,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
       [
@@ -254,6 +259,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: null,
           isLoading: true,
+          expectedAwardModel: ReferralProgramAwardModels.RevShareLimit,
           paginationParams: {
             page: 1,
             recordsPerPage: 4,
@@ -413,6 +419,7 @@ export const mockReferrersLeaderboardData = new Map<
             accurateAsOf: 1773069047,
           },
           isLoading: false,
+          expectedAwardModel: ReferralProgramAwardModels.RevShareLimit,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
     ]),

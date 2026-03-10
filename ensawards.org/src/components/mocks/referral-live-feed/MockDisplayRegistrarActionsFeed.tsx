@@ -18,6 +18,7 @@ import {
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
+import { DEFAULT_REFERRAL_PROGRAM_EDITIONS } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 import { variants } from "./data.ts";
@@ -129,9 +130,7 @@ export function MockDisplayRegistrarActionsFeed() {
                   <DisplayRegistrarActionsList
                     namespaceId={namespaceId}
                     registrarActions={selectedVariant.registrarActions}
-                    referralProgramEditions={Array.from(
-                      getDefaultReferralProgramEditionConfigSet(namespaceId).values(),
-                    )}
+                    referralProgramEditions={DEFAULT_REFERRAL_PROGRAM_EDITIONS}
                   />
                 </div>
               )}

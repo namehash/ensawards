@@ -46,7 +46,6 @@ export function ReferralProgramEditionsList({
         console.error(response.errorMessage);
         setReferralProgramEditionConfigs(null);
         setFetchErrorMessage("An error occurred while loading the Referral program editions.");
-        setIsLoading(false);
         return;
       }
       setReferralProgramEditionConfigs(filterOutUnrecognizedEditions(response.data.editions));

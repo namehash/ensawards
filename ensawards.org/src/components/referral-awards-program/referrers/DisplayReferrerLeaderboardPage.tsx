@@ -1,4 +1,5 @@
 import {
+  type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
   type ReferrerLeaderboardPageParams,
   type ReferrerLeaderboardPagePieSplit,
@@ -20,6 +21,7 @@ export interface DisplayReferrerLeaderboardPageProps {
     | ReferrerLeaderboardPagePieSplit
     | null;
   isLoading: boolean;
+  expectedAwardModel: ReferralProgramAwardModel;
   leaderboardPageFetchError?: ReactElement;
   paginationParams?: Required<ReferrerLeaderboardPageParams>;
 }
@@ -31,6 +33,7 @@ export function DisplayReferrerLeaderboardPage({
   leaderboardPageData,
   isLoading,
   leaderboardPageFetchError,
+  expectedAwardModel,
   paginationParams = {
     page: 1,
     recordsPerPage: 5,
@@ -46,20 +49,18 @@ export function DisplayReferrerLeaderboardPage({
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
         {[...Array(paginationParams.recordsPerPage).keys()].map((elem) => {
-          if (
-            leaderboardPageData === null ||
-            leaderboardPageData.awardModel === ReferralProgramAwardModels.RevShareLimit
-          ) {
+          if (expectedAwardModel === ReferralProgramAwardModels.PieSplit) {
             return (
-              <ReferrerCardRevShareLimitLoading
+              <ReferrerCardPieSplitLoading
                 key={`Referrer-loading-${pageOffset + elem}`}
                 rank={pageOffset + elem + 1}
               />
             );
           }
 
+          // Return rev share limit loading for all other cases since it's newer
           return (
-            <ReferrerCardPieSplitLoading
+            <ReferrerCardRevShareLimitLoading
               key={`Referrer-loading-${pageOffset + elem}`}
               rank={pageOffset + elem + 1}
             />

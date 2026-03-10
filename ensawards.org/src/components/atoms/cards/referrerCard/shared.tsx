@@ -1,7 +1,6 @@
-import type { AwardedReferrerMetrics } from "@namehash/ens-referrals";
 import { type ReferrerRank } from "@namehash/ens-referrals/v1";
 import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
-import type { Address } from "viem/accounts";
+import type { Address } from "viem";
 
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 
@@ -55,7 +54,7 @@ export const RankIcon = ({ rank, isQualified, className }: RankProps) => (
           : `Rank ${rank} does not qualify for awards.`}
       </p>
     }
-    tooltipOffset={4}
+    tooltipOffset={1}
   >
     <div className="w-8 h-8 box-border flex justify-center items-center">
       {rank <= 3 ? (
@@ -79,7 +78,7 @@ export const RankIcon = ({ rank, isQualified, className }: RankProps) => (
 );
 
 export const RankIconLoading = ({ rank, className }: Omit<RankProps, "isQualified">) => (
-  <GenericTooltip content={<p>Loading the data. Please wait.</p>} tooltipOffset={4}>
+  <GenericTooltip content={<p>Loading the data. Please wait.</p>} tooltipOffset={1}>
     <div className="w-8 h-8 box-border flex justify-center items-center">
       {rank <= 3 ? (
         <img alt={`${rank}-place`} src={placeIcons[rank - 1].src} className={className} />

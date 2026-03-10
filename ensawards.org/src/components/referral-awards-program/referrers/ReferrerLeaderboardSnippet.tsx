@@ -68,14 +68,15 @@ export function ReferrerLeaderboardSnippet({
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
   // and reuse this fetch wherever we need
   async function fetchReferrerLeaderboard() {
-    setFetchErrorMessage("");
-    setIsLoading(true);
-
     if (!latestActiveReferralProgramEdition) {
+      setLeaderboardSnippetData(null);
       setFetchErrorMessage("No active referral program edition found.");
       setIsLoading(false);
       return;
     }
+
+    setFetchErrorMessage("");
+    setIsLoading(true);
 
     try {
       const response = await client.getReferrerLeaderboardPage({
@@ -86,6 +87,7 @@ export function ReferrerLeaderboardSnippet({
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
         console.error(response.errorMessage);
+        setLeaderboardSnippetData(null);
         setFetchErrorMessage("An error occurred while loading the leaderboard.");
         setIsLoading(false);
         return;
@@ -93,6 +95,7 @@ export function ReferrerLeaderboardSnippet({
 
       // Display an error for the unrecognized award model
       if (response.data.awardModel === ReferralProgramAwardModels.Unrecognized) {
+        setLeaderboardSnippetData(null);
         setFetchErrorMessage("Unrecognized referral program edition award model.");
         setIsLoading(false);
         return;
@@ -182,6 +185,10 @@ export function ReferrerLeaderboardSnippet({
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardSnippetData}
             isLoading={isLoading}
+            expectedAwardModel={
+              latestActiveReferralProgramEdition?.rules.awardModel ??
+              ReferralProgramAwardModels.Unrecognized
+            }
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo

@@ -57,7 +57,6 @@ export function AdvocateReferralsList({
         </p>
       ) : (
         <>
-          {" "}
           <DisplayRegistrarActionsList
             namespaceId={namespaceId}
             registrarActions={registrarActions.registrarActions}

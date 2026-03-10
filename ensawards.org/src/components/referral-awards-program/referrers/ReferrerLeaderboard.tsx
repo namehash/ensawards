@@ -85,6 +85,7 @@ export function ReferrerLeaderboard({
 
       // Display an error for the unrecognized award model
       if (response.data.awardModel === ReferralProgramAwardModels.Unrecognized) {
+        setLeaderboardData(null);
         setFetchErrorMessage("Unrecognized referral program edition award model.");
         setIsLoading(false);
         return;
@@ -187,6 +188,7 @@ export function ReferrerLeaderboard({
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardData}
             isLoading={isLoading}
+            expectedAwardModel={referralProgramEditionConfig.rules.awardModel}
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo

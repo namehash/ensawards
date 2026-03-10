@@ -12,6 +12,10 @@ export const prerender = false;
 const { edition } = Astro.params;
 
 const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConfigBySlug(edition);
+
+if (resolvedReferralProgramEditionConfig === undefined) {
+  Astro.response.status = 404;
+}
 ---
 
 {
@@ -19,13 +23,13 @@ const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConf
     <Layout
       isStatic={true}
       pageMetadata={{
-        title: `ENSAwards: Invalid ENS Referral Program edition slug`,
-        description: `The ENS Referral Program edition slug provided is invalid.`,
+        title: `ENSAwards: Invalid ENS Referral Program edition`,
+        description: `The provided ENS Referral Program edition slug is invalid.`,
         url: `https://ensawards.org/ens-referral-program/editions/${edition}/leaderboard`,
       }}>
       <Error404Display
-        header="Invalid ENS Referral Program edition slug"
-        description="The ENS Referral Program edition slug provided is invalid. Go to the ENS Referral Program page to view valid editions."
+        header="Invalid ENS Referral Program edition"
+        description="The provided ENS Referral Program edition slug is invalid. Go to the ENS Referral Program page to view valid editions."
         button={{
           text: "Back to ENS Referral Program page",
           href: "/ens-referral-program",

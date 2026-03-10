@@ -244,6 +244,7 @@ export function Pagination({
       </div>
       <button
         aria-disabled={paginationParams.page === totalPages}
+        disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles, "border-transparent")}
         onClick={onNext}
       >
@@ -252,6 +253,7 @@ export function Pagination({
       </button>
       <button
         aria-disabled={paginationParams.page === totalPages}
+        disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles, "block sm:hidden")}
         onClick={() => {
           onSelectPage(totalPages);
@@ -366,6 +368,7 @@ export function SimplePagination({
     >
       <button
         aria-disabled={paginationParams.page === 1}
+        disabled={paginationParams.page === 1}
         className={cn(buttonStyles)}
         onClick={onPrevious}
       >
@@ -374,6 +377,7 @@ export function SimplePagination({
       </button>
       <button
         aria-disabled={paginationParams.page === totalPages}
+        disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles)}
         onClick={onNext}
       >

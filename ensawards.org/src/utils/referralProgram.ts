@@ -83,7 +83,7 @@ export async function fetchReferralProgramEditions(): Promise<ReferralProgramEdi
   }
 }
 
-//TODO: Maybe we already have a function for it? I couldn't find such...
+//TODO: See https://github.com/namehash/ensawards/issues/151
 /**
  * Converts the parsed currency representation in its smallest unit back to its original value.
  *
