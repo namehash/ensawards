@@ -8,9 +8,14 @@ import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-import { currencyFormatter, numberFormatter, ReferrerCardHeader } from "../shared.tsx";
+import {
+  currencyFormatter,
+  numberFormatter,
+  ReferralYearsField,
+  ReferrerCardHeader,
+} from "../shared.tsx";
 
-export interface PieSplitReferrerCardProps {
+export interface ReferrerCardPieSplitProps {
   referrer: AwardedReferrerMetricsPieSplit;
   aggregatedMetrics: AggregatedReferrerMetricsPieSplit;
 }
@@ -20,7 +25,7 @@ export interface PieSplitReferrerCardProps {
  *
  * This component is specifically designed for the {@link ReferralProgramAwardModels.PieSplit} award model.
  */
-function ReferrerCardPieSplit({ referrer, aggregatedMetrics }: PieSplitReferrerCardProps) {
+function ReferrerCardPieSplit({ referrer, aggregatedMetrics }: ReferrerCardPieSplitProps) {
   const yearsRequiredToBeQualified = numberFormatter.format(
     Math.max(0.01, aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore),
   );
@@ -32,21 +37,7 @@ function ReferrerCardPieSplit({ referrer, aggregatedMetrics }: PieSplitReferrerC
         rank={referrer.rank}
         isQualified={referrer.isQualified}
       />
-      <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-        <GenericTooltip
-          tooltipOffset={0}
-          content={
-            <p className="max-w-[140px]">
-              Total duration of all referred registrations and renewals
-            </p>
-          }
-        >
-          <p className="text-muted-foreground text-sm leading-normal font-normal">Referral years</p>
-        </GenericTooltip>
-        <p className="text-sm leading-normal font-medium text-black">
-          {numberFormatter.format(referrer.score)}
-        </p>
-      </div>
+      <ReferralYearsField referralYears={referrer.score} />
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <GenericTooltip
           tooltipOffset={0}

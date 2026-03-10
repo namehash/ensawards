@@ -218,3 +218,19 @@ export const ReferrerCardHeaderLoading = ({
     </>
   );
 };
+
+export const ReferralYearsField = ({ referralYears }: { referralYears: number }) => (
+  <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+    <GenericTooltip
+      tooltipOffset={0}
+      content={
+        <p className="max-w-[140px]">Total duration of all referred registrations and renewals</p>
+      }
+    >
+      <p className="text-muted-foreground text-sm leading-normal font-normal">Referral years</p>
+    </GenericTooltip>
+    <p className="text-sm leading-normal font-medium text-black">
+      {numberFormatter.format(referralYears)}
+    </p>
+  </div>
+);

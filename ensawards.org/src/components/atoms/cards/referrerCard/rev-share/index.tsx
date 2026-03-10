@@ -8,13 +8,14 @@ import { memo } from "react";
 import {
   currencyFormatter,
   numberFormatter,
+  ReferralYearsField,
   ReferrerCardHeader,
 } from "@/components/atoms/cards/referrerCard/shared";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-interface RevShareLimitReferrerCardProps {
+export interface ReferrerCardRevShareLimitProps {
   referrer: AwardedReferrerMetricsRevShareLimit;
   editionRules: ReferralProgramRulesRevShareLimit;
 }
@@ -24,7 +25,7 @@ interface RevShareLimitReferrerCardProps {
  *
  * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareLimit} award model.
  */
-function ReferrerCardRevShareLimit({ referrer, editionRules }: RevShareLimitReferrerCardProps) {
+function ReferrerCardRevShareLimit({ referrer, editionRules }: ReferrerCardRevShareLimitProps) {
   const yearsRequiredToBeQualified = numberFormatter.format(
     Math.max(
       0.01,
@@ -48,70 +49,26 @@ function ReferrerCardRevShareLimit({ referrer, editionRules }: RevShareLimitRefe
         rank={referrer.rank}
         isQualified={referrer.isQualified}
       />
-      <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+      <ReferralYearsField referralYears={referrer.totalIncrementalDuration / SECONDS_PER_YEAR} />
+      <BaseRevenueContributionField referrer={referrer} />
+      <UncappedAwardValueField referrer={referrer} />
+      <div className="sm:min-w-[200px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
         <GenericTooltip
           tooltipOffset={0}
           content={
             <p className="max-w-[140px]">
-              Total duration of all referred registrations and renewals
+              The amount actually claimed from the pool by this referrer, capped by the remaining
+              pool at the time of their qualifying events.
             </p>
           }
         >
-          <p className="text-muted-foreground text-sm leading-normal font-normal">Referral years</p>
-        </GenericTooltip>
-        <p className="text-sm leading-normal font-medium text-black">
-          {numberFormatter.format(referrer.totalIncrementalDuration / SECONDS_PER_YEAR)}
-        </p>
-      </div>
-      <div className="sm:min-w-[175px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-        <GenericTooltip tooltipOffset={0} content={<p className="max-w-[140px]">X</p>}>
-          <p className="text-muted-foreground text-sm leading-normal font-normal">
-            Base revenue contribution
-          </p>
-        </GenericTooltip>
-        <p className="text-sm leading-normal font-medium text-black">
-          US{" "}
-          {currencyFormatter.format(
-            parseReferralProgramCurrency(referrer.totalBaseRevenueContribution),
-          )}
-        </p>
-      </div>
-      <div className="sm:min-w-[200px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-        <GenericTooltip tooltipOffset={0} content={<p className="max-w-[200px]">X</p>}>
           <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
-            Uncapped award value
-          </p>
-        </GenericTooltip>
-        <p
-          className={cn(
-            "text-sm font-semibold leading-normal max-sm:text-right",
-            referrer.isQualified ? "text-emerald-600" : "text-black font-normal",
-          )}
-        >
-          {referrer.isQualified ? (
-            <>
-              US{" "}
-              {currencyFormatter.format(parseReferralProgramCurrency(referrer.standardAwardValue))}
-            </>
-          ) : (
-            <span className="text-sm leading-normal font-semibold text-black max-sm:text-end">
-              Requires{" "}
-              {yearsRequiredToBeQualified === "1.00"
-                ? "1 more year"
-                : `${yearsRequiredToBeQualified} more years`}
-            </span>
-          )}
-        </p>
-      </div>
-      <div className="sm:min-w-[200px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
-        <GenericTooltip tooltipOffset={0} content={<p className="max-w-[140px]">x</p>}>
-          <p className="text-muted-foreground text-sm leading-normal font-normal">
             Award pool approximate value
           </p>
         </GenericTooltip>
         <p
           className={cn(
-            "text-sm font-semibold leading-normal",
+            "text-sm font-semibold leading-normal text-right",
             referrer.isQualified ? "text-emerald-600" : "text-black font-normal",
           )}
         >
@@ -123,12 +80,75 @@ function ReferrerCardRevShareLimit({ referrer, editionRules }: RevShareLimitRefe
               )}
             </>
           ) : (
-            "-"
+            <span className="max-sm:text-right">
+              Requires{" "}
+              {yearsRequiredToBeQualified === "1.00"
+                ? "1 more year"
+                : `${yearsRequiredToBeQualified} more years`}
+            </span>
           )}
         </p>
       </div>
     </div>
   );
 }
+
+export const BaseRevenueContributionField = ({
+  referrer,
+}: {
+  referrer: AwardedReferrerMetricsRevShareLimit;
+}) => (
+  <div className="sm:min-w-[175px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+    <GenericTooltip
+      tooltipOffset={0}
+      content={
+        <p className="max-w-[140px]">
+          The referrer's base revenue contribution (base-fee-only: $5 × years of incremental
+          duration).
+        </p>
+      }
+    >
+      <p className="text-muted-foreground text-sm leading-normal font-normal">
+        Base revenue contribution
+      </p>
+    </GenericTooltip>
+    <p className="text-sm leading-normal font-medium text-black">
+      US{" "}
+      {currencyFormatter.format(
+        parseReferralProgramCurrency(referrer.totalBaseRevenueContribution),
+      )}
+    </p>
+  </div>
+);
+
+export const UncappedAwardValueField = ({
+  referrer,
+}: {
+  referrer: AwardedReferrerMetricsRevShareLimit;
+}) => (
+  <div className="sm:min-w-[200px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+    <GenericTooltip
+      tooltipOffset={0}
+      content={
+        <p className="max-w-[200px]">
+          Represents what the referrer would receive if the pool were unlimited and the referrer
+          were qualified. Independent of the pool state and qualification status.
+        </p>
+      }
+    >
+      <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
+        Uncapped award value
+      </p>
+    </GenericTooltip>
+    <p
+      className={cn(
+        "text-sm font-semibold leading-normal max-sm:text-right",
+        referrer.isQualified ? "text-emerald-600" : "text-black",
+      )}
+    >
+      US {currencyFormatter.format(parseReferralProgramCurrency(referrer.standardAwardValue))}
+    </p>
+  </div>
+);
 
 export const ReferrerCardRevShareLimitMemo = memo(ReferrerCardRevShareLimit);

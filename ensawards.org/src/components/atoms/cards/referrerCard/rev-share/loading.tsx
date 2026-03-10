@@ -22,21 +22,23 @@ export const ReferrerCardRevShareLimitLoading = ({
         <p className="text-muted-foreground text-sm leading-normal font-normal">
           Base revenue contribution
         </p>
-        <div className={cn(loadingStateStyles, "w-10 h-[14px] mt-[4px] mb-[3px]")} />
+        <div className={cn(loadingStateStyles, "w-[80px] h-[14px] mt-[4px] mb-[3px]")} />
       </div>
       <div className="sm:min-w-[200px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal">
           Uncapped award value
         </p>
         <div
-          className={cn(loadingStateStyles, "w-[48px] sm:w-[130px] h-[14px] mt-[4px] mb-[3px]")}
+          className={cn(loadingStateStyles, "w-[60px] sm:w-[100px] h-[14px] mt-[4px] mb-[3px]")}
         />
       </div>
       <div className="sm:min-w-[200px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">
+        <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
           Award pool approximate value
         </p>
-        <div className={cn(loadingStateStyles, "w-[88px] h-[14px] mt-[4px] mb-[3px]")} />
+        <div
+          className={cn(loadingStateStyles, "w-[80px] sm:w-[100px] h-[14px] mt-[4px] mb-[3px]")}
+        />
       </div>
     </div>
   );
