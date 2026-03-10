@@ -200,7 +200,7 @@ export const ReferrerCardHeaderLoading = ({
           <div className="animate-pulse w-10 h-10 bg-gray-200 rounded-full" />
           <div className="sm:min-w-[170px] flex flex-col flex-nowrap justify-center items-start gap-0 max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal">Referrer</p>
-            <div className="animate-pulse bg-gray-300 rounded-sm w-[100px] h-[14px] mt-[4px] mb-[3px]" />
+            <div className={cn(loadingStateStyles, "w-[100px] h-[14px] mt-[4px] mb-[3px]")} />
           </div>
         </div>
       </div>

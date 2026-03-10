@@ -25,7 +25,7 @@ export type MockReferrersListState =
 const fetchErrorProps = {
   leaderboardPageData: null,
   isLoading: false,
-  expectedAwardModel: ReferralProgramAwardModels.PieSplit, // not important in this scenarion
+  expectedAwardModel: ReferralProgramAwardModels.PieSplit, // not important in this scenario
   leaderboardPageFetchError: (
     <ErrorInfo
       title="Error loading referrer data"

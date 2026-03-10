@@ -81,7 +81,7 @@ interface ReferralProgramEditionsListContainerProps {
 
 const ReferralProgramEditionsListContainer = ({
   activeEditions,
-  closedEditions: closeEditions,
+  closedEditions,
   scheduledEditions,
 }: ReferralProgramEditionsListContainerProps) => {
   const headerStyles = "text-2xl leading-normal font-semibold text-black";
@@ -101,10 +101,10 @@ const ReferralProgramEditionsListContainer = ({
           <div className={editionsListStyles}>{scheduledEditions}</div>
         </div>
       )}
-      {closeEditions.length > 0 && (
+      {closedEditions.length > 0 && (
         <div className={subcontainerStyles}>
           <h2 className={headerStyles}>Closed</h2>
-          <div className={editionsListStyles}>{closeEditions}</div>
+          <div className={editionsListStyles}>{closedEditions}</div>
         </div>
       )}
     </div>
