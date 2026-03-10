@@ -34,11 +34,7 @@ function ReferrerCardRevShareLimit({ referrer, editionRules }: ReferrerCardRevSh
         amount:
           editionRules.minQualifiedRevenueContribution.amount -
           referrer.totalBaseRevenueContribution.amount,
-      }) /
-        parseReferralProgramCurrency({
-          currency: editionRules.minQualifiedRevenueContribution.currency,
-          amount: BASE_REVENUE_CONTRIBUTION_PER_YEAR.amount,
-        }),
+      }) / parseReferralProgramCurrency(BASE_REVENUE_CONTRIBUTION_PER_YEAR),
     ),
   );
 
