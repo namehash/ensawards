@@ -64,14 +64,9 @@ export function ReferrerLeaderboardSnippet({
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
-  //TODO: Ideally that part could also be extracted (with useQuery or w/e)
-  // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
-  // and reuse this fetch wherever we need
   async function fetchReferrerLeaderboard() {
     if (!latestActiveReferralProgramEdition) {
-      setLeaderboardSnippetData(null);
-      setFetchErrorMessage("No active referral program edition found.");
-      setIsLoading(false);
+      // Editions haven't loaded yet — stay in the loading state silently
       return;
     }
 

@@ -54,7 +54,14 @@ const ReferrerCardRevShareLimitDisqualified = ({
         <p className="text-sm font-semibold leading-normal text-red-600 text-right">DISQUALIFIED</p>
         <GenericTooltip
           tooltipOffset={0}
-          content={<p className="max-w-[200px]">{referrer.adminDisqualificationReason}</p>}
+          // `referrer.adminDisqualificationReason` will never be null (see DisplayReferrerLeaderboardPage.tsx:101-107).
+          // This fallback is introduced for type-safety
+          content={
+            <p className="max-w-[200px]">
+              {referrer.adminDisqualificationReason ??
+                "User disqualified due to the breach of the edition's rules"}
+            </p>
+          }
         >
           <DisqualifiedIcon size={18} className="text-red-600" />
         </GenericTooltip>
