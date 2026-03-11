@@ -1,14 +1,4 @@
-import { AbsoluteTime, ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
 import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
-
-import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
-import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
-
-import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
-import { getENSNodeUrl } from "@/utils/env";
-import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 
 import { type AppBenchmark, BenchmarkResult } from "../../../../data/apps/benchmarks-types.ts";
 import { cn } from "../../../utils/tailwindClassConcatenation";
@@ -16,57 +6,7 @@ import { cn } from "../../../utils/tailwindClassConcatenation";
 export interface BenchmarkResultBadgeProps {
   benchmark: AppBenchmark;
   className?: string;
-  isLoading?: boolean;
 }
-
-const TooltipContent = ({ benchmark }: { benchmark: AppBenchmark }) => {
-  // biome-ignore lint/style/noNonNullAssertion: It is guaranteed that there is at least one contribution.
-  const latestContributor = benchmark.contributions.at(-1)!.from;
-
-  const identity = buildUnresolvedIdentity(
-    latestContributor.address,
-    DEFAULT_ENS_NAMESPACE,
-    latestContributor.chainId,
-  );
-
-  return (
-    <div className="flex flex-col gap-3 p-1">
-      <div className="flex flex-col gap-1">
-        <p className="text-muted-foreground text-xs">Benchmarked by</p>
-        <ResolveAndDisplayIdentity
-          identity={identity}
-          namespaceId={DEFAULT_ENS_NAMESPACE}
-          withLink={true}
-          withTooltip={false}
-          withAvatar={true}
-          identityLinkDetails={{
-            isExternal: false,
-            link: new URL(
-              getEnsAdvocateDetailsRelativePath(identity.address),
-              getEnsAwardsBaseUrl(),
-            ),
-          }}
-          className="text-blue-400 hover:underline hover:underline-offset-[25%]"
-        />
-      </div>
-      <p className="text-xs text-muted-foreground">
-        on{" "}
-        <AbsoluteTime
-          timestamp={benchmark.lastUpdated}
-          options={{
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }}
-        />
-      </p>
-    </div>
-  );
-};
-
-const ensNodeReactConfig = createConfig({
-  url: getENSNodeUrl(),
-});
 
 const getResultIcon = (result: BenchmarkResult) => {
   switch (result) {
@@ -80,26 +20,16 @@ const getResultIcon = (result: BenchmarkResult) => {
 };
 
 export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBadgeProps) {
-  const badgeContent = (
+  return (
     <span
       className={cn(
         "w-fit flex flex-row flex-nowrap justify-center items-center gap-1.5 pl-2.5 pr-3 " +
-          "py-1 rounded-full text-xs leading-normal font-medium hover:opacity-80 cursor-default",
+          "py-1 rounded-full text-xs leading-normal font-medium cursor-pointer",
         className,
       )}
     >
       {getResultIcon(benchmark.result)}
       {benchmark.result}
     </span>
-  );
-
-  return (
-    <ENSNodeProvider config={ensNodeReactConfig}>
-      <TooltipProvider delayDuration={250} skipDelayDuration={0}>
-        <GenericTooltip content={<TooltipContent benchmark={benchmark} />}>
-          {badgeContent}
-        </GenericTooltip>
-      </TooltipProvider>
-    </ENSNodeProvider>
   );
 }
