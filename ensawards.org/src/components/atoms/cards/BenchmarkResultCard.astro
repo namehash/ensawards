@@ -2,6 +2,7 @@
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
+
 export interface BenchmarkResultCardProps {
   name: string;
   notes: string;
@@ -17,14 +18,20 @@ export interface BenchmarkResultCardProps {
   }[];
 }
 const { name, notes, viewDetails, additionalInfo }: BenchmarkResultCardProps = Astro.props;
+
+const isStandaloneLinkCard = additionalInfo === undefined;
+const RootTag = isStandaloneLinkCard ? "a" : "div";
 ---
 
-<!--The "onClick" here is hacky, but allows us to have two different links (as before) and the requested hover behavior-->
-<div
-  data-link={viewDetails.link}
-  onClick=`if(!event.target.closest('a')) window.location=this.dataset.link`
-  class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-nowrap justify-start items-start gap-3 sm:gap-10
-            p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
+<!--Use an anchor only when the whole card should navigate, otherwise keep the clickable div to allow nested links-->
+<RootTag
+  href={isStandaloneLinkCard ? viewDetails.link : undefined}
+  target={isStandaloneLinkCard ? "_self" : undefined}
+  data-link={isStandaloneLinkCard ? undefined : viewDetails.link}
+  onclick={isStandaloneLinkCard
+    ? undefined
+    : "if(!event.target.closest('a')) window.location=this.dataset.link"}
+  class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-nowrap justify-start items-start gap-3 sm:gap-10 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <!--Mobile Header start-->
   <div
     class="sm:hidden flex flex-row flex-nowrap justify-between items-center self-stretch">
@@ -88,7 +95,7 @@ const { name, notes, viewDetails, additionalInfo }: BenchmarkResultCardProps = A
       className="max-sm:hidden w-10 h-10 hover:opacity-60 shrink-0"
     />
   </div>
-  <button
+  <div
     class={cn(
       shadcnButtonVariants({
         variant: "secondary",
@@ -97,5 +104,5 @@ const { name, notes, viewDetails, additionalInfo }: BenchmarkResultCardProps = A
       }),
     )}>
     {viewDetails.text}
-  </button>
-</div>
+  </div>
+</RootTag>
