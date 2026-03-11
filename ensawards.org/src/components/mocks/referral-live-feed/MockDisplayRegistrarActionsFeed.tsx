@@ -1,4 +1,3 @@
-import { getDefaultReferralProgramEditionConfigSet } from "@namehash/ens-referrals/v1";
 import { useMemo, useState } from "react";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
