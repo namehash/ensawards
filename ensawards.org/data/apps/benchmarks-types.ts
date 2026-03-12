@@ -5,9 +5,9 @@ import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 import type { BestPracticeApp } from "../ens-best-practices/types.ts";
 
 export enum BenchmarkResult {
-  Pass = "Pass",
-  PartialPass = "Partial pass",
-  Fail = "Fail",
+  Pass = "Passed",
+  PartialPass = "Partial passed",
+  Fail = "Failed",
 }
 
 /**

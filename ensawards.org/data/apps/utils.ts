@@ -4,6 +4,7 @@ import type {
   BestPracticeTarget,
 } from "../ens-best-practices/types.ts";
 import { BenchmarkResult } from "./benchmarks-types.ts";
+import { getBenchmarkWeight } from "./benchmarks-utils.ts";
 import { APPS } from "./index.ts";
 import { type App, type AppType, AppTypes } from "./types.ts";
 
@@ -33,26 +34,20 @@ export const getAppById = (appId: string): App | undefined => {
 };
 
 /**
+ * Returns an {@link App} by {@link App.name}.
+ */
+export const getAppByName = (appName: string): App | undefined => {
+  return APPS.find((app) => app.name === appName);
+};
+
+/**
  * Calculates ENS Awards score for an app as a percentage of passed benchmark weight.
- *
- * For now, the weights for different {@link BenchmarkResult}s are:
- * {@link BenchmarkResult.Pass} = 1.0
- * {@link BenchmarkResult.PartialPass} = 0.5
- * {@link BenchmarkResult.Fail} = 0.0
  */
 export const calculateAppEnsAwardsScore = (app: App) => {
-  const accumulatedBenchmarks = app.benchmarks.reduce((sum, benchmark) => {
-    switch (benchmark.result) {
-      case BenchmarkResult.Pass:
-        return sum + 1;
-
-      case BenchmarkResult.PartialPass:
-        return sum + 0.5;
-
-      default:
-        return sum;
-    }
-  }, 0);
+  const accumulatedBenchmarks = app.benchmarks.reduce(
+    (sum, benchmark) => sum + getBenchmarkWeight(benchmark),
+    0,
+  );
 
   if (app.benchmarks.length === 0) return 0;
 
@@ -82,20 +77,7 @@ export const calculateAppSupport = (bestPractice: BestPracticeApp): number => {
 
     benchmarkedApps += 1;
 
-    switch (appBenchmark.result) {
-      case BenchmarkResult.Pass:
-        appSupport += 1;
-        break;
-
-      case BenchmarkResult.PartialPass:
-        appSupport += 0.5;
-        break;
-
-      default:
-        // Explicit non-increase for failed benchmark
-        appSupport += 0;
-        break;
-    }
+    appSupport += getBenchmarkWeight(appBenchmark);
   }
 
   if (benchmarkedApps === 0) return 0;

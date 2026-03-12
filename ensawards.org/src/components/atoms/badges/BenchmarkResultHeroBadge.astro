@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+import benchmarkResultFailSymbol from "../../../assets/benchmarkResultFailSymbol.svg";
+import benchmarkResultPartialPassSymbol from "../../../assets/benchmarkResultPartialPassSymbol.svg";
+import benchmarkResultPassSymbol from "../../../assets/benchmarkResultPassSymbol.svg";
+import { BenchmarkResult } from "../../../../data/apps/benchmarks-types.ts";
+import { cn } from "../../../utils/tailwindClassConcatenation";
+import { type BenchmarkResultBadgeProps } from "./BenchmarkResultBadge.tsx";
+
+const { benchmark, className }: BenchmarkResultBadgeProps = Astro.props;
+
+const benchmarkResultContent = {
+  [BenchmarkResult.Pass]: {
+    symbol: benchmarkResultPassSymbol,
+    symbolAlt: "Passed benchmark result indicator",
+  },
+  [BenchmarkResult.PartialPass]: {
+    symbol: benchmarkResultPartialPassSymbol,
+    symbolAlt: "Partially passed benchmark result indicator",
+  },
+  [BenchmarkResult.Fail]: {
+    symbol: benchmarkResultFailSymbol,
+    symbolAlt: "Failed benchmark result indicator",
+  },
+} satisfies Record<BenchmarkResult, { symbol: ImageMetadata; symbolAlt: string }>;
+
+const { symbol, symbolAlt } = benchmarkResultContent[benchmark.result];
+---
+
+<div
+  class={cn(
+    "flex w-full max-w-[124px] sm:max-w-[228px] flex-col items-center gap-[14px] rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#191D4D_0%,#10143F_100%)] px-6 sm:px-11 pb-[13px] sm:pb-[23px] pt-4.5 sm:pt-8 relative z-10",
+    className,
+  )}>
+  <Image
+    src={symbol}
+    alt={symbolAlt}
+    width={139}
+    height={139}
+    class="h-[75px] sm:h-[139px] w-[75px] sm:w-[139px] shrink-0"
+    quality={100}
+  />
+  <p class="text-center text-base font-semibold leading-6 text-[#F5F5F5]">
+    {benchmark.result}
+  </p>
+</div>

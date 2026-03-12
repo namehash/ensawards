@@ -1,0 +1,37 @@
+---
+import type { BestPractice } from "/data/ens-best-practices/types.ts";
+import { markdownToHtml } from "@/utils/markdown";
+
+export interface BestPracticeTechnicalDetailsProps {
+  bestPractice: BestPractice;
+}
+
+const { bestPractice } = Astro.props;
+
+const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
+const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
+---
+
+<div
+  class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
+  <h2 class="text-2xl leading-none font-semibold text-black">
+    {bestPractice.technicalDetails.main.header}
+  </h2>
+  <p
+    class={technicalSectionContentStyles}
+    set:html={markdownToHtml(bestPractice.technicalDetails.main.content)}
+  />
+  {
+    bestPractice.technicalDetails.sides.map((additionalContent) => (
+      <>
+        <h3 class={technicalSectionMinorHeaderStyles}>
+          {additionalContent.header}
+        </h3>
+        <p
+          class={technicalSectionContentStyles}
+          set:html={markdownToHtml(additionalContent.content)}
+        />
+      </>
+    ))
+  }
+</div>
