@@ -19,6 +19,7 @@ const ArbitrumDao: DAOProtocol = {
   socials: {
     website: new URL("https://arbitrum.foundation/"),
     twitter: new URL("https://x.com/arbitrum"),
+    ens: "arbfoundation.eth",
   },
   ogImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/og.png",
   twitterOgImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/twitter-og.png",
