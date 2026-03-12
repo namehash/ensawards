@@ -17,6 +17,8 @@ export const EnsAwardsBarScore = ({ score, isDynamic = true }: EnsAwardsBarScore
     );
   }
 
+  const normalizedScore = Math.round(score);
+
   return (
     <div
       className={cn(
@@ -39,7 +41,7 @@ export const EnsAwardsBarScore = ({ score, isDynamic = true }: EnsAwardsBarScore
               "absolute h-full self-stretch rounded-[20px] z-10",
               `bg-${getAppSupportColor(score)}`,
             )}
-            style={{ width: `calc(${score}%)` }}
+            style={{ width: `calc(${normalizedScore}%)` }}
           ></div>
         </div>
         <p
@@ -49,7 +51,7 @@ export const EnsAwardsBarScore = ({ score, isDynamic = true }: EnsAwardsBarScore
             `text-${getAppSupportColor(score)}`,
           )}
         >
-          {score}%
+          {normalizedScore}%
         </p>
       </div>
     </div>

@@ -12,8 +12,12 @@ export const getBenchmarkWeight = (benchmark: AppBenchmark): number => {
   switch (benchmark.result) {
     case BenchmarkResult.Pass:
       return 1;
+
     case BenchmarkResult.PartialPass:
       return 0.5;
+
+    // explicit zero value for the failed benchmark
+    case BenchmarkResult.Fail:
     default:
       return 0;
   }

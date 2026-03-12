@@ -21,7 +21,7 @@ const getBenchmarkIcon = (result: BenchmarkResult) => {
     case BenchmarkResult.Pass:
       return <PassIcon className="h-6 w-6 text-emerald-600" />;
     case BenchmarkResult.PartialPass:
-      return <PartialPassIcon className="h-6 w-6 text-gray-500" />;
+      return <PartialPassIcon className="h-6 w-6 text-orange-600" />;
     case BenchmarkResult.Fail:
       return <FailIcon className="h-6 w-6 text-red-600" />;
   }

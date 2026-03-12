@@ -6,7 +6,7 @@ import type { BestPracticeApp } from "../ens-best-practices/types.ts";
 
 export enum BenchmarkResult {
   Pass = "Passed",
-  PartialPass = "Partial passed",
+  PartialPass = "Partially passed",
   Fail = "Failed",
 }
 
