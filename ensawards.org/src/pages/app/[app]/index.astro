@@ -1,19 +1,19 @@
 ---
 import { EnsIcon, TwitterIcon } from "@namehash/namehash-ui";
 
-import { BenchmarkResultBadge } from "../../components/atoms/badges/BenchmarkResultBadge";
-import BenchmarkResultCard from "../../components/atoms/cards/BenchmarkResultCard.astro";
-import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
-import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
-import ItemsList from "../../components/molecules/ItemsList.astro";
-import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
-import { APPS } from "../../../data/apps";
-import Layout from "../../layouts/Layout.astro";
-import { BenchmarkResultToBadgeStyles } from "../../utils/styles";
-import { calculateAppEnsAwardsScore, getAppBySlug } from "../../../data/apps/utils.ts";
-import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
-import { type Contribution } from "../../../data/contributors/types.ts";
+import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge";
+import BenchmarkResultCard from "@/components/atoms/cards/BenchmarkResultCard.astro";
+import EnsAwardsScore from "@/components/atoms/ens-awards-score/circular.astro";
+import GlobeIcon from "@/components/atoms/icons/GlobeIcon.astro";
+import ItemsList from "@/components/molecules/ItemsList.astro";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
+import { APPS } from "@/../data/apps";
+import Layout from "@/layouts/Layout.astro";
+import { BenchmarkResultToBadgeStyles } from "@/utils/styles";
+import { calculateAppEnsAwardsScore, getAppBySlug } from "@/../data/apps/utils.ts";
+import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
+import { type Contribution } from "@/../data/contributors/types.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -120,7 +120,6 @@ if (appToDisplay !== undefined) {
                 slot="badge"
                 className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
                 benchmark={benchmark}
-                client:load
               />
             </BenchmarkResultCard>
           ))}

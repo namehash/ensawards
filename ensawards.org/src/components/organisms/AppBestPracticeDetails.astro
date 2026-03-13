@@ -2,7 +2,6 @@
 import { APPS } from "../../../data/apps";
 import { BenchmarkResult } from "../../../data/apps/benchmarks-types.ts";
 import type { BestPracticeApp } from "../../../data/ens-best-practices/types.ts";
-import { markdownToHtml } from "../../utils/markdown";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "../../utils/styles";
 import { cn } from "../../utils/tailwindClassConcatenation";
 import { BenchmarkResultBadge } from "../atoms/badges/BenchmarkResultBadge";
@@ -11,6 +10,7 @@ import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { calculateAppsPassed, calculateAppSupport } from "../../../data/apps/utils.ts";
 import { SuggestionCard } from "../atoms/cards/SuggestionCard.tsx";
+import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 
 export interface AppBestPracticeDetailsProps {
   bestPractice: BestPracticeApp;
@@ -103,7 +103,7 @@ const appSupport = calculateAppSupport(bestPractice);
                 notes={app.description}
                 viewDetails={{
                   text: "App details",
-                  link: `/app/${app.appSlug}`,
+                  link: `/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}/details`,
                 }}>
                 <BenchmarkResultBadge
                   slot="badge"
@@ -111,7 +111,6 @@ const appSupport = calculateAppSupport(bestPractice);
                   className={
                     BenchmarkResultToBadgeStyles.get(benchmark.result)!
                   }
-                  client:load
                 />
                 <AppIcon
                   slot="icon"
@@ -129,29 +128,7 @@ const appSupport = calculateAppSupport(bestPractice);
   class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
   <div
     class="w-full max-w-[1216px] flex flex-nowrap flex-col sm:flex-row gap-6 sm:gap-20 justify-start sm:justify-center items-start">
-    <div
-      class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
-      <h2 class="text-2xl leading-none font-semibold text-black">
-        {bestPractice.technicalDetails.main.header}
-      </h2>
-      <p
-        class={technicalSectionContentStyles}
-        set:html={markdownToHtml(bestPractice.technicalDetails.main.content)}
-      />
-      {
-        bestPractice.technicalDetails.sides.map((additionalContent) => (
-          <>
-            <h3 class={technicalSectionMinorHeaderStyles}>
-              {additionalContent.header}
-            </h3>
-            <p
-              class={technicalSectionContentStyles}
-              set:html={markdownToHtml(additionalContent.content)}
-            />
-          </>
-        ))
-      }
-    </div>
+    <BestPracticeTechnicalDetails bestPractice={bestPractice} />
     <div class="w-full sm:w-1/2 h-fit box-border flex flex-col gap-5">
       <div
         class="w-full min-w-[300px] max-w-[420px] box-border h-fit hidden md:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
