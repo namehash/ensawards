@@ -9,7 +9,6 @@ import { memo } from "react";
 import {
   currencyFormatter,
   numberFormatter,
-  ReferralYearsField,
   ReferrerCardHeader,
 } from "@/components/atoms/cards/referrerCard/shared";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
