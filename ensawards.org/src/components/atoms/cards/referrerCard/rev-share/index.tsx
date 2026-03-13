@@ -156,7 +156,7 @@ const DisqualifiedFieldContent = ({
     <p className="text-sm font-semibold leading-normal text-red-600 text-right">Disqualified</p>
     <GenericTooltip
       tooltipOffset={0}
-      // `referrer.adminDisqualificationReason` will never be null (see DisplayReferrerLeaderboardPage.tsx:101-107).
+      // `referrer.adminDisqualificationReason` will never be null if `referrer.isAdminDisqualified` is true
       // This fallback is introduced for type-safety
       content={
         <p className="max-w-[200px]">
