@@ -48,9 +48,9 @@ export function ReferralProgramEditionCardLoading({
     <div
       className={cn(
         "max-w-[335px] w-full h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
-        "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10",
+        "rounded-2xl border border-gray-200 relative z-10",
         !showMobileVariant &&
-          "max-w-full w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
+          "max-w-full w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5",
       )}
     >
       <div
@@ -59,7 +59,7 @@ export function ReferralProgramEditionCardLoading({
           !showMobileVariant && "sm:hidden",
         )}
       >
-        <Skeleton className={cn("h-[18px] mt-[4px] mb-[3px] w-2/3", loadingStateStyles)} />
+        <Skeleton className={cn("h-[18px] mt-[5px] mb-[4px] w-2/3", loadingStateStyles)} />
         <Skeleton className={cn(loadingStateStyles, "h-[22px] w-[60px] rounded-full")} />
       </div>
       <div
@@ -68,7 +68,7 @@ export function ReferralProgramEditionCardLoading({
           !showMobileVariant && "sm:flex",
         )}
       >
-        <Skeleton className={cn("h-[18px] mt-[4px] mb-[3px] w-1/2", loadingStateStyles)} />
+        <Skeleton className={cn("h-[18px] mt-[5px] mb-[4px] w-1/2", loadingStateStyles)} />
       </div>
       <ReferralProgramEditionFieldLoading
         label="Time period"
@@ -95,7 +95,7 @@ export function ReferralProgramEditionCardLoading({
       <span
         className={cn(
           "hidden",
-          !showMobileVariant && "max-sm:hidden sm:flex sm:flex-row sm:justify-end",
+          !showMobileVariant && "max-sm:hidden sm:flex sm:flex-row sm:justify-end w-[90px]",
         )}
       >
         <Skeleton className={cn(loadingStateStyles, "h-[22px] w-[60px] rounded-full")} />
@@ -109,7 +109,7 @@ export function ReferralProgramEditionCardLoading({
       <div
         className={cn(
           loadingStateStyles,
-          "w-full h-10 rounded-full self-stretch pt-1",
+          "w-full h-9 rounded-full self-stretch",
           !showMobileVariant && "sm:hidden",
         )}
       ></div>

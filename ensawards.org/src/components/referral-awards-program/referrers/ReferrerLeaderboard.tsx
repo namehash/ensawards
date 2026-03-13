@@ -1,9 +1,11 @@
 import {
   ENSReferralsClient,
-  type ReferrerLeaderboardPage,
+  ReferralProgramAwardModels,
+  type ReferralProgramEditionConfig,
+  type ReferrerLeaderboardPagePieSplit,
   ReferrerLeaderboardPageResponseCodes,
-} from "@namehash/ens-referrals";
-import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+  type ReferrerLeaderboardPageRevShareLimit,
+} from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import { fromUnixTime, intlFormat } from "date-fns";
 import { secondsInMinute } from "date-fns/constants";
@@ -46,7 +48,9 @@ export function ReferrerLeaderboard({
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPage | null>(null);
+  const [leaderboardData, setLeaderboardData] = useState<
+    ReferrerLeaderboardPageRevShareLimit | ReferrerLeaderboardPagePieSplit | null
+  >(null);
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
@@ -65,8 +69,8 @@ export function ReferrerLeaderboard({
     setIsLoading(true);
     scrollWithOffset("leaderboard-header", 75);
     try {
-      // TODO: Update this call once the new API is working on one of our instances
       const response = await client.getReferrerLeaderboardPage({
+        edition: referralProgramEditionConfig.slug,
         page: currentPage,
         recordsPerPage: currentRecordsPerPage,
       });
@@ -75,6 +79,14 @@ export function ReferrerLeaderboard({
         console.error(response.errorMessage);
         setLeaderboardData(null);
         setFetchErrorMessage("An error occurred while loading the leaderboard.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Display an error for the unrecognized award model
+      if (response.data.awardModel === ReferralProgramAwardModels.Unrecognized) {
+        setLeaderboardData(null);
+        setFetchErrorMessage("Unrecognized referral program edition award model.");
         setIsLoading(false);
         return;
       }
@@ -176,6 +188,7 @@ export function ReferrerLeaderboard({
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardData}
             isLoading={isLoading}
+            expectedAwardModel={referralProgramEditionConfig.rules.awardModel}
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo

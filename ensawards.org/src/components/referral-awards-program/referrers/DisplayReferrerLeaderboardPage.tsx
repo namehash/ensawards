@@ -1,16 +1,26 @@
-import type {
-  ReferrerLeaderboardPage,
-  ReferrerLeaderboardPageParams,
-} from "@namehash/ens-referrals";
+import {
+  type ReferralProgramAwardModel,
+  ReferralProgramAwardModels,
+  type ReferrerLeaderboardPageParams,
+  type ReferrerLeaderboardPagePieSplit,
+  type ReferrerLeaderboardPageRevShareLimit,
+} from "@namehash/ens-referrals/v1";
 import type { ReactElement } from "react";
 
-import { ReferrerCard, ReferrerCardLoading } from "@/components/atoms/cards/ReferrerCard.tsx";
+import { ReferrerCardPieSplitMemo } from "@/components/atoms/cards/referrerCard/pie-split";
+import { ReferrerCardPieSplitLoading } from "@/components/atoms/cards/referrerCard/pie-split/loading";
+import { ReferrerCardRevShareLimitMemo } from "@/components/atoms/cards/referrerCard/rev-share";
+import { ReferrerCardRevShareLimitLoading } from "@/components/atoms/cards/referrerCard/rev-share/loading";
 import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime";
 import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 
 export interface DisplayReferrerLeaderboardPageProps {
-  leaderboardPageData: ReferrerLeaderboardPage | null;
+  leaderboardPageData:
+    | ReferrerLeaderboardPageRevShareLimit
+    | ReferrerLeaderboardPagePieSplit
+    | null;
   isLoading: boolean;
+  expectedAwardModel: ReferralProgramAwardModel;
   leaderboardPageFetchError?: ReactElement;
   paginationParams?: Required<ReferrerLeaderboardPageParams>;
 }
@@ -22,6 +32,7 @@ export function DisplayReferrerLeaderboardPage({
   leaderboardPageData,
   isLoading,
   leaderboardPageFetchError,
+  expectedAwardModel,
   paginationParams = {
     page: 1,
     recordsPerPage: 5,
@@ -36,12 +47,24 @@ export function DisplayReferrerLeaderboardPage({
 
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
-        {[...Array(paginationParams.recordsPerPage).keys()].map((elem) => (
-          <ReferrerCardLoading
-            key={`Referrer-loading-${pageOffset + elem}`}
-            rank={pageOffset + elem + 1}
-          />
-        ))}
+        {[...Array(paginationParams.recordsPerPage).keys()].map((elem) => {
+          if (expectedAwardModel === ReferralProgramAwardModels.PieSplit) {
+            return (
+              <ReferrerCardPieSplitLoading
+                key={`Referrer-loading-${pageOffset + elem}`}
+                rank={pageOffset + elem + 1}
+              />
+            );
+          }
+
+          // Return rev share limit loading for all other cases since it's newer
+          return (
+            <ReferrerCardRevShareLimitLoading
+              key={`Referrer-loading-${pageOffset + elem}`}
+              rank={pageOffset + elem + 1}
+            />
+          );
+        })}
       </div>
     );
   }
@@ -64,14 +87,22 @@ export function DisplayReferrerLeaderboardPage({
 
   return (
     <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-3">
-      {leaderboardPageData.referrers.map((referrer, idx) => (
-        <ReferrerCard
-          key={`Referrer-${referrer.referrer}`}
-          referrer={referrer}
-          aggregatedMetrics={leaderboardPageData.aggregatedMetrics}
-          referralRules={leaderboardPageData.rules}
-        />
-      ))}
+      {leaderboardPageData.awardModel === ReferralProgramAwardModels.PieSplit &&
+        leaderboardPageData.referrers.map((referrer) => (
+          <ReferrerCardPieSplitMemo
+            key={`Referrer-${referrer.referrer}`}
+            referrer={referrer}
+            aggregatedMetrics={leaderboardPageData.aggregatedMetrics}
+          />
+        ))}
+      {leaderboardPageData.awardModel === ReferralProgramAwardModels.RevShareLimit &&
+        leaderboardPageData.referrers.map((referrer) => (
+          <ReferrerCardRevShareLimitMemo
+            key={`Referrer-${referrer.referrer}`}
+            referrer={referrer}
+            editionRules={leaderboardPageData.rules}
+          />
+        ))}
     </div>
   );
 }

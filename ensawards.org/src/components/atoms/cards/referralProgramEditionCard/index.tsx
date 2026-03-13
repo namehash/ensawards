@@ -1,19 +1,17 @@
 import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
-import { calcReferralProgramStatus } from "@namehash/ens-referrals/v1";
-// TODO: Remember to roll back to "v0" / adapt imports
-//  when implementing final version of the logic for the new referral program
+import { calcReferralProgramStatus, ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import { ChevronRightIcon } from "lucide-react";
 import { useMemo } from "react";
 
 import type { PriceUsdc, UnixTimestamp } from "@ensnode/ensnode-sdk";
-import { getCurrencyInfo } from "@ensnode/ensnode-sdk";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramTimeline.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { parseReferralProgramCurrency } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferralProgramEditionCardProps {
@@ -32,17 +30,20 @@ export const ReferralProgramEditionCard = ({
     [now, referralProgramEditionConfig.rules],
   );
 
-  return (
-    <a
-      href={`/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`}
-      target="_self"
-      className={cn(
-        "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
-        "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10",
-        !showMobileVariant &&
-          "sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
-      )}
-    >
+  // The config of an unrecognized edition will never be passed here,
+  // but we perform the check for the type safety
+  if (referralProgramEditionConfig.rules.awardModel === ReferralProgramAwardModels.Unrecognized)
+    return null;
+
+  const cardClassName = cn(
+    "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
+    "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10 cursor-default",
+    !showMobileVariant &&
+      "sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
+  );
+
+  const cardContent = (
+    <>
       <div
         className={cn(
           "w-full flex flex-row justify-between items-start gap-5 pb-1",
@@ -69,7 +70,7 @@ export const ReferralProgramEditionCard = ({
           container: cn(
             "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
             !showMobileVariant &&
-              "sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
+              "sm:min-w-[185px] sm:flex-col sm:justify-center max-sm:self-stretch",
           ),
           label: cn(
             "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left",
@@ -102,7 +103,7 @@ export const ReferralProgramEditionCard = ({
       />
       <span
         className={cn(
-          "min-w-[80px]",
+          "min-w-[90px]",
           !showMobileVariant ? "max-sm:hidden flex sm:flex-row sm:justify-end" : "hidden",
         )}
       >
@@ -131,6 +132,18 @@ export const ReferralProgramEditionCard = ({
       >
         View leaderboard
       </div>
+    </>
+  );
+
+  if (showMobileVariant) return <div className={cardClassName}>{cardContent}</div>;
+
+  return (
+    <a
+      href={`/ens-referral-program/editions/${referralProgramEditionConfig.slug}/leaderboard`}
+      target="_self"
+      className={cardClassName}
+    >
+      {cardContent}
     </a>
   );
 };
@@ -198,27 +211,6 @@ export const ReferralProgramEditionBudget = ({
     style: "currency",
     currency: "USD",
   });
-
-  //TODO: Maybe we already have a function for it? I couldn't find such...
-  // If it turns out we really need this function then it should be moved to /src/utils
-  /**
-   * Converts the parsed currency representation in its smallest unit back to its original value.
-   *
-   * **Note** For large values this parsing may lead to loss of precision
-   *
-   * @param referralProgramTotalAwardShare - a {@link PriceUsdc} object with the amount in the smallest unit (6 decimals)
-   * @returns A number representing the actual amount of the given currency
-   *
-   * @example
-   * Based on the USDC currency
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 123456780n }) // returns 123.4567
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 1000000n }) // returns 1
-   * parseReferralProgramCurrency({ currency: "USDC", amount: 1000n }) // returns 0.001
-   */
-  const parseReferralProgramCurrency = (referralProgramTotalAwardShare: PriceUsdc): number => {
-    const currencyInfo = getCurrencyInfo(referralProgramTotalAwardShare.currency);
-    return Number(referralProgramTotalAwardShare.amount) / Math.pow(10, currencyInfo.decimals);
-  };
 
   return (
     <div

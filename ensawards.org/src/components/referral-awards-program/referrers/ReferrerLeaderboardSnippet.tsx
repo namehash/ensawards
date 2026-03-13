@@ -1,13 +1,13 @@
 import {
-  ENSReferralsClient,
-  type ReferrerLeaderboardPage,
-  ReferrerLeaderboardPageResponseCodes,
-} from "@namehash/ens-referrals";
-import {
   calcReferralProgramStatus,
+  ENSReferralsClient,
+  ReferralProgramAwardModels,
   type ReferralProgramEditionConfig,
   ReferralProgramStatuses,
   type ReferralProgramStatusId,
+  type ReferrerLeaderboardPagePieSplit,
+  ReferrerLeaderboardPageResponseCodes,
+  type ReferrerLeaderboardPageRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import type { VariantProps } from "class-variance-authority";
@@ -16,26 +16,18 @@ import { useEffect, useMemo, useState } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 
-import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge";
-import {
-  ReferralProgramEditionBudget,
-  ReferralProgramEditionRules,
-  ReferralProgramEditionTimePeriod,
-} from "@/components/atoms/cards/referralProgramEditionCard";
 import {
   LastUpdateTime,
   LastUpdateTimeLoading,
 } from "@/components/atoms/datetime/LastUpdateTime.tsx";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import { ReferralProgramEditionInfo } from "@/components/molecules/ReferralProgramEditionInfo.tsx";
 import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
-import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 import { fetchReferralProgramEditions } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-
-import { ReferralProgramEditionFieldLoading } from "../../atoms/cards/referralProgramEditionCard/loading.tsx";
 
 export interface ReferrerLeaderboardSnippetProps {
   snippetSize?: number;
@@ -58,27 +50,40 @@ export function ReferrerLeaderboardSnippet({
     useState<ReferralProgramStatusId>(ReferralProgramStatuses.Active);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [leaderboardSnippetData, setLeaderboardSnippetData] =
-    useState<ReferrerLeaderboardPage | null>(null);
+  const [leaderboardSnippetData, setLeaderboardSnippetData] = useState<
+    ReferrerLeaderboardPageRevShareLimit | ReferrerLeaderboardPagePieSplit | null
+  >(null);
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
-  //TODO: Ideally that part could also be extracted (with useQuery or w/e)
-  // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
-  // and reuse this fetch wherever we need
   async function fetchReferrerLeaderboard() {
+    if (!latestActiveReferralProgramEdition) {
+      // Editions haven't loaded yet — stay in the loading state silently
+      return;
+    }
+
     setFetchErrorMessage("");
     setIsLoading(true);
+
     try {
-      //TODO: Update after V1 api is available (no longer returns 404)
       const response = await client.getReferrerLeaderboardPage({
+        edition: latestActiveReferralProgramEdition.slug,
         page: 1,
         recordsPerPage: snippetSize,
       });
 
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
         console.error(response.errorMessage);
+        setLeaderboardSnippetData(null);
         setFetchErrorMessage("An error occurred while loading the leaderboard.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Display an error for the unrecognized award model
+      if (response.data.awardModel === ReferralProgramAwardModels.Unrecognized) {
+        setLeaderboardSnippetData(null);
+        setFetchErrorMessage("Unrecognized referral program edition award model.");
         setIsLoading(false);
         return;
       }
@@ -95,7 +100,7 @@ export function ReferrerLeaderboardSnippet({
 
   useEffect(() => {
     fetchReferrerLeaderboard();
-  }, [now]);
+  }, [now, latestActiveReferralProgramEdition]);
 
   useEffect(() => {
     fetchReferralProgramEditions().then((editions) => {
@@ -143,6 +148,12 @@ export function ReferrerLeaderboardSnippet({
               <ReferralProgramEditionInfo
                 referralProgramEdition={latestActiveReferralProgramEdition}
                 referralProgramEditionStatus={latestReferralProgramEditionStatus}
+                aggregatedEditionMetrics={
+                  leaderboardSnippetData !== null &&
+                  leaderboardSnippetData.awardModel === ReferralProgramAwardModels.RevShareLimit
+                    ? leaderboardSnippetData.aggregatedMetrics
+                    : null
+                }
                 isLoading={isLoading}
               />
               <div
@@ -167,6 +178,10 @@ export function ReferrerLeaderboardSnippet({
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardSnippetData}
             isLoading={isLoading}
+            expectedAwardModel={
+              latestActiveReferralProgramEdition?.rules.awardModel ??
+              ReferralProgramAwardModels.Unrecognized
+            }
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo
@@ -195,10 +210,10 @@ export function ReferrerLeaderboardSnippet({
           />
           {!isLoading &&
             leaderboardSnippetData !== null &&
+            latestActiveReferralProgramEdition &&
             leaderboardSnippetData.pageContext.totalRecords > snippetSize && (
-              // TODO: Remove the hardcoded fallback slug when we add more editions and the slug is guaranteed to exist
               <a
-                href={`/ens-referral-program/editions/${latestActiveReferralProgramEdition?.slug ?? "2025-12"}/leaderboard`}
+                href={`/ens-referral-program/editions/${latestActiveReferralProgramEdition.slug}/leaderboard`}
                 className={cn(
                   shadcnButtonVariants({
                     variant: fullLeaderboardButtonVariant,
@@ -218,72 +233,3 @@ export function ReferrerLeaderboardSnippet({
     </ENSNodeProvider>
   );
 }
-
-interface ReferralProgramEditionInfoProps {
-  referralProgramEdition: ReferralProgramEditionConfig;
-  referralProgramEditionStatus: ReferralProgramStatusId;
-  isLoading: boolean;
-}
-
-const ReferralProgramEditionInfo = ({
-  referralProgramEdition,
-  referralProgramEditionStatus: referralProgramStatus,
-  isLoading,
-}: ReferralProgramEditionInfoProps) => {
-  return (
-    <>
-      {isLoading ? (
-        <ReferralProgramEditionFieldLoading
-          label="Time period"
-          styles={{
-            skeleton: "w-[185px] h-[14px] mt-[4px] mb-[3px]",
-          }}
-        />
-      ) : (
-        <ReferralProgramEditionTimePeriod
-          startTime={referralProgramEdition.rules.startTime}
-          endTime={referralProgramEdition.rules.endTime}
-        />
-      )}
-      {isLoading ? (
-        <ReferralProgramEditionFieldLoading
-          label="Budget"
-          styles={{
-            skeleton: "w-[91px] h-[14px] mt-[4px] mb-[3px]",
-          }}
-        />
-      ) : (
-        <ReferralProgramEditionBudget
-          totalAwardPoolValue={referralProgramEdition.rules.totalAwardPoolValue}
-        />
-      )}
-      {isLoading ? (
-        <ReferralProgramEditionFieldLoading label="Rules" />
-      ) : (
-        <ReferralProgramEditionRules
-          rulesUrl={
-            new URL(
-              `/ens-referral-program/editions/${referralProgramEdition.slug}/rules`,
-              getEnsAwardsBaseUrl(),
-            )
-          }
-        />
-      )}
-      {isLoading ? (
-        <ReferralProgramEditionFieldLoading
-          label="Status"
-          styles={{
-            skeleton: "h-[22px] w-[60px] rounded-full",
-          }}
-        />
-      ) : (
-        <div className="flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[80px] sm:flex-col sm:justify-center max-sm:self-stretch">
-          <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default">
-            Status
-          </p>
-          <ReferralProgramStatusBadge status={referralProgramStatus} />
-        </div>
-      )}
-    </>
-  );
-};
