@@ -6,7 +6,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 // and should be moved to ens-referrals package as soon as we're not under such a time pressure
 export const ExhaustedReferralProgramStatus = {
   Exhausted: "Exhausted",
-};
+} as const;
 
 export type ExhaustedReferralProgramStatusId =
   (typeof ExhaustedReferralProgramStatus)[keyof typeof ExhaustedReferralProgramStatus];
@@ -25,6 +25,7 @@ const getReferralProgramStatusStyle = (
     case ReferralProgramStatuses.Active:
       return "bg-emerald-600 text-white";
     case ReferralProgramStatuses.Closed:
+    case ExhaustedReferralProgramStatus.Exhausted:
     default:
       return "bg-neutral-500 text-white";
   }

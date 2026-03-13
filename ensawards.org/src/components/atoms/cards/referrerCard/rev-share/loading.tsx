@@ -28,9 +28,7 @@ export const ReferrerCardRevShareLimitLoading = ({
       </div>
       <div className="sm:min-w-[125px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal">Revenue share</p>
-        <div
-          className={cn(loadingStateStyles, "w-[60px] sm:w-[60px] h-[14px] mt-[4px] mb-[3px]")}
-        />
+        <div className={cn(loadingStateStyles, "w-[60px] h-[14px] mt-[4px] mb-[3px]")} />
       </div>
       <div className="sm:min-w-[180px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal text-left">

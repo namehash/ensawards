@@ -71,7 +71,7 @@ export const ReferralProgramEditionInfo = ({
           totalAwardPoolValue={referralProgramEdition.rules.totalAwardPoolValue}
         />
       )}
-      {aggregatedEditionMetrics !== null &&
+      {referralProgramEdition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit &&
         (isLoading ? (
           <ReferralProgramEditionFieldLoading
             label="Budget remaining"
@@ -81,7 +81,7 @@ export const ReferralProgramEditionInfo = ({
               skeleton: "w-[100px] h-[14px] mt-[4px] mb-[3px]",
             }}
           />
-        ) : (
+        ) : aggregatedEditionMetrics !== null ? (
           <div className="flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[110px] sm:flex-col sm:justify-center max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default">
               Budget remaining
@@ -93,7 +93,7 @@ export const ReferralProgramEditionInfo = ({
               USD
             </p>
           </div>
-        ))}
+        ) : null)}
       {isLoading ? (
         <ReferralProgramEditionFieldLoading label="Rules" />
       ) : (

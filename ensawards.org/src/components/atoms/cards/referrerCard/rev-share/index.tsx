@@ -95,7 +95,7 @@ export const BaseRevenueContributionField = ({
           <p className="max-w-[200px]">
             Measured as US $5.00 × {referralYears} referral years (total duration of all referred
             registrations and renewals). Excludes ENS DAO revenue from short-name premiums and
-            recently-released temporary premiums.).
+            recently-released temporary premiums).
           </p>
         }
       >
