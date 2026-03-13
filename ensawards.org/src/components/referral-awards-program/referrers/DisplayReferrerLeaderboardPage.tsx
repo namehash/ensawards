@@ -10,7 +10,6 @@ import type { ReactElement } from "react";
 import { ReferrerCardPieSplitMemo } from "@/components/atoms/cards/referrerCard/pie-split";
 import { ReferrerCardPieSplitLoading } from "@/components/atoms/cards/referrerCard/pie-split/loading";
 import { ReferrerCardRevShareLimitMemo } from "@/components/atoms/cards/referrerCard/rev-share";
-import { ReferrerCardRevShareLimitDisqualifiedMemo } from "@/components/atoms/cards/referrerCard/rev-share/disqualified";
 import { ReferrerCardRevShareLimitLoading } from "@/components/atoms/cards/referrerCard/rev-share/loading";
 import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime";
 import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
@@ -97,24 +96,13 @@ export function DisplayReferrerLeaderboardPage({
           />
         ))}
       {leaderboardPageData.awardModel === ReferralProgramAwardModels.RevShareLimit &&
-        leaderboardPageData.referrers.map((referrer) => {
-          if (referrer.isAdminDisqualified) {
-            return (
-              <ReferrerCardRevShareLimitDisqualifiedMemo
-                key={`Referrer-${referrer.referrer}`}
-                referrer={referrer}
-              />
-            );
-          }
-
-          return (
-            <ReferrerCardRevShareLimitMemo
-              key={`Referrer-${referrer.referrer}`}
-              referrer={referrer}
-              editionRules={leaderboardPageData.rules}
-            />
-          );
-        })}
+        leaderboardPageData.referrers.map((referrer) => (
+          <ReferrerCardRevShareLimitMemo
+            key={`Referrer-${referrer.referrer}`}
+            referrer={referrer}
+            editionRules={leaderboardPageData.rules}
+          />
+        ))}
     </div>
   );
 }

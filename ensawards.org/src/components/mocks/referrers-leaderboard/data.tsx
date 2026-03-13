@@ -275,7 +275,7 @@ export const mockReferrersLeaderboardData = new Map<
             rules: {
               awardModel: ReferralProgramAwardModels.RevShareLimit,
               totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
-              minQualifiedRevenueContribution: { currency: CurrencyIds.USDC, amount: 5000000000n },
+              minQualifiedRevenueContribution: { currency: CurrencyIds.USDC, amount: 500000000n },
               qualifiedRevenueShare: 0.5,
               startTime: 1764547200,
               endTime: 1767225599,

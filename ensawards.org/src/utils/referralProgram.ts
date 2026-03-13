@@ -9,7 +9,7 @@ import {
   ReferralProgramEditionConfigSetResponseCodes,
 } from "@namehash/ens-referrals/v1";
 
-import { getCurrencyInfo, type PriceUsdc } from "@ensnode/ensnode-sdk";
+import { getCurrencyInfo, type Price } from "@ensnode/ensnode-sdk";
 
 import { isValidSlug } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
@@ -89,7 +89,7 @@ export async function fetchReferralProgramEditions(): Promise<ReferralProgramEdi
  *
  * **Note** For large values this parsing may lead to loss of precision
  *
- * @param valueInUSDC - a {@link PriceUsdc} object with the amount in the smallest unit (6 decimals)
+ * @param value - a {@link Price} object with the amount in the smallest unit
  * @returns A number representing the actual amount of the given currency
  *
  * @example
@@ -98,7 +98,7 @@ export async function fetchReferralProgramEditions(): Promise<ReferralProgramEdi
  * parseReferralProgramCurrency({ currency: "USDC", amount: 1000000n }) // returns 1
  * parseReferralProgramCurrency({ currency: "USDC", amount: 1000n }) // returns 0.001
  */
-export const parseReferralProgramCurrency = (valueInUSDC: PriceUsdc): number => {
-  const currencyInfo = getCurrencyInfo(valueInUSDC.currency);
-  return Number(valueInUSDC.amount) / Math.pow(10, currencyInfo.decimals);
+export const parseReferralProgramCurrency = (value: Price): number => {
+  const currencyInfo = getCurrencyInfo(value.currency);
+  return Number(value.amount) / Math.pow(10, currencyInfo.decimals);
 };
