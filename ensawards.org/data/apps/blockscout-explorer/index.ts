@@ -17,6 +17,7 @@ const BlockscoutExplorer: App = {
   socials: {
     website: new URL("https://www.blockscout.com/"),
     twitter: new URL("https://x.com/blockscout"),
+    ens: "blockscout.eth",
   },
   icon: BlockscoutIcon,
   benchmarks: BlockscoutExplorerBenchmarks,
