@@ -214,7 +214,7 @@ describe("App utils", () => {
       mockGetBenchmarkWeight.mockReturnValue(2);
 
       expect(() => calculateAppEnsAwardsScore(mockAppWithSinglePassingBenchmark)).toThrow(
-        "Invariant violation: EnsAwardsScore must be between 0 and 100, but was 200 instead",
+        "Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was 200 instead",
       );
     });
 
@@ -222,7 +222,7 @@ describe("App utils", () => {
       mockGetBenchmarkWeight.mockReturnValue(-1);
 
       expect(() => calculateAppEnsAwardsScore(mockAppWithSinglePassingBenchmark)).toThrow(
-        "Invariant violation: EnsAwardsScore must be between 0 and 100, but was -100 instead",
+        "Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was -100 instead",
       );
     });
   });

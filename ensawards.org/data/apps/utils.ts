@@ -57,9 +57,9 @@ export const calculateAppEnsAwardsScore = (app: App): EnsAwardsScore => {
   const score = Math.round((accumulatedBenchmarks * 100) / app.benchmarks.length);
 
   // Check EnsAwardsScore range invariant
-  if (!Number.isFinite(score) || score < 0 || score > 100) {
+  if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
     throw new Error(
-      `Invariant violation: EnsAwardsScore must be between 0 and 100, but was ${score} instead`,
+      `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
     );
   }
 

@@ -107,9 +107,9 @@ export function contractPipeline(
 
   sortedEntries.forEach(([key, value]) => {
     // Check for EnsAwardsScore invariants
-    if (!Number.isFinite(value) || value < 0 || value > 100) {
+    if (!Number.isFinite(value) || !Number.isInteger(value) || value < 0 || value > 100) {
       throw new Error(
-        `Invariant violation: EnsAwardsScore must be between 0 and 100, but was ${value} instead`,
+        `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${value} instead`,
       );
     }
 

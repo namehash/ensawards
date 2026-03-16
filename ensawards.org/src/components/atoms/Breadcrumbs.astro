@@ -2,7 +2,7 @@
 import { cn } from "../../utils/tailwindClassConcatenation";
 import ChevronRightIcon from "./icons/ChevronRightIcon.astro";
 import HomeIcon from "./icons/HomeIcon.astro";
-import { getAppByName } from "/data/apps/utils";
+import { getAppByName } from "data/apps/utils";
 
 interface BreadcrumbsProps {
   breadcrumbs: string[];
@@ -62,14 +62,20 @@ const handleAppBreadcrumb = (crumb: string): string | undefined => {
   {
     breadcrumbs.map((crumb, idx) => {
       const urlAdaptedCrumb = adaptBreadcrumb(crumb);
+      const isLastCrumb = idx === breadcrumbs.length - 1;
 
       // We assume that an app will always be the last breadcrumb (at least for now).
       // That's necessary because our only use case of App in breadcrumbs (`ensawards.org\src\pages\app\[app]\[category]\[bestPractice]\index.astro`)
       // breaks the natural breadcrumbs flow, since the route to app details page is independent from leaderboards' routes
-      breadcrumbHref =
-        handleAppBreadcrumb(crumb) ??
-        breadcrumbHref.concat("/", urlAdaptedCrumb);
-      if (idx < breadcrumbs.length - 1) {
+      if (isLastCrumb) {
+        breadcrumbHref =
+          handleAppBreadcrumb(crumb) ??
+          breadcrumbHref.concat("/", urlAdaptedCrumb);
+      } else {
+        breadcrumbHref = breadcrumbHref.concat("/", urlAdaptedCrumb);
+      }
+
+      if (!isLastCrumb) {
         return (
           <>
             <a
@@ -84,6 +90,7 @@ const handleAppBreadcrumb = (crumb: string): string | undefined => {
           </>
         );
       }
+
       return (
         <a
           class={cn(
