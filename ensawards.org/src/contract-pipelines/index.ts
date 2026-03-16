@@ -109,7 +109,7 @@ export function contractPipeline(
     // Check for EnsAwardsScore invariants
     if (value < 0 || value > 100) {
       throw new Error(
-        `Invariant violation: EnsAwardsScore must be between 0 and a 100, but was ${value} instead`,
+        `Invariant violation: EnsAwardsScore must be between 0 and 100, but was ${value} instead`,
       );
     }
 

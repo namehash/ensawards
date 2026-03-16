@@ -1,4 +1,8 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { type AppBenchmark, BenchmarkResult } from "data/apps/benchmarks-types.ts";
+import { getBenchmarkWeight, groupBenchmarksByCategory } from "data/apps/benchmarks-utils.ts";
+import type { App } from "data/apps/types.ts";
+import { calculateAppEnsAwardsScore, getAppById } from "data/apps/utils.ts";
 import {
   ChevronRight,
   X as FailIcon,
@@ -7,13 +11,9 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { type AppBenchmark, BenchmarkResult } from "@/../data/apps/benchmarks-types.ts";
-import { getBenchmarkWeight, groupBenchmarksByCategory } from "@/../data/apps/benchmarks-utils.ts";
-import { calculateAppEnsAwardsScore, getAppById } from "@/../data/apps/utils.ts";
 import { getAppSupportColor } from "@/utils/styles";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-import type { App } from "../../../../data/apps/types.ts";
 import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
 
 const getBenchmarkIcon = (result: BenchmarkResult) => {
@@ -72,14 +72,11 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
         group.length;
 
   return (
-    <div
-      ref={animationParent}
-      className="w-full border-t border-gray-200 py-4"
-      aria-expanded={isOpen}
-    >
+    <div ref={animationParent} className="w-full border-t border-gray-200 py-4">
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
         className="flex w-full items-center gap-3 text-left"
       >
         <CircularCategoryScore score={categoryScore} />

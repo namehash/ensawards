@@ -59,7 +59,7 @@ export const calculateAppEnsAwardsScore = (app: App): EnsAwardsScore => {
   // Check EnsAwardsScore range invariant
   if (score < 0 || score > 100) {
     throw new Error(
-      `Invariant violation: EnsAwardsScore must be between 0 and a 100, but was ${score} instead`,
+      `Invariant violation: EnsAwardsScore must be between 0 and 100, but was ${score} instead`,
     );
   }
 

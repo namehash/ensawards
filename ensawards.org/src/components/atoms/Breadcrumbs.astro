@@ -64,7 +64,7 @@ const handleAppBreadcrumb = (crumb: string): string | undefined => {
       const urlAdaptedCrumb = adaptBreadcrumb(crumb);
 
       // We assume that an app will always be the last breadcrumb (at least for now).
-      // That's necessary because our only use case of App in breadcrumbs (`ensawards.org\src\pages\app\[app]\[category]\[bestPractice]\details.astro`)
+      // That's necessary because our only use case of App in breadcrumbs (`ensawards.org\src\pages\app\[app]\[category]\[bestPractice]\index.astro`)
       // breaks the natural breadcrumbs flow, since the route to app details page is independent from leaderboards' routes
       breadcrumbHref =
         handleAppBreadcrumb(crumb) ??
