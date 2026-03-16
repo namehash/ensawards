@@ -57,11 +57,12 @@ const CircularCategoryScore = ({ score }: { score: number }) => {
 };
 
 interface BenchmarkCategorySectionProps {
+  app: App;
   group: AppBenchmark[]; // all benchmarks in the group belong to the same category
   initiallyOpen: boolean;
 }
 
-function BenchmarkCategorySection({ group, initiallyOpen }: BenchmarkCategorySectionProps) {
+function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCategorySectionProps) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
   const categoryScore =
@@ -95,7 +96,7 @@ function BenchmarkCategorySection({ group, initiallyOpen }: BenchmarkCategorySec
           {group.map((benchmark) => (
             <a
               key={benchmark.bestPractice.id}
-              href={`/ens-best-practices/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
+              href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}/details`}
               className="flex items-start gap-3"
             >
               <span className="shrink-0">{getBenchmarkIcon(benchmark.result)}</span>
@@ -139,6 +140,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
         return (
           <BenchmarkCategorySection
             key={`${resolvedApp.name}-benchmarks-in-${group[0].bestPractice.category.id}-category`}
+            app={app}
             group={group}
             initiallyOpen={index === 0}
           />

@@ -1,24 +1,23 @@
 import { getAppSupportColor } from "@/utils/styles";
 import { cn } from "@/utils/tailwindClassConcatenation";
+import type { EnsAwardsScore } from "@/utils/types";
 
 export interface EnsAwardsBarScoreProps {
-  /** Score for the App across all of its benchmarks
+  score: EnsAwardsScore;
+
+  /**
+   * Whether the score UI is adapted for mobile screen sizes or not.
    *
-   * @invariant Must be between 0 and 100.
+   * If `true`, the score will be displayed in a more compact way on mobile screens,
+   * and the progress bar will be hidden on mobile screens.
+   *
+   * If `false`, the score will be displayed identically on all screen sizes,
+   * and the progress bar will be visible at all times.
    */
-  score: number;
   isDynamic?: boolean;
 }
 
 export const EnsAwardsBarScore = ({ score, isDynamic = true }: EnsAwardsBarScoreProps) => {
-  if (score < 0 || score > 100) {
-    throw new Error(
-      `Invariant violation: score must be between 0 and a 100, but was ${score} instead`,
-    );
-  }
-
-  const normalizedScore = Math.round(score);
-
   return (
     <div
       className={cn(
@@ -41,7 +40,7 @@ export const EnsAwardsBarScore = ({ score, isDynamic = true }: EnsAwardsBarScore
               "absolute h-full self-stretch rounded-[20px] z-10",
               `bg-${getAppSupportColor(score)}`,
             )}
-            style={{ width: `calc(${normalizedScore}%)` }}
+            style={{ width: `calc(${score}%)` }}
           ></div>
         </div>
         <p
@@ -51,7 +50,7 @@ export const EnsAwardsBarScore = ({ score, isDynamic = true }: EnsAwardsBarScore
             `text-${getAppSupportColor(score)}`,
           )}
         >
-          {normalizedScore}%
+          {score}%
         </p>
       </div>
     </div>

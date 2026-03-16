@@ -1,3 +1,5 @@
+import type { EnsAwardsScore } from "@/utils/types.ts";
+
 import type {
   BestPractice,
   BestPracticeApp,
@@ -41,9 +43,9 @@ export const getAppByName = (appName: string): App | undefined => {
 };
 
 /**
- * Calculates ENS Awards score for an app as a percentage of passed benchmark weight.
+ * Calculates {@link EnsAwardsScore} for an app as a percentage of passed benchmark weight.
  */
-export const calculateAppEnsAwardsScore = (app: App) => {
+export const calculateAppEnsAwardsScore = (app: App): EnsAwardsScore => {
   const accumulatedBenchmarks = app.benchmarks.reduce(
     (sum, benchmark) => sum + getBenchmarkWeight(benchmark),
     0,
@@ -51,7 +53,17 @@ export const calculateAppEnsAwardsScore = (app: App) => {
 
   if (app.benchmarks.length === 0) return 0;
 
-  return (accumulatedBenchmarks * 100) / app.benchmarks.length;
+  // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
+  const score = Math.round((accumulatedBenchmarks * 100) / app.benchmarks.length);
+
+  // Check EnsAwardsScore range invariant
+  if (score < 0 || score > 100) {
+    throw new Error(
+      `Invariant violation: EnsAwardsScore must be between 0 and a 100, but was ${score} instead`,
+    );
+  }
+
+  return score;
 };
 
 /**

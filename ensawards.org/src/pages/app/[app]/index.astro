@@ -14,6 +14,7 @@ import { BenchmarkResultToBadgeStyles } from "@/utils/styles";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "@/../data/apps/utils.ts";
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
 import { type Contribution } from "@/../data/contributors/types.ts";
+import { type EnsAwardsScore as EnsAwardsScoreType } from "@/utils/types.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -23,7 +24,7 @@ const { app } = Astro.params;
 
 const appToDisplay = getAppBySlug(app);
 
-let appScore: number;
+let appScore: EnsAwardsScoreType = 0;
 let AppIcon;
 let appBenchmarksDataContributions: Contribution[] = [];
 
@@ -104,8 +105,8 @@ if (appToDisplay !== undefined) {
               name={benchmark.bestPractice.name}
               notes={benchmark.bestPractice.description}
               viewDetails={{
-                text: "View best practice details",
-                link: `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
+                text: "View best practice benchmark details",
+                link: `/app/${appToDisplay.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}/details`,
               }}
               additionalInfo={[
                 {
