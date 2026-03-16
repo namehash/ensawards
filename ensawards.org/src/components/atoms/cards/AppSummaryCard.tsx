@@ -96,7 +96,7 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
           {group.map((benchmark) => (
             <a
               key={benchmark.bestPractice.id}
-              href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}/details`}
+              href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
               className="flex items-start gap-3"
             >
               <span className="shrink-0">{getBenchmarkIcon(benchmark.result)}</span>

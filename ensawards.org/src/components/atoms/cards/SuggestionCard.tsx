@@ -9,7 +9,7 @@ import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensno
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { getEnsAdvocateDetailsRelativePath } from "@/utils";
+import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { openSuggestionOverlay } from "@/utils/domActions";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
@@ -90,7 +90,14 @@ export const SuggestionCard = ({
                     <ResolveAndDisplayIdentity
                       identity={identity}
                       namespaceId={DEFAULT_ENS_NAMESPACE}
-                      withLink={false}
+                      withLink={true}
+                      identityLinkDetails={{
+                        isExternal: false,
+                        link: new URL(
+                          getEnsAdvocateDetailsRelativePath(profile.address),
+                          getEnsAwardsBaseUrl(),
+                        ),
+                      }}
                       withTooltip={false}
                       withAvatar={true}
                       withIdentifier={false}
