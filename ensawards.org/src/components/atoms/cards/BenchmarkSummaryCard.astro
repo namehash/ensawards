@@ -54,10 +54,7 @@ const detailValueStyles = cn(
       <p class={detailLabelStyles}>Benchmark result</p>
       <BenchmarkResultBadge
         benchmark={benchmark}
-        className={cn(
-          BenchmarkResultToBadgeStyles.get(benchmark.result)!,
-          "cursor-default",
-        )}
+        className={cn(BenchmarkResultToBadgeStyles.get(benchmark.result)!)}
       />
     </div>
 

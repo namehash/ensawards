@@ -24,7 +24,7 @@ export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBa
     <span
       className={cn(
         "w-fit flex flex-row flex-nowrap justify-center items-center gap-1.5 pl-2.5 pr-3 " +
-          "py-1 rounded-full text-xs leading-normal font-medium cursor-pointer",
+          "py-1 rounded-full text-xs leading-normal font-medium cursor-default",
         className,
       )}
     >

@@ -72,7 +72,11 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
         group.length;
 
   return (
-    <div ref={animationParent} className="w-full border-t border-gray-200 py-4">
+    <div
+      ref={animationParent}
+      className="w-full border-t border-gray-200 py-4"
+      aria-expanded={isOpen}
+    >
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}

@@ -108,9 +108,10 @@ const appSupport = calculateAppSupport(bestPractice);
                 <BenchmarkResultBadge
                   slot="badge"
                   benchmark={benchmark}
-                  className={
-                    BenchmarkResultToBadgeStyles.get(benchmark.result)!
-                  }
+                  className={cn(
+                    BenchmarkResultToBadgeStyles.get(benchmark.result)!,
+                    "cursor-pointer",
+                  )}
                 />
                 <AppIcon
                   slot="icon"

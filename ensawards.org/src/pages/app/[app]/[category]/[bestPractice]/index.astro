@@ -96,7 +96,7 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 gap-5 sm:gap-10 sm:py-[60px] sm:px-8">
         <div class="w-full max-w-[1216px] box-border h-fit flex flex-col-reverse lg:flex-row lg:flex-nowrap justify-start lg:justify-between items-center sm:items-start gap-6 sm:gap-10 lg:gap-20">
-          <div class="lg:hidden block">
+          <div class="lg:hidden block w-full">
             <AppSummaryCard client:load app={resolvedApp} />
           </div>
           <BestPracticeTechnicalDetails bestPractice={resolvedBestPractice} />
@@ -123,7 +123,7 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
               allContributions={resolvedBestPractice.contributions}
               gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${resolvedBestPractice.category.categorySlug}/${resolvedBestPractice.bestPracticeSlug}.ts`}
             />
-            <div class="hidden lg:block">
+            <div class="hidden lg:block w-full">
               <AppSummaryCard client:load app={resolvedApp} />
             </div>
           </div>

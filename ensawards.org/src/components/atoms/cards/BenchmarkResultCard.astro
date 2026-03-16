@@ -21,6 +21,7 @@ const { name, notes, viewDetails, additionalInfo }: BenchmarkResultCardProps = A
 
 const isStandaloneLinkCard = additionalInfo === undefined;
 const RootTag = isStandaloneLinkCard ? "a" : "div";
+const ViewDetailsTag = isStandaloneLinkCard ? "div" : "button";
 ---
 
 <!--Use an anchor only when the whole card should navigate, otherwise keep the clickable div to allow nested links-->
@@ -95,7 +96,7 @@ const RootTag = isStandaloneLinkCard ? "a" : "div";
       className="max-sm:hidden w-10 h-10 hover:opacity-60 shrink-0"
     />
   </div>
-  <div
+  <ViewDetailsTag
     class={cn(
       shadcnButtonVariants({
         variant: "secondary",
@@ -104,5 +105,5 @@ const RootTag = isStandaloneLinkCard ? "a" : "div";
       }),
     )}>
     {viewDetails.text}
-  </div>
+  </ViewDetailsTag>
 </RootTag>

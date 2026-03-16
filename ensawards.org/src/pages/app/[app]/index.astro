@@ -15,6 +15,7 @@ import { calculateAppEnsAwardsScore, getAppBySlug } from "@/../data/apps/utils.t
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
 import { type Contribution } from "@/../data/contributors/types.ts";
 import { type EnsAwardsScore as EnsAwardsScoreType } from "@/utils/types.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -119,7 +120,10 @@ if (appToDisplay !== undefined) {
               ]}>
               <BenchmarkResultBadge
                 slot="badge"
-                className={BenchmarkResultToBadgeStyles.get(benchmark.result)}
+                className={cn(
+                  BenchmarkResultToBadgeStyles.get(benchmark.result),
+                  "cursor-pointer",
+                )}
                 benchmark={benchmark}
               />
             </BenchmarkResultCard>
