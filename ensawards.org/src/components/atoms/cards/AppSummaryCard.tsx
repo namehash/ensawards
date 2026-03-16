@@ -141,7 +141,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
         return (
           <BenchmarkCategorySection
             key={`${resolvedApp.name}-benchmarks-in-${group[0].bestPractice.category.id}-category`}
-            app={app}
+            app={resolvedApp}
             group={group}
             initiallyOpen={index === 0}
           />
