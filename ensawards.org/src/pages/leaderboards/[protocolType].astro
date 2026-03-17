@@ -1,20 +1,20 @@
 ---
-import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
+import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import type { ImageMetadata } from "astro";
-import { ProtocolTypes } from "../../../data/ens-best-practices/types.ts";
-import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
-import type { ProtocolId } from "../../../data/protocols/types.ts";
-import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import Layout from "../../layouts/Layout.astro";
-import LeaderboardCard from "../../components/atoms/cards/LeaderboardCard.astro";
+import { ProtocolTypes } from "data/ens-best-practices/types.ts";
+import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
+import type { ProtocolId } from "data/protocols/types.ts";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import Layout from "@/layouts/Layout.astro";
+import LeaderboardCard from "@/components/atoms/cards/LeaderboardCard.astro";
 import { Image } from "astro:assets";
-import ItemsList from "../../components/molecules/ItemsList.astro";
+import ItemsList from "@/components/molecules/ItemsList.astro";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import {
   getProtocolById,
   getProtocolTypeBySlug,
   getAllProtocolContracts,
-} from "../../../data/protocols/utils.ts";
+} from "data/protocols/utils.ts";
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
 import type { Contribution } from "data/contributors/types";
 
@@ -46,7 +46,7 @@ if (resolvedProtocolType) {
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedProtocolType);
   protocolScores = getContractNamingScoresByProtocolType(resolvedProtocolType);
   protocolContractDataContributions = Object.keys(protocolScores).flatMap((protocolId) =>
-    getAllProtocolContracts(protocolId as ProtocolId).flatMap((contract) => contract.contributions),
+    getAllProtocolContracts(protocolId).flatMap((contract) => contract.contributions),
   );
 }
 ---

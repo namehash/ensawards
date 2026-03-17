@@ -1,7 +1,6 @@
 import type { AppBenchmark } from "data/apps/benchmarks-types";
 import type { App } from "data/apps/types.ts";
 import { getAppById } from "data/apps/utils.ts";
-import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
 
 import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge.tsx";
 import { BenchmarkResultToBadgeStyles } from "@/utils/styles.ts";
@@ -15,7 +14,10 @@ export interface BenchmarksPerAppTypeCardProps {
 }
 
 export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerAppTypeCardProps) {
+  // A necessary step due to Astro Island's inner serialization logic
   const resolvedApps = appsWithBenchmark.map(({ app }) => getAppById(app.id) ?? app);
+
+  if (resolvedApps.length === 0) return null;
 
   const [firstApp] = resolvedApps;
   const areAllAppsOfSameType = resolvedApps.every((app) => app.type === firstApp.type);

@@ -1,6 +1,6 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { type AppBenchmark, BenchmarkResult } from "data/apps/benchmarks-types.ts";
-import { getBenchmarkWeight, groupBenchmarksByCategory } from "data/apps/benchmarks-utils.ts";
+import { calcCategoryScore, groupBenchmarksByCategory } from "data/apps/benchmarks-utils.ts";
 import type { App } from "data/apps/types.ts";
 import { calculateAppEnsAwardsScore, getAppById } from "data/apps/utils.ts";
 import {
@@ -36,11 +36,7 @@ interface BenchmarkCategorySectionProps {
 function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCategorySectionProps) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
-  const categoryScore =
-    group.length === 0
-      ? 0
-      : (group.reduce((sum, benchmark) => sum + getBenchmarkWeight(benchmark), 0) * 100) /
-        group.length;
+  const categoryScore = calcCategoryScore(group);
 
   return (
     <div ref={animationParent} className="w-full border-t border-gray-200 py-4">

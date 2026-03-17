@@ -84,8 +84,20 @@ export const getProtocolTypeBySlug = (protocolTypeSlug: string): ProtocolType | 
 export const appliesToAllProtocols = (targets: BestPracticeTarget[]): boolean =>
   Object.values(ProtocolTypes).every((protocolType) => targets.includes(protocolType));
 
+export const PROTOCOL_CONTRACTS_BY_PROTOCOL_ID: Map<ProtocolId, Contract[]> = (() => {
+  const contractsMap = new Map<ProtocolId, Contract[]>();
+  for (const contract of CONTRACTS) {
+    const protocolId = contract.protocol.id;
+    const previousContractsList = contractsMap.get(protocolId) ?? [];
+    previousContractsList.push(contract);
+    contractsMap.set(protocolId, previousContractsList);
+  }
+
+  return contractsMap;
+})();
+
 /**
  * Returns all {@link Contract}s associated with a given {@link Protocol}.
  */
 export const getAllProtocolContracts = (protocolId: ProtocolId): Contract[] =>
-  CONTRACTS.filter((contract) => contract.protocol.id === protocolId);
+  PROTOCOL_CONTRACTS_BY_PROTOCOL_ID.get(protocolId) ?? [];

@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 
 import { BenchmarkResult } from "./benchmarks-types.ts";
-import { getBenchmarkWeight, groupBenchmarksByCategory } from "./benchmarks-utils.ts";
+import {
+  calcCategoryScore,
+  getBenchmarkWeight,
+  groupBenchmarksByCategory,
+} from "./benchmarks-utils.ts";
 import { createMockBenchmark, createMockBestPractice } from "./test-utils.ts";
 
 const mockSetPrimaryNameBestPractice = createMockBestPractice({
@@ -102,6 +106,31 @@ describe("benchmarks-utils", () => {
         [mockPassingReverseResolutionBenchmark, mockFailingReverseResolutionBenchmark],
         [mockPartialDisplayProfilesBenchmark],
       ]);
+    });
+  });
+
+  describe("calcCategoryScore", () => {
+    it("Should return 0 for an empty array", () => {
+      expect(calcCategoryScore([])).toEqual(0);
+    });
+
+    it("Should return 0 when benchmarks belong to different categories", () => {
+      const mixedCategoryBenchmarks = [
+        mockPassingReverseResolutionBenchmark,
+        mockPartialDisplayProfilesBenchmark,
+      ];
+
+      expect(calcCategoryScore(mixedCategoryBenchmarks)).toEqual(0);
+    });
+
+    it("Should return the rounded category score for valid benchmarks", () => {
+      const validCategoryBenchmarks = [
+        mockPassingReverseResolutionBenchmark,
+        mockFailingReverseResolutionBenchmark,
+        mockFailingReverseResolutionWeightBenchmark,
+      ];
+
+      expect(calcCategoryScore(validCategoryBenchmarks)).toEqual(33);
     });
   });
 });

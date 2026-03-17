@@ -56,7 +56,7 @@ export const calculateAppEnsAwardsScore = (app: App): EnsAwardsScore => {
   // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
   const score = Math.round((accumulatedBenchmarks * 100) / app.benchmarks.length);
 
-  // Check EnsAwardsScore range invariant
+  // Check EnsAwardsScore invariants
   if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
     throw new Error(
       `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
@@ -94,7 +94,7 @@ export const calculateAppSupport = (bestPractice: BestPracticeApp): number => {
 
   if (benchmarkedApps === 0) return 0;
 
-  return (appSupport * 100) / benchmarkedApps;
+  return Math.round((appSupport * 100) / benchmarkedApps);
 };
 
 /**

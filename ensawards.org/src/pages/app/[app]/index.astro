@@ -16,7 +16,7 @@ import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
 import { type Contribution } from "@/../data/contributors/types.ts";
 import { type EnsAwardsScore as EnsAwardsScoreType } from "@/utils/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { groupBenchmarksByCategory, getBenchmarkWeight } from "data/apps/benchmarks-utils";
+import { groupBenchmarksByCategory, calcCategoryScore } from "data/apps/benchmarks-utils";
 import { type AppBenchmark } from "data/apps/benchmarks-types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 
@@ -103,15 +103,7 @@ if (appToDisplay !== undefined) {
           <div class="w-full md:w-3/5">
             <ItemsList header="Benchmark results">
               {benchmarkGroups.map((group) => {
-                const categoryScore =
-                  group.length === 0
-                    ? 0
-                    : (group.reduce(
-                        (sum, benchmark) => sum + getBenchmarkWeight(benchmark),
-                        0,
-                      ) *
-                        100) /
-                      group.length;
+                const categoryScore = calcCategoryScore(group);
                 return (
                   <div class="w-full flex flex-col justify-start items-start gap-2">
                     <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">

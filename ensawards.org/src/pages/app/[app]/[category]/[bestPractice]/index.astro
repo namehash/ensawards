@@ -1,18 +1,18 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
-import { BEST_PRACTICE_CATEGORIES } from "/data/ens-best-practices";
-import { type BestPracticeApp } from "/data/ens-best-practices/types";
-import { APPS } from "/data/apps";
-import { type App } from "/data/apps/types";
-import { getAppBySlug } from "/data/apps/utils.ts";
+import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
+import { type BestPracticeApp } from "data/ens-best-practices/types";
+import { APPS } from "data/apps";
+import { type App } from "data/apps/types";
+import { getAppBySlug } from "data/apps/utils.ts";
 import {
   getBestPracticesByCategory,
   getBestPracticeBySlug,
-} from "/data/ens-best-practices/utils.ts";
+} from "data/ens-best-practices/utils.ts";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import BenchmarkResultHeroBadge from "@/components/atoms/badges/BenchmarkResultHeroBadge.astro";
-import { type AppBenchmark } from "/data/apps/benchmarks-types";
+import { type AppBenchmark } from "data/apps/benchmarks-types";
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import BenchmarkSummaryCard from "@/components/atoms/cards/BenchmarkSummaryCard.astro";
