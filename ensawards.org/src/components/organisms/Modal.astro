@@ -2,31 +2,23 @@
 import { ContactForm } from "../molecules/contact-form/ContactForm";
 import { ContactFormField, PossibleSuggestions } from "../molecules/contact-form/types";
 
-export interface SuggestionFormProps {
-  whatsSuggested: PossibleSuggestions;
-  formFields: ContactFormField[];
+export interface ModalProps {
+  overlayId: string;
 }
 
-const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;
+const { overlayId }: ModalProps = Astro.props;
 ---
 
-<overlay-content
-  id=`${whatsSuggested.replace(" ","-")}-overlay-content`
-  data-suggestion={whatsSuggested}
+<modal-content
+  id=`${overlayId}-modal-content`
+  data-id={overlayId}
   class="w-fit sm:min-w-[420px] max-w-[460px] h-fit box-border p-6 flex flex-nowrap flex-col justify-start items-start gap-5 shrink-0 rounded-xl bg-white">
-  <ContactForm
-    whatsSuggested={whatsSuggested}
-    submissionEndpoint="https://namehashlabs.org/api/contact-form"
-    formFields={formFields}
-    client:load
-  />
-</overlay-content>
+  <slot name="modalContent" />
+</modal-content>
 
 <script>
-  function closeOverlay(whatsSuggested: string) {
-    document
-      .querySelector(`#${whatsSuggested.replace(" ", "-")}-overlay`)
-      .classList.add("hidden");
+  function closeOverlay(overlayId: string) {
+    document.querySelector(`#${overlayId}`).classList.add("hidden");
     document.body.classList.remove("no-scroll");
 
     const scrollToY = parseInt(
@@ -39,17 +31,13 @@ const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;
     }
   }
 
-  function enableAlternativeClosings(whatsSuggested: string) {
-    const overlay = document.querySelector(
-      `#${whatsSuggested.replace(" ", "-")}-overlay`,
-    );
-    const content = overlay.querySelector(
-      `#${whatsSuggested.replace(" ", "-")}-overlay-content`,
-    );
+  function enableAlternativeClosings(overlayId: string) {
+    const overlay = document.querySelector(`#${overlayId}`);
+    const content = overlay.querySelector(`#${overlayId}-modal-content`);
 
     // Close on click outside
     overlay.addEventListener("click", (e) => {
-      if (!content.contains(e.target)) closeOverlay(whatsSuggested);
+      if (!content.contains(e.target)) closeOverlay(overlayId);
     });
 
     // Close on Escape key
@@ -59,16 +47,16 @@ const { whatsSuggested, formFields }: SuggestionFormProps = Astro.props;
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         e.preventDefault();
-        closeOverlay(whatsSuggested);
+        closeOverlay(overlayId);
       }
     });
   }
 
   class OverlayContent extends HTMLElement {
     connectedCallback() {
-      enableAlternativeClosings(this.dataset.suggestion);
+      enableAlternativeClosings(this.dataset.id);
     }
   }
 
-  customElements.define("overlay-content", OverlayContent);
+  customElements.define("modal-content", OverlayContent);
 </script>

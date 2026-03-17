@@ -8,10 +8,8 @@ import "../styles/global.css";
 import { Footer } from "@namehash/namehash-ui";
 
 import { EnsAwardsContactFormFields } from "../components/molecules/contact-form/types";
-import Overlay from "../components/molecules/Overlay.astro";
 import Header from "../components/organisms/Header.astro";
 import StaticHeader from "../components/organisms/StaticHeader.astro";
-import SuggestionForm from "../components/organisms/SuggestionForm.astro";
 
 interface PageMetadata {
   title?: string;
@@ -105,78 +103,6 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
     {isStatic ? <StaticHeader /> : <Header />}
     <slot />
     <Toaster client:load />
-    <div id="app-overlay" class="hidden">
-      <Overlay>
-        <SuggestionForm
-          whatsSuggested="app"
-          formFields={[
-            {
-              label: EnsAwardsContactFormFields.Name,
-              type: "text",
-              required: true,
-            },
-            {
-              label: EnsAwardsContactFormFields.Url,
-              type: "url",
-              required: true,
-            },
-            {
-              label: EnsAwardsContactFormFields.Description,
-              type: "text",
-              required: false,
-            },
-          ]}
-        />
-      </Overlay>
-    </div>
-    <div id="protocol-overlay" class="hidden">
-      <Overlay>
-        <SuggestionForm
-          whatsSuggested="protocol"
-          formFields={[
-            {
-              label: EnsAwardsContactFormFields.Name,
-              type: "text",
-              required: true,
-            },
-            {
-              label: EnsAwardsContactFormFields.Url,
-              type: "url",
-              required: true,
-            },
-            {
-              label: EnsAwardsContactFormFields.Description,
-              type: "text",
-              required: false,
-            },
-          ]}
-        />
-      </Overlay>
-    </div>
-    <div id="contract-overlay" class="hidden">
-      <Overlay>
-        <SuggestionForm
-          whatsSuggested="contract"
-          formFields={[
-            {
-              label: EnsAwardsContactFormFields.Project,
-              type: "text",
-              required: true,
-            },
-            {
-              label: EnsAwardsContactFormFields.ContractAddress,
-              type: "text",
-              required: true,
-            },
-            {
-              label: EnsAwardsContactFormFields.Description,
-              type: "text",
-              required: false,
-            },
-          ]}
-        />
-      </Overlay>
-    </div>
     <Footer />
   </body>
 </html>

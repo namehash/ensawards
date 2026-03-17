@@ -7,17 +7,16 @@ import { getAddress } from "viem";
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
+import GitHubOutlineIcon from "@/components/assets/githubOutlineIcon.svg";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
-import { openSuggestionOverlay } from "@/utils/domActions";
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { type PossibleSuggestions } from "@/utils/types";
 
-import GitHubOutlineIcon from "../../../assets/githubOutlineIcon.svg";
-import { cn } from "../../../utils/tailwindClassConcatenation";
-import { type PossibleSuggestions } from "../../molecules/contact-form/types";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 
 const orderContributorsByAppearances = (contributors: Contributor[]): Contributor[] => {
@@ -44,8 +43,6 @@ const getSuggestionCardDescription = (whatsSuggested: PossibleSuggestions) => {
       return "benchmarks";
   }
 };
-
-const suggestionsWithoutContactForm: PossibleSuggestions[] = ["best practice", "benchmark result"];
 
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
@@ -141,20 +138,6 @@ export const SuggestionCard = ({
                 Submit a contribution
               </p>
               <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
-                {!suggestionsWithoutContactForm.includes(whatsSuggested) && (
-                  <button
-                    onClick={() => openSuggestionOverlay(whatsSuggested)}
-                    className={cn(
-                      shadcnButtonVariants({
-                        variant: "ghost",
-                        size: "default",
-                        className: "cursor-pointer rounded-full max-sm:self-stretch",
-                      }),
-                    )}
-                  >
-                    Contact us
-                  </button>
-                )}
                 <a
                   href={gitHubTargetHref}
                   target="_blank"
@@ -232,7 +215,8 @@ export const SuggestionCardLoading = ({
         <div className="w-full flex flex-col gap-1">
           <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
           <p className="text-base leading-6 font-normal text-muted-foreground">
-            All benchmarks on ENSAwards are open for public contribution.
+            All {getSuggestionCardDescription(whatsSuggested)} on ENSAwards are open for public
+            contribution.
           </p>
         </div>
       </div>
@@ -259,9 +243,6 @@ export const SuggestionCardLoading = ({
             Submit a contribution
           </p>
           <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
-            <Skeleton
-              className={cn(loadingStyles, "w-[105px] h-[36px] rounded-full max-sm:self-stretch")}
-            />
             <Skeleton
               className={cn(loadingStyles, "w-[154px] h-[36px] rounded-full max-sm:self-stretch")}
             />

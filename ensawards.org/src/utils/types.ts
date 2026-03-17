@@ -11,10 +11,24 @@ export interface QuoteCardData {
   avatarPath: string;
 }
 
-/** Score for the benchmarked entity ({@link App} or {@link Protocol}) in the ENS Awards.
+/**
+ * Contribution targets that can be surfaced by the {@link SuggestionCard}.
  *
- * Can also be used to identify how well a {@link BestPractice} or {@link BestPracticeCategory}
- * is following established best practices
+ * Each literal value identifies a kind of ENS Awards entity that users can be
+ * encouraged to suggest updates for.
+ */
+export type PossibleSuggestions =
+  | "app"
+  | "best practice"
+  | "benchmark result"
+  | "protocol"
+  | "contract";
+
+/**
+ * Score for a benchmarked entity ({@link App} or {@link Protocol}) in the ENS Awards.
+ *
+ * Can also be used to identify how well a {@link BestPractice} or
+ * {@link BestPracticeCategory} follows established best practices
  * (see {@link calculateAppSupport} or {@link calcCategoryScore}).
  *
  * @invariant Must be an integer between 0 and 100.
