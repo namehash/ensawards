@@ -1,5 +1,6 @@
 import { groupByProtocol } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
+import type { EnsAwardsScore } from "@/utils/types.ts";
 
 import { CONTRACTS } from "../../data/protocols/contracts.ts";
 import type { Contract } from "../../data/protocols/contracts-types.ts";
@@ -13,9 +14,9 @@ import type { ProtocolId } from "../../data/protocols/types.ts";
  * @returns An array of [category, score] tuples in the desired sort order
  */
 export type LeaderboardSortFn = (
-  scores: Record<ProtocolId, number>,
+  scores: Record<ProtocolId, EnsAwardsScore>,
   groupedContracts: Record<ProtocolId, Contract[]>,
-) => [ProtocolId, number][];
+) => [ProtocolId, EnsAwardsScore][];
 
 /**
  * Options for configuring the contract pipeline.
@@ -60,7 +61,7 @@ export interface ContractPipelineOptions {
  */
 export function contractPipeline(
   options: ContractPipelineOptions = {},
-): Record<ProtocolId, number> {
+): Record<ProtocolId, EnsAwardsScore> {
   const {
     groupBy = groupByProtocol,
     weights = binaryWeights,
@@ -91,9 +92,9 @@ export function contractPipeline(
   }
 
   // Sort results
-  const sortedScores = {} as Record<ProtocolId, number>;
+  const sortedScores = {} as Record<ProtocolId, EnsAwardsScore>;
 
-  let sortedEntries: [ProtocolId, number][];
+  let sortedEntries: [ProtocolId, EnsAwardsScore][];
   if (sort) {
     // Use custom sort function if provided
     sortedEntries = sort(scores, groupedContracts);
@@ -105,6 +106,13 @@ export function contractPipeline(
   }
 
   sortedEntries.forEach(([key, value]) => {
+    // Check for EnsAwardsScore invariants
+    if (!Number.isFinite(value) || !Number.isInteger(value) || value < 0 || value > 100) {
+      throw new Error(
+        `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${value} instead`,
+      );
+    }
+
     sortedScores[key] = value;
   });
 

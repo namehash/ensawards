@@ -10,3 +10,13 @@ export interface QuoteCardData {
   author: QuoteAuthorData;
   avatarPath: string;
 }
+
+/** Score for the benchmarked entity ({@link App} or {@link Protocol}) in the ENS Awards.
+ *
+ * Can also be used to identify how well a {@link BestPractice} or {@link BestPracticeCategory}
+ * is following established best practices
+ * (see {@link calculateAppSupport} or {@link calcCategoryScore}).
+ *
+ * @invariant Must be an integer between 0 and 100.
+ */
+export type EnsAwardsScore = number;

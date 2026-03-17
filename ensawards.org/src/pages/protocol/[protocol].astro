@@ -1,9 +1,8 @@
 ---
-import { PROTOCOLS } from "../../../data/protocols";
-import { type Contract } from "../../../data/protocols/contracts-types";
-import { CONTRACTS } from "../../../data/protocols/contracts";
-import DataLoadingError from "../../components/organisms/DataLoadingError.astro";
-import SubpageHero from "../../components/molecules/SubpageHero.astro";
+import { PROTOCOLS } from "data/protocols";
+import { type Contract } from "data/protocols/contracts-types";
+import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import {
   ChainIcon,
   EnsIcon,
@@ -11,21 +10,21 @@ import {
   SUPPORTED_CHAINS,
   TwitterIcon,
 } from "@namehash/namehash-ui";
-import ContractCard from "../../components/atoms/cards/ContractCard.astro";
-import Layout from "../../layouts/Layout.astro";
-import ItemsList from "../../components/molecules/ItemsList.astro";
-import GlobeIcon from "../../components/atoms/icons/GlobeIcon.astro";
-import ContractNamingBanner from "../../components/atoms/ContractNamingBanner.astro";
-import EnscribeIcon from "../../components/atoms/icons/EnscribeIconLight.astro";
-import EnsAwardsScore from "../../components/atoms/EnsAwardsScore.astro";
-import { sortByResolutionStatus } from "../../contract-pipelines/sorting";
-import { cn } from "../../utils/tailwindClassConcatenation";
-import { getENSNameFieldStyles } from "../../utils/styles";
-import { type Protocol } from "../../../data/protocols/types";
+import ContractCard from "@/components/atoms/cards/ContractCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import ItemsList from "@/components/molecules/ItemsList.astro";
+import GlobeIcon from "@/components/atoms/icons/GlobeIcon.astro";
+import ContractNamingBanner from "@/components/atoms/ContractNamingBanner.astro";
+import EnscribeIcon from "@/components/atoms/icons/EnscribeIconLight.astro";
+import EnsAwardsScore from "@/components/atoms/ens-awards-score/circular.astro";
+import { sortByResolutionStatus } from "@/contract-pipelines/sorting";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { getENSNameFieldStyles } from "@/utils/styles";
+import { type Protocol } from "data/protocols/types";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolBySlug } from "../../../data/protocols/utils.ts";
-import { SuggestionCard } from "../../components/atoms/cards/SuggestionCard.tsx";
-import { type Contribution } from "../../../data/contributors/types.ts";
+import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils.ts";
+import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
+import { type Contribution } from "data/contributors/types.ts";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -51,7 +50,7 @@ let ProtocolIcon = GlobeIcon;
 let protocolContractsDataContributions: Contribution[] = [];
 
 if (resolvedProtocol) {
-  protocolContracts = CONTRACTS.filter((contract) => contract.protocol.id === resolvedProtocol.id);
+  protocolContracts = getAllProtocolContracts(resolvedProtocol.id);
   ProtocolIcon = resolvedProtocol.icon;
   protocolScore =
     getContractNamingScoresByProtocolType(resolvedProtocol.protocolType)[resolvedProtocol.id] ?? 0;
