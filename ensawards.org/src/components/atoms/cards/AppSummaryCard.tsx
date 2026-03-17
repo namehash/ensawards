@@ -100,7 +100,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
           </div>
           <h3 className="text-lg leading-normal font-semibold text-black">{resolvedApp.name}</h3>
         </div>
-        <EnsAwardsBarScore score={appScore} isDynamic={false} />
+        <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
       </div>
       {benchmarkGroups.map((group, index) => {
         if (group.length === 0) return null;

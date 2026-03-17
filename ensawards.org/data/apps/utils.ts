@@ -74,7 +74,7 @@ export const calculateAppEnsAwardsScore = (app: App): EnsAwardsScore => {
  * {@link BenchmarkResult.PartialPass} = 0.5
  * {@link BenchmarkResult.Fail} = 0.0
  */
-export const calculateAppSupport = (bestPractice: BestPracticeApp): number => {
+export const calculateAppSupport = (bestPractice: BestPracticeApp): EnsAwardsScore => {
   let benchmarkedApps = 0;
   let appSupport = 0;
 
@@ -94,7 +94,16 @@ export const calculateAppSupport = (bestPractice: BestPracticeApp): number => {
 
   if (benchmarkedApps === 0) return 0;
 
-  return Math.round((appSupport * 100) / benchmarkedApps);
+  const score = Math.round((appSupport * 100) / benchmarkedApps);
+
+  // Check EnsAwardsScore invariants
+  if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
+    throw new Error(
+      `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
+    );
+  }
+
+  return score;
 };
 
 /**

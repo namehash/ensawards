@@ -6,7 +6,7 @@ export interface BestPracticeTechnicalDetailsProps {
   bestPractice: BestPractice;
 }
 
-const { bestPractice } = Astro.props;
+const { bestPractice }: BestPracticeTechnicalDetailsProps = Astro.props;
 
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";

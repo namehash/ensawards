@@ -15,12 +15,17 @@ export interface BenchmarksPerAppTypeCardProps {
 
 export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerAppTypeCardProps) {
   // A necessary step due to Astro Island's inner serialization logic
-  const resolvedApps = appsWithBenchmark.map(({ app }) => getAppById(app.id) ?? app);
+  const resolvedAppsWithBenchmark = appsWithBenchmark.map(({ app, benchmark }) => ({
+    app: getAppById(app.id) ?? app,
+    benchmark,
+  }));
 
-  if (resolvedApps.length === 0) return null;
+  if (resolvedAppsWithBenchmark.length === 0) return null;
 
-  const [firstApp] = resolvedApps;
-  const areAllAppsOfSameType = resolvedApps.every((app) => app.type === firstApp.type);
+  const [{ app: firstApp }] = resolvedAppsWithBenchmark;
+  const areAllAppsOfSameType = resolvedAppsWithBenchmark.every(
+    ({ app }) => app.type === firstApp.type,
+  );
 
   if (!areAllAppsOfSameType) return null;
 
@@ -30,7 +35,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
         {firstApp.type} benchmarks
       </h3>
       <div className="flex w-full flex-col">
-        {appsWithBenchmark.map(({ app, benchmark }, index) => {
+        {resolvedAppsWithBenchmark.map(({ app, benchmark }, index) => {
           const AppIcon = app.icon;
 
           return (

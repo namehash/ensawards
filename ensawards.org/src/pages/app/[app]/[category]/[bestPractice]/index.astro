@@ -22,7 +22,7 @@ import { AppSummaryCard } from "@/components/atoms/cards/AppSummaryCard.tsx";
 export function getStaticPaths() {
   const staticPaths = [];
 
-  for (let category of BEST_PRACTICE_CATEGORIES) {
+  for (const category of BEST_PRACTICE_CATEGORIES) {
     getBestPracticesByCategory(category).forEach((bestPractice: BestPracticeApp) => {
       const applicableApps = APPS.filter(
         (app: App) =>

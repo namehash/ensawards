@@ -84,7 +84,7 @@ export const getProtocolTypeBySlug = (protocolTypeSlug: string): ProtocolType | 
 export const appliesToAllProtocols = (targets: BestPracticeTarget[]): boolean =>
   Object.values(ProtocolTypes).every((protocolType) => targets.includes(protocolType));
 
-export const PROTOCOL_CONTRACTS_BY_PROTOCOL_ID: Map<ProtocolId, Contract[]> = (() => {
+const PROTOCOL_CONTRACTS_BY_PROTOCOL_ID: Map<ProtocolId, Contract[]> = (() => {
   const contractsMap = new Map<ProtocolId, Contract[]>();
   for (const contract of CONTRACTS) {
     const protocolId = contract.protocol.id;

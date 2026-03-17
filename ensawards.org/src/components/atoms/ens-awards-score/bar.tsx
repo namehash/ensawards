@@ -14,31 +14,31 @@ export interface EnsAwardsBarScoreProps {
    * If `false`, the score will be displayed identically on all screen sizes,
    * and the progress bar will be visible at all times.
    */
-  isDynamic?: boolean;
+  mobileAdaptive?: boolean;
 }
 
-export const EnsAwardsBarScore = ({ score, isDynamic = true }: EnsAwardsBarScoreProps) => {
+export const EnsAwardsBarScore = ({ score, mobileAdaptive = true }: EnsAwardsBarScoreProps) => {
   return (
     <div
       className={cn(
         "min-md:min-w-[130px] flex items-start gap-0",
-        isDynamic
+        mobileAdaptive
           ? "flex-row sm:flex-col flex-nowrap justify-between sm:justify-center max-sm:self-stretch"
           : "flex-col justify-center",
       )}
     >
       <p className="text-muted-foreground text-sm leading-normal font-normal">ENSAwards score</p>
-      <ScoreBar score={score} isDynamic={isDynamic} />
+      <ScoreBar score={score} mobileAdaptive={mobileAdaptive} />
     </div>
   );
 };
 
-export const ScoreBar = ({ score, isDynamic }: EnsAwardsBarScoreProps) => (
+export const ScoreBar = ({ score, mobileAdaptive }: EnsAwardsBarScoreProps) => (
   <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
     <div
       className={cn(
         "flex relative w-20 h-[7px] rounded-[20px] bg-gray-200 z-0",
-        isDynamic && "max-sm:hidden ",
+        mobileAdaptive && "max-sm:hidden ",
       )}
     >
       <div
@@ -52,7 +52,7 @@ export const ScoreBar = ({ score, isDynamic }: EnsAwardsBarScoreProps) => (
     <p
       className={cn(
         "text-sm leading-normal",
-        isDynamic ? "font-medium sm:font-semibold" : "font-semibold",
+        mobileAdaptive ? "font-medium sm:font-semibold" : "font-semibold",
         `text-${getAppSupportColor(score)}`,
       )}
     >
