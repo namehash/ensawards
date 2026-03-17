@@ -41,9 +41,6 @@ export const createMockBestPractice = (overrides: {
     name: overrides.categoryName,
     description: `${overrides.categoryName} description`,
     status: CategoryStatus.Active,
-    contributions: [
-      { from: { address: "0x123" as `0x${string}`, chainId: mainnet.id }, updatedAt: 0 },
-    ],
   },
   appliesTo: [AppTypes.Wallet],
   technicalDetails: {

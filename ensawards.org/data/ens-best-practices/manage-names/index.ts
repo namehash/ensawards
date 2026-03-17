@@ -16,9 +16,6 @@ const ManageNamesCategory: BestPracticeCategory = {
   description:
     "Updating profiles, transferring ownership, configuring resolvers, and more. There's a lot to managing ENS names!",
   status: CategoryStatus.ComingSoon,
-  contributions: [
-    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
-  ],
 };
 
 defineBestPracticeCategory(ManageNamesCategory);

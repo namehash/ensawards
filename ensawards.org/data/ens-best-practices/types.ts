@@ -61,5 +61,4 @@ export interface BestPracticeCategory {
   name: string;
   description: string;
   status: CategoryStatus;
-  contributions: [Contribution, ...Contribution[]];
 }

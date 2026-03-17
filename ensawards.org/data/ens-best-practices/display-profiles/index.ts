@@ -16,9 +16,6 @@ const DisplayProfilesCategory: BestPracticeCategory = {
   description:
     "Avatar images, social records, address records, and more. Ensure each ENS profile is displayed optimally.",
   status: CategoryStatus.ComingSoon,
-  contributions: [
-    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
-  ],
 };
 
 defineBestPracticeCategory(DisplayProfilesCategory);

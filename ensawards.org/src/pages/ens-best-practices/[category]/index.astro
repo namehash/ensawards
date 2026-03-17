@@ -29,10 +29,9 @@ let categoryDataContributions: Contribution[] = [];
 
 if (categoryToDisplay !== undefined) {
   categoryBestPractices = getBestPracticesByCategory(categoryToDisplay);
-  categoryDataContributions = [
-    ...categoryToDisplay.contributions,
-    ...categoryBestPractices.map((bestPractice) => bestPractice.contributions).flat(),
-  ];
+  categoryDataContributions = categoryBestPractices.flatMap(
+    (bestPractice) => bestPractice.contributions,
+  );
 }
 ---
 

@@ -15,9 +15,6 @@ const ReverseResolutionCategory: BestPracticeCategory = {
   name: "Reverse Resolution",
   description: "Reverse records, primary names, default primary names, L2 primary names, and more.",
   status: CategoryStatus.ComingSoon,
-  contributions: [
-    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
-  ],
 };
 
 defineBestPracticeCategory(ReverseResolutionCategory);

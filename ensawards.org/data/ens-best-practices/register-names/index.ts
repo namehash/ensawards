@@ -16,9 +16,6 @@ const RegisterNamesCategory: BestPracticeCategory = {
   description:
     "Provide smooth onboarding when supporting users to find and register their own names.",
   status: CategoryStatus.ComingSoon,
-  contributions: [
-    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-08-31T00:57:00.000Z") },
-  ],
 };
 
 defineBestPracticeCategory(RegisterNamesCategory);
