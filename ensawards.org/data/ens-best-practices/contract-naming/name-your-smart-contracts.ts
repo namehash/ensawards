@@ -30,7 +30,7 @@ const nameYourSmartContracts: BestPracticeProtocol = {
   appliesTo: [ProtocolTypes.DAO, ProtocolTypes.DeFi],
   technicalDetails: {
     main: {
-      header: "Technical Details",
+      header: "ENS best practice details",
       content: technicalDetailsMainContent,
     },
     sides: [

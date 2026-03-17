@@ -11,15 +11,14 @@ import SubpageHero from "../molecules/SubpageHero.astro";
 import { calculateAppsPassed, calculateAppSupport } from "../../../data/apps/utils.ts";
 import { SuggestionCard } from "../atoms/cards/SuggestionCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
+import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
+import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
 
 export interface AppBestPracticeDetailsProps {
   bestPractice: BestPracticeApp;
 }
 
 const { bestPractice }: AppBestPracticeDetailsProps = Astro.props;
-
-const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
-const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
 
 // Get apps that have benchmarks for this specific best practice
 const appsWithBenchmarks = APPS.map((app) => {
@@ -74,109 +73,20 @@ const appSupport = calculateAppSupport(bestPractice);
       name: "Apps passed",
       value: appsPassed,
     },
-    {
-      name: "App support",
-      value: `${appSupport}%`,
-    },
   ]}>
-  <technical-info-anchor
-    data-id={bestPractice.id}
-    href={`#${bestPractice.id}-technical-info`}
-    id={`${bestPractice.id}-technical-info-anchor`}
-    slot="technicalSectionAnchor"
-    class="text-white transition-all duration-200 decoration-white/40 hover:decoration-white underline underline-offset-[25%] decoration-from-font hover:cursor-pointer"
-    >Learn More
-  </technical-info-anchor>
+  <div
+    slot="extraAdditionalElementLast"
+    class="flex flex-row md:flex-col flex-nowrap justify-between md:justify-center items-center md:items-end md:gap-0 leading-7 max-md:self-stretch">
+    <p class="text-gray-400 whitespace-nowrap">App support</p>
+    <ScoreBar score={appSupport} isDynamic={false} />
+  </div>
 </SubpageHero>
 <section
-  class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 sm:pt-[60px] sm:px-8 gap-5 sm:gap-[60px]">
-  {
-    bestPractice.appliesTo.map((appliesTo) => (
-      <ItemsList header={`${appliesTo} benchmarks`} containerStyles="sm:gap-2">
-        {sortedAppsByBenchmark
-          .filter(({ app }) => app.type === appliesTo)
-          .map(({ app, benchmark }) => {
-            const AppIcon = app.icon;
-            return (
-              <BenchmarkResultCard
-                name={app.name}
-                notes={app.description}
-                viewDetails={{
-                  text: "App benchmark details",
-                  link: `/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`,
-                }}>
-                <BenchmarkResultBadge
-                  slot="badge"
-                  benchmark={benchmark}
-                  className={cn(
-                    BenchmarkResultToBadgeStyles.get(benchmark.result)!,
-                    "cursor-pointer",
-                  )}
-                />
-                <AppIcon
-                  slot="icon"
-                  className="shrink-0 rounded-md w-10 h-10"
-                />
-              </BenchmarkResultCard>
-            );
-          })}
-      </ItemsList>
-    ))
-  }
-</section>
-<section
-  id={`${bestPractice.id}-technical-info`}
-  class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center pt-10 sm:pt-6 pb-6 sm:pb-[60px] px-5 sm:px-8">
+  class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center py-6 sm:py-[60px] px-5 sm:px-8">
   <div
-    class="w-full max-w-[1216px] flex flex-nowrap flex-col sm:flex-row gap-6 sm:gap-20 justify-start sm:justify-center items-start">
+    class="w-full max-w-[1216px] flex flex-nowrap flex-col md:flex-row gap-6 md:gap-20 justify-start md:justify-center items-start">
     <BestPracticeTechnicalDetails bestPractice={bestPractice} />
-    <div class="w-full sm:w-1/2 h-fit box-border flex flex-col gap-5">
-      <div
-        class="w-full min-w-[300px] max-w-[420px] box-border h-fit hidden md:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">
-        <h4 class={technicalSectionMinorHeaderStyles}>
-          {bestPractice.name}
-        </h4>
-        <p class={technicalSectionContentStyles}>
-          {bestPractice.description}
-        </p>
-        <div class="bg-gray-200 h-[1px] self-stretch"></div>
-        <div
-          class="w-full flex flex-row flex-wrap justify-between items-center gap-6">
-          <div
-            class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-            <p class="text-sm leading-normal font-normal text-muted-foreground">
-              Category
-            </p>
-            <a
-              href={`/ens-best-practices/${bestPractice.category.categorySlug}`}
-              class="text-sm leading-normal font-semibold text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200">
-              {bestPractice.category.name}
-            </a>
-          </div>
-          <div
-            class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-            <p class="text-sm leading-normal font-normal text-muted-foreground">
-              Apps passed
-            </p>
-            <p class="text-sm leading-normal font-semibold text-black">
-              {appsPassed}
-            </p>
-          </div>
-          <div
-            class="w-fit flex flex-col flex-nowrap justify-center items-start gap-0">
-            <p class="text-sm leading-normal font-normal text-muted-foreground">
-              App support
-            </p>
-            <p
-              class={cn(
-                "text-sm leading-normal font-semibold",
-                `text-${getAppSupportColor(appSupport)}`,
-              )}>
-              {appSupport}%
-            </p>
-          </div>
-        </div>
-      </div>
+    <div class="w-full md:w-1/2 h-fit box-border flex flex-col gap-5">
       <SuggestionCard
         client:load
         sidebarVariant
@@ -184,6 +94,15 @@ const appSupport = calculateAppSupport(bestPractice);
         allContributions={bestPractice.contributions}
         gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}
       />
+      {
+        bestPractice.appliesTo.map((appliesTo) => (
+          <BenchmarksPerAppTypeCard
+            appsWithBenchmark={sortedAppsByBenchmark.filter(
+              ({ app }) => app.type === appliesTo,
+            )}
+          />
+        ))
+      }
     </div>
   </div>
 </section>

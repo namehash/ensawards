@@ -16,6 +16,9 @@ import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
 import { type Contribution } from "@/../data/contributors/types.ts";
 import { type EnsAwardsScore as EnsAwardsScoreType } from "@/utils/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
+import { groupBenchmarksByCategory, getBenchmarkWeight } from "data/apps/benchmarks-utils";
+import { type AppBenchmark } from "data/apps/benchmarks-types";
+import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -28,6 +31,7 @@ const appToDisplay = getAppBySlug(app);
 let appScore: EnsAwardsScoreType = 0;
 let AppIcon;
 let appBenchmarksDataContributions: Contribution[] = [];
+let benchmarkGroups: AppBenchmark[][] = [];
 
 if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);
@@ -35,6 +39,7 @@ if (appToDisplay !== undefined) {
   appBenchmarksDataContributions = appToDisplay.benchmarks
     .map((benchmark) => benchmark.contributions)
     .flat();
+  benchmarkGroups = groupBenchmarksByCategory(appToDisplay.benchmarks);
 }
 ---
 
@@ -94,41 +99,61 @@ if (appToDisplay !== undefined) {
         />
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 gap-5 sm:gap-10 sm:py-[60px] sm:px-8">
-        <SuggestionCard
-          client:load
-          whatsSuggested="benchmark result"
-          allContributions={appBenchmarksDataContributions}
-          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
-        />
-        <ItemsList header="Benchmark results">
-          {appToDisplay.benchmarks.map((benchmark, idx) => (
-            <BenchmarkResultCard
-              name={benchmark.bestPractice.name}
-              notes={benchmark.bestPractice.description}
-              viewDetails={{
-                text: "View best practice benchmark details",
-                link: `/app/${appToDisplay.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
-              }}
-              additionalInfo={[
-                {
-                  category: "Category",
-                  value: benchmark.bestPractice.category.name,
-                  link: `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}`,
-                  linkStyles:
-                    "text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]",
-                },
-              ]}>
-              <BenchmarkResultBadge
-                slot="badge"
-                className={cn(
-                  BenchmarkResultToBadgeStyles.get(benchmark.result),
-                  "cursor-pointer",
-                )}
-                benchmark={benchmark}
-              />
-            </BenchmarkResultCard>
-          ))}
-        </ItemsList>
+        <div class="w-full max-w-[1216px] flex flex-col md:flex-row justify-start md:justify-between gap-6 items-center md:items-start">
+          <div class="w-full md:w-3/5">
+            <ItemsList header="Benchmark results">
+              {benchmarkGroups.map((group) => {
+                const categoryScore =
+                  group.length === 0
+                    ? 0
+                    : (group.reduce(
+                        (sum, benchmark) => sum + getBenchmarkWeight(benchmark),
+                        0,
+                      ) *
+                        100) /
+                      group.length;
+                return (
+                  <div class="w-full flex flex-col justify-start items-start gap-2">
+                    <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">
+                      <EnsAwardsCircularScoreSmall score={categoryScore} />
+                      {/* This assumption is safe, because all benchmarks passed into this component belong to one BestPracticeCategory */}
+                      <span class="flex-1 text-lg leading-normal font-semibold text-black">
+                        {group[0].bestPractice.category.name}
+                      </span>
+                    </div>
+                    {group.map((benchmark: AppBenchmark) => (
+                      <BenchmarkResultCard
+                        name={benchmark.bestPractice.name}
+                        notes={benchmark.bestPractice.description}
+                        viewDetails={{
+                          text: "View detailed report",
+                          link: `/app/${appToDisplay.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
+                        }}>
+                        <BenchmarkResultBadge
+                          slot="badge"
+                          className={cn(
+                            BenchmarkResultToBadgeStyles.get(benchmark.result),
+                            "cursor-pointer",
+                          )}
+                          benchmark={benchmark}
+                        />
+                      </BenchmarkResultCard>
+                    ))}
+                  </div>
+                );
+              })}
+            </ItemsList>
+          </div>
+          <div class="w-full md:w-2/5">
+            <SuggestionCard
+              client:load
+              whatsSuggested="benchmark result"
+              allContributions={appBenchmarksDataContributions}
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
+              sidebarVariant
+            />
+          </div>
+        </div>
       </section>
     </Layout>
   )

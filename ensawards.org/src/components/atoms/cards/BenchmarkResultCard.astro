@@ -1,7 +1,6 @@
 ---
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
 
 export interface BenchmarkResultCardProps {
   name: string;
@@ -10,28 +9,13 @@ export interface BenchmarkResultCardProps {
     text: string;
     link: string;
   };
-  additionalInfo?: {
-    category: string;
-    value: string;
-    link?: string;
-    linkStyles?: string;
-  }[];
 }
-const { name, notes, viewDetails, additionalInfo }: BenchmarkResultCardProps = Astro.props;
-
-const isStandaloneLinkCard = additionalInfo === undefined;
-const RootTag = isStandaloneLinkCard ? "a" : "div";
-const ViewDetailsTag = isStandaloneLinkCard ? "div" : "button";
+const { name, notes, viewDetails }: BenchmarkResultCardProps = Astro.props;
 ---
 
-<!--Use an anchor only when the whole card should navigate, otherwise keep the clickable div to allow nested links-->
-<RootTag
-  href={isStandaloneLinkCard ? viewDetails.link : undefined}
-  target={isStandaloneLinkCard ? "_self" : undefined}
-  data-link={isStandaloneLinkCard ? undefined : viewDetails.link}
-  onclick={isStandaloneLinkCard
-    ? undefined
-    : "if(!event.target.closest('a')) window.location=this.dataset.link"}
+<a
+  href={viewDetails.link}
+  target="_self"
   class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-nowrap justify-start items-start gap-3 sm:gap-10 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <!--Mobile Header start-->
   <div
@@ -60,43 +44,13 @@ const ViewDetailsTag = isStandaloneLinkCard ? "div" : "button";
     </div>
   </div>
   <div
-    class={cn(
-      "min-[1000px]:w-1/3 flex flex-col sm:flex-row flex-nowrap justify-center items-center sm:items-center gap-4 sm:gap-6 max-sm:self-stretch",
-      additionalInfo ? "sm:justify-between" : "sm:justify-end",
-    )}>
-    {
-      additionalInfo !== undefined &&
-        additionalInfo.map((elem) => (
-          <div class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-start items-start max-sm:self-stretch sm:min-w-[80px]">
-            <p class="text-muted-foreground text-sm leading-normal font-normal">
-              {elem.category}
-            </p>
-            {elem.link ? (
-              <a
-                href={elem.link}
-                class={cn(
-                  "text-sm leading-normal font-medium transition-all duration-200",
-                  elem.linkStyles,
-                )}>
-                {elem.value}
-              </a>
-            ) : (
-              <p class="text-sm leading-normal font-medium text-black">
-                {elem.value}
-              </p>
-            )}
-          </div>
-        ))
-    }
+    class="min-[1000px]:w-1/3 flex flex-col sm:flex-row flex-nowrap justify-center items-center sm:items-center gap-4 sm:gap-6 max-sm:self-stretch sm:justify-end">
     <div
-      class="max-sm:hidden flex flex-col items-start justify-center min-w-[110px]">
+      class="max-sm:hidden flex flex-col items-end justify-center min-w-[110px]">
       <slot name="badge" />
     </div>
-    <ChevronRightIcon
-      className="max-sm:hidden w-10 h-10 hover:opacity-60 shrink-0"
-    />
   </div>
-  <ViewDetailsTag
+  <div
     class={cn(
       shadcnButtonVariants({
         variant: "secondary",
@@ -105,5 +59,5 @@ const ViewDetailsTag = isStandaloneLinkCard ? "div" : "button";
       }),
     )}>
     {viewDetails.text}
-  </ViewDetailsTag>
-</RootTag>
+  </div>
+</a>

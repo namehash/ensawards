@@ -21,38 +21,42 @@ export const EnsAwardsBarScore = ({ score, isDynamic = true }: EnsAwardsBarScore
   return (
     <div
       className={cn(
-        "min-md:min-w-[120px] flex items-start gap-0",
+        "min-md:min-w-[130px] flex items-start gap-0",
         isDynamic
           ? "flex-row sm:flex-col flex-nowrap justify-between sm:justify-center max-sm:self-stretch"
           : "flex-col justify-center",
       )}
     >
       <p className="text-muted-foreground text-sm leading-normal font-normal">ENSAwards score</p>
-      <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
-        <div
-          className={cn(
-            "flex relative w-20 h-[7px] rounded-[20px] bg-gray-200 z-0",
-            isDynamic && "max-sm:hidden ",
-          )}
-        >
-          <div
-            className={cn(
-              "absolute h-full self-stretch rounded-[20px] z-10",
-              `bg-${getAppSupportColor(score)}`,
-            )}
-            style={{ width: `calc(${score}%)` }}
-          ></div>
-        </div>
-        <p
-          className={cn(
-            "text-sm leading-normal",
-            isDynamic ? "font-medium sm:font-semibold" : "font-semibold",
-            `text-${getAppSupportColor(score)}`,
-          )}
-        >
-          {score}%
-        </p>
-      </div>
+      <ScoreBar score={score} isDynamic={isDynamic} />
     </div>
   );
 };
+
+export const ScoreBar = ({ score, isDynamic }: EnsAwardsBarScoreProps) => (
+  <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
+    <div
+      className={cn(
+        "flex relative w-20 h-[7px] rounded-[20px] bg-gray-200 z-0",
+        isDynamic && "max-sm:hidden ",
+      )}
+    >
+      <div
+        className={cn(
+          "absolute h-full self-stretch rounded-[20px] z-10",
+          `bg-${getAppSupportColor(score)}`,
+        )}
+        style={{ width: `calc(${score}%)` }}
+      ></div>
+    </div>
+    <p
+      className={cn(
+        "text-sm leading-normal",
+        isDynamic ? "font-medium sm:font-semibold" : "font-semibold",
+        `text-${getAppSupportColor(score)}`,
+      )}
+    >
+      {score}%
+    </p>
+  </div>
+);

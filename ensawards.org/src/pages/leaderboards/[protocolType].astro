@@ -10,7 +10,13 @@ import LeaderboardCard from "../../components/atoms/cards/LeaderboardCard.astro"
 import { Image } from "astro:assets";
 import ItemsList from "../../components/molecules/ItemsList.astro";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById, getProtocolTypeBySlug } from "../../../data/protocols/utils.ts";
+import {
+  getProtocolById,
+  getProtocolTypeBySlug,
+  getAllProtocolContracts,
+} from "../../../data/protocols/utils.ts";
+import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
+import type { Contribution } from "data/contributors/types";
 
 export function getStaticPaths() {
   return Object.values(ProtocolTypes).map((protocolType) => ({
@@ -33,11 +39,15 @@ const resolvedProtocolType = getProtocolTypeBySlug(protocolType);
 let normalizedProtocolType = "-";
 let pluralizedBestPracticeTarget = "-";
 let protocolScores: Record<ProtocolId, number> = {} as Record<ProtocolId, number>;
+let protocolContractDataContributions: Contribution[] = [];
 
 if (resolvedProtocolType) {
   normalizedProtocolType = resolvedProtocolType.toLowerCase();
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedProtocolType);
   protocolScores = getContractNamingScoresByProtocolType(resolvedProtocolType);
+  protocolContractDataContributions = Object.keys(protocolScores).flatMap((protocolId) =>
+    getAllProtocolContracts(protocolId as ProtocolId).flatMap((contract) => contract.contributions),
+  );
 }
 ---
 
@@ -66,39 +76,54 @@ if (resolvedProtocolType) {
         }}
       />
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-        <ItemsList containerStyles="gap-3 sm:gap-3">
-          {Object.entries(protocolScores).map(([scoreCategory, value], idx) => {
-            const protocolId = scoreCategory as ProtocolId;
-            const protocol = getProtocolById(protocolId);
-            const ProtocolIcon = protocol.icon;
-            return (
-              <LeaderboardCard
-                key={`leaderboard-card-${protocol.protocolSlug}`}
-                name={protocol.name}
-                ensAwardsScore={value}
-                viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
-                viewDetailsText={`${resolvedProtocolType}${resolvedProtocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
-                {idx < 3 ? (
-                  <Image
-                    alt={`${idx + 1}-place`}
-                    src={images[placeIcons[idx]]()}
-                    slot="placeIcon"
-                  />
-                ) : (
-                  <p
-                    slot="placeIcon"
-                    class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                    {idx + 1}
-                  </p>
-                )}
-                <ProtocolIcon
-                  slot="rankedEntityIcon"
-                  className="w-10 h-10 rounded-md"
-                />
-              </LeaderboardCard>
-            );
-          })}
-        </ItemsList>
+        <div class="w-full max-w-[1216px] flex flex-col md:flex-row justify-start md:justify-between gap-6 items-center md:items-start">
+          <div class="w-full md:w-3/5">
+            <ItemsList containerStyles="gap-3 sm:gap-3">
+              {Object.entries(protocolScores).map(
+                ([scoreCategory, value], idx) => {
+                  const protocolId = scoreCategory as ProtocolId;
+                  const protocol = getProtocolById(protocolId);
+                  const ProtocolIcon = protocol.icon;
+                  return (
+                    <LeaderboardCard
+                      key={`leaderboard-card-${protocol.protocolSlug}`}
+                      name={protocol.name}
+                      ensAwardsScore={value}
+                      viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
+                      viewDetailsText={`${resolvedProtocolType}${resolvedProtocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
+                      {idx < 3 ? (
+                        <Image
+                          alt={`${idx + 1}-place`}
+                          src={images[placeIcons[idx]]()}
+                          slot="placeIcon"
+                        />
+                      ) : (
+                        <p
+                          slot="placeIcon"
+                          class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
+                          {idx + 1}
+                        </p>
+                      )}
+                      <ProtocolIcon
+                        slot="rankedEntityIcon"
+                        className="w-10 h-10 rounded-md"
+                      />
+                    </LeaderboardCard>
+                  );
+                },
+              )}
+            </ItemsList>
+          </div>
+          <div class="w-full md:w-2/5">
+            <SuggestionCard
+              client:load
+              whatsSuggested="protocol"
+              allContributions={protocolContractDataContributions}
+              gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/index.ts"
+              sidebarVariant
+            />
+          </div>
+        </div>
       </section>
     </Layout>
   )
