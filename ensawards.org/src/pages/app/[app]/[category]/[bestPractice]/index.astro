@@ -119,14 +119,14 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
             <SuggestionCard
               client:only="react"
               sidebarVariant
-              whatsSuggested="best practice"
-              allContributions={resolvedBestPractice.contributions}
-              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${resolvedBestPractice.category.categorySlug}/${resolvedBestPractice.bestPracticeSlug}.ts`}>
+              whatsSuggested="benchmark result"
+              allContributions={appBenchmark.contributions}
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${resolvedApp.appSlug}/benchmarks.ts`}>
               <SuggestionCardLoading
                 slot="fallback"
                 sidebarVariant
-                whatsSuggested="best practice"
-                allContributions={resolvedBestPractice.contributions}
+                whatsSuggested="benchmark result"
+                allContributions={appBenchmark.contributions}
               />
             </SuggestionCard>
             <div class="hidden lg:block w-full">

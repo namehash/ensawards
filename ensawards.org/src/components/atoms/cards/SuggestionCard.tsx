@@ -27,6 +27,24 @@ const orderContributorsByAppearances = (contributors: Contributor[]): Contributo
     .map(({ contributor }) => contributor);
 };
 
+const getSuggestionCardDescription = (whatsSuggested: PossibleSuggestions) => {
+  switch (whatsSuggested) {
+    case "app":
+    case "protocol":
+      return "leaderboards";
+
+    case "contract":
+      return "smart contracts";
+
+    case "best practice":
+      return "ENS best practices";
+
+    case "benchmark result":
+    default:
+      return "benchmarks";
+  }
+};
+
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
   allContributions: Contribution[];
@@ -66,7 +84,8 @@ export const SuggestionCard = ({
             <div className="w-full flex flex-col gap-1">
               <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
               <p className="text-base leading-6 font-normal text-muted-foreground">
-                All benchmarks on ENSAwards are open for public contribution.
+                All {getSuggestionCardDescription(whatsSuggested)} on ENSAwards are open for public
+                contribution.
               </p>
             </div>
           </div>

@@ -13,6 +13,7 @@ import { SuggestionCard, SuggestionCardLoading } from "../atoms/cards/Suggestion
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
+import { type Contribution } from "data/contributors/types";
 
 export interface AppBestPracticeDetailsProps {
   bestPractice: BestPracticeApp;
@@ -57,6 +58,14 @@ const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
 
 const appsPassed = calculateAppsPassed(bestPractice);
 const appSupport = calculateAppSupport(bestPractice);
+
+const benchmarkDataContributions: Contribution[] = appsWithValidBenchmarks.flatMap(
+  ({ benchmark }) => benchmark.contributions,
+);
+const allContributions: Contribution[] = [
+  ...bestPractice.contributions,
+  ...benchmarkDataContributions,
+];
 ---
 
 <SubpageHero
@@ -91,13 +100,13 @@ const appSupport = calculateAppSupport(bestPractice);
         client:only="react"
         sidebarVariant
         whatsSuggested="best practice"
-        allContributions={bestPractice.contributions}
+        allContributions={allContributions}
         gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
         <SuggestionCardLoading
           slot="fallback"
           sidebarVariant
           whatsSuggested="best practice"
-          allContributions={bestPractice.contributions}
+          allContributions={allContributions}
         />
       </SuggestionCard>
       {

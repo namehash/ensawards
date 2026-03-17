@@ -1,13 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import {
-  type BestPracticeProtocol,
-  ProtocolTypes,
-} from "../../../data/ens-best-practices/types.ts";
-import { type ProtocolId } from "../../../data/protocols/types.ts";
-import { markdownToHtml } from "../../utils/markdown";
-import { cn } from "../../utils/tailwindClassConcatenation";
+import { type BestPracticeProtocol, ProtocolTypes } from "data/ens-best-practices/types.ts";
+import { type ProtocolId } from "data/protocols/types.ts";
+import { markdownToHtml } from "@/utils/markdown";
+import { cn } from "@/utils/tailwindClassConcatenation";
 import ContractNamingBanner from "../atoms/ContractNamingBanner.astro";
 import LeaderboardCard from "../atoms/cards/LeaderboardCard.astro";
 import EnscribeIcon from "../atoms/icons/EnscribeIconDark.astro";
@@ -16,8 +13,10 @@ import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "../../../data/protocols/utils.ts";
+import { getProtocolById } from "data/protocols/utils.ts";
 import { SuggestionCard, SuggestionCardLoading } from "../atoms/cards/SuggestionCard.tsx";
+import { type Contribution } from "data/contributors/types";
+import { CONTRACTS } from "data/protocols/contracts";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
@@ -34,6 +33,14 @@ const { bestPractice }: ProtocolBestPracticeDetailsProps = Astro.props;
 
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
+
+const contractDataContributions: Contribution[] = CONTRACTS.flatMap(
+  (contract) => contract.contributions,
+);
+const allContributions: Contribution[] = [
+  ...bestPractice.contributions,
+  ...contractDataContributions,
+];
 ---
 
 <SubpageHero
@@ -116,13 +123,13 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
         client:only="react"
         sidebarVariant
         whatsSuggested="best practice"
-        allContributions={bestPractice.contributions}
+        allContributions={allContributions}
         gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
         <SuggestionCardLoading
           slot="fallback"
           sidebarVariant
           whatsSuggested="best practice"
-          allContributions={bestPractice.contributions}
+          allContributions={allContributions}
         />
       </SuggestionCard>
     </div>
