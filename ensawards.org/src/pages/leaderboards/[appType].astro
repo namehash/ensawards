@@ -10,7 +10,7 @@ import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "data/apps/utils.ts";
-import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
+import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
 
 export function getStaticPaths() {
@@ -111,12 +111,18 @@ if (resolvedAppType !== undefined) {
           </div>
           <div class="w-full md:w-2/5">
             <SuggestionCard
-              client:load
+              client:only="react"
               whatsSuggested="app"
               allContributions={appBenchmarkDataContributions}
               gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/index.ts"
-              sidebarVariant
-            />
+              sidebarVariant>
+              <SuggestionCardLoading
+                slot="fallback"
+                sidebarVariant
+                whatsSuggested="app"
+                allContributions={appBenchmarkDataContributions}
+              />
+            </SuggestionCard>
           </div>
         </div>
       </section>

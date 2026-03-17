@@ -23,7 +23,7 @@ import { getENSNameFieldStyles } from "@/utils/styles";
 import { type Protocol } from "data/protocols/types";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils.ts";
-import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
+import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard.tsx";
 import { type Contribution } from "data/contributors/types.ts";
 
 export function getStaticPaths() {
@@ -121,11 +121,17 @@ if (resolvedProtocol) {
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ContractNamingBanner />
         <SuggestionCard
-          client:load
+          client:only="react"
           whatsSuggested="contract"
           allContributions={protocolContractsDataContributions}
-          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
-        />
+          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}>
+          <SuggestionCardLoading
+            slot="fallback"
+            sidebarVariant
+            whatsSuggested="contract"
+            allContributions={protocolContractsDataContributions}
+          />
+        </SuggestionCard>
         <ItemsList
           header="Smart contract naming"
           containerStyles="gap-3 sm:gap-2">

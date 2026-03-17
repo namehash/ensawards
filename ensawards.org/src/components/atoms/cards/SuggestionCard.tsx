@@ -8,6 +8,7 @@ import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 import { openSuggestionOverlay } from "@/utils/domActions";
@@ -186,6 +187,63 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
         >
           View ENS Advocate profile
         </a>
+      </div>
+    </div>
+  );
+};
+
+export const SuggestionCardLoading = ({
+  whatsSuggested,
+  allContributions,
+  sidebarVariant = false,
+}: Omit<SuggestionCardProps, "gitHubTargetHref">) => {
+  const loadingStyles = "animate-pulse bg-gray-200";
+  return (
+    <div
+      className={cn(
+        "w-full max-w-[1216px] h-fit flex flex-col gap-3 sm:gap-5 p-4 sm:px-5 sm:py-4 rounded-2xl border border-gray-200 bg-white",
+        !sidebarVariant && "lg:flex-row lg:justify-between lg:items-start",
+      )}
+    >
+      <div className="w-full flex-1 min-w-0">
+        <div className="w-full flex flex-col gap-1">
+          <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
+          <p className="text-base leading-6 font-normal text-muted-foreground">
+            All benchmarks on ENSAwards are open for public contribution.
+          </p>
+        </div>
+      </div>
+
+      <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
+        <div className="flex flex-wrap items-start gap-3 py-1.5">
+          {allContributions.map((_, idx) => (
+            <Skeleton
+              key={`Contributor-placeholder-#${idx}`}
+              className={cn(loadingStyles, "w-10 h-10 rounded-full")}
+            />
+          ))}
+        </div>
+
+        <div className="w-full h-px bg-border"></div>
+
+        <div
+          className={cn(
+            "w-full flex flex-col gap-3",
+            !sidebarVariant && "sm:flex-row sm:justify-between sm:items-center",
+          )}
+        >
+          <p className="text-base leading-6 font-normal text-muted-foreground">
+            Submit a contribution
+          </p>
+          <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
+            <Skeleton
+              className={cn(loadingStyles, "w-[105px] h-[36px] rounded-full max-sm:self-stretch")}
+            />
+            <Skeleton
+              className={cn(loadingStyles, "w-[154px] h-[36px] rounded-full max-sm:self-stretch")}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

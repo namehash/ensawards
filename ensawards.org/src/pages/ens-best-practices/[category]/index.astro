@@ -1,20 +1,17 @@
 ---
-import ContractNamingBanner from "../../../components/atoms/ContractNamingBanner.astro";
-import BestPracticeCard from "../../../components/atoms/cards/BestPracticeCard.astro";
-import EnscribeIcon from "../../../components/atoms/icons/EnscribeIconDark.astro";
-import UnderConstructionBanner from "../../../components/atoms/UnderConstructionBanner.astro";
-import ItemsList from "../../../components/molecules/ItemsList.astro";
-import SubpageHero from "../../../components/molecules/SubpageHero.astro";
-import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
-import Layout from "../../../layouts/Layout.astro";
-import { type BestPractice, CategoryStatus } from "../../../../data/ens-best-practices/types.ts";
-import { BEST_PRACTICE_CATEGORIES } from "../../../../data/ens-best-practices";
-import {
-  getBestPracticesByCategory,
-  getCategoryBySlug,
-} from "../../../../data/ens-best-practices/utils.ts";
-import { SuggestionCard } from "../../../components/atoms/cards/SuggestionCard.tsx";
-import { type Contribution } from "../../../../data/contributors/types.ts";
+import ContractNamingBanner from "@/components/atoms/ContractNamingBanner.astro";
+import BestPracticeCard from "@/components/atoms/cards/BestPracticeCard.astro";
+import EnscribeIcon from "@/components/atoms/icons/EnscribeIconDark.astro";
+import UnderConstructionBanner from "@/components/atoms/UnderConstructionBanner.astro";
+import ItemsList from "@/components/molecules/ItemsList.astro";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
+import Layout from "@/layouts/Layout.astro";
+import { type BestPractice, CategoryStatus } from "data/ens-best-practices/types.ts";
+import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
+import { getBestPracticesByCategory, getCategoryBySlug } from "data/ens-best-practices/utils.ts";
+import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard.tsx";
+import { type Contribution } from "data/contributors/types.ts";
 
 export function getStaticPaths() {
   return BEST_PRACTICE_CATEGORIES.map((category) => ({
@@ -84,11 +81,17 @@ if (categoryToDisplay !== undefined) {
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px]">
         {categoryToDisplay.id.includes("contract") && <ContractNamingBanner />}
         <SuggestionCard
-          client:load
+          client:only="react"
           whatsSuggested="best practice"
           allContributions={categoryDataContributions}
-          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${categoryToDisplay.categorySlug}/index.ts`}
-        />
+          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${categoryToDisplay.categorySlug}/index.ts`}>
+          <SuggestionCardLoading
+            slot="fallback"
+            sidebarVariant
+            whatsSuggested="best practice"
+            allContributions={categoryDataContributions}
+          />
+        </SuggestionCard>
         <ItemsList header="Best practices">
           {categoryBestPractices.map((bestPractice, idx) => (
             <BestPracticeCard

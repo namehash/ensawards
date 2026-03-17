@@ -15,7 +15,7 @@ import {
   getProtocolTypeBySlug,
   getAllProtocolContracts,
 } from "data/protocols/utils.ts";
-import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
+import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard";
 import type { Contribution } from "data/contributors/types";
 
 export function getStaticPaths() {
@@ -116,12 +116,18 @@ if (resolvedProtocolType) {
           </div>
           <div class="w-full md:w-2/5">
             <SuggestionCard
-              client:load
+              client:only="react"
               whatsSuggested="protocol"
               allContributions={protocolContractDataContributions}
               gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/index.ts"
-              sidebarVariant
-            />
+              sidebarVariant>
+              <SuggestionCardLoading
+                slot="fallback"
+                sidebarVariant
+                whatsSuggested="protocol"
+                allContributions={protocolContractDataContributions}
+              />
+            </SuggestionCard>
           </div>
         </div>
       </section>

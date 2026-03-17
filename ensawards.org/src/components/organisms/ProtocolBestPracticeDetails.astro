@@ -17,7 +17,7 @@ import SubpageHero from "../molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById } from "../../../data/protocols/utils.ts";
-import { SuggestionCard } from "../atoms/cards/SuggestionCard.tsx";
+import { SuggestionCard, SuggestionCardLoading } from "../atoms/cards/SuggestionCard.tsx";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
@@ -113,12 +113,18 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
         >
       </div>
       <SuggestionCard
-        client:load
+        client:only="react"
         sidebarVariant
         whatsSuggested="best practice"
         allContributions={bestPractice.contributions}
-        gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}
-      />
+        gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
+        <SuggestionCardLoading
+          slot="fallback"
+          sidebarVariant
+          whatsSuggested="best practice"
+          allContributions={bestPractice.contributions}
+        />
+      </SuggestionCard>
     </div>
   </div>
 </section>

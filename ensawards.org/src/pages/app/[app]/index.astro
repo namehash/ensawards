@@ -12,7 +12,7 @@ import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { BenchmarkResultToBadgeStyles } from "@/utils/styles";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "data/apps/utils.ts";
-import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
+import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard.tsx";
 import { type Contribution } from "data/contributors/types.ts";
 import { type EnsAwardsScore as EnsAwardsScoreType } from "@/utils/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -138,12 +138,18 @@ if (appToDisplay !== undefined) {
           </div>
           <div class="w-full md:w-2/5">
             <SuggestionCard
-              client:load
+              client:only="react"
               whatsSuggested="benchmark result"
               allContributions={appBenchmarksDataContributions}
               gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
-              sidebarVariant
-            />
+              sidebarVariant>
+              <SuggestionCardLoading
+                slot="fallback"
+                sidebarVariant
+                whatsSuggested="benchmark result"
+                allContributions={appBenchmarksDataContributions}
+              />
+            </SuggestionCard>
           </div>
         </div>
       </section>
