@@ -46,7 +46,7 @@ if (resolvedProtocolType) {
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedProtocolType);
   protocolScores = getContractNamingScoresByProtocolType(resolvedProtocolType);
   protocolContractDataContributions = Object.keys(protocolScores).flatMap((protocolId) =>
-    getAllProtocolContracts(protocolId).flatMap((contract) => contract.contributions),
+    getAllProtocolContracts(protocolId as ProtocolId).flatMap((contract) => contract.contributions),
   );
 }
 ---

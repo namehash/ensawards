@@ -26,7 +26,7 @@ export const getBenchmarkWeight = (benchmark: AppBenchmark): number => {
 };
 
 /**
- * Groups passed benchmarks by their {@link AppBenchmark.bestPractice.category.id} field.
+ * Groups benchmarks by their {@link AppBenchmark.bestPractice.category.id} field.
  */
 export const groupBenchmarksByCategory = (benchmarks: AppBenchmark[]): AppBenchmark[][] => {
   const groupedBenchmarks = new Map<string, AppBenchmark[]>();
