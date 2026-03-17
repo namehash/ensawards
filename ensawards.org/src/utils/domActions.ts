@@ -9,13 +9,10 @@ export function openSuggestionOverlay(whatsSuggested: PossibleSuggestions) {
       document.querySelector("#app-overlay")!.classList.remove("hidden");
       break;
 
-    case "best practice":
-      document.querySelector("#best-practice-overlay")!.classList.remove("hidden");
-      break;
-
     case "benchmark result":
-      document.querySelector("#benchmark-result-overlay")!.classList.remove("hidden");
-      break;
+    case "best practice":
+      // For these cases we've removed the contact form to push people to edit on GitHub.
+      return;
 
     case "protocol":
       document.querySelector("#protocol-overlay")!.classList.remove("hidden");

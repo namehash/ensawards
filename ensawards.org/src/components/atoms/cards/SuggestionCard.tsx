@@ -45,6 +45,8 @@ const getSuggestionCardDescription = (whatsSuggested: PossibleSuggestions) => {
   }
 };
 
+const suggestionsWithoutContactForm: PossibleSuggestions[] = ["best practice", "benchmark result"];
+
 export interface SuggestionCardProps {
   whatsSuggested: PossibleSuggestions;
   allContributions: Contribution[];
@@ -139,18 +141,20 @@ export const SuggestionCard = ({
                 Submit a contribution
               </p>
               <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
-                <button
-                  onClick={() => openSuggestionOverlay(whatsSuggested)}
-                  className={cn(
-                    shadcnButtonVariants({
-                      variant: "ghost",
-                      size: "default",
-                      className: "cursor-pointer rounded-full max-sm:self-stretch",
-                    }),
-                  )}
-                >
-                  Contact us
-                </button>
+                {!suggestionsWithoutContactForm.includes(whatsSuggested) && (
+                  <button
+                    onClick={() => openSuggestionOverlay(whatsSuggested)}
+                    className={cn(
+                      shadcnButtonVariants({
+                        variant: "ghost",
+                        size: "default",
+                        className: "cursor-pointer rounded-full max-sm:self-stretch",
+                      }),
+                    )}
+                  >
+                    Contact us
+                  </button>
+                )}
                 <a
                   href={gitHubTargetHref}
                   target="_blank"

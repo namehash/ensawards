@@ -129,44 +129,6 @@ const { isStatic = false, pageMetadata = DEFAULT_PAGE_METADATA }: LayoutProps = 
         />
       </Overlay>
     </div>
-    <div id="best-practice-overlay" class="hidden">
-      <Overlay>
-        <SuggestionForm
-          whatsSuggested="best practice"
-          formFields={[
-            {
-              label: EnsAwardsContactFormFields.Description,
-              type: "text",
-              required: true,
-            },
-          ]}
-        />
-      </Overlay>
-    </div>
-    <div id="benchmark-result-overlay" class="hidden">
-      <Overlay>
-        <SuggestionForm
-          whatsSuggested="benchmark result"
-          formFields={[
-            {
-              label: EnsAwardsContactFormFields.App,
-              type: "text",
-              required: true,
-            },
-            {
-              label: EnsAwardsContactFormFields.Benchmark,
-              type: "text",
-              required: true,
-            },
-            {
-              label: EnsAwardsContactFormFields.BenchmarkResultUpdate,
-              type: "text",
-              required: false,
-            },
-          ]}
-        />
-      </Overlay>
-    </div>
     <div id="protocol-overlay" class="hidden">
       <Overlay>
         <SuggestionForm
