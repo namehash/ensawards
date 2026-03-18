@@ -3,6 +3,8 @@ import {
   type ProtocolType,
   ProtocolTypes,
 } from "../ens-best-practices/types.ts";
+import { CONTRACTS } from "./contracts.ts";
+import { type Contract } from "./contracts-types.ts";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "./index.ts";
 import type {
   DAOProtocol,
@@ -81,3 +83,21 @@ export const getProtocolTypeBySlug = (protocolTypeSlug: string): ProtocolType | 
  */
 export const appliesToAllProtocols = (targets: BestPracticeTarget[]): boolean =>
   Object.values(ProtocolTypes).every((protocolType) => targets.includes(protocolType));
+
+const PROTOCOL_CONTRACTS_BY_PROTOCOL_ID: Map<ProtocolId, Contract[]> = (() => {
+  const contractsMap = new Map<ProtocolId, Contract[]>();
+  for (const contract of CONTRACTS) {
+    const protocolId = contract.protocol.id;
+    const previousContractsList = contractsMap.get(protocolId) ?? [];
+    previousContractsList.push(contract);
+    contractsMap.set(protocolId, previousContractsList);
+  }
+
+  return contractsMap;
+})();
+
+/**
+ * Returns all {@link Contract}s associated with a given {@link Protocol}.
+ */
+export const getAllProtocolContracts = (protocolId: ProtocolId): Contract[] =>
+  PROTOCOL_CONTRACTS_BY_PROTOCOL_ID.get(protocolId) ?? [];

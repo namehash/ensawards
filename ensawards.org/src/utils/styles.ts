@@ -5,9 +5,9 @@ export const getAppSupportColor = (value: number): string =>
   value > 75 ? "emerald-600" : value > 35 ? "amber-600" : "red-600";
 
 export const BenchmarkResultToBadgeStyles = new Map<BenchmarkResult, string>([
-  [BenchmarkResult.PartialPass, "text-neutral-900 bg-neutral-100"],
-  [BenchmarkResult.Pass, "text-emerald-600 bg-[#0596691A]"],
-  [BenchmarkResult.Fail, "text-red-600 bg-[#DC26261A]"],
+  [BenchmarkResult.PartialPass, "text-orange-600 bg-orange-100"],
+  [BenchmarkResult.Pass, "text-emerald-600 bg-emerald-100"],
+  [BenchmarkResult.Fail, "text-red-600 bg-[rgba(220,38,38,0.1)]"],
 ]);
 
 /**
