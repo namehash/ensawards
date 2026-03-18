@@ -6,7 +6,11 @@ import {
   CategoryStatus,
 } from "../ens-best-practices/types.ts";
 import { type Project, ProjectIds } from "../projects/types.ts";
-import { type AppBenchmark, BenchmarkResult } from "./benchmarks-types.ts";
+import {
+  BenchmarkResult,
+  BenchmarkStatuses,
+  type EffectiveAppBenchmark,
+} from "./benchmarks-types.ts";
 import { type App, AppTypes } from "./types.ts";
 
 export const mockIcon = (() => null) as unknown as App["icon"];
@@ -58,8 +62,9 @@ export const createMockBestPractice = (overrides: {
 export const createMockBenchmark = (
   bestPractice: BestPracticeApp,
   result: BenchmarkResult,
-): AppBenchmark => ({
-  bestPractice,
+): EffectiveAppBenchmark => ({
+  bestPractice: bestPractice,
+  status: BenchmarkStatuses.Completed,
   result,
   lastUpdated: 0,
   contributions: [
@@ -72,7 +77,7 @@ export const createMockApp = (overrides: {
   appSlug: string;
   name: string;
   type: App["type"];
-  benchmarks?: AppBenchmark[];
+  benchmarks?: EffectiveAppBenchmark[];
 }): App => ({
   id: overrides.id,
   appSlug: overrides.appSlug,

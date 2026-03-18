@@ -1,6 +1,6 @@
 ---
 import { APPS } from "data/apps";
-import { BenchmarkResult } from "data/apps/benchmarks-types.ts";
+import { BenchmarkResult, BenchmarkStatuses } from "data/apps/benchmarks-types.ts";
 import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "@/utils/styles";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -59,9 +59,12 @@ const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
 const appsPassed = calculateAppsPassed(bestPractice);
 const appSupport = calculateAppSupport(bestPractice);
 
-const benchmarkDataContributions: Contribution[] = appsWithValidBenchmarks.flatMap(
-  ({ benchmark }) => benchmark.contributions,
-);
+const benchmarkDataContributions: Contribution[] = appsWithValidBenchmarks
+  .filter(
+    ({ benchmark }): benchmark is AppBenchmarkCompleted =>
+      benchmark.status === BenchmarkStatuses.Completed,
+  )
+  .flatMap(({ benchmark }) => benchmark.contributions);
 const allContributions: Contribution[] = [
   ...bestPractice.contributions,
   ...benchmarkDataContributions,
@@ -106,7 +109,6 @@ const allContributions: Contribution[] = [
           slot="fallback"
           sidebarVariant
           whatsSuggested="best practice"
-          allContributions={allContributions}
         />
       </SuggestionCard>
       {

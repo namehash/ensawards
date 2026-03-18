@@ -7,7 +7,7 @@ import { getAddress } from "viem";
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
-import GitHubOutlineIcon from "@/components/assets/githubOutlineIcon.svg";
+import GitHubOutlineIcon from "@/assets/githubOutlineIcon.svg";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -91,39 +91,45 @@ export const SuggestionCard = ({
 
           <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
             <div className="flex flex-wrap items-start gap-3 py-1.5">
-              {orderedContributorProfiles.map((profile) => {
-                const identity = buildUnresolvedIdentity(
-                  profile.address,
-                  DEFAULT_ENS_NAMESPACE,
-                  profile.chainId,
-                );
+              {orderedContributorProfiles.length === 0 ? (
+                <p className="text-black font-semibold">
+                  No contributions yet... Be first to suggest updates to this {whatsSuggested}.
+                </p>
+              ) : (
+                orderedContributorProfiles.map((profile) => {
+                  const identity = buildUnresolvedIdentity(
+                    profile.address,
+                    DEFAULT_ENS_NAMESPACE,
+                    profile.chainId,
+                  );
 
-                return (
-                  <GenericTooltip
-                    key={`contributor-${profile.chainId}-${getAddress(profile.address)}`}
-                    content={
-                      <ContributorTooltipContent contributor={profile} identity={identity} />
-                    }
-                    tooltipOffset={1}
-                  >
-                    <ResolveAndDisplayIdentity
-                      identity={identity}
-                      namespaceId={DEFAULT_ENS_NAMESPACE}
-                      withLink={true}
-                      identityLinkDetails={{
-                        isExternal: false,
-                        link: new URL(
-                          getEnsAdvocateDetailsRelativePath(profile.address),
-                          getEnsAwardsBaseUrl(),
-                        ),
-                      }}
-                      withTooltip={false}
-                      withAvatar={true}
-                      withIdentifier={false}
-                    />
-                  </GenericTooltip>
-                );
-              })}
+                  return (
+                    <GenericTooltip
+                      key={`contributor-${profile.chainId}-${getAddress(profile.address)}`}
+                      content={
+                        <ContributorTooltipContent contributor={profile} identity={identity} />
+                      }
+                      tooltipOffset={1}
+                    >
+                      <ResolveAndDisplayIdentity
+                        identity={identity}
+                        namespaceId={DEFAULT_ENS_NAMESPACE}
+                        withLink={true}
+                        identityLinkDetails={{
+                          isExternal: false,
+                          link: new URL(
+                            getEnsAdvocateDetailsRelativePath(profile.address),
+                            getEnsAwardsBaseUrl(),
+                          ),
+                        }}
+                        withTooltip={false}
+                        withAvatar={true}
+                        withIdentifier={false}
+                      />
+                    </GenericTooltip>
+                  );
+                })
+              )}
             </div>
 
             <div className="w-full h-px bg-border"></div>
@@ -200,9 +206,8 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
 
 export const SuggestionCardLoading = ({
   whatsSuggested,
-  allContributions,
   sidebarVariant = false,
-}: Omit<SuggestionCardProps, "gitHubTargetHref">) => {
+}: Omit<SuggestionCardProps, "gitHubTargetHref" | "allContributions">) => {
   const loadingStyles = "animate-pulse bg-gray-200";
   return (
     <div
@@ -223,12 +228,9 @@ export const SuggestionCardLoading = ({
 
       <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
         <div className="flex flex-wrap items-start gap-3 py-1.5">
-          {allContributions.map((_, idx) => (
-            <Skeleton
-              key={`Contributor-placeholder-#${idx}`}
-              className={cn(loadingStyles, "w-10 h-10 rounded-full")}
-            />
-          ))}
+          <Skeleton className={cn(loadingStyles, "w-10 h-10 rounded-full")} />
+          <Skeleton className={cn(loadingStyles, "w-10 h-10 rounded-full")} />
+          <Skeleton className={cn(loadingStyles, "w-10 h-10 rounded-full")} />
         </div>
 
         <div className="w-full h-px bg-border"></div>

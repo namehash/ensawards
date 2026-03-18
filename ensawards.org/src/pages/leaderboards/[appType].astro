@@ -12,6 +12,7 @@ import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "data/apps/utils.ts";
 import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
+import { BenchmarkStatuses } from "data/apps/benchmarks-types";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({
@@ -39,7 +40,13 @@ if (resolvedAppType !== undefined) {
   normalizedAppType = resolvedAppType.toLowerCase();
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedAppType).toLowerCase();
   appBenchmarkDataContributions = APPS.filter((app) => app.type === resolvedAppType).flatMap(
-    (app) => app.benchmarks.flatMap((benchmark) => benchmark.contributions),
+    (app) =>
+      app.benchmarks
+        .filter(
+          (benchmark): benchmark is AppBenchmarkCompleted =>
+            benchmark.status === BenchmarkStatuses.Completed,
+        )
+        .flatMap((benchmark) => benchmark.contributions),
   );
 }
 ---
@@ -120,7 +127,6 @@ if (resolvedAppType !== undefined) {
                 slot="fallback"
                 sidebarVariant
                 whatsSuggested="app"
-                allContributions={appBenchmarkDataContributions}
               />
             </SuggestionCard>
           </div>

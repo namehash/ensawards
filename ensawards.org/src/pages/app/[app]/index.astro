@@ -10,14 +10,18 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
-import { BenchmarkResultToBadgeStyles } from "@/utils/styles";
+import { benchmarkResultToBadgeStyles } from "@/utils/styles";
 import { calculateAppEnsAwardsScore, getAppBySlug } from "data/apps/utils.ts";
 import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard.tsx";
 import { type Contribution } from "data/contributors/types.ts";
 import { type EnsAwardsScore as EnsAwardsScoreType } from "@/utils/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { groupBenchmarksByCategory, calcCategoryScore } from "data/apps/benchmarks-utils";
-import { type AppBenchmark } from "data/apps/benchmarks-types";
+import {
+  type EffectiveAppBenchmark,
+  type AppBenchmarkCompleted,
+  BenchmarkStatuses,
+} from "data/apps/benchmarks-types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 
 export function getStaticPaths() {
@@ -37,8 +41,12 @@ if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);
   AppIcon = appToDisplay.icon;
   appBenchmarksDataContributions = appToDisplay.benchmarks
-    .map((benchmark) => benchmark.contributions)
-    .flat();
+    .filter(
+      (benchmark): benchmark is AppBenchmarkCompleted =>
+        benchmark.status === BenchmarkStatuses.Completed,
+    )
+    .flatMap((benchmark) => benchmark.contributions);
+
   benchmarkGroups = groupBenchmarksByCategory(appToDisplay.benchmarks);
 }
 ---
@@ -113,7 +121,7 @@ if (appToDisplay !== undefined) {
                         {group[0].bestPractice.category.name}
                       </span>
                     </div>
-                    {group.map((benchmark: AppBenchmark) => (
+                    {group.map((benchmark: EffectiveAppBenchmark) => (
                       <BenchmarkResultCard
                         name={benchmark.bestPractice.name}
                         notes={benchmark.bestPractice.description}
@@ -124,7 +132,7 @@ if (appToDisplay !== undefined) {
                         <BenchmarkResultBadge
                           slot="badge"
                           className={cn(
-                            BenchmarkResultToBadgeStyles.get(benchmark.result),
+                            benchmarkResultToBadgeStyles(benchmark),
                             "cursor-pointer",
                           )}
                           benchmark={benchmark}
@@ -147,7 +155,6 @@ if (appToDisplay !== undefined) {
                 slot="fallback"
                 sidebarVariant
                 whatsSuggested="benchmark result"
-                allContributions={appBenchmarksDataContributions}
               />
             </SuggestionCard>
           </div>

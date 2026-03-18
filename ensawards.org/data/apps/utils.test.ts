@@ -1,6 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { type AppBenchmark, BenchmarkResult } from "./benchmarks-types.ts";
+import {
+  BenchmarkResult,
+  BenchmarkStatuses,
+  type EffectiveAppBenchmark,
+} from "./benchmarks-types.ts";
 import { createMockApp, createMockBenchmark, createMockBestPractice } from "./test-utils.ts";
 import { type App, AppTypes } from "./types.ts";
 
@@ -116,7 +120,9 @@ describe("App utils", () => {
   beforeEach(() => {
     mockApps.splice(0, mockApps.length);
     mockGetBenchmarkWeight.mockReset();
-    mockGetBenchmarkWeight.mockImplementation((benchmark: AppBenchmark) => {
+    mockGetBenchmarkWeight.mockImplementation((benchmark: EffectiveAppBenchmark) => {
+      if (benchmark.status === BenchmarkStatuses.Pending) return 0;
+
       switch (benchmark.result) {
         case BenchmarkResult.Pass:
           return 1;

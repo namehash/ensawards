@@ -1,6 +1,15 @@
 import { type EnsAwardsScore } from "@/utils/types";
 
-import { type AppBenchmark, BenchmarkResult } from "./benchmarks-types.ts";
+import { ENS_BEST_PRACTICES } from "../ens-best-practices";
+import { type BestPracticeApp, BestPracticeTypes } from "../ens-best-practices/types.ts";
+import {
+  type AppBenchmarkCompleted,
+  type AppBenchmarkPending,
+  BenchmarkResult,
+  BenchmarkStatuses,
+  type EffectiveAppBenchmark,
+} from "./benchmarks-types.ts";
+import { type AppType } from "./types";
 
 /**
  * Returns a weight of all possible types of {@link BenchmarkResult}.
@@ -10,7 +19,9 @@ import { type AppBenchmark, BenchmarkResult } from "./benchmarks-types.ts";
  * {@link BenchmarkResult.PartialPass} = 0.5
  * {@link BenchmarkResult.Fail} = 0.0
  */
-export const getBenchmarkWeight = (benchmark: AppBenchmark): number => {
+export const getBenchmarkWeight = (benchmark: EffectiveAppBenchmark): number => {
+  if (benchmark.status === BenchmarkStatuses.Pending) return 0;
+
   switch (benchmark.result) {
     case BenchmarkResult.Pass:
       return 1;
@@ -28,8 +39,10 @@ export const getBenchmarkWeight = (benchmark: AppBenchmark): number => {
 /**
  * Groups benchmarks by their {@link AppBenchmark.bestPractice.category.id} field.
  */
-export const groupBenchmarksByCategory = (benchmarks: AppBenchmark[]): AppBenchmark[][] => {
-  const groupedBenchmarks = new Map<string, AppBenchmark[]>();
+export const groupBenchmarksByCategory = (
+  benchmarks: EffectiveAppBenchmark[],
+): EffectiveAppBenchmark[][] => {
+  const groupedBenchmarks = new Map<string, EffectiveAppBenchmark[]>();
 
   for (const benchmark of benchmarks) {
     const { category } = benchmark.bestPractice;
@@ -52,7 +65,7 @@ export const groupBenchmarksByCategory = (benchmarks: AppBenchmark[]): AppBenchm
  *
  * @throws if the {@link EnsAwardsScore} invariants are not satisfied
  */
-export const calcCategoryScore = (benchmarks: AppBenchmark[]): EnsAwardsScore => {
+export const calcCategoryScore = (benchmarks: EffectiveAppBenchmark[]): EnsAwardsScore => {
   if (benchmarks.length === 0) return 0;
 
   const [firstBenchmark] = benchmarks;
@@ -75,4 +88,24 @@ export const calcCategoryScore = (benchmarks: AppBenchmark[]): EnsAwardsScore =>
   }
 
   return score;
+};
+
+export const buildEffectiveAppBenchmarks = (
+  explicitBenchmarks: AppBenchmarkCompleted[],
+  appType: AppType,
+): EffectiveAppBenchmark[] => {
+  const allBenchmarks: EffectiveAppBenchmark[] = [];
+
+  ENS_BEST_PRACTICES.filter(
+    (bestPractice): bestPractice is BestPracticeApp =>
+      bestPractice.type === BestPracticeTypes.App && bestPractice.appliesTo.includes(appType),
+  ).forEach((bestPractice) => {
+    const newBenchmark =
+      explicitBenchmarks.find((benchmark) => benchmark.bestPractice.id === bestPractice.id) ??
+      ({ bestPractice, status: BenchmarkStatuses.Pending } as AppBenchmarkPending);
+
+    allBenchmarks.push(newBenchmark);
+  });
+
+  return allBenchmarks;
 };

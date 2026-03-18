@@ -2,6 +2,7 @@
 // on adding and modifying apps
 
 import MetaMaskProject from "../../projects/metamask";
+import { buildEffectiveAppBenchmarks } from "../benchmarks-utils.ts";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import MetaMaskWalletBenchmarks from "./benchmarks.ts";
@@ -20,7 +21,7 @@ const MetaMaskWallet: App = {
     ens: "metamask.eth",
   },
   icon: MetaMaskIcon,
-  benchmarks: MetaMaskWalletBenchmarks,
+  benchmarks: buildEffectiveAppBenchmarks(MetaMaskWalletBenchmarks, AppTypes.Wallet),
   ogImagePath: "https://ensawards.org/data/apps/metamask-wallet/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/metamask-wallet/twitter-og.png",
 };

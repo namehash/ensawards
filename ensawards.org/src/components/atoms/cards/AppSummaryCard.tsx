@@ -1,5 +1,9 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { type AppBenchmark, BenchmarkResult } from "data/apps/benchmarks-types.ts";
+import {
+  BenchmarkResult,
+  BenchmarkStatuses,
+  type EffectiveAppBenchmark,
+} from "data/apps/benchmarks-types.ts";
 import { calcCategoryScore, groupBenchmarksByCategory } from "data/apps/benchmarks-utils.ts";
 import type { App } from "data/apps/types.ts";
 import { calculateAppEnsAwardsScore, getAppById } from "data/apps/utils.ts";
@@ -8,6 +12,7 @@ import {
   X as FailIcon,
   Check as PartialPassIcon,
   CheckCheck as PassIcon,
+  Clock as PendingIcon,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -16,8 +21,12 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
 
-const getBenchmarkIcon = (result: BenchmarkResult) => {
-  switch (result) {
+const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark) => {
+  if (benchmark.status === BenchmarkStatuses.Pending) {
+    return <PendingIcon className="h-6 w-6 text-violet-600" />;
+  }
+
+  switch (benchmark.result) {
     case BenchmarkResult.Pass:
       return <PassIcon className="h-6 w-6 text-emerald-600" />;
     case BenchmarkResult.PartialPass:
@@ -29,7 +38,7 @@ const getBenchmarkIcon = (result: BenchmarkResult) => {
 
 interface BenchmarkCategorySectionProps {
   app: App;
-  group: AppBenchmark[]; // all benchmarks in the group belong to the same category
+  group: EffectiveAppBenchmark[]; // all benchmarks in the group belong to the same category
   initiallyOpen: boolean;
 }
 
@@ -67,7 +76,7 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
               href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
               className="flex items-start gap-3"
             >
-              <span className="shrink-0">{getBenchmarkIcon(benchmark.result)}</span>
+              <span className="shrink-0">{getBenchmarkIcon(benchmark)}</span>
               <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
                 {benchmark.bestPractice.name}
               </span>

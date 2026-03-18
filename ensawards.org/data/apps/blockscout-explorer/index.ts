@@ -2,6 +2,7 @@
 // on adding and modifying apps
 
 import BlockscoutProject from "../../projects/blockscout";
+import { buildEffectiveAppBenchmarks } from "../benchmarks-utils.ts";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import BlockscoutExplorerBenchmarks from "./benchmarks.ts";
@@ -20,7 +21,7 @@ const BlockscoutExplorer: App = {
     ens: "blockscout.eth",
   },
   icon: BlockscoutIcon,
-  benchmarks: BlockscoutExplorerBenchmarks,
+  benchmarks: buildEffectiveAppBenchmarks(BlockscoutExplorerBenchmarks, AppTypes.Explorer),
   ogImagePath: "https://ensawards.org/data/apps/blockscout-explorer/og.png",
   twitterOgImagePath: "https://ensawards.org/data/apps/blockscout-explorer/twitter-og.png",
 };

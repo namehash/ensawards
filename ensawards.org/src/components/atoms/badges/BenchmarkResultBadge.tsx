@@ -1,15 +1,27 @@
-import { X as FailIcon, Check as PartialPassIcon, CheckCheck as PassIcon } from "lucide-react";
+import {
+  BenchmarkResult,
+  BenchmarkStatuses,
+  type EffectiveAppBenchmark,
+} from "data/apps/benchmarks-types.ts";
+import {
+  X as FailIcon,
+  Check as PartialPassIcon,
+  CheckCheck as PassIcon,
+  Clock as PendingIcon,
+} from "lucide-react";
 
-import { type AppBenchmark, BenchmarkResult } from "../../../../data/apps/benchmarks-types.ts";
-import { cn } from "../../../utils/tailwindClassConcatenation";
+import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface BenchmarkResultBadgeProps {
-  benchmark: AppBenchmark;
+  benchmark: EffectiveAppBenchmark;
   className?: string;
 }
 
-const getResultIcon = (result: BenchmarkResult) => {
-  switch (result) {
+const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark) => {
+  if (benchmark.status === BenchmarkStatuses.Pending) {
+    return <PendingIcon width={16} height={16} />;
+  }
+  switch (benchmark.result) {
     case BenchmarkResult.Pass:
       return <PassIcon width={16} height={16} />;
     case BenchmarkResult.PartialPass:
@@ -23,13 +35,13 @@ export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBa
   return (
     <span
       className={cn(
-        "w-fit flex flex-row flex-nowrap justify-center items-center gap-1.5 pl-2.5 pr-3 " +
-          "py-1 rounded-full text-xs leading-normal font-medium cursor-default",
+        "w-fit flex flex-row flex-nowrap justify-center items-center gap-1.5 pl-2.5 pr-3 py-1 rounded-full " +
+          "text-xs leading-normal font-medium cursor-default",
         className,
       )}
     >
-      {getResultIcon(benchmark.result)}
-      {benchmark.result}
+      {getBenchmarkIcon(benchmark)}
+      {benchmark.status === BenchmarkStatuses.Pending ? "Pending" : benchmark.result}
     </span>
   );
 }

@@ -5,7 +5,11 @@ import type {
   BestPracticeApp,
   BestPracticeTarget,
 } from "../ens-best-practices/types.ts";
-import { BenchmarkResult } from "./benchmarks-types.ts";
+import {
+  type AppBenchmarkCompleted,
+  BenchmarkResult,
+  BenchmarkStatuses,
+} from "./benchmarks-types.ts";
 import { getBenchmarkWeight } from "./benchmarks-utils.ts";
 import { APPS } from "./index.ts";
 import { type App, type AppType, AppTypes } from "./types.ts";
@@ -80,7 +84,9 @@ export const calculateAppSupport = (bestPractice: BestPracticeApp): EnsAwardsSco
 
   for (const app of APPS) {
     const appBenchmark = app.benchmarks.find(
-      (benchmark) => benchmark.bestPractice.id === bestPractice.id,
+      (benchmark) =>
+        benchmark.bestPractice.id === bestPractice.id &&
+        benchmark.status === BenchmarkStatuses.Completed,
     );
 
     if (appBenchmark === undefined) {
@@ -116,9 +122,12 @@ export const calculateAppsPassed = (bestPractice: BestPracticeApp): number => {
 
   APPS.forEach((app) => {
     const appBenchmark = app.benchmarks.find(
-      (benchmark) => benchmark.bestPractice.id === bestPractice.id,
+      (benchmark): benchmark is AppBenchmarkCompleted =>
+        benchmark.bestPractice.id === bestPractice.id &&
+        benchmark.status === BenchmarkStatuses.Completed,
     );
 
+    // Explicit acceptance of Pass & Partial Pass results
     if (
       appBenchmark !== undefined &&
       (appBenchmark.result === BenchmarkResult.Pass ||

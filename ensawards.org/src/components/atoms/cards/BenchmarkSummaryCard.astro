@@ -4,7 +4,7 @@ import { RelativeTime } from "@namehash/namehash-ui";
 import type { AppBenchmark } from "data/apps/benchmarks-types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
-import { BenchmarkResultToBadgeStyles } from "@/utils/styles";
+import { benchmarkResultToBadgeStyles } from "@/utils/styles";
 
 export interface BenchmarkSummaryCardProps {
   benchmark: AppBenchmark;
@@ -54,7 +54,7 @@ const detailValueStyles = cn(
       <p class={detailLabelStyles}>Benchmark result</p>
       <BenchmarkResultBadge
         benchmark={benchmark}
-        className={cn(BenchmarkResultToBadgeStyles.get(benchmark.result)!)}
+        className={cn(benchmarkResultToBadgeStyles(benchmark))}
       />
     </div>
 

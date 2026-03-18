@@ -1,15 +1,15 @@
-import type { AppBenchmark } from "data/apps/benchmarks-types";
+import type { EffectiveAppBenchmark } from "data/apps/benchmarks-types";
 import type { App } from "data/apps/types.ts";
 import { getAppById } from "data/apps/utils.ts";
 
 import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge.tsx";
-import { BenchmarkResultToBadgeStyles } from "@/utils/styles.ts";
+import { benchmarkResultToBadgeStyles } from "@/utils/styles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface BenchmarksPerAppTypeCardProps {
   appsWithBenchmark: {
     app: App;
-    benchmark: AppBenchmark;
+    benchmark: EffectiveAppBenchmark;
   }[];
 }
 
@@ -35,7 +35,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
         {firstApp.type} benchmarks
       </h3>
       <div className="flex w-full flex-col">
-        {resolvedAppsWithBenchmark.map(({ app, benchmark }, index) => {
+        {appsWithBenchmark.map(({ app, benchmark }, index) => {
           const AppIcon = app.icon;
 
           return (
@@ -55,8 +55,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
                 benchmark={benchmark}
                 className={cn(
                   "shrink-0",
-                  // biome-ignore lint/style/noNonNullAssertion: the mapping is guaranteed to exist
-                  BenchmarkResultToBadgeStyles.get(benchmark.result)!,
+                  benchmarkResultToBadgeStyles(benchmark),
                   "cursor-pointer",
                 )}
               />
