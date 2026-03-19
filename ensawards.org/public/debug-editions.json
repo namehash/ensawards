@@ -1,0 +1,143 @@
+[
+  {
+    "slug": "2025-12",
+    "displayName": "ENS Holiday Awards",
+    "rules": {
+      "awardModel": "pie-split",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "10000000000" },
+      "maxQualifiedReferrers": 10,
+      "startTime": 1764547200,
+      "endTime": 1767225599,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-holiday-awards-rules",
+      "areAwardsDistributed": true
+    }
+  },
+  {
+    "slug": "debug-2026-03",
+    "displayName": "March 2026",
+    "rules": {
+      "awardModel": "rev-share-limit",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "10000000000" },
+      "minQualifiedRevenueContribution": { "currency": "USDC", "amount": "500000000" },
+      "qualifiedRevenueShare": 0.5,
+      "startTime": 1772323200,
+      "endTime": 1775001599,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-holiday-awards-rules",
+      "areAwardsDistributed": false,
+      "disqualifications": [
+        {
+          "referrer": "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
+          "reason": "Disqualified for operating an artificial self-referral scheme in violation of the referral program terms of service (fake; solely for debugging purposes)."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "debug-2025-12-rsl",
+    "displayName": "ENS Holiday Awards (Rev-Share-Limit, AwardsReview)",
+    "rules": {
+      "awardModel": "rev-share-limit",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "10000000000" },
+      "minQualifiedRevenueContribution": { "currency": "USDC", "amount": "500000000" },
+      "qualifiedRevenueShare": 0.5,
+      "startTime": 1764547200,
+      "endTime": 1767225599,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-holiday-awards-rules",
+      "areAwardsDistributed": false,
+      "disqualifications": [
+        {
+          "referrer": "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
+          "reason": "Disqualified for operating an artificial self-referral scheme in violation of the referral program terms of service (fake; solely for debugging purposes)."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "debug-2026-03-low-bar",
+    "displayName": "March 2026 (Low Threshold — Populated Leaderboard)",
+    "rules": {
+      "awardModel": "rev-share-limit",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "5000000000" },
+      "minQualifiedRevenueContribution": { "currency": "USDC", "amount": "10000" },
+      "qualifiedRevenueShare": 0.5,
+      "startTime": 1772323200,
+      "endTime": 1775001599,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-holiday-awards-rules",
+      "areAwardsDistributed": false,
+      "disqualifications": []
+    }
+  },
+  {
+    "slug": "debug-2026-03-high-bar",
+    "displayName": "March 2026 (High Threshold — Empty Leaderboard)",
+    "rules": {
+      "awardModel": "rev-share-limit",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "5000000000" },
+      "minQualifiedRevenueContribution": { "currency": "USDC", "amount": "30000000000" },
+      "qualifiedRevenueShare": 0.5,
+      "startTime": 1772323200,
+      "endTime": 1775001599,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-holiday-awards-rules",
+      "areAwardsDistributed": false,
+      "disqualifications": []
+    }
+  },
+  {
+    "slug": "debug-2026-03-tiny-pool",
+    "displayName": "March 2026 (Tiny Pool — Exhausted)",
+    "rules": {
+      "awardModel": "rev-share-limit",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "1000000" },
+      "minQualifiedRevenueContribution": { "currency": "USDC", "amount": "10000" },
+      "qualifiedRevenueShare": 0.5,
+      "startTime": 1772323200,
+      "endTime": 1775001599,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-holiday-awards-rules",
+      "areAwardsDistributed": false,
+      "disqualifications": []
+    }
+  },
+  {
+    "slug": "debug-2026-06",
+    "displayName": "June 2026 (Scheduled)",
+    "rules": {
+      "awardModel": "rev-share-limit",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "10000000000" },
+      "minQualifiedRevenueContribution": { "currency": "USDC", "amount": "500000000" },
+      "qualifiedRevenueShare": 0.5,
+      "startTime": 1780272000,
+      "endTime": 1782863999,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-holiday-awards-rules",
+      "areAwardsDistributed": false,
+      "disqualifications": []
+    }
+  }
+]
