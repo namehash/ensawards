@@ -114,6 +114,8 @@ const allContributions: Contribution[] = [
       {
         bestPractice.appliesTo.map((appliesTo) => (
           <BenchmarksPerAppTypeCard
+            key={`benchmarks-list-${appliesTo}`}
+            client:load
             appsWithBenchmark={sortedAppsByBenchmark.filter(
               ({ app }) => app.type === appliesTo,
             )}
