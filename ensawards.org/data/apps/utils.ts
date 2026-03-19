@@ -50,15 +50,20 @@ export const getAppByName = (appName: string): App | undefined => {
  * Calculates {@link EnsAwardsScore} for an app as a percentage of passed benchmark weight.
  */
 export const calculateAppEnsAwardsScore = (app: App): EnsAwardsScore => {
-  const accumulatedBenchmarks = app.benchmarks.reduce(
+  const completedBenchmarks = app.benchmarks.filter(
+    (benchmark): benchmark is AppBenchmarkCompleted =>
+      benchmark.status === BenchmarkStatuses.Completed,
+  );
+
+  if (completedBenchmarks.length === 0) return 0;
+
+  const accumulatedBenchmarksScore = completedBenchmarks.reduce(
     (sum, benchmark) => sum + getBenchmarkWeight(benchmark),
     0,
   );
 
-  if (app.benchmarks.length === 0) return 0;
-
   // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
-  const score = Math.round((accumulatedBenchmarks * 100) / app.benchmarks.length);
+  const score = Math.round((accumulatedBenchmarksScore * 100) / completedBenchmarks.length);
 
   // Check EnsAwardsScore invariants
   if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
@@ -84,7 +89,7 @@ export const calculateAppSupport = (bestPractice: BestPracticeApp): EnsAwardsSco
 
   for (const app of APPS) {
     const appBenchmark = app.benchmarks.find(
-      (benchmark) =>
+      (benchmark): benchmark is AppBenchmarkCompleted =>
         benchmark.bestPractice.id === bestPractice.id &&
         benchmark.status === BenchmarkStatuses.Completed,
     );

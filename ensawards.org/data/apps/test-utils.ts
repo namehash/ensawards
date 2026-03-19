@@ -7,6 +7,7 @@ import {
 } from "../ens-best-practices/types.ts";
 import { type Project, ProjectIds } from "../projects/types.ts";
 import {
+  type AppBenchmarkCompleted,
   BenchmarkResult,
   BenchmarkStatuses,
   type EffectiveAppBenchmark,
@@ -62,7 +63,7 @@ export const createMockBestPractice = (overrides: {
 export const createMockBenchmark = (
   bestPractice: BestPracticeApp,
   result: BenchmarkResult,
-): EffectiveAppBenchmark => ({
+): AppBenchmarkCompleted => ({
   bestPractice: bestPractice,
   status: BenchmarkStatuses.Completed,
   result,

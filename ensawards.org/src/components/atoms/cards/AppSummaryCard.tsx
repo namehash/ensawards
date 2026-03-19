@@ -4,7 +4,11 @@ import {
   BenchmarkStatuses,
   type EffectiveAppBenchmark,
 } from "data/apps/benchmarks-types.ts";
-import { calcCategoryScore, groupBenchmarksByCategory } from "data/apps/benchmarks-utils.ts";
+import {
+  calcCategoryScore,
+  compareBenchmarks,
+  groupBenchmarksByCategory,
+} from "data/apps/benchmarks-utils.ts";
 import type { App } from "data/apps/types.ts";
 import { calculateAppEnsAwardsScore, getAppById } from "data/apps/utils.ts";
 import {
@@ -70,18 +74,20 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
 
       {isOpen && (
         <div className="flex w-full flex-col gap-4 pt-4">
-          {group.map((benchmark) => (
-            <a
-              key={benchmark.bestPractice.id}
-              href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
-              className="flex items-start gap-3"
-            >
-              <span className="shrink-0">{getBenchmarkIcon(benchmark)}</span>
-              <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
-                {benchmark.bestPractice.name}
-              </span>
-            </a>
-          ))}
+          {group
+            .sort((a, b) => compareBenchmarks(a, b))
+            .map((benchmark) => (
+              <a
+                key={benchmark.bestPractice.id}
+                href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
+                className="flex items-start gap-3"
+              >
+                <span className="shrink-0">{getBenchmarkIcon(benchmark)}</span>
+                <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
+                  {benchmark.bestPractice.name}
+                </span>
+              </a>
+            ))}
         </div>
       )}
     </div>

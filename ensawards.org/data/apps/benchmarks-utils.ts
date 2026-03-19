@@ -6,6 +6,7 @@ import {
   type AppBenchmarkCompleted,
   type AppBenchmarkPending,
   BenchmarkResult,
+  type BenchmarkStatus,
   BenchmarkStatuses,
   type EffectiveAppBenchmark,
 } from "./benchmarks-types.ts";
@@ -19,9 +20,7 @@ import { type AppType } from "./types";
  * {@link BenchmarkResult.PartialPass} = 0.5
  * {@link BenchmarkResult.Fail} = 0.0
  */
-export const getBenchmarkWeight = (benchmark: EffectiveAppBenchmark): number => {
-  if (benchmark.status === BenchmarkStatuses.Pending) return 0;
-
+export const getBenchmarkWeight = (benchmark: AppBenchmarkCompleted): number => {
   switch (benchmark.result) {
     case BenchmarkResult.Pass:
       return 1;
@@ -75,9 +74,14 @@ export const calcCategoryScore = (benchmarks: EffectiveAppBenchmark[]): EnsAward
 
   if (!areAllBenchmarksOfSameCategory) return 0;
 
+  const completedBenchmarks = benchmarks.filter(
+    (benchmark): benchmark is AppBenchmarkCompleted =>
+      benchmark.status === BenchmarkStatuses.Completed,
+  );
+
   const score = Math.round(
-    (benchmarks.reduce((sum, benchmark) => sum + getBenchmarkWeight(benchmark), 0) * 100) /
-      benchmarks.length,
+    (completedBenchmarks.reduce((sum, benchmark) => sum + getBenchmarkWeight(benchmark), 0) * 100) /
+      completedBenchmarks.length,
   );
 
   // Check EnsAwardsScore invariants
@@ -108,4 +112,29 @@ export const buildEffectiveAppBenchmarks = (
   });
 
   return allBenchmarks;
+};
+
+// Declare sort order for benchmark result (Pass → Partial Pass → Fail)
+const resultOrder = {
+  [BenchmarkResult.Pass]: 0,
+  [BenchmarkResult.PartialPass]: 1,
+  [BenchmarkResult.Fail]: 2,
+} as const satisfies Record<BenchmarkResult, number>;
+
+// Declare sort order for benchmark status (Completed → Pending)
+const statusOrder = {
+  [BenchmarkStatuses.Completed]: 0,
+  [BenchmarkStatuses.Pending]: 1,
+} as const satisfies Record<BenchmarkStatus, number>;
+
+export const compareBenchmarks = (a: EffectiveAppBenchmark, b: EffectiveAppBenchmark): number => {
+  // If both benchmarks are completed sort by result
+  if (a.status === BenchmarkStatuses.Completed && b.status === BenchmarkStatuses.Completed) {
+    const resultDiff = resultOrder[a.result] - resultOrder[b.result];
+    return resultDiff;
+  }
+
+  // Otherwise, sort by status
+  const statusDiff = statusOrder[a.status] - statusOrder[b.status];
+  return statusDiff;
 };

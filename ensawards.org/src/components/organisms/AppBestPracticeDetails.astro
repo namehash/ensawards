@@ -9,6 +9,7 @@ import BenchmarkResultCard from "../atoms/cards/BenchmarkResultCard.astro";
 import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { calculateAppsPassed, calculateAppSupport } from "data/apps/utils.ts";
+import { compareBenchmarks } from "data/apps/benchmarks-utils";
 import { SuggestionCard, SuggestionCardLoading } from "../atoms/cards/SuggestionCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
@@ -40,19 +41,14 @@ const appsWithValidBenchmarks = appsWithBenchmarks.filter(
   ({ benchmark }) => benchmark !== undefined,
 );
 
-// Declare sort order for benchmark result (Pass → Partial Pass → Fail)
-const resultOrder = {
-  [BenchmarkResult.Pass]: 0,
-  [BenchmarkResult.PartialPass]: 1,
-  [BenchmarkResult.Fail]: 2,
-};
-
 // Sort benchmark results
 const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
-  // First sort by result
-  const resultDiff = resultOrder[a.benchmark!.result] - resultOrder[b.benchmark!.result];
-  if (resultDiff !== 0) return resultDiff;
-  // Then sort alphabetically within those categories
+  // First try to differentiate by benchmarks
+  const benchmarksDiff = compareBenchmarks(a.benchmark, b.benchmark);
+
+  if (benchmarksDiff !== 0) return benchmarksDiff;
+
+  // Otherwise, sort alphabetically by App name
   return a.app.name.localeCompare(b.app.name);
 });
 

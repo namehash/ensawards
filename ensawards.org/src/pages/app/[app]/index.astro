@@ -16,7 +16,11 @@ import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/
 import { type Contribution } from "data/contributors/types.ts";
 import { type EnsAwardsScore as EnsAwardsScoreType } from "@/utils/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { groupBenchmarksByCategory, calcCategoryScore } from "data/apps/benchmarks-utils";
+import {
+  groupBenchmarksByCategory,
+  calcCategoryScore,
+  compareBenchmarks,
+} from "data/apps/benchmarks-utils";
 import {
   type EffectiveAppBenchmark,
   type AppBenchmarkCompleted,
@@ -121,24 +125,26 @@ if (appToDisplay !== undefined) {
                         {group[0].bestPractice.category.name}
                       </span>
                     </div>
-                    {group.map((benchmark: EffectiveAppBenchmark) => (
-                      <BenchmarkResultCard
-                        name={benchmark.bestPractice.name}
-                        notes={benchmark.bestPractice.description}
-                        viewDetails={{
-                          text: "View detailed report",
-                          link: `/app/${appToDisplay.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
-                        }}>
-                        <BenchmarkResultBadge
-                          slot="badge"
-                          className={cn(
-                            benchmarkResultToBadgeStyles(benchmark),
-                            "cursor-pointer",
-                          )}
-                          benchmark={benchmark}
-                        />
-                      </BenchmarkResultCard>
-                    ))}
+                    {group
+                      .sort((a, b) => compareBenchmarks(a, b))
+                      .map((benchmark: EffectiveAppBenchmark) => (
+                        <BenchmarkResultCard
+                          name={benchmark.bestPractice.name}
+                          notes={benchmark.bestPractice.description}
+                          viewDetails={{
+                            text: "View detailed report",
+                            link: `/app/${appToDisplay.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
+                          }}>
+                          <BenchmarkResultBadge
+                            slot="badge"
+                            className={cn(
+                              benchmarkResultToBadgeStyles(benchmark),
+                              "cursor-pointer",
+                            )}
+                            benchmark={benchmark}
+                          />
+                        </BenchmarkResultCard>
+                      ))}
                   </div>
                 );
               })}
