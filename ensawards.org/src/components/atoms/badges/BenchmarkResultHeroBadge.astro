@@ -15,7 +15,7 @@ const benchmarkResultContent = (benchmark): { symbol: ImageMetadata; symbolAlt: 
   if (benchmark.status === BenchmarkStatuses.Pending) {
     return {
       symbol: benchmarkResultPartialPassSymbol,
-      symbolAlt: "Partially passed benchmark result indicator",
+      symbolAlt: "Pending review benchmark indicator",
     }; //TODO: To be adapted as the designs come in
   }
   switch (benchmark.result) {
@@ -57,7 +57,7 @@ const { symbol, symbolAlt } = benchmarkResultContent(benchmark);
   <p class="text-center text-base font-semibold leading-6 text-[#F5F5F5]">
     {
       benchmark.status === BenchmarkStatuses.Pending
-        ? "Pending"
+        ? BenchmarkStatuses.Pending
         : benchmark.result
     }
   </p>

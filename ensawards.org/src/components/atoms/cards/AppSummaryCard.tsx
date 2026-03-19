@@ -23,7 +23,7 @@ import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
 
 const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark) => {
   if (benchmark.status === BenchmarkStatuses.Pending) {
-    return <PendingIcon className="h-6 w-6 text-violet-600" />;
+    return <PendingIcon className="h-6 w-6 text-muted-foreground" />;
   }
 
   switch (benchmark.result) {

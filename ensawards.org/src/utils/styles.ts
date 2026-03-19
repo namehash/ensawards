@@ -10,7 +10,7 @@ export const getAppSupportColor = (value: number): string =>
 
 export const benchmarkResultToBadgeStyles = (benchmark: EffectiveAppBenchmark) => {
   if (benchmark.status === BenchmarkStatuses.Pending) {
-    return "text-violet-600 bg-violet-100";
+    return "text-muted-foreground bg-black/8";
   }
   switch (benchmark.result) {
     case BenchmarkResult.PartialPass:

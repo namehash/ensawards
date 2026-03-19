@@ -41,7 +41,9 @@ export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBa
       )}
     >
       {getBenchmarkIcon(benchmark)}
-      {benchmark.status === BenchmarkStatuses.Pending ? "Pending" : benchmark.result}
+      {benchmark.status === BenchmarkStatuses.Pending
+        ? BenchmarkStatuses.Pending
+        : benchmark.result}
     </span>
   );
 }
