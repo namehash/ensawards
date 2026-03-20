@@ -1,6 +1,7 @@
 import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
 import type { Contribution, Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
+import { User as NoContributionsIcon } from "lucide-react";
 import { useMemo } from "react";
 import { getAddress } from "viem";
 
@@ -92,9 +93,12 @@ export const SuggestionCard = ({
           <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
             <div className="flex flex-wrap items-start gap-3 py-1.5">
               {orderedContributorProfiles.length === 0 ? (
-                <p className="text-black font-semibold">
-                  No contributions yet... Be first to suggest updates to this {whatsSuggested}.
-                </p>
+                <div className="w-full flex flex-col justify-center items-center gap-3 py-3">
+                  <NoContributionsIcon size={24} className="text-muted-foreground" />
+                  <p className="text-base text-muted-foreground leading-normal font-normal">
+                    No contributions yet
+                  </p>
+                </div>
               ) : (
                 orderedContributorProfiles.map((profile) => {
                   const identity = buildUnresolvedIdentity(
