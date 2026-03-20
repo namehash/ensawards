@@ -1,10 +1,11 @@
 ---
-import { type BestPractice } from "../../../../data/ens-best-practices/types.ts";
-import { cn } from "../../../utils/tailwindClassConcatenation";
+import { type BestPractice } from "data/ens-best-practices/types.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import { pluralizeBestPracticeTarget } from "../../../utils/textModifications";
-import { appliesToAllProtocols } from "../../../../data/protocols/utils.ts";
-import { appliesToAllApps } from "../../../../data/apps/utils.ts";
+import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
+import { appliesToAllProtocols } from "data/protocols/utils.ts";
+import { appliesToAllApps } from "data/apps/utils.ts";
+import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
 
 export interface BestPracticeCardProps {
   bestPractice: BestPractice;
@@ -59,7 +60,7 @@ const appliesToBadgeStyles =
         <p class="text-sm leading-normal font-normal text-muted-foreground">
           Applies to
         </p>
-        {
+        <!-- {
           appliesToAllApps(bestPractice.appliesTo) ? (
             <span class={appliesToBadgeStyles}>Apps</span>
           ) : appliesToAllProtocols(bestPractice.appliesTo) ? (
@@ -73,7 +74,8 @@ const appliesToBadgeStyles =
               ))}
             </div>
           )
-        }
+        } -->
+        <AppliesToBadges bestPractice={bestPractice} />
       </div>
     </div>
   </div>

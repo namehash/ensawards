@@ -17,6 +17,7 @@ import { getProtocolById } from "data/protocols/utils.ts";
 import { SuggestionCard, SuggestionCardLoading } from "../atoms/cards/SuggestionCard.tsx";
 import { type Contribution } from "data/contributors/types";
 import { CONTRACTS } from "data/protocols/contracts";
+import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
@@ -41,6 +42,9 @@ const allContributions: Contribution[] = [
   ...bestPractice.contributions,
   ...contractDataContributions,
 ];
+
+const additionalInfoContainerStyles =
+  "flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch";
 ---
 
 <SubpageHero
@@ -54,14 +58,18 @@ const allContributions: Contribution[] = [
       link: `/ens-best-practices/${bestPractice.category.categorySlug}`,
     },
   ]}>
-  <div
-    slot="extraAdditionalElementFirst"
-    class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
-    <p class="text-gray-400">Powered by</p>
-    <a href="https://www.enscribe.xyz/" target="_blank" rel="noreferrer"
-      ><EnscribeIcon /></a
-    >
-  </div>
+  <Fragment slot="extraAdditionalElementLast">
+    <div class={cn(additionalInfoContainerStyles, "sm:gap-0.5 sm:items-start")}>
+      <p class="text-gray-400">Applies to</p>
+      <AppliesToBadges bestPractice={bestPractice} />
+    </div>
+    <div class={additionalInfoContainerStyles}>
+      <p class="text-gray-400">Powered by</p>
+      <a href="https://www.enscribe.xyz/" target="_blank" rel="noreferrer"
+        ><EnscribeIcon /></a
+      >
+    </div>
+  </Fragment>
 </SubpageHero>
 <section
   class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-10 py-6 sm:pt-[60px] px-5 sm:px-8">
