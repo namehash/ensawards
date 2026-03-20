@@ -253,9 +253,24 @@ export enum BenchmarkResult {
     Fail = "Fail",
 }
 
-export interface AppBenchmark {
+export const BenchmarkStatuses = {
+  Completed: "Completed",
+  Pending: "Pending",
+} as const;
+
+export interface AppBenchmarkAbstract<BenchmarkStatusT extends BenchmarkStatus> {
   /** The best practice being benchmarked */
   bestPractice: BestPracticeApp;
+
+  /** The status of a benchmark */
+  status: BenchmarkStatusT;
+}
+
+/**
+ * Represents a benchmark result for a specific {@link BestPractice} within an {@link App}.
+ */
+export interface AppBenchmarkCompleted
+  extends AppBenchmarkAbstract<typeof BenchmarkStatuses.Completed> {
   /** The result of the benchmark */
   result: BenchmarkResult;
   /** Unix timestamp when the benchmark was last updated */
@@ -264,6 +279,12 @@ export interface AppBenchmark {
   contributions: [Contribution, ...Contribution[]];
 }
 ```
+
+> **NOTE**
+>
+> Whenever you want to add or edit benchmark data, always implement the `AppBenchmarkCompleted` variant.
+>
+> The `AppBenchmarkPending` variant represents benchmarks for applicable best practices that have not yet been reviewed and is appended to our data dynamically at build time.
 
 ## Using `Biome` and `Prettier` together
 
