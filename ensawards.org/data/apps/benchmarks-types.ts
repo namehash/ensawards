@@ -23,7 +23,7 @@ export enum BenchmarkResult {
  */
 export const BenchmarkStatuses = {
   Completed: "Completed",
-  Pending: "Pending review",
+  Pending: "Pending",
 } as const;
 
 /**
