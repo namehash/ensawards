@@ -50,12 +50,14 @@ const additionalInfoContainerStyles =
 <SubpageHero
   header={bestPractice.name}
   description={bestPractice.description}
-  breadcrumbs={["ENS best practices", bestPractice.category.name]}
+  breadcrumbs={[
+    { text: "ENS best practices", linkHref: "/ens-best-practices" },
+    { text: bestPractice.category.name },
+  ]}
   additionalElements={[
     {
       name: "Category",
       value: bestPractice.category.name,
-      link: `/ens-best-practices/${bestPractice.category.categorySlug}`,
     },
   ]}>
   <Fragment slot="extraAdditionalElementLast">

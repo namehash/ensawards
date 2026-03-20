@@ -1,11 +1,12 @@
 ---
-import { cn } from "../../utils/tailwindClassConcatenation";
+import { cn } from "@/utils/tailwindClassConcatenation";
 import ChevronRightIcon from "./icons/ChevronRightIcon.astro";
 import HomeIcon from "./icons/HomeIcon.astro";
 import { getAppByName } from "data/apps/utils";
+import { type Breadcrumb } from "@/utils/types";
 
 interface BreadcrumbsProps {
-  breadcrumbs: string[];
+  breadcrumbs: Breadcrumb[];
   styles?: {
     home?: string;
     chevron?: string;
@@ -15,37 +16,7 @@ interface BreadcrumbsProps {
 
 const { breadcrumbs, styles }: BreadcrumbsProps = Astro.props;
 
-let breadcrumbHref = "";
-
-const normalizeText = (text: string): string => text.toLowerCase().replaceAll(" ", "-");
-
-const adaptBreadcrumb = (crumb: string): string => {
-  // We use switch case here to stay flexible in the future
-  switch (crumb) {
-    case "DAO leaderboard":
-      return "dao";
-    case "DeFi leaderboard":
-      return "defi";
-    case "Wallet leaderboard":
-      return "wallet";
-    case "Explorer leaderboard":
-      return "explorer";
-    case "ENS leaderboards":
-      return "leaderboards";
-    case "ENS Referral Program":
-      return "ens-referral-program";
-    case "ENS advocates":
-      return "advocate";
-    default:
-      return crumb;
-  }
-};
-
-const handleAppBreadcrumb = (crumb: string): string | undefined => {
-  const maybeApp = getAppByName(crumb);
-
-  return maybeApp ? `/app/${maybeApp.appSlug}` : undefined;
-};
+const baseBreadcrumbStyles = "text-xs sm:text-sm leading-normal font-normal text-white";
 ---
 
 <div
@@ -60,46 +31,33 @@ const handleAppBreadcrumb = (crumb: string): string | undefined => {
   </a>
   <ChevronRightIcon className={cn("text-white", styles?.chevron)} />
   {
-    breadcrumbs.map((crumb, idx) => {
-      const urlAdaptedCrumb = adaptBreadcrumb(crumb);
+    breadcrumbs.map((breadcrumb, idx) => {
       const isLastCrumb = idx === breadcrumbs.length - 1;
+      let breadcrumbElement = (
+        <p class={cn(baseBreadcrumbStyles, styles?.text)}>{breadcrumb.text}</p>
+      );
 
-      // We assume that an app will always be the last breadcrumb (at least for now).
-      // That's necessary because our only use case of App in breadcrumbs (`ensawards.org\src\pages\app\[app]\[category]\[bestPractice]\index.astro`)
-      // breaks the natural breadcrumbs flow, since the route to app details page is independent from leaderboards' routes
-      if (isLastCrumb) {
-        breadcrumbHref =
-          handleAppBreadcrumb(crumb) ??
-          breadcrumbHref.concat("/", urlAdaptedCrumb);
-      } else {
-        breadcrumbHref = breadcrumbHref.concat("/", urlAdaptedCrumb);
-      }
-
-      if (!isLastCrumb) {
-        return (
-          <>
-            <a
-              class={cn(
-                "text-xs sm:text-sm leading-normal font-normal text-white hover:underline hover:underline-offset-[25%] transition-all duration-200",
-                styles?.text,
-              )}
-              href={decodeURI(normalizeText(breadcrumbHref))}>
-              {crumb}
-            </a>
-            <ChevronRightIcon className={cn("text-white", styles?.chevron)} />
-          </>
+      if (breadcrumb.linkHref !== undefined) {
+        breadcrumbElement = (
+          <a
+            class={cn(
+              baseBreadcrumbStyles,
+              "hover:underline hover:underline-offset-[25%] transition-all duration-200",
+              styles?.text,
+            )}
+            href={breadcrumb.linkHref}>
+            {breadcrumb.text}
+          </a>
         );
       }
 
       return (
-        <a
-          class={cn(
-            "text-xs sm:text-sm leading-normal font-normal text-white hover:underline hover:underline-offset-[25%] transition-all duration-200",
-            styles?.text,
+        <>
+          {breadcrumbElement}
+          {!isLastCrumb && (
+            <ChevronRightIcon className={cn("text-white", styles?.chevron)} />
           )}
-          href={decodeURI(normalizeText(breadcrumbHref))}>
-          {crumb}
-        </a>
+        </>
       );
     })
   }

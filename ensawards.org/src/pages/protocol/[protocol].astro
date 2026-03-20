@@ -77,8 +77,11 @@ if (resolvedProtocol) {
         header={resolvedProtocol.name}
         description={resolvedProtocol.description}
         breadcrumbs={[
-          "ENS leaderboards",
-          `${resolvedProtocol.protocolType} leaderboard`,
+          { text: "ENS leaderboards", linkHref: "/leaderboards" },
+          {
+            text: `${resolvedProtocol.protocolType} leaderboard`,
+            linkHref: `/leaderboards/${resolvedProtocol.protocolType.toLowerCase()}`,
+          },
         ]}>
         <ProtocolIcon
           slot="icon"

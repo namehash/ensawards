@@ -19,7 +19,9 @@ import { cn } from "../../utils/tailwindClassConcatenation";
   <SubpageHero
     header="ENS referral live feed"
     description="Watch the latest ENS referrals as they stream in."
-    breadcrumbs={["ENS Referral Program"]}
+    breadcrumbs={[
+      { text: "ENS Referral Program", linkHref: "/ens-referral-program" },
+    ]}
     customImage={{
       source: "/src/assets/referralLiveFeedHeroImage.png",
       width: 315,

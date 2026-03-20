@@ -79,9 +79,12 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
         header={resolvedBestPractice.name}
         description={resolvedBestPractice.description}
         breadcrumbs={[
-          "ENS leaderboards",
-          `${resolvedApp.type} leaderboard`,
-          resolvedApp.name,
+          { text: "ENS leaderboards", linkHref: "/leaderboards" },
+          {
+            text: `${resolvedApp.type} leaderboard`,
+            linkHref: `/leaderboards/${resolvedApp.type.toLowerCase()}`,
+          },
+          { text: resolvedApp.name, linkHref: `/app/${resolvedApp.appSlug}` },
         ]}>
         <div slot="icon" class="flex flex-row gap-3 justify-start items-center">
           <AppIcon className="w-[28px] h-[28px] shrink-0 rounded-[6px]" />

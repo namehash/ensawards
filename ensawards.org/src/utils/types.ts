@@ -11,6 +11,11 @@ export interface QuoteCardData {
   avatarPath: string;
 }
 
+export interface Breadcrumb {
+  text: string;
+  linkHref?: string;
+}
+
 /**
  * Contribution targets that can be surfaced by the {@link SuggestionCard}.
  *

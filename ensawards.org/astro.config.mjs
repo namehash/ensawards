@@ -39,6 +39,8 @@ export default defineConfig({
     "/ens-holiday-awards-rules": "/ens-referral-program/editions/2025-12/rules",
     "/ens-referral-live-feed": "/ens-referral-program/live-feed",
     "/leaderboards/referrer": "/ens-referral-program/editions/2025-12/leaderboard",
+
+    "/ens-best-practices/contract-naming": "/ens-best-practices",
   },
 
   adapter: vercel(),

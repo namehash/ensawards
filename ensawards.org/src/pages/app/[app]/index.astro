@@ -71,7 +71,13 @@ if (appToDisplay !== undefined) {
       <SubpageHero
         header={appToDisplay.name}
         description={appToDisplay.description}
-        breadcrumbs={["ENS leaderboards", `${appToDisplay.type} leaderboard`]}>
+        breadcrumbs={[
+          { text: "ENS leaderboards", linkHref: "/leaderboards" },
+          {
+            text: `${appToDisplay.type} leaderboard`,
+            linkHref: `/leaderboards/${appToDisplay.type.toLowerCase()}`,
+          },
+        ]}>
         <AppIcon
           slot="icon"
           className="w-[60px] h-[60px] shrink-0 rounded-lg"

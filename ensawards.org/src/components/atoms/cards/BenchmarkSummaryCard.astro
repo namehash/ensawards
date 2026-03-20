@@ -12,7 +12,6 @@ export interface BenchmarkSummaryCardProps {
 
 const { benchmark }: BenchmarkSummaryCardProps = Astro.props;
 
-const categoryHref = `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}`;
 const bestPracticeHref = `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`;
 
 const detailLabelStyles = "text-sm leading-normal font-normal text-muted-foreground";
@@ -38,9 +37,9 @@ const detailValueStyles = cn(
 
     <div class="flex w-full flex-col items-start gap-1 py-1">
       <p class={detailLabelStyles}>Category</p>
-      <a href={categoryHref} class={detailValueStyles}>
+      <p class="text-sm leading-normal font-medium text-black">
         {benchmark.bestPractice.category.name}
-      </a>
+      </p>
     </div>
 
     <div class="flex w-full flex-col items-start gap-1 py-1">

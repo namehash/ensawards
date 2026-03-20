@@ -67,7 +67,7 @@ if (resolvedAppType !== undefined) {
       <SubpageHero
         header={`${resolvedAppType} leaderboard`}
         description={`Compare ${pluralizedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
-        breadcrumbs={["ENS leaderboards"]}
+        breadcrumbs={[{ text: "ENS leaderboards", linkHref: "/leaderboards" }]}
         customImage={{
           source: "/src/assets/leaderboardsHeroImage.png",
           width: 371,

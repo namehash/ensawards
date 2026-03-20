@@ -31,7 +31,9 @@ if (resolvedReferralProgramEditionConfig === undefined) {
   <SubpageHero
     header={`${resolvedReferralProgramEditionConfig.displayName} leaderboard`}
     description={`Compare referrers by their performance in ${resolvedReferralProgramEditionConfig.displayName}.`}
-    breadcrumbs={["ENS Referral Program"]}
+    breadcrumbs={[
+      { text: "ENS Referral Program", linkHref: "/ens-referral-program" },
+    ]}
     customImage={{
       source: "/src/assets/leaderboardsHeroImage.png",
       width: 371,
