@@ -19,15 +19,8 @@ import BestPracticeCard from "@/components/atoms/cards/BestPracticeCard.astro";
   }}>
   <SubpageHero
     header="ENS best practices"
-    description="Learn how to build the best possible ENS integration.">
-    <div
-      slot="largerHeroItem"
-      class="max-sm:self-stretch sm:absolute sm:top-0 sm:right-0">
-      <UnderConstructionBanner
-        text="The current catalog of ENS best practices is not comprehensive and is being expanded."
-      />
-    </div>
-  </SubpageHero>
+    description="Learn how to build the best possible ENS integration."
+  />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     {
@@ -47,5 +40,8 @@ import BestPracticeCard from "@/components/atoms/cards/BestPracticeCard.astro";
         </ItemsList>
       ))
     }
+    <UnderConstructionBanner
+      text="The current catalog of ENS best practices is not comprehensive and is being expanded."
+    />
   </section>
 </Layout>

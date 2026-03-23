@@ -8,7 +8,7 @@ const { text }: UnderConstructionProps = Astro.props;
 ---
 
 <div
-  class="w-fit h-fit max-w-[309px] box-border flex flex-row justify-start items-start gap-[10px] px-3 py-2 rounded-md bg-white relative z-10">
+  class="w-full h-fit max-w-[1216px] box-border flex flex-row justify-start items-start gap-3 p-4 rounded-md bg-white relative z-10 border border-gray-200 border-dashed">
   <TrafficCone size={20} class="text-amber-500 flex-shrink-0" />
-  <p class="text-xs leading-5 font-normal text-black">{text}</p>
+  <p class="text-sm leading-normal font-normal text-muted-foreground">{text}</p>
 </div>
