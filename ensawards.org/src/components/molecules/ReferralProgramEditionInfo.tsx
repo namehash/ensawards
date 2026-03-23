@@ -12,10 +12,10 @@ import {
 } from "@/components/atoms/badges/ReferralProgramStatusBadge";
 import {
   ReferralProgramEditionBudget,
+  ReferralProgramEditionFieldLoading,
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
-} from "@/components/atoms/cards/referralProgramEditionCard";
-import { ReferralProgramEditionFieldLoading } from "@/components/atoms/cards/referralProgramEditionCard/loading.tsx";
+} from "@/components/atoms/cards/referralProgramEditionCard/shared.tsx";
 import { currencyFormatter } from "@/components/atoms/cards/referrerCard/shared.tsx";
 import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
@@ -98,12 +98,7 @@ export const ReferralProgramEditionInfo = ({
         <ReferralProgramEditionFieldLoading label="Rules" />
       ) : (
         <ReferralProgramEditionRules
-          rulesUrl={
-            new URL(
-              `/ens-referral-program/editions/${referralProgramEdition.slug}/rules`,
-              getEnsAwardsBaseUrl(),
-            )
-          }
+          rulesUrlHref={`/ens-referral-program/editions/${referralProgramEdition.slug}/rules`}
         />
       )}
       {isLoading ? (

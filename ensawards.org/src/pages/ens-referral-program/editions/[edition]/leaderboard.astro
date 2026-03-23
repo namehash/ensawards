@@ -2,7 +2,9 @@
 import Error404Display from "@/components/molecules/Error404Display.astro";
 import Layout from "@/layouts/Layout.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
-import { ReferralProgramEditionCard } from "@/components/atoms/cards/referralProgramEditionCard";
+import { ReferralProgramEditionHeroCardPieSplit } from "@/components/atoms/cards/referralProgramEditionCard/pie-split/hero";
+import { ReferralProgramEditionHeroCardRevShareLimit } from "@/components/atoms/cards/referralProgramEditionCard/rev-share/hero";
+import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
 import { ReferrerLeaderboard } from "@/components/referral-awards-program/referrers/ReferrerLeaderboard";
 import { getReferralProgramEditionConfigBySlug } from "@/utils/referralProgram";
 import { ReferralProgramLeaderboardHeroButtons } from "@/components/atoms/ReferralProgramLeaderboardHeroButtons";
@@ -51,12 +53,20 @@ const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConf
           height: 372,
           styles: "-top-0 right-0 opacity-10",
         }}>
-        <ReferralProgramEditionCard
-          client:load
-          slot="largerHeroItem"
-          referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
-          showMobileVariant={true}
-        />
+        {resolvedReferralProgramEditionConfig.rules.awardModel ===
+        ReferralProgramAwardModels.RevShareLimit ? (
+          <ReferralProgramEditionHeroCardRevShareLimit
+            client:load
+            slot="largerHeroItem"
+            referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+          />
+        ) : (
+          <ReferralProgramEditionHeroCardPieSplit
+            client:load
+            slot="largerHeroItem"
+            referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+          />
+        )}
         <ReferralProgramLeaderboardHeroButtons
           client:load
           slot="ctaContent"
