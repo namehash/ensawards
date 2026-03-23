@@ -21,6 +21,8 @@ import {
 import { useState } from "react";
 
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
+import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
@@ -82,7 +84,18 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
                 href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
                 className="flex items-start gap-3"
               >
-                <span className="shrink-0">{getBenchmarkIcon(benchmark)}</span>
+                <GenericTooltip
+                  tooltipOffset={1}
+                  content={
+                    <p>
+                      {benchmark.status === BenchmarkStatuses.Pending
+                        ? benchmark.status
+                        : benchmark.result}
+                    </p>
+                  }
+                >
+                  <span className="shrink-0 cursor-pointer">{getBenchmarkIcon(benchmark)}</span>
+                </GenericTooltip>
                 <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
                   {benchmark.bestPractice.name}
                 </span>
@@ -107,28 +120,30 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
   const AppIcon = resolvedApp.icon;
 
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white px-5">
-      <div className="flex items-start justify-between gap-4 py-5">
-        <div className="flex min-w-0 flex-col items-start gap-3">
-          <div className="flex h-10 w-10 items-center justify-center overflow-hidden">
-            <AppIcon className="h-10 w-10 shrink-0 rounded-md" />
+    <TooltipProvider delayDuration={200} skipDelayDuration={0}>
+      <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white px-5">
+        <div className="flex items-start justify-between gap-4 py-5">
+          <div className="flex min-w-0 flex-col items-start gap-3">
+            <div className="flex h-10 w-10 items-center justify-center overflow-hidden">
+              <AppIcon className="h-10 w-10 shrink-0 rounded-md" />
+            </div>
+            <h3 className="text-lg leading-normal font-semibold text-black">{resolvedApp.name}</h3>
           </div>
-          <h3 className="text-lg leading-normal font-semibold text-black">{resolvedApp.name}</h3>
+          <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
         </div>
-        <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
-      </div>
-      {benchmarkGroups.map((group, index) => {
-        if (group.length === 0) return null;
+        {benchmarkGroups.map((group, index) => {
+          if (group.length === 0) return null;
 
-        return (
-          <BenchmarkCategorySection
-            key={`${resolvedApp.name}-benchmarks-in-${group[0].bestPractice.category.id}-category`}
-            app={resolvedApp}
-            group={group}
-            initiallyOpen={index === 0}
-          />
-        );
-      })}
-    </div>
+          return (
+            <BenchmarkCategorySection
+              key={`${resolvedApp.name}-benchmarks-in-${group[0].bestPractice.category.id}-category`}
+              app={resolvedApp}
+              group={group}
+              initiallyOpen={index === 0}
+            />
+          );
+        })}
+      </div>
+    </TooltipProvider>
   );
 }

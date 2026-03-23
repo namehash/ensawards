@@ -1,7 +1,7 @@
 ---
 import { RelativeTime } from "@namehash/namehash-ui";
 
-import type { AppBenchmark } from "data/apps/benchmarks-types.ts";
+import { BenchmarkStatuses, type AppBenchmark } from "data/apps/benchmarks-types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
 import { benchmarkResultToBadgeStyles } from "@/utils/styles";
@@ -57,15 +57,19 @@ const detailValueStyles = cn(
       />
     </div>
 
-    <div class="flex w-full flex-col items-start gap-1 py-1">
-      <p class={detailLabelStyles}>Last updated</p>
-      <p class="text-sm leading-normal font-medium text-black">
-        <RelativeTime
-          client:load
-          enforcePast
-          timestamp={benchmark.lastUpdated}
-        />
-      </p>
-    </div>
+    {
+      benchmark.status === BenchmarkStatuses.Completed && (
+        <div class="flex w-full flex-col items-start gap-1 py-1">
+          <p class={detailLabelStyles}>Last updated</p>
+          <p class="text-sm leading-normal font-medium text-black">
+            <RelativeTime
+              client:load
+              enforcePast
+              timestamp={benchmark.lastUpdated}
+            />
+          </p>
+        </div>
+      )
+    }
   </div>
 </div>
