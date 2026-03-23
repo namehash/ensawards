@@ -1,9 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import { cn } from "../../utils/tailwindClassConcatenation";
-import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
+import RevenueShareBanner from "@/components/atoms/banners/RevenueShareBanner.astro";
 
-import ReferralImage from "../../assets/referralLiveFeedHeroImage.png";
+import ReferralImage from "@/assets/referralLiveFeedHeroImage.png";
 
 const horizontalContainerStyles =
   "w-fit h-fit flex flex-row flex-nowrap justify-start items-center";
@@ -29,7 +30,7 @@ const horizontalContainerStyles =
         </h1>
         <p
           class="text-base leading-normal sm:leading-7 font-normal text-center sm:text-left text-white/60">
-          Grow .eth name registrations and renewals. Earn $ENS.
+          Earn $$$ by growing .eth name registrations and renewals.
         </p>
       </div>
       <div class={cn(horizontalContainerStyles, "gap-4")}>
@@ -56,6 +57,10 @@ const horizontalContainerStyles =
           )}>View all editions</a
         >
       </div>
+      <RevenueShareBanner
+        header="Up to 50% revenue share!"
+        description="The revenue share that's bigger than ever."
+      />
     </div>
     <Image
       quality={100}

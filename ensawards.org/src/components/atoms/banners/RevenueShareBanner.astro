@@ -1,0 +1,24 @@
+---
+import DollarEnsTokenIcon from "@/components/atoms/icons/DollarEnsTokenIcon.astro";
+
+interface RevenueShareBannerProps {
+  header: string;
+  description: string;
+}
+
+const { header, description }: RevenueShareBannerProps = Astro.props;
+---
+
+<div
+  class="w-full sm:w-fit h-fit flex flex-row flex-nowrap justify-center items-center gap-3 rounded-xl bg-white/5 px-4 py-3">
+  <DollarEnsTokenIcon className="flex-shrink-0 w-9 h-9" />
+  <div
+    class="w-full max-w-[280px] flex flex-col justify-center items-start gap-0.5">
+    <h4 class="w-full text-sm leading-5 font-semibold text-white">
+      {header}
+    </h4>
+    <p class="w-full text-sm leading-5 font-normal text-white/50">
+      {description}
+    </p>
+  </div>
+</div>
