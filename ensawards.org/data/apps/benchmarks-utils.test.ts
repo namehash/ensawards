@@ -6,6 +6,7 @@ import {
   BenchmarkStatuses,
 } from "./benchmarks-types.ts";
 import {
+  allBenchmarksPending,
   buildEffectiveAppBenchmarks,
   calcCategoryScore,
   compareBenchmarks,
@@ -211,6 +212,26 @@ describe("benchmarks-utils", () => {
           `Expected sorted benchmark at index ${index} to match "${benchmark.bestPractice.id}"`,
         ).toBe(true),
       );
+    });
+  });
+
+  describe("allBenchmarksPending", () => {
+    it("should return true if all benchmarks are pending", () => {
+      const pendingBenchmarks = [
+        mockPendingReverseResolutionBenchmark,
+        mockPendingReverseResolutionBenchmark,
+      ];
+
+      expect(allBenchmarksPending(pendingBenchmarks)).toBe(true);
+    });
+
+    it("should return false if any benchmark is not pending", () => {
+      const mixedBenchmarks = [
+        mockPendingReverseResolutionBenchmark,
+        mockFailingReverseResolutionBenchmark,
+      ];
+
+      expect(allBenchmarksPending(mixedBenchmarks)).toBe(false);
     });
   });
 });

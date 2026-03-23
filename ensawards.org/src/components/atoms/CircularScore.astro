@@ -2,11 +2,17 @@
 import { cn } from "../../utils/tailwindClassConcatenation";
 export interface CircularScoreProps {
   score: number;
+  scorePending?: boolean;
   size?: number;
   strokeWidth?: number;
 }
 
-const { score, size = 139, strokeWidth = 10 }: CircularScoreProps = Astro.props;
+const {
+  score,
+  scorePending = false,
+  size = 139,
+  strokeWidth = 10,
+}: CircularScoreProps = Astro.props;
 
 const gradientStartColors = ["#12D494", "#ffd230", "#fb2c36"];
 const gradientStopColors = ["#0D9A6B", "#e17100", "#c10007"];
@@ -75,12 +81,24 @@ const circumference = 2 * Math.PI * radius;
   </svg>
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-0">
-    <p
-      id="scoreNumber"
-      data-score={score}
-      class="text-4xl text-white leading-8 font-semibold transition-all ease-linear">
-    </p>
-    <p class={cn("text-4xl text-white leading-8 font-semibold")}>%</p>
+    {
+      scorePending ? (
+        <p class="text-base leading-normal font-semibold text-[rgba(245,245,245,0.5)]">
+          Pending
+        </p>
+      ) : (
+        <p
+          id="scoreNumber"
+          data-score={score}
+          class="text-4xl text-white leading-8 font-semibold transition-all ease-linear"
+        />
+      )
+    }
+    {
+      !scorePending && (
+        <p class={cn("text-4xl text-white leading-8 font-semibold")}>%</p>
+      )
+    }
   </div>
 </div>
 <script>

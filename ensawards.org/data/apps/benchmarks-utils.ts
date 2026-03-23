@@ -79,6 +79,8 @@ export const calcCategoryScore = (benchmarks: EffectiveAppBenchmark[]): EnsAward
       benchmark.status === BenchmarkStatuses.Completed,
   );
 
+  if (completedBenchmarks.length === 0) return 0;
+
   const score = Math.round(
     (completedBenchmarks.reduce((sum, benchmark) => sum + getBenchmarkWeight(benchmark), 0) * 100) /
       completedBenchmarks.length,
@@ -138,3 +140,7 @@ export const compareBenchmarks = (a: EffectiveAppBenchmark, b: EffectiveAppBench
   const statusDiff = statusOrder[a.status] - statusOrder[b.status];
   return statusDiff;
 };
+
+/** Calculates whether all benchmarks are of {@link BenchmarkStatuses.Pending} status */
+export const allBenchmarksPending = (benchmarks: EffectiveAppBenchmark[]): boolean =>
+  benchmarks.every((benchmark) => benchmark.status === BenchmarkStatuses.Pending);

@@ -1,15 +1,14 @@
 ---
 import { APPS } from "data/apps";
-import { BenchmarkResult, BenchmarkStatuses } from "data/apps/benchmarks-types.ts";
+import { BenchmarkStatuses } from "data/apps/benchmarks-types.ts";
 import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
-import { BenchmarkResultToBadgeStyles, getAppSupportColor } from "@/utils/styles";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { BenchmarkResultBadge } from "../atoms/badges/BenchmarkResultBadge";
-import BenchmarkResultCard from "../atoms/cards/BenchmarkResultCard.astro";
-import ItemsList from "../molecules/ItemsList.astro";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { calculateAppSupport } from "data/apps/utils.ts";
-import { compareBenchmarks } from "data/apps/benchmarks-utils";
+import {
+  allBenchmarksPending as allBenchmarksPendingUtil,
+  compareBenchmarks,
+} from "data/apps/benchmarks-utils";
 import { SuggestionCard, SuggestionCardLoading } from "../atoms/cards/SuggestionCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
@@ -66,6 +65,10 @@ const allContributions: Contribution[] = [
   ...benchmarkDataContributions,
 ];
 
+const allBenchmarksPending = allBenchmarksPendingUtil(
+  appsWithValidBenchmarks.map(({ benchmark }) => benchmark),
+);
+
 const additionalInfoContainerStyles =
   "flex flex-row md:flex-col flex-nowrap justify-between md:justify-center items-center md:items-end md:gap-0 leading-7 max-md:self-stretch";
 ---
@@ -99,7 +102,15 @@ const additionalInfoContainerStyles =
         "md:max-[1200px]:items-start min-[1200px]:items-end",
       )}>
       <p class="text-gray-400 whitespace-nowrap">App support</p>
-      <ScoreBar score={appSupport} mobileAdaptive={false} />
+      {
+        allBenchmarksPending ? (
+          <p class="text-base leading-normal font-semibold text-white">
+            Pending
+          </p>
+        ) : (
+          <ScoreBar score={appSupport} mobileAdaptive={false} />
+        )
+      }
     </div>
   </Fragment>
 </SubpageHero>

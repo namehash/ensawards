@@ -2,13 +2,12 @@
 import { type BestPractice, BestPracticeTypes } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
-import { appliesToAllProtocols } from "data/protocols/utils.ts";
-import { appliesToAllApps } from "data/apps/utils.ts";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
 import EnscribeIcon from "@/components/atoms/icons/EnscribeIconLight.astro";
 import { calculateAppSupport } from "data/apps/utils.ts";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
+import { APPS } from "data/apps";
+import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benchmarks-utils.ts";
 
 export interface BestPracticeCardProps {
   bestPractice: BestPractice;
@@ -16,8 +15,14 @@ export interface BestPracticeCardProps {
 
 const { bestPractice }: BestPracticeCardProps = Astro.props;
 
-const appliesToBadgeStyles =
-  "flex justify-center items-center px-2 py-[2px] rounded-md border border-gray-200 bg-white text-black text-xs leading-4 font-semibold";
+const allBenchmarksPending =
+  bestPractice.type === BestPracticeTypes.App
+    ? allBenchmarksPendingUtil(
+        APPS.filter((app) => bestPractice.appliesTo.includes(app.type)).flatMap((app) =>
+          app.benchmarks.filter((benchmark) => benchmark.bestPractice.id === bestPractice.id),
+        ),
+      )
+    : false;
 ---
 
 <a
@@ -74,10 +79,14 @@ const appliesToBadgeStyles =
       </p>
       {
         bestPractice.type === BestPracticeTypes.App ? (
-          <ScoreBar
-            score={calculateAppSupport(bestPractice)}
-            mobileAdaptive={false}
-          />
+          allBenchmarksPending ? (
+            <p class="text-sm leading-normal font-medium text-black">Pending</p>
+          ) : (
+            <ScoreBar
+              score={calculateAppSupport(bestPractice)}
+              mobileAdaptive={false}
+            />
+          )
         ) : (
           <EnscribeIcon />
         )

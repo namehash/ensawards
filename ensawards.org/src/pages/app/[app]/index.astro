@@ -20,6 +20,7 @@ import {
   groupBenchmarksByCategory,
   calcCategoryScore,
   compareBenchmarks,
+  allBenchmarksPending as allBenchmarksPendingUtil,
 } from "data/apps/benchmarks-utils";
 import {
   type EffectiveAppBenchmark,
@@ -27,6 +28,7 @@ import {
   BenchmarkStatuses,
 } from "data/apps/benchmarks-types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
+import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon.tsx";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -39,7 +41,8 @@ const appToDisplay = getAppBySlug(app);
 let appScore: EnsAwardsScoreType = 0;
 let AppIcon;
 let appBenchmarksDataContributions: Contribution[] = [];
-let benchmarkGroups: AppBenchmark[][] = [];
+let benchmarkGroups: EffectiveAppBenchmark[][] = [];
+let allBenchmarksPending = false;
 
 if (appToDisplay !== undefined) {
   appScore = calculateAppEnsAwardsScore(appToDisplay);
@@ -52,6 +55,7 @@ if (appToDisplay !== undefined) {
     .flatMap((benchmark) => benchmark.contributions);
 
   benchmarkGroups = groupBenchmarksByCategory(appToDisplay.benchmarks);
+  allBenchmarksPending = allBenchmarksPendingUtil(appToDisplay.benchmarks);
 }
 ---
 
@@ -113,6 +117,7 @@ if (appToDisplay !== undefined) {
         <EnsAwardsScore
           slot="largerHeroItem"
           score={appScore}
+          scorePending={allBenchmarksPending}
           label="ENSAwards score"
         />
       </SubpageHero>
@@ -122,10 +127,15 @@ if (appToDisplay !== undefined) {
             <ItemsList header="ENS best practice benchmarks">
               {benchmarkGroups.map((group) => {
                 const categoryScore = calcCategoryScore(group);
+                const allBenchmarksPending = allBenchmarksPendingUtil(group);
                 return (
                   <div class="w-full flex flex-col justify-start items-start gap-2">
                     <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">
-                      <EnsAwardsCircularScoreSmall score={categoryScore} />
+                      {allBenchmarksPending ? (
+                        <AllBenchmarksPendingIcon />
+                      ) : (
+                        <EnsAwardsCircularScoreSmall score={categoryScore} />
+                      )}
                       {/* This assumption is safe, because all benchmarks passed into this component belong to one BestPracticeCategory */}
                       <span class="flex-1 text-lg leading-normal font-semibold text-black">
                         {group[0].bestPractice.category.name}

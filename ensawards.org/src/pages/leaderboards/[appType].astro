@@ -13,6 +13,7 @@ import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "data/apps/utils.ts
 import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
 import { BenchmarkStatuses } from "data/apps/benchmarks-types";
+import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benchmarks-utils.ts";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({
@@ -80,20 +81,36 @@ if (resolvedAppType !== undefined) {
           <div class="w-full md:w-3/5">
             <ItemsList containerStyles="gap-3 sm:gap-3">
               {APPS.filter((app) => app.type === resolvedAppType)
-                .sort(
-                  (a, b) =>
+                .sort((a, b) => {
+                  const aAllBenchmarksPending = allBenchmarksPendingUtil(
+                    a.benchmarks,
+                  );
+                  const bAllBenchmarksPending = allBenchmarksPendingUtil(
+                    b.benchmarks,
+                  );
+
+                  if (aAllBenchmarksPending && !bAllBenchmarksPending) return 1;
+                  if (!aAllBenchmarksPending && bAllBenchmarksPending)
+                    return -1;
+
+                  return (
                     calculateAppEnsAwardsScore(b) -
-                    calculateAppEnsAwardsScore(a),
-                )
+                    calculateAppEnsAwardsScore(a)
+                  );
+                })
                 .map((app, idx) => {
                   const AppIcon = app.icon;
+                  const allBenchmarksPending = allBenchmarksPendingUtil(
+                    app.benchmarks,
+                  );
                   return (
                     <LeaderboardCard
                       key={`app-review-card-${app.id}`}
                       name={app.name}
                       ensAwardsScore={calculateAppEnsAwardsScore(app)}
                       viewDetailsLink={`/app/${app.appSlug}`}
-                      viewDetailsText="App report">
+                      viewDetailsText="App report"
+                      scorePending={allBenchmarksPending}>
                       <AppIcon
                         slot="rankedEntityIcon"
                         className="w-10 h-10 rounded-md"

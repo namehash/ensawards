@@ -5,6 +5,7 @@ import {
   type EffectiveAppBenchmark,
 } from "data/apps/benchmarks-types.ts";
 import {
+  allBenchmarksPending as allBenchmarksPendingUtil,
   calcCategoryScore,
   compareBenchmarks,
   groupBenchmarksByCategory,
@@ -20,8 +21,10 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import { EnsAwardsBarScorePending } from "@/components/atoms/ens-awards-score/bar-pending.tsx";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
@@ -29,7 +32,7 @@ import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
 
 const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark) => {
   if (benchmark.status === BenchmarkStatuses.Pending) {
-    return <PendingIcon className="h-6 w-6 text-muted-foreground" />;
+    return <PendingIcon className="h-5 w-5 text-gray-500/50" />;
   }
 
   switch (benchmark.result) {
@@ -52,6 +55,7 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
   const categoryScore = calcCategoryScore(group);
+  const allBenchmarksPending = allBenchmarksPendingUtil(group);
 
   return (
     <div ref={animationParent} className="w-full border-t border-gray-200 py-4">
@@ -61,7 +65,11 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
         aria-expanded={isOpen}
         className="flex w-full items-center gap-3 text-left"
       >
-        <EnsAwardsCircularScoreSmall score={categoryScore} />
+        {allBenchmarksPending ? (
+          <AllBenchmarksPendingIcon />
+        ) : (
+          <EnsAwardsCircularScoreSmall score={categoryScore} />
+        )}
         {/* This assumption is safe, because all benchmarks passed into this component belong to one BestPracticeCategory */}
         <span className="flex-1 text-lg leading-normal font-semibold text-black">
           {group[0].bestPractice.category.name}
@@ -119,6 +127,8 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
   const benchmarkGroups = groupBenchmarksByCategory(resolvedApp.benchmarks);
   const AppIcon = resolvedApp.icon;
 
+  const allBenchmarksPending = allBenchmarksPendingUtil(resolvedApp.benchmarks);
+
   return (
     <TooltipProvider delayDuration={200} skipDelayDuration={0}>
       <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white px-5">
@@ -129,7 +139,11 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
             </div>
             <h3 className="text-lg leading-normal font-semibold text-black">{resolvedApp.name}</h3>
           </div>
-          <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
+          {allBenchmarksPending ? (
+            <EnsAwardsBarScorePending mobileAdaptive={false} />
+          ) : (
+            <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
+          )}
         </div>
         {benchmarkGroups.map((group, index) => {
           if (group.length === 0) return null;

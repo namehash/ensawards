@@ -2,6 +2,7 @@
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { EnsAwardsBarScore } from "@/components/atoms/ens-awards-score/bar.tsx";
+import { EnsAwardsBarScorePending } from "@/components/atoms/ens-awards-score/bar-pending.tsx";
 import { type EnsAwardsScore } from "@/utils/types";
 
 export interface LeaderboardCardProps {
@@ -10,10 +11,17 @@ export interface LeaderboardCardProps {
   viewDetailsText?: string;
   ensAwardsScore: EnsAwardsScore;
   type?: string;
+  scorePending?: boolean;
 }
 
-const { name, viewDetailsLink, viewDetailsText, ensAwardsScore, type }: LeaderboardCardProps =
-  Astro.props;
+const {
+  name,
+  viewDetailsLink,
+  viewDetailsText,
+  ensAwardsScore,
+  type,
+  scorePending = false,
+}: LeaderboardCardProps = Astro.props;
 ---
 
 <a
@@ -54,7 +62,13 @@ const { name, viewDetailsLink, viewDetailsText, ensAwardsScore, type }: Leaderbo
         </div>
       )
     }
-    <EnsAwardsBarScore score={ensAwardsScore} />
+    {
+      scorePending ? (
+        <EnsAwardsBarScorePending />
+      ) : (
+        <EnsAwardsBarScore score={ensAwardsScore} />
+      )
+    }
     <button
       class={cn(
         shadcnButtonVariants({
