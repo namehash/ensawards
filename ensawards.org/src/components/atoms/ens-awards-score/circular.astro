@@ -1,7 +1,9 @@
 ---
-import CircularScore from "./CircularScore.astro";
+import CircularScore from "../CircularScore.astro";
+import { type EnsAwardsScore } from "@/utils/types";
+
 export interface EnsAwardsScoreProps {
-  score: number;
+  score: EnsAwardsScore;
   label: string;
 }
 

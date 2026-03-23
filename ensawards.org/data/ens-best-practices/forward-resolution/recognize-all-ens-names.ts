@@ -30,7 +30,7 @@
 //   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
 //   technicalDetails: {
 //     main: {
-//       header: "Technical Details",
+//       header: "ENS best practice details",
 //       content: technicalDetailsMainContent,
 //     },
 //     sides: [
