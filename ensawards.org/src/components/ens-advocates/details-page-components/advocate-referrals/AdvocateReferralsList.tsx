@@ -19,7 +19,13 @@ export function AdvocateReferralsListLoading({
   return (
     <div className="w-full space-y-3 relative z-10">
       {[...Array(recordsPerPage)].map((_, idx) => (
-        <RegistrarActionCardLoading key={idx} showReferrer={false} />
+        // TODO: Reintroduce the "Incentive program" field once the related helper API is ready.
+        // See https://github.com/namehash/ensnode/issues/1797 for more details
+        <RegistrarActionCardLoading
+          key={idx}
+          showReferrer={false}
+          showReferralProgramField={false}
+        />
       ))}
     </div>
   );
