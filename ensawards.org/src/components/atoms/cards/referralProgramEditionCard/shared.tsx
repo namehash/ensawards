@@ -2,6 +2,7 @@ import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 
 import type { PriceUsdc, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
+import { currencyFormatter } from "@/components/atoms/cards/referrerCard/shared";
 import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramTimeline.tsx";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -71,11 +72,6 @@ export const ReferralProgramEditionBudget = ({
   totalAwardPoolValue,
   styles,
 }: ReferralProgramEditionBudgetProps) => {
-  const currencyFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
   return (
     <div
       className={cn(

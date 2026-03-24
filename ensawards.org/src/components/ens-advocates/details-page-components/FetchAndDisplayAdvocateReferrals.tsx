@@ -11,10 +11,8 @@ import {
 } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo";
-import {
-  AdvocateReferralsList,
-  AdvocateReferralsListLoading,
-} from "@/components/ens-advocates/details-page-components/advocate-referrals/AdvocateReferralsList.tsx";
+import { AdvocateReferralsList } from "@/components/ens-advocates/details-page-components/advocate-referrals/AdvocateReferralsList.tsx";
+import { DisplayRegistrarActionsListLoading } from "@/components/referral-awards-program/referrals/RegistrarActionsList";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { scrollWithOffset } from "@/utils/domActions.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
@@ -74,7 +72,7 @@ export function FetchAndDisplayAdvocateReferrals({
   if (registrarActionsQuery.isPending) {
     return (
       <AdvocateReferralsContainer>
-        <AdvocateReferralsListLoading recordsPerPage={recordsPerPage} />
+        <DisplayRegistrarActionsListLoading recordsPerPage={recordsPerPage} showReferrer={false} />
       </AdvocateReferralsContainer>
     );
   }

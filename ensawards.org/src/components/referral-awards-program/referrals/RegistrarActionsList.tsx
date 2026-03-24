@@ -2,7 +2,6 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { type ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
 import {
   getEnsManagerNameDetailsUrl,
-  LabeledField,
   RegistrarActionCardLoading,
   RegistrarActionCardMemo,
   useNow,
@@ -12,7 +11,6 @@ import type { Address } from "viem";
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type NamedRegistrarAction } from "@ensnode/ensnode-sdk";
 
-import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils";
 import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
 
 interface DisplayRegistrarActionsListProps {
@@ -97,6 +95,7 @@ export function DisplayRegistrarActionsList({
 
 interface DisplayRegistrarActionsListLoadingProps {
   recordsPerPage: number;
+  showReferrer?: boolean;
 }
 
 /**
@@ -104,13 +103,18 @@ interface DisplayRegistrarActionsListLoadingProps {
  */
 export function DisplayRegistrarActionsListLoading({
   recordsPerPage,
+  showReferrer = true,
 }: DisplayRegistrarActionsListLoadingProps) {
   return (
     <div className="w-full space-y-3 relative z-10">
       {[...Array(recordsPerPage)].map((_, idx) => (
         // TODO: Reintroduce the "Incentive program" field once the related helper API is ready.
         // See https://github.com/namehash/ensnode/issues/1797 for more details
-        <RegistrarActionCardLoading key={idx} showReferralProgramField={false} />
+        <RegistrarActionCardLoading
+          key={idx}
+          showReferrer={showReferrer}
+          showReferralProgramField={false}
+        />
       ))}
     </div>
   );

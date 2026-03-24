@@ -78,7 +78,7 @@ export function ReferralProgramEditionCardPieSplitLoading({
           skeleton: "w-[41px] h-[14px] mt-[4px] mb-[3px]",
         }}
       />
-      <span className="hidden max-sm:hidden sm:flex sm:flex-row sm:justify-end w-[90px]">
+      <span className="hidden sm:flex sm:flex-row sm:justify-end w-[90px]">
         <Skeleton
           className={cn(
             ReferralProgramEditionCardLoadingStateStyles,
@@ -86,7 +86,7 @@ export function ReferralProgramEditionCardPieSplitLoading({
           )}
         />
       </span>
-      <ChevronRightIcon className="hidden w-6 h-6 text-gray-400 hover:text-gray-500 shrink-0 max-sm:hidden block" />
+      <ChevronRightIcon className="hidden sm:block w-6 h-6 text-gray-400 hover:text-gray-500 shrink-0" />
       <div
         className={cn(
           ReferralProgramEditionCardLoadingStateStyles,

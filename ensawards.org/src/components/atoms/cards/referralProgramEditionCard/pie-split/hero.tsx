@@ -40,9 +40,6 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
         </h3>
         <ReferralProgramStatusBadge status={referralProgramStatus} />
       </div>
-      <h3 className="hidden w-2/5 text-lg leading-normal font-semibold text-black text-ellipsis">
-        {referralProgramEditionConfig.displayName}
-      </h3>
       <ReferralProgramEditionTimePeriod
         startTime={referralProgramEditionConfig.rules.startTime}
         endTime={referralProgramEditionConfig.rules.endTime}
@@ -50,8 +47,7 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
           label:
             "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default",
-          value:
-            "text-sm leading-normal font-medium text-black cursor-pointer text-right cursor-default",
+          value: "text-sm leading-normal font-medium text-black text-right cursor-default",
           date: "cursor-default",
         }}
       />

@@ -10,7 +10,7 @@ import {
   ReferralProgramStatuses,
 } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
-import { secondsInMinute } from "date-fns/constants";
+import { secondsInHour, secondsInMinute } from "date-fns/constants";
 import { Inbox as NoEditionsIcon } from "lucide-react";
 import { Fragment, type ReactNode, useEffect, useMemo, useState } from "react";
 
@@ -145,8 +145,8 @@ export const DisplayReferralProgramEditionsList = ({
   loadingReferralProgramEditionConfigs,
   simplifiedVariant,
 }: DisplayReferralProgramEditionsListProps) => {
-  // refresh the status every minute
-  const now = useNow({ timeToRefresh: secondsInMinute });
+  // refresh the status every minute for the grouped view
+  const now = useNow({ timeToRefresh: simplifiedVariant ? secondsInHour : secondsInMinute });
 
   const ErrorDisplay = (
     <ErrorInfo
@@ -207,14 +207,31 @@ export const DisplayReferralProgramEditionsList = ({
     status: ReferralProgramStatusId,
   ) => editions.filter((edition) => calcReferralProgramStatus(edition.rules, now) === status);
 
+  const { activeEditions, closedEditions, scheduledEditions } = useMemo(() => {
+    if (!referralProgramEditionConfigs) {
+      return { activeEditions: [], closedEditions: [], scheduledEditions: [] };
+    }
+    return {
+      activeEditions: referralProgramEditionConfigs.filter(
+        (edition) =>
+          calcReferralProgramStatus(edition.rules, now) === ReferralProgramStatuses.Active,
+      ),
+      closedEditions: referralProgramEditionConfigs.filter(
+        (edition) =>
+          calcReferralProgramStatus(edition.rules, now) === ReferralProgramStatuses.Closed,
+      ),
+      scheduledEditions: referralProgramEditionConfigs.filter(
+        (edition) =>
+          calcReferralProgramStatus(edition.rules, now) === ReferralProgramStatuses.Scheduled,
+      ),
+    };
+  }, [referralProgramEditionConfigs, now]);
+
   return (
     <Fragment>
       {isLoading && (
         <ReferralProgramEditionsListContainer
-          activeEditions={filterEditionsByStatus(
-            loadingReferralProgramEditionConfigs,
-            ReferralProgramStatuses.Active,
-          ).map((edition, index) => {
+          activeEditions={activeEditions.map((edition, index) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimitLoading
@@ -228,10 +245,7 @@ export const DisplayReferralProgramEditionsList = ({
               />
             );
           })}
-          closedEditions={filterEditionsByStatus(
-            loadingReferralProgramEditionConfigs,
-            ReferralProgramStatuses.Closed,
-          ).map((edition, index) => {
+          closedEditions={closedEditions.map((edition, index) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimitLoading
@@ -245,10 +259,7 @@ export const DisplayReferralProgramEditionsList = ({
               />
             );
           })}
-          scheduledEditions={filterEditionsByStatus(
-            loadingReferralProgramEditionConfigs,
-            ReferralProgramStatuses.Scheduled,
-          ).map((edition, index) => {
+          scheduledEditions={scheduledEditions.map((edition, index) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimitLoading

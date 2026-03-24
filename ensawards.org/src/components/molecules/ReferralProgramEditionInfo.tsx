@@ -17,7 +17,6 @@ import {
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared.tsx";
 import { currencyFormatter } from "@/components/atoms/cards/referrerCard/shared.tsx";
-import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 
 interface ReferralProgramEditionInfoProps {

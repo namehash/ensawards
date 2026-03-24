@@ -30,7 +30,7 @@ export const ReferralProgramEditionCardRevShareLimit = ({
 
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
-    "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10 cursor-default sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
+    "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10 sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
   );
 
   return (
@@ -56,8 +56,7 @@ export const ReferralProgramEditionCardRevShareLimit = ({
             "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch sm:min-w-[185px] sm:flex-col sm:justify-center max-sm:self-stretch",
           label:
             "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-pointer",
-          value:
-            "text-sm leading-normal font-medium text-black cursor-pointer max-sm:text-right cursor-pointer",
+          value: "text-sm leading-normal font-medium text-black max-sm:text-right cursor-pointer",
           date: "cursor-pointer",
         }}
       />

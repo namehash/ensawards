@@ -40,9 +40,6 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
         </h3>
         <ReferralProgramStatusBadge status={referralProgramStatus} />
       </div>
-      <h3 className="hidden w-2/5 text-lg leading-normal font-semibold text-black text-ellipsis">
-        {referralProgramEditionConfig.displayName}
-      </h3>
       <ReferralProgramEditionTimePeriod
         startTime={referralProgramEditionConfig.rules.startTime}
         endTime={referralProgramEditionConfig.rules.endTime}

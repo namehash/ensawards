@@ -7,30 +7,6 @@ import { type RegistrarActionsResponseOk, type RequestPageParams } from "@ensnod
 import { SimplePagination } from "@/components/molecules/Pagination";
 import { DisplayRegistrarActionsList } from "@/components/referral-awards-program/referrals/RegistrarActionsList";
 
-interface AdvocateReferralsListLoadingProps {
-  recordsPerPage: number;
-}
-/**
- * Displays a loading state for a list of {@link NamedRegistrarAction}s.
- */
-export function AdvocateReferralsListLoading({
-  recordsPerPage,
-}: AdvocateReferralsListLoadingProps) {
-  return (
-    <div className="w-full space-y-3 relative z-10">
-      {[...Array(recordsPerPage)].map((_, idx) => (
-        // TODO: Reintroduce the "Incentive program" field once the related helper API is ready.
-        // See https://github.com/namehash/ensnode/issues/1797 for more details
-        <RegistrarActionCardLoading
-          key={idx}
-          showReferrer={false}
-          showReferralProgramField={false}
-        />
-      ))}
-    </div>
-  );
-}
-
 export interface AdvocateReferralsListProps {
   namespaceId: ENSNamespaceId;
   registrarActions: RegistrarActionsResponseOk;
