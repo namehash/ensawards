@@ -231,7 +231,10 @@ export const DisplayReferralProgramEditionsList = ({
     <Fragment>
       {isLoading && (
         <ReferralProgramEditionsListContainer
-          activeEditions={activeEditions.map((edition, index) => {
+          activeEditions={filterEditionsByStatus(
+            loadingReferralProgramEditionConfigs,
+            ReferralProgramStatuses.Active,
+          ).map((edition, index) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimitLoading
@@ -245,7 +248,10 @@ export const DisplayReferralProgramEditionsList = ({
               />
             );
           })}
-          closedEditions={closedEditions.map((edition, index) => {
+          closedEditions={filterEditionsByStatus(
+            loadingReferralProgramEditionConfigs,
+            ReferralProgramStatuses.Closed,
+          ).map((edition, index) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimitLoading
@@ -259,7 +265,10 @@ export const DisplayReferralProgramEditionsList = ({
               />
             );
           })}
-          scheduledEditions={scheduledEditions.map((edition, index) => {
+          scheduledEditions={filterEditionsByStatus(
+            loadingReferralProgramEditionConfigs,
+            ReferralProgramStatuses.Scheduled,
+          ).map((edition, index) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimitLoading
@@ -278,10 +287,7 @@ export const DisplayReferralProgramEditionsList = ({
       {!isLoading && referralProgramEditionConfigs === null && fetchErrorMessage && ErrorDisplay}
       {!isLoading && referralProgramEditionConfigs !== null && (
         <ReferralProgramEditionsListContainer
-          activeEditions={filterEditionsByStatus(
-            referralProgramEditionConfigs,
-            ReferralProgramStatuses.Active,
-          ).map((edition) => {
+          activeEditions={activeEditions.map((edition) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimit
@@ -297,10 +303,7 @@ export const DisplayReferralProgramEditionsList = ({
               />
             );
           })}
-          closedEditions={filterEditionsByStatus(
-            referralProgramEditionConfigs,
-            ReferralProgramStatuses.Closed,
-          ).map((edition) => {
+          closedEditions={closedEditions.map((edition) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimit
@@ -316,10 +319,7 @@ export const DisplayReferralProgramEditionsList = ({
               />
             );
           })}
-          scheduledEditions={filterEditionsByStatus(
-            referralProgramEditionConfigs,
-            ReferralProgramStatuses.Scheduled,
-          ).map((edition) => {
+          scheduledEditions={scheduledEditions.map((edition) => {
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimit

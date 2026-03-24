@@ -70,10 +70,10 @@ export const ReferralProgramEditionCardRevShareLimit = ({
         }}
       />
       <div className="flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[150px] sm:flex-col sm:justify-center max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default">
+        <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left">
           Max revenue share
         </p>
-        <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
+        <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
           {referralProgramEditionConfig.rules.awardModel ===
           ReferralProgramAwardModels.RevShareLimit
             ? `${Math.round(referralProgramEditionConfig.rules.qualifiedRevenueShare * 100)}%`
