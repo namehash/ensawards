@@ -2,6 +2,7 @@
 import Error404Display from "@/components/molecules/Error404Display.astro";
 import Layout from "@/layouts/Layout.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
 import { ReferralProgramEditionHeroCardPieSplit } from "@/components/atoms/cards/referralProgramEditionCard/pie-split/hero";
 import { ReferralProgramEditionHeroCardRevShareLimit } from "@/components/atoms/cards/referralProgramEditionCard/rev-share/hero";
 import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
@@ -48,7 +49,7 @@ const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConf
         description={`Compare referrers by their performance in ${resolvedReferralProgramEditionConfig.displayName}.`}
         breadcrumbs={["ENS Referral Program"]}
         customImage={{
-          source: "/src/assets/leaderboardsHeroImage.png",
+          source: LeaderboardsHeroImage,
           width: 371,
           height: 372,
           styles: "-top-0 right-0 opacity-10",

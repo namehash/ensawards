@@ -1,6 +1,7 @@
 ---
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import type { ImageMetadata } from "astro";
+import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
 import { ProtocolTypes } from "data/ens-best-practices/types.ts";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import type { ProtocolId } from "data/protocols/types.ts";
@@ -69,7 +70,7 @@ if (resolvedProtocolType) {
         description={`Compare ${pluralizedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
         breadcrumbs={["ENS leaderboards"]}
         customImage={{
-          source: "/src/assets/leaderboardsHeroImage.png",
+          source: LeaderboardsHeroImage,
           width: 371,
           height: 372,
           styles: "-top-0 right-0",

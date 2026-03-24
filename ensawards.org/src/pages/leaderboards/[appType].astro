@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
 import LeaderboardCard from "@/components/atoms/cards/LeaderboardCard.astro";
 import ItemsList from "@/components/molecules/ItemsList.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
@@ -62,7 +63,7 @@ if (resolvedAppType !== undefined) {
         description={`Compare ${pluralizedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
         breadcrumbs={["ENS leaderboards"]}
         customImage={{
-          source: "/src/assets/leaderboardsHeroImage.png",
+          source: LeaderboardsHeroImage,
           width: 371,
           height: 372,
           styles: "-top-0 right-0",

@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import NotFoundErrorCode from "@/assets/404.svg";
@@ -19,11 +18,10 @@ const { header, description, button }: Error404DisplayProps = Astro.props;
 <section class="w-full h-screen flex justify-center items-center">
   <div
     class="h-fit w-fit max-w-[850px] flex flex-nowrap flex-col justify-center items-center gap-8">
-    <Image
-      src={NotFoundErrorCode}
+    <img
+      src={NotFoundErrorCode.src}
       alt="404 error"
       class="h-[90px] sm:h-[200px] sm:pl-[26px] sm:pr-[28px] sm:pt-[21px]"
-      quality={100}
     />
     <div
       class="h-fit w-fit flex flex-nowrap flex-col justify-center items-center gap-5 max-sm:px-5">
