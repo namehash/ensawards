@@ -137,12 +137,7 @@ export function ReferrerLeaderboard({
   }
 
   return (
-    <ENSNodeProvider
-      config={config}
-      queryClientOptions={{
-        defaultOptions: { queries: { staleTime: 30 * 1000 } },
-      }}
-    >
+    <ENSNodeProvider config={config}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-4">
           <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between items-start sm:items-center gap-y-2">
