@@ -1,24 +1,63 @@
 ---
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import StarIcon from "@/components/atoms/icons/StarIcon.astro";
+import ChevronRightIcon from "@/components/atoms/icons/ChevronRightIcon.astro";
 
 interface RevenueShareBannerProps {
   header: string;
   description: string;
+  heroVariant?: boolean;
 }
 
-const { header, description }: RevenueShareBannerProps = Astro.props;
+const { header, description, heroVariant = false }: RevenueShareBannerProps = Astro.props;
 ---
 
-<div
-  class="w-full sm:w-fit h-fit flex flex-row flex-nowrap justify-center items-center gap-3 rounded-xl bg-white/5 px-4 py-3">
-  <StarIcon className="flex-shrink-0 w-10 h-10" />
-  <div
-    class="w-full max-w-[350px] flex flex-col justify-center items-start gap-0.5">
-    <h4 class="w-full text-sm leading-5 font-semibold text-white">
-      {header}
-    </h4>
-    <p class="w-full text-sm leading-5 font-normal text-white/50">
-      {description}
-    </p>
-  </div>
-</div>
+{
+  heroVariant && (
+    <div class="w-full sm:w-fit h-fit flex flex-row flex-nowrap justify-center items-center gap-3 rounded-xl bg-white/5 px-4 py-3">
+      <StarIcon className="flex-shrink-0 w-10 h-10" />
+      <div class="w-full max-w-[350px] flex flex-col justify-center items-start gap-0.5">
+        <h4 class="w-full text-sm leading-5 font-semibold text-white">
+          {header}
+        </h4>
+        <p class="w-full text-sm leading-5 font-normal text-white/50">
+          {description}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+{
+  !heroVariant && (
+    <a
+      href="/ens-referral-program"
+      class="max-w-[1216px] w-full h-fit sm:h-[88px] flex flex-row flex-nowrap justify-between items-center bg-[linear-gradient(180deg,rgba(22,21,71,1.0)_0%,rgba(8,14,50,1.0)_100%)]
+  hover:bg-[linear-gradient(180deg,rgba(22,21,71,0.9)_0%,rgba(8,14,50,0.9)_100%)] transition-all duration-200
+  py-2 px-3 sm:py-4 sm:px-6 rounded-lg">
+      <div class="w-full flex flex-row flex-nowrap justify-start items-center gap-2 sm:gap-5">
+        <StarIcon className="flex-shrink-0 w-[36px] h-[36px] sm:w-12 sm:h-12" />
+        <div>
+          <h4 class="text-lg max-sm:text-sm font-semibold leading-7 max-sm:leading-6 text-white">
+            {header}
+          </h4>
+          <p class="text-xs text-white/50 font-normal leading-6 sm:text-sm sm:leading-7">
+            {description}
+          </p>
+        </div>
+      </div>
+      <button
+        class={cn(
+          shadcnButtonVariants({
+            variant: "outline",
+            size: "default",
+            className: "cursor-pointer max-sm:hidden",
+          }),
+        )}>
+        Learn more
+      </button>
+      <ChevronRightIcon className="block sm:hidden w-6 h-6 text-white/50 hover:text-white" />
+    </a>
+  )
+}
