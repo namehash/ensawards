@@ -15,6 +15,12 @@ export const prerender = false;
 const { edition } = Astro.params;
 
 const resolvedReferralProgramEditionSummary = await getReferralProgramEditionSummaryBySlug(edition);
+
+// If the referral program edition summary cannot be found based on the slug in the URL,
+// set the 404 status explicitly for SEO/caching purposes and render the 404 fallback.
+if (resolvedReferralProgramEditionSummary === undefined) {
+  Astro.response.status = 404;
+}
 ---
 
 {

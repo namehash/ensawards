@@ -110,7 +110,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
     return (
       <ErrorInfo
         title={title.text}
-        description={["ENSNode connection error occurred. Please try again later."]}
+        description={["A connection error occurred. Please try again later."]}
       >
         {TryAgainButton}
       </ErrorInfo>

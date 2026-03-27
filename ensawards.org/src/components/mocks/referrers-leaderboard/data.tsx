@@ -27,10 +27,7 @@ const fetchErrorProps = {
   isLoading: false,
   expectedAwardModel: ReferralProgramAwardModels.PieSplit, // not important in this scenario
   leaderboardPageFetchError: (
-    <ErrorInfo
-      title="Error loading referrer data"
-      description={["Mock error message. Please try again later."]}
-    >
+    <ErrorInfo title="Error loading referrer data" description={["Please try again later."]}>
       <button
         className={cn(
           shadcnButtonVariants({

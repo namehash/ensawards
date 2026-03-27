@@ -16,6 +16,7 @@ import { ReferralProgramEditionCardRevShareLimit } from "@/components/atoms/card
 import { ReferralProgramEditionCardRevShareLimitLoading } from "@/components/atoms/cards/referralProgramEditionCard/rev-share/loading";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { mockReferralProgramEditionSummariesList } from "@/components/mocks/referral-program-editions/data";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { getENSNodeUrl } from "@/utils/env";
 import { filterOutUnrecognizedEditions } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -259,7 +260,7 @@ const DisplayGroupedReferralProgramEditionSummariesList = ({
         />
       )}
       {!isLoading && referralProgramEditionSummaries === null && fetchErrorMessage && (
-        <SummariesFetchingErrorDisplay fetchErrorMessage={fetchErrorMessage} />
+        <SummariesFetchingErrorDisplay />
       )}
       {!isLoading && referralProgramEditionSummaries !== null && (
         <ReferralProgramEditionsListContainer
@@ -343,7 +344,7 @@ const DisplaySimplifiedReferralProgramEditionSummariesList = ({
       </div>
     )}
     {!isLoading && referralProgramEditionSummaries === null && fetchErrorMessage && (
-      <SummariesFetchingErrorDisplay fetchErrorMessage={fetchErrorMessage} />
+      <SummariesFetchingErrorDisplay />
     )}
     {!isLoading && referralProgramEditionSummaries !== null && (
       <div className="w-full h-fit flex flex-col justify-start items-center gap-2">
@@ -386,9 +387,23 @@ const NoEditionsInfo = ({ header, description }: { header: string; description: 
   );
 };
 
-const SummariesFetchingErrorDisplay = ({ fetchErrorMessage }: { fetchErrorMessage: string }) => (
+const SummariesFetchingErrorDisplay = () => (
   <ErrorInfo
-    title="Error loading referral programs data"
-    description={[`${fetchErrorMessage} Please try again later.`]}
-  />
+    title="Error loading referral program editions"
+    description={[`Please try again later.`]}
+  >
+    <button
+      className={cn(
+        shadcnButtonVariants({
+          variant: "outline",
+          size: "default",
+          className: "rounded-full cursor-pointer",
+        }),
+      )}
+      // Simple reload to avoid prop drilling and hacky refetches
+      onClick={() => window.location.reload()}
+    >
+      Try again
+    </button>
+  </ErrorInfo>
 );

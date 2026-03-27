@@ -126,7 +126,7 @@ export function ReferrerLeaderboard({
     refreshReferralProgramEditionSummary();
   }, [referralProgramEditionSummary, now]);
 
-  if (referralProgramEditionSummaryData.status !== ReferralProgramEditionStatuses.Active) {
+  if (referralProgramEditionSummaryData.status === ReferralProgramEditionStatuses.Scheduled) {
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
         <EmptyLeaderboardInfo
@@ -201,7 +201,7 @@ export function ReferrerLeaderboard({
               fetchErrorMessage ? (
                 <ErrorInfo
                   title="Error loading referrer data"
-                  description={[`${fetchErrorMessage} Please try again later.`]}
+                  description={["Please try again later."]}
                 >
                   <button
                     className={cn(

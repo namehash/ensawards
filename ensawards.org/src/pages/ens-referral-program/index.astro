@@ -113,8 +113,8 @@ const backgroundGreyStyles =
           ENS referral program editions
         </h3>
         <p class={cn(descriptionStyles, "text-center")}>
-          Check out the current, past and upcoming ENS referral program
-          editions.
+          Explore editions that are currently active, scheduled for the future,
+          or already closed.
         </p>
       </div>
       <ReferralProgramEditionsList client:load />
@@ -326,7 +326,9 @@ const backgroundGreyStyles =
           <p class="text-base leading-normal font-normal text-muted-foreground">
             Check out our Frequently Asked Questions (FAQs) to find quick
             solutions to common queries. Still have questions? <a
-              id="scroll-to-tg"
+              href="https://t.me/ensawards"
+              target="_blank"
+              rel="noopener noreferrer"
               class="cursor-pointer text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200"
               >Join the Telegram community!</a
             >
@@ -339,20 +341,4 @@ const backgroundGreyStyles =
       </div>
     </div>
   </section>
-  <script>
-    import { scrollWithOffset } from "../../utils/domActions";
-
-    function initializeEnsReferralAwardsAutoScroll() {
-      const scrollToJoinTelegramElement =
-        document.getElementById("scroll-to-tg");
-      if (scrollToJoinTelegramElement !== null) {
-        scrollToJoinTelegramElement.addEventListener("click", (event) => {
-          event.preventDefault();
-          scrollWithOffset(`joinTelegramCommunity`, 90);
-        });
-      }
-    }
-
-    initializeEnsReferralAwardsAutoScroll();
-  </script>
 </Layout>

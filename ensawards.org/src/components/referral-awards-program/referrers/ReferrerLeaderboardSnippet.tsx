@@ -169,7 +169,7 @@ export function ReferrerLeaderboardSnippet({
               fetchErrorMessage ? (
                 <ErrorInfo
                   title="Error loading referrer data"
-                  description={[`${fetchErrorMessage} Please try again later.`]}
+                  description={["Please try again later."]}
                 >
                   <button
                     className={cn(

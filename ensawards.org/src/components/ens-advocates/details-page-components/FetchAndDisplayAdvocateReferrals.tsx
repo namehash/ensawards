@@ -93,7 +93,7 @@ export function FetchAndDisplayAdvocateReferrals({
       <AdvocateReferralsContainer>
         <ErrorInfo
           title="ENS Advocate Referrals"
-          description={["ENSNode connection error occurred. Please try again later."]}
+          description={["A connection error occurred. Please try again later."]}
         >
           {TryAgainButton}
         </ErrorInfo>

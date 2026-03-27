@@ -73,7 +73,7 @@ export function DisplayReferrerLeaderboardPage({
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
         <EmptyLeaderboardInfo
-          header="Looks like there's no referrals in this referral program cycle yet"
+          header="Looks like there's no referrals in this referral program edition yet"
           description="Wanna be first? Generate your referral link and earn awards!"
           buttonData={{
             label: "Generate your referral link",
