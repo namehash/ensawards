@@ -16,7 +16,7 @@ catalogs:
 overrides:
   vite@<7.3.1: '>=7.3.1 <8.0.0'
   tar@<7.5.11: '>=7.5.11 <8.0.0'
-  lodash@<4.17.23: '>=4.17.23'
+  lodash@<4.17.23: '>=4.17.23 <5.0.0'
   ajv@<8.18.0: '>=8.18.0 <9.0.0'
   minimatch@<10.2.3: '>=10.2.3 <11.0.0'
   rollup@<4.59.0: '>=4.59.0 <5.0.0'
@@ -24,10 +24,10 @@ overrides:
   devalue@<5.6.4: '>=5.6.4 <6.0.0'
   path-to-regexp@<6.3.0: '>=6.3.0 <7.0.0'
   h3@<1.15.9: '>=1.15.9 <2.0.0'
-  yaml@>=2.0.0 <2.8.3: '>=2.8.3'
-  picomatch@<2.3.2: '>=2.3.2'
-  picomatch@>=4.0.0 <4.0.4: '>=4.0.4'
-  smol-toml@<1.6.1: '>=1.6.1'
+  yaml@>=2.0.0 <2.8.3: '>=2.8.3 <3.0.0'
+  picomatch@<2.3.2: '>=2.3.2 <3.0.0'
+  picomatch@>=4.0.0 <4.0.4: '>=4.0.4 <5.0.0'
+  smol-toml@<1.6.1: '>=1.6.1 <2.0.0'
   brace-expansion@<5.0.5: '>=5.0.5 <6.0.0'
 
 importers:
@@ -56,7 +56,7 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       '@astrojs/vercel':
-        specifier: 10.0.3
+        specifier: ^10.0.3
         version: 10.0.3(astro@6.1.1(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.3))(react@19.2.0)(rollup@4.59.0)
       '@ensnode/datasources':
         specifier: 0.0.0-next-20260217213247
@@ -2137,7 +2137,7 @@ packages:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
-      picomatch: '>=4.0.4'
+      picomatch: '>=4.0.4 <5.0.0'
     peerDependenciesMeta:
       picomatch:
         optional: true
@@ -2549,10 +2549,6 @@ packages:
     resolution: {integrity: sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==}
     engines: {node: 18 || 20 || >=22}
 
-  minipass@7.1.2:
-    resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
-    engines: {node: '>=16 || 14 >=14.17'}
-
   minipass@7.1.3:
     resolution: {integrity: sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -2683,6 +2679,10 @@ packages:
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
+
+  picomatch@2.3.2:
+    resolution: {integrity: sha512-V7+vQEJ06Z+c5tSye8S+nHUfI51xoXIXjHQ99cQtKUkQqqO1kO/KCJUfZXuB47h/YBlDhah2H3hdUGXn8ie0oA==}
+    engines: {node: '>=8.6'}
 
   picomatch@4.0.4:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
@@ -3228,7 +3228,7 @@ packages:
       sugarss: ^5.0.0
       terser: ^5.16.0
       tsx: ^4.8.1
-      yaml: '>=2.8.3'
+      yaml: '>=2.8.3 <3.0.0'
     peerDependenciesMeta:
       '@types/node':
         optional: true
@@ -4064,7 +4064,7 @@ snapshots:
 
   '@isaacs/fs-minipass@4.0.1':
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -4096,7 +4096,7 @@ snapshots:
       https-proxy-agent: 7.0.6
       node-fetch: 2.7.0
       nopt: 8.1.0
-      semver: 7.7.3
+      semver: 7.7.4
       tar: 7.5.11
     transitivePeerDependencies:
       - encoding
@@ -5017,7 +5017,7 @@ snapshots:
   anymatch@3.1.3:
     dependencies:
       normalize-path: 3.0.0
-      picomatch: 4.0.4
+      picomatch: 2.3.2
 
   arg@5.0.2: {}
 
@@ -5994,13 +5994,11 @@ snapshots:
     dependencies:
       brace-expansion: 5.0.5
 
-  minipass@7.1.2: {}
-
   minipass@7.1.3: {}
 
   minizlib@3.1.0:
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   mrmime@2.0.1: {}
 
@@ -6113,6 +6111,8 @@ snapshots:
   piccolore@0.1.3: {}
 
   picocolors@1.1.1: {}
+
+  picomatch@2.3.2: {}
 
   picomatch@4.0.4: {}
 
@@ -6465,7 +6465,7 @@ snapshots:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
-      minipass: 7.1.2
+      minipass: 7.1.3
       minizlib: 3.1.0
       yallist: 5.0.0
 

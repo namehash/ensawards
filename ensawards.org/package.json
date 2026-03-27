@@ -19,7 +19,7 @@
   "dependencies": {
     "@astrojs/react": "^5.0.2",
     "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/vercel": "10.0.3",
+    "@astrojs/vercel": "^10.0.3",
     "@ensnode/datasources": "0.0.0-next-20260217213247",
     "@ensnode/ensnode-react": "0.0.0-next-20260217213247",
     "@ensnode/ensnode-sdk": "0.0.0-next-20260217213247",
