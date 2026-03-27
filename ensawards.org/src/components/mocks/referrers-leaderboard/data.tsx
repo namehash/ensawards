@@ -1,7 +1,7 @@
 import {
   type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
-  ReferralProgramStatuses,
+  ReferralProgramEditionStatuses,
   type ReferrerLeaderboardPagePieSplit,
 } from "@namehash/ens-referrals/v1";
 
@@ -60,6 +60,7 @@ const emptyPieSplitLeaderboardData = {
       address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
     },
     rulesUrl: new URL("https://example.com/rules"),
+    areAwardsDistributed: true,
   },
   referrers: [],
   aggregatedMetrics: {
@@ -79,7 +80,7 @@ const emptyPieSplitLeaderboardData = {
     startIndex: undefined,
     endIndex: undefined,
   },
-  status: ReferralProgramStatuses.Active,
+  status: ReferralProgramEditionStatuses.Active,
   accurateAsOf: 1764091210,
 } as const satisfies ReferrerLeaderboardPagePieSplit;
 
@@ -127,6 +128,7 @@ export const mockReferrersLeaderboardData = new Map<
                 address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
               },
               rulesUrl: new URL("https://example.com/rules"),
+              areAwardsDistributed: true,
             },
             referrers: [
               {
@@ -199,7 +201,7 @@ export const mockReferrersLeaderboardData = new Map<
               startIndex: 0,
               endIndex: 3,
             },
-            status: ReferralProgramStatuses.Active,
+            status: ReferralProgramEditionStatuses.Active,
             accurateAsOf: 1764580368,
           },
           isLoading: false,
@@ -229,6 +231,7 @@ export const mockReferrersLeaderboardData = new Map<
               },
               rulesUrl: new URL("https://example.com/rules"),
               disqualifications: [],
+              areAwardsDistributed: false,
             },
             referrers: [],
             aggregatedMetrics: {
@@ -247,7 +250,7 @@ export const mockReferrersLeaderboardData = new Map<
               startIndex: undefined,
               endIndex: undefined,
             },
-            status: ReferralProgramStatuses.Active,
+            status: ReferralProgramEditionStatuses.Active,
             accurateAsOf: 1764091210,
           },
           isLoading: false,
@@ -290,6 +293,7 @@ export const mockReferrersLeaderboardData = new Map<
                   reason: "Mock longer disqualification text",
                 },
               ],
+              areAwardsDistributed: false,
             },
             referrers: [
               {
@@ -415,7 +419,7 @@ export const mockReferrersLeaderboardData = new Map<
               startIndex: undefined,
               endIndex: undefined,
             },
-            status: ReferralProgramStatuses.Active,
+            status: ReferralProgramEditionStatuses.Active,
             accurateAsOf: 1773069047,
           },
           isLoading: false,

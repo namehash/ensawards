@@ -1,52 +1,43 @@
 import type {
-  ReferralProgramEditionConfig,
   ReferralProgramEditionSlug,
+  ReferralProgramEditionSummary,
 } from "@namehash/ens-referrals/v1";
 import {
   ENSReferralsClient,
-  getDefaultReferralProgramEditionConfigSet,
   ReferralProgramAwardModels,
-  ReferralProgramEditionConfigSetResponseCodes,
+  ReferralProgramEditionSummariesResponseCodes,
 } from "@namehash/ens-referrals/v1";
 
 import { getCurrencyInfo, type Price } from "@ensnode/ensnode-sdk";
 
 import { isValidSlug } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
-import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace";
 
 export const filterOutUnrecognizedEditions = (
-  editions: ReferralProgramEditionConfig[],
-): ReferralProgramEditionConfig[] => {
-  return editions.filter(
-    (edition) => edition.rules.awardModel !== ReferralProgramAwardModels.Unrecognized,
+  editionSummaries: ReferralProgramEditionSummary[],
+): ReferralProgramEditionSummary[] => {
+  return editionSummaries.filter(
+    (editionSummary) => editionSummary.awardModel !== ReferralProgramAwardModels.Unrecognized,
   );
 };
-
-export const DEFAULT_REFERRAL_PROGRAM_EDITIONS: ReferralProgramEditionConfig[] =
-  filterOutUnrecognizedEditions(
-    Array.from(getDefaultReferralProgramEditionConfigSet(DEFAULT_ENS_NAMESPACE).values()),
-  );
 
 const getEditionsFetchErrorMessage = (errorMessage: string) =>
   `Error fetching referral program editions: ${errorMessage}. Falling back to default referral program editions.`;
 
-export async function getReferralProgramEditionConfigBySlug(
+export async function getReferralProgramEditionSummaryBySlug(
   referralProgramSlug: ReferralProgramEditionSlug,
-): Promise<ReferralProgramEditionConfig | undefined> {
+): Promise<ReferralProgramEditionSummary | undefined> {
   if (!referralProgramSlug || !isValidSlug(referralProgramSlug)) return undefined;
 
   try {
     const client = new ENSReferralsClient({ url: getENSNodeUrl() });
-    const response = await client.getEditionConfigSet();
+    const response = await client.getEditionSummaries();
 
-    if (response.responseCode !== ReferralProgramEditionConfigSetResponseCodes.Ok) {
+    if (response.responseCode !== ReferralProgramEditionSummariesResponseCodes.Ok) {
       console.error(
         getEditionsFetchErrorMessage(`(${response.error}) --> ${response.errorMessage}`),
       );
-      return DEFAULT_REFERRAL_PROGRAM_EDITIONS.find(
-        (edition) => edition.slug === referralProgramSlug,
-      );
+      return undefined;
     }
 
     return filterOutUnrecognizedEditions(response.data.editions).find(
@@ -56,30 +47,28 @@ export async function getReferralProgramEditionConfigBySlug(
     console.error(
       getEditionsFetchErrorMessage(error instanceof Error ? error.message : String(error)),
     );
-    return DEFAULT_REFERRAL_PROGRAM_EDITIONS.find(
-      (edition) => edition.slug === referralProgramSlug,
-    );
+    return undefined;
   }
 }
 
-export async function fetchReferralProgramEditions(): Promise<ReferralProgramEditionConfig[]> {
+export async function fetchReferralProgramEditionSummaries(): Promise<
+  ReferralProgramEditionSummary[]
+> {
   try {
     const client = new ENSReferralsClient({ url: getENSNodeUrl() });
-    const response = await client.getEditionConfigSet();
+    const response = await client.getEditionSummaries();
 
-    if (response.responseCode !== ReferralProgramEditionConfigSetResponseCodes.Ok) {
-      console.error(
+    if (response.responseCode !== ReferralProgramEditionSummariesResponseCodes.Ok) {
+      throw new Error(
         getEditionsFetchErrorMessage(`(${response.error}) --> ${response.errorMessage}`),
       );
-      return DEFAULT_REFERRAL_PROGRAM_EDITIONS;
     }
 
     return filterOutUnrecognizedEditions(response.data.editions);
   } catch (error) {
-    console.error(
+    throw new Error(
       getEditionsFetchErrorMessage(error instanceof Error ? error.message : String(error)),
     );
-    return DEFAULT_REFERRAL_PROGRAM_EDITIONS;
   }
 }
 

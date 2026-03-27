@@ -7,18 +7,18 @@ import { ReferralProgramEditionHeroCardPieSplit } from "@/components/atoms/cards
 import { ReferralProgramEditionHeroCardRevShareLimit } from "@/components/atoms/cards/referralProgramEditionCard/rev-share/hero";
 import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
 import { ReferrerLeaderboard } from "@/components/referral-awards-program/referrers/ReferrerLeaderboard";
-import { getReferralProgramEditionConfigBySlug } from "@/utils/referralProgram";
+import { getReferralProgramEditionSummaryBySlug } from "@/utils/referralProgram";
 import { ReferralProgramLeaderboardHeroButtons } from "@/components/atoms/ReferralProgramLeaderboardHeroButtons";
 
 export const prerender = false;
 
 const { edition } = Astro.params;
 
-const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConfigBySlug(edition);
+const resolvedReferralProgramEditionSummary = await getReferralProgramEditionSummaryBySlug(edition);
 ---
 
 {
-  resolvedReferralProgramEditionConfig === undefined ? (
+  resolvedReferralProgramEditionSummary === undefined ? (
     <Layout
       isStatic={true}
       pageMetadata={{
@@ -38,15 +38,15 @@ const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConf
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ENS Leaderboard for ${resolvedReferralProgramEditionConfig.displayName} Referrers`,
-        description: `Compare referrers by their performance in ${resolvedReferralProgramEditionConfig.displayName}.`,
-        url: `https://ensawards.org/ens-referral-program/editions/${resolvedReferralProgramEditionConfig.slug}/leaderboard`,
-        ogImage: `https://ensawards.org/${resolvedReferralProgramEditionConfig.slug}_referral_program_edition_og_image.png`,
-        twitterImage: `https://ensawards.org/${resolvedReferralProgramEditionConfig.slug}_referral_program_edition_twitter_og_image.png`,
+        title: `ENSAwards: ENS Leaderboard for ${resolvedReferralProgramEditionSummary.displayName} Referrers`,
+        description: `Compare referrers by their performance in ${resolvedReferralProgramEditionSummary.displayName}.`,
+        url: `https://ensawards.org/ens-referral-program/editions/${resolvedReferralProgramEditionSummary.slug}/leaderboard`,
+        ogImage: `https://ensawards.org/${resolvedReferralProgramEditionSummary.slug}_referral_program_edition_og_image.png`,
+        twitterImage: `https://ensawards.org/${resolvedReferralProgramEditionSummary.slug}_referral_program_edition_twitter_og_image.png`,
       }}>
       <SubpageHero
-        header={`${resolvedReferralProgramEditionConfig.displayName} leaderboard`}
-        description={`Compare referrers by their performance in ${resolvedReferralProgramEditionConfig.displayName}.`}
+        header={`${resolvedReferralProgramEditionSummary.displayName} leaderboard`}
+        description={`Compare referrers by their performance in ${resolvedReferralProgramEditionSummary.displayName}.`}
         breadcrumbs={["ENS Referral Program"]}
         customImage={{
           source: LeaderboardsHeroImage,
@@ -54,30 +54,34 @@ const resolvedReferralProgramEditionConfig = await getReferralProgramEditionConf
           height: 372,
           styles: "-top-0 right-0 opacity-10",
         }}>
-        {resolvedReferralProgramEditionConfig.rules.awardModel ===
+        {resolvedReferralProgramEditionSummary.rules.awardModel ===
         ReferralProgramAwardModels.RevShareLimit ? (
           <ReferralProgramEditionHeroCardRevShareLimit
             client:load
             slot="largerHeroItem"
-            referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+            referralProgramEditionSummary={
+              resolvedReferralProgramEditionSummary
+            }
           />
         ) : (
           <ReferralProgramEditionHeroCardPieSplit
             client:load
             slot="largerHeroItem"
-            referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+            referralProgramEditionSummary={
+              resolvedReferralProgramEditionSummary
+            }
           />
         )}
         <ReferralProgramLeaderboardHeroButtons
           client:load
           slot="ctaContent"
-          referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+          referralProgramEditionSummary={resolvedReferralProgramEditionSummary}
         />
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ReferrerLeaderboard
           client:load
-          referralProgramEditionConfig={resolvedReferralProgramEditionConfig}
+          referralProgramEditionSummary={resolvedReferralProgramEditionSummary}
         />
       </section>
     </Layout>

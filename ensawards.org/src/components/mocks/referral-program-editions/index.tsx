@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { mockReferralProgramEditionsList } from "@/components/mocks/referral-program-editions/data";
+import { mockReferralProgramEditionSummariesList } from "@/components/mocks/referral-program-editions/data";
 import { DisplayReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -79,12 +79,12 @@ export const MockReferralProgramEditionsList = () => {
           fetchErrorMessage={
             state === ReferralProgramEditionsListStates.Error ? "Mock test error message." : ""
           }
-          referralProgramEditionConfigs={
+          referralProgramEditionSummaries={
             state === ReferralProgramEditionsListStates.Loaded
-              ? mockReferralProgramEditionsList
+              ? mockReferralProgramEditionSummariesList
               : null
           }
-          loadingReferralProgramEditionConfigs={mockReferralProgramEditionsList}
+          loadingReferralProgramEditionSummaries={mockReferralProgramEditionSummariesList}
           simplifiedVariant={variant === ReferralProgramEditionsListVariants.Simplified}
         />
       </div>

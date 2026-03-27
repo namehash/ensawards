@@ -1,10 +1,7 @@
 import {
-  calcReferralProgramStatus,
   ENSReferralsClient,
   ReferralProgramAwardModels,
-  type ReferralProgramEditionConfig,
-  ReferralProgramStatuses,
-  type ReferralProgramStatusId,
+  type ReferralProgramEditionSummary,
   type ReferrerLeaderboardPagePieSplit,
   ReferrerLeaderboardPageResponseCodes,
   type ReferrerLeaderboardPageRevShareLimit,
@@ -26,7 +23,7 @@ import { DisplayReferrerLeaderboardPage } from "@/components/referral-awards-pro
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
-import { fetchReferralProgramEditions } from "@/utils/referralProgram.ts";
+import { fetchReferralProgramEditionSummaries } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferrerLeaderboardSnippetProps {
@@ -44,10 +41,8 @@ export function ReferrerLeaderboardSnippet({
   fullLeaderboardButtonVariant = "ghost",
 }: ReferrerLeaderboardSnippetProps) {
   const now = useNow({ timeToRefresh: secondsInMinute });
-  const [latestActiveReferralProgramEdition, setLatestActiveReferralProgramEdition] =
-    useState<ReferralProgramEditionConfig | null>(null);
-  const [latestReferralProgramEditionStatus, setLatestReferralProgramEditionStatus] =
-    useState<ReferralProgramStatusId>(ReferralProgramStatuses.Active);
+  const [latestReferralProgramEdition, setLatestReferralProgramEdition] =
+    useState<ReferralProgramEditionSummary | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardSnippetData, setLeaderboardSnippetData] = useState<
@@ -57,7 +52,7 @@ export function ReferrerLeaderboardSnippet({
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   async function fetchReferrerLeaderboard() {
-    if (!latestActiveReferralProgramEdition) {
+    if (!latestReferralProgramEdition) {
       // Editions haven't loaded yet — stay in the loading state silently
       return;
     }
@@ -67,7 +62,7 @@ export function ReferrerLeaderboardSnippet({
 
     try {
       const response = await client.getReferrerLeaderboardPage({
-        edition: latestActiveReferralProgramEdition.slug,
+        edition: latestReferralProgramEdition.slug,
         page: 1,
         recordsPerPage: snippetSize,
       });
@@ -100,34 +95,36 @@ export function ReferrerLeaderboardSnippet({
 
   useEffect(() => {
     fetchReferrerLeaderboard();
-  }, [now, latestActiveReferralProgramEdition]);
+  }, [now, latestReferralProgramEdition]);
 
   useEffect(() => {
-    fetchReferralProgramEditions().then((editions) => {
-      const startedEditions = editions.filter((edition) => edition.rules.startTime <= now);
+    fetchReferralProgramEditionSummaries()
+      .then((editions) => {
+        const startedEditions = editions.filter((edition) => edition.rules.startTime <= now);
 
-      // If there are no started editions recorded,
-      // return the first edition from the fetched list,
-      // which is guaranteed to exist from default edition config set.
-      if (startedEditions.length === 0) {
-        const fallbackEdition = editions[0];
+        // If there are no started editions recorded,
+        // return the first edition from the fetched list,
+        // which is guaranteed to exist from default edition config set.
+        if (startedEditions.length === 0) {
+          const fallbackEdition = editions[0];
 
-        if (!fallbackEdition) return;
+          if (!fallbackEdition) return;
 
-        setLatestActiveReferralProgramEdition(fallbackEdition);
-        setLatestReferralProgramEditionStatus(
-          calcReferralProgramStatus(fallbackEdition.rules, now),
+          setLatestReferralProgramEdition(fallbackEdition);
+          return;
+        }
+
+        let latestEdition = startedEditions.reduce((latest, edition) =>
+          edition.rules.startTime > latest.rules.startTime ? edition : latest,
         );
-        return;
-      }
 
-      let latestEdition = startedEditions.reduce((latest, edition) =>
-        edition.rules.startTime > latest.rules.startTime ? edition : latest,
-      );
-
-      setLatestActiveReferralProgramEdition(latestEdition);
-      setLatestReferralProgramEditionStatus(calcReferralProgramStatus(latestEdition.rules, now));
-    });
+        setLatestReferralProgramEdition(latestEdition);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLeaderboardSnippetData(null);
+        setFetchErrorMessage("An error occurred while loading the leaderboard.");
+      });
   }, [now]);
 
   return (
@@ -135,20 +132,12 @@ export function ReferrerLeaderboardSnippet({
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start max-sm:items-center items-start gap-2 sm:gap-3 relative z-10">
           <h3 className="w-full text-left text-xl sm:text-2xl leading-normal font-semibold text-black">
-            Top {latestActiveReferralProgramEdition?.displayName ?? "Referral program edition"}{" "}
-            Referrers
+            Top {latestReferralProgramEdition?.displayName ?? "Referral program edition"} Referrers
           </h3>
-          {latestActiveReferralProgramEdition && (
+          {latestReferralProgramEdition && (
             <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start items-center gap-2 sm:gap-10 py-1 sm:pt-1 sm:pb-3">
               <ReferralProgramEditionInfo
-                referralProgramEdition={latestActiveReferralProgramEdition}
-                referralProgramEditionStatus={latestReferralProgramEditionStatus}
-                aggregatedEditionMetrics={
-                  leaderboardSnippetData !== null &&
-                  leaderboardSnippetData.awardModel === ReferralProgramAwardModels.RevShareLimit
-                    ? leaderboardSnippetData.aggregatedMetrics
-                    : null
-                }
+                referralProgramEdition={latestReferralProgramEdition}
                 isLoading={isLoading}
               />
               <div
@@ -174,8 +163,7 @@ export function ReferrerLeaderboardSnippet({
             leaderboardPageData={leaderboardSnippetData}
             isLoading={isLoading}
             expectedAwardModel={
-              latestActiveReferralProgramEdition?.rules.awardModel ??
-              ReferralProgramAwardModels.Unrecognized
+              latestReferralProgramEdition?.awardModel ?? ReferralProgramAwardModels.Unrecognized
             }
             leaderboardPageFetchError={
               fetchErrorMessage ? (
@@ -205,10 +193,10 @@ export function ReferrerLeaderboardSnippet({
           />
           {!isLoading &&
             leaderboardSnippetData !== null &&
-            latestActiveReferralProgramEdition &&
+            latestReferralProgramEdition &&
             leaderboardSnippetData.pageContext.totalRecords > snippetSize && (
               <a
-                href={`/ens-referral-program/editions/${latestActiveReferralProgramEdition.slug}/leaderboard`}
+                href={`/ens-referral-program/editions/${latestReferralProgramEdition.slug}/leaderboard`}
                 className={cn(
                   shadcnButtonVariants({
                     variant: fullLeaderboardButtonVariant,

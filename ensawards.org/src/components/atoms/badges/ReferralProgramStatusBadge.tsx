@@ -1,31 +1,25 @@
-import { ReferralProgramStatuses, type ReferralProgramStatusId } from "@namehash/ens-referrals/v1";
+import {
+  ReferralProgramEditionStatuses,
+  type ReferralProgramEditionStatusId,
+} from "@namehash/ens-referrals/v1";
 
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-// TODO: the current implementation of "Exhausted" variant is temporary
-// and should be moved to ens-referrals package as soon as we're not under such a time pressure
-export const ExhaustedReferralProgramStatus = {
-  Exhausted: "Exhausted",
-} as const;
-
-export type ExhaustedReferralProgramStatusId =
-  (typeof ExhaustedReferralProgramStatus)[keyof typeof ExhaustedReferralProgramStatus];
-
 interface ReferralProgramStatusBadgeProps {
-  status: ReferralProgramStatusId | ExhaustedReferralProgramStatusId;
+  status: ReferralProgramEditionStatusId;
   className?: string;
 }
 
-const getReferralProgramStatusStyle = (
-  status: ReferralProgramStatusId | ExhaustedReferralProgramStatusId,
-): string => {
+const getReferralProgramStatusStyle = (status: ReferralProgramEditionStatusId): string => {
   switch (status) {
-    case ReferralProgramStatuses.Scheduled:
+    case ReferralProgramEditionStatuses.AwardsReview: //TODO: Adjust to figma later
+      return "bg-yellow-500 text-white";
+    case ReferralProgramEditionStatuses.Scheduled:
       return "bg-white text-black border border-[#E5E5E5]";
-    case ReferralProgramStatuses.Active:
+    case ReferralProgramEditionStatuses.Active:
       return "bg-emerald-600 text-white";
-    case ReferralProgramStatuses.Closed:
-    case ExhaustedReferralProgramStatus.Exhausted:
+    case ReferralProgramEditionStatuses.Closed:
+    case ReferralProgramEditionStatuses.Exhausted:
     default:
       return "bg-neutral-500 text-white";
   }

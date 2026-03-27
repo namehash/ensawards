@@ -1,7 +1,8 @@
 import {
   ENSReferralsClient,
   ReferralProgramAwardModels,
-  type ReferralProgramEditionConfig,
+  ReferralProgramEditionStatuses,
+  type ReferralProgramEditionSummary,
   type ReferrerLeaderboardPagePieSplit,
   ReferrerLeaderboardPageResponseCodes,
   type ReferrerLeaderboardPageRevShareLimit,
@@ -30,18 +31,19 @@ import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { scrollWithOffset } from "@/utils/domActions.ts";
 import { getENSNodeUrl } from "@/utils/env";
+import { getReferralProgramEditionSummaryBySlug } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferrerLeaderboardProps {
   recordsPerPage?: number;
-  referralProgramEditionConfig: ReferralProgramEditionConfig;
+  referralProgramEditionSummary: ReferralProgramEditionSummary;
 }
 /**
  * Fetches Referrer Leaderboard through ENSNode and displays a single page of the leaderboard and pagination.
  */
 export function ReferrerLeaderboard({
   recordsPerPage = 25,
-  referralProgramEditionConfig,
+  referralProgramEditionSummary,
 }: ReferrerLeaderboardProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentRecordsPerPage, setCurrentRecordsPerPage] = useState(recordsPerPage);
@@ -51,15 +53,14 @@ export function ReferrerLeaderboard({
   const [leaderboardData, setLeaderboardData] = useState<
     ReferrerLeaderboardPageRevShareLimit | ReferrerLeaderboardPagePieSplit | null
   >(null);
+  const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
+    referralProgramEditionSummary,
+  );
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
-  // refresh for status changes every minute
-  const now = useNow({ timeToRefresh: secondsInMinute });
-  const hasReferralProgramEditionStarted = useMemo(
-    () => referralProgramEditionConfig.rules.startTime <= now,
-    [referralProgramEditionConfig.rules.startTime, now],
-  );
+  // refresh every 5 minutes
+  const now = useNow({ timeToRefresh: 5 * secondsInMinute });
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -70,7 +71,7 @@ export function ReferrerLeaderboard({
     scrollWithOffset("leaderboard-header", 75);
     try {
       const response = await client.getReferrerLeaderboardPage({
-        edition: referralProgramEditionConfig.slug,
+        edition: referralProgramEditionSummaryData.slug,
         page: currentPage,
         recordsPerPage: currentRecordsPerPage,
       });
@@ -107,19 +108,31 @@ export function ReferrerLeaderboard({
     }
   }
 
+  async function refreshReferralProgramEditionSummary() {
+    const refreshedSummary = await getReferralProgramEditionSummaryBySlug(
+      referralProgramEditionSummary.slug,
+    );
+
+    setReferralProgramEditionSummaryData(refreshedSummary ?? referralProgramEditionSummary);
+  }
+
   useEffect(() => {
-    if (!hasReferralProgramEditionStarted) return;
+    if (referralProgramEditionSummaryData.status !== ReferralProgramEditionStatuses.Active) return;
 
     fetchReferrerLeaderboard();
-  }, [currentPage, currentRecordsPerPage, hasReferralProgramEditionStarted]);
+  }, [currentPage, currentRecordsPerPage, referralProgramEditionSummaryData]);
 
-  if (!hasReferralProgramEditionStarted) {
+  useEffect(() => {
+    refreshReferralProgramEditionSummary();
+  }, [referralProgramEditionSummary, now]);
+
+  if (referralProgramEditionSummaryData.status !== ReferralProgramEditionStatuses.Active) {
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
         <EmptyLeaderboardInfo
-          header={`The ${referralProgramEditionConfig.displayName} edition is not active yet`}
-          description={`The ${referralProgramEditionConfig.displayName} edition begins ${intlFormat(
-            fromUnixTime(referralProgramEditionConfig.rules.startTime),
+          header={`The ${referralProgramEditionSummaryData.displayName} edition is not active yet`}
+          description={`The ${referralProgramEditionSummaryData.displayName} edition begins ${intlFormat(
+            fromUnixTime(referralProgramEditionSummaryData.rules.startTime),
             {
               year: "numeric",
               month: "short",
@@ -129,7 +142,7 @@ export function ReferrerLeaderboard({
           )}`}
           buttonData={{
             label: "Read the rules",
-            href: referralProgramEditionConfig.rules.rulesUrl.href,
+            href: `/ens-referral-program/editions/${referralProgramEditionSummaryData.slug}/rules`,
           }}
         />
       </div>
@@ -183,7 +196,7 @@ export function ReferrerLeaderboard({
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardData}
             isLoading={isLoading}
-            expectedAwardModel={referralProgramEditionConfig.rules.awardModel}
+            expectedAwardModel={referralProgramEditionSummaryData.awardModel}
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo

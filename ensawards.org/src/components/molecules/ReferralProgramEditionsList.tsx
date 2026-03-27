@@ -1,16 +1,12 @@
-import type {
-  ReferralProgramEditionConfig,
-  ReferralProgramStatusId,
-} from "@namehash/ens-referrals/v1";
+import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
 import {
-  calcReferralProgramStatus,
   ENSReferralsClient,
   ReferralProgramAwardModels,
-  ReferralProgramEditionConfigSetResponseCodes,
-  ReferralProgramStatuses,
+  ReferralProgramEditionStatuses,
+  ReferralProgramEditionSummariesResponseCodes,
 } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
-import { secondsInHour, secondsInMinute } from "date-fns/constants";
+import { secondsInMinute } from "date-fns/constants";
 import { Inbox as NoEditionsIcon } from "lucide-react";
 import { Fragment, type ReactNode, useEffect, useMemo, useState } from "react";
 
@@ -19,7 +15,7 @@ import { ReferralProgramEditionCardPieSplitLoading } from "@/components/atoms/ca
 import { ReferralProgramEditionCardRevShareLimit } from "@/components/atoms/cards/referralProgramEditionCard/rev-share";
 import { ReferralProgramEditionCardRevShareLimitLoading } from "@/components/atoms/cards/referralProgramEditionCard/rev-share/loading";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
-import { mockReferralProgramEditionsList } from "@/components/mocks/referral-program-editions/data";
+import { mockReferralProgramEditionSummariesList } from "@/components/mocks/referral-program-editions/data";
 import { getENSNodeUrl } from "@/utils/env";
 import { filterOutUnrecognizedEditions } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -34,27 +30,28 @@ export function ReferralProgramEditionsList({
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
-
-  const [referralProgramEditionConfigs, setReferralProgramEditionConfigs] = useState<
-    ReferralProgramEditionConfig[] | null
+  const [referralProgramEditionSummaries, setReferralProgramEditionSummaries] = useState<
+    ReferralProgramEditionSummary[] | null
   >(null);
+  // refresh every 5 minutes
+  const now = useNow({ timeToRefresh: 5 * secondsInMinute });
 
-  async function fetchReferralProgramEditionConfigs() {
+  async function fetchReferralProgramEditionSummaries() {
     setFetchErrorMessage("");
     setIsLoading(true);
 
     try {
-      const response = await client.getEditionConfigSet();
-      if (response.responseCode !== ReferralProgramEditionConfigSetResponseCodes.Ok) {
+      const response = await client.getEditionSummaries();
+      if (response.responseCode !== ReferralProgramEditionSummariesResponseCodes.Ok) {
         console.error(response.errorMessage);
-        setReferralProgramEditionConfigs(null);
+        setReferralProgramEditionSummaries(null);
         setFetchErrorMessage("An error occurred while loading the Referral program editions.");
         return;
       }
-      setReferralProgramEditionConfigs(filterOutUnrecognizedEditions(response.data.editions));
+      setReferralProgramEditionSummaries(filterOutUnrecognizedEditions(response.data.editions));
     } catch (error) {
       console.error(error);
-      setReferralProgramEditionConfigs(null);
+      setReferralProgramEditionSummaries(null);
       setFetchErrorMessage("An error occurred while loading the Referral program editions.");
     } finally {
       setIsLoading(false);
@@ -62,16 +59,16 @@ export function ReferralProgramEditionsList({
   }
 
   useEffect(() => {
-    fetchReferralProgramEditionConfigs();
-  }, []);
+    fetchReferralProgramEditionSummaries();
+  }, [now]);
 
   return (
     <DisplayReferralProgramEditionsList
       isLoading={isLoading}
       fetchErrorMessage={fetchErrorMessage}
-      referralProgramEditionConfigs={referralProgramEditionConfigs}
+      referralProgramEditionSummaries={referralProgramEditionSummaries}
       // Using mock data for the loading state because the current ens-referrals defaults are outdated
-      loadingReferralProgramEditionConfigs={mockReferralProgramEditionsList}
+      loadingReferralProgramEditionSummaries={mockReferralProgramEditionSummariesList}
       simplifiedVariant={simplifiedVariant}
     />
   );
@@ -133,34 +130,80 @@ const ReferralProgramEditionsListContainer = ({
 interface DisplayReferralProgramEditionsListProps {
   isLoading: boolean;
   fetchErrorMessage: string;
-  referralProgramEditionConfigs: ReferralProgramEditionConfig[] | null;
-  loadingReferralProgramEditionConfigs: ReferralProgramEditionConfig[];
+  referralProgramEditionSummaries: ReferralProgramEditionSummary[] | null;
+  loadingReferralProgramEditionSummaries: ReferralProgramEditionSummary[];
   simplifiedVariant: boolean;
 }
 
 export const DisplayReferralProgramEditionsList = ({
   isLoading,
   fetchErrorMessage,
-  referralProgramEditionConfigs,
-  loadingReferralProgramEditionConfigs,
+  referralProgramEditionSummaries,
+  loadingReferralProgramEditionSummaries,
   simplifiedVariant,
 }: DisplayReferralProgramEditionsListProps) => {
-  // refresh the status every minute for the grouped view
-  const now = useNow({ timeToRefresh: simplifiedVariant ? secondsInHour : secondsInMinute });
-
-  const ErrorDisplay = (
-    <ErrorInfo
-      title="Error loading referral programs data"
-      description={[`${fetchErrorMessage} Please try again later.`]}
-    />
-  );
-
   if (simplifiedVariant) {
     return (
-      <Fragment>
-        {isLoading && (
-          <div className="w-full h-fit flex flex-col justify-start items-center gap-2">
-            {loadingReferralProgramEditionConfigs.map((edition, index) => {
+      <DisplaySimplifiedReferralProgramEditionSummariesList
+        isLoading={isLoading}
+        fetchErrorMessage={fetchErrorMessage}
+        referralProgramEditionSummaries={referralProgramEditionSummaries}
+        loadingReferralProgramEditionSummaries={loadingReferralProgramEditionSummaries}
+      />
+    );
+  }
+
+  return (
+    <DisplayGroupedReferralProgramEditionSummariesList
+      isLoading={isLoading}
+      fetchErrorMessage={fetchErrorMessage}
+      referralProgramEditionSummaries={referralProgramEditionSummaries}
+      loadingReferralProgramEditionSummaries={loadingReferralProgramEditionSummaries}
+    />
+  );
+};
+
+const DisplayGroupedReferralProgramEditionSummariesList = ({
+  isLoading,
+  fetchErrorMessage,
+  referralProgramEditionSummaries,
+  loadingReferralProgramEditionSummaries,
+}: Omit<DisplayReferralProgramEditionsListProps, "simplifiedVariant">) => {
+  // refresh the status every minute
+  const now = useNow({ timeToRefresh: secondsInMinute });
+
+  const { activeEditions, closedEditions, scheduledEditions } = useMemo(() => {
+    if (!referralProgramEditionSummaries) {
+      return { activeEditions: [], closedEditions: [], scheduledEditions: [] };
+    }
+    return {
+      activeEditions: referralProgramEditionSummaries.filter(
+        (editionSummary) =>
+          editionSummary.status === ReferralProgramEditionStatuses.Active ||
+          editionSummary.status === ReferralProgramEditionStatuses.Exhausted,
+      ),
+      closedEditions: referralProgramEditionSummaries.filter(
+        (editionSummary) =>
+          editionSummary.status === ReferralProgramEditionStatuses.Closed ||
+          editionSummary.status === ReferralProgramEditionStatuses.AwardsReview,
+      ),
+      scheduledEditions: referralProgramEditionSummaries.filter(
+        (editionSummary) => editionSummary.status === ReferralProgramEditionStatuses.Scheduled,
+      ),
+    };
+  }, [referralProgramEditionSummaries, now]);
+
+  return (
+    <Fragment>
+      {isLoading && (
+        <ReferralProgramEditionsListContainer
+          activeEditions={loadingReferralProgramEditionSummaries
+            .filter(
+              (edition) =>
+                edition.status === ReferralProgramEditionStatuses.Active ||
+                edition.status === ReferralProgramEditionStatuses.Exhausted,
+            )
+            .map((edition, index) => {
               if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
                 return (
                   <ReferralProgramEditionCardRevShareLimitLoading
@@ -174,131 +217,64 @@ export const DisplayReferralProgramEditionsList = ({
                 />
               );
             })}
-          </div>
-        )}
-        {!isLoading && referralProgramEditionConfigs === null && fetchErrorMessage && ErrorDisplay}
-        {!isLoading && referralProgramEditionConfigs !== null && (
-          <div className="w-full h-fit flex flex-col justify-start items-center gap-2">
-            {referralProgramEditionConfigs.map((edition) => {
-              if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+          closedEditions={loadingReferralProgramEditionSummaries
+            .filter(
+              (editionSummary) =>
+                editionSummary.status === ReferralProgramEditionStatuses.Closed ||
+                editionSummary.status === ReferralProgramEditionStatuses.AwardsReview,
+            )
+            .map((editionSummary, index) => {
+              if (editionSummary.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
                 return (
-                  <ReferralProgramEditionCardRevShareLimit
-                    referralProgramEditionConfig={edition}
-                    key={`referral-program-edition-${edition.slug}`}
+                  <ReferralProgramEditionCardRevShareLimitLoading
+                    key={`referral-program-edition-loading-closed#${index}`}
                   />
                 );
               }
-
               return (
-                <ReferralProgramEditionCardPieSplit
-                  referralProgramEditionConfig={edition}
-                  key={`referral-program-edition-${edition.slug}`}
-                />
-              );
-            })}
-          </div>
-        )}
-      </Fragment>
-    );
-  }
-
-  const filterEditionsByStatus = (
-    editions: ReferralProgramEditionConfig[],
-    status: ReferralProgramStatusId,
-  ) => editions.filter((edition) => calcReferralProgramStatus(edition.rules, now) === status);
-
-  const { activeEditions, closedEditions, scheduledEditions } = useMemo(() => {
-    if (!referralProgramEditionConfigs) {
-      return { activeEditions: [], closedEditions: [], scheduledEditions: [] };
-    }
-    return {
-      activeEditions: referralProgramEditionConfigs.filter(
-        (edition) =>
-          calcReferralProgramStatus(edition.rules, now) === ReferralProgramStatuses.Active,
-      ),
-      closedEditions: referralProgramEditionConfigs.filter(
-        (edition) =>
-          calcReferralProgramStatus(edition.rules, now) === ReferralProgramStatuses.Closed,
-      ),
-      scheduledEditions: referralProgramEditionConfigs.filter(
-        (edition) =>
-          calcReferralProgramStatus(edition.rules, now) === ReferralProgramStatuses.Scheduled,
-      ),
-    };
-  }, [referralProgramEditionConfigs, now]);
-
-  return (
-    <Fragment>
-      {isLoading && (
-        <ReferralProgramEditionsListContainer
-          activeEditions={filterEditionsByStatus(
-            loadingReferralProgramEditionConfigs,
-            ReferralProgramStatuses.Active,
-          ).map((edition, index) => {
-            if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
-              return (
-                <ReferralProgramEditionCardRevShareLimitLoading
-                  key={`referral-program-edition-loading-active#${index}`}
-                />
-              );
-            }
-            return (
-              <ReferralProgramEditionCardPieSplitLoading
-                key={`referral-program-edition-loading-active#${index}`}
-              />
-            );
-          })}
-          closedEditions={filterEditionsByStatus(
-            loadingReferralProgramEditionConfigs,
-            ReferralProgramStatuses.Closed,
-          ).map((edition, index) => {
-            if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
-              return (
-                <ReferralProgramEditionCardRevShareLimitLoading
+                <ReferralProgramEditionCardPieSplitLoading
                   key={`referral-program-edition-loading-closed#${index}`}
                 />
               );
-            }
-            return (
-              <ReferralProgramEditionCardPieSplitLoading
-                key={`referral-program-edition-loading-closed#${index}`}
-              />
-            );
-          })}
-          scheduledEditions={filterEditionsByStatus(
-            loadingReferralProgramEditionConfigs,
-            ReferralProgramStatuses.Scheduled,
-          ).map((edition, index) => {
-            if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+            })}
+          scheduledEditions={loadingReferralProgramEditionSummaries
+            .filter(
+              (editionSummary) =>
+                editionSummary.status === ReferralProgramEditionStatuses.Scheduled,
+            )
+            .map((editionSummary, index) => {
+              if (editionSummary.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+                return (
+                  <ReferralProgramEditionCardRevShareLimitLoading
+                    key={`referral-program-edition-loading-scheduled#${index}`}
+                  />
+                );
+              }
               return (
-                <ReferralProgramEditionCardRevShareLimitLoading
+                <ReferralProgramEditionCardPieSplitLoading
                   key={`referral-program-edition-loading-scheduled#${index}`}
                 />
               );
-            }
-            return (
-              <ReferralProgramEditionCardPieSplitLoading
-                key={`referral-program-edition-loading-scheduled#${index}`}
-              />
-            );
-          })}
+            })}
         />
       )}
-      {!isLoading && referralProgramEditionConfigs === null && fetchErrorMessage && ErrorDisplay}
-      {!isLoading && referralProgramEditionConfigs !== null && (
+      {!isLoading && referralProgramEditionSummaries === null && fetchErrorMessage && (
+        <SummariesFetchingErrorDisplay fetchErrorMessage={fetchErrorMessage} />
+      )}
+      {!isLoading && referralProgramEditionSummaries !== null && (
         <ReferralProgramEditionsListContainer
           activeEditions={activeEditions.map((edition) => {
-            if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+            if (edition.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimit
-                  referralProgramEditionConfig={edition}
+                  referralProgramEditionSummary={edition}
                   key={`referral-program-edition-${edition.slug}`}
                 />
               );
             }
             return (
               <ReferralProgramEditionCardPieSplit
-                referralProgramEditionConfig={edition}
+                referralProgramEditionSummary={edition}
                 key={`referral-program-edition-${edition.slug}`}
               />
             );
@@ -307,14 +283,14 @@ export const DisplayReferralProgramEditionsList = ({
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimit
-                  referralProgramEditionConfig={edition}
+                  referralProgramEditionSummary={edition}
                   key={`referral-program-edition-${edition.slug}`}
                 />
               );
             }
             return (
               <ReferralProgramEditionCardPieSplit
-                referralProgramEditionConfig={edition}
+                referralProgramEditionSummary={edition}
                 key={`referral-program-edition-${edition.slug}`}
               />
             );
@@ -323,14 +299,14 @@ export const DisplayReferralProgramEditionsList = ({
             if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimit
-                  referralProgramEditionConfig={edition}
+                  referralProgramEditionSummary={edition}
                   key={`referral-program-edition-${edition.slug}`}
                 />
               );
             }
             return (
               <ReferralProgramEditionCardPieSplit
-                referralProgramEditionConfig={edition}
+                referralProgramEditionSummary={edition}
                 key={`referral-program-edition-${edition.slug}`}
               />
             );
@@ -340,6 +316,58 @@ export const DisplayReferralProgramEditionsList = ({
     </Fragment>
   );
 };
+
+const DisplaySimplifiedReferralProgramEditionSummariesList = ({
+  isLoading,
+  fetchErrorMessage,
+  referralProgramEditionSummaries,
+  loadingReferralProgramEditionSummaries,
+}: Omit<DisplayReferralProgramEditionsListProps, "simplifiedVariant">) => (
+  <Fragment>
+    {isLoading && (
+      <div className="w-full h-fit flex flex-col justify-start items-center gap-2">
+        {loadingReferralProgramEditionSummaries.map((editionSummary, index) => {
+          if (editionSummary.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+            return (
+              <ReferralProgramEditionCardRevShareLimitLoading
+                key={`referral-program-edition-loading-active#${index}`}
+              />
+            );
+          }
+          return (
+            <ReferralProgramEditionCardPieSplitLoading
+              key={`referral-program-edition-loading-active#${index}`}
+            />
+          );
+        })}
+      </div>
+    )}
+    {!isLoading && referralProgramEditionSummaries === null && fetchErrorMessage && (
+      <SummariesFetchingErrorDisplay fetchErrorMessage={fetchErrorMessage} />
+    )}
+    {!isLoading && referralProgramEditionSummaries !== null && (
+      <div className="w-full h-fit flex flex-col justify-start items-center gap-2">
+        {referralProgramEditionSummaries.map((editionSummary) => {
+          if (editionSummary.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+            return (
+              <ReferralProgramEditionCardRevShareLimit
+                referralProgramEditionSummary={editionSummary}
+                key={`referral-program-edition-${editionSummary.slug}`}
+              />
+            );
+          }
+
+          return (
+            <ReferralProgramEditionCardPieSplit
+              referralProgramEditionSummary={editionSummary}
+              key={`referral-program-edition-${editionSummary.slug}`}
+            />
+          );
+        })}
+      </div>
+    )}
+  </Fragment>
+);
 
 const NoEditionsInfo = ({ header, description }: { header: string; description: string }) => {
   const baseContainerStyles = "w-full h-fit flex flex-col justify-start items-center";
@@ -357,3 +385,10 @@ const NoEditionsInfo = ({ header, description }: { header: string; description: 
     </div>
   );
 };
+
+const SummariesFetchingErrorDisplay = ({ fetchErrorMessage }: { fetchErrorMessage: string }) => (
+  <ErrorInfo
+    title="Error loading referral programs data"
+    description={[`${fetchErrorMessage} Please try again later.`]}
+  />
+);

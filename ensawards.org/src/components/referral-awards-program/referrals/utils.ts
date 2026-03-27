@@ -1,4 +1,4 @@
-import { type ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
 import { zeroAddress } from "viem";
 
 import {
@@ -8,7 +8,7 @@ import {
 } from "@ensnode/ensnode-sdk";
 
 export function isQualifiedReferral(
-  referralProgramEdition: ReferralProgramEditionConfig,
+  referralProgramEdition: ReferralProgramEditionSummary,
   registrarAction: NamedRegistrarAction,
 ): boolean {
   // Check if the registrar action occurred within program's duration

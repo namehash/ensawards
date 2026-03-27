@@ -1,7 +1,7 @@
-import { calcReferralProgramStatus, ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
+import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import {
@@ -10,21 +10,33 @@ import {
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
+import { getReferralProgramEditionSummaryBySlug } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export const ReferralProgramEditionHeroCardPieSplit = ({
-  referralProgramEditionConfig,
+  referralProgramEditionSummary,
 }: ReferralProgramEditionCardProps) => {
-  // refresh the status every minute
-  const now = useNow({ timeToRefresh: secondsInMinute });
-  const referralProgramStatus = useMemo(
-    () => calcReferralProgramStatus(referralProgramEditionConfig.rules, now),
-    [now, referralProgramEditionConfig.rules],
+  const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
+    referralProgramEditionSummary,
   );
+  // refresh every 5 minutes
+  const now = useNow({ timeToRefresh: 5 * secondsInMinute });
+
+  async function refreshReferralProgramEditionSummary() {
+    const refreshedSummary = await getReferralProgramEditionSummaryBySlug(
+      referralProgramEditionSummaryData.slug,
+    );
+
+    setReferralProgramEditionSummaryData(refreshedSummary ?? referralProgramEditionSummary);
+  }
+
+  useEffect(() => {
+    refreshReferralProgramEditionSummary();
+  }, [referralProgramEditionSummaryData, now]);
 
   // The config of an unrecognized edition will never be passed here,
   // but we perform the check for the type safety
-  if (referralProgramEditionConfig.rules.awardModel === ReferralProgramAwardModels.Unrecognized)
+  if (referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.Unrecognized)
     return null;
 
   const cardClassName = cn(
@@ -36,13 +48,13 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
     <div className={cardClassName}>
       <div className="w-full flex flex-row justify-between items-start gap-5 pb-1">
         <h3 className="text-lg leading-normal font-semibold text-black text-ellipsis">
-          {referralProgramEditionConfig.displayName}
+          {referralProgramEditionSummaryData.displayName}
         </h3>
-        <ReferralProgramStatusBadge status={referralProgramStatus} />
+        <ReferralProgramStatusBadge status={referralProgramEditionSummaryData.status} />
       </div>
       <ReferralProgramEditionTimePeriod
-        startTime={referralProgramEditionConfig.rules.startTime}
-        endTime={referralProgramEditionConfig.rules.endTime}
+        startTime={referralProgramEditionSummaryData.rules.startTime}
+        endTime={referralProgramEditionSummaryData.rules.endTime}
         styles={{
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
           label:
@@ -52,7 +64,7 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
         }}
       />
       <ReferralProgramEditionBudget
-        totalAwardPoolValue={referralProgramEditionConfig.rules.totalAwardPoolValue}
+        totalAwardPoolValue={referralProgramEditionSummaryData.rules.totalAwardPoolValue}
         styles={{
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
           label: "text-muted-foreground text-sm leading-normal font-normal cursor-default",
@@ -64,13 +76,13 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
           Max qualified referrers
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
-          {referralProgramEditionConfig.rules.awardModel === ReferralProgramAwardModels.PieSplit
-            ? referralProgramEditionConfig.rules.maxQualifiedReferrers
+          {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.PieSplit
+            ? referralProgramEditionSummaryData.rules.maxQualifiedReferrers
             : "-"}
         </p>
       </div>
       <ReferralProgramEditionRules
-        rulesUrlHref={`/ens-referral-program/editions/${referralProgramEditionConfig.slug}/rules`}
+        rulesUrlHref={`/ens-referral-program/editions/${referralProgramEditionSummaryData.slug}/rules`}
         styles={{
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
           label: "text-muted-foreground text-sm leading-normal font-normal cursor-default",

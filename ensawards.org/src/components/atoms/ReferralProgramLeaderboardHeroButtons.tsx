@@ -1,32 +1,44 @@
 import {
-  calcReferralProgramStatus,
-  type ReferralProgramEditionConfig,
-  ReferralProgramStatuses,
+  ReferralProgramEditionStatuses,
+  type ReferralProgramEditionSummary,
 } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
+import { getReferralProgramEditionSummaryBySlug } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 interface ReferralProgramLeaderboardHeroButtonsProps {
-  referralProgramEditionConfig: ReferralProgramEditionConfig;
+  referralProgramEditionSummary: ReferralProgramEditionSummary;
 }
 
 export const ReferralProgramLeaderboardHeroButtons = ({
-  referralProgramEditionConfig,
+  referralProgramEditionSummary,
 }: ReferralProgramLeaderboardHeroButtonsProps) => {
-  // refresh the status every minute
-  const now = useNow({ timeToRefresh: secondsInMinute });
-  const referralProgramStatus = useMemo(
-    () => calcReferralProgramStatus(referralProgramEditionConfig.rules, now),
-    [now, referralProgramEditionConfig],
+  const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
+    referralProgramEditionSummary,
   );
+  // refresh every 5 minutes
+  const now = useNow({ timeToRefresh: 5 * secondsInMinute });
+
+  async function refreshReferralProgramEditionSummary() {
+    const refreshedSummary = await getReferralProgramEditionSummaryBySlug(
+      referralProgramEditionSummary.slug,
+    );
+
+    setReferralProgramEditionSummaryData(refreshedSummary ?? referralProgramEditionSummary);
+  }
+
+  useEffect(() => {
+    refreshReferralProgramEditionSummary();
+  }, [referralProgramEditionSummary, now]);
+
   return (
     <div className="flex flex-col sm:flex-row justify-start items-start gap-4">
       <a
-        href={`/ens-referral-program/editions/${referralProgramEditionConfig.slug}/rules`}
+        href={`/ens-referral-program/editions/${referralProgramEditionSummaryData.slug}/rules`}
         className={cn(
           shadcnButtonVariants({
             variant: "default",
@@ -38,7 +50,7 @@ export const ReferralProgramLeaderboardHeroButtons = ({
       >
         View edition rules
       </a>
-      {referralProgramStatus === ReferralProgramStatuses.Active && (
+      {referralProgramEditionSummaryData.status === ReferralProgramEditionStatuses.Active && (
         <a
           href="/ens-referral-program/live-feed"
           className={cn(

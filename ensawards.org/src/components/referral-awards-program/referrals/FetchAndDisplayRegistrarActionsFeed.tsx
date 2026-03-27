@@ -1,4 +1,4 @@
-import { type ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
 import { useEffect, useState } from "react";
 import { namehash } from "viem";
 
@@ -18,7 +18,7 @@ import {
 } from "@/components/referral-awards-program/referrals/RegistrarActionsList";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
-import { fetchReferralProgramEditions } from "@/utils/referralProgram.ts";
+import { fetchReferralProgramEditionSummaries } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface ReferralLiveFeedTitle {
@@ -49,8 +49,8 @@ export function FetchAndDisplayRegistrarActionsFeed({
     registrarActionsFilter.withReferral(true),
   ];
 
-  const [referralProgramEditions, setReferralProgramEditions] = useState<
-    ReferralProgramEditionConfig[]
+  const [referralProgramEditionSummaries, setReferralProgramEditionSummaries] = useState<
+    ReferralProgramEditionSummary[]
   >([]);
 
   const registrarActionsQuery = useRegistrarActions({
@@ -61,7 +61,14 @@ export function FetchAndDisplayRegistrarActionsFeed({
   });
 
   useEffect(() => {
-    fetchReferralProgramEditions().then(setReferralProgramEditions);
+    fetchReferralProgramEditionSummaries()
+      .then(setReferralProgramEditionSummaries)
+      .catch((error) => {
+        console.error("Error fetching referral program edition summaries:", error);
+        // Because the lack of editions doesn't prevent the referral livefeed from working,
+        // we stay in a silent failure and just set editions to an empty array
+        setReferralProgramEditionSummaries([]);
+      });
   }, []);
 
   const TryAgainButton = (
@@ -156,7 +163,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
       <DisplayRegistrarActionsList
         namespaceId={namespaceId}
         registrarActions={registrarActionsQuery.data.registrarActions}
-        referralProgramEditions={referralProgramEditions}
+        referralProgramEditionSummaries={referralProgramEditionSummaries}
       />
     </div>
   );

@@ -9,6 +9,7 @@ import {
   LastUpdateTimeLoading,
 } from "@/components/atoms/datetime/LastUpdateTime.tsx";
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import { mockReferralProgramEditionSummariesList } from "@/components/mocks/referral-program-editions/data.ts";
 import type { ReferralLiveFeedTitle } from "@/components/referral-awards-program/referrals/FetchAndDisplayRegistrarActionsFeed.tsx";
 import {
   DisplayRegistrarActionsList,
@@ -17,7 +18,6 @@ import {
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
-import { DEFAULT_REFERRAL_PROGRAM_EDITIONS } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 import { variants } from "./data.ts";
@@ -129,7 +129,7 @@ export function MockDisplayRegistrarActionsFeed() {
                   <DisplayRegistrarActionsList
                     namespaceId={namespaceId}
                     registrarActions={selectedVariant.registrarActions}
-                    referralProgramEditions={DEFAULT_REFERRAL_PROGRAM_EDITIONS}
+                    referralProgramEditionSummaries={mockReferralProgramEditionSummariesList}
                   />
                 </div>
               )}

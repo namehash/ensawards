@@ -1,4 +1,4 @@
-import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
 
 import type { PriceUsdc, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
@@ -10,7 +10,7 @@ import { parseReferralProgramCurrency } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferralProgramEditionCardProps {
-  referralProgramEditionConfig: ReferralProgramEditionConfig;
+  referralProgramEditionSummary: ReferralProgramEditionSummary;
 }
 
 export interface ReferralProgramEditionTimePeriodProps {

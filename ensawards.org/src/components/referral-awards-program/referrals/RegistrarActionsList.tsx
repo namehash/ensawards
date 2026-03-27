@@ -1,5 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { type ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
 import {
   getEnsManagerNameDetailsUrl,
   RegistrarActionCardLoading,
@@ -16,7 +16,7 @@ import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils"
 interface DisplayRegistrarActionsListProps {
   namespaceId: ENSNamespaceId;
   registrarActions: NamedRegistrarAction[];
-  referralProgramEditions: ReferralProgramEditionConfig[];
+  referralProgramEditionSummaries: ReferralProgramEditionSummary[];
   showReferrer?: boolean;
 }
 
@@ -26,7 +26,7 @@ interface DisplayRegistrarActionsListProps {
 export function DisplayRegistrarActionsList({
   namespaceId,
   registrarActions,
-  referralProgramEditions,
+  referralProgramEditionSummaries,
   showReferrer = true,
 }: DisplayRegistrarActionsListProps) {
   const [animationParent] = useAutoAnimate();
@@ -42,7 +42,7 @@ export function DisplayRegistrarActionsList({
         // See https://github.com/namehash/ensnode/issues/1797 for more details
         // // if the registrar action is qualified for a given referral program edition,
         // // add the program edition's config to the list.
-        // const qualifiedReferralPrograms = referralProgramEditions.filter((edition) =>
+        // const qualifiedReferralPrograms = referralProgramEditionSummaries.filter((edition) =>
         //   isQualifiedReferral(edition, namedRegistrarAction),
         // );
 

@@ -1,15 +1,9 @@
 import {
-  type AggregatedReferrerMetricsRevShareLimit,
   ReferralProgramAwardModels,
-  type ReferralProgramEditionConfig,
-  ReferralProgramStatuses,
-  type ReferralProgramStatusId,
+  type ReferralProgramEditionSummary,
 } from "@namehash/ens-referrals/v1";
 
-import {
-  ExhaustedReferralProgramStatus,
-  ReferralProgramStatusBadge,
-} from "@/components/atoms/badges/ReferralProgramStatusBadge";
+import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge";
 import {
   ReferralProgramEditionBudget,
   ReferralProgramEditionFieldLoading,
@@ -20,16 +14,12 @@ import { currencyFormatter } from "@/components/atoms/cards/referrerCard/shared.
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 
 interface ReferralProgramEditionInfoProps {
-  referralProgramEdition: ReferralProgramEditionConfig;
-  referralProgramEditionStatus: ReferralProgramStatusId;
-  aggregatedEditionMetrics: AggregatedReferrerMetricsRevShareLimit | null;
+  referralProgramEdition: ReferralProgramEditionSummary;
   isLoading: boolean;
 }
 
 export const ReferralProgramEditionInfo = ({
   referralProgramEdition,
-  referralProgramEditionStatus,
-  aggregatedEditionMetrics,
   isLoading,
 }: ReferralProgramEditionInfoProps) => {
   // The config of an unrecognized edition will never be passed here,
@@ -37,11 +27,6 @@ export const ReferralProgramEditionInfo = ({
   if (referralProgramEdition.rules.awardModel === ReferralProgramAwardModels.Unrecognized) {
     return null;
   }
-
-  const isAwardPoolExhausted =
-    referralProgramEditionStatus === ReferralProgramStatuses.Active &&
-    aggregatedEditionMetrics !== null &&
-    aggregatedEditionMetrics.awardPoolRemaining.amount === 0n;
 
   return (
     <>
@@ -70,7 +55,7 @@ export const ReferralProgramEditionInfo = ({
           totalAwardPoolValue={referralProgramEdition.rules.totalAwardPoolValue}
         />
       )}
-      {referralProgramEdition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit &&
+      {referralProgramEdition.awardModel === ReferralProgramAwardModels.RevShareLimit &&
         (isLoading ? (
           <ReferralProgramEditionFieldLoading
             label="Budget remaining"
@@ -80,19 +65,19 @@ export const ReferralProgramEditionInfo = ({
               skeleton: "w-[100px] h-[14px] mt-[4px] mb-[3px]",
             }}
           />
-        ) : aggregatedEditionMetrics !== null ? (
+        ) : (
           <div className="flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[110px] sm:flex-col sm:justify-center max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default">
               Budget remaining
             </p>
             <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
               {currencyFormatter.format(
-                parseReferralProgramCurrency(aggregatedEditionMetrics.awardPoolRemaining),
+                parseReferralProgramCurrency(referralProgramEdition.awardPoolRemaining),
               )}{" "}
               USD
             </p>
           </div>
-        ) : null)}
+        ))}
       {isLoading ? (
         <ReferralProgramEditionFieldLoading label="Rules" />
       ) : (
@@ -112,13 +97,7 @@ export const ReferralProgramEditionInfo = ({
           <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default">
             Status
           </p>
-          <ReferralProgramStatusBadge
-            status={
-              isAwardPoolExhausted
-                ? ExhaustedReferralProgramStatus.Exhausted
-                : referralProgramEditionStatus
-            }
-          />
+          <ReferralProgramStatusBadge status={referralProgramEdition.status} />
         </div>
       )}
     </>
