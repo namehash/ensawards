@@ -10,7 +10,7 @@ import {
 import { useNow } from "@namehash/namehash-ui";
 import { fromUnixTime, intlFormat } from "date-fns";
 import { secondsInMinute } from "date-fns/constants";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 
@@ -58,6 +58,7 @@ export function ReferrerLeaderboard({
   );
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
+  const initialLoadRef = useRef(false);
 
   // refresh every 5 minutes
   const now = useNow({ timeToRefresh: 5 * secondsInMinute });
@@ -117,12 +118,18 @@ export function ReferrerLeaderboard({
   }
 
   useEffect(() => {
-    if (referralProgramEditionSummaryData.status !== ReferralProgramEditionStatuses.Active) return;
+    if (referralProgramEditionSummaryData.status === ReferralProgramEditionStatuses.Scheduled)
+      return;
 
     fetchReferrerLeaderboard();
   }, [currentPage, currentRecordsPerPage, referralProgramEditionSummaryData]);
 
   useEffect(() => {
+    if (!initialLoadRef.current) {
+      initialLoadRef.current = true;
+      return;
+    }
+
     refreshReferralProgramEditionSummary();
   }, [referralProgramEditionSummary, now]);
 

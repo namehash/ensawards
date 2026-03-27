@@ -32,7 +32,7 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
 
   useEffect(() => {
     refreshReferralProgramEditionSummary();
-  }, [referralProgramEditionSummaryData, now]);
+  }, [referralProgramEditionSummary, now]);
 
   // The config of an unrecognized edition will never be passed here,
   // but we perform the check for the type safety
