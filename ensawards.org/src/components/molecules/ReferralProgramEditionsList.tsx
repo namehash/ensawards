@@ -37,7 +37,8 @@ export function ReferralProgramEditionsList({
   const now = useNow({ timeToRefresh: 5 * secondsInMinute });
 
   const fetchReferralProgramEditionSummaries = useCallback(async () => {
-    setIsLoading(true);
+    // Only show loading state during the initial fetch, not during refreshes
+    if (referralProgramEditionSummaries === null) setIsLoading(true);
 
     try {
       const response = await client.getEditionSummaries();

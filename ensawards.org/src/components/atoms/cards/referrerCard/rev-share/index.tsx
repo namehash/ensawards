@@ -6,7 +6,11 @@ import { BASE_REVENUE_CONTRIBUTION_PER_YEAR, SECONDS_PER_YEAR } from "@namehash/
 import { TriangleAlert as DisqualifiedIcon } from "lucide-react";
 import { memo } from "react";
 
-import { numberFormatter, ReferrerCardHeader } from "@/components/atoms/cards/referrerCard/shared";
+import {
+  ethFormatter,
+  numberFormatter,
+  ReferrerCardHeader,
+} from "@/components/atoms/cards/referrerCard/shared";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
@@ -49,11 +53,6 @@ export const TotalRevenueContributionField = ({
 }: {
   referrer: AwardedReferrerMetricsRevShareLimit;
 }) => {
-  const ethFormatter = new Intl.NumberFormat("en-US", {
-    minimumFractionDigits: 3,
-    maximumFractionDigits: 3,
-  });
-
   const referralYears = numberFormatter.format(
     referrer.totalIncrementalDuration / SECONDS_PER_YEAR,
   );

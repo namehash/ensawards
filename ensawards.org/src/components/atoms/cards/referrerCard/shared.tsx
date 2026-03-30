@@ -19,6 +19,11 @@ export const numberFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
+export const ethFormatter = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 3,
+  maximumFractionDigits: 3,
+});
+
 export const getAdvocateDetailsUrl = (referrerAddress: Address) =>
   new URL(getEnsAdvocateDetailsRelativePath(referrerAddress), getEnsAwardsBaseUrl());
 
@@ -76,7 +81,7 @@ export const RankIconLoading = ({
       ) : (
         <span
           className={cn(
-            "w-fit h-6 box-border flex justify-center items-center text-xs leading-5 font-semibold text-muted-foreground rounded-full border px-2",
+            "w-fit h-6 box-border flex justify-center items-center text-xs leading-5 font-semibold rounded-full border px-2",
             "text-gray-600 bg-gray-100 border-gray-200",
             rank < 10 && "w-6",
             className,

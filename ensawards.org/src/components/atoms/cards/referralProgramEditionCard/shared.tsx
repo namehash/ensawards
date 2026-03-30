@@ -239,7 +239,7 @@ export function ReferralProgramEditionCardLoading({
         }}
       />
       {children}
-      <span className="hidden sm:flex sm:flex-row sm:justify-end w-[90px]">
+      <span className="hidden sm:flex sm:flex-row sm:max-[1205px]:justify-start min-[1205px]:justify-end w-[110px]">
         <Skeleton
           className={cn(
             ReferralProgramEditionCardLoadingStateStyles,

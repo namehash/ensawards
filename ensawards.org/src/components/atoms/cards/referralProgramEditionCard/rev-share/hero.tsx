@@ -61,8 +61,7 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
           label:
             "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default",
-          value:
-            "text-sm leading-normal font-medium text-black cursor-pointer text-right cursor-default",
+          value: "text-sm leading-normal font-medium text-black text-right cursor-default",
           date: "cursor-default",
         }}
       />

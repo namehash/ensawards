@@ -1,6 +1,7 @@
 import {
   ENSReferralsClient,
   ReferralProgramAwardModels,
+  type ReferralProgramEditionSlug,
   type ReferralProgramEditionSummary,
   type ReferrerLeaderboardPagePieSplit,
   ReferrerLeaderboardPageResponseCodes,
@@ -51,18 +52,13 @@ export function ReferrerLeaderboardSnippet({
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
-  async function fetchReferrerLeaderboard() {
-    if (!latestReferralProgramEdition) {
-      // Editions haven't loaded yet — stay in the loading state silently
-      return;
-    }
-
+  async function fetchReferrerLeaderboard(referralProgramEditionSlug: ReferralProgramEditionSlug) {
     setFetchErrorMessage("");
     setIsLoading(true);
 
     try {
       const response = await client.getReferrerLeaderboardPage({
-        edition: latestReferralProgramEdition.slug,
+        edition: referralProgramEditionSlug,
         page: 1,
         recordsPerPage: snippetSize,
       });
@@ -93,42 +89,45 @@ export function ReferrerLeaderboardSnippet({
     }
   }
 
-  useEffect(() => {
-    fetchReferrerLeaderboard();
-  }, [now, latestReferralProgramEdition?.slug, latestReferralProgramEdition?.awardModel]);
-
-  const fetchLatestReferralProgramEdition = async () => {
-    fetchReferralProgramEditionSummaries()
-      .then((editions) => {
+  const fetchLatestReferralProgramEdition =
+    async (): Promise<ReferralProgramEditionSummary | null> => {
+      try {
+        const editions = await fetchReferralProgramEditionSummaries();
         const startedEditions = editions.filter((edition) => edition.rules.startTime <= now);
 
-        // If there are no started editions recorded,
-        // return the first edition from the fetched list,
-        // which is guaranteed to exist from default edition config set.
-        if (startedEditions.length === 0) {
-          const fallbackEdition = editions[0];
-
-          if (!fallbackEdition) return;
-
-          setLatestReferralProgramEdition(fallbackEdition);
-          return;
-        }
-
-        let latestEdition = startedEditions.reduce((latest, edition) =>
-          edition.rules.startTime > latest.rules.startTime ? edition : latest,
-        );
+        const latestEdition =
+          startedEditions.length === 0
+            ? (editions[0] ?? null)
+            : startedEditions.reduce(
+                (latest, edition) =>
+                  edition.rules.startTime > latest.rules.startTime ? edition : latest,
+                startedEditions[0],
+              );
 
         setLatestReferralProgramEdition(latestEdition);
-      })
-      .catch((error) => {
+
+        return latestEdition;
+      } catch (error) {
         console.error(error);
+        setLatestReferralProgramEdition(null);
         setLeaderboardSnippetData(null);
         setFetchErrorMessage("An error occurred while loading the leaderboard.");
-      });
-  };
+        return null;
+      }
+    };
 
   useEffect(() => {
-    fetchLatestReferralProgramEdition();
+    const loadLeaderboardSnippet = async () => {
+      const latestEdition = await fetchLatestReferralProgramEdition();
+
+      if (latestEdition === null) {
+        return;
+      }
+
+      await fetchReferrerLeaderboard(latestEdition.slug);
+    };
+
+    void loadLeaderboardSnippet();
   }, [now]);
 
   return (
@@ -184,11 +183,15 @@ export function ReferrerLeaderboardSnippet({
                       }),
                     )}
                     onClick={() => {
-                      if (latestReferralProgramEdition === null) {
-                        fetchLatestReferralProgramEdition();
-                        return;
-                      }
-                      fetchReferrerLeaderboard();
+                      void (async () => {
+                        const latestEdition =
+                          latestReferralProgramEdition ??
+                          (await fetchLatestReferralProgramEdition());
+
+                        if (latestEdition === null) return;
+
+                        await fetchReferrerLeaderboard(latestEdition.slug);
+                      })();
                     }}
                   >
                     Try again

@@ -30,14 +30,14 @@ export const ReferralProgramEditionCardPieSplit = ({
       className={cardClassName}
     >
       <div className="w-full flex flex-row justify-between items-start gap-3 pb-1 sm:hidden">
-        <h3 className="text-lg leading-normal font-semibold text-black text-ellipsis">
+        <h3 className="text-lg leading-normal font-semibold text-black">
           {referralProgramEditionSummary.displayName}
         </h3>
         <div className="min-w-[110px] flex items-center justify-end">
           <ReferralProgramStatusBadge status={referralProgramEditionSummary.status} />
         </div>
       </div>
-      <h3 className="hidden w-2/5 text-lg leading-normal font-semibold text-black text-ellipsis sm:block">
+      <h3 className="hidden w-2/5 text-lg leading-normal font-semibold text-black sm:block">
         {referralProgramEditionSummary.displayName}
       </h3>
       <ReferralProgramEditionTimePeriod
@@ -71,7 +71,7 @@ export const ReferralProgramEditionCardPieSplit = ({
             : "-"}
         </p>
       </div>
-      <span className="min-w-[110px] max-sm:hidden flex sm:flex-row sm:justify-end">
+      <span className="min-w-[110px] max-sm:hidden flex sm:flex-row sm:max-[1205px]:justify-start min-[1205px]:justify-end">
         <ReferralProgramStatusBadge
           status={referralProgramEditionSummary.status}
           className="cursor-pointer"

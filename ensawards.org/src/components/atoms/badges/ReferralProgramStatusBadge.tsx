@@ -15,13 +15,14 @@ interface ReferralProgramStatusBadgeProps {
 
 const getReferralProgramStatusStyle = (status: ReferralProgramEditionStatusId): string => {
   switch (status) {
+    case ReferralProgramEditionStatuses.AwardsReview:
+      return "bg-amber-500 text-white";
     case ReferralProgramEditionStatuses.Scheduled:
       return "bg-white text-black border-[#E5E5E5]";
     case ReferralProgramEditionStatuses.Active:
       return "bg-emerald-600 text-white";
     case ReferralProgramEditionStatuses.Closed:
     case ReferralProgramEditionStatuses.Exhausted:
-    case ReferralProgramEditionStatuses.AwardsReview:
     default:
       return "bg-neutral-500 text-white";
   }
