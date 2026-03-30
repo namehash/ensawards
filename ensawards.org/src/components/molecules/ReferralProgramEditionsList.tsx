@@ -8,7 +8,7 @@ import {
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import { CalendarClock as NoEditionsIcon } from "lucide-react";
-import { Fragment, type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { ReferralProgramEditionCardPieSplit } from "@/components/atoms/cards/referralProgramEditionCard/pie-split";
 import { ReferralProgramEditionCardPieSplitLoading } from "@/components/atoms/cards/referralProgramEditionCard/pie-split/loading";
@@ -35,22 +35,27 @@ export function ReferralProgramEditionsList({
   >(null);
   // refresh every 5 minutes
   const now = useNow({ timeToRefresh: 5 * secondsInMinute });
+  const initialLoadRef = useRef(false);
 
   const fetchReferralProgramEditionSummaries = useCallback(async () => {
-    // Only show loading state during the initial fetch, not during refreshes
-    if (referralProgramEditionSummaries === null) setIsLoading(true);
+    // Only show loading state during the initial fetch & refetches after errors,
+    // not during refreshes
+    if (!initialLoadRef.current) setIsLoading(true);
 
     try {
       const response = await client.getEditionSummaries();
       if (response.responseCode !== ReferralProgramEditionSummariesResponseCodes.Ok) {
         console.error(response.errorMessage);
         setReferralProgramEditionSummaries(null);
+        initialLoadRef.current = false;
         return;
       }
       setReferralProgramEditionSummaries(filterOutUnrecognizedEditions(response.data.editions));
+      initialLoadRef.current = true;
     } catch (error) {
       console.error(error);
       setReferralProgramEditionSummaries(null);
+      initialLoadRef.current = false;
     } finally {
       setIsLoading(false);
     }
@@ -117,7 +122,7 @@ const ReferralProgramEditionsListContainer = ({
         ) : (
           <NoEditionsInfo
             header="No closed editions yet"
-            description="Once an edition&apos;s time period has passed you&apos;ll find it here."
+            description="Once an edition's time period has passed you'll find it here."
           />
         )}
       </div>
@@ -194,12 +199,12 @@ const DisplayGroupedReferralProgramEditionSummariesList = ({
         <ReferralProgramEditionsListContainer
           activeEditions={loadingReferralProgramEditionSummaries
             .filter(
-              (edition) =>
-                edition.status === ReferralProgramEditionStatuses.Active ||
-                edition.status === ReferralProgramEditionStatuses.Exhausted,
+              (editionSummary) =>
+                editionSummary.status === ReferralProgramEditionStatuses.Active ||
+                editionSummary.status === ReferralProgramEditionStatuses.Exhausted,
             )
-            .map((edition, index) => {
-              if (edition.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+            .map((editionSummary, index) => {
+              if (editionSummary.awardModel === ReferralProgramAwardModels.RevShareLimit) {
                 return (
                   <ReferralProgramEditionCardRevShareLimitLoading
                     key={`referral-program-edition-loading-active#${index}`}
@@ -219,7 +224,7 @@ const DisplayGroupedReferralProgramEditionSummariesList = ({
                 editionSummary.status === ReferralProgramEditionStatuses.AwardsReview,
             )
             .map((editionSummary, index) => {
-              if (editionSummary.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+              if (editionSummary.awardModel === ReferralProgramAwardModels.RevShareLimit) {
                 return (
                   <ReferralProgramEditionCardRevShareLimitLoading
                     key={`referral-program-edition-loading-closed#${index}`}
@@ -238,7 +243,7 @@ const DisplayGroupedReferralProgramEditionSummariesList = ({
                 editionSummary.status === ReferralProgramEditionStatuses.Scheduled,
             )
             .map((editionSummary, index) => {
-              if (editionSummary.rules.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+              if (editionSummary.awardModel === ReferralProgramAwardModels.RevShareLimit) {
                 return (
                   <ReferralProgramEditionCardRevShareLimitLoading
                     key={`referral-program-edition-loading-scheduled#${index}`}

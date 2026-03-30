@@ -111,6 +111,7 @@ export function ReferrerLeaderboardSnippet({
         console.error(error);
         setLatestReferralProgramEdition(null);
         setLeaderboardSnippetData(null);
+        setIsLoading(false);
         setFetchErrorMessage("An error occurred while loading the leaderboard.");
         return null;
       }
