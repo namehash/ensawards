@@ -45,7 +45,7 @@ export function ReferrerLeaderboardSnippet({
   const [latestReferralProgramEdition, setLatestReferralProgramEdition] =
     useState<ReferralProgramEditionSummary | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [fetchErrorMessage, setFetchErrorMessage] = useState("");
+  const [isError, setIsError] = useState<boolean>(false);
   const [leaderboardSnippetData, setLeaderboardSnippetData] = useState<
     ReferrerLeaderboardPageRevShareLimit | ReferrerLeaderboardPagePieSplit | null
   >(null);
@@ -53,7 +53,7 @@ export function ReferrerLeaderboardSnippet({
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   async function fetchReferrerLeaderboard(referralProgramEditionSlug: ReferralProgramEditionSlug) {
-    setFetchErrorMessage("");
+    setIsError(false);
     setIsLoading(true);
 
     try {
@@ -66,7 +66,7 @@ export function ReferrerLeaderboardSnippet({
       if (response.responseCode !== ReferrerLeaderboardPageResponseCodes.Ok) {
         console.error(response.errorMessage);
         setLeaderboardSnippetData(null);
-        setFetchErrorMessage("An error occurred while loading the leaderboard.");
+        setIsError(true);
         setIsLoading(false);
         return;
       }
@@ -74,7 +74,7 @@ export function ReferrerLeaderboardSnippet({
       // Display an error for the unrecognized award model
       if (response.data.awardModel === ReferralProgramAwardModels.Unrecognized) {
         setLeaderboardSnippetData(null);
-        setFetchErrorMessage("Unrecognized referral program edition award model.");
+        setIsError(true);
         setIsLoading(false);
         return;
       }
@@ -83,7 +83,7 @@ export function ReferrerLeaderboardSnippet({
     } catch (error) {
       console.error(error);
       setLeaderboardSnippetData(null);
-      setFetchErrorMessage("An error occurred while loading the leaderboard.");
+      setIsError(true);
     } finally {
       setIsLoading(false);
     }
@@ -93,11 +93,20 @@ export function ReferrerLeaderboardSnippet({
     async (): Promise<ReferralProgramEditionSummary | null> => {
       try {
         const editions = await fetchReferralProgramEditionSummaries();
+
+        if (editions.length === 0) {
+          setLatestReferralProgramEdition(null);
+          setLeaderboardSnippetData(null);
+          setIsLoading(false);
+          setIsError(true);
+          return null;
+        }
+
         const startedEditions = editions.filter((edition) => edition.rules.startTime <= now);
 
         const latestEdition =
           startedEditions.length === 0
-            ? (editions[0] ?? null)
+            ? editions[0]
             : startedEditions.reduce(
                 (latest, edition) =>
                   edition.rules.startTime > latest.rules.startTime ? edition : latest,
@@ -112,7 +121,7 @@ export function ReferrerLeaderboardSnippet({
         setLatestReferralProgramEdition(null);
         setLeaderboardSnippetData(null);
         setIsLoading(false);
-        setFetchErrorMessage("An error occurred while loading the leaderboard.");
+        setIsError(true);
         return null;
       }
     };
@@ -147,7 +156,7 @@ export function ReferrerLeaderboardSnippet({
               <div
                 className={cn(
                   "w-fit flex justify-center items-center relative",
-                  (fetchErrorMessage || !showLastUpdateTime) && "hidden",
+                  (isError || !showLastUpdateTime) && "hidden",
                 )}
               >
                 {isLoading ? (
@@ -170,7 +179,7 @@ export function ReferrerLeaderboardSnippet({
               latestReferralProgramEdition?.awardModel ?? ReferralProgramAwardModels.Unrecognized
             }
             leaderboardPageFetchError={
-              fetchErrorMessage ? (
+              isError ? (
                 <ErrorInfo
                   title="Error loading referrer data"
                   description={["Please try again later."]}

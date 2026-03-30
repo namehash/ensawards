@@ -295,19 +295,19 @@ const DisplayGroupedReferralProgramEditionSummariesList = ({
               />
             );
           })}
-          scheduledEditions={scheduledEditions.map((edition) => {
-            if (edition.awardModel === ReferralProgramAwardModels.RevShareLimit) {
+          scheduledEditions={scheduledEditions.map((editionSummary) => {
+            if (editionSummary.awardModel === ReferralProgramAwardModels.RevShareLimit) {
               return (
                 <ReferralProgramEditionCardRevShareLimit
-                  referralProgramEditionSummary={edition}
-                  key={`referral-program-edition-${edition.slug}`}
+                  referralProgramEditionSummary={editionSummary}
+                  key={`referral-program-edition-${editionSummary.slug}`}
                 />
               );
             }
             return (
               <ReferralProgramEditionCardPieSplit
-                referralProgramEditionSummary={edition}
-                key={`referral-program-edition-${edition.slug}`}
+                referralProgramEditionSummary={editionSummary}
+                key={`referral-program-edition-${editionSummary.slug}`}
               />
             );
           })}

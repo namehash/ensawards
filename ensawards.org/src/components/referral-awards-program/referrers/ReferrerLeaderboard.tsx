@@ -122,7 +122,7 @@ export function ReferrerLeaderboard({
       return;
 
     fetchReferrerLeaderboard();
-  }, [currentPage, currentRecordsPerPage, referralProgramEditionSummaryData]);
+  }, [currentPage, currentRecordsPerPage, referralProgramEditionSummaryData.status]);
 
   useEffect(() => {
     if (!initialLoadRef.current) {
