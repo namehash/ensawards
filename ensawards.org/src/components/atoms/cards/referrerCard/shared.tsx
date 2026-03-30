@@ -14,11 +14,6 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 
 export const placeIcons = [firstPlaceIcon, secondPlaceIcon, thirdPlaceIcon];
 
-export const currencyFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
-
 export const numberFormatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,

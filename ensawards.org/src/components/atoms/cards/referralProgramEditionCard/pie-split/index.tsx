@@ -1,8 +1,5 @@
 import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
-import { useNow } from "@namehash/namehash-ui";
-import { secondsInMinute } from "date-fns/constants";
 import { ChevronRightIcon } from "lucide-react";
-import { useMemo } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import {

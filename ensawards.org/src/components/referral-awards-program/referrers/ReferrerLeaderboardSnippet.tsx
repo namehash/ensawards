@@ -137,7 +137,7 @@ export function ReferrerLeaderboardSnippet({
           {latestReferralProgramEdition && (
             <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start items-center gap-2 sm:gap-10 py-1 sm:pt-1 sm:pb-3">
               <ReferralProgramEditionInfo
-                referralProgramEdition={latestReferralProgramEdition}
+                referralProgramEditionSummary={latestReferralProgramEdition}
                 isLoading={isLoading}
               />
               <div

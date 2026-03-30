@@ -10,21 +10,21 @@ import {
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared.tsx";
-import { currencyFormatter } from "@/components/atoms/cards/referrerCard/shared.tsx";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
+import { currencyFormatter } from "@/utils/textModifications.ts";
 
 interface ReferralProgramEditionInfoProps {
-  referralProgramEdition: ReferralProgramEditionSummary;
+  referralProgramEditionSummary: ReferralProgramEditionSummary;
   isLoading: boolean;
 }
 
 export const ReferralProgramEditionInfo = ({
-  referralProgramEdition,
+  referralProgramEditionSummary,
   isLoading,
 }: ReferralProgramEditionInfoProps) => {
   // The config of an unrecognized edition will never be passed here,
   // but we perform the check for the type safety
-  if (referralProgramEdition.rules.awardModel === ReferralProgramAwardModels.Unrecognized) {
+  if (referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.Unrecognized) {
     return null;
   }
 
@@ -39,8 +39,8 @@ export const ReferralProgramEditionInfo = ({
         />
       ) : (
         <ReferralProgramEditionTimePeriod
-          startTime={referralProgramEdition.rules.startTime}
-          endTime={referralProgramEdition.rules.endTime}
+          startTime={referralProgramEditionSummary.rules.startTime}
+          endTime={referralProgramEditionSummary.rules.endTime}
         />
       )}
       {isLoading ? (
@@ -52,10 +52,10 @@ export const ReferralProgramEditionInfo = ({
         />
       ) : (
         <ReferralProgramEditionBudget
-          totalAwardPoolValue={referralProgramEdition.rules.totalAwardPoolValue}
+          totalAwardPoolValue={referralProgramEditionSummary.rules.totalAwardPoolValue}
         />
       )}
-      {referralProgramEdition.awardModel === ReferralProgramAwardModels.RevShareLimit &&
+      {referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.RevShareLimit &&
         (isLoading ? (
           <ReferralProgramEditionFieldLoading
             label="Budget remaining"
@@ -72,7 +72,7 @@ export const ReferralProgramEditionInfo = ({
             </p>
             <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
               {currencyFormatter.format(
-                parseReferralProgramCurrency(referralProgramEdition.awardPoolRemaining),
+                parseReferralProgramCurrency(referralProgramEditionSummary.awardPoolRemaining),
               )}{" "}
               USD
             </p>
@@ -82,7 +82,7 @@ export const ReferralProgramEditionInfo = ({
         <ReferralProgramEditionFieldLoading label="Rules" />
       ) : (
         <ReferralProgramEditionRules
-          rulesUrlHref={`/ens-referral-program/editions/${referralProgramEdition.slug}/rules`}
+          rulesUrlHref={`/ens-referral-program/editions/${referralProgramEditionSummary.slug}/rules`}
         />
       )}
       {isLoading ? (
@@ -97,7 +97,7 @@ export const ReferralProgramEditionInfo = ({
           <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default">
             Status
           </p>
-          <ReferralProgramStatusBadge status={referralProgramEdition.status} />
+          <ReferralProgramStatusBadge status={referralProgramEditionSummary.status} />
         </div>
       )}
     </>

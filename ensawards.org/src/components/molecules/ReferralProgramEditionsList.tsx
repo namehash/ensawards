@@ -170,9 +170,6 @@ const DisplayGroupedReferralProgramEditionSummariesList = ({
   referralProgramEditionSummaries,
   loadingReferralProgramEditionSummaries,
 }: Omit<DisplayReferralProgramEditionsListProps, "simplifiedVariant">) => {
-  // refresh the status every minute
-  const now = useNow({ timeToRefresh: secondsInMinute });
-
   const { activeEditions, closedEditions, scheduledEditions } = useMemo(() => {
     if (!referralProgramEditionSummaries) {
       return { activeEditions: [], closedEditions: [], scheduledEditions: [] };
@@ -192,7 +189,7 @@ const DisplayGroupedReferralProgramEditionSummariesList = ({
         (editionSummary) => editionSummary.status === ReferralProgramEditionStatuses.Scheduled,
       ),
     };
-  }, [referralProgramEditionSummaries, now]);
+  }, [referralProgramEditionSummaries]);
 
   return (
     <Fragment>

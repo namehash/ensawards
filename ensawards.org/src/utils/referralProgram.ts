@@ -22,7 +22,7 @@ export const filterOutUnrecognizedEditions = (
 };
 
 const getEditionsFetchErrorMessage = (errorMessage: string) =>
-  `Error fetching referral program editions: ${errorMessage}. Falling back to default referral program editions.`;
+  `Error fetching referral program editions: ${errorMessage}.`;
 
 export async function getReferralProgramEditionSummaryBySlug(
   referralProgramSlug: ReferralProgramEditionSlug,

@@ -25,7 +25,7 @@ export const ReferralProgramLeaderboardHeroButtons = ({
 
   async function refreshReferralProgramEditionSummary() {
     const refreshedSummary = await getReferralProgramEditionSummaryBySlug(
-      referralProgramEditionSummary.slug,
+      referralProgramEditionSummaryData.slug,
     );
 
     setReferralProgramEditionSummaryData(refreshedSummary ?? referralProgramEditionSummary);
@@ -33,7 +33,7 @@ export const ReferralProgramLeaderboardHeroButtons = ({
 
   useEffect(() => {
     refreshReferralProgramEditionSummary();
-  }, [referralProgramEditionSummary, now]);
+  }, [now]);
 
   return (
     <div className="flex flex-col sm:flex-row justify-start items-start gap-4">

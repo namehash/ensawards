@@ -8,7 +8,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 const ReferralProgramEditionsListVariants = {
   Default: "Default",
   Simplified: "Simplified",
-};
+} as const;
 
 type ReferralProgramEditionsListVariant =
   (typeof ReferralProgramEditionsListVariants)[keyof typeof ReferralProgramEditionsListVariants];
@@ -17,7 +17,7 @@ const ReferralProgramEditionsListStates = {
   Loading: "Loading",
   Error: "Error",
   Loaded: "Loaded",
-};
+} as const;
 
 type ReferralProgramEditionsListState =
   (typeof ReferralProgramEditionsListStates)[keyof typeof ReferralProgramEditionsListStates];

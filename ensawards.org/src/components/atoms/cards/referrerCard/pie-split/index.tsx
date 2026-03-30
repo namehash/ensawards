@@ -7,13 +7,9 @@ import { memo } from "react";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { currencyFormatter } from "@/utils/textModifications.ts";
 
-import {
-  currencyFormatter,
-  numberFormatter,
-  ReferralYearsField,
-  ReferrerCardHeader,
-} from "../shared.tsx";
+import { numberFormatter, ReferralYearsField, ReferrerCardHeader } from "../shared.tsx";
 
 export interface ReferrerCardPieSplitProps {
   referrer: AwardedReferrerMetricsPieSplit;
