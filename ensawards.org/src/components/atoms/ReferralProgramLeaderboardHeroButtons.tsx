@@ -36,7 +36,7 @@ export const ReferralProgramLeaderboardHeroButtons = ({
   }, [now]);
 
   return (
-    <div className="flex flex-col sm:flex-row justify-start items-start gap-4">
+    <div className="flex flex-row flex-wrap justify-start items-start gap-4">
       <a
         href={`/ens-referral-program/editions/${referralProgramEditionSummaryData.slug}/rules`}
         className={cn(

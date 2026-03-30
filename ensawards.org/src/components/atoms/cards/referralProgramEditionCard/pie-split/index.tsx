@@ -29,11 +29,13 @@ export const ReferralProgramEditionCardPieSplit = ({
       target="_self"
       className={cardClassName}
     >
-      <div className="w-full flex flex-row justify-between items-start gap-5 pb-1 sm:hidden">
+      <div className="w-full flex flex-row justify-between items-start gap-3 pb-1 sm:hidden">
         <h3 className="text-lg leading-normal font-semibold text-black text-ellipsis">
           {referralProgramEditionSummary.displayName}
         </h3>
-        <ReferralProgramStatusBadge status={referralProgramEditionSummary.status} />
+        <div className="min-w-[110px] flex items-center justify-end">
+          <ReferralProgramStatusBadge status={referralProgramEditionSummary.status} />
+        </div>
       </div>
       <h3 className="hidden w-2/5 text-lg leading-normal font-semibold text-black text-ellipsis sm:block">
         {referralProgramEditionSummary.displayName}
