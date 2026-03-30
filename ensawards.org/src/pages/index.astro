@@ -32,11 +32,13 @@ const placeIcons = [
   <section
     id="previews-section"
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
-    <CurrentReferralProgramEditionCTA />
+    <!-- TODO: Reveal the banners once the design improvements are ready and implemented. 
+     See: https://namehash.slack.com/archives/C086Z6FNBHN/p1774874174108629?thread_ts=1774858281.475319&cid=C086Z6FNBHN -->
+    <!-- <CurrentReferralProgramEditionCTA />
     <RevenueShareBanner
       header="Earn up to a 50% revenue share!"
       description="Benefits for you, your community, and for ENS."
-    />
+    /> -->
     {
       Object.values(AppTypes).map((appType) => {
         const relevantApps = APPS.filter((app) => app.type === appType);
