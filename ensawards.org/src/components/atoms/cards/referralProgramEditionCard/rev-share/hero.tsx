@@ -46,11 +46,13 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
 
   return (
     <div className={cardClassName}>
-      <div className="w-full flex flex-row justify-between items-start gap-5 pb-1">
+      <div className="w-full flex flex-row justify-between items-start gap-3 pb-1">
         <h3 className="text-lg leading-normal font-semibold text-black text-ellipsis">
           {referralProgramEditionSummaryData.displayName}
         </h3>
-        <ReferralProgramStatusBadge status={referralProgramEditionSummaryData.status} />
+        <div className="min-w-[110px] flex items-center justify-end">
+          <ReferralProgramStatusBadge status={referralProgramEditionSummaryData.status} />
+        </div>
       </div>
       <ReferralProgramEditionTimePeriod
         startTime={referralProgramEditionSummaryData.rules.startTime}

@@ -93,8 +93,8 @@ const ReferralProgramEditionsListContainer = ({
           <div className={editionsListStyles}>{activeEditions}</div>
         ) : (
           <NoEditionsInfo
-            header="No active editions"
-            description="Looks like there are no active editions yet."
+            header="No editions currently active"
+            description="Check back soon for new editions."
           />
         )}
       </div>
@@ -104,8 +104,8 @@ const ReferralProgramEditionsListContainer = ({
           <div className={editionsListStyles}>{scheduledEditions}</div>
         ) : (
           <NoEditionsInfo
-            header="No scheduled editions"
-            description="Looks like there are no scheduled editions yet."
+            header="No new editions scheduled yet"
+            description="Check back soon for new editions."
           />
         )}
       </div>
@@ -115,8 +115,8 @@ const ReferralProgramEditionsListContainer = ({
           <div className={editionsListStyles}>{closedEditions}</div>
         ) : (
           <NoEditionsInfo
-            header="No closed editions"
-            description="Looks like there are no closed editions yet."
+            header="No closed editions yet"
+            description="Once an edition&apos;s time period has passed you&apos;ll find it here."
           />
         )}
       </div>
