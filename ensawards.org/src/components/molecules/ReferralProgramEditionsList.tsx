@@ -7,7 +7,7 @@ import {
 } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
-import { Inbox as NoEditionsIcon } from "lucide-react";
+import { CalendarClock as NoEditionsIcon } from "lucide-react";
 import { Fragment, type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 
 import { ReferralProgramEditionCardPieSplit } from "@/components/atoms/cards/referralProgramEditionCard/pie-split";
