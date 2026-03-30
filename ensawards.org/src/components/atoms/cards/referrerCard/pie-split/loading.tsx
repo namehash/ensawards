@@ -9,7 +9,7 @@ import { type RankProps, ReferrerCardHeaderLoading } from "../shared.tsx";
  */
 export const ReferrerCardPieSplitLoading = ({
   rank,
-}: Omit<RankProps, "className" | "isQualified">) => {
+}: Omit<RankProps, "className" | "isQualified" | "rankTooltipText">) => {
   const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
   return (
     <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 bg-white">

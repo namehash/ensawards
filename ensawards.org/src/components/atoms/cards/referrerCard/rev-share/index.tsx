@@ -33,6 +33,7 @@ function ReferrerCardRevShareLimit({ referrer, editionRules }: ReferrerCardRevSh
       <ReferrerCardHeader
         referrer={referrer.referrer}
         rank={referrer.rank}
+        rankTooltipText={`Rank ${referrer.rank}`}
         isQualified={referrer.isQualified}
       />
       <TotalRevenueContributionField referrer={referrer} />
@@ -53,14 +54,19 @@ export const TotalRevenueContributionField = ({
     maximumFractionDigits: 3,
   });
 
+  const referralYears = numberFormatter.format(
+    referrer.totalIncrementalDuration / SECONDS_PER_YEAR,
+  );
+  const userFacingReferralYears = referralYears === "1.00" ? "1 year" : `${referralYears} years`;
+
   return (
     <div className="sm:min-w-[175px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
       <GenericTooltip
         tooltipOffset={0}
         content={
-          <p className="max-w-[200px]">
-            The total revenue contribution in ETH made to the ENS DAO by all referrals from this
-            referrer.
+          <p className="max-w-[220px]">
+            Total ENS DAO revenue from {userFacingReferralYears} of registrations and renewals
+            referred by this referrer during this edition. Includes premium revenue sources.
           </p>
         }
       >
@@ -84,15 +90,25 @@ export const BaseRevenueContributionField = ({
     referrer.totalIncrementalDuration / SECONDS_PER_YEAR,
   );
 
+  const totalBaseRevenueContributionInUSD = currencyFormatter.format(
+    parseReferralProgramCurrency(referrer.totalBaseRevenueContribution),
+  );
+
+  const userFacingTotalBaseRevenueContribution =
+    totalBaseRevenueContributionInUSD === "$0.00" ? "$0.01" : totalBaseRevenueContributionInUSD;
+
   return (
     <div className="sm:min-w-[175px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
       <GenericTooltip
         tooltipOffset={0}
         content={
-          <p className="max-w-[200px]">
-            Measured as US $5.00 × {referralYears} referral years (total duration of all referred
-            registrations and renewals). Excludes ENS DAO revenue from short-name premiums and
-            recently-released temporary premiums.
+          <p className="max-w-[220px]">
+            Measured as US{" "}
+            {currencyFormatter.format(
+              parseReferralProgramCurrency(BASE_REVENUE_CONTRIBUTION_PER_YEAR),
+            )}{" "}
+            × {referralYears} years of registrations and renewals referred by this referrer during
+            this edition. Excludes premium revenue sources.
           </p>
         }
       >
@@ -101,23 +117,35 @@ export const BaseRevenueContributionField = ({
         </p>
       </GenericTooltip>
       <p className="text-sm leading-normal font-medium text-black">
-        US{" "}
-        {currencyFormatter.format(
-          parseReferralProgramCurrency(referrer.totalBaseRevenueContribution),
-        )}
+        US {userFacingTotalBaseRevenueContribution}
       </p>
     </div>
   );
 };
 
 export const RevenueShareField = ({ referrer, editionRules }: ReferrerCardRevShareLimitProps) => {
+  const minQualifiedRevenueContributionInUSD = currencyFormatter.format(
+    parseReferralProgramCurrency(editionRules.minQualifiedRevenueContribution),
+  );
+  const qualifiedRevenueSharePercentage = `${Math.round(editionRules.qualifiedRevenueShare * 100)}%`;
+
+  const additionalRevenueRequiredInUSD = currencyFormatter.format(
+    parseReferralProgramCurrency({
+      currency: editionRules.minQualifiedRevenueContribution.currency,
+      amount:
+        editionRules.minQualifiedRevenueContribution.amount -
+        referrer.totalBaseRevenueContribution.amount,
+    }),
+  );
+
+  const userFacingAdditionalRevenueRequired =
+    additionalRevenueRequiredInUSD === "$0.00" ? "$0.01" : additionalRevenueRequiredInUSD;
+
   const tooltipContent = referrer.isAdminDisqualified
-    ? "If a referrer breaks a rule they are disqualified and do not qualify for any revenue share."
+    ? "This referrer violated a rule of the referral program edition (see alert icon below for more info) and is therefore disqualified from any revenue share during this edition."
     : referrer.isQualified
-      ? "The share of the base revenue contribution awarded to the referrer until the budget for the referral program edition is exhausted."
-      : `Qualification for a revenue share requires a base revenue contribution of at least US ${currencyFormatter.format(
-          parseReferralProgramCurrency(editionRules.minQualifiedRevenueContribution),
-        )}.`;
+      ? `This referrer contributed base revenues of US ${minQualifiedRevenueContributionInUSD} or more during this referral program edition and therefore qualifies to earn a ${qualifiedRevenueSharePercentage} share of their base revenue contribution until this edition ends or its budget is exhausted`
+      : `To qualify for a revenue share, this referrer must first achieve at least an additional US ${userFacingAdditionalRevenueRequired} base revenue contribution to meet the US ${minQualifiedRevenueContributionInUSD} minimum before this referral program edition ends or its budget is exhausted.`;
 
   const displayContent = referrer.isAdminDisqualified ? (
     <DisqualifiedFieldContent referrer={referrer} />
@@ -125,18 +153,18 @@ export const RevenueShareField = ({ referrer, editionRules }: ReferrerCardRevSha
     <p
       className={cn(
         "text-sm font-normal leading-normal max-sm:text-right",
-        referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black",
+        referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
       )}
     >
-      {referrer.isQualified ? `${Math.round(editionRules.qualifiedRevenueShare * 100)}%` : "-"}
+      {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more base revenue"}
     </p>
   );
 
   return (
-    <div className="sm:min-w-[125px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-      <GenericTooltip tooltipOffset={0} content={<p className="max-w-[200px]">{tooltipContent}</p>}>
+    <div className="sm:min-w-[195px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+      <GenericTooltip tooltipOffset={0} content={<p className="max-w-[220px]">{tooltipContent}</p>}>
         <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
-          Revenue share
+          Base revenue share
         </p>
       </GenericTooltip>
       {displayContent}
@@ -156,7 +184,7 @@ const DisqualifiedFieldContent = ({
       // `referrer.adminDisqualificationReason` will never be null if `referrer.isAdminDisqualified` is true
       // This fallback is introduced for type-safety
       content={
-        <p className="max-w-[200px]">
+        <p className="max-w-[220px]">
           {referrer.adminDisqualificationReason ??
             "User disqualified due to the breach of the edition's rules"}
         </p>
@@ -171,25 +199,14 @@ export const TentativeAwardsField = ({
   referrer,
   editionRules,
 }: ReferrerCardRevShareLimitProps) => {
-  const yearsRequiredToBeQualified = numberFormatter.format(
-    Math.max(
-      0.01,
-      parseReferralProgramCurrency({
-        currency: editionRules.minQualifiedRevenueContribution.currency,
-        amount:
-          editionRules.minQualifiedRevenueContribution.amount -
-          referrer.totalBaseRevenueContribution.amount,
-      }) / parseReferralProgramCurrency(BASE_REVENUE_CONTRIBUTION_PER_YEAR),
-    ),
-  );
   return (
-    <div className="sm:min-w-[180px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
+    <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
       <GenericTooltip
         tooltipOffset={0}
         content={
-          <p className="max-w-[200px]">
-            Estimated value of the amount actually claimed from the pool by this referrer, capped by
-            the remaining pool at the time of their qualifying events.
+          <p className="max-w-[220px]">
+            Estimated awards that will be paid to the referrer at the conclusion of this referral
+            program edition.
           </p>
         }
       >
@@ -209,16 +226,7 @@ export const TentativeAwardsField = ({
             {currencyFormatter.format(parseReferralProgramCurrency(referrer.awardPoolApproxValue))}
           </>
         ) : (
-          <span className="max-sm:text-right">
-            {referrer.isAdminDisqualified
-              ? "-"
-              : `Requires 
-              ${
-                yearsRequiredToBeQualified === "1.00"
-                  ? "1 more year"
-                  : `${yearsRequiredToBeQualified} more years`
-              }`}
-          </span>
+          "-"
         )}
       </p>
     </div>

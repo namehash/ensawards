@@ -32,6 +32,11 @@ function ReferrerCardPieSplit({ referrer, aggregatedMetrics }: ReferrerCardPieSp
         referrer={referrer.referrer}
         rank={referrer.rank}
         isQualified={referrer.isQualified}
+        rankTooltipText={
+          referrer.isQualified
+            ? `Rank ${referrer.rank} is qualified for awards.`
+            : `Rank ${referrer.rank} does not qualify for awards.`
+        }
       />
       <ReferralYearsField referralYears={referrer.score} />
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">

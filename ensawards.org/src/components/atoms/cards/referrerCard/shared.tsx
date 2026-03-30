@@ -34,23 +34,16 @@ export interface RankProps {
    * For more details see {@link AwardedReferrerMetrics.isQualified}
    */
   isQualified: boolean;
+
+  rankTooltipText: string;
   className?: string;
 }
 
 /**
  * Display {@link RankedReferrerMetrics.rank}.
  */
-export const RankIcon = ({ rank, isQualified, className }: RankProps) => (
-  <GenericTooltip
-    content={
-      <p>
-        {isQualified
-          ? `Rank ${rank} is qualified for awards.`
-          : `Rank ${rank} does not qualify for awards.`}
-      </p>
-    }
-    tooltipOffset={1}
-  >
+export const RankIcon = ({ rank, isQualified, rankTooltipText, className }: RankProps) => (
+  <GenericTooltip content={<p>{rankTooltipText}</p>} tooltipOffset={1}>
     <div className="w-8 h-8 box-border flex justify-center items-center">
       {rank <= 3 ? (
         <img alt={`${rank}-place`} src={placeIcons[rank - 1].src} className={className} />
@@ -72,7 +65,10 @@ export const RankIcon = ({ rank, isQualified, className }: RankProps) => (
   </GenericTooltip>
 );
 
-export const RankIconLoading = ({ rank, className }: Omit<RankProps, "isQualified">) => (
+export const RankIconLoading = ({
+  rank,
+  className,
+}: Omit<RankProps, "isQualified" | "rankTooltipText">) => (
   <GenericTooltip content={<p>Loading the data. Please wait.</p>} tooltipOffset={1}>
     <div className="w-8 h-8 box-border flex justify-center items-center">
       {rank <= 3 ? (
@@ -96,10 +92,16 @@ export const RankIconLoading = ({ rank, className }: Omit<RankProps, "isQualifie
 interface ReferrerCardHeaderProps {
   referrer: Address;
   rank: ReferrerRank;
+  rankTooltipText: string;
   isQualified: boolean;
 }
 
-export const ReferrerCardHeader = ({ referrer, rank, isQualified }: ReferrerCardHeaderProps) => {
+export const ReferrerCardHeader = ({
+  referrer,
+  rank,
+  rankTooltipText,
+  isQualified,
+}: ReferrerCardHeaderProps) => {
   const namespaceId = DEFAULT_ENS_NAMESPACE;
   const referrerIdentity = buildUnresolvedIdentity(
     referrer,
@@ -113,7 +115,7 @@ export const ReferrerCardHeader = ({ referrer, rank, isQualified }: ReferrerCard
     <>
       {/*Desktop Header*/}
       <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-4">
-        <RankIcon rank={rank} isQualified={isQualified} />
+        <RankIcon rank={rank} isQualified={isQualified} rankTooltipText={rankTooltipText} />
         <div className="flex flex-nowrap flex-row justify-start items-center gap-3">
           <ResolveAndDisplayIdentity
             identity={referrerIdentity}
@@ -147,7 +149,12 @@ export const ReferrerCardHeader = ({ referrer, rank, isQualified }: ReferrerCard
       </div>
       {/*Mobile Header*/}
       <div className="sm:hidden flex flex-row-reverse flex-nowrap justify-end items-start gap-4 w-full relative">
-        <RankIcon rank={rank} isQualified={isQualified} className="absolute top-0 right-0" />
+        <RankIcon
+          rank={rank}
+          isQualified={isQualified}
+          rankTooltipText={rankTooltipText}
+          className="absolute top-0 right-0"
+        />
         <ResolveAndDisplayIdentity
           identity={referrerIdentity}
           namespaceId={namespaceId}
@@ -183,7 +190,7 @@ export const ReferrerCardHeader = ({ referrer, rank, isQualified }: ReferrerCard
 
 export const ReferrerCardHeaderLoading = ({
   rank,
-}: Omit<ReferrerCardHeaderProps, "referrer" | "isQualified">) => {
+}: Omit<ReferrerCardHeaderProps, "referrer" | "isQualified" | "rankTooltipText">) => {
   const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
 
   return (
