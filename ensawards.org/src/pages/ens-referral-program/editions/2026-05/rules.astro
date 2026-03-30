@@ -1,0 +1,44 @@
+---
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { cn } from "@/utils/tailwindClassConcatenation";
+
+const h2Styles = "text-4xl leading-normal font-semibold text-black scroll-mt-24";
+const h3Styles = "text-2xl leading-normal font-semibold text-black scroll-mt-24";
+const textStyles = "text-base leading-7 font-normal text-muted-foreground";
+const linkStyles =
+  "leading-normal text-black underline underline-offset-[25%] decoration-black/40 hover:decoration-black transition-all duration-200";
+const termStyles =
+  "text-black underline decoration-dotted decoration-gray-400 underline-offset-2 hover:decoration-gray-600 transition-all duration-200";
+---
+
+<Layout
+  pageMetadata={{
+    title: "ENS Referral Program - May 2026 Edition - Rules",
+    description: "TODO: add description",
+    url: "https://ensawards.org/ens-referral-program/editions/2026-05/rules",
+    ogImage:
+      "https://ensawards.org/2026-05_referral_program_edition_og_image.png",
+    twitterImage:
+      "https://ensawards.org/2026-05_referral_program_edition_twitter_og_image.png",
+  }}>
+  <SubpageHero
+    header="ENS Referral Program - May 2026 Edition - Rules"
+    description="TODO: add description"
+    breadcrumbs={["ENS Referral Program"]}
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div
+      class="w-full max-w-[660px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-5 [&>p]:mb-2 [&>p]:pl-4 [&>h2]:mt-8 [&>h2]:mb-1 [&>h3]:mt-5 [&>h3]:mb-0.5 [&>ul]:mb-2 [&>ul]:pl-4 [&>ol]:mb-2 [&>ol]:pl-4 [&>div]:pl-4">
+      <h2 class={h2Styles}>Coming Soon</h2>
+      <p class={textStyles}>Rules for this edition will be published soon.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .formula-fraction {
+    line-height: 1.2;
+  }
+</style>
