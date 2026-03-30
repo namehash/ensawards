@@ -128,20 +128,22 @@ export function FetchAndDisplayAdvocateReferrals({
     );
   }
 
+  const registrarActions = registrarActionsQuery.data;
+
   return (
     <AdvocateReferralsContainer>
       <AdvocateReferralsList
         paginationParams={{ page: currentPage, recordsPerPage: recordsPerPage }}
         onPrevious={() => {
-          setCurrentPage((prev) => prev - 1);
+          setCurrentPage((prev) => Math.max(prev - 1, 1));
           scrollWithOffset("advocate-referrals-header", 75);
         }}
         onNext={() => {
-          setCurrentPage((prev) => prev + 1);
+          setCurrentPage((prev) => Math.min(prev + 1, registrarActions.pageContext.totalPages));
           scrollWithOffset("advocate-referrals-header", 75);
         }}
         namespaceId={namespaceId}
-        registrarActions={registrarActionsQuery.data}
+        registrarActions={registrarActions}
         referralProgramEditionSummaries={referralProgramEditionSummaries}
       />
     </AdvocateReferralsContainer>

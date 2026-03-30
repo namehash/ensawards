@@ -76,9 +76,7 @@ export const MockReferralProgramEditionsList = () => {
         <h3>Output:</h3>
         <DisplayReferralProgramEditionsList
           isLoading={state === ReferralProgramEditionsListStates.Loading}
-          fetchErrorMessage={
-            state === ReferralProgramEditionsListStates.Error ? "Mock test error message." : ""
-          }
+          retryFetch={() => alert("Refetch referral program editions")}
           referralProgramEditionSummaries={
             state === ReferralProgramEditionsListStates.Loaded
               ? mockReferralProgramEditionSummariesList

@@ -59,9 +59,7 @@ export async function fetchReferralProgramEditionSummaries(): Promise<
     const response = await client.getEditionSummaries();
 
     if (response.responseCode !== ReferralProgramEditionSummariesResponseCodes.Ok) {
-      throw new Error(
-        getEditionsFetchErrorMessage(`(${response.error}) --> ${response.errorMessage}`),
-      );
+      throw new Error(`(${response.error}) --> ${response.errorMessage}`);
     }
 
     return filterOutUnrecognizedEditions(response.data.editions);

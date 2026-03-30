@@ -69,7 +69,7 @@ export const ReferralProgramEditionCardPieSplit = ({
             : "-"}
         </p>
       </div>
-      <span className="min-w-[90px] max-sm:hidden flex sm:flex-row sm:justify-end">
+      <span className="min-w-[110px] max-sm:hidden flex sm:flex-row sm:justify-end">
         <ReferralProgramStatusBadge
           status={referralProgramEditionSummary.status}
           className="cursor-pointer"

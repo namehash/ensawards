@@ -28,7 +28,7 @@ export const ReferralProgramLeaderboardHeroButtons = ({
       referralProgramEditionSummaryData.slug,
     );
 
-    setReferralProgramEditionSummaryData(refreshedSummary ?? referralProgramEditionSummary);
+    setReferralProgramEditionSummaryData((current) => refreshedSummary ?? current);
   }
 
   useEffect(() => {

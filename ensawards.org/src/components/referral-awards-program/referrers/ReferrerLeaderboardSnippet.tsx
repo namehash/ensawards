@@ -95,9 +95,9 @@ export function ReferrerLeaderboardSnippet({
 
   useEffect(() => {
     fetchReferrerLeaderboard();
-  }, [now, latestReferralProgramEdition]);
+  }, [now, latestReferralProgramEdition?.slug, latestReferralProgramEdition?.awardModel]);
 
-  useEffect(() => {
+  const fetchLatestReferralProgramEdition = async () => {
     fetchReferralProgramEditionSummaries()
       .then((editions) => {
         const startedEditions = editions.filter((edition) => edition.rules.startTime <= now);
@@ -125,6 +125,10 @@ export function ReferrerLeaderboardSnippet({
         setLeaderboardSnippetData(null);
         setFetchErrorMessage("An error occurred while loading the leaderboard.");
       });
+  };
+
+  useEffect(() => {
+    fetchLatestReferralProgramEdition();
   }, [now]);
 
   return (
@@ -179,7 +183,13 @@ export function ReferrerLeaderboardSnippet({
                         className: "rounded-full cursor-pointer",
                       }),
                     )}
-                    onClick={() => fetchReferrerLeaderboard()}
+                    onClick={() => {
+                      if (latestReferralProgramEdition === null) {
+                        fetchLatestReferralProgramEdition();
+                        return;
+                      }
+                      fetchReferrerLeaderboard();
+                    }}
                   >
                     Try again
                   </button>

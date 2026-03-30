@@ -27,7 +27,7 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
       referralProgramEditionSummaryData.slug,
     );
 
-    setReferralProgramEditionSummaryData(refreshedSummary ?? referralProgramEditionSummary);
+    setReferralProgramEditionSummaryData((current) => refreshedSummary ?? current);
   }
 
   useEffect(() => {
