@@ -45,7 +45,7 @@ export const ReferralProgramEditionInfo = ({
       )}
       {isLoading ? (
         <ReferralProgramEditionFieldLoading
-          label="Budget"
+          label="Award pool"
           styles={{
             skeleton: "w-[109px] h-[14px] mt-[4px] mb-[3px]",
           }}
