@@ -5,7 +5,7 @@ import {
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge";
 import {
-  ReferralProgramEditionBudget,
+  ReferralProgramEditionAwardPool,
   ReferralProgramEditionFieldLoading,
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
@@ -45,30 +45,30 @@ export const ReferralProgramEditionInfo = ({
       )}
       {isLoading ? (
         <ReferralProgramEditionFieldLoading
-          label="Budget"
+          label="Award pool"
           styles={{
             skeleton: "w-[109px] h-[14px] mt-[4px] mb-[3px]",
           }}
         />
       ) : (
-        <ReferralProgramEditionBudget
+        <ReferralProgramEditionAwardPool
           totalAwardPoolValue={referralProgramEditionSummary.rules.totalAwardPoolValue}
         />
       )}
       {referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.RevShareLimit &&
         (isLoading ? (
           <ReferralProgramEditionFieldLoading
-            label="Budget remaining"
+            label="Award pool remaining"
             styles={{
               container:
-                "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[117px] sm:flex-col sm:justify-center max-sm:self-stretch",
+                "flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[135px] sm:flex-col sm:justify-center max-sm:self-stretch",
               skeleton: "w-[100px] h-[14px] mt-[4px] mb-[3px]",
             }}
           />
         ) : (
-          <div className="flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[110px] sm:flex-col sm:justify-center max-sm:self-stretch">
+          <div className="flex flex-row flex-nowrap justify-between items-start gap-0 sm:min-w-[135px] sm:flex-col sm:justify-center max-sm:self-stretch">
             <p className="text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default">
-              Budget remaining
+              Award pool remaining
             </p>
             <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
               {currencyFormatter.format(

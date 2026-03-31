@@ -5,13 +5,17 @@ import { useEffect, useState } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import {
-  ReferralProgramEditionBudget,
+  ReferralProgramEditionAwardPool,
   type ReferralProgramEditionCardProps,
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
-import { getReferralProgramEditionSummaryBySlug } from "@/utils/referralProgram";
+import {
+  getReferralProgramEditionSummaryBySlug,
+  parseReferralProgramCurrency,
+} from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
+import { currencyFormatter } from "@/utils/textModifications";
 
 export const ReferralProgramEditionHeroCardRevShareLimit = ({
   referralProgramEditionSummary,
@@ -65,7 +69,7 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
           date: "cursor-default",
         }}
       />
-      <ReferralProgramEditionBudget
+      <ReferralProgramEditionAwardPool
         totalAwardPoolValue={referralProgramEditionSummaryData.rules.totalAwardPoolValue}
         styles={{
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
@@ -80,6 +84,16 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
           {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareLimit
             ? `${Math.round(referralProgramEditionSummaryData.rules.qualifiedRevenueShare * 100)}%`
+            : "-"}
+        </p>
+      </div>
+      <div className="flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch">
+        <p className="text-muted-foreground text-sm leading-normal font-normal text-left cursor-default">
+          Min base revenue contribution
+        </p>
+        <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
+          {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareLimit
+            ? `${currencyFormatter.format(parseReferralProgramCurrency(referralProgramEditionSummaryData.rules.minQualifiedRevenueContribution))} USD`
             : "-"}
         </p>
       </div>

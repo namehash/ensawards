@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import {
-  ReferralProgramEditionBudget,
+  ReferralProgramEditionAwardPool,
   type ReferralProgramEditionCardProps,
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
@@ -65,7 +65,7 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
           date: "cursor-default",
         }}
       />
-      <ReferralProgramEditionBudget
+      <ReferralProgramEditionAwardPool
         totalAwardPoolValue={referralProgramEditionSummaryData.rules.totalAwardPoolValue}
         styles={{
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",

@@ -3,7 +3,7 @@ import { ChevronRightIcon } from "lucide-react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import {
-  ReferralProgramEditionBudget,
+  ReferralProgramEditionAwardPool,
   type ReferralProgramEditionCardProps,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
@@ -52,7 +52,7 @@ export const ReferralProgramEditionCardRevShareLimit = ({
           date: "cursor-pointer",
         }}
       />
-      <ReferralProgramEditionBudget
+      <ReferralProgramEditionAwardPool
         totalAwardPoolValue={referralProgramEditionSummary.rules.totalAwardPoolValue}
         styles={{
           container:
