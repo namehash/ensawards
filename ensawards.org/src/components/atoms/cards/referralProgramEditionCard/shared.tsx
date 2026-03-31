@@ -61,7 +61,7 @@ export const ReferralProgramEditionTimePeriod = ({
   );
 };
 
-export interface ReferralProgramEditionBudgetProps {
+export interface ReferralProgramEditionAwardPoolProps {
   totalAwardPoolValue: PriceUsdc;
   styles?: {
     container?: string;
@@ -70,10 +70,10 @@ export interface ReferralProgramEditionBudgetProps {
   };
 }
 
-export const ReferralProgramEditionBudget = ({
+export const ReferralProgramEditionAwardPool = ({
   totalAwardPoolValue,
   styles,
-}: ReferralProgramEditionBudgetProps) => {
+}: ReferralProgramEditionAwardPoolProps) => {
   return (
     <div
       className={cn(
@@ -87,7 +87,7 @@ export const ReferralProgramEditionBudget = ({
             "text-muted-foreground text-sm leading-normal font-normal max-sm:text-left cursor-default",
         )}
       >
-        Budget
+        Award pool
       </p>
       <p
         className={cn(
@@ -229,7 +229,7 @@ export function ReferralProgramEditionCardLoading({
         }}
       />
       <ReferralProgramEditionFieldLoading
-        label="Budget"
+        label="Award pool"
         styles={{
           container: cn(
             "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
