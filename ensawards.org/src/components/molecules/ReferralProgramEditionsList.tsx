@@ -389,7 +389,7 @@ const NoEditionsInfo = ({ header, description }: { header: string; description: 
 const SummariesFetchingErrorDisplay = ({ retryFetch }: { retryFetch: () => void }) => (
   <ErrorInfo
     title="Error loading referral program editions"
-    description={[`Please try again later.`]}
+    description={["Please try again later."]}
   >
     <button
       className={cn(
