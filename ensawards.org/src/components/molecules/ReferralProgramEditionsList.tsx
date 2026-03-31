@@ -1,4 +1,7 @@
-import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
+import type {
+  ReferralProgramEditionStatusId,
+  ReferralProgramEditionSummary,
+} from "@namehash/ens-referrals/v1";
 import {
   ENSReferralsClient,
   ReferralProgramAwardModels,
@@ -23,10 +26,12 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 
 interface ReferralProgramEditionsListProps {
   simplifiedVariant?: boolean;
+  statusesToHide?: ReferralProgramEditionStatusId[];
 }
 
 export function ReferralProgramEditionsList({
   simplifiedVariant = false,
+  statusesToHide = [],
 }: ReferralProgramEditionsListProps) {
   const [isLoading, setIsLoading] = useState(true);
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
@@ -50,7 +55,13 @@ export function ReferralProgramEditionsList({
         initialLoadRef.current = false;
         return;
       }
-      setReferralProgramEditionSummaries(filterOutUnrecognizedEditions(response.data.editions));
+      // Filter out unrecognized editions and editions with statuses to hide,
+      // sort the rest by start date in ascending order
+      setReferralProgramEditionSummaries(
+        filterOutUnrecognizedEditions(response.data.editions)
+          .filter((editionSummary) => !statusesToHide.includes(editionSummary.status))
+          .sort((a, b) => a.rules.startTime - b.rules.startTime),
+      );
       initialLoadRef.current = true;
     } catch (error) {
       console.error(error);

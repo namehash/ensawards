@@ -1,19 +1,20 @@
 ---
-import LeaderboardsHeroImage from "../../assets/leaderboardsHeroImage.png";
-import LeaderboardSnippetCard from "../../components/atoms/cards/LeaderboardSnippetCard.astro";
-import ItemsList from "../../components/molecules/ItemsList.astro";
-import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import { APPS } from "../../../data/apps";
-import Layout from "../../layouts/Layout.astro";
-import { AppTypes } from "../../../data/apps/types.ts";
-import { type ProtocolId } from "../../../data/protocols/types.ts";
-import { cn } from "../../utils/tailwindClassConcatenation";
-import { ProtocolTypes } from "../../../data/ens-best-practices/types.ts";
-import { pluralizeBestPracticeTarget } from "../../utils/textModifications";
+import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
+import LeaderboardSnippetCard from "@/components/atoms/cards/LeaderboardSnippetCard.astro";
+import ItemsList from "@/components/molecules/ItemsList.astro";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import { APPS } from "data/apps";
+import Layout from "@/layouts/Layout.astro";
+import { AppTypes } from "data/apps/types.ts";
+import { type ProtocolId } from "data/protocols/types.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { ProtocolTypes } from "data/ens-best-practices/types.ts";
+import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "../../../data/protocols/utils.ts";
-import { calculateAppEnsAwardsScore } from "../../../data/apps/utils.ts";
-import { ReferralProgramEditionsList } from "../../components/molecules/ReferralProgramEditionsList.tsx";
+import { getProtocolById } from "data/protocols/utils.ts";
+import { calculateAppEnsAwardsScore } from "data/apps/utils.ts";
+import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList.tsx";
+import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 ---
 
 <Layout
@@ -128,7 +129,11 @@ import { ReferralProgramEditionsList } from "../../components/molecules/Referral
       }
     </ItemsList>
     <ItemsList header="Referrers" containerStyles="sm:gap-6">
-      <ReferralProgramEditionsList client:load simplifiedVariant />
+      <ReferralProgramEditionsList
+        client:load
+        statusesToHide={[ReferralProgramEditionStatuses.Scheduled]}
+        simplifiedVariant
+      />
     </ItemsList>
   </section>
 </Layout>

@@ -1,6 +1,8 @@
 import type {
   ReferralProgramEditionSlug,
   ReferralProgramEditionSummary,
+  ReferralProgramEditionSummaryPieSplit,
+  ReferralProgramEditionSummaryRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import {
   ENSReferralsClient,
@@ -15,7 +17,7 @@ import { getENSNodeUrl } from "@/utils/env";
 
 export const filterOutUnrecognizedEditions = (
   editionSummaries: ReferralProgramEditionSummary[],
-): ReferralProgramEditionSummary[] => {
+): (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit)[] => {
   return editionSummaries.filter(
     (editionSummary) => editionSummary.awardModel !== ReferralProgramAwardModels.Unrecognized,
   );
