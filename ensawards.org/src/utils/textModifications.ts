@@ -62,3 +62,8 @@ const pluralizedBestPracticeTargets: Record<BestPracticeTarget, string> = {
 export const pluralizeBestPracticeTarget = (target: BestPracticeTarget): string => {
   return pluralizedBestPracticeTargets[target];
 };
+
+export const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});

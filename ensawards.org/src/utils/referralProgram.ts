@@ -1,72 +1,93 @@
 import type {
-  ReferralProgramEditionConfig,
   ReferralProgramEditionSlug,
+  ReferralProgramEditionSummary,
+  ReferralProgramEditionSummaryPieSplit,
+  ReferralProgramEditionSummaryRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import {
   ENSReferralsClient,
-  getDefaultReferralProgramEditionConfigSet,
-  ReferralProgramEditionConfigSetResponseCodes,
+  ReferralProgramAwardModels,
+  ReferralProgramEditionSummariesResponseCodes,
 } from "@namehash/ens-referrals/v1";
+
+import { getCurrencyInfo, type Price } from "@ensnode/ensnode-sdk";
 
 import { isValidSlug } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
-import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace";
 
-// TODO: After we are ready to publish the march edition (start using backend data instead of the defaults)
-// we should adapt the code accordingly by:
-// * Uncommenting all code related to fetching the editions from the backend
-// * Using default values only as a fallback.
-// * Removing all code that limits the list of editions to holiday awards only
-// (all filters by "2025-12" slug should be removed)
+export const filterOutUnrecognizedEditions = (
+  editionSummaries: ReferralProgramEditionSummary[],
+): (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit)[] => {
+  return editionSummaries.filter(
+    (editionSummary) => editionSummary.awardModel !== ReferralProgramAwardModels.Unrecognized,
+  );
+};
 
-export const DEFAULT_REFERRAL_PROGRAM_EDITIONS: ReferralProgramEditionConfig[] = Array.from(
-  getDefaultReferralProgramEditionConfigSet(DEFAULT_ENS_NAMESPACE).values(),
-).filter((edition) => edition.slug === "2025-12");
+const getEditionsFetchErrorMessage = (errorMessage: string) =>
+  `Error fetching referral program editions: ${errorMessage}.`;
 
-export async function getReferralProgramEditionConfigBySlug(
+export async function getReferralProgramEditionSummaryBySlug(
   referralProgramSlug: ReferralProgramEditionSlug,
-): Promise<ReferralProgramEditionConfig | undefined> {
+): Promise<ReferralProgramEditionSummary | undefined> {
   if (!referralProgramSlug || !isValidSlug(referralProgramSlug)) return undefined;
 
-  // try {
-  //   const client = new ENSReferralsClient({ url: getENSNodeUrl() });
-  //   const response = await client.getEditionConfigSet();
+  try {
+    const client = new ENSReferralsClient({ url: getENSNodeUrl() });
+    const response = await client.getEditionSummaries();
 
-  //   const editions =
-  //     response.responseCode === ReferralProgramEditionConfigSetResponseCodes.Ok
-  //       ? response.data.editions
-  //       : DEFAULT_REFERRAL_PROGRAM_EDITIONS;
+    if (response.responseCode !== ReferralProgramEditionSummariesResponseCodes.Ok) {
+      console.error(
+        getEditionsFetchErrorMessage(`(${response.error}) --> ${response.errorMessage}`),
+      );
+      return undefined;
+    }
 
-  //   return editions.find((edition) => edition.slug === referralProgramSlug);
-  // } catch (error) {
-  //   console.error(
-  //     "Error fetching referral program:",
-  //     error,
-  //     "Falling back to default referral program editions.",
-  //   );
-  //   return DEFAULT_REFERRAL_PROGRAM_EDITIONS.find(
-  //     (edition) => edition.slug === referralProgramSlug,
-  //   );
-  // }
-
-  return DEFAULT_REFERRAL_PROGRAM_EDITIONS.find((edition) => edition.slug === referralProgramSlug);
+    return filterOutUnrecognizedEditions(response.data.editions).find(
+      (edition) => edition.slug === referralProgramSlug,
+    );
+  } catch (error) {
+    console.error(
+      getEditionsFetchErrorMessage(error instanceof Error ? error.message : String(error)),
+    );
+    return undefined;
+  }
 }
 
-export async function fetchReferralProgramEditions(): Promise<ReferralProgramEditionConfig[]> {
-  // try {
-  //   const client = new ENSReferralsClient({ url: getENSNodeUrl() });
-  //   const response = await client.getEditionConfigSet();
+export async function fetchReferralProgramEditionSummaries(): Promise<
+  ReferralProgramEditionSummary[]
+> {
+  try {
+    const client = new ENSReferralsClient({ url: getENSNodeUrl() });
+    const response = await client.getEditionSummaries();
 
-  //   return response.responseCode === ReferralProgramEditionConfigSetResponseCodes.Ok
-  //     ? response.data.editions.filter((edition) => edition.slug === "2025-12")
-  //     : DEFAULT_REFERRAL_PROGRAM_EDITIONS;
-  // } catch (error) {
-  //   console.error(
-  //     "Error fetching referral program:",
-  //     error,
-  //     "Falling back to default referral program editions.",
-  //   );
-  //   return DEFAULT_REFERRAL_PROGRAM_EDITIONS;
-  // }
-  return DEFAULT_REFERRAL_PROGRAM_EDITIONS;
+    if (response.responseCode !== ReferralProgramEditionSummariesResponseCodes.Ok) {
+      throw new Error(`(${response.error}) --> ${response.errorMessage}`);
+    }
+
+    return filterOutUnrecognizedEditions(response.data.editions);
+  } catch (error) {
+    throw new Error(
+      getEditionsFetchErrorMessage(error instanceof Error ? error.message : String(error)),
+    );
+  }
 }
+
+//TODO: See https://github.com/namehash/ensawards/issues/151
+/**
+ * Converts the parsed currency representation in its smallest unit back to its original value.
+ *
+ * **Note** For large values this parsing may lead to loss of precision
+ *
+ * @param value - a {@link Price} object with the amount in the smallest unit
+ * @returns A number representing the actual amount of the given currency
+ *
+ * @example
+ * Based on the USDC currency
+ * parseReferralProgramCurrency({ currency: "USDC", amount: 123456780n }) // returns 123.45678
+ * parseReferralProgramCurrency({ currency: "USDC", amount: 1000000n }) // returns 1
+ * parseReferralProgramCurrency({ currency: "USDC", amount: 1000n }) // returns 0.001
+ */
+export const parseReferralProgramCurrency = (value: Price): number => {
+  const currencyInfo = getCurrencyInfo(value.currency);
+  return Number(value.amount) / Math.pow(10, currencyInfo.decimals);
+};

@@ -1,23 +1,20 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import {
-  type BestPracticeProtocol,
-  ProtocolTypes,
-} from "../../../data/ens-best-practices/types.ts";
-import { type ProtocolId } from "../../../data/protocols/types.ts";
-import { markdownToHtml } from "../../utils/markdown";
-import { cn } from "../../utils/tailwindClassConcatenation";
-import ContractNamingBanner from "../atoms/ContractNamingBanner.astro";
-import LeaderboardCard from "../atoms/cards/LeaderboardCard.astro";
-import EnscribeIcon from "../atoms/icons/EnscribeIconDark.astro";
-import EnscribeIconLight from "../atoms/icons/EnscribeIconLight.astro";
-import ItemsList from "../molecules/ItemsList.astro";
-import SubpageHero from "../molecules/SubpageHero.astro";
-import { shadcnButtonVariants } from "../ui/shadcnButtonStyles";
+import { type BestPracticeProtocol, ProtocolTypes } from "data/ens-best-practices/types.ts";
+import { type ProtocolId } from "data/protocols/types.ts";
+import { markdownToHtml } from "@/utils/markdown";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import ContractNamingBanner from "@/components/atoms/banners/ContractNamingBanner.astro";
+import LeaderboardCard from "@/components/atoms/cards/LeaderboardCard.astro";
+import EnscribeIcon from "@/components/atoms/icons/EnscribeIconDark.astro";
+import EnscribeIconLight from "@/components/atoms/icons/EnscribeIconLight.astro";
+import ItemsList from "@/components/molecules/ItemsList.astro";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "../../../data/protocols/utils.ts";
-import { SuggestionCard } from "../atoms/cards/SuggestionCard.tsx";
+import { getProtocolById } from "data/protocols/utils.ts";
+import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;

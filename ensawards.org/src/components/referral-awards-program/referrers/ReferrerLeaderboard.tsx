@@ -1,13 +1,16 @@
 import {
   ENSReferralsClient,
-  type ReferrerLeaderboardPage,
+  ReferralProgramAwardModels,
+  ReferralProgramEditionStatuses,
+  type ReferralProgramEditionSummary,
+  type ReferrerLeaderboardPagePieSplit,
   ReferrerLeaderboardPageResponseCodes,
-} from "@namehash/ens-referrals";
-import type { ReferralProgramEditionConfig } from "@namehash/ens-referrals/v1";
+  type ReferrerLeaderboardPageRevShareLimit,
+} from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
 import { fromUnixTime, intlFormat } from "date-fns";
 import { secondsInMinute } from "date-fns/constants";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 
@@ -28,34 +31,37 @@ import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { scrollWithOffset } from "@/utils/domActions.ts";
 import { getENSNodeUrl } from "@/utils/env";
+import { getReferralProgramEditionSummaryBySlug } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface ReferrerLeaderboardProps {
   recordsPerPage?: number;
-  referralProgramEditionConfig: ReferralProgramEditionConfig;
+  referralProgramEditionSummary: ReferralProgramEditionSummary;
 }
 /**
  * Fetches Referrer Leaderboard through ENSNode and displays a single page of the leaderboard and pagination.
  */
 export function ReferrerLeaderboard({
   recordsPerPage = 25,
-  referralProgramEditionConfig,
+  referralProgramEditionSummary,
 }: ReferrerLeaderboardProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentRecordsPerPage, setCurrentRecordsPerPage] = useState(recordsPerPage);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
-  const [leaderboardData, setLeaderboardData] = useState<ReferrerLeaderboardPage | null>(null);
+  const [leaderboardData, setLeaderboardData] = useState<
+    ReferrerLeaderboardPageRevShareLimit | ReferrerLeaderboardPagePieSplit | null
+  >(null);
+  const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
+    referralProgramEditionSummary,
+  );
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
+  const initialLoadRef = useRef(false);
 
-  // refresh for status changes every minute
-  const now = useNow({ timeToRefresh: secondsInMinute });
-  const hasReferralProgramEditionStarted = useMemo(
-    () => referralProgramEditionConfig.rules.startTime <= now,
-    [referralProgramEditionConfig.rules.startTime, now],
-  );
+  // refresh every 5 minutes
+  const now = useNow({ timeToRefresh: 5 * secondsInMinute });
 
   //TODO: Ideally that part could also be extracted (with useQuery or w/e)
   // so that we can do something similar like we do with ENSNodeConfigInfo in ENSAdmin
@@ -65,8 +71,8 @@ export function ReferrerLeaderboard({
     setIsLoading(true);
     scrollWithOffset("leaderboard-header", 75);
     try {
-      // TODO: Update this call once the new API is working on one of our instances
       const response = await client.getReferrerLeaderboardPage({
+        edition: referralProgramEditionSummaryData.slug,
         page: currentPage,
         recordsPerPage: currentRecordsPerPage,
       });
@@ -75,6 +81,14 @@ export function ReferrerLeaderboard({
         console.error(response.errorMessage);
         setLeaderboardData(null);
         setFetchErrorMessage("An error occurred while loading the leaderboard.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Display an error for the unrecognized award model
+      if (response.data.awardModel === ReferralProgramAwardModels.Unrecognized) {
+        setLeaderboardData(null);
+        setFetchErrorMessage("Unrecognized referral program edition award model.");
         setIsLoading(false);
         return;
       }
@@ -95,19 +109,37 @@ export function ReferrerLeaderboard({
     }
   }
 
+  async function refreshReferralProgramEditionSummary() {
+    const refreshedSummary = await getReferralProgramEditionSummaryBySlug(
+      referralProgramEditionSummary.slug,
+    );
+
+    setReferralProgramEditionSummaryData(refreshedSummary ?? referralProgramEditionSummary);
+  }
+
   useEffect(() => {
-    if (!hasReferralProgramEditionStarted) return;
+    if (referralProgramEditionSummaryData.status === ReferralProgramEditionStatuses.Scheduled)
+      return;
 
     fetchReferrerLeaderboard();
-  }, [currentPage, currentRecordsPerPage, hasReferralProgramEditionStarted]);
+  }, [currentPage, currentRecordsPerPage, referralProgramEditionSummaryData.status]);
 
-  if (!hasReferralProgramEditionStarted) {
+  useEffect(() => {
+    if (!initialLoadRef.current) {
+      initialLoadRef.current = true;
+      return;
+    }
+
+    refreshReferralProgramEditionSummary();
+  }, [referralProgramEditionSummary, now]);
+
+  if (referralProgramEditionSummaryData.status === ReferralProgramEditionStatuses.Scheduled) {
     return (
       <div className="w-full h-fit md:min-h-[305px] flex flex-col flex-nowrap justify-center items-center gap-3 sm:gap-4 md:bg-[url(/src/assets/emptyReferrersListBackgroundImage.png)] bg-no-repeat bg-contain bg-center">
         <EmptyLeaderboardInfo
-          header={`The ${referralProgramEditionConfig.displayName} edition is not active yet`}
-          description={`The ${referralProgramEditionConfig.displayName} edition begins ${intlFormat(
-            fromUnixTime(referralProgramEditionConfig.rules.startTime),
+          header={`The ${referralProgramEditionSummaryData.displayName} edition is not active yet`}
+          description={`The ${referralProgramEditionSummaryData.displayName} edition begins ${intlFormat(
+            fromUnixTime(referralProgramEditionSummaryData.rules.startTime),
             {
               year: "numeric",
               month: "short",
@@ -117,7 +149,7 @@ export function ReferrerLeaderboard({
           )}`}
           buttonData={{
             label: "Read the rules",
-            href: referralProgramEditionConfig.rules.rulesUrl.href,
+            href: `/ens-referral-program/editions/${referralProgramEditionSummaryData.slug}/rules`,
           }}
         />
       </div>
@@ -125,12 +157,7 @@ export function ReferrerLeaderboard({
   }
 
   return (
-    <ENSNodeProvider
-      config={config}
-      queryClientOptions={{
-        defaultOptions: { queries: { staleTime: 30 * 1000 } },
-      }}
-    >
+    <ENSNodeProvider config={config}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-4">
           <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between items-start sm:items-center gap-y-2">
@@ -176,11 +203,12 @@ export function ReferrerLeaderboard({
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardData}
             isLoading={isLoading}
+            expectedAwardModel={referralProgramEditionSummaryData.awardModel}
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo
                   title="Error loading referrer data"
-                  description={[`${fetchErrorMessage} Please try again later.`]}
+                  description={["Please try again later."]}
                 >
                   <button
                     className={cn(

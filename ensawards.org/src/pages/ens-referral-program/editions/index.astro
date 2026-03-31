@@ -1,4 +1,5 @@
 ---
+import ReferralLiveFeedHeroImage from "../../../assets/referralLiveFeedHeroImage.png";
 import Layout from "../../../layouts/Layout.astro";
 import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import { ReferralProgramEditionsList } from "../../../components/molecules/ReferralProgramEditionsList";
@@ -6,26 +7,26 @@ import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../../components/ui/shadcnButtonStyles";
 ---
 
-<!-- TODO: Add dedicated OG and Twitter images for this page once they are available -->
 <Layout
   pageMetadata={{
     title: "ENSAwards: ENS Referral Program Editions",
-    description: "View all the ENS referral program editions.",
+    description:
+      "Explore editions that are currently active, scheduled for the future, or already closed.",
     url: "https://ensawards.org/ens-referral-program/editions",
-    ogImage: "https://ensawards.org/ens_referral_program_og_image.png",
+    ogImage: "https://ensawards.org/ens_referral_program_editions_og_image.png",
     twitterImage:
-      "https://ensawards.org/ens_referral_program_twitter_og_image.png",
+      "https://ensawards.org/ens_referral_program_editions_twitter_og_image.png",
   }}>
   <SubpageHero
     header="ENS referral program editions"
-    description="View all the ENS referral program editions."
+    description="Explore editions that are currently active, scheduled for the future, or already closed."
     breadcrumbs={["ENS Referral Program"]}
     customImage={{
-      source: "/src/assets/referralLiveFeedHeroImage.png",
-      width: 315,
-      height: 311,
+      source: ReferralLiveFeedHeroImage,
+      width: 342,
+      height: 337,
       styles:
-        "top-0 sm:-top-8 right-0 sm:right-5 opacity-100 max-sm:block max-sm:relative max-sm:w-full max-sm:h-auto",
+        "top-0 sm:-top-10 right-0 sm:right-5 opacity-100 max-sm:block max-sm:relative max-sm:w-full max-sm:h-auto sm:max-lg:opacity-40",
     }}>
     <div
       slot="ctaContent"

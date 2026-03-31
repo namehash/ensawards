@@ -17,12 +17,7 @@ export function EnsAdvocateDetailsPageProvider({ address }: EnsAdvocateDetailsPa
   const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
   return (
-    <ENSNodeProvider
-      config={config}
-      queryClientOptions={{
-        defaultOptions: { queries: { staleTime: 30 * 1000 } },
-      }}
-    >
+    <ENSNodeProvider config={config}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full h-fit box-border flex flex-col justify-start items-center gap-6 sm:gap-10">
           <FetchAndDisplayAdvocateProfile address={address} />

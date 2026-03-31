@@ -155,6 +155,7 @@ export function Pagination({
     <div className="w-fit h-fit flex flex-row flex-nowrap justify-center items-center gap-1 text-black">
       <button
         aria-disabled={paginationParams.page === 1}
+        disabled={paginationParams.page === 1}
         className={cn(buttonStyles, "block sm:hidden")}
         onClick={() => {
           onSelectPage(1);
@@ -164,6 +165,7 @@ export function Pagination({
       </button>
       <button
         aria-disabled={paginationParams.page === 1}
+        disabled={paginationParams.page === 1}
         className={cn(buttonStyles, "border-transparent")}
         onClick={onPrevious}
       >
@@ -244,6 +246,7 @@ export function Pagination({
       </div>
       <button
         aria-disabled={paginationParams.page === totalPages}
+        disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles, "border-transparent")}
         onClick={onNext}
       >
@@ -252,6 +255,7 @@ export function Pagination({
       </button>
       <button
         aria-disabled={paginationParams.page === totalPages}
+        disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles, "block sm:hidden")}
         onClick={() => {
           onSelectPage(totalPages);
@@ -366,6 +370,7 @@ export function SimplePagination({
     >
       <button
         aria-disabled={paginationParams.page === 1}
+        disabled={paginationParams.page === 1}
         className={cn(buttonStyles)}
         onClick={onPrevious}
       >
@@ -374,6 +379,7 @@ export function SimplePagination({
       </button>
       <button
         aria-disabled={paginationParams.page === totalPages}
+        disabled={paginationParams.page === totalPages}
         className={cn(buttonStyles)}
         onClick={onNext}
       >

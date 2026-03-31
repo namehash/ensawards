@@ -27,7 +27,7 @@ const { eventUnixTimestamp, eventText, styles }: CountdownProps = Astro.props;
   data-threshold={90 * secondsInDay}
   style={{ display: "none" }}
   class={cn(
-    "max-w-[590px] w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between gap-3 sm:gap-0 sm:gap-y-3 items-center px-5 py-3 rounded-xl cursor-default",
+    "max-w-[590px] w-fit sm:w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between gap-3 sm:gap-0 sm:gap-y-3 items-center px-5 py-3 rounded-xl cursor-default",
     styles?.banner,
   )}>
   <div class="flex flex-row flex-nowrap justify-start items-center gap-3">

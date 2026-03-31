@@ -3,20 +3,11 @@ import type {
   InterpretedName,
   NamedRegistrarAction,
   RegistrarActionEventId,
+  RegistrarActionsResponse,
+  RegistrarActionsResponseError,
+  RegistrarActionsResponseOk,
 } from "@ensnode/ensnode-sdk";
-import { registrarActionsPrerequisites } from "@ensnode/ensnode-sdk";
-
-import type {
-  StatefulFetchRegistrarActions,
-  StatefulFetchRegistrarActionsConnecting,
-  StatefulFetchRegistrarActionsError,
-  StatefulFetchRegistrarActionsLoaded,
-  StatefulFetchRegistrarActionsLoading,
-  StatefulFetchRegistrarActionsNotReady,
-  StatefulFetchRegistrarActionsUnsupported,
-  StatefulFetchStatusId,
-} from "../../referral-awards-program/referrals/types.ts";
-import { StatefulFetchStatusIds } from "../../referral-awards-program/referrals/types.ts";
+import { RegistrarActionsResponseCodes } from "@ensnode/ensnode-sdk";
 
 export const registrationWithReferral = {
   action: {
@@ -232,45 +223,23 @@ function registrarActionWithUpdatedIncrementalDuration(
   } satisfies NamedRegistrarAction;
 }
 
-export const variants: Map<StatefulFetchStatusId, StatefulFetchRegistrarActions> = new Map([
+type RegistrarActionsVariants = "Loading" | "Error" | "Loaded";
+
+export const variants: Map<RegistrarActionsVariants, RegistrarActionsResponse | null> = new Map([
+  ["Loading", null],
   [
-    StatefulFetchStatusIds.Connecting,
+    "Error",
     {
-      fetchStatus: StatefulFetchStatusIds.Connecting,
-    } satisfies StatefulFetchRegistrarActionsConnecting,
+      responseCode: RegistrarActionsResponseCodes.Error,
+      error: {
+        message: "An error occurred while fetching Registrar Actions.",
+      },
+    } satisfies RegistrarActionsResponseError,
   ],
   [
-    StatefulFetchStatusIds.Unsupported,
+    "Loaded",
     {
-      fetchStatus: StatefulFetchStatusIds.Unsupported,
-      requiredPlugins: registrarActionsPrerequisites.requiredPlugins,
-    } satisfies StatefulFetchRegistrarActionsUnsupported,
-  ],
-  [
-    StatefulFetchStatusIds.NotReady,
-    {
-      fetchStatus: StatefulFetchStatusIds.NotReady,
-      supportedIndexingStatusIds: registrarActionsPrerequisites.supportedIndexingStatusIds,
-    } satisfies StatefulFetchRegistrarActionsNotReady,
-  ],
-  [
-    StatefulFetchStatusIds.Loading,
-    {
-      fetchStatus: StatefulFetchStatusIds.Loading,
-      recordsPerPage: 8,
-    } satisfies StatefulFetchRegistrarActionsLoading,
-  ],
-  [
-    StatefulFetchStatusIds.Error,
-    {
-      fetchStatus: StatefulFetchStatusIds.Error,
-      reason: "ENSNode connection error. Please check your selected connection.",
-    } satisfies StatefulFetchRegistrarActionsError,
-  ],
-  [
-    StatefulFetchStatusIds.Loaded,
-    {
-      fetchStatus: StatefulFetchStatusIds.Loaded,
+      responseCode: RegistrarActionsResponseCodes.Ok,
       registrarActions: [
         renewalWithNoReferral,
         registrarActionWithUpdatedIncrementalDuration(
@@ -304,6 +273,6 @@ export const variants: Map<StatefulFetchStatusId, StatefulFetchRegistrarActions>
         recordsPerPage: 8,
       },
       accurateAsOf: 1763052924,
-    } satisfies StatefulFetchRegistrarActionsLoaded,
+    } satisfies RegistrarActionsResponseOk,
   ],
 ]);

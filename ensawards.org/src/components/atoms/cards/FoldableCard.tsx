@@ -25,7 +25,7 @@ export function FoldableCard({
       id={`FAQ-${header}`}
       onClick={() => setIsOpen((prev) => !prev)}
       className={cn(
-        "w-full max-w-[590px] h-fit flex flex-col justify-start items-start gap-4 px-5 py-4 box-border border border-gray-200 hover:border-gray-300 hover:shadow-xs rounded-lg bg-white transition-all duration-300 relative z-10 cursor-pointer",
+        "w-full max-w-[590px] h-fit flex flex-col justify-start items-start gap-4 px-5 py-4 box-border border border-gray-200 hover:border-gray-300 hover:shadow-xs rounded-lg bg-white transition-all duration-300 relative z-10 cursor-pointer overflow-hidden",
         cardStyles,
       )}
     >
