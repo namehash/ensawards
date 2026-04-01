@@ -55,8 +55,8 @@ const termStyles =
             >A 50% revenue share of the <a
               href="#base-revenue-contribution"
               class={termStyles}>Base Revenue Contribution</a
-            > from each <a href="#qualifying-referral" class={termStyles}
-              >Qualifying Referral</a
+            > from each <a href="#qualified-referral" class={termStyles}
+              >Qualified Referral</a
             > until the <a href="#award-pool" class={termStyles}>Award Pool</a> is
             exhausted or the <a href="#edition-period" class={termStyles}
               >Edition Period</a
@@ -126,7 +126,7 @@ const termStyles =
           href="#the-edition"
           class={termStyles}>The Edition</a
         > is the duration of April 2026, from April 1, 2026 00:00:00 UTC to April
-        30, 23:59:59 UTC inclusive.
+        30, 2026, 23:59:59 UTC inclusive.
       </p>
 
       <h3 class={h3Styles} id="edition-administrator">
@@ -142,12 +142,12 @@ const termStyles =
         >.
       </p>
 
-      <h3 class={h3Styles} id="qualifying-referral">
-        &quot;Qualifying Referral&quot; and &quot;Referrer&quot;
+      <h3 class={h3Styles} id="qualified-referral">
+        &quot;Qualified Referral&quot; and &quot;Referrer&quot;
       </h3>
       <p class={textStyles}>
-        To be a <a href="#qualifying-referral" class={termStyles}
-          >Qualifying Referral</a
+        To be a <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
         >, registrations / renewals must satisfy all of the following
         conditions:
       </p>
@@ -162,6 +162,7 @@ const termStyles =
             <li class={cn(textStyles, "pl-2")}>
               <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://etherscan.io/address/0x59E16fcCd424Cc24e280Be16E11Bcd56fb0CE547"
                 class={linkStyles}>UnwrappedEthRegistrarController</a
               > (supports referrals for both registrations and renewals)
@@ -169,6 +170,7 @@ const termStyles =
             <li class={cn(textStyles, "pl-2")}>
               <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://etherscan.io/address/0xf55575Bde5953ee4272d5CE7cdD924c74d8fA81A"
                 class={linkStyles}>UniversalRegistrarRenewalWithReferrer</a
               > (recommended for referrals that renew "wrapped" direct subnames of
@@ -185,12 +187,12 @@ const termStyles =
             <li class={cn(textStyles, "pl-2")}>First 12-bytes: all zeros.</li>
             <li class={cn(textStyles, "pl-2")}>
               Last 20-bytes: Ethereum mainnet address identifying the
-              <a href="#qualifying-referral" class={termStyles}>Referrer</a> and
-              where any <a href="#award-distribution" class={termStyles}
+              <a href="#qualified-referral" class={termStyles}>Referrer</a> and where
+              any <a href="#award-distribution" class={termStyles}
                 >Award Distributions</a
               > the
-              <a href="#qualifying-referral" class={termStyles}>Referrer</a> may
-              earn will be deposited.
+              <a href="#qualified-referral" class={termStyles}>Referrer</a> may earn
+              will be deposited.
             </li>
           </ol>
         </li>
@@ -205,7 +207,7 @@ const termStyles =
       </p>
       <p class={textStyles}>
         To reduce complexity with this edition, a <a
-          href="#qualifying-referral"
+          href="#qualified-referral"
           class={termStyles}>Referrer</a
         > cannot customize where any <a
           href="#award-distribution"
@@ -213,7 +215,7 @@ const termStyles =
         > they may earn will be deposited. The referrer's address and the address
         where any
         <a href="#award-distribution" class={termStyles}>Award Distributions</a>
-        the <a href="#qualifying-referral" class={termStyles}>Referrer</a> may earn
+        the <a href="#qualified-referral" class={termStyles}>Referrer</a> may earn
         will be deposited are one and the same.
       </p>
 
@@ -223,9 +225,9 @@ const termStyles =
       <p class={textStyles}>
         A <a href="#participating-referrer" class={termStyles}
           >Participating Referrer</a
-        > is any <a href="#qualifying-referral" class={termStyles}>Referrer</a> who
-        has made a <a href="#qualifying-referral" class={termStyles}
-          >Qualifying Referral</a
+        > is any <a href="#qualified-referral" class={termStyles}>Referrer</a> who
+        has made a <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
         >.
       </p>
       <p class={textStyles}>
@@ -235,14 +237,14 @@ const termStyles =
         >. <a href="#the-edition" class={termStyles}>The Edition</a> is permissionless.
       </p>
 
-      <h3 class={h3Styles} id="qualifying-referral-year">
-        &quot;Qualifying Referral Year&quot;
+      <h3 class={h3Styles} id="qualified-referral-year">
+        &quot;Qualified Referral Year&quot;
       </h3>
       <p class={textStyles}>
-        Each <a href="#qualifying-referral" class={termStyles}
-          >Qualifying Referral</a
-        > is measured in <a href="#qualifying-referral-year" class={termStyles}
-          >Qualifying Referral Years</a
+        Each <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
+        > is measured in <a href="#qualified-referral-year" class={termStyles}
+          >Qualified Referral Years</a
         >:
       </p>
       <ul class="list-disc list-outside ml-5 space-y-2">
@@ -260,14 +262,14 @@ const termStyles =
         365.2425 days on average per year)
       </p>
       <p class={textStyles}>
-        <a href="#qualifying-referral-year" class={termStyles}
-          >Qualifying Referral Years</a
+        <a href="#qualified-referral-year" class={termStyles}
+          >Qualified Referral Years</a
         > support measurement in fractional units. Ex: A renewal of 6 months would
-        represent 0.5 <a href="#qualifying-referral-year" class={termStyles}
-          >Qualifying Referral Years</a
+        represent 0.5 <a href="#qualified-referral-year" class={termStyles}
+          >Qualified Referral Years</a
         >. A registration for 2 years would represent 2 <a
-          href="#qualifying-referral-year"
-          class={termStyles}>Qualifying Referral Years</a
+          href="#qualified-referral-year"
+          class={termStyles}>Qualified Referral Years</a
         >.
       </p>
 
@@ -281,8 +283,8 @@ const termStyles =
           href="#participating-referrer"
           class={termStyles}>Participating Referrer</a
         > as the revenue they contribute to the ENS DAO through all of their <a
-          href="#qualifying-referral"
-          class={termStyles}>Qualifying Referrals</a
+          href="#qualified-referral"
+          class={termStyles}>Qualified Referrals</a
         > excluding any premium revenue categories such as short-name premiums or
         recently-released temporary premiums.
       </p>
@@ -290,8 +292,8 @@ const termStyles =
         Currently, the <a href="#base-revenue-contribution" class={termStyles}
           >Base Revenue Contribution</a
         > is $5.00 USDC for each <a
-          href="#qualifying-referral-year"
-          class={termStyles}>Qualifying Referral Year</a
+          href="#qualified-referral-year"
+          class={termStyles}>Qualified Referral Year</a
         >. The ENS DAO has the power to modify pricing rules. In the event the
         ENS DAO modifies pricing rules during the <a
           href="#edition-period"
@@ -316,8 +318,8 @@ const termStyles =
         An <a href="#economic-discount" class={termStyles}>Economic Discount</a>
         is any rebate, refund, credit, incentive, or other benefit that may have
         the intent or effect of reducing, directly or indirectly, the net price paid
-        for any <a href="#qualifying-referral" class={termStyles}
-          >Qualifying Referral</a
+        for any <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
         > beneath the price that would otherwise be enforced by ENS contracts.
       </p>
       <p class={textStyles}>
@@ -326,8 +328,8 @@ const termStyles =
         digital assets, gift cards, prepaid cards, stored value instruments, or any
         other assets or consideration that are readily convertible to cash, as well
         as any arrangement that may offset or reimburse all or part of the price
-        paid for any <a href="#qualifying-referral" class={termStyles}
-          >Qualifying Referral</a
+        paid for any <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
         >.
       </p>
       <p class={textStyles}>
@@ -360,44 +362,44 @@ const termStyles =
         > throughout the <a href="#edition-period" class={termStyles}
           >Edition Period</a
         >:
-        <ol class="list-decimal list-outside ml-5 space-y-2">
-          <li class={cn(textStyles, "pl-2")}>
-            <a href="#participating-referrer" class={termStyles}
-              >Participating Referrers</a
-            > must not offer, provide, or arrange any <a
-              href="#economic-discount"
-              class={termStyles}>Economic Discounts</a
-            >, directly or indirectly, and shall not structure any arrangement
-            with the intent or effect of circumventing this restriction.
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            <a href="#participating-referrer" class={termStyles}
-              >Participating Referrers</a
-            > must configure an ENS primary name for their Ethereum Mainnet address
-            to be a valid ENS name.
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            <a href="#participating-referrer" class={termStyles}
-              >Participating Referrers</a
-            > must configure the profile of their primary ENS name with a functioning
-            avatar image and information that clearly identifies the project the
-            <a href="#participating-referrer" class={termStyles}
-              >Participating Referrer</a
-            > uses to produce <a href="#qualifying-referral" class={termStyles}
-              >Qualifying Referrals</a
-            >. For example, by identifying the website where their referrals
-            originate from.
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            <a href="#participating-referrer" class={termStyles}
-              >Participating Referrers</a
-            > must not engage in deceptive marketing, or other abusive promotional
-            practices, including any activities that violate applicable laws (such
-            as anti-spam or consumer protection laws) or other activities that are
-            reasonably likely to harm the reputation or goodwill of ENS.
-          </li>
-        </ol>
       </p>
+      <ol class="list-decimal list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrers</a
+          > must not offer, provide, or arrange any <a
+            href="#economic-discount"
+            class={termStyles}>Economic Discounts</a
+          >, directly or indirectly, and shall not structure any arrangement
+          with the intent or effect of circumventing this restriction.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrers</a
+          > must configure an ENS primary name for their Ethereum Mainnet address
+          to be a valid ENS name.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrers</a
+          > must configure the profile of their primary ENS name with a functioning
+          avatar image and information that clearly identifies the project the
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer</a
+          > uses to produce <a href="#qualified-referral" class={termStyles}
+            >Qualified Referrals</a
+          >. For example, by identifying the website where their referrals
+          originate from.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrers</a
+          > must not engage in deceptive marketing, or other abusive promotional
+          practices, including any activities that violate applicable laws (such
+          as anti-spam or consumer protection laws) or other activities that are
+          reasonably likely to harm the reputation or goodwill of ENS.
+        </li>
+      </ol>
 
       <h3 class={h3Styles} id="disqualified-referrer">
         &quot;Disqualified Referrer&quot;
@@ -421,51 +423,49 @@ const termStyles =
         > may disqualify a <a href="#participating-referrer" class={termStyles}>
           Participating Referrer</a
         > for reasons including but not limited to:
-        <ol class="list-decimal list-outside ml-5 space-y-2">
-          <li class={cn(textStyles, "pl-2")}>
-            Violating the <a href="#code-of-conduct" class={termStyles}
-              >Code of Conduct</a
-            >.
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            The <a href="#participating-referrer" class={termStyles}
-              >Participating Referrer's</a
-            > project, as identified by the <a
-              href="#edition-administrator"
-              class={termStyles}>Edition Administrator</a
-            > through point 3 of the <a
-              href="#code-of-conduct"
-              class={termStyles}>Code of Conduct</a
-            >, fails to provide sufficient evidence to satisfy the <a
-              href="#edition-administrator"
-              class={termStyles}>Edition Administrator</a
-            > that the preponderance of <a
-              href="#qualifying-referral"
-              class={termStyles}>Qualified Referrals</a
-            > produced by the <a
-              href="#participating-referrer"
-              class={termStyles}>Participating Referrer</a
-            > are made by registrants who are unaffiliated with the <a
-              href="#participating-referrer"
-              class={termStyles}>Participating Referrer</a
-            > (not "self-referrals" which effectively represent an <a
-              href="#economic-discount"
-              class={termStyles}>Economic Discount</a
-            > that violates the <a href="#code-of-conduct" class={termStyles}
-              >Code of Conduct</a
-            >). Each <a href="#participating-referrer" class={termStyles}
-              >Participating Referrer</a
-            > is responsible for proactively demonstrating such satisfactory evidence
-            to the <a href="#edition-administrator" class={termStyles}
-              >Edition Administrator</a
-            > during the <a href="#edition-period" class={termStyles}
-              >Edition Period</a
-            > through the <a href="#participating-referrer" class={termStyles}
-              >Participating Referrer's</a
-            > project's website and/or other means.
-          </li>
-        </ol>
       </p>
+      <ol class="list-decimal list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          Violating the <a href="#code-of-conduct" class={termStyles}
+            >Code of Conduct</a
+          >.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          The <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer's</a
+          > project, as identified by the <a
+            href="#edition-administrator"
+            class={termStyles}>Edition Administrator</a
+          > through point 3 of the <a href="#code-of-conduct" class={termStyles}
+            >Code of Conduct</a
+          >, fails to provide sufficient evidence to satisfy the <a
+            href="#edition-administrator"
+            class={termStyles}>Edition Administrator</a
+          > that the preponderance of <a
+            href="#qualified-referral"
+            class={termStyles}>Qualified Referrals</a
+          > produced by the <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer</a
+          > are made by registrants who are unaffiliated with the <a
+            href="#participating-referrer"
+            class={termStyles}>Participating Referrer</a
+          > (not "self-referrals" which effectively represent an <a
+            href="#economic-discount"
+            class={termStyles}>Economic Discount</a
+          > that violates the <a href="#code-of-conduct" class={termStyles}
+            >Code of Conduct</a
+          >). Each <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer</a
+          > is responsible for proactively demonstrating such satisfactory evidence
+          to the <a href="#edition-administrator" class={termStyles}
+            >Edition Administrator</a
+          > during the <a href="#edition-period" class={termStyles}
+            >Edition Period</a
+          > through the <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer's</a
+          > project's website and/or other means.
+        </li>
+      </ol>
 
       <p class={textStyles}>
         If a <a href="#participating-referrer" class={termStyles}
@@ -550,7 +550,7 @@ const termStyles =
         > with a
         <a href="#base-revenue-contribution" class={termStyles}
           >Base Revenue Contribution</a
-        > of USDC $100.00 or more.
+        > of $100.00 USDC or more.
       </p>
       <p class={textStyles}>
         Anyone has the potential to become a <a
@@ -616,72 +616,74 @@ const termStyles =
           For each <a href="#qualified-referral" class={termStyles}
             >Qualified Referral</a
           > (in the order it was executed onchain):
+          <ol class="list-decimal list-outside ml-5 space-y-2">
+            <li class={cn(textStyles, "pl-2")}>
+              Let the "associated referrer" be the <a
+                href="#participating-referrer"
+                class={termStyles}>Participating Referrer</a
+              > who referred the <a
+                href="#qualified-referral"
+                class={termStyles}>Qualified Referral</a
+              >.
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Let the "incremental base revenue contribution" be the incremental <a
+                href="#base-revenue-contribution"
+                class={termStyles}>Base Revenue Contribution</a
+              > from the <a href="#qualified-referral" class={termStyles}
+                >Qualified Referral</a
+              >.
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Update the "total base revenue contribution" of the "associated
+              referrer" by adding the "incremental base revenue contribution".
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              If the "associated referrer" is a <a
+                href="#disqualified-referrer"
+                class={termStyles}>Disqualified Referrer</a
+              > then let the "incremental award" be $0.00 USDC (including for any
+              referrals the "associated referrer" may have made before becoming disqualified).
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Else, if the "total base revenue contribution" is not yet enough
+              for the "associated referrer" to become a <a
+                href="#qualified-referrer"
+                class={termStyles}>Qualified Referrer</a
+              > then let the "incremental award" be $0.00 USDC.
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Else, if the updated "total base revenue contribution" is <i
+                >just now</i
+              > enabling the "associated referrer" to become a <a
+                href="#qualified-referrer"
+                class={termStyles}>Qualified Referrer</a
+              > then let the "incremental award" be the minimum of the "remaining
+              award pool" and 50% of the current "total base revenue contribution"
+              of the "associated referrer" (calculate an incremental award for all
+              the past
+              <a href="#qualified-referral" class={termStyles}
+                >Qualified Referrals</a
+              > made by the "associated referrer" before they became a <a
+                href="#qualified-referrer"
+                class={termStyles}>Qualified Referrer</a
+              >).
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Else, let the "incremental award" be the minimum of the "remaining
+              award pool" and 50% of "incremental base revenue contribution".
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Update the <a href="#referral-award" class={termStyles}
+                >Referral Award</a
+              > for the "associated referrer" by adding the "incremental award".
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Update the "remaining award pool" by subtracting the "incremental
+              award".
+            </li>
+          </ol>
         </li>
-        <ol class="list-decimal list-outside ml-5 space-y-2">
-          <li class={cn(textStyles, "pl-2")}>
-            Let the "associated referrer" be the <a
-              href="#participating-referrer"
-              class={termStyles}>Participating Referrer</a
-            > who referred the <a href="#qualified-referral" class={termStyles}
-              >Qualified Referral</a
-            >.
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            Let the "incremental base revenue contribution" be the incremental <a
-              href="#base-revenue-contribution"
-              class={termStyles}>Base Revenue Contribution</a
-            > from the <a href="#qualified-referral" class={termStyles}
-              >Qualified Referral</a
-            >.
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            Update the "total base revenue contribution" of the "associated
-            referrer" by adding the "incremental base revenue contribution".
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            If the "associated referrer" is a <a
-              href="#disqualified-referrer"
-              class={termStyles}>Disqualified Referrer</a
-            > then let the "incremental award" be $0.00 USDC (including for any referrals
-            the "associated referrer" may have made before becoming disqualified).
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            Else, if the "total base revenue contribution" is not yet enough for
-            the "associated referrer" to become a <a
-              href="#qualified-referrer"
-              class={termStyles}>Qualified Referrer</a
-            > then let the "incremental award" be $0.00 USDC.
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            Else, if the updated "total base revenue contribution" is <i
-              >just now</i
-            > enabling the "associated referrer" to become a <a
-              href="#qualified-referrer"
-              class={termStyles}>Qualified Referrer</a
-            > then let the "incremental award" be the minimum of the "remaining award
-            pool" and 50% of the current "total base revenue contribution" of the
-            "associated referrer" (calculate an incremental award for all the past
-            <a href="#qualified-referral" class={termStyles}
-              >Qualified Referrals</a
-            > made by the "associated referrer" before they became a <a
-              href="#qualified-referrer"
-              class={termStyles}>Qualified Referrer</a
-            >).
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            Else, let the "incremental award" be the minimum of the "remaining
-            award pool" and 50% of "incremental base revenue contribution".
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            Update the <a href="#referral-award" class={termStyles}
-              >Referral Award</a
-            > for the "associated referrer" by adding the "incremental award".
-          </li>
-          <li class={cn(textStyles, "pl-2")}>
-            Update the "remaining award pool" by subtracting the "incremental
-            award".
-          </li>
-        </ol>
       </ol>
       <p class={textStyles}>
         All <a href="#referral-award" class={termStyles}>Referral Awards</a> are
@@ -787,9 +789,3 @@ const termStyles =
     </div>
   </section>
 </Layout>
-
-<style>
-  .formula-fraction {
-    line-height: 1.2;
-  }
-</style>
