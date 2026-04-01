@@ -14,7 +14,7 @@ const termStyles =
 
 <Layout
   pageMetadata={{
-    title: "ENS Referral Program - April 2026 Edition - Rules",
+    title: "ENS Referral Program Rules - April 2026 Edition",
     description: "Rules for the April 2026 Edition of the ENS Referral Program",
     url: "https://ensawards.org/ens-referral-program/editions/2026-04/rules",
     ogImage:
@@ -23,7 +23,7 @@ const termStyles =
       "https://ensawards.org/2026-04_referral_program_edition_twitter_og_image.png",
   }}>
   <SubpageHero
-    header="ENS Referral Program - April 2026 Edition - Rules"
+    header="ENS Referral Program Rules - April 2026 Edition"
     description="Rules for the April 2026 Edition of the ENS Referral Program"
     breadcrumbs={["ENS Referral Program"]}
   />
@@ -31,14 +31,769 @@ const termStyles =
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <div
       class="w-full max-w-[660px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-5 [&>p]:mb-2 [&>p]:pl-4 [&>h2]:mt-8 [&>h2]:mb-1 [&>h3]:mt-5 [&>h3]:mb-0.5 [&>ul]:mb-2 [&>ul]:pl-4 [&>ol]:mb-2 [&>ol]:pl-4 [&>div]:pl-4">
-      <h2 class={h2Styles}>Coming Soon</h2>
-      <p class={textStyles}>Rules for this edition will be published soon.</p>
+      <h2 class={h2Styles}>Introduction</h2>
+      <p class={textStyles}>
+        The &quot;April 2026 Edition&quot; of the ENS Referral Program aims to
+        encourage new growth in ENS adoption. It does this by offering awards
+        that incentivize builders to invest in shipping features and marketing
+        campaigns that promote .eth name registrations and renewals.
+      </p>
+
+      <h2 class={h2Styles}>Overview</h2>
+      <ul class="list-disc list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2 text-black")}>
+          <b>Award pool:</b>
+          <span class={textStyles}>$10,000.00 USDC.</span>
+        </li>
+        <li class={cn(textStyles, "pl-2 text-black")}>
+          <b>Edition period:</b>
+          <span class={textStyles}>The duration of April 2026.</span>
+        </li>
+        <li class={cn(textStyles, "pl-2 text-black")}>
+          <b>Referral awards:</b>
+          <span class={textStyles}
+            >A 50% revenue share of the <a
+              href="#base-revenue-contribution"
+              class={termStyles}>Base Revenue Contribution</a
+            > from each <a href="#qualified-referral" class={termStyles}
+              >Qualified Referral</a
+            > until the <a href="#award-pool" class={termStyles}>Award Pool</a> is
+            exhausted or the <a href="#edition-period" class={termStyles}
+              >Edition Period</a
+            > ends.</span
+          >
+        </li>
+        <li class={cn(textStyles, "pl-2 text-black")}>
+          <b>Participation:</b>
+          <span class={textStyles}
+            >Permissionless (anyone can become a <a
+              href="#participating-referrer"
+              class={termStyles}>Participating Referrer</a
+            >).</span
+          >
+        </li>
+        <li class={cn(textStyles, "pl-2 text-black")}>
+          <b>Qualification criteria:</b>
+          <span class={textStyles}
+            >To qualify for <a href="#referral-award" class={termStyles}
+              >Referral Awards</a
+            >, a referrer must abide by these rules (including the <a
+              href="#code-of-conduct"
+              class={termStyles}>Code of Conduct</a
+            >) and produce a <a
+              href="#base-revenue-contribution"
+              class={termStyles}>Base Revenue Contribution</a
+            > to the ENS DAO of $100.00 USDC or more during the <a
+              href="#edition-period"
+              class={termStyles}>Edition Period</a
+            > and before the <a href="#award-pool" class={termStyles}
+              >Award Pool</a
+            > is exhausted.</span
+          >
+        </li>
+        <li class={cn(textStyles, "pl-2 text-black")}>
+          <b>Award distribution:</b>
+          <span class={textStyles}
+            >No later than 15 days after the <a
+              href="#edition-period"
+              class={termStyles}>Edition Period</a
+            > ends.</span
+          >
+        </li>
+        <li class={cn(textStyles, "pl-2 text-black")}>
+          <b>Administration:</b>
+          <span class={textStyles}
+            >Led by <a
+              target="_blank"
+              href="https://namehashlabs.org/"
+              class={linkStyles}>NameHash Labs</a
+            >.</span
+          >
+        </li>
+      </ul>
+
+      <h2 class={h2Styles}>Rules</h2>
+
+      <h3 class={h3Styles} id="the-edition">&quot;The Edition&quot;</h3>
+      <p class={textStyles}>
+        <a href="#the-edition" class={termStyles}>The Edition</a> is the &quot;April
+        2026 Edition&quot; of the ENS Referral Program.
+      </p>
+
+      <h3 class={h3Styles} id="edition-period">&quot;Edition Period&quot;</h3>
+      <p class={textStyles}>
+        The <a href="#edition-period" class={termStyles}>Edition Period</a> of <a
+          href="#the-edition"
+          class={termStyles}>The Edition</a
+        > is the duration of April 2026, from April 1, 2026 00:00:00 UTC to April
+        30, 2026 23:59:59 UTC inclusive.
+      </p>
+
+      <h3 class={h3Styles} id="edition-administrator">
+        &quot;Edition Administrator&quot;
+      </h3>
+      <p class={textStyles}>
+        The <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        > of <a href="#the-edition" class={termStyles}>The Edition</a> is <a
+          href="https://namehashlabs.org/"
+          class={linkStyles}
+          target="_blank">NameHash Labs</a
+        >.
+      </p>
+
+      <h3 class={h3Styles} id="qualified-referral">
+        &quot;Qualified Referral&quot; and &quot;Referrer&quot;
+      </h3>
+      <p class={textStyles}>
+        To be a <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
+        >, registrations / renewals must satisfy all of the following
+        conditions:
+      </p>
+      <ol class="list-decimal list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          Registration / renewal of a direct subname of &quot;.eth&quot; made
+          through one of the following contracts on Ethereum Mainnet within the <a
+            href="#edition-period"
+            class={termStyles}>Edition Period</a
+          >:
+          <ol class="list-decimal list-outside ml-5 space-y-2 mt-2">
+            <li class={cn(textStyles, "pl-2")}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://etherscan.io/address/0x59E16fcCd424Cc24e280Be16E11Bcd56fb0CE547"
+                class={linkStyles}>UnwrappedEthRegistrarController</a
+              > (supports referrals for both registrations and renewals)
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://etherscan.io/address/0xf55575Bde5953ee4272d5CE7cdD924c74d8fA81A"
+                class={linkStyles}>UniversalRegistrarRenewalWithReferrer</a
+              > (recommended for referrals that renew "wrapped" direct subnames of
+              .eth)
+            </li>
+          </ol>
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          The &quot;referrer&quot; parameter passed to the register / renew call
+          is a 32-byte value, while an Ethereum address is a 20-byte value.
+          Therefore, the &quot;referrer&quot; parameter must match the following
+          format:
+          <ol class="list-decimal list-outside ml-5 space-y-2 mt-2">
+            <li class={cn(textStyles, "pl-2")}>First 12-bytes: all zeros.</li>
+            <li class={cn(textStyles, "pl-2")}>
+              Last 20-bytes: Ethereum mainnet address identifying the
+              <a href="#qualified-referral" class={termStyles}>Referrer</a> and where
+              any <a href="#award-distribution" class={termStyles}
+                >Award Distributions</a
+              > the
+              <a href="#qualified-referral" class={termStyles}>Referrer</a> may earn
+              will be deposited.
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <p class={textStyles}>
+        Resources and additional instructions for the technical implementation
+        of referrals can be found in the <a
+          href="https://github.com/namehash/ens-referrals"
+          class={linkStyles}
+          target="_blank">ens-referrals</a
+        > GitHub Repo.
+      </p>
+      <p class={textStyles}>
+        To reduce complexity with this edition, a <a
+          href="#qualified-referral"
+          class={termStyles}>Referrer</a
+        > cannot customize where any <a
+          href="#award-distribution"
+          class={termStyles}>Award Distributions</a
+        > they may earn will be deposited. The referrer's address and the address
+        where any
+        <a href="#award-distribution" class={termStyles}>Award Distributions</a>
+        the <a href="#qualified-referral" class={termStyles}>Referrer</a> may earn
+        will be deposited are one and the same.
+      </p>
+
+      <h3 class={h3Styles} id="participating-referrer">
+        &quot;Participating Referrer&quot;
+      </h3>
+      <p class={textStyles}>
+        A <a href="#participating-referrer" class={termStyles}
+          >Participating Referrer</a
+        > is any <a href="#qualified-referral" class={termStyles}>Referrer</a> who
+        has made a <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
+        >.
+      </p>
+      <p class={textStyles}>
+        Anyone has the potential to become a <a
+          href="#participating-referrer"
+          class={termStyles}>Participating Referrer</a
+        >. <a href="#the-edition" class={termStyles}>The Edition</a> is permissionless.
+      </p>
+
+      <h3 class={h3Styles} id="qualified-referral-year">
+        &quot;Qualified Referral Year&quot;
+      </h3>
+      <p class={textStyles}>
+        Each <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
+        > is measured in <a href="#qualified-referral-year" class={termStyles}
+          >Qualified Referral Years</a
+        >:
+      </p>
+      <ul class="list-disc list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          For registrations: equal to the number of years the name was
+          registered for.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          For renewals: equal to the number of years the name was renewed for.
+        </li>
+      </ul>
+      <p class={textStyles}>Here we define a year as 31,556,952 seconds.</p>
+      <p class={textStyles}>
+        (60 seconds per minute * 60 minutes per hour * 24 hours per day *
+        365.2425 days on average per year)
+      </p>
+      <p class={textStyles}>
+        <a href="#qualified-referral-year" class={termStyles}
+          >Qualified Referral Years</a
+        > support measurement in fractional units. Ex: A renewal of 6 months would
+        represent 0.5 <a href="#qualified-referral-year" class={termStyles}
+          >Qualified Referral Years</a
+        >. A registration for 2 years would represent 2 <a
+          href="#qualified-referral-year"
+          class={termStyles}>Qualified Referral Years</a
+        >.
+      </p>
+
+      <h3 class={h3Styles} id="base-revenue-contribution">
+        &quot;Base Revenue Contribution&quot;
+      </h3>
+      <p class={textStyles}>
+        A <a href="#base-revenue-contribution" class={termStyles}
+          >Base Revenue Contribution</a
+        > is calculated for each <a
+          href="#participating-referrer"
+          class={termStyles}>Participating Referrer</a
+        > as the revenue they contribute to the ENS DAO through all of their <a
+          href="#qualified-referral"
+          class={termStyles}>Qualified Referrals</a
+        > excluding any premium revenue categories such as short-name premiums or
+        recently-released temporary premiums.
+      </p>
+      <p class={textStyles}>
+        Currently, the <a href="#base-revenue-contribution" class={termStyles}
+          >Base Revenue Contribution</a
+        > is $5.00 USDC for each <a
+          href="#qualified-referral-year"
+          class={termStyles}>Qualified Referral Year</a
+        >. The ENS DAO has the power to modify pricing rules. In the event the
+        ENS DAO modifies pricing rules during the <a
+          href="#edition-period"
+          class={termStyles}>Edition Period</a
+        >, the <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        > will appropriately update the rule for calculating the <a
+          href="#base-revenue-contribution"
+          class={termStyles}>Base Revenue Contribution</a
+        >.
+      </p>
+      <p class={textStyles}>
+        This rule is designed to mitigate potential abuses of the ENS Referral
+        Program in situations where potential "self-referral" Economic Discounts
+        might otherwise be large due to premium revenue categories.
+      </p>
+
+      <h3 class={h3Styles} id="economic-discount">
+        &quot;Economic Discount&quot;
+      </h3>
+      <p class={textStyles}>
+        An <a href="#economic-discount" class={termStyles}>Economic Discount</a>
+        is any rebate, refund, credit, incentive, or other benefit that may have
+        the intent or effect of reducing, directly or indirectly, the net price paid
+        for any <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
+        > beneath the price that would otherwise be enforced by ENS contracts.
+      </p>
+      <p class={textStyles}>
+        <a href="#economic-discount" class={termStyles}>Economic Discounts</a> include,
+        without limitation, cash payments, rebates, refunds, cryptocurrency or other
+        digital assets, gift cards, prepaid cards, stored value instruments, or any
+        other assets or consideration that are readily convertible to cash, as well
+        as any arrangement that may offset or reimburse all or part of the price
+        paid for any <a href="#qualified-referral" class={termStyles}
+          >Qualified Referral</a
+        >.
+      </p>
+      <p class={textStyles}>
+        <a href="#economic-discount" class={termStyles}>Economic Discounts</a> do
+        not include bona fide value-added services, features, or enhancements provided
+        by a <a href="#participating-referrer" class={termStyles}
+          >Participating Referrer</a
+        > as part of the <a href="#participating-referrer" class={termStyles}
+          >Participating Referrer's</a
+        > services, or promotional or marketing items of nominal value that are not
+        readily convertible to cash (e.g., apparel or branded merchandise).
+      </p>
+      <p class={textStyles}>
+        These rules aim to encourage <a
+          href="#participating-referrer"
+          class={termStyles}>Participating Referrers</a
+        > to invest in building and promoting better products and services for the
+        ENS ecosystem rather than engaging in zero-sum price competition through
+        <a href="#economic-discount" class={termStyles}>Economic Discounts</a>.
+      </p>
+
+      <h3 class={h3Styles} id="code-of-conduct">&quot;Code of Conduct&quot;</h3>
+
+      <p class={textStyles}>
+        The following <a href="#code-of-conduct" class={termStyles}
+          >Code of Conduct</a
+        > must be followed by each <a
+          href="#participating-referrer"
+          class={termStyles}>Participating Referrer</a
+        > throughout the <a href="#edition-period" class={termStyles}
+          >Edition Period</a
+        >:
+      </p>
+      <ol class="list-decimal list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrers</a
+          > must not offer, provide, or arrange any <a
+            href="#economic-discount"
+            class={termStyles}>Economic Discounts</a
+          >, directly or indirectly, and shall not structure any arrangement
+          with the intent or effect of circumventing this restriction.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrers</a
+          > must configure an ENS primary name for their Ethereum Mainnet address
+          to be a valid ENS name.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrers</a
+          > must configure the profile of their primary ENS name with a functioning
+          avatar image and information that clearly identifies the project the
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer</a
+          > uses to produce <a href="#qualified-referral" class={termStyles}
+            >Qualified Referrals</a
+          >. For example, by identifying the website where their referrals
+          originate from.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          <a href="#participating-referrer" class={termStyles}
+            >Participating Referrers</a
+          > must not engage in deceptive marketing, or other abusive promotional
+          practices, including any activities that violate applicable laws (such
+          as anti-spam or consumer protection laws) or other activities that are
+          reasonably likely to harm the reputation or goodwill of ENS.
+        </li>
+      </ol>
+
+      <h3 class={h3Styles} id="disqualified-referrer">
+        &quot;Disqualified Referrer&quot;
+      </h3>
+
+      <p class={textStyles}>
+        A <a href="#disqualified-referrer" class={termStyles}
+          >Disqualified Referrer</a
+        > is a <a href="#participating-referrer" class={termStyles}
+          >Participating Referrer</a
+        > who the <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        >, at their sole discretion, has disqualified from earning any <a
+          href="#award-distribution"
+          class={termStyles}>Award Distributions</a
+        > for <a href="#the-edition" class={termStyles}>The Edition</a>.
+      </p>
+      <p class={textStyles}>
+        The <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        > may disqualify a <a href="#participating-referrer" class={termStyles}>
+          Participating Referrer</a
+        > for reasons including but not limited to:
+      </p>
+      <ol class="list-decimal list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          Violating the <a href="#code-of-conduct" class={termStyles}
+            >Code of Conduct</a
+          >.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          The <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer's</a
+          > project, as identified by the <a
+            href="#edition-administrator"
+            class={termStyles}>Edition Administrator</a
+          > through point 3 of the <a href="#code-of-conduct" class={termStyles}
+            >Code of Conduct</a
+          >, fails to provide sufficient evidence to satisfy the <a
+            href="#edition-administrator"
+            class={termStyles}>Edition Administrator</a
+          > that the preponderance of <a
+            href="#qualified-referral"
+            class={termStyles}>Qualified Referrals</a
+          > produced by the <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer</a
+          > are made by registrants who are unaffiliated with the <a
+            href="#participating-referrer"
+            class={termStyles}>Participating Referrer</a
+          > (not "self-referrals" which effectively represent an <a
+            href="#economic-discount"
+            class={termStyles}>Economic Discount</a
+          > that violates the <a href="#code-of-conduct" class={termStyles}
+            >Code of Conduct</a
+          >). Each <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer</a
+          > is responsible for proactively demonstrating such satisfactory evidence
+          to the <a href="#edition-administrator" class={termStyles}
+            >Edition Administrator</a
+          > during the <a href="#edition-period" class={termStyles}
+            >Edition Period</a
+          > through the <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer's</a
+          > project's website and/or other means.
+        </li>
+      </ol>
+
+      <p class={textStyles}>
+        If a <a href="#participating-referrer" class={termStyles}
+          >Participating Referrer</a
+        > becomes a <a href="#disqualified-referrer" class={termStyles}
+          >Disqualified Referrer</a
+        >:
+      </p>
+      <ul class="list-disc list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          They will be disqualified from earning any <a
+            href="#award-distribution"
+            class={termStyles}>Award Distributions</a
+          > for <a href="#the-edition" class={termStyles}>The Edition</a>.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          Any <a href="#award-distribution" class={termStyles}
+            >Award Distributions</a
+          > that may have been tentatively awarded to the <a
+            href="#participating-referrer"
+            class={termStyles}>Participating Referrer</a
+          > for <a href="#the-edition" class={termStyles}>The Edition</a> prior to
+          becoming a <a href="#disqualified-referrer" class={termStyles}
+            >Disqualified Referrer</a
+          > will be revoked and returned to the <a
+            href="#award-pool"
+            class={termStyles}>Award Pool</a
+          >.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          The <a href="#edition-administrator" class={termStyles}
+            >Edition Administrator</a
+          > will publish a public notice of the disqualification including a short
+          description of the reason for the disqualification.
+        </li>
+      </ul>
+      <p class={textStyles}>
+        When changes are made to the disqualification status of a <a
+          href="#participating-referrer"
+          class={termStyles}>Participating Referrer</a
+        >, the <a href="#referral-award" class={termStyles}>Referral Awards</a> for
+        all <a href="#participating-referrer" class={termStyles}
+          >Participating Referrers</a
+        > will be appropriately recalculated.
+      </p>
+      <p class={textStyles}>
+        The <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        > has the final and sole authority to decide if a <a
+          href="#participating-referrer"
+          class={termStyles}>Participating Referrer</a
+        > is a <a href="#disqualified-referrer" class={termStyles}
+          >Disqualified Referrer</a
+        > or if a disqualification should be removed such that a Participating Referrer
+        might (again) qualify to become a <a
+          href="#qualified-referrer"
+          class={termStyles}>Qualified Referrer</a
+        >. The <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        > has no obligation to offer appeals for disqualifications.
+      </p>
+
+      <h3 class={h3Styles} id="eligible-referrer">
+        &quot;Eligible Referrer&quot;
+      </h3>
+      <p class={textStyles}>
+        An <a href="#eligible-referrer" class={termStyles}>Eligible Referrer</a>
+        is a <a href="#participating-referrer" class={termStyles}
+          >Participating Referrer</a
+        > who is not a <a href="#disqualified-referrer" class={termStyles}
+          >Disqualified Referrer</a
+        >.
+      </p>
+
+      <h3 class={h3Styles} id="qualified-referrer">
+        &quot;Qualified Referrer&quot;
+      </h3>
+      <p class={textStyles}>
+        A <a href="#qualified-referrer" class={termStyles}>Qualified Referrer</a
+        > is an <a href="#eligible-referrer" class={termStyles}
+          >Eligible Referrer</a
+        > with a
+        <a href="#base-revenue-contribution" class={termStyles}
+          >Base Revenue Contribution</a
+        > of $100.00 USDC or more.
+      </p>
+      <p class={textStyles}>
+        Anyone has the potential to become a <a
+          href="#qualified-referrer"
+          class={termStyles}>Qualified Referrer</a
+        >. <a href="#the-edition" class={termStyles}>The Edition</a> is permissionless.
+      </p>
+
+      <h3 class={h3Styles} id="award-pool">&quot;Award Pool&quot;</h3>
+      <p class={textStyles}>
+        An <a href="#award-pool" class={termStyles}>Award Pool</a> of $10,000 USDC
+        is available for distribution as <a
+          href="#referral-award"
+          class={termStyles}>Referral Awards</a
+        >. In the event the <a href="#award-pool" class={termStyles}
+          >Award Pool</a
+        > is not fully exhausted within the <a
+          href="#edition-period"
+          class={termStyles}>Edition Period</a
+        >, the <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        > may allocate the remaining <a href="#award-pool" class={termStyles}
+          >Award Pool</a
+        > to a future edition of the ENS Referral Program.
+      </p>
+
+      <h3 class={h3Styles} id="referral-award">&quot;Referral Award&quot;</h3>
+      <p class={textStyles}>
+        A <a href="#referral-award" class={termStyles}>Referral Award</a> will be
+        calculated for each <a href="#participating-referrer" class={termStyles}
+          >Participating Referrer</a
+        > using the following formula:
+      </p>
+
+      <ol class="list-decimal list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          Initialize the "remaining award pool" to equal the <a
+            href="#award-pool"
+            class={termStyles}>Award Pool</a
+          >.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          Initialize the "total base revenue contribution" of each <a
+            href="#participating-referrer"
+            class={termStyles}>Participating Referrer</a
+          > to be $0.00 USDC.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          Initialize each <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer</a
+          > to not yet be a <a href="#qualified-referrer" class={termStyles}
+            >Qualified Referrer</a
+          >.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          Initialize the <a href="#referral-award" class={termStyles}
+            >Referral Award</a
+          > for each <a href="#participating-referrer" class={termStyles}
+            >Participating Referrer</a
+          > to $0.00 USDC.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          For each <a href="#qualified-referral" class={termStyles}
+            >Qualified Referral</a
+          > (in the order it was executed onchain):
+          <ol class="list-decimal list-outside ml-5 space-y-2">
+            <li class={cn(textStyles, "pl-2")}>
+              Let the "associated referrer" be the <a
+                href="#participating-referrer"
+                class={termStyles}>Participating Referrer</a
+              > who referred the <a
+                href="#qualified-referral"
+                class={termStyles}>Qualified Referral</a
+              >.
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Let the "incremental base revenue contribution" be the incremental <a
+                href="#base-revenue-contribution"
+                class={termStyles}>Base Revenue Contribution</a
+              > from the <a href="#qualified-referral" class={termStyles}
+                >Qualified Referral</a
+              >.
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Update the "total base revenue contribution" of the "associated
+              referrer" by adding the "incremental base revenue contribution".
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              If the "associated referrer" is a <a
+                href="#disqualified-referrer"
+                class={termStyles}>Disqualified Referrer</a
+              > then let the "incremental award" be $0.00 USDC (including for any
+              referrals the "associated referrer" may have made before becoming disqualified).
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Else, if the "total base revenue contribution" is not yet enough
+              for the "associated referrer" to become a <a
+                href="#qualified-referrer"
+                class={termStyles}>Qualified Referrer</a
+              > then let the "incremental award" be $0.00 USDC.
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Else, if the updated "total base revenue contribution" is <i
+                >just now</i
+              > enabling the "associated referrer" to become a <a
+                href="#qualified-referrer"
+                class={termStyles}>Qualified Referrer</a
+              > then let the "incremental award" be the minimum of the "remaining
+              award pool" and 50% of the current "total base revenue contribution"
+              of the "associated referrer" (calculate an incremental award for all
+              the past
+              <a href="#qualified-referral" class={termStyles}
+                >Qualified Referrals</a
+              > made by the "associated referrer" before they became a <a
+                href="#qualified-referrer"
+                class={termStyles}>Qualified Referrer</a
+              >).
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Else, let the "incremental award" be the minimum of the "remaining
+              award pool" and 50% of "incremental base revenue contribution".
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Update the <a href="#referral-award" class={termStyles}
+                >Referral Award</a
+              > for the "associated referrer" by adding the "incremental award".
+            </li>
+            <li class={cn(textStyles, "pl-2")}>
+              Update the "remaining award pool" by subtracting the "incremental
+              award".
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <p class={textStyles}>
+        All <a href="#referral-award" class={termStyles}>Referral Awards</a> are
+        tentative until the <a href="#edition-period" class={termStyles}
+          >Edition Period</a
+        > ends and the <a href="#award-distribution" class={termStyles}
+          >Award Distribution</a
+        > is completed.
+      </p>
+
+      <h3 class={h3Styles} id="award-distribution">
+        &quot;Award Distribution&quot;
+      </h3>
+      <p class={textStyles}>
+        The <a href="#award-distribution" class={termStyles}
+          >Award Distribution</a
+        > is the process of the <a
+          href="#edition-administrator"
+          class={termStyles}>Edition Administrator</a
+        > distributing all <a href="#referral-award" class={termStyles}
+          >Referral Awards</a
+        > to all <a href="#qualified-referrer" class={termStyles}
+          >Qualified Referrers</a
+        >.
+      </p>
+      <p class={textStyles}>
+        After the <a href="#edition-period" class={termStyles}>Edition Period</a
+        > ends, <a href="#the-edition" class={termStyles}>The Edition</a> will enter
+        an "award review" state where the <a
+          href="#edition-administrator"
+          class={termStyles}>Edition Administrator</a
+        > will review all <a href="#referral-award" class={termStyles}
+          >Referral Awards</a
+        >.
+      </p>
+      <p class={textStyles}>
+        The <a href="#award-distribution" class={termStyles}
+          >Award Distribution</a
+        > will be completed by the <a
+          href="#edition-administrator"
+          class={termStyles}>Edition Administrator</a
+        > within 15 days of the <a href="#edition-period" class={termStyles}
+          >Edition Period</a
+        > ending. Once completed, <a href="#the-edition" class={termStyles}
+          >The Edition</a
+        > will enter a "closed" state.
+      </p>
+      <p class={textStyles}>
+        The <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        > will provide publicly auditable records of the <a
+          href="#referral-award"
+          class={termStyles}>Referral Awards</a
+        > and the <a href="#award-distribution" class={termStyles}
+          >Award Distribution</a
+        > to the ENS DAO.
+      </p>
+
+      <h2 class={h2Styles}>Dispute Resolution and Final Authority</h2>
+      <p class={textStyles}>
+        The <a href="#edition-administrator" class={termStyles}
+          >Edition Administrator</a
+        > reserves the exclusive right to interpret, apply, and enforce all rules
+        related to <a href="#the-edition" class={termStyles}>The Edition</a>. In
+        the event of any dispute, ambiguity, or claim arising out of or relating
+        to <a href="#the-edition" class={termStyles}>The Edition</a>, including
+        but not limited to eligibility, qualification, award calculation,
+        participant conduct, or administration, the <a
+          href="#edition-administrator"
+          class={termStyles}>Edition Administrator's</a
+        > determination shall be final, binding, and made in the <a
+          href="#edition-administrator"
+          class={termStyles}>Edition Administrator's</a
+        >
+        sole discretion.
+      </p>
+      <p class={textStyles}>
+        By participating in <a href="#the-edition" class={termStyles}
+          >The Edition</a
+        >, you expressly acknowledge and agree that:
+      </p>
+      <ul class="list-disc list-outside ml-5 space-y-2">
+        <li class={cn(textStyles, "pl-2")}>
+          The <a href="#edition-administrator" class={termStyles}
+            >Edition Administrator</a
+          > may resolve any dispute in any manner it deems appropriate;
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          The <a href="#edition-administrator" class={termStyles}
+            >Edition Administrator</a
+          > has the right to refine the rules of <a
+            href="#the-edition"
+            class={termStyles}>The Edition</a
+          > at any time.
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          No appeal or further review of the <a
+            href="#edition-administrator"
+            class={termStyles}>Edition Administrator</a
+          > decision is possible; and
+        </li>
+        <li class={cn(textStyles, "pl-2")}>
+          Your participation constitutes acceptance of the <a
+            href="#edition-administrator"
+            class={termStyles}>Edition Administrator</a
+          > full and unilateral authority to make final decisions regarding all aspects
+          of
+          <a href="#the-edition" class={termStyles}>The Edition</a>.
+        </li>
+      </ul>
     </div>
   </section>
 </Layout>
-
-<style>
-  .formula-fraction {
-    line-height: 1.2;
-  }
-</style>
