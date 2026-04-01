@@ -1,0 +1,7 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0.5" y="0.5" width="47" height="47" rx="9.5" fill="white" stroke="rgba(0,0,0,0.1)"/>
+  <rect x="0.5" y="0.5" width="47" height="12" rx="9.5" fill="#3B82F6"/>
+  <rect x="0" y="7" width="48" height="5.5" fill="#3B82F6"/>
+  <rect x="7" y="5" width="32" height="1" rx="0.5" fill="#F5F5F5"/>
+  <text x="24" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#6B7280">MAY</text>
+</svg>
