@@ -1,0 +1,57 @@
+[
+  {
+    "slug": "2025-12",
+    "displayName": "ENS Holiday Awards",
+    "rules": {
+      "awardModel": "pie-split",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "10000000000" },
+      "maxQualifiedReferrers": 10,
+      "startTime": 1764547200,
+      "endTime": 1767225599,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-referral-program/editions/2025-12/rules",
+      "areAwardsDistributed": true
+    }
+  },
+  {
+    "slug": "2026-04",
+    "displayName": "April 2026",
+    "rules": {
+      "awardModel": "rev-share-limit",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "10000000000" },
+      "minQualifiedRevenueContribution": { "currency": "USDC", "amount": "100000000" },
+      "qualifiedRevenueShare": 0.5,
+      "startTime": 1775001600,
+      "endTime": 1777593599,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-referral-program/editions/2026-04/rules",
+      "areAwardsDistributed": false,
+      "disqualifications": []
+    }
+  },
+  {
+    "slug": "2026-05",
+    "displayName": "May 2026",
+    "rules": {
+      "awardModel": "rev-share-limit",
+      "totalAwardPoolValue": { "currency": "USDC", "amount": "30000000000" },
+      "minQualifiedRevenueContribution": { "currency": "USDC", "amount": "100000000" },
+      "qualifiedRevenueShare": 0.5,
+      "startTime": 1777593600,
+      "endTime": 1780271999,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-referral-program/editions/2026-05/rules",
+      "areAwardsDistributed": false,
+      "disqualifications": []
+    }
+  }
+]

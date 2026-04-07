@@ -19,12 +19,7 @@ export function LiveReferralFeed({
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   return (
-    <ENSNodeProvider
-      config={config}
-      queryClientOptions={{
-        defaultOptions: { queries: { staleTime: 30 * 1000 } },
-      }}
-    >
+    <ENSNodeProvider config={config}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <FetchAndDisplayRegistrarActionsFeed recordsPerPage={recordsPerPage} title={title} />
       </TooltipProvider>

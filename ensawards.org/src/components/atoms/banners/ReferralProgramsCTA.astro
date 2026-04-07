@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
+import calendarIconApr from "@/assets/calendarIconApr.svg";
+import calendarIconMay from "@/assets/calendarIconMay.svg";
+import calendarIconJun from "@/assets/calendarIconJun.svg";
+
+const editions = [
+  { icon: calendarIconApr, month: "April 2026", prize: "$10,000 prize pool" },
+  { icon: calendarIconMay, month: "May 2026", prize: "$30,000 prize pool" },
+  {
+    icon: calendarIconJun,
+    month: "June 2026+",
+    prize: "Prize pools to be announced!",
+  },
+];
+---
+
+<a
+  href="/ens-referral-program"
+  class="max-w-[1216px] w-full flex flex-col min-[815px]:flex-row items-start
+    bg-[linear-gradient(180deg,rgba(246,220,249,0.2)_0%,rgba(191,195,255,0.2)_100%)]
+    min-[815px]:bg-[linear-gradient(90deg,rgba(246,220,249,0.2)_0%,rgba(191,195,255,0.2)_100%)]
+    hover:bg-[linear-gradient(180deg,rgba(246,220,249,0.3)_0%,rgba(191,195,255,0.3)_100%)]
+    min-[815px]:hover:bg-[linear-gradient(90deg,rgba(246,220,249,0.3)_0%,rgba(191,195,255,0.3)_100%)]
+    hover:border-gray-300 hover:shadow-xs
+    transition-all duration-200
+    border border-[#e5e5e5] rounded-2xl
+    px-5 pt-4 pb-5 min-[815px]:px-7 min-[815px]:pt-6 min-[815px]:pb-7 gap-5 min-[815px]:gap-10">
+  <div class="flex flex-col gap-5 justify-center">
+    <div class="flex flex-col gap-2 min-[815px]:gap-1">
+      <h4
+        class="text-xl min-[815px]:text-2xl font-semibold leading-normal text-foreground">
+        Upgrade your ENS integration with referrals
+      </h4>
+      <p class="text-base font-normal leading-normal text-muted-foreground">
+        Benefits for you, your community, and for ENS.
+      </p>
+    </div>
+    <span
+      class={cn(
+        shadcnButtonVariants({
+          variant: "default",
+          size: "default",
+          className: "w-fit h-10 rounded-full cursor-pointer",
+        }),
+      )}>
+      Earn up to a 50% revenue share
+    </span>
+  </div>
+
+  <div
+    class="w-full h-px min-[815px]:w-px min-[815px]:h-auto min-[815px]:self-stretch bg-[#d9d9d9]">
+  </div>
+
+  <div class="flex flex-col min-[815px]:flex-row gap-6 min-[815px]:gap-7">
+    {
+      editions.map(({ icon, month, prize }) => (
+        <div class="flex flex-row min-[815px]:flex-col items-center min-[815px]:items-start gap-4">
+          <Image src={icon} alt={month} class="w-12 h-12 shrink-0" />
+          <div class="flex flex-col gap-0.5">
+            <p class="text-lg font-semibold leading-6 text-black">{month}</p>
+            <p class="text-base font-normal leading-normal text-gray-500">
+              {prize}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</a>

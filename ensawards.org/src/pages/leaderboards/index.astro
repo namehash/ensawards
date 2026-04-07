@@ -1,4 +1,5 @@
 ---
+import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
 import LeaderboardSnippetCard from "@/components/atoms/cards/LeaderboardSnippetCard.astro";
 import ItemsList from "@/components/molecules/ItemsList.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
@@ -14,6 +15,7 @@ import { getProtocolById } from "data/protocols/utils.ts";
 import { calculateAppEnsAwardsScore } from "data/apps/utils.ts";
 import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList.tsx";
 import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benchmarks-utils.ts";
+import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 ---
 
 <Layout
@@ -29,10 +31,10 @@ import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benc
     header="ENS leaderboards"
     description="Explore how top ENS advocates contribute to the growth of ENS."
     customImage={{
-      source: "/src/assets/leaderboardsHeroImage.png",
+      source: LeaderboardsHeroImage,
       width: 371,
-      height: 372,
-      styles: "-top-0 right-0",
+      height: 277,
+      styles: "-top-10 right-0",
     }}
   />
   <section
@@ -141,7 +143,11 @@ import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benc
       }
     </ItemsList>
     <ItemsList header="Referrers" containerStyles="sm:gap-6">
-      <ReferralProgramEditionsList client:load />
+      <ReferralProgramEditionsList
+        client:load
+        statusesToHide={[ReferralProgramEditionStatuses.Scheduled]}
+        simplifiedVariant
+      />
     </ItemsList>
   </section>
 </Layout>

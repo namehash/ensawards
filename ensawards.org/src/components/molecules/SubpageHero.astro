@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 import SubpageHeroImage from "@/assets/subpageHeroImage.png";
@@ -18,7 +17,7 @@ export interface SubpageHeroProps {
   description?: string;
   breadcrumbs?: Breadcrumb[];
   customImage?: {
-    source: string;
+    source: ImageMetadata;
     width: number;
     height: number;
     alt?: string;
@@ -30,8 +29,6 @@ export interface SubpageHeroProps {
     additionalElementsContainer?: string;
   };
 }
-
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 
 const {
   header,
@@ -75,7 +72,7 @@ const {
           </h1>
           {
             description && (
-              <p class="w-fit text-sm sm:text-base leading-6 sm:leading-7 font-normal text-gray-400">
+              <p class="w-fit max-w-[750px] text-sm sm:text-base leading-6 sm:leading-7 font-normal text-gray-400">
                 {description} <slot name="technicalSectionAnchor" />
               </p>
             )
@@ -85,7 +82,7 @@ const {
       </div>
       {
         additionalElements && (
-          <div class="block sm:hidden bg-white/15 h-[1px] self-stretch" />
+          <div class="block md:hidden bg-white/15 h-[1px] self-stretch" />
         )
       }
       {
@@ -128,10 +125,9 @@ const {
       }
       <slot name="largerHeroItem" />
     </div>
-    <Image
-      src={customImage ? images[customImage.source]() : SubpageHeroImage}
+    <img
+      src={customImage?.source.src ?? SubpageHeroImage.src}
       alt={customImage?.alt ? customImage.alt : header}
-      quality={100}
       width={customImage ? customImage.width : 948}
       height={customImage ? customImage.height : 848}
       class={cn(

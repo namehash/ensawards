@@ -30,7 +30,7 @@ export const LastUpdateTime = ({ timestamp, className }: LastUpdateTimeProps) =>
     return (
       <div className="inline-flex items-center gap-2 py-1 rounded-full">
         <p className={cn("text-sm text-muted-foreground leading-normal font-normal", className)}>
-          Last updated:
+          Last updated
         </p>
         <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 py-1 pl-3 pr-2.5">
           <span className="size-[7px] shrink-0 rounded-full bg-emerald-500" />
@@ -50,7 +50,7 @@ export const LastUpdateTime = ({ timestamp, className }: LastUpdateTimeProps) =>
   return (
     <div className="inline-flex items-center gap-2 py-1 rounded-full">
       <p className={cn("text-sm text-muted-foreground leading-normal font-normal", className)}>
-        Last updated:
+        Last updated
       </p>
       <span className="size-[7px] shrink-0 rounded-full bg-neutral-400" />
       <p className={cn("text-sm text-black leading-normal font-normal", className)}>
@@ -65,7 +65,7 @@ interface LastUpdateTimeLoadingProps {
 }
 export const LastUpdateTimeLoading = ({ className }: LastUpdateTimeLoadingProps) => (
   <div className={cn("inline-flex items-center gap-2 py-1 rounded-full", className)}>
-    <p className={cn("text-sm text-muted-foreground leading-normal font-normal")}>Last updated:</p>
+    <p className={cn("text-sm text-muted-foreground leading-normal font-normal")}>Last updated</p>
     <span className="size-[7px] shrink-0 rounded-full bg-gray-200" />
     <div className="w-[85px] h-5 flex items-center">
       <Skeleton className="w-full h-1 rounded-full bg-gray-200" />
