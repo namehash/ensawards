@@ -1,5 +1,6 @@
 import { type ReferrerRank } from "@namehash/ens-referrals/v1";
 import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
+import { CircleAlert as WarningIcon } from "lucide-react";
 import type { Address } from "viem";
 
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
@@ -99,6 +100,7 @@ interface ReferrerCardHeaderProps {
   rank: ReferrerRank;
   rankTooltipText: string;
   isQualified: boolean;
+  warning?: string;
 }
 
 export const ReferrerCardHeader = ({
@@ -106,6 +108,7 @@ export const ReferrerCardHeader = ({
   rank,
   rankTooltipText,
   isQualified,
+  warning,
 }: ReferrerCardHeaderProps) => {
   const namespaceId = DEFAULT_ENS_NAMESPACE;
   const referrerIdentity = buildUnresolvedIdentity(
@@ -115,6 +118,19 @@ export const ReferrerCardHeader = ({
   );
 
   const advocateDetailsUrl = getAdvocateDetailsUrl(referrer);
+
+  const referrerLabel = (
+    <div className="flex flex-row justify-start items-start gap-1">
+      <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
+        Referrer
+      </p>
+      {warning && (
+        <GenericTooltip content={<p className="max-w-[220px]">{warning}</p>} tooltipOffset={2}>
+          <WarningIcon className="w-4.5 h-4.5 text-orange-600 shrink-0" />
+        </GenericTooltip>
+      )}
+    </div>
+  );
 
   return (
     <>
@@ -134,9 +150,7 @@ export const ReferrerCardHeader = ({
             }}
           />
           <div className="sm:min-w-[170px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-            <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
-              Referrer
-            </p>
+            {referrerLabel}
             <ResolveAndDisplayIdentity
               identity={referrerIdentity}
               namespaceId={namespaceId}
@@ -173,9 +187,7 @@ export const ReferrerCardHeader = ({
         />
       </div>
       <div className="min-w-[120px] sm:hidden flex flex-row flex-nowrap justify-between items-start self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
-          Referrer
-        </p>
+        {referrerLabel}
         <ResolveAndDisplayIdentity
           identity={referrerIdentity}
           namespaceId={namespaceId}

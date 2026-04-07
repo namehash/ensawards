@@ -1,6 +1,8 @@
 import {
   type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
+  type ReferralProgramEditionSlug,
+  type ReferralProgramEditionSummary,
   type ReferrerLeaderboardPageParams,
   type ReferrerLeaderboardPagePieSplit,
   type ReferrerLeaderboardPageRevShareLimit,
@@ -20,7 +22,7 @@ export interface DisplayReferrerLeaderboardPageProps {
     | ReferrerLeaderboardPagePieSplit
     | null;
   isLoading: boolean;
-  expectedAwardModel: ReferralProgramAwardModel;
+  editionSummary: ReferralProgramEditionSummary | null;
   leaderboardPageFetchError?: ReactElement;
   paginationParams?: Required<ReferrerLeaderboardPageParams>;
 }
@@ -32,7 +34,7 @@ export function DisplayReferrerLeaderboardPage({
   leaderboardPageData,
   isLoading,
   leaderboardPageFetchError,
-  expectedAwardModel,
+  editionSummary,
   paginationParams = {
     page: 1,
     recordsPerPage: 5,
@@ -48,7 +50,10 @@ export function DisplayReferrerLeaderboardPage({
     return (
       <div className="w-full h-fit flex flex-col flex-nowrap justify-start items-end gap-2 sm:gap-3">
         {[...Array(paginationParams.recordsPerPage).keys()].map((elem) => {
-          if (expectedAwardModel === ReferralProgramAwardModels.PieSplit) {
+          if (
+            editionSummary === null ||
+            editionSummary.awardModel === ReferralProgramAwardModels.PieSplit
+          ) {
             return (
               <ReferrerCardPieSplitLoading
                 key={`Referrer-loading-${pageOffset + elem}`}
@@ -101,6 +106,7 @@ export function DisplayReferrerLeaderboardPage({
             key={`Referrer-${referrer.referrer}`}
             referrer={referrer}
             editionRules={leaderboardPageData.rules}
+            editionSlug={editionSummary?.slug}
           />
         ))}
     </div>

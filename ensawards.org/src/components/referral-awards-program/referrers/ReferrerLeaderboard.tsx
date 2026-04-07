@@ -203,7 +203,7 @@ export function ReferrerLeaderboard({
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardData}
             isLoading={isLoading}
-            expectedAwardModel={referralProgramEditionSummaryData.awardModel}
+            editionSummary={referralProgramEditionSummaryData}
             leaderboardPageFetchError={
               fetchErrorMessage ? (
                 <ErrorInfo

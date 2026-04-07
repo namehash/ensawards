@@ -1,5 +1,6 @@
 import type {
   AwardedReferrerMetricsRevShareLimit,
+  ReferralProgramEditionSlug,
   ReferralProgramRulesRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import { BASE_REVENUE_CONTRIBUTION_PER_YEAR, SECONDS_PER_YEAR } from "@namehash/ens-referrals/v1";
@@ -12,6 +13,7 @@ import {
   ReferrerCardHeader,
 } from "@/components/atoms/cards/referrerCard/shared";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings/index";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { currencyFormatter } from "@/utils/textModifications";
@@ -19,6 +21,7 @@ import { currencyFormatter } from "@/utils/textModifications";
 export interface ReferrerCardRevShareLimitProps {
   referrer: AwardedReferrerMetricsRevShareLimit;
   editionRules: ReferralProgramRulesRevShareLimit;
+  editionSlug?: ReferralProgramEditionSlug;
 }
 
 /**
@@ -26,7 +29,15 @@ export interface ReferrerCardRevShareLimitProps {
  *
  * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareLimit} award model.
  */
-function ReferrerCardRevShareLimit({ referrer, editionRules }: ReferrerCardRevShareLimitProps) {
+function ReferrerCardRevShareLimit({
+  referrer,
+  editionRules,
+  editionSlug,
+}: ReferrerCardRevShareLimitProps) {
+  const possibleWarning = editionSlug
+    ? REFERRAL_PROGRAM_WARNINGS.get(editionSlug)?.get(referrer.referrer)
+    : undefined;
+
   return (
     <div
       className={cn(
@@ -39,11 +50,12 @@ function ReferrerCardRevShareLimit({ referrer, editionRules }: ReferrerCardRevSh
         rank={referrer.rank}
         rankTooltipText={`Rank ${referrer.rank}`}
         isQualified={referrer.isQualified}
+        warning={!referrer.isAdminDisqualified ? possibleWarning : undefined}
       />
       <TotalRevenueContributionField referrer={referrer} />
       <BaseRevenueContributionField referrer={referrer} />
       <RevenueShareField referrer={referrer} editionRules={editionRules} />
-      <TentativeAwardsField referrer={referrer} editionRules={editionRules} />
+      <TentativeAwardsField referrer={referrer} />
     </div>
   );
 }
@@ -122,7 +134,10 @@ export const BaseRevenueContributionField = ({
   );
 };
 
-export const RevenueShareField = ({ referrer, editionRules }: ReferrerCardRevShareLimitProps) => {
+export const RevenueShareField = ({
+  referrer,
+  editionRules,
+}: Omit<ReferrerCardRevShareLimitProps, "editionSlug">) => {
   const minQualifiedRevenueContributionInUSD = currencyFormatter.format(
     parseReferralProgramCurrency(editionRules.minQualifiedRevenueContribution),
   );
@@ -196,8 +211,9 @@ const DisqualifiedFieldContent = ({
 
 export const TentativeAwardsField = ({
   referrer,
-  editionRules,
-}: ReferrerCardRevShareLimitProps) => {
+}: {
+  referrer: AwardedReferrerMetricsRevShareLimit;
+}) => {
   return (
     <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
       <GenericTooltip
