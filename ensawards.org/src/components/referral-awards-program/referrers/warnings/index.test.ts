@@ -1,32 +1,20 @@
 import {
-  deserializeReferralProgramEditionConfigSetArray,
   REFERRAL_PROGRAM_EDITION_SLUG_PATTERN,
   type ReferralProgramEditionSlug,
 } from "@namehash/ens-referrals/v1";
+import productionEditions from "public/production-editions.json";
 import { type Address, isAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
 import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings";
-
-const PRODUCTION_EDITIONS_URL = "https://ensawards.org/production-editions.json";
-
-async function fetchProductionEditionSlugs(): Promise<ReferralProgramEditionSlug[] | null> {
-  // Intentionally let all errors throw.
-  const response = await fetch(PRODUCTION_EDITIONS_URL);
-
-  if (!response.ok) throw new Error("Failed to fetch production edition slugs}");
-
-  return deserializeReferralProgramEditionConfigSetArray(await response.json()).map(
-    (editionConfig) => editionConfig.slug,
-  );
-}
 
 describe("REFERRAL_PROGRAM_WARNINGS", () => {
   const data = REFERRAL_PROGRAM_WARNINGS;
 
   it("Should have valid referral program edition slugs", () => {
     const editionSlugs: ReferralProgramEditionSlug[] = Array.from(data.keys());
-    const productuionEditionSlugs = editionSlugs.length > 0 ? fetchProductionEditionSlugs() : null;
+    const productionEditionSlugs =
+      editionSlugs.length > 0 ? productionEditions.map((edition) => edition.slug) : null;
 
     editionSlugs.forEach((slug) => {
       expect(slug, `edition "${slug}" should match the slug pattern`).toMatch(
@@ -34,9 +22,9 @@ describe("REFERRAL_PROGRAM_WARNINGS", () => {
       );
 
       expect(
-        productuionEditionSlugs,
+        productionEditionSlugs,
         `edition "${slug}" should be present in the production editions list`,
-      ).resolves.toContain(slug);
+      ).toContain(slug);
     });
   });
 
@@ -52,7 +40,7 @@ describe("REFERRAL_PROGRAM_WARNINGS", () => {
 
   it("Should have non-empty warning messages", () => {
     data.forEach((referrerWarningsMap) => {
-      referrerWarningsMap.forEach(([address, warning]) => {
+      referrerWarningsMap.forEach((warning, address) => {
         expect(warning.length > 0, `Warning message for address ${address} is empty`).toBe(true);
       });
     });

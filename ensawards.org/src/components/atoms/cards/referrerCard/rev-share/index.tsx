@@ -13,7 +13,7 @@ import {
   ReferrerCardHeader,
 } from "@/components/atoms/cards/referrerCard/shared";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings/index";
+import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { currencyFormatter } from "@/utils/textModifications";
