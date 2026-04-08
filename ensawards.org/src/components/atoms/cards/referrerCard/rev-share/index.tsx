@@ -81,11 +81,11 @@ export const TotalRevenueContributionField = ({
           </p>
         }
       >
-        <p className="text-muted-foreground text-sm leading-normal font-normal">
+        <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
           Total revenue contribution
         </p>
       </GenericTooltip>
-      <p className="text-sm leading-normal font-medium text-black">
+      <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
         Ξ {ethFormatter.format(parseReferralProgramCurrency(referrer.totalRevenueContribution))}
       </p>
     </div>
@@ -123,11 +123,11 @@ export const BaseRevenueContributionField = ({
           </p>
         }
       >
-        <p className="text-muted-foreground text-sm leading-normal font-normal">
+        <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
           Base revenue contribution
         </p>
       </GenericTooltip>
-      <p className="text-sm leading-normal font-medium text-black">
+      <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
         US {userFacingTotalBaseRevenueContribution}
       </p>
     </div>

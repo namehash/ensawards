@@ -1,7 +1,5 @@
 import {
-  type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
-  type ReferralProgramEditionSlug,
   type ReferralProgramEditionSummary,
   type ReferrerLeaderboardPageParams,
   type ReferrerLeaderboardPagePieSplit,

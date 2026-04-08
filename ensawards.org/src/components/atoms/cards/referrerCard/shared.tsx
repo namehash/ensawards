@@ -126,7 +126,7 @@ export const ReferrerCardHeader = ({
       </p>
       {warning && (
         <GenericTooltip content={<p className="max-w-[220px]">{warning}</p>} tooltipOffset={2}>
-          <WarningIcon className="w-4.5 h-4.5 text-orange-600 shrink-0" />
+          <WarningIcon fill="#DC2626" className="w-4.5 h-4.5 text-white shrink-0" />
         </GenericTooltip>
       )}
     </div>
