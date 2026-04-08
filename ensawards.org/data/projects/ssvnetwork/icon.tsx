@@ -1,7 +1,7 @@
 import React from "react";
 
 const Icon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="none" {...props}>
     <path fill="#2DB1FF"
         d="m204.141 337.252 37.927-46.64c3.96-4.869 11.415-4.869 15.375 0l37.928 46.64a9.856 9.856 0 0 1 0 12.445l-37.928 46.64c-3.96 4.87-11.415 4.87-15.375 0l-37.927-46.64a9.856 9.856 0 0 1 0-12.445Z"
         opacity=".62" />
