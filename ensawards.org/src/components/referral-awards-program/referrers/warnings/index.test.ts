@@ -1,4 +1,5 @@
 import {
+  deserializeReferralProgramEditionConfigSetArray,
   REFERRAL_PROGRAM_EDITION_SLUG_PATTERN,
   type ReferralProgramEditionSlug,
 } from "@namehash/ens-referrals/v1";
@@ -7,16 +8,35 @@ import { describe, expect, it } from "vitest";
 
 import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings";
 
+const PRODUCTION_EDITIONS_URL = "https://ensawards.org/production-editions.json";
+
+async function fetchProductionEditionSlugs(): Promise<ReferralProgramEditionSlug[] | null> {
+  // Intentionally let all errors throw.
+  const response = await fetch(PRODUCTION_EDITIONS_URL);
+
+  if (!response.ok) throw new Error("Failed to fetch production edition slugs}");
+
+  return deserializeReferralProgramEditionConfigSetArray(await response.json()).map(
+    (editionConfig) => editionConfig.slug,
+  );
+}
+
 describe("REFERRAL_PROGRAM_WARNINGS", () => {
   const data = REFERRAL_PROGRAM_WARNINGS;
 
   it("Should have valid referral program edition slugs", () => {
     const editionSlugs: ReferralProgramEditionSlug[] = Array.from(data.keys());
+    const productuionEditionSlugs = editionSlugs.length > 0 ? fetchProductionEditionSlugs() : null;
 
     editionSlugs.forEach((slug) => {
       expect(slug, `edition "${slug}" should match the slug pattern`).toMatch(
         REFERRAL_PROGRAM_EDITION_SLUG_PATTERN,
       );
+
+      expect(
+        productuionEditionSlugs,
+        `edition "${slug}" should be present in the production editions list`,
+      ).resolves.toContain(slug);
     });
   });
 
