@@ -2,14 +2,13 @@ import { type EnsAwardsScore } from "@/utils/types";
 
 import { ENS_BEST_PRACTICES } from "../ens-best-practices";
 import { type BestPracticeApp, BestPracticeTypes } from "../ens-best-practices/types.ts";
-import {
-  type AppBenchmarkCompleted,
-  type AppBenchmarkPending,
-  BenchmarkResult,
-  type BenchmarkStatus,
-  BenchmarkStatuses,
-  type EffectiveAppBenchmark,
+import type {
+  AppBenchmarkCompleted,
+  AppBenchmarkPending,
+  BenchmarkStatus,
+  EffectiveAppBenchmark,
 } from "./benchmarks-types.ts";
+import { BenchmarkResult, BenchmarkStatuses } from "./benchmarks-types.ts";
 import { type AppType } from "./types";
 
 /**

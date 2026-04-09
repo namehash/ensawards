@@ -1,9 +1,9 @@
 export function openOverlay(overlayId: string) {
   const scrollValue = window.scrollY;
-  const overlay = document.querySelector(overlayId);
+  const overlay = document.querySelector(`#${overlayId}`);
 
   if (overlay === null) {
-    throw new Error(`${overlayId} is not a valid overlay identifier`);
+    throw new Error(`#${overlayId} is not a valid overlay identifier`);
   }
 
   overlay.classList.remove("hidden");

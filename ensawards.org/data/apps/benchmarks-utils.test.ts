@@ -70,6 +70,11 @@ const mockFailingReverseResolutionWeightBenchmark = createMockBenchmark(
   BenchmarkResult.Fail,
 );
 
+const mockPartialReverseResolutionWeightBenchmark = createMockBenchmark(
+  mockResolvePrimaryNameBestPractice,
+  BenchmarkResult.PartialPass,
+);
+
 const mockPendingReverseResolutionBenchmark = {
   status: BenchmarkStatuses.Pending,
   bestPractice: mockResolvePrimaryNameBestPractice,
@@ -195,10 +200,12 @@ describe("benchmarks-utils", () => {
         mockFailingReverseResolutionBenchmark,
         mockPassingReverseResolutionBenchmark,
         mockFailingReverseResolutionWeightBenchmark,
+        mockPartialReverseResolutionWeightBenchmark,
       ];
 
       const expectedOutput = [
         mockPassingReverseResolutionBenchmark,
+        mockPartialReverseResolutionWeightBenchmark,
         mockFailingReverseResolutionBenchmark,
         mockFailingReverseResolutionWeightBenchmark,
         mockPendingReverseResolutionBenchmark,

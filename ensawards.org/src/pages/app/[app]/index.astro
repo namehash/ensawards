@@ -141,7 +141,7 @@ if (appToDisplay !== undefined) {
                         {group[0].bestPractice.category.name}
                       </span>
                     </div>
-                    {group
+                    {[...group]
                       .sort((a, b) => compareBenchmarks(a, b))
                       .map((benchmark: EffectiveAppBenchmark) => (
                         <BenchmarkResultCard

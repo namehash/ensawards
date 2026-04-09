@@ -17,7 +17,9 @@ export const AppliesToBadges = ({ bestPractice }: { bestPractice: BestPractice }
   return (
     <div className="flex flex-row justify-start items-center gap-1">
       {bestPractice.appliesTo.map((target) => (
-        <span className={appliesToBadgeStyles}>{pluralizeBestPracticeTarget(target)}</span>
+        <span key={`applies-to-${target}-badge`} className={appliesToBadgeStyles}>
+          {pluralizeBestPracticeTarget(target)}
+        </span>
       ))}
     </div>
   );

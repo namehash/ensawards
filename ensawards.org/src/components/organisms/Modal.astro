@@ -1,7 +1,4 @@
 ---
-import { ContactForm } from "../molecules/contact-form/ContactForm";
-import { ContactFormField, PossibleSuggestions } from "../molecules/contact-form/types";
-
 export interface ModalProps {
   overlayId: string;
 }
@@ -33,7 +30,11 @@ const { overlayId }: ModalProps = Astro.props;
 
   function enableAlternativeClosings(overlayId: string) {
     const overlay = document.querySelector(`#${overlayId}`);
-    const content = overlay.querySelector(`#${overlayId}-modal-content`);
+    const content = overlay
+      ? overlay.querySelector(`#${overlayId}-modal-content`)
+      : null;
+
+    if (!overlay || !content) return;
 
     // Close on click outside
     overlay.addEventListener("click", (e) => {
@@ -41,11 +42,10 @@ const { overlayId }: ModalProps = Astro.props;
     });
 
     // Close on Escape key
-    // Currently this event fires multiple cause there are multiple overlays always in DOM
-    // TODO: for now it's fixed in a 'hacky' way in the closeOverlay function
-    // - figure out if there is a more elegant way to do it
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
+        const overlay = document.querySelector(`#${overlayId}`);
+        if (!overlay || overlay.classList.contains("hidden")) return;
         e.preventDefault();
         closeOverlay(overlayId);
       }

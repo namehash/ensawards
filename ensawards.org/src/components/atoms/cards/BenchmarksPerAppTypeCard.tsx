@@ -7,11 +7,13 @@ import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultB
 import { benchmarkResultToBadgeStyles } from "@/utils/styles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
+export interface AppWithBenchmark {
+  app: App;
+  benchmark: EffectiveAppBenchmark;
+}
+
 export interface BenchmarksPerAppTypeCardProps {
-  appsWithBenchmark: {
-    app: App;
-    benchmark: EffectiveAppBenchmark;
-  }[];
+  appsWithBenchmark: AppWithBenchmark[];
 }
 
 export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerAppTypeCardProps) {
@@ -48,8 +50,8 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
               <a
                 href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
                 className="flex w-full items-center gap-3 py-4 p-[10px] rounded-xl transition-colors duration-200 hover:bg-[#F5F5F5]"
-                onMouseOver={() => setHoveredItem(index)}
-                onMouseOut={() => setHoveredItem(null)}
+                onMouseEnter={() => setHoveredItem(index)}
+                onMouseLeave={() => setHoveredItem(null)}
               >
                 <AppIcon className="h-8 w-8 shrink-0 rounded-md" />
                 <span className="min-w-0 flex-1 text-base leading-normal font-semibold text-neutral-900">

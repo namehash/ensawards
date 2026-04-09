@@ -128,11 +128,7 @@ if (resolvedProtocol) {
           whatsSuggested="contract"
           allContributions={protocolContractsDataContributions}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}>
-          <SuggestionCardLoading
-            slot="fallback"
-            sidebarVariant
-            whatsSuggested="contract"
-          />
+          <SuggestionCardLoading slot="fallback" whatsSuggested="contract" />
         </SuggestionCard>
         <ItemsList
           header="Smart contract naming"

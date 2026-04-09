@@ -11,7 +11,10 @@ import {
 } from "data/apps/benchmarks-utils";
 import { SuggestionCard, SuggestionCardLoading } from "../atoms/cards/SuggestionCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
-import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
+import {
+  BenchmarksPerAppTypeCard,
+  type AppWithBenchmark,
+} from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
 import { type Contribution } from "data/contributors/types";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
@@ -38,7 +41,8 @@ const appsWithBenchmarks = APPS.map((app) => {
 
 // Filter out apps that don't have a benchmark for this best practice
 const appsWithValidBenchmarks = appsWithBenchmarks.filter(
-  ({ benchmark }) => benchmark !== undefined,
+  (appWithBenchmark): appWithBenchmark is AppWithBenchmark =>
+    appWithBenchmark.benchmark !== undefined,
 );
 
 // Sort benchmark results
@@ -54,12 +58,11 @@ const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
 
 const appSupport = calculateAppSupport(bestPractice);
 
-const benchmarkDataContributions: Contribution[] = appsWithValidBenchmarks
-  .filter(
-    ({ benchmark }): benchmark is AppBenchmarkCompleted =>
-      benchmark.status === BenchmarkStatuses.Completed,
-  )
-  .flatMap(({ benchmark }) => benchmark.contributions);
+const benchmarkDataContributions: Contribution[] = appsWithValidBenchmarks.flatMap(
+  ({ benchmark }) =>
+    benchmark.status === BenchmarkStatuses.Completed ? benchmark.contributions : [],
+);
+
 const allContributions: Contribution[] = [
   ...bestPractice.contributions,
   ...benchmarkDataContributions,

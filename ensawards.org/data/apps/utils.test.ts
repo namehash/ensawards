@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
+  type AppBenchmarkPending,
   BenchmarkResult,
   BenchmarkStatuses,
   type EffectiveAppBenchmark,
@@ -91,6 +92,10 @@ const mockAppsForBenchmarkAggregation = [
     ...mockMetamaskApp,
     benchmarks: [
       createMockBenchmark(mockReverseResolutionBestPractice, BenchmarkResult.PartialPass),
+      {
+        bestPractice: mockDisplayProfilesBestPractice,
+        status: BenchmarkStatuses.Pending,
+      } as AppBenchmarkPending,
     ],
   },
   {
@@ -189,6 +194,13 @@ describe("App utils", () => {
     it("Should return the number of apps that passed or partially passed the best practice benchmark", () => {
       expect(calculateAppsPassed(mockReverseResolutionBestPractice)).toEqual(2);
     });
+
+    it("Should exclude all pending benchmarks from the calculation", () => {
+      expect(
+        calculateAppsPassed(mockDisplayProfilesBestPractice),
+        "calculateAppsPassed doesn't exclude pending benchmarks",
+      ).toEqual(1);
+    });
   });
 
   describe("calculateAppSupport", () => {
@@ -204,6 +216,13 @@ describe("App utils", () => {
       setMockApps(mockRainbowApp);
 
       expect(calculateAppSupport(mockReverseResolutionBestPractice)).toEqual(0);
+    });
+
+    it("Should exclude pending benchmarks from the calculation", () => {
+      expect(
+        calculateAppSupport(mockDisplayProfilesBestPractice),
+        "calculateAppSupport doesn't exclude pending benchmarks",
+      ).toEqual(100);
     });
   });
 

@@ -84,7 +84,7 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
 
       {isOpen && (
         <div className="flex w-full flex-col gap-4 pt-4">
-          {group
+          {[...group]
             .sort((a, b) => compareBenchmarks(a, b))
             .map((benchmark) => (
               <a

@@ -1,15 +1,15 @@
 ---
-import AppBestPracticeDetails from "../../../components/organisms/AppBestPracticeDetails.astro";
-import DataLoadingError from "../../../components/organisms/DataLoadingError.astro";
-import ProtocolBestPracticeDetails from "../../../components/organisms/ProtocolBestPracticeDetails.astro";
-import Layout from "../../../layouts/Layout.astro";
-import { BestPracticeTypes } from "../../../../data/ens-best-practices/types.ts";
-import TechnicalInfoAnchorScript from "../../../components/atoms/TechnicalInfoAnchorScript.astro";
-import { BEST_PRACTICE_CATEGORIES } from "../../../../data/ens-best-practices";
+import AppBestPracticeDetails from "@/components/organisms/AppBestPracticeDetails.astro";
+import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
+import ProtocolBestPracticeDetails from "@/components/organisms/ProtocolBestPracticeDetails.astro";
+import Layout from "@/layouts/Layout.astro";
+import { BestPracticeTypes } from "data/ens-best-practices/types.ts";
+import TechnicalInfoAnchorScript from "@/components/atoms/TechnicalInfoAnchorScript.astro";
+import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import {
   getBestPracticesByCategory,
   getBestPracticeBySlug,
-} from "../../../../data/ens-best-practices/utils.ts";
+} from "data/ens-best-practices/utils.ts";
 
 export function getStaticPaths() {
   const staticPaths = [];

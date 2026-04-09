@@ -6,8 +6,11 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import contributors from "../../contributors";
 import displayNamedSmartContractsL2 from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
 import displayNamedSmartContractsMainnet from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
-import type { AppBenchmarkCompleted } from "../benchmarks-types.ts";
-import { BenchmarkResult, BenchmarkStatuses } from "../benchmarks-types.ts";
+import {
+  type AppBenchmarkCompleted,
+  BenchmarkResult,
+  BenchmarkStatuses,
+} from "../benchmarks-types.ts";
 
 const benchmarks: AppBenchmarkCompleted[] = [
   // {

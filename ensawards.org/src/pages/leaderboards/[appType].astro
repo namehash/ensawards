@@ -13,7 +13,7 @@ import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "data/apps/utils.ts";
 import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
-import { BenchmarkStatuses } from "data/apps/benchmarks-types";
+import { BenchmarkStatuses, type AppBenchmarkCompleted } from "data/apps/benchmarks-types";
 import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benchmarks-utils.ts";
 
 export function getStaticPaths() {
