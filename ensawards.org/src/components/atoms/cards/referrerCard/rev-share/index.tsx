@@ -4,7 +4,7 @@ import type {
   ReferralProgramRulesRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import { BASE_REVENUE_CONTRIBUTION_PER_YEAR, SECONDS_PER_YEAR } from "@namehash/ens-referrals/v1";
-import { TriangleAlert as DisqualifiedIcon } from "lucide-react";
+import { TriangleAlert as DisqualifiedIcon, CircleAlert as WarningIcon } from "lucide-react";
 import { memo } from "react";
 
 import {
@@ -34,10 +34,6 @@ function ReferrerCardRevShareLimit({
   editionRules,
   editionSlug,
 }: ReferrerCardRevShareLimitProps) {
-  const possibleWarning = editionSlug
-    ? REFERRAL_PROGRAM_WARNINGS.get(editionSlug)?.get(referrer.referrer)
-    : undefined;
-
   return (
     <div
       className={cn(
@@ -50,11 +46,14 @@ function ReferrerCardRevShareLimit({
         rank={referrer.rank}
         rankTooltipText={`Rank ${referrer.rank}`}
         isQualified={referrer.isQualified}
-        warning={!referrer.isAdminDisqualified ? possibleWarning : undefined}
       />
       <TotalRevenueContributionField referrer={referrer} />
       <BaseRevenueContributionField referrer={referrer} />
-      <RevenueShareField referrer={referrer} editionRules={editionRules} />
+      <RevenueShareField
+        referrer={referrer}
+        editionRules={editionRules}
+        editionSlug={editionSlug}
+      />
       <TentativeAwardsField referrer={referrer} />
     </div>
   );
@@ -137,7 +136,12 @@ export const BaseRevenueContributionField = ({
 export const RevenueShareField = ({
   referrer,
   editionRules,
-}: Omit<ReferrerCardRevShareLimitProps, "editionSlug">) => {
+  editionSlug,
+}: ReferrerCardRevShareLimitProps) => {
+  const possibleWarning = editionSlug
+    ? REFERRAL_PROGRAM_WARNINGS.get(editionSlug)?.get(referrer.referrer)
+    : undefined;
+
   const minQualifiedRevenueContributionInUSD = currencyFormatter.format(
     parseReferralProgramCurrency(editionRules.minQualifiedRevenueContribution),
   );
@@ -168,6 +172,7 @@ export const RevenueShareField = ({
       className={cn(
         "text-sm font-normal leading-normal max-sm:text-right",
         referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
+        possibleWarning && "text-orange-600",
       )}
     >
       {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more base revenue"}
@@ -176,11 +181,29 @@ export const RevenueShareField = ({
 
   return (
     <div className="sm:min-w-[195px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-      <GenericTooltip tooltipOffset={0} content={<p className="max-w-[220px]">{tooltipContent}</p>}>
-        <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
-          Base revenue share
-        </p>
-      </GenericTooltip>
+      <div className="flex flex-row justify-start items-start gap-1">
+        <GenericTooltip
+          tooltipOffset={0}
+          content={<p className="max-w-[220px]">{tooltipContent}</p>}
+        >
+          <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
+            Base revenue share
+          </p>
+        </GenericTooltip>
+        {!referrer.isAdminDisqualified && possibleWarning && (
+          <GenericTooltip
+            content={
+              <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
+                <h3 className="text-sm leading-normal font-semibold">Disqualification warning</h3>
+                <p>{possibleWarning}</p>
+              </div>
+            }
+            tooltipOffset={2}
+          >
+            <WarningIcon className="w-4.5 h-4.5 text-white fill-orange-600 shrink-0" />
+          </GenericTooltip>
+        )}
+      </div>
       {displayContent}
     </div>
   );

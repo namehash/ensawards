@@ -30,6 +30,10 @@ export const REFERRAL_PROGRAM_WARNINGS = new Map<
         "0xf919a96d2970380b87917b04f02e6d3d08368b10",
         "This is a warning message for testing purposes.",
       ],
+      [
+        "0x9c6aa5ce4903aad922ac4dde9b57817c1fc17d9b",
+        "This is a warning message for testing purposes.",
+      ],
     ]),
   ],
 ]);
