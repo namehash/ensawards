@@ -4,7 +4,7 @@ import type {
   ReferralProgramRulesRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import { BASE_REVENUE_CONTRIBUTION_PER_YEAR, SECONDS_PER_YEAR } from "@namehash/ens-referrals/v1";
-import { TriangleAlert as DisqualifiedIcon, CircleAlert as WarningIcon } from "lucide-react";
+import { TriangleAlert as RulesBreachIcon } from "lucide-react";
 import { memo } from "react";
 
 import {
@@ -35,12 +35,7 @@ function ReferrerCardRevShareLimit({
   editionSlug,
 }: ReferrerCardRevShareLimitProps) {
   return (
-    <div
-      className={cn(
-        "w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white",
-        referrer.isAdminDisqualified && "border-red-200 hover:border-red-300",
-      )}
-    >
+    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       <ReferrerCardHeader
         referrer={referrer.referrer}
         rank={referrer.rank}
@@ -168,42 +163,39 @@ export const RevenueShareField = ({
   const displayContent = referrer.isAdminDisqualified ? (
     <DisqualifiedFieldContent referrer={referrer} />
   ) : (
-    <p
-      className={cn(
-        "text-sm font-normal leading-normal max-sm:text-right",
-        referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
-        possibleWarning && "text-orange-600",
+    <div className="flex flex-row justify-start items-start gap-2">
+      <p
+        className={cn(
+          "text-sm font-normal leading-normal max-sm:text-right",
+          referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
+          possibleWarning && "text-orange-600",
+        )}
+      >
+        {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more referrals"}
+      </p>
+      {possibleWarning && (
+        <GenericTooltip
+          content={
+            <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
+              <h3 className="text-sm leading-normal font-semibold">Disqualification warning</h3>
+              <p>{possibleWarning}</p>
+            </div>
+          }
+          tooltipOffset={2}
+        >
+          <RulesBreachIcon size={18} className="text-orange-600 shrink-0" />
+        </GenericTooltip>
       )}
-    >
-      {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more base revenue"}
-    </p>
+    </div>
   );
 
   return (
     <div className="sm:min-w-[195px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-      <div className="flex flex-row justify-start items-start gap-1">
-        <GenericTooltip
-          tooltipOffset={0}
-          content={<p className="max-w-[220px]">{tooltipContent}</p>}
-        >
-          <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
-            Base revenue share
-          </p>
-        </GenericTooltip>
-        {!referrer.isAdminDisqualified && possibleWarning && (
-          <GenericTooltip
-            content={
-              <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
-                <h3 className="text-sm leading-normal font-semibold">Disqualification warning</h3>
-                <p>{possibleWarning}</p>
-              </div>
-            }
-            tooltipOffset={2}
-          >
-            <WarningIcon className="w-4.5 h-4.5 text-white fill-orange-600 shrink-0" />
-          </GenericTooltip>
-        )}
-      </div>
+      <GenericTooltip tooltipOffset={0} content={<p className="max-w-[220px]">{tooltipContent}</p>}>
+        <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
+          Base revenue share
+        </p>
+      </GenericTooltip>
       {displayContent}
     </div>
   );
@@ -214,20 +206,23 @@ const DisqualifiedFieldContent = ({
 }: {
   referrer: AwardedReferrerMetricsRevShareLimit;
 }) => (
-  <div className="flex flex-row justify-start items-center gap-2">
+  <div className="flex flex-row justify-start items-start gap-2">
     <p className="text-sm font-semibold leading-normal text-red-600 text-right">Disqualified</p>
     <GenericTooltip
       tooltipOffset={0}
       // `referrer.adminDisqualificationReason` will never be null if `referrer.isAdminDisqualified` is true
       // This fallback is introduced for type-safety
       content={
-        <p className="max-w-[220px]">
-          {referrer.adminDisqualificationReason ??
-            "User disqualified due to the breach of the edition's rules"}
-        </p>
+        <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
+          <h3 className="text-sm leading-normal font-semibold">Disqualification</h3>
+          <p>
+            {referrer.adminDisqualificationReason ??
+              "User disqualified due to the breach of the edition's rules"}
+          </p>
+        </div>
       }
     >
-      <DisqualifiedIcon size={18} className="text-red-600" />
+      <RulesBreachIcon size={18} className="text-red-600" />
     </GenericTooltip>
   </div>
 );
