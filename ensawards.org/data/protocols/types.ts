@@ -12,6 +12,7 @@ export const DAOProtocolIds = {
   ArbitrumDao: "protocol-arbitrum-dao",
   AaveDao: "protocol-aave-dao",
   TaikoDao: "protocol-taiko-dao",
+  SSVNetworkDao: "protocol-ssvnetwork-dao",
 } as const;
 
 /**
