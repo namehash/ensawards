@@ -106,7 +106,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f",
+        address: "0xe16d6138B1D2aD4fD6603ACdb329ad1A6cD26D9f",
         chain: mainnet,
         codeName: "IMP1",
       },
