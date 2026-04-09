@@ -15,6 +15,7 @@ export const ProjectIds = {
   Etherscan: "project-etherscan",
   Cork: "project-cork",
   Giveth: "project-giveth",
+  SSVNetwork: "project-ssvnetwork",
 } as const;
 
 /**
