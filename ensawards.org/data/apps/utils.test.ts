@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
+  type AppBenchmarkCompleted,
   type AppBenchmarkPending,
   BenchmarkResult,
   BenchmarkStatuses,
@@ -125,9 +126,7 @@ describe("App utils", () => {
   beforeEach(() => {
     mockApps.splice(0, mockApps.length);
     mockGetBenchmarkWeight.mockReset();
-    mockGetBenchmarkWeight.mockImplementation((benchmark: EffectiveAppBenchmark) => {
-      if (benchmark.status === BenchmarkStatuses.Pending) return 0;
-
+    mockGetBenchmarkWeight.mockImplementation((benchmark: AppBenchmarkCompleted) => {
       switch (benchmark.result) {
         case BenchmarkResult.Pass:
           return 1;

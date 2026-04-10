@@ -44,7 +44,7 @@ const allContributions: Contribution[] = [
 ];
 
 const additionalInfoContainerStyles =
-  "flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch";
+  "flex flex-row md:flex-col flex-nowrap justify-between md:justify-center items-center md:items-end md:gap-0 leading-7 max-md:self-stretch";
 ---
 
 <SubpageHero
@@ -59,13 +59,18 @@ const additionalInfoContainerStyles =
       name: "Category",
       value: bestPractice.category.name,
     },
-  ]}>
+  ]}
+  styles={{
+    textContentContainer: "md:max-w-[720px]",
+    additionalElementsContainer:
+      "md:max-[1200px]:flex-col min-[1200px]:flex-row md:gap-8 xl:gap-14",
+  }}>
   <Fragment slot="extraAdditionalElementLast">
-    <div class={cn(additionalInfoContainerStyles, "sm:gap-0.5 sm:items-start")}>
+    <div class={cn(additionalInfoContainerStyles, "md:gap-0.5 md:items-start")}>
       <p class="text-gray-400">Applies to</p>
       <AppliesToBadges bestPractice={bestPractice} />
     </div>
-    <div class={additionalInfoContainerStyles}>
+    <div class={cn(additionalInfoContainerStyles, "md:items-start")}>
       <p class="text-gray-400">Powered by</p>
       <a
         href="https://www.enscribe.xyz/"

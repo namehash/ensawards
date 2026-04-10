@@ -2,7 +2,7 @@ import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
 import type { Contribution, Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
 import { User as NoContributionsIcon } from "lucide-react";
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { getAddress } from "viem";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
@@ -110,26 +110,29 @@ export const SuggestionCard = ({
                   return (
                     <GenericTooltip
                       key={`contributor-${profile.chainId}-${getAddress(profile.address)}`}
+                      triggerAsChild
                       content={
                         <ContributorTooltipContent contributor={profile} identity={identity} />
                       }
                       tooltipOffset={1}
                     >
-                      <ResolveAndDisplayIdentity
-                        identity={identity}
-                        namespaceId={DEFAULT_ENS_NAMESPACE}
-                        withLink={true}
-                        identityLinkDetails={{
-                          isExternal: false,
-                          link: new URL(
-                            getEnsAdvocateDetailsRelativePath(profile.address),
-                            getEnsAwardsBaseUrl(),
-                          ),
-                        }}
-                        withTooltip={false}
-                        withAvatar={true}
-                        withIdentifier={false}
-                      />
+                      <div className="w-10 h-10 rounded-full">
+                        <ResolveAndDisplayIdentity
+                          identity={identity}
+                          namespaceId={DEFAULT_ENS_NAMESPACE}
+                          withLink={true}
+                          identityLinkDetails={{
+                            isExternal: false,
+                            link: new URL(
+                              getEnsAdvocateDetailsRelativePath(profile.address),
+                              getEnsAwardsBaseUrl(),
+                            ),
+                          }}
+                          withTooltip={false}
+                          withAvatar={true}
+                          withIdentifier={false}
+                        />
+                      </div>
                     </GenericTooltip>
                   );
                 })

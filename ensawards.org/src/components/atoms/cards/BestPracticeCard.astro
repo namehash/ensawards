@@ -27,7 +27,7 @@ const allBenchmarksPending =
 
 <a
   href={`/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
-  class="max-md:w-full w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
+  class="max-[800px]:w-full w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
             justify-center items-start gap-4 p-5 sm:px-6 sm:pt-6 sm:pb-4 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <div
     class="flex flex-col flex-nowrap justify-center items-start gap-5 self-stretch">
@@ -57,7 +57,7 @@ const allBenchmarksPending =
   </div>
   <div class="bg-gray-200 h-[1px] self-stretch"></div>
   <div
-    class="sm:min-h-[45px] flex flex-col-reverse sm:flex-row flex-nowrap justify-center sm:justify-between items-center sm:items-start
+    class="sm:min-h-[42px] flex flex-col-reverse sm:flex-row flex-nowrap justify-center sm:justify-between items-center
                 max-sm:gap-3 self-stretch">
     <button
       class={cn(
@@ -69,7 +69,11 @@ const allBenchmarksPending =
       )}>
       View details
     </button>
-    <div class="hidden sm:flex flex-col justify-center items-end gap-0">
+    <div
+      class={cn(
+        "hidden sm:flex flex-col justify-center items-end gap-0",
+        bestPractice.type === BestPracticeTypes.Protocol && "flex-row gap-2",
+      )}>
       <p class="text-sm leading-normal font-normal text-gray-400">
         {
           bestPractice.type === BestPracticeTypes.App
