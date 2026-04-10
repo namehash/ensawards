@@ -42,7 +42,9 @@ describe("REFERRAL_PROGRAM_WARNINGS", () => {
   it("Should have non-empty warning messages", () => {
     data.forEach((referrerWarningsMap) => {
       referrerWarningsMap.forEach((warning, address) => {
-        expect(warning.length > 0, `Warning message for address ${address} is empty`).toBe(true);
+        expect(warning.trim().length > 0, `Warning message for address ${address} is empty`).toBe(
+          true,
+        );
       });
     });
   });
