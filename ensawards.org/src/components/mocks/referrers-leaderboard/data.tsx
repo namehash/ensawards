@@ -2,6 +2,10 @@ import {
   type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
   ReferralProgramEditionStatuses,
+  type ReferralProgramEditionSummary,
+  type ReferralProgramEditionSummaryPieSplit,
+  type ReferralProgramRulesPieSplit,
+  type ReferralProgramRulesRevShareLimit,
   type ReferrerLeaderboardPagePieSplit,
 } from "@namehash/ens-referrals/v1";
 
@@ -25,7 +29,7 @@ export type MockReferrersListState =
 const fetchErrorProps = {
   leaderboardPageData: null,
   isLoading: false,
-  expectedAwardModel: ReferralProgramAwardModels.PieSplit, // not important in this scenario
+  editionSummary: null, // not important in this scenario
   leaderboardPageFetchError: (
     <ErrorInfo title="Error loading referrer data" description={["Please try again later."]}>
       <button
@@ -44,21 +48,23 @@ const fetchErrorProps = {
   ),
 } satisfies DisplayReferrerLeaderboardPageProps;
 
+const mockPieSplitRules = {
+  awardModel: ReferralProgramAwardModels.PieSplit,
+  totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
+  maxQualifiedReferrers: 10,
+  startTime: 1764547200,
+  endTime: 1767225599,
+  subregistryId: {
+    chainId: 1,
+    address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+  },
+  rulesUrl: new URL("https://example.com/rules"),
+  areAwardsDistributed: true,
+} as const satisfies ReferralProgramRulesPieSplit;
+
 const emptyPieSplitLeaderboardData = {
   awardModel: ReferralProgramAwardModels.PieSplit,
-  rules: {
-    awardModel: ReferralProgramAwardModels.PieSplit,
-    totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
-    maxQualifiedReferrers: 10,
-    startTime: 1764547200,
-    endTime: 1767225599,
-    subregistryId: {
-      chainId: 1,
-      address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
-    },
-    rulesUrl: new URL("https://example.com/rules"),
-    areAwardsDistributed: true,
-  },
+  rules: mockPieSplitRules,
   referrers: [],
   aggregatedMetrics: {
     grandTotalReferrals: 0,
@@ -81,6 +87,39 @@ const emptyPieSplitLeaderboardData = {
   accurateAsOf: 1764091210,
 } as const satisfies ReferrerLeaderboardPagePieSplit;
 
+const mockEditionSummaryPieSplit = {
+  awardModel: ReferralProgramAwardModels.PieSplit,
+  slug: "2026-04",
+  displayName: "December 2025 Edition",
+  status: ReferralProgramEditionStatuses.Closed,
+  rules: mockPieSplitRules,
+} as const satisfies ReferralProgramEditionSummaryPieSplit;
+
+const mockRevShareLimitRules = {
+  awardModel: ReferralProgramAwardModels.RevShareLimit,
+  totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
+  minQualifiedRevenueContribution: { currency: CurrencyIds.USDC, amount: 5000000000n },
+  qualifiedRevenueShare: 0.5,
+  startTime: 1764547200,
+  endTime: 1767225599,
+  subregistryId: {
+    chainId: 1,
+    address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+  },
+  rulesUrl: new URL("https://example.com/rules"),
+  disqualifications: [],
+  areAwardsDistributed: false,
+} as const satisfies ReferralProgramRulesRevShareLimit;
+
+const mockEditionSummaryRevShareLimit = {
+  slug: "2026-04",
+  awardModel: ReferralProgramAwardModels.RevShareLimit,
+  displayName: "April 2026 Edition",
+  status: ReferralProgramEditionStatuses.Active,
+  rules: mockRevShareLimitRules,
+  awardPoolRemaining: { currency: CurrencyIds.USDC, amount: 8715625715n },
+} as const satisfies ReferralProgramEditionSummary;
+
 export const mockReferrersLeaderboardData = new Map<
   ReferralProgramAwardModel,
   Map<MockReferrersListState, DisplayReferrerLeaderboardPageProps>
@@ -93,7 +132,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: emptyPieSplitLeaderboardData,
           isLoading: false,
-          expectedAwardModel: ReferralProgramAwardModels.PieSplit,
+          editionSummary: mockEditionSummaryPieSplit,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
       [
@@ -101,7 +140,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: emptyPieSplitLeaderboardData,
           isLoading: true,
-          expectedAwardModel: ReferralProgramAwardModels.PieSplit,
+          editionSummary: null,
           paginationParams: {
             page: 1,
             recordsPerPage: 4,
@@ -114,19 +153,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: {
             awardModel: ReferralProgramAwardModels.PieSplit,
-            rules: {
-              awardModel: ReferralProgramAwardModels.PieSplit,
-              totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
-              maxQualifiedReferrers: 10,
-              startTime: 1764547200,
-              endTime: 1767225599,
-              subregistryId: {
-                chainId: 1,
-                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
-              },
-              rulesUrl: new URL("https://example.com/rules"),
-              areAwardsDistributed: true,
-            },
+            rules: mockPieSplitRules,
             referrers: [
               {
                 referrer: "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
@@ -202,7 +229,7 @@ export const mockReferrersLeaderboardData = new Map<
             accurateAsOf: 1764580368,
           },
           isLoading: false,
-          expectedAwardModel: ReferralProgramAwardModels.PieSplit,
+          editionSummary: mockEditionSummaryPieSplit,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
     ]),
@@ -215,21 +242,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: {
             awardModel: ReferralProgramAwardModels.RevShareLimit,
-            rules: {
-              awardModel: ReferralProgramAwardModels.RevShareLimit,
-              totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
-              minQualifiedRevenueContribution: { currency: CurrencyIds.USDC, amount: 5000000000n },
-              qualifiedRevenueShare: 0.5,
-              startTime: 1764547200,
-              endTime: 1767225599,
-              subregistryId: {
-                chainId: 1,
-                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
-              },
-              rulesUrl: new URL("https://example.com/rules"),
-              disqualifications: [],
-              areAwardsDistributed: false,
-            },
+            rules: mockRevShareLimitRules,
             referrers: [],
             aggregatedMetrics: {
               grandTotalReferrals: 0,
@@ -251,7 +264,7 @@ export const mockReferrersLeaderboardData = new Map<
             accurateAsOf: 1764091210,
           },
           isLoading: false,
-          expectedAwardModel: ReferralProgramAwardModels.RevShareLimit,
+          editionSummary: mockEditionSummaryRevShareLimit,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
       [
@@ -259,7 +272,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: null,
           isLoading: true,
-          expectedAwardModel: ReferralProgramAwardModels.RevShareLimit,
+          editionSummary: null,
           paginationParams: {
             page: 1,
             recordsPerPage: 4,
@@ -272,26 +285,7 @@ export const mockReferrersLeaderboardData = new Map<
         {
           leaderboardPageData: {
             awardModel: ReferralProgramAwardModels.RevShareLimit,
-            rules: {
-              awardModel: ReferralProgramAwardModels.RevShareLimit,
-              totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
-              minQualifiedRevenueContribution: { currency: CurrencyIds.USDC, amount: 500000000n },
-              qualifiedRevenueShare: 0.5,
-              startTime: 1764547200,
-              endTime: 1767225599,
-              subregistryId: {
-                chainId: 1,
-                address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
-              },
-              rulesUrl: new URL("https://example.com/rules"),
-              disqualifications: [
-                {
-                  referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
-                  reason: "Mock longer disqualification text",
-                },
-              ],
-              areAwardsDistributed: false,
-            },
+            rules: mockRevShareLimitRules,
             referrers: [
               {
                 referrer: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
@@ -420,7 +414,7 @@ export const mockReferrersLeaderboardData = new Map<
             accurateAsOf: 1773069047,
           },
           isLoading: false,
-          expectedAwardModel: ReferralProgramAwardModels.RevShareLimit,
+          editionSummary: mockEditionSummaryRevShareLimit,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
     ]),

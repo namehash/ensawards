@@ -21,6 +21,8 @@ const SSVNetworkDao: DAOProtocol = {
     twitter: new URL("https://x.com/ssv_network"),
     ens: "ssvnetwork.eth",
   },
+  ogImagePath: "https://ensawards.org/data/protocols/ssvnetwork-dao/og.png",
+  twitterOgImagePath: "https://ensawards.org/data/protocols/ssvnetwork-dao/twitter-og.png",
 };
 
 defineProtocol(SSVNetworkDao);
