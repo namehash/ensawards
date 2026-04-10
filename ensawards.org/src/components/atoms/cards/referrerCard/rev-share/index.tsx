@@ -163,12 +163,12 @@ export const RevenueShareField = ({
   const displayContent = referrer.isAdminDisqualified ? (
     <DisqualifiedFieldContent referrer={referrer} />
   ) : (
-    <div className="flex flex-row justify-start items-start gap-2">
+    <div className="flex flex-row justify-start items-start gap-1.5">
       <p
         className={cn(
           "text-sm font-normal leading-normal max-sm:text-right",
           referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
-          possibleWarning && "text-orange-600",
+          possibleWarning && "text-orange-500",
         )}
       >
         {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more referrals"}
@@ -177,13 +177,13 @@ export const RevenueShareField = ({
         <GenericTooltip
           content={
             <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
-              <h3 className="text-sm leading-normal font-semibold">Disqualification warning</h3>
+              <h3 className="text-xs leading-normal font-semibold">Disqualification warning</h3>
               <p>{possibleWarning}</p>
             </div>
           }
           tooltipOffset={2}
         >
-          <RulesBreachIcon size={18} className="text-orange-600 shrink-0" />
+          <RulesBreachIcon size={18} className="text-orange-500 shrink-0" />
         </GenericTooltip>
       )}
     </div>
@@ -206,7 +206,7 @@ const DisqualifiedFieldContent = ({
 }: {
   referrer: AwardedReferrerMetricsRevShareLimit;
 }) => (
-  <div className="flex flex-row justify-start items-start gap-2">
+  <div className="flex flex-row justify-start items-start gap-1.5">
     <p className="text-sm font-semibold leading-normal text-red-600 text-right">Disqualified</p>
     <GenericTooltip
       tooltipOffset={0}
@@ -214,7 +214,7 @@ const DisqualifiedFieldContent = ({
       // This fallback is introduced for type-safety
       content={
         <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
-          <h3 className="text-sm leading-normal font-semibold">Disqualification</h3>
+          <h3 className="text-xs leading-normal font-semibold">Disqualification</h3>
           <p>
             {referrer.adminDisqualificationReason ??
               "User disqualified due to the breach of the edition's rules"}
