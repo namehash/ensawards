@@ -12,7 +12,7 @@ import {
 } from "data/ens-best-practices/utils.ts";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import BenchmarkResultHeroBadge from "@/components/atoms/badges/BenchmarkResultHeroBadge.astro";
-import { type AppBenchmark, BenchmarkStatuses } from "data/apps/benchmarks-types";
+import { type EffectiveAppBenchmark, BenchmarkStatuses } from "data/apps/benchmarks-types";
 import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import BenchmarkSummaryCard from "@/components/atoms/cards/BenchmarkSummaryCard.astro";
@@ -28,7 +28,7 @@ export function getStaticPaths() {
         (app: App) =>
           bestPractice.appliesTo.includes(app.type) &&
           app.benchmarks.some(
-            (benchmark: AppBenchmark) => benchmark.bestPractice.id === bestPractice.id,
+            (benchmark: EffectiveAppBenchmark) => benchmark.bestPractice.id === bestPractice.id,
           ),
       );
 
@@ -57,7 +57,7 @@ let appBenchmark;
 if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
   AppIcon = resolvedApp.icon;
   appBenchmark = resolvedApp.benchmarks.find(
-    (benchmark: AppBenchmark) => benchmark.bestPractice.id === resolvedBestPractice.id,
+    (benchmark: EffectiveAppBenchmark) => benchmark.bestPractice.id === resolvedBestPractice.id,
   );
 }
 ---
