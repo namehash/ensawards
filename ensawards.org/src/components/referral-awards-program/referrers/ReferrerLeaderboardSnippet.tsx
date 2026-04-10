@@ -175,9 +175,7 @@ export function ReferrerLeaderboardSnippet({
           <DisplayReferrerLeaderboardPage
             leaderboardPageData={leaderboardSnippetData}
             isLoading={isLoading}
-            expectedAwardModel={
-              latestReferralProgramEdition?.awardModel ?? ReferralProgramAwardModels.Unrecognized
-            }
+            editionSummary={latestReferralProgramEdition}
             leaderboardPageFetchError={
               isError ? (
                 <ErrorInfo

@@ -1,9 +1,10 @@
 import type {
   AwardedReferrerMetricsRevShareLimit,
+  ReferralProgramEditionSlug,
   ReferralProgramRulesRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import { BASE_REVENUE_CONTRIBUTION_PER_YEAR, SECONDS_PER_YEAR } from "@namehash/ens-referrals/v1";
-import { TriangleAlert as DisqualifiedIcon } from "lucide-react";
+import { TriangleAlert as RulesBreachIcon } from "lucide-react";
 import { memo } from "react";
 
 import {
@@ -12,6 +13,7 @@ import {
   ReferrerCardHeader,
 } from "@/components/atoms/cards/referrerCard/shared";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { currencyFormatter } from "@/utils/textModifications";
@@ -19,6 +21,7 @@ import { currencyFormatter } from "@/utils/textModifications";
 export interface ReferrerCardRevShareLimitProps {
   referrer: AwardedReferrerMetricsRevShareLimit;
   editionRules: ReferralProgramRulesRevShareLimit;
+  editionSlug?: ReferralProgramEditionSlug;
 }
 
 /**
@@ -26,14 +29,13 @@ export interface ReferrerCardRevShareLimitProps {
  *
  * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareLimit} award model.
  */
-function ReferrerCardRevShareLimit({ referrer, editionRules }: ReferrerCardRevShareLimitProps) {
+function ReferrerCardRevShareLimit({
+  referrer,
+  editionRules,
+  editionSlug,
+}: ReferrerCardRevShareLimitProps) {
   return (
-    <div
-      className={cn(
-        "w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white",
-        referrer.isAdminDisqualified && "border-red-200 hover:border-red-300",
-      )}
-    >
+    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       <ReferrerCardHeader
         referrer={referrer.referrer}
         rank={referrer.rank}
@@ -42,8 +44,12 @@ function ReferrerCardRevShareLimit({ referrer, editionRules }: ReferrerCardRevSh
       />
       <TotalRevenueContributionField referrer={referrer} />
       <BaseRevenueContributionField referrer={referrer} />
-      <RevenueShareField referrer={referrer} editionRules={editionRules} />
-      <TentativeAwardsField referrer={referrer} editionRules={editionRules} />
+      <RevenueShareField
+        referrer={referrer}
+        editionRules={editionRules}
+        editionSlug={editionSlug}
+      />
+      <TentativeAwardsField referrer={referrer} />
     </div>
   );
 }
@@ -69,11 +75,11 @@ export const TotalRevenueContributionField = ({
           </p>
         }
       >
-        <p className="text-muted-foreground text-sm leading-normal font-normal">
+        <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
           Total revenue contribution
         </p>
       </GenericTooltip>
-      <p className="text-sm leading-normal font-medium text-black">
+      <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
         Ξ {ethFormatter.format(parseReferralProgramCurrency(referrer.totalRevenueContribution))}
       </p>
     </div>
@@ -111,18 +117,26 @@ export const BaseRevenueContributionField = ({
           </p>
         }
       >
-        <p className="text-muted-foreground text-sm leading-normal font-normal">
+        <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
           Base revenue contribution
         </p>
       </GenericTooltip>
-      <p className="text-sm leading-normal font-medium text-black">
+      <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
         US {userFacingTotalBaseRevenueContribution}
       </p>
     </div>
   );
 };
 
-export const RevenueShareField = ({ referrer, editionRules }: ReferrerCardRevShareLimitProps) => {
+export const RevenueShareField = ({
+  referrer,
+  editionRules,
+  editionSlug,
+}: ReferrerCardRevShareLimitProps) => {
+  const disqualificationWarningMessage = editionSlug
+    ? REFERRAL_PROGRAM_WARNINGS.get(editionSlug)?.get(referrer.referrer)
+    : undefined;
+
   const minQualifiedRevenueContributionInUSD = currencyFormatter.format(
     parseReferralProgramCurrency(editionRules.minQualifiedRevenueContribution),
   );
@@ -149,14 +163,30 @@ export const RevenueShareField = ({ referrer, editionRules }: ReferrerCardRevSha
   const displayContent = referrer.isAdminDisqualified ? (
     <DisqualifiedFieldContent referrer={referrer} />
   ) : (
-    <p
-      className={cn(
-        "text-sm font-normal leading-normal max-sm:text-right",
-        referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
+    <div className="flex flex-row justify-start items-start gap-1.5">
+      <p
+        className={cn(
+          "text-sm font-normal leading-normal max-sm:text-right",
+          referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
+          disqualificationWarningMessage && "text-orange-500",
+        )}
+      >
+        {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more referrals"}
+      </p>
+      {disqualificationWarningMessage && (
+        <GenericTooltip
+          content={
+            <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
+              <h3 className="text-xs leading-normal font-semibold">Disqualification warning</h3>
+              <p>{disqualificationWarningMessage}</p>
+            </div>
+          }
+          tooltipOffset={2}
+        >
+          <RulesBreachIcon size={18} className="text-orange-500 shrink-0" />
+        </GenericTooltip>
       )}
-    >
-      {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more base revenue"}
-    </p>
+    </div>
   );
 
   return (
@@ -176,28 +206,32 @@ const DisqualifiedFieldContent = ({
 }: {
   referrer: AwardedReferrerMetricsRevShareLimit;
 }) => (
-  <div className="flex flex-row justify-start items-center gap-2">
+  <div className="flex flex-row justify-start items-start gap-1.5">
     <p className="text-sm font-semibold leading-normal text-red-600 text-right">Disqualified</p>
     <GenericTooltip
       tooltipOffset={0}
       // `referrer.adminDisqualificationReason` will never be null if `referrer.isAdminDisqualified` is true
       // This fallback is introduced for type-safety
       content={
-        <p className="max-w-[220px]">
-          {referrer.adminDisqualificationReason ??
-            "User disqualified due to the breach of the edition's rules"}
-        </p>
+        <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
+          <h3 className="text-xs leading-normal font-semibold">Disqualification</h3>
+          <p>
+            {referrer.adminDisqualificationReason ??
+              "User disqualified due to the breach of the edition's rules"}
+          </p>
+        </div>
       }
     >
-      <DisqualifiedIcon size={18} className="text-red-600" />
+      <RulesBreachIcon size={18} className="text-red-600" />
     </GenericTooltip>
   </div>
 );
 
 export const TentativeAwardsField = ({
   referrer,
-  editionRules,
-}: ReferrerCardRevShareLimitProps) => {
+}: {
+  referrer: AwardedReferrerMetricsRevShareLimit;
+}) => {
   return (
     <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
       <GenericTooltip
