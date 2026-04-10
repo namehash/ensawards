@@ -2,7 +2,7 @@ import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
 import type { Contribution, Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
 import { User as NoContributionsIcon } from "lucide-react";
-import { Fragment, useMemo } from "react";
+import { useMemo } from "react";
 import { getAddress } from "viem";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";

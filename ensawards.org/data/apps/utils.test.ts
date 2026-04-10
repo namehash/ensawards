@@ -5,7 +5,6 @@ import {
   type AppBenchmarkPending,
   BenchmarkResult,
   BenchmarkStatuses,
-  type EffectiveAppBenchmark,
 } from "./benchmarks-types.ts";
 import { createMockApp, createMockBenchmark, createMockBestPractice } from "./test-utils.ts";
 import { type App, AppTypes } from "./types.ts";

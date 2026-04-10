@@ -214,10 +214,9 @@ describe("benchmarks-utils", () => {
       const result = input.sort((a, b) => compareBenchmarks(a, b));
 
       expectedOutput.forEach((benchmark, index) =>
-        expect(
-          benchmark === result[index],
-          `Expected sorted benchmark at index ${index} to match "${benchmark.bestPractice.id}"`,
-        ).toBe(true),
+        expect(benchmark, `Expected sorted benchmark at index ${index} to match`).toEqual(
+          result[index],
+        ),
       );
     });
   });

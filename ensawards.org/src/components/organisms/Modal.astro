@@ -15,7 +15,9 @@ const { overlayId }: ModalProps = Astro.props;
 
 <script>
   function closeOverlay(overlayId: string) {
-    document.querySelector(`#${overlayId}`).classList.add("hidden");
+    const overlay = document.querySelector(`#${overlayId}`);
+    if (!overlay) return;
+    overlay.classList.add("hidden");
     document.body.classList.remove("no-scroll");
 
     const scrollToY = parseInt(

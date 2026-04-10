@@ -2,7 +2,7 @@ import type { EnsAwardsBarScoreProps } from "@/components/atoms/ens-awards-score
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export const EnsAwardsBarScorePending = ({
-  mobileAdaptive,
+  mobileAdaptive = true,
 }: Omit<EnsAwardsBarScoreProps, "score">) => (
   <div
     className={cn(
