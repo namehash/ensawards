@@ -84,7 +84,7 @@ const contractCodeNameForMobileDisplay = breakLongWords(
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
         <>
-          <div class="h-[20px] max-sm:hidden flex flex-row flex-nowrap justify-start items-start gap-1.5">
+          <div class="h-[20px] max-sm:hidden flex flex-row flex-nowrap justify-start items-center gap-1.5">
             <a
               href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
               target="_blank"

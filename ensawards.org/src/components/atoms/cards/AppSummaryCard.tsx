@@ -94,6 +94,7 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
               >
                 <GenericTooltip
                   tooltipOffset={1}
+                  triggerAsChild
                   content={
                     <p>
                       {benchmark.status === BenchmarkStatuses.Pending

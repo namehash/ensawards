@@ -7,7 +7,7 @@ const { overlayId }: ModalProps = Astro.props;
 ---
 
 <modal-content
-  id=`${overlayId}-modal-content`
+  id={`${overlayId}-modal-content`}
   data-id={overlayId}
   class="w-fit sm:min-w-[420px] max-w-[460px] h-fit box-border p-6 flex flex-nowrap flex-col justify-start items-start gap-5 shrink-0 rounded-xl bg-white">
   <slot name="modalContent" />
@@ -38,7 +38,9 @@ const { overlayId }: ModalProps = Astro.props;
 
     // Close on click outside
     overlay.addEventListener("click", (e) => {
-      if (!content.contains(e.target)) closeOverlay(overlayId);
+      const target = e.target;
+      if (!(target instanceof Node)) return;
+      if (!content.contains(target)) closeOverlay(overlayId);
     });
 
     // Close on Escape key
@@ -54,7 +56,9 @@ const { overlayId }: ModalProps = Astro.props;
 
   class OverlayContent extends HTMLElement {
     connectedCallback() {
-      enableAlternativeClosings(this.dataset.id);
+      const overlayId = this.dataset.id;
+      if (!overlayId) return;
+      enableAlternativeClosings(overlayId);
     }
   }
 

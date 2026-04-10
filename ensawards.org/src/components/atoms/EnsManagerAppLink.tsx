@@ -33,7 +33,7 @@ export const EnsManagerAppLink = ({
   return (
     <TooltipProvider delayDuration={200} skipDelayDuration={0}>
       <a href={link} rel="noreferrer" target="_blank">
-        <GenericTooltip tooltipOffset={4} content={<p>{text}</p>}>
+        <GenericTooltip triggerAsChild tooltipOffset={4} content={<p>{text}</p>}>
           <EnsIcon
             width={16}
             height={16}
