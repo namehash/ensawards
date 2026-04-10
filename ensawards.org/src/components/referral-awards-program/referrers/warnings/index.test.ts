@@ -11,7 +11,7 @@ import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/
 describe("REFERRAL_PROGRAM_WARNINGS", () => {
   const data = REFERRAL_PROGRAM_WARNINGS;
 
-  it("Should have valid referral program edition slugs", () => {
+  it("Should have recognized referral program edition slugs", () => {
     const editionSlugs: ReferralProgramEditionSlug[] = Array.from(data.keys());
     const productionEditionSlugs =
       editionSlugs.length > 0 ? productionEditions.map((edition) => edition.slug) : null;
@@ -28,13 +28,14 @@ describe("REFERRAL_PROGRAM_WARNINGS", () => {
     });
   });
 
-  it("Should have valid Ethereum addresses as referrer keys", () => {
+  it("Should have valid, fully lowercase Ethereum addresses as referrer keys", () => {
     const warnedReferrers: Address[] = Array.from(data.values())
       .map((referrerWarningsMap) => Array.from(referrerWarningsMap.keys()))
       .flat();
 
     warnedReferrers.forEach((address) => {
       expect(isAddress(address), `Address ${address} is not valid`).toEqual(true);
+      expect(address, `Address ${address} is not fully lowercase`).toBe(address.toLowerCase());
     });
   });
 

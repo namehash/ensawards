@@ -133,7 +133,7 @@ export const RevenueShareField = ({
   editionRules,
   editionSlug,
 }: ReferrerCardRevShareLimitProps) => {
-  const possibleWarning = editionSlug
+  const disqualificationWarningMessage = editionSlug
     ? REFERRAL_PROGRAM_WARNINGS.get(editionSlug)?.get(referrer.referrer)
     : undefined;
 
@@ -168,17 +168,17 @@ export const RevenueShareField = ({
         className={cn(
           "text-sm font-normal leading-normal max-sm:text-right",
           referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
-          possibleWarning && "text-orange-500",
+          disqualificationWarningMessage && "text-orange-500",
         )}
       >
         {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more referrals"}
       </p>
-      {possibleWarning && (
+      {disqualificationWarningMessage && (
         <GenericTooltip
           content={
             <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
               <h3 className="text-xs leading-normal font-semibold">Disqualification warning</h3>
-              <p>{possibleWarning}</p>
+              <p>{disqualificationWarningMessage}</p>
             </div>
           }
           tooltipOffset={2}
