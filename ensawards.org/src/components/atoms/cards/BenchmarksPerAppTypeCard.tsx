@@ -17,8 +17,6 @@ export interface BenchmarksPerAppTypeCardProps {
 }
 
 export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerAppTypeCardProps) {
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
-
   // A necessary step due to Astro Island's inner serialization logic
   const resolvedAppsWithBenchmark = appsWithBenchmark.map(({ app, benchmark }) => ({
     app: getAppById(app.id) ?? app,
@@ -42,16 +40,12 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
       <div className="flex w-full flex-col items-center">
         {resolvedAppsWithBenchmark.map(({ app, benchmark }, index) => {
           const AppIcon = app.icon;
-          const hoveredItemRelativePosition =
-            hoveredItem !== null ? hoveredItem - index : undefined;
 
           return (
             <Fragment key={`${app.id}-${benchmark.bestPractice.id}`}>
               <a
                 href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
                 className="flex w-full items-center gap-3 py-4 p-[10px] rounded-xl transition-colors duration-200 hover:bg-[#F5F5F5]"
-                onMouseEnter={() => setHoveredItem(index)}
-                onMouseLeave={() => setHoveredItem(null)}
               >
                 <AppIcon className="h-8 w-8 shrink-0 rounded-md" />
                 <span className="min-w-0 flex-1 text-base leading-normal font-semibold text-neutral-900">
@@ -67,15 +61,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
                 />
               </a>
               {index < appsWithBenchmark.length - 1 && (
-                <div
-                  className={cn(
-                    "w-[calc(100%-20px)] h-[1px]",
-                    hoveredItemRelativePosition !== undefined &&
-                      (hoveredItemRelativePosition === 0 || hoveredItemRelativePosition === 1)
-                      ? "bg-transparent"
-                      : "bg-gray-200",
-                  )}
-                />
+                <div className="w-[calc(100%-28px)] h-[1px] bg-[#F5F5F5]" />
               )}
             </Fragment>
           );

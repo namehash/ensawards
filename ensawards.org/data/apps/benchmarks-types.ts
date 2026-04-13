@@ -13,7 +13,7 @@ export enum BenchmarkResult {
 /**
  * Represents all types of benchmark statuses on ENSAwards where:
  *
- * Complete - means that an {@link App} that this benchmark is assigned to
+ * Completed - means that an {@link App} that this benchmark is assigned to
  * was benchmarked against a given {@link BestPractice} at least once in the past, and
  * such benchmark is recorded in our data.
  *
