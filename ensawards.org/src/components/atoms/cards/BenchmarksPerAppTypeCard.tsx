@@ -1,7 +1,7 @@
 import type { EffectiveAppBenchmark } from "data/apps/benchmarks-types";
 import type { App } from "data/apps/types.ts";
 import { getAppById } from "data/apps/utils.ts";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge.tsx";
 import { benchmarkResultToBadgeStyles } from "@/utils/styles.ts";
