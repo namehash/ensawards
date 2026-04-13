@@ -87,7 +87,7 @@ const contracts: Contract[] = [
       name: "treasury.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-13-08T22:30:00.000Z") },
+      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-13T22:30:00.000Z") },
     ],
   },
   {
@@ -132,7 +132,7 @@ const contracts: Contract[] = [
       name: "v1-imp-lido.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-13-08T22:30:00.000Z") },
+      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-13T22:30:00.000Z") },
     ],
   },
 ];
