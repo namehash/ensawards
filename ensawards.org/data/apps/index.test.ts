@@ -93,10 +93,11 @@ describe("App data", () => {
   });
 
   it("Should have an effective benchmark defined for all best practices that apply to apps", () => {
-    const bestPracticeData = ENS_BEST_PRACTICES.filter(
-      (bestPractice) => bestPractice.type === BestPracticeTypes.App,
-    );
     data.forEach((app) => {
+      const bestPracticeData = ENS_BEST_PRACTICES.filter(
+        (bestPractice) =>
+          bestPractice.type === BestPracticeTypes.App && bestPractice.appliesTo.includes(app.type),
+      );
       bestPracticeData.forEach((bestPractice) => {
         const foundBenchmark = app.benchmarks.find(
           (benchmark) => benchmark.bestPractice.id === bestPractice.id,
