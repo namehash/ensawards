@@ -11,7 +11,7 @@ const GivethProject: Project = {
   icon: GivethIcon,
   socials: {
     twitter: new URL("https://x.com/giveth"),
-    website: new URL("https://giveth.io/"),
+    website: new URL("https://giveth.io"),
   },
 };
 

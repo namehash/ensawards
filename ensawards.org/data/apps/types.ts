@@ -32,6 +32,8 @@ export interface App {
     twitter: URL;
     ens?: Name;
   };
+  /** Relative path from the app data root to the Open Graph image for the app. */
   ogImagePath?: string;
+  /** Relative path from the app data root to the Twitter Open Graph image for the app. */
   twitterOgImagePath?: string;
 }

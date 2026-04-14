@@ -1,4 +1,4 @@
-import { type EnsAwardsScore } from "@/utils/types";
+import { type EnsAwardsScore } from "@/components/atoms/ens-awards-score/types.ts";
 
 import { ENS_BEST_PRACTICES } from "../ens-best-practices";
 import { type BestPracticeApp, BestPracticeTypes } from "../ens-best-practices/types.ts";
@@ -12,14 +12,22 @@ import { BenchmarkResult, BenchmarkStatuses } from "./benchmarks-types.ts";
 import { type AppType } from "./types";
 
 /**
- * Returns a weight of all possible types of {@link BenchmarkResult}.
+ * Points awarded for a benchmark result, where higher points indicate better benchmark results.
+ * Used for calculating the EnsAwardsScore.
  *
- * For now, the weights for different {@link BenchmarkResult}s are:
+ * @invariant EnsAwardsPoints must be a non-negative finite number.
+ */
+export type EnsAwardsPoints = number;
+
+/**
+ * Returns {@link EnsAwardsPoints} for all possible types of {@link BenchmarkResult}.
+ *
+ * For now, the points for different {@link BenchmarkResult}s are:
  * {@link BenchmarkResult.Pass} = 1.0
  * {@link BenchmarkResult.PartialPass} = 0.5
  * {@link BenchmarkResult.Fail} = 0.0
  */
-export const getBenchmarkWeight = (benchmark: AppBenchmarkCompleted): number => {
+export const getBenchmarkPoints = (benchmark: AppBenchmarkCompleted): EnsAwardsPoints => {
   switch (benchmark.result) {
     case BenchmarkResult.Pass:
       return 1;
@@ -55,33 +63,35 @@ export const groupBenchmarksByCategory = (
 };
 
 /**
- * Calculates {@link EnsAwardsScore} for all benchmarks belonging to a single {@link BestPracticeCategory} as a percentage of passed benchmark weight.
+ * Calculates {@link EnsAwardsScore} for all benchmarks belonging to a single {@link BestPracticeCategory}.
  *
  * @returns
- * 0 - if no benchmarks passed, the list is empty or benchmarks don't belong to the same category
- * 0 < x < 100 - otherwise
+ * undefined - if no benchmarks are completed, the list is empty or benchmarks don't belong to the same category
+ * 0 <= x <= 100 - otherwise
  *
  * @throws if the {@link EnsAwardsScore} invariants are not satisfied
  */
-export const calcCategoryScore = (benchmarks: EffectiveAppBenchmark[]): EnsAwardsScore => {
-  if (benchmarks.length === 0) return 0;
+export const calcCategoryScore = (
+  benchmarks: EffectiveAppBenchmark[],
+): EnsAwardsScore | undefined => {
+  if (benchmarks.length === 0) return undefined;
 
   const [firstBenchmark] = benchmarks;
   const areAllBenchmarksOfSameCategory = benchmarks.every(
     (benchmark) => benchmark.bestPractice.category.id === firstBenchmark.bestPractice.category.id,
   );
 
-  if (!areAllBenchmarksOfSameCategory) return 0;
+  if (!areAllBenchmarksOfSameCategory) return undefined;
 
   const completedBenchmarks = benchmarks.filter(
     (benchmark): benchmark is AppBenchmarkCompleted =>
       benchmark.status === BenchmarkStatuses.Completed,
   );
 
-  if (completedBenchmarks.length === 0) return 0;
+  if (completedBenchmarks.length === 0) return undefined;
 
   const score = Math.round(
-    (completedBenchmarks.reduce((sum, benchmark) => sum + getBenchmarkWeight(benchmark), 0) * 100) /
+    (completedBenchmarks.reduce((sum, benchmark) => sum + getBenchmarkPoints(benchmark), 0) * 100) /
       completedBenchmarks.length,
   );
 
@@ -115,19 +125,20 @@ export const buildEffectiveAppBenchmarks = (
   return allBenchmarks;
 };
 
-// Declare sort order for benchmark result (Pass → Partial Pass → Fail)
+/** Declare sort order for benchmark result (Pass → Partial Pass → Fail) */
 const resultOrder = {
   [BenchmarkResult.Pass]: 0,
   [BenchmarkResult.PartialPass]: 1,
   [BenchmarkResult.Fail]: 2,
 } as const satisfies Record<BenchmarkResult, number>;
 
-// Declare sort order for benchmark status (Completed → Pending)
+/** Declare sort order for benchmark status (Completed → Pending) */
 const statusOrder = {
   [BenchmarkStatuses.Completed]: 0,
   [BenchmarkStatuses.Pending]: 1,
 } as const satisfies Record<BenchmarkStatus, number>;
 
+/** Compares two benchmarks based on their result and status */
 export const compareBenchmarks = (a: EffectiveAppBenchmark, b: EffectiveAppBenchmark): number => {
   // If both benchmarks are completed sort by result
   if (a.status === BenchmarkStatuses.Completed && b.status === BenchmarkStatuses.Completed) {
@@ -139,7 +150,3 @@ export const compareBenchmarks = (a: EffectiveAppBenchmark, b: EffectiveAppBench
   const statusDiff = statusOrder[a.status] - statusOrder[b.status];
   return statusDiff;
 };
-
-/** Calculates whether all benchmarks are of {@link BenchmarkStatuses.Pending} status */
-export const allBenchmarksPending = (benchmarks: EffectiveAppBenchmark[]): boolean =>
-  benchmarks.every((benchmark) => benchmark.status === BenchmarkStatuses.Pending);

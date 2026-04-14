@@ -16,7 +16,6 @@ import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils"
 import { getENSNodeUrl } from "@/utils/env";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { type PossibleSuggestions } from "@/utils/types";
 
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 
@@ -27,7 +26,7 @@ const orderContributorsByAppearances = (contributors: Contributor[]): Contributo
     .map(({ contributor }) => contributor);
 };
 
-const getSuggestionCardDescription = (whatsSuggested: PossibleSuggestions) => {
+const getContributorsCardDescription = (whatsSuggested: PossibleContributions) => {
   switch (whatsSuggested) {
     case "app":
     case "protocol":
@@ -45,19 +44,32 @@ const getSuggestionCardDescription = (whatsSuggested: PossibleSuggestions) => {
   }
 };
 
-export interface SuggestionCardProps {
-  whatsSuggested: PossibleSuggestions;
+/**
+ * Contribution targets that can be surfaced by the {@link ContributorsCard}.
+ *
+ * Each literal value identifies a kind of ENS Awards entity that users can be
+ * encouraged to suggest updates for.
+ */
+export type PossibleContributions =
+  | "app"
+  | "best practice"
+  | "benchmark result"
+  | "protocol"
+  | "contract";
+
+export interface ContributorsCardProps {
+  whatsSuggested: PossibleContributions;
   allContributions: Contribution[];
   gitHubTargetHref?: string;
   sidebarVariant?: boolean;
 }
 
-export const SuggestionCard = ({
+export const ContributorsCard = ({
   whatsSuggested,
   allContributions,
   gitHubTargetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
   sidebarVariant = false,
-}: SuggestionCardProps) => {
+}: ContributorsCardProps) => {
   const ensNodeReactConfig = useMemo(
     () =>
       createConfig({
@@ -84,8 +96,8 @@ export const SuggestionCard = ({
             <div className="w-full flex flex-col gap-1">
               <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
               <p className="text-base leading-6 font-normal text-muted-foreground">
-                All {getSuggestionCardDescription(whatsSuggested)} on ENSAwards are open for public
-                contribution.
+                All {getContributorsCardDescription(whatsSuggested)} on ENSAwards are open for
+                public contribution.
               </p>
             </div>
           </div>
@@ -211,10 +223,10 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
   );
 };
 
-export const SuggestionCardLoading = ({
+export const ContributorsCardLoading = ({
   whatsSuggested,
   sidebarVariant = false,
-}: Omit<SuggestionCardProps, "gitHubTargetHref" | "allContributions">) => {
+}: Omit<ContributorsCardProps, "gitHubTargetHref" | "allContributions">) => {
   const loadingStyles = "animate-pulse bg-gray-200";
   return (
     <div
@@ -227,7 +239,7 @@ export const SuggestionCardLoading = ({
         <div className="w-full flex flex-col gap-1">
           <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
           <p className="text-base leading-6 font-normal text-muted-foreground">
-            All {getSuggestionCardDescription(whatsSuggested)} on ENSAwards are open for public
+            All {getContributorsCardDescription(whatsSuggested)} on ENSAwards are open for public
             contribution.
           </p>
         </div>

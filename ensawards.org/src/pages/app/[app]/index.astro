@@ -1,7 +1,10 @@
 ---
 import { EnsIcon, TwitterIcon } from "@namehash/namehash-ui";
 
-import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge";
+import {
+  BenchmarkResultBadge,
+  benchmarkResultToBadgeStyles,
+} from "@/components/atoms/badges/BenchmarkResultBadge";
 import BenchmarkResultCard from "@/components/atoms/cards/BenchmarkResultCard.astro";
 import EnsAwardsScore from "@/components/atoms/ens-awards-score/circular.astro";
 import GlobeIcon from "@/components/atoms/icons/GlobeIcon.astro";
@@ -10,25 +13,22 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
-import { benchmarkResultToBadgeStyles } from "@/utils/styles";
-import { calculateAppEnsAwardsScore, getAppBySlug } from "data/apps/utils.ts";
-import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard.tsx";
+import { calcAppEnsAwardsScore, getAppBySlug, buildAppOgImageUrlHref } from "data/apps/utils.ts";
+import {
+  ContributorsCard,
+  ContributorsCardLoading,
+} from "@/components/atoms/cards/ContributorsCard.tsx";
 import { type Contribution } from "data/contributors/types.ts";
-import { type EnsAwardsScore as EnsAwardsScoreType } from "@/utils/types.ts";
+import { type EnsAwardsScore as EnsAwardsScoreType } from "@/components/atoms/ens-awards-score/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import {
   groupBenchmarksByCategory,
   calcCategoryScore,
   compareBenchmarks,
-  allBenchmarksPending as allBenchmarksPendingUtil,
 } from "data/apps/benchmarks-utils";
-import {
-  type EffectiveAppBenchmark,
-  type AppBenchmarkCompleted,
-  BenchmarkStatuses,
-} from "data/apps/benchmarks-types";
+import { type EffectiveAppBenchmark } from "data/apps/benchmarks-types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
-import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon.tsx";
+import { getAppContributions } from "data/contributors/utils.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -42,20 +42,13 @@ let appScore: EnsAwardsScoreType = 0;
 let AppIcon;
 let appBenchmarksDataContributions: Contribution[] = [];
 let benchmarkGroups: EffectiveAppBenchmark[][] = [];
-let allBenchmarksPending = false;
 
 if (appToDisplay !== undefined) {
-  appScore = calculateAppEnsAwardsScore(appToDisplay);
+  appScore = calcAppEnsAwardsScore(appToDisplay);
   AppIcon = appToDisplay.icon;
-  appBenchmarksDataContributions = appToDisplay.benchmarks
-    .filter(
-      (benchmark): benchmark is AppBenchmarkCompleted =>
-        benchmark.status === BenchmarkStatuses.Completed,
-    )
-    .flatMap((benchmark) => benchmark.contributions);
+  appBenchmarksDataContributions = getAppContributions(appToDisplay);
 
   benchmarkGroups = groupBenchmarksByCategory(appToDisplay.benchmarks);
-  allBenchmarksPending = allBenchmarksPendingUtil(appToDisplay.benchmarks);
 }
 ---
 
@@ -69,8 +62,8 @@ if (appToDisplay !== undefined) {
         title: `ENSAwards: ${appToDisplay.name} ENS Integration Benchmarks`,
         description: appToDisplay.description,
         url: `https://ensawards.org/app/${app}`,
-        ogImage: appToDisplay.ogImagePath,
-        twitterImage: appToDisplay.twitterOgImagePath,
+        ogImage: buildAppOgImageUrlHref(appToDisplay.ogImagePath),
+        twitterImage: buildAppOgImageUrlHref(appToDisplay.twitterOgImagePath),
       }}>
       <SubpageHero
         header={appToDisplay.name}
@@ -117,7 +110,6 @@ if (appToDisplay !== undefined) {
         <EnsAwardsScore
           slot="largerHeroItem"
           score={appScore}
-          scorePending={allBenchmarksPending}
           label="ENSAwards score"
         />
       </SubpageHero>
@@ -127,15 +119,10 @@ if (appToDisplay !== undefined) {
             <ItemsList header="ENS best practice benchmarks">
               {benchmarkGroups.map((group) => {
                 const categoryScore = calcCategoryScore(group);
-                const allBenchmarksPending = allBenchmarksPendingUtil(group);
                 return (
                   <div class="w-full flex flex-col justify-start items-start gap-2">
                     <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">
-                      {allBenchmarksPending ? (
-                        <AllBenchmarksPendingIcon />
-                      ) : (
-                        <EnsAwardsCircularScoreSmall score={categoryScore} />
-                      )}
+                      <EnsAwardsCircularScoreSmall score={categoryScore} />
                       {/* This assumption is safe, because all benchmarks passed into this component belong to one BestPracticeCategory */}
                       <span class="flex-1 text-lg leading-normal font-semibold text-black">
                         {group[0].bestPractice.category.name}
@@ -167,18 +154,18 @@ if (appToDisplay !== undefined) {
             </ItemsList>
           </div>
           <div class="w-full md:w-2/5">
-            <SuggestionCard
+            <ContributorsCard
               client:only="react"
               whatsSuggested="benchmark result"
               allContributions={appBenchmarksDataContributions}
               gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
               sidebarVariant>
-              <SuggestionCardLoading
+              <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant
                 whatsSuggested="benchmark result"
               />
-            </SuggestionCard>
+            </ContributorsCard>
           </div>
         </div>
       </section>

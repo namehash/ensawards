@@ -9,9 +9,9 @@ import {
 import { createMockApp, createMockBenchmark, createMockBestPractice } from "./test-utils.ts";
 import { type App, AppTypes } from "./types.ts";
 
-const { mockApps, mockGetBenchmarkWeight } = vi.hoisted(() => ({
+const { mockApps, mockgetBenchmarkPoints } = vi.hoisted(() => ({
   mockApps: [] as App[],
-  mockGetBenchmarkWeight: vi.fn(),
+  mockgetBenchmarkPoints: vi.fn(),
 }));
 
 vi.mock("./index.ts", () => ({
@@ -19,14 +19,14 @@ vi.mock("./index.ts", () => ({
 }));
 
 vi.mock("./benchmarks-utils.ts", () => ({
-  getBenchmarkWeight: mockGetBenchmarkWeight,
+  getBenchmarkPoints: mockgetBenchmarkPoints,
 }));
 
 import {
   appliesToAllApps,
-  calculateAppEnsAwardsScore,
-  calculateAppSupport,
-  calculateAppsPassed,
+  calcAppEnsAwardsScore,
+  calcAppsPassed,
+  calcBestPracticeEnsAwardsScore,
   getAppById,
   getAppByName,
   getAppBySlug,
@@ -124,8 +124,8 @@ const mockAppWithSinglePassingBenchmark = {
 describe("App utils", () => {
   beforeEach(() => {
     mockApps.splice(0, mockApps.length);
-    mockGetBenchmarkWeight.mockReset();
-    mockGetBenchmarkWeight.mockImplementation((benchmark: AppBenchmarkCompleted) => {
+    mockgetBenchmarkPoints.mockReset();
+    mockgetBenchmarkPoints.mockImplementation((benchmark: AppBenchmarkCompleted) => {
       switch (benchmark.result) {
         case BenchmarkResult.Pass:
           return 1;
@@ -184,67 +184,67 @@ describe("App utils", () => {
     });
   });
 
-  describe("calculateAppsPassed", () => {
+  describe("calcAppsPassed", () => {
     beforeEach(() => {
       setMockApps(...mockAppsForBenchmarkAggregation);
     });
 
     it("Should return the number of apps that passed or partially passed the best practice benchmark", () => {
-      expect(calculateAppsPassed(mockReverseResolutionBestPractice)).toEqual(2);
+      expect(calcAppsPassed(mockReverseResolutionBestPractice)).toEqual(2);
     });
 
     it("Should exclude all pending benchmarks from the calculation", () => {
       expect(
-        calculateAppsPassed(mockDisplayProfilesBestPractice),
-        "calculateAppsPassed doesn't exclude pending benchmarks",
+        calcAppsPassed(mockDisplayProfilesBestPractice),
+        "calcAppsPassed doesn't exclude pending benchmarks",
       ).toEqual(1);
     });
   });
 
-  describe("calculateAppSupport", () => {
+  describe("calcBestPracticeEnsAwardsScore", () => {
     beforeEach(() => {
       setMockApps(...mockAppsForBenchmarkAggregation);
     });
 
     it("Should return the support percentage for benchmarked apps", () => {
-      expect(calculateAppSupport(mockReverseResolutionBestPractice)).toEqual(50);
+      expect(calcBestPracticeEnsAwardsScore(mockReverseResolutionBestPractice)).toEqual(50);
     });
 
-    it("Should return zero when no apps are benchmarked for the best practice", () => {
+    it("Should return undefined when no apps are benchmarked for the best practice", () => {
       setMockApps(mockRainbowApp);
 
-      expect(calculateAppSupport(mockReverseResolutionBestPractice)).toEqual(0);
+      expect(calcBestPracticeEnsAwardsScore(mockReverseResolutionBestPractice)).toBeUndefined();
     });
 
     it("Should exclude pending benchmarks from the calculation", () => {
       expect(
-        calculateAppSupport(mockDisplayProfilesBestPractice),
-        "calculateAppSupport doesn't exclude pending benchmarks",
+        calcBestPracticeEnsAwardsScore(mockDisplayProfilesBestPractice),
+        "calcBestPracticeEnsAwardsScore doesn't exclude pending benchmarks",
       ).toEqual(100);
     });
   });
 
-  describe("calculateAppEnsAwardsScore", () => {
+  describe("calcAppEnsAwardsScore", () => {
     it("Should return the rounded ENSAwards score for an app with benchmarks", () => {
-      expect(calculateAppEnsAwardsScore(mockAppWithPassingAndPartialBenchmarks)).toEqual(75);
+      expect(calcAppEnsAwardsScore(mockAppWithPassingAndPartialBenchmarks)).toEqual(75);
     });
 
-    it("Should return zero when the app has no benchmarks", () => {
-      expect(calculateAppEnsAwardsScore(mockRainbowApp)).toEqual(0);
+    it("Should return undefined when the app has no benchmarks", () => {
+      expect(calcAppEnsAwardsScore(mockRainbowApp)).toBeUndefined();
     });
 
     it("Should throw when the calculated score is greater than 100", () => {
-      mockGetBenchmarkWeight.mockReturnValue(2);
+      mockgetBenchmarkPoints.mockReturnValue(2);
 
-      expect(() => calculateAppEnsAwardsScore(mockAppWithSinglePassingBenchmark)).toThrow(
+      expect(() => calcAppEnsAwardsScore(mockAppWithSinglePassingBenchmark)).toThrow(
         "Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was 200 instead",
       );
     });
 
     it("Should throw when the calculated score is less than 0", () => {
-      mockGetBenchmarkWeight.mockReturnValue(-1);
+      mockgetBenchmarkPoints.mockReturnValue(-1);
 
-      expect(() => calculateAppEnsAwardsScore(mockAppWithSinglePassingBenchmark)).toThrow(
+      expect(() => calcAppEnsAwardsScore(mockAppWithSinglePassingBenchmark)).toThrow(
         "Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was -100 instead",
       );
     });

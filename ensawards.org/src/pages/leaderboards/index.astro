@@ -12,9 +12,8 @@ import { ProtocolTypes } from "data/ens-best-practices/types.ts";
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById } from "data/protocols/utils.ts";
-import { calculateAppEnsAwardsScore } from "data/apps/utils.ts";
+import { compareApps } from "data/apps/utils.ts";
 import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList.tsx";
-import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benchmarks-utils.ts";
 import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 ---
 
@@ -53,24 +52,7 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
                 {relevantApps
-                  .sort((a, b) => {
-                    const aAllBenchmarksPending = allBenchmarksPendingUtil(
-                      a.benchmarks,
-                    );
-                    const bAllBenchmarksPending = allBenchmarksPendingUtil(
-                      b.benchmarks,
-                    );
-
-                    if (aAllBenchmarksPending && !bAllBenchmarksPending)
-                      return 1;
-                    if (!aAllBenchmarksPending && bAllBenchmarksPending)
-                      return -1;
-
-                    return (
-                      calculateAppEnsAwardsScore(b) -
-                      calculateAppEnsAwardsScore(a)
-                    );
-                  })
+                  .sort((a, b) => compareApps(a, b))
                   .slice(0, 3)
                   .map((app, idx) => {
                     const AppIcon = app.icon;

@@ -16,14 +16,14 @@ const MetaMaskWallet: App = {
   description: "MetaMask is a widely used, self-custodial cryptocurrency wallet.",
   type: AppTypes.Wallet,
   socials: {
-    website: new URL("https://metamask.io/"),
+    website: new URL("https://metamask.io"),
     twitter: new URL("https://x.com/MetaMask"),
     ens: "metamask.eth",
   },
   icon: MetaMaskIcon,
   benchmarks: buildEffectiveAppBenchmarks(MetaMaskWalletBenchmarks, AppTypes.Wallet),
-  ogImagePath: "https://ensawards.org/data/apps/metamask-wallet/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/apps/metamask-wallet/twitter-og.png",
+  ogImagePath: "metamask-wallet/og.png",
+  twitterOgImagePath: "metamask-wallet/twitter-og.png",
 };
 
 defineApp(MetaMaskWallet);

@@ -17,12 +17,12 @@ const UniswapDao: DAOProtocol = {
     "Uniswap governance is a collective of companies, communities, and token holders working together to steward the future of the Uniswap protocol.",
   icon: UniswapIcon,
   socials: {
-    website: new URL("https://www.uniswapfoundation.org/"),
+    website: new URL("https://www.uniswapfoundation.org"),
     twitter: new URL("https://x.com/UniswapFND"),
     ens: "uniswap.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/uniswap-dao/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/uniswap-dao/twitter-og.png",
+  ogImagePath: "uniswap-dao/og.png",
+  twitterOgImagePath: "uniswap-dao/twitter-og.png",
 };
 
 defineProtocol(UniswapDao);

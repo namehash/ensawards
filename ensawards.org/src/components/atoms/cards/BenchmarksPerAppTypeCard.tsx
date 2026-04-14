@@ -4,7 +4,6 @@ import { getAppById } from "data/apps/utils.ts";
 import { Fragment } from "react";
 
 import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge.tsx";
-import { benchmarkResultToBadgeStyles } from "@/utils/styles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface AppWithBenchmark {
@@ -51,14 +50,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
                 <span className="min-w-0 flex-1 text-base leading-normal font-semibold text-neutral-900">
                   {app.name}
                 </span>
-                <BenchmarkResultBadge
-                  benchmark={benchmark}
-                  className={cn(
-                    "shrink-0",
-                    benchmarkResultToBadgeStyles(benchmark),
-                    "cursor-pointer",
-                  )}
-                />
+                <BenchmarkResultBadge benchmark={benchmark} className="shrink-0 cursor-pointer" />
               </a>
               {index < appsWithBenchmark.length - 1 && (
                 <div className="w-[calc(100%-28px)] h-[1px] bg-[#F5F5F5]" />

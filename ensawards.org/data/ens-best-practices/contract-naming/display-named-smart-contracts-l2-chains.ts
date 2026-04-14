@@ -20,7 +20,7 @@ ENSIP-19 and all ENS best practices:
 - [ensnode-react](https://github.com/namehash/ensnode/blob/main/packages/ensnode-react/README.md) (v1.0.0+)
 - [Viem](https://viem.sh/docs/ens/actions/getEnsName#chain-specific-resolution) (v2.35.0+)
 - [Wagmi](https://wagmi.sh/react/api/hooks/useEnsName#chainid) (v2.18.0+)
-Libraries and tools for additional languages or frameworks can be found in the [ENS documentation](https://docs.ens.domains/web/libraries/).`;
+Libraries and tools for additional languages or frameworks can be found in the [ENS documentation](https://docs.ens.domains/web/libraries).`;
 
 const technicalDetailsAdditionalContent = `ENSIP-19 enables primary names to be set on any chain. 
 Contracts deployed to an L2 chain benefit from this, as the contract can then configure its name 

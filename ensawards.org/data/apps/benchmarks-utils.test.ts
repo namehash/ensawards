@@ -6,11 +6,10 @@ import {
   BenchmarkStatuses,
 } from "./benchmarks-types.ts";
 import {
-  allBenchmarksPending,
   buildEffectiveAppBenchmarks,
   calcCategoryScore,
   compareBenchmarks,
-  getBenchmarkWeight,
+  getBenchmarkPoints,
   groupBenchmarksByCategory,
 } from "./benchmarks-utils.ts";
 import MetaMaskWalletBenchmarks from "./metamask-wallet/benchmarks.ts";
@@ -65,12 +64,8 @@ const mockFailingReverseResolutionBenchmark = createMockBenchmark(
   mockShowPrimaryNameBestPractice,
   BenchmarkResult.Fail,
 );
-const mockFailingReverseResolutionWeightBenchmark = createMockBenchmark(
-  mockResolvePrimaryNameBestPractice,
-  BenchmarkResult.Fail,
-);
 
-const mockPartialReverseResolutionWeightBenchmark = createMockBenchmark(
+const mockPartialReverseResolutionBenchmark = createMockBenchmark(
   mockResolvePrimaryNameBestPractice,
   BenchmarkResult.PartialPass,
 );
@@ -81,28 +76,28 @@ const mockPendingReverseResolutionBenchmark = {
 } as const satisfies AppBenchmarkPending;
 
 describe("benchmarks-utils", () => {
-  describe("getBenchmarkWeight", () => {
-    it("Should return the correct weight for each benchmark result type", () => {
+  describe("getBenchmarkPoints", () => {
+    it("Should return correct points for each benchmark result type", () => {
       const benchmarkCases = [
         {
           benchmark: mockPassingReverseResolutionBenchmark,
-          expectedWeight: 1,
+          expectedPoints: 1,
         },
         {
           benchmark: mockPartialDisplayProfilesBenchmark,
-          expectedWeight: 0.5,
+          expectedPoints: 0.5,
         },
         {
-          benchmark: mockFailingReverseResolutionWeightBenchmark,
-          expectedWeight: 0,
+          benchmark: mockFailingReverseResolutionBenchmark,
+          expectedPoints: 0,
         },
       ];
 
-      benchmarkCases.forEach(({ benchmark, expectedWeight }) => {
+      benchmarkCases.forEach(({ benchmark, expectedPoints }) => {
         expect(
-          getBenchmarkWeight(benchmark),
-          `Expected getBenchmarkWeight to return ${expectedWeight} for benchmark "${benchmark.bestPractice.id}"`,
-        ).toEqual(expectedWeight);
+          getBenchmarkPoints(benchmark),
+          `Expected getBenchmarkPoints to return ${expectedPoints} for benchmark "${benchmark.bestPractice.id}"`,
+        ).toEqual(expectedPoints);
       });
     });
   });
@@ -138,14 +133,14 @@ describe("benchmarks-utils", () => {
   });
 
   describe("calcCategoryScore", () => {
-    it("Should return 0 for an empty array", () => {
+    it("Should return undefined for an empty array", () => {
       expect(
         calcCategoryScore([]),
-        "Expected calcCategoryScore to return 0 for an empty benchmark list",
-      ).toEqual(0);
+        "Expected calcCategoryScore to return undefined for an empty benchmark list",
+      ).toEqual(undefined);
     });
 
-    it("Should return 0 when benchmarks belong to different categories", () => {
+    it("Should return undefined when benchmarks belong to different categories", () => {
       const mixedCategoryBenchmarks = [
         mockPassingReverseResolutionBenchmark,
         mockPartialDisplayProfilesBenchmark,
@@ -153,15 +148,15 @@ describe("benchmarks-utils", () => {
 
       expect(
         calcCategoryScore(mixedCategoryBenchmarks),
-        "Expected calcCategoryScore to return 0 when benchmarks span multiple categories",
-      ).toEqual(0);
+        "Expected calcCategoryScore to return undefined when benchmarks span multiple categories",
+      ).toEqual(undefined);
     });
 
     it("Should return the rounded category score for valid benchmarks", () => {
       const validCategoryBenchmarks = [
         mockPassingReverseResolutionBenchmark,
         mockFailingReverseResolutionBenchmark,
-        mockFailingReverseResolutionWeightBenchmark,
+        mockFailingReverseResolutionBenchmark,
       ];
 
       const result = calcCategoryScore(validCategoryBenchmarks);
@@ -199,15 +194,15 @@ describe("benchmarks-utils", () => {
         mockPendingReverseResolutionBenchmark,
         mockFailingReverseResolutionBenchmark,
         mockPassingReverseResolutionBenchmark,
-        mockFailingReverseResolutionWeightBenchmark,
-        mockPartialReverseResolutionWeightBenchmark,
+        mockFailingReverseResolutionBenchmark,
+        mockPartialReverseResolutionBenchmark,
       ];
 
       const expectedOutput = [
         mockPassingReverseResolutionBenchmark,
-        mockPartialReverseResolutionWeightBenchmark,
+        mockPartialReverseResolutionBenchmark,
         mockFailingReverseResolutionBenchmark,
-        mockFailingReverseResolutionWeightBenchmark,
+        mockFailingReverseResolutionBenchmark,
         mockPendingReverseResolutionBenchmark,
       ];
 
@@ -218,26 +213,6 @@ describe("benchmarks-utils", () => {
           result[index],
         ),
       );
-    });
-  });
-
-  describe("allBenchmarksPending", () => {
-    it("should return true if all benchmarks are pending", () => {
-      const pendingBenchmarks = [
-        mockPendingReverseResolutionBenchmark,
-        mockPendingReverseResolutionBenchmark,
-      ];
-
-      expect(allBenchmarksPending(pendingBenchmarks)).toBe(true);
-    });
-
-    it("should return false if any benchmark is not pending", () => {
-      const mixedBenchmarks = [
-        mockPendingReverseResolutionBenchmark,
-        mockFailingReverseResolutionBenchmark,
-      ];
-
-      expect(allBenchmarksPending(mixedBenchmarks)).toBe(false);
     });
   });
 });

@@ -10,7 +10,7 @@ const LiquityProject: Project = {
   icon: LiquityIcon,
   socials: {
     twitter: new URL("https://x.com/LiquityProtocol"),
-    website: new URL("https://www.liquity.org/"),
+    website: new URL("https://www.liquity.org"),
   },
 };
 

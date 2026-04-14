@@ -18,11 +18,11 @@ const GivethDeFi: DeFiProtocol = {
   icon: GivethIcon,
   socials: {
     twitter: new URL("https://x.com/giveth"),
-    website: new URL("https://giveth.io/"),
+    website: new URL("https://giveth.io"),
     ens: "giv.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/giveth-defi/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/giveth-defi/twitter-og.png",
+  ogImagePath: "giveth-defi/og.png",
+  twitterOgImagePath: "giveth-defi/twitter-og.png",
 };
 
 defineProtocol(GivethDeFi);

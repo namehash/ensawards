@@ -18,11 +18,11 @@ const CorkDeFi: DeFiProtocol = {
   icon: CorkIcon,
   socials: {
     twitter: new URL("https://x.com/Corkprotocol"),
-    website: new URL("https://www.cork.tech/"),
+    website: new URL("https://www.cork.tech"),
     ens: "cork.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/cork-defi/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/cork-defi/twitter-og.png",
+  ogImagePath: "cork-defi/og.png",
+  twitterOgImagePath: "cork-defi/twitter-og.png",
 };
 
 defineProtocol(CorkDeFi);

@@ -5,20 +5,13 @@ import {
   type EffectiveAppBenchmark,
 } from "data/apps/benchmarks-types.ts";
 import {
-  allBenchmarksPending as allBenchmarksPendingUtil,
   calcCategoryScore,
   compareBenchmarks,
   groupBenchmarksByCategory,
 } from "data/apps/benchmarks-utils.ts";
 import type { App } from "data/apps/types.ts";
-import { calculateAppEnsAwardsScore, getAppById } from "data/apps/utils.ts";
-import {
-  ChevronRight,
-  X as FailIcon,
-  Check as PartialPassIcon,
-  CheckCheck as PassIcon,
-  Clock as PendingIcon,
-} from "lucide-react";
+import { calcAppEnsAwardsScore, getAppById } from "data/apps/utils.ts";
+import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 import { EnsAwardsBarScorePending } from "@/components/atoms/ens-awards-score/bar-pending.tsx";
@@ -28,22 +21,12 @@ import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarks
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
+import {
+  benchmarkResultToBadgeStyles,
+  getBenchmarkIcon,
+  getBenchmarkResultLabel,
+} from "../badges/BenchmarkResultBadge.tsx";
 import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
-
-const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark) => {
-  if (benchmark.status === BenchmarkStatuses.Pending) {
-    return <PendingIcon className="h-5 w-5 text-gray-500/50" />;
-  }
-
-  switch (benchmark.result) {
-    case BenchmarkResult.Pass:
-      return <PassIcon className="h-6 w-6 text-emerald-600" />;
-    case BenchmarkResult.PartialPass:
-      return <PartialPassIcon className="h-6 w-6 text-orange-600" />;
-    case BenchmarkResult.Fail:
-      return <FailIcon className="h-6 w-6 text-red-600" />;
-  }
-};
 
 interface BenchmarkCategorySectionProps {
   app: App;
@@ -55,7 +38,6 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
   const categoryScore = calcCategoryScore(group);
-  const allBenchmarksPending = allBenchmarksPendingUtil(group);
 
   return (
     <div ref={animationParent} className="w-full border-t border-gray-200 py-4">
@@ -65,11 +47,7 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
         aria-expanded={isOpen}
         className="flex w-full items-center gap-3 text-left"
       >
-        {allBenchmarksPending ? (
-          <AllBenchmarksPendingIcon />
-        ) : (
-          <EnsAwardsCircularScoreSmall score={categoryScore} />
-        )}
+        <EnsAwardsCircularScoreSmall score={categoryScore} />
         {/* This assumption is safe, because all benchmarks passed into this component belong to one BestPracticeCategory */}
         <span className="flex-1 text-lg leading-normal font-semibold text-black">
           {group[0].bestPractice.category.name}
@@ -95,15 +73,14 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
                 <GenericTooltip
                   tooltipOffset={1}
                   triggerAsChild
-                  content={
-                    <p>
-                      {benchmark.status === BenchmarkStatuses.Pending
-                        ? benchmark.status
-                        : benchmark.result}
-                    </p>
-                  }
+                  content={<p>{getBenchmarkResultLabel(benchmark)}</p>}
                 >
-                  <span className="shrink-0 cursor-pointer">{getBenchmarkIcon(benchmark)}</span>
+                  <span className="shrink-0 cursor-pointer">
+                    {getBenchmarkIcon(
+                      benchmark,
+                      cn("w-6 h-6", benchmarkResultToBadgeStyles(benchmark), "bg-transparent"),
+                    )}
+                  </span>
                 </GenericTooltip>
                 <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
                   {benchmark.bestPractice.name}
@@ -124,11 +101,9 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
   // A necessary step due to Astro Island's inner serialization logic
   const resolvedApp = getAppById(app.id) ?? app;
 
-  const appScore = calculateAppEnsAwardsScore(resolvedApp);
+  const appScore = calcAppEnsAwardsScore(resolvedApp);
   const benchmarkGroups = groupBenchmarksByCategory(resolvedApp.benchmarks);
   const AppIcon = resolvedApp.icon;
-
-  const allBenchmarksPending = allBenchmarksPendingUtil(resolvedApp.benchmarks);
 
   return (
     <TooltipProvider delayDuration={200} skipDelayDuration={0}>
@@ -140,11 +115,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
             </div>
             <h3 className="text-lg leading-normal font-semibold text-black">{resolvedApp.name}</h3>
           </div>
-          {allBenchmarksPending ? (
-            <EnsAwardsBarScorePending mobileAdaptive={false} />
-          ) : (
-            <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
-          )}
+          <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
         </div>
         {benchmarkGroups.map((group, index) => {
           if (group.length === 0) return null;

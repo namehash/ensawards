@@ -17,33 +17,56 @@ export interface BenchmarkResultBadgeProps {
   className?: string;
 }
 
-const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark) => {
+export const benchmarkResultToBadgeStyles = (benchmark: EffectiveAppBenchmark) => {
   if (benchmark.status === BenchmarkStatuses.Pending) {
-    return <PendingIcon width={16} height={16} />;
+    return "text-muted-foreground bg-black/8";
   }
   switch (benchmark.result) {
-    case BenchmarkResult.Pass:
-      return <PassIcon width={16} height={16} />;
     case BenchmarkResult.PartialPass:
-      return <PartialPassIcon width={16} height={16} />;
+      return "text-orange-600 bg-orange-100";
+    case BenchmarkResult.Pass:
+      return "text-emerald-600 bg-emerald-100";
     case BenchmarkResult.Fail:
-      return <FailIcon width={16} height={16} />;
+    default:
+      return "text-red-600 bg-[rgba(220,38,38,0.1)]";
   }
 };
 
+export const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark, className?: string) => {
+  if (benchmark.status === BenchmarkStatuses.Pending) {
+    return <PendingIcon className={className} />;
+  }
+  switch (benchmark.result) {
+    case BenchmarkResult.Pass:
+      return <PassIcon className={className} />;
+    case BenchmarkResult.PartialPass:
+      return <PartialPassIcon className={className} />;
+    case BenchmarkResult.Fail:
+      return <FailIcon className={className} />;
+  }
+};
+
+export const getBenchmarkResultLabel = (benchmark: EffectiveAppBenchmark): string => {
+  if (benchmark.status === BenchmarkStatuses.Pending) {
+    return BenchmarkStatuses.Pending;
+  }
+
+  return benchmark.result;
+};
+
 export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBadgeProps) {
+  const BenchmarkIcon = getBenchmarkIcon(benchmark, "w-4 h-4");
   return (
     <span
       className={cn(
         "w-fit flex flex-row flex-nowrap justify-center items-center gap-1.5 pl-2.5 pr-3 py-1 rounded-full " +
           "text-xs leading-normal font-medium cursor-default",
+        benchmarkResultToBadgeStyles(benchmark),
         className,
       )}
     >
-      {getBenchmarkIcon(benchmark)}
-      {benchmark.status === BenchmarkStatuses.Pending
-        ? BenchmarkStatuses.Pending
-        : benchmark.result}
+      {BenchmarkIcon}
+      {getBenchmarkResultLabel(benchmark)}
     </span>
   );
 }

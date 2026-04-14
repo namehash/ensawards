@@ -17,12 +17,12 @@ const ArbitrumDao: DAOProtocol = {
     "The Arbitrum DAO provides governance for Arbitrum, a unified blockchain for everyone, where ideas thrive and boundaries fade.",
   icon: ArbitrumIcon,
   socials: {
-    website: new URL("https://arbitrum.foundation/"),
+    website: new URL("https://arbitrum.foundation"),
     twitter: new URL("https://x.com/arbitrum"),
     ens: "arbfoundation.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/twitter-og.png",
+  ogImagePath: "arbitrum-dao/og.png",
+  twitterOgImagePath: "arbitrum-dao/twitter-og.png",
 };
 
 defineProtocol(ArbitrumDao);

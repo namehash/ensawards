@@ -13,7 +13,10 @@ import {
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import BenchmarkResultHeroBadge from "@/components/atoms/badges/BenchmarkResultHeroBadge.astro";
 import { type EffectiveAppBenchmark, BenchmarkStatuses } from "data/apps/benchmarks-types";
-import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard.tsx";
+import {
+  ContributorsCard,
+  ContributorsCardLoading,
+} from "@/components/atoms/cards/ContributorsCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import BenchmarkSummaryCard from "@/components/atoms/cards/BenchmarkSummaryCard.astro";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -119,7 +122,7 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
                 </a>
               </div>
             </BenchmarkSummaryCard>
-            <SuggestionCard
+            <ContributorsCard
               client:only="react"
               sidebarVariant
               whatsSuggested="benchmark result"
@@ -129,12 +132,12 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
                   : []
               }
               gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${resolvedApp.appSlug}/benchmarks.ts`}>
-              <SuggestionCardLoading
+              <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant
                 whatsSuggested="benchmark result"
               />
-            </SuggestionCard>
+            </ContributorsCard>
             <div class="hidden lg:block w-full">
               <AppSummaryCard client:load app={resolvedApp} />
             </div>

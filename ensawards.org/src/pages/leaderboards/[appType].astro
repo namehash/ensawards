@@ -10,11 +10,13 @@ import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
-import { calculateAppEnsAwardsScore, getAppTypeBySlug } from "data/apps/utils.ts";
-import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard";
+import { calcAppEnsAwardsScore, getAppTypeBySlug, compareApps } from "data/apps/utils.ts";
+import {
+  ContributorsCard,
+  ContributorsCardLoading,
+} from "@/components/atoms/cards/ContributorsCard";
 import { type Contribution } from "data/contributors/types";
-import { BenchmarkStatuses, type AppBenchmarkCompleted } from "data/apps/benchmarks-types";
-import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benchmarks-utils.ts";
+import { getAppContributions } from "data/contributors/utils.ts";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({
@@ -42,13 +44,7 @@ if (resolvedAppType !== undefined) {
   normalizedAppType = resolvedAppType.toLowerCase();
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedAppType).toLowerCase();
   appBenchmarkDataContributions = APPS.filter((app) => app.type === resolvedAppType).flatMap(
-    (app) =>
-      app.benchmarks
-        .filter(
-          (benchmark): benchmark is AppBenchmarkCompleted =>
-            benchmark.status === BenchmarkStatuses.Completed,
-        )
-        .flatMap((benchmark) => benchmark.contributions),
+    (app) => getAppContributions(app),
   );
 }
 ---
@@ -82,36 +78,17 @@ if (resolvedAppType !== undefined) {
           <div class="w-full md:w-3/5">
             <ItemsList containerStyles="gap-3 sm:gap-3">
               {APPS.filter((app) => app.type === resolvedAppType)
-                .sort((a, b) => {
-                  const aAllBenchmarksPending = allBenchmarksPendingUtil(
-                    a.benchmarks,
-                  );
-                  const bAllBenchmarksPending = allBenchmarksPendingUtil(
-                    b.benchmarks,
-                  );
-
-                  if (aAllBenchmarksPending && !bAllBenchmarksPending) return 1;
-                  if (!aAllBenchmarksPending && bAllBenchmarksPending)
-                    return -1;
-
-                  return (
-                    calculateAppEnsAwardsScore(b) -
-                    calculateAppEnsAwardsScore(a)
-                  );
-                })
+                .sort((a, b) => compareApps(a, b))
                 .map((app, idx) => {
                   const AppIcon = app.icon;
-                  const allBenchmarksPending = allBenchmarksPendingUtil(
-                    app.benchmarks,
-                  );
+                  const appScore = calcAppEnsAwardsScore(app);
                   return (
                     <LeaderboardCard
                       key={`app-review-card-${app.id}`}
                       name={app.name}
-                      ensAwardsScore={calculateAppEnsAwardsScore(app)}
+                      ensAwardsScore={appScore}
                       viewDetailsLink={`/app/${app.appSlug}`}
-                      viewDetailsText="App report"
-                      scorePending={allBenchmarksPending}>
+                      viewDetailsText="App report">
                       <AppIcon
                         slot="rankedEntityIcon"
                         className="w-10 h-10 rounded-md"
@@ -135,18 +112,18 @@ if (resolvedAppType !== undefined) {
             </ItemsList>
           </div>
           <div class="w-full md:w-2/5">
-            <SuggestionCard
+            <ContributorsCard
               client:only="react"
               whatsSuggested="app"
               allContributions={appBenchmarkDataContributions}
               gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/index.ts"
               sidebarVariant>
-              <SuggestionCardLoading
+              <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant
                 whatsSuggested="app"
               />
-            </SuggestionCard>
+            </ContributorsCard>
           </div>
         </div>
       </section>

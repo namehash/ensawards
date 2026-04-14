@@ -17,12 +17,12 @@ const ENSDao: DAOProtocol = {
     "The Ethereum Name Service (ENS) is a decentralized domain name system. The ENS DAO governs the ENS protocol and treasury.",
   icon: EnsIcon,
   socials: {
-    website: new URL("https://ensdao.org/"),
+    website: new URL("https://ensdao.org"),
     twitter: new URL("https://x.com/ENS_DAO"),
     ens: "ensdao.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/ens-dao/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/ens-dao/twitter-og.png",
+  ogImagePath: "ens-dao/og.png",
+  twitterOgImagePath: "ens-dao/twitter-og.png",
 };
 
 defineProtocol(ENSDao);

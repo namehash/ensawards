@@ -10,7 +10,7 @@ const UniswapProject: Project = {
     "The largest onchain marketplace. Buy and sell crypto on Ethereum and 12+ other chains.",
   icon: UniswapIcon,
   socials: {
-    website: new URL("https://app.uniswap.org/"),
+    website: new URL("https://app.uniswap.org"),
     twitter: new URL("https://x.com/Uniswap"),
   },
 };

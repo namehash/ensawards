@@ -17,12 +17,12 @@ const TaikoDeFi: DeFiProtocol = {
     "Ethereum-equivalent zkRollup protocol enabling decentralized, permissionless Layer-2 scaling secured by Ethereum.",
   icon: TaikoIcon,
   socials: {
-    website: new URL("https://taiko.xyz/"),
+    website: new URL("https://taiko.xyz"),
     twitter: new URL("https://x.com/taikoxyz"),
     ens: "taiko.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/taiko-defi/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/taiko-defi/twitter-og.png",
+  ogImagePath: "taiko-defi/og.png",
+  twitterOgImagePath: "taiko-defi/twitter-og.png",
 };
 
 defineProtocol(TaikoDeFi);

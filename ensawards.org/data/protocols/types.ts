@@ -60,7 +60,9 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
     twitter: URL;
     ens?: Name;
   };
+  /** Relative path from the protocol data root to the Open Graph image for the protocol. */
   ogImagePath?: string;
+  /** Relative path from the protocol data root to the Twitter Open Graph image for the protocol. */
   twitterOgImagePath?: string;
 }
 

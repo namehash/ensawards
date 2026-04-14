@@ -21,10 +21,15 @@ import { sortByResolutionStatus } from "@/contract-pipelines/sorting";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "@/utils/styles";
 import { type Protocol } from "data/protocols/types";
+import { buildProtocolOgImageUrlHref } from "data/protocols/utils";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils";
 import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils";
-import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard";
+import {
+  ContributorsCard,
+  ContributorsCardLoading,
+} from "@/components/atoms/cards/ContributorsCard";
 import { type Contribution } from "data/contributors/types";
+import { getProtocolContributions } from "data/contributors/utils";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -54,9 +59,7 @@ if (resolvedProtocol) {
   ProtocolIcon = resolvedProtocol.icon;
   protocolScore =
     getContractNamingScoresByProtocolType(resolvedProtocol.protocolType)[resolvedProtocol.id] ?? 0;
-  protocolContractsDataContributions = protocolContracts
-    .map((contract) => contract.contributions)
-    .flat();
+  protocolContractsDataContributions = getProtocolContributions(resolvedProtocol);
 }
 ---
 
@@ -70,8 +73,10 @@ if (resolvedProtocol) {
         title: `ENSAwards: ${resolvedProtocol.name} ENS Integration Benchmarks`,
         description: resolvedProtocol.description,
         url: `https://ensawards.org/protocol/${resolvedProtocol.protocolSlug}`,
-        ogImage: resolvedProtocol.ogImagePath,
-        twitterImage: resolvedProtocol.twitterOgImagePath,
+        ogImage: buildProtocolOgImageUrlHref(resolvedProtocol.ogImagePath),
+        twitterImage: buildProtocolOgImageUrlHref(
+          resolvedProtocol.twitterOgImagePath,
+        ),
       }}>
       <SubpageHero
         header={resolvedProtocol.name}
@@ -123,13 +128,13 @@ if (resolvedProtocol) {
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ContractNamingBanner />
-        <SuggestionCard
+        <ContributorsCard
           client:only="react"
           whatsSuggested="contract"
           allContributions={protocolContractsDataContributions}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}>
-          <SuggestionCardLoading slot="fallback" whatsSuggested="contract" />
-        </SuggestionCard>
+          <ContributorsCardLoading slot="fallback" whatsSuggested="contract" />
+        </ContributorsCard>
         <ItemsList
           header="Smart contract naming"
           containerStyles="gap-3 sm:gap-2">

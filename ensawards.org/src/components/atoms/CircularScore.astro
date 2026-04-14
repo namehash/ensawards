@@ -1,18 +1,14 @@
 ---
 import { cn } from "../../utils/tailwindClassConcatenation";
+import { type EnsAwardsScore } from "@/components/atoms/ens-awards-score/shared";
+
 export interface CircularScoreProps {
-  score: number;
-  scorePending?: boolean;
+  score?: EnsAwardsScore;
   size?: number;
   strokeWidth?: number;
 }
 
-const {
-  score,
-  scorePending = false,
-  size = 139,
-  strokeWidth = 10,
-}: CircularScoreProps = Astro.props;
+const { score, size = 139, strokeWidth = 10 }: CircularScoreProps = Astro.props;
 
 const gradientStartColors = ["#12D494", "#ffd230", "#fb2c36"];
 const gradientStopColors = ["#0D9A6B", "#e17100", "#c10007"];
@@ -32,7 +28,7 @@ const getGradientColorIndex = (score: number) => {
   return 0;
 };
 
-const gradientIndex = getGradientColorIndex(score);
+const gradientIndex = getGradientColorIndex(score ?? 0);
 const colorFrom = gradientStartColors[gradientIndex];
 const colorTo = gradientStopColors[gradientIndex];
 
@@ -82,7 +78,7 @@ const circumference = 2 * Math.PI * radius;
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-0">
     {
-      scorePending ? (
+      score === undefined ? (
         <p class="text-base leading-normal font-semibold text-[rgba(245,245,245,0.5)]">
           Pending
         </p>
@@ -95,7 +91,7 @@ const circumference = 2 * Math.PI * radius;
       )
     }
     {
-      !scorePending && (
+      score !== undefined && (
         <p class={cn("text-4xl text-white leading-8 font-semibold")}>%</p>
       )
     }

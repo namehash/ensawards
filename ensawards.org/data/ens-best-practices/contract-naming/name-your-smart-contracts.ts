@@ -9,9 +9,9 @@ import { defineBestPractice } from "../registry.ts";
 import { type BestPracticeProtocol, BestPracticeTypes, ProtocolTypes } from "../types.ts";
 import ContractNamingCategory from ".";
 
-const technicalDetailsMainContent = `Contracts should be [assigned ENS names](https://docs.ens.domains/web/naming-contracts/) during or after deployment. 
+const technicalDetailsMainContent = `Contracts should be [assigned ENS names](https://docs.ens.domains/web/naming-contracts) during or after deployment. 
 For deployment-time naming, see the [Enscribe documentation](https://www.enscribe.xyz/docs/introduction/naming-contracts) which goes into greater detail on the process. 
-For post-deployment naming we recommend using the [Enscribe App](https://app.enscribe.xyz/). 
+For post-deployment naming we recommend using the [Enscribe App](https://app.enscribe.xyz). 
 Note that setting a [primary name](https://docs.ens.domains/web/reverse) (reverse resolution) requires the contract to implement 
 [Ownable](https://docs.openzeppelin.com/contracts/5.x/access-control#ownership-and-ownable). 
 Contracts without Ownable can still have forward resolution configured (\`name → address\`) but cannot set a reverse record (\`address → name\`).`;

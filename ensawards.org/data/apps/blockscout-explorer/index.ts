@@ -16,14 +16,14 @@ const BlockscoutExplorer: App = {
   description: "Blockscout is a tool for inspecting and analyzing EVM-based blockchains.",
   type: AppTypes.Explorer,
   socials: {
-    website: new URL("https://www.blockscout.com/"),
+    website: new URL("https://www.blockscout.com"),
     twitter: new URL("https://x.com/blockscout"),
     ens: "blockscout.eth",
   },
   icon: BlockscoutIcon,
   benchmarks: buildEffectiveAppBenchmarks(BlockscoutExplorerBenchmarks, AppTypes.Explorer),
-  ogImagePath: "https://ensawards.org/data/apps/blockscout-explorer/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/apps/blockscout-explorer/twitter-og.png",
+  ogImagePath: "blockscout-explorer/og.png",
+  twitterOgImagePath: "blockscout-explorer/twitter-og.png",
 };
 
 defineApp(BlockscoutExplorer);

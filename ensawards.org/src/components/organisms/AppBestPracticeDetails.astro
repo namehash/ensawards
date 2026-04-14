@@ -4,12 +4,9 @@ import { BenchmarkStatuses } from "data/apps/benchmarks-types.ts";
 import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import SubpageHero from "../molecules/SubpageHero.astro";
-import { calculateAppSupport } from "data/apps/utils.ts";
-import {
-  allBenchmarksPending as allBenchmarksPendingUtil,
-  compareBenchmarks,
-} from "data/apps/benchmarks-utils";
-import { SuggestionCard, SuggestionCardLoading } from "../atoms/cards/SuggestionCard.tsx";
+import { calcBestPracticeEnsAwardsScore } from "data/apps/utils.ts";
+import { compareBenchmarks } from "data/apps/benchmarks-utils";
+import { ContributorsCard, ContributorsCardLoading } from "../atoms/cards/ContributorsCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import {
   BenchmarksPerAppTypeCard,
@@ -37,16 +34,13 @@ const appsWithBenchmarks = APPS.map((app) => {
     app,
     benchmark: matchingBenchmark,
   };
-});
-
-// Filter out apps that don't have a benchmark for this best practice
-const appsWithValidBenchmarks = appsWithBenchmarks.filter(
+}).filter(
   (appWithBenchmark): appWithBenchmark is AppWithBenchmark =>
     appWithBenchmark.benchmark !== undefined,
 );
 
 // Sort benchmark results
-const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
+const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
   // First try to differentiate by benchmarks
   const benchmarksDiff = compareBenchmarks(a.benchmark, b.benchmark);
 
@@ -56,21 +50,16 @@ const sortedAppsByBenchmark = appsWithValidBenchmarks.sort((a, b) => {
   return a.app.name.localeCompare(b.app.name);
 });
 
-const appSupport = calculateAppSupport(bestPractice);
+const bestPracticeScore = calcBestPracticeEnsAwardsScore(bestPractice);
 
-const benchmarkDataContributions: Contribution[] = appsWithValidBenchmarks.flatMap(
-  ({ benchmark }) =>
-    benchmark.status === BenchmarkStatuses.Completed ? benchmark.contributions : [],
+const benchmarkDataContributions: Contribution[] = appsWithBenchmarks.flatMap(({ benchmark }) =>
+  benchmark.status === BenchmarkStatuses.Completed ? benchmark.contributions : [],
 );
 
 const allContributions: Contribution[] = [
   ...bestPractice.contributions,
   ...benchmarkDataContributions,
 ];
-
-const allBenchmarksPending = allBenchmarksPendingUtil(
-  appsWithValidBenchmarks.map(({ benchmark }) => benchmark),
-);
 
 const additionalInfoContainerStyles =
   "flex flex-row md:flex-col flex-nowrap justify-between md:justify-center items-center md:items-end md:gap-0 leading-7 max-md:self-stretch";
@@ -106,12 +95,12 @@ const additionalInfoContainerStyles =
       )}>
       <p class="text-gray-400 whitespace-nowrap">App support</p>
       {
-        allBenchmarksPending ? (
+        bestPracticeScore === undefined ? (
           <p class="text-base leading-normal font-semibold text-white">
             Pending
           </p>
         ) : (
-          <ScoreBar score={appSupport} mobileAdaptive={false} />
+          <ScoreBar score={bestPracticeScore} mobileAdaptive={false} />
         )
       }
     </div>
@@ -123,18 +112,18 @@ const additionalInfoContainerStyles =
     class="w-full max-w-[1216px] flex flex-nowrap flex-col md:flex-row gap-6 md:gap-20 justify-start md:justify-center items-start">
     <BestPracticeTechnicalDetails bestPractice={bestPractice} />
     <div class="w-full md:w-1/2 h-fit box-border flex flex-col gap-5">
-      <SuggestionCard
+      <ContributorsCard
         client:only="react"
         sidebarVariant
         whatsSuggested="best practice"
         allContributions={allContributions}
         gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
-        <SuggestionCardLoading
+        <ContributorsCardLoading
           slot="fallback"
           sidebarVariant
           whatsSuggested="best practice"
         />
-      </SuggestionCard>
+      </ContributorsCard>
       {
         bestPractice.appliesTo.map((appliesTo) => (
           <BenchmarksPerAppTypeCard

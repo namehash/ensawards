@@ -14,7 +14,10 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById } from "data/protocols/utils.ts";
-import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard.tsx";
+import {
+  ContributorsCard,
+  ContributorsCardLoading,
+} from "@/components/atoms/cards/ContributorsCard.tsx";
 import { type Contribution } from "data/contributors/types";
 import { CONTRACTS } from "data/protocols/contracts";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
@@ -137,18 +140,18 @@ const additionalInfoContainerStyles =
           )}>Learn more about Enscribe</a
         >
       </div>
-      <SuggestionCard
+      <ContributorsCard
         client:only="react"
         sidebarVariant
         whatsSuggested="best practice"
         allContributions={allContributions}
         gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
-        <SuggestionCardLoading
+        <ContributorsCardLoading
           slot="fallback"
           sidebarVariant
           whatsSuggested="best practice"
         />
-      </SuggestionCard>
+      </ContributorsCard>
     </div>
   </div>
 </section>

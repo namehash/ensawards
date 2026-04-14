@@ -21,6 +21,10 @@ const contracts: Contract[] = [
         codeName: "SSVNetwork",
       },
       name: "ssvnetwork.eth",
+      profile: {
+        docs: new URL("https://docs.ssv.network/developers/smart-contracts/ssvnetwork"),
+        avatar: new URL("ipfs://bafkreier3kfqjrm6uj6gvncvk233f4x7vymlc2t53fbyfsoq7qafehbcla"),
+      }
     },
     contributions: [
       { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-08T16:30:00.000Z") },

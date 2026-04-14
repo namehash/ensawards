@@ -16,12 +16,12 @@ const LiquityDeFi: DeFiProtocol = {
   description: "DeFi protocol for borrowing against ETH & staked ETH.",
   icon: LiquityIcon,
   socials: {
-    website: new URL("https://www.liquity.org/"),
+    website: new URL("https://www.liquity.org"),
     twitter: new URL("https://x.com/LiquityProtocol"),
     ens: "liquity-protocol.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/liquity-defi/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/liquity-defi/twitter-og.png",
+  ogImagePath: "liquity-defi/og.png",
+  twitterOgImagePath: "liquity-defi/twitter-og.png",
 };
 
 defineProtocol(LiquityDeFi);

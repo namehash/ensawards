@@ -17,12 +17,12 @@ const NounsDao: DAOProtocol = {
     "Nouns is a community-owned brand that makes a positive impact by funding ideas and fostering collaboration.",
   icon: NounsIcon,
   socials: {
-    website: new URL("https://nouns.wtf/"),
+    website: new URL("https://nouns.wtf"),
     twitter: new URL("https://x.com/nounsdao"),
     ens: "nouns.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/nouns-dao/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/nouns-dao/twitter-og.png",
+  ogImagePath: "nouns-dao/og.png",
+  twitterOgImagePath: "nouns-dao/twitter-og.png",
 };
 
 defineProtocol(NounsDao);

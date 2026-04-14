@@ -1,4 +1,4 @@
-import type { EnsAwardsScore } from "@/utils/types.ts";
+import type { EnsAwardsScore } from "@/components/atoms/ens-awards-score/types";
 
 import type {
   BestPractice,
@@ -10,7 +10,7 @@ import {
   BenchmarkResult,
   BenchmarkStatuses,
 } from "./benchmarks-types.ts";
-import { getBenchmarkWeight } from "./benchmarks-utils.ts";
+import { getBenchmarkPoints } from "./benchmarks-utils.ts";
 import { APPS } from "./index.ts";
 import { type App, type AppType, AppTypes } from "./types.ts";
 
@@ -47,23 +47,25 @@ export const getAppByName = (appName: string): App | undefined => {
 };
 
 /**
- * Calculates {@link EnsAwardsScore} for an app as a percentage of passed benchmark weight.
+ * Calculates {@link EnsAwardsScore} for an app.
+ *
+ * @returns undefined - if no benchmarks are completed or the list of app's benchmarks is empty.
  */
-export const calculateAppEnsAwardsScore = (app: App): EnsAwardsScore => {
+export const calcAppEnsAwardsScore = (app: App): EnsAwardsScore | undefined => {
   const completedBenchmarks = app.benchmarks.filter(
     (benchmark): benchmark is AppBenchmarkCompleted =>
       benchmark.status === BenchmarkStatuses.Completed,
   );
 
-  if (completedBenchmarks.length === 0) return 0;
+  if (completedBenchmarks.length === 0) return undefined;
 
-  const accumulatedBenchmarksScore = completedBenchmarks.reduce(
-    (sum, benchmark) => sum + getBenchmarkWeight(benchmark),
+  const accumulatedBenchmarkPoints = completedBenchmarks.reduce(
+    (sum, benchmark) => sum + getBenchmarkPoints(benchmark),
     0,
   );
 
   // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
-  const score = Math.round((accumulatedBenchmarksScore * 100) / completedBenchmarks.length);
+  const score = Math.round((accumulatedBenchmarkPoints * 100) / completedBenchmarks.length);
 
   // Check EnsAwardsScore invariants
   if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
@@ -76,16 +78,19 @@ export const calculateAppEnsAwardsScore = (app: App): EnsAwardsScore => {
 };
 
 /**
- * Calculates how well the benchmarked apps apply this {@link BestPractice}.
+ * Calculates an {@link EnsAwardsScore} for a {@link BestPractice},
+ * by calculating the average score of all apps that were benchmarked on this best practice.
  *
- * For now, the weights for different {@link BenchmarkResult}s are:
- * {@link BenchmarkResult.Pass} = 1.0
- * {@link BenchmarkResult.PartialPass} = 0.5
- * {@link BenchmarkResult.Fail} = 0.0
+ * @returns `undefined` if no apps were benchmarked on this best practice,
+ * otherwise returns an integer between 0 and 100.
+ *
+ * The points awarded for different {@link BenchmarkResult}s are defined by the {@link getBenchmarkPoints} function.
  */
-export const calculateAppSupport = (bestPractice: BestPracticeApp): EnsAwardsScore => {
+export const calcBestPracticeEnsAwardsScore = (
+  bestPractice: BestPracticeApp,
+): EnsAwardsScore | undefined => {
   let benchmarkedApps = 0;
-  let appSupport = 0;
+  let bestPracticePoints = 0;
 
   for (const app of APPS) {
     const appBenchmark = app.benchmarks.find(
@@ -100,12 +105,12 @@ export const calculateAppSupport = (bestPractice: BestPracticeApp): EnsAwardsSco
 
     benchmarkedApps += 1;
 
-    appSupport += getBenchmarkWeight(appBenchmark);
+    bestPracticePoints += getBenchmarkPoints(appBenchmark);
   }
 
-  if (benchmarkedApps === 0) return 0;
+  if (benchmarkedApps === 0) return undefined;
 
-  const score = Math.round((appSupport * 100) / benchmarkedApps);
+  const score = Math.round((bestPracticePoints * 100) / benchmarkedApps);
 
   // Check EnsAwardsScore invariants
   if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
@@ -122,7 +127,7 @@ export const calculateAppSupport = (bestPractice: BestPracticeApp): EnsAwardsSco
  *
  * For now, both {@link BenchmarkResult.Pass} and {@link BenchmarkResult.PartialPass} are treated as a pass.
  */
-export const calculateAppsPassed = (bestPractice: BestPracticeApp): number => {
+export const calcAppsPassed = (bestPractice: BestPracticeApp): number => {
   let appsPassed = 0;
 
   APPS.forEach((app) => {
@@ -150,3 +155,27 @@ export const calculateAppsPassed = (bestPractice: BestPracticeApp): number => {
  */
 export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
   Object.values(AppTypes).every((appType) => targets.includes(appType));
+
+/**
+ * Compares two apps based on their {@link EnsAwardsScore}.
+ */
+export const compareApps = (a: App, b: App): number => {
+  const aEnsAwardsScore = calcAppEnsAwardsScore(a);
+  const bEnsAwardsScore = calcAppEnsAwardsScore(b);
+
+  if (aEnsAwardsScore === undefined && bEnsAwardsScore === undefined) return 0;
+  if (bEnsAwardsScore === undefined) return 1;
+  if (aEnsAwardsScore === undefined) return -1;
+
+  return bEnsAwardsScore - aEnsAwardsScore;
+};
+
+/** Builds the URL's href for an app's Open Graph image.
+ *
+ * @returns undefined if the app doesn't have an og image path, otherwise returns the URL string for the og image.
+ */
+export const buildAppOgImageUrlHref = (imagePath: string | undefined): string | undefined => {
+  if (!imagePath) return undefined;
+
+  return new URL(imagePath, "https://ensawards.org/data/apps/").href;
+};

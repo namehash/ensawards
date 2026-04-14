@@ -1,9 +1,11 @@
 import { getAppSupportColor } from "@/utils/styles";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import type { EnsAwardsScore } from "@/utils/types";
+
+import { EnsAwardsBarScorePending } from "./bar-pending";
+import type { EnsAwardsScore } from "./types";
 
 export interface EnsAwardsBarScoreProps {
-  score: EnsAwardsScore;
+  score?: EnsAwardsScore;
 
   /**
    * Whether the score UI is adapted for mobile screen sizes or not.
@@ -18,6 +20,8 @@ export interface EnsAwardsBarScoreProps {
 }
 
 export const EnsAwardsBarScore = ({ score, mobileAdaptive = true }: EnsAwardsBarScoreProps) => {
+  if (score === undefined) return <EnsAwardsBarScorePending mobileAdaptive={mobileAdaptive} />;
+
   return (
     <div
       className={cn(
@@ -33,7 +37,7 @@ export const EnsAwardsBarScore = ({ score, mobileAdaptive = true }: EnsAwardsBar
   );
 };
 
-export const ScoreBar = ({ score, mobileAdaptive }: EnsAwardsBarScoreProps) => (
+export const ScoreBar = ({ score, mobileAdaptive }: Required<EnsAwardsBarScoreProps>) => (
   <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
     <div
       className={cn(

@@ -12,7 +12,10 @@ import {
   type EffectiveAppBenchmark,
 } from "data/apps/benchmarks-types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { type BenchmarkResultBadgeProps } from "./BenchmarkResultBadge.tsx";
+import {
+  type BenchmarkResultBadgeProps,
+  getBenchmarkResultLabel,
+} from "./BenchmarkResultBadge.tsx";
 
 const { benchmark, className }: BenchmarkResultBadgeProps = Astro.props;
 
@@ -62,10 +65,6 @@ const { symbol, symbolAlt } = benchmarkResultContent(benchmark);
     quality={100}
   />
   <p class="text-center text-base font-medium leading-normal text-[#F5F5F5]">
-    {
-      benchmark.status === BenchmarkStatuses.Pending
-        ? BenchmarkStatuses.Pending
-        : benchmark.result
-    }
+    {getBenchmarkResultLabel(benchmark)}
   </p>
 </div>

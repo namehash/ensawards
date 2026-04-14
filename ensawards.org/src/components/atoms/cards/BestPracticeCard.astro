@@ -4,10 +4,8 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
 import EnscribeIcon from "@/components/atoms/icons/EnscribeIconLight.astro";
-import { calculateAppSupport } from "data/apps/utils.ts";
+import { calcBestPracticeEnsAwardsScore } from "data/apps/utils.ts";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
-import { APPS } from "data/apps";
-import { allBenchmarksPending as allBenchmarksPendingUtil } from "data/apps/benchmarks-utils.ts";
 
 export interface BestPracticeCardProps {
   bestPractice: BestPractice;
@@ -15,14 +13,10 @@ export interface BestPracticeCardProps {
 
 const { bestPractice }: BestPracticeCardProps = Astro.props;
 
-const allBenchmarksPending =
+const bestPracticeEnsAwardsScore =
   bestPractice.type === BestPracticeTypes.App
-    ? allBenchmarksPendingUtil(
-        APPS.filter((app) => bestPractice.appliesTo.includes(app.type)).flatMap((app) =>
-          app.benchmarks.filter((benchmark) => benchmark.bestPractice.id === bestPractice.id),
-        ),
-      )
-    : false;
+    ? calcBestPracticeEnsAwardsScore(bestPractice)
+    : undefined;
 ---
 
 <a
@@ -83,11 +77,11 @@ const allBenchmarksPending =
       </p>
       {
         bestPractice.type === BestPracticeTypes.App ? (
-          allBenchmarksPending ? (
+          bestPracticeEnsAwardsScore === undefined ? (
             <p class="text-sm leading-normal font-medium text-black">Pending</p>
           ) : (
             <ScoreBar
-              score={calculateAppSupport(bestPractice)}
+              score={bestPracticeEnsAwardsScore}
               mobileAdaptive={false}
             />
           )

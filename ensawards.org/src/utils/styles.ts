@@ -8,21 +8,6 @@ import { DeFiProtocolIds, type ProtocolId } from "../../data/protocols/types.ts"
 export const getAppSupportColor = (value: number): string =>
   value > 75 ? "emerald-600" : value > 35 ? "amber-600" : "red-600";
 
-export const benchmarkResultToBadgeStyles = (benchmark: EffectiveAppBenchmark) => {
-  if (benchmark.status === BenchmarkStatuses.Pending) {
-    return "text-muted-foreground bg-black/8";
-  }
-  switch (benchmark.result) {
-    case BenchmarkResult.PartialPass:
-      return "text-orange-600 bg-orange-100";
-    case BenchmarkResult.Pass:
-      return "text-emerald-600 bg-emerald-100";
-    case BenchmarkResult.Fail:
-    default:
-      return "text-red-600 bg-[rgba(220,38,38,0.1)]";
-  }
-};
-
 /**
  * Special styling for `ENS name` field because some protocols have really long contract names.
  *

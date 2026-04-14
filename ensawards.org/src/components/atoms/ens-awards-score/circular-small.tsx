@@ -1,7 +1,11 @@
+import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon";
 import { getAppSupportColor } from "@/utils/styles";
-import { type EnsAwardsScore } from "@/utils/types";
 
-export const EnsAwardsCircularScoreSmall = ({ score }: { score: EnsAwardsScore }) => {
+import { type EnsAwardsScore } from "./types";
+
+export const EnsAwardsCircularScoreSmall = ({ score }: { score?: EnsAwardsScore }) => {
+  if (score === undefined) return <AllBenchmarksPendingIcon />;
+
   const roundedScore = Math.round(score);
   const radius = 13;
   const circumference = 2 * Math.PI * radius;

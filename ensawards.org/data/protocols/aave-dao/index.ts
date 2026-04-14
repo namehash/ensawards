@@ -17,12 +17,12 @@ const AaveDao: DAOProtocol = {
     "The Aave DAO provides governance to DeFi's largest lending network: Aave, where you can earn, borrow, save, and swap with millions of users.",
   icon: AaveIcon,
   socials: {
-    website: new URL("https://aave.com/"),
+    website: new URL("https://aave.com"),
     twitter: new URL("https://x.com/aave"),
     ens: "aave.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/aave-dao/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/aave-dao/twitter-og.png",
+  ogImagePath: "aave-dao/og.png",
+  twitterOgImagePath: "aave-dao/twitter-og.png",
 };
 
 defineProtocol(AaveDao);

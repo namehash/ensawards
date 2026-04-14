@@ -16,8 +16,12 @@ import {
   getProtocolTypeBySlug,
   getAllProtocolContracts,
 } from "data/protocols/utils.ts";
-import { SuggestionCard, SuggestionCardLoading } from "@/components/atoms/cards/SuggestionCard";
+import {
+  ContributorsCard,
+  ContributorsCardLoading,
+} from "@/components/atoms/cards/ContributorsCard";
 import type { Contribution } from "data/contributors/types";
+import { getProtocolContributions } from "data/contributors/utils";
 
 export function getStaticPaths() {
   return Object.values(ProtocolTypes).map((protocolType) => ({
@@ -47,7 +51,7 @@ if (resolvedProtocolType) {
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedProtocolType);
   protocolScores = getContractNamingScoresByProtocolType(resolvedProtocolType);
   protocolContractDataContributions = Object.keys(protocolScores).flatMap((protocolId) =>
-    getAllProtocolContracts(protocolId as ProtocolId).flatMap((contract) => contract.contributions),
+    getProtocolContributions(getProtocolById(protocolId as ProtocolId)!),
   );
 }
 ---
@@ -116,18 +120,18 @@ if (resolvedProtocolType) {
             </ItemsList>
           </div>
           <div class="w-full md:w-2/5">
-            <SuggestionCard
+            <ContributorsCard
               client:only="react"
               whatsSuggested="protocol"
               allContributions={protocolContractDataContributions}
               gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/index.ts"
               sidebarVariant>
-              <SuggestionCardLoading
+              <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant
                 whatsSuggested="protocol"
               />
-            </SuggestionCard>
+            </ContributorsCard>
           </div>
         </div>
       </section>
