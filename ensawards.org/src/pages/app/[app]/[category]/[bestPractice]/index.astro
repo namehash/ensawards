@@ -67,9 +67,7 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
 ---
 
 {
-  resolvedBestPractice === undefined ||
-  resolvedApp === undefined ||
-  appBenchmark === undefined ? (
+  resolvedBestPractice === undefined || resolvedApp === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (

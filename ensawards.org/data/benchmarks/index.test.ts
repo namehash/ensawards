@@ -13,7 +13,7 @@ import { BENCHMARKS } from ".";
 describe("Benchmarks registry", () => {
   const data = BENCHMARKS;
 
-  describe("APP_BENCHMARKS", () => {
+  describe("BENCHMARKS", () => {
     it("Should have an explicit key for all apps", () => {
       const registryKeys = Object.keys(data);
       const appSlugs = APPS.map((app) => app.appSlug);
@@ -24,7 +24,7 @@ describe("Benchmarks registry", () => {
     });
   });
 
-  describe("All BestPracticeBenchmarks in APP_BENCHMARKS", () => {
+  describe("All BestPracticeBenchmarks in BENCHMARKS", () => {
     it("Should have an explicit key for all app-related best practices", () => {
       const bestPracticeSlugs = ENS_BEST_PRACTICES.filter(
         (bestPractice): bestPractice is BestPracticeApp =>

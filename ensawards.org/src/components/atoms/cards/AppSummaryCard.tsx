@@ -88,7 +88,12 @@ function BenchmarkCategorySection({
                     <span className="shrink-0 cursor-pointer">
                       {getBenchmarkIcon(
                         benchmark,
-                        cn("w-6 h-6", benchmarkResultToBadgeStyles(benchmark), "bg-transparent"),
+                        cn(
+                          "w-6 h-6",
+                          benchmarkResultToBadgeStyles(benchmark),
+                          "bg-transparent",
+                          benchmark === undefined && "p-0.5",
+                        ),
                       )}
                     </span>
                   </GenericTooltip>
