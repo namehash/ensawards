@@ -2,10 +2,8 @@
 // on adding and modifying apps
 
 import CoinbaseProject from "../../projects/coinbase";
-import { buildEffectiveAppBenchmarks } from "../benchmarks-utils.ts";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
-import CoinbaseWalletBenchmarks from "./benchmarks.ts";
 import CoinbaseIcon from "./icon.tsx";
 
 const CoinbaseWallet: App = {
@@ -21,7 +19,6 @@ const CoinbaseWallet: App = {
     ens: "coinbase.eth",
   },
   icon: CoinbaseIcon,
-  benchmarks: buildEffectiveAppBenchmarks(CoinbaseWalletBenchmarks, AppTypes.Wallet),
   ogImagePath: "coinbase-wallet/og.png",
   twitterOgImagePath: "coinbase-wallet/twitter-og.png",
 };

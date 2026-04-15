@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
-import { type BestPracticeApp } from "data/ens-best-practices/types";
+import { BestPracticeTypes, type BestPracticeApp } from "data/ens-best-practices/types";
 import { APPS } from "data/apps";
 import { type App } from "data/apps/types";
 import { getAppBySlug } from "data/apps/utils.ts";
@@ -12,7 +12,8 @@ import {
 } from "data/ens-best-practices/utils.ts";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import BenchmarkResultHeroBadge from "@/components/atoms/badges/BenchmarkResultHeroBadge.astro";
-import { type EffectiveAppBenchmark, BenchmarkStatuses } from "data/apps/benchmarks-types";
+import { type AppBenchmark } from "data/benchmarks/types";
+import { getBenchmarkByAppSlugAndBestPracticeSlug } from "data/benchmarks/utils";
 import {
   ContributorsCard,
   ContributorsCardLoading,
@@ -26,25 +27,24 @@ export function getStaticPaths() {
   const staticPaths = [];
 
   for (const category of BEST_PRACTICE_CATEGORIES) {
-    getBestPracticesByCategory(category).forEach((bestPractice: BestPracticeApp) => {
-      const applicableApps = APPS.filter(
-        (app: App) =>
-          bestPractice.appliesTo.includes(app.type) &&
-          app.benchmarks.some(
-            (benchmark: EffectiveAppBenchmark) => benchmark.bestPractice.id === bestPractice.id,
-          ),
-      );
+    getBestPracticesByCategory(category)
+      .filter(
+        (bestPractice): bestPractice is BestPracticeApp =>
+          bestPractice.type === BestPracticeTypes.App,
+      )
+      .forEach((bestPractice) => {
+        const applicableApps = APPS.filter((app: App) => bestPractice.appliesTo.includes(app.type));
 
-      applicableApps.forEach((app: App) =>
-        staticPaths.push({
-          params: {
-            category: category.categorySlug,
-            bestPractice: bestPractice.bestPracticeSlug,
-            app: app.appSlug,
-          },
-        }),
-      );
-    });
+        applicableApps.forEach((app: App) =>
+          staticPaths.push({
+            params: {
+              category: category.categorySlug,
+              bestPractice: bestPractice.bestPracticeSlug,
+              app: app.appSlug,
+            },
+          }),
+        );
+      });
   }
   return staticPaths;
 }
@@ -55,12 +55,13 @@ const resolvedBestPractice = getBestPracticeBySlug(bestPractice);
 const resolvedApp = getAppBySlug(app);
 
 let AppIcon;
-let appBenchmark;
+let appBenchmark: AppBenchmark | undefined = undefined;
 
 if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
   AppIcon = resolvedApp.icon;
-  appBenchmark = resolvedApp.benchmarks.find(
-    (benchmark: EffectiveAppBenchmark) => benchmark.bestPractice.id === resolvedBestPractice.id,
+  appBenchmark = getBenchmarkByAppSlugAndBestPracticeSlug(
+    resolvedApp.appSlug,
+    resolvedBestPractice.bestPracticeSlug,
   );
 }
 ---
@@ -107,7 +108,9 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
           </div>
           <BestPracticeTechnicalDetails bestPractice={resolvedBestPractice} />
           <div class="w-full lg:w-1/3 h-fit box-border flex flex-col gap-5">
-            <BenchmarkSummaryCard benchmark={appBenchmark}>
+            <BenchmarkSummaryCard
+              bestPractice={resolvedBestPractice}
+              benchmark={appBenchmark}>
               <div slot="appInfo" class="flex h-7 items-center gap-3">
                 <AppIcon className="w-[28px] h-[28px] shrink-0 rounded-[6px]" />
                 <a
@@ -127,9 +130,7 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
               sidebarVariant
               whatsSuggested="benchmark result"
               allContributions={
-                appBenchmark.status === BenchmarkStatuses.Completed
-                  ? appBenchmark.contributions
-                  : []
+                appBenchmark !== undefined ? appBenchmark.contributions : []
               }
               gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${resolvedApp.appSlug}/benchmarks.ts`}>
               <ContributorsCardLoading

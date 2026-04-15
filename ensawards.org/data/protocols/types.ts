@@ -47,9 +47,16 @@ export const ProtocolIds = {
  */
 export type ProtocolId = (typeof ProtocolIds)[keyof typeof ProtocolIds];
 
+/** A unique identifier for a protocol.
+ *
+ * @invariant Must be unique across all protocols.
+ * @invariant Must match {@link ENSAWARDS_SLUG_PATTERN}.
+ */
+export type ProtocolSlug = string;
+
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
   id: ProtocolIdT;
-  protocolSlug: string;
+  protocolSlug: ProtocolSlug;
   protocolType: ProtocolT;
   project: Project; // each protocol belongs to a single project.
   name: string;

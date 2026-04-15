@@ -1,8 +1,4 @@
-import {
-  BenchmarkResult,
-  BenchmarkStatuses,
-  type EffectiveAppBenchmark,
-} from "data/apps/benchmarks-types.ts";
+import { type AppBenchmark, BenchmarkResult } from "data/benchmarks/types.ts";
 import {
   X as FailIcon,
   Check as PartialPassIcon,
@@ -13,12 +9,12 @@ import {
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface BenchmarkResultBadgeProps {
-  benchmark: EffectiveAppBenchmark;
+  benchmark?: AppBenchmark;
   className?: string;
 }
 
-export const benchmarkResultToBadgeStyles = (benchmark: EffectiveAppBenchmark) => {
-  if (benchmark.status === BenchmarkStatuses.Pending) {
+export const benchmarkResultToBadgeStyles = (benchmark?: AppBenchmark) => {
+  if (!benchmark) {
     return "text-muted-foreground bg-black/8";
   }
   switch (benchmark.result) {
@@ -32,8 +28,8 @@ export const benchmarkResultToBadgeStyles = (benchmark: EffectiveAppBenchmark) =
   }
 };
 
-export const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark, className?: string) => {
-  if (benchmark.status === BenchmarkStatuses.Pending) {
+export const getBenchmarkIcon = (benchmark?: AppBenchmark, className?: string) => {
+  if (!benchmark) {
     return <PendingIcon className={className} />;
   }
   switch (benchmark.result) {
@@ -46,9 +42,9 @@ export const getBenchmarkIcon = (benchmark: EffectiveAppBenchmark, className?: s
   }
 };
 
-export const getBenchmarkResultLabel = (benchmark: EffectiveAppBenchmark): string => {
-  if (benchmark.status === BenchmarkStatuses.Pending) {
-    return BenchmarkStatuses.Pending;
+export const getBenchmarkResultLabel = (benchmark?: AppBenchmark): string => {
+  if (!benchmark) {
+    return "Pending";
   }
 
   return benchmark.result;

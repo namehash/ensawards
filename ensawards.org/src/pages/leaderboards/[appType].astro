@@ -10,7 +10,7 @@ import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
-import { calcAppEnsAwardsScore, getAppTypeBySlug, compareApps } from "data/apps/utils.ts";
+import { calcAppScore, getAppTypeBySlug, compareApps } from "data/apps/utils.ts";
 import {
   ContributorsCard,
   ContributorsCardLoading,
@@ -81,7 +81,7 @@ if (resolvedAppType !== undefined) {
                 .sort((a, b) => compareApps(a, b))
                 .map((app, idx) => {
                   const AppIcon = app.icon;
-                  const appScore = calcAppEnsAwardsScore(app);
+                  const appScore = calcAppScore(app);
                   return (
                     <LeaderboardCard
                       key={`app-review-card-${app.id}`}

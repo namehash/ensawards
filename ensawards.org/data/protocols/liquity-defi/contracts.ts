@@ -23,7 +23,7 @@ const contracts: Contract[] = [
       name: "bold.token.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -37,7 +37,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -51,7 +51,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -65,7 +65,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -79,7 +79,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -94,7 +94,7 @@ const contracts: Contract[] = [
       name: "redeem.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -108,7 +108,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -122,7 +122,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -136,7 +136,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -150,7 +150,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -164,7 +164,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -178,7 +178,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -193,7 +193,7 @@ const contracts: Contract[] = [
       name: "borrower-ops.eth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -207,7 +207,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -221,7 +221,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -235,7 +235,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -250,7 +250,7 @@ const contracts: Contract[] = [
       name: "stability-pool.eth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -265,7 +265,7 @@ const contracts: Contract[] = [
       name: "trove-manager.eth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -280,7 +280,7 @@ const contracts: Contract[] = [
       name: "trove.eth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -294,7 +294,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -308,7 +308,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -322,7 +322,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -336,7 +336,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -351,7 +351,7 @@ const contracts: Contract[] = [
       name: "leverage-zapper.eth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -365,7 +365,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -379,7 +379,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -393,7 +393,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -408,7 +408,7 @@ const contracts: Contract[] = [
       name: "borrower-ops.wsteth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -422,7 +422,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -436,7 +436,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -450,7 +450,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -465,7 +465,7 @@ const contracts: Contract[] = [
       name: "stability-pool.wsteth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -480,7 +480,7 @@ const contracts: Contract[] = [
       name: "trove-manager.wsteth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -495,7 +495,7 @@ const contracts: Contract[] = [
       name: "trove.wsteth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -509,7 +509,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -523,7 +523,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -537,7 +537,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -551,7 +551,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -566,7 +566,7 @@ const contracts: Contract[] = [
       name: "leverage-zapper.wsteth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -580,7 +580,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -594,7 +594,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -608,7 +608,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -623,7 +623,7 @@ const contracts: Contract[] = [
       name: "borrower-ops.reth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -637,7 +637,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -651,7 +651,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -665,7 +665,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -680,7 +680,7 @@ const contracts: Contract[] = [
       name: "stability-pool.reth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -695,7 +695,7 @@ const contracts: Contract[] = [
       name: "trove-manager.reth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -710,7 +710,7 @@ const contracts: Contract[] = [
       name: "trove.reth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -724,7 +724,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -738,7 +738,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -752,7 +752,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -766,7 +766,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -781,7 +781,7 @@ const contracts: Contract[] = [
       name: "leverage-zapper.reth.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -796,7 +796,7 @@ const contracts: Contract[] = [
       name: "governance.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -810,7 +810,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -824,7 +824,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -838,7 +838,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -852,7 +852,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -866,7 +866,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -880,7 +880,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -894,7 +894,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -909,7 +909,7 @@ const contracts: Contract[] = [
       name: "lqty.token.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
   {
@@ -924,7 +924,7 @@ const contracts: Contract[] = [
       name: "lusd.token.liquity-protocol.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2026-02-10T08:41:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
     ],
   },
 ];

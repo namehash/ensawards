@@ -4,7 +4,7 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
 import EnscribeIcon from "@/components/atoms/icons/EnscribeIconLight.astro";
-import { calcBestPracticeEnsAwardsScore } from "data/apps/utils.ts";
+import { calcBestPracticeScore } from "data/ens-best-practices/utils.ts";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
 
 export interface BestPracticeCardProps {
@@ -14,9 +14,7 @@ export interface BestPracticeCardProps {
 const { bestPractice }: BestPracticeCardProps = Astro.props;
 
 const bestPracticeEnsAwardsScore =
-  bestPractice.type === BestPracticeTypes.App
-    ? calcBestPracticeEnsAwardsScore(bestPractice)
-    : undefined;
+  bestPractice.type === BestPracticeTypes.App ? calcBestPracticeScore(bestPractice) : undefined;
 ---
 
 <a

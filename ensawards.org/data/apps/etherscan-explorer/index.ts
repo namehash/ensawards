@@ -2,10 +2,8 @@
 // on adding and modifying apps
 
 import EtherscanProject from "../../projects/etherscan";
-import { buildEffectiveAppBenchmarks } from "../benchmarks-utils.ts";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
-import EtherscanExplorerBenchmarks from "./benchmarks.ts";
 import EtherscanIcon from "./icon.tsx";
 
 const EtherscanExplorer: App = {
@@ -21,7 +19,6 @@ const EtherscanExplorer: App = {
     ens: "etherscan.eth",
   },
   icon: EtherscanIcon,
-  benchmarks: buildEffectiveAppBenchmarks(EtherscanExplorerBenchmarks, AppTypes.Explorer),
   ogImagePath: "etherscan-explorer/og.png",
   twitterOgImagePath: "etherscan-explorer/twitter-og.png",
 };

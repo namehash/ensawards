@@ -1,14 +1,15 @@
-import type { EffectiveAppBenchmark } from "data/apps/benchmarks-types";
 import type { App } from "data/apps/types.ts";
 import { getAppById } from "data/apps/utils.ts";
+import type { AppBenchmark } from "data/benchmarks/types";
+import type { BestPracticeApp } from "data/ens-best-practices/types";
 import { Fragment } from "react";
 
 import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge.tsx";
-import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export interface AppWithBenchmark {
   app: App;
-  benchmark: EffectiveAppBenchmark;
+  bestPractice: BestPracticeApp;
+  benchmark?: AppBenchmark;
 }
 
 export interface BenchmarksPerAppTypeCardProps {
@@ -17,8 +18,9 @@ export interface BenchmarksPerAppTypeCardProps {
 
 export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerAppTypeCardProps) {
   // A necessary step due to Astro Island's inner serialization logic
-  const resolvedAppsWithBenchmark = appsWithBenchmark.map(({ app, benchmark }) => ({
+  const resolvedAppsWithBenchmark = appsWithBenchmark.map(({ app, bestPractice, benchmark }) => ({
     app: getAppById(app.id) ?? app,
+    bestPractice,
     benchmark,
   }));
 
@@ -37,13 +39,13 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
         {firstApp.type} benchmarks
       </h3>
       <div className="flex w-full flex-col items-center">
-        {resolvedAppsWithBenchmark.map(({ app, benchmark }, index) => {
+        {resolvedAppsWithBenchmark.map(({ app, bestPractice, benchmark }, index) => {
           const AppIcon = app.icon;
 
           return (
-            <Fragment key={`${app.id}-${benchmark.bestPractice.id}`}>
+            <Fragment key={`${app.id}-${bestPractice.id}`}>
               <a
-                href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
+                href={`/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
                 className="flex w-full items-center gap-3 py-4 p-[10px] rounded-xl transition-colors duration-200 hover:bg-[#F5F5F5]"
               >
                 <AppIcon className="h-8 w-8 shrink-0 rounded-md" />

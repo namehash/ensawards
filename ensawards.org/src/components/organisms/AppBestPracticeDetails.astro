@@ -1,17 +1,13 @@
 ---
 import { APPS } from "data/apps";
-import { BenchmarkStatuses } from "data/apps/benchmarks-types.ts";
 import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import SubpageHero from "../molecules/SubpageHero.astro";
-import { calcBestPracticeEnsAwardsScore } from "data/apps/utils.ts";
-import { compareBenchmarks } from "data/apps/benchmarks-utils";
+import { calcBestPracticeScore } from "data/ens-best-practices/utils.ts";
+import { compareBenchmarks, getBenchmarksByAppSlug } from "data/benchmarks/utils.ts";
 import { ContributorsCard, ContributorsCardLoading } from "../atoms/cards/ContributorsCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
-import {
-  BenchmarksPerAppTypeCard,
-  type AppWithBenchmark,
-} from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
+import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
 import { type Contribution } from "data/contributors/types";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
@@ -24,20 +20,14 @@ const { bestPractice }: AppBestPracticeDetailsProps = Astro.props;
 
 // Get apps that have benchmarks for this specific best practice
 const appsWithBenchmarks = APPS.map((app) => {
-  const matchingBenchmark = app.benchmarks.find(
-    (benchmark) =>
-      benchmark.bestPractice.category.id === bestPractice.category.id &&
-      benchmark.bestPractice.id === bestPractice.id,
-  );
+  const matchingBenchmark = getBenchmarksByAppSlug(app.appSlug)[bestPractice.bestPracticeSlug];
 
   return {
     app,
+    bestPractice,
     benchmark: matchingBenchmark,
   };
-}).filter(
-  (appWithBenchmark): appWithBenchmark is AppWithBenchmark =>
-    appWithBenchmark.benchmark !== undefined,
-);
+});
 
 // Sort benchmark results
 const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
@@ -50,10 +40,10 @@ const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
   return a.app.name.localeCompare(b.app.name);
 });
 
-const bestPracticeScore = calcBestPracticeEnsAwardsScore(bestPractice);
+const bestPracticeScore = calcBestPracticeScore(bestPractice);
 
 const benchmarkDataContributions: Contribution[] = appsWithBenchmarks.flatMap(({ benchmark }) =>
-  benchmark.status === BenchmarkStatuses.Completed ? benchmark.contributions : [],
+  benchmark ? benchmark.contributions : [],
 );
 
 const allContributions: Contribution[] = [

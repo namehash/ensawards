@@ -1,8 +1,3 @@
-import {
-  BenchmarkResult,
-  BenchmarkStatuses,
-  type EffectiveAppBenchmark,
-} from "../../data/apps/benchmarks-types.ts";
 import { DeFiProtocolIds, type ProtocolId } from "../../data/protocols/types.ts";
 
 export const getAppSupportColor = (value: number): string =>

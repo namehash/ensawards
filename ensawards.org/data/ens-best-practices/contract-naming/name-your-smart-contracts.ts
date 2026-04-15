@@ -41,8 +41,8 @@ const nameYourSmartContracts: BestPracticeProtocol = {
     ],
   },
   contributions: [
-    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
-    { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-12T14:51:00.000Z") },
+    { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-03T11:25:00.000Z") },
+    { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-12T14:51:00.000Z") },
   ],
 };
 

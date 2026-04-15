@@ -1,17 +1,20 @@
 ---
 import { RelativeTime } from "@namehash/namehash-ui";
 
-import { BenchmarkStatuses, type EffectiveAppBenchmark } from "data/apps/benchmarks-types.ts";
+import { type AppBenchmark } from "data/benchmarks/types.ts";
+import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
+import { getBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
 import { BenchmarkResultBadge, benchmarkResultToBadgeStyles } from "../badges/BenchmarkResultBadge";
 
 export interface BenchmarkSummaryCardProps {
-  benchmark: EffectiveAppBenchmark;
+  bestPractice: BestPracticeApp;
+  benchmark?: AppBenchmark;
 }
 
-const { benchmark }: BenchmarkSummaryCardProps = Astro.props;
+const { bestPractice, benchmark }: BenchmarkSummaryCardProps = Astro.props;
 
-const bestPracticeHref = `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`;
+const bestPracticeHref = `/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`;
 
 const detailLabelStyles = "text-sm leading-normal font-normal text-muted-foreground";
 const detailValueStyles = cn(
@@ -37,14 +40,14 @@ const detailValueStyles = cn(
     <div class="flex w-full flex-col items-start gap-1 py-1">
       <p class={detailLabelStyles}>Category</p>
       <p class="text-sm leading-normal font-medium text-black">
-        {benchmark.bestPractice.category.name}
+        {bestPractice.category.name}
       </p>
     </div>
 
     <div class="flex w-full flex-col items-start gap-1 py-1">
       <p class={detailLabelStyles}>ENS best practice</p>
       <a href={bestPracticeHref} class={detailValueStyles}>
-        {benchmark.bestPractice.name}
+        {bestPractice.name}
       </a>
     </div>
 
@@ -57,14 +60,14 @@ const detailValueStyles = cn(
     </div>
 
     {
-      benchmark.status === BenchmarkStatuses.Completed && (
+      benchmark !== undefined && (
         <div class="flex w-full flex-col items-start gap-1 py-1">
           <p class={detailLabelStyles}>Last updated</p>
           <p class="text-sm leading-normal font-medium text-black">
             <RelativeTime
               client:load
               enforcePast
-              timestamp={benchmark.lastUpdated}
+              timestamp={getBenchmarkLastUpdateTimestamp(benchmark)}
             />
           </p>
         </div>

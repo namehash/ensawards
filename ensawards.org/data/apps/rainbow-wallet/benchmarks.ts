@@ -1,42 +1,36 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying app benchmarks
 
+import RainbowWallet from "data/apps/rainbow-wallet";
+import { defineAppBenchmarks } from "data/benchmarks/registry";
+import { BenchmarkResult } from "data/benchmarks/types";
+import type { BestPracticeBenchmarks } from "data/benchmarks/types.ts";
+
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import contributors from "../../contributors";
-import displayNamedSmartContractsL2 from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
-import displayNamedSmartContractsMainnet from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
-import type { AppBenchmarkCompleted } from "../benchmarks-types.ts";
-import { BenchmarkResult, BenchmarkStatuses } from "../benchmarks-types.ts";
 
-const benchmarks: AppBenchmarkCompleted[] = [
-  // {
-  //   bestPractice: recognizeAllENSNames,
-  //   status: BenchmarkStatuses.Completed,
+const benchmarks = {
+  // "recognize-all-ens-names": {
   //   result: BenchmarkResult.Pass,
-  //   lastUpdated: parseTimestamp("2025-12-03T14:00:00Z"),
   //   contributions: [
-  //   { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-08T18:19:28.672Z") },
-  // ],
+  //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-03T14:00:00Z") },
+  //   ],
   // },
-  {
-    bestPractice: displayNamedSmartContractsMainnet,
-    status: BenchmarkStatuses.Completed,
+  "display-named-smart-contracts-mainnet": {
     result: BenchmarkResult.Pass,
-    lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z"),
     contributions: [
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-08T18:19:28.672Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
     ],
   },
-  {
-    bestPractice: displayNamedSmartContractsL2,
-    status: BenchmarkStatuses.Completed,
+  "display-named-smart-contracts-l2-chains": {
     result: BenchmarkResult.Fail,
-    lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z"),
     contributions: [
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-08T18:19:28.672Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
     ],
   },
-];
+} as const satisfies BestPracticeBenchmarks;
+
+defineAppBenchmarks(RainbowWallet, benchmarks);
 
 export default benchmarks;

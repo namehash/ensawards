@@ -6,11 +6,7 @@ import benchmarkResultFailSymbol from "@/assets/benchmarkResultFailSymbol.svg";
 import benchmarkResultPartialPassSymbol from "@/assets/benchmarkResultPartialPassSymbol.svg";
 import benchmarkResultPassSymbol from "@/assets/benchmarkResultPassSymbol.svg";
 import benchmarkPendingSymbol from "@/assets/benchmarkPendingSymbol.svg";
-import {
-  BenchmarkResult,
-  BenchmarkStatuses,
-  type EffectiveAppBenchmark,
-} from "data/apps/benchmarks-types.ts";
+import { BenchmarkResult, type AppBenchmark } from "data/benchmarks/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import {
   type BenchmarkResultBadgeProps,
@@ -20,9 +16,9 @@ import {
 const { benchmark, className }: BenchmarkResultBadgeProps = Astro.props;
 
 const benchmarkResultContent = (
-  benchmark: EffectiveAppBenchmark,
+  benchmark?: AppBenchmark,
 ): { symbol: ImageMetadata; symbolAlt: string } => {
-  if (benchmark.status === BenchmarkStatuses.Pending) {
+  if (benchmark === undefined) {
     return {
       symbol: benchmarkPendingSymbol,
       symbolAlt: "Pending review benchmark indicator",

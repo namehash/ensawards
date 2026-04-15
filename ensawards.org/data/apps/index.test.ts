@@ -1,13 +1,11 @@
+import { isValidSlug } from "data/shared/slugs";
 import { describe, expect, it } from "vitest";
 
 import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
-import { areStringsUnique, isValidSlug } from "@/utils";
+import { areStringsUnique } from "@/utils";
 
-import { ENS_BEST_PRACTICES } from "../ens-best-practices";
-import { BestPracticeTypes } from "../ens-best-practices/types";
 import { APPS } from ".";
-import { BenchmarkStatuses } from "./benchmarks-types";
 
 describe("App data", () => {
   const data = APPS;
@@ -80,63 +78,6 @@ describe("App data", () => {
           `Name={${app.socials.ens}} is empty or is not ENS normalized`,
         ).toEqual(true);
       }
-    });
-  });
-
-  it("Should have benchmarks array", () => {
-    data.forEach((app) => {
-      expect(
-        Array.isArray(app.benchmarks),
-        `Benchmarks for app with id={${app.id}} is not an array`,
-      ).toEqual(true);
-    });
-  });
-
-  it("Should have an effective benchmark defined for all best practices that apply to apps", () => {
-    data.forEach((app) => {
-      const bestPracticeData = ENS_BEST_PRACTICES.filter(
-        (bestPractice) =>
-          bestPractice.type === BestPracticeTypes.App && bestPractice.appliesTo.includes(app.type),
-      );
-      bestPracticeData.forEach((bestPractice) => {
-        const foundBenchmark = app.benchmarks.find(
-          (benchmark) => benchmark.bestPractice.id === bestPractice.id,
-        );
-
-        expect(
-          foundBenchmark,
-          `App ${app.name} has no benchmark for "${bestPractice.name}" best practice`,
-        ).toBeDefined();
-      });
-    });
-  });
-
-  it("Should have valid benchmark data structure for completed benchmarks", () => {
-    data.forEach((app) => {
-      app.benchmarks
-        .filter((benchmark) => benchmark.status === BenchmarkStatuses.Completed)
-        .forEach((benchmark, index) => {
-          expect(
-            benchmark.bestPractice,
-            `Benchmark ${index} for app ${app.id} missing bestPractice`,
-          ).toBeDefined();
-          expect(
-            benchmark.result,
-            `Benchmark ${index} for app ${app.id} missing result`,
-          ).toBeDefined();
-          expect(
-            benchmark.lastUpdated,
-            `Benchmark ${index} for app ${app.id} missing lastUpdated`,
-          ).toBeDefined();
-          expect(
-            typeof benchmark.lastUpdated === "number",
-            `Benchmark ${index} for app ${app.id} lastUpdated should be a number`,
-          ).toEqual(true);
-          expect(
-            benchmark.contributions,
-            `Benchmark ${index} for app ${app.id} missing contributions`,
-          ).toBeDefined();
-        });
     });
   });
 });

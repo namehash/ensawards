@@ -3,7 +3,6 @@ import type { JSX } from "astro/jsx-runtime";
 import type { Name } from "@ensnode/ensnode-sdk";
 
 import type { Project } from "../projects/types.ts";
-import type { EffectiveAppBenchmark } from "./benchmarks-types.ts";
 
 /**
  * Represents all types of apps that are currently benchmarked on ENSAwards.
@@ -18,15 +17,21 @@ export const AppTypes = {
  */
 export type AppType = (typeof AppTypes)[keyof typeof AppTypes];
 
+/** A unique identifier for an app.
+ *
+ * @invariant Must be unique across all apps.
+ * @invariant Must match {@link ENSAWARDS_SLUG_PATTERN}.
+ */
+export type AppSlug = string;
+
 export interface App {
   id: string; // normalized app name, might be redundant
-  appSlug: string;
+  appSlug: AppSlug;
   project: Project; // each app belongs to a single project.
   name: string;
   description: string;
   type: AppType;
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  benchmarks: EffectiveAppBenchmark[]; // all benchmarks included in our data plus pending benchmarks appended at build time
   socials: {
     website: URL;
     twitter: URL;

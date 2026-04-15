@@ -13,7 +13,7 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
-import { calcAppEnsAwardsScore, getAppBySlug, buildAppOgImageUrlHref } from "data/apps/utils.ts";
+import { calcAppScore, getAppBySlug, buildAppOgImageUrlHref } from "data/apps/utils.ts";
 import {
   ContributorsCard,
   ContributorsCardLoading,
@@ -25,10 +25,13 @@ import {
   groupBenchmarksByCategory,
   calcCategoryScore,
   compareBenchmarks,
-} from "data/apps/benchmarks-utils";
-import { type EffectiveAppBenchmark } from "data/apps/benchmarks-types";
+  getBenchmarksByAppSlug,
+} from "data/benchmarks/utils";
+import { type AppBenchmark, type BestPracticeBenchmarks } from "data/benchmarks/types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { getAppContributions } from "data/contributors/utils.ts";
+import type { CategorySlug, BestPracticeSlug } from "data/ens-best-practices/types";
+import { getCategoryBySlug, getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -38,17 +41,17 @@ const { app } = Astro.params;
 
 const appToDisplay = getAppBySlug(app);
 
-let appScore: EnsAwardsScoreType = 0;
+let appScore: EnsAwardsScoreType | undefined = undefined;
 let AppIcon;
 let appBenchmarksDataContributions: Contribution[] = [];
-let benchmarkGroups: EffectiveAppBenchmark[][] = [];
+let benchmarkGroups: Map<CategorySlug, BestPracticeBenchmarks> = new Map();
 
 if (appToDisplay !== undefined) {
-  appScore = calcAppEnsAwardsScore(appToDisplay);
+  appScore = calcAppScore(appToDisplay);
   AppIcon = appToDisplay.icon;
   appBenchmarksDataContributions = getAppContributions(appToDisplay);
 
-  benchmarkGroups = groupBenchmarksByCategory(appToDisplay.benchmarks);
+  benchmarkGroups = groupBenchmarksByCategory(getBenchmarksByAppSlug(appToDisplay.appSlug));
 }
 ---
 
@@ -117,37 +120,59 @@ if (appToDisplay !== undefined) {
         <div class="w-full max-w-[1216px] flex flex-col md:flex-row justify-start md:justify-between gap-6 items-center md:items-start">
           <div class="w-full md:w-3/5">
             <ItemsList header="ENS best practice benchmarks">
-              {benchmarkGroups.map((group) => {
+              {benchmarkGroups.entries().map(([categorySlug, group]) => {
+                const category = getCategoryBySlug(categorySlug);
                 const categoryScore = calcCategoryScore(group);
+
+                // Only introduced for type safety.
+                // In theory, should never happen
+                if (category === undefined) {
+                  return null;
+                }
                 return (
                   <div class="w-full flex flex-col justify-start items-start gap-2">
                     <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">
                       <EnsAwardsCircularScoreSmall score={categoryScore} />
-                      {/* This assumption is safe, because all benchmarks passed into this component belong to one BestPracticeCategory */}
                       <span class="flex-1 text-lg leading-normal font-semibold text-black">
-                        {group[0].bestPractice.category.name}
+                        {category.name}
                       </span>
                     </div>
-                    {[...group]
-                      .sort((a, b) => compareBenchmarks(a, b))
-                      .map((benchmark: EffectiveAppBenchmark) => (
-                        <BenchmarkResultCard
-                          name={benchmark.bestPractice.name}
-                          notes={benchmark.bestPractice.description}
-                          viewDetails={{
-                            text: "View detailed report",
-                            link: `/app/${appToDisplay.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`,
-                          }}>
-                          <BenchmarkResultBadge
-                            slot="badge"
-                            className={cn(
-                              benchmarkResultToBadgeStyles(benchmark),
-                              "cursor-pointer",
-                            )}
-                            benchmark={benchmark}
-                          />
-                        </BenchmarkResultCard>
-                      ))}
+                    {[...Object.entries(group)]
+                      .sort(([_a, aBenchmark], [_b, bBenchmark]) =>
+                        compareBenchmarks(aBenchmark, bBenchmark),
+                      )
+                      .map(
+                        ([bestPracticeSlug, benchmark]: [
+                          BestPracticeSlug,
+                          AppBenchmark | undefined,
+                        ]) => {
+                          const bestPractice =
+                            getBestPracticeBySlug(bestPracticeSlug);
+
+                          // Only introduced for type safety.
+                          // In theory, should never happen
+                          if (bestPractice === undefined) {
+                            return null;
+                          }
+                          return (
+                            <BenchmarkResultCard
+                              bestPractice={bestPractice}
+                              viewDetails={{
+                                text: "View detailed report",
+                                link: `/app/${appToDisplay.appSlug}/${categorySlug}/${bestPracticeSlug}`,
+                              }}>
+                              <BenchmarkResultBadge
+                                slot="badge"
+                                className={cn(
+                                  benchmarkResultToBadgeStyles(benchmark),
+                                  "cursor-pointer",
+                                )}
+                                benchmark={benchmark}
+                              />
+                            </BenchmarkResultCard>
+                          );
+                        },
+                      )}
                   </div>
                 );
               })}

@@ -1,23 +1,20 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import {
-  BenchmarkResult,
-  BenchmarkStatuses,
-  type EffectiveAppBenchmark,
-} from "data/apps/benchmarks-types.ts";
+import type { App } from "data/apps/types.ts";
+import { calcAppScore, getAppById } from "data/apps/utils.ts";
+import { type AppBenchmark, type BestPracticeBenchmarks } from "data/benchmarks/types.ts";
 import {
   calcCategoryScore,
   compareBenchmarks,
+  getBenchmarksByAppSlug,
   groupBenchmarksByCategory,
-} from "data/apps/benchmarks-utils.ts";
-import type { App } from "data/apps/types.ts";
-import { calcAppEnsAwardsScore, getAppById } from "data/apps/utils.ts";
+} from "data/benchmarks/utils.ts";
+import type { BestPracticeSlug, CategorySlug } from "data/ens-best-practices/types.ts";
+import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
-import { EnsAwardsBarScorePending } from "@/components/atoms/ens-awards-score/bar-pending.tsx";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
@@ -30,11 +27,17 @@ import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
 
 interface BenchmarkCategorySectionProps {
   app: App;
-  group: EffectiveAppBenchmark[]; // all benchmarks in the group belong to the same category
+  categorySlug: CategorySlug;
+  group: BestPracticeBenchmarks; // all benchmarks in the group belong to the same category
   initiallyOpen: boolean;
 }
 
-function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCategorySectionProps) {
+function BenchmarkCategorySection({
+  app,
+  categorySlug,
+  group,
+  initiallyOpen,
+}: BenchmarkCategorySectionProps) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
   const categoryScore = calcCategoryScore(group);
@@ -48,9 +51,8 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
         className="flex w-full items-center gap-3 text-left"
       >
         <EnsAwardsCircularScoreSmall score={categoryScore} />
-        {/* This assumption is safe, because all benchmarks passed into this component belong to one BestPracticeCategory */}
         <span className="flex-1 text-lg leading-normal font-semibold text-black">
-          {group[0].bestPractice.category.name}
+          {categorySlug}
         </span>
         <ChevronRight
           className={cn(
@@ -62,31 +64,40 @@ function BenchmarkCategorySection({ app, group, initiallyOpen }: BenchmarkCatego
 
       {isOpen && (
         <div className="flex w-full flex-col gap-4 pt-4">
-          {[...group]
-            .sort((a, b) => compareBenchmarks(a, b))
-            .map((benchmark) => (
-              <a
-                key={benchmark.bestPractice.id}
-                href={`/app/${app.appSlug}/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`}
-                className="flex items-start gap-3"
-              >
-                <GenericTooltip
-                  tooltipOffset={1}
-                  triggerAsChild
-                  content={<p>{getBenchmarkResultLabel(benchmark)}</p>}
+          {[...Object.entries(group)]
+            .sort(([_a, aBenchmark], [_b, bBenchmark]) => compareBenchmarks(aBenchmark, bBenchmark))
+            .map(([bestPracticeSlug, benchmark]: [BestPracticeSlug, AppBenchmark | undefined]) => {
+              const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+
+              // Only introduced for type safety.
+              // In theory, should never happen
+              if (bestPractice === undefined) {
+                return null;
+              }
+              return (
+                <a
+                  key={bestPractice.id}
+                  href={`/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
+                  className="flex items-start gap-3"
                 >
-                  <span className="shrink-0 cursor-pointer">
-                    {getBenchmarkIcon(
-                      benchmark,
-                      cn("w-6 h-6", benchmarkResultToBadgeStyles(benchmark), "bg-transparent"),
-                    )}
+                  <GenericTooltip
+                    tooltipOffset={1}
+                    triggerAsChild
+                    content={<p>{getBenchmarkResultLabel(benchmark)}</p>}
+                  >
+                    <span className="shrink-0 cursor-pointer">
+                      {getBenchmarkIcon(
+                        benchmark,
+                        cn("w-6 h-6", benchmarkResultToBadgeStyles(benchmark), "bg-transparent"),
+                      )}
+                    </span>
+                  </GenericTooltip>
+                  <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
+                    {bestPractice.name}
                   </span>
-                </GenericTooltip>
-                <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
-                  {benchmark.bestPractice.name}
-                </span>
-              </a>
-            ))}
+                </a>
+              );
+            })}
         </div>
       )}
     </div>
@@ -101,8 +112,8 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
   // A necessary step due to Astro Island's inner serialization logic
   const resolvedApp = getAppById(app.id) ?? app;
 
-  const appScore = calcAppEnsAwardsScore(resolvedApp);
-  const benchmarkGroups = groupBenchmarksByCategory(resolvedApp.benchmarks);
+  const appScore = calcAppScore(resolvedApp);
+  const benchmarkGroups = groupBenchmarksByCategory(getBenchmarksByAppSlug(resolvedApp.appSlug));
   const AppIcon = resolvedApp.icon;
 
   return (
@@ -117,13 +128,12 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
           </div>
           <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
         </div>
-        {benchmarkGroups.map((group, index) => {
-          if (group.length === 0) return null;
-
+        {[...benchmarkGroups.entries()].map(([categorySlug, group], index) => {
           return (
             <BenchmarkCategorySection
-              key={`${resolvedApp.name}-benchmarks-in-${group[0].bestPractice.category.id}-category`}
+              key={`${resolvedApp.name}-benchmarks-in-${categorySlug}-category`}
               app={resolvedApp}
+              categorySlug={categorySlug}
               group={group}
               initiallyOpen={index === 0}
             />

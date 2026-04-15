@@ -9,10 +9,10 @@ import {
   ReferralProgramAwardModels,
   ReferralProgramEditionSummariesResponseCodes,
 } from "@namehash/ens-referrals/v1";
+import { isValidSlug } from "data/shared/slugs";
 
 import { getCurrencyInfo, type Price } from "@ensnode/ensnode-sdk";
 
-import { isValidSlug } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 
 export const filterOutUnrecognizedEditions = (

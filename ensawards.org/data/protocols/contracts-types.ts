@@ -233,6 +233,10 @@ export interface Contract {
    */
   cachedIdentity: ContractIdentityResolved;
 
-  /** A record of all contributors involved in the addition or maintenance of the contract's data. */
+  /** A record of all contributors involved in the addition or maintenance of the contract's data.
+   *
+   * @invariant A single contributor can only appear once in a specific contribution array,
+   * but can mark new contribution by changing {@link lastUpdated} timestamp.
+   */
   contributions: [Contribution, ...Contribution[]];
 }

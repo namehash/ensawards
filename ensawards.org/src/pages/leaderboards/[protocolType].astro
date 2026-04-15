@@ -84,7 +84,7 @@ if (resolvedProtocolType) {
         <div class="w-full max-w-[1216px] flex flex-col md:flex-row justify-start md:justify-between gap-6 items-center md:items-start">
           <div class="w-full md:w-3/5">
             <ItemsList containerStyles="gap-3 sm:gap-3">
-              {Object.entries(protocolScores).map(
+              {[...Object.entries(protocolScores)].map(
                 ([scoreCategory, value], idx) => {
                   const protocolId = scoreCategory as ProtocolId;
                   const protocol = getProtocolById(protocolId);

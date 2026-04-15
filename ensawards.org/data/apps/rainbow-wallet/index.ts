@@ -2,10 +2,8 @@
 // on adding and modifying apps
 
 import RainbowProject from "../../projects/rainbow";
-import { buildEffectiveAppBenchmarks } from "../benchmarks-utils.ts";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
-import RainbowWalletBenchmarks from "./benchmarks.ts";
 import RainbowIcon from "./icon.tsx";
 
 const RainbowWallet: App = {
@@ -22,7 +20,6 @@ const RainbowWallet: App = {
     ens: "rainbowwallet.eth",
   },
   icon: RainbowIcon,
-  benchmarks: buildEffectiveAppBenchmarks(RainbowWalletBenchmarks, AppTypes.Wallet),
   ogImagePath: "rainbow-wallet/og.png",
   twitterOgImagePath: "rainbow-wallet/twitter-og.png",
 };

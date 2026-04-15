@@ -1,32 +1,41 @@
+import { type AppBenchmark, type AppBenchmarks, BenchmarkResult } from "data/benchmarks/types.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
-  type AppBenchmarkCompleted,
-  type AppBenchmarkPending,
-  BenchmarkResult,
-  BenchmarkStatuses,
-} from "./benchmarks-types.ts";
-import { createMockApp, createMockBenchmark, createMockBestPractice } from "./test-utils.ts";
+  createMockBenchmark,
+  mockCoinbaseWalletApp,
+  mockDisplayProfilesBestPractice,
+  mockEtherscanApp,
+  mockForwardResolutionBestPractice,
+  mockMetamaskApp,
+  mockNormalizeNamesBestPractice,
+  mockRainbowApp,
+  mockReverseResolutionBestPractice,
+} from "../shared/test-utils.ts";
 import { type App, AppTypes } from "./types.ts";
 
-const { mockApps, mockgetBenchmarkPoints } = vi.hoisted(() => ({
+const { mockApps, mockgetBenchmarkPoints, mockBenchmarks } = vi.hoisted(() => ({
   mockApps: [] as App[],
   mockgetBenchmarkPoints: vi.fn(),
+  mockBenchmarks: {} as AppBenchmarks,
 }));
 
 vi.mock("./index.ts", () => ({
   APPS: mockApps,
 }));
 
-vi.mock("./benchmarks-utils.ts", () => ({
+vi.mock("data/benchmarks/index.ts", () => ({
+  APP_BENCHMARKS: mockBenchmarks,
+}));
+
+vi.mock("data/benchmarks/utils.ts", () => ({
   getBenchmarkPoints: mockgetBenchmarkPoints,
+  getBenchmarksByAppSlug: (slug: string) => mockBenchmarks[slug],
 }));
 
 import {
   appliesToAllApps,
-  calcAppEnsAwardsScore,
-  calcAppsPassed,
-  calcBestPracticeEnsAwardsScore,
+  calcAppScore,
   getAppById,
   getAppByName,
   getAppBySlug,
@@ -37,95 +46,11 @@ const setMockApps = (...apps: App[]) => {
   mockApps.splice(0, mockApps.length, ...apps);
 };
 
-const mockReverseResolutionBestPractice = createMockBestPractice({
-  id: "set-primary-name",
-  name: "Set primary name",
-  bestPracticeSlug: "set-primary-name",
-  categoryId: "reverse-resolution",
-  categoryName: "Reverse resolution",
-  categorySlug: "reverse-resolution",
-});
-
-const mockDisplayProfilesBestPractice = createMockBestPractice({
-  id: "display-avatar",
-  name: "Display avatar",
-  bestPracticeSlug: "display-avatar",
-  categoryId: "display-profiles",
-  categoryName: "Display profiles",
-  categorySlug: "display-profiles",
-});
-
-const mockRainbowApp = createMockApp({
-  id: "rainbow-wallet",
-  appSlug: "rainbow-wallet",
-  name: "Rainbow",
-  type: AppTypes.Wallet,
-});
-
-const mockMetamaskApp = createMockApp({
-  id: "metamask-wallet",
-  appSlug: "metamask-wallet",
-  name: "MetaMask",
-  type: AppTypes.Wallet,
-});
-
-const mockEtherscanApp = createMockApp({
-  id: "etherscan-explorer",
-  appSlug: "etherscan-explorer",
-  name: "Etherscan",
-  type: AppTypes.Explorer,
-});
-
-const mockCoinbaseWalletApp = createMockApp({
-  id: "coinbase-wallet",
-  appSlug: "coinbase-wallet",
-  name: "Coinbase Wallet",
-  type: AppTypes.Wallet,
-});
-
-const mockAppsForBenchmarkAggregation = [
-  {
-    ...mockRainbowApp,
-    benchmarks: [createMockBenchmark(mockReverseResolutionBestPractice, BenchmarkResult.Pass)],
-  },
-  {
-    ...mockMetamaskApp,
-    benchmarks: [
-      createMockBenchmark(mockReverseResolutionBestPractice, BenchmarkResult.PartialPass),
-      {
-        bestPractice: mockDisplayProfilesBestPractice,
-        status: BenchmarkStatuses.Pending,
-      } as AppBenchmarkPending,
-    ],
-  },
-  {
-    ...mockCoinbaseWalletApp,
-    benchmarks: [createMockBenchmark(mockReverseResolutionBestPractice, BenchmarkResult.Fail)],
-  },
-  {
-    ...mockEtherscanApp,
-    benchmarks: [createMockBenchmark(mockDisplayProfilesBestPractice, BenchmarkResult.Pass)],
-  },
-];
-
-const mockAppWithPassingAndPartialBenchmarks = {
-  ...mockRainbowApp,
-  benchmarks: [
-    createMockBenchmark(mockReverseResolutionBestPractice, BenchmarkResult.Pass),
-    createMockBenchmark(mockDisplayProfilesBestPractice, BenchmarkResult.PartialPass),
-  ],
-};
-
-const mockAppWithSinglePassingBenchmark = {
-  ...mockRainbowApp,
-  benchmarks: [createMockBenchmark(mockReverseResolutionBestPractice, BenchmarkResult.Pass)],
-};
-
 describe("App utils", () => {
   beforeEach(() => {
     mockApps.splice(0, mockApps.length);
     mockgetBenchmarkPoints.mockReset();
-    mockgetBenchmarkPoints.mockImplementation((benchmark: AppBenchmarkCompleted) => {
+    mockgetBenchmarkPoints.mockImplementation((benchmark: AppBenchmark) => {
       switch (benchmark.result) {
         case BenchmarkResult.Pass:
           return 1;
@@ -184,67 +109,64 @@ describe("App utils", () => {
     });
   });
 
-  describe("calcAppsPassed", () => {
+  describe("calcAppScore", () => {
     beforeEach(() => {
-      setMockApps(...mockAppsForBenchmarkAggregation);
+      mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {};
     });
 
-    it("Should return the number of apps that passed or partially passed the best practice benchmark", () => {
-      expect(calcAppsPassed(mockReverseResolutionBestPractice)).toEqual(2);
-    });
-
-    it("Should exclude all pending benchmarks from the calculation", () => {
-      expect(
-        calcAppsPassed(mockDisplayProfilesBestPractice),
-        "calcAppsPassed doesn't exclude pending benchmarks",
-      ).toEqual(1);
-    });
-  });
-
-  describe("calcBestPracticeEnsAwardsScore", () => {
-    beforeEach(() => {
-      setMockApps(...mockAppsForBenchmarkAggregation);
-    });
-
-    it("Should return the support percentage for benchmarked apps", () => {
-      expect(calcBestPracticeEnsAwardsScore(mockReverseResolutionBestPractice)).toEqual(50);
-    });
-
-    it("Should return undefined when no apps are benchmarked for the best practice", () => {
-      setMockApps(mockRainbowApp);
-
-      expect(calcBestPracticeEnsAwardsScore(mockReverseResolutionBestPractice)).toBeUndefined();
-    });
-
-    it("Should exclude pending benchmarks from the calculation", () => {
-      expect(
-        calcBestPracticeEnsAwardsScore(mockDisplayProfilesBestPractice),
-        "calcBestPracticeEnsAwardsScore doesn't exclude pending benchmarks",
-      ).toEqual(100);
-    });
-  });
-
-  describe("calcAppEnsAwardsScore", () => {
     it("Should return the rounded ENSAwards score for an app with benchmarks", () => {
-      expect(calcAppEnsAwardsScore(mockAppWithPassingAndPartialBenchmarks)).toEqual(75);
+      mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Pass,
+        ),
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Pass,
+        ),
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Fail,
+        ),
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+      };
+
+      const result = calcAppScore(mockCoinbaseWalletApp);
+
+      expect(result, `Expected ENSAwards score to be 67 got ${result}`).toEqual(67);
     });
 
-    it("Should return undefined when the app has no benchmarks", () => {
-      expect(calcAppEnsAwardsScore(mockRainbowApp)).toBeUndefined();
+    it("Should return undefined when the app has no defined benchmarks", () => {
+      mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: undefined,
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: undefined,
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: undefined,
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+      };
+      const result = calcAppScore(mockCoinbaseWalletApp);
+
+      expect(result, `Expected ENSAwards score to be undefined got ${result}`).toBeUndefined();
     });
 
     it("Should throw when the calculated score is greater than 100", () => {
       mockgetBenchmarkPoints.mockReturnValue(2);
+      mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Pass,
+        ),
+      };
 
-      expect(() => calcAppEnsAwardsScore(mockAppWithSinglePassingBenchmark)).toThrow(
+      expect(() => calcAppScore(mockCoinbaseWalletApp)).toThrow(
         "Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was 200 instead",
       );
     });
 
     it("Should throw when the calculated score is less than 0", () => {
       mockgetBenchmarkPoints.mockReturnValue(-1);
+      mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Pass,
+        ),
+      };
 
-      expect(() => calcAppEnsAwardsScore(mockAppWithSinglePassingBenchmark)).toThrow(
+      expect(() => calcAppScore(mockCoinbaseWalletApp)).toThrow(
         "Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was -100 instead",
       );
     });
