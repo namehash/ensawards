@@ -8,6 +8,8 @@ import {
 } from "data/ens-best-practices/types";
 import { describe, expect, it } from "vitest";
 
+import { formatAccountId } from "@ensnode/ensnode-sdk";
+
 import { BENCHMARKS } from ".";
 
 describe("Benchmarks registry", () => {
@@ -55,8 +57,8 @@ describe("Benchmarks registry", () => {
               `Benchmark for ${appSlug} on ${bestPracticeSlug} missing contributions`,
             ).toBeGreaterThan(0);
 
-            const contributorsList = benchmark.contributions.map(
-              (contribution) => contribution.from,
+            const contributorsList = benchmark.contributions.map((contribution) =>
+              formatAccountId(contribution.from),
             );
             const uniqueContributors = new Set(contributorsList);
             expect(

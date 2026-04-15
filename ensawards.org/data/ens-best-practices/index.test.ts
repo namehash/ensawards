@@ -1,6 +1,8 @@
 import { isValidSlug } from "data/shared/slugs";
 import { describe, expect, it } from "vitest";
 
+import { formatAccountId } from "@ensnode/ensnode-sdk";
+
 import { areStringsUnique } from "@/utils";
 
 import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from ".";
@@ -69,8 +71,8 @@ describe("Best Practices data", () => {
 
     it("Should have unique contributor entries", () => {
       bestPracticesData.forEach((bestPractice) => {
-        const contributorsList = bestPractice.contributions.map(
-          (contribution) => contribution.from,
+        const contributorsList = bestPractice.contributions.map((contribution) =>
+          formatAccountId(contribution.from),
         );
         const uniqueContributors = new Set(contributorsList);
         expect(

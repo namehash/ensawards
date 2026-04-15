@@ -6,6 +6,7 @@ import {
   type ChainId,
   EnsApiClient,
   evmChainIdToCoinType,
+  formatAccountId,
   isNormalizedName,
   type ResolveRecordsResponse,
   type ResolverRecordsResponseBase,
@@ -214,7 +215,9 @@ describe("Contracts contribution data", () => {
   const data = CONTRACTS;
   it("Should have unique contributor entries for each contract", () => {
     data.forEach((contract) => {
-      const contributorsList = contract.contributions.map((contribution) => contribution.from);
+      const contributorsList = contract.contributions.map((contribution) =>
+        formatAccountId(contribution.from),
+      );
       const uniqueContributors = new Set(contributorsList);
       expect(
         uniqueContributors.size,

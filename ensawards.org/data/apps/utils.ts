@@ -85,8 +85,8 @@ export const compareApps = (a: App, b: App): number => {
   const bEnsAwardsScore = calcAppScore(b);
 
   if (aEnsAwardsScore === undefined && bEnsAwardsScore === undefined) return 0;
-  if (bEnsAwardsScore === undefined) return 1;
-  if (aEnsAwardsScore === undefined) return -1;
+  if (bEnsAwardsScore === undefined) return -1;
+  if (aEnsAwardsScore === undefined) return 1;
 
   return bEnsAwardsScore - aEnsAwardsScore;
 };

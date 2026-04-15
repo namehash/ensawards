@@ -78,7 +78,7 @@ if (resolvedAppType !== undefined) {
           <div class="w-full md:w-3/5">
             <ItemsList containerStyles="gap-3 sm:gap-3">
               {APPS.filter((app) => app.type === resolvedAppType)
-                .sort((a, b) => compareApps(a, b))
+                .sort(compareApps)
                 .map((app, idx) => {
                   const AppIcon = app.icon;
                   const appScore = calcAppScore(app);

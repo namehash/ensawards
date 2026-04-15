@@ -52,7 +52,7 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
                 {relevantApps
-                  .sort((a, b) => compareApps(a, b))
+                  .sort(compareApps)
                   .slice(0, 3)
                   .map((app, idx) => {
                     const AppIcon = app.icon;

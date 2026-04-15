@@ -9,7 +9,7 @@ import {
   groupBenchmarksByCategory,
 } from "data/benchmarks/utils.ts";
 import type { BestPracticeSlug, CategorySlug } from "data/ens-best-practices/types.ts";
-import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
+import { getBestPracticeBySlug, getCategoryBySlug } from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
@@ -41,6 +41,7 @@ function BenchmarkCategorySection({
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
   const categoryScore = calcCategoryScore(group);
+  const categoryName = getCategoryBySlug(categorySlug)?.name ?? categorySlug;
 
   return (
     <div ref={animationParent} className="w-full border-t border-gray-200 py-4">
@@ -52,7 +53,7 @@ function BenchmarkCategorySection({
       >
         <EnsAwardsCircularScoreSmall score={categoryScore} />
         <span className="flex-1 text-lg leading-normal font-semibold text-black">
-          {categorySlug}
+          {categoryName}
         </span>
         <ChevronRight
           className={cn(

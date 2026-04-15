@@ -15,7 +15,7 @@
 // with additional options available in the [ENS Documentation](https://docs.ens.domains/web/libraries).
 // Finally, display an appropriate error message when input fails validation as either a valid name or address. `;
 //
-// // I'm using https://ensnode.io/docs/ as the main reference point for our docs since it will remain a static path no matter what we update in our docs.
+// // I'm using https://ensnode.io/docs as the main reference point for our docs since it will remain a static path no matter what we update in our docs.
 // // Ideally our quickstart will become more robust and be perfect for a callout like this.
 // const technicalDetailsAdditionalContent = `Once you have properly implemented ENS name detection, consider adding more details and records to your app.
 // [ENSNode](https://ensnode.io/docs) makes it simple and easy to fetch ENS profile data that can be used to enhance your user experience.

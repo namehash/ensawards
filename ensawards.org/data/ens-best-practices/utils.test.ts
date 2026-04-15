@@ -14,7 +14,7 @@ const { mockAppBenchmarks } = vi.hoisted(() => ({
 }));
 
 vi.mock("data/benchmarks/index.ts", () => ({
-  APP_BENCHMARKS: mockAppBenchmarks,
+  BENCHMARKS: mockAppBenchmarks,
 }));
 
 vi.mock(import("data/benchmarks/utils.ts"), async (importOriginal) => {
@@ -24,8 +24,8 @@ vi.mock(import("data/benchmarks/utils.ts"), async (importOriginal) => {
     getBenchmarksByBestPracticeSlug: (bestPracticeSlug: string) => {
       const benchmarks: (AppBenchmark | undefined)[] = [];
 
-      for (const appBenchmrks of Object.values(mockAppBenchmarks)) {
-        benchmarks.push(appBenchmrks[bestPracticeSlug]);
+      for (const appBenchmarks of Object.values(mockAppBenchmarks)) {
+        benchmarks.push(appBenchmarks[bestPracticeSlug]);
       }
 
       return benchmarks;

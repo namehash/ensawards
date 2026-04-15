@@ -5,7 +5,7 @@ import HomeIcon from "../icons/HomeIcon.astro";
 import { type Breadcrumb } from "./types";
 
 interface BreadcrumbsProps {
-  breadcrumbs: Breadcrumb[];
+  breadcrumbs: [Breadcrumb, ...Breadcrumb[]];
   styles?: {
     home?: string;
     chevron?: string;
@@ -25,7 +25,8 @@ const baseBreadcrumbStyles = "text-xs sm:text-sm leading-normal font-normal text
     class={cn(
       "box-content p-1 hover:bg-white/5 rounded-[4px] transition-all duration-200",
       styles?.home,
-    )}>
+    )}
+    aria-label="Go to home page">
     <HomeIcon className={cn("w-4 h-4")} />
   </a>
   <ChevronRightIcon className={cn("text-white", styles?.chevron)} />

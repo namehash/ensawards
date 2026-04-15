@@ -6,7 +6,7 @@ export const EnsAwardsBarScorePending = ({
 }: Omit<EnsAwardsBarScoreProps, "score">) => (
   <div
     className={cn(
-      "min-md:min-w-[130px] flex items-start gap-0",
+      "md:min-w-[130px] flex items-start gap-0",
       mobileAdaptive
         ? "flex-row sm:flex-col flex-nowrap justify-between sm:justify-center max-sm:self-stretch"
         : "flex-col justify-center",
