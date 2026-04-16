@@ -17,7 +17,7 @@ const contracts: Contract[] = [
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "uni.uniswap.eth",
       contract: {
-        address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+        address: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
         chain: mainnet,
         codeName: "UNIToken",
       },
@@ -31,7 +31,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
+        address: "0x1a9c8182c09f50c8318d769245bea52c32be35bc",
         chain: mainnet,
         codeName: "Timelock",
       },
@@ -63,7 +63,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+        address: "0x408ed6354d4973f66138c91495f2f2fcbd8724c3",
         chain: mainnet,
         codeName: "GovernorBravo",
       },
@@ -77,7 +77,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x090D4613473dEE047c3f2706764f49E0821D256e",
+        address: "0x090d4613473dee047c3f2706764f49e0821d256e",
         chain: mainnet,
         codeName: "UniMerkleDistributor",
       },
@@ -91,7 +91,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x3032Ab3Fa8C01d786D29dAdE018d7f2017918e12",
+        address: "0x3032ab3fa8c01d786d29dade018d7f2017918e12",
         chain: mainnet,
         codeName: "StakingRewardsFactory",
       },

@@ -1,5 +1,6 @@
 import { SUPPORTED_CHAINS } from "@namehash/namehash-ui";
-import { getAddress, isAddress } from "viem";
+import { isNormalizedAddress } from "data/shared/normalizedAddress";
+import { getAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
 import type { AccountId, ChainId } from "@ensnode/ensnode-sdk";
@@ -10,10 +11,10 @@ describe("Contributors data", () => {
   const contributorsData = contributors;
 
   describe("Contributor data", () => {
-    it("Should have valid addresses", () => {
+    it("Should have valid, normalized addresses", () => {
       Object.entries(contributorsData).forEach(([name, contributor]: [string, AccountId]) => {
         expect(
-          isAddress(contributor.address),
+          isNormalizedAddress(contributor.address),
           `Address for contributor ${name} is not valid: ${contributor.address}`,
         ).toEqual(true);
       });

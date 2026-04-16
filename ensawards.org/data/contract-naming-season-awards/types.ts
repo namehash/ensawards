@@ -1,13 +1,15 @@
-import type { Address, Hash } from "viem";
+import type { Hash } from "viem";
 
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+
+import type { NormalizedAddress } from "../shared/normalizedAddress.ts";
 
 /**
  * Defines project that has been awarded for the active participation
  * in the Contract Naming Season.
  */
 export interface AwardedProject {
-  /** The name of the project, derived from the ENS name of the award recipient. */
+  /** The name of the awarded project. */
   name: string;
   /** Optional link to the project's website or relevant page. */
   link?: URL;
@@ -15,20 +17,25 @@ export interface AwardedProject {
 
 /** An amount in units of $ENS */
 export type $ENS = number;
-//TODO: $ENS is not defined in packages/ensnode-sdk/src/shared/currencies.ts,
-// we should consider defining it there and importing it here instead of defining it here.
+// TODO: Use an import from ensnode-sdk when the support for $ENS is implemented.
+// See https://github.com/namehash/ensnode/issues/1941
 
 /**
- * Award distributed for the active participation in the Contract Naming Season.
+ * Award distributions for participation in ENS Contract Naming Season.
  */
 export interface ContractNamingSeasonAward {
   /** Mainnet address of the recipient of the award.
    *
-   * @invariant No address can receive more than one award.
+   * @invariant Simplifying assumption: no address can receive more than one award.
+   * TODO: The above is not technically true. When we have more time we should relax this constraint.
    */
-  depositedTo: Address;
+  depositedTo: NormalizedAddress;
 
-  /** Project associated with the award recipient */
+  /** Project associated with the award recipient.
+   * Helps to identify the recipient in human-recognizable ways for cases
+   * where `depositedTo` doesn't have an ENS primary name or
+   * where it's ENS primary name doesn't make it sufficiently intuitive who the backing project is.
+   */
   project?: AwardedProject;
 
   /** Amount of the award in $ENS.

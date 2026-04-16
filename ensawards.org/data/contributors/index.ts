@@ -5,27 +5,27 @@ import type { Contributor } from "./types";
 const contributors = {
   stevedylan: {
     chainId: mainnet.id,
-    address: "0x464d18C13b4420E07eE85d5E6Fddfc3078eE9e23",
+    address: "0x464d18c13b4420e07ee85d5e6fddfc3078ee9e23",
   },
   lightwalker: {
     chainId: mainnet.id,
-    address: "0x1a199654959140E5c1A2F4135fAA7Ba2748939C5",
+    address: "0x1a199654959140e5c1a2f4135faa7ba2748939c5",
   },
   y3drk: {
     chainId: mainnet.id,
-    address: "0x26A1BC2b06DD438669094bD68f1E2481F47FEC5b",
+    address: "0x26a1bc2b06dd438669094bd68f1e2481f47fec5b",
   },
   theloner: {
     chainId: mainnet.id,
-    address: "0x6D99E3D9287C0e7f39d24472a066B4DE24Bfe657",
+    address: "0x6d99e3d9287c0e7f39d24472a066b4de24bfe657",
   },
   nischal: {
     chainId: mainnet.id,
-    address: "0xD1DA830E7D175eC8a51103bCfbBbE32A9362a6b2",
+    address: "0xd1da830e7d175ec8a51103bcfbbbe32a9362a6b2",
   },
   spooky: {
     chainId: mainnet.id,
-    address: "0x0B399d2667733659F4A5fDCB030F3E26D26cC0Fe",
+    address: "0x0b399d2667733659f4a5fdcb030f3e26d26cc0fe",
   },
 } as const satisfies Record<string, Contributor>;
 

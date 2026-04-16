@@ -16,7 +16,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x9AEE0B04504CeF83A65AC3f0e838D0593BCb2BC7",
+        address: "0x9aee0b04504cef83a65ac3f0e838d0593bcb2bc7",
         chain: mainnet,
         codeName: "AaveGovernance",
       },
@@ -30,7 +30,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xa198Fac58E02A5C5F8F7e877895d50cFa9ad1E04",
+        address: "0xa198fac58e02a5c5f8f7e877895d50cfa9ad1e04",
         chain: mainnet,
         codeName: "GovernancePowerStrategy",
       },
@@ -44,7 +44,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x6ACe1Bf22D57a33863161bFDC851316Fb0442690",
+        address: "0x6ace1bf22d57a33863161bfdc851316fb0442690",
         chain: mainnet,
         codeName: "VotingPortalEth",
       },
@@ -58,7 +58,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x06a1795a88b82700896583e123F46BE43877bFb6",
+        address: "0x06a1795a88b82700896583e123f46be43877bfb6",
         chain: mainnet,
         codeName: "VotingMachine",
       },
@@ -72,7 +72,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xA16044F268d84599e58E851b25f4DBA061DC6088",
+        address: "0xa16044f268d84599e58e851b25f4dba061dc6088",
         chain: mainnet,
         codeName: "VotingStrategy",
       },
@@ -86,7 +86,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xa638c14525CAEE8e498A67b409CCb1B7b34c3981",
+        address: "0xa638c14525caee8e498a67b409ccb1b7b34c3981",
         chain: mainnet,
         codeName: "DataWarehouse",
       },
@@ -100,7 +100,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x5300A1a15135EA4dc7aD5a167152C01EFc9b192A",
+        address: "0x5300a1a15135ea4dc7ad5a167152c01efc9b192a",
         chain: mainnet,
         codeName: "ExecutorLvl1",
       },
@@ -114,7 +114,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x17Dd33Ed0e3dD2a80E37489B8A63063161BE6957",
+        address: "0x17dd33ed0e3dd2a80e37489b8a63063161be6957",
         chain: mainnet,
         codeName: "ExecutorLvl2",
       },
@@ -128,7 +128,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xdAbad81aF85554E9ae636395611C58F7eC1aAEc5",
+        address: "0xdabad81af85554e9ae636395611c58f7ec1aaec5",
         chain: mainnet,
         codeName: "PayloadsController",
       },

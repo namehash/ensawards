@@ -16,7 +16,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72",
+        address: "0xc18360217d8f7ab5e7c516566761ea12ce7f9d72",
         chain: mainnet,
         codeName: "ENSToken",
       },
@@ -31,7 +31,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xd7A029Db2585553978190dB5E85eC724Aa4dF23f",
+        address: "0xd7a029db2585553978190db5e85ec724aa4df23f",
         chain: mainnet,
         codeName: "TokenLock",
       },
@@ -46,7 +46,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x323A76393544d5ecca80cd6ef2A560C6a395b7E3",
+        address: "0x323a76393544d5ecca80cd6ef2a560c6a395b7e3",
         chain: mainnet,
         codeName: "ENSGovernor",
       },
@@ -61,7 +61,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xFe89cc7aBB2C4183683ab71653C4cdc9B02D44b7",
+        address: "0xfe89cc7abb2c4183683ab71653c4cdc9b02d44b7",
         chain: mainnet,
         codeName: "TimelockController",
       },
@@ -76,7 +76,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x02D61347e5c6EA5604f3f814C5b5498421cEBdEB",
+        address: "0x02d61347e5c6ea5604f3f814c5b5498421cebdeb",
         chain: mainnet,
         codeName: "SafeProxy",
       },
@@ -91,7 +91,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x552DF471a4c7Fea11Ea8d7a7b0Acc6989b902a95",
+        address: "0x552df471a4c7fea11ea8d7a7b0acc6989b902a95",
         chain: mainnet,
         codeName: "Veto",
       },
@@ -106,7 +106,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x4F2083f5fBede34C2714aFfb3105539775f7FE64",
+        address: "0x4f2083f5fbede34c2714affb3105539775f7fe64",
         chain: mainnet,
         codeName: "GnosisSafeProxy",
       },

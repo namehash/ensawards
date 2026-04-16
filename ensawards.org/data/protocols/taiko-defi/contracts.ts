@@ -16,7 +16,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x8Efa01564425692d0a0838DC10E300BD310Cb43e",
+        address: "0x8efa01564425692d0a0838dc10e300bd310cb43e",
         chain: mainnet,
         codeName: "SharedResolver",
       },
@@ -30,7 +30,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x9e0a24964e5397B566c1ed39258e21aB5E35C77C",
+        address: "0x9e0a24964e5397b566c1ed39258e21ab5e35c77c",
         chain: mainnet,
         codeName: "SignalService",
       },
@@ -45,7 +45,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xd60247c6848B7Ca29eDdF63AA924E53dB6Ddd8EC",
+        address: "0xd60247c6848b7ca29eddf63aa924e53db6ddd8ec",
         chain: mainnet,
         codeName: "Bridge",
       },
@@ -60,7 +60,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x91f67118DD47d502B1f0C354D0611997B022f29E",
+        address: "0x91f67118dd47d502b1f0c354d0611997b022f29e",
         chain: mainnet,
         codeName: "QuotaManager",
       },
@@ -74,7 +74,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x996282cA11E5DEb6B5D122CC3B9A1FcAAD4415Ab",
+        address: "0x996282ca11e5deb6b5d122cc3b9a1fcaad4415ab",
         chain: mainnet,
         codeName: "ERC20Vault",
       },
@@ -89,7 +89,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0b470dd3A0e1C41228856Fb319649E7c08f419Aa",
+        address: "0x0b470dd3a0e1c41228856fb319649e7c08f419aa",
         chain: mainnet,
         codeName: "ERC721Vault",
       },
@@ -104,7 +104,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xaf145913EA4a56BE22E120ED9C24589659881702",
+        address: "0xaf145913ea4a56be22e120ed9c24589659881702",
         chain: mainnet,
         codeName: "ERC1155Vault",
       },
@@ -119,7 +119,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x65666141a541423606365123Ed280AB16a09A2e1",
+        address: "0x65666141a541423606365123ed280ab16a09a2e1",
         chain: mainnet,
         codeName: "BridgedERC20",
       },
@@ -133,7 +133,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xC3310905E2BC9Cfb198695B75EF3e5B69C6A1Bf7",
+        address: "0xc3310905e2bc9cfb198695b75ef3e5b69c6a1bf7",
         chain: mainnet,
         codeName: "BridgedERC721",
       },
@@ -147,7 +147,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x3c90963cFBa436400B0F9C46Aa9224cB379c2c40",
+        address: "0x3c90963cfba436400b0f9c46aa9224cb379c2c40",
         chain: mainnet,
         codeName: "BridgedERC1155",
       },
@@ -161,7 +161,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x06a9Ab27c7e2255df1815E6CC0168d7755Feb19a",
+        address: "0x06a9ab27c7e2255df1815e6cc0168d7755feb19a",
         chain: mainnet,
         codeName: "TaikoInbox",
       },
@@ -176,7 +176,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x9F9D2fC7abe74C79f86F0D1212107692430eef72",
+        address: "0x9f9d2fc7abe74c79f86f0d1212107692430eef72",
         chain: mainnet,
         codeName: "TaikoWrapper",
       },
@@ -190,7 +190,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xB16931e78d0cE3c9298bbEEf3b5e2276D34b8da1",
+        address: "0xb16931e78d0ce3c9298bbeef3b5e2276d34b8da1",
         chain: mainnet,
         codeName: "ComposeVerifier",
       },
@@ -204,7 +204,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x9e322fC59b8f4A29e6b25c3a166ac1892AA30136",
+        address: "0x9e322fc59b8f4a29e6b25c3a166ac1892aa30136",
         chain: mainnet,
         codeName: "SgxRethVerifier",
       },
@@ -218,7 +218,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x7e6409e9b6c5e2064064a6cC994f9a2e95680782",
+        address: "0x7e6409e9b6c5e2064064a6cc994f9a2e95680782",
         chain: mainnet,
         codeName: "SgxGethVerifier",
       },
@@ -232,7 +232,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x73Ee496dA20e5C65340c040B0D8c3C891C1f74AE",
+        address: "0x73ee496da20e5c65340c040b0d8c3c891c1f74ae",
         chain: mainnet,
         codeName: "Risc0RethVerifier",
       },
@@ -246,7 +246,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xbee1040D0Aab17AE19454384904525aE4A3602B9",
+        address: "0xbee1040d0aab17ae19454384904525ae4a3602b9",
         chain: mainnet,
         codeName: "SP1RethVerifier",
       },
@@ -274,7 +274,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x68d30f47F19c07bCCEf4Ac7FAE2Dc12FCa3e0dC9",
+        address: "0x68d30f47f19c07bccef4ac7fae2dc12fca3e0dc9",
         chain: mainnet,
         codeName: "labprover",
       },
@@ -288,7 +288,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x05d88855361808fA1d7fc28084Ef3fCa191c4e03",
+        address: "0x05d88855361808fa1d7fc28084ef3fca191c4e03",
         chain: mainnet,
         codeName: "ForcedInclusionStore",
       },
@@ -302,7 +302,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x5A982Fb1818c22744f5d7D36D0C4c9f61937b33a",
+        address: "0x5a982fb1818c22744f5d7d36d0c4c9f61937b33a",
         chain: mainnet,
         codeName: "RollupAddressResolver",
       },
@@ -316,7 +316,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xfB3Ca570A5348FD101e65303eECdB5Bf43C5548a",
+        address: "0xfb3ca570a5348fd101e65303eecdb5bf43c5548a",
         chain: mainnet,
         codeName: "Risc0Groth16Verifier",
       },
@@ -330,7 +330,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x8d7C954960a36a7596d7eA4945dDf891967ca8A3",
+        address: "0x8d7c954960a36a7596d7ea4945ddf891967ca8a3",
         chain: mainnet,
         codeName: "AutomataDcapAttestation",
       },
@@ -344,7 +344,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0ffa4A625ED9DB32B70F99180FD00759fc3e9261",
+        address: "0x0ffa4a625ed9db32b70f99180fd00759fc3e9261",
         chain: mainnet,
         codeName: "SgxGethAutomata",
       },
@@ -358,7 +358,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x02772b7B3a5Bea0141C993Dbb8D0733C19F46169",
+        address: "0x02772b7b3a5bea0141c993dbb8d0733c19f46169",
         chain: mainnet,
         codeName: "PemCertChainLib",
       },
@@ -372,7 +372,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x11A9ebA17EbF92b40fcf9a640Ebbc47Db6fBeab0",
+        address: "0x11a9eba17ebf92b40fcf9a640ebbc47db6fbeab0",
         chain: mainnet,
         codeName: "P256Verifier",
       },
@@ -386,7 +386,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x47bB416ee947fE4a4b655011aF7d6E3A1B80E6e9",
+        address: "0x47bb416ee947fe4a4b655011af7d6e3a1b80e6e9",
         chain: mainnet,
         codeName: "SigVerifyLib",
       },

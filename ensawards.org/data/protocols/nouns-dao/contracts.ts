@@ -17,7 +17,7 @@ const contracts: Contract[] = [
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "auction.nouns.eth",
       contract: {
-        address: "0x830BD73E4184ceF73443C15111a1DF14e495C706",
+        address: "0x830bd73e4184cef73443c15111a1df14e495c706",
         chain: mainnet,
         codeName: "NounsAuctionHouseProxy",
       },
@@ -34,7 +34,7 @@ const contracts: Contract[] = [
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "candidates.nouns.eth",
       contract: {
-        address: "0xf790A5f59678dd733fb3De93493A91f472ca1365",
+        address: "0xf790a5f59678dd733fb3de93493a91f472ca1365",
         chain: mainnet,
         codeName: "NounsDataDaoProxy",
       },
@@ -68,7 +68,7 @@ const contracts: Contract[] = [
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "proposals.nouns.eth",
       contract: {
-        address: "0x6f3E6272A167e8AcCb32072d08E0957F9c79223d",
+        address: "0x6f3e6272a167e8accb32072d08e0957f9c79223d",
         chain: mainnet,
         codeName: "NounsDaoProxy",
       },
@@ -84,7 +84,7 @@ const contracts: Contract[] = [
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "rewards.nouns.eth",
       contract: {
-        address: "0x883860178F95d0C82413eDc1D6De530cB4771d55",
+        address: "0x883860178f95d0c82413edc1d6de530cb4771d55",
         chain: mainnet,
         codeName: "NounsRewardsProxy",
       },
@@ -101,7 +101,7 @@ const contracts: Contract[] = [
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       name: "traits.nouns.eth",
       contract: {
-        address: "0x33A9c445fb4FB21f2c030A6b2d3e2F12D017BFAC",
+        address: "0x33a9c445fb4fb21f2c030a6b2d3e2f12d017bfac",
         chain: mainnet,
         codeName: "NounsDescriptorV3",
       },
@@ -117,7 +117,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xb1a32FC9F9D8b2cf86C068Cae13108809547ef71",
+        address: "0xb1a32fc9f9d8b2cf86c068cae13108809547ef71",
         chain: mainnet,
         codeName: "NounsDAOExecutorProxy",
       },
@@ -134,7 +134,7 @@ const contracts: Contract[] = [
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       name: "streams.nouns.eth",
       contract: {
-        address: "0x0fd206FC7A7dBcD5661157eDCb1FFDD0D02A61ff",
+        address: "0x0fd206fc7a7dbcd5661157edcb1ffdd0d02a61ff",
         chain: mainnet,
         codeName: "NounsStreamFactory",
       },

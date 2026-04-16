@@ -16,7 +16,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x900dB999074d9277c5DA2A43F252D74366230DA0",
+        address: "0x900db999074d9277c5da2a43f252d74366230da0",
         chain: mainnet,
         codeName: "GIV",
       },
@@ -31,7 +31,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x87dE995F6744B75bBe0255A973081142aDb61f4d",
+        address: "0x87de995f6744b75bbe0255a973081142adb61f4d",
         chain: mainnet,
         codeName: "TokenDistro",
       },
@@ -46,7 +46,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x93E79499b00a2fdAAC38e6005B0ad8E88b177346",
+        address: "0x93e79499b00a2fdaac38e6005b0ad8e88b177346",
         chain: mainnet,
         codeName: "DevouchMultisig",
       },
@@ -94,7 +94,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x93E79499b00a2fdAAC38e6005B0ad8E88b177346",
+        address: "0x93e79499b00a2fdaac38e6005b0ad8e88b177346",
         chain: optimism,
         codeName: "DevouchMultisig",
       },
@@ -127,7 +127,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x4F9368DDd665D5652f9786cd57f1b7d7469d95F7",
+        address: "0x4f9368ddd665d5652f9786cd57f1b7d7469d95f7",
         chain: optimism,
         codeName: "DeVouchResolverUpgradeable",
       },

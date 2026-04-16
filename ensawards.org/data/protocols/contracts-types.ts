@@ -1,5 +1,6 @@
 import type { Contribution } from "data/contributors/types.ts";
-import type { Address, Chain } from "viem";
+import type { NormalizedAddress } from "data/shared/normalizedAddress.ts";
+import type { Chain } from "viem";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
@@ -60,7 +61,7 @@ export interface EnsProfileForContract {
  */
 export interface ContractDeployment {
   chain: Chain;
-  address: Address;
+  address: NormalizedAddress;
 
   /**
    * The name of the contract from a codebase perspective (ex: in Solidity).

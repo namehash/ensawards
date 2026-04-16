@@ -16,7 +16,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x9CDf589C941ee81D75F34d3755671d614f7cf261",
+        address: "0x9cdf589c941ee81d75f34d3755671d614f7cf261",
         chain: mainnet,
         codeName: "TaikoDAO",
       },
@@ -32,7 +32,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x10dea67478c5F8C5E2D90e5E9B26dBe60c54d800",
+        address: "0x10dea67478c5f8c5e2d90e5e9b26dbe60c54d800",
         chain: mainnet,
         codeName: "TaikoToken",
       },
@@ -51,7 +51,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x5c475bB14727833394b0704266f14157678A72b6",
+        address: "0x5c475bb14727833394b0704266f14157678a72b6",
         chain: mainnet,
         codeName: "TokenUnlock",
       },
@@ -66,7 +66,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x75Ba76403b13b26AD1beC70D6eE937314eeaCD0a",
+        address: "0x75ba76403b13b26ad1bec70d6ee937314eeacd0a",
         chain: mainnet,
         codeName: "TaikoDAOController",
       },
