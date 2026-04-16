@@ -17,8 +17,10 @@ export default defineConfig({
 
   redirects: {
     "/benchmarks": "/leaderboards",
-    "/benchmarks/[appslug]": "/app/[appslug]",
     "/leaderboards/app": "/leaderboards",
+    "/benchmarks/rainbow-wallet": "/app/rainbow-wallet",
+    "/benchmarks/coinbase-wallet": "/app/coinbase-wallet",
+    "/benchmarks/metamask": "/app/metamask-wallet",
 
     "/app/blockscout": "/app/blockscout-explorer",
     "/app/etherscan": "/app/etherscan-explorer",
