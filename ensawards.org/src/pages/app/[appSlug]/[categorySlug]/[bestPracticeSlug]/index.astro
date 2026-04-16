@@ -5,7 +5,7 @@ import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import { BestPracticeTypes, type BestPracticeApp } from "data/ens-best-practices/types";
 import { APPS } from "data/apps";
 import { type App } from "data/apps/types";
-import { getAppBySlug } from "data/apps/utils.ts";
+import { getAppBySlug, getAppTypeLabel } from "data/apps/utils.ts";
 import {
   getBestPracticesByCategory,
   getBestPracticeBySlug,
@@ -13,8 +13,9 @@ import {
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import BenchmarkResultHeroBadge from "@/components/atoms/badges/BenchmarkResultHeroBadge.astro";
 import { type AppBenchmark } from "data/benchmarks/types";
-import { getBenchmarkByAppSlugAndBestPracticeSlug } from "data/benchmarks/utils";
+import { getAppBenchmark } from "data/benchmarks/utils";
 import {
+  ContributionTypes,
   ContributorsCard,
   ContributorsCardLoading,
 } from "@/components/atoms/cards/ContributorsCard.tsx";
@@ -28,19 +29,16 @@ export function getStaticPaths() {
 
   for (const category of BEST_PRACTICE_CATEGORIES) {
     getBestPracticesByCategory(category)
-      .filter(
-        (bestPractice): bestPractice is BestPracticeApp =>
-          bestPractice.type === BestPracticeTypes.App,
-      )
+      .filter((bestPractice) => bestPractice.type === BestPracticeTypes.App)
       .forEach((bestPractice) => {
         const applicableApps = APPS.filter((app: App) => bestPractice.appliesTo.includes(app.type));
 
         applicableApps.forEach((app: App) =>
           staticPaths.push({
             params: {
-              category: category.categorySlug,
-              bestPractice: bestPractice.bestPracticeSlug,
-              app: app.appSlug,
+              categorySlug: category.categorySlug,
+              bestPracticeSlug: bestPractice.bestPracticeSlug,
+              appSlug: app.appSlug,
             },
           }),
         );
@@ -49,20 +47,17 @@ export function getStaticPaths() {
   return staticPaths;
 }
 
-const { category, bestPractice, app } = Astro.params;
+const { categorySlug, bestPracticeSlug, appSlug } = Astro.params;
 
-const resolvedBestPractice = getBestPracticeBySlug(bestPractice);
-const resolvedApp = getAppBySlug(app);
+const resolvedBestPractice = getBestPracticeBySlug(bestPracticeSlug);
+const resolvedApp = getAppBySlug(appSlug);
 
 let AppIcon;
 let appBenchmark: AppBenchmark | undefined = undefined;
 
 if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
   AppIcon = resolvedApp.icon;
-  appBenchmark = getBenchmarkByAppSlugAndBestPracticeSlug(
-    resolvedApp.appSlug,
-    resolvedBestPractice.bestPracticeSlug,
-  );
+  appBenchmark = getAppBenchmark(resolvedApp.appSlug, resolvedBestPractice.bestPracticeSlug);
 }
 ---
 
@@ -75,7 +70,7 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
       pageMetadata={{
         title: `ENSAwards: ${resolvedApp.name} benchmark details for "${resolvedBestPractice.name}" best practice`,
         description: `See how well ${resolvedApp.name} applies "${resolvedBestPractice.name}" best practice`,
-        url: `https://ensawards.org/app/${app}/${category}/${bestPractice}`,
+        url: `https://ensawards.org/app/${appSlug}/${categorySlug}/${bestPracticeSlug}`,
       }}>
       <SubpageHero
         header={resolvedBestPractice.name}
@@ -83,8 +78,8 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
         breadcrumbs={[
           { text: "ENS leaderboards", linkHref: "/leaderboards" },
           {
-            text: `${resolvedApp.type} leaderboard`,
-            linkHref: `/leaderboards/${resolvedApp.type.toLowerCase()}`,
+            text: `${getAppTypeLabel(resolvedApp.type)} leaderboard`,
+            linkHref: `/leaderboards/${resolvedApp.type}`,
           },
           { text: resolvedApp.name, linkHref: `/app/${resolvedApp.appSlug}` },
         ]}>
@@ -126,15 +121,15 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
             <ContributorsCard
               client:only="react"
               sidebarVariant
-              whatsSuggested="benchmark result"
-              allContributions={
+              contributionType={ContributionTypes.BenchmarkResult}
+              existingContributions={
                 appBenchmark !== undefined ? appBenchmark.contributions : []
               }
               gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${resolvedApp.appSlug}/benchmarks.ts`}>
               <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant
-                whatsSuggested="benchmark result"
+                contributionType={ContributionTypes.BenchmarkResult}
               />
             </ContributorsCard>
             <div class="hidden lg:block w-full">

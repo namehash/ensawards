@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import { type BestPracticeProtocol, ProtocolTypes } from "data/ens-best-practices/types.ts";
+import { type BestPracticeProtocol } from "data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "data/protocols/types.ts";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { markdownToHtml } from "@/utils/markdown";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -17,6 +18,7 @@ import { getProtocolById } from "data/protocols/utils.ts";
 import {
   ContributorsCard,
   ContributorsCardLoading,
+  ContributionTypes,
 } from "@/components/atoms/cards/ContributorsCard.tsx";
 import { type Contribution } from "data/contributors/types";
 import { CONTRACTS } from "data/protocols/contracts";
@@ -143,13 +145,13 @@ const additionalInfoContainerStyles =
       <ContributorsCard
         client:only="react"
         sidebarVariant
-        whatsSuggested="best practice"
-        allContributions={allContributions}
+        contributionType={ContributionTypes.BestPractice}
+        existingContributions={allContributions}
         gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
         <ContributorsCardLoading
           slot="fallback"
           sidebarVariant
-          whatsSuggested="best practice"
+          contributionType={ContributionTypes.BestPractice}
         />
       </ContributorsCard>
     </div>

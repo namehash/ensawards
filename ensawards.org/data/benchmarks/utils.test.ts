@@ -1,10 +1,10 @@
 import {
   calcCategoryScore,
-  compareBenchmarks,
-  getBenchmarkPoints,
+  getEnsAwardsPoints,
   groupBenchmarksByCategory,
+  sortBenchmarks,
 } from "data/benchmarks/utils.ts";
-import type { BestPracticeSlug } from "data/ens-best-practices/types.ts";
+import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
 import {
   createMockBenchmark,
   mockDisplayProfilesBestPractice,
@@ -14,7 +14,7 @@ import {
 } from "data/shared/test-utils.ts";
 import { describe, expect, it, vi } from "vitest";
 
-import { BenchmarkResult, type BestPracticeBenchmarks } from "./types.ts";
+import { BenchmarkResult } from "./types.ts";
 
 const { mockGetBestPracticeBySlug } = vi.hoisted(() => ({
   mockGetBestPracticeBySlug: vi.fn(),
@@ -44,7 +44,7 @@ describe("benchmarks-utils", () => {
 
       benchmarkCases.forEach(({ benchmark, expectedPoints }) => {
         expect(
-          getBenchmarkPoints(benchmark),
+          getEnsAwardsPoints(benchmark),
           `Expected getBenchmarkPoints to return ${expectedPoints}`,
         ).toEqual(expectedPoints);
       });
@@ -132,7 +132,7 @@ describe("benchmarks-utils", () => {
     });
   });
 
-  describe("compareBenchmarks", () => {
+  describe("sortBenchmarks", () => {
     it("should allow correct sorting of benchmarks", () => {
       const input = [
         undefined,
@@ -150,7 +150,7 @@ describe("benchmarks-utils", () => {
         undefined,
       ];
 
-      const result = input.sort((a, b) => compareBenchmarks(a, b));
+      const result = input.sort((a, b) => sortBenchmarks(a, b));
 
       expectedOutput.forEach((benchmark, index) =>
         expect(benchmark, `Expected sorted benchmark at index ${index} to match`).toEqual(

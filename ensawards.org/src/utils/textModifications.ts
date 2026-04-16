@@ -1,7 +1,8 @@
 import type { Address } from "viem";
 
 import { AppTypes } from "../../data/apps/types.ts";
-import { type BestPracticeTarget, ProtocolTypes } from "../../data/ens-best-practices/types.ts";
+import { type BestPracticeTarget } from "../../data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "../../data/protocols/types.ts";
 
 const CAPITALIZED_ACRONYMS = ["DAO", "DeFi"];
 

@@ -1,10 +1,9 @@
 import { BenchmarkResult } from "data/benchmarks/types.ts";
-import { getBenchmarkPoints, getBenchmarksByBestPracticeSlug } from "data/benchmarks/utils.ts";
-
-import type { EnsAwardsScore } from "@/components/atoms/ens-awards-score/types.ts";
+import { getAppBenchmarksByBestPractice, getEnsAwardsPoints } from "data/benchmarks/utils.ts";
+import { type EnsAwardsScore, isValidEnsAwardsScore } from "data/shared/ens-awards-score.ts";
 
 import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from "./index.ts";
-import type { BestPractice, BestPracticeApp, BestPracticeCategory } from "./types.ts";
+import { type BestPractice, type BestPracticeApp, type BestPracticeCategory } from "./types.ts";
 
 /**
  * Returns a {@link BestPracticeCategory} by {@link BestPracticeCategory.categorySlug}.
@@ -43,14 +42,16 @@ export const getBestPracticesByCategory = (category: BestPracticeCategory): Best
   return ENS_BEST_PRACTICES.filter((bestPractice) => bestPractice.category.id === category.id);
 };
 
+export const getBestPracticeTypeLabel = (bestPracticeType: string): string => {
+  return bestPracticeType.charAt(0).toUpperCase() + bestPracticeType.slice(1);
+};
+
 /**
  * Calculates an {@link EnsAwardsScore} for a {@link BestPractice},
  * by calculating the average score of all apps that were benchmarked on this best practice.
  *
  * @returns `undefined` if no apps were benchmarked on this best practice,
- * otherwise returns an integer between 0 and 100.
- *
- * The points awarded for different {@link BenchmarkResult}s are defined by the {@link getBenchmarkPoints} function.
+ * otherwise returns the {@link EnsAwardsScore}.
  */
 export const calcBestPracticeScore = (
   bestPractice: BestPracticeApp,
@@ -58,7 +59,7 @@ export const calcBestPracticeScore = (
   let benchmarkedApps = 0;
   let bestPracticePoints = 0;
 
-  const bestPracticeBenchmarks = getBenchmarksByBestPracticeSlug(bestPractice.bestPracticeSlug);
+  const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(bestPractice.bestPracticeSlug);
 
   for (const benchmark of bestPracticeBenchmarks) {
     if (benchmark === undefined) {
@@ -67,7 +68,7 @@ export const calcBestPracticeScore = (
 
     benchmarkedApps += 1;
 
-    bestPracticePoints += getBenchmarkPoints(benchmark);
+    bestPracticePoints += getEnsAwardsPoints(benchmark);
   }
 
   if (benchmarkedApps === 0) return undefined;
@@ -75,7 +76,7 @@ export const calcBestPracticeScore = (
   const score = Math.round((bestPracticePoints * 100) / benchmarkedApps);
 
   // Check EnsAwardsScore invariants
-  if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
+  if (!isValidEnsAwardsScore(score)) {
     throw new Error(
       `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
     );
@@ -92,7 +93,7 @@ export const calcBestPracticeScore = (
 export const calcAppsPassed = (bestPractice: BestPracticeApp): number => {
   let appsPassed = 0;
 
-  const bestPracticeBenchmarks = getBenchmarksByBestPracticeSlug(bestPractice.bestPracticeSlug);
+  const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(bestPractice.bestPracticeSlug);
 
   bestPracticeBenchmarks.forEach((benchmark) => {
     // Explicit acceptance of Pass & Partial Pass results

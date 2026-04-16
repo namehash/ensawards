@@ -13,7 +13,7 @@ export interface BestPracticeCardProps {
 
 const { bestPractice }: BestPracticeCardProps = Astro.props;
 
-const bestPracticeEnsAwardsScore =
+const bestPracticeScore =
   bestPractice.type === BestPracticeTypes.App ? calcBestPracticeScore(bestPractice) : undefined;
 ---
 
@@ -75,13 +75,10 @@ const bestPracticeEnsAwardsScore =
       </p>
       {
         bestPractice.type === BestPracticeTypes.App ? (
-          bestPracticeEnsAwardsScore === undefined ? (
+          bestPracticeScore === undefined ? (
             <p class="text-sm leading-normal font-medium text-black">Pending</p>
           ) : (
-            <ScoreBar
-              score={bestPracticeEnsAwardsScore}
-              mobileAdaptive={false}
-            />
+            <ScoreBar score={bestPracticeScore} mobileAdaptive={false} />
           )
         ) : (
           <EnscribeIcon />

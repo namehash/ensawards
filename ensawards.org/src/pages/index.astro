@@ -12,11 +12,11 @@ import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { ProtocolTypes } from "data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "data/protocols/types.ts";
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "data/protocols/utils.ts";
-import { calcAppScore, compareApps } from "data/apps/utils.ts";
+import { getProtocolById, getProtocolTypeLabel } from "data/protocols/utils.ts";
+import { calcAppScore, sortApps, getAppTypeLabel } from "data/apps/utils.ts";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -37,7 +37,7 @@ const placeIcons = [
         const relevantApps = APPS.filter((app) => app.type === appType);
         const rankedApps = relevantApps
           .map((app) => ({ app, score: calcAppScore(app) }))
-          .sort((a, b) => compareApps(a.app, b.app))
+          .sort((a, b) => sortApps(a.app, b.app))
           .slice(0, 3);
 
         return (
@@ -48,11 +48,11 @@ const placeIcons = [
               const AppIcon = app.icon;
               return (
                 <LeaderboardCard
-                  key={`${appType.toLowerCase()}-review-card-${app.id}`}
+                  key={`${appType}-review-card-${app.id}`}
                   name={app.name}
                   ensAwardsScore={score}
                   viewDetailsLink={`/app/${app.appSlug}`}
-                  viewDetailsText={`${appType} report`}>
+                  viewDetailsText={`${getAppTypeLabel(appType)} report`}>
                   <AppIcon
                     slot="rankedEntityIcon"
                     className="w-10 h-10 rounded-md"
@@ -66,7 +66,7 @@ const placeIcons = [
               );
             })}
             <a
-              href={`/leaderboards/${appType.toLowerCase()}`}
+              href={`/leaderboards/${appType}`}
               class={cn(
                 shadcnButtonVariants({
                   variant: "ghost",
@@ -75,7 +75,7 @@ const placeIcons = [
                     "cursor-pointer rounded-full text-sm max-sm:w-full",
                 }),
               )}>
-              View full {appType.toLowerCase()} leaderboard
+              View full {appType} leaderboard
             </a>
           </ItemsList>
         );
@@ -102,7 +102,7 @@ const placeIcons = [
                     name={protocol.name}
                     ensAwardsScore={value}
                     viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
-                    viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
+                    viewDetailsText={`${getProtocolTypeLabel(protocolType)}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                     <Image
                       alt={`${idx + 1}-place`}
                       src={images[placeIcons[idx]]()}
@@ -116,7 +116,7 @@ const placeIcons = [
                 );
               })}
             <a
-              href={`/leaderboards/${protocolType.toLowerCase()}`}
+              href={`/leaderboards/${protocolType}`}
               class={cn(
                 shadcnButtonVariants({
                   variant: "ghost",
@@ -125,7 +125,7 @@ const placeIcons = [
                     "cursor-pointer rounded-full text-sm max-sm:w-full",
                 }),
               )}>
-              View full {protocolType} leaderboard
+              View full {getProtocolTypeLabel(protocolType)} leaderboard
             </a>
           </ItemsList>
         );

@@ -1,8 +1,9 @@
-import { getAppSupportColor } from "@/utils/styles";
+import type { EnsAwardsScore } from "data/shared/ens-awards-score";
+
+import { getScoreColor } from "@/utils/styles";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import { EnsAwardsBarScorePending } from "./bar-pending";
-import type { EnsAwardsScore } from "./types";
 
 export interface EnsAwardsBarScoreProps {
   score?: EnsAwardsScore;
@@ -48,7 +49,7 @@ export const ScoreBar = ({ score, mobileAdaptive }: Required<EnsAwardsBarScorePr
       <div
         className={cn(
           "absolute h-full self-stretch rounded-[20px] z-10",
-          `bg-${getAppSupportColor(score)}`,
+          `bg-${getScoreColor(score)}`,
         )}
         style={{ width: `calc(${score}%)` }}
       ></div>
@@ -57,7 +58,7 @@ export const ScoreBar = ({ score, mobileAdaptive }: Required<EnsAwardsBarScorePr
       className={cn(
         "text-sm leading-normal",
         mobileAdaptive ? "font-medium sm:font-semibold" : "font-semibold",
-        `text-${getAppSupportColor(score)}`,
+        `text-${getScoreColor(score)}`,
       )}
     >
       {score}%

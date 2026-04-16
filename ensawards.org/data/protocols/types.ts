@@ -2,7 +2,6 @@ import type { JSX } from "astro/jsx-runtime";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
-import { type ProtocolType, ProtocolTypes } from "../ens-best-practices/types.ts";
 import type { Project } from "../projects/types.ts";
 
 export const DAOProtocolIds = {
@@ -47,6 +46,13 @@ export const ProtocolIds = {
  */
 export type ProtocolId = (typeof ProtocolIds)[keyof typeof ProtocolIds];
 
+export const ProtocolTypes = {
+  DAO: "dao",
+  DeFi: "defi",
+} as const;
+
+export type ProtocolType = (typeof ProtocolTypes)[keyof typeof ProtocolTypes];
+
 /** A unique identifier for a protocol.
  *
  * @invariant Must be unique across all protocols.
@@ -58,7 +64,7 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
   id: ProtocolIdT;
   protocolSlug: ProtocolSlug;
   protocolType: ProtocolT;
-  project: Project; // each protocol belongs to a single project.
+  project: Project; // each protocol is associated with a broader project, which may comprise multiple apps and protocols.
   name: string;
   description: string;
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
@@ -67,9 +73,9 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
     twitter: URL;
     ens?: Name;
   };
-  /** Relative path from the protocol data root to the Open Graph image for the protocol. */
+  /** Relative path from `/data/protocols` to the Open Graph image for the protocol. */
   ogImagePath?: string;
-  /** Relative path from the protocol data root to the Twitter Open Graph image for the protocol. */
+  /** Relative path from `/data/protocols` to the Twitter Open Graph image for the protocol. */
   twitterOgImagePath?: string;
 }
 

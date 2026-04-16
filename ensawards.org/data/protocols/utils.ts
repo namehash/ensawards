@@ -1,8 +1,4 @@
-import {
-  type BestPracticeTarget,
-  type ProtocolType,
-  ProtocolTypes,
-} from "../ens-best-practices/types.ts";
+import { type BestPracticeTarget } from "../ens-best-practices/types.ts";
 import { CONTRACTS } from "./contracts.ts";
 import { type Contract } from "./contracts-types.ts";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "./index.ts";
@@ -13,7 +9,9 @@ import type {
   DeFiProtocolId,
   Protocol,
   ProtocolId,
+  ProtocolType,
 } from "./types.ts";
+import { ProtocolTypes } from "./types.ts";
 
 /**
  * Returns a {@link Protocol} by {@link Protocol.id}.
@@ -102,12 +100,25 @@ const PROTOCOL_CONTRACTS_BY_PROTOCOL_ID: Map<ProtocolId, Contract[]> = (() => {
 export const getAllProtocolContracts = (protocolId: ProtocolId): Contract[] =>
   PROTOCOL_CONTRACTS_BY_PROTOCOL_ID.get(protocolId) ?? [];
 
-/** Builds the URL's href for a protocol's Open Graph image.
+/** Builds the URL for a protocol's Open Graph image.
  *
- * @returns undefined if the protocol doesn't have an og image path, otherwise returns the URL string for the og image.
+ * @returns undefined if the protocol doesn't have an og image path, otherwise returns the URL for the og image.
  */
-export const buildProtocolOgImageUrlHref = (imagePath: string | undefined): string | undefined => {
+export const buildProtocolOgImageUrl = (imagePath: string | undefined): URL | undefined => {
   if (!imagePath) return undefined;
 
-  return new URL(imagePath, "https://ensawards.org/data/protocols/").href;
+  return new URL(imagePath, "https://ensawards.org/data/protocols/");
+};
+
+export const getProtocolTypeLabel = (protocolType: ProtocolType): string => {
+  switch (protocolType) {
+    case ProtocolTypes.DeFi:
+      return "DeFi";
+
+    case ProtocolTypes.DAO:
+      return "DAO";
+
+    default:
+      return "Unknown";
+  }
 };

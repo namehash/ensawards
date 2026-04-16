@@ -1,4 +1,4 @@
-import { type AppBenchmark, type AppBenchmarks, BenchmarkResult } from "data/benchmarks/types.ts";
+import { type AppBenchmark, BenchmarkResult } from "data/benchmarks/types.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
@@ -12,11 +12,11 @@ import {
   mockRainbowApp,
   mockReverseResolutionBestPractice,
 } from "../shared/test-utils.ts";
-import { type App, AppTypes } from "./types.ts";
+import { type App, type AppBenchmarks, type AppSlug, AppTypes } from "./types.ts";
 
-const { mockApps, mockgetBenchmarkPoints, mockBenchmarks } = vi.hoisted(() => ({
+const { mockApps, mockEnsAwardsPoints, mockBenchmarks } = vi.hoisted(() => ({
   mockApps: [] as App[],
-  mockgetBenchmarkPoints: vi.fn(),
+  mockEnsAwardsPoints: vi.fn(),
   mockBenchmarks: {} as AppBenchmarks,
 }));
 
@@ -29,8 +29,8 @@ vi.mock("data/benchmarks/index.ts", () => ({
 }));
 
 vi.mock("data/benchmarks/utils.ts", () => ({
-  getBenchmarkPoints: mockgetBenchmarkPoints,
-  getBenchmarksByAppSlug: (slug: string) => mockBenchmarks[slug],
+  getEnsAwardsPoints: mockEnsAwardsPoints,
+  getAppBenchmarks: (slug: AppSlug) => mockBenchmarks[slug],
 }));
 
 import {
@@ -49,8 +49,8 @@ const setMockApps = (...apps: App[]) => {
 describe("App utils", () => {
   beforeEach(() => {
     mockApps.splice(0, mockApps.length);
-    mockgetBenchmarkPoints.mockReset();
-    mockgetBenchmarkPoints.mockImplementation((benchmark: AppBenchmark) => {
+    mockEnsAwardsPoints.mockReset();
+    mockEnsAwardsPoints.mockImplementation((benchmark: AppBenchmark) => {
       switch (benchmark.result) {
         case BenchmarkResult.Pass:
           return 1;
@@ -146,7 +146,7 @@ describe("App utils", () => {
     });
 
     it("Should throw when the calculated score is greater than 100", () => {
-      mockgetBenchmarkPoints.mockReturnValue(2);
+      mockEnsAwardsPoints.mockReturnValue(2);
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
           BenchmarkResult.Pass,
@@ -159,7 +159,7 @@ describe("App utils", () => {
     });
 
     it("Should throw when the calculated score is less than 0", () => {
-      mockgetBenchmarkPoints.mockReturnValue(-1);
+      mockEnsAwardsPoints.mockReturnValue(-1);
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
           BenchmarkResult.Pass,

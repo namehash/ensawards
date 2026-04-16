@@ -6,13 +6,14 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
+import { getAppTypeLabel } from "data/apps/utils.ts";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { ProtocolTypes } from "data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "data/protocols/types.ts";
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "data/protocols/utils.ts";
-import { compareApps } from "data/apps/utils.ts";
+import { getProtocolById, getProtocolTypeLabel } from "data/protocols/utils.ts";
+import { sortApps } from "data/apps/utils.ts";
 import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList.tsx";
 import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 ---
@@ -45,14 +46,14 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 
           return (
             <LeaderboardSnippetCard
-              name={`${appType} leaderboard`}
+              name={`${getAppTypeLabel(appType)} leaderboard`}
               description={`See how ${pluralizeBestPracticeTarget(appType).toLowerCase()} rank for following ENS best practices.`}
-              link={`/leaderboards/${appType.toLowerCase()}`}>
+              link={`/leaderboards/${appType}`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
                 {relevantApps
-                  .sort(compareApps)
+                  .sort(sortApps)
                   .slice(0, 3)
                   .map((app, idx) => {
                     const AppIcon = app.icon;
@@ -88,9 +89,9 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 
           return (
             <LeaderboardSnippetCard
-              name={`${protocolType} leaderboard`}
+              name={`${getProtocolTypeLabel(protocolType)} leaderboard`}
               description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
-              link={`/leaderboards/${protocolType.toLowerCase()}`}>
+              link={`/leaderboards/${protocolType}`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">

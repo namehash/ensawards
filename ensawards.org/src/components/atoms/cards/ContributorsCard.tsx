@@ -26,8 +26,8 @@ const orderContributorsByAppearances = (contributors: Contributor[]): Contributo
     .map(({ contributor }) => contributor);
 };
 
-const getContributorsCardDescription = (whatsSuggested: PossibleContributions) => {
-  switch (whatsSuggested) {
+const getContributionTypeDescription = (contributionType: ContributionType) => {
+  switch (contributionType) {
     case "app":
     case "protocol":
       return "leaderboards";
@@ -44,29 +44,32 @@ const getContributorsCardDescription = (whatsSuggested: PossibleContributions) =
   }
 };
 
+export const ContributionTypes = {
+  App: "app",
+  BestPractice: "best practice",
+  BenchmarkResult: "benchmark result",
+  Protocol: "protocol",
+  Contract: "contract",
+} as const;
+
 /**
  * Contribution targets that can be surfaced by the {@link ContributorsCard}.
  *
  * Each literal value identifies a kind of ENS Awards entity that users can be
  * encouraged to suggest updates for.
  */
-export type PossibleContributions =
-  | "app"
-  | "best practice"
-  | "benchmark result"
-  | "protocol"
-  | "contract";
+export type ContributionType = (typeof ContributionTypes)[keyof typeof ContributionTypes];
 
 export interface ContributorsCardProps {
-  whatsSuggested: PossibleContributions;
-  allContributions: Contribution[];
+  contributionType: ContributionType;
+  existingContributions: Contribution[];
   gitHubTargetHref?: string;
   sidebarVariant?: boolean;
 }
 
 export const ContributorsCard = ({
-  whatsSuggested,
-  allContributions,
+  contributionType,
+  existingContributions,
   gitHubTargetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
   sidebarVariant = false,
 }: ContributorsCardProps) => {
@@ -79,8 +82,11 @@ export const ContributorsCard = ({
   );
 
   const orderedContributorProfiles = useMemo(
-    () => orderContributorsByAppearances(allContributions.map((contribution) => contribution.from)),
-    [allContributions],
+    () =>
+      orderContributorsByAppearances(
+        existingContributions.map((contribution) => contribution.from),
+      ),
+    [existingContributions],
   );
 
   return (
@@ -96,7 +102,7 @@ export const ContributorsCard = ({
             <div className="w-full flex flex-col gap-1">
               <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
               <p className="text-base leading-6 font-normal text-muted-foreground">
-                All {getContributorsCardDescription(whatsSuggested)} on ENSAwards are open for
+                All {getContributionTypeDescription(contributionType)} on ENSAwards are open for
                 public contribution.
               </p>
             </div>
@@ -224,9 +230,9 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
 };
 
 export const ContributorsCardLoading = ({
-  whatsSuggested,
+  contributionType: whatsSuggested,
   sidebarVariant = false,
-}: Omit<ContributorsCardProps, "gitHubTargetHref" | "allContributions">) => {
+}: Omit<ContributorsCardProps, "gitHubTargetHref" | "existingContributions">) => {
   const loadingStyles = "animate-pulse bg-gray-200";
   return (
     <div
@@ -239,7 +245,7 @@ export const ContributorsCardLoading = ({
         <div className="w-full flex flex-col gap-1">
           <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
           <p className="text-base leading-6 font-normal text-muted-foreground">
-            All {getContributorsCardDescription(whatsSuggested)} on ENSAwards are open for public
+            All {getContributionTypeDescription(whatsSuggested)} on ENSAwards are open for public
             contribution.
           </p>
         </div>

@@ -17,16 +17,19 @@ export function getStaticPaths() {
   for (let category of BEST_PRACTICE_CATEGORIES) {
     getBestPracticesByCategory(category).forEach((bestPractice) =>
       staticPaths.push({
-        params: { category: category.categorySlug, bestPractice: bestPractice.bestPracticeSlug },
+        params: {
+          categorySlug: category.categorySlug,
+          bestPracticeSlug: bestPractice.bestPracticeSlug,
+        },
       }),
     );
   }
   return staticPaths;
 }
 
-const { category, bestPractice } = Astro.params;
+const { categorySlug, bestPracticeSlug } = Astro.params;
 
-const bestPracticeToDisplay = getBestPracticeBySlug(bestPractice);
+const bestPracticeToDisplay = getBestPracticeBySlug(bestPracticeSlug);
 ---
 
 {

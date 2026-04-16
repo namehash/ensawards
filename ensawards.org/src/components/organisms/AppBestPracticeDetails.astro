@@ -4,8 +4,12 @@ import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { calcBestPracticeScore } from "data/ens-best-practices/utils.ts";
-import { compareBenchmarks, getBenchmarksByAppSlug } from "data/benchmarks/utils.ts";
-import { ContributorsCard, ContributorsCardLoading } from "../atoms/cards/ContributorsCard.tsx";
+import { sortBenchmarks, getAppBenchmarks } from "data/benchmarks/utils.ts";
+import {
+  ContributionTypes,
+  ContributorsCard,
+  ContributorsCardLoading,
+} from "../atoms/cards/ContributorsCard.tsx";
 import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
@@ -20,7 +24,7 @@ const { bestPractice }: AppBestPracticeDetailsProps = Astro.props;
 
 // Get apps that have benchmarks for this specific best practice
 const appsWithBenchmarks = APPS.map((app) => {
-  const matchingBenchmark = getBenchmarksByAppSlug(app.appSlug)[bestPractice.bestPracticeSlug];
+  const matchingBenchmark = getAppBenchmarks(app.appSlug)[bestPractice.bestPracticeSlug];
 
   return {
     app,
@@ -32,7 +36,7 @@ const appsWithBenchmarks = APPS.map((app) => {
 // Sort benchmark results
 const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
   // First try to differentiate by benchmarks
-  const benchmarksDiff = compareBenchmarks(a.benchmark, b.benchmark);
+  const benchmarksDiff = sortBenchmarks(a.benchmark, b.benchmark);
 
   if (benchmarksDiff !== 0) return benchmarksDiff;
 
@@ -42,14 +46,11 @@ const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
 
 const bestPracticeScore = calcBestPracticeScore(bestPractice);
 
-const benchmarkDataContributions: Contribution[] = appsWithBenchmarks.flatMap(({ benchmark }) =>
+const benchmarkContributions: Contribution[] = appsWithBenchmarks.flatMap(({ benchmark }) =>
   benchmark ? benchmark.contributions : [],
 );
 
-const allContributions: Contribution[] = [
-  ...bestPractice.contributions,
-  ...benchmarkDataContributions,
-];
+const allContributions: Contribution[] = [...bestPractice.contributions, ...benchmarkContributions];
 
 const additionalInfoContainerStyles =
   "flex flex-row md:flex-col flex-nowrap justify-between md:justify-center items-center md:items-end md:gap-0 leading-7 max-md:self-stretch";
@@ -105,13 +106,13 @@ const additionalInfoContainerStyles =
       <ContributorsCard
         client:only="react"
         sidebarVariant
-        whatsSuggested="best practice"
-        allContributions={allContributions}
+        contributionType={ContributionTypes.BestPractice}
+        existingContributions={allContributions}
         gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
         <ContributorsCardLoading
           slot="fallback"
           sidebarVariant
-          whatsSuggested="best practice"
+          contributionType={ContributionTypes.BestPractice}
         />
       </ContributorsCard>
       {

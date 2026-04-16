@@ -1,5 +1,6 @@
 import type { AppBenchmark } from "data/benchmarks/types.ts";
 import { BenchmarkResult } from "data/benchmarks/types.ts";
+import { zeroAddress } from "viem";
 import { mainnet } from "viem/chains";
 
 import { type App, type AppSlug, type AppType, AppTypes } from "../apps/types.ts";
@@ -51,16 +52,12 @@ export const createMockBestPractice = (overrides: {
     },
     sides: [],
   },
-  contributions: [
-    { from: { address: "0x123" as `0x${string}`, chainId: mainnet.id }, lastUpdated: 0 },
-  ],
+  contributions: [{ from: { address: zeroAddress, chainId: mainnet.id }, lastUpdated: 0 }],
 });
 
 export const createMockBenchmark = (result: BenchmarkResult): AppBenchmark => ({
   result,
-  contributions: [
-    { from: { address: "0x123" as `0x${string}`, chainId: mainnet.id }, lastUpdated: 0 },
-  ],
+  contributions: [{ from: { address: zeroAddress, chainId: mainnet.id }, lastUpdated: 0 }],
 });
 
 export const createMockApp = (overrides: {

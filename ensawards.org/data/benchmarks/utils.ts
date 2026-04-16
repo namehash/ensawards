@@ -3,25 +3,32 @@ import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
-import { type EnsAwardsScore } from "@/components/atoms/ens-awards-score/types.ts";
+import type { BestPracticeBenchmarks, BestPracticeSlug } from "../ens-best-practices/types.ts";
+import { type BestPracticeCategorySlug } from "../ens-best-practices/types.ts";
+import {
+  type EnsAwardsPoints,
+  type EnsAwardsScore,
+  isValidEnsAwardsScore,
+} from "../shared/ens-awards-score.ts";
+import { APP_BENCHMARKS } from ".";
+import { type AppBenchmark, BenchmarkResult } from "./types.ts";
 
-import type { BestPracticeSlug } from "../ens-best-practices/types.ts";
-import { type CategorySlug } from "../ens-best-practices/types.ts";
-import { BENCHMARKS } from ".";
-import { type AppBenchmark, BenchmarkResult, type BestPracticeBenchmarks } from "./types.ts";
-
-/** Returns all benchmarks of a {@link App} by its {@link AppSlug}. */
-export function getBenchmarksByAppSlug(slug: AppSlug): BestPracticeBenchmarks {
-  return BENCHMARKS[slug];
+/** Returns all benchmarks of a {@link App} by its {@link AppSlug}.
+ *
+ * If a returned {@link AppBenchmark} is `undefined`,
+ * it means that it's pending and has not been completed yet.
+ */
+export function getAppBenchmarks(slug: AppSlug): BestPracticeBenchmarks {
+  return APP_BENCHMARKS[slug];
 }
 
 /** Returns all benchmarks of a {@link BestPractice} by its {@link BestPracticeSlug}. */
-export function getBenchmarksByBestPracticeSlug(
+export function getAppBenchmarksByBestPractice(
   slug: BestPracticeSlug,
 ): (AppBenchmark | undefined)[] {
   const benchmarks: (AppBenchmark | undefined)[] = [];
 
-  for (const appBenchmarks of Object.values(BENCHMARKS)) {
+  for (const appBenchmarks of Object.values(APP_BENCHMARKS)) {
     benchmarks.push(appBenchmarks[slug]);
   }
 
@@ -29,22 +36,18 @@ export function getBenchmarksByBestPracticeSlug(
 }
 
 /** Returns a single benchmark of an {@link App} on a specific {@link BestPractice}
- * decided by the {@link AppSlug} and {@link BestPracticeSlug}. */
-export function getBenchmarkByAppSlugAndBestPracticeSlug(
+ * decided by the {@link AppSlug} and {@link BestPracticeSlug}.
+ *
+ * If a returned {@link AppBenchmark} is `undefined`,
+ * it means that it's pending and has not been completed yet.
+ * */
+export function getAppBenchmark(
   appSlug: AppSlug,
   bestPracticeSlug: BestPracticeSlug,
 ): AppBenchmark | undefined {
-  const appBenchmarks = getBenchmarksByAppSlug(appSlug);
+  const appBenchmarks = getAppBenchmarks(appSlug);
   return appBenchmarks[bestPracticeSlug];
 }
-
-/**
- * Points awarded for a benchmark result, where higher points indicate better benchmark results.
- * Used for calculating the EnsAwardsScore.
- *
- * @invariant EnsAwardsPoints must be a non-negative finite number.
- */
-export type EnsAwardsPoints = number;
 
 /**
  * Returns {@link EnsAwardsPoints} for all possible types of {@link BenchmarkResult}.
@@ -54,7 +57,7 @@ export type EnsAwardsPoints = number;
  * {@link BenchmarkResult.PartialPass} = 0.5
  * {@link BenchmarkResult.Fail} = 0.0
  */
-export const getBenchmarkPoints = (benchmark: AppBenchmark): EnsAwardsPoints => {
+export const getEnsAwardsPoints = (benchmark: AppBenchmark): EnsAwardsPoints => {
   switch (benchmark.result) {
     case BenchmarkResult.Pass:
       return 1;
@@ -74,8 +77,8 @@ export const getBenchmarkPoints = (benchmark: AppBenchmark): EnsAwardsPoints => 
  */
 export const groupBenchmarksByCategory = (
   benchmarks: BestPracticeBenchmarks,
-): Map<CategorySlug, BestPracticeBenchmarks> => {
-  const groupedBenchmarks: Map<CategorySlug, BestPracticeBenchmarks> = new Map();
+): Map<BestPracticeCategorySlug, BestPracticeBenchmarks> => {
+  const groupedBenchmarks: Map<BestPracticeCategorySlug, BestPracticeBenchmarks> = new Map();
 
   for (const [bestPracticeSlug, benchmark] of Object.entries(benchmarks)) {
     const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
@@ -98,7 +101,7 @@ export const groupBenchmarksByCategory = (
  *
  * @returns
  * undefined - if no benchmarks are completed
- * 0 <= x <= 100 - otherwise
+ * {@link EnsAwardsScore} - otherwise
  *
  * @throws if the {@link EnsAwardsScore} invariants are not satisfied
  */
@@ -106,17 +109,17 @@ export const calcCategoryScore = (
   benchmarks: BestPracticeBenchmarks,
 ): EnsAwardsScore | undefined => {
   const completedBenchmarks = Object.values(benchmarks).filter(
-    (benchmark): benchmark is AppBenchmark => benchmark !== undefined,
+    (benchmark) => benchmark !== undefined,
   );
   if (completedBenchmarks.length === 0) return undefined;
 
   const score = Math.round(
-    (completedBenchmarks.reduce((sum, benchmark) => sum + getBenchmarkPoints(benchmark), 0) * 100) /
+    (completedBenchmarks.reduce((sum, benchmark) => sum + getEnsAwardsPoints(benchmark), 0) * 100) /
       completedBenchmarks.length,
   );
 
   // Check EnsAwardsScore invariants
-  if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
+  if (!isValidEnsAwardsScore(score)) {
     throw new Error(
       `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
     );
@@ -132,8 +135,8 @@ const resultOrder = {
   [BenchmarkResult.Fail]: 2,
 } as const satisfies Record<BenchmarkResult, number>;
 
-/** Compares two benchmarks based on their state and result */
-export const compareBenchmarks = (
+/** Sorts two {@link AppBenchmark}s based on their state and result */
+export const sortBenchmarks = (
   a: AppBenchmark | undefined,
   b: AppBenchmark | undefined,
 ): number => {

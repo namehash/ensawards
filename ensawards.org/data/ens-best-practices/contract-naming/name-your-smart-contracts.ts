@@ -2,11 +2,12 @@
 // on adding and modifying best practices
 
 import contributors from "data/contributors/index.ts";
+import { ProtocolTypes } from "data/protocols/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { defineBestPractice } from "../registry.ts";
-import { type BestPracticeProtocol, BestPracticeTypes, ProtocolTypes } from "../types.ts";
+import { type BestPracticeProtocol, BestPracticeTypes } from "../types.ts";
 import ContractNamingCategory from ".";
 
 const technicalDetailsMainContent = `Contracts should be [assigned ENS names](https://docs.ens.domains/web/naming-contracts) during or after deployment. 

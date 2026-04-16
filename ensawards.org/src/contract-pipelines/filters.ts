@@ -1,5 +1,5 @@
-import { type ProtocolType, ProtocolTypes } from "../../data/ens-best-practices/types.ts";
 import { type Contract } from "../../data/protocols/contracts-types.ts";
+import { type ProtocolType, ProtocolTypes } from "../../data/protocols/types.ts";
 
 /**
  * Filters contracts by their protocol's type.

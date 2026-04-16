@@ -20,13 +20,17 @@ import EnsAwardsScore from "@/components/atoms/ens-awards-score/circular.astro";
 import { sortByResolutionStatus } from "@/contract-pipelines/sorting";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "@/utils/styles";
-import { type Protocol } from "data/protocols/types";
-import { buildProtocolOgImageUrlHref } from "data/protocols/utils";
+import { buildProtocolOgImageUrl } from "data/protocols/utils";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils";
-import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils";
+import {
+  getProtocolBySlug,
+  getAllProtocolContracts,
+  getProtocolTypeLabel,
+} from "data/protocols/utils";
 import {
   ContributorsCard,
   ContributorsCardLoading,
+  ContributionTypes,
 } from "@/components/atoms/cards/ContributorsCard";
 import { type Contribution } from "data/contributors/types";
 import { getProtocolContributions } from "data/contributors/utils";
@@ -37,29 +41,29 @@ export function getStaticPaths() {
   PROTOCOLS.forEach((protocol) =>
     staticPaths.push({
       params: {
-        protocol: protocol.protocolSlug,
+        protocolSlug: protocol.protocolSlug,
       },
     }),
   );
   return staticPaths;
 }
 
-const { protocol } = Astro.params;
+const { protocolSlug } = Astro.params;
 
-const resolvedProtocol = getProtocolBySlug(protocol);
+const resolvedProtocol = getProtocolBySlug(protocolSlug);
 
 // The default values should never be used. Only introduced for type safety.
 let protocolContracts: Contract[] = [];
 let protocolScore = 0;
 let ProtocolIcon = GlobeIcon;
-let protocolContractsDataContributions: Contribution[] = [];
+let protocolContributions: Contribution[] = [];
 
 if (resolvedProtocol) {
   protocolContracts = getAllProtocolContracts(resolvedProtocol.id);
   ProtocolIcon = resolvedProtocol.icon;
   protocolScore =
     getContractNamingScoresByProtocolType(resolvedProtocol.protocolType)[resolvedProtocol.id] ?? 0;
-  protocolContractsDataContributions = getProtocolContributions(resolvedProtocol);
+  protocolContributions = getProtocolContributions(resolvedProtocol);
 }
 ---
 
@@ -73,10 +77,10 @@ if (resolvedProtocol) {
         title: `ENSAwards: ${resolvedProtocol.name} ENS Integration Benchmarks`,
         description: resolvedProtocol.description,
         url: `https://ensawards.org/protocol/${resolvedProtocol.protocolSlug}`,
-        ogImage: buildProtocolOgImageUrlHref(resolvedProtocol.ogImagePath),
-        twitterImage: buildProtocolOgImageUrlHref(
+        ogImage: buildProtocolOgImageUrl(resolvedProtocol.ogImagePath)?.href,
+        twitterImage: buildProtocolOgImageUrl(
           resolvedProtocol.twitterOgImagePath,
-        ),
+        )?.href,
       }}>
       <SubpageHero
         header={resolvedProtocol.name}
@@ -84,8 +88,8 @@ if (resolvedProtocol) {
         breadcrumbs={[
           { text: "ENS leaderboards", linkHref: "/leaderboards" },
           {
-            text: `${resolvedProtocol.protocolType} leaderboard`,
-            linkHref: `/leaderboards/${resolvedProtocol.protocolType.toLowerCase()}`,
+            text: `${getProtocolTypeLabel(resolvedProtocol.protocolType)} leaderboard`,
+            linkHref: `/leaderboards/${resolvedProtocol.protocolType}`,
           },
         ]}>
         <ProtocolIcon
@@ -130,10 +134,13 @@ if (resolvedProtocol) {
         <ContractNamingBanner />
         <ContributorsCard
           client:only="react"
-          whatsSuggested="contract"
-          allContributions={protocolContractsDataContributions}
+          contributionType={ContributionTypes.Contract}
+          existingContributions={protocolContributions}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}>
-          <ContributorsCardLoading slot="fallback" whatsSuggested="contract" />
+          <ContributorsCardLoading
+            slot="fallback"
+            contributionType={ContributionTypes.Contract}
+          />
         </ContributorsCard>
         <ItemsList
           header="Smart contract naming"

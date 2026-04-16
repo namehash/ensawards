@@ -13,10 +13,11 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 export const ReferralProgramEditionCardRevShareLimit = ({
   referralProgramEditionSummary,
 }: ReferralProgramEditionCardProps) => {
-  // The config of an unrecognized edition will never be passed here,
-  // but we perform the check for the type safety
-  if (referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.Unrecognized)
-    return null;
+  if (referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.Unrecognized) {
+    throw new Error(
+      `Invariant(AwardModel): Unrecognized award model passed to ReferralProgramEditionCardRevShareLimit`,
+    );
+  }
 
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",

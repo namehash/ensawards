@@ -1,7 +1,6 @@
 import { type AppBenchmark } from "data/benchmarks/types.ts";
-import { getBenchmarkPoints, getBenchmarksByAppSlug } from "data/benchmarks/utils.ts";
-
-import type { EnsAwardsScore } from "@/components/atoms/ens-awards-score/types";
+import { getAppBenchmarks, getEnsAwardsPoints } from "data/benchmarks/utils.ts";
+import { type EnsAwardsScore, isValidEnsAwardsScore } from "data/shared/ens-awards-score.ts";
 
 import type { BestPractice, BestPracticeTarget } from "../ens-best-practices/types.ts";
 import { APPS } from "./index.ts";
@@ -45,24 +44,24 @@ export const getAppByName = (appName: string): App | undefined => {
  * @returns undefined - if no benchmarks are completed.
  */
 export const calcAppScore = (app: App): EnsAwardsScore | undefined => {
-  const appBenchmarks = getBenchmarksByAppSlug(app.appSlug);
+  const appBenchmarks = getAppBenchmarks(app.appSlug);
 
   const completedBenchmarks = Object.values(appBenchmarks).filter(
-    (benchmark): benchmark is AppBenchmark => benchmark !== undefined,
+    (benchmark) => benchmark !== undefined,
   );
 
   if (completedBenchmarks.length === 0) return undefined;
 
-  const accumulatedBenchmarkPoints = completedBenchmarks.reduce(
-    (sum, benchmark) => sum + getBenchmarkPoints(benchmark),
+  const totalPoints = completedBenchmarks.reduce(
+    (sum, benchmark) => sum + getEnsAwardsPoints(benchmark),
     0,
   );
 
   // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
-  const score = Math.round((accumulatedBenchmarkPoints * 100) / completedBenchmarks.length);
+  const score = Math.round((totalPoints * 100) / completedBenchmarks.length);
 
   // Check EnsAwardsScore invariants
-  if (!Number.isFinite(score) || !Number.isInteger(score) || score < 0 || score > 100) {
+  if (!isValidEnsAwardsScore(score)) {
     throw new Error(
       `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
     );
@@ -78,25 +77,29 @@ export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
   Object.values(AppTypes).every((appType) => targets.includes(appType));
 
 /**
- * Compares two apps based on their {@link EnsAwardsScore}.
+ * Sorts two {@link App}s based on their {@link EnsAwardsScore}.
  */
-export const compareApps = (a: App, b: App): number => {
-  const aEnsAwardsScore = calcAppScore(a);
-  const bEnsAwardsScore = calcAppScore(b);
+export const sortApps = (a: App, b: App): number => {
+  const aScore = calcAppScore(a);
+  const bScore = calcAppScore(b);
 
-  if (aEnsAwardsScore === undefined && bEnsAwardsScore === undefined) return 0;
-  if (bEnsAwardsScore === undefined) return -1;
-  if (aEnsAwardsScore === undefined) return 1;
+  if (aScore === undefined && bScore === undefined) return 0;
+  if (bScore === undefined) return -1;
+  if (aScore === undefined) return 1;
 
-  return bEnsAwardsScore - aEnsAwardsScore;
+  return bScore - aScore;
 };
 
-/** Builds the URL's href for an app's Open Graph image.
+/** Builds the URL for an app's Open Graph image.
  *
- * @returns undefined if the app doesn't have an og image path, otherwise returns the URL string for the og image.
+ * @returns undefined if the app doesn't have an og image path, otherwise returns the URL for the og image.
  */
-export const buildAppOgImageUrlHref = (imagePath: string | undefined): string | undefined => {
+export const buildAppOgImageUrl = (imagePath: string | undefined): URL | undefined => {
   if (!imagePath) return undefined;
 
-  return new URL(imagePath, "https://ensawards.org/data/apps/").href;
+  return new URL(imagePath, "https://ensawards.org/data/apps/");
+};
+
+export const getAppTypeLabel = (appType: AppType): string => {
+  return appType.charAt(0).toUpperCase() + appType.slice(1);
 };

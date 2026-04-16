@@ -47,7 +47,17 @@ export const getBenchmarkResultLabel = (benchmark?: AppBenchmark): string => {
     return "Pending";
   }
 
-  return benchmark.result;
+  switch (benchmark.result) {
+    case BenchmarkResult.Pass:
+      return "Passed";
+
+    case BenchmarkResult.PartialPass:
+      return "Partially Passed";
+
+    case BenchmarkResult.Fail:
+    default:
+      return "Failed";
+  }
 };
 
 export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBadgeProps) {

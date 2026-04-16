@@ -1,4 +1,5 @@
-import type { EnsAwardsScore } from "@/components/atoms/ens-awards-score/types.ts";
+import type { EnsAwardsScore } from "data/shared/ens-awards-score.ts";
+
 import { groupByProtocol } from "@/contract-pipelines/group-by.ts";
 import { binaryWeights } from "@/contract-pipelines/weights.ts";
 

@@ -4,7 +4,7 @@
 import EtherscanExplorer from "data/apps/etherscan-explorer";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResult } from "data/benchmarks/types";
-import type { BestPracticeBenchmarks } from "data/benchmarks/types.ts";
+import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 

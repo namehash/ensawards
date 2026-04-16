@@ -26,10 +26,10 @@ import { shadcnButtonVariants } from "../components/ui/shadcnButtonStyles";
 import Layout from "../layouts/Layout.astro";
 import { type ProtocolId } from "../../data/protocols/types.ts";
 import { cn } from "../utils/tailwindClassConcatenation";
-import { ProtocolTypes } from "../../data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "../../data/protocols/types.ts";
 import { pluralizeBestPracticeTarget } from "../utils/textModifications";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "../../data/protocols/utils.ts";
+import { getProtocolById, getProtocolTypeLabel } from "../../data/protocols/utils.ts";
 
 interface ContentItemData {
   name: string;
@@ -235,9 +235,9 @@ const startContractNamingTodayButtonStyles =
 
             return (
               <LeaderboardSnippetCard
-                name={`${protocolType} leaderboard`}
+                name={`${getProtocolTypeLabel(protocolType)} leaderboard`}
                 description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
-                link={`/leaderboards/${protocolType.toLowerCase()}`}>
+                link={`/leaderboards/${protocolType}`}>
                 <div
                   slot="bestResultsIcons"
                   class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">

@@ -17,7 +17,7 @@ export default defineConfig({
 
   redirects: {
     "/benchmarks": "/leaderboards",
-    "/benchmarks/[app]": "/app/[app]",
+    "/benchmarks/[appslug]": "/app/[appslug]",
     "/leaderboards/app": "/leaderboards",
 
     "/app/blockscout": "/app/blockscout-explorer",

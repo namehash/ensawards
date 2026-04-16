@@ -10,17 +10,18 @@ import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
-import { calcAppScore, getAppTypeBySlug, compareApps } from "data/apps/utils.ts";
+import { calcAppScore, getAppTypeBySlug, sortApps, getAppTypeLabel } from "data/apps/utils.ts";
 import {
   ContributorsCard,
   ContributorsCardLoading,
+  ContributionTypes,
 } from "@/components/atoms/cards/ContributorsCard";
 import { type Contribution } from "data/contributors/types";
 import { getAppContributions } from "data/contributors/utils.ts";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({
-    params: { appType: appType.toLowerCase() },
+    params: { appType: appType },
   }));
 }
 
@@ -36,15 +37,13 @@ const placeIcons = [
 const resolvedAppType = getAppTypeBySlug(appType);
 
 // The fallbacks should never be used. Only introduced for type safety.
-let normalizedAppType = "-";
 let pluralizedBestPracticeTarget = "-";
-let appBenchmarkDataContributions: Contribution[] = [];
+let appContributions: Contribution[] = [];
 
 if (resolvedAppType !== undefined) {
-  normalizedAppType = resolvedAppType.toLowerCase();
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedAppType).toLowerCase();
-  appBenchmarkDataContributions = APPS.filter((app) => app.type === resolvedAppType).flatMap(
-    (app) => getAppContributions(app),
+  appContributions = APPS.filter((app) => app.type === resolvedAppType).flatMap((app) =>
+    getAppContributions(app),
   );
 }
 ---
@@ -56,14 +55,14 @@ if (resolvedAppType !== undefined) {
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ENS Leaderboard for ${resolvedAppType} Integrations`,
+        title: `ENSAwards: ENS Leaderboard for ${getAppTypeLabel(resolvedAppType)} Integrations`,
         description: `See how ${pluralizedBestPracticeTarget} score on ENS integration benchmarks.`,
-        url: `https://ensawards.org/leaderboards/${normalizedAppType}`,
-        ogImage: `https://ensawards.org/${normalizedAppType}_leaderboard_og_image.png`,
-        twitterImage: `https://ensawards.org/${normalizedAppType}_leaderboard_twitter_og_image.png`,
+        url: `https://ensawards.org/leaderboards/${resolvedAppType}`,
+        ogImage: `https://ensawards.org/${resolvedAppType}_leaderboard_og_image.png`,
+        twitterImage: `https://ensawards.org/${resolvedAppType}_leaderboard_twitter_og_image.png`,
       }}>
       <SubpageHero
-        header={`${resolvedAppType} leaderboard`}
+        header={`${getAppTypeLabel(resolvedAppType)} leaderboard`}
         description={`Compare ${pluralizedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
         breadcrumbs={[{ text: "ENS leaderboards", linkHref: "/leaderboards" }]}
         customImage={{
@@ -78,7 +77,7 @@ if (resolvedAppType !== undefined) {
           <div class="w-full md:w-3/5">
             <ItemsList containerStyles="gap-3 sm:gap-3">
               {APPS.filter((app) => app.type === resolvedAppType)
-                .sort(compareApps)
+                .sort(sortApps)
                 .map((app, idx) => {
                   const AppIcon = app.icon;
                   const appScore = calcAppScore(app);
@@ -114,14 +113,14 @@ if (resolvedAppType !== undefined) {
           <div class="w-full md:w-2/5">
             <ContributorsCard
               client:only="react"
-              whatsSuggested="app"
-              allContributions={appBenchmarkDataContributions}
+              contributionType={ContributionTypes.App}
+              existingContributions={appContributions}
               gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/index.ts"
               sidebarVariant>
               <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant
-                whatsSuggested="app"
+                contributionType={ContributionTypes.App}
               />
             </ContributorsCard>
           </div>

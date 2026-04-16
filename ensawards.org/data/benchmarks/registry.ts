@@ -1,5 +1,5 @@
-import type { App } from "data/apps/types";
-import type { AppBenchmarks, BestPracticeBenchmarks } from "data/benchmarks/types";
+import type { App, AppBenchmarks } from "data/apps/types";
+import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
 const benchmarksRegistry: AppBenchmarks = {};
 
@@ -8,4 +8,4 @@ export function defineAppBenchmarks(app: App, benchmarks: BestPracticeBenchmarks
   benchmarksRegistry[app.appSlug] = benchmarks;
 }
 
-export const getBenchmarks = (): AppBenchmarks => benchmarksRegistry;
+export const getAppBenchmarks = (): AppBenchmarks => benchmarksRegistry;

@@ -10,24 +10,24 @@ import { describe, expect, it } from "vitest";
 
 import { formatAccountId } from "@ensnode/ensnode-sdk";
 
-import { BENCHMARKS } from ".";
+import { APP_BENCHMARKS } from ".";
 
 describe("Benchmarks registry", () => {
-  const data = BENCHMARKS;
+  const data = APP_BENCHMARKS;
 
-  describe("BENCHMARKS", () => {
-    it("Should have an explicit key for all apps", () => {
+  describe("APP_BENCHMARKS", () => {
+    it("Should have an explicit entry for all apps", () => {
       const registryKeys = Object.keys(data);
       const appSlugs = APPS.map((app) => app.appSlug);
 
       appSlugs.forEach((slug) => {
-        expect(registryKeys, `Missing benchmark key for app slug={${slug}}`).toContain(slug);
+        expect(registryKeys, `Missing benchmark entry for app slug={${slug}}`).toContain(slug);
       });
     });
   });
 
-  describe("All BestPracticeBenchmarks in BENCHMARKS", () => {
-    it("Should have an explicit key for all app-related best practices", () => {
+  describe("All BestPracticeBenchmarks in APP_BENCHMARKS", () => {
+    it("Should have an explicit entry for all app-related best practices", () => {
       const bestPracticeSlugs = ENS_BEST_PRACTICES.filter(
         (bestPractice): bestPractice is BestPracticeApp =>
           bestPractice.type === BestPracticeTypes.App,
@@ -37,7 +37,7 @@ describe("Benchmarks registry", () => {
         bestPracticeSlugs.forEach((slug) => {
           expect(
             appBenchmarks,
-            `Missing benchmark for best practice slug={${slug}}`,
+            `Missing benchmark entry for best practice slug={${slug}}`,
           ).toHaveProperty(slug);
         });
       });

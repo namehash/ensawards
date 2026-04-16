@@ -1,0 +1,210 @@
+---
+import { EnsIcon, TwitterIcon } from "@namehash/namehash-ui";
+
+import {
+  BenchmarkResultBadge,
+  benchmarkResultToBadgeStyles,
+} from "@/components/atoms/badges/BenchmarkResultBadge";
+import BenchmarkResultCard from "@/components/atoms/cards/BenchmarkResultCard.astro";
+import EnsAwardsScore from "@/components/atoms/ens-awards-score/circular.astro";
+import GlobeIcon from "@/components/atoms/icons/GlobeIcon.astro";
+import ItemsList from "@/components/molecules/ItemsList.astro";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
+import { APPS } from "data/apps";
+import Layout from "@/layouts/Layout.astro";
+import {
+  calcAppScore,
+  getAppBySlug,
+  buildAppOgImageUrl,
+  getAppTypeLabel,
+} from "data/apps/utils.ts";
+import {
+  ContributionTypes,
+  ContributorsCard,
+  ContributorsCardLoading,
+} from "@/components/atoms/cards/ContributorsCard.tsx";
+import { type Contribution } from "data/contributors/types.ts";
+import { type EnsAwardsScore as EnsAwardsScoreType } from "data/shared/ens-awards-score.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import {
+  groupBenchmarksByCategory,
+  calcCategoryScore,
+  sortBenchmarks,
+  getAppBenchmarks,
+} from "data/benchmarks/utils";
+import type { AppBenchmark } from "data/benchmarks/types";
+import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
+import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
+import { getAppContributions } from "data/contributors/utils.ts";
+import type { BestPracticeCategorySlug, BestPracticeSlug } from "data/ens-best-practices/types";
+import { getCategoryBySlug, getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
+
+export function getStaticPaths() {
+  return APPS.map((app) => ({ params: { appSlug: app.appSlug } }));
+}
+
+const { appSlug } = Astro.params;
+
+const appToDisplay = getAppBySlug(appSlug);
+
+let appScore: EnsAwardsScoreType | undefined = undefined;
+let AppIcon;
+let appContributions: Contribution[] = [];
+let benchmarksByCategory: Map<BestPracticeCategorySlug, BestPracticeBenchmarks> = new Map();
+
+if (appToDisplay !== undefined) {
+  appScore = calcAppScore(appToDisplay);
+  AppIcon = appToDisplay.icon;
+  appContributions = getAppContributions(appToDisplay);
+
+  benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(appToDisplay.appSlug));
+}
+---
+
+{
+  appToDisplay === undefined ? (
+    // theoretically, because of Astro's build-time page generation, this should never happen
+    <DataLoadingError />
+  ) : (
+    <Layout
+      pageMetadata={{
+        title: `ENSAwards: ${appToDisplay.name} ENS Integration Benchmarks`,
+        description: appToDisplay.description,
+        url: `https://ensawards.org/app/${appSlug}`,
+        ogImage: buildAppOgImageUrl(appToDisplay.ogImagePath)?.href,
+        twitterImage: buildAppOgImageUrl(appToDisplay.twitterOgImagePath)?.href,
+      }}>
+      <SubpageHero
+        header={appToDisplay.name}
+        description={appToDisplay.description}
+        breadcrumbs={[
+          { text: "ENS leaderboards", linkHref: "/leaderboards" },
+          {
+            text: `${getAppTypeLabel(appToDisplay.type)} leaderboard`,
+            linkHref: `/leaderboards/${appToDisplay.type}`,
+          },
+        ]}>
+        <AppIcon
+          slot="icon"
+          className="w-[60px] h-[60px] shrink-0 rounded-lg"
+        />
+        <div
+          slot="ctaContent"
+          class="flex flex-row flex-nowrap justify-start items-center gap-2">
+          <a
+            href={appToDisplay.socials.website}
+            rel="noreferrer"
+            target="_blank">
+            <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
+          </a>
+          <a
+            href={appToDisplay.socials.twitter}
+            rel="noreferrer"
+            target="_blank">
+            <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
+          </a>
+          {appToDisplay.socials.ens && (
+            <a
+              href={`https://app.ens.domains/${encodeURIComponent(appToDisplay.socials.ens)}`}
+              rel="noreferrer"
+              target="_blank">
+              <EnsIcon
+                width={18}
+                height={18}
+                className="hover:text-white text-gray-400 transition-all duration-200"
+              />
+            </a>
+          )}
+        </div>
+        <EnsAwardsScore
+          slot="largerHeroItem"
+          score={appScore}
+          label="ENSAwards score"
+        />
+      </SubpageHero>
+      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 gap-5 sm:gap-10 sm:py-[60px] sm:px-8">
+        <div class="w-full max-w-[1216px] flex flex-col md:flex-row justify-start md:justify-between gap-6 items-center md:items-start">
+          <div class="w-full md:w-3/5">
+            <ItemsList header="ENS best practice benchmarks">
+              {benchmarksByCategory
+                .entries()
+                .map(([categorySlug, benchmarksInCategory]) => {
+                  const category = getCategoryBySlug(categorySlug);
+                  const categoryScore = calcCategoryScore(benchmarksInCategory);
+
+                  if (category === undefined) {
+                    throw new Error(
+                      `Invariant(CategorySlug): Category with slug ${categorySlug} not found`,
+                    );
+                  }
+
+                  return (
+                    <div class="w-full flex flex-col justify-start items-start gap-2">
+                      <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">
+                        <EnsAwardsCircularScoreSmall score={categoryScore} />
+                        <span class="flex-1 text-lg leading-normal font-semibold text-black">
+                          {category.name}
+                        </span>
+                      </div>
+                      {[...Object.entries(benchmarksInCategory)]
+                        .sort(([_a, aBenchmark], [_b, bBenchmark]) =>
+                          sortBenchmarks(aBenchmark, bBenchmark),
+                        )
+                        .map(
+                          ([bestPracticeSlug, benchmark]: [
+                            BestPracticeSlug,
+                            AppBenchmark | undefined,
+                          ]) => {
+                            const bestPractice =
+                              getBestPracticeBySlug(bestPracticeSlug);
+
+                            if (bestPractice === undefined) {
+                              throw new Error(
+                                `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
+                              );
+                            }
+
+                            return (
+                              <BenchmarkResultCard
+                                bestPractice={bestPractice}
+                                viewDetails={{
+                                  text: "View detailed report",
+                                  link: `/app/${appToDisplay.appSlug}/${categorySlug}/${bestPracticeSlug}`,
+                                }}>
+                                <BenchmarkResultBadge
+                                  slot="badge"
+                                  className={cn(
+                                    benchmarkResultToBadgeStyles(benchmark),
+                                    "cursor-pointer",
+                                  )}
+                                  benchmark={benchmark}
+                                />
+                              </BenchmarkResultCard>
+                            );
+                          },
+                        )}
+                    </div>
+                  );
+                })}
+            </ItemsList>
+          </div>
+          <div class="w-full md:w-2/5">
+            <ContributorsCard
+              client:only="react"
+              contributionType={ContributionTypes.BenchmarkResult}
+              existingContributions={appContributions}
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
+              sidebarVariant>
+              <ContributorsCardLoading
+                slot="fallback"
+                sidebarVariant
+                contributionType={ContributionTypes.BenchmarkResult}
+              />
+            </ContributorsCard>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  )
+}

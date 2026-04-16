@@ -1,10 +1,9 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
-import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import UniswapProject from "../../projects/uniswap";
 import { defineProtocol } from "../registry.ts";
-import { type DeFiProtocol, DeFiProtocolIds } from "../types.ts";
+import { type DeFiProtocol, DeFiProtocolIds, ProtocolTypes } from "../types.ts";
 import UniswapIcon from "./icon.tsx";
 
 const UniswapDeFi: DeFiProtocol = {

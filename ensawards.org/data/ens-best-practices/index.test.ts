@@ -77,7 +77,7 @@ describe("Best Practices data", () => {
         const uniqueContributors = new Set(contributorsList);
         expect(
           uniqueContributors.size,
-          `Best practice ${bestPractice.bestPracticeSlug} has duplicate contributors`,
+          `Best practice ${bestPractice.bestPracticeSlug} has a duplicate contributor`,
         ).toEqual(contributorsList.length);
       });
     });

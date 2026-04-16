@@ -34,10 +34,11 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
     refreshReferralProgramEditionSummary();
   }, [now]);
 
-  // The config of an unrecognized edition will never be passed here,
-  // but we perform the check for the type safety
-  if (referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.Unrecognized)
-    return null;
+  if (referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.Unrecognized) {
+    throw new Error(
+      `Invariant(AwardModel): Unrecognized award model passed to ReferralProgramEditionHeroCardPieSplit`,
+    );
+  }
 
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",

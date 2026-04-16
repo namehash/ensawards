@@ -5,6 +5,6 @@ export type Contributor = AccountId;
 export type Contribution = {
   /** The contributor who made the contribution */
   from: Contributor;
-  /** The Unix timestamp of when the contribution was last updated */
+  /** The Unix timestamp of when the contributor last updated this contribution */
   lastUpdated: UnixTimestamp;
 };

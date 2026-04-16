@@ -1,4 +1,5 @@
-import { type AppBenchmark, type AppBenchmarks, BenchmarkResult } from "data/benchmarks/types";
+import { type AppBenchmarks } from "data/apps/types";
+import { type AppBenchmark, BenchmarkResult } from "data/benchmarks/types";
 import { calcAppsPassed, calcBestPracticeScore } from "data/ens-best-practices/utils";
 import {
   createMockBenchmark,
@@ -14,14 +15,14 @@ const { mockAppBenchmarks } = vi.hoisted(() => ({
 }));
 
 vi.mock("data/benchmarks/index.ts", () => ({
-  BENCHMARKS: mockAppBenchmarks,
+  APP_BENCHMARKS: mockAppBenchmarks,
 }));
 
 vi.mock(import("data/benchmarks/utils.ts"), async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...actual,
-    getBenchmarksByBestPracticeSlug: (bestPracticeSlug: string) => {
+    getAppBenchmarksByBestPractice: (bestPracticeSlug: string) => {
       const benchmarks: (AppBenchmark | undefined)[] = [];
 
       for (const appBenchmarks of Object.values(mockAppBenchmarks)) {

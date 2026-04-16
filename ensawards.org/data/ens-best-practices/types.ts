@@ -1,20 +1,15 @@
+import type { AppBenchmark } from "data/benchmarks/types.ts";
 import type { Contribution } from "data/contributors/types.ts";
 
 import type { AppType } from "../apps/types.ts";
+import type { ProtocolType } from "../protocols/types.ts";
 
 export const BestPracticeTypes = {
-  Protocol: "Protocol",
-  App: "App",
+  Protocol: "protocol",
+  App: "app",
 } as const;
 
 export type BestPracticeType = (typeof BestPracticeTypes)[keyof typeof BestPracticeTypes];
-
-export const ProtocolTypes = {
-  DAO: "DAO",
-  DeFi: "DeFi",
-} as const;
-
-export type ProtocolType = (typeof ProtocolTypes)[keyof typeof ProtocolTypes];
 
 export type BestPracticeTarget = AppType | ProtocolType;
 
@@ -57,6 +52,14 @@ export interface BestPracticeApp
 
 export type BestPractice = BestPracticeProtocol | BestPracticeApp;
 
+/**
+ * Defines relations between {@link BestPracticeSlug} and {@link AppBenchmark}
+ * for the related {@link BestPractice}.
+ *
+ * @invariant Each {@link BestPractice} must define an explicit entry.
+ */
+export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;
+
 export enum CategoryStatus {
   ComingSoon,
   Active,
@@ -64,14 +67,14 @@ export enum CategoryStatus {
 
 /** A unique identifier for a best practice category.
  *
- * @invariant Must be unique across all categories.
+ * @invariant Must be unique across all best practice categories.
  * @invariant Must match {@link ENSAWARDS_SLUG_PATTERN}.
  */
-export type CategorySlug = string;
+export type BestPracticeCategorySlug = string;
 
 export interface BestPracticeCategory {
   id: string;
-  categorySlug: CategorySlug;
+  categorySlug: BestPracticeCategorySlug;
   name: string;
   description: string;
   status: CategoryStatus;

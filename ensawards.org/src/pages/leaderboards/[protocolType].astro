@@ -2,7 +2,7 @@
 import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 import type { ImageMetadata } from "astro";
 import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
-import { ProtocolTypes } from "data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "data/protocols/types.ts";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import type { ProtocolId } from "data/protocols/types.ts";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
@@ -14,18 +14,19 @@ import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/util
 import {
   getProtocolById,
   getProtocolTypeBySlug,
-  getAllProtocolContracts,
+  getProtocolTypeLabel,
 } from "data/protocols/utils.ts";
 import {
   ContributorsCard,
   ContributorsCardLoading,
+  ContributionTypes,
 } from "@/components/atoms/cards/ContributorsCard";
 import type { Contribution } from "data/contributors/types";
 import { getProtocolContributions } from "data/contributors/utils";
 
 export function getStaticPaths() {
   return Object.values(ProtocolTypes).map((protocolType) => ({
-    params: { protocolType: protocolType.toLowerCase() },
+    params: { protocolType: protocolType },
   }));
 }
 
@@ -41,17 +42,15 @@ const placeIcons = [
 const resolvedProtocolType = getProtocolTypeBySlug(protocolType);
 
 // The default values should never be used. Only introduced for type safety.
-let normalizedProtocolType = "-";
 let pluralizedBestPracticeTarget = "-";
 let protocolScores: Record<ProtocolId, number> = {} as Record<ProtocolId, number>;
 let protocolContractDataContributions: Contribution[] = [];
 
 if (resolvedProtocolType) {
-  normalizedProtocolType = resolvedProtocolType.toLowerCase();
   pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedProtocolType);
   protocolScores = getContractNamingScoresByProtocolType(resolvedProtocolType);
   protocolContractDataContributions = Object.keys(protocolScores).flatMap((protocolId) =>
-    getProtocolContributions(getProtocolById(protocolId as ProtocolId)!),
+    getProtocolContributions(getProtocolById(protocolId as ProtocolId)),
   );
 }
 ---
@@ -65,12 +64,12 @@ if (resolvedProtocolType) {
       pageMetadata={{
         title: `ENSAwards: ENS Leaderboard for ${resolvedProtocolType} Integrations`,
         description: `See how ${pluralizedBestPracticeTarget} score on ENS integration benchmarks.`,
-        url: `https://ensawards.org/leaderboards/${normalizedProtocolType}`,
-        ogImage: `https://ensawards.org/${normalizedProtocolType}_leaderboard_og_image.png`,
-        twitterImage: `https://ensawards.org/${normalizedProtocolType}_leaderboard_twitter_og_image.png`,
+        url: `https://ensawards.org/leaderboards/${resolvedProtocolType}`,
+        ogImage: `https://ensawards.org/${resolvedProtocolType}_leaderboard_og_image.png`,
+        twitterImage: `https://ensawards.org/${resolvedProtocolType}_leaderboard_twitter_og_image.png`,
       }}>
       <SubpageHero
-        header={`${resolvedProtocolType} leaderboard`}
+        header={`${getProtocolTypeLabel(resolvedProtocolType)} leaderboard`}
         description={`Compare ${pluralizedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
         breadcrumbs={[{ text: "ENS leaderboards", linkHref: "/leaderboards" }]}
         customImage={{
@@ -122,14 +121,14 @@ if (resolvedProtocolType) {
           <div class="w-full md:w-2/5">
             <ContributorsCard
               client:only="react"
-              whatsSuggested="protocol"
-              allContributions={protocolContractDataContributions}
+              contributionType={ContributionTypes.Protocol}
+              existingContributions={protocolContractDataContributions}
               gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/index.ts"
               sidebarVariant>
               <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant
-                whatsSuggested="protocol"
+                contributionType={ContributionTypes.Protocol}
               />
             </ContributorsCard>
           </div>

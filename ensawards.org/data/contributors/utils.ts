@@ -1,5 +1,5 @@
 import type { AppBenchmark } from "data/benchmarks/types.ts";
-import { getBenchmarksByAppSlug } from "data/benchmarks/utils.ts";
+import { getAppBenchmarks } from "data/benchmarks/utils.ts";
 
 import { formatAccountId } from "@ensnode/ensnode-sdk";
 
@@ -26,8 +26,8 @@ export const countContributorAppearances = (
 };
 
 export const getAppContributions = (app: App): Contribution[] =>
-  Object.values(getBenchmarksByAppSlug(app.appSlug))
-    .filter((benchmark): benchmark is AppBenchmark => benchmark !== undefined)
+  Object.values(getAppBenchmarks(app.appSlug))
+    .filter((benchmark) => benchmark !== undefined)
     .flatMap((benchmark) => benchmark.contributions);
 
 export const getProtocolContributions = (protocol: Protocol): Contribution[] =>

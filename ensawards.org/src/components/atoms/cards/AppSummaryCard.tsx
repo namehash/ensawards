@@ -1,14 +1,18 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import type { App } from "data/apps/types.ts";
 import { calcAppScore, getAppById } from "data/apps/utils.ts";
-import { type AppBenchmark, type BestPracticeBenchmarks } from "data/benchmarks/types.ts";
+import type { AppBenchmark } from "data/benchmarks/types.ts";
 import {
   calcCategoryScore,
-  compareBenchmarks,
-  getBenchmarksByAppSlug,
+  getAppBenchmarks,
   groupBenchmarksByCategory,
+  sortBenchmarks,
 } from "data/benchmarks/utils.ts";
-import type { BestPracticeSlug, CategorySlug } from "data/ens-best-practices/types.ts";
+import type {
+  BestPracticeBenchmarks,
+  BestPracticeCategorySlug,
+  BestPracticeSlug,
+} from "data/ens-best-practices/types.ts";
 import { getBestPracticeBySlug, getCategoryBySlug } from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
@@ -27,21 +31,25 @@ import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
 
 interface BenchmarkCategorySectionProps {
   app: App;
-  categorySlug: CategorySlug;
-  group: BestPracticeBenchmarks; // all benchmarks in the group belong to the same category
+  categorySlug: BestPracticeCategorySlug;
+  benchmarksInCategory: BestPracticeBenchmarks;
   initiallyOpen: boolean;
 }
 
 function BenchmarkCategorySection({
   app,
   categorySlug,
-  group,
+  benchmarksInCategory,
   initiallyOpen,
 }: BenchmarkCategorySectionProps) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
-  const categoryScore = calcCategoryScore(group);
-  const categoryName = getCategoryBySlug(categorySlug)?.name ?? categorySlug;
+  const categoryScore = calcCategoryScore(benchmarksInCategory);
+  const category = getCategoryBySlug(categorySlug);
+
+  if (category === undefined) {
+    throw new Error(`Invariant(CategorySlug): Category with slug ${categorySlug} not found`);
+  }
 
   return (
     <div ref={animationParent} className="w-full border-t border-gray-200 py-4">
@@ -53,7 +61,7 @@ function BenchmarkCategorySection({
       >
         <EnsAwardsCircularScoreSmall score={categoryScore} />
         <span className="flex-1 text-lg leading-normal font-semibold text-black">
-          {categoryName}
+          {category.name}
         </span>
         <ChevronRight
           className={cn(
@@ -65,16 +73,17 @@ function BenchmarkCategorySection({
 
       {isOpen && (
         <div className="flex w-full flex-col gap-4 pt-4">
-          {[...Object.entries(group)]
-            .sort(([_a, aBenchmark], [_b, bBenchmark]) => compareBenchmarks(aBenchmark, bBenchmark))
+          {[...Object.entries(benchmarksInCategory)]
+            .sort(([_a, aBenchmark], [_b, bBenchmark]) => sortBenchmarks(aBenchmark, bBenchmark))
             .map(([bestPracticeSlug, benchmark]: [BestPracticeSlug, AppBenchmark | undefined]) => {
               const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
 
-              // Only introduced for type safety.
-              // In theory, should never happen
               if (bestPractice === undefined) {
-                return null;
+                throw new Error(
+                  `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
+                );
               }
+
               return (
                 <a
                   key={bestPractice.id}
@@ -119,7 +128,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
   const resolvedApp = getAppById(app.id) ?? app;
 
   const appScore = calcAppScore(resolvedApp);
-  const benchmarkGroups = groupBenchmarksByCategory(getBenchmarksByAppSlug(resolvedApp.appSlug));
+  const benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(resolvedApp.appSlug));
   const AppIcon = resolvedApp.icon;
 
   return (
@@ -134,13 +143,13 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
           </div>
           <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
         </div>
-        {[...benchmarkGroups.entries()].map(([categorySlug, group], index) => {
+        {[...benchmarksByCategory.entries()].map(([categorySlug, benchmarksInCategory], index) => {
           return (
             <BenchmarkCategorySection
-              key={`${resolvedApp.name}-benchmarks-in-${categorySlug}-category`}
+              key={`${resolvedApp.appSlug}-benchmarks-in-${categorySlug}-category`}
               app={resolvedApp}
               categorySlug={categorySlug}
-              group={group}
+              benchmarksInCategory={benchmarksInCategory}
               initiallyOpen={index === 0}
             />
           );

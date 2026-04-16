@@ -22,10 +22,10 @@ export const ReferralProgramEditionInfo = ({
   referralProgramEditionSummary,
   isLoading,
 }: ReferralProgramEditionInfoProps) => {
-  // The config of an unrecognized edition will never be passed here,
-  // but we perform the check for the type safety
   if (referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.Unrecognized) {
-    return null;
+    throw new Error(
+      `Invariant(AwardModel): Unrecognized award model passed to ReferralProgramEditionInfo`,
+    );
   }
 
   return (
