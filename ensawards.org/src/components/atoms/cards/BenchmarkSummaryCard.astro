@@ -53,10 +53,7 @@ const detailValueStyles = cn(
 
     <div class="flex w-full flex-col items-start gap-1 justify-center">
       <p class={detailLabelStyles}>Benchmark result</p>
-      <BenchmarkResultBadge
-        benchmark={benchmark}
-        className={benchmarkResultToBadgeStyles(benchmark)}
-      />
+      <BenchmarkResultBadge benchmark={benchmark} />
     </div>
 
     {
