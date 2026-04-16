@@ -33,6 +33,8 @@ import { ProtocolTypes } from "../../data/ens-best-practices/types.ts";
 import { pluralizeBestPracticeTarget } from "../utils/textModifications";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById } from "../../data/protocols/utils.ts";
+import DistributedAwardsHeader from "@/components/contract-naming-season/distributed-awards/DistributedAwardsHeader.astro";
+import { DistributedAwardsList } from "@/components/contract-naming-season/distributed-awards/DistributedAwardsList.tsx";
 
 interface ContentItemData {
   name: string;
@@ -215,6 +217,11 @@ const startContractNamingTodayButtonStyles =
         }
       </div>
       <ContractNamingIncentivesBanner />
+      <div
+        class="w-full max-w-[1216px] h-fit flex flex-col justify-start items-start gap-6">
+        <DistributedAwardsHeader />
+        <DistributedAwardsList client:load listSize={5} />
+      </div>
     </div>
     <ContractNamingBestPractices />
     <div
