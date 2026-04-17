@@ -27,8 +27,8 @@ export type Contributor = AccountId;
 export type Contribution = {
   /** The contributor who made the contribution */
   from: Contributor;
-  /** The Unix timestamp of when the contribution was made */
-  updatedAt: UnixTimestamp;
+  /** The Unix timestamp of when the contributor last updated this contribution */
+  lastUpdated: UnixTimestamp;
 };
 ```
 
@@ -47,7 +47,7 @@ This is our way to show appreciation to the people who contributed to our cause.
 
 To add yourself:
 1. Add your `AccountId` to the `contributors` collection in [ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) (if this is your first contribution).
-2. Reference yourself in the contributions array of the entity you are updating. If you update the same entity multiple times, add a separate entry for each update with the corresponding timestamp.
+2. Reference yourself in the contributions array of the entity you are updating. If you update the same entity multiple times, update the `lastUpdated` field for each change with the corresponding timestamp.
 
 For reference see [ensawards.org/data/apps/metamask-wallet/benchmarks.ts](ensawards.org/data/apps/metamask-wallet/benchmarks.ts).
 
@@ -91,9 +91,9 @@ For this reason, every new `App` or `Protocol` must be associated with a corresp
 ```typescript
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
   id: ProtocolIdT;
-  protocolSlug: string;
+  protocolSlug: ProtocolSlug;
   protocolType: ProtocolT;
-  project: Project; // each protocol belongs to a single project.
+  project: Project; // each protocol is associated with a broader project, which may comprise multiple apps and protocols.
   name: string;
   description: string;
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
@@ -102,7 +102,9 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
     twitter: URL;
     ens?: Name;
   };
+  /** Relative path from `/data/protocols` to the Open Graph image for the protocol. */
   ogImagePath?: string;
+  /** Relative path from `/data/protocols` to the Twitter Open Graph image for the protocol. */
   twitterOgImagePath?: string;
 }
 
@@ -146,19 +148,20 @@ export interface Contract {
 ```typescript
 export interface App {
   id: string;
-  appSlug: string;
-  project: Project; // each app belongs to a single project.
+  appSlug: AppSlug;
+  project: Project; // each app is part of a broader project (which may span multiple apps and protocols).
   name: string;
   description: string;
   type: AppType;
   icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  benchmarks: AppBenchmark[];
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
+  /** Relative path from `/data/apps` to the Open Graph image for the app. */
   ogImagePath?: string;
+  /** Relative path from `/data/apps` to the Twitter Open Graph image for the app. */
   twitterOgImagePath?: string;
 }
 ```
@@ -189,7 +192,7 @@ export interface BestPracticeAbstract<
 > {
   type: BestPracticeT;
   id: string;
-  bestPracticeSlug: string;
+  bestPracticeSlug: BestPracticeSlug;
   name: string;
   description: string;
   category: BestPracticeCategory; // each best practice belongs to exactly one category
@@ -233,19 +236,31 @@ export enum CategoryStatus {
 
 export interface BestPracticeCategory {
   id: string;
-  categorySlug: string;
+  categorySlug: BestPracticeCategorySlug;
   name: string;
   description: string;
   status: CategoryStatus;
-  contributions: [Contribution, ...Contribution[]]; // Remember to add yourself as a contributor
 }
 ```
 4. In your PR describe your reasoning for adding it.
 
 ### Suggest a `benchmark update`
 
-1. To suggest a benchmark update for an existing app, modify its `benchmarks` array in the [ensawards.org/data/apps/[app-directory]/benchmarks.ts](ensawards.org/data/apps/rainbow-wallet/benchmarks.ts) file where `[app-directory]` represents the slug of the relevant app.
-2. Make sure to follow benchmark's data model. It's available in the [ensawards.org/data/apps/benchmarks-types.ts](ensawards.org/data/apps/benchmarks-types.ts) file.
+1. To suggest a benchmark update for an existing app, modify its `benchmarks` record in the [ensawards.org/data/apps/[app-directory]/benchmarks.ts](ensawards.org/data/apps/rainbow-wallet/benchmarks.ts) file where `[app-directory]` represents the slug of the relevant app. These records define relationships between benchmarks and best practices. Their data model is available at [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts).
+
+```typescript
+/**
+ * Defines relations between {@link BestPracticeSlug} and {@link AppBenchmark}
+ * for the related {@link BestPractice}.
+ *
+ * @invariant Each {@link BestPractice} must define an explicit entry.
+ */
+export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;
+```
+
+For reference see [ensawards.org/data/apps/blockscout-explorer/benchmarks.ts](ensawards.org/data/apps/blockscout-explorer/benchmarks.ts) for an example benchmarks record.
+
+2. Make sure to follow the benchmark data model. It is available in the [ensawards.org/data/benchmarks/types.ts](ensawards.org/data/benchmarks/types.ts) file.
 ```typescript
 export enum BenchmarkResult {
     Pass = "Pass",
@@ -253,38 +268,18 @@ export enum BenchmarkResult {
     Fail = "Fail",
 }
 
-export const BenchmarkStatuses = {
-  Completed: "Completed",
-  Pending: "Pending",
-} as const;
-
-export interface AppBenchmarkAbstract<BenchmarkStatusT extends BenchmarkStatus> {
-  /** The best practice being benchmarked */
-  bestPractice: BestPracticeApp;
-
-  /** The status of a benchmark */
-  status: BenchmarkStatusT;
-}
-
-/**
- * Represents a benchmark result for a specific {@link BestPractice} within an {@link App}.
- */
-export interface AppBenchmarkCompleted
-  extends AppBenchmarkAbstract<typeof BenchmarkStatuses.Completed> {
-  /** The result of the benchmark */
+export interface AppBenchmark {
   result: BenchmarkResult;
-  /** Unix timestamp when the benchmark was last updated */
-  lastUpdated: UnixTimestamp;
-  /** A record of all contributors involved in the addition or maintenance of the benchmark's data */
+
+  /** A record of all contributors involved in the addition or maintenance of the benchmark's data.
+   *
+   * @invariant Multiple {@link Contribution} from the same contributor is not allowed.
+   * When a contributor makes updates to their existing contribution, they should update the `lastUpdated` timestamp.
+   */
   contributions: [Contribution, ...Contribution[]];
 }
 ```
 
-> **NOTE**
->
-> Whenever you want to add or edit benchmark data, always implement the `AppBenchmarkCompleted` variant.
->
-> The `AppBenchmarkPending` variant represents benchmarks for applicable best practices that have not yet been reviewed and is appended to our data dynamically at build time.
 
 ## Using `Biome` and `Prettier` together
 
