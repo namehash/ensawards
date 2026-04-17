@@ -13,8 +13,7 @@ export interface DistributedAwardsListProps {
 }
 
 export const AwardDistributionsList = ({ listSize }: DistributedAwardsListProps) => {
-  const ensNodeUrl = getENSNodeUrl();
-  const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
+  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
 
   const sortedDistributedAwards = [...CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS].sort(
     sortContractNamingSeasonAwards,

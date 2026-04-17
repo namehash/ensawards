@@ -1,5 +1,11 @@
-import { RelativeTime, ResolveAndDisplayIdentity, useNow } from "@namehash/namehash-ui";
+import {
+  RelativeTime,
+  ResolveAndDisplayIdentity,
+  useIsMobile,
+  useNow,
+} from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
+import { useMemo } from "react";
 
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 
@@ -22,13 +28,18 @@ export const ContractNamingSeasonAwardCard = ({
   distributedAward,
 }: ContractNamingSeasonAwardCardProps) => {
   const namespaceId = DEFAULT_ENS_NAMESPACE;
-  const recipientIdentity = buildUnresolvedIdentity(
-    distributedAward.depositedTo,
-    namespaceId,
-    getENSRootChainId(namespaceId),
+  const recipientIdentity = useMemo(
+    () =>
+      buildUnresolvedIdentity(
+        distributedAward.depositedTo,
+        namespaceId,
+        getENSRootChainId(namespaceId),
+      ),
+    [distributedAward.depositedTo, namespaceId],
   );
 
   const now = useNow({ timeToRefresh: secondsInMinute });
+  const isMobile = useIsMobile();
 
   const etherscanUrl = `https://etherscan.io/tx/${distributedAward.transactionHash}`;
   const depositedToDetailsUrl = getAdvocateDetailsUrl(distributedAward.depositedTo);
@@ -47,29 +58,30 @@ export const ContractNamingSeasonAwardCard = ({
   );
 
   return (
-    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
-      {/* Desktop: Deposited to */}
-      <div className="w-fit hidden sm:flex flex-nowrap flex-row justify-start items-center gap-3">
-        <ResolveAndDisplayIdentity
-          identity={recipientIdentity}
-          namespaceId={namespaceId}
-          withIdentifier={false}
-          withAvatar={true}
-          withTooltip={false}
-          identityLinkDetails={{
-            isExternal: false,
-            link: depositedToDetailsUrl,
-          }}
-        />
-        <div className="sm:min-w-[170px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-          <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
+    <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-5 sm:pb-4 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
+      <div className="w-full sm:w-fit flex flex-nowrap flex-row justify-between sm:justify-start items-center gap-3">
+        <div className="w-10 h-10 hidden sm:block">
+          <ResolveAndDisplayIdentity
+            identity={recipientIdentity}
+            namespaceId={namespaceId}
+            withIdentifier={false}
+            withAvatar={true}
+            withTooltip={false}
+            identityLinkDetails={{
+              isExternal: false,
+              link: depositedToDetailsUrl,
+            }}
+          />
+        </div>
+        <div className="min-w-[120px] sm:min-w-[170px] w-full sm:w-fit flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
+          <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default text-left">
             Deposited to
           </p>
           <ResolveAndDisplayIdentity
             identity={recipientIdentity}
             namespaceId={namespaceId}
             withIdentifier={true}
-            withAvatar={false}
+            withAvatar={isMobile}
             withTooltip={false}
             identityLinkDetails={{
               isExternal: false,
@@ -78,25 +90,6 @@ export const ContractNamingSeasonAwardCard = ({
             className="font-medium sm:max-w-[170px] sm:overflow-x-auto"
           />
         </div>
-      </div>
-
-      {/* Mobile: Deposited to */}
-      <div className="min-w-[120px] sm:hidden flex flex-row flex-nowrap justify-between items-start self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
-          Deposited to
-        </p>
-        <ResolveAndDisplayIdentity
-          identity={recipientIdentity}
-          namespaceId={namespaceId}
-          withIdentifier={true}
-          withAvatar={true}
-          withTooltip={false}
-          identityLinkDetails={{
-            isExternal: false,
-            link: depositedToDetailsUrl,
-          }}
-          className="font-medium"
-        />
       </div>
 
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
@@ -145,13 +138,15 @@ export const ContractNamingSeasonAwardCard = ({
         <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
           Awarded
         </p>
-        <RelativeTime
-          timestamp={distributedAward.awardedAt}
-          enforcePast={true}
-          conciseFormatting={true}
-          relativeTo={now}
-          contentWrapper={awardedContentWrapper}
-        />
+        <p className="h-[21px] leading-5">
+          <RelativeTime
+            timestamp={distributedAward.awardedAt}
+            enforcePast={true}
+            conciseFormatting={true}
+            relativeTo={now}
+            contentWrapper={awardedContentWrapper}
+          />
+        </p>
       </div>
     </div>
   );

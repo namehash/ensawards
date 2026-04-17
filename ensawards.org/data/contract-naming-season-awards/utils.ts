@@ -3,7 +3,8 @@ import { type ContractNamingSeasonAward } from "./types";
 /**
  * Sorts {@link ContractNamingSeasonAward}s.
  *
- * Prioritizes awards with higher `awardValue` and, in case of a tie, earlier `awardedAt` date.
+ * Prioritizes awards with higher {@link ContractNamingSeasonAward.award} and,
+ * in case of a tie, earlier {@link ContractNamingSeasonAward.awardedAt} date.
  */
 export const sortContractNamingSeasonAwards = (
   a: ContractNamingSeasonAward,

@@ -1,5 +1,5 @@
 import { zeroAddress, zeroHash } from "viem";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { type ContractNamingSeasonAward } from "./types.ts";
 import { sortContractNamingSeasonAwards } from "./utils.ts";
