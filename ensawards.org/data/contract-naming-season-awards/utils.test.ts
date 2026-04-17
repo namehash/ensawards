@@ -42,7 +42,7 @@ describe("Contract naming season awards utils", () => {
       const sortedAwards = [...awards].sort(sortContractNamingSeasonAwards);
 
       sortedAwards.forEach((award, index) => {
-        expect(award, "Should sort awards by award value in descending order").toEqual(
+        expect(award, "Should resolve tiebreaker from earliest to latest awardedAt").toEqual(
           expectedSortedAwards[index],
         );
       });

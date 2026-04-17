@@ -28,11 +28,19 @@ export const sortContractNamingSeasonAwards = (
 /**
  * Calculates the remaining award pool in ENS Contract Naming Season.
  */
-export const calcRemainingAwardPool = () => {
+export const calcRemainingAwardPool = (): $ENS => {
   const distributedAwardPool = CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS.reduce(
     (acc, award) => acc + award.award,
     0,
   );
 
-  return CONTRACT_NAMING_SEASON_TOTAL_AWARD_POOL - distributedAwardPool;
+  const remainingAwardPool = CONTRACT_NAMING_SEASON_TOTAL_AWARD_POOL - distributedAwardPool;
+
+  if (remainingAwardPool < 0) {
+    throw new Error(
+      `Invariant(AwardDistributions): Remaining award pool cannot be negative, but was ${remainingAwardPool} instead`,
+    );
+  }
+
+  return remainingAwardPool;
 };
