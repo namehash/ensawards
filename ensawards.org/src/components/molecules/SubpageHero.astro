@@ -15,7 +15,7 @@ interface additionalHeroElement {
 export interface SubpageHeroProps {
   header: string;
   description?: string;
-  breadcrumbs?: Breadcrumb[];
+  breadcrumbs?: [Breadcrumb, ...Breadcrumb[]];
   customImage?: {
     source: ImageMetadata;
     width: number;

@@ -40,6 +40,7 @@ import {
   getAppByName,
   getAppBySlug,
   getAppTypeBySlug,
+  sortApps,
 } from "./utils.ts";
 
 const setMockApps = (...apps: App[]) => {
@@ -179,6 +180,54 @@ describe("App utils", () => {
 
     it("Should return false when not all app types are included in targets", () => {
       expect(appliesToAllApps([AppTypes.Wallet])).toEqual(false);
+    });
+  });
+
+  describe("sortApps", () => {
+    it("Should sort apps in descending order of their scores", () => {
+      mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Pass,
+        ),
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Pass,
+        ),
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Fail,
+        ),
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+      };
+
+      mockBenchmarks[mockRainbowApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Pass,
+        ),
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Fail,
+        ),
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
+          BenchmarkResult.Fail,
+        ),
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+      };
+
+      mockBenchmarks[mockMetamaskApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: undefined,
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: undefined,
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: undefined,
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+      };
+
+      const apps = [mockMetamaskApp, mockRainbowApp, mockCoinbaseWalletApp];
+      const expectedOrder = [mockCoinbaseWalletApp, mockRainbowApp, mockMetamaskApp];
+      const sortedApps = apps.sort(sortApps);
+
+      sortedApps.forEach((app, index) => {
+        expect(
+          app,
+          `Expected app at index ${index} to be ${expectedOrder[index].name}, got ${app.name} instead`,
+        ).toEqual(expectedOrder[index]);
+      });
     });
   });
 });
