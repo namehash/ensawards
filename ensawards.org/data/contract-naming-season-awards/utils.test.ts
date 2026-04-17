@@ -26,5 +26,26 @@ describe("Contract naming season awards utils", () => {
         );
       });
     });
+
+    it("should correctly resolve tiebreakers", () => {
+      const awards: ContractNamingSeasonAward[] = [
+        { depositedTo: zeroAddress, award: 100, awardedAt: 2, transactionHash: zeroHash },
+        { depositedTo: zeroAddress, award: 100, awardedAt: 1, transactionHash: zeroHash },
+        { depositedTo: zeroAddress, award: 100, awardedAt: 3, transactionHash: zeroHash },
+      ];
+
+      const expectedSortedAwards: ContractNamingSeasonAward[] = [
+        { depositedTo: zeroAddress, award: 100, awardedAt: 1, transactionHash: zeroHash },
+        { depositedTo: zeroAddress, award: 100, awardedAt: 2, transactionHash: zeroHash },
+        { depositedTo: zeroAddress, award: 100, awardedAt: 3, transactionHash: zeroHash },
+      ];
+      const sortedAwards = [...awards].sort(sortContractNamingSeasonAwards);
+
+      sortedAwards.forEach((award, index) => {
+        expect(award, "Should sort awards by award value in descending order").toEqual(
+          expectedSortedAwards[index],
+        );
+      });
+    });
   });
 });

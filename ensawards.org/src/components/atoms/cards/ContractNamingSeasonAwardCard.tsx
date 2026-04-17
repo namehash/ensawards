@@ -4,13 +4,14 @@ import {
   useIsMobile,
   useNow,
 } from "@namehash/namehash-ui";
+import { $ENS_TO_USDC_CONVERSION_RATE } from "data/contract-naming-season-awards";
+import type { ContractNamingSeasonAward } from "data/contract-naming-season-awards/types";
+import { $ensFormatter } from "data/contract-naming-season-awards/utils";
 import { secondsInMinute } from "date-fns/constants";
 import { useMemo } from "react";
 
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 
-import { $ENS_TO_USDC_CONVERSION_RATE } from "@/../data/contract-naming-season-awards";
-import type { ContractNamingSeasonAward } from "@/../data/contract-naming-season-awards/types";
 import { getAdvocateDetailsUrl } from "@/components/atoms/cards/referrerCard/shared";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace";
 import { currencyFormatter } from "@/utils/textModifications";
@@ -18,11 +19,6 @@ import { currencyFormatter } from "@/utils/textModifications";
 export interface ContractNamingSeasonAwardCardProps {
   distributedAward: ContractNamingSeasonAward;
 }
-
-const $ensFormatter = new Intl.NumberFormat("en-US", {
-  minimumFractionDigits: 3,
-  maximumFractionDigits: 3,
-});
 
 export const ContractNamingSeasonAwardCard = ({
   distributedAward,
