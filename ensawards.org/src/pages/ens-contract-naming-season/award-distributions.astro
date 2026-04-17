@@ -1,0 +1,34 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
+import AwardDistributionsHeader from "@/components/contract-naming-season/award-distributions/AwardDistributionsHeader.astro";
+import { AwardDistributionsList } from "@/components/contract-naming-season/award-distributions/AwardDistributionsList";
+---
+
+<Layout
+  pageMetadata={{
+    title: "ENSAwards: ENS Contract Naming Season Award Distributions",
+    description: "Check out all the awards distributed to date.",
+    url: "https://ensawards.org/ens-contract-naming-season/award-distributions",
+  }}>
+  <SubpageHero
+    header="ENS Contract Naming Season Award Distributions"
+    description="Check out all the awards distributed to date."
+    breadcrumbs={["ENS Contract Naming Season"]}
+    customImage={{
+      source: LeaderboardsHeroImage,
+      width: 371,
+      height: 277,
+      styles: "-top-10 right-0",
+    }}
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div
+      class="w-full max-w-[1216px] h-fit flex flex-col justify-start items-start gap-6">
+      <AwardDistributionsHeader />
+      <AwardDistributionsList client:load />
+    </div>
+  </section>
+</Layout>

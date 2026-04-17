@@ -35,6 +35,17 @@ export const ContractNamingSeasonAwardCard = ({
 
   const estimatedValueUSD = distributedAward.award * $ENS_TO_USDC_CONVERSION_RATE;
 
+  const awardedContentWrapper = ({ children }: React.PropsWithChildren): React.ReactNode => (
+    <a
+      href={etherscanUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-sm leading-normal font-medium text-blue-600 hover:underline hover:underline-offset-[25%]"
+    >
+      {children}
+    </a>
+  );
+
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       {/* Desktop: Deposited to */}
@@ -70,19 +81,6 @@ export const ContractNamingSeasonAwardCard = ({
       </div>
 
       {/* Mobile: Deposited to */}
-      <div className="sm:hidden flex flex-row flex-nowrap justify-start items-start gap-4 w-full">
-        <ResolveAndDisplayIdentity
-          identity={recipientIdentity}
-          namespaceId={namespaceId}
-          withIdentifier={false}
-          withAvatar={true}
-          withTooltip={false}
-          identityLinkDetails={{
-            isExternal: false,
-            link: depositedToDetailsUrl,
-          }}
-        />
-      </div>
       <div className="min-w-[120px] sm:hidden flex flex-row flex-nowrap justify-between items-start self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
           Deposited to
@@ -91,7 +89,7 @@ export const ContractNamingSeasonAwardCard = ({
           identity={recipientIdentity}
           namespaceId={namespaceId}
           withIdentifier={true}
-          withAvatar={false}
+          withAvatar={true}
           withTooltip={false}
           identityLinkDetails={{
             isExternal: false,
@@ -112,7 +110,7 @@ export const ContractNamingSeasonAwardCard = ({
                 href={distributedAward.project.link.toString()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className="text-blue-600 hover:underline hover:underline-offset-[25%]"
               >
                 {distributedAward.project.name}
               </a>
@@ -147,18 +145,13 @@ export const ContractNamingSeasonAwardCard = ({
         <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
           Awarded
         </p>
-        <a
-          href={etherscanUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm leading-normal font-medium text-blue-600 hover:underline"
-        >
-          <RelativeTime
-            timestamp={distributedAward.awardedAt}
-            enforcePast={true}
-            relativeTo={now}
-          />
-        </a>
+        <RelativeTime
+          timestamp={distributedAward.awardedAt}
+          enforcePast={true}
+          conciseFormatting={true}
+          relativeTo={now}
+          contentWrapper={awardedContentWrapper}
+        />
       </div>
     </div>
   );

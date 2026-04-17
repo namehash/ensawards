@@ -12,7 +12,7 @@ export interface DistributedAwardsListProps {
   listSize?: number;
 }
 
-export const DistributedAwardsList = ({ listSize }: DistributedAwardsListProps) => {
+export const AwardDistributionsList = ({ listSize }: DistributedAwardsListProps) => {
   const ensNodeUrl = getENSNodeUrl();
   const config = useMemo(() => createConfig({ url: ensNodeUrl }), [ensNodeUrl]);
 
