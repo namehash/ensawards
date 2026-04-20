@@ -11,8 +11,6 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { type Award, AwardTypes } from "../../awards/types";
 
-export const $ENS_TO_USDC_CONVERSION_RATE = 5.72;
-
 const bulkDistributionTransactionHash =
   "0x97b1011ebe8253cc54876d79390b8927cfb72d0307b5c32009035f0fb656ff8f";
 
