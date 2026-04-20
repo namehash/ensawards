@@ -23,7 +23,7 @@ describe("Awards data", () => {
     });
   });
 
-  it("Should have valid award amounts when `AwardType` is Payout", () => {
+  it("Should have valid award amounts when `AwardType` is MoneyPrize", () => {
     Object.values(data)
       .flatMap((awards) => awards)
       .filter((award) => award.type === AwardTypes.MoneyPrize)
@@ -40,7 +40,7 @@ describe("Awards data", () => {
         if (award.project && award.project.type === AwardedProjectTypes.Custom) {
           expect(
             award.project.name.trim().length,
-            `Custom project name is empty for an award deposited to: ${award.awardedTo}`,
+            `Custom project name is empty for an award awarded to: ${award.awardedTo}`,
           ).toBeGreaterThan(0);
         }
       });

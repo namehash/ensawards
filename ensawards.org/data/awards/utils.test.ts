@@ -12,14 +12,14 @@ describe("awards utils", () => {
           type: AwardTypes.MoneyPrize,
           awardedTo: zeroAddress,
           award: 100,
-          awardedAt: 0,
+          awardedAt: 1,
           transactionHash: zeroHash,
         },
         {
           type: AwardTypes.MoneyPrize,
           awardedTo: zeroAddress,
           award: 200,
-          awardedAt: 0,
+          awardedAt: 2,
           transactionHash: zeroHash,
         },
         {
@@ -36,7 +36,7 @@ describe("awards utils", () => {
           type: AwardTypes.MoneyPrize,
           awardedTo: zeroAddress,
           award: 200,
-          awardedAt: 0,
+          awardedAt: 2,
           transactionHash: zeroHash,
         },
         {
@@ -50,17 +50,15 @@ describe("awards utils", () => {
           type: AwardTypes.MoneyPrize,
           awardedTo: zeroAddress,
           award: 100,
-          awardedAt: 0,
+          awardedAt: 1,
           transactionHash: zeroHash,
         },
       ];
       const sortedAwards = [...awards].sort(sortMoneyPrizeAwards);
 
-      sortedAwards.forEach((award, index) => {
-        expect(award, "Should sort awards by award value in descending order").toEqual(
-          expectedSortedAwards[index],
-        );
-      });
+      expect(sortedAwards, "Should sort awards by award value in descending order").toEqual(
+        expectedSortedAwards,
+      );
     });
 
     it("should correctly resolve tiebreakers", () => {
@@ -113,11 +111,9 @@ describe("awards utils", () => {
       ];
       const sortedAwards = [...awards].sort(sortMoneyPrizeAwards);
 
-      sortedAwards.forEach((award, index) => {
-        expect(award, "Should resolve tiebreaker from earliest to latest awardedAt").toEqual(
-          expectedSortedAwards[index],
-        );
-      });
+      expect(sortedAwards, "Should resolve tiebreaker from earliest to latest awardedAt").toEqual(
+        expectedSortedAwards,
+      );
     });
   });
 });

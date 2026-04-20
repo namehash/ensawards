@@ -21,8 +21,24 @@ export type AwardType = (typeof AwardTypes)[keyof typeof AwardTypes];
 
 export interface AwardAbstract<AwardTypeT extends AwardType> {
   type: AwardTypeT;
+
+  /** Mainnet address of the recipient of the award.
+   *
+   * @invariant Simplifying assumption: no address can receive more than one award.
+   * TODO: The above is not technically true. When we have more time we should relax this constraint.
+   */
   awardedTo: NormalizedAddress;
-  project?: AwardedProject; // undefined project signals an individual recipient.
+
+  /** Project associated with the award recipient.
+   * Helps to identify the recipient in human-recognizable ways for cases
+   * where `depositedTo` doesn't have an ENS primary name or
+   * where it's ENS primary name doesn't make it sufficiently intuitive who the backing project is.
+   *
+   * `undefined` project signals an individual recipient.
+   */
+  project?: AwardedProject;
+
+  /** When the award was distributed */
   awardedAt: UnixTimestamp;
 }
 
@@ -30,7 +46,15 @@ export interface AwardSocialRecognition
   extends AwardAbstract<typeof AwardTypes.SocialRecognition> {}
 
 export interface AwardMoneyPrize extends AwardAbstract<typeof AwardTypes.MoneyPrize> {
+  /** Amount of the award in $ENS.
+   *
+   * @invariant Award amount must be greater than 0.
+   */
   award: $ENS; // should be replaced with `Price` from ensnode-sdk when Issue#1941 is completed.
+
+  /** Transaction hash of the transaction on Ethereum mainnet
+   * that took place on {@link awardedAt} to distribute the {@link Award}
+   */
   transactionHash: Hash;
 }
 

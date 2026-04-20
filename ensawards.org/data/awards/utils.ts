@@ -104,11 +104,11 @@ export const getAwardsByProject = (
   return awardsByCategory;
 };
 
-export const getAwardCategoryLabel = (BestPracticeCategory: BestPracticeCategory): string => {
-  switch (BestPracticeCategory.categorySlug) {
+export const getAwardCategoryLabel = (bestPracticeCategory: BestPracticeCategory): string => {
+  switch (bestPracticeCategory.categorySlug) {
     case ContractNamingCategory.categorySlug:
       return "ENS Contract Naming Season";
     default:
-      return BestPracticeCategory.name;
+      return bestPracticeCategory.name;
   }
 };
