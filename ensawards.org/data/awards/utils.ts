@@ -1,13 +1,15 @@
-import { CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS } from "data/contract-naming-season-awards";
+import { AWARDS } from "data/awards";
 import {
   type AwardedApp,
   type AwardedCustomProject,
   type AwardedProject,
   AwardedProjectTypes,
   type AwardedProtocol,
-} from "data/contract-naming-season-awards/awarded-project-types";
+} from "data/awards/awarded-project-types";
+import ContractNamingCategory from "data/ens-best-practices/contract-naming";
+import type { BestPracticeCategory, BestPracticeCategorySlug } from "data/ens-best-practices/types";
 
-import { type $ENS, type ContractNamingSeasonAward } from "./types";
+import { type $ENS, type Award, type AwardMoneyPrize, AwardTypes } from "./types";
 
 export const CONTRACT_NAMING_SEASON_TOTAL_AWARD_POOL: $ENS = 10000;
 
@@ -17,15 +19,12 @@ export const $ensFormatter = new Intl.NumberFormat("en-US", {
 });
 
 /**
- * Sorts {@link ContractNamingSeasonAward}s.
+ * Sorts {@link Award}s of {@link AwardMoneyPrize} type.
  *
- * Prioritizes awards with higher {@link ContractNamingSeasonAward.award} and,
- * in case of a tie, earlier {@link ContractNamingSeasonAward.awardedAt} date.
+ * Prioritizes awards with higher {@link AwardMoneyPrize.award} and,
+ * in case of a tie, earlier {@link AwardMoneyPrize.awardedAt} date.
  */
-export const sortContractNamingSeasonAwards = (
-  a: ContractNamingSeasonAward,
-  b: ContractNamingSeasonAward,
-): number => {
+export const sortMoneyPrizeAwards = (a: AwardMoneyPrize, b: AwardMoneyPrize): number => {
   if (a.award > b.award) return -1;
   if (a.award < b.award) return 1;
 
@@ -35,8 +34,11 @@ export const sortContractNamingSeasonAwards = (
 /**
  * Calculates the remaining award pool in ENS Contract Naming Season.
  */
-export const calcRemainingAwardPool = (): $ENS => {
-  const distributedAwardPool = CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS.reduce(
+export const calcRemainingContractNamingSeasonAwardPool = (): $ENS => {
+  const contractNamingSeasonAwards = AWARDS[ContractNamingCategory.categorySlug].filter(
+    (award) => award.type === AwardTypes.MoneyPrize,
+  );
+  const distributedAwardPool = contractNamingSeasonAwards.reduce(
     (acc, award) => acc + award.award,
     0,
   );
@@ -64,11 +66,10 @@ export const getAwardedProjectName = (awardedProject: AwardedApp | AwardedProtoc
 };
 
 /** Returns all awards for a given project */
-export const getAwardsByProject = (awardedProject: AwardedProject): ContractNamingSeasonAward[] => {
-  const isMatchingProject = (
-    award: ContractNamingSeasonAward,
-    awardedProject: AwardedProject,
-  ): boolean => {
+export const getAwardsByProject = (
+  awardedProject: AwardedProject,
+): Map<BestPracticeCategorySlug, Award[]> => {
+  const isMatchingProject = (award: Award, awardedProject: AwardedProject): boolean => {
     if (award.project === undefined) return false;
 
     if (award.project.type !== awardedProject.type) return false;
@@ -90,7 +91,24 @@ export const getAwardsByProject = (awardedProject: AwardedProject): ContractNami
         return (award.project as AwardedCustomProject).name === awardedProject.name;
     }
   };
-  return CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS.filter((award) =>
-    isMatchingProject(award, awardedProject),
-  );
+
+  const awardsByCategory = new Map<BestPracticeCategorySlug, Award[]>();
+
+  Object.entries(AWARDS).forEach(([categorySlug, awards]) => {
+    const matchingAwards = awards.filter((award) => isMatchingProject(award, awardedProject));
+    if (matchingAwards.length > 0) {
+      awardsByCategory.set(categorySlug as BestPracticeCategorySlug, matchingAwards);
+    }
+  });
+
+  return awardsByCategory;
+};
+
+export const getAwardCategoryLabel = (BestPracticeCategory: BestPracticeCategory): string => {
+  switch (BestPracticeCategory.categorySlug) {
+    case ContractNamingCategory.categorySlug:
+      return "ENS Contract Naming Season";
+    default:
+      return BestPracticeCategory.name;
+  }
 };

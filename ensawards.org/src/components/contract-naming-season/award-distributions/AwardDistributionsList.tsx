@@ -1,5 +1,7 @@
-import { CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS } from "data/contract-naming-season-awards";
-import { sortContractNamingSeasonAwards } from "data/contract-naming-season-awards/utils";
+import { AWARDS } from "data/awards";
+import { AwardTypes } from "data/awards/types";
+import { sortMoneyPrizeAwards } from "data/awards/utils";
+import ContractNamingCategory from "data/ens-best-practices/contract-naming";
 import { useMemo } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
@@ -12,9 +14,11 @@ export interface AwardDistributionsListProps {
   listSize?: number;
 }
 
-const SORTED_DISTRIBUTED_AWARDS = [...CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS].sort(
-  sortContractNamingSeasonAwards,
-);
+const SORTED_DISTRIBUTED_AWARDS = [
+  ...AWARDS[ContractNamingCategory.categorySlug].filter(
+    (award) => award.type === AwardTypes.MoneyPrize,
+  ),
+].sort(sortMoneyPrizeAwards);
 
 export const AwardDistributionsList = ({ listSize }: AwardDistributionsListProps) => {
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
@@ -25,7 +29,7 @@ export const AwardDistributionsList = ({ listSize }: AwardDistributionsListProps
         <div className="w-full h-fit flex flex-col gap-2 justify-start items-center">
           {SORTED_DISTRIBUTED_AWARDS.slice(0, listSize).map((award) => (
             <ContractNamingSeasonAwardCard
-              key={`${award.transactionHash}-${award.depositedTo}`}
+              key={`${award.transactionHash}-${award.awardedTo}`}
               distributedAward={award}
             />
           ))}

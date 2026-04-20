@@ -1,8 +1,9 @@
+import { isValidSlug } from "data/shared/slugs.ts";
 import { describe, expect, it } from "vitest";
 
 import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
-import { areStringsUnique, isValidSlug } from "@/utils";
+import { areStringsUnique } from "@/utils";
 
 import { ProtocolTypes } from "../ens-best-practices/types.ts";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from ".";

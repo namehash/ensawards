@@ -1,3 +1,4 @@
+import type { Award } from "data/awards/types.ts";
 import type { Contribution } from "data/contributors/types.ts";
 
 import type { AppType } from "../apps/types.ts";
@@ -55,11 +56,23 @@ export enum CategoryStatus {
   Active,
 }
 
+/** A unique identifier for a best practice category.
+ *
+ * @invariant Must be unique across all best practice categories.
+ * @invariant Must match {@link ENSAWARDS_SLUG_PATTERN}.
+ */
+export type BestPracticeCategorySlug = string;
+
 export interface BestPracticeCategory {
   id: string;
-  categorySlug: string;
+  categorySlug: BestPracticeCategorySlug;
   name: string;
   description: string;
   status: CategoryStatus;
   contributions: [Contribution, ...Contribution[]];
 }
+
+/**
+ * Defines relations between {@link BestPracticeCategorySlug} and {@link Award} given for the related {@link BestPracticeCategory}.
+ */
+export type BestPracticeCategoryAwards = Record<BestPracticeCategorySlug, Award[]>;

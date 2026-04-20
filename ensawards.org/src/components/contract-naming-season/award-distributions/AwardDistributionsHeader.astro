@@ -1,5 +1,5 @@
 ---
-import { calcRemainingAwardPool } from "data/contract-naming-season-awards/utils";
+import { calcRemainingContractNamingSeasonAwardPool } from "data/awards/utils";
 
 const $ensFormatterShort = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 0,
@@ -16,7 +16,8 @@ const $ensFormatterShort = new Intl.NumberFormat("en-US", {
   <p class="text-base leading-normal font-normal text-muted-foreground">
     Many awards for ENS Contract Naming Season have already been distributed.
     Act fast to participate before the remaining <span class="text-black"
-      >{$ensFormatterShort.format(calcRemainingAwardPool())} $ENS</span
+      >{$ensFormatterShort.format(calcRemainingContractNamingSeasonAwardPool())}
+      $ENS</span
     > award pool is exhausted!
   </p>
 </div>

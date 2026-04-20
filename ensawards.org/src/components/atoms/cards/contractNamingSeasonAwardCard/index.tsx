@@ -4,9 +4,8 @@ import {
   useIsMobile,
   useNow,
 } from "@namehash/namehash-ui";
-import { $ENS_TO_USDC_CONVERSION_RATE } from "data/contract-naming-season-awards";
-import type { ContractNamingSeasonAward } from "data/contract-naming-season-awards/types";
-import { $ensFormatter } from "data/contract-naming-season-awards/utils";
+import { $ENS_TO_USDC_CONVERSION_RATE, type AwardMoneyPrize } from "data/awards/types";
+import { $ensFormatter } from "data/awards/utils";
 import { secondsInMinute } from "date-fns/constants";
 import { useMemo } from "react";
 
@@ -18,7 +17,7 @@ import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace";
 import { currencyFormatter } from "@/utils/textModifications";
 
 export interface ContractNamingSeasonAwardCardProps {
-  distributedAward: ContractNamingSeasonAward;
+  distributedAward: AwardMoneyPrize;
 }
 
 export const ContractNamingSeasonAwardCard = ({
@@ -28,18 +27,18 @@ export const ContractNamingSeasonAwardCard = ({
   const recipientIdentity = useMemo(
     () =>
       buildUnresolvedIdentity(
-        distributedAward.depositedTo,
+        distributedAward.awardedTo,
         namespaceId,
         getENSRootChainId(namespaceId),
       ),
-    [distributedAward.depositedTo, namespaceId],
+    [distributedAward.awardedTo, namespaceId],
   );
 
   const now = useNow({ timeToRefresh: secondsInMinute });
   const isMobile = useIsMobile();
 
   const etherscanUrl = `https://etherscan.io/tx/${distributedAward.transactionHash}`;
-  const depositedToDetailsUrl = getAdvocateDetailsUrl(distributedAward.depositedTo);
+  const awardedToDetailsUrl = getAdvocateDetailsUrl(distributedAward.awardedTo);
 
   const estimatedValueUSD = distributedAward.award * $ENS_TO_USDC_CONVERSION_RATE;
 
@@ -66,7 +65,7 @@ export const ContractNamingSeasonAwardCard = ({
             withTooltip={false}
             identityLinkDetails={{
               isExternal: false,
-              link: depositedToDetailsUrl,
+              link: awardedToDetailsUrl,
             }}
           />
         </div>
@@ -82,7 +81,7 @@ export const ContractNamingSeasonAwardCard = ({
             withTooltip={false}
             identityLinkDetails={{
               isExternal: false,
-              link: depositedToDetailsUrl,
+              link: awardedToDetailsUrl,
             }}
             className="font-medium sm:max-w-[170px] sm:overflow-x-auto"
           />

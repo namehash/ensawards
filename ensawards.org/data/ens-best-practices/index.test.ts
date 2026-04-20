@@ -1,6 +1,7 @@
+import { isValidSlug } from "data/shared/slugs";
 import { describe, expect, it } from "vitest";
 
-import { areStringsUnique, isValidSlug } from "@/utils";
+import { areStringsUnique } from "@/utils";
 
 import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from ".";
 

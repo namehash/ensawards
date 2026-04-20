@@ -26,11 +26,8 @@ import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
 import ProjectAwardsCard from "@/components/atoms/cards/ProjectAwardsCard.astro";
-import {
-  AwardedProjectTypes,
-  type AwardedProtocol,
-} from "data/contract-naming-season-awards/awarded-project-types";
-import { getAwardsByProject } from "data/contract-naming-season-awards/utils";
+import { AwardedProjectTypes, type AwardedProtocol } from "data/awards/awarded-project-types";
+import { getAwardsByProject } from "data/awards/utils";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -71,7 +68,7 @@ if (resolvedProtocol) {
     .flat();
 
   awardedProtocol = { type: AwardedProjectTypes.Protocol, protocol: resolvedProtocol };
-  hasAwards = getAwardsByProject(awardedProtocol).length > 0;
+  hasAwards = getAwardsByProject(awardedProtocol).size > 0;
 }
 ---
 

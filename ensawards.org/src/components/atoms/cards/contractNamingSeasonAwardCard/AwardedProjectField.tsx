@@ -1,9 +1,6 @@
 import { useIsMobile } from "@namehash/namehash-ui";
 import { getAppDetailsUrl } from "data/apps/utils";
-import {
-  type AwardedProject,
-  AwardedProjectTypes,
-} from "data/contract-naming-season-awards/awarded-project-types";
+import { type AwardedProject, AwardedProjectTypes } from "data/awards/awarded-project-types";
 import { getProtocolDetailsUrl } from "data/protocols/utils";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
