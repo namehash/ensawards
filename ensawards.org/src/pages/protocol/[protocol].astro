@@ -25,6 +25,12 @@ import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/util
 import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils";
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
+import ProjectAwardsCard from "@/components/atoms/cards/ProjectAwardsCard.astro";
+import {
+  AwardedProjectTypes,
+  type AwardedProtocol,
+} from "data/contract-naming-season-awards/awarded-project-types";
+import { getAwardsByProject } from "data/contract-naming-season-awards/utils";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -49,6 +55,12 @@ let protocolScore = 0;
 let ProtocolIcon = GlobeIcon;
 let protocolContractsDataContributions: Contribution[] = [];
 
+// NOTE: These two variables might be a temporary solution until designs for ProjectAwardsCard are finalized,
+// to determine how to display it in relation to SuggestionCard.
+// The current approach is ugly and should be refined once the designs are ready.
+let awardedProtocol: AwardedProtocol | undefined;
+let hasAwards = false;
+
 if (resolvedProtocol) {
   protocolContracts = getAllProtocolContracts(resolvedProtocol.id);
   ProtocolIcon = resolvedProtocol.icon;
@@ -57,11 +69,14 @@ if (resolvedProtocol) {
   protocolContractsDataContributions = protocolContracts
     .map((contract) => contract.contributions)
     .flat();
+
+  awardedProtocol = { type: AwardedProjectTypes.Protocol, protocol: resolvedProtocol };
+  hasAwards = getAwardsByProject(awardedProtocol).length > 0;
 }
 ---
 
 {
-  resolvedProtocol === undefined ? (
+  resolvedProtocol === undefined || awardedProtocol === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
@@ -120,12 +135,16 @@ if (resolvedProtocol) {
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ContractNamingBanner />
-        <SuggestionCard
-          client:load
-          whatsSuggested="contract"
-          allContributions={protocolContractsDataContributions}
-          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
-        />
+        <div class="w-full max-w-[1216px] flex flex-col md:flex-row justify-start md:justify-between gap-6 items-center md:items-start">
+          <SuggestionCard
+            client:load
+            sidebarVariant={hasAwards}
+            whatsSuggested="contract"
+            allContributions={protocolContractsDataContributions}
+            gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
+          />
+          <ProjectAwardsCard project={awardedProtocol} />
+        </div>
         <ItemsList
           header="Smart contract naming"
           containerStyles="gap-3 sm:gap-2">

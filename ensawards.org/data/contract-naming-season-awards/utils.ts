@@ -1,12 +1,19 @@
 import { CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS } from "data/contract-naming-season-awards";
+import {
+  type AwardedApp,
+  type AwardedCustomProject,
+  type AwardedProject,
+  AwardedProjectTypes,
+  type AwardedProtocol,
+} from "data/contract-naming-season-awards/awarded-project-types";
 
 import { type $ENS, type ContractNamingSeasonAward } from "./types";
 
 export const CONTRACT_NAMING_SEASON_TOTAL_AWARD_POOL: $ENS = 10000;
 
 export const $ensFormatter = new Intl.NumberFormat("en-US", {
-  minimumFractionDigits: 3,
-  maximumFractionDigits: 3,
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
 });
 
 /**
@@ -43,4 +50,47 @@ export const calcRemainingAwardPool = (): $ENS => {
   }
 
   return remainingAwardPool;
+};
+
+export const getAwardedProjectName = (awardedProject: AwardedApp | AwardedProtocol): string => {
+  switch (awardedProject.type) {
+    case AwardedProjectTypes.App:
+      return awardedProject.app.name;
+    case AwardedProjectTypes.Protocol:
+      return awardedProject.protocol.name;
+    default:
+      return "Unknown Project";
+  }
+};
+
+/** Returns all awards for a given project */
+export const getAwardsByProject = (awardedProject: AwardedProject): ContractNamingSeasonAward[] => {
+  const isMatchingProject = (
+    award: ContractNamingSeasonAward,
+    awardedProject: AwardedProject,
+  ): boolean => {
+    if (award.project === undefined) return false;
+
+    if (award.project.type !== awardedProject.type) return false;
+
+    // NOTE: Type casting is necessary due to compiler limitations,
+    // but it's safe because of the type check above.
+    switch (awardedProject.type) {
+      case AwardedProjectTypes.App:
+        return (award.project as AwardedApp).app.appSlug === awardedProject.app.appSlug;
+
+      case AwardedProjectTypes.Protocol:
+        return (
+          (award.project as AwardedProtocol).protocol.protocolSlug ===
+          awardedProject.protocol.protocolSlug
+        );
+
+      case AwardedProjectTypes.Custom:
+      default:
+        return (award.project as AwardedCustomProject).name === awardedProject.name;
+    }
+  };
+  return CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS.filter((award) =>
+    isMatchingProject(award, awardedProject),
+  );
 };

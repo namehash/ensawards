@@ -19,6 +19,8 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import { groupBenchmarksByCategory, calcCategoryScore } from "data/apps/benchmarks-utils";
 import { type AppBenchmark } from "data/apps/benchmarks-types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
+import ProjectAwardsCard from "@/components/atoms/cards/ProjectAwardsCard.astro";
+import { AwardedProjectTypes } from "data/contract-naming-season-awards/awarded-project-types";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -136,13 +138,16 @@ if (appToDisplay !== undefined) {
               })}
             </ItemsList>
           </div>
-          <div class="w-full md:w-2/5">
+          <div class="w-full md:w-2/5 flex flex-col justify-start items-center gap-5">
             <SuggestionCard
               client:load
               whatsSuggested="benchmark result"
               allContributions={appBenchmarksDataContributions}
               gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
               sidebarVariant
+            />
+            <ProjectAwardsCard
+              project={{ type: AwardedProjectTypes.App, app: appToDisplay }}
             />
           </div>
         </div>

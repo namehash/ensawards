@@ -1,0 +1,75 @@
+---
+import {
+  type AwardedApp,
+  type AwardedProtocol,
+} from "data/contract-naming-season-awards/awarded-project-types";
+import {
+  getAwardedProjectName,
+  getAwardsByProject,
+} from "data/contract-naming-season-awards/utils";
+
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { AbsoluteTime } from "@namehash/namehash-ui";
+import { EnsAwardsIcon } from "@/components/atoms/icons/EnsAwardsIcon";
+
+interface ContractNamingSeasonAwardsPerProjectCardProps {
+  project: AwardedApp | AwardedProtocol;
+}
+
+const { project }: ContractNamingSeasonAwardsPerProjectCardProps = Astro.props;
+
+const contractNamingSeasonAwards = getAwardsByProject(project);
+
+// NOTE: For now this component is specific to Contract Naming Season awards.
+// If we decided to generalize the awards data model, this component should also be generalized
+// (or adjusted to call more specific subcomponents based on the award type, if the display logic differs significantly between award types).
+---
+
+{
+  contractNamingSeasonAwards.length > 0 && (
+    <div class="w-full max-w-[1216px] h-fit flex flex-col gap-3 sm:gap-5 p-4 sm:px-5 sm:py-4 rounded-2xl border border-gray-200 bg-white">
+      <div class="w-full flex-1 min-w-0">
+        <div class="w-full flex flex-col gap-1">
+          <h4 class="text-lg leading-7 font-semibold text-slate-800">Awards</h4>
+          <p class="text-base leading-6 font-normal text-muted-foreground">
+            {getAwardedProjectName(project)} has been awarded
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-start items-start gap-0">
+        {contractNamingSeasonAwards.map((award, idx) => (
+          <div
+            key={`contract-naming-season-award-for-${award.depositedTo}`}
+            class={cn(
+              "w-full h-fit flex flex-row flex-nowrap justify-start items-center gap-3",
+              idx > 0 && "border-t border-gray-200",
+            )}>
+            <EnsAwardsIcon className="w-10 h-10 shrink-0" />
+            <div>
+              <h3 class="text-base leading-6 font-semibold text-black">
+                ENS Contract Naming Season Award
+              </h3>
+              <div class="flex flex-row flex-nowrap justify-start items-center gap-1">
+                <p class="text-sm leading-normal font-normal text-muted-foreground">
+                  Awarded on
+                </p>
+                <p class="text-sm leading-normal font-medium text-black">
+                  <AbsoluteTime
+                    client:load
+                    timestamp={award.awardedAt}
+                    options={{
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    }}
+                  />
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
