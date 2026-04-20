@@ -221,7 +221,7 @@ const startContractNamingTodayButtonStyles =
         class="w-full max-w-[1216px] h-fit flex flex-col justify-start items-start gap-6">
         <AwardDistributionsHeader />
         <div class="w-full h-fit flex flex-col justify-start items-start gap-2">
-          <AwardDistributionsList client:load listSize={5} />
+          <AwardDistributionsList client:only="react" listSize={5} />
           <a
             href={`/ens-contract-naming-season/award-distributions`}
             class={cn(

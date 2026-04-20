@@ -1,3 +1,4 @@
+import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 import type { EnsAwardsScore } from "@/utils/types.ts";
 
 import type {
@@ -136,3 +137,9 @@ export const calculateAppsPassed = (bestPractice: BestPracticeApp): number => {
  */
 export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
   Object.values(AppTypes).every((appType) => targets.includes(appType));
+
+/**
+ * Returns the URL to the app details page for a given {@link App}.
+ */
+export const getAppDetailsUrl = (app: App): URL =>
+  new URL(`/app/${app.appSlug}`, getEnsAwardsBaseUrl());

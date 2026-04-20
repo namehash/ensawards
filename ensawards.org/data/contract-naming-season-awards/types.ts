@@ -3,17 +3,7 @@ import type { Hash } from "viem";
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { NormalizedAddress } from "../shared/normalizedAddress.ts";
-
-/**
- * Defines project that has been awarded for the active participation
- * in the Contract Naming Season.
- */
-export interface AwardedProject {
-  /** The name of the awarded project. */
-  name: string;
-  /** Optional link to the project's website or relevant page. */
-  link?: URL;
-}
+import type { AwardedProject } from "./awarded-project-types.ts";
 
 /** An amount in units of $ENS */
 export type $ENS = number;

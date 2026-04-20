@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 
-import { ContractNamingSeasonAwardCard } from "@/components/atoms/cards/ContractNamingSeasonAwardCard";
+import { ContractNamingSeasonAwardCard } from "@/components/atoms/cards/contractNamingSeasonAwardCard";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getENSNodeUrl } from "@/utils/env";
 

@@ -28,7 +28,7 @@ import { AwardDistributionsList } from "@/components/contract-naming-season/awar
     <div
       class="w-full max-w-[1216px] h-fit flex flex-col justify-start items-start gap-6">
       <AwardDistributionsHeader />
-      <AwardDistributionsList client:load />
+      <AwardDistributionsList client:only="react" />
     </div>
   </section>
 </Layout>

@@ -1,6 +1,8 @@
 import React from "react";
 
-const Icon = (props: React.SVGProps<SVGSVGElement>) => (
+import { cn } from "@/utils/tailwindClassConcatenation";
+
+const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
     version="1.1"
     id="Layer_1"
@@ -9,7 +11,7 @@ const Icon = (props: React.SVGProps<SVGSVGElement>) => (
     x="0px"
     y="0px"
     viewBox="0 0 373.9 422"
-    style={{ padding: "4px" }}
+    className={cn("p-1", className)}
     xmlSpace="preserve"
     {...props}
   >

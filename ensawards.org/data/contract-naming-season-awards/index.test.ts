@@ -1,3 +1,4 @@
+import { AwardedProjectTypes } from "data/contract-naming-season-awards/awarded-project-types";
 import { isNormalizedAddress, type NormalizedAddress } from "data/shared/normalizedAddress";
 import { describe, expect, it } from "vitest";
 
@@ -28,12 +29,12 @@ describe("Contract Naming Season Awards data", () => {
     });
   });
 
-  it("Should have a non-empty project name if project information is provided", () => {
+  it("Should have a non-empty custom project name if project information is provided", () => {
     data.forEach((award) => {
-      if (award.project) {
+      if (award.project && award.project.type === AwardedProjectTypes.Custom) {
         expect(
           award.project.name.trim().length,
-          `Project name is empty for an award deposited to: ${award.depositedTo}`,
+          `Custom project name is empty for an award deposited to: ${award.depositedTo}`,
         ).toBeGreaterThan(0);
       }
     });

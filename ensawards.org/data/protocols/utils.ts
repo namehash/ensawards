@@ -1,3 +1,5 @@
+import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
+
 import {
   type BestPracticeTarget,
   type ProtocolType,
@@ -101,3 +103,9 @@ const PROTOCOL_CONTRACTS_BY_PROTOCOL_ID: Map<ProtocolId, Contract[]> = (() => {
  */
 export const getAllProtocolContracts = (protocolId: ProtocolId): Contract[] =>
   PROTOCOL_CONTRACTS_BY_PROTOCOL_ID.get(protocolId) ?? [];
+
+/**
+ * Returns the URL to the protocol details page for a given {@link Protocol}.
+ */
+export const getProtocolDetailsUrl = (protocol: Protocol): URL =>
+  new URL(`/protocol/${protocol.protocolSlug}`, getEnsAwardsBaseUrl());

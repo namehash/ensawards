@@ -1,3 +1,10 @@
+import BlockscoutExplorer from "data/apps/blockscout-explorer";
+import { AwardedProjectTypes } from "data/contract-naming-season-awards/awarded-project-types";
+import CorkDeFi from "data/protocols/cork-defi";
+import GivethDeFi from "data/protocols/giveth-defi";
+import LiquityDeFi from "data/protocols/liquity-defi";
+import NounsDao from "data/protocols/nouns-dao";
+
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { ContractNamingSeasonAward } from "./types";
@@ -9,12 +16,13 @@ const bulkDistributionTransactionHash =
 
 const bulkDistributionTimestamp = parseTimestamp("2026-03-06T11:21:23Z");
 
+// Idea: See https://docs.google.com/document/d/1Tw7k35CK7zP33Z_V1wtLZl-wNl11DXXppkQouciWVZQ/edit?usp=sharing
 export const CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS: ContractNamingSeasonAward[] = [
   {
     depositedTo: "0xb1a32fc9f9d8b2cf86c068cae13108809547ef71",
     project: {
-      name: "Nouns DAO",
-      link: new URL("https://nouns.wtf"),
+      type: AwardedProjectTypes.Protocol,
+      protocol: NounsDao,
     },
     award: 500,
     awardedAt: bulkDistributionTimestamp,
@@ -23,8 +31,8 @@ export const CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS: ContractNamingSeasonAwar
   {
     depositedTo: "0xf06016d822943c42e3cb7fc3a6a3b1889c1045f8",
     project: {
-      name: "Liquity",
-      link: new URL("https://www.liquity.org"),
+      type: AwardedProjectTypes.Protocol,
+      protocol: LiquityDeFi,
     },
     award: 500,
     awardedAt: bulkDistributionTimestamp,
@@ -33,8 +41,8 @@ export const CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS: ContractNamingSeasonAwar
   {
     depositedTo: "0xc70eb1486872909b3ad619546fa2afb8d5aaa373",
     project: {
-      name: "Cork",
-      link: new URL("https://www.cork.tech"),
+      type: AwardedProjectTypes.Protocol,
+      protocol: CorkDeFi,
     },
     award: 500,
     awardedAt: bulkDistributionTimestamp,
@@ -43,8 +51,8 @@ export const CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS: ContractNamingSeasonAwar
   {
     depositedTo: "0x4d9339dd97db55e3b9bcbe65de39ff9c04d1c2cd",
     project: {
-      name: "Giveth",
-      link: new URL("https://giveth.io"),
+      type: AwardedProjectTypes.Protocol,
+      protocol: GivethDeFi,
     },
     award: 500,
     awardedAt: bulkDistributionTimestamp,
@@ -53,6 +61,7 @@ export const CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS: ContractNamingSeasonAwar
   {
     depositedTo: "0x75c83356987c8d813829d9fbb5de504b547750a6",
     project: {
+      type: AwardedProjectTypes.Custom,
       name: "Based Nouns",
       link: new URL("https://nouns.build/"),
     },
@@ -63,8 +72,8 @@ export const CONTRACT_NAMING_SEASON_DISTRIBUTED_AWARDS: ContractNamingSeasonAwar
   {
     depositedTo: "0x242ba6d68ffeb4a098b591b32d370f973ff882b7",
     project: {
-      name: "Blockscout",
-      link: new URL("https://blockscout.com/"),
+      type: AwardedProjectTypes.App,
+      app: BlockscoutExplorer,
     },
     award: 1195,
     awardedAt: parseTimestamp("2026-01-30T17:46:59Z"),

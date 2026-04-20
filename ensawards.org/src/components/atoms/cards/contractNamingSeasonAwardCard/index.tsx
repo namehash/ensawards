@@ -12,6 +12,7 @@ import { useMemo } from "react";
 
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 
+import { AwardedProjectField } from "@/components/atoms/cards/contractNamingSeasonAwardCard/AwardedProjectField";
 import { getAdvocateDetailsUrl } from "@/components/atoms/cards/referrerCard/shared";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace";
 import { currencyFormatter } from "@/utils/textModifications";
@@ -88,29 +89,7 @@ export const ContractNamingSeasonAwardCard = ({
         </div>
       </div>
 
-      <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
-          Project
-        </p>
-        <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
-          {distributedAward.project ? (
-            distributedAward.project.link ? (
-              <a
-                href={distributedAward.project.link.toString()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline hover:underline-offset-[25%]"
-              >
-                {distributedAward.project.name}
-              </a>
-            ) : (
-              distributedAward.project.name
-            )
-          ) : (
-            "-"
-          )}
-        </p>
-      </div>
+      <AwardedProjectField project={distributedAward.project} />
 
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
