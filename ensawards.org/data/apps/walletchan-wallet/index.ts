@@ -12,8 +12,7 @@ const WalletChanWallet: App = {
   appSlug: "walletchan-wallet",
   project: WalletChanProject,
   name: "WalletChan",
-  description:
-    "WalletChan is an upcoming, powerful EVM wallet that's ready for the AI era.",
+  description: "WalletChan is an upcoming, powerful EVM wallet that's ready for the AI era.",
   type: AppTypes.Wallet,
   socials: {
     website: new URL("https://walletchan.com/"),

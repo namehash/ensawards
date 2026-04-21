@@ -6,8 +6,7 @@ import WalletChanIcon from "./icon.tsx";
 const WalletChanProject: Project = {
   id: ProjectIds.WalletChan,
   name: "WalletChan",
-  description:
-    "WalletChan is an upcoming, powerful EVM wallet that's ready for the AI era.",
+  description: "WalletChan is an upcoming, powerful EVM wallet that's ready for the AI era.",
   icon: WalletChanIcon,
   socials: {
     website: new URL("https://walletchan.com/"),

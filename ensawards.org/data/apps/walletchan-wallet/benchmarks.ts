@@ -1,5 +1,5 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
-// on adding and modifying app benchmarks TEST
+// on adding and modifying app benchmarks
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
