@@ -33,13 +33,13 @@ export const sortFinancialAwards = (a: AwardFinancial, b: AwardFinancial): numbe
  * Calculates the remaining award pool in ENS Contract Naming Season.
  */
 export const calcRemainingContractNamingSeasonAwardPool = (): EnsTokens => {
-  const EnsContractNamingSeasonAwardPool = EnsContractNamingSeason.totalAwardPool;
+  const ensContractNamingSeasonAwardPool = EnsContractNamingSeason.totalAwardPool;
   const contractNamingSeasonAwards = AWARDS.get(EnsContractNamingSeason.incentiveProgramSlug);
 
   if (!contractNamingSeasonAwards)
     throw new Error("No awards found for ENS Contract Naming Season");
 
-  if (EnsContractNamingSeasonAwardPool === undefined) {
+  if (ensContractNamingSeasonAwardPool === undefined) {
     throw new Error("ENS Contract Naming Season total award pool is undefined");
   }
 
@@ -51,7 +51,7 @@ export const calcRemainingContractNamingSeasonAwardPool = (): EnsTokens => {
     0,
   );
 
-  const remainingAwardPool = EnsContractNamingSeasonAwardPool - distributedAwardPool;
+  const remainingAwardPool = ensContractNamingSeasonAwardPool - distributedAwardPool;
 
   if (remainingAwardPool < 0) {
     throw new Error(
@@ -78,7 +78,7 @@ export const getAwardedEntityName = (awardedEntity: AwardedApp | AwardedProtocol
 export const getAwardsByEntity = (
   awardedEntity: AwardedEntity,
 ): Map<IncentiveProgramSlug, Award[]> => {
-  const isMatchingEntity = (award: Award, awardedEntity: AwardedEntity): boolean => {
+  const isMatchingEntity = (award: Award): boolean => {
     const awardEntityData = award.awardedEntity;
 
     if (awardEntityData === undefined) return false;
@@ -111,7 +111,7 @@ export const getAwardsByEntity = (
   const awardsByIncentiveProgram = new Map<IncentiveProgramSlug, Award[]>();
 
   Array.from(AWARDS).forEach(([incentiveProgramSlug, awards]) => {
-    const matchingAwards = awards.filter((award) => isMatchingEntity(award, awardedEntity));
+    const matchingAwards = awards.filter(isMatchingEntity);
     if (matchingAwards.length > 0) {
       awardsByIncentiveProgram.set(incentiveProgramSlug, matchingAwards);
     }

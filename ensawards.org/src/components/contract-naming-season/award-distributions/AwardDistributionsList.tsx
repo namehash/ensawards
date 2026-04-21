@@ -29,7 +29,7 @@ export const AwardDistributionsList = ({ listSize }: AwardDistributionsListProps
         <div className="w-full h-fit flex flex-col gap-2 justify-start items-center">
           {SORTED_DISTRIBUTED_AWARDS.slice(0, listSize).map((award) => (
             <ContractNamingSeasonAwardCard
-              key={`${award.transactionHash}-${award.awardedTo}`}
+              key={`${award.chainId}-${award.transactionHash}-${award.awardedTo}`}
               distributedAward={award}
             />
           ))}

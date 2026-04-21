@@ -1,5 +1,4 @@
 import { zeroAddress, zeroHash } from "viem";
-import { mainnet } from "viem/chains";
 import { describe, expect, it } from "vitest";
 
 import { type AwardFinancial, AwardTypes } from "./types.ts";

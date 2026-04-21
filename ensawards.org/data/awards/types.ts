@@ -22,7 +22,7 @@ export type AwardType = (typeof AwardTypes)[keyof typeof AwardTypes];
 export interface AwardAbstract<AwardTypeT extends AwardType> {
   type: AwardTypeT;
 
-  /** Mainnet address of the recipient of the award.
+  /** Address of the recipient of the award.
    *
    * @invariant Simplifying assumption: no address can receive more than one award.
    * TODO: The above is not technically true. When we have more time we should relax this constraint.
@@ -32,7 +32,7 @@ export interface AwardAbstract<AwardTypeT extends AwardType> {
   /** Entity associated with the award recipient.
    * Helps to identify the recipient in human-recognizable ways for cases
    * where `awardedTo` doesn't have an ENS primary name or
-   * where it's ENS primary name doesn't make it sufficiently intuitive
+   * where its ENS primary name doesn't make it sufficiently intuitive
    * which app, protocol, or custom entity the recipient stands for.
    *
    * `undefined` award entity represents that `awardedTo` either is an individual
@@ -57,7 +57,7 @@ export interface AwardFinancial extends AwardAbstract<typeof AwardTypes.Financia
   /**
    * Chain ID of the blockchain where the award distribution transaction took place.
    *
-   * Required to uniqely identify the transaction together with {@link transactionHash}.
+   * Required to uniquely identify the transaction together with {@link transactionHash}.
    */
   chainId: ChainId;
 

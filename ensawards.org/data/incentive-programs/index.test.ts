@@ -1,3 +1,4 @@
+import type { IncentiveProgramSlug } from "data/incentive-programs/types";
 import { isValidSlug } from "data/shared/slugs";
 import { describe, expect, it } from "vitest";
 
@@ -9,7 +10,7 @@ describe("Incentive Program data", () => {
   const data = INCENTIVE_PROGRAMS;
 
   it("Should have valid and unique slugs", () => {
-    const slugArray: string[] = [];
+    const slugArray: IncentiveProgramSlug[] = [];
 
     data.forEach((incentiveProgram) => {
       expect(
@@ -20,7 +21,7 @@ describe("Incentive Program data", () => {
       slugArray.push(incentiveProgram.incentiveProgramSlug);
     });
 
-    expect(areStringsUnique(slugArray), `Slugs for Incentive Programs are not unique`).toEqual(
+    expect(areStringsUnique(slugArray), `Slugs for Incentive Programs are not unique.`).toEqual(
       true,
     );
   });

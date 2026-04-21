@@ -1,4 +1,3 @@
-import type { Award } from "data/awards/types.ts";
 import type { Contribution } from "data/contributors/types.ts";
 
 import type { AppType } from "../apps/types.ts";

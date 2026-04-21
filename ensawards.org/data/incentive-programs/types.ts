@@ -1,6 +1,5 @@
 import type { Award, EnsTokens } from "data/awards/types";
-
-import type { Price } from "@ensnode/ensnode-sdk";
+import { ENSAWARDS_SLUG_PATTERN } from "data/shared/slugs";
 
 /** A unique identifier for an {@link IncentiveProgram}.
  *

@@ -50,7 +50,7 @@ export const ContractNamingSeasonAwardCard = ({
   const awardedContentWrapper = ({ children }: React.PropsWithChildren): React.ReactNode =>
     transactionUrl ? (
       <a
-        href={transactionUrl?.href}
+        href={transactionUrl.href}
         target="_blank"
         rel="noopener noreferrer"
         className="text-sm leading-normal font-medium text-blue-600 hover:underline hover:underline-offset-[25%]"

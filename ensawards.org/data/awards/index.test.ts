@@ -8,7 +8,6 @@ import { describe, expect, it } from "vitest";
 import { AWARDS } from ".";
 
 describe("Awards data", () => {
-  const data = AWARDS;
   it("Should have valid and unique recipient addresses", () => {
     Array.from(AWARDS).forEach(([, awards]) => {
       const addresses: Set<NormalizedAddress> = new Set();
@@ -35,7 +34,7 @@ describe("Awards data", () => {
         );
       }
 
-      if (!incentiveProgram.totalAwardPool) {
+      if (incentiveProgram.totalAwardPool === undefined) {
         awards.forEach((award) => {
           expect(
             award.type === AwardTypes.RecognitionAward,
