@@ -1,29 +1,31 @@
 import {
+  getBlockExplorerTransactionDetailsUrl,
   RelativeTime,
   ResolveAndDisplayIdentity,
   useIsMobile,
   useNow,
 } from "@namehash/namehash-ui";
-import { $ENS_TO_USDC_CONVERSION_RATE, type AwardMoneyPrize } from "data/awards/types";
-import { $ensFormatter } from "data/awards/utils";
+import { type AwardFinancial, ENS_TOKENS_TO_USDC_CONVERSION_RATE } from "data/awards/types";
+import { ensTokenFormatter } from "data/awards/utils";
 import { secondsInMinute } from "date-fns/constants";
 import { useMemo } from "react";
 
 import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
 
-import { AwardedProjectField } from "@/components/atoms/cards/contractNamingSeasonAwardCard/AwardedProjectField";
+import { AwardedEntityField } from "@/components/atoms/cards/contractNamingSeasonAwardCard/AwardedEntityField";
 import { getAdvocateDetailsUrl } from "@/components/atoms/cards/referrerCard/shared";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace";
 import { currencyFormatter } from "@/utils/textModifications";
 
 export interface ContractNamingSeasonAwardCardProps {
-  distributedAward: AwardMoneyPrize;
+  distributedAward: AwardFinancial;
 }
 
 export const ContractNamingSeasonAwardCard = ({
   distributedAward,
 }: ContractNamingSeasonAwardCardProps) => {
   const namespaceId = DEFAULT_ENS_NAMESPACE;
+
   const recipientIdentity = useMemo(
     () =>
       buildUnresolvedIdentity(
@@ -37,21 +39,27 @@ export const ContractNamingSeasonAwardCard = ({
   const now = useNow({ timeToRefresh: secondsInMinute });
   const isMobile = useIsMobile();
 
-  const etherscanUrl = `https://etherscan.io/tx/${distributedAward.transactionHash}`;
+  const transactionUrl = getBlockExplorerTransactionDetailsUrl(
+    distributedAward.chainId,
+    distributedAward.transactionHash,
+  );
   const awardedToDetailsUrl = getAdvocateDetailsUrl(distributedAward.awardedTo);
 
-  const estimatedValueUSD = distributedAward.award * $ENS_TO_USDC_CONVERSION_RATE;
+  const estimatedValueUSD = distributedAward.award * ENS_TOKENS_TO_USDC_CONVERSION_RATE;
 
-  const awardedContentWrapper = ({ children }: React.PropsWithChildren): React.ReactNode => (
-    <a
-      href={etherscanUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-sm leading-normal font-medium text-blue-600 hover:underline hover:underline-offset-[25%]"
-    >
-      {children}
-    </a>
-  );
+  const awardedContentWrapper = ({ children }: React.PropsWithChildren): React.ReactNode =>
+    transactionUrl ? (
+      <a
+        href={transactionUrl?.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm leading-normal font-medium text-blue-600 hover:underline hover:underline-offset-[25%]"
+      >
+        {children}
+      </a>
+    ) : (
+      <p className="text-sm leading-normal font-medium text-black">{children}</p>
+    );
 
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-5 sm:pb-4 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
@@ -88,14 +96,14 @@ export const ContractNamingSeasonAwardCard = ({
         </div>
       </div>
 
-      <AwardedProjectField project={distributedAward.project} />
+      <AwardedEntityField entity={distributedAward.awardedEntity} />
 
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
           Award
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
-          {$ensFormatter.format(distributedAward.award)} $ENS
+          {ensTokenFormatter.format(distributedAward.award)} $ENS
         </p>
       </div>
 

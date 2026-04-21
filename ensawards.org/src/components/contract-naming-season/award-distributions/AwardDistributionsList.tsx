@@ -1,7 +1,7 @@
 import { AWARDS } from "data/awards";
 import { AwardTypes } from "data/awards/types";
-import { sortMoneyPrizeAwards } from "data/awards/utils";
-import ContractNamingCategory from "data/ens-best-practices/contract-naming";
+import { sortFinancialAwards } from "data/awards/utils";
+import EnsContractNamingSeason from "data/incentive-programs/ens-contract-naming-season";
 import { useMemo } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
@@ -15,10 +15,10 @@ export interface AwardDistributionsListProps {
 }
 
 const SORTED_DISTRIBUTED_AWARDS = [
-  ...AWARDS[ContractNamingCategory.categorySlug].filter(
-    (award) => award.type === AwardTypes.MoneyPrize,
-  ),
-].sort(sortMoneyPrizeAwards);
+  ...(AWARDS.get(EnsContractNamingSeason.incentiveProgramSlug)?.filter(
+    (award) => award.type === AwardTypes.FinancialAward,
+  ) ?? []),
+].sort(sortFinancialAwards);
 
 export const AwardDistributionsList = ({ listSize }: AwardDistributionsListProps) => {
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);

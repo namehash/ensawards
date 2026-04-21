@@ -25,9 +25,9 @@ import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/util
 import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils";
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
-import ProjectAwardsCard from "@/components/atoms/cards/ProjectAwardsCard.astro";
-import { AwardedProjectTypes, type AwardedProtocol } from "data/awards/awarded-project-types";
-import { getAwardsByProject } from "data/awards/utils";
+import EntityAwardsCard from "@/components/atoms/cards/EntityAwardsCard.astro";
+import { AwardedEntityTypes, type AwardedProtocol } from "data/awards/awarded-entity-types";
+import { getAwardsByEntity } from "data/awards/utils";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -52,7 +52,7 @@ let protocolScore = 0;
 let ProtocolIcon = GlobeIcon;
 let protocolContractsDataContributions: Contribution[] = [];
 
-// NOTE: These two variables might be a temporary solution until designs for ProjectAwardsCard are finalized,
+// NOTE: These two variables might be a temporary solution until designs for EntityAwardsCard are finalized,
 // to determine how to display it in relation to SuggestionCard.
 // The current approach is ugly and should be refined once the designs are ready.
 let awardedProtocol: AwardedProtocol | undefined;
@@ -67,8 +67,8 @@ if (resolvedProtocol) {
     .map((contract) => contract.contributions)
     .flat();
 
-  awardedProtocol = { type: AwardedProjectTypes.Protocol, protocol: resolvedProtocol };
-  hasAwards = getAwardsByProject(awardedProtocol).size > 0;
+  awardedProtocol = { type: AwardedEntityTypes.Protocol, protocol: resolvedProtocol };
+  hasAwards = getAwardsByEntity(awardedProtocol).size > 0;
 }
 ---
 
@@ -140,7 +140,7 @@ if (resolvedProtocol) {
             allContributions={protocolContractsDataContributions}
             gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
           />
-          <ProjectAwardsCard project={awardedProtocol} />
+          <EntityAwardsCard entity={awardedProtocol} />
         </div>
         <ItemsList
           header="Smart contract naming"

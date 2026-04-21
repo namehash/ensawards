@@ -20,8 +20,13 @@ export const getBenchmarkWeight = (benchmark: AppBenchmark): number => {
 
     // explicit zero value for the failed benchmark
     case BenchmarkResult.Fail:
-    default:
       return 0;
+
+    default:
+      const _exhaustive: never = benchmark.result;
+      throw new Error(
+        `Unsupported BenchmarkResult: ${JSON.stringify(_exhaustive)}. Cannot calculate benchmark weight.`,
+      );
   }
 };
 

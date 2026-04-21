@@ -1,60 +1,68 @@
 import { zeroAddress, zeroHash } from "viem";
+import { mainnet } from "viem/chains";
 import { describe, expect, it } from "vitest";
 
-import { type AwardMoneyPrize, AwardTypes } from "./types.ts";
-import { sortMoneyPrizeAwards } from "./utils.ts";
+import { type AwardFinancial, AwardTypes } from "./types.ts";
+import { sortFinancialAwards } from "./utils.ts";
 
 describe("awards utils", () => {
-  describe("sortMoneyPrizeAwards", () => {
+  describe("sortFinancialAwards", () => {
+    const placeholderChainId = 0;
     it("should sort awards by award value in descending order", () => {
-      const awards: AwardMoneyPrize[] = [
+      const awards: AwardFinancial[] = [
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 100,
           awardedAt: 1,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 200,
           awardedAt: 2,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 150,
           awardedAt: 0,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
       ];
 
-      const expectedSortedAwards: AwardMoneyPrize[] = [
+      const expectedSortedAwards: AwardFinancial[] = [
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 200,
           awardedAt: 2,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 150,
           awardedAt: 0,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 100,
           awardedAt: 1,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
       ];
-      const sortedAwards = [...awards].sort(sortMoneyPrizeAwards);
+      const sortedAwards = [...awards].sort(sortFinancialAwards);
 
       expect(sortedAwards, "Should sort awards by award value in descending order").toEqual(
         expectedSortedAwards,
@@ -62,54 +70,60 @@ describe("awards utils", () => {
     });
 
     it("should correctly resolve tiebreakers", () => {
-      const awards: AwardMoneyPrize[] = [
+      const awards: AwardFinancial[] = [
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 100,
           awardedAt: 2,
           transactionHash: zeroHash,
+          chainId: placeholderChainId,
         },
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 100,
           awardedAt: 1,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 100,
           awardedAt: 3,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
       ];
 
-      const expectedSortedAwards: AwardMoneyPrize[] = [
+      const expectedSortedAwards: AwardFinancial[] = [
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 100,
           awardedAt: 1,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 100,
           awardedAt: 2,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
         {
-          type: AwardTypes.MoneyPrize,
+          type: AwardTypes.FinancialAward,
           awardedTo: zeroAddress,
           award: 100,
           awardedAt: 3,
+          chainId: placeholderChainId,
           transactionHash: zeroHash,
         },
       ];
-      const sortedAwards = [...awards].sort(sortMoneyPrizeAwards);
+      const sortedAwards = [...awards].sort(sortFinancialAwards);
 
       expect(sortedAwards, "Should resolve tiebreaker from earliest to latest awardedAt").toEqual(
         expectedSortedAwards,

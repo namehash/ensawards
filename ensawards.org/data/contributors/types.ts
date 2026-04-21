@@ -1,5 +1,12 @@
 import type { AccountId, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
+/**
+ * Human-readable alias for a contributor, used to identify them in the {@link contributors} record
+ * (see ensawards.org\data\contributors\index.ts ).
+ */
+// TODO: Appreciate advice about improvig the JSDoc to include more guidance about the alias's requirements.
+export type ContributorAlias = string;
+
 export type Contributor = AccountId;
 
 export type Contribution = {

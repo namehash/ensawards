@@ -1,5 +1,7 @@
-import { AwardedProjectTypes } from "data/awards/awarded-project-types";
+import { AwardedEntityTypes } from "data/awards/awarded-entity-types";
 import { AwardTypes } from "data/awards/types";
+import { isValidAwardValue, isValidCustomAwardedEntityName } from "data/awards/utils";
+import { getIncentiveProgramBySlug } from "data/incentive-programs/utils";
 import { isNormalizedAddress, type NormalizedAddress } from "data/shared/normalizedAddress";
 import { describe, expect, it } from "vitest";
 
@@ -8,7 +10,7 @@ import { AWARDS } from ".";
 describe("Awards data", () => {
   const data = AWARDS;
   it("Should have valid and unique recipient addresses", () => {
-    Object.values(data).forEach((awards) => {
+    Array.from(AWARDS).forEach(([, awards]) => {
       const addresses: Set<NormalizedAddress> = new Set();
       awards.forEach((award) => {
         expect(
@@ -23,25 +25,45 @@ describe("Awards data", () => {
     });
   });
 
-  it("Should have valid award amounts when `AwardType` is MoneyPrize", () => {
-    Object.values(data)
-      .flatMap((awards) => awards)
-      .filter((award) => award.type === AwardTypes.MoneyPrize)
+  it("Should only have awards of `RecognitionAward` type if `totalAwardPool` is not defined for the corresponding Incentive Program", () => {
+    Array.from(AWARDS).forEach(([incentiveProgramSlug, awards]) => {
+      const incentiveProgram = getIncentiveProgramBySlug(incentiveProgramSlug);
+
+      if (!incentiveProgram) {
+        throw new Error(
+          `Invariant(IncentiveProgramSlug): Incentive program with slug="${incentiveProgramSlug}" not found`,
+        );
+      }
+
+      if (!incentiveProgram.totalAwardPool) {
+        awards.forEach((award) => {
+          expect(
+            award.type === AwardTypes.RecognitionAward,
+            `Award given to ${award.awardedTo} in Incentive Program with slug="${incentiveProgramSlug}" has type=${award.type}, but should be ${AwardTypes.RecognitionAward} since the Incentive Program does not define a totalAwardPool`,
+          ).toStrictEqual(true);
+        });
+      }
+    });
+  });
+
+  it("Should have valid award amounts when `AwardType` is `FinancialAward`", () => {
+    Array.from(AWARDS)
+      .flatMap(([, awards]) => awards)
+      .filter((award) => award.type === AwardTypes.FinancialAward)
       .forEach((award) => {
-        expect(award.award).toBeGreaterThan(0);
-        expect(Number.isFinite(award.award)).toBeTruthy();
+        expect(isValidAwardValue(award.award)).toStrictEqual(true);
       });
   });
 
-  it("Should have a non-empty custom project name if project information is provided", () => {
-    Object.values(data)
-      .flatMap((awards) => awards)
+  it("If `awardedEntity` is provided and of type `Custom`, it should have a valid name", () => {
+    Array.from(AWARDS)
+      .flatMap(([, awards]) => awards)
       .forEach((award) => {
-        if (award.project && award.project.type === AwardedProjectTypes.Custom) {
+        if (award.awardedEntity && award.awardedEntity.type === AwardedEntityTypes.Custom) {
           expect(
-            award.project.name.trim().length,
-            `Custom project name is empty for an award awarded to: ${award.awardedTo}`,
-          ).toBeGreaterThan(0);
+            isValidCustomAwardedEntityName(award.awardedEntity.name),
+            `Custom entity name is empty for an award awarded to: ${award.awardedTo}`,
+          ).toEqual(true);
         }
       });
   });

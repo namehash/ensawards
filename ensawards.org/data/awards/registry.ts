@@ -1,14 +1,11 @@
 import type { Award } from "data/awards/types.ts";
-import type {
-  BestPracticeCategory,
-  BestPracticeCategoryAwards,
-} from "data/ens-best-practices/types";
+import type { IncentiveProgram, IncentiveProgramAwards } from "data/incentive-programs/types";
 
-const awardsRegistry: BestPracticeCategoryAwards = {};
+const awardsRegistry: IncentiveProgramAwards = new Map();
 
-export function defineAwards(bestPracticeCategory: BestPracticeCategory, awards: Award[]): void {
+export function defineAwards(incentiveProgram: IncentiveProgram, awards: Award[]): void {
   // For now, allow overwriting awards on call, might change
-  awardsRegistry[bestPracticeCategory.categorySlug] = awards;
+  awardsRegistry.set(incentiveProgram.incentiveProgramSlug, awards);
 }
 
 export const getAwards = () => awardsRegistry;

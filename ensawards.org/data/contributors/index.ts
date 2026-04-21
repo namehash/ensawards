@@ -1,6 +1,6 @@
 import { mainnet } from "viem/chains";
 
-import type { Contributor } from "./types";
+import type { Contributor, ContributorAlias } from "./types";
 
 const contributors = {
   stevedylan: {
@@ -27,6 +27,6 @@ const contributors = {
     chainId: mainnet.id,
     address: "0x0b399d2667733659f4a5fdcb030f3e26d26cc0fe",
   },
-} as const satisfies Record<string, Contributor>;
+} as const satisfies Record<ContributorAlias, Contributor>;
 
 export default contributors;

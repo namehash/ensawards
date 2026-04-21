@@ -23,8 +23,11 @@ const getReferralProgramStatusStyle = (status: ReferralProgramEditionStatusId): 
       return "bg-emerald-600 text-white";
     case ReferralProgramEditionStatuses.Closed:
     case ReferralProgramEditionStatuses.Exhausted:
-    default:
       return "bg-neutral-500 text-white";
+
+    default:
+      const _exhaustive: never = status;
+      throw new Error(`Unsupported ReferralProgramEditionStatusId: ${JSON.stringify(_exhaustive)}`);
   }
 };
 
@@ -39,8 +42,11 @@ const getReferralProgramStatusTooltipText = (status: ReferralProgramEditionStatu
     case ReferralProgramEditionStatuses.Closed:
       return "This edition's time period is over and awards have been distributed.";
     case ReferralProgramEditionStatuses.Exhausted:
-    default:
       return "This edition's time period is active for earning awards, but its budget has already been fully consumed.";
+
+    default:
+      const _exhaustive: never = status;
+      throw new Error(`Unsupported ReferralProgramEditionStatusId: ${JSON.stringify(_exhaustive)}`);
   }
 };
 
