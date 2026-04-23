@@ -1,31 +1,34 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying app benchmarks
 
+import WalletChanWallet from "data/apps/walletchan-wallet";
+import { defineAppBenchmarks } from "data/benchmarks/registry";
+import { BenchmarkResults } from "data/benchmarks/types.ts";
+import contributors from "data/contributors";
+import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
+
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
-import contributors from "../../contributors";
-import displayNamedSmartContractsL2 from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
-import displayNamedSmartContractsMainnet from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
-import type { AppBenchmark } from "../benchmarks-types.ts";
-import { BenchmarkResult } from "../benchmarks-types.ts";
+const benchmarks: BestPracticeBenchmarks = {
+  "display-named-smart-contracts-mainnet": {
+    result: BenchmarkResults.Pass,
+    contributions: [
+      { from: contributors.apoorvlathey, lastUpdated: parseTimestamp("2026-04-18T00:00:00Z") },
+    ],
+  },
+  "display-named-smart-contracts-l2-chains": {
+    result: BenchmarkResults.Pass,
+    contributions: [
+      {
+        from: contributors.apoorvlathey,
+        lastUpdated: parseTimestamp("2026-04-18T00:00:00Z"),
+      },
+    ],
+  },
+  "mock-all-pending-bp2": undefined,
+  "mock-all-pending-bp1": undefined,
+} as const satisfies BestPracticeBenchmarks;
 
-const benchmarks: AppBenchmark[] = [
-  {
-    bestPractice: displayNamedSmartContractsMainnet,
-    result: BenchmarkResult.Pass,
-    lastUpdated: parseTimestamp("2026-04-18T00:00:00Z"),
-    contributions: [
-      { from: contributors.apoorvlathey, updatedAt: parseTimestamp("2026-04-18T00:00:00Z") },
-    ],
-  },
-  {
-    bestPractice: displayNamedSmartContractsL2,
-    result: BenchmarkResult.Pass,
-    lastUpdated: parseTimestamp("2026-04-18T00:00:00Z"),
-    contributions: [
-      { from: contributors.apoorvlathey, updatedAt: parseTimestamp("2026-04-18T00:00:00Z") },
-    ],
-  },
-];
+defineAppBenchmarks(WalletChanWallet, benchmarks);
 
 export default benchmarks;
