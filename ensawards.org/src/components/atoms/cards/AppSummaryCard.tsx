@@ -3,7 +3,8 @@ import type { App } from "data/apps/types.ts";
 import { calcAppScore, getAppById } from "data/apps/utils.ts";
 import type { AppBenchmark } from "data/benchmarks/types.ts";
 import {
-  calcCategoryScore,
+  calcBestPracticeCategoryScore,
+  formatBenchmarkResult,
   getAppBenchmarks,
   groupBenchmarksByCategory,
   sortBenchmarks,
@@ -22,11 +23,7 @@ import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-import {
-  benchmarkResultToBadgeStyles,
-  getBenchmarkIcon,
-  getBenchmarkResultLabel,
-} from "../badges/BenchmarkResultBadge.tsx";
+import { benchmarkResultToBadgeStyles, getBenchmarkIcon } from "../badges/BenchmarkResultBadge.tsx";
 import { EnsAwardsBarScore } from "../ens-awards-score/bar.tsx";
 
 interface BenchmarkCategorySectionProps {
@@ -44,7 +41,7 @@ function BenchmarkCategorySection({
 }: BenchmarkCategorySectionProps) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
-  const categoryScore = calcCategoryScore(benchmarksInCategory);
+  const categoryScore = calcBestPracticeCategoryScore(benchmarksInCategory);
   const category = getCategoryBySlug(categorySlug);
 
   if (category === undefined) {
@@ -93,7 +90,7 @@ function BenchmarkCategorySection({
                   <GenericTooltip
                     tooltipOffset={1}
                     triggerAsChild
-                    content={<p>{getBenchmarkResultLabel(benchmark)}</p>}
+                    content={<p>{formatBenchmarkResult(benchmark)}</p>}
                   >
                     <span className="shrink-0 cursor-pointer">
                       {getBenchmarkIcon(

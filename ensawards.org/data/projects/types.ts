@@ -1,4 +1,4 @@
-import type { JSX } from "astro/jsx-runtime";
+import type { SvgIcon } from "data/shared/svg-icon";
 
 export const ProjectIds = {
   Ens: "project-ens",
@@ -30,7 +30,7 @@ export interface Project {
   id: ProjectId;
   name: string;
   description: string;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: SvgIcon;
   socials: {
     website: URL;
     twitter: URL;

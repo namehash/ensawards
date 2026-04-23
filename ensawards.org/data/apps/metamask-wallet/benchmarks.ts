@@ -3,7 +3,7 @@
 
 import MetaMaskWallet from "data/apps/metamask-wallet";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
-import { BenchmarkResult } from "data/benchmarks/types";
+import { BenchmarkResults } from "data/benchmarks/types";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -12,19 +12,19 @@ import contributors from "../../contributors";
 
 const benchmarks = {
   // "recognize-all-ens-names": {
-  //   result: BenchmarkResult.Pass,
+  //   result: BenchmarkResults.Pass,
   //   contributions: [
   //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-03T14:00:00Z") },
   //   ],
   // },
   "display-named-smart-contracts-mainnet": {
-    result: BenchmarkResult.Pass,
+    result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:24:39.561Z") },
     ],
   },
   "display-named-smart-contracts-l2-chains": {
-    result: BenchmarkResult.Fail,
+    result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:24:39.561Z") },
     ],

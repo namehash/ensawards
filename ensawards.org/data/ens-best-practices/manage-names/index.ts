@@ -3,7 +3,7 @@
 
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
-import { CategoryStatus } from "../types.ts";
+import { CategoryStatuses } from "../types.ts";
 
 const ManageNamesCategory: BestPracticeCategory = {
   id: "manage-names",
@@ -11,7 +11,7 @@ const ManageNamesCategory: BestPracticeCategory = {
   name: "Managing Names",
   description:
     "Updating profiles, transferring ownership, configuring resolvers, and more. There's a lot to managing ENS names!",
-  status: CategoryStatus.ComingSoon,
+  status: CategoryStatuses.ComingSoon,
 };
 
 defineBestPracticeCategory(ManageNamesCategory);

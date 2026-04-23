@@ -6,12 +6,10 @@ import benchmarkResultFailSymbol from "@/assets/benchmarkResultFailSymbol.svg";
 import benchmarkResultPartialPassSymbol from "@/assets/benchmarkResultPartialPassSymbol.svg";
 import benchmarkResultPassSymbol from "@/assets/benchmarkResultPassSymbol.svg";
 import benchmarkPendingSymbol from "@/assets/benchmarkPendingSymbol.svg";
-import { BenchmarkResult, type AppBenchmark } from "data/benchmarks/types.ts";
+import { BenchmarkResults, type AppBenchmark } from "data/benchmarks/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import {
-  type BenchmarkResultBadgeProps,
-  getBenchmarkResultLabel,
-} from "./BenchmarkResultBadge.tsx";
+import { type BenchmarkResultBadgeProps } from "./BenchmarkResultBadge.tsx";
+import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
 
 const { benchmark, className }: BenchmarkResultBadgeProps = Astro.props;
 
@@ -25,22 +23,25 @@ const benchmarkResultContent = (
     };
   }
   switch (benchmark.result) {
-    case BenchmarkResult.PartialPass:
+    case BenchmarkResults.PartialPass:
       return {
         symbol: benchmarkResultPartialPassSymbol,
         symbolAlt: "Partially passed benchmark result indicator",
       };
-    case BenchmarkResult.Pass:
+    case BenchmarkResults.Pass:
       return {
         symbol: benchmarkResultPassSymbol,
         symbolAlt: "Passed benchmark result indicator",
       };
-    case BenchmarkResult.Fail:
-    default:
+    case BenchmarkResults.Fail:
       return {
         symbol: benchmarkResultFailSymbol,
         symbolAlt: "Failed benchmark result indicator",
       };
+
+    default:
+      const _exhaustive: never = benchmark.result;
+      throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };
 
@@ -61,6 +62,6 @@ const { symbol, symbolAlt } = benchmarkResultContent(benchmark);
     quality={100}
   />
   <p class="text-center text-base font-medium leading-normal text-[#F5F5F5]">
-    {getBenchmarkResultLabel(benchmark)}
+    {formatBenchmarkResult(benchmark)}
   </p>
 </div>

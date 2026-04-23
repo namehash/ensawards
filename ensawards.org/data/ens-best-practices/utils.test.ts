@@ -1,5 +1,5 @@
 import { type AppBenchmarks } from "data/apps/types";
-import { type AppBenchmark, BenchmarkResult } from "data/benchmarks/types";
+import { type AppBenchmark, BenchmarkResults } from "data/benchmarks/types";
 import { calcAppsPassed, calcBestPracticeScore } from "data/ens-best-practices/utils";
 import {
   createMockBenchmark,
@@ -44,12 +44,12 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
     it("Should return the number of apps that passed or partially passed the best practice benchmark", () => {
       mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
       };
       mockAppBenchmarks[mockMetamaskApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.PartialPass,
+          BenchmarkResults.PartialPass,
         ),
       };
 
@@ -59,7 +59,7 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
     it("Should exclude all pending benchmarks from the calculation", () => {
       mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
       };
       mockAppBenchmarks[mockMetamaskApp.appSlug] = {
@@ -77,12 +77,12 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
     it("Should return the EnsAwardsScore for benchmarked apps", () => {
       mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
       };
       mockAppBenchmarks[mockMetamaskApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Fail,
+          BenchmarkResults.Fail,
         ),
       };
 
@@ -110,7 +110,7 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
     it("Should exclude pending benchmarks from the calculation", () => {
       mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
       };
       mockAppBenchmarks[mockMetamaskApp.appSlug] = {

@@ -9,6 +9,7 @@ import type {
   DeFiProtocolId,
   Protocol,
   ProtocolId,
+  ProtocolSlug,
   ProtocolType,
 } from "./types.ts";
 import { ProtocolTypes } from "./types.ts";
@@ -26,7 +27,7 @@ export const getProtocolById = (protocolId: ProtocolId): Protocol => {
 /**
  * Returns a protocol by {@link Protocol.protocolSlug}.
  */
-export const getProtocolBySlug = (protocolSlug: string): Protocol | undefined => {
+export const getProtocolBySlug = (protocolSlug: ProtocolSlug): Protocol | undefined => {
   return PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
@@ -43,7 +44,7 @@ export const getDAOByProtocolId = (protocolId: DAOProtocolId): DAOProtocol => {
 /**
  * Returns a DAO protocol by {@link Protocol.protocolSlug}.
  */
-export const getDAOByProtocolSlug = (protocolSlug: string): DAOProtocol | undefined => {
+export const getDAOByProtocolSlug = (protocolSlug: ProtocolSlug): DAOProtocol | undefined => {
   return DAO_PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
@@ -60,20 +61,26 @@ export const getDeFiProtocolByProtocolId = (protocolId: DeFiProtocolId): DeFiPro
 /**
  * Returns a {@link DeFiProtocol} by {@link Protocol.protocolSlug}.
  */
-export const getDeFiProtocolByProtocolSlug = (protocolSlug: string): DeFiProtocol | undefined => {
+export const getDeFiProtocolByProtocolSlug = (
+  protocolSlug: ProtocolSlug,
+): DeFiProtocol | undefined => {
   return DEFI_PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
-const ProtocolTypeSlugMapping = new Map<string, ProtocolType>([
-  ["dao", ProtocolTypes.DAO],
-  ["defi", ProtocolTypes.DeFi],
-]);
-
 /**
- * Maps a protocol type slug to its {@link ProtocolType}.
+ * Validates a string as a {@link ProtocolType}.
  */
-export const getProtocolTypeBySlug = (protocolTypeSlug: string): ProtocolType | undefined => {
-  return ProtocolTypeSlugMapping.get(protocolTypeSlug);
+export const validateProtocolType = (maybeProtocolType: string): ProtocolType => {
+  switch (maybeProtocolType) {
+    case "dao":
+      return ProtocolTypes.DAO;
+
+    case "defi":
+      return ProtocolTypes.DeFi;
+
+    default:
+      throw new Error(`Invalid ProtocolType value: ${maybeProtocolType}`);
+  }
 };
 
 /**
@@ -102,7 +109,10 @@ export const getAllProtocolContracts = (protocolId: ProtocolId): Contract[] =>
 
 /** Builds the URL for a protocol's Open Graph image.
  *
- * @returns undefined if the protocol doesn't have an og image path, otherwise returns the URL for the og image.
+ * @returns
+ * * `undefined` if the protocol doesn't have an OG image path.
+ * In this case, a default OG image will be used for the protocol.
+ * Otherwise, the URL for the OG image is returned.
  */
 export const buildProtocolOgImageUrl = (imagePath: string | undefined): URL | undefined => {
   if (!imagePath) return undefined;
@@ -110,15 +120,19 @@ export const buildProtocolOgImageUrl = (imagePath: string | undefined): URL | un
   return new URL(imagePath, "https://ensawards.org/data/protocols/");
 };
 
-export const getProtocolTypeLabel = (protocolType: ProtocolType): string => {
+export const formatProtocolType = (
+  protocolType: ProtocolType,
+  lowercase: boolean = false,
+): string => {
   switch (protocolType) {
     case ProtocolTypes.DeFi:
-      return "DeFi";
+      return lowercase ? "defi" : "DeFi";
 
     case ProtocolTypes.DAO:
-      return "DAO";
+      return lowercase ? "dao" : "DAO";
 
     default:
-      return "Unknown";
+      const _exhaustive: never = protocolType;
+      throw new Error(`Unsupported ProtocolType: ${_exhaustive}`);
   }
 };

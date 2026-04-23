@@ -16,7 +16,7 @@ import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { currencyFormatter } from "@/utils/textModifications";
+import { usdFormatter } from "@/utils/textModifications";
 
 export interface ReferrerCardRevShareLimitProps {
   referrer: AwardedReferrerMetricsRevShareLimit;
@@ -95,7 +95,7 @@ export const BaseRevenueContributionField = ({
     referrer.totalIncrementalDuration / SECONDS_PER_YEAR,
   );
 
-  const totalBaseRevenueContributionInUSD = currencyFormatter.format(
+  const totalBaseRevenueContributionInUSD = usdFormatter.format(
     parseReferralProgramCurrency(referrer.totalBaseRevenueContribution),
   );
 
@@ -109,9 +109,7 @@ export const BaseRevenueContributionField = ({
         content={
           <p className="max-w-[220px]">
             Measured as US{" "}
-            {currencyFormatter.format(
-              parseReferralProgramCurrency(BASE_REVENUE_CONTRIBUTION_PER_YEAR),
-            )}{" "}
+            {usdFormatter.format(parseReferralProgramCurrency(BASE_REVENUE_CONTRIBUTION_PER_YEAR))}{" "}
             × {referralYears} years of registrations and renewals referred by this referrer during
             this edition. Excludes premium revenue sources.
           </p>
@@ -137,12 +135,12 @@ export const RevenueShareField = ({
     ? REFERRAL_PROGRAM_WARNINGS.get(editionSlug)?.get(referrer.referrer)
     : undefined;
 
-  const minQualifiedRevenueContributionInUSD = currencyFormatter.format(
+  const minQualifiedRevenueContributionInUSD = usdFormatter.format(
     parseReferralProgramCurrency(editionRules.minQualifiedRevenueContribution),
   );
   const qualifiedRevenueSharePercentage = `${Math.round(editionRules.qualifiedRevenueShare * 100)}%`;
 
-  const additionalRevenueRequiredInUSD = currencyFormatter.format(
+  const additionalRevenueRequiredInUSD = usdFormatter.format(
     parseReferralProgramCurrency({
       currency: editionRules.minQualifiedRevenueContribution.currency,
       amount:
@@ -254,10 +252,7 @@ export const TentativeAwardsField = ({
         )}
       >
         {referrer.isQualified ? (
-          <>
-            US{" "}
-            {currencyFormatter.format(parseReferralProgramCurrency(referrer.awardPoolApproxValue))}
-          </>
+          <>US {usdFormatter.format(parseReferralProgramCurrency(referrer.awardPoolApproxValue))}</>
         ) : (
           "-"
         )}

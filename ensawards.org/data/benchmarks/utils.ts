@@ -8,21 +8,25 @@ import { type BestPracticeCategorySlug } from "../ens-best-practices/types.ts";
 import {
   type EnsAwardsPoints,
   type EnsAwardsScore,
-  isValidEnsAwardsScore,
+  validateEnsAwardsScore,
 } from "../shared/ens-awards-score.ts";
 import { APP_BENCHMARKS } from ".";
-import { type AppBenchmark, BenchmarkResult } from "./types.ts";
+import { type AppBenchmark, type BenchmarkResult, BenchmarkResults } from "./types.ts";
 
-/** Returns all benchmarks of a {@link App} by its {@link AppSlug}.
- *
- * If a returned {@link AppBenchmark} is `undefined`,
- * it means that it's pending and has not been completed yet.
+/** Returns all benchmarks of an {@link App} by its {@link AppSlug}.
  */
 export function getAppBenchmarks(slug: AppSlug): BestPracticeBenchmarks {
   return APP_BENCHMARKS[slug];
 }
 
-/** Returns all benchmarks of a {@link BestPractice} by its {@link BestPracticeSlug}. */
+/** Returns all benchmarks of a {@link BestPractice} by its {@link BestPracticeSlug}.
+ *
+ * If the related {@link App} doesn't have a benchmark completed for the specified {@link BestPractice}
+ * then this function will return `undefined` as a representation of a pending benchmark for that app.
+ *
+ * Otherwise, the value will be an `AppBenchmark`
+ * describing how the related {@link App} performed for the {@link BestPractice}.
+ */
 export function getAppBenchmarksByBestPractice(
   slug: BestPracticeSlug,
 ): (AppBenchmark | undefined)[] {
@@ -37,9 +41,6 @@ export function getAppBenchmarksByBestPractice(
 
 /** Returns a single benchmark of an {@link App} on a specific {@link BestPractice}
  * decided by the {@link AppSlug} and {@link BestPracticeSlug}.
- *
- * If a returned {@link AppBenchmark} is `undefined`,
- * it means that it's pending and has not been completed yet.
  * */
 export function getAppBenchmark(
   appSlug: AppSlug,
@@ -53,22 +54,25 @@ export function getAppBenchmark(
  * Returns {@link EnsAwardsPoints} for all possible types of {@link BenchmarkResult}.
  *
  * For now, the points for different {@link BenchmarkResult}s are:
- * {@link BenchmarkResult.Pass} = 1.0
- * {@link BenchmarkResult.PartialPass} = 0.5
- * {@link BenchmarkResult.Fail} = 0.0
+ * {@link BenchmarkResults.Pass} = 1.0
+ * {@link BenchmarkResults.PartialPass} = 0.5
+ * {@link BenchmarkResults.Fail} = 0.0
  */
-export const getEnsAwardsPoints = (benchmark: AppBenchmark): EnsAwardsPoints => {
+export const calcEnsAwardsPoints = (benchmark: AppBenchmark): EnsAwardsPoints => {
   switch (benchmark.result) {
-    case BenchmarkResult.Pass:
+    case BenchmarkResults.Pass:
       return 1;
 
-    case BenchmarkResult.PartialPass:
+    case BenchmarkResults.PartialPass:
       return 0.5;
 
     // explicit zero value for the failed benchmark
-    case BenchmarkResult.Fail:
-    default:
+    case BenchmarkResults.Fail:
       return 0;
+
+    default:
+      const _exhaustive: never = benchmark.result;
+      throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };
 
@@ -100,12 +104,12 @@ export const groupBenchmarksByCategory = (
  * Calculates {@link EnsAwardsScore} for all benchmarks belonging to a single {@link BestPracticeCategory}.
  *
  * @returns
- * undefined - if no benchmarks are completed
- * {@link EnsAwardsScore} - otherwise
+ * undefined - if no benchmarks are completed for the `BestPracticeCategory`.
+ * Otherwise, an {@link EnsAwardsScore} calculation for the `BestPracticeCategory`
  *
  * @throws if the {@link EnsAwardsScore} invariants are not satisfied
  */
-export const calcCategoryScore = (
+export const calcBestPracticeCategoryScore = (
   benchmarks: BestPracticeBenchmarks,
 ): EnsAwardsScore | undefined => {
   const completedBenchmarks = Object.values(benchmarks).filter(
@@ -114,28 +118,24 @@ export const calcCategoryScore = (
   if (completedBenchmarks.length === 0) return undefined;
 
   const score = Math.round(
-    (completedBenchmarks.reduce((sum, benchmark) => sum + getEnsAwardsPoints(benchmark), 0) * 100) /
+    (completedBenchmarks.reduce((sum, benchmark) => sum + calcEnsAwardsPoints(benchmark), 0) *
+      100) /
       completedBenchmarks.length,
   );
 
-  // Check EnsAwardsScore invariants
-  if (!isValidEnsAwardsScore(score)) {
-    throw new Error(
-      `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
-    );
-  }
+  validateEnsAwardsScore(score);
 
   return score;
 };
 
 /** Declare sort order for benchmark result (Pass → Partial Pass → Fail) */
 const resultOrder = {
-  [BenchmarkResult.Pass]: 0,
-  [BenchmarkResult.PartialPass]: 1,
-  [BenchmarkResult.Fail]: 2,
+  [BenchmarkResults.Pass]: 0,
+  [BenchmarkResults.PartialPass]: 1,
+  [BenchmarkResults.Fail]: 2,
 } as const satisfies Record<BenchmarkResult, number>;
 
-/** Sorts two {@link AppBenchmark}s based on their state and result */
+/** Sorts two {@link AppBenchmark}s relative to each other. */
 export const sortBenchmarks = (
   a: AppBenchmark | undefined,
   b: AppBenchmark | undefined,
@@ -156,4 +156,28 @@ export const getBenchmarkLastUpdateTimestamp = (benchmark: AppBenchmark): UnixTi
   );
 
   return Math.max(...contributionTimestamps);
+};
+
+export const formatBenchmarkResult = (
+  benchmark?: AppBenchmark,
+  lowercase: boolean = false,
+): string => {
+  if (!benchmark) {
+    return lowercase ? "pending" : "Pending";
+  }
+
+  switch (benchmark.result) {
+    case BenchmarkResults.Pass:
+      return lowercase ? "passed" : "Passed";
+
+    case BenchmarkResults.PartialPass:
+      return lowercase ? "partially passed" : "Partially Passed";
+
+    case BenchmarkResults.Fail:
+      return lowercase ? "failed" : "Failed";
+
+    default:
+      const _exhaustive: never = benchmark.result;
+      throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
+  }
 };

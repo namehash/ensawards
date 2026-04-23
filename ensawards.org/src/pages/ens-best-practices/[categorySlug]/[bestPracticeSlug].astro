@@ -29,24 +29,24 @@ export function getStaticPaths() {
 
 const { categorySlug, bestPracticeSlug } = Astro.params;
 
-const bestPracticeToDisplay = getBestPracticeBySlug(bestPracticeSlug);
+const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
 ---
 
 {
-  bestPracticeToDisplay === undefined ? (
+  bestPractice === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ${bestPracticeToDisplay.name}`,
-        description: bestPracticeToDisplay.description,
-        url: `https://ensawards.org/ens-best-practices/${bestPracticeToDisplay.category.categorySlug}/${bestPracticeToDisplay.bestPracticeSlug}`,
+        title: `ENSAwards: ${bestPractice.name}`,
+        description: bestPractice.description,
+        url: `https://ensawards.org/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`,
       }}>
-      {bestPracticeToDisplay.type === BestPracticeTypes.App ? (
-        <AppBestPracticeDetails bestPractice={bestPracticeToDisplay} />
+      {bestPractice.type === BestPracticeTypes.App ? (
+        <AppBestPracticeDetails bestPractice={bestPractice} />
       ) : (
-        <ProtocolBestPracticeDetails bestPractice={bestPracticeToDisplay} />
+        <ProtocolBestPracticeDetails bestPractice={bestPractice} />
       )}
       <TechnicalInfoAnchorScript />
     </Layout>

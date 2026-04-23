@@ -28,7 +28,9 @@ const getEditionsFetchErrorMessage = (errorMessage: string) =>
 
 export async function getReferralProgramEditionSummaryBySlug(
   referralProgramSlug: ReferralProgramEditionSlug,
-): Promise<ReferralProgramEditionSummary | undefined> {
+): Promise<
+  ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit | undefined
+> {
   if (!referralProgramSlug || !isValidSlug(referralProgramSlug)) return undefined;
 
   try {
@@ -54,7 +56,7 @@ export async function getReferralProgramEditionSummaryBySlug(
 }
 
 export async function fetchReferralProgramEditionSummaries(): Promise<
-  ReferralProgramEditionSummary[]
+  (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit)[]
 > {
   try {
     const client = new ENSReferralsClient({ url: getENSNodeUrl() });

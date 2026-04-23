@@ -1,10 +1,7 @@
 ---
 import { EnsIcon, TwitterIcon } from "@namehash/namehash-ui";
 
-import {
-  BenchmarkResultBadge,
-  benchmarkResultToBadgeStyles,
-} from "@/components/atoms/badges/BenchmarkResultBadge";
+import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge";
 import BenchmarkResultCard from "@/components/atoms/cards/BenchmarkResultCard.astro";
 import EnsAwardsScore from "@/components/atoms/ens-awards-score/circular.astro";
 import GlobeIcon from "@/components/atoms/icons/GlobeIcon.astro";
@@ -13,12 +10,7 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
-import {
-  calcAppScore,
-  getAppBySlug,
-  buildAppOgImageUrl,
-  getAppTypeLabel,
-} from "data/apps/utils.ts";
+import { calcAppScore, getAppBySlug, buildAppOgImageUrl, formatAppType } from "data/apps/utils.ts";
 import {
   ContributionTypes,
   ContributorsCard,
@@ -29,7 +21,7 @@ import { type EnsAwardsScore as EnsAwardsScoreType } from "data/shared/ens-award
 import { cn } from "@/utils/tailwindClassConcatenation";
 import {
   groupBenchmarksByCategory,
-  calcCategoryScore,
+  calcBestPracticeCategoryScore,
   sortBenchmarks,
   getAppBenchmarks,
 } from "data/benchmarks/utils";
@@ -48,6 +40,7 @@ const { appSlug } = Astro.params;
 
 const appToDisplay = getAppBySlug(appSlug);
 
+// The default values should never be used. Only introduced for type safety.
 let appScore: EnsAwardsScoreType | undefined = undefined;
 let AppIcon;
 let appContributions: Contribution[] = [];
@@ -81,7 +74,7 @@ if (appToDisplay !== undefined) {
         breadcrumbs={[
           { text: "ENS leaderboards", linkHref: "/leaderboards" },
           {
-            text: `${getAppTypeLabel(appToDisplay.type)} leaderboard`,
+            text: `${formatAppType(appToDisplay.type)} leaderboard`,
             linkHref: `/leaderboards/${appToDisplay.type}`,
           },
         ]}>
@@ -131,7 +124,8 @@ if (appToDisplay !== undefined) {
                 .entries()
                 .map(([categorySlug, benchmarksInCategory]) => {
                   const category = getCategoryBySlug(categorySlug);
-                  const categoryScore = calcCategoryScore(benchmarksInCategory);
+                  const categoryScore =
+                    calcBestPracticeCategoryScore(benchmarksInCategory);
 
                   if (category === undefined) {
                     throw new Error(

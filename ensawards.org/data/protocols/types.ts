@@ -1,4 +1,5 @@
 import type { JSX } from "astro/jsx-runtime";
+import type { SvgIcon } from "data/shared/svg-icon.ts";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
@@ -67,15 +68,28 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
   project: Project; // each protocol is associated with a broader project, which may comprise multiple apps and protocols.
   name: string;
   description: string;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: SvgIcon;
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
-  /** Relative path from `/data/protocols` to the Open Graph image for the protocol. */
+  /** Relative path from `/data/protocols` to the Open Graph image for the protocol.
+   *
+   * @optional It's not required to provide an OG image yourself.
+   * We have a fallback mechanism in place, so the SEO of Protocol's details page won't be degraded.
+   * In fact, we recommend leaving it empty. When your PR with a new {@link Protocol} gets accepted,
+   * the NameHash Labs team will follow it up, providing customized OG images.
+   */
   ogImagePath?: string;
-  /** Relative path from `/data/protocols` to the Twitter Open Graph image for the protocol. */
+
+  /** Relative path from `/data/protocols` to the Twitter Open Graph image for the protocol.
+   *
+   * @optional It's not required to provide a Twitter OG image yourself.
+   * We have a fallback mechanism in place, so the SEO of Protocol's details page won't be degraded.
+   * In fact, we recommend leaving it empty. When your PR with a new {@link Protocol} gets accepted,
+   * the NameHash Labs team will follow it up, providing customized OG images.
+   */
   twitterOgImagePath?: string;
 }
 

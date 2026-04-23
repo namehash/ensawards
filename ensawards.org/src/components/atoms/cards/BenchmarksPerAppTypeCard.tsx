@@ -1,5 +1,5 @@
 import type { App } from "data/apps/types.ts";
-import { getAppById } from "data/apps/utils.ts";
+import { formatAppType, getAppById } from "data/apps/utils.ts";
 import type { AppBenchmark } from "data/benchmarks/types";
 import type { BestPracticeApp } from "data/ens-best-practices/types";
 import { Fragment } from "react";
@@ -36,7 +36,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
   return (
     <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white px-[10px] pt-4 pb-[10px]">
       <h3 className="text-lg leading-normal font-semibold text-black px-[10px]">
-        {firstApp.type} benchmarks
+        {formatAppType(firstApp.type)} benchmarks
       </h3>
       <div className="flex w-full flex-col items-center">
         {resolvedAppsWithBenchmark.map(({ app, bestPractice, benchmark }, index) => {

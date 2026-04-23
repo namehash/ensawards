@@ -1,4 +1,4 @@
-import { type AppBenchmark, BenchmarkResult } from "data/benchmarks/types.ts";
+import { type AppBenchmark, BenchmarkResults } from "data/benchmarks/types.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
@@ -29,7 +29,7 @@ vi.mock("data/benchmarks/index.ts", () => ({
 }));
 
 vi.mock("data/benchmarks/utils.ts", () => ({
-  getEnsAwardsPoints: mockEnsAwardsPoints,
+  calcEnsAwardsPoints: mockEnsAwardsPoints,
   getAppBenchmarks: (slug: AppSlug) => mockBenchmarks[slug],
 }));
 
@@ -39,8 +39,8 @@ import {
   getAppById,
   getAppByName,
   getAppBySlug,
-  getAppTypeBySlug,
   sortApps,
+  validateAppType,
 } from "./utils.ts";
 
 const setMockApps = (...apps: App[]) => {
@@ -53,24 +53,24 @@ describe("App utils", () => {
     mockEnsAwardsPoints.mockReset();
     mockEnsAwardsPoints.mockImplementation((benchmark: AppBenchmark) => {
       switch (benchmark.result) {
-        case BenchmarkResult.Pass:
+        case BenchmarkResults.Pass:
           return 1;
-        case BenchmarkResult.PartialPass:
+        case BenchmarkResults.PartialPass:
           return 0.5;
-        case BenchmarkResult.Fail:
+        case BenchmarkResults.Fail:
         default:
           return 0;
       }
     });
   });
 
-  describe("getAppTypeBySlug", () => {
-    it("Should return the app type for a valid slug", () => {
-      expect(getAppTypeBySlug("wallet")).toEqual(AppTypes.Wallet);
+  describe("validateAppType", () => {
+    it("Should return the app type for a valid AppType value", () => {
+      expect(validateAppType("wallet")).toEqual(AppTypes.Wallet);
     });
 
-    it("Should return undefined for an invalid slug", () => {
-      expect(getAppTypeBySlug("invalid-type")).toBeUndefined();
+    it("Should throw an error for an invalid AppType value", () => {
+      expect(() => validateAppType("invalid-type")).toThrow("Invalid AppType value: invalid-type");
     });
   });
 
@@ -118,13 +118,13 @@ describe("App utils", () => {
     it("Should return the rounded ENSAwards score for an app with benchmarks", () => {
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
         [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
         [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Fail,
+          BenchmarkResults.Fail,
         ),
         [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
       };
@@ -150,7 +150,7 @@ describe("App utils", () => {
       mockEnsAwardsPoints.mockReturnValue(2);
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
       };
 
@@ -163,7 +163,7 @@ describe("App utils", () => {
       mockEnsAwardsPoints.mockReturnValue(-1);
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
       };
 
@@ -187,26 +187,26 @@ describe("App utils", () => {
     it("Should sort apps in descending order of their scores", () => {
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
         [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
         [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Fail,
+          BenchmarkResults.Fail,
         ),
         [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
       };
 
       mockBenchmarks[mockRainbowApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
         [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Fail,
+          BenchmarkResults.Fail,
         ),
         [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Fail,
+          BenchmarkResults.Fail,
         ),
         [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
       };

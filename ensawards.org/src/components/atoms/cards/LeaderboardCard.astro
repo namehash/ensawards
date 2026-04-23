@@ -6,18 +6,17 @@ import { type EnsAwardsScore } from "data/shared/ens-awards-score.ts";
 
 export interface LeaderboardCardProps {
   name: string;
-  viewDetailsLink: string;
+  viewDetailsHref: string;
   viewDetailsText?: string;
   ensAwardsScore?: EnsAwardsScore;
-  type?: string;
 }
 
-const { name, viewDetailsLink, viewDetailsText, ensAwardsScore, type }: LeaderboardCardProps =
+const { name, viewDetailsHref, viewDetailsText, ensAwardsScore }: LeaderboardCardProps =
   Astro.props;
 ---
 
 <a
-  href={viewDetailsLink}
+  href={viewDetailsHref}
   class="w-full h-fit box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-start sm:items-center gap-3 p-4 sm:p-6 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <!--Desktop Header-->
   <div
@@ -42,18 +41,6 @@ const { name, viewDetailsLink, viewDetailsText, ensAwardsScore, type }: Leaderbo
   </div>
   <div
     class="flex flex-nowrap flex-col sm:flex-row justify-start sm:justify-end items-center gap-2 sm:gap-10 max-sm:self-stretch">
-    {
-      type && (
-        <div class="min-md:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
-          <p class="text-muted-foreground text-sm leading-normal font-normal">
-            Type
-          </p>
-          <p class="text-sm leading-normal font-medium sm:font-semibold text-accent-foreground">
-            {type}
-          </p>
-        </div>
-      )
-    }
     <EnsAwardsBarScore score={ensAwardsScore} />
     <button
       class={cn(

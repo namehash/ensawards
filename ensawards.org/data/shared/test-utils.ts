@@ -1,5 +1,5 @@
 import type { AppBenchmark } from "data/benchmarks/types.ts";
-import { BenchmarkResult } from "data/benchmarks/types.ts";
+import { type BenchmarkResult } from "data/benchmarks/types.ts";
 import { zeroAddress } from "viem";
 import { mainnet } from "viem/chains";
 
@@ -7,7 +7,7 @@ import { type App, type AppSlug, type AppType, AppTypes } from "../apps/types.ts
 import {
   type BestPracticeApp,
   BestPracticeTypes,
-  CategoryStatus,
+  CategoryStatuses,
 } from "../ens-best-practices/types.ts";
 import { type Project, ProjectIds } from "../projects/types.ts";
 
@@ -42,7 +42,7 @@ export const createMockBestPractice = (overrides: {
     categorySlug: overrides.categorySlug,
     name: overrides.categoryName,
     description: `${overrides.categoryName} description`,
-    status: CategoryStatus.Active,
+    status: CategoryStatuses.Active,
   },
   appliesTo: [AppTypes.Wallet],
   technicalDetails: {

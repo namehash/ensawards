@@ -4,7 +4,7 @@ import ItemsList from "@/components/molecules/ItemsList.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import Layout from "@/layouts/Layout.astro";
-import { CategoryStatus } from "data/ens-best-practices/types";
+import { CategoryStatuses } from "data/ens-best-practices/types";
 import { getBestPracticesByCategory } from "data/ens-best-practices/utils";
 import BestPracticeCard from "@/components/atoms/cards/BestPracticeCard.astro";
 ---
@@ -23,7 +23,7 @@ import BestPracticeCard from "@/components/atoms/cards/BestPracticeCard.astro";
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     {
       BEST_PRACTICE_CATEGORIES.filter(
-        (category) => category.status === CategoryStatus.Active,
+        (category) => category.status === CategoryStatuses.Active,
       ).map((category) => (
         <ItemsList
           key={`${category.categorySlug}-group`}

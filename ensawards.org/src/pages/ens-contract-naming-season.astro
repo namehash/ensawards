@@ -27,9 +27,9 @@ import Layout from "../layouts/Layout.astro";
 import { type ProtocolId } from "../../data/protocols/types.ts";
 import { cn } from "../utils/tailwindClassConcatenation";
 import { ProtocolTypes } from "../../data/protocols/types.ts";
-import { pluralizeBestPracticeTarget } from "../utils/textModifications";
+import { formatBestPracticeTarget } from "data/ens-best-practices/utils.ts";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById, getProtocolTypeLabel } from "../../data/protocols/utils.ts";
+import { getProtocolById, formatProtocolType } from "data/protocols/utils.ts";
 
 interface ContentItemData {
   name: string;
@@ -235,16 +235,19 @@ const startContractNamingTodayButtonStyles =
 
             return (
               <LeaderboardSnippetCard
-                name={`${getProtocolTypeLabel(protocolType)} leaderboard`}
-                description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
-                link={`/leaderboards/${protocolType}`}>
+                name={`${formatProtocolType(protocolType)} leaderboard`}
+                description={`See how ${formatBestPracticeTarget(protocolType, true)} rank for following ENS best practices.`}
+                link={`/leaderboards/${protocolType}`}
+                viewLeaderboardText={`View ${formatProtocolType(protocolType)} leaderboard`}>
                 <div
                   slot="bestResultsIcons"
                   class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
                   {Object.entries(protocolScores)
                     .slice(0, 3)
-                    .map(([scoreCategory, _value], idx) => {
-                      const protocolId = scoreCategory as ProtocolId;
+                    .map(([scoredProtocolId, _value], idx) => {
+                      // Type casting is necessary due to `Record`'s type nature.
+                      // We are completely sure of its correctness
+                      const protocolId = scoredProtocolId as ProtocolId;
                       const protocol = getProtocolById(protocolId);
                       const ProtocolIcon = protocol.icon;
                       return (

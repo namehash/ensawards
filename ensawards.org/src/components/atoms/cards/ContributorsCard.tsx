@@ -26,36 +26,39 @@ const orderContributorsByAppearances = (contributors: Contributor[]): Contributo
     .map(({ contributor }) => contributor);
 };
 
-const getContributionTypeDescription = (contributionType: ContributionType) => {
+const formatContributionType = (contributionType: ContributionType): string => {
   switch (contributionType) {
-    case "app":
-    case "protocol":
+    case ContributionTypes.App:
+    case ContributionTypes.Protocol:
       return "leaderboards";
 
-    case "contract":
+    case ContributionTypes.Contract:
       return "smart contracts";
 
-    case "best practice":
+    case ContributionTypes.BestPractice:
       return "ENS best practices";
 
-    case "benchmark result":
-    default:
+    case ContributionTypes.BenchmarkResult:
       return "benchmarks";
+
+    default:
+      const _exhaustive: never = contributionType;
+      throw new Error(`Unsupported ContributionType: ${_exhaustive}`);
   }
 };
 
 export const ContributionTypes = {
   App: "app",
-  BestPractice: "best practice",
-  BenchmarkResult: "benchmark result",
+  BestPractice: "best-practice",
+  BenchmarkResult: "benchmark-result",
   Protocol: "protocol",
   Contract: "contract",
 } as const;
 
 /**
- * Contribution targets that can be surfaced by the {@link ContributorsCard}.
+ * Contribution types that can be surfaced by the {@link ContributorsCard}.
  *
- * Each literal value identifies a kind of ENS Awards entity that users can be
+ * Identifies a type of entity on ENS Awards that users can be
  * encouraged to suggest updates for.
  */
 export type ContributionType = (typeof ContributionTypes)[keyof typeof ContributionTypes];
@@ -102,8 +105,8 @@ export const ContributorsCard = ({
             <div className="w-full flex flex-col gap-1">
               <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
               <p className="text-base leading-6 font-normal text-muted-foreground">
-                All {getContributionTypeDescription(contributionType)} on ENSAwards are open for
-                public contribution.
+                All {formatContributionType(contributionType)} on ENSAwards are open for public
+                contribution.
               </p>
             </div>
           </div>
@@ -230,7 +233,7 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
 };
 
 export const ContributorsCardLoading = ({
-  contributionType: whatsSuggested,
+  contributionType,
   sidebarVariant = false,
 }: Omit<ContributorsCardProps, "gitHubTargetHref" | "existingContributions">) => {
   const loadingStyles = "animate-pulse bg-gray-200";
@@ -245,7 +248,7 @@ export const ContributorsCardLoading = ({
         <div className="w-full flex flex-col gap-1">
           <h4 className="text-lg leading-7 font-semibold text-slate-800">Contributors</h4>
           <p className="text-base leading-6 font-normal text-muted-foreground">
-            All {getContributionTypeDescription(whatsSuggested)} on ENSAwards are open for public
+            All {formatContributionType(contributionType)} on ENSAwards are open for public
             contribution.
           </p>
         </div>

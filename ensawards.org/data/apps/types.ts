@@ -1,4 +1,4 @@
-import type { JSX } from "astro/jsx-runtime";
+import type { SvgIcon } from "data/shared/svg-icon.ts";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
@@ -6,7 +6,7 @@ import type { BestPracticeBenchmarks } from "../ens-best-practices/types.ts";
 import type { Project } from "../projects/types.ts";
 
 /**
- * Represents all types of apps that are currently benchmarked on ENSAwards.
+ * Represents the types of apps that are currently benchmarked on ENSAwards.
  */
 export const AppTypes = {
   Wallet: "wallet",
@@ -32,15 +32,28 @@ export interface App {
   name: string;
   description: string;
   type: AppType;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: SvgIcon;
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
-  /** Relative path from `/data/apps` to the Open Graph image for the app. */
+  /** Relative path from `/data/apps` to the Open Graph image for the app.
+   *
+   * @optional It's not required to provide an OG image yourself.
+   * We have a fallback mechanism in place, so the SEO of App's details page won't be degraded.
+   * In fact, we recommend leaving it empty. When your PR with a new {@link App} gets accepted,
+   * the NameHash Labs team will follow it up, providing customized OG images.
+   */
   ogImagePath?: string;
-  /** Relative path from `/data/apps` to the Twitter Open Graph image for the app. */
+
+  /** Relative path from `/data/apps` to the Twitter Open Graph image for the app.
+   *
+   * @optional It's not required to provide a Twitter OG image yourself.
+   * We have a fallback mechanism in place, so the SEO of App's details page won't be degraded.
+   * In fact, we recommend leaving it empty. When your PR with a new {@link App} gets accepted,
+   * the NameHash Labs team will follow it up, providing customized OG images.
+   */
   twitterOgImagePath?: string;
 }
 
@@ -48,6 +61,8 @@ export interface App {
  * Defines relations between {@link AppSlug} and {@link BestPracticeBenchmarks}
  * for the related {@link App}.
  *
- * @invariant Each {@link App} must define an explicit entry.
+ * @invariant An explicit key for each {@link AppSlug} should be added to this `Record` for each available {@link App}.
+ * The value should be a {@link BestPracticeBenchmarks} record.
+ * To register this entry, `defineAppBenchmarks()` should be called from each app's `data/apps/{app}/benchmarks.ts` file.
  */
 export type AppBenchmarks = Record<AppSlug, BestPracticeBenchmarks>;

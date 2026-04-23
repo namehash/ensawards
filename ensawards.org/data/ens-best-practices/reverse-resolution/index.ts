@@ -3,14 +3,14 @@
 
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
-import { CategoryStatus } from "../types.ts";
+import { CategoryStatuses } from "../types.ts";
 
 const ReverseResolutionCategory: BestPracticeCategory = {
   id: "reverse-resolution",
   categorySlug: "reverse-resolution",
   name: "Reverse Resolution",
   description: "Reverse records, primary names, default primary names, L2 primary names, and more.",
-  status: CategoryStatus.ComingSoon,
+  status: CategoryStatuses.ComingSoon,
 };
 
 defineBestPracticeCategory(ReverseResolutionCategory);

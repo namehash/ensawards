@@ -1,15 +1,15 @@
 ---
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import { normalizeLeaderboardSnippetPhrase } from "@/utils/textModifications";
 
 interface LeaderboardSnippetCardProps {
   name: string;
   description: string;
   link: string;
+  viewLeaderboardText: string;
 }
 
-const { name, description, link }: LeaderboardSnippetCardProps = Astro.props;
+const { name, description, link, viewLeaderboardText }: LeaderboardSnippetCardProps = Astro.props;
 ---
 
 <a
@@ -37,7 +37,7 @@ const { name, description, link }: LeaderboardSnippetCardProps = Astro.props;
           size: "default",
           className: "cursor-pointer rounded-full max-sm:self-stretch",
         }),
-      )}>View {normalizeLeaderboardSnippetPhrase(name)}</button
+      )}>{viewLeaderboardText}</button
     >
     <slot name="bestResultsIcons" />
   </div>

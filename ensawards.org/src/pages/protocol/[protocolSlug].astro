@@ -16,16 +16,15 @@ import ItemsList from "@/components/molecules/ItemsList.astro";
 import GlobeIcon from "@/components/atoms/icons/GlobeIcon.astro";
 import ContractNamingBanner from "@/components/atoms/banners/ContractNamingBanner.astro";
 import EnscribeIcon from "@/components/atoms/icons/EnscribeIconLight.astro";
-import EnsAwardsScore from "@/components/atoms/ens-awards-score/circular.astro";
+import EnsAwardsScoreDisplay from "@/components/atoms/ens-awards-score/circular.astro";
 import { sortByResolutionStatus } from "@/contract-pipelines/sorting";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { getENSNameFieldStyles } from "@/utils/styles";
 import { buildProtocolOgImageUrl } from "data/protocols/utils";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils";
 import {
   getProtocolBySlug,
   getAllProtocolContracts,
-  getProtocolTypeLabel,
+  formatProtocolType,
 } from "data/protocols/utils";
 import {
   ContributorsCard,
@@ -34,6 +33,7 @@ import {
 } from "@/components/atoms/cards/ContributorsCard";
 import { type Contribution } from "data/contributors/types";
 import { getProtocolContributions } from "data/contributors/utils";
+import type { EnsAwardsScore } from "data/shared/ens-awards-score";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -50,46 +50,44 @@ export function getStaticPaths() {
 
 const { protocolSlug } = Astro.params;
 
-const resolvedProtocol = getProtocolBySlug(protocolSlug);
+const protocol = getProtocolBySlug(protocolSlug);
 
 // The default values should never be used. Only introduced for type safety.
 let protocolContracts: Contract[] = [];
-let protocolScore = 0;
-let ProtocolIcon = GlobeIcon;
+let protocolScore: EnsAwardsScore = 0;
+let ProtocolIcon: typeof GlobeIcon = GlobeIcon;
 let protocolContributions: Contribution[] = [];
 
-if (resolvedProtocol) {
-  protocolContracts = getAllProtocolContracts(resolvedProtocol.id);
-  ProtocolIcon = resolvedProtocol.icon;
-  protocolScore =
-    getContractNamingScoresByProtocolType(resolvedProtocol.protocolType)[resolvedProtocol.id] ?? 0;
-  protocolContributions = getProtocolContributions(resolvedProtocol);
+if (protocol) {
+  protocolContracts = getAllProtocolContracts(protocol.id);
+  ProtocolIcon = protocol.icon;
+  protocolScore = getContractNamingScoresByProtocolType(protocol.protocolType)[protocol.id] ?? 0;
+  protocolContributions = getProtocolContributions(protocol);
 }
 ---
 
 {
-  resolvedProtocol === undefined ? (
+  protocol === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ${resolvedProtocol.name} ENS Integration Benchmarks`,
-        description: resolvedProtocol.description,
-        url: `https://ensawards.org/protocol/${resolvedProtocol.protocolSlug}`,
-        ogImage: buildProtocolOgImageUrl(resolvedProtocol.ogImagePath)?.href,
-        twitterImage: buildProtocolOgImageUrl(
-          resolvedProtocol.twitterOgImagePath,
-        )?.href,
+        title: `ENSAwards: ${protocol.name} ENS Integration Benchmarks`,
+        description: protocol.description,
+        url: `https://ensawards.org/protocol/${protocol.protocolSlug}`,
+        ogImage: buildProtocolOgImageUrl(protocol.ogImagePath)?.href,
+        twitterImage: buildProtocolOgImageUrl(protocol.twitterOgImagePath)
+          ?.href,
       }}>
       <SubpageHero
-        header={resolvedProtocol.name}
-        description={resolvedProtocol.description}
+        header={protocol.name}
+        description={protocol.description}
         breadcrumbs={[
           { text: "ENS leaderboards", linkHref: "/leaderboards" },
           {
-            text: `${getProtocolTypeLabel(resolvedProtocol.protocolType)} leaderboard`,
-            linkHref: `/leaderboards/${resolvedProtocol.protocolType}`,
+            text: `${formatProtocolType(protocol.protocolType)} leaderboard`,
+            linkHref: `/leaderboards/${protocol.protocolType}`,
           },
         ]}>
         <ProtocolIcon
@@ -99,21 +97,15 @@ if (resolvedProtocol) {
         <div
           slot="ctaContent"
           class="flex flex-row flex-nowrap justify-start items-center gap-2">
-          <a
-            href={resolvedProtocol.socials.website}
-            rel="noreferrer"
-            target="_blank">
+          <a href={protocol.socials.website} rel="noreferrer" target="_blank">
             <GlobeIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
-          <a
-            href={resolvedProtocol.socials.twitter}
-            rel="noreferrer"
-            target="_blank">
+          <a href={protocol.socials.twitter} rel="noreferrer" target="_blank">
             <TwitterIcon className="hover:text-white text-gray-400 transition-all duration-200" />
           </a>
-          {resolvedProtocol.socials.ens && (
+          {protocol.socials.ens && (
             <a
-              href={`https://app.ens.domains/${encodeURIComponent(resolvedProtocol.socials.ens)}`}
+              href={`https://app.ens.domains/${encodeURIComponent(protocol.socials.ens)}`}
               rel="noreferrer"
               target="_blank">
               <EnsIcon
@@ -124,7 +116,7 @@ if (resolvedProtocol) {
             </a>
           )}
         </div>
-        <EnsAwardsScore
+        <EnsAwardsScoreDisplay
           slot="largerHeroItem"
           score={protocolScore}
           label="ENSAwards score"
@@ -136,7 +128,7 @@ if (resolvedProtocol) {
           client:only="react"
           contributionType={ContributionTypes.Contract}
           existingContributions={protocolContributions}
-          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}>
+          gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${protocol.protocolSlug}/contracts.ts`}>
           <ContributorsCardLoading
             slot="fallback"
             contributionType={ContributionTypes.Contract}
@@ -183,12 +175,7 @@ if (resolvedProtocol) {
                   </>
                 </div>
                 {sortedContracts.map((contract) => (
-                  <ContractCard
-                    contract={contract}
-                    className={{
-                      ensName: cn(getENSNameFieldStyles(resolvedProtocol.id)),
-                    }}
-                  />
+                  <ContractCard contract={contract} />
                 ))}
               </>
             );

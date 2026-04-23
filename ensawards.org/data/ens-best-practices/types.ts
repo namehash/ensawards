@@ -29,7 +29,7 @@ export interface BestPracticeAbstract<
   bestPracticeSlug: BestPracticeSlug;
   name: string;
   description: string;
-  category: BestPracticeCategory; // each best practice belongs to exactly one category
+  category: BestPracticeCategory; // each best practice belongs to exactly one best practice category
   appliesTo: AppliesToT[];
   technicalDetails: {
     main: {
@@ -56,14 +56,18 @@ export type BestPractice = BestPracticeProtocol | BestPracticeApp;
  * Defines relations between {@link BestPracticeSlug} and {@link AppBenchmark}
  * for the related {@link BestPractice}.
  *
- * @invariant Each {@link BestPractice} must define an explicit entry.
+ * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}.
+ * If the related app doesn't have a benchmark completed for the `BestPractice` then the value should explicitly be set to `undefined`.
+ * Otherwise, the value should be an `AppBenchmark` describing how the related app performed for the `BestPractice`.
  */
 export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;
 
-export enum CategoryStatus {
-  ComingSoon,
-  Active,
-}
+export const CategoryStatuses = {
+  ComingSoon: "coming-soon",
+  Active: "active",
+} as const;
+
+export type CategoryStatus = (typeof CategoryStatuses)[keyof typeof CategoryStatuses];
 
 /** A unique identifier for a best practice category.
  *

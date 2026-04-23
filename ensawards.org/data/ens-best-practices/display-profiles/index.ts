@@ -3,7 +3,7 @@
 
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
-import { CategoryStatus } from "../types.ts";
+import { CategoryStatuses } from "../types.ts";
 
 const DisplayProfilesCategory: BestPracticeCategory = {
   id: "display-profiles",
@@ -11,7 +11,7 @@ const DisplayProfilesCategory: BestPracticeCategory = {
   name: "Displaying Profiles",
   description:
     "Avatar images, social records, address records, and more. Ensure each ENS profile is displayed optimally.",
-  status: CategoryStatus.Active,
+  status: CategoryStatuses.Active,
 };
 
 defineBestPracticeCategory(DisplayProfilesCategory);

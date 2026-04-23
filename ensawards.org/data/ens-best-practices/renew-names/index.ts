@@ -3,7 +3,7 @@
 
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
-import { CategoryStatus } from "../types.ts";
+import { CategoryStatuses } from "../types.ts";
 
 const RenewNamesCategory: BestPracticeCategory = {
   id: "renew-names",
@@ -11,7 +11,7 @@ const RenewNamesCategory: BestPracticeCategory = {
   name: "Renewing Names",
   description:
     "Help your users avoid unintentionally losing the names they love. Renewal reminders and name renewal best practices.",
-  status: CategoryStatus.ComingSoon,
+  status: CategoryStatuses.ComingSoon,
 };
 
 defineBestPracticeCategory(RenewNamesCategory);

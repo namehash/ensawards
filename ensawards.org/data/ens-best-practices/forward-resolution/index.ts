@@ -3,7 +3,7 @@
 
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
-import { CategoryStatus } from "../types.ts";
+import { CategoryStatuses } from "../types.ts";
 
 const ForwardResolutionCategory: BestPracticeCategory = {
   id: "forward-resolution",
@@ -11,7 +11,7 @@ const ForwardResolutionCategory: BestPracticeCategory = {
   name: "Forward Resolution",
   description:
     "Lookup the details of an ENS name, such as its onchain addresses, avatar image, social records, and decentralized website.",
-  status: CategoryStatus.ComingSoon,
+  status: CategoryStatuses.ComingSoon,
 };
 
 defineBestPracticeCategory(ForwardResolutionCategory);

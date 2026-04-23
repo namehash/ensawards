@@ -1,6 +1,6 @@
 import {
-  calcCategoryScore,
-  getEnsAwardsPoints,
+  calcBestPracticeCategoryScore,
+  calcEnsAwardsPoints,
   groupBenchmarksByCategory,
   sortBenchmarks,
 } from "data/benchmarks/utils.ts";
@@ -14,7 +14,7 @@ import {
 } from "data/shared/test-utils.ts";
 import { describe, expect, it, vi } from "vitest";
 
-import { BenchmarkResult } from "./types.ts";
+import { BenchmarkResults } from "./types.ts";
 
 const { mockGetBestPracticeBySlug } = vi.hoisted(() => ({
   mockGetBestPracticeBySlug: vi.fn(),
@@ -25,27 +25,27 @@ vi.mock("data/ens-best-practices/utils.ts", () => ({
 }));
 
 describe("benchmarks-utils", () => {
-  describe("getBenchmarkPoints", () => {
+  describe("calcEnsAwardsPoints", () => {
     it("Should return correct points for each benchmark result type", () => {
       const benchmarkCases = [
         {
-          benchmark: createMockBenchmark(BenchmarkResult.Pass),
+          benchmark: createMockBenchmark(BenchmarkResults.Pass),
           expectedPoints: 1,
         },
         {
-          benchmark: createMockBenchmark(BenchmarkResult.PartialPass),
+          benchmark: createMockBenchmark(BenchmarkResults.PartialPass),
           expectedPoints: 0.5,
         },
         {
-          benchmark: createMockBenchmark(BenchmarkResult.Fail),
+          benchmark: createMockBenchmark(BenchmarkResults.Fail),
           expectedPoints: 0,
         },
       ];
 
       benchmarkCases.forEach(({ benchmark, expectedPoints }) => {
         expect(
-          getEnsAwardsPoints(benchmark),
-          `Expected getBenchmarkPoints to return ${expectedPoints}`,
+          calcEnsAwardsPoints(benchmark),
+          `Expected calcEnsAwardsPoints to return ${expectedPoints}`,
         ).toEqual(expectedPoints);
       });
     });
@@ -96,7 +96,7 @@ describe("benchmarks-utils", () => {
     });
   });
 
-  describe("calcCategoryScore", () => {
+  describe("calcBestPracticeCategoryScore", () => {
     it("Should return undefined for no completed benchmarks", () => {
       const benchmarks: BestPracticeBenchmarks = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: undefined,
@@ -105,29 +105,29 @@ describe("benchmarks-utils", () => {
       };
 
       expect(
-        calcCategoryScore(benchmarks),
-        "Expected calcCategoryScore to return undefined for an empty benchmark list",
+        calcBestPracticeCategoryScore(benchmarks),
+        "Expected calcBestPracticeCategoryScore to return undefined for an empty benchmark list",
       ).toEqual(undefined);
     });
 
     it("Should return the rounded category score for valid benchmarks", () => {
       const validCategoryBenchmarks = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Pass,
+          BenchmarkResults.Pass,
         ),
         [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Fail,
+          BenchmarkResults.Fail,
         ),
         [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResult.Fail,
+          BenchmarkResults.Fail,
         ),
       } as const satisfies BestPracticeBenchmarks;
 
-      const result = calcCategoryScore(validCategoryBenchmarks);
+      const result = calcBestPracticeCategoryScore(validCategoryBenchmarks);
 
       expect(
         result,
-        `Expected calcCategoryScore to return the rounded percentage for valid category benchmarks, got ${result} instead`,
+        `Expected calcBestPracticeCategoryScore to return the rounded percentage for valid category benchmarks, got ${result} instead`,
       ).toEqual(33);
     });
   });
@@ -136,17 +136,17 @@ describe("benchmarks-utils", () => {
     it("should allow correct sorting of benchmarks", () => {
       const input = [
         undefined,
-        createMockBenchmark(BenchmarkResult.Fail),
-        createMockBenchmark(BenchmarkResult.Pass),
-        createMockBenchmark(BenchmarkResult.Fail),
-        createMockBenchmark(BenchmarkResult.PartialPass),
+        createMockBenchmark(BenchmarkResults.Fail),
+        createMockBenchmark(BenchmarkResults.Pass),
+        createMockBenchmark(BenchmarkResults.Fail),
+        createMockBenchmark(BenchmarkResults.PartialPass),
       ];
 
       const expectedOutput = [
-        createMockBenchmark(BenchmarkResult.Pass),
-        createMockBenchmark(BenchmarkResult.PartialPass),
-        createMockBenchmark(BenchmarkResult.Fail),
-        createMockBenchmark(BenchmarkResult.Fail),
+        createMockBenchmark(BenchmarkResults.Pass),
+        createMockBenchmark(BenchmarkResults.PartialPass),
+        createMockBenchmark(BenchmarkResults.Fail),
+        createMockBenchmark(BenchmarkResults.Fail),
         undefined,
       ];
 

@@ -5,7 +5,7 @@ import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import { BestPracticeTypes, type BestPracticeApp } from "data/ens-best-practices/types";
 import { APPS } from "data/apps";
 import { type App } from "data/apps/types";
-import { getAppBySlug, getAppTypeLabel } from "data/apps/utils.ts";
+import { getAppBySlug, formatAppType } from "data/apps/utils.ts";
 import {
   getBestPracticesByCategory,
   getBestPracticeBySlug,
@@ -49,44 +49,44 @@ export function getStaticPaths() {
 
 const { categorySlug, bestPracticeSlug, appSlug } = Astro.params;
 
-const resolvedBestPractice = getBestPracticeBySlug(bestPracticeSlug);
-const resolvedApp = getAppBySlug(appSlug);
+const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+const app = getAppBySlug(appSlug);
 
 let AppIcon;
 let appBenchmark: AppBenchmark | undefined = undefined;
 
-if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
-  AppIcon = resolvedApp.icon;
-  appBenchmark = getAppBenchmark(resolvedApp.appSlug, resolvedBestPractice.bestPracticeSlug);
+if (app !== undefined && bestPractice !== undefined) {
+  AppIcon = app.icon;
+  appBenchmark = getAppBenchmark(app.appSlug, bestPractice.bestPracticeSlug);
 }
 ---
 
 {
-  resolvedBestPractice === undefined || resolvedApp === undefined ? (
+  bestPractice === undefined || app === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ${resolvedApp.name} benchmark details for "${resolvedBestPractice.name}" best practice`,
-        description: `See how well ${resolvedApp.name} applies "${resolvedBestPractice.name}" best practice`,
+        title: `ENSAwards: ${app.name} benchmark details for "${bestPractice.name}" best practice`,
+        description: `See how well ${app.name} applies "${bestPractice.name}" best practice`,
         url: `https://ensawards.org/app/${appSlug}/${categorySlug}/${bestPracticeSlug}`,
       }}>
       <SubpageHero
-        header={resolvedBestPractice.name}
-        description={resolvedBestPractice.description}
+        header={bestPractice.name}
+        description={bestPractice.description}
         breadcrumbs={[
           { text: "ENS leaderboards", linkHref: "/leaderboards" },
           {
-            text: `${getAppTypeLabel(resolvedApp.type)} leaderboard`,
-            linkHref: `/leaderboards/${resolvedApp.type}`,
+            text: `${formatAppType(app.type)} leaderboard`,
+            linkHref: `/leaderboards/${app.type}`,
           },
-          { text: resolvedApp.name, linkHref: `/app/${resolvedApp.appSlug}` },
+          { text: app.name, linkHref: `/app/${app.appSlug}` },
         ]}>
         <div slot="icon" class="flex flex-row gap-3 justify-start items-center">
           <AppIcon className="w-[28px] h-[28px] shrink-0 rounded-[6px]" />
           <p class="text-base leading-normal font-medium text-white">
-            {resolvedApp.name}
+            {app.name}
           </p>
         </div>
         <BenchmarkResultHeroBadge
@@ -97,24 +97,24 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 gap-5 sm:gap-10 sm:py-[60px] sm:px-8">
         <div class="w-full max-w-[1216px] box-border h-fit flex flex-col-reverse lg:flex-row lg:flex-nowrap justify-start lg:justify-between items-center sm:items-start gap-6 sm:gap-10 lg:gap-20">
           <div class="lg:hidden block w-full">
-            <AppSummaryCard client:load app={resolvedApp} />
+            <AppSummaryCard client:load app={app} />
           </div>
-          <BestPracticeTechnicalDetails bestPractice={resolvedBestPractice} />
+          <BestPracticeTechnicalDetails bestPractice={bestPractice} />
           <div class="w-full lg:w-1/3 h-fit box-border flex flex-col gap-5">
             <BenchmarkSummaryCard
-              bestPractice={resolvedBestPractice}
+              bestPractice={bestPractice}
               benchmark={appBenchmark}>
               <div slot="appInfo" class="flex h-7 items-center gap-3">
                 <AppIcon className="w-[28px] h-[28px] shrink-0 rounded-[6px]" />
                 <a
                   target="_self"
-                  href={`/app/${resolvedApp.appSlug}`}
+                  href={`/app/${app.appSlug}`}
                   class={cn(
                     "text-sm leading-normal font-medium text-black",
                     "underline decoration-black/40 decoration-from-font underline-offset-[25%]",
                     "transition-all duration-200 hover:decoration-black",
                   )}>
-                  {resolvedApp.name}
+                  {app.name}
                 </a>
               </div>
             </BenchmarkSummaryCard>
@@ -125,7 +125,7 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
               existingContributions={
                 appBenchmark !== undefined ? appBenchmark.contributions : []
               }
-              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${resolvedApp.appSlug}/benchmarks.ts`}>
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks.ts`}>
               <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant
@@ -133,7 +133,7 @@ if (resolvedApp !== undefined && resolvedBestPractice !== undefined) {
               />
             </ContributorsCard>
             <div class="hidden lg:block w-full">
-              <AppSummaryCard client:load app={resolvedApp} />
+              <AppSummaryCard client:load app={app} />
             </div>
           </div>
         </div>

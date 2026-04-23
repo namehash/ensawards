@@ -1,15 +1,5 @@
 import type { Address } from "viem";
 
-import { AppTypes } from "../../data/apps/types.ts";
-import { type BestPracticeTarget } from "../../data/ens-best-practices/types.ts";
-import { ProtocolTypes } from "../../data/protocols/types.ts";
-
-const CAPITALIZED_ACRONYMS = ["DAO", "DeFi"];
-
-export const normalizeLeaderboardSnippetPhrase = (text: string): string => {
-  return CAPITALIZED_ACRONYMS.some((phrase) => text.includes(phrase)) ? text : text.toLowerCase();
-};
-
 export const breakLongWords = (
   word: string,
   breakRegex: string | RegExp,
@@ -53,18 +43,7 @@ export const capitalizeText = (text: string): string => {
 export const truncateAddress = (address: Address) =>
   `${address.slice(0, 6)}...${address.slice(-4)}`;
 
-const pluralizedBestPracticeTargets: Record<BestPracticeTarget, string> = {
-  [AppTypes.Explorer]: "Explorers",
-  [AppTypes.Wallet]: "Wallets",
-  [ProtocolTypes.DAO]: "DAOs",
-  [ProtocolTypes.DeFi]: "DeFi protocols",
-};
-
-export const pluralizeBestPracticeTarget = (target: BestPracticeTarget): string => {
-  return pluralizedBestPracticeTargets[target];
-};
-
-export const currencyFormatter = new Intl.NumberFormat("en-US", {
+export const usdFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });

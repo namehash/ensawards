@@ -6,13 +6,13 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
-import { getAppTypeLabel } from "data/apps/utils.ts";
+import { formatAppType } from "data/apps/utils.ts";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { ProtocolTypes } from "data/protocols/types.ts";
-import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
+import { formatBestPracticeTarget } from "data/ens-best-practices/utils.ts";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById, getProtocolTypeLabel } from "data/protocols/utils.ts";
+import { getProtocolById, formatProtocolType } from "data/protocols/utils.ts";
 import { sortApps } from "data/apps/utils.ts";
 import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList.tsx";
 import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
@@ -46,9 +46,10 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 
           return (
             <LeaderboardSnippetCard
-              name={`${getAppTypeLabel(appType)} leaderboard`}
-              description={`See how ${pluralizeBestPracticeTarget(appType).toLowerCase()} rank for following ENS best practices.`}
-              link={`/leaderboards/${appType}`}>
+              name={`${formatAppType(appType)} leaderboard`}
+              description={`See how ${formatBestPracticeTarget(appType, true, true)} rank for following ENS best practices.`}
+              link={`/leaderboards/${appType}`}
+              viewLeaderboardText={`View ${formatAppType(appType, true)} leaderboard`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
@@ -89,16 +90,19 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 
           return (
             <LeaderboardSnippetCard
-              name={`${getProtocolTypeLabel(protocolType)} leaderboard`}
-              description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
-              link={`/leaderboards/${protocolType}`}>
+              name={`${formatProtocolType(protocolType)} leaderboard`}
+              description={`See how ${formatBestPracticeTarget(protocolType, true)} rank for following ENS best practices.`}
+              link={`/leaderboards/${protocolType}`}
+              viewLeaderboardText={`View ${formatProtocolType(protocolType)} leaderboard`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
                 {[...Object.entries(protocolScores)]
                   .slice(0, 3)
-                  .map(([scoreCategory, _value], idx) => {
-                    const protocolId = scoreCategory as ProtocolId;
+                  .map(([scoredProtocolId, _value], idx) => {
+                    // Type casting is necessary due to `Record`'s type nature.
+                    // We are completely sure of its correctness
+                    const protocolId = scoredProtocolId as ProtocolId;
                     const protocol = getProtocolById(protocolId);
                     const ProtocolIcon = protocol.icon;
                     return (

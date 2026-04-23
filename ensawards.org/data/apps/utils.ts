@@ -1,26 +1,32 @@
-import { type AppBenchmark } from "data/benchmarks/types.ts";
-import { getAppBenchmarks, getEnsAwardsPoints } from "data/benchmarks/utils.ts";
-import { type EnsAwardsScore, isValidEnsAwardsScore } from "data/shared/ens-awards-score.ts";
+import { calcEnsAwardsPoints, getAppBenchmarks } from "data/benchmarks/utils.ts";
+import {
+  type EnsAwardsPoints,
+  type EnsAwardsScore,
+  validateEnsAwardsScore,
+} from "data/shared/ens-awards-score.ts";
 
 import type { BestPractice, BestPracticeTarget } from "../ens-best-practices/types.ts";
 import { APPS } from "./index.ts";
-import { type App, type AppType, AppTypes } from "./types.ts";
-
-const AppTypeSlugMapping = new Map<string, AppType>([
-  ["wallet", AppTypes.Wallet],
-  ["explorer", AppTypes.Explorer],
-]);
+import { type App, type AppSlug, type AppType, AppTypes } from "./types.ts";
 
 /**
- * Maps an app type slug to its {@link AppType}.
+ * Validates a string as an {@link AppType}.
  */
-export const getAppTypeBySlug = (appTypeSlug: string): AppType | undefined =>
-  AppTypeSlugMapping.get(appTypeSlug);
+export const validateAppType = (maybeAppType: string): AppType => {
+  switch (maybeAppType) {
+    case "wallet":
+      return AppTypes.Wallet;
+    case "explorer":
+      return AppTypes.Explorer;
+    default:
+      throw new Error(`Invalid AppType value: ${maybeAppType}`);
+  }
+};
 
 /**
  * Returns an {@link App} by {@link App.appSlug}.
  */
-export const getAppBySlug = (appSlug: string): App | undefined => {
+export const getAppBySlug = (appSlug: AppSlug): App | undefined => {
   return APPS.find((app) => app.appSlug === appSlug);
 };
 
@@ -52,20 +58,15 @@ export const calcAppScore = (app: App): EnsAwardsScore | undefined => {
 
   if (completedBenchmarks.length === 0) return undefined;
 
-  const totalPoints = completedBenchmarks.reduce(
-    (sum, benchmark) => sum + getEnsAwardsPoints(benchmark),
+  const totalPoints: EnsAwardsPoints = completedBenchmarks.reduce(
+    (sum, benchmark) => sum + calcEnsAwardsPoints(benchmark),
     0,
   );
 
   // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
   const score = Math.round((totalPoints * 100) / completedBenchmarks.length);
 
-  // Check EnsAwardsScore invariants
-  if (!isValidEnsAwardsScore(score)) {
-    throw new Error(
-      `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
-    );
-  }
+  validateEnsAwardsScore(score);
 
   return score;
 };
@@ -92,7 +93,10 @@ export const sortApps = (a: App, b: App): number => {
 
 /** Builds the URL for an app's Open Graph image.
  *
- * @returns undefined if the app doesn't have an og image path, otherwise returns the URL for the og image.
+ * @returns
+ * * `undefined` if the app doesn't have an OG image path.
+ * In this case, a default OG image will be used for the app.
+ * Otherwise, the URL for the OG image is returned.
  */
 export const buildAppOgImageUrl = (imagePath: string | undefined): URL | undefined => {
   if (!imagePath) return undefined;
@@ -100,6 +104,16 @@ export const buildAppOgImageUrl = (imagePath: string | undefined): URL | undefin
   return new URL(imagePath, "https://ensawards.org/data/apps/");
 };
 
-export const getAppTypeLabel = (appType: AppType): string => {
-  return appType.charAt(0).toUpperCase() + appType.slice(1);
+export const formatAppType = (appType: AppType, lowercase: boolean = false): string => {
+  switch (appType) {
+    case AppTypes.Wallet:
+      return lowercase ? "wallet" : "Wallet";
+
+    case AppTypes.Explorer:
+      return lowercase ? "explorer" : "Explorer";
+
+    default:
+      const _exhaustive: never = appType;
+      throw new Error(`Unsupported AppType: ${_exhaustive}`);
+  }
 };

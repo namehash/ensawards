@@ -1,4 +1,5 @@
-import { type AppBenchmark, BenchmarkResult } from "data/benchmarks/types.ts";
+import { type AppBenchmark, BenchmarkResults } from "data/benchmarks/types.ts";
+import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
 import {
   X as FailIcon,
   Check as PartialPassIcon,
@@ -18,13 +19,16 @@ export const benchmarkResultToBadgeStyles = (benchmark?: AppBenchmark) => {
     return "text-muted-foreground bg-black/8";
   }
   switch (benchmark.result) {
-    case BenchmarkResult.PartialPass:
+    case BenchmarkResults.PartialPass:
       return "text-orange-600 bg-orange-100";
-    case BenchmarkResult.Pass:
+    case BenchmarkResults.Pass:
       return "text-emerald-600 bg-emerald-100";
-    case BenchmarkResult.Fail:
-    default:
+    case BenchmarkResults.Fail:
       return "text-red-600 bg-[rgba(220,38,38,0.1)]";
+
+    default:
+      const _exhaustive: never = benchmark.result;
+      throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };
 
@@ -33,30 +37,16 @@ export const getBenchmarkIcon = (benchmark?: AppBenchmark, className?: string) =
     return <PendingIcon className={className} />;
   }
   switch (benchmark.result) {
-    case BenchmarkResult.Pass:
+    case BenchmarkResults.Pass:
       return <PassIcon className={className} />;
-    case BenchmarkResult.PartialPass:
+    case BenchmarkResults.PartialPass:
       return <PartialPassIcon className={className} />;
-    case BenchmarkResult.Fail:
+    case BenchmarkResults.Fail:
       return <FailIcon className={className} />;
-  }
-};
 
-export const getBenchmarkResultLabel = (benchmark?: AppBenchmark): string => {
-  if (!benchmark) {
-    return "Pending";
-  }
-
-  switch (benchmark.result) {
-    case BenchmarkResult.Pass:
-      return "Passed";
-
-    case BenchmarkResult.PartialPass:
-      return "Partially Passed";
-
-    case BenchmarkResult.Fail:
     default:
-      return "Failed";
+      const _exhaustive: never = benchmark.result;
+      throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };
 
@@ -72,7 +62,7 @@ export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBa
       )}
     >
       {BenchmarkIcon}
-      {getBenchmarkResultLabel(benchmark)}
+      {formatBenchmarkResult(benchmark)}
     </span>
   );
 }

@@ -1,12 +1,13 @@
 import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
+import { isValidReferralProgramEditionSummaryPieSplit } from "data/shared/referral-program-editions";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
+import type { ReferralProgramEditionPieSplitCardProps } from "@/components/atoms/cards/referralProgramEditionCard/pie-split";
 import {
   ReferralProgramEditionAwardPool,
-  type ReferralProgramEditionCardProps,
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
@@ -15,7 +16,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export const ReferralProgramEditionHeroCardPieSplit = ({
   referralProgramEditionSummary,
-}: ReferralProgramEditionCardProps) => {
+}: ReferralProgramEditionPieSplitCardProps) => {
   const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
     referralProgramEditionSummary,
   );
@@ -27,18 +28,18 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
       referralProgramEditionSummaryData.slug,
     );
 
-    setReferralProgramEditionSummaryData((current) => refreshedSummary ?? current);
+    // If the fetch fails keep the latest valid data
+    setReferralProgramEditionSummaryData((current) =>
+      refreshedSummary !== undefined &&
+      isValidReferralProgramEditionSummaryPieSplit(refreshedSummary)
+        ? refreshedSummary
+        : current,
+    );
   }
 
   useEffect(() => {
     refreshReferralProgramEditionSummary();
   }, [now]);
-
-  if (referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.Unrecognized) {
-    throw new Error(
-      `Invariant(AwardModel): Unrecognized award model passed to ReferralProgramEditionHeroCardPieSplit`,
-    );
-  }
 
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",

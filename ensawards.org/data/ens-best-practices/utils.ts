@@ -1,20 +1,36 @@
-import { BenchmarkResult } from "data/benchmarks/types.ts";
-import { getAppBenchmarksByBestPractice, getEnsAwardsPoints } from "data/benchmarks/utils.ts";
-import { type EnsAwardsScore, isValidEnsAwardsScore } from "data/shared/ens-awards-score.ts";
+import { AppTypes } from "data/apps/types.ts";
+import { BenchmarkResults } from "data/benchmarks/types.ts";
+import { calcEnsAwardsPoints, getAppBenchmarksByBestPractice } from "data/benchmarks/utils.ts";
+import { ProtocolTypes } from "data/protocols/types.ts";
+import { type EnsAwardsScore, validateEnsAwardsScore } from "data/shared/ens-awards-score.ts";
 
 import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from "./index.ts";
-import { type BestPractice, type BestPracticeApp, type BestPracticeCategory } from "./types.ts";
+import {
+  type BestPractice,
+  type BestPracticeApp,
+  type BestPracticeCategory,
+  type BestPracticeCategorySlug,
+  type BestPracticeSlug,
+  type BestPracticeTarget,
+  type BestPracticeType,
+  BestPracticeTypes,
+} from "./types.ts";
 
 /**
  * Returns a {@link BestPracticeCategory} by {@link BestPracticeCategory.categorySlug}.
  */
-export const getCategoryBySlug = (categorySlug: string): BestPracticeCategory | undefined => {
+export const getCategoryBySlug = (
+  categorySlug: BestPracticeCategorySlug,
+): BestPracticeCategory | undefined => {
   return BEST_PRACTICE_CATEGORIES.find((category) => category.categorySlug === categorySlug);
 };
 
 /**
  * Returns a {@link BestPracticeCategory} by {@link BestPracticeCategory.id}.
  */
+// TODO: The id field in BestPracticeCategory is currently a string.
+// Since we will be removing it (see https://github.com/namehash/ensawards/issues/182)
+// I don't want to create a type/ type alias for it
 export const getCategoryById = (categoryId: string): BestPracticeCategory | undefined => {
   return BEST_PRACTICE_CATEGORIES.find((category) => category.id === categoryId);
 };
@@ -22,7 +38,9 @@ export const getCategoryById = (categoryId: string): BestPracticeCategory | unde
 /**
  * Returns an ENS {@link BestPractice} by {@link BestPractice.bestPracticeSlug}.
  */
-export const getBestPracticeBySlug = (bestPracticeSlug: string): BestPractice | undefined => {
+export const getBestPracticeBySlug = (
+  bestPracticeSlug: BestPracticeSlug,
+): BestPractice | undefined => {
   return ENS_BEST_PRACTICES.find(
     (bestPractice) => bestPractice.bestPracticeSlug === bestPracticeSlug,
   );
@@ -31,6 +49,9 @@ export const getBestPracticeBySlug = (bestPracticeSlug: string): BestPractice | 
 /**
  * Returns an ENS {@link BestPractice} by {@link BestPractice.id}.
  */
+// TODO: The id field in BestPractice is currently a string.
+// Since we will be removing it (see https://github.com/namehash/ensawards/issues/182)
+// I don't want to create a type/ type alias for it
 export const getBestPracticeById = (bestPracticeId: string): BestPractice | undefined => {
   return ENS_BEST_PRACTICES.find((bestPractice) => bestPractice.id === bestPracticeId);
 };
@@ -42,8 +63,21 @@ export const getBestPracticesByCategory = (category: BestPracticeCategory): Best
   return ENS_BEST_PRACTICES.filter((bestPractice) => bestPractice.category.id === category.id);
 };
 
-export const getBestPracticeTypeLabel = (bestPracticeType: string): string => {
-  return bestPracticeType.charAt(0).toUpperCase() + bestPracticeType.slice(1);
+export const formatBestPracticeType = (
+  bestPracticeType: BestPracticeType,
+  lowercase: boolean = false,
+): string => {
+  switch (bestPracticeType) {
+    case BestPracticeTypes.Protocol:
+      return lowercase ? "protocol" : "Protocol";
+
+    case BestPracticeTypes.App:
+      return lowercase ? "app" : "App";
+
+    default:
+      const _exhaustive: never = bestPracticeType;
+      throw new Error(`Unsupported BestPracticeType: ${_exhaustive}`);
+  }
 };
 
 /**
@@ -68,19 +102,14 @@ export const calcBestPracticeScore = (
 
     benchmarkedApps += 1;
 
-    bestPracticePoints += getEnsAwardsPoints(benchmark);
+    bestPracticePoints += calcEnsAwardsPoints(benchmark);
   }
 
   if (benchmarkedApps === 0) return undefined;
 
   const score = Math.round((bestPracticePoints * 100) / benchmarkedApps);
 
-  // Check EnsAwardsScore invariants
-  if (!isValidEnsAwardsScore(score)) {
-    throw new Error(
-      `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${score} instead`,
-    );
-  }
+  validateEnsAwardsScore(score);
 
   return score;
 };
@@ -88,7 +117,7 @@ export const calcBestPracticeScore = (
 /**
  * Calculates how many apps passed our benchmark on this {@link BestPractice}.
  *
- * For now, both {@link BenchmarkResult.Pass} and {@link BenchmarkResult.PartialPass} are treated as a pass.
+ * For now, both {@link BenchmarkResults.Pass} and {@link BenchmarkResults.PartialPass} are treated as a pass.
  */
 export const calcAppsPassed = (bestPractice: BestPracticeApp): number => {
   let appsPassed = 0;
@@ -99,12 +128,47 @@ export const calcAppsPassed = (bestPractice: BestPracticeApp): number => {
     // Explicit acceptance of Pass & Partial Pass results
     if (
       benchmark !== undefined &&
-      (benchmark.result === BenchmarkResult.Pass ||
-        benchmark.result === BenchmarkResult.PartialPass)
+      (benchmark.result === BenchmarkResults.Pass ||
+        benchmark.result === BenchmarkResults.PartialPass)
     ) {
       appsPassed += 1;
     }
   });
 
   return appsPassed;
+};
+
+export const formatBestPracticeTarget = (
+  target: BestPracticeTarget,
+  plural: boolean = false,
+  lowercase: boolean = false,
+): string => {
+  let formattedTarget: string;
+  switch (target) {
+    case AppTypes.Explorer:
+      formattedTarget = plural ? "Explorers" : "Explorer";
+      break;
+
+    case AppTypes.Wallet:
+      formattedTarget = plural ? "Wallets" : "Wallet";
+      break;
+
+    case ProtocolTypes.DAO:
+      formattedTarget = plural ? "DAOs" : "DAO";
+      break;
+
+    case ProtocolTypes.DeFi:
+      formattedTarget = plural ? "DeFi protocols" : "DeFi protocol";
+      break;
+
+    default:
+      const _exhaustive: never = target;
+      throw new Error(`Unsupported BestPracticeTarget: ${_exhaustive}`);
+  }
+
+  if (lowercase) {
+    formattedTarget = formattedTarget.toLowerCase();
+  }
+
+  return formattedTarget;
 };

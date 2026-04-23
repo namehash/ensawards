@@ -3,7 +3,7 @@
 
 import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
-import { CategoryStatus } from "../types.ts";
+import { CategoryStatuses } from "../types.ts";
 
 const RegisterNamesCategory: BestPracticeCategory = {
   id: "register-names",
@@ -11,7 +11,7 @@ const RegisterNamesCategory: BestPracticeCategory = {
   name: "Registering Names",
   description:
     "Provide smooth onboarding when supporting users to find and register their own names.",
-  status: CategoryStatus.ComingSoon,
+  status: CategoryStatuses.ComingSoon,
 };
 
 defineBestPracticeCategory(RegisterNamesCategory);

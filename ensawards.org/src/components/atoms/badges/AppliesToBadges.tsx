@@ -1,8 +1,7 @@
 import { appliesToAllApps } from "data/apps/utils";
 import { type BestPractice } from "data/ens-best-practices/types";
+import { formatBestPracticeTarget } from "data/ens-best-practices/utils";
 import { appliesToAllProtocols } from "data/protocols/utils";
-
-import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
 
 export const AppliesToBadges = ({ bestPractice }: { bestPractice: BestPractice }) => {
   const appliesToBadgeStyles =
@@ -18,7 +17,7 @@ export const AppliesToBadges = ({ bestPractice }: { bestPractice: BestPractice }
     <div className="flex flex-row justify-start items-center gap-1">
       {bestPractice.appliesTo.map((target) => (
         <span key={`applies-to-${target}-badge`} className={appliesToBadgeStyles}>
-          {pluralizeBestPracticeTarget(target)}
+          {formatBestPracticeTarget(target)}
         </span>
       ))}
     </div>

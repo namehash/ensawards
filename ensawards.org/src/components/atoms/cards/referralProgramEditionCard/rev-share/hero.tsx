@@ -1,12 +1,13 @@
 import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
+import { isValidReferralProgramEditionSummaryRevShareLimit } from "data/shared/referral-program-editions";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
+import type { ReferralProgramEditionRevShareLimitCardProps } from "@/components/atoms/cards/referralProgramEditionCard/rev-share";
 import {
   ReferralProgramEditionAwardPool,
-  type ReferralProgramEditionCardProps,
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
@@ -15,11 +16,11 @@ import {
   parseReferralProgramCurrency,
 } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { currencyFormatter } from "@/utils/textModifications";
+import { usdFormatter } from "@/utils/textModifications";
 
 export const ReferralProgramEditionHeroCardRevShareLimit = ({
   referralProgramEditionSummary,
-}: ReferralProgramEditionCardProps) => {
+}: ReferralProgramEditionRevShareLimitCardProps) => {
   const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
     referralProgramEditionSummary,
   );
@@ -31,18 +32,18 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
       referralProgramEditionSummaryData.slug,
     );
 
-    setReferralProgramEditionSummaryData((current) => refreshedSummary ?? current);
+    // If the fetch fails keep the latest valid data
+    setReferralProgramEditionSummaryData((current) =>
+      refreshedSummary !== undefined &&
+      isValidReferralProgramEditionSummaryRevShareLimit(refreshedSummary)
+        ? refreshedSummary
+        : current,
+    );
   }
 
   useEffect(() => {
     refreshReferralProgramEditionSummary();
   }, [now]);
-
-  if (referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.Unrecognized) {
-    throw new Error(
-      `Invariant(AwardModel): Unrecognized award model passed to ReferralProgramEditionHeroCardRevShareLimit`,
-    );
-  }
 
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
@@ -94,7 +95,7 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
           {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareLimit
-            ? `${currencyFormatter.format(parseReferralProgramCurrency(referralProgramEditionSummaryData.rules.minQualifiedRevenueContribution))} USD`
+            ? `${usdFormatter.format(parseReferralProgramCurrency(referralProgramEditionSummaryData.rules.minQualifiedRevenueContribution))} USD`
             : "-"}
         </p>
       </div>

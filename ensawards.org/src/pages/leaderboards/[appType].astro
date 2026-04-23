@@ -9,8 +9,8 @@ import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
-import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
-import { calcAppScore, getAppTypeBySlug, sortApps, getAppTypeLabel } from "data/apps/utils.ts";
+import { formatBestPracticeTarget } from "data/ens-best-practices/utils.ts";
+import { calcAppScore, validateAppType, sortApps, formatAppType } from "data/apps/utils.ts";
 import {
   ContributorsCard,
   ContributorsCardLoading,
@@ -18,6 +18,7 @@ import {
 } from "@/components/atoms/cards/ContributorsCard";
 import { type Contribution } from "data/contributors/types";
 import { getAppContributions } from "data/contributors/utils.ts";
+import { lowercase } from "astro:schema";
 
 export function getStaticPaths() {
   return Object.values(AppTypes).map((appType) => ({
@@ -34,98 +35,89 @@ const placeIcons = [
   "/src/assets/thirdPlaceAward.svg",
 ];
 
-const resolvedAppType = getAppTypeBySlug(appType);
+const validAppType = validateAppType(appType);
 
-// The fallbacks should never be used. Only introduced for type safety.
-let pluralizedBestPracticeTarget = "-";
-let appContributions: Contribution[] = [];
-
-if (resolvedAppType !== undefined) {
-  pluralizedBestPracticeTarget = pluralizeBestPracticeTarget(resolvedAppType).toLowerCase();
-  appContributions = APPS.filter((app) => app.type === resolvedAppType).flatMap((app) =>
-    getAppContributions(app),
-  );
-}
+const formattedBestPracticeTarget: string = formatBestPracticeTarget(validAppType, true, true);
+const appContributions: Contribution[] = APPS.filter((app) => app.type === validAppType).flatMap(
+  (app) => getAppContributions(app),
+);
 ---
 
-{
-  resolvedAppType === undefined ? (
-    // theoretically, because of Astro's build-time page generation, this should never happen
-    <DataLoadingError />
-  ) : (
-    <Layout
-      pageMetadata={{
-        title: `ENSAwards: ENS Leaderboard for ${getAppTypeLabel(resolvedAppType)} Integrations`,
-        description: `See how ${pluralizedBestPracticeTarget} score on ENS integration benchmarks.`,
-        url: `https://ensawards.org/leaderboards/${resolvedAppType}`,
-        ogImage: `https://ensawards.org/${resolvedAppType}_leaderboard_og_image.png`,
-        twitterImage: `https://ensawards.org/${resolvedAppType}_leaderboard_twitter_og_image.png`,
-      }}>
-      <SubpageHero
-        header={`${getAppTypeLabel(resolvedAppType)} leaderboard`}
-        description={`Compare ${pluralizedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
-        breadcrumbs={[{ text: "ENS leaderboards", linkHref: "/leaderboards" }]}
-        customImage={{
-          source: LeaderboardsHeroImage,
-          width: 371,
-          height: 277,
-          styles: "-top-10 right-0",
-        }}
-      />
-      <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-        <div class="w-full max-w-[1216px] flex flex-col md:flex-row justify-start md:justify-between gap-6 items-center md:items-start">
-          <div class="w-full md:w-3/5">
-            <ItemsList containerStyles="gap-3 sm:gap-3">
-              {APPS.filter((app) => app.type === resolvedAppType)
-                .sort(sortApps)
-                .map((app, idx) => {
-                  const AppIcon = app.icon;
-                  const appScore = calcAppScore(app);
-                  return (
-                    <LeaderboardCard
-                      key={`app-review-card-${app.id}`}
-                      name={app.name}
-                      ensAwardsScore={appScore}
-                      viewDetailsLink={`/app/${app.appSlug}`}
-                      viewDetailsText="App report">
-                      <AppIcon
-                        slot="rankedEntityIcon"
-                        className="w-10 h-10 rounded-md"
+<Layout
+  pageMetadata={{
+    title: `ENSAwards: ENS Leaderboard for ${formatAppType(validAppType)} Integrations`,
+    description: `See how ${formattedBestPracticeTarget} score on ENS integration benchmarks.`,
+    url: `https://ensawards.org/leaderboards/${validAppType}`,
+    ogImage: `https://ensawards.org/${validAppType}_leaderboard_og_image.png`,
+    twitterImage: `https://ensawards.org/${validAppType}_leaderboard_twitter_og_image.png`,
+  }}>
+  <SubpageHero
+    header={`${formatAppType(validAppType)} leaderboard`}
+    description={`Compare ${formattedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
+    breadcrumbs={[{ text: "ENS leaderboards", linkHref: "/leaderboards" }]}
+    customImage={{
+      source: LeaderboardsHeroImage,
+      width: 371,
+      height: 277,
+      styles: "-top-10 right-0",
+    }}
+  />
+  <section
+    class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
+    <div
+      class="w-full max-w-[1216px] flex flex-col md:flex-row justify-start md:justify-between gap-6 items-center md:items-start">
+      <div class="w-full md:w-3/5">
+        <ItemsList containerStyles="gap-3 sm:gap-3">
+          {
+            APPS.filter((app) => app.type === validAppType)
+              .sort(sortApps)
+              .map((app, idx) => {
+                const AppIcon = app.icon;
+                const appScore = calcAppScore(app);
+                return (
+                  <LeaderboardCard
+                    key={`app-review-card-${app.id}`}
+                    name={app.name}
+                    ensAwardsScore={appScore}
+                    viewDetailsHref={`/app/${app.appSlug}`}
+                    viewDetailsText="App report">
+                    <AppIcon
+                      slot="rankedEntityIcon"
+                      className="w-10 h-10 rounded-md"
+                    />
+                    {idx < 3 ? (
+                      <Image
+                        alt={`${idx + 1}-place`}
+                        src={images[placeIcons[idx]]()}
+                        slot="placeIcon"
                       />
-                      {idx < 3 ? (
-                        <Image
-                          alt={`${idx + 1}-place`}
-                          src={images[placeIcons[idx]]()}
-                          slot="placeIcon"
-                        />
-                      ) : (
-                        <p
-                          slot="placeIcon"
-                          class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                          {idx + 1}
-                        </p>
-                      )}
-                    </LeaderboardCard>
-                  );
-                })}
-            </ItemsList>
-          </div>
-          <div class="w-full md:w-2/5">
-            <ContributorsCard
-              client:only="react"
-              contributionType={ContributionTypes.App}
-              existingContributions={appContributions}
-              gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/index.ts"
-              sidebarVariant>
-              <ContributorsCardLoading
-                slot="fallback"
-                sidebarVariant
-                contributionType={ContributionTypes.App}
-              />
-            </ContributorsCard>
-          </div>
-        </div>
-      </section>
-    </Layout>
-  )
-}
+                    ) : (
+                      <p
+                        slot="placeIcon"
+                        class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
+                        {idx + 1}
+                      </p>
+                    )}
+                  </LeaderboardCard>
+                );
+              })
+          }
+        </ItemsList>
+      </div>
+      <div class="w-full md:w-2/5">
+        <ContributorsCard
+          client:only="react"
+          contributionType={ContributionTypes.App}
+          existingContributions={appContributions}
+          gitHubTargetHref="https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/index.ts"
+          sidebarVariant>
+          <ContributorsCardLoading
+            slot="fallback"
+            sidebarVariant
+            contributionType={ContributionTypes.App}
+          />
+        </ContributorsCard>
+      </div>
+    </div>
+  </section>
+</Layout>
