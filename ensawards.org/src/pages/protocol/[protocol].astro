@@ -22,12 +22,15 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "@/utils/styles";
 import { type Protocol } from "data/protocols/types";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils";
-import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils";
+import {
+  getProtocolBySlug,
+  getAllProtocolContracts,
+  getAwardsByProtocolSlug,
+} from "data/protocols/utils";
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
 import EntityAwardsCard from "@/components/atoms/cards/EntityAwardsCard.astro";
 import { AwardedEntityTypes, type AwardedProtocol } from "data/awards/awarded-entity-types";
-import { getAwardsByEntity } from "data/awards/utils";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -68,7 +71,7 @@ if (resolvedProtocol) {
     .flat();
 
   awardedProtocol = { type: AwardedEntityTypes.Protocol, protocol: resolvedProtocol };
-  hasAwards = getAwardsByEntity(awardedProtocol).size > 0;
+  hasAwards = getAwardsByProtocolSlug(resolvedProtocol.protocolSlug).length > 0;
 }
 ---
 
