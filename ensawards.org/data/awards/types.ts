@@ -1,16 +1,11 @@
-import type { Hash } from "viem";
+import type { IncentiveProgram, IncentiveProgramSlug } from "data/incentive-programs/types.ts";
+import { type EnsTokens } from "data/shared/ensTokens.ts";
+import type { NormalizedAddress } from "data/shared/normalizedAddress.ts";
+import type { TransactionRef } from "data/shared/transactionRef.ts";
 
-import type { ChainId, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { AccountId, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
-import type { NormalizedAddress } from "../shared/normalizedAddress.ts";
 import type { AwardedEntity } from "./awarded-entity-types.ts";
-
-/** An amount in units of $ENS */
-export type EnsTokens = number;
-// TODO: Use an import from ensnode-sdk when the support for $ENS is implemented.
-// See https://github.com/namehash/ensnode/issues/1941
-
-export const ENS_TOKENS_TO_USDC_CONVERSION_RATE = 5.72;
 
 export const AwardTypes = {
   FinancialAward: "financial-award",
@@ -22,10 +17,16 @@ export type AwardType = (typeof AwardTypes)[keyof typeof AwardTypes];
 export interface AwardAbstract<AwardTypeT extends AwardType> {
   type: AwardTypeT;
 
+  /**
+   * Identifies the {@link IncentiveProgram} associated with the award by its {@link IncentiveProgramSlug}.
+   */
+  associatedIncentiveProgramSlug: IncentiveProgramSlug;
+
   /** Address of the recipient of the award.
    *
    * @invariant Simplifying assumption: no address can receive more than one award.
    * TODO: The above is not technically true. When we have more time we should relax this constraint.
+   * This action is planned in: https://github.com/namehash/ensawards/issues/191
    */
   awardedTo: NormalizedAddress;
 
@@ -43,6 +44,11 @@ export interface AwardAbstract<AwardTypeT extends AwardType> {
 
   /** When the award was distributed */
   awardedAt: UnixTimestamp;
+
+  /**
+   * The reason for granting the award.
+   */
+  reason?: string;
 }
 
 export interface AwardRecognition extends AwardAbstract<typeof AwardTypes.RecognitionAward> {}
@@ -52,19 +58,17 @@ export interface AwardFinancial extends AwardAbstract<typeof AwardTypes.Financia
    *
    * @invariant Award amount must be finite and greater than 0.
    */
-  award: EnsTokens; // should be replaced with `Price` from ensnode-sdk when Issue#1941 is completed.
+  price: EnsTokens; // should be replaced with `Price` from ensnode-sdk when Issue#1941 is completed.
 
   /**
-   * Chain ID of the blockchain where the award distribution transaction took place.
-   *
-   * Required to uniquely identify the transaction together with {@link transactionHash}.
+   * Details of the transaction associated with the distribution of this award.
    */
-  chainId: ChainId;
-
-  /** Transaction hash of the transaction on the chain identified by {@link chainId}.
-   * that took place on {@link awardedAt} to distribute the {@link Award}
-   */
-  transactionHash: Hash;
+  transaction: TransactionRef;
 }
 
 export type Award = AwardFinancial | AwardRecognition;
+
+export interface AwardDistribution {
+  timestamp: UnixTimestamp;
+  transaction: TransactionRef;
+}

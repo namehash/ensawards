@@ -1,3 +1,7 @@
+import { AwardedEntityTypes } from "data/awards/awarded-entity-types.ts";
+import { AWARDS } from "data/awards/index.ts";
+import type { Award } from "data/awards/types.ts";
+
 import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 import type { EnsAwardsScore } from "@/utils/types.ts";
 
@@ -143,3 +147,14 @@ export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
  */
 export const getAppDetailsUrl = (app: App): URL =>
   new URL(`/app/${app.appSlug}`, getEnsAwardsBaseUrl());
+
+/**
+ * Returns all {@link Award}s associated with a given {@link AppSlug}.
+ */
+// TODO: Change input type to AppSlug when PR#164 is merged
+export const getAwardsByAppSlug = (appSlug: App["appSlug"]): Award[] =>
+  AWARDS.filter(
+    (award) =>
+      award.awardedEntity?.type === AwardedEntityTypes.App &&
+      award.awardedEntity.app.appSlug === appSlug,
+  );

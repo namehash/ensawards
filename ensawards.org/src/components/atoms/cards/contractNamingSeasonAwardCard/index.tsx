@@ -5,8 +5,8 @@ import {
   useIsMobile,
   useNow,
 } from "@namehash/namehash-ui";
-import { type AwardFinancial, ENS_TOKENS_TO_USDC_CONVERSION_RATE } from "data/awards/types";
-import { ensTokenFormatter } from "data/awards/utils";
+import { type AwardFinancial } from "data/awards/types";
+import { ENS_TOKENS_TO_USDC_CONVERSION_RATE, ensTokenFormatter } from "data/shared/ensTokens";
 import { secondsInMinute } from "date-fns/constants";
 import { useMemo } from "react";
 
@@ -18,34 +18,27 @@ import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace";
 import { currencyFormatter } from "@/utils/textModifications";
 
 export interface ContractNamingSeasonAwardCardProps {
-  distributedAward: AwardFinancial;
+  award: AwardFinancial;
 }
 
-export const ContractNamingSeasonAwardCard = ({
-  distributedAward,
-}: ContractNamingSeasonAwardCardProps) => {
+export const ContractNamingSeasonAwardCard = ({ award }: ContractNamingSeasonAwardCardProps) => {
   const namespaceId = DEFAULT_ENS_NAMESPACE;
 
   const recipientIdentity = useMemo(
-    () =>
-      buildUnresolvedIdentity(
-        distributedAward.awardedTo,
-        namespaceId,
-        getENSRootChainId(namespaceId),
-      ),
-    [distributedAward.awardedTo, namespaceId],
+    () => buildUnresolvedIdentity(award.awardedTo, namespaceId, getENSRootChainId(namespaceId)),
+    [award.awardedTo, namespaceId],
   );
 
   const now = useNow({ timeToRefresh: secondsInMinute });
   const isMobile = useIsMobile();
 
   const transactionUrl = getBlockExplorerTransactionDetailsUrl(
-    distributedAward.chainId,
-    distributedAward.transactionHash,
+    award.transaction.chainId,
+    award.transaction.transactionHash,
   );
-  const awardedToDetailsUrl = getAdvocateDetailsUrl(distributedAward.awardedTo);
+  const awardedToDetailsUrl = getAdvocateDetailsUrl(award.awardedTo);
 
-  const estimatedValueUSD = distributedAward.award * ENS_TOKENS_TO_USDC_CONVERSION_RATE;
+  const estimatedValueUSD = award.price * ENS_TOKENS_TO_USDC_CONVERSION_RATE;
 
   const awardedContentWrapper = ({ children }: React.PropsWithChildren): React.ReactNode =>
     transactionUrl ? (
@@ -96,14 +89,14 @@ export const ContractNamingSeasonAwardCard = ({
         </div>
       </div>
 
-      <AwardedEntityField entity={distributedAward.awardedEntity} />
+      <AwardedEntityField entity={award.awardedEntity} />
 
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
           Award
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
-          {ensTokenFormatter.format(distributedAward.award)} $ENS
+          {ensTokenFormatter.format(award.price)} $ENS
         </p>
       </div>
 
@@ -122,7 +115,7 @@ export const ContractNamingSeasonAwardCard = ({
         </p>
         <p className="h-[21px] leading-5">
           <RelativeTime
-            timestamp={distributedAward.awardedAt}
+            timestamp={award.awardedAt}
             enforcePast={true}
             conciseFormatting={true}
             relativeTo={now}

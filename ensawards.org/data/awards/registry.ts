@@ -1,11 +1,16 @@
 import type { Award } from "data/awards/types.ts";
-import type { IncentiveProgram, IncentiveProgramAwards } from "data/incentive-programs/types";
+import type { IncentiveProgramSlug } from "data/incentive-programs/types";
 
-const awardsRegistry: IncentiveProgramAwards = new Map();
+const awardsRegistry: Map<IncentiveProgramSlug, Set<Award>> = new Map();
 
-export function defineAwards(incentiveProgram: IncentiveProgram, awards: Award[]): void {
-  // For now, allow overwriting awards on call, might change
-  awardsRegistry.set(incentiveProgram.incentiveProgramSlug, awards);
+export function defineAwards(awards: Award[]): void {
+  awards.forEach((award) => {
+    const awardsForIncentiveProgram =
+      awardsRegistry.get(award.associatedIncentiveProgramSlug) || new Set();
+    awardsForIncentiveProgram.add(award);
+    awardsRegistry.set(award.associatedIncentiveProgramSlug, awardsForIncentiveProgram);
+  });
 }
 
-export const getAwards = () => awardsRegistry;
+export const getAwards = (): Award[] =>
+  [...awardsRegistry.values()].flatMap((awards) => [...awards]);

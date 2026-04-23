@@ -1,3 +1,7 @@
+import { AwardedEntityTypes } from "data/awards/awarded-entity-types.ts";
+import { AWARDS } from "data/awards/index.ts";
+import type { Award } from "data/awards/types.ts";
+
 import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 
 import {
@@ -109,3 +113,14 @@ export const getAllProtocolContracts = (protocolId: ProtocolId): Contract[] =>
  */
 export const getProtocolDetailsUrl = (protocol: Protocol): URL =>
   new URL(`/protocol/${protocol.protocolSlug}`, getEnsAwardsBaseUrl());
+
+/**
+ * Returns all {@link Award}s associated with a given {@link ProtocolSlug}.
+ */
+// TODO: Change input type to ProtocolSlug when PR#164 is merged
+export const getAwardsByProtocolSlug = (protocolSlug: Protocol["protocolSlug"]): Award[] =>
+  AWARDS.filter(
+    (award) =>
+      award.awardedEntity?.type === AwardedEntityTypes.Protocol &&
+      award.awardedEntity.protocol.protocolSlug === protocolSlug,
+  );

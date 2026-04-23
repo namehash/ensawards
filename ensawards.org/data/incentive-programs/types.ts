@@ -1,4 +1,5 @@
-import type { Award, EnsTokens } from "data/awards/types";
+import type { Award } from "data/awards/types";
+import { type EnsTokens } from "data/shared/ensTokens";
 import { ENSAWARDS_SLUG_PATTERN } from "data/shared/slugs";
 
 /** A unique identifier for an {@link IncentiveProgram}.
@@ -8,7 +9,18 @@ import { ENSAWARDS_SLUG_PATTERN } from "data/shared/slugs";
  */
 export type IncentiveProgramSlug = string;
 
-export interface IncentiveProgram {
+export const IncentiveProgramTypes = {
+  AwardPool: "award-pool",
+} as const;
+
+export type IncentiveProgramType =
+  (typeof IncentiveProgramTypes)[keyof typeof IncentiveProgramTypes];
+
+/**
+ * Represents an incentive program with a defined total award pool of financial awards.
+ */
+export interface IncentiveProgramAwardPool {
+  type: typeof IncentiveProgramTypes.AwardPool;
   incentiveProgramSlug: IncentiveProgramSlug;
 
   /** A human-readable name for the incentive program. */
@@ -24,10 +36,7 @@ export interface IncentiveProgram {
    * the awards for this incentive program are considered to be of social recognition nature.
    * Therefore they must be of {@link AwardRecognition} type.
    */
-  totalAwardPool?: EnsTokens; // TODO: Should be of type Price once Issue#1941 in ensnode is resolved
+  totalAwardPool: EnsTokens; // TODO: Should be of type Price once Issue#1941 in ensnode is resolved
 }
 
-/**
- * Defines relations between {@link IncentiveProgramSlug} and {@link Award[]} given for the related {@link IncentiveProgram}.
- */
-export type IncentiveProgramAwards = Map<IncentiveProgramSlug, Award[]>;
+export type IncentiveProgram = IncentiveProgramAwardPool;

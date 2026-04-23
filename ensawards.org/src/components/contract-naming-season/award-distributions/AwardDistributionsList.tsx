@@ -1,7 +1,8 @@
 import { AWARDS } from "data/awards";
 import { AwardTypes } from "data/awards/types";
-import { sortFinancialAwards } from "data/awards/utils";
+import { sortFinancialAwardsByPrice } from "data/awards/utils";
 import EnsContractNamingSeason from "data/incentive-programs/ens-contract-naming-season";
+import { getAwardsByIncentiveProgramSlug } from "data/incentive-programs/utils";
 import { useMemo } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
@@ -14,11 +15,11 @@ export interface AwardDistributionsListProps {
   listSize?: number;
 }
 
-const SORTED_DISTRIBUTED_AWARDS = [
-  ...(AWARDS.get(EnsContractNamingSeason.incentiveProgramSlug)?.filter(
+const SORTED_FINANCIAL_AWARDS = [
+  ...(getAwardsByIncentiveProgramSlug(EnsContractNamingSeason.incentiveProgramSlug)?.filter(
     (award) => award.type === AwardTypes.FinancialAward,
   ) ?? []),
-].sort(sortFinancialAwards);
+].sort(sortFinancialAwardsByPrice);
 
 export const AwardDistributionsList = ({ listSize }: AwardDistributionsListProps) => {
   const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
@@ -27,10 +28,10 @@ export const AwardDistributionsList = ({ listSize }: AwardDistributionsListProps
     <ENSNodeProvider config={config}>
       <TooltipProvider delayDuration={250} skipDelayDuration={0}>
         <div className="w-full h-fit flex flex-col gap-2 justify-start items-center">
-          {SORTED_DISTRIBUTED_AWARDS.slice(0, listSize).map((award) => (
+          {SORTED_FINANCIAL_AWARDS.slice(0, listSize).map((award) => (
             <ContractNamingSeasonAwardCard
-              key={`${award.chainId}-${award.transactionHash}-${award.awardedTo}`}
-              distributedAward={award}
+              key={`${award.transaction.chainId}-${award.transaction.transactionHash}-${award.awardedTo}`}
+              award={award}
             />
           ))}
         </div>
