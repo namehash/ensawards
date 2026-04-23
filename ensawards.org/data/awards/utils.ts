@@ -1,12 +1,8 @@
-import { AWARDS } from "data/awards";
 import {
   type AwardedApp,
-  type AwardedCustomEntity,
-  type AwardedEntity,
   AwardedEntityTypes,
   type AwardedProtocol,
 } from "data/awards/awarded-entity-types";
-import type { IncentiveProgramSlug } from "data/incentive-programs/types";
 import { type EnsTokens } from "data/shared/ensTokens";
 
 import { type Award, type AwardFinancial, AwardTypes } from "./types";

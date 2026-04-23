@@ -1,4 +1,3 @@
-import type { Award } from "data/awards/types";
 import { type EnsTokens } from "data/shared/ensTokens";
 import { ENSAWARDS_SLUG_PATTERN } from "data/shared/slugs";
 
@@ -31,10 +30,6 @@ export interface IncentiveProgramAwardPool {
 
   /**
    * The total award pool allocated for this incentive program.
-   *
-   * @invariant If `totalAwardPool` is undefined,
-   * the awards for this incentive program are considered to be of social recognition nature.
-   * Therefore they must be of {@link AwardRecognition} type.
    */
   totalAwardPool: EnsTokens; // TODO: Should be of type Price once Issue#1941 in ensnode is resolved
 }

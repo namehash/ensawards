@@ -3,7 +3,7 @@ import { type EnsTokens } from "data/shared/ensTokens.ts";
 import type { NormalizedAddress } from "data/shared/normalizedAddress.ts";
 import type { TransactionRef } from "data/shared/transactionRef.ts";
 
-import type { AccountId, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { AwardedEntity } from "./awarded-entity-types.ts";
 

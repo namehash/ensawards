@@ -12,9 +12,6 @@ export const calcRemainingContractNamingSeasonAwardPool = (): EnsTokens => {
     EnsContractNamingSeason.incentiveProgramSlug,
   );
 
-  if (!contractNamingSeasonAwards)
-    throw new Error("No awards found for ENS Contract Naming Season");
-
   const contractNamingSeasonFinancialAwards = contractNamingSeasonAwards.filter(
     (award) => award.type === AwardTypes.FinancialAward,
   );
