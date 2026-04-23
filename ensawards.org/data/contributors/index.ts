@@ -27,6 +27,10 @@ const contributors = {
     chainId: mainnet.id,
     address: "0x0B399d2667733659F4A5fDCB030F3E26D26cC0Fe",
   },
+  apoorvlathey: {
+    chainId: mainnet.id,
+    address: "0x63A556c75443b176b5A4078e929e38bEb37a1ff2",
+  },
 } as const satisfies Record<string, Contributor>;
 
 export default contributors;

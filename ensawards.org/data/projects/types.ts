@@ -16,6 +16,7 @@ export const ProjectIds = {
   Cork: "project-cork",
   Giveth: "project-giveth",
   SSVNetwork: "project-ssvnetwork",
+  WalletChan: "project-walletchan",
 } as const;
 
 /**
