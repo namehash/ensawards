@@ -4,7 +4,6 @@
 import WalletChanProject from "../../projects/walletchan";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
-import WalletChanWalletBenchmarks from "./benchmarks.ts";
 import WalletChanIcon from "./icon.tsx";
 
 const WalletChanWallet: App = {
@@ -20,7 +19,6 @@ const WalletChanWallet: App = {
     ens: "walletchan.eth",
   },
   icon: WalletChanIcon,
-  benchmarks: WalletChanWalletBenchmarks,
 };
 
 defineApp(WalletChanWallet);

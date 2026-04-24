@@ -1,11 +1,13 @@
+import type { EnsAwardsScore } from "data/shared/ens-awards-score.ts";
+
 import { daoContractsOnly, defiContractsOnly } from "@/contract-pipelines/filters.ts";
 import { contractPipeline } from "@/contract-pipelines/index.ts";
 import { sortProtocolLeaderboard } from "@/contract-pipelines/sorting.ts";
 
-import { type ProtocolType, ProtocolTypes } from "../../data/ens-best-practices/types.ts";
 import { CONTRACTS } from "../../data/protocols/contracts.ts";
 import type { Contract } from "../../data/protocols/contracts-types.ts";
 import type { ProtocolId } from "../../data/protocols/types.ts";
+import { type ProtocolType, ProtocolTypes } from "../../data/protocols/types.ts";
 
 const contractPipelineFilterByProtocolType = new Map<
   ProtocolType,
@@ -24,7 +26,7 @@ const contractPipelineFilterByProtocolType = new Map<
 export const getContractNamingScoresByProtocolType = (
   protocolType: ProtocolType,
   data: Contract[] = CONTRACTS,
-): Record<ProtocolId, number> => {
+): Record<ProtocolId, EnsAwardsScore> => {
   const filter = contractPipelineFilterByProtocolType.get(protocolType);
 
   // if the filter for a given ProtocolType is undefined throw an error

@@ -9,7 +9,7 @@ const EtherscanProject: Project = {
   description: "Etherscan is a Block Explorer and Analytics Platform for Ethereum.",
   icon: EtherscanIcon,
   socials: {
-    website: new URL("https://etherscan.io/"),
+    website: new URL("https://etherscan.io"),
     twitter: new URL("https://x.com/etherscan"),
   },
 };

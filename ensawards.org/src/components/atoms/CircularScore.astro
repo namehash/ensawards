@@ -1,17 +1,23 @@
 ---
 import { cn } from "../../utils/tailwindClassConcatenation";
+import { type EnsAwardsScore } from "data/shared/ens-awards-score";
+
 export interface CircularScoreProps {
-  score: number;
+  score?: EnsAwardsScore;
   size?: number;
   strokeWidth?: number;
 }
 
 const { score, size = 139, strokeWidth = 10 }: CircularScoreProps = Astro.props;
 
-const gradientStartColors = ["#12D494", "#ffd230", "#fb2c36"];
-const gradientStopColors = ["#0D9A6B", "#e17100", "#c10007"];
+const gradientStartColors = ["#12D494", "#ffd230", "#fb2c36", "#d1d1d1"];
+const gradientStopColors = ["#0D9A6B", "#e17100", "#c10007", "#969696"];
 
-const getGradientColorIndex = (score: number) => {
+const getGradientColorIndex = (score?: EnsAwardsScore) => {
+  if (score === undefined) {
+    return 3; // default to gray-ish gradient if score is undefined
+  }
+
   if (score < 35) {
     // return red-ish gradient index
     return 2;
@@ -75,12 +81,24 @@ const circumference = 2 * Math.PI * radius;
   </svg>
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-0">
-    <p
-      id="scoreNumber"
-      data-score={score}
-      class="text-4xl text-white leading-8 font-semibold transition-all ease-linear">
-    </p>
-    <p class={cn("text-4xl text-white leading-8 font-semibold")}>%</p>
+    {
+      score === undefined ? (
+        <p class="text-base leading-normal font-semibold text-[rgba(245,245,245,0.5)]">
+          Pending
+        </p>
+      ) : (
+        <p
+          id="scoreNumber"
+          data-score={score}
+          class="text-4xl text-white leading-8 font-semibold transition-all ease-linear"
+        />
+      )
+    }
+    {
+      score !== undefined && (
+        <p class={cn("text-4xl text-white leading-8 font-semibold")}>%</p>
+      )
+    }
   </div>
 </div>
 <script>

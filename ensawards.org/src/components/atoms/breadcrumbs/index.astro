@@ -1,0 +1,64 @@
+---
+import { cn } from "@/utils/tailwindClassConcatenation";
+import ChevronRightIcon from "../icons/ChevronRightIcon.astro";
+import HomeIcon from "../icons/HomeIcon.astro";
+import { type Breadcrumb } from "./types";
+
+interface BreadcrumbsProps {
+  breadcrumbs: [Breadcrumb, ...Breadcrumb[]];
+  styles?: {
+    home?: string;
+    chevron?: string;
+    text?: string;
+  };
+}
+
+const { breadcrumbs, styles }: BreadcrumbsProps = Astro.props;
+
+const baseBreadcrumbStyles = "text-xs sm:text-sm leading-normal font-normal text-white";
+---
+
+<div
+  class="flex flex-row flex-wrap justify-start items-center gap-[10px] relative z-10">
+  <a
+    href="/"
+    class={cn(
+      "box-content p-1 hover:bg-white/5 rounded-[4px] transition-all duration-200",
+      styles?.home,
+    )}
+    aria-label="Go to home page">
+    <HomeIcon className={cn("w-4 h-4")} />
+  </a>
+  <ChevronRightIcon className={cn("text-white", styles?.chevron)} />
+  {
+    breadcrumbs.map((breadcrumb, idx) => {
+      const isLastCrumb = idx === breadcrumbs.length - 1;
+      let breadcrumbElement = (
+        <p class={cn(baseBreadcrumbStyles, styles?.text)}>{breadcrumb.text}</p>
+      );
+
+      if (breadcrumb.linkHref !== undefined) {
+        breadcrumbElement = (
+          <a
+            class={cn(
+              baseBreadcrumbStyles,
+              "hover:underline hover:underline-offset-[25%] transition-all duration-200",
+              styles?.text,
+            )}
+            href={breadcrumb.linkHref}>
+            {breadcrumb.text}
+          </a>
+        );
+      }
+
+      return (
+        <>
+          {breadcrumbElement}
+          {!isLastCrumb && (
+            <ChevronRightIcon className={cn("text-white", styles?.chevron)} />
+          )}
+        </>
+      );
+    })
+  }
+</div>

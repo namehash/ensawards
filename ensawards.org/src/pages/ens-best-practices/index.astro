@@ -1,13 +1,12 @@
 ---
-import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
-
-import AlertCountdown from "@/components/atoms/AlertCountdown.astro";
-import CategoryCard from "@/components/atoms/cards/CategoryCard.astro";
 import UnderConstructionBanner from "@/components/atoms/banners/UnderConstructionBanner.astro";
 import ItemsList from "@/components/molecules/ItemsList.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import Layout from "@/layouts/Layout.astro";
+import { CategoryStatuses } from "data/ens-best-practices/types";
+import { getBestPracticesByCategory } from "data/ens-best-practices/utils";
+import BestPracticeCard from "@/components/atoms/cards/BestPracticeCard.astro";
 ---
 
 <Layout
@@ -16,39 +15,31 @@ import Layout from "@/layouts/Layout.astro";
     description: "Best practices for ENS integrations.",
     url: "https://ensawards.org/ens-best-practices",
   }}>
-  <AlertCountdown
-    slot="alertBanner"
-    eventUnixTimestamp={ENS_HOLIDAY_AWARDS_END_DATE}
-    eventText="ENS Holiday Awards ends in"
-    ctaText="Learn more"
-    link="/ens-referral-program"
-    styles={{
-      banner: "bg-blue-700 hover:bg-blue-700/90 transition-all duration-200",
-      cta: "text-white decoration-white/40 hover:decoration-white",
-      text: "text-white",
-      timer: "text-white",
-      timerLegend: "text-white",
-    }}
-  />
   <SubpageHero
     header="ENS best practices"
-    description="Learn how to build the best possible ENS integration.">
-    <div
-      slot="largerHeroItem"
-      class="max-sm:self-stretch sm:absolute sm:top-0 sm:right-0">
-      <UnderConstructionBanner
-        text="The current catalog of ENS best practices is not comprehensive and is being expanded."
-      />
-    </div>
-  </SubpageHero>
+    description="Learn how to build the best possible ENS integration."
+  />
   <section
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
-    <ItemsList header="Best Practice Categories">
-      {
-        BEST_PRACTICE_CATEGORIES.map((category, idx) => (
-          <CategoryCard key={`best-practice-card-${idx}`} category={category} />
-        ))
-      }
-    </ItemsList>
+    {
+      BEST_PRACTICE_CATEGORIES.filter(
+        (category) => category.status === CategoryStatuses.Active,
+      ).map((category) => (
+        <ItemsList
+          key={`${category.categorySlug}-group`}
+          header={category.name}
+          additionalInfo={category.description}>
+          {getBestPracticesByCategory(category).map((bestPractice) => (
+            <BestPracticeCard
+              key={`${category.categorySlug}-${bestPractice.bestPracticeSlug}`}
+              bestPractice={bestPractice}
+            />
+          ))}
+        </ItemsList>
+      ))
+    }
+    <UnderConstructionBanner
+      text="The current catalog of ENS best practices is not comprehensive and is being expanded."
+    />
   </section>
 </Layout>

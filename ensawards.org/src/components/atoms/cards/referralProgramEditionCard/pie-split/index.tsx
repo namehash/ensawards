@@ -1,23 +1,24 @@
-import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
+import {
+  ReferralProgramAwardModels,
+  type ReferralProgramEditionSummaryPieSplit,
+} from "@namehash/ens-referrals/v1";
 import { ChevronRightIcon } from "lucide-react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
 import {
   ReferralProgramEditionAwardPool,
-  type ReferralProgramEditionCardProps,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
+export interface ReferralProgramEditionPieSplitCardProps {
+  referralProgramEditionSummary: ReferralProgramEditionSummaryPieSplit;
+}
+
 export const ReferralProgramEditionCardPieSplit = ({
   referralProgramEditionSummary,
-}: ReferralProgramEditionCardProps) => {
-  // The config of an unrecognized edition will never be passed here,
-  // but we perform the check for the type safety
-  if (referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.Unrecognized)
-    return null;
-
+}: ReferralProgramEditionPieSplitCardProps) => {
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
     "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10 sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",

@@ -23,7 +23,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
     ],
   },
   {
@@ -38,9 +38,9 @@ const contracts: Contract[] = [
       name: "uniswap.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
-      { from: contributors.y3drk, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2025-11-03T11:25:00.000Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
     ],
   },
   {
@@ -55,7 +55,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
     ],
   },
   {
@@ -69,7 +69,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
     ],
   },
   {
@@ -83,7 +83,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
     ],
   },
   {
@@ -97,7 +97,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
     ],
   },
   {
@@ -111,7 +111,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
     ],
   },
   {
@@ -125,7 +125,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
     ],
   },
   {
@@ -139,7 +139,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
     ],
   },
   {
@@ -153,7 +153,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-10-14T11:30:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
     ],
   },
 ];

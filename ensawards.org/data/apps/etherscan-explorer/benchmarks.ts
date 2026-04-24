@@ -1,39 +1,36 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying app benchmarks
 
+import EtherscanExplorer from "data/apps/etherscan-explorer";
+import { defineAppBenchmarks } from "data/benchmarks/registry";
+import { BenchmarkResults } from "data/benchmarks/types";
+import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
+
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import contributors from "../../contributors";
-import displayNamedSmartContractsL2 from "../../ens-best-practices/contract-naming/display-named-smart-contracts-l2-chains.ts";
-import displayNamedSmartContractsMainnet from "../../ens-best-practices/contract-naming/display-named-smart-contracts-mainnet.ts";
-import type { AppBenchmark } from "../benchmarks-types.ts";
-import { BenchmarkResult } from "../benchmarks-types.ts";
 
-const benchmarks: AppBenchmark[] = [
-  // {
-  //   bestPractice: recognizeAllENSNames,
-  //   result: BenchmarkResult.Pass,
-  //   lastUpdated: parseTimestamp("2025-12-03T14:00:00Z"),
+const benchmarks = {
+  // "recognize-all-ens-names": {
+  //   result: BenchmarkResults.Pass,
   //   contributions: [
-  //   { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-08T18:26:20.566Z") },
-  // ],
+  //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-03T14:00:00Z") },
+  //   ],
   // },
-  {
-    bestPractice: displayNamedSmartContractsMainnet,
-    result: BenchmarkResult.Pass,
-    lastUpdated: parseTimestamp("2025-12-08T18:26:20.566Z"),
+  "display-named-smart-contracts-mainnet": {
+    result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-08T18:26:20.566Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:26:20.566Z") },
     ],
   },
-  {
-    bestPractice: displayNamedSmartContractsL2,
-    result: BenchmarkResult.Fail,
-    lastUpdated: parseTimestamp("2025-12-08T18:26:20.566Z"),
+  "display-named-smart-contracts-l2-chains": {
+    result: BenchmarkResults.Fail,
     contributions: [
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-08T18:26:20.566Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:26:20.566Z") },
     ],
   },
-];
+} as const satisfies BestPracticeBenchmarks;
+
+defineAppBenchmarks(EtherscanExplorer, benchmarks);
 
 export default benchmarks;

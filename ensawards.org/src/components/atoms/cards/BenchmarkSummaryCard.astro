@@ -1,19 +1,20 @@
 ---
 import { RelativeTime } from "@namehash/namehash-ui";
 
-import type { AppBenchmark } from "data/apps/benchmarks-types.ts";
+import { type AppBenchmark } from "data/benchmarks/types.ts";
+import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
-import { BenchmarkResultToBadgeStyles } from "@/utils/styles";
+import { getBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
+import { BenchmarkResultBadge, benchmarkResultToBadgeStyles } from "../badges/BenchmarkResultBadge";
 
 export interface BenchmarkSummaryCardProps {
-  benchmark: AppBenchmark;
+  bestPractice: BestPracticeApp;
+  benchmark?: AppBenchmark;
 }
 
-const { benchmark }: BenchmarkSummaryCardProps = Astro.props;
+const { bestPractice, benchmark }: BenchmarkSummaryCardProps = Astro.props;
 
-const categoryHref = `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}`;
-const bestPracticeHref = `/ens-best-practices/${benchmark.bestPractice.category.categorySlug}/${benchmark.bestPractice.bestPracticeSlug}`;
+const bestPracticeHref = `/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`;
 
 const detailLabelStyles = "text-sm leading-normal font-normal text-muted-foreground";
 const detailValueStyles = cn(
@@ -38,35 +39,36 @@ const detailValueStyles = cn(
 
     <div class="flex w-full flex-col items-start gap-1 py-1">
       <p class={detailLabelStyles}>Category</p>
-      <a href={categoryHref} class={detailValueStyles}>
-        {benchmark.bestPractice.category.name}
-      </a>
+      <p class="text-sm leading-normal font-medium text-black">
+        {bestPractice.category.name}
+      </p>
     </div>
 
     <div class="flex w-full flex-col items-start gap-1 py-1">
       <p class={detailLabelStyles}>ENS best practice</p>
       <a href={bestPracticeHref} class={detailValueStyles}>
-        {benchmark.bestPractice.name}
+        {bestPractice.name}
       </a>
     </div>
 
     <div class="flex w-full flex-col items-start gap-1 justify-center">
       <p class={detailLabelStyles}>Benchmark result</p>
-      <BenchmarkResultBadge
-        benchmark={benchmark}
-        className={cn(BenchmarkResultToBadgeStyles.get(benchmark.result)!)}
-      />
+      <BenchmarkResultBadge benchmark={benchmark} />
     </div>
 
-    <div class="flex w-full flex-col items-start gap-1 py-1">
-      <p class={detailLabelStyles}>Last updated</p>
-      <p class="text-sm leading-normal font-medium text-black">
-        <RelativeTime
-          client:load
-          enforcePast
-          timestamp={benchmark.lastUpdated}
-        />
-      </p>
-    </div>
+    {
+      benchmark !== undefined && (
+        <div class="flex w-full flex-col items-start gap-1 py-1">
+          <p class={detailLabelStyles}>Last updated</p>
+          <p class="text-sm leading-normal font-medium text-black">
+            <RelativeTime
+              client:load
+              enforcePast
+              timestamp={getBenchmarkLastUpdateTimestamp(benchmark)}
+            />
+          </p>
+        </div>
+      )
+    }
   </div>
 </div>

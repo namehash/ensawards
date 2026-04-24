@@ -11,7 +11,7 @@ const CorkProject: Project = {
   icon: CorkIcon,
   socials: {
     twitter: new URL("https://x.com/Corkprotocol"),
-    website: new URL("https://www.cork.tech/"),
+    website: new URL("https://www.cork.tech"),
   },
 };
 

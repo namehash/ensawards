@@ -27,8 +27,8 @@ export type Contributor = AccountId;
 export type Contribution = {
   /** The contributor who made the contribution */
   from: Contributor;
-  /** The Unix timestamp of when the contribution was made */
-  updatedAt: UnixTimestamp;
+  /** The Unix timestamp of when the contributor last updated this contribution */
+  lastUpdated: UnixTimestamp;
 };
 ```
 
@@ -47,7 +47,7 @@ This is our way to show appreciation to the people who contributed to our cause.
 
 To add yourself:
 1. Add your `AccountId` to the `contributors` collection in [ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) (if this is your first contribution).
-2. Reference yourself in the contributions array of the entity you are updating. If you update the same entity multiple times, add a separate entry for each update with the corresponding timestamp.
+2. Reference yourself in the contributions array of the entity you are updating. If you update the same entity multiple times, update the `lastUpdated` field for each change with the timestamp of your most recent update to that entity.
 
 For reference see [ensawards.org/data/apps/metamask-wallet/benchmarks.ts](ensawards.org/data/apps/metamask-wallet/benchmarks.ts).
 
@@ -62,14 +62,14 @@ export interface Project {
   id: ProjectId;
   name: string;
   description: string;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: SvgIcon;
   socials: {
     website: URL;
     twitter: URL;
   };
 }
 ```
-4. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/projects/aave/icon.tsx](ensawards.org/data/projects/aave/icon.tsx).
+4. Add an SVG icon as a React component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/projects/aave/icon.tsx](ensawards.org/data/projects/aave/icon.tsx).
 5. You are welcome to propose updates to already added projects using the same approach.
 
 ### Relationship between `Projects`, `Protocols` and `Apps`
@@ -91,18 +91,33 @@ For this reason, every new `App` or `Protocol` must be associated with a corresp
 ```typescript
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
   id: ProtocolIdT;
-  protocolSlug: string;
+  protocolSlug: ProtocolSlug;
   protocolType: ProtocolT;
-  project: Project; // each protocol belongs to a single project.
+  project: Project; // each protocol is associated with a broader project, which may comprise multiple apps and protocols.
   name: string;
   description: string;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: SvgIcon;
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
+  /** The custom Open Graph image for the protocol. 
+   * Specified by the relative path from `/data/protocols` to a custom Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Open Graph image will be used for the protocol. 
+   * When adding a new protocol we recommend leaving this undefined. 
+   * The NameHash Labs team will add a custom OG image for your protocol for you.
+   */
   ogImagePath?: string;
+
+  /** The custom Twitter Open Graph image for the protocol. 
+   * Specified by the relative path from `/data/protocols` to a custom Twitter Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Twitter Open Graph image will be used for the protocol. 
+   * When adding a new protocol we recommend leaving this undefined. 
+   * The NameHash Labs team will add a custom Twitter OG image for your protocol for you.
+   */
   twitterOgImagePath?: string;
 }
 
@@ -114,13 +129,7 @@ export type Protocol = DAOProtocol | DeFiProtocol;
 
 ```
 
-> **NOTE**
->
-> We recommend to skip defining the OG image-related fields. They are optional, and we have a fallback mechanism in place, so the SEO of Protocol's details page won't be degraded.
->
-> When your PR with a new `Protocol` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
-
-4. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/protocols/ens-dao/icon.tsx](ensawards.org/data/protocols/ens-dao/icon.tsx).
+4. Add an SVG icon as a React component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/protocols/ens-dao/icon.tsx](ensawards.org/data/protocols/ens-dao/icon.tsx).
 5. In your PR describe your reasoning for adding this `Protocol`.
 6. You are welcome to propose updates to existing protocols using the same approach.
 
@@ -146,29 +155,38 @@ export interface Contract {
 ```typescript
 export interface App {
   id: string;
-  appSlug: string;
-  project: Project; // each app belongs to a single project.
+  appSlug: AppSlug;
+  project: Project; // each app is part of a broader project (which may span multiple apps and protocols).
   name: string;
   description: string;
   type: AppType;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  benchmarks: AppBenchmark[];
+  icon: SvgIcon;
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
+  /** The custom Open Graph image for the app. 
+   * Specified by the relative path from `/data/apps` to a custom Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Open Graph image will be used for the app. 
+   * When adding a new app we recommend leaving this undefined. 
+   * The NameHash Labs team will add a custom OG image for your app for you.
+   */
   ogImagePath?: string;
+
+  /** The custom Twitter Open Graph image for the app.
+   * Specified by the relative path from `/data/apps` to a custom Twitter Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Twitter Open Graph image will be used for the app.
+   * When adding a new app we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom Twitter OG image for your app for you.
+   */
   twitterOgImagePath?: string;
 }
 ```
-> **NOTE**
->
-> We recommend to skip defining the OG image-related fields. They are optional, and we have a fallback mechanism in place, so the SEO of App's details page won't be degraded. 
-> 
-> When your PR with a new `App` gets accepted, the NameHash Labs team will follow it up, providing customized OG images.
 
-4. Add an icon as a React functional component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/apps/blockscout-explorer/icon.tsx](ensawards.org/data/apps/blockscout-explorer/icon.tsx).
+4. Add an SVG icon as a React component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/apps/blockscout-explorer/icon.tsx](ensawards.org/data/apps/blockscout-explorer/icon.tsx).
 5. In your PR describe your reasoning for adding that new `App`.
 6. You are welcome to propose updates to already added apps using the same approach.
 
@@ -189,10 +207,10 @@ export interface BestPracticeAbstract<
 > {
   type: BestPracticeT;
   id: string;
-  bestPracticeSlug: string;
+  bestPracticeSlug: BestPracticeSlug;
   name: string;
   description: string;
-  category: BestPracticeCategory; // each best practice belongs to exactly one category
+  category: BestPracticeCategory; // each best practice belongs to exactly one best practice category
   appliesTo: AppliesToT[];
   technicalDetails: {
     main: {
@@ -226,44 +244,64 @@ Categories sort best practices into topic-related groups based on their characte
 2. Inside the new directory, create an `index.ts` file and default-export the category definition. Make sure to also call `defineBestPracticeCategory()` on it. For reference see [ensawards.org/data/ens-best-practices/contract-naming/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts).
 3. Follow its data model available in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
-export enum CategoryStatus {
-    ComingSoon,
-    Active,
-}
+export const CategoryStatuses = {
+  ComingSoon: "coming-soon",
+  Active: "active",
+} as const;
+
+export type CategoryStatus = (typeof CategoryStatuses)[keyof typeof CategoryStatuses];
 
 export interface BestPracticeCategory {
   id: string;
-  categorySlug: string;
+  categorySlug: BestPracticeCategorySlug;
   name: string;
   description: string;
   status: CategoryStatus;
-  contributions: [Contribution, ...Contribution[]]; // Remember to add yourself as a contributor
 }
 ```
 4. In your PR describe your reasoning for adding it.
 
 ### Suggest a `benchmark update`
 
-1. To suggest a benchmark update for an existing app, modify its `benchmarks` array in the [ensawards.org/data/apps/[app-directory]/benchmarks.ts](ensawards.org/data/apps/rainbow-wallet/benchmarks.ts) file where `[app-directory]` represents the slug of the relevant app.
-2. Make sure to follow benchmark's data model. It's available in the [ensawards.org/data/apps/benchmarks-types.ts](ensawards.org/data/apps/benchmarks-types.ts) file.
+1. To suggest a benchmark update for an existing app, modify its `benchmarks` record in the [ensawards.org/data/apps/[app-directory]/benchmarks.ts](ensawards.org/data/apps/rainbow-wallet/benchmarks.ts) file where `[app-directory]` represents the slug of the relevant app. These records define relationships between benchmarks and best practices. Their data model is available at [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts).
+
 ```typescript
-export enum BenchmarkResult {
-    Pass = "Pass",
-    PartialPass = "Partial pass",
-    Fail = "Fail",
-}
+/**
+ * Defines relations between {@link BestPracticeSlug} and {@link AppBenchmark}
+ * for the related {@link BestPractice}.
+ *
+ * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}. 
+ * If an app doesn't have a benchmark completed for a `BestPractice` then the benchmark should be explicitly set to `undefined`. 
+ * Otherwise, the value should be an `AppBenchmark` describing how the related app performed for the `BestPractice`.
+ */
+export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;
+```
+
+For reference see [ensawards.org/data/apps/blockscout-explorer/benchmarks.ts](ensawards.org/data/apps/blockscout-explorer/benchmarks.ts) for an example benchmarks record.
+
+2. Make sure to follow the benchmark data model. It is available in the [ensawards.org/data/benchmarks/types.ts](ensawards.org/data/benchmarks/types.ts) file.
+```typescript
+export const BenchmarkResults = {
+  Pass: "passed",
+  PartialPass: "partially-passed",
+  Fail: "failed",
+} as const;
+
+export type BenchmarkResult = (typeof BenchmarkResults)[keyof typeof BenchmarkResults];
 
 export interface AppBenchmark {
-  /** The best practice being benchmarked */
-  bestPractice: BestPracticeApp;
-  /** The result of the benchmark */
   result: BenchmarkResult;
-  /** Unix timestamp when the benchmark was last updated */
-  lastUpdated: UnixTimestamp;
-  /** A record of all contributors involved in the addition or maintenance of the benchmark's data */
+
+  /** A record of all contributors involved in the addition or maintenance of the benchmark's data.
+   *
+   * @invariant Multiple {@link Contribution} from the same contributor on the same app benchmark  are not allowed.
+   * When a contributor makes updates to their existing contribution, 
+   * they should update the `lastUpdated` timestamp of their existing `Contribution`.
+   */
   contributions: [Contribution, ...Contribution[]];
 }
 ```
+
 
 ## Using `Biome` and `Prettier` together
 

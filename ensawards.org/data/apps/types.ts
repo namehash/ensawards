@@ -1,16 +1,16 @@
-import type { JSX } from "astro/jsx-runtime";
+import type { SvgIcon } from "data/shared/svg-icon.ts";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
+import type { BestPracticeBenchmarks } from "../ens-best-practices/types.ts";
 import type { Project } from "../projects/types.ts";
-import type { AppBenchmark } from "./benchmarks-types.ts";
 
 /**
- * Represents all types of apps that are currently benchmarked on ENSAwards.
+ * Represents the types of apps that are currently benchmarked on ENSAwards.
  */
 export const AppTypes = {
-  Wallet: "Wallet",
-  Explorer: "Explorer",
+  Wallet: "wallet",
+  Explorer: "explorer",
 } as const;
 
 /**
@@ -18,20 +18,51 @@ export const AppTypes = {
  */
 export type AppType = (typeof AppTypes)[keyof typeof AppTypes];
 
+/** A unique identifier for an app.
+ *
+ * @invariant Must be unique across all apps.
+ * @invariant Must match {@link ENSAWARDS_SLUG_PATTERN}.
+ */
+export type AppSlug = string;
+
 export interface App {
   id: string; // normalized app name, might be redundant
-  appSlug: string;
-  project: Project; // each app belongs to a single project.
+  appSlug: AppSlug;
+  project: Project; // each app is part of a broader project (which may span multiple apps and protocols).
   name: string;
   description: string;
   type: AppType;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  benchmarks: AppBenchmark[];
+  icon: SvgIcon;
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
+  /** The custom Open Graph image for the app.
+   * Specified by the relative path from `/data/apps` to a custom Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Open Graph image will be used for the app.
+   * When adding a new app we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom OG image for your app for you.
+   */
   ogImagePath?: string;
+
+  /** The custom Twitter Open Graph image for the app.
+   * Specified by the relative path from `/data/apps` to a custom Twitter Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Twitter Open Graph image will be used for the app.
+   * When adding a new app we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom Twitter OG image for your app for you.
+   */
   twitterOgImagePath?: string;
 }
+
+/**
+ * Defines relations between {@link AppSlug} and {@link BestPracticeBenchmarks}
+ * for the related {@link App}.
+ *
+ * @invariant An explicit key for each {@link AppSlug} should be added to this `Record` for each available {@link App}.
+ * The value should be a {@link BestPracticeBenchmarks} record.
+ * To register this entry, `defineAppBenchmarks()` should be called from each app's `data/apps/{app}/benchmarks.ts` file.
+ */
+export type AppBenchmarks = Record<AppSlug, BestPracticeBenchmarks>;

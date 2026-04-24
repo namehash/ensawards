@@ -1,10 +1,9 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
-import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import ArbitrumProject from "../../projects/arbitrum";
 import { defineProtocol } from "../registry.ts";
-import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
+import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
 import ArbitrumIcon from "./icon.tsx";
 
 const ArbitrumDao: DAOProtocol = {
@@ -17,12 +16,12 @@ const ArbitrumDao: DAOProtocol = {
     "The Arbitrum DAO provides governance for Arbitrum, a unified blockchain for everyone, where ideas thrive and boundaries fade.",
   icon: ArbitrumIcon,
   socials: {
-    website: new URL("https://arbitrum.foundation/"),
+    website: new URL("https://arbitrum.foundation"),
     twitter: new URL("https://x.com/arbitrum"),
     ens: "arbfoundation.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/arbitrum-dao/twitter-og.png",
+  ogImagePath: "arbitrum-dao/og.png",
+  twitterOgImagePath: "arbitrum-dao/twitter-og.png",
 };
 
 defineProtocol(ArbitrumDao);

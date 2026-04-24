@@ -27,7 +27,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-13T22:30:00.000Z") },
+      { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
     ],
   },
   {
@@ -42,7 +42,7 @@ const contracts: Contract[] = [
       name: "views.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-13T22:30:00.000Z") },
+      { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
     ],
   },
   {
@@ -57,7 +57,7 @@ const contracts: Contract[] = [
       name: "ssv.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-13T22:30:00.000Z") },
+      { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
     ],
   },
   {
@@ -72,7 +72,7 @@ const contracts: Contract[] = [
       name: "cssv.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-08T16:30:00.000Z") },
+      { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-08T16:30:00.000Z") },
     ],
   },
   {
@@ -87,7 +87,7 @@ const contracts: Contract[] = [
       name: "treasury.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-13T22:30:00.000Z") },
+      { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
     ],
   },
   {
@@ -102,7 +102,7 @@ const contracts: Contract[] = [
       name: "foundation.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-08T16:30:00.000Z") },
+      { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-08T16:30:00.000Z") },
     ],
   },
   {
@@ -117,7 +117,7 @@ const contracts: Contract[] = [
       name: "v1-imp.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-13T22:30:00.000Z") },
+      { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
     ],
   },
   {
@@ -132,7 +132,7 @@ const contracts: Contract[] = [
       name: "v1-imp-lido.ssvnetwork.eth",
     },
     contributions: [
-      { from: contributors.spooky, updatedAt: parseTimestamp("2026-04-13T22:30:00.000Z") },
+      { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
     ],
   },
 ];

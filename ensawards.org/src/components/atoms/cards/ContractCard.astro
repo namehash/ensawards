@@ -1,24 +1,21 @@
 ---
 import { getBlockExplorerAddressDetailsUrl } from "@namehash/namehash-ui";
 
-import {
-  Contract,
-  ContractResolutionStatusIds,
-} from "../../../../data/protocols/contracts-types.ts";
-import { cn } from "../../../utils/tailwindClassConcatenation";
-import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import { ContractBadge } from "../badges/ContractBadge";
-import { EnsManagerAppLink } from "../EnsManagerAppLink";
-import { SmartContractMetadata } from "../SmartContractMetadata";
-import { breakLongWords } from "../../../utils/textModifications";
+import { type Contract, ContractResolutionStatusIds } from "data/protocols/contracts-types.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
+import { ContractBadge } from "@/components/atoms/badges/ContractBadge";
+import { EnsManagerAppLink } from "@/components/atoms/EnsManagerAppLink";
+import { SmartContractMetadata } from "@/components/atoms/SmartContractMetadata";
+import { breakLongWords } from "@/utils/textModifications";
+import { type ProtocolId } from "data/protocols/types.ts";
+import { getAllProtocolContracts } from "data/protocols/utils.ts";
+
 export interface ContractCardProps {
   contract: Contract;
-  className?: {
-    ensName?: string;
-  };
 }
 
-const { contract, className = { ensName: "sm:min-w-[225px]" } }: ContractCardProps = Astro.props;
+const { contract }: ContractCardProps = Astro.props;
 
 // The fallback should never be used. Only introduced for type safety.
 const ensNameForMobileDisplay =
@@ -31,6 +28,38 @@ const contractCodeNameForMobileDisplay = breakLongWords(
   contract.cachedIdentity.contract.codeName,
   /(?=[A-Z])/,
 );
+
+// TODO: Refinement necessary.
+// We should be using the `charCount` and `charSplit` functions from enssdk instead of `String.length`.
+// Blocked until Issue#1987 from ensnode monorepo is resolved.
+// For more details see: https://github.com/namehash/ensnode/issues/1987
+
+/**
+ * Adaptive styling for `ENS name` field of `ContractCard` based on
+ * the longest contract name among the protocol's contracts.
+ */
+const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
+  // We need to discretize the width due to Tailwind's limitations with dynamic class names
+  const getFieldWidthBuckets = (maxNameLength: number): string => {
+    if (maxNameLength <= 20) return "sm:min-w-[225px]";
+    if (maxNameLength <= 30) return "sm:min-w-[250px]";
+    if (maxNameLength <= 40) return "sm:min-w-[275px]";
+    return "sm:min-w-[325px]";
+  };
+  const protocolContractNames = getAllProtocolContracts(protocolId)
+    .map((contract) => contract.cachedIdentity)
+    .filter(
+      (cachedIdentity) => cachedIdentity.resolutionStatus !== ContractResolutionStatusIds.Unnamed,
+    )
+    .map((cachedIdentity) => cachedIdentity.name);
+
+  const longestContractNameLength = Math.max(
+    ...protocolContractNames.map((name) => name.length),
+    0,
+  );
+
+  return getFieldWidthBuckets(longestContractNameLength);
+};
 ---
 
 <div
@@ -72,7 +101,7 @@ const contractCodeNameForMobileDisplay = breakLongWords(
   <div
     class={cn(
       "flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start",
-      className.ensName,
+      getContractNameFieldWidth(contract.protocol.id),
     )}>
     <p
       class="text-sm leading-[20px] font-normal text-muted-foreground max-sm:min-w-[105px]">
@@ -84,7 +113,7 @@ const contractCodeNameForMobileDisplay = breakLongWords(
       contract.cachedIdentity.resolutionStatus ===
         ContractResolutionStatusIds.ForwardNamed ? (
         <>
-          <div class="h-[20px] max-sm:hidden flex flex-row flex-nowrap justify-start items-start gap-1.5">
+          <div class="h-[20px] max-sm:hidden flex flex-row flex-nowrap justify-start items-center gap-1.5">
             <a
               href={`https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`}
               target="_blank"

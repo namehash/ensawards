@@ -2,7 +2,8 @@ import {
   ENSReferralsClient,
   ReferralProgramAwardModels,
   type ReferralProgramEditionSlug,
-  type ReferralProgramEditionSummary,
+  type ReferralProgramEditionSummaryPieSplit,
+  type ReferralProgramEditionSummaryRevShareLimit,
   type ReferrerLeaderboardPagePieSplit,
   ReferrerLeaderboardPageResponseCodes,
   type ReferrerLeaderboardPageRevShareLimit,
@@ -42,8 +43,9 @@ export function ReferrerLeaderboardSnippet({
   fullLeaderboardButtonVariant = "ghost",
 }: ReferrerLeaderboardSnippetProps) {
   const now = useNow({ timeToRefresh: secondsInMinute });
-  const [latestReferralProgramEdition, setLatestReferralProgramEdition] =
-    useState<ReferralProgramEditionSummary | null>(null);
+  const [latestReferralProgramEdition, setLatestReferralProgramEdition] = useState<
+    ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit | null
+  >(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [leaderboardSnippetData, setLeaderboardSnippetData] = useState<
@@ -89,42 +91,43 @@ export function ReferrerLeaderboardSnippet({
     }
   }
 
-  const fetchLatestReferralProgramEdition =
-    async (): Promise<ReferralProgramEditionSummary | null> => {
-      try {
-        const editions = await fetchReferralProgramEditionSummaries();
+  const fetchLatestReferralProgramEdition = async (): Promise<
+    ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit | null
+  > => {
+    try {
+      const editions = await fetchReferralProgramEditionSummaries();
 
-        if (editions.length === 0) {
-          setLatestReferralProgramEdition(null);
-          setLeaderboardSnippetData(null);
-          setIsLoading(false);
-          setIsError(true);
-          return null;
-        }
-
-        const startedEditions = editions.filter((edition) => edition.rules.startTime <= now);
-
-        const latestEdition =
-          startedEditions.length === 0
-            ? editions[0]
-            : startedEditions.reduce(
-                (latest, edition) =>
-                  edition.rules.startTime > latest.rules.startTime ? edition : latest,
-                startedEditions[0],
-              );
-
-        setLatestReferralProgramEdition(latestEdition);
-
-        return latestEdition;
-      } catch (error) {
-        console.error(error);
+      if (editions.length === 0) {
         setLatestReferralProgramEdition(null);
         setLeaderboardSnippetData(null);
         setIsLoading(false);
         setIsError(true);
         return null;
       }
-    };
+
+      const startedEditions = editions.filter((edition) => edition.rules.startTime <= now);
+
+      const latestEdition =
+        startedEditions.length === 0
+          ? editions[0]
+          : startedEditions.reduce(
+              (latest, edition) =>
+                edition.rules.startTime > latest.rules.startTime ? edition : latest,
+              startedEditions[0],
+            );
+
+      setLatestReferralProgramEdition(latestEdition);
+
+      return latestEdition;
+    } catch (error) {
+      console.error(error);
+      setLatestReferralProgramEdition(null);
+      setLeaderboardSnippetData(null);
+      setIsLoading(false);
+      setIsError(true);
+      return null;
+    }
+  };
 
   useEffect(() => {
     const loadLeaderboardSnippet = async () => {

@@ -16,7 +16,7 @@ There are a variety of libraries capable of looking up the [primary name](https:
 - [ensnode-react](https://github.com/namehash/ensnode/blob/main/packages/ensnode-react/README.md) (v1.0.0+)
 - [Viem](https://viem.sh/docs/ens/actions/getEnsName#chain-specific-resolution) (v2.35.0+)
 - [Wagmi](https://wagmi.sh/react/api/hooks/useEnsName#chainid) (v2.18.0+)
-Libraries and tools for additional languages or frameworks can be found in the [ENS documentation](https://docs.ens.domains/web/libraries/).`;
+Libraries and tools for additional languages or frameworks can be found in the [ENS documentation](https://docs.ens.domains/web/libraries).`;
 
 const technicalDetailsAdditionalContent = `If a contract has an ENS name, you can use its ENS profile to power additional UX improvements 
 such as avatars, metadata, audit information, and more. More information can be found at the 
@@ -44,8 +44,8 @@ const displayNamedSmartContractsMainnet: BestPracticeApp = {
     ],
   },
   contributions: [
-    { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-03T11:25:00.000Z") },
-    { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-12T14:51:00.000Z") },
+    { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-03T11:25:00.000Z") },
+    { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-12T14:51:00.000Z") },
   ],
 };
 

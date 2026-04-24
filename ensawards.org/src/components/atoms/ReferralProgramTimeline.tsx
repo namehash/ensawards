@@ -1,7 +1,6 @@
 import { calcReferralProgramStatus, type ReferralProgramRules } from "@namehash/ens-referrals";
 import { AbsoluteTime, useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
-import type * as React from "react";
 import { useMemo } from "react";
 
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";

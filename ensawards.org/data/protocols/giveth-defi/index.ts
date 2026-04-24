@@ -1,10 +1,9 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
-import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import GivethProject from "../../projects/giveth";
 import { defineProtocol } from "../registry.ts";
-import { type DeFiProtocol, DeFiProtocolIds } from "../types.ts";
+import { type DeFiProtocol, DeFiProtocolIds, ProtocolTypes } from "../types.ts";
 import GivethIcon from "./icon.tsx";
 
 const GivethDeFi: DeFiProtocol = {
@@ -18,11 +17,11 @@ const GivethDeFi: DeFiProtocol = {
   icon: GivethIcon,
   socials: {
     twitter: new URL("https://x.com/giveth"),
-    website: new URL("https://giveth.io/"),
+    website: new URL("https://giveth.io"),
     ens: "giv.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/giveth-defi/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/giveth-defi/twitter-og.png",
+  ogImagePath: "giveth-defi/og.png",
+  twitterOgImagePath: "giveth-defi/twitter-og.png",
 };
 
 defineProtocol(GivethDeFi);

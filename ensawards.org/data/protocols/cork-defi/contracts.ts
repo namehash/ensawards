@@ -23,7 +23,7 @@ const contracts: Contract[] = [
       name: "timelock-upgrade.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -38,7 +38,7 @@ const contracts: Contract[] = [
       name: "timelock-admin.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -53,7 +53,7 @@ const contracts: Contract[] = [
       name: "timelock-operational.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -68,7 +68,7 @@ const contracts: Contract[] = [
       name: "constraint-rate-adapter.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -83,7 +83,7 @@ const contracts: Contract[] = [
       name: "constraint-rate-adapter-impl.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -98,7 +98,7 @@ const contracts: Contract[] = [
       name: "whitelist.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -113,7 +113,7 @@ const contracts: Contract[] = [
       name: "whitelist-impl.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -128,7 +128,7 @@ const contracts: Contract[] = [
       name: "controller.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -143,7 +143,7 @@ const contracts: Contract[] = [
       name: "pool-manager.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -158,7 +158,7 @@ const contracts: Contract[] = [
       name: "pool-manager-impl.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -173,7 +173,7 @@ const contracts: Contract[] = [
       name: "shares-factory.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
   {
@@ -188,7 +188,7 @@ const contracts: Contract[] = [
       name: "adapter.phoenix.cork.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-01-27T15:15:05.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
     ],
   },
 ];

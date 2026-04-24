@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import { type BestPracticeProtocol, ProtocolTypes } from "data/ens-best-practices/types.ts";
+import { type BestPracticeProtocol } from "data/ens-best-practices/types.ts";
+import { ProtocolTypes } from "data/protocols/types.ts";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { markdownToHtml } from "@/utils/markdown";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -13,8 +14,15 @@ import ItemsList from "@/components/molecules/ItemsList.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "data/protocols/utils.ts";
-import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard.tsx";
+import { formatProtocolType, getProtocolById } from "data/protocols/utils.ts";
+import {
+  ContributorsCard,
+  ContributorsCardLoading,
+  ContributionTypes,
+} from "@/components/atoms/cards/ContributorsCard.tsx";
+import { type Contribution } from "data/contributors/types";
+import { CONTRACTS } from "data/protocols/contracts";
+import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
@@ -31,27 +39,52 @@ const { bestPractice }: ProtocolBestPracticeDetailsProps = Astro.props;
 
 const technicalSectionContentStyles = "w-fit text-base font-normal leading-7 text-gray-500";
 const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold text-black";
+
+const contractDataContributions: Contribution[] = CONTRACTS.flatMap(
+  (contract) => contract.contributions,
+);
+const allContributions: Contribution[] = [
+  ...bestPractice.contributions,
+  ...contractDataContributions,
+];
+
+const additionalInfoContainerStyles =
+  "flex flex-row md:flex-col flex-nowrap justify-between md:justify-center items-center md:items-end md:gap-0 leading-7 max-md:self-stretch";
 ---
 
 <SubpageHero
   header={bestPractice.name}
   description={bestPractice.description}
-  breadcrumbs={["ENS best practices", bestPractice.category.name]}
+  breadcrumbs={[
+    { text: "ENS best practices", linkHref: "/ens-best-practices" },
+    { text: bestPractice.category.name },
+  ]}
   additionalElements={[
     {
       name: "Category",
       value: bestPractice.category.name,
-      link: `/ens-best-practices/${bestPractice.category.categorySlug}`,
     },
-  ]}>
-  <div
-    slot="extraAdditionalElementFirst"
-    class="flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-center sm:items-start sm:gap-0 leading-7 max-sm:self-stretch">
-    <p class="text-gray-400">Powered by</p>
-    <a href="https://www.enscribe.xyz/" target="_blank" rel="noreferrer"
-      ><EnscribeIcon /></a
-    >
-  </div>
+  ]}
+  styles={{
+    textContentContainer: "md:max-w-[720px]",
+    additionalElementsContainer:
+      "md:max-[1200px]:flex-col min-[1200px]:flex-row md:gap-8 xl:gap-14",
+  }}>
+  <Fragment slot="extraAdditionalElementLast">
+    <div class={cn(additionalInfoContainerStyles, "md:gap-0.5 md:items-start")}>
+      <p class="text-gray-400">Applies to</p>
+      <AppliesToBadges bestPractice={bestPractice} />
+    </div>
+    <div class={cn(additionalInfoContainerStyles, "md:items-start")}>
+      <p class="text-gray-400">Powered by</p>
+      <a
+        href="https://www.enscribe.xyz/"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Visit Enscribe (opens in a new tab)"><EnscribeIcon /></a
+      >
+    </div>
+  </Fragment>
 </SubpageHero>
 <section
   class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-10 py-6 sm:pt-[60px] px-5 sm:px-8">
@@ -109,13 +142,18 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
           )}>Learn more about Enscribe</a
         >
       </div>
-      <SuggestionCard
-        client:load
+      <ContributorsCard
+        client:only="react"
         sidebarVariant
-        whatsSuggested="best practice"
-        allContributions={bestPractice.contributions}
-        gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}
-      />
+        contributionType={ContributionTypes.BestPractice}
+        existingContributions={allContributions}
+        gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
+        <ContributorsCardLoading
+          slot="fallback"
+          sidebarVariant
+          contributionType={ContributionTypes.BestPractice}
+        />
+      </ContributorsCard>
     </div>
   </div>
 </section>
@@ -128,39 +166,43 @@ const technicalSectionMinorHeaderStyles = "text-lg leading-normal font-semibold 
 
       return (
         <ItemsList
-          header={`${protocolType} Leaderboard`}
+          header={`${formatProtocolType(protocolType)} Leaderboard`}
           containerStyles="gap-3 sm:gap-2 sm:justify-start max-sm:justify-center">
-          {Object.entries(protocolScores).map(([scoreCategory, value], idx) => {
-            const protocolId = scoreCategory as ProtocolId;
-            const protocol = getProtocolById(protocolId);
-            const ProtocolIcon = protocol.icon;
-            return (
-              <LeaderboardCard
-                key={`leaderboard-card-${protocol.protocolSlug}`}
-                name={protocol.name}
-                ensAwardsScore={value}
-                viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
-                viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
-                {idx < 3 ? (
-                  <Image
-                    alt={`${idx + 1}-place`}
-                    src={images[placeIcons[idx]]()}
-                    slot="placeIcon"
+          {Object.entries(protocolScores).map(
+            ([scoredProtocolId, value], idx) => {
+              // Type casting is necessary due to `Record`'s type nature.
+              // We are completely sure of its correctness
+              const protocolId = scoredProtocolId as ProtocolId;
+              const protocol = getProtocolById(protocolId);
+              const ProtocolIcon = protocol.icon;
+              return (
+                <LeaderboardCard
+                  key={`leaderboard-card-${protocol.protocolSlug}`}
+                  name={protocol.name}
+                  ensAwardsScore={value}
+                  viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
+                  viewDetailsText={`${formatProtocolType(protocolType)}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
+                  {idx < 3 ? (
+                    <Image
+                      alt={`${idx + 1}-place`}
+                      src={images[placeIcons[idx]]()}
+                      slot="placeIcon"
+                    />
+                  ) : (
+                    <p
+                      slot="placeIcon"
+                      class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
+                      {idx + 1}
+                    </p>
+                  )}
+                  <ProtocolIcon
+                    slot="rankedEntityIcon"
+                    className="w-10 h-10 rounded-md"
                   />
-                ) : (
-                  <p
-                    slot="placeIcon"
-                    class="w-8 pt-[7px] px-[11px] pb-[5px] text-sm leading-normal font-semibold text-muted-foreground">
-                    {idx + 1}
-                  </p>
-                )}
-                <ProtocolIcon
-                  slot="rankedEntityIcon"
-                  className="w-10 h-10 rounded-md"
-                />
-              </LeaderboardCard>
-            );
-          })}
+                </LeaderboardCard>
+              );
+            },
+          )}
         </ItemsList>
       );
     })

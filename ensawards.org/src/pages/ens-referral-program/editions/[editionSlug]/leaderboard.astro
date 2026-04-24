@@ -12,25 +12,25 @@ import { ReferralProgramLeaderboardHeroButtons } from "@/components/atoms/Referr
 
 export const prerender = false;
 
-const { edition } = Astro.params;
+const { editionSlug } = Astro.params;
 
-const resolvedReferralProgramEditionSummary = await getReferralProgramEditionSummaryBySlug(edition);
+const referralProgramEditionSummary = await getReferralProgramEditionSummaryBySlug(editionSlug);
 
 // If the referral program edition summary cannot be found based on the slug in the URL,
 // set the 404 status explicitly for SEO/caching purposes and render the 404 fallback.
-if (resolvedReferralProgramEditionSummary === undefined) {
+if (referralProgramEditionSummary === undefined) {
   Astro.response.status = 404;
 }
 ---
 
 {
-  resolvedReferralProgramEditionSummary === undefined ? (
+  referralProgramEditionSummary === undefined ? (
     <Layout
       isStatic={true}
       pageMetadata={{
         title: `ENSAwards: Unrecognized ENS Referral Program Edition`,
         description: `The requested ENS Referral Program edition is not recognized.`,
-        url: `https://ensawards.org/ens-referral-program/editions/${edition}/leaderboard`,
+        url: `https://ensawards.org/ens-referral-program/editions/${editionSlug}/leaderboard`,
       }}>
       <Error404Display
         header="Unrecognized ENS Referral Program Edition"
@@ -44,38 +44,36 @@ if (resolvedReferralProgramEditionSummary === undefined) {
   ) : (
     <Layout
       pageMetadata={{
-        title: `ENSAwards: ENS Leaderboard for ${resolvedReferralProgramEditionSummary.displayName} Referrers`,
-        description: `Compare referrers by their performance in ${resolvedReferralProgramEditionSummary.displayName}.`,
-        url: `https://ensawards.org/ens-referral-program/editions/${resolvedReferralProgramEditionSummary.slug}/leaderboard`,
-        ogImage: `https://ensawards.org/${resolvedReferralProgramEditionSummary.slug}_referral_program_edition_og_image.png`,
-        twitterImage: `https://ensawards.org/${resolvedReferralProgramEditionSummary.slug}_referral_program_edition_twitter_og_image.png`,
+        title: `ENSAwards: ENS Leaderboard for ${referralProgramEditionSummary.displayName} Referrers`,
+        description: `Compare referrers by their performance in ${referralProgramEditionSummary.displayName}.`,
+        url: `https://ensawards.org/ens-referral-program/editions/${referralProgramEditionSummary.slug}/leaderboard`,
+        ogImage: `https://ensawards.org/${referralProgramEditionSummary.slug}_referral_program_edition_og_image.png`,
+        twitterImage: `https://ensawards.org/${referralProgramEditionSummary.slug}_referral_program_edition_twitter_og_image.png`,
       }}>
       <SubpageHero
-        header={`${resolvedReferralProgramEditionSummary.displayName} leaderboard`}
-        description={`Compare referrers by their performance in ${resolvedReferralProgramEditionSummary.displayName}.`}
-        breadcrumbs={["ENS Referral Program"]}
+        header={`${referralProgramEditionSummary.displayName} leaderboard`}
+        description={`Compare referrers by their performance in ${referralProgramEditionSummary.displayName}.`}
+        breadcrumbs={[
+          { text: "ENS Referral Program", linkHref: "/ens-referral-program" },
+        ]}
         customImage={{
           source: LeaderboardsHeroImage,
           width: 371,
           height: 372,
           styles: "-top-0 right-0 opacity-10",
         }}>
-        {resolvedReferralProgramEditionSummary.rules.awardModel ===
+        {referralProgramEditionSummary.rules.awardModel ===
         ReferralProgramAwardModels.RevShareLimit ? (
           <ReferralProgramEditionHeroCardRevShareLimit
             client:load
             slot="largerHeroItem"
-            referralProgramEditionSummary={
-              resolvedReferralProgramEditionSummary
-            }
+            referralProgramEditionSummary={referralProgramEditionSummary}
           />
         ) : (
           <ReferralProgramEditionHeroCardPieSplit
             client:load
             slot="largerHeroItem"
-            referralProgramEditionSummary={
-              resolvedReferralProgramEditionSummary
-            }
+            referralProgramEditionSummary={referralProgramEditionSummary}
           />
         )}
         <div
@@ -83,9 +81,7 @@ if (resolvedReferralProgramEditionSummary === undefined) {
           class="flex flex-col gap-4 justify-start items-start">
           <ReferralProgramLeaderboardHeroButtons
             client:load
-            referralProgramEditionSummary={
-              resolvedReferralProgramEditionSummary
-            }
+            referralProgramEditionSummary={referralProgramEditionSummary}
           />
           <div class="block md:hidden bg-white/15 h-[1px] w-[calc(100vw-48px)]" />
         </div>
@@ -93,7 +89,7 @@ if (resolvedReferralProgramEditionSummary === undefined) {
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
         <ReferrerLeaderboard
           client:load
-          referralProgramEditionSummary={resolvedReferralProgramEditionSummary}
+          referralProgramEditionSummary={referralProgramEditionSummary}
         />
       </section>
     </Layout>

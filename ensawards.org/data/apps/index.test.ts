@@ -1,8 +1,9 @@
+import { isValidSlug } from "data/shared/slugs";
 import { describe, expect, it } from "vitest";
 
 import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
-import { areStringsUnique, isValidSlug } from "@/utils";
+import { areStringsUnique } from "@/utils";
 
 import { APPS } from ".";
 
@@ -77,42 +78,6 @@ describe("App data", () => {
           `Name={${app.socials.ens}} is empty or is not ENS normalized`,
         ).toEqual(true);
       }
-    });
-  });
-
-  it("Should have benchmarks array", () => {
-    data.forEach((app) => {
-      expect(
-        Array.isArray(app.benchmarks),
-        `Benchmarks for app with id={${app.id}} is not an array`,
-      ).toEqual(true);
-    });
-  });
-
-  it("Should have valid benchmark data structure", () => {
-    data.forEach((app) => {
-      app.benchmarks.forEach((benchmark, index) => {
-        expect(
-          benchmark.bestPractice,
-          `Benchmark ${index} for app ${app.id} missing bestPractice`,
-        ).toBeDefined();
-        expect(
-          benchmark.result,
-          `Benchmark ${index} for app ${app.id} missing result`,
-        ).toBeDefined();
-        expect(
-          benchmark.lastUpdated,
-          `Benchmark ${index} for app ${app.id} missing lastUpdated`,
-        ).toBeDefined();
-        expect(
-          typeof benchmark.lastUpdated === "number",
-          `Benchmark ${index} for app ${app.id} lastUpdated should be a number`,
-        ).toEqual(true);
-        expect(
-          benchmark.contributions,
-          `Benchmark ${index} for app ${app.id} missing contributions`,
-        ).toBeDefined();
-      });
     });
   });
 });

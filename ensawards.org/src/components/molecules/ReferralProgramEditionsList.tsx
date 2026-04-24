@@ -1,6 +1,7 @@
 import type {
   ReferralProgramEditionStatusId,
-  ReferralProgramEditionSummary,
+  ReferralProgramEditionSummaryPieSplit,
+  ReferralProgramEditionSummaryRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 import {
   ENSReferralsClient,
@@ -36,7 +37,7 @@ export function ReferralProgramEditionsList({
   const [isLoading, setIsLoading] = useState(true);
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
   const [referralProgramEditionSummaries, setReferralProgramEditionSummaries] = useState<
-    ReferralProgramEditionSummary[] | null
+    (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit)[] | null
   >(null);
   // refresh every 5 minutes
   const now = useNow({ timeToRefresh: 5 * secondsInMinute });
@@ -144,8 +145,13 @@ const ReferralProgramEditionsListContainer = ({
 interface DisplayReferralProgramEditionsListProps {
   isLoading: boolean;
   retryFetch: () => void;
-  referralProgramEditionSummaries: ReferralProgramEditionSummary[] | null;
-  loadingReferralProgramEditionSummaries: ReferralProgramEditionSummary[];
+  referralProgramEditionSummaries:
+    | (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit)[]
+    | null;
+  loadingReferralProgramEditionSummaries: (
+    | ReferralProgramEditionSummaryPieSplit
+    | ReferralProgramEditionSummaryRevShareLimit
+  )[];
   simplifiedVariant: boolean;
 }
 

@@ -9,10 +9,10 @@ import {
   ReferralProgramAwardModels,
   ReferralProgramEditionSummariesResponseCodes,
 } from "@namehash/ens-referrals/v1";
+import { isValidSlug } from "data/shared/slugs";
 
 import { getCurrencyInfo, type Price } from "@ensnode/ensnode-sdk";
 
-import { isValidSlug } from "@/utils";
 import { getENSNodeUrl } from "@/utils/env";
 
 export const filterOutUnrecognizedEditions = (
@@ -28,7 +28,9 @@ const getEditionsFetchErrorMessage = (errorMessage: string) =>
 
 export async function getReferralProgramEditionSummaryBySlug(
   referralProgramSlug: ReferralProgramEditionSlug,
-): Promise<ReferralProgramEditionSummary | undefined> {
+): Promise<
+  ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit | undefined
+> {
   if (!referralProgramSlug || !isValidSlug(referralProgramSlug)) return undefined;
 
   try {
@@ -54,7 +56,7 @@ export async function getReferralProgramEditionSummaryBySlug(
 }
 
 export async function fetchReferralProgramEditionSummaries(): Promise<
-  ReferralProgramEditionSummary[]
+  (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit)[]
 > {
   try {
     const client = new ENSReferralsClient({ url: getENSNodeUrl() });

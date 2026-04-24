@@ -9,7 +9,7 @@ const BlockscoutProject: Project = {
   description: "Blockscout is a tool for inspecting and analyzing EVM-based blockchains.",
   icon: BlockscoutIcon,
   socials: {
-    website: new URL("https://www.blockscout.com/"),
+    website: new URL("https://www.blockscout.com"),
     twitter: new URL("https://x.com/blockscout"),
   },
 };

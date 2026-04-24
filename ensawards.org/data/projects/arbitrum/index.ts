@@ -10,7 +10,7 @@ const ArbitrumProject: Project = {
     "Arbitrum is a unified blockchain for everyone, where ideas thrive and boundaries fade.",
   icon: ArbitrumIcon,
   socials: {
-    website: new URL("https://arbitrum.io/"),
+    website: new URL("https://arbitrum.io"),
     twitter: new URL("https://x.com/arbitrum"),
   },
 };

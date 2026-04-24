@@ -1,0 +1,68 @@
+---
+export interface ModalProps {
+  overlayId: string;
+}
+
+const { overlayId }: ModalProps = Astro.props;
+---
+
+<modal-content
+  id={`${overlayId}-modal-content`}
+  data-id={overlayId}
+  class="w-fit sm:min-w-[420px] max-w-[460px] h-fit box-border p-6 flex flex-nowrap flex-col justify-start items-start gap-5 shrink-0 rounded-xl bg-white">
+  <slot name="modalContent" />
+</modal-content>
+
+<script>
+  function closeOverlay(overlayId: string) {
+    const overlay = document.querySelector(`#${overlayId}`);
+    if (!overlay) return;
+    overlay.classList.add("hidden");
+    document.body.classList.remove("no-scroll");
+
+    const scrollToY = parseInt(
+      document.body.style.top.replace("px", "").replace("-", ""),
+    );
+    document.body.style.top = "";
+
+    if (!isNaN(scrollToY)) {
+      window.scrollTo({ top: scrollToY, behavior: "instant" });
+    }
+  }
+
+  function enableAlternativeClosings(overlayId: string) {
+    const overlay = document.querySelector(`#${overlayId}`);
+    const content = overlay
+      ? overlay.querySelector(`#${overlayId}-modal-content`)
+      : null;
+
+    if (!overlay || !content) return;
+
+    // Close on click outside
+    overlay.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Node)) return;
+      if (!content.contains(target)) closeOverlay(overlayId);
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        const overlay = document.querySelector(`#${overlayId}`);
+        if (!overlay || overlay.classList.contains("hidden")) return;
+        e.preventDefault();
+        closeOverlay(overlayId);
+      }
+    });
+  }
+
+  class OverlayContent extends HTMLElement {
+    connectedCallback() {
+      const overlayId = this.dataset.id;
+      if (!overlayId) return;
+      enableAlternativeClosings(overlayId);
+    }
+  }
+
+  customElements.define("modal-content", OverlayContent);
+</script>

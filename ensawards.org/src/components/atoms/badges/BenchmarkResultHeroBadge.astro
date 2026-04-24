@@ -2,31 +2,50 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
-import benchmarkResultFailSymbol from "../../../assets/benchmarkResultFailSymbol.svg";
-import benchmarkResultPartialPassSymbol from "../../../assets/benchmarkResultPartialPassSymbol.svg";
-import benchmarkResultPassSymbol from "../../../assets/benchmarkResultPassSymbol.svg";
-import { BenchmarkResult } from "../../../../data/apps/benchmarks-types.ts";
-import { cn } from "../../../utils/tailwindClassConcatenation";
+import benchmarkResultFailSymbol from "@/assets/benchmarkResultFailSymbol.svg";
+import benchmarkResultPartialPassSymbol from "@/assets/benchmarkResultPartialPassSymbol.svg";
+import benchmarkResultPassSymbol from "@/assets/benchmarkResultPassSymbol.svg";
+import benchmarkPendingSymbol from "@/assets/benchmarkPendingSymbol.svg";
+import { BenchmarkResults, type AppBenchmark } from "data/benchmarks/types.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
 import { type BenchmarkResultBadgeProps } from "./BenchmarkResultBadge.tsx";
+import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
 
 const { benchmark, className }: BenchmarkResultBadgeProps = Astro.props;
 
-const benchmarkResultContent = {
-  [BenchmarkResult.Pass]: {
-    symbol: benchmarkResultPassSymbol,
-    symbolAlt: "Passed benchmark result indicator",
-  },
-  [BenchmarkResult.PartialPass]: {
-    symbol: benchmarkResultPartialPassSymbol,
-    symbolAlt: "Partially passed benchmark result indicator",
-  },
-  [BenchmarkResult.Fail]: {
-    symbol: benchmarkResultFailSymbol,
-    symbolAlt: "Failed benchmark result indicator",
-  },
-} satisfies Record<BenchmarkResult, { symbol: ImageMetadata; symbolAlt: string }>;
+const benchmarkResultContent = (
+  benchmark?: AppBenchmark,
+): { symbol: ImageMetadata; symbolAlt: string } => {
+  if (benchmark === undefined) {
+    return {
+      symbol: benchmarkPendingSymbol,
+      symbolAlt: "Pending review benchmark indicator",
+    };
+  }
+  switch (benchmark.result) {
+    case BenchmarkResults.PartialPass:
+      return {
+        symbol: benchmarkResultPartialPassSymbol,
+        symbolAlt: "Partially passed benchmark result indicator",
+      };
+    case BenchmarkResults.Pass:
+      return {
+        symbol: benchmarkResultPassSymbol,
+        symbolAlt: "Passed benchmark result indicator",
+      };
+    case BenchmarkResults.Fail:
+      return {
+        symbol: benchmarkResultFailSymbol,
+        symbolAlt: "Failed benchmark result indicator",
+      };
 
-const { symbol, symbolAlt } = benchmarkResultContent[benchmark.result];
+    default:
+      const _exhaustive: never = benchmark.result;
+      throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
+  }
+};
+
+const { symbol, symbolAlt } = benchmarkResultContent(benchmark);
 ---
 
 <div
@@ -42,7 +61,7 @@ const { symbol, symbolAlt } = benchmarkResultContent[benchmark.result];
     class="h-[75px] sm:h-[139px] w-[75px] sm:w-[139px] shrink-0"
     quality={100}
   />
-  <p class="text-center text-base font-semibold leading-6 text-[#F5F5F5]">
-    {benchmark.result}
+  <p class="text-center text-base font-medium leading-normal text-[#F5F5F5]">
+    {formatBenchmarkResult(benchmark, { lowercase: false })}
   </p>
 </div>

@@ -10,7 +10,7 @@ const AaveProject: Project = {
     "The largest lending network where you can earn, borrow, save, and swap with millions of users.",
   icon: AaveIcon,
   socials: {
-    website: new URL("https://aave.com/"),
+    website: new URL("https://aave.com"),
     twitter: new URL("https://x.com/aave"),
   },
 };

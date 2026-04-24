@@ -6,6 +6,7 @@ import {
   type ChainId,
   EnsApiClient,
   evmChainIdToCoinType,
+  formatAccountId,
   isNormalizedName,
   type ResolveRecordsResponse,
   type ResolverRecordsResponseBase,
@@ -207,5 +208,21 @@ describe("CachedIdentity", () => {
         await testContractsCachedProfile(contract.cachedIdentity);
       }
     }, 3000);
+  });
+});
+
+describe("Contracts contribution data", () => {
+  const data = CONTRACTS;
+  it("Should have unique contributor entries for each contract", () => {
+    data.forEach((contract) => {
+      const contributorsList = contract.contributions.map((contribution) =>
+        formatAccountId(contribution.from),
+      );
+      const uniqueContributors = new Set(contributorsList);
+      expect(
+        uniqueContributors.size,
+        `Contract with address=${contract.cachedIdentity.contract.address} has duplicate contributors`,
+      ).toEqual(contributorsList.length);
+    });
   });
 });

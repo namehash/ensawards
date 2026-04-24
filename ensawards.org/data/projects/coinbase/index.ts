@@ -10,7 +10,7 @@ const CoinbaseProject: Project = {
     "Regulated crypto exchange and financial platform for buying, selling, storing, and using digital assets.",
   icon: CoinbaseIcon,
   socials: {
-    website: new URL("https://www.coinbase.com/"),
+    website: new URL("https://www.coinbase.com"),
     twitter: new URL("https://x.com/coinbase"),
   },
 };
