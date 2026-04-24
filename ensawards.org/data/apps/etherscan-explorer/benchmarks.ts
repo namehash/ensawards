@@ -29,8 +29,6 @@ const benchmarks = {
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:26:20.566Z") },
     ],
   },
-  "mock-all-pending-bp2": undefined,
-  "mock-all-pending-bp1": undefined,
 } as const satisfies BestPracticeBenchmarks;
 
 defineAppBenchmarks(EtherscanExplorer, benchmarks);

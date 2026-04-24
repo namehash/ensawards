@@ -25,8 +25,6 @@ const benchmarks: BestPracticeBenchmarks = {
       },
     ],
   },
-  "mock-all-pending-bp2": undefined,
-  "mock-all-pending-bp1": undefined,
 } as const satisfies BestPracticeBenchmarks;
 
 defineAppBenchmarks(WalletChanWallet, benchmarks);

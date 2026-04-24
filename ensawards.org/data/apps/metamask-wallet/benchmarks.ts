@@ -29,8 +29,6 @@ const benchmarks = {
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:24:39.561Z") },
     ],
   },
-  "mock-all-pending-bp2": undefined,
-  "mock-all-pending-bp1": undefined,
 } as const satisfies BestPracticeBenchmarks;
 
 defineAppBenchmarks(MetaMaskWallet, benchmarks);
