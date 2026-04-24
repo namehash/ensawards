@@ -20,7 +20,12 @@ import { ContractNamingSeasonAwardCardLoading } from "@/components/atoms/cards/c
   <SubpageHero
     header="ENS Contract Naming Season Award Distributions"
     description="Check out all the awards distributed to date."
-    breadcrumbs={["ENS Contract Naming Season"]}
+    breadcrumbs={[
+      {
+        text: "ENS Contract Naming Season",
+        linkHref: "/ens-contract-naming-season",
+      },
+    ]}
     customImage={{
       source: LeaderboardsHeroImage,
       width: 371,

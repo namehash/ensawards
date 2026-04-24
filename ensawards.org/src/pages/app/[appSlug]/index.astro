@@ -177,7 +177,7 @@ if (app !== undefined) {
                 })}
             </ItemsList>
           </div>
-          <div class="w-full md:w-2/5">
+          <div class="w-full md:w-2/5 flex flex-col justify-start items-center gap-6">
             <ContributorsCard
               client:only="react"
               contributionType={ContributionTypes.BenchmarkResult}
@@ -190,7 +190,7 @@ if (app !== undefined) {
                 contributionType={ContributionTypes.BenchmarkResult}
               />
             </ContributorsCard>
-            <AwardsCard entity={app} />
+            <AwardsCard entity={app} sidebarVariant />
           </div>
         </div>
       </section>

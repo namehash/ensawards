@@ -32,24 +32,27 @@ describe("Awards data", () => {
       awardsByIncentiveProgram.set(award.associatedIncentiveProgramSlug, accountIdStrings);
     });
   });
-});
 
-it("Should have valid award amounts when `AwardType` is `FinancialAward`", () => {
-  AWARDS.filter((award) => award.type === AwardTypes.FinancialAward).forEach((award) => {
-    expect(isValidAwardValue(award.price)).toStrictEqual(true);
-  });
-});
-
-it("If `awardedEntityMetadata` is provided and of type `Custom`, it should have a valid name", () => {
-  AWARDS.forEach((award) => {
-    if (
-      award.awardedEntityMetadata &&
-      award.awardedEntityMetadata.type === EntityMetadataTypes.Custom
-    ) {
+  it("Should have valid award amounts when `AwardType` is `FinancialAward`", () => {
+    AWARDS.filter((award) => award.type === AwardTypes.FinancialAward).forEach((award) => {
       expect(
-        isValidCustomEntityName(award.awardedEntityMetadata.name),
-        `Custom entity name is empty for an award awarded to: ${formatAccountId(award.awardedTo)}`,
-      ).toEqual(true);
-    }
+        isValidAwardValue(award.price),
+        `Invalid price for award: ${formatAccountId(award.awardedTo)} in incentive program: ${award.associatedIncentiveProgramSlug}`,
+      ).toStrictEqual(true);
+    });
+  });
+
+  it("If `awardedEntityMetadata` is provided and of type `Custom`, it should have a valid name", () => {
+    AWARDS.forEach((award) => {
+      if (
+        award.awardedEntityMetadata &&
+        award.awardedEntityMetadata.type === EntityMetadataTypes.Custom
+      ) {
+        expect(
+          isValidCustomEntityName(award.awardedEntityMetadata.name),
+          `Custom entity name is empty for an award awarded to: ${formatAccountId(award.awardedTo)}`,
+        ).toEqual(true);
+      }
+    });
   });
 });

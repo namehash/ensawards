@@ -36,22 +36,21 @@ export const sumIncentiveProgramFinancialAwards = (
  * Calculates the remaining award pool for a given {@link IncentiveProgram}.
  *
  * @throws If the calculated remaining award pool is negative.
- * @throws If the incentive program with the given slug
- * is not of type {@link IncentiveProgramAwardPool} or does not exist.
+ * @throws If the incentive program with the given slug does not exist.
  */
 export const calcIncentiveProgramRemainingAwardPool = (
   incentiveProgramSlug: IncentiveProgramSlug,
 ): number => {
-  const totalAwardPool = getIncentiveProgramBySlug(incentiveProgramSlug)?.totalAwardPool ?? 0;
+  const incentiveProgram = getIncentiveProgramBySlug(incentiveProgramSlug);
 
-  if (totalAwardPool === undefined) {
+  if (incentiveProgram === undefined) {
     throw new Error(
-      `Incentive program with slug ${incentiveProgramSlug} is not of type "IncentiveProgramAwardPool".`,
+      `Invariant(IncentiveProgramSlug): Incentive program with slug ${incentiveProgramSlug} is not defined.`,
     );
   }
 
   const remainingAwardPool =
-    totalAwardPool - sumIncentiveProgramFinancialAwards(incentiveProgramSlug);
+    incentiveProgram.totalAwardPool - sumIncentiveProgramFinancialAwards(incentiveProgramSlug);
 
   if (remainingAwardPool < 0) {
     throw new Error(

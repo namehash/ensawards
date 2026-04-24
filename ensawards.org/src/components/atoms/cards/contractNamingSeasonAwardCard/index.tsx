@@ -10,7 +10,7 @@ import { ENS_TOKENS_TO_USDC_CONVERSION_RATE, ensTokenFormatter } from "data/shar
 import { secondsInMinute } from "date-fns/constants";
 import { useCallback, useMemo } from "react";
 
-import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
+import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import { AwardedEntityField } from "@/components/atoms/cards/contractNamingSeasonAwardCard/AwardedEntityField";
 import { getAdvocateDetailsUrl } from "@/components/atoms/cards/referrerCard/shared";
@@ -52,7 +52,7 @@ export const ContractNamingSeasonAwardCard = ({ award }: ContractNamingSeasonAwa
           {children}
         </a>
       ) : (
-        <p className="text-sm leading-normal font-medium text-black">{children}</p>
+        <span className="text-sm leading-normal font-medium text-black">{children}</span>
       ),
     [transactionUrl],
   );

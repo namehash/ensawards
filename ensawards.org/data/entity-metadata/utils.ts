@@ -3,5 +3,5 @@
  * according to the invariants defined in {@link CustomEntityMetadata}.
  */
 export const isValidCustomEntityName = (name: string): boolean => {
-  return name.trim().length > 0;
+  return name === name.trim() && name.trim().length > 0;
 };

@@ -32,14 +32,11 @@ describe("Contributors data", () => {
       });
     });
 
-    it("Should have valid and unique contributor aliases", () => {
+    it("Should have valid contributor aliases", () => {
       const aliases = Object.keys(contributorsData);
-      const uniqueAliases = new Set();
 
       aliases.forEach((alias) => {
         expect(isValidSlug(alias), `Contributor alias "${alias}" is not valid.`).toBe(true);
-        expect(uniqueAliases.has(alias), `Contributor alias "${alias}" is not unique.`).toBe(false);
-        uniqueAliases.add(alias);
       });
     });
 
