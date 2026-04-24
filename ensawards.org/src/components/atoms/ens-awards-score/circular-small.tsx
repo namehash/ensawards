@@ -1,12 +1,16 @@
-import { getAppSupportColor } from "@/utils/styles";
-import { type EnsAwardsScore } from "@/utils/types";
+import { type EnsAwardsScore } from "data/shared/ens-awards-score";
 
-export const EnsAwardsCircularScoreSmall = ({ score }: { score: EnsAwardsScore }) => {
+import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon";
+import { getScoreColor } from "@/utils/styles";
+
+export const EnsAwardsCircularScoreSmall = ({ score }: { score?: EnsAwardsScore }) => {
+  if (score === undefined) return <AllBenchmarksPendingIcon />;
+
   const roundedScore = Math.round(score);
   const radius = 13;
   const circumference = 2 * Math.PI * radius;
   const dashOffset = circumference * (1 - roundedScore / 100);
-  const progressColorClass = `text-${getAppSupportColor(score)}`;
+  const progressColorClass = `text-${getScoreColor(score)}`;
 
   return (
     <div className="relative flex h-8 w-8 shrink-0 items-center justify-center">

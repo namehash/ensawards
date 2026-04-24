@@ -1,0 +1,54 @@
+---
+import AppBestPracticeDetails from "@/components/organisms/AppBestPracticeDetails.astro";
+import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
+import ProtocolBestPracticeDetails from "@/components/organisms/ProtocolBestPracticeDetails.astro";
+import Layout from "@/layouts/Layout.astro";
+import { BestPracticeTypes } from "data/ens-best-practices/types.ts";
+import TechnicalInfoAnchorScript from "@/components/atoms/TechnicalInfoAnchorScript.astro";
+import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
+import {
+  getBestPracticesByCategory,
+  getBestPracticeBySlug,
+} from "data/ens-best-practices/utils.ts";
+
+export function getStaticPaths() {
+  const staticPaths = [];
+
+  for (let category of BEST_PRACTICE_CATEGORIES) {
+    getBestPracticesByCategory(category).forEach((bestPractice) =>
+      staticPaths.push({
+        params: {
+          categorySlug: category.categorySlug,
+          bestPracticeSlug: bestPractice.bestPracticeSlug,
+        },
+      }),
+    );
+  }
+  return staticPaths;
+}
+
+const { categorySlug, bestPracticeSlug } = Astro.params;
+
+const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+---
+
+{
+  bestPractice === undefined ? (
+    // theoretically, because of Astro's build-time page generation, this should never happen
+    <DataLoadingError />
+  ) : (
+    <Layout
+      pageMetadata={{
+        title: `ENSAwards: ${bestPractice.name}`,
+        description: bestPractice.description,
+        url: `https://ensawards.org/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`,
+      }}>
+      {bestPractice.type === BestPracticeTypes.App ? (
+        <AppBestPracticeDetails bestPractice={bestPractice} />
+      ) : (
+        <ProtocolBestPracticeDetails bestPractice={bestPractice} />
+      )}
+      <TechnicalInfoAnchorScript />
+    </Layout>
+  )
+}

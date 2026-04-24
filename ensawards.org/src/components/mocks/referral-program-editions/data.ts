@@ -1,12 +1,16 @@
 import {
   ReferralProgramAwardModels,
   ReferralProgramEditionStatuses,
-  type ReferralProgramEditionSummary,
+  type ReferralProgramEditionSummaryPieSplit,
+  type ReferralProgramEditionSummaryRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 
 import { CurrencyIds } from "@ensnode/ensnode-sdk";
 
-export const mockReferralProgramEditionSummariesList: ReferralProgramEditionSummary[] = [
+export const mockReferralProgramEditionSummariesList: (
+  | ReferralProgramEditionSummaryPieSplit
+  | ReferralProgramEditionSummaryRevShareLimit
+)[] = [
   {
     awardModel: ReferralProgramAwardModels.PieSplit,
     slug: "2025-12",

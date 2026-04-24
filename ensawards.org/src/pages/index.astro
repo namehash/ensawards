@@ -12,11 +12,11 @@ import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { ProtocolTypes } from "data/ens-best-practices/types.ts";
-import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
+import { ProtocolTypes } from "data/protocols/types.ts";
+import { formatBestPracticeTarget } from "data/ens-best-practices/utils.ts";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "data/protocols/utils.ts";
-import { calculateAppEnsAwardsScore } from "data/apps/utils.ts";
+import { getProtocolById, formatProtocolType } from "data/protocols/utils.ts";
+import { calcAppScore, sortApps, formatAppType } from "data/apps/utils.ts";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -33,26 +33,26 @@ const placeIcons = [
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-center items-center max-sm:gap-6 gap-10 py-5 sm:py-[60px] px-5 sm:px-8">
     <ReferralProgramsCTA />
     {
-      Object.values(AppTypes).map((appType) => {
+      [...Object.values(AppTypes)].map((appType) => {
         const relevantApps = APPS.filter((app) => app.type === appType);
         const rankedApps = relevantApps
-          .map((app) => ({ app, score: calculateAppEnsAwardsScore(app) }))
-          .sort((a, b) => b.score - a.score)
+          .map((app) => ({ app, score: calcAppScore(app) }))
+          .sort((a, b) => sortApps(a.app, b.app))
           .slice(0, 3);
 
         return (
           <ItemsList
-            header={`Top ${pluralizeBestPracticeTarget(appType)}`}
+            header={`Top ${formatBestPracticeTarget(appType, { lowercase: false, plural: true })}`}
             containerStyles="gap-3 sm:gap-2 sm:justify-start max-sm:justify-center">
             {rankedApps.map(({ app, score }, idx) => {
               const AppIcon = app.icon;
               return (
                 <LeaderboardCard
-                  key={`${appType.toLowerCase()}-review-card-${app.id}`}
+                  key={`${appType}-review-card-${app.id}`}
                   name={app.name}
                   ensAwardsScore={score}
-                  viewDetailsLink={`/app/${app.appSlug}`}
-                  viewDetailsText={`${appType} report`}>
+                  viewDetailsHref={`/app/${app.appSlug}`}
+                  viewDetailsText={`${formatAppType(appType, { plural: false, lowercase: false })} report`}>
                   <AppIcon
                     slot="rankedEntityIcon"
                     className="w-10 h-10 rounded-md"
@@ -66,7 +66,7 @@ const placeIcons = [
               );
             })}
             <a
-              href={`/leaderboards/${appType.toLowerCase()}`}
+              href={`/leaderboards/${appType}`}
               class={cn(
                 shadcnButtonVariants({
                   variant: "ghost",
@@ -75,25 +75,29 @@ const placeIcons = [
                     "cursor-pointer rounded-full text-sm max-sm:w-full",
                 }),
               )}>
-              View full {appType.toLowerCase()} leaderboard
+              View full{" "}
+              {formatAppType(appType, { plural: false, lowercase: true })}{" "}
+              leaderboard
             </a>
           </ItemsList>
         );
       })
     }
     {
-      Object.values(ProtocolTypes).map((protocolType) => {
+      [...Object.values(ProtocolTypes)].map((protocolType) => {
         const protocolScores =
           getContractNamingScoresByProtocolType(protocolType);
 
         return (
           <ItemsList
-            header={`Top ${pluralizeBestPracticeTarget(protocolType)}`}
+            header={`Top ${formatBestPracticeTarget(protocolType, { lowercase: false, plural: true })}`}
             containerStyles="gap-3 sm:gap-2 sm:justify-start max-sm:justify-center">
-            {Object.entries(protocolScores)
+            {[...Object.entries(protocolScores)]
               .slice(0, 3)
-              .map(([scoreCategory, value], idx) => {
-                const protocolId = scoreCategory as ProtocolId;
+              .map(([scoredProtocolId, value], idx) => {
+                // Type casting is necessary due to `Record`'s type nature.
+                // We are completely sure of its correctness
+                const protocolId = scoredProtocolId as ProtocolId;
                 const protocol = getProtocolById(protocolId);
                 const ProtocolIcon = protocol.icon;
                 return (
@@ -101,8 +105,8 @@ const placeIcons = [
                     key={`leaderboard-card-${protocol.protocolSlug}`}
                     name={protocol.name}
                     ensAwardsScore={value}
-                    viewDetailsLink={`/protocol/${protocol.protocolSlug}`}
-                    viewDetailsText={`${protocolType}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
+                    viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
+                    viewDetailsText={`${formatProtocolType(protocolType)}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                     <Image
                       alt={`${idx + 1}-place`}
                       src={images[placeIcons[idx]]()}
@@ -116,7 +120,7 @@ const placeIcons = [
                 );
               })}
             <a
-              href={`/leaderboards/${protocolType.toLowerCase()}`}
+              href={`/leaderboards/${protocolType}`}
               class={cn(
                 shadcnButtonVariants({
                   variant: "ghost",
@@ -125,7 +129,7 @@ const placeIcons = [
                     "cursor-pointer rounded-full text-sm max-sm:w-full",
                 }),
               )}>
-              View full {protocolType} leaderboard
+              View full {formatProtocolType(protocolType)} leaderboard
             </a>
           </ItemsList>
         );

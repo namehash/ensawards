@@ -234,6 +234,11 @@ export interface Contract {
    */
   cachedIdentity: ContractIdentityResolved;
 
-  /** A record of all contributors involved in the addition or maintenance of the contract's data. */
+  /** Identifies all contributors who added or updated the contract's data.
+   *
+   * @invariant Multiple {@link Contribution} from the same contributor are not allowed for the same {@link Contract}.
+   * When a contributor makes updates to their existing contribution,
+   * they should update the `lastUpdated` timestamp of their existing `Contribution`.
+   */
   contributions: [Contribution, ...Contribution[]];
 }

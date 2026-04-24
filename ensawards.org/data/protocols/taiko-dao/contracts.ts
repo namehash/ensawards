@@ -23,8 +23,8 @@ const contracts: Contract[] = [
       name: "dao.taiko.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-28T14:30:00.000Z") },
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-28T14:30:00.000Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
     ],
   },
   {
@@ -42,8 +42,8 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-28T14:30:00.000Z") },
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-28T14:30:00.000Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
     ],
   },
   {
@@ -57,8 +57,8 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-28T14:30:00.000Z") },
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-28T14:30:00.000Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
     ],
   },
   {
@@ -73,8 +73,8 @@ const contracts: Contract[] = [
       name: "controller.taiko.eth",
     },
     contributions: [
-      { from: contributors.lightwalker, updatedAt: parseTimestamp("2025-11-28T14:30:00.000Z") },
-      { from: contributors.stevedylan, updatedAt: parseTimestamp("2025-12-04T15:25:00.000Z") },
+      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-28T14:30:00.000Z") },
+      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
     ],
   },
 ];

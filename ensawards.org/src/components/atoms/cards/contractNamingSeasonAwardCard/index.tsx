@@ -15,7 +15,7 @@ import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk
 import { AwardedEntityField } from "@/components/atoms/cards/contractNamingSeasonAwardCard/AwardedEntityField";
 import { getAdvocateDetailsUrl } from "@/components/atoms/cards/referrerCard/shared";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace";
-import { currencyFormatter } from "@/utils/textModifications";
+import { usdFormatter } from "@/utils/textModifications";
 
 export interface ContractNamingSeasonAwardCardProps {
   award: AwardFinancial;
@@ -108,7 +108,7 @@ export const ContractNamingSeasonAwardCard = ({ award }: ContractNamingSeasonAwa
           Est. award value
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
-          {currencyFormatter.format(estimatedValueUSD)} USD
+          {usdFormatter.format(estimatedValueUSD)} USD
         </p>
       </div>
 

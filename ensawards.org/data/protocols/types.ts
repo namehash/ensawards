@@ -1,8 +1,8 @@
 import type { JSX } from "astro/jsx-runtime";
+import type { SvgIcon } from "data/shared/svg-icon.ts";
 
 import type { Name } from "@ensnode/ensnode-sdk";
 
-import { type ProtocolType, ProtocolTypes } from "../ens-best-practices/types.ts";
 import type { Project } from "../projects/types.ts";
 
 export const DAOProtocolIds = {
@@ -47,20 +47,49 @@ export const ProtocolIds = {
  */
 export type ProtocolId = (typeof ProtocolIds)[keyof typeof ProtocolIds];
 
+export const ProtocolTypes = {
+  DAO: "dao",
+  DeFi: "defi",
+} as const;
+
+export type ProtocolType = (typeof ProtocolTypes)[keyof typeof ProtocolTypes];
+
+/** A unique identifier for a protocol.
+ *
+ * @invariant Must be unique across all protocols.
+ * @invariant Must match {@link ENSAWARDS_SLUG_PATTERN}.
+ */
+export type ProtocolSlug = string;
+
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
   id: ProtocolIdT;
-  protocolSlug: string;
+  protocolSlug: ProtocolSlug;
   protocolType: ProtocolT;
-  project: Project; // each protocol belongs to a single project.
+  project: Project; // each protocol is associated with a broader project, which may comprise multiple apps and protocols.
   name: string;
   description: string;
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: SvgIcon;
   socials: {
     website: URL;
     twitter: URL;
     ens?: Name;
   };
+  /** The custom Open Graph image for the protocol.
+   * Specified by the relative path from `/data/protocols` to a custom Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Open Graph image will be used for the protocol.
+   * When adding a new protocol we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom OG image for your protocol for you.
+   */
   ogImagePath?: string;
+
+  /** The custom Twitter Open Graph image for the protocol.
+   * Specified by the relative path from `/data/protocols` to a custom Twitter Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Twitter Open Graph image will be used for the protocol.
+   * When adding a new protocol we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom Twitter OG image for your protocol for you.
+   */
   twitterOgImagePath?: string;
 }
 

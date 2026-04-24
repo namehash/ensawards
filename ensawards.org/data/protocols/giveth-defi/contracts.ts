@@ -23,7 +23,7 @@ const contracts: Contract[] = [
       name: "givtoken.giv.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
     ],
   },
   {
@@ -38,7 +38,7 @@ const contracts: Contract[] = [
       name: "distro.giv.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
     ],
   },
   {
@@ -56,7 +56,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
     ],
   },
   {
@@ -71,7 +71,7 @@ const contracts: Contract[] = [
       name: "givtoken.giv.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
     ],
   },
   {
@@ -86,7 +86,7 @@ const contracts: Contract[] = [
       name: "distro.giv.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
     ],
   },
   {
@@ -104,7 +104,7 @@ const contracts: Contract[] = [
       },
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
     ],
   },
   {
@@ -119,7 +119,7 @@ const contracts: Contract[] = [
       name: "givpower.giv.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
     ],
   },
   {
@@ -134,7 +134,7 @@ const contracts: Contract[] = [
       name: "devouch.giv.eth",
     },
     contributions: [
-      { from: contributors.nischal, updatedAt: parseTimestamp("2026-02-27T18:25:20.000Z") },
+      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
     ],
   },
 ];

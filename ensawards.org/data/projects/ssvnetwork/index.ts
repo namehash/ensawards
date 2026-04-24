@@ -10,7 +10,7 @@ const SSVNetworkProject: Project = {
     "SSV is the largest DVT staking protocol on Ethereum — securing and decentralizing the network",
   icon: SSVNetworkIcon,
   socials: {
-    website: new URL("https://ssv.network/"),
+    website: new URL("https://ssv.network"),
     twitter: new URL("https://x.com/ssv_network"),
   },
 };

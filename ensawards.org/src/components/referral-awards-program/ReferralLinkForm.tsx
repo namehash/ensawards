@@ -32,9 +32,12 @@ const formFields: FormField[] = [
   },
 ];
 
-enum ENSAwardsReferralLinkFormFields {
-  ReferralAwardRecipient = "referral award recipient",
-}
+const ENSAwardsReferralLinkFormFields = {
+  ReferralAwardRecipient: "referral award recipient",
+} as const;
+
+type ENSAwardsReferralLinkFormField =
+  (typeof ENSAwardsReferralLinkFormFields)[keyof typeof ENSAwardsReferralLinkFormFields];
 
 // Very rudimentary validation here so that the more advanced one can be performed later in submit
 const generateReferralLinkFormSchema = Yup.object().shape({

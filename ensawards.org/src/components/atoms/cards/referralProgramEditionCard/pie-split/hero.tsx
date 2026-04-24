@@ -4,9 +4,9 @@ import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
+import type { ReferralProgramEditionPieSplitCardProps } from "@/components/atoms/cards/referralProgramEditionCard/pie-split";
 import {
   ReferralProgramEditionAwardPool,
-  type ReferralProgramEditionCardProps,
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
@@ -15,7 +15,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export const ReferralProgramEditionHeroCardPieSplit = ({
   referralProgramEditionSummary,
-}: ReferralProgramEditionCardProps) => {
+}: ReferralProgramEditionPieSplitCardProps) => {
   const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
     referralProgramEditionSummary,
   );
@@ -27,17 +27,18 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
       referralProgramEditionSummaryData.slug,
     );
 
-    setReferralProgramEditionSummaryData((current) => refreshedSummary ?? current);
+    // If the fetch fails keep the latest valid data
+    setReferralProgramEditionSummaryData((current) =>
+      refreshedSummary !== undefined &&
+      refreshedSummary.awardModel === ReferralProgramAwardModels.PieSplit
+        ? refreshedSummary
+        : current,
+    );
   }
 
   useEffect(() => {
     refreshReferralProgramEditionSummary();
   }, [now]);
-
-  // The config of an unrecognized edition will never be passed here,
-  // but we perform the check for the type safety
-  if (referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.Unrecognized)
-    return null;
 
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",

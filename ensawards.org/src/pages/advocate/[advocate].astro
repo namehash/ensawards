@@ -1,12 +1,9 @@
 ---
-import { ENS_HOLIDAY_AWARDS_END_DATE } from "@namehash/ens-referrals";
 import { isAddress } from "viem";
 
-import AlertCountdown from "../../components/atoms/AlertCountdown.astro";
-import Breadcrumbs from "../../components/atoms/Breadcrumbs.astro";
-import { ErrorInfo } from "../../components/atoms/ErrorInfo";
-import { EnsAdvocateDetailsPageProvider } from "../../components/ens-advocates/EnsAdvocateDetailsPageProvider";
-import Layout from "../../layouts/Layout.astro";
+import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
+import { EnsAdvocateDetailsPageProvider } from "@/components/ens-advocates/EnsAdvocateDetailsPageProvider";
+import Layout from "@/layouts/Layout.astro";
 export const prerender = false;
 const { advocate } = Astro.params;
 
@@ -22,7 +19,7 @@ const isRouteParamAValidAddress = isAddress(advocate);
       class="w-full max-w-[1216px] box-border h-fit flex flex-col justify-start items-start gap-5 sm:gap-8">
       <!--TODO: uncomment once the /advocate page is ready to be public-->
       <!--<Breadcrumbs-->
-      <!--  breadcrumbs={["ENS advocates"]}-->
+      <!--  breadcrumbs={[{text: "ENS advocates", linkHref: "/advocate"}]}-->
       <!--  styles={{-->
       <!--    home: "text-neutral-500 hover:bg-black/5",-->
       <!--    chevron: "text-neutral-500 opacity-100",-->

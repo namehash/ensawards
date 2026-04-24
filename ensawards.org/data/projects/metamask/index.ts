@@ -9,7 +9,7 @@ const MetaMaskProject: Project = {
   description: "MetaMask is a widely used, self-custodial cryptocurrency wallet.",
   icon: MetaMaskIcon,
   socials: {
-    website: new URL("https://metamask.io/"),
+    website: new URL("https://metamask.io"),
     twitter: new URL("https://x.com/MetaMask"),
   },
 };

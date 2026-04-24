@@ -1,6 +1,7 @@
 import {
   ReferralProgramAwardModels,
-  type ReferralProgramEditionSummary,
+  type ReferralProgramEditionSummaryPieSplit,
+  type ReferralProgramEditionSummaryRevShareLimit,
 } from "@namehash/ens-referrals/v1";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge";
@@ -11,10 +12,12 @@ import {
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared.tsx";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
-import { currencyFormatter } from "@/utils/textModifications.ts";
+import { usdFormatter } from "@/utils/textModifications.ts";
 
 interface ReferralProgramEditionInfoProps {
-  referralProgramEditionSummary: ReferralProgramEditionSummary;
+  referralProgramEditionSummary:
+    | ReferralProgramEditionSummaryPieSplit
+    | ReferralProgramEditionSummaryRevShareLimit;
   isLoading: boolean;
 }
 
@@ -22,12 +25,6 @@ export const ReferralProgramEditionInfo = ({
   referralProgramEditionSummary,
   isLoading,
 }: ReferralProgramEditionInfoProps) => {
-  // The config of an unrecognized edition will never be passed here,
-  // but we perform the check for the type safety
-  if (referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.Unrecognized) {
-    return null;
-  }
-
   return (
     <>
       {isLoading ? (
@@ -71,7 +68,7 @@ export const ReferralProgramEditionInfo = ({
               Award pool remaining
             </p>
             <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
-              {currencyFormatter.format(
+              {usdFormatter.format(
                 parseReferralProgramCurrency(referralProgramEditionSummary.awardPoolRemaining),
               )}{" "}
               USD

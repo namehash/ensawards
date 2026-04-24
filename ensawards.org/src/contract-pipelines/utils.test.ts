@@ -3,8 +3,13 @@ import { describe, expect, it } from "vitest";
 import { CONTRACTS_TEST_DATA } from "@/contract-pipelines/contractsTestData.ts";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 
-import { type ProtocolType, ProtocolTypes } from "../../data/ens-best-practices/types.ts";
-import { DAOProtocolIds, DeFiProtocolIds, type ProtocolId } from "../../data/protocols/types.ts";
+import {
+  DAOProtocolIds,
+  DeFiProtocolIds,
+  type ProtocolId,
+  type ProtocolType,
+  ProtocolTypes,
+} from "../../data/protocols/types.ts";
 
 describe("getContractNamingScoresByProtocolType", () => {
   const data = CONTRACTS_TEST_DATA;

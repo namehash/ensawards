@@ -1,13 +1,12 @@
-import { isValidSlug } from "data/shared/slugs.ts";
+import { isValidSlug } from "data/shared/slugs";
 import { describe, expect, it } from "vitest";
 
 import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
 import { areStringsUnique } from "@/utils";
 
-import { ProtocolTypes } from "../ens-best-practices/types.ts";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from ".";
-import { DAOProtocolIds, DeFiProtocolIds, ProtocolIds } from "./types.ts";
+import { DAOProtocolIds, DeFiProtocolIds, ProtocolIds, ProtocolTypes } from "./types.ts";
 
 describe("protocols data", () => {
   const data = PROTOCOLS;

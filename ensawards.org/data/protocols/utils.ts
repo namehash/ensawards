@@ -1,14 +1,11 @@
 import { AWARDS } from "data/awards/index.ts";
 import type { Award } from "data/awards/types.ts";
 import { EntityMetadataTypes } from "data/entity-metadata/types.ts";
+import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 
 import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 
-import {
-  type BestPracticeTarget,
-  type ProtocolType,
-  ProtocolTypes,
-} from "../ens-best-practices/types.ts";
+import { type BestPracticeTarget } from "../ens-best-practices/types.ts";
 import { CONTRACTS } from "./contracts.ts";
 import { type Contract } from "./contracts-types.ts";
 import { DAO_PROTOCOLS, DEFI_PROTOCOLS, PROTOCOLS } from "./index.ts";
@@ -19,7 +16,10 @@ import type {
   DeFiProtocolId,
   Protocol,
   ProtocolId,
+  ProtocolSlug,
+  ProtocolType,
 } from "./types.ts";
+import { ProtocolTypes } from "./types.ts";
 
 /**
  * Returns a {@link Protocol} by {@link Protocol.id}.
@@ -34,7 +34,7 @@ export const getProtocolById = (protocolId: ProtocolId): Protocol => {
 /**
  * Returns a protocol by {@link Protocol.protocolSlug}.
  */
-export const getProtocolBySlug = (protocolSlug: string): Protocol | undefined => {
+export const getProtocolBySlug = (protocolSlug: ProtocolSlug): Protocol | undefined => {
   return PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
@@ -51,7 +51,7 @@ export const getDAOByProtocolId = (protocolId: DAOProtocolId): DAOProtocol => {
 /**
  * Returns a DAO protocol by {@link Protocol.protocolSlug}.
  */
-export const getDAOByProtocolSlug = (protocolSlug: string): DAOProtocol | undefined => {
+export const getDAOByProtocolSlug = (protocolSlug: ProtocolSlug): DAOProtocol | undefined => {
   return DAO_PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
@@ -68,20 +68,28 @@ export const getDeFiProtocolByProtocolId = (protocolId: DeFiProtocolId): DeFiPro
 /**
  * Returns a {@link DeFiProtocol} by {@link Protocol.protocolSlug}.
  */
-export const getDeFiProtocolByProtocolSlug = (protocolSlug: string): DeFiProtocol | undefined => {
+export const getDeFiProtocolByProtocolSlug = (
+  protocolSlug: ProtocolSlug,
+): DeFiProtocol | undefined => {
   return DEFI_PROTOCOLS.find((protocol) => protocol.protocolSlug === protocolSlug);
 };
 
-const ProtocolTypeSlugMapping = new Map<string, ProtocolType>([
-  ["dao", ProtocolTypes.DAO],
-  ["defi", ProtocolTypes.DeFi],
-]);
-
 /**
- * Maps a protocol type slug to its {@link ProtocolType}.
+ * Validates that the provided string is a valid {@link ProtocolType}.
+ *
+ * @throws if the provided string is invalid
  */
-export const getProtocolTypeBySlug = (protocolTypeSlug: string): ProtocolType | undefined => {
-  return ProtocolTypeSlugMapping.get(protocolTypeSlug);
+export const asProtocolType = (maybeProtocolType: string): ProtocolType => {
+  switch (maybeProtocolType) {
+    case "dao":
+      return ProtocolTypes.DAO;
+
+    case "defi":
+      return ProtocolTypes.DeFi;
+
+    default:
+      throw new Error(`Invalid ProtocolType value: ${maybeProtocolType}`);
+  }
 };
 
 /**
@@ -108,6 +116,36 @@ const PROTOCOL_CONTRACTS_BY_PROTOCOL_ID: Map<ProtocolId, Contract[]> = (() => {
 export const getAllProtocolContracts = (protocolId: ProtocolId): Contract[] =>
   PROTOCOL_CONTRACTS_BY_PROTOCOL_ID.get(protocolId) ?? [];
 
+/** Builds the URL for a protocol's Open Graph image.
+ *
+ * @returns `undefined` if `imagePath` is `undefined`,
+ * else builds a URL for the protocol OG image associated with `imagePath`.
+ */
+export const buildProtocolOgImageUrl = (imagePath: string | undefined): URL | undefined => {
+  if (!imagePath) return undefined;
+
+  return new URL(imagePath, "https://ensawards.org/data/protocols/");
+};
+
+export const formatProtocolType = (
+  protocolType: ProtocolType,
+  options: Omit<FormatTypeOptions, "plural"> = { lowercase: false },
+): string => {
+  const { lowercase } = options;
+
+  switch (protocolType) {
+    case ProtocolTypes.DeFi:
+      return lowercase ? "defi" : "DeFi";
+
+    case ProtocolTypes.DAO:
+      return lowercase ? "dao" : "DAO";
+
+    default:
+      const _exhaustive: never = protocolType;
+      throw new Error(`Unsupported ProtocolType: ${_exhaustive}`);
+  }
+};
+
 /**
  * Returns the URL to the protocol details page for a given {@link Protocol}.
  */
@@ -117,8 +155,7 @@ export const getProtocolDetailsUrl = (protocol: Protocol): URL =>
 /**
  * Returns all {@link Award}s associated with a given {@link ProtocolSlug}.
  */
-// TODO: Change input type to ProtocolSlug when PR#164 is merged
-export const getAwardsByProtocolSlug = (protocolSlug: Protocol["protocolSlug"]): Award[] =>
+export const getAwardsByProtocolSlug = (protocolSlug: ProtocolSlug): Award[] =>
   AWARDS.filter(
     (award) =>
       award.awardedEntityMetadata?.type === EntityMetadataTypes.Protocol &&

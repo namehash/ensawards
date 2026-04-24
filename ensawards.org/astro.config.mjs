@@ -17,8 +17,10 @@ export default defineConfig({
 
   redirects: {
     "/benchmarks": "/leaderboards",
-    "/benchmarks/[app]": "/app/[app]",
     "/leaderboards/app": "/leaderboards",
+    "/benchmarks/rainbow-wallet": "/app/rainbow-wallet",
+    "/benchmarks/coinbase-wallet": "/app/coinbase-wallet",
+    "/benchmarks/metamask": "/app/metamask-wallet",
 
     "/app/blockscout": "/app/blockscout-explorer",
     "/app/etherscan": "/app/etherscan-explorer",
@@ -39,6 +41,8 @@ export default defineConfig({
     "/ens-holiday-awards-rules": "/ens-referral-program/editions/2025-12/rules",
     "/ens-referral-live-feed": "/ens-referral-program/live-feed",
     "/leaderboards/referrer": "/ens-referral-program/editions/2025-12/leaderboard",
+
+    "/ens-best-practices/contract-naming": "/ens-best-practices",
   },
 
   adapter: vercel(),

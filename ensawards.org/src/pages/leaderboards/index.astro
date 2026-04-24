@@ -6,13 +6,14 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
+import { formatAppType } from "data/apps/utils.ts";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { ProtocolTypes } from "data/ens-best-practices/types.ts";
-import { pluralizeBestPracticeTarget } from "@/utils/textModifications";
+import { ProtocolTypes } from "data/protocols/types.ts";
+import { formatBestPracticeTarget } from "data/ens-best-practices/utils.ts";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById } from "data/protocols/utils.ts";
-import { calculateAppEnsAwardsScore } from "data/apps/utils.ts";
+import { getProtocolById, formatProtocolType } from "data/protocols/utils.ts";
+import { sortApps } from "data/apps/utils.ts";
 import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList.tsx";
 import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 ---
@@ -40,23 +41,20 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
     class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center max-sm:gap-6 gap-10 p-5 sm:py-[60px] sm:px-8">
     <ItemsList header="Apps" containerStyles="sm:gap-6">
       {
-        Object.values(AppTypes).map((appType) => {
+        [...Object.values(AppTypes)].map((appType) => {
           const relevantApps = APPS.filter((app) => app.type === appType);
 
           return (
             <LeaderboardSnippetCard
-              name={`${appType} leaderboard`}
-              description={`See how ${pluralizeBestPracticeTarget(appType).toLowerCase()} rank for following ENS best practices.`}
-              link={`/leaderboards/${appType.toLowerCase()}`}>
+              name={`${formatAppType(appType, { lowercase: false, plural: false })} leaderboard`}
+              description={`See how ${formatBestPracticeTarget(appType, { lowercase: true, plural: true })} rank for following ENS best practices.`}
+              link={`/leaderboards/${appType}`}
+              viewLeaderboardText={`View ${formatAppType(appType, { lowercase: true, plural: false })} leaderboard`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
                 {relevantApps
-                  .sort(
-                    (a, b) =>
-                      calculateAppEnsAwardsScore(b) -
-                      calculateAppEnsAwardsScore(a),
-                  )
+                  .sort(sortApps)
                   .slice(0, 3)
                   .map((app, idx) => {
                     const AppIcon = app.icon;
@@ -86,22 +84,25 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
     </ItemsList>
     <ItemsList header="Protocols" containerStyles="sm:gap-6">
       {
-        Object.values(ProtocolTypes).map((protocolType) => {
+        [...Object.values(ProtocolTypes)].map((protocolType) => {
           const protocolScores =
             getContractNamingScoresByProtocolType(protocolType);
 
           return (
             <LeaderboardSnippetCard
-              name={`${protocolType} leaderboard`}
-              description={`See how ${pluralizeBestPracticeTarget(protocolType)} rank for following ENS best practices.`}
-              link={`/leaderboards/${protocolType.toLowerCase()}`}>
+              name={`${formatProtocolType(protocolType)} leaderboard`}
+              description={`See how ${formatBestPracticeTarget(protocolType, { lowercase: false, plural: true })} rank for following ENS best practices.`}
+              link={`/leaderboards/${protocolType}`}
+              viewLeaderboardText={`View ${formatProtocolType(protocolType, { lowercase: false })} leaderboard`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
-                {Object.entries(protocolScores)
+                {[...Object.entries(protocolScores)]
                   .slice(0, 3)
-                  .map(([scoreCategory, _value], idx) => {
-                    const protocolId = scoreCategory as ProtocolId;
+                  .map(([scoredProtocolId, _value], idx) => {
+                    // Type casting is necessary due to `Record`'s type nature.
+                    // We are completely sure of its correctness
+                    const protocolId = scoredProtocolId as ProtocolId;
                     const protocol = getProtocolById(protocolId);
                     const ProtocolIcon = protocol.icon;
                     return (

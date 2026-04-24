@@ -1,10 +1,9 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
-import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import TaikoProject from "../../projects/taiko";
 import { defineProtocol } from "../registry.ts";
-import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
+import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
 import TaikoIcon from "./icon.tsx";
 
 const TaikoDao: DAOProtocol = {
@@ -17,12 +16,12 @@ const TaikoDao: DAOProtocol = {
     "Taiko DAO, created in collaboration with Aragon, plays a critical role in governing Taiko in a decentralized way.",
   icon: TaikoIcon,
   socials: {
-    website: new URL("https://dao.taiko.xyz/"),
+    website: new URL("https://dao.taiko.xyz"),
     twitter: new URL("https://x.com/taikoxyz"),
     ens: "taiko.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/taiko-dao/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/taiko-dao/twitter-og.png",
+  ogImagePath: "taiko-dao/og.png",
+  twitterOgImagePath: "taiko-dao/twitter-og.png",
 };
 
 defineProtocol(TaikoDao);

@@ -10,7 +10,7 @@ const RainbowProject: Project = {
     "Rainbow is a fun, simple, and secure way to get started with crypto and explore Ethereum.",
   icon: RainbowIcon,
   socials: {
-    website: new URL("https://rainbow.me/"),
+    website: new URL("https://rainbow.me"),
     twitter: new URL("https://x.com/rainbowdotme"),
   },
 };

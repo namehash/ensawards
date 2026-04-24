@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { currencyFormatter } from "@/utils/textModifications";
+import { usdFormatter } from "@/utils/textModifications";
 
 export interface ReferralProgramEditionCardProps {
   referralProgramEditionSummary: ReferralProgramEditionSummary;
@@ -95,7 +95,7 @@ export const ReferralProgramEditionAwardPool = ({
             "text-sm leading-normal font-medium text-black max-sm:text-right cursor-default",
         )}
       >
-        {currencyFormatter.format(parseReferralProgramCurrency(totalAwardPoolValue))} USD
+        {usdFormatter.format(parseReferralProgramCurrency(totalAwardPoolValue))} USD
       </p>
     </div>
   );

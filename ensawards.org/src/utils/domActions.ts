@@ -1,38 +1,16 @@
-import type { PossibleSuggestions } from "@/components/molecules/contact-form/types";
-
-// biome-ignore-start lint/style/noNonNullAssertion: All DOM objects accessed in this file
-// are guaranteed to exist for the entirety of runtime (forms in modal view)
-export function openSuggestionOverlay(whatsSuggested: PossibleSuggestions) {
+export function openOverlay(overlayId: string) {
   const scrollValue = window.scrollY;
-  switch (whatsSuggested) {
-    case "app":
-      document.querySelector("#app-overlay")!.classList.remove("hidden");
-      break;
+  const overlay = document.getElementById(overlayId);
 
-    case "best practice":
-      document.querySelector("#best-practice-overlay")!.classList.remove("hidden");
-      break;
-
-    case "benchmark result":
-      document.querySelector("#benchmark-result-overlay")!.classList.remove("hidden");
-      break;
-
-    case "protocol":
-      document.querySelector("#protocol-overlay")!.classList.remove("hidden");
-      break;
-
-    case "contract":
-      document.querySelector("#contract-overlay")!.classList.remove("hidden");
-      break;
-
-    default:
-      throw new Error(`${whatsSuggested} is not a valid suggestion category`);
+  if (overlay === null) {
+    throw new Error(`${overlayId} is not a valid overlay identifier`);
   }
+
+  overlay.classList.remove("hidden");
 
   document.body.classList.add("no-scroll");
   document.body.style.top = `-${scrollValue}px`;
 }
-// biome-ignore-end lint/style/noNonNullAssertion: see lines 1&2
 
 export const scrollWithOffset = (id: string, offset: number) => {
   const element = document.getElementById(id);

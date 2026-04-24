@@ -2,7 +2,7 @@
 // on adding and modifying best practices and best practice categories
 
 import { getDefinedBestPracticeCategories, getDefinedBestPractices } from "./registry.ts";
-import { type BestPractice, type BestPracticeCategory, CategoryStatus } from "./types.ts";
+import { type BestPractice, type BestPracticeCategory, CategoryStatuses } from "./types.ts";
 
 import.meta.glob("./*/*.ts", { eager: true });
 
@@ -14,7 +14,7 @@ export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
   ...getDefinedBestPracticeCategories().sort((a, b) => {
     if (a.status === b.status) return a.name.localeCompare(b.name);
 
-    if (a.status === CategoryStatus.Active) return -1;
+    if (a.status === CategoryStatuses.Active) return -1;
 
     return 1;
   }),

@@ -1,10 +1,11 @@
 ---
-import { type BestPractice } from "../../../../data/ens-best-practices/types.ts";
-import { cn } from "../../../utils/tailwindClassConcatenation";
+import { type BestPractice, BestPracticeTypes } from "data/ens-best-practices/types.ts";
+import { cn } from "@/utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
-import { pluralizeBestPracticeTarget } from "../../../utils/textModifications";
-import { appliesToAllProtocols } from "../../../../data/protocols/utils.ts";
-import { appliesToAllApps } from "../../../../data/apps/utils.ts";
+import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
+import EnscribeIcon from "@/components/atoms/icons/EnscribeIconLight.astro";
+import { calcBestPracticeScore } from "data/ens-best-practices/utils.ts";
+import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
 
 export interface BestPracticeCardProps {
   bestPractice: BestPractice;
@@ -12,14 +13,14 @@ export interface BestPracticeCardProps {
 
 const { bestPractice }: BestPracticeCardProps = Astro.props;
 
-const appliesToBadgeStyles =
-  "flex justify-center items-center px-2 py-[2px] rounded-md border border-gray-200 bg-white text-black text-xs leading-4 font-semibold";
+const bestPracticeScore =
+  bestPractice.type === BestPracticeTypes.App ? calcBestPracticeScore(bestPractice) : undefined;
 ---
 
 <a
   href={`/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
-  class="max-md:w-fit w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
-            justify-center items-start gap-3 sm:gap-4 p-5 sm:px-6 sm:pt-6 sm:pb-4 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
+  class="max-[800px]:w-full w-[calc(50%-10px)] max-w-[598px] h-fit min-h-[223px] box-border flex flex-col flex-nowrap
+            justify-center items-start gap-4 p-5 sm:px-6 sm:pt-6 sm:pb-4 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <div
     class="flex flex-col flex-nowrap justify-center items-start gap-5 self-stretch">
     <slot name="icon" />
@@ -38,9 +39,17 @@ const appliesToBadgeStyles =
       </p>
     </div>
   </div>
+  <div
+    class="flex flex-row justify-between sm:justify-start items-center sm:gap-2 max-sm:self-stretch">
+    <p
+      class="text-sm leading-normal font-medium sm:font-normal text-muted-foreground">
+      Applies to
+    </p>
+    <AppliesToBadges bestPractice={bestPractice} />
+  </div>
   <div class="bg-gray-200 h-[1px] self-stretch"></div>
   <div
-    class="flex flex-col-reverse sm:flex-row flex-nowrap justify-center sm:justify-between items-center
+    class="sm:min-h-[42px] flex flex-col-reverse sm:flex-row flex-nowrap justify-center sm:justify-between items-center
                 max-sm:gap-3 self-stretch">
     <button
       class={cn(
@@ -53,28 +62,28 @@ const appliesToBadgeStyles =
       View details
     </button>
     <div
-      class="flex flex-nowrap flex-col sm:flex-row justify-start items-center gap-2 sm:gap-6 sm:pl-4 max-sm:self-stretch">
-      <div
-        class="flex flex-row justify-between sm:justify-start items-center sm:gap-2 max-sm:self-stretch">
-        <p class="text-sm leading-normal font-normal text-muted-foreground">
-          Applies to
-        </p>
+      class={cn(
+        "hidden sm:flex flex-col justify-center items-end gap-0",
+        bestPractice.type === BestPracticeTypes.Protocol && "flex-row gap-2",
+      )}>
+      <p class="text-sm leading-normal font-normal text-gray-400">
         {
-          appliesToAllApps(bestPractice.appliesTo) ? (
-            <span class={appliesToBadgeStyles}>Apps</span>
-          ) : appliesToAllProtocols(bestPractice.appliesTo) ? (
-            <span class={appliesToBadgeStyles}>Protocols</span>
-          ) : (
-            <div class="flex flex-row justify-start items-center gap-1">
-              {bestPractice.appliesTo.map((target) => (
-                <span class={appliesToBadgeStyles}>
-                  {pluralizeBestPracticeTarget(target)}
-                </span>
-              ))}
-            </div>
-          )
+          bestPractice.type === BestPracticeTypes.App
+            ? "App support"
+            : "Powered by"
         }
-      </div>
+      </p>
+      {
+        bestPractice.type === BestPracticeTypes.App ? (
+          bestPracticeScore === undefined ? (
+            <p class="text-sm leading-normal font-medium text-black">Pending</p>
+          ) : (
+            <ScoreBar score={bestPracticeScore} mobileAdaptive={false} />
+          )
+        ) : (
+          <EnscribeIcon />
+        )
+      }
     </div>
   </div>
 </a>

@@ -4,9 +4,9 @@ import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
+import type { ReferralProgramEditionRevShareLimitCardProps } from "@/components/atoms/cards/referralProgramEditionCard/rev-share";
 import {
   ReferralProgramEditionAwardPool,
-  type ReferralProgramEditionCardProps,
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
@@ -15,11 +15,11 @@ import {
   parseReferralProgramCurrency,
 } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
-import { currencyFormatter } from "@/utils/textModifications";
+import { usdFormatter } from "@/utils/textModifications";
 
 export const ReferralProgramEditionHeroCardRevShareLimit = ({
   referralProgramEditionSummary,
-}: ReferralProgramEditionCardProps) => {
+}: ReferralProgramEditionRevShareLimitCardProps) => {
   const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
     referralProgramEditionSummary,
   );
@@ -31,17 +31,18 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
       referralProgramEditionSummaryData.slug,
     );
 
-    setReferralProgramEditionSummaryData((current) => refreshedSummary ?? current);
+    // If the fetch fails keep the latest valid data
+    setReferralProgramEditionSummaryData((current) =>
+      refreshedSummary !== undefined &&
+      refreshedSummary.awardModel === ReferralProgramAwardModels.RevShareLimit
+        ? refreshedSummary
+        : current,
+    );
   }
 
   useEffect(() => {
     refreshReferralProgramEditionSummary();
   }, [now]);
-
-  // The config of an unrecognized edition will never be passed here,
-  // but we perform the check for the type safety
-  if (referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.Unrecognized)
-    return null;
 
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
@@ -93,7 +94,7 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
           {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareLimit
-            ? `${currencyFormatter.format(parseReferralProgramCurrency(referralProgramEditionSummaryData.rules.minQualifiedRevenueContribution))} USD`
+            ? `${usdFormatter.format(parseReferralProgramCurrency(referralProgramEditionSummaryData.rules.minQualifiedRevenueContribution))} USD`
             : "-"}
         </p>
       </div>

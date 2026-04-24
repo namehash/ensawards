@@ -1,10 +1,9 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
-import { ProtocolTypes } from "../../ens-best-practices/types.ts";
 import SSVNetworkProject from "../../projects/ssvnetwork";
 import { defineProtocol } from "../registry.ts";
-import { type DAOProtocol, DAOProtocolIds } from "../types.ts";
+import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
 import SSVNetworkIcon from "./icon.tsx";
 
 const SSVNetworkDao: DAOProtocol = {
@@ -17,12 +16,12 @@ const SSVNetworkDao: DAOProtocol = {
     "SSV is the largest DVT staking protocol on Ethereum — securing and decentralizing the network",
   icon: SSVNetworkIcon,
   socials: {
-    website: new URL("https://ssv.network/"),
+    website: new URL("https://ssv.network"),
     twitter: new URL("https://x.com/ssv_network"),
     ens: "ssvnetwork.eth",
   },
-  ogImagePath: "https://ensawards.org/data/protocols/ssvnetwork-dao/og.png",
-  twitterOgImagePath: "https://ensawards.org/data/protocols/ssvnetwork-dao/twitter-og.png",
+  ogImagePath: "ssvnetwork-dao/og.png",
+  twitterOgImagePath: "ssvnetwork-dao/twitter-og.png",
 };
 
 defineProtocol(SSVNetworkDao);
