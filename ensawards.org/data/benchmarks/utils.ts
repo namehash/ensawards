@@ -1,14 +1,15 @@
 import type { AppSlug } from "data/apps/types.ts";
 import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
+import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "../ens-best-practices/types.ts";
 import { type BestPracticeCategorySlug } from "../ens-best-practices/types.ts";
 import {
+  asEnsAwardsScore,
   type EnsAwardsPoints,
   type EnsAwardsScore,
-  validateEnsAwardsScore,
 } from "../shared/ens-awards-score.ts";
 import { APP_BENCHMARKS } from ".";
 import { type AppBenchmark, type BenchmarkResult, BenchmarkResults } from "./types.ts";
@@ -123,9 +124,7 @@ export const calcBestPracticeCategoryScore = (
       completedBenchmarks.length,
   );
 
-  validateEnsAwardsScore(score);
-
-  return score;
+  return asEnsAwardsScore(score);
 };
 
 /** Declare sort order for benchmark result (Pass → Partial Pass → Fail) */
@@ -160,8 +159,10 @@ export const getBenchmarkLastUpdateTimestamp = (benchmark: AppBenchmark): UnixTi
 
 export const formatBenchmarkResult = (
   benchmark?: AppBenchmark,
-  lowercase: boolean = false,
+  options: Omit<FormatTypeOptions, "plural"> = { lowercase: false },
 ): string => {
+  const { lowercase } = options;
+
   if (!benchmark) {
     return lowercase ? "pending" : "Pending";
   }

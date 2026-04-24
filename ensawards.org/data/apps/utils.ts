@@ -1,18 +1,21 @@
 import { calcEnsAwardsPoints, getAppBenchmarks } from "data/benchmarks/utils.ts";
 import {
+  asEnsAwardsScore,
   type EnsAwardsPoints,
   type EnsAwardsScore,
-  validateEnsAwardsScore,
 } from "data/shared/ens-awards-score.ts";
+import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 
 import type { BestPractice, BestPracticeTarget } from "../ens-best-practices/types.ts";
 import { APPS } from "./index.ts";
 import { type App, type AppSlug, type AppType, AppTypes } from "./types.ts";
 
 /**
- * Validates a string as an {@link AppType}.
+ * Validates that the provided string is a valid {@link AppType}.
+ *
+ * @throws if the provided string is invalid
  */
-export const validateAppType = (maybeAppType: string): AppType => {
+export const asAppType = (maybeAppType: string): AppType => {
   switch (maybeAppType) {
     case "wallet":
       return AppTypes.Wallet;
@@ -66,9 +69,7 @@ export const calcAppScore = (app: App): EnsAwardsScore | undefined => {
   // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
   const score = Math.round((totalPoints * 100) / completedBenchmarks.length);
 
-  validateEnsAwardsScore(score);
-
-  return score;
+  return asEnsAwardsScore(score);
 };
 
 /**
@@ -93,10 +94,8 @@ export const sortApps = (a: App, b: App): number => {
 
 /** Builds the URL for an app's Open Graph image.
  *
- * @returns
- * * `undefined` if the app doesn't have an OG image path.
- * In this case, a default OG image will be used for the app.
- * Otherwise, the URL for the OG image is returned.
+ * @returns `undefined` if `imagePath` is `undefined`,
+ * else builds a URL for the app OG image associated with `imagePath`.
  */
 export const buildAppOgImageUrl = (imagePath: string | undefined): URL | undefined => {
   if (!imagePath) return undefined;
@@ -104,16 +103,31 @@ export const buildAppOgImageUrl = (imagePath: string | undefined): URL | undefin
   return new URL(imagePath, "https://ensawards.org/data/apps/");
 };
 
-export const formatAppType = (appType: AppType, lowercase: boolean = false): string => {
+export const formatAppType = (
+  appType: AppType,
+  options: FormatTypeOptions = { lowercase: false, plural: false },
+): string => {
+  const { plural, lowercase } = options;
+
+  let formattedType: string;
+
   switch (appType) {
     case AppTypes.Wallet:
-      return lowercase ? "wallet" : "Wallet";
+      formattedType = plural ? "Wallets" : "Wallet";
+      break;
 
     case AppTypes.Explorer:
-      return lowercase ? "explorer" : "Explorer";
+      formattedType = plural ? "Explorers" : "Explorer";
+      break;
 
     default:
       const _exhaustive: never = appType;
       throw new Error(`Unsupported AppType: ${_exhaustive}`);
   }
+
+  if (lowercase) {
+    formattedType = formattedType.toLowerCase();
+  }
+
+  return formattedType;
 };

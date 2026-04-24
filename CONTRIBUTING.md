@@ -102,21 +102,21 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
     twitter: URL;
     ens?: Name;
   };
-  /** Relative path from `/data/protocols` to the Open Graph image for the protocol.
+  /** The custom Open Graph image for the protocol. 
+   * Specified by the relative path from `/data/protocols` to a custom Open Graph image.
    *
-   * @optional It's not required to provide an OG image yourself.
-   * We have a fallback mechanism in place, so the SEO of Protocol's details page won't be degraded.
-   * In fact, we recommend leaving it empty. When your PR with a new {@link Protocol} gets accepted,
-   * the NameHash Labs team will follow it up, providing customized OG images.
+   * @optional If not provided, a generic fallback Open Graph image will be used for the protocol. 
+   * When adding a new protocol we recommend leaving this undefined. 
+   * The NameHash Labs team will add a custom OG image for your protocol for you.
    */
   ogImagePath?: string;
 
-  /** Relative path from `/data/protocols` to the Twitter Open Graph image for the protocol.
+  /** The custom Twitter Open Graph image for the protocol. 
+   * Specified by the relative path from `/data/protocols` to a custom Twitter Open Graph image.
    *
-   * @optional It's not required to provide a Twitter OG image yourself.
-   * We have a fallback mechanism in place, so the SEO of Protocol's details page won't be degraded.
-   * In fact, we recommend leaving it empty. When your PR with a new {@link Protocol} gets accepted,
-   * the NameHash Labs team will follow it up, providing customized OG images.
+   * @optional If not provided, a generic fallback Twitter Open Graph image will be used for the protocol. 
+   * When adding a new protocol we recommend leaving this undefined. 
+   * The NameHash Labs team will add a custom Twitter OG image for your protocol for you.
    */
   twitterOgImagePath?: string;
 }
@@ -166,22 +166,22 @@ export interface App {
     twitter: URL;
     ens?: Name;
   };
-  /** Relative path from `/data/apps` to the Open Graph image for the app. 
-   * 
-   * @optional It's not required to provide an OG image yourself. 
-   * We have a fallback mechanism in place, so the SEO of App's details page won't be degraded. 
-   * In fact, we recommend leaving it empty. When your PR with a new {@link App} gets accepted, 
-   * the NameHash Labs team will follow it up, providing customized OG images.
-  */
+  /** The custom Open Graph image for the app. 
+   * Specified by the relative path from `/data/apps` to a custom Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Open Graph image will be used for the app. 
+   * When adding a new app we recommend leaving this undefined. 
+   * The NameHash Labs team will add a custom OG image for your app for you.
+   */
   ogImagePath?: string;
 
-  /** Relative path from `/data/apps` to the Twitter Open Graph image for the app. 
-   * 
-   * @optional It's not required to provide a Twitter OG image yourself. 
-   * We have a fallback mechanism in place, so the SEO of App's details page won't be degraded. 
-   * In fact, we recommend leaving it empty. When your PR with a new {@link App} gets accepted, 
-   * the NameHash Labs team will follow it up, providing customized OG images.
-  */
+  /** The custom Twitter Open Graph image for the app.
+   * Specified by the relative path from `/data/apps` to a custom Twitter Open Graph image.
+   *
+   * @optional If not provided, a generic fallback Twitter Open Graph image will be used for the app.
+   * When adding a new app we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom Twitter OG image for your app for you.
+   */
   twitterOgImagePath?: string;
 }
 ```
@@ -271,7 +271,7 @@ export interface BestPracticeCategory {
  * for the related {@link BestPractice}.
  *
  * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}. 
- * If the related app doesn't have a benchmark completed for the `BestPractice` then the value should explicitly be set to `undefined`. 
+ * If an app doesn't have a benchmark completed for a `BestPractice` then the benchmark should be explicitly set to `undefined`. 
  * Otherwise, the value should be an `AppBenchmark` describing how the related app performed for the `BestPractice`.
  */
 export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;
@@ -294,9 +294,9 @@ export interface AppBenchmark {
 
   /** A record of all contributors involved in the addition or maintenance of the benchmark's data.
    *
-   * @invariant Multiple {@link Contribution} from the same contributor are not allowed.
+   * @invariant Multiple {@link Contribution} from the same contributor on the same app benchmark  are not allowed.
    * When a contributor makes updates to their existing contribution, 
-   * they should update the `lastUpdated` timestamp from their existing `Contribution`.
+   * they should update the `lastUpdated` timestamp of their existing `Contribution`.
    */
   contributions: [Contribution, ...Contribution[]];
 }

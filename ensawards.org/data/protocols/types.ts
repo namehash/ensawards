@@ -74,21 +74,21 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
     twitter: URL;
     ens?: Name;
   };
-  /** Relative path from `/data/protocols` to the Open Graph image for the protocol.
+  /** The custom Open Graph image for the protocol.
+   * Specified by the relative path from `/data/protocols` to a custom Open Graph image.
    *
-   * @optional It's not required to provide an OG image yourself.
-   * We have a fallback mechanism in place, so the SEO of Protocol's details page won't be degraded.
-   * In fact, we recommend leaving it empty. When your PR with a new {@link Protocol} gets accepted,
-   * the NameHash Labs team will follow it up, providing customized OG images.
+   * @optional If not provided, a generic fallback Open Graph image will be used for the protocol.
+   * When adding a new protocol we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom OG image for your protocol for you.
    */
   ogImagePath?: string;
 
-  /** Relative path from `/data/protocols` to the Twitter Open Graph image for the protocol.
+  /** The custom Twitter Open Graph image for the protocol.
+   * Specified by the relative path from `/data/protocols` to a custom Twitter Open Graph image.
    *
-   * @optional It's not required to provide a Twitter OG image yourself.
-   * We have a fallback mechanism in place, so the SEO of Protocol's details page won't be degraded.
-   * In fact, we recommend leaving it empty. When your PR with a new {@link Protocol} gets accepted,
-   * the NameHash Labs team will follow it up, providing customized OG images.
+   * @optional If not provided, a generic fallback Twitter Open Graph image will be used for the protocol.
+   * When adding a new protocol we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom Twitter OG image for your protocol for you.
    */
   twitterOgImagePath?: string;
 }

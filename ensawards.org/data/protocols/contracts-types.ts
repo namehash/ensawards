@@ -235,9 +235,9 @@ export interface Contract {
 
   /** Identifies all contributors who added or updated the contract's data.
    *
-   * @invariant Multiple {@link Contribution} from the same contributor are not allowed.
+   * @invariant Multiple {@link Contribution} from the same contributor are not allowed for the same {@link Contract}.
    * When a contributor makes updates to their existing contribution,
-   * they should update the `lastUpdated` timestamp from their existing `Contribution`.
+   * they should update the `lastUpdated` timestamp of their existing `Contribution`.
    */
   contributions: [Contribution, ...Contribution[]];
 }

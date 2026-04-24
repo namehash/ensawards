@@ -57,7 +57,7 @@ export type BestPractice = BestPracticeProtocol | BestPracticeApp;
  * for the related {@link BestPractice}.
  *
  * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}.
- * If the related app doesn't have a benchmark completed for the `BestPractice` then the value should explicitly be set to `undefined`.
+ * If an app doesn't have a benchmark completed for a `BestPractice` then the benchmark should be explicitly set to `undefined`.
  * Otherwise, the value should be an `AppBenchmark` describing how the related app performed for the `BestPractice`.
  */
 export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;

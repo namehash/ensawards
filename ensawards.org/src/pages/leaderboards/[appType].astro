@@ -10,7 +10,7 @@ import { APPS } from "data/apps";
 import Layout from "@/layouts/Layout.astro";
 import { AppTypes } from "data/apps/types.ts";
 import { formatBestPracticeTarget } from "data/ens-best-practices/utils.ts";
-import { calcAppScore, validateAppType, sortApps, formatAppType } from "data/apps/utils.ts";
+import { calcAppScore, asAppType, sortApps, formatAppType } from "data/apps/utils.ts";
 import {
   ContributorsCard,
   ContributorsCardLoading,
@@ -26,7 +26,7 @@ export function getStaticPaths() {
   }));
 }
 
-const { appType } = Astro.params;
+const { appType: maybeAppType } = Astro.params;
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -35,24 +35,27 @@ const placeIcons = [
   "/src/assets/thirdPlaceAward.svg",
 ];
 
-const validAppType = validateAppType(appType);
+const appType = asAppType(maybeAppType);
 
-const formattedBestPracticeTarget: string = formatBestPracticeTarget(validAppType, true, true);
-const appContributions: Contribution[] = APPS.filter((app) => app.type === validAppType).flatMap(
-  (app) => getAppContributions(app),
+const formattedBestPracticeTarget: string = formatBestPracticeTarget(appType, {
+  lowercase: true,
+  plural: true,
+});
+const appContributions: Contribution[] = APPS.filter((app) => app.type === appType).flatMap((app) =>
+  getAppContributions(app),
 );
 ---
 
 <Layout
   pageMetadata={{
-    title: `ENSAwards: ENS Leaderboard for ${formatAppType(validAppType)} Integrations`,
+    title: `ENSAwards: ENS Leaderboard for ${formatAppType(appType, { plural: false, lowercase: false })} Integrations`,
     description: `See how ${formattedBestPracticeTarget} score on ENS integration benchmarks.`,
-    url: `https://ensawards.org/leaderboards/${validAppType}`,
-    ogImage: `https://ensawards.org/${validAppType}_leaderboard_og_image.png`,
-    twitterImage: `https://ensawards.org/${validAppType}_leaderboard_twitter_og_image.png`,
+    url: `https://ensawards.org/leaderboards/${appType}`,
+    ogImage: `https://ensawards.org/${appType}_leaderboard_og_image.png`,
+    twitterImage: `https://ensawards.org/${appType}_leaderboard_twitter_og_image.png`,
   }}>
   <SubpageHero
-    header={`${formatAppType(validAppType)} leaderboard`}
+    header={`${formatAppType(appType, { plural: false, lowercase: false })} leaderboard`}
     description={`Compare ${formattedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
     breadcrumbs={[{ text: "ENS leaderboards", linkHref: "/leaderboards" }]}
     customImage={{
@@ -69,7 +72,7 @@ const appContributions: Contribution[] = APPS.filter((app) => app.type === valid
       <div class="w-full md:w-3/5">
         <ItemsList containerStyles="gap-3 sm:gap-3">
           {
-            APPS.filter((app) => app.type === validAppType)
+            APPS.filter((app) => app.type === appType)
               .sort(sortApps)
               .map((app, idx) => {
                 const AppIcon = app.icon;

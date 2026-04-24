@@ -17,9 +17,9 @@ export interface AppBenchmark {
 
   /** A record of all contributors involved in the addition or maintenance of the benchmark's data.
    *
-   * @invariant Multiple {@link Contribution} from the same contributor is not allowed.
+   * @invariant Multiple {@link Contribution} from the same contributor on the same app benchmark are not allowed.
    * When a contributor makes updates to their existing contribution,
-   * they should update the `lastUpdated` timestamp from their existing `Contribution`.
+   * they should update the `lastUpdated` timestamp of their existing `Contribution`.
    */
   contributions: [Contribution, ...Contribution[]];
 }

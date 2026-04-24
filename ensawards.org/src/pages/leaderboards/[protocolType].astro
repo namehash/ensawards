@@ -11,7 +11,7 @@ import LeaderboardCard from "@/components/atoms/cards/LeaderboardCard.astro";
 import { Image } from "astro:assets";
 import ItemsList from "@/components/molecules/ItemsList.astro";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
-import { getProtocolById, validateProtocolType, formatProtocolType } from "data/protocols/utils.ts";
+import { getProtocolById, asProtocolType, formatProtocolType } from "data/protocols/utils.ts";
 import {
   ContributorsCard,
   ContributorsCardLoading,
@@ -27,7 +27,7 @@ export function getStaticPaths() {
   }));
 }
 
-const { protocolType } = Astro.params;
+const { protocolType: maybeProtocolType } = Astro.params;
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -36,11 +36,14 @@ const placeIcons = [
   "/src/assets/thirdPlaceAward.svg",
 ];
 
-const validProtocolType = validateProtocolType(protocolType);
+const protocolType = asProtocolType(maybeProtocolType);
 
-const formattedBestPracticeTarget: string = formatBestPracticeTarget(validProtocolType, true);
+const formattedBestPracticeTarget: string = formatBestPracticeTarget(protocolType, {
+  lowercase: false,
+  plural: true,
+});
 const protocolScores: Record<ProtocolId, EnsAwardsScore> =
-  getContractNamingScoresByProtocolType(validProtocolType);
+  getContractNamingScoresByProtocolType(protocolType);
 const protocolContractDataContributions: Contribution[] = Object.keys(protocolScores).flatMap(
   (protocolId) => getProtocolContributions(getProtocolById(protocolId as ProtocolId)),
 );
@@ -48,14 +51,14 @@ const protocolContractDataContributions: Contribution[] = Object.keys(protocolSc
 
 <Layout
   pageMetadata={{
-    title: `ENSAwards: ENS Leaderboard for ${formatProtocolType(validProtocolType, true)} Integrations`,
+    title: `ENSAwards: ENS Leaderboard for ${formatProtocolType(protocolType, { lowercase: false })} Integrations`,
     description: `See how ${formattedBestPracticeTarget} score on ENS integration benchmarks.`,
-    url: `https://ensawards.org/leaderboards/${validProtocolType}`,
-    ogImage: `https://ensawards.org/${validProtocolType}_leaderboard_og_image.png`,
-    twitterImage: `https://ensawards.org/${validProtocolType}_leaderboard_twitter_og_image.png`,
+    url: `https://ensawards.org/leaderboards/${protocolType}`,
+    ogImage: `https://ensawards.org/${protocolType}_leaderboard_og_image.png`,
+    twitterImage: `https://ensawards.org/${protocolType}_leaderboard_twitter_og_image.png`,
   }}>
   <SubpageHero
-    header={`${formatProtocolType(validProtocolType)} leaderboard`}
+    header={`${formatProtocolType(protocolType, { lowercase: false })} leaderboard`}
     description={`Compare ${formattedBestPracticeTarget} by their rank of following a selection of ENS best practices.`}
     breadcrumbs={[{ text: "ENS leaderboards", linkHref: "/leaderboards" }]}
     customImage={{
@@ -85,7 +88,7 @@ const protocolContractDataContributions: Contribution[] = Object.keys(protocolSc
                     name={protocol.name}
                     ensAwardsScore={value}
                     viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
-                    viewDetailsText={`${formatProtocolType(validProtocolType)}${validProtocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
+                    viewDetailsText={`${formatProtocolType(protocolType, { lowercase: false })}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
                     {idx < 3 ? (
                       <Image
                         alt={`${idx + 1}-place`}

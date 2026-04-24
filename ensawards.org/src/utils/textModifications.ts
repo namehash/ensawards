@@ -40,9 +40,6 @@ export const capitalizeText = (text: string): string => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
-export const truncateAddress = (address: Address) =>
-  `${address.slice(0, 6)}...${address.slice(-4)}`;
-
 export const usdFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",

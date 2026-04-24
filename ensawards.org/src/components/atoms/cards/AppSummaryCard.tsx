@@ -14,7 +14,10 @@ import type {
   BestPracticeCategorySlug,
   BestPracticeSlug,
 } from "data/ens-best-practices/types.ts";
-import { getBestPracticeBySlug, getCategoryBySlug } from "data/ens-best-practices/utils.ts";
+import {
+  getBestPracticeBySlug,
+  getBestPracticeCategoryBySlug,
+} from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
@@ -42,7 +45,7 @@ function BenchmarkCategorySection({
   const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [animationParent] = useAutoAnimate();
   const categoryScore = calcBestPracticeCategoryScore(benchmarksInCategory);
-  const category = getCategoryBySlug(categorySlug);
+  const category = getBestPracticeCategoryBySlug(categorySlug);
 
   if (category === undefined) {
     throw new Error(`Invariant(CategorySlug): Category with slug ${categorySlug} not found`);
@@ -90,7 +93,7 @@ function BenchmarkCategorySection({
                   <GenericTooltip
                     tooltipOffset={1}
                     triggerAsChild
-                    content={<p>{formatBenchmarkResult(benchmark)}</p>}
+                    content={<p>{formatBenchmarkResult(benchmark, { lowercase: false })}</p>}
                   >
                     <span className="shrink-0 cursor-pointer">
                       {getBenchmarkIcon(

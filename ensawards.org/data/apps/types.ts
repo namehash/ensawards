@@ -38,21 +38,21 @@ export interface App {
     twitter: URL;
     ens?: Name;
   };
-  /** Relative path from `/data/apps` to the Open Graph image for the app.
+  /** The custom Open Graph image for the app.
+   * Specified by the relative path from `/data/apps` to a custom Open Graph image.
    *
-   * @optional It's not required to provide an OG image yourself.
-   * We have a fallback mechanism in place, so the SEO of App's details page won't be degraded.
-   * In fact, we recommend leaving it empty. When your PR with a new {@link App} gets accepted,
-   * the NameHash Labs team will follow it up, providing customized OG images.
+   * @optional If not provided, a generic fallback Open Graph image will be used for the app.
+   * When adding a new app we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom OG image for your app for you.
    */
   ogImagePath?: string;
 
-  /** Relative path from `/data/apps` to the Twitter Open Graph image for the app.
+  /** The custom Twitter Open Graph image for the app.
+   * Specified by the relative path from `/data/apps` to a custom Twitter Open Graph image.
    *
-   * @optional It's not required to provide a Twitter OG image yourself.
-   * We have a fallback mechanism in place, so the SEO of App's details page won't be degraded.
-   * In fact, we recommend leaving it empty. When your PR with a new {@link App} gets accepted,
-   * the NameHash Labs team will follow it up, providing customized OG images.
+   * @optional If not provided, a generic fallback Twitter Open Graph image will be used for the app.
+   * When adding a new app we recommend leaving this undefined.
+   * The NameHash Labs team will add a custom Twitter OG image for your app for you.
    */
   twitterOgImagePath?: string;
 }

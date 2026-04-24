@@ -46,10 +46,10 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
 
           return (
             <LeaderboardSnippetCard
-              name={`${formatAppType(appType)} leaderboard`}
-              description={`See how ${formatBestPracticeTarget(appType, true, true)} rank for following ENS best practices.`}
+              name={`${formatAppType(appType, { lowercase: false, plural: false })} leaderboard`}
+              description={`See how ${formatBestPracticeTarget(appType, { lowercase: true, plural: true })} rank for following ENS best practices.`}
               link={`/leaderboards/${appType}`}
-              viewLeaderboardText={`View ${formatAppType(appType, true)} leaderboard`}>
+              viewLeaderboardText={`View ${formatAppType(appType, { lowercase: true, plural: false })} leaderboard`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">
@@ -91,9 +91,9 @@ import { ReferralProgramEditionStatuses } from "@namehash/ens-referrals/v1";
           return (
             <LeaderboardSnippetCard
               name={`${formatProtocolType(protocolType)} leaderboard`}
-              description={`See how ${formatBestPracticeTarget(protocolType, true)} rank for following ENS best practices.`}
+              description={`See how ${formatBestPracticeTarget(protocolType, { lowercase: false, plural: true })} rank for following ENS best practices.`}
               link={`/leaderboards/${protocolType}`}
-              viewLeaderboardText={`View ${formatProtocolType(protocolType)} leaderboard`}>
+              viewLeaderboardText={`View ${formatProtocolType(protocolType, { lowercase: false })} leaderboard`}>
               <div
                 slot="bestResultsIcons"
                 class="sm:relative sm:left-4 flex flex-row flex-nowrap justify-center items-center gap-0">

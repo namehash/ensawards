@@ -11,7 +11,7 @@ export type EnsAwardsPoints = number;
  *
  * Can also be used to identify how well a {@link BestPractice} or
  * {@link BestPracticeCategory} follows established best practices
- * (see {@link calcBestPracticeScore} or {@link calcCategoryScore}).
+ * (see {@link calcBestPracticeScore} or {@link calcBestPracticeCategoryScore}).
  *
  * @invariant Must be an integer between 0 and 100.
  */
@@ -24,14 +24,15 @@ export const isValidEnsAwardsScore = (maybeScore: number): maybeScore is EnsAwar
   Number.isInteger(maybeScore) && maybeScore >= 0 && maybeScore <= 100;
 
 /**
- * Checks the {@link EnsAwardsScore} invariants.
+ * Validates that the provided number is a valid {@link EnsAwardsScore}.
  *
- * @throws {Error} if the provided score does not satisfy the invariants of {@link EnsAwardsScore}.
+ * @throws if the provided score does not satisfy the invariants of {@link EnsAwardsScore}.
  */
-export const validateEnsAwardsScore = (maybeScore: number): void => {
+export const asEnsAwardsScore = (maybeScore: number): EnsAwardsScore => {
   if (!isValidEnsAwardsScore(maybeScore)) {
     throw new Error(
       `Invariant violation: EnsAwardsScore must be an integer between 0 and 100, but was ${maybeScore} instead`,
     );
   }
+  return maybeScore;
 };

@@ -236,7 +236,7 @@ const startContractNamingTodayButtonStyles =
             return (
               <LeaderboardSnippetCard
                 name={`${formatProtocolType(protocolType)} leaderboard`}
-                description={`See how ${formatBestPracticeTarget(protocolType, true)} rank for following ENS best practices.`}
+                description={`See how ${formatBestPracticeTarget(protocolType, { lowercase: false, plural: true })} rank for following ENS best practices.`}
                 link={`/leaderboards/${protocolType}`}
                 viewLeaderboardText={`View ${formatProtocolType(protocolType)} leaderboard`}>
                 <div

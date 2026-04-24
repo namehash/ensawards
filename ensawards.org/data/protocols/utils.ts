@@ -1,3 +1,5 @@
+import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
+
 import { type BestPracticeTarget } from "../ens-best-practices/types.ts";
 import { CONTRACTS } from "./contracts.ts";
 import { type Contract } from "./contracts-types.ts";
@@ -68,9 +70,11 @@ export const getDeFiProtocolByProtocolSlug = (
 };
 
 /**
- * Validates a string as a {@link ProtocolType}.
+ * Validates that the provided string is a valid {@link ProtocolType}.
+ *
+ * @throws if the provided string is invalid
  */
-export const validateProtocolType = (maybeProtocolType: string): ProtocolType => {
+export const asProtocolType = (maybeProtocolType: string): ProtocolType => {
   switch (maybeProtocolType) {
     case "dao":
       return ProtocolTypes.DAO;
@@ -109,10 +113,8 @@ export const getAllProtocolContracts = (protocolId: ProtocolId): Contract[] =>
 
 /** Builds the URL for a protocol's Open Graph image.
  *
- * @returns
- * * `undefined` if the protocol doesn't have an OG image path.
- * In this case, a default OG image will be used for the protocol.
- * Otherwise, the URL for the OG image is returned.
+ * @returns `undefined` if `imagePath` is `undefined`,
+ * else builds a URL for the protocol OG image associated with `imagePath`.
  */
 export const buildProtocolOgImageUrl = (imagePath: string | undefined): URL | undefined => {
   if (!imagePath) return undefined;
@@ -122,8 +124,10 @@ export const buildProtocolOgImageUrl = (imagePath: string | undefined): URL | un
 
 export const formatProtocolType = (
   protocolType: ProtocolType,
-  lowercase: boolean = false,
+  options: Omit<FormatTypeOptions, "plural"> = { lowercase: false },
 ): string => {
+  const { lowercase } = options;
+
   switch (protocolType) {
     case ProtocolTypes.DeFi:
       return lowercase ? "defi" : "DeFi";

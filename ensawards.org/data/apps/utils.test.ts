@@ -35,12 +35,12 @@ vi.mock("data/benchmarks/utils.ts", () => ({
 
 import {
   appliesToAllApps,
+  asAppType,
   calcAppScore,
   getAppById,
   getAppByName,
   getAppBySlug,
   sortApps,
-  validateAppType,
 } from "./utils.ts";
 
 const setMockApps = (...apps: App[]) => {
@@ -66,11 +66,11 @@ describe("App utils", () => {
 
   describe("validateAppType", () => {
     it("Should return the app type for a valid AppType value", () => {
-      expect(validateAppType("wallet")).toEqual(AppTypes.Wallet);
+      expect(asAppType("wallet")).toEqual(AppTypes.Wallet);
     });
 
     it("Should throw an error for an invalid AppType value", () => {
-      expect(() => validateAppType("invalid-type")).toThrow("Invalid AppType value: invalid-type");
+      expect(() => asAppType("invalid-type")).toThrow("Invalid AppType value: invalid-type");
     });
   });
 

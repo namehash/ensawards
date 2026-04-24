@@ -1,6 +1,5 @@
 import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
 import { useNow } from "@namehash/namehash-ui";
-import { isValidReferralProgramEditionSummaryPieSplit } from "data/shared/referral-program-editions";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";
 
@@ -31,7 +30,7 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
     // If the fetch fails keep the latest valid data
     setReferralProgramEditionSummaryData((current) =>
       refreshedSummary !== undefined &&
-      isValidReferralProgramEditionSummaryPieSplit(refreshedSummary)
+      refreshedSummary.awardModel === ReferralProgramAwardModels.PieSplit
         ? refreshedSummary
         : current,
     );

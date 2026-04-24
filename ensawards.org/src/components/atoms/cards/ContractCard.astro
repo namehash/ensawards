@@ -38,7 +38,7 @@ const contractCodeNameForMobileDisplay = breakLongWords(
  * Adaptive styling for `ENS name` field of `ContractCard` based on
  * the longest contract name among the protocol's contracts.
  */
-const getENSNameFieldStyles = (protocolId: ProtocolId): string => {
+const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
   // We need to discretize the width due to Tailwind's limitations with dynamic class names
   const getFieldWidthBuckets = (maxNameLength: number): string => {
     if (maxNameLength <= 20) return "sm:min-w-[225px]";
@@ -101,7 +101,7 @@ const getENSNameFieldStyles = (protocolId: ProtocolId): string => {
   <div
     class={cn(
       "flex flex-row max-sm:gap-5 gap-1 sm:flex-col justify-start items-start",
-      getENSNameFieldStyles(contract.protocol.id),
+      getContractNameFieldWidth(contract.protocol.id),
     )}>
     <p
       class="text-sm leading-[20px] font-normal text-muted-foreground max-sm:min-w-[105px]">

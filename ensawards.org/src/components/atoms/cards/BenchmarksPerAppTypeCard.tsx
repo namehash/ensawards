@@ -36,7 +36,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
   return (
     <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white px-[10px] pt-4 pb-[10px]">
       <h3 className="text-lg leading-normal font-semibold text-black px-[10px]">
-        {formatAppType(firstApp.type)} benchmarks
+        {formatAppType(firstApp.type, { plural: false, lowercase: false })} benchmarks
       </h3>
       <div className="flex w-full flex-col items-center">
         {resolvedAppsWithBenchmark.map(({ app, bestPractice, benchmark }, index) => {

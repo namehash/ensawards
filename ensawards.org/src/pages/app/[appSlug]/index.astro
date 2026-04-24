@@ -30,7 +30,10 @@ import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { getAppContributions } from "data/contributors/utils.ts";
 import type { BestPracticeCategorySlug, BestPracticeSlug } from "data/ens-best-practices/types";
-import { getCategoryBySlug, getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
+import {
+  getBestPracticeCategoryBySlug,
+  getBestPracticeBySlug,
+} from "data/ens-best-practices/utils.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { appSlug: app.appSlug } }));
@@ -74,7 +77,7 @@ if (appToDisplay !== undefined) {
         breadcrumbs={[
           { text: "ENS leaderboards", linkHref: "/leaderboards" },
           {
-            text: `${formatAppType(appToDisplay.type)} leaderboard`,
+            text: `${formatAppType(appToDisplay.type, { plural: false, lowercase: false })} leaderboard`,
             linkHref: `/leaderboards/${appToDisplay.type}`,
           },
         ]}>
@@ -123,7 +126,7 @@ if (appToDisplay !== undefined) {
               {benchmarksByCategory
                 .entries()
                 .map(([categorySlug, benchmarksInCategory]) => {
-                  const category = getCategoryBySlug(categorySlug);
+                  const category = getBestPracticeCategoryBySlug(categorySlug);
                   const categoryScore =
                     calcBestPracticeCategoryScore(benchmarksInCategory);
 

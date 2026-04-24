@@ -62,7 +62,7 @@ export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBa
       )}
     >
       {BenchmarkIcon}
-      {formatBenchmarkResult(benchmark)}
+      {formatBenchmarkResult(benchmark, { lowercase: false })}
     </span>
   );
 }

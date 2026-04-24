@@ -2,7 +2,8 @@ import { AppTypes } from "data/apps/types.ts";
 import { BenchmarkResults } from "data/benchmarks/types.ts";
 import { calcEnsAwardsPoints, getAppBenchmarksByBestPractice } from "data/benchmarks/utils.ts";
 import { ProtocolTypes } from "data/protocols/types.ts";
-import { type EnsAwardsScore, validateEnsAwardsScore } from "data/shared/ens-awards-score.ts";
+import { asEnsAwardsScore, type EnsAwardsScore } from "data/shared/ens-awards-score.ts";
+import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 
 import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from "./index.ts";
 import {
@@ -19,7 +20,7 @@ import {
 /**
  * Returns a {@link BestPracticeCategory} by {@link BestPracticeCategory.categorySlug}.
  */
-export const getCategoryBySlug = (
+export const getBestPracticeCategoryBySlug = (
   categorySlug: BestPracticeCategorySlug,
 ): BestPracticeCategory | undefined => {
   return BEST_PRACTICE_CATEGORIES.find((category) => category.categorySlug === categorySlug);
@@ -31,7 +32,9 @@ export const getCategoryBySlug = (
 // TODO: The id field in BestPracticeCategory is currently a string.
 // Since we will be removing it (see https://github.com/namehash/ensawards/issues/182)
 // I don't want to create a type/ type alias for it
-export const getCategoryById = (categoryId: string): BestPracticeCategory | undefined => {
+export const getBestPracticeCategoryById = (
+  categoryId: string,
+): BestPracticeCategory | undefined => {
   return BEST_PRACTICE_CATEGORIES.find((category) => category.id === categoryId);
 };
 
@@ -65,19 +68,29 @@ export const getBestPracticesByCategory = (category: BestPracticeCategory): Best
 
 export const formatBestPracticeType = (
   bestPracticeType: BestPracticeType,
-  lowercase: boolean = false,
+  options: FormatTypeOptions = { lowercase: false, plural: false },
 ): string => {
+  const { lowercase, plural } = options;
+  let formattedType: string;
   switch (bestPracticeType) {
     case BestPracticeTypes.Protocol:
-      return lowercase ? "protocol" : "Protocol";
+      formattedType = plural ? "Protocols" : "Protocol";
+      break;
 
     case BestPracticeTypes.App:
-      return lowercase ? "app" : "App";
+      formattedType = plural ? "Apps" : "App";
+      break;
 
     default:
       const _exhaustive: never = bestPracticeType;
       throw new Error(`Unsupported BestPracticeType: ${_exhaustive}`);
   }
+
+  if (lowercase) {
+    formattedType = formattedType.toLowerCase();
+  }
+
+  return formattedType;
 };
 
 /**
@@ -109,9 +122,7 @@ export const calcBestPracticeScore = (
 
   const score = Math.round((bestPracticePoints * 100) / benchmarkedApps);
 
-  validateEnsAwardsScore(score);
-
-  return score;
+  return asEnsAwardsScore(score);
 };
 
 /**
@@ -140,9 +151,9 @@ export const calcAppsPassed = (bestPractice: BestPracticeApp): number => {
 
 export const formatBestPracticeTarget = (
   target: BestPracticeTarget,
-  plural: boolean = false,
-  lowercase: boolean = false,
+  options: FormatTypeOptions = { lowercase: false, plural: false },
 ): string => {
+  const { lowercase, plural } = options;
   let formattedTarget: string;
   switch (target) {
     case AppTypes.Explorer:
