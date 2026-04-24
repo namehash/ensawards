@@ -1,4 +1,6 @@
+import type { App } from "data/apps/types.ts";
 import type { IncentiveProgram, IncentiveProgramSlug } from "data/incentive-programs/types.ts";
+import type { Protocol } from "data/protocols/types.ts";
 import { type EnsTokens } from "data/shared/ensTokens.ts";
 import type { NormalizedAddress } from "data/shared/normalizedAddress.ts";
 import type { TransactionRef } from "data/shared/transactionRef.ts";

@@ -1,4 +1,3 @@
-import { AWARDS } from "data/awards";
 import { AwardTypes } from "data/awards/types";
 import { sortFinancialAwardsByPrice } from "data/awards/utils";
 import EnsContractNamingSeason from "data/incentive-programs/ens-contract-naming-season";

@@ -12,7 +12,7 @@ export const AwardedEntityField = ({ entity }: { entity?: AwardedEntity }) => {
   if (!entity) return <AwardedEntityFieldContainer value={<span>-</span>} />;
 
   switch (entity.type) {
-    case AwardedEntityTypes.App:
+    case AwardedEntityTypes.App: {
       const AppIcon = entity.app.icon;
       const appDetailsUrl = getAppDetailsUrl(entity.app);
       return (
@@ -32,7 +32,8 @@ export const AwardedEntityField = ({ entity }: { entity?: AwardedEntity }) => {
           }
         />
       );
-    case AwardedEntityTypes.Protocol:
+    }
+    case AwardedEntityTypes.Protocol: {
       const ProtocolIcon = entity.protocol.icon;
       const protocolDetailsUrl = getProtocolDetailsUrl(entity.protocol);
       return (
@@ -52,7 +53,8 @@ export const AwardedEntityField = ({ entity }: { entity?: AwardedEntity }) => {
           }
         />
       );
-    case AwardedEntityTypes.Custom:
+    }
+    case AwardedEntityTypes.Custom: {
       return (
         <AwardedEntityFieldContainer
           value={
@@ -71,10 +73,12 @@ export const AwardedEntityField = ({ entity }: { entity?: AwardedEntity }) => {
           }
         />
       );
+    }
 
-    default:
+    default: {
       const _exhaustive: never = entity;
       throw new Error(`Unsupported AwardedEntityType: ${JSON.stringify(_exhaustive)}`);
+    }
   }
 };
 
@@ -85,7 +89,7 @@ interface AwardedEntityFieldContainerProps {
 
 const AwardedEntityFieldContainer = ({ value, icon }: AwardedEntityFieldContainerProps) => (
   <div className="sm:min-w-[172px] flex flex-row justify-start items-center gap-3 max-sm:self-stretch">
-    <div className="hidden sm:block w-10 h-10 flex items-center justify-center shrink-0">
+    <div className="hidden sm:flex w-10 h-10 items-center justify-center shrink-0">
       {icon ? icon : <EntityPlaceholderIcon className="w-10 h-10" />}
     </div>
     <div className="max-sm:w-full sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0">
@@ -93,7 +97,7 @@ const AwardedEntityFieldContainer = ({ value, icon }: AwardedEntityFieldContaine
         Entity
       </p>
       <div className="flex flex-row justify-start items-center gap-2">
-        <div className="block sm:hidden w-5 h-5 flex items-center justify-center shrink-0">
+        <div className="flex sm:hidden w-5 h-5 items-center justify-center shrink-0">
           {icon ? icon : <EntityPlaceholderIcon className="w-5 h-5" />}
         </div>
         <p className="text-sm leading-normal font-medium max-sm:text-right text-black">{value}</p>

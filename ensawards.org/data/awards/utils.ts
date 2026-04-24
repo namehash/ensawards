@@ -5,7 +5,7 @@ import {
 } from "data/awards/awarded-entity-types";
 import { type EnsTokens } from "data/shared/ensTokens";
 
-import { type Award, type AwardFinancial, AwardTypes } from "./types";
+import { type Award, type AwardFinancial } from "./types";
 
 /**
  * Sorts {@link Award}s of {@link AwardFinancial} type.
