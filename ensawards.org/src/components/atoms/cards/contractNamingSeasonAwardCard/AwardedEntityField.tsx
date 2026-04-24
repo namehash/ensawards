@@ -3,6 +3,7 @@ import { getAppDetailsUrl } from "data/apps/utils";
 import { type AwardedEntity, AwardedEntityTypes } from "data/awards/awarded-entity-types";
 import { getProtocolDetailsUrl } from "data/protocols/utils";
 
+import { EntityPlaceholderIcon } from "@/components/atoms/icons/EntityPlaceholderIcon";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export const AwardedEntityField = ({ entity }: { entity?: AwardedEntity }) => {
@@ -85,7 +86,7 @@ interface AwardedEntityFieldContainerProps {
 const AwardedEntityFieldContainer = ({ value, icon }: AwardedEntityFieldContainerProps) => (
   <div className="sm:min-w-[172px] flex flex-row justify-start items-center gap-3 max-sm:self-stretch">
     <div className="hidden sm:block w-10 h-10 flex items-center justify-center shrink-0">
-      {icon}
+      {icon ? icon : <EntityPlaceholderIcon className="w-10 h-10" />}
     </div>
     <div className="max-sm:w-full sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0">
       <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">
@@ -93,7 +94,7 @@ const AwardedEntityFieldContainer = ({ value, icon }: AwardedEntityFieldContaine
       </p>
       <div className="flex flex-row justify-start items-center gap-2">
         <div className="block sm:hidden w-5 h-5 flex items-center justify-center shrink-0">
-          {icon}
+          {icon ? icon : <EntityPlaceholderIcon className="w-5 h-5" />}
         </div>
         <p className="text-sm leading-normal font-medium max-sm:text-right text-black">{value}</p>
       </div>
