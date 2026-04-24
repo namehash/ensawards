@@ -2,16 +2,17 @@ import { type Hash } from "viem";
 
 import { type ChainId } from "@ensnode/ensnode-sdk";
 
+/**
+ * Reference to a distinct transaction.
+ */
 export interface TransactionRef {
   /**
-   * Chain ID of the blockchain where the award distribution transaction took place.
-   *
-   * Required to uniquely identify the transaction together with {@link transactionHash}.
+   * Chain ID where the transaction took place.
    */
   chainId: ChainId;
 
-  /** Transaction hash of the transaction on the chain identified by {@link chainId}.
-   * that took place on {@link awardedAt} to distribute the {@link Award}
+  /**
+   * Transaction hash of the transaction that took place on `chainId`.
    */
   transactionHash: Hash;
 }

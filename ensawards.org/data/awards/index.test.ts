@@ -11,6 +11,7 @@ import { type AccountIdString, formatAccountId } from "@ensnode/ensnode-sdk";
 import { AWARDS } from ".";
 
 describe("Awards data", () => {
+  // TODO: We are planning to remove this constraint. See: https://github.com/namehash/ensawards/issues/191
   it("Should have valid and unique recipient AccountIds per incentive program", () => {
     const awardsByIncentiveProgram: Map<IncentiveProgramSlug, Set<AccountIdString>> = new Map();
     AWARDS.forEach((award) => {

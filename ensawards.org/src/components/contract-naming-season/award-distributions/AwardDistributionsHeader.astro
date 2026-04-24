@@ -1,5 +1,6 @@
 ---
-import { calcRemainingContractNamingSeasonAwardPool } from "data/incentive-programs/ens-contract-naming-season/utils";
+import EnsContractNamingSeason from "data/incentive-programs/ens-contract-naming-season";
+import { calcIncentiveProgramRemainingAwardPool } from "data/incentive-programs/utils";
 import { ensTokenFormatterShort } from "data/shared/ensTokens";
 ---
 
@@ -14,7 +15,9 @@ import { ensTokenFormatterShort } from "data/shared/ensTokens";
     Act fast to participate before the remaining <span class="text-black"
       >{
         ensTokenFormatterShort.format(
-          calcRemainingContractNamingSeasonAwardPool(),
+          calcIncentiveProgramRemainingAwardPool(
+            EnsContractNamingSeason.incentiveProgramSlug,
+          ),
         )
       }
       $ENS</span

@@ -46,7 +46,7 @@ export interface AwardAbstract<AwardTypeT extends AwardType> {
   awardedAt: UnixTimestamp;
 
   /**
-   * The reason for granting the award.
+   * A short reason for granting the award; optional.
    */
   reason?: string;
 }
