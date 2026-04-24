@@ -1,5 +1,6 @@
 import { getChainName } from "@namehash/namehash-ui";
-import { type Address, isAddress, isAddressEqual } from "viem";
+import { isNormalizedAddress } from "data/shared/normalizedAddress";
+import { type Address, isAddressEqual } from "viem";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -141,11 +142,11 @@ describe("CachedIdentity", () => {
     });
   });
 
-  it("The `ContractDeployment.address` must be a valid and in checksum format", () => {
+  it("The `ContractDeployment.address` must be a valid normalized address", () => {
     data.forEach((contract) =>
       expect(
-        isAddress(contract.cachedIdentity.contract.address),
-        `The address=${contract.cachedIdentity.contract.address} is not valid or not in checksum format.`,
+        isNormalizedAddress(contract.cachedIdentity.contract.address),
+        `The address=${contract.cachedIdentity.contract.address} is not a valid normalized address.`,
       ).toEqual(true),
     );
   });

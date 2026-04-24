@@ -1,4 +1,9 @@
+import { AWARDS } from "data/awards/index.ts";
+import type { Award } from "data/awards/types.ts";
+import { EntityMetadataTypes } from "data/entity-metadata/types.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
+
+import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 
 import { type BestPracticeTarget } from "../ens-best-practices/types.ts";
 import { CONTRACTS } from "./contracts.ts";
@@ -140,3 +145,19 @@ export const formatProtocolType = (
       throw new Error(`Unsupported ProtocolType: ${_exhaustive}`);
   }
 };
+
+/**
+ * Returns the URL to the protocol details page for a given {@link Protocol}.
+ */
+export const getProtocolDetailsUrl = (protocol: Protocol): URL =>
+  new URL(`/protocol/${protocol.protocolSlug}`, getEnsAwardsBaseUrl());
+
+/**
+ * Returns all {@link Award}s associated with a given {@link ProtocolSlug}.
+ */
+export const getAwardsByProtocolSlug = (protocolSlug: ProtocolSlug): Award[] =>
+  AWARDS.filter(
+    (award) =>
+      award.awardedEntityMetadata?.type === EntityMetadataTypes.Protocol &&
+      award.awardedEntityMetadata.protocol.protocolSlug === protocolSlug,
+  );

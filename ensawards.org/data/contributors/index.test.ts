@@ -1,5 +1,7 @@
 import { SUPPORTED_CHAINS } from "@namehash/namehash-ui";
-import { getAddress, isAddress } from "viem";
+import { isNormalizedAddress } from "data/shared/normalizedAddress";
+import { isValidSlug } from "data/shared/slugs";
+import { getAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
 import type { AccountId, ChainId } from "@ensnode/ensnode-sdk";
@@ -10,10 +12,10 @@ describe("Contributors data", () => {
   const contributorsData = contributors;
 
   describe("Contributor data", () => {
-    it("Should have valid addresses", () => {
+    it("Should have valid, normalized addresses", () => {
       Object.entries(contributorsData).forEach(([name, contributor]: [string, AccountId]) => {
         expect(
-          isAddress(contributor.address),
+          isNormalizedAddress(contributor.address),
           `Address for contributor ${name} is not valid: ${contributor.address}`,
         ).toEqual(true);
       });
@@ -27,6 +29,14 @@ describe("Contributors data", () => {
           supportedChainIds.some((chainId) => chainId === contributor.chainId),
           `Chain ID for contributor ${name} is not in SUPPORTED_CHAINS: ${contributor.chainId}`,
         ).toBe(true);
+      });
+    });
+
+    it("Should have valid contributor aliases", () => {
+      const aliases = Object.keys(contributorsData);
+
+      aliases.forEach((alias) => {
+        expect(isValidSlug(alias), `Contributor alias "${alias}" is not valid.`).toBe(true);
       });
     });
 

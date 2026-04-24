@@ -16,7 +16,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x6440f144b7e50D6a8439336510312d2F54beB01D",
+        address: "0x6440f144b7e50d6a8439336510312d2f54beb01d",
         chain: mainnet,
         codeName: "boldToken",
       },
@@ -31,7 +31,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x03569CC076654F82679C4BA2124D64774781B01D",
+        address: "0x03569cc076654f82679c4ba2124d64774781b01d",
         chain: base,
         codeName: "boldToken",
       },
@@ -45,7 +45,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x03569CC076654F82679C4BA2124D64774781B01D",
+        address: "0x03569cc076654f82679c4ba2124d64774781b01d",
         chain: arbitrum,
         codeName: "boldToken",
       },
@@ -59,7 +59,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x03569CC076654F82679C4BA2124D64774781B01D",
+        address: "0x03569cc076654f82679c4ba2124d64774781b01d",
         chain: optimism,
         codeName: "boldToken",
       },
@@ -73,7 +73,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x03569CC076654F82679C4BA2124D64774781B01D",
+        address: "0x03569cc076654f82679c4ba2124d64774781b01d",
         chain: scroll,
         codeName: "boldToken",
       },
@@ -87,7 +87,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xf949982B91C8c61e952B3bA942cbbfaef5386684",
+        address: "0xf949982b91c8c61e952b3ba942cbbfaef5386684",
         chain: mainnet,
         codeName: "shared.collateralRegistry",
       },
@@ -102,7 +102,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xF0caE19C96E572234398d6665cC1147A16cBe657",
+        address: "0xf0cae19c96e572234398d6665cc1147a16cbe657",
         chain: mainnet,
         codeName: "shared.hintHelpers",
       },
@@ -116,7 +116,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xFA61dB085510C64B83056Db3A7Acf3b6f631D235",
+        address: "0xfa61db085510c64b83056db3a7acf3b6f631d235",
         chain: mainnet,
         codeName: "shared.multiTroveGetter",
       },
@@ -130,7 +130,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x2f60bAb0072AbeC7058017f48D7256EC288c8686",
+        address: "0x2f60bab0072abec7058017f48d7256ec288c8686",
         chain: mainnet,
         codeName: "shared.exchangeHelpers",
       },
@@ -144,7 +144,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
         chain: mainnet,
         codeName: "ETHBranch.collToken",
       },
@@ -158,7 +158,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x20F7C9ad66983F6523a0881d0f82406541417526",
+        address: "0x20f7c9ad66983f6523a0881d0f82406541417526",
         chain: mainnet,
         codeName: "ETHBranch.addressesRegistry",
       },
@@ -172,7 +172,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xeB5A8C825582965f1d84606E078620a84ab16AfE",
+        address: "0xeb5a8c825582965f1d84606e078620a84ab16afe",
         chain: mainnet,
         codeName: "ETHBranch.activePool",
       },
@@ -186,7 +186,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x372ABD1810eAF23Cb9D941BbE7596DFb2c46BC65",
+        address: "0x372abd1810eaf23cb9d941bbe7596dfb2c46bc65",
         chain: mainnet,
         codeName: "ETHBranch.borrowerOperations",
       },
@@ -201,7 +201,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xedbE2509E502c0320D2e7f8b6746a49b4B50E2bF",
+        address: "0xedbe2509e502c0320d2e7f8b6746a49b4b50e2bf",
         chain: mainnet,
         codeName: "ETHBranch.collSurplusPool",
       },
@@ -215,7 +215,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xD4558240d50C2E219a21c9d25afD513Bb6e5B1A0",
+        address: "0xd4558240d50c2e219a21c9d25afd513bb6e5b1a0",
         chain: mainnet,
         codeName: "ETHBranch.defaultPool",
       },
@@ -229,7 +229,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xA25269E41BD072513849F2E64Ad221e84f3063F4",
+        address: "0xa25269e41bd072513849f2e64ad221e84f3063f4",
         chain: mainnet,
         codeName: "ETHBranch.sortedTroves",
       },
@@ -243,7 +243,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x5721cbbd64fc7Ae3Ef44A0A3F9a790A9264Cf9BF",
+        address: "0x5721cbbd64fc7ae3ef44a0a3f9a790a9264cf9bf",
         chain: mainnet,
         codeName: "ETHBranch.stabilityPool",
       },
@@ -258,7 +258,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x7bcb64B2c9206a5B699eD43363f6F98D4776Cf5A",
+        address: "0x7bcb64b2c9206a5b699ed43363f6f98d4776cf5a",
         chain: mainnet,
         codeName: "ETHBranch.troveManager",
       },
@@ -273,7 +273,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x1A0FC0b843aFD9140267D25d4E575Cb37a838013",
+        address: "0x1a0fc0b843afd9140267d25d4e575cb37a838013",
         chain: mainnet,
         codeName: "ETHBranch.troveNFT",
       },
@@ -288,7 +288,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x9B36C3B16299D68c79F174df7e728E35b6AF4A12",
+        address: "0x9b36c3b16299d68c79f174df7e728e35b6af4a12",
         chain: mainnet,
         codeName: "ETHBranch.metadataNFT",
       },
@@ -302,7 +302,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xCC5F8102eb670c89a4a3c567C13851260303c24F",
+        address: "0xcc5f8102eb670c89a4a3c567c13851260303c24f",
         chain: mainnet,
         codeName: "ETHBranch.priceFeed",
       },
@@ -316,7 +316,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x7b9ab3DE4036caE51F1fa4ec0a2C2fd606bCF921",
+        address: "0x7b9ab3de4036cae51f1fa4ec0a2c2fd606bcf921",
         chain: mainnet,
         codeName: "ETHBranch.gasPool",
       },
@@ -330,7 +330,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x7022A4f4A2b9f0C30A5eB0B0073a8Bb4C8e70C1f",
+        address: "0x7022a4f4a2b9f0c30a5eb0b0073a8bb4c8e70c1f",
         chain: mainnet,
         codeName: "ETHBranch.wethZapper",
       },
@@ -344,7 +344,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xdCcBD7A365aeE086aa3b4EDe8afe895B20770AE3",
+        address: "0xdccbd7a365aee086aa3b4ede8afe895b20770ae3",
         chain: mainnet,
         codeName: "ETHBranch.leverageZapper",
       },
@@ -359,7 +359,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+        address: "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
         chain: mainnet,
         codeName: "wstETHBranch.collToken",
       },
@@ -373,7 +373,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x8d733F7ea7c23Cbea7C613B6eBd845d46d3aAc54",
+        address: "0x8d733f7ea7c23cbea7c613b6ebd845d46d3aac54",
         chain: mainnet,
         codeName: "wstETHBranch.addressesRegistry",
       },
@@ -387,7 +387,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x531a8f99c70D6A56A7CEe02d6B4281650d7919a0",
+        address: "0x531a8f99c70d6a56a7cee02d6b4281650d7919a0",
         chain: mainnet,
         codeName: "wstETHBranch.activePool",
       },
@@ -401,7 +401,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xa741A32f9dcFe6aDBa088fD0f97e90742d7d5DA3",
+        address: "0xa741a32f9dcfe6adba088fd0f97e90742d7d5da3",
         chain: mainnet,
         codeName: "wstETHBranch.borrowerOperations",
       },
@@ -416,7 +416,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x36e6CBdf68f64CF00fC3a6c634A25be32Dd0A235",
+        address: "0x36e6cbdf68f64cf00fc3a6c634a25be32dd0a235",
         chain: mainnet,
         codeName: "wstETHBranch.collSurplusPool",
       },
@@ -430,7 +430,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xD796e1648526400386CC4d12FA05E5F11e6a22A1",
+        address: "0xd796e1648526400386cc4d12fa05e5f11e6a22a1",
         chain: mainnet,
         codeName: "wstETHBranch.defaultPool",
       },
@@ -444,7 +444,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x84eb85a8C25049255614F0536Bea8F31682e86F1",
+        address: "0x84eb85a8c25049255614f0536bea8f31682e86f1",
         chain: mainnet,
         codeName: "wstETHBranch.sortedTroves",
       },
@@ -458,7 +458,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x9502b7c397E9aa22FE9dB7EF7DAF21cD2AEBe56B",
+        address: "0x9502b7c397e9aa22fe9db7ef7daf21cd2aebe56b",
         chain: mainnet,
         codeName: "wstETHBranch.stabilityPool",
       },
@@ -473,7 +473,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xA2895d6A3bf110561Dfe4b71cA539d84e1928B22",
+        address: "0xa2895d6a3bf110561dfe4b71ca539d84e1928b22",
         chain: mainnet,
         codeName: "wstETHBranch.troveManager",
       },
@@ -488,7 +488,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x857aECeBF75f1012DC18E15020C97096aeA31b04",
+        address: "0x857aecebf75f1012dc18e15020c97096aea31b04",
         chain: mainnet,
         codeName: "wstETHBranch.troveNFT",
       },
@@ -503,7 +503,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x362f822dF79790C8077e61110484Fffa48F682A1",
+        address: "0x362f822df79790c8077e61110484fffa48f682a1",
         chain: mainnet,
         codeName: "wstETHBranch.metadataNFT",
       },
@@ -517,7 +517,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xe7Aa2Ba9E086A379d3beb224098bC634a46e314E",
+        address: "0xe7aa2ba9e086a379d3beb224098bc634a46e314e",
         chain: mainnet,
         codeName: "wstETHBranch.priceFeed",
       },
@@ -531,7 +531,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x8C44FBa379D8A8608C0e29B2729DeB75a981Db1f",
+        address: "0x8c44fba379d8a8608c0e29b2729deb75a981db1f",
         chain: mainnet,
         codeName: "wstETHBranch.gasPool",
       },
@@ -545,7 +545,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xBD69D3e0eA967d146E925b7572B765c8E9C4127D",
+        address: "0xbd69d3e0ea967d146e925b7572b765c8e9c4127d",
         chain: mainnet,
         codeName: "wstETHBranch.gasCompZapper",
       },
@@ -559,7 +559,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xe85230dE04147C4Ea363B21cdb801c1C19DF0A56",
+        address: "0xe85230de04147c4ea363b21cdb801c1c19df0a56",
         chain: mainnet,
         codeName: "wstETHBranch.leverageZapper",
       },
@@ -574,7 +574,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xae78736Cd615f374D3085123A210448E74Fc6393",
+        address: "0xae78736cd615f374d3085123a210448e74fc6393",
         chain: mainnet,
         codeName: "rETHBranch.collToken",
       },
@@ -588,7 +588,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x6106046F031a22713697e04C08B330dDaf3e8789",
+        address: "0x6106046f031a22713697e04c08b330ddaf3e8789",
         chain: mainnet,
         codeName: "rETHBranch.addressesRegistry",
       },
@@ -602,7 +602,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x9074D72cc82DaD1e13E454755Aa8f144c479532F",
+        address: "0x9074d72cc82dad1e13e454755aa8f144c479532f",
         chain: mainnet,
         codeName: "rETHBranch.activePool",
       },
@@ -616,7 +616,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xe8119fC02953B27a1b48D2573855738485A17329",
+        address: "0xe8119fc02953b27a1b48d2573855738485a17329",
         chain: mainnet,
         codeName: "rETHBranch.borrowerOperations",
       },
@@ -631,7 +631,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xba4A2bD8b76DF84CaC98eBa3f4b967D8423192bF",
+        address: "0xba4a2bd8b76df84cac98eba3f4b967d8423192bf",
         chain: mainnet,
         codeName: "rETHBranch.collSurplusPool",
       },
@@ -645,7 +645,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x5cc5ceFD034Fdc4728D487a72Ca58A410CDdCD6b",
+        address: "0x5cc5cefd034fdc4728d487a72ca58a410cddcd6b",
         chain: mainnet,
         codeName: "rETHBranch.defaultPool",
       },
@@ -659,7 +659,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x14d8d8011dF2b396Ed2bbC4959bb73250324F386",
+        address: "0x14d8d8011df2b396ed2bbc4959bb73250324f386",
         chain: mainnet,
         codeName: "rETHBranch.sortedTroves",
       },
@@ -673,7 +673,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xd442E41019B7F5C4dD78F50dc03726C446148695",
+        address: "0xd442e41019b7f5c4dd78f50dc03726c446148695",
         chain: mainnet,
         codeName: "rETHBranch.stabilityPool",
       },
@@ -688,7 +688,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xb2B2ABEb5C357a234363FF5D180912D319e3e19e",
+        address: "0xb2b2abeb5c357a234363ff5d180912d319e3e19e",
         chain: mainnet,
         codeName: "rETHBranch.troveManager",
       },
@@ -703,7 +703,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x7ae430E25b67f19B431e1D1Dc048a5BCF24C0873",
+        address: "0x7ae430e25b67f19b431e1d1dc048a5bcf24c0873",
         chain: mainnet,
         codeName: "rETHBranch.troveNFT",
       },
@@ -718,7 +718,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x3400874305E1547020fb8e80eAF1308B757171Af",
+        address: "0x3400874305e1547020fb8e80eaf1308b757171af",
         chain: mainnet,
         codeName: "rETHBranch.metadataNFT",
       },
@@ -732,7 +732,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x34F1E9c7dcc279ec70d3c4488EB2D80FBa8B7b2B",
+        address: "0x34f1e9c7dcc279ec70d3c4488eb2d80fba8b7b2b",
         chain: mainnet,
         codeName: "rETHBranch.priceFeed",
       },
@@ -746,7 +746,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x45c81dcE308389e1Bee63ae30A04Fb1e148dad41",
+        address: "0x45c81dce308389e1bee63ae30a04fb1e148dad41",
         chain: mainnet,
         codeName: "rETHBranch.gasPool",
       },
@@ -760,7 +760,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xbE8B230dCd12E246F5eDc5c103CC98be68ab636F",
+        address: "0xbe8b230dcd12e246f5edc5c103cc98be68ab636f",
         chain: mainnet,
         codeName: "rETHBranch.gasCompZapper",
       },
@@ -774,7 +774,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x75036b1D6DE5665c60F5C33BB4a64e8E123211A2",
+        address: "0x75036b1d6de5665c60f5c33bb4a64e8e123211a2",
         chain: mainnet,
         codeName: "rETHBranch.leverageZapper",
       },
@@ -789,7 +789,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x807DEf5E7d057DF05C796F4bc75C3Fe82Bd6EeE1",
+        address: "0x807def5e7d057df05c796f4bc75c3fe82bd6eee1",
         chain: mainnet,
         codeName: "governance",
       },
@@ -804,7 +804,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xEFc6516323FbD28e80B85A497B65A86243a54B3E",
+        address: "0xefc6516323fbd28e80b85a497b65a86243a54b3e",
         chain: mainnet,
         codeName: "governance.curveUsdcBoldPool",
       },
@@ -818,7 +818,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x07a01471fA544D9C6531B631E6A96A79a9AD05E9",
+        address: "0x07a01471fa544d9c6531b631e6a96a79a9ad05e9",
         chain: mainnet,
         codeName: "governance.curveUsdcBoldGauge",
       },
@@ -832,7 +832,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xbA415Afa8fCD65196764B5E08cb4dBF90BEE33B4",
+        address: "0xba415afa8fcd65196764b5e08cb4dbf90bee33b4",
         chain: mainnet,
         codeName: "governance.curveUsdcBoldInitiative",
       },
@@ -846,7 +846,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x7ED17e037B7d88A8270c89B3aFA9C38e5218F12b",
+        address: "0x7ed17e037b7d88a8270c89b3afa9c38e5218f12b",
         chain: mainnet,
         codeName: "governance.curveLusdBoldPool",
       },
@@ -860,7 +860,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xa37cdce0207127204682D3235EAd2c7a4C5D6C5C",
+        address: "0xa37cdce0207127204682d3235ead2c7a4c5d6c5c",
         chain: mainnet,
         codeName: "governance.curveLusdBoldGauge",
       },
@@ -874,7 +874,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0c76eaE597AfA2Aa163A8C845F7E7e870256aC7E",
+        address: "0x0c76eae597afa2aa163a8c845f7e7e870256ac7e",
         chain: mainnet,
         codeName: "governance.curveLusdBoldInitiative",
       },
@@ -888,7 +888,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x4f9Fbb3f1E99B56e0Fe2892e623Ed36A76Fc605d",
+        address: "0x4f9fbb3f1e99b56e0fe2892e623ed36a76fc605d",
         chain: mainnet,
         codeName: "governance.stakingV1",
       },
@@ -902,7 +902,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x6DEA81C8171D0bA574754EF6F8b412F2Ed88c54D",
+        address: "0x6dea81c8171d0ba574754ef6f8b412f2ed88c54d",
         chain: mainnet,
         codeName: "governance.LQTYToken",
       },
@@ -917,7 +917,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x5f98805A4E8be255a32880FDeC7F6728C6568bA0",
+        address: "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
         chain: mainnet,
         codeName: "governance.LUSDToken",
       },

@@ -16,7 +16,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1",
+        address: "0xdd9bc35ae942ef0cfa76930954a156b3ff30a4e1",
         chain: mainnet,
         codeName: "SSVNetwork",
       },
@@ -35,7 +35,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xafE830B6Ee262ba11cce5F32fDCd760FFE6a66e4",
+        address: "0xafe830b6ee262ba11cce5f32fdcd760ffe6a66e4",
         chain: mainnet,
         codeName: "SSVNetworkViews",
       },
@@ -50,7 +50,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54",
+        address: "0x9d65ff81a3c488d585bbfb0bfe3c7707c7917f54",
         chain: mainnet,
         codeName: "SSVToken",
       },
@@ -65,7 +65,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0xe018D31F120A637828F46aFD6c64EC099d960546",
+        address: "0xe018d31f120a637828f46afd6c64ec099d960546",
         chain: mainnet,
         codeName: "CSSVToken",
       },
@@ -80,7 +80,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xb35096b074fdb9bBac63E3AdaE0Bbde512B2E6b6",
+        address: "0xb35096b074fdb9bbac63e3adae0bbde512b2e6b6",
         chain: mainnet,
         codeName: "DAOTreasury",
       },
@@ -95,7 +95,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xeC29418bc30FED20dE85706F32c7D77Da0be7afB",
+        address: "0xec29418bc30fed20de85706f32c7d77da0be7afb",
         chain: mainnet,
         codeName: "SSVFoundation",
       },
@@ -110,7 +110,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0xe16d6138B1D2aD4fD6603ACdb329ad1A6cD26D9f",
+        address: "0xe16d6138b1d2ad4fd6603acdb329ad1a6cd26d9f",
         chain: mainnet,
         codeName: "IMP1",
       },
@@ -125,7 +125,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x13006e447608bB62383D1d59bb11a93e957Be7cF",
+        address: "0x13006e447608bb62383d1d59bb11a93e957be7cf",
         chain: mainnet,
         codeName: "IMPLido",
       },

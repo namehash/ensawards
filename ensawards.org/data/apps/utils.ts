@@ -1,10 +1,15 @@
+import { AWARDS } from "data/awards/index.ts";
+import type { Award } from "data/awards/types.ts";
 import { calcEnsAwardsPoints, getAppBenchmarks } from "data/benchmarks/utils.ts";
+import { EntityMetadataTypes } from "data/entity-metadata/types.ts";
 import {
   asEnsAwardsScore,
   type EnsAwardsPoints,
   type EnsAwardsScore,
 } from "data/shared/ens-awards-score.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
+
+import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 
 import type { BestPractice, BestPracticeTarget } from "../ens-best-practices/types.ts";
 import { APPS } from "./index.ts";
@@ -131,3 +136,19 @@ export const formatAppType = (
 
   return formattedType;
 };
+
+/**
+ * Returns the URL to the app details page for a given {@link App}.
+ */
+export const getAppDetailsUrl = (app: App): URL =>
+  new URL(`/app/${app.appSlug}`, getEnsAwardsBaseUrl());
+
+/**
+ * Returns all {@link Award}s associated with a given {@link AppSlug}.
+ */
+export const getAwardsByAppSlug = (appSlug: AppSlug): Award[] =>
+  AWARDS.filter(
+    (award) =>
+      award.awardedEntityMetadata?.type === EntityMetadataTypes.App &&
+      award.awardedEntityMetadata.app.appSlug === appSlug,
+  );

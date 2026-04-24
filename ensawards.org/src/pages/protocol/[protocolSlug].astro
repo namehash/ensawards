@@ -19,9 +19,9 @@ import EnscribeIcon from "@/components/atoms/icons/EnscribeIconLight.astro";
 import EnsAwardsScoreDisplay from "@/components/atoms/ens-awards-score/circular.astro";
 import { sortByResolutionStatus } from "@/contract-pipelines/sorting";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { buildProtocolOgImageUrl } from "data/protocols/utils";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils";
 import {
+  buildProtocolOgImageUrl,
   getProtocolBySlug,
   getAllProtocolContracts,
   formatProtocolType,
@@ -34,6 +34,7 @@ import {
 import { type Contribution } from "data/contributors/types";
 import { getProtocolContributions } from "data/contributors/utils";
 import type { EnsAwardsScore } from "data/shared/ens-awards-score";
+import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -134,6 +135,7 @@ if (protocol) {
             contributionType={ContributionTypes.Contract}
           />
         </ContributorsCard>
+        <AwardsCard entity={protocol} />
         <ItemsList
           header="Smart contract naming"
           containerStyles="gap-3 sm:gap-2">

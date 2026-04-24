@@ -17,10 +17,13 @@ const getReferralProgramStatusStyle = (status: ReferralProgramEditionStatusId): 
   switch (status) {
     case ReferralProgramEditionStatuses.AwardsReview:
       return "bg-amber-500 text-white";
+
     case ReferralProgramEditionStatuses.Scheduled:
       return "bg-white text-black border-[#E5E5E5]";
+
     case ReferralProgramEditionStatuses.Active:
       return "bg-emerald-600 text-white";
+
     case ReferralProgramEditionStatuses.Closed:
     case ReferralProgramEditionStatuses.Exhausted:
       return "bg-neutral-500 text-white";
@@ -35,14 +38,19 @@ const getReferralProgramStatusTooltipText = (status: ReferralProgramEditionStatu
   switch (status) {
     case ReferralProgramEditionStatuses.AwardsReview:
       return "This edition's time period is over but awards haven't been distributed yet.";
+
     case ReferralProgramEditionStatuses.Scheduled:
       return "This edition's time period hasn't started yet.";
+
     case ReferralProgramEditionStatuses.Active:
       return "This edition's time period is active for earning awards.";
+
     case ReferralProgramEditionStatuses.Closed:
       return "This edition's time period is over and awards have been distributed.";
+
     case ReferralProgramEditionStatuses.Exhausted:
       return "This edition's time period is active for earning awards, but its budget has already been fully consumed.";
+
     default:
       const _exhaustive: never = status;
       throw new Error(`Unsupported ReferralProgramEditionStatusId: ${_exhaustive}`);

@@ -16,7 +16,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x000000000004444c5dc75cB358380D2e3dE08A90",
+        address: "0x000000000004444c5dc75cb358380d2e3de08a90",
         chain: mainnet,
         codeName: "PoolManager",
       },
@@ -114,7 +114,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+        address: "0x000000000022d473030f116ddee9f6b43ac78ba3",
         chain: mainnet,
         codeName: "Permit2",
       },

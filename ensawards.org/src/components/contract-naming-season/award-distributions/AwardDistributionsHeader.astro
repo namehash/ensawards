@@ -1,0 +1,26 @@
+---
+import EnsContractNamingSeason from "data/incentive-programs/ens-contract-naming-season";
+import { calcIncentiveProgramRemainingAwardPool } from "data/incentive-programs/utils";
+import { ensTokenFormatterShort } from "data/shared/ensTokens";
+---
+
+<div
+  class="w-full sm:max-w-[600px] flex flex-col gap-4 items-start justify-start">
+  <h2
+    class="text-3xl leading-normal font-semibold text-black text-left self-stretch">
+    Distributed awards
+  </h2>
+  <p class="text-base leading-normal font-normal text-muted-foreground">
+    Many awards for ENS Contract Naming Season have already been distributed.
+    Act fast to participate before the remaining <span class="text-black"
+      >{
+        ensTokenFormatterShort.format(
+          calcIncentiveProgramRemainingAwardPool(
+            EnsContractNamingSeason.incentiveProgramSlug,
+          ),
+        )
+      }
+      $ENS</span
+    > award pool is exhausted!
+  </p>
+</div>
