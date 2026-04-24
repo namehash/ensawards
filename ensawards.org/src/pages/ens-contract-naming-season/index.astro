@@ -35,6 +35,7 @@ import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/util
 import { getProtocolById } from "data/protocols/utils.ts";
 import AwardDistributionsHeader from "@/components/contract-naming-season/award-distributions/AwardDistributionsHeader.astro";
 import { AwardDistributionsList } from "@/components/contract-naming-season/award-distributions/AwardDistributionsList";
+import { ContractNamingSeasonAwardCardLoading } from "@/components/atoms/cards/contractNamingSeasonAwardCard/loading.tsx";
 
 interface ContentItemData {
   name: string;
@@ -221,7 +222,17 @@ const startContractNamingTodayButtonStyles =
         class="w-full max-w-[1216px] h-fit flex flex-col justify-start items-start gap-6">
         <AwardDistributionsHeader />
         <div class="w-full h-fit flex flex-col justify-start items-start gap-2">
-          <AwardDistributionsList client:only="react" listSize={5} />
+          <AwardDistributionsList client:only="react" listSize={5}>
+            <div
+              slot="fallback"
+              class="w-full flex flex-col justify-start items-center gap-2">
+              {
+                Array.from({ length: 5 }).map((_, index) => (
+                  <ContractNamingSeasonAwardCardLoading key={index} />
+                ))
+              }
+            </div>
+          </AwardDistributionsList>
           <a
             href={`/ens-contract-naming-season/award-distributions`}
             class={cn(

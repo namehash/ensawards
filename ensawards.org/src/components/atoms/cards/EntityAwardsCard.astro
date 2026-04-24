@@ -8,7 +8,7 @@ import { getAwardedEntityName } from "data/awards/utils";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { AbsoluteTime } from "@namehash/namehash-ui";
-import { EnsAwardsIcon } from "@/components/atoms/icons/EnsAwardsIcon";
+import EnsTrophyIcon from "@/components/atoms/icons/EnsTrophyIcon.astro";
 
 import { getIncentiveProgramBySlug } from "data/incentive-programs/utils";
 import { getAwardsByAppSlug } from "data/apps/utils";
@@ -16,31 +16,40 @@ import { getAwardsByProtocolSlug } from "data/protocols/utils";
 
 interface EntityAwardsCardProps {
   entity: AwardedApp | AwardedProtocol;
+  sidebarVariant?: boolean;
 }
 
-const { entity }: EntityAwardsCardProps = Astro.props;
+const { entity, sidebarVariant = false }: EntityAwardsCardProps = Astro.props;
 
 const entityAwards =
   entity.type === AwardedEntityTypes.App
     ? getAwardsByAppSlug(entity.app.appSlug)
     : getAwardsByProtocolSlug(entity.protocol.protocolSlug);
-
-// NOTE: For now this component comes with a pretty basic design, since I'm waiting for @theloner's input on it. Will adapt as soon as the final designs are ready.
 ---
 
 {
   entityAwards.length > 0 && (
-    <div class="w-full max-w-[1216px] h-fit flex flex-col gap-3 sm:gap-5 p-4 sm:px-5 sm:py-4 rounded-2xl border border-gray-200 bg-white">
+    <div
+      class={cn(
+        "w-full max-w-[1216px] h-fit flex flex-col sm:flex-row justify-start items-start sm:justify-between items-start gap-3 sm:gap-5 p-4 sm:px-5 sm:py-4 rounded-2xl border border-gray-200 bg-white",
+        sidebarVariant && "sm:flex-col sm:gap-3",
+      )}>
       <div class="w-full flex-1 min-w-0">
         <div class="w-full flex flex-col gap-1">
-          <h4 class="text-lg leading-7 font-semibold text-slate-800">Awards</h4>
+          <h4 class="text-lg leading-normal font-semibold text-slate-800">
+            Awards
+          </h4>
           <p class="text-base leading-6 font-normal text-muted-foreground">
-            {getAwardedEntityName(entity)} has been awarded
+            List of all {getAwardedEntityName(entity)}'s awards
           </p>
         </div>
       </div>
 
-      <div class="flex flex-col justify-start items-start gap-0">
+      <div
+        class={cn(
+          "w-full flex flex-col justify-start items-start gap-3",
+          !sidebarVariant && "sm:w-fit",
+        )}>
         {entityAwards.map((award, index) => {
           const incentiveProgram = getIncentiveProgramBySlug(
             award.associatedIncentiveProgramSlug,
@@ -53,21 +62,23 @@ const entityAwards =
           }
 
           return (
-            <div
-              class={cn(
-                "w-full h-fit flex flex-row flex-nowrap justify-start items-center gap-3",
-                index > 0 && "border-t border-gray-200",
-              )}>
-              <EnsAwardsIcon className="w-10 h-10 shrink-0" />
-              <div>
-                <h3 class="text-base leading-6 font-semibold text-black">
-                  {incentiveProgram.displayName} Award
-                </h3>
-                <div class="flex flex-row flex-nowrap justify-start items-center gap-1">
-                  <p class="text-sm leading-normal font-normal text-muted-foreground">
-                    Awarded on
-                  </p>
-                  <p class="text-sm leading-normal font-medium text-black">
+            <>
+              <span
+                class={cn(
+                  "block sm:hidden h-[1px] w-full bg-gray-200",
+                  (index > 0 || sidebarVariant) && "sm:block",
+                )}
+              />
+              <div
+                class={cn(
+                  "w-full h-fit flex flex-row flex-nowrap justify-start items-center gap-3",
+                )}>
+                <EnsTrophyIcon className="w-12 h-12 shrink-0" />
+                <div>
+                  <h3 class="text-base leading-normal font-semibold text-black">
+                    {incentiveProgram.displayName} Award
+                  </h3>
+                  <p class="text-base leading-normal font-normal text-muted-foreground">
                     <AbsoluteTime
                       client:load
                       timestamp={award.awardedAt}
@@ -80,7 +91,7 @@ const entityAwards =
                   </p>
                 </div>
               </div>
-            </div>
+            </>
           );
         })}
       </div>

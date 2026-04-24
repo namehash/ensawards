@@ -4,6 +4,7 @@ import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
 import AwardDistributionsHeader from "@/components/contract-naming-season/award-distributions/AwardDistributionsHeader.astro";
 import { AwardDistributionsList } from "@/components/contract-naming-season/award-distributions/AwardDistributionsList";
+import { ContractNamingSeasonAwardCardLoading } from "@/components/atoms/cards/contractNamingSeasonAwardCard/loading.tsx";
 ---
 
 <Layout
@@ -28,7 +29,17 @@ import { AwardDistributionsList } from "@/components/contract-naming-season/awar
     <div
       class="w-full max-w-[1216px] h-fit flex flex-col justify-start items-start gap-6">
       <AwardDistributionsHeader />
-      <AwardDistributionsList client:only="react" />
+      <AwardDistributionsList client:only="react">
+        <div
+          slot="fallback"
+          class="w-full flex flex-col justify-start items-center gap-2">
+          {
+            Array.from({ length: 30 }).map((_, index) => (
+              <ContractNamingSeasonAwardCardLoading key={index} />
+            ))
+          }
+        </div>
+      </AwardDistributionsList>
     </div>
   </section>
 </Layout>
