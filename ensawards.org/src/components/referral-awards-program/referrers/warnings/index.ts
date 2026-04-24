@@ -22,20 +22,10 @@ export const REFERRAL_PROGRAM_WARNINGS = new Map<
   [
     "2026-04",
     new Map<Address, ReferralProgramWarning>([
-      // TODO: Populate with true warnings.
-      // See https://github.com/namehash/ensawards/pull/174#discussion_r3058470915
-      // [
-      //   "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
-      //   "This is a warning message for testing purposes.",
-      // ],
-      // [
-      //   "0xf919a96d2970380b87917b04f02e6d3d08368b10",
-      //   "This is a warning message for testing purposes.",
-      // ],
-      // [
-      //   "0x9c6aa5ce4903aad922ac4dde9b57817c1fc17d9b",
-      //   "This is a warning message for testing purposes.",
-      // ],
+      [
+        "0x02fa71cbb4b1b990a475deb370d0aa42aa43503b",
+        "A number of referrals for April 2026 are self-referrals. Continued self-referrals will violate rule 1 of the Code of Conduct and result in disqualification for April 2026.",
+      ],
     ]),
   ],
 ]);
