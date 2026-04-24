@@ -32,7 +32,12 @@
       },
       "rulesUrl": "https://ensawards.org/ens-referral-program/editions/2026-04/rules",
       "areAwardsDistributed": false,
-      "disqualifications": []
+      "disqualifications": [
+        {
+          "referrer": "0x9a75ed8e1e592c2e2b0d3eddee8404dcf326a8c5",
+          "reason": "Disqualified for April 2026 due to violation of rule 1 of the Code of Conduct. Unsatisfactory evidence that a preponderance of referrals are not self-referrals."
+        }
+      ]
     }
   },
   {
