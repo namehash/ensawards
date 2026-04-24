@@ -25,7 +25,7 @@ export const ContractNamingSeasonAwardCard = ({ award }: ContractNamingSeasonAwa
   const namespaceId = DEFAULT_ENS_NAMESPACE;
 
   const recipientIdentity = useMemo(
-    () => buildUnresolvedIdentity(award.awardedTo, namespaceId, getENSRootChainId(namespaceId)),
+    () => buildUnresolvedIdentity(award.awardedTo.address, namespaceId, award.awardedTo.chainId),
     [award.awardedTo, namespaceId],
   );
 
@@ -36,7 +36,7 @@ export const ContractNamingSeasonAwardCard = ({ award }: ContractNamingSeasonAwa
     award.transaction.chainId,
     award.transaction.transactionHash,
   );
-  const awardedToDetailsUrl = getAdvocateDetailsUrl(award.awardedTo);
+  const awardedToDetailsUrl = getAdvocateDetailsUrl(award.awardedTo.address);
 
   const estimatedValueUSD = award.price * ENS_TOKENS_TO_USDC_CONVERSION_RATE;
 
@@ -92,7 +92,7 @@ export const ContractNamingSeasonAwardCard = ({ award }: ContractNamingSeasonAwa
         </div>
       </div>
 
-      <AwardedEntityField entity={award.awardedEntity} />
+      <AwardedEntityField entity={award.awardedEntityMetadata} />
 
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal cursor-default">

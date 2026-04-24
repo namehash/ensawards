@@ -5,6 +5,7 @@ import { getAwardsByIncentiveProgramSlug } from "data/incentive-programs/utils";
 import { useMemo } from "react";
 
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { formatAccountId } from "@ensnode/ensnode-sdk";
 
 import { ContractNamingSeasonAwardCard } from "@/components/atoms/cards/contractNamingSeasonAwardCard";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -29,7 +30,7 @@ export const AwardDistributionsList = ({ listSize }: AwardDistributionsListProps
         <div className="w-full h-fit flex flex-col gap-2 justify-start items-center">
           {SORTED_FINANCIAL_AWARDS.slice(0, listSize).map((award) => (
             <ContractNamingSeasonAwardCard
-              key={`${award.transaction.chainId}-${award.transaction.transactionHash}-${award.awardedTo}`}
+              key={`${award.transaction.transactionHash}-${formatAccountId(award.awardedTo)}`}
               award={award}
             />
           ))}

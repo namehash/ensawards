@@ -14,7 +14,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 100,
           awardedAt: 1,
           transaction: {
@@ -25,7 +28,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 200,
           awardedAt: 2,
           transaction: {
@@ -36,7 +42,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 150,
           awardedAt: 0,
           transaction: {
@@ -50,7 +59,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 200,
           awardedAt: 2,
           transaction: {
@@ -61,7 +73,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 150,
           awardedAt: 0,
           transaction: {
@@ -72,7 +87,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 100,
           awardedAt: 1,
           transaction: {
@@ -93,7 +111,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 100,
           awardedAt: 2,
           transaction: {
@@ -104,7 +125,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 100,
           awardedAt: 1,
           transaction: {
@@ -115,7 +139,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 100,
           awardedAt: 3,
           transaction: {
@@ -129,7 +156,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 100,
           awardedAt: 1,
           transaction: {
@@ -140,7 +170,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 100,
           awardedAt: 2,
           transaction: {
@@ -151,7 +184,10 @@ describe("awards utils", () => {
         {
           associatedIncentiveProgramSlug: "placeholder-incentive-program",
           type: AwardTypes.FinancialAward,
-          awardedTo: zeroAddress,
+          awardedTo: {
+            chainId: placeholderChainId,
+            address: zeroAddress,
+          },
           price: 100,
           awardedAt: 3,
           transaction: {

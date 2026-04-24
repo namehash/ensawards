@@ -1,8 +1,3 @@
-import {
-  type AwardedApp,
-  AwardedEntityTypes,
-  type AwardedProtocol,
-} from "data/awards/awarded-entity-types";
 import { type EnsTokens } from "data/shared/ensTokens";
 
 import { type Award, type AwardFinancial } from "./types";
@@ -18,18 +13,6 @@ export const sortFinancialAwardsByPrice = (a: AwardFinancial, b: AwardFinancial)
   if (a.price < b.price) return 1;
 
   return a.awardedAt - b.awardedAt;
-};
-
-export const getAwardedEntityName = (awardedEntity: AwardedApp | AwardedProtocol): string => {
-  switch (awardedEntity.type) {
-    case AwardedEntityTypes.App:
-      return awardedEntity.app.name;
-    case AwardedEntityTypes.Protocol:
-      return awardedEntity.protocol.name;
-    default:
-      const _exhaustive: never = awardedEntity;
-      throw new Error(`Unsupported AwardedEntityType: ${JSON.stringify(_exhaustive)}`);
-  }
 };
 
 /**

@@ -1,6 +1,6 @@
-import { AwardedEntityTypes } from "data/awards/awarded-entity-types.ts";
 import { AWARDS } from "data/awards/index.ts";
 import type { Award } from "data/awards/types.ts";
+import { EntityMetadataTypes } from "data/entity-metadata/types.ts";
 
 import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 import type { EnsAwardsScore } from "@/utils/types.ts";
@@ -155,6 +155,6 @@ export const getAppDetailsUrl = (app: App): URL =>
 export const getAwardsByAppSlug = (appSlug: App["appSlug"]): Award[] =>
   AWARDS.filter(
     (award) =>
-      award.awardedEntity?.type === AwardedEntityTypes.App &&
-      award.awardedEntity.app.appSlug === appSlug,
+      award.awardedEntityMetadata?.type === EntityMetadataTypes.App &&
+      award.awardedEntityMetadata.app.appSlug === appSlug,
   );

@@ -19,8 +19,7 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import { groupBenchmarksByCategory, calcCategoryScore } from "data/apps/benchmarks-utils";
 import { type AppBenchmark } from "data/apps/benchmarks-types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
-import { AwardedEntityTypes } from "data/awards/awarded-entity-types";
-import EntityAwardsCard from "@/components/atoms/cards/EntityAwardsCard.astro";
+import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { app: app.appSlug } }));
@@ -146,10 +145,7 @@ if (appToDisplay !== undefined) {
               gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${appToDisplay.appSlug}/benchmarks.ts`}
               sidebarVariant
             />
-            <EntityAwardsCard
-              entity={{ type: AwardedEntityTypes.App, app: appToDisplay }}
-              sidebarVariant
-            />
+            <AwardsCard entity={appToDisplay} sidebarVariant />
           </div>
         </div>
       </section>

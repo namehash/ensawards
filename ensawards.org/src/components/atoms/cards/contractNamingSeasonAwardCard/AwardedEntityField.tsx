@@ -1,18 +1,18 @@
 import { useIsMobile } from "@namehash/namehash-ui";
 import { getAppDetailsUrl } from "data/apps/utils";
-import { type AwardedEntity, AwardedEntityTypes } from "data/awards/awarded-entity-types";
+import { type EntityMetadata, EntityMetadataTypes } from "data/entity-metadata/types";
 import { getProtocolDetailsUrl } from "data/protocols/utils";
 
 import { EntityPlaceholderIcon } from "@/components/atoms/icons/EntityPlaceholderIcon";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-export const AwardedEntityField = ({ entity }: { entity?: AwardedEntity }) => {
+export const AwardedEntityField = ({ entity }: { entity?: EntityMetadata }) => {
   const isMobile = useIsMobile();
 
   if (!entity) return <AwardedEntityFieldContainer value={<span>-</span>} />;
 
   switch (entity.type) {
-    case AwardedEntityTypes.App: {
+    case EntityMetadataTypes.App: {
       const AppIcon = entity.app.icon;
       const appDetailsUrl = getAppDetailsUrl(entity.app);
       return (
@@ -33,7 +33,7 @@ export const AwardedEntityField = ({ entity }: { entity?: AwardedEntity }) => {
         />
       );
     }
-    case AwardedEntityTypes.Protocol: {
+    case EntityMetadataTypes.Protocol: {
       const ProtocolIcon = entity.protocol.icon;
       const protocolDetailsUrl = getProtocolDetailsUrl(entity.protocol);
       return (
@@ -54,7 +54,7 @@ export const AwardedEntityField = ({ entity }: { entity?: AwardedEntity }) => {
         />
       );
     }
-    case AwardedEntityTypes.Custom: {
+    case EntityMetadataTypes.Custom: {
       return (
         <AwardedEntityFieldContainer
           value={

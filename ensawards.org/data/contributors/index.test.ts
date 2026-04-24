@@ -1,5 +1,6 @@
 import { SUPPORTED_CHAINS } from "@namehash/namehash-ui";
 import { isNormalizedAddress } from "data/shared/normalizedAddress";
+import { isValidSlug } from "data/shared/slugs";
 import { getAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
@@ -28,6 +29,17 @@ describe("Contributors data", () => {
           supportedChainIds.some((chainId) => chainId === contributor.chainId),
           `Chain ID for contributor ${name} is not in SUPPORTED_CHAINS: ${contributor.chainId}`,
         ).toBe(true);
+      });
+    });
+
+    it("Should have valid and unique contributor aliases", () => {
+      const aliases = Object.keys(contributorsData);
+      const uniqueAliases = new Set();
+
+      aliases.forEach((alias) => {
+        expect(isValidSlug(alias), `Contributor alias "${alias}" is not valid.`).toBe(true);
+        expect(uniqueAliases.has(alias), `Contributor alias "${alias}" is not unique.`).toBe(false);
+        uniqueAliases.add(alias);
       });
     });
 

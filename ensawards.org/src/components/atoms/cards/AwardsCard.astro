@@ -1,11 +1,4 @@
 ---
-import {
-  type AwardedApp,
-  type AwardedProtocol,
-  AwardedEntityTypes,
-} from "data/awards/awarded-entity-types";
-import { getAwardedEntityName } from "data/awards/utils";
-
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { AbsoluteTime } from "@namehash/namehash-ui";
 import EnsTrophyIcon from "@/components/atoms/icons/EnsTrophyIcon.astro";
@@ -13,18 +6,20 @@ import EnsTrophyIcon from "@/components/atoms/icons/EnsTrophyIcon.astro";
 import { getIncentiveProgramBySlug } from "data/incentive-programs/utils";
 import { getAwardsByAppSlug } from "data/apps/utils";
 import { getAwardsByProtocolSlug } from "data/protocols/utils";
+import { type App } from "data/apps/types";
+import { type Protocol } from "data/protocols/types";
 
-interface EntityAwardsCardProps {
-  entity: AwardedApp | AwardedProtocol;
+interface AwardsCardProps {
+  entity: App | Protocol;
   sidebarVariant?: boolean;
 }
 
-const { entity, sidebarVariant = false }: EntityAwardsCardProps = Astro.props;
+const { entity, sidebarVariant = false }: AwardsCardProps = Astro.props;
 
 const entityAwards =
-  entity.type === AwardedEntityTypes.App
-    ? getAwardsByAppSlug(entity.app.appSlug)
-    : getAwardsByProtocolSlug(entity.protocol.protocolSlug);
+  "appSlug" in entity
+    ? getAwardsByAppSlug(entity.appSlug)
+    : getAwardsByProtocolSlug(entity.protocolSlug);
 ---
 
 {
@@ -40,7 +35,7 @@ const entityAwards =
             Awards
           </h4>
           <p class="text-base leading-6 font-normal text-muted-foreground">
-            List of all {getAwardedEntityName(entity)}'s awards
+            List of all {entity.name}'s awards
           </p>
         </div>
       </div>

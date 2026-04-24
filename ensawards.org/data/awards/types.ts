@@ -1,13 +1,11 @@
 import type { App } from "data/apps/types.ts";
+import type { EntityMetadata } from "data/entity-metadata/types.ts";
 import type { IncentiveProgram, IncentiveProgramSlug } from "data/incentive-programs/types.ts";
 import type { Protocol } from "data/protocols/types.ts";
 import { type EnsTokens } from "data/shared/ensTokens.ts";
-import type { NormalizedAddress } from "data/shared/normalizedAddress.ts";
 import type { TransactionRef } from "data/shared/transactionRef.ts";
 
-import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
-
-import type { AwardedEntity } from "./awarded-entity-types.ts";
+import type { AccountId, UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 export const AwardTypes = {
   FinancialAward: "financial-award",
@@ -24,25 +22,25 @@ export interface AwardAbstract<AwardTypeT extends AwardType> {
    */
   associatedIncentiveProgramSlug: IncentiveProgramSlug;
 
-  /** Address of the recipient of the award.
+  /** {@link AccountId} of the recipient of the award.
    *
-   * @invariant Simplifying assumption: no address can receive more than one award.
+   * @invariant Simplifying assumption: no recipient (AccountId) can receive more than one award.
    * TODO: The above is not technically true. When we have more time we should relax this constraint.
    * This action is planned in: https://github.com/namehash/ensawards/issues/191
    */
-  awardedTo: NormalizedAddress;
+  awardedTo: AccountId;
 
-  /** Entity associated with the award recipient.
+  /** Metadata of the entity associated with the award recipient.
    * Helps to identify the recipient in human-recognizable ways for cases
    * where `awardedTo` doesn't have an ENS primary name or
    * where its ENS primary name doesn't make it sufficiently intuitive
    * which app, protocol, or custom entity the recipient stands for.
    *
-   * `undefined` award entity represents that `awardedTo` either is an individual
+   * `undefined` awarded entity metadata represents that `awardedTo` either is an individual
    * who is not affiliated with any known {@link App} or {@link Protocol},
    * or their {@link App} or {@link Protocol} affiliation is unknown.
    */
-  awardedEntity?: AwardedEntity;
+  awardedEntityMetadata?: EntityMetadata;
 
   /** When the award was distributed */
   awardedAt: UnixTimestamp;

@@ -1,6 +1,6 @@
-import { AwardedEntityTypes } from "data/awards/awarded-entity-types.ts";
 import { AWARDS } from "data/awards/index.ts";
 import type { Award } from "data/awards/types.ts";
+import { EntityMetadataTypes } from "data/entity-metadata/types.ts";
 
 import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 
@@ -121,6 +121,6 @@ export const getProtocolDetailsUrl = (protocol: Protocol): URL =>
 export const getAwardsByProtocolSlug = (protocolSlug: Protocol["protocolSlug"]): Award[] =>
   AWARDS.filter(
     (award) =>
-      award.awardedEntity?.type === AwardedEntityTypes.Protocol &&
-      award.awardedEntity.protocol.protocolSlug === protocolSlug,
+      award.awardedEntityMetadata?.type === EntityMetadataTypes.Protocol &&
+      award.awardedEntityMetadata.protocol.protocolSlug === protocolSlug,
   );

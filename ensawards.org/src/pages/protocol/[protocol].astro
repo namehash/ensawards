@@ -22,15 +22,10 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import { getENSNameFieldStyles } from "@/utils/styles";
 import { type Protocol } from "data/protocols/types";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils";
-import {
-  getProtocolBySlug,
-  getAllProtocolContracts,
-  getAwardsByProtocolSlug,
-} from "data/protocols/utils";
+import { getProtocolBySlug, getAllProtocolContracts } from "data/protocols/utils";
 import { SuggestionCard } from "@/components/atoms/cards/SuggestionCard";
 import { type Contribution } from "data/contributors/types";
-import EntityAwardsCard from "@/components/atoms/cards/EntityAwardsCard.astro";
-import { AwardedEntityTypes, type AwardedProtocol } from "data/awards/awarded-entity-types";
+import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -55,12 +50,6 @@ let protocolScore = 0;
 let ProtocolIcon = GlobeIcon;
 let protocolContractsDataContributions: Contribution[] = [];
 
-// NOTE: These two variables might be a temporary solution until designs for EntityAwardsCard are finalized,
-// to determine how to display it in relation to SuggestionCard.
-// The current approach is ugly and should be refined once the designs are ready.
-let awardedProtocol: AwardedProtocol | undefined;
-let hasAwards = false;
-
 if (resolvedProtocol) {
   protocolContracts = getAllProtocolContracts(resolvedProtocol.id);
   ProtocolIcon = resolvedProtocol.icon;
@@ -69,14 +58,11 @@ if (resolvedProtocol) {
   protocolContractsDataContributions = protocolContracts
     .map((contract) => contract.contributions)
     .flat();
-
-  awardedProtocol = { type: AwardedEntityTypes.Protocol, protocol: resolvedProtocol };
-  hasAwards = getAwardsByProtocolSlug(resolvedProtocol.protocolSlug).length > 0;
 }
 ---
 
 {
-  resolvedProtocol === undefined || awardedProtocol === undefined ? (
+  resolvedProtocol === undefined ? (
     // theoretically, because of Astro's build-time page generation, this should never happen
     <DataLoadingError />
   ) : (
@@ -137,12 +123,11 @@ if (resolvedProtocol) {
         <ContractNamingBanner />
         <SuggestionCard
           client:load
-          sidebarVariant={hasAwards}
           whatsSuggested="contract"
           allContributions={protocolContractsDataContributions}
           gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/protocols/${resolvedProtocol.protocolSlug}/contracts.ts`}
         />
-        <EntityAwardsCard entity={awardedProtocol} />
+        <AwardsCard entity={resolvedProtocol} />
         <ItemsList
           header="Smart contract naming"
           containerStyles="gap-3 sm:gap-2">
