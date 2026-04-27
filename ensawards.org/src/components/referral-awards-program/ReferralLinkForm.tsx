@@ -1,12 +1,11 @@
 import { buildEnsReferralUrl } from "@namehash/ens-referrals";
 import { CopyButton, useIsMobile } from "@namehash/namehash-ui";
+import { type Name } from "enssdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
 import { isAddress } from "viem";
 import { normalize } from "viem/ens";
 import * as Yup from "yup";
-
-import { type NormalizedName } from "@ensnode/ensnode-sdk";
 
 import { FormButton } from "@/components/atoms/form-elements/FormButton.tsx";
 import { Input } from "@/components/atoms/form-elements/Input.tsx";
@@ -105,10 +104,10 @@ export function ReferralLinkForm() {
     }
 
     // Check if the input is a "normalizable" ENS name
-    let normalizedName: NormalizedName;
+    let normalizedName: Name;
 
     try {
-      normalizedName = normalize(recipientInput) as NormalizedName;
+      normalizedName = normalize(recipientInput) as Name;
     } catch (error) {
       // Display a generic message (ignore the details on purpose)
       setInputError("Invalid name or address");

@@ -1,7 +1,5 @@
-import type { JSX } from "astro/jsx-runtime";
 import type { SvgIcon } from "data/shared/svg-icon.ts";
-
-import type { Name } from "@ensnode/ensnode-sdk";
+import type { Name } from "enssdk";
 
 import type { Project } from "../projects/types.ts";
 

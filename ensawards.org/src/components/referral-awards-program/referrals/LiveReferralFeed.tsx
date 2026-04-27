@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import {
   FetchAndDisplayRegistrarActionsFeed,
@@ -16,13 +16,13 @@ export function LiveReferralFeed({
   recordsPerPage,
   title,
 }: FetchAndDisplayRegistrarActionsFeedProps) {
-  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
+  const options = useMemo(() => createEnsNodeProviderOptions({ url: getENSNodeUrl() }), []);
 
   return (
-    <ENSNodeProvider config={config}>
+    <EnsNodeProvider options={options}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <FetchAndDisplayRegistrarActionsFeed recordsPerPage={recordsPerPage} title={title} />
       </TooltipProvider>
-    </ENSNodeProvider>
+    </EnsNodeProvider>
   );
 }

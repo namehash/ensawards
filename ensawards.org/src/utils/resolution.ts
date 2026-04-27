@@ -1,20 +1,15 @@
 import { millisecondsInSecond } from "date-fns/constants";
-import type { Address } from "viem";
+import type { Address, Duration, Name } from "enssdk";
+import { ETH_COIN_TYPE } from "enssdk";
 
-import {
-  type Duration,
-  EnsApiClient,
-  ETH_COIN_TYPE,
-  type NormalizedName,
-  type ResolverRecordsSelection,
-} from "@ensnode/ensnode-sdk";
+import { EnsNodeClient, type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
 
 import { getENSNodeUrl } from "@/utils/env";
 
 /**
  * Resolves the Ethereum Mainnet address for the given name.
  *
- * @param name - a {@link NormalizedName} to resolve the Ethereum Mainnet address for.
+ * @param name - a {@link Name} to resolve the Ethereum Mainnet address for.
  * @param timeout - a duration in seconds when the resolution request will timeout.
  *
  * @returns The Ethereum Mainnet {@link Address} for the provided name
@@ -23,10 +18,10 @@ import { getENSNodeUrl } from "@/utils/env";
  * @throws If the resolution isn't completed before the timeout or a resolution error occurs.
  */
 export const resolveEthAddress = async (
-  name: NormalizedName,
+  name: Name,
   timeout: Duration = 5,
 ): Promise<Address | null> => {
-  const client = new EnsApiClient({ url: getENSNodeUrl() });
+  const client = new EnsNodeClient({ url: getENSNodeUrl() });
 
   // Define the selection of records to resolve. In this case, we only want to resolve the Ethereum Mainnet address.
   // The Ethereum Mainnet coin type is 60 as per `evmChainIdToCoinType(mainnet.id)`.

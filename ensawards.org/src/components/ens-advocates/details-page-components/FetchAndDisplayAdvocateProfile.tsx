@@ -1,7 +1,7 @@
-import type { Address } from "viem";
+import type { Address } from "enssdk";
 
+import { getENSRootChainId } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
-import { getENSRootChainId } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { AdvocateProfileWithoutName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithoutName.tsx";

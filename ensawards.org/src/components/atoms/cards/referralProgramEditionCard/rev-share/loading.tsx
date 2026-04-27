@@ -5,7 +5,7 @@ import {
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-export function ReferralProgramEditionCardRevShareLimitLoading({
+export function ReferralProgramEditionCardRevShareCapLoading({
   showMobileVariant = false,
 }: ReferralProgramEditionCardLoadingProps) {
   return (

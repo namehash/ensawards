@@ -1,9 +1,9 @@
 import type {
-  AwardedReferrerMetricsRevShareLimit,
+  AwardedReferrerMetricsRevShareCap,
   ReferralProgramEditionSlug,
-  ReferralProgramRulesRevShareLimit,
-} from "@namehash/ens-referrals/v1";
-import { BASE_REVENUE_CONTRIBUTION_PER_YEAR, SECONDS_PER_YEAR } from "@namehash/ens-referrals/v1";
+  ReferralProgramRulesRevShareCap,
+} from "@namehash/ens-referrals";
+import { AdminActionTypes, SECONDS_PER_YEAR } from "@namehash/ens-referrals";
 import { TriangleAlert as RulesBreachIcon } from "lucide-react";
 import { memo } from "react";
 
@@ -18,22 +18,22 @@ import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { usdFormatter } from "@/utils/textModifications";
 
-export interface ReferrerCardRevShareLimitProps {
-  referrer: AwardedReferrerMetricsRevShareLimit;
-  editionRules: ReferralProgramRulesRevShareLimit;
+export interface ReferrerCardRevShareCapProps {
+  referrer: AwardedReferrerMetricsRevShareCap;
+  editionRules: ReferralProgramRulesRevShareCap;
   editionSlug?: ReferralProgramEditionSlug;
 }
 
 /**
  * Display a single Referrer on the {@link ReferrerLeaderboardPage}.
  *
- * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareLimit} award model.
+ * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareCap} award model.
  */
-function ReferrerCardRevShareLimit({
+function ReferrerCardRevShareCap({
   referrer,
   editionRules,
   editionSlug,
-}: ReferrerCardRevShareLimitProps) {
+}: ReferrerCardRevShareCapProps) {
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       <ReferrerCardHeader
@@ -43,7 +43,7 @@ function ReferrerCardRevShareLimit({
         isQualified={referrer.isQualified}
       />
       <TotalRevenueContributionField referrer={referrer} />
-      <BaseRevenueContributionField referrer={referrer} />
+      <BaseRevenueContributionField referrer={referrer} editionRules={editionRules} />
       <RevenueShareField
         referrer={referrer}
         editionRules={editionRules}
@@ -57,7 +57,7 @@ function ReferrerCardRevShareLimit({
 export const TotalRevenueContributionField = ({
   referrer,
 }: {
-  referrer: AwardedReferrerMetricsRevShareLimit;
+  referrer: AwardedReferrerMetricsRevShareCap;
 }) => {
   const referralYears = numberFormatter.format(
     referrer.totalIncrementalDuration / SECONDS_PER_YEAR,
@@ -88,9 +88,8 @@ export const TotalRevenueContributionField = ({
 
 export const BaseRevenueContributionField = ({
   referrer,
-}: {
-  referrer: AwardedReferrerMetricsRevShareLimit;
-}) => {
+  editionRules,
+}: Omit<ReferrerCardRevShareCapProps, "editionSlug">) => {
   const referralYears = numberFormatter.format(
     referrer.totalIncrementalDuration / SECONDS_PER_YEAR,
   );
@@ -109,7 +108,9 @@ export const BaseRevenueContributionField = ({
         content={
           <p className="max-w-[220px]">
             Measured as US{" "}
-            {usdFormatter.format(parseReferralProgramCurrency(BASE_REVENUE_CONTRIBUTION_PER_YEAR))}{" "}
+            {usdFormatter.format(
+              parseReferralProgramCurrency(editionRules.baseAnnualRevenueContribution),
+            )}{" "}
             × {referralYears} years of registrations and renewals referred by this referrer during
             this edition. Excludes premium revenue sources.
           </p>
@@ -130,21 +131,21 @@ export const RevenueShareField = ({
   referrer,
   editionRules,
   editionSlug,
-}: ReferrerCardRevShareLimitProps) => {
+}: ReferrerCardRevShareCapProps) => {
   const disqualificationWarningMessage = editionSlug
     ? REFERRAL_PROGRAM_WARNINGS.get(editionSlug)?.get(referrer.referrer)
     : undefined;
 
   const minQualifiedRevenueContributionInUSD = usdFormatter.format(
-    parseReferralProgramCurrency(editionRules.minQualifiedRevenueContribution),
+    parseReferralProgramCurrency(editionRules.minBaseRevenueContribution),
   );
-  const qualifiedRevenueSharePercentage = `${Math.round(editionRules.qualifiedRevenueShare * 100)}%`;
+  const qualifiedRevenueSharePercentage = `${Math.round(editionRules.maxBaseRevenueShare * 100)}%`;
 
   const additionalRevenueRequiredInUSD = usdFormatter.format(
     parseReferralProgramCurrency({
-      currency: editionRules.minQualifiedRevenueContribution.currency,
+      currency: editionRules.minBaseRevenueContribution.currency,
       amount:
-        editionRules.minQualifiedRevenueContribution.amount -
+        editionRules.minBaseRevenueContribution.amount -
         referrer.totalBaseRevenueContribution.amount,
     }),
   );
@@ -152,13 +153,17 @@ export const RevenueShareField = ({
   const userFacingAdditionalRevenueRequired =
     additionalRevenueRequiredInUSD === "$0.00" ? "$0.01" : additionalRevenueRequiredInUSD;
 
-  const tooltipContent = referrer.isAdminDisqualified
+  const isReferrerDisqualified =
+    referrer.adminAction !== null &&
+    referrer.adminAction.actionType === AdminActionTypes.Disqualification;
+
+  const tooltipContent = isReferrerDisqualified
     ? "This referrer violated a rule of the referral program edition (see alert icon below for more info) and is therefore disqualified from any revenue share during this edition."
     : referrer.isQualified
       ? `This referrer contributed base revenues of US ${minQualifiedRevenueContributionInUSD} or more during this referral program edition and therefore qualifies to earn a ${qualifiedRevenueSharePercentage} share of their base revenue contribution until this edition ends or its budget is exhausted`
       : `To qualify for a revenue share, this referrer must first achieve at least an additional US ${userFacingAdditionalRevenueRequired} base revenue contribution to meet the US ${minQualifiedRevenueContributionInUSD} minimum before this referral program edition ends or its budget is exhausted.`;
 
-  const displayContent = referrer.isAdminDisqualified ? (
+  const displayContent = isReferrerDisqualified ? (
     <DisqualifiedFieldContent referrer={referrer} />
   ) : (
     <div className="flex flex-row justify-start items-start gap-1.5">
@@ -202,7 +207,7 @@ export const RevenueShareField = ({
 const DisqualifiedFieldContent = ({
   referrer,
 }: {
-  referrer: AwardedReferrerMetricsRevShareLimit;
+  referrer: AwardedReferrerMetricsRevShareCap;
 }) => (
   <div className="flex flex-row justify-start items-start gap-1.5">
     <p className="text-sm font-semibold leading-normal text-red-600 text-right">Disqualified</p>
@@ -214,7 +219,7 @@ const DisqualifiedFieldContent = ({
         <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
           <h3 className="text-xs leading-normal font-semibold">Disqualification</h3>
           <p>
-            {referrer.adminDisqualificationReason ??
+            {referrer.adminAction?.reason ??
               "User disqualified due to the breach of the edition's rules"}
           </p>
         </div>
@@ -228,7 +233,7 @@ const DisqualifiedFieldContent = ({
 export const TentativeAwardsField = ({
   referrer,
 }: {
-  referrer: AwardedReferrerMetricsRevShareLimit;
+  referrer: AwardedReferrerMetricsRevShareCap;
 }) => {
   return (
     <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
@@ -252,7 +257,7 @@ export const TentativeAwardsField = ({
         )}
       >
         {referrer.isQualified ? (
-          <>US {usdFormatter.format(parseReferralProgramCurrency(referrer.awardPoolApproxValue))}</>
+          <>US {usdFormatter.format(parseReferralProgramCurrency(referrer.cappedAward))}</>
         ) : (
           "-"
         )}
@@ -261,4 +266,4 @@ export const TentativeAwardsField = ({
   );
 };
 
-export const ReferrerCardRevShareLimitMemo = memo(ReferrerCardRevShareLimit);
+export const ReferrerCardRevShareCapMemo = memo(ReferrerCardRevShareCap);

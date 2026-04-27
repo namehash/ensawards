@@ -1,7 +1,7 @@
 import type {
   AggregatedReferrerMetricsPieSplit,
   AwardedReferrerMetricsPieSplit,
-} from "@namehash/ens-referrals/v1";
+} from "@namehash/ens-referrals";
 import { memo } from "react";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";

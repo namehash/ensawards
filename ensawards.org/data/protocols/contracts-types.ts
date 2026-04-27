@@ -1,8 +1,6 @@
 import type { Contribution } from "data/contributors/types.ts";
-import type { NormalizedAddress } from "data/shared/normalizedAddress.ts";
+import type { Name, NormalizedAddress } from "enssdk";
 import type { Chain } from "viem";
-
-import type { Name } from "@ensnode/ensnode-sdk";
 
 import type { Protocol } from "./types.ts";
 

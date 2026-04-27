@@ -32,12 +32,12 @@ export type Contribution = {
 };
 ```
 
-`Contributor` is an alias for `AccountId`, which is a CAIP-10 account identifier from `@ensnode/ensnode-sdk`:
+`Contributor` is an alias for `AccountId`, which is a CAIP-10 account identifier from `enssdk`:
 
 ```typescript
 export interface AccountId {
   chainId: ChainId;
-  address: Address;
+  address: NormalizedAddress;
 }
 ```
 

@@ -3,22 +3,19 @@ import {
   type ReferralProgramEditionSummary,
   type ReferrerLeaderboardPageParams,
   type ReferrerLeaderboardPagePieSplit,
-  type ReferrerLeaderboardPageRevShareLimit,
-} from "@namehash/ens-referrals/v1";
+  type ReferrerLeaderboardPageRevShareCap,
+} from "@namehash/ens-referrals";
 import type { ReactElement } from "react";
 
 import { ReferrerCardPieSplitMemo } from "@/components/atoms/cards/referrerCard/pie-split";
 import { ReferrerCardPieSplitLoading } from "@/components/atoms/cards/referrerCard/pie-split/loading";
-import { ReferrerCardRevShareLimitMemo } from "@/components/atoms/cards/referrerCard/rev-share";
-import { ReferrerCardRevShareLimitLoading } from "@/components/atoms/cards/referrerCard/rev-share/loading";
+import { ReferrerCardRevShareCapMemo } from "@/components/atoms/cards/referrerCard/rev-share";
+import { ReferrerCardRevShareCapLoading } from "@/components/atoms/cards/referrerCard/rev-share/loading";
 import { LastUpdateTime } from "@/components/atoms/datetime/LastUpdateTime";
 import { EmptyLeaderboardInfo } from "@/components/referral-awards-program/referrers/utils.tsx";
 
 export interface DisplayReferrerLeaderboardPageProps {
-  leaderboardPageData:
-    | ReferrerLeaderboardPageRevShareLimit
-    | ReferrerLeaderboardPagePieSplit
-    | null;
+  leaderboardPageData: ReferrerLeaderboardPageRevShareCap | ReferrerLeaderboardPagePieSplit | null;
   isLoading: boolean;
   editionSummary: ReferralProgramEditionSummary | null;
   leaderboardPageFetchError?: ReactElement;
@@ -62,7 +59,7 @@ export function DisplayReferrerLeaderboardPage({
 
           // Return rev share limit loading for all other cases since it's newer
           return (
-            <ReferrerCardRevShareLimitLoading
+            <ReferrerCardRevShareCapLoading
               key={`Referrer-loading-${pageOffset + elem}`}
               rank={pageOffset + elem + 1}
             />
@@ -98,9 +95,9 @@ export function DisplayReferrerLeaderboardPage({
             aggregatedMetrics={leaderboardPageData.aggregatedMetrics}
           />
         ))}
-      {leaderboardPageData.awardModel === ReferralProgramAwardModels.RevShareLimit &&
+      {leaderboardPageData.awardModel === ReferralProgramAwardModels.RevShareCap &&
         leaderboardPageData.referrers.map((referrer) => (
-          <ReferrerCardRevShareLimitMemo
+          <ReferrerCardRevShareCapMemo
             key={`Referrer-${referrer.referrer}`}
             referrer={referrer}
             editionRules={leaderboardPageData.rules}

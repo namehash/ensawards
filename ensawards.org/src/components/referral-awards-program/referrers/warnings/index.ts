@@ -1,5 +1,5 @@
-import { type ReferralProgramEditionSlug } from "@namehash/ens-referrals/v1";
-import { type Address } from "viem";
+import { type ReferralProgramEditionSlug } from "@namehash/ens-referrals";
+import { type Address } from "enssdk";
 
 /**
  * The reason why the referrer received a warning.

@@ -1,13 +1,11 @@
 ---
-import { type Address } from "viem";
+import { type Name, type Address } from "enssdk";
 
-import { type Name } from "@ensnode/ensnode-sdk";
-
-import { AdvocateSearchForm } from "../../components/ens-advocates/AdvocateSearchForm";
-import SubpageHero from "../../components/molecules/SubpageHero.astro";
-import { shadcnButtonVariants } from "../../components/ui/shadcnButtonStyles";
-import Layout from "../../layouts/Layout.astro";
-import { cn } from "../../utils/tailwindClassConcatenation";
+import { AdvocateSearchForm } from "@/components/ens-advocates/AdvocateSearchForm";
+import SubpageHero from "@/components/molecules/SubpageHero.astro";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
+import Layout from "@/layouts/Layout.astro";
+import { cn } from "@/utils/tailwindClassConcatenation";
 
 interface AdvocateIdentity {
   name: Name;

@@ -1,10 +1,10 @@
-import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
+import { ReferralProgramAwardModels } from "@namehash/ens-referrals";
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
-import type { ReferralProgramEditionRevShareLimitCardProps } from "@/components/atoms/cards/referralProgramEditionCard/rev-share";
+import type { ReferralProgramEditionRevShareCapCardProps } from "@/components/atoms/cards/referralProgramEditionCard/rev-share";
 import {
   ReferralProgramEditionAwardPool,
   ReferralProgramEditionRules,
@@ -17,9 +17,9 @@ import {
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { usdFormatter } from "@/utils/textModifications";
 
-export const ReferralProgramEditionHeroCardRevShareLimit = ({
+export const ReferralProgramEditionHeroCardRevShareCap = ({
   referralProgramEditionSummary,
-}: ReferralProgramEditionRevShareLimitCardProps) => {
+}: ReferralProgramEditionRevShareCapCardProps) => {
   const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
     referralProgramEditionSummary,
   );
@@ -34,7 +34,7 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
     // If the fetch fails keep the latest valid data
     setReferralProgramEditionSummaryData((current) =>
       refreshedSummary !== undefined &&
-      refreshedSummary.awardModel === ReferralProgramAwardModels.RevShareLimit
+      refreshedSummary.awardModel === ReferralProgramAwardModels.RevShareCap
         ? refreshedSummary
         : current,
     );
@@ -71,7 +71,7 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
         }}
       />
       <ReferralProgramEditionAwardPool
-        totalAwardPoolValue={referralProgramEditionSummaryData.rules.totalAwardPoolValue}
+        totalAwardPoolValue={referralProgramEditionSummaryData.rules.awardPool}
         styles={{
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
           label: "text-muted-foreground text-sm leading-normal font-normal cursor-default",
@@ -83,8 +83,8 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
           Max revenue share
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
-          {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareLimit
-            ? `${Math.round(referralProgramEditionSummaryData.rules.qualifiedRevenueShare * 100)}%`
+          {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareCap
+            ? `${Math.round(referralProgramEditionSummaryData.rules.maxBaseRevenueShare * 100)}%`
             : "-"}
         </p>
       </div>
@@ -93,8 +93,8 @@ export const ReferralProgramEditionHeroCardRevShareLimit = ({
           Min base revenue contribution
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
-          {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareLimit
-            ? `${usdFormatter.format(parseReferralProgramCurrency(referralProgramEditionSummaryData.rules.minQualifiedRevenueContribution))} USD`
+          {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareCap
+            ? `${usdFormatter.format(parseReferralProgramCurrency(referralProgramEditionSummaryData.rules.minBaseRevenueContribution))} USD`
             : "-"}
         </p>
       </div>

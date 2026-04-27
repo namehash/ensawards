@@ -1,4 +1,4 @@
-import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
+import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals";
 import { type ReactNode, useEffect, useState } from "react";
 import { type Address, namehash } from "viem";
 

@@ -1,7 +1,7 @@
 import {
   ReferralProgramAwardModels,
-  type ReferralProgramEditionSummaryRevShareLimit,
-} from "@namehash/ens-referrals/v1";
+  type ReferralProgramEditionSummaryRevShareCap,
+} from "@namehash/ens-referrals";
 import { ChevronRightIcon } from "lucide-react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
@@ -12,13 +12,13 @@ import {
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-export interface ReferralProgramEditionRevShareLimitCardProps {
-  referralProgramEditionSummary: ReferralProgramEditionSummaryRevShareLimit;
+export interface ReferralProgramEditionRevShareCapCardProps {
+  referralProgramEditionSummary: ReferralProgramEditionSummaryRevShareCap;
 }
 
-export const ReferralProgramEditionCardRevShareLimit = ({
+export const ReferralProgramEditionCardRevShareCap = ({
   referralProgramEditionSummary,
-}: ReferralProgramEditionRevShareLimitCardProps) => {
+}: ReferralProgramEditionRevShareCapCardProps) => {
   const cardClassName = cn(
     "w-full sm:max-w-[335px] h-fit min-h-[80px] box-border flex flex-col flex-wrap justify-start items-start gap-2 p-4 bg-white",
     "rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs relative z-10 sm:max-w-full sm:flex-row sm:justify-between sm:items-center sm:px-6 sm:py-5 sm:gap-5 cursor-pointer",
@@ -54,7 +54,7 @@ export const ReferralProgramEditionCardRevShareLimit = ({
         }}
       />
       <ReferralProgramEditionAwardPool
-        totalAwardPoolValue={referralProgramEditionSummary.rules.totalAwardPoolValue}
+        totalAwardPoolValue={referralProgramEditionSummary.rules.awardPool}
         styles={{
           container:
             "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",
@@ -67,8 +67,8 @@ export const ReferralProgramEditionCardRevShareLimit = ({
           Max revenue share
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
-          {referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.RevShareLimit
-            ? `${Math.round(referralProgramEditionSummary.rules.qualifiedRevenueShare * 100)}%`
+          {referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.RevShareCap
+            ? `${Math.round(referralProgramEditionSummary.rules.maxBaseRevenueShare * 100)}%`
             : "-"}
         </p>
       </div>

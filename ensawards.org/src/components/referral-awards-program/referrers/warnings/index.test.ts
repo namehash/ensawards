@@ -1,9 +1,10 @@
 import {
   REFERRAL_PROGRAM_EDITION_SLUG_PATTERN,
   type ReferralProgramEditionSlug,
-} from "@namehash/ens-referrals/v1";
+} from "@namehash/ens-referrals";
+import type { Address } from "enssdk";
 import productionEditions from "public/production-editions.json";
-import { type Address, isAddress } from "viem";
+import { isAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
 import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings";

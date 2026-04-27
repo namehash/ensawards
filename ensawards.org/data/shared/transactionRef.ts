@@ -1,6 +1,5 @@
+import { type ChainId } from "enssdk";
 import { type Hash } from "viem";
-
-import { type ChainId } from "@ensnode/ensnode-sdk";
 
 /**
  * Reference to a distinct transaction.

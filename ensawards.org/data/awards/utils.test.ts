@@ -1,7 +1,6 @@
+import type { ChainId } from "enssdk";
 import { zeroAddress, zeroHash } from "viem";
 import { describe, expect, it } from "vitest";
-
-import type { ChainId } from "@ensnode/ensnode-sdk";
 
 import { type AwardFinancial, AwardTypes } from "./types.ts";
 import { sortFinancialAwardsByPrice } from "./utils.ts";

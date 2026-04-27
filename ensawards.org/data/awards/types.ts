@@ -4,8 +4,7 @@ import type { IncentiveProgram, IncentiveProgramSlug } from "data/incentive-prog
 import type { Protocol } from "data/protocols/types.ts";
 import { type EnsTokens } from "data/shared/ensTokens.ts";
 import type { TransactionRef } from "data/shared/transactionRef.ts";
-
-import type { AccountId, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { AccountId, UnixTimestamp } from "enssdk";
 
 export const AwardTypes = {
   FinancialAward: "financial-award",

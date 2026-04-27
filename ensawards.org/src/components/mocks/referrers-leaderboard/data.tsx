@@ -1,13 +1,15 @@
 import {
+  AdminActionTypes,
   type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
   ReferralProgramEditionStatuses,
   type ReferralProgramEditionSummary,
   type ReferralProgramEditionSummaryPieSplit,
+  type ReferralProgramEditionSummaryRevShareCap,
   type ReferralProgramRulesPieSplit,
-  type ReferralProgramRulesRevShareLimit,
+  type ReferralProgramRulesRevShareCap,
   type ReferrerLeaderboardPagePieSplit,
-} from "@namehash/ens-referrals/v1";
+} from "@namehash/ens-referrals";
 
 import { CurrencyIds } from "@ensnode/ensnode-sdk";
 
@@ -50,7 +52,7 @@ const fetchErrorProps = {
 
 const mockPieSplitRules = {
   awardModel: ReferralProgramAwardModels.PieSplit,
-  totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
+  awardPool: { currency: CurrencyIds.USDC, amount: 10000000000n },
   maxQualifiedReferrers: 10,
   startTime: 1764547200,
   endTime: 1767225599,
@@ -95,11 +97,12 @@ const mockEditionSummaryPieSplit = {
   rules: mockPieSplitRules,
 } as const satisfies ReferralProgramEditionSummaryPieSplit;
 
-const mockRevShareLimitRules = {
-  awardModel: ReferralProgramAwardModels.RevShareLimit,
-  totalAwardPoolValue: { currency: CurrencyIds.USDC, amount: 10000000000n },
-  minQualifiedRevenueContribution: { currency: CurrencyIds.USDC, amount: 5000000000n },
-  qualifiedRevenueShare: 0.5,
+const mockRevShareCapRules = {
+  awardModel: ReferralProgramAwardModels.RevShareCap,
+  awardPool: { currency: CurrencyIds.USDC, amount: 10000000000n },
+  minBaseRevenueContribution: { currency: CurrencyIds.USDC, amount: 5000000000n },
+  maxBaseRevenueShare: 0.5,
+  baseAnnualRevenueContribution: { currency: CurrencyIds.USDC, amount: 5000000n },
   startTime: 1764547200,
   endTime: 1767225599,
   subregistryId: {
@@ -107,18 +110,18 @@ const mockRevShareLimitRules = {
     address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
   },
   rulesUrl: new URL("https://example.com/rules"),
-  disqualifications: [],
+  adminActions: [],
   areAwardsDistributed: false,
-} as const satisfies ReferralProgramRulesRevShareLimit;
+} as const satisfies ReferralProgramRulesRevShareCap;
 
-const mockEditionSummaryRevShareLimit = {
+const mockEditionSummaryRevShareCap = {
   slug: "2026-04",
-  awardModel: ReferralProgramAwardModels.RevShareLimit,
+  awardModel: ReferralProgramAwardModels.RevShareCap,
   displayName: "April 2026 Edition",
   status: ReferralProgramEditionStatuses.Active,
-  rules: mockRevShareLimitRules,
+  rules: mockRevShareCapRules,
   awardPoolRemaining: { currency: CurrencyIds.USDC, amount: 8715625715n },
-} as const satisfies ReferralProgramEditionSummary;
+} as const satisfies ReferralProgramEditionSummaryRevShareCap;
 
 export const mockReferrersLeaderboardData = new Map<
   ReferralProgramAwardModel,
@@ -235,14 +238,14 @@ export const mockReferrersLeaderboardData = new Map<
     ]),
   ],
   [
-    ReferralProgramAwardModels.RevShareLimit,
+    ReferralProgramAwardModels.RevShareCap,
     new Map<MockReferrersListState, DisplayReferrerLeaderboardPageProps>([
       [
         MockReferrersListStates.Empty,
         {
           leaderboardPageData: {
-            awardModel: ReferralProgramAwardModels.RevShareLimit,
-            rules: mockRevShareLimitRules,
+            awardModel: ReferralProgramAwardModels.RevShareCap,
+            rules: mockRevShareCapRules,
             referrers: [],
             aggregatedMetrics: {
               grandTotalReferrals: 0,
@@ -264,7 +267,7 @@ export const mockReferrersLeaderboardData = new Map<
             accurateAsOf: 1764091210,
           },
           isLoading: false,
-          editionSummary: mockEditionSummaryRevShareLimit,
+          editionSummary: mockEditionSummaryRevShareCap,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
       [
@@ -284,8 +287,8 @@ export const mockReferrersLeaderboardData = new Map<
         MockReferrersListStates.Loaded,
         {
           leaderboardPageData: {
-            awardModel: ReferralProgramAwardModels.RevShareLimit,
-            rules: mockRevShareLimitRules,
+            awardModel: ReferralProgramAwardModels.RevShareCap,
+            rules: mockRevShareCapRules,
             referrers: [
               {
                 referrer: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
@@ -301,16 +304,15 @@ export const mockReferrersLeaderboardData = new Map<
                 },
                 rank: 1,
                 isQualified: true,
-                standardAwardValue: {
+                uncappedAward: {
                   currency: CurrencyIds.USDC,
                   amount: 1776204931n,
                 },
-                awardPoolApproxValue: {
+                cappedAward: {
                   currency: CurrencyIds.USDC,
                   amount: 1776204010n,
                 },
-                isAdminDisqualified: false,
-                adminDisqualificationReason: null,
+                adminAction: null,
               },
               {
                 referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
@@ -326,16 +328,19 @@ export const mockReferrersLeaderboardData = new Map<
                 },
                 rank: 2,
                 isQualified: false,
-                standardAwardValue: {
+                uncappedAward: {
                   currency: CurrencyIds.USDC,
                   amount: 1226192187n,
                 },
-                awardPoolApproxValue: {
+                cappedAward: {
                   currency: CurrencyIds.USDC,
                   amount: 1226192099n,
                 },
-                isAdminDisqualified: true,
-                adminDisqualificationReason: "Mock longer disqualification text",
+                adminAction: {
+                  actionType: AdminActionTypes.Disqualification,
+                  referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
+                  reason: "Mock longer disqualification text",
+                },
               },
               {
                 referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
@@ -351,16 +356,15 @@ export const mockReferrersLeaderboardData = new Map<
                 },
                 rank: 4,
                 isQualified: false,
-                standardAwardValue: {
+                uncappedAward: {
                   currency: CurrencyIds.USDC,
                   amount: 10198703n,
                 },
-                awardPoolApproxValue: {
+                cappedAward: {
                   currency: CurrencyIds.USDC,
                   amount: 0n,
                 },
-                isAdminDisqualified: false,
-                adminDisqualificationReason: null,
+                adminAction: null,
               },
               {
                 referrer: "0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",
@@ -376,16 +380,15 @@ export const mockReferrersLeaderboardData = new Map<
                 },
                 rank: 10,
                 isQualified: false,
-                standardAwardValue: {
+                uncappedAward: {
                   currency: CurrencyIds.USDC,
                   amount: 198213n,
                 },
-                awardPoolApproxValue: {
+                cappedAward: {
                   currency: CurrencyIds.USDC,
                   amount: 0n,
                 },
-                isAdminDisqualified: false,
-                adminDisqualificationReason: null,
+                adminAction: null,
               },
             ],
             aggregatedMetrics: {
@@ -414,7 +417,7 @@ export const mockReferrersLeaderboardData = new Map<
             accurateAsOf: 1773069047,
           },
           isLoading: false,
-          editionSummary: mockEditionSummaryRevShareLimit,
+          editionSummary: mockEditionSummaryRevShareCap,
         } satisfies DisplayReferrerLeaderboardPageProps,
       ],
     ]),

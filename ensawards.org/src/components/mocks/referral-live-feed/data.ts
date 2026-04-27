@@ -1,6 +1,6 @@
+import type { Duration, InterpretedName } from "enssdk";
+
 import type {
-  Duration,
-  InterpretedName,
   NamedRegistrarAction,
   RegistrarActionEventId,
   RegistrarActionsResponse,

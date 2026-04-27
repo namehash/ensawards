@@ -1,7 +1,6 @@
 import { isValidSlug } from "data/shared/slugs";
+import { isNormalizedName } from "enssdk";
 import { describe, expect, it } from "vitest";
-
-import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
 import { areStringsUnique } from "@/utils";
 

@@ -1,5 +1,3 @@
-import type { Address } from "viem";
-
 export const breakLongWords = (
   word: string,
   breakRegex: string | RegExp,

@@ -1,4 +1,4 @@
-import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
+import { ReferralProgramAwardModels } from "@namehash/ens-referrals";
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";
@@ -67,7 +67,7 @@ export const ReferralProgramEditionHeroCardPieSplit = ({
         }}
       />
       <ReferralProgramEditionAwardPool
-        totalAwardPoolValue={referralProgramEditionSummaryData.rules.totalAwardPoolValue}
+        totalAwardPoolValue={referralProgramEditionSummaryData.rules.awardPool}
         styles={{
           container: "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch",
           label: "text-muted-foreground text-sm leading-normal font-normal cursor-default",

@@ -6,9 +6,8 @@ import {
   type BestPracticeSlug,
   BestPracticeTypes,
 } from "data/ens-best-practices/types";
+import { stringifyAccountId } from "enssdk";
 import { describe, expect, it } from "vitest";
-
-import { formatAccountId } from "@ensnode/ensnode-sdk";
 
 import { APP_BENCHMARKS } from ".";
 
@@ -58,7 +57,7 @@ describe("Benchmarks registry", () => {
             ).toBeGreaterThan(0);
 
             const contributorsList = benchmark.contributions.map((contribution) =>
-              formatAccountId(contribution.from),
+              stringifyAccountId(contribution.from),
             );
             const uniqueContributors = new Set(contributorsList);
             expect(
