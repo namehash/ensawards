@@ -57,7 +57,7 @@ export function DisplayReferrerLeaderboardPage({
             );
           }
 
-          // Return rev share limit loading for all other cases since it's newer
+          // Return rev share cap loading for all other cases since it's newer
           return (
             <ReferrerCardRevShareCapLoading
               key={`Referrer-loading-${pageOffset + elem}`}

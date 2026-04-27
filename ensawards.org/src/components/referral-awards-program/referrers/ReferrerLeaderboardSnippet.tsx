@@ -151,7 +151,7 @@ export function ReferrerLeaderboardSnippet({
             Top{" "}
             {latestReferralProgramEdition?.displayName
               ? `${latestReferralProgramEdition.displayName} `
-              : " "}
+              : ""}
             Referrers
           </h3>
           {latestReferralProgramEdition && (

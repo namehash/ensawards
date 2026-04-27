@@ -57,7 +57,7 @@ export interface AwardFinancial extends AwardAbstract<typeof AwardTypes.Financia
    *
    * @invariant Award amount must be finite and greater than 0.
    */
-  price: EnsTokens; // should be replaced with `Price` from ensnode-sdk when Issue#1941 is completed.
+  price: EnsTokens; // should be replaced with `Price` from enssdk when Issue#1941 is completed.
 
   /**
    * Details of the transaction associated with the distribution of this award.

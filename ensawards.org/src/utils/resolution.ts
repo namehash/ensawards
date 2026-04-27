@@ -43,5 +43,5 @@ export const resolveEthAddress = async (
   const response = await Promise.race([resolutionPromise, timeoutPromise]);
 
   // resolution completed without error before the timeout.
-  return response.records.addresses[60] as Address | null;
+  return response.records.addresses[ETH_COIN_TYPE] as Address | null;
 };

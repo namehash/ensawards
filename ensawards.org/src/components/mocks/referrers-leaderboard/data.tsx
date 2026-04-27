@@ -1,5 +1,7 @@
 import {
+  type AdminActionDisqualification,
   AdminActionTypes,
+  type AdminActionWarning,
   type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
   ReferralProgramEditionStatuses,
@@ -97,6 +99,18 @@ const mockEditionSummaryPieSplit = {
   rules: mockPieSplitRules,
 } as const satisfies ReferralProgramEditionSummaryPieSplit;
 
+const mockDisqualificationAction: AdminActionDisqualification = {
+  actionType: AdminActionTypes.Disqualification,
+  referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
+  reason: "Mock longer disqualification text",
+};
+
+const mockDisqualificationWarningAction: AdminActionWarning = {
+  actionType: AdminActionTypes.Warning,
+  referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
+  reason: "Mock longer warning text placeholder",
+};
+
 const mockRevShareCapRules = {
   awardModel: ReferralProgramAwardModels.RevShareCap,
   awardPool: { currency: CurrencyIds.USDC, amount: 10000000000n },
@@ -110,18 +124,7 @@ const mockRevShareCapRules = {
     address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
   },
   rulesUrl: new URL("https://example.com/rules"),
-  adminActions: [
-    {
-      actionType: AdminActionTypes.Disqualification,
-      referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
-      reason: "Mock longer disqualification text",
-    },
-    {
-      actionType: AdminActionTypes.Warning,
-      referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
-      reason: "Mock longer warning text placeholder",
-    },
-  ],
+  adminActions: [mockDisqualificationAction, mockDisqualificationWarningAction],
   areAwardsDistributed: false,
 } as const satisfies ReferralProgramRulesRevShareCap;
 
@@ -347,11 +350,7 @@ export const mockReferrersLeaderboardData = new Map<
                   currency: CurrencyIds.USDC,
                   amount: 1226192099n,
                 },
-                adminAction: {
-                  actionType: AdminActionTypes.Disqualification,
-                  referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
-                  reason: "Mock longer disqualification text",
-                },
+                adminAction: mockDisqualificationAction,
               },
               {
                 referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
@@ -375,11 +374,7 @@ export const mockReferrersLeaderboardData = new Map<
                   currency: CurrencyIds.USDC,
                   amount: 0n,
                 },
-                adminAction: {
-                  actionType: AdminActionTypes.Warning,
-                  referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
-                  reason: "Mock longer warning text placeholder",
-                },
+                adminAction: mockDisqualificationWarningAction,
               },
               {
                 referrer: "0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",
