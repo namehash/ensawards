@@ -110,7 +110,18 @@ const mockRevShareCapRules = {
     address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
   },
   rulesUrl: new URL("https://example.com/rules"),
-  adminActions: [],
+  adminActions: [
+    {
+      actionType: AdminActionTypes.Disqualification,
+      referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
+      reason: "Mock longer disqualification text",
+    },
+    {
+      actionType: AdminActionTypes.Warning,
+      referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
+      reason: "Mock longer warning text placeholder",
+    },
+  ],
   areAwardsDistributed: false,
 } as const satisfies ReferralProgramRulesRevShareCap;
 
@@ -364,7 +375,11 @@ export const mockReferrersLeaderboardData = new Map<
                   currency: CurrencyIds.USDC,
                   amount: 0n,
                 },
-                adminAction: null,
+                adminAction: {
+                  actionType: AdminActionTypes.Warning,
+                  referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
+                  reason: "Mock longer warning text placeholder",
+                },
               },
               {
                 referrer: "0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",

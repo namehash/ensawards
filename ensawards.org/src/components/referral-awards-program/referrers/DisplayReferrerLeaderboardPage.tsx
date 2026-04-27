@@ -101,7 +101,6 @@ export function DisplayReferrerLeaderboardPage({
             key={`Referrer-${referrer.referrer}`}
             referrer={referrer}
             editionRules={leaderboardPageData.rules}
-            editionSlug={editionSummary?.slug}
           />
         ))}
     </div>

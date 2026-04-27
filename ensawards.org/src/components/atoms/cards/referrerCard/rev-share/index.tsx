@@ -1,6 +1,8 @@
 import type {
+  AdminAction,
+  AdminActionDisqualification,
+  AdminActionWarning,
   AwardedReferrerMetricsRevShareCap,
-  ReferralProgramEditionSlug,
   ReferralProgramRulesRevShareCap,
 } from "@namehash/ens-referrals";
 import { AdminActionTypes, SECONDS_PER_YEAR } from "@namehash/ens-referrals";
@@ -13,7 +15,6 @@ import {
   ReferrerCardHeader,
 } from "@/components/atoms/cards/referrerCard/shared";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { REFERRAL_PROGRAM_WARNINGS } from "@/components/referral-awards-program/referrers/warnings";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { usdFormatter } from "@/utils/textModifications";
@@ -21,7 +22,6 @@ import { usdFormatter } from "@/utils/textModifications";
 export interface ReferrerCardRevShareCapProps {
   referrer: AwardedReferrerMetricsRevShareCap;
   editionRules: ReferralProgramRulesRevShareCap;
-  editionSlug?: ReferralProgramEditionSlug;
 }
 
 /**
@@ -29,11 +29,7 @@ export interface ReferrerCardRevShareCapProps {
  *
  * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareCap} award model.
  */
-function ReferrerCardRevShareCap({
-  referrer,
-  editionRules,
-  editionSlug,
-}: ReferrerCardRevShareCapProps) {
+function ReferrerCardRevShareCap({ referrer, editionRules }: ReferrerCardRevShareCapProps) {
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       <ReferrerCardHeader
@@ -44,11 +40,7 @@ function ReferrerCardRevShareCap({
       />
       <TotalRevenueContributionField referrer={referrer} />
       <BaseRevenueContributionField referrer={referrer} editionRules={editionRules} />
-      <RevenueShareField
-        referrer={referrer}
-        editionRules={editionRules}
-        editionSlug={editionSlug}
-      />
+      <RevenueShareField referrer={referrer} editionRules={editionRules} />
       <TentativeAwardsField referrer={referrer} />
     </div>
   );
@@ -89,7 +81,7 @@ export const TotalRevenueContributionField = ({
 export const BaseRevenueContributionField = ({
   referrer,
   editionRules,
-}: Omit<ReferrerCardRevShareCapProps, "editionSlug">) => {
+}: ReferrerCardRevShareCapProps) => {
   const referralYears = numberFormatter.format(
     referrer.totalIncrementalDuration / SECONDS_PER_YEAR,
   );
@@ -127,15 +119,18 @@ export const BaseRevenueContributionField = ({
   );
 };
 
-export const RevenueShareField = ({
-  referrer,
-  editionRules,
-  editionSlug,
-}: ReferrerCardRevShareCapProps) => {
-  const disqualificationWarningMessage = editionSlug
-    ? REFERRAL_PROGRAM_WARNINGS.get(editionSlug)?.get(referrer.referrer)
-    : undefined;
+const isReferrerDisqualified = (
+  referrer: AwardedReferrerMetricsRevShareCap,
+): referrer is AwardedReferrerMetricsRevShareCap & { adminAction: AdminActionDisqualification } =>
+  referrer.adminAction !== null &&
+  referrer.adminAction.actionType === AdminActionTypes.Disqualification;
 
+const isReferrerWarned = (
+  referrer: AwardedReferrerMetricsRevShareCap,
+): referrer is AwardedReferrerMetricsRevShareCap & { adminAction: AdminActionWarning } =>
+  referrer.adminAction !== null && referrer.adminAction.actionType === AdminActionTypes.Warning;
+
+export const RevenueShareField = ({ referrer, editionRules }: ReferrerCardRevShareCapProps) => {
   const minQualifiedRevenueContributionInUSD = usdFormatter.format(
     parseReferralProgramCurrency(editionRules.minBaseRevenueContribution),
   );
@@ -153,17 +148,13 @@ export const RevenueShareField = ({
   const userFacingAdditionalRevenueRequired =
     additionalRevenueRequiredInUSD === "$0.00" ? "$0.01" : additionalRevenueRequiredInUSD;
 
-  const isReferrerDisqualified =
-    referrer.adminAction !== null &&
-    referrer.adminAction.actionType === AdminActionTypes.Disqualification;
-
-  const tooltipContent = isReferrerDisqualified
+  const tooltipContent = isReferrerDisqualified(referrer)
     ? "This referrer violated a rule of the referral program edition (see alert icon below for more info) and is therefore disqualified from any revenue share during this edition."
     : referrer.isQualified
       ? `This referrer contributed base revenues of US ${minQualifiedRevenueContributionInUSD} or more during this referral program edition and therefore qualifies to earn a ${qualifiedRevenueSharePercentage} share of their base revenue contribution until this edition ends or its budget is exhausted`
       : `To qualify for a revenue share, this referrer must first achieve at least an additional US ${userFacingAdditionalRevenueRequired} base revenue contribution to meet the US ${minQualifiedRevenueContributionInUSD} minimum before this referral program edition ends or its budget is exhausted.`;
 
-  const displayContent = isReferrerDisqualified ? (
+  const displayContent = isReferrerDisqualified(referrer) ? (
     <DisqualifiedFieldContent referrer={referrer} />
   ) : (
     <div className="flex flex-row justify-start items-start gap-1.5">
@@ -171,17 +162,17 @@ export const RevenueShareField = ({
         className={cn(
           "text-sm font-normal leading-normal max-sm:text-right",
           referrer.isQualified ? "text-emerald-600 font-semibold" : "text-black font-medium",
-          disqualificationWarningMessage && "text-orange-500",
+          isReferrerWarned(referrer) && "text-orange-500",
         )}
       >
         {referrer.isQualified ? qualifiedRevenueSharePercentage : "Requires more referrals"}
       </p>
-      {disqualificationWarningMessage && (
+      {isReferrerWarned(referrer) && (
         <GenericTooltip
           content={
             <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
               <h3 className="text-xs leading-normal font-semibold">Disqualification warning</h3>
-              <p>{disqualificationWarningMessage}</p>
+              <p>{referrer.adminAction.reason}</p>
             </div>
           }
           tooltipOffset={2}
@@ -207,21 +198,16 @@ export const RevenueShareField = ({
 const DisqualifiedFieldContent = ({
   referrer,
 }: {
-  referrer: AwardedReferrerMetricsRevShareCap;
+  referrer: AwardedReferrerMetricsRevShareCap & { adminAction: AdminActionDisqualification };
 }) => (
   <div className="flex flex-row justify-start items-start gap-1.5">
     <p className="text-sm font-semibold leading-normal text-red-600 text-right">Disqualified</p>
     <GenericTooltip
       tooltipOffset={0}
-      // `referrer.adminDisqualificationReason` will never be null if `referrer.isAdminDisqualified` is true
-      // This fallback is introduced for type-safety
       content={
         <div className="max-w-[220px] flex flex-col justify-start items-start gap-0.5">
           <h3 className="text-xs leading-normal font-semibold">Disqualification</h3>
-          <p>
-            {referrer.adminAction?.reason ??
-              "User disqualified due to the breach of the edition's rules"}
-          </p>
+          <p>{referrer.adminAction.reason}</p>
         </div>
       }
     >
