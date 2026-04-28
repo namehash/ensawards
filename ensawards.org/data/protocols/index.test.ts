@@ -1,5 +1,5 @@
 import { isValidSlug } from "data/shared/slugs";
-import { isNormalizedName } from "enssdk";
+import { isInterpretedName } from "enssdk";
 import { describe, expect, it } from "vitest";
 
 import { areStringsUnique } from "@/utils";
@@ -63,12 +63,12 @@ describe("protocols data", () => {
     expect(areStringsUnique(slugArray), `Slugs for Protocols are not unique`).toEqual(true);
   });
 
-  it("In `socials`, `ens`, if defined, must be a non-empty normalized ENS name", () => {
+  it("In `socials`, `ens`, if defined, must be a non-empty interpreted ENS name", () => {
     data.forEach((protocol) => {
       if (protocol.socials.ens !== undefined) {
         expect(
-          protocol.socials.ens.length > 0 && isNormalizedName(protocol.socials.ens),
-          `Name={${protocol.socials.ens}} is empty or is not ENS normalized`,
+          protocol.socials.ens.length > 0 && isInterpretedName(protocol.socials.ens),
+          `Name={${protocol.socials.ens}} is empty or is not ENS interpreted`,
         ).toEqual(true);
       }
     });

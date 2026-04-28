@@ -2,8 +2,8 @@ import { getChainName } from "@namehash/namehash-ui";
 import {
   type ChainId,
   evmChainIdToCoinType,
+  isInterpretedName,
   isNormalizedAddress,
-  isNormalizedName,
   type NormalizedAddress,
   stringifyAccountId,
 } from "enssdk";
@@ -130,15 +130,16 @@ const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentit
 describe("CachedIdentity", () => {
   const data = CONTRACTS;
 
-  it("For `cachedIdentity` of type `ContractIdentityPrimaryNamed` or `ContractIdentityForwardNamed`, `name` must be a non-empty normalized ENS name", () => {
+  it("For `cachedIdentity` of type `ContractIdentityPrimaryNamed` or `ContractIdentityForwardNamed`, `name` must be a non-empty interpreted ENS name", () => {
     data.forEach((contract) => {
       if (
         contract.cachedIdentity.resolutionStatus == ContractResolutionStatusIds.PrimaryNamed ||
         contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
       ) {
         expect(
-          contract.cachedIdentity.name.length > 0 && isNormalizedName(contract.cachedIdentity.name),
-          `Name={${contract.cachedIdentity.name}} is empty or is not ENS normalized`,
+          contract.cachedIdentity.name.length > 0 &&
+            isInterpretedName(contract.cachedIdentity.name),
+          `Name={${contract.cachedIdentity.name}} is empty or is not ENS interpreted`,
         ).toEqual(true);
       }
     });

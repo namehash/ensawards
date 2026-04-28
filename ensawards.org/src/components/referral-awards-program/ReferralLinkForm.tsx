@@ -1,6 +1,6 @@
 import { buildEnsReferralUrl } from "@namehash/ens-referrals";
 import { CopyButton, useIsMobile } from "@namehash/namehash-ui";
-import { type Name } from "enssdk";
+import { type InterpretedName, normalizeName } from "enssdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
 import { isAddress } from "viem";
@@ -103,11 +103,11 @@ export function ReferralLinkForm() {
       return;
     }
 
-    // Check if the input is a "normalizable" ENS name
-    let normalizedName: Name;
+    // Check if the input is normalizable to an interpreted ENS name
+    let interpretedName: InterpretedName;
 
     try {
-      normalizedName = normalize(recipientInput) as Name;
+      interpretedName = normalizeName(recipientInput);
     } catch (error) {
       // Display a generic message (ignore the details on purpose)
       setInputError("Invalid name or address");
@@ -115,9 +115,9 @@ export function ReferralLinkForm() {
       return;
     }
 
-    // The name was normalizable to `normalizedName` so proceed with resolution
+    // The name was normalizable to `interpretedName` so proceed with resolution
     try {
-      const resolvedAddress = await resolveEthAddress(normalizedName);
+      const resolvedAddress = await resolveEthAddress(interpretedName);
 
       if (resolvedAddress === null) {
         setInputError("No Ethereum Mainnet address configured for this name.");
