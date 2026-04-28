@@ -19,6 +19,8 @@ const WalletChanWallet: App = {
     ens: "walletchan.eth",
   },
   icon: WalletChanIcon,
+  ogImagePath: "walletchan-wallet/og.png",
+  twitterOgImagePath: "walletchan-wallet/twitter-og.png",
 };
 
 defineApp(WalletChanWallet);
