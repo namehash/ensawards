@@ -1,5 +1,4 @@
 import type {
-  AdminAction,
   AdminActionDisqualification,
   AdminActionWarning,
   AwardedReferrerMetricsRevShareCap,

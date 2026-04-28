@@ -4,7 +4,6 @@ import { type InterpretedName, normalizeName } from "enssdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
 import { isAddress } from "viem";
-import { normalize } from "viem/ens";
 import * as Yup from "yup";
 
 import { FormButton } from "@/components/atoms/form-elements/FormButton.tsx";
