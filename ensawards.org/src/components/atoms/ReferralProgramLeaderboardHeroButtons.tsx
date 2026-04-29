@@ -1,7 +1,7 @@
 import {
   ReferralProgramEditionStatuses,
   type ReferralProgramEditionSummary,
-} from "@namehash/ens-referrals/v1";
+} from "@namehash/ens-referrals";
 import { useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";

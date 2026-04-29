@@ -3,10 +3,8 @@ import { isValidAwardValue } from "data/awards/utils";
 import { EntityMetadataTypes } from "data/entity-metadata/types";
 import { isValidCustomEntityName } from "data/entity-metadata/utils";
 import type { IncentiveProgramSlug } from "data/incentive-programs/types";
-import { isNormalizedAddress } from "data/shared/normalizedAddress";
+import { type AccountIdString, isNormalizedAddress, stringifyAccountId } from "enssdk";
 import { describe, expect, it } from "vitest";
-
-import { type AccountIdString, formatAccountId } from "@ensnode/ensnode-sdk";
 
 import { AWARDS } from ".";
 
@@ -24,11 +22,11 @@ describe("Awards data", () => {
         `Invalid address: ${award.awardedTo.address}`,
       ).toStrictEqual(true);
       expect(
-        accountIdStrings.has(formatAccountId(award.awardedTo)),
-        `Duplicate address found: ${formatAccountId(award.awardedTo)} for incentive program: ${award.associatedIncentiveProgramSlug}`,
+        accountIdStrings.has(stringifyAccountId(award.awardedTo)),
+        `Duplicate address found: ${stringifyAccountId(award.awardedTo)} for incentive program: ${award.associatedIncentiveProgramSlug}`,
       ).toBe(false);
 
-      accountIdStrings.add(formatAccountId(award.awardedTo));
+      accountIdStrings.add(stringifyAccountId(award.awardedTo));
       awardsByIncentiveProgram.set(award.associatedIncentiveProgramSlug, accountIdStrings);
     });
   });
@@ -37,7 +35,7 @@ describe("Awards data", () => {
     AWARDS.filter((award) => award.type === AwardTypes.FinancialAward).forEach((award) => {
       expect(
         isValidAwardValue(award.price),
-        `Invalid price for award: ${formatAccountId(award.awardedTo)} in incentive program: ${award.associatedIncentiveProgramSlug}`,
+        `Invalid price for award: ${stringifyAccountId(award.awardedTo)} in incentive program: ${award.associatedIncentiveProgramSlug}`,
       ).toStrictEqual(true);
     });
   });
@@ -50,7 +48,7 @@ describe("Awards data", () => {
       ) {
         expect(
           isValidCustomEntityName(award.awardedEntityMetadata.name),
-          `Custom entity name is empty for an award awarded to: ${formatAccountId(award.awardedTo)}`,
+          `Custom entity name is empty for an award awarded to: ${stringifyAccountId(award.awardedTo)}`,
         ).toEqual(true);
       }
     });

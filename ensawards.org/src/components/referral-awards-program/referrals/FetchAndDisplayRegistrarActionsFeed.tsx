@@ -1,4 +1,4 @@
-import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
+import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals";
 import { useEffect, useState } from "react";
 import { namehash } from "viem";
 
@@ -153,12 +153,10 @@ export function FetchAndDisplayRegistrarActionsFeed({
         <h2 className={cn(title.styles?.text ?? "text-2xl leading-normal font-semibold")}>
           {title.text}
         </h2>
-        {registrarActionsQuery.data.accurateAsOf && (
-          <LastUpdateTime
-            timestamp={registrarActionsQuery.data.accurateAsOf}
-            className="text-base sm:text-sm"
-          />
-        )}
+        <LastUpdateTime
+          timestamp={registrarActionsQuery.data.accurateAsOf}
+          className="text-base sm:text-sm"
+        />
       </div>
       <DisplayRegistrarActionsList
         namespaceId={namespaceId}

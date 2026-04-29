@@ -1,7 +1,7 @@
 import { getUnixTime } from "date-fns";
-import type { Address } from "viem";
+import type { Address, UnixTimestamp } from "enssdk";
 
-import type { OmnichainIndexingStatusId, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { OmnichainIndexingStatusId } from "@ensnode/ensnode-sdk";
 
 /**
  * Takes in an array of strings and returns true

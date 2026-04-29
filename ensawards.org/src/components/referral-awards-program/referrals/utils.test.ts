@@ -2,15 +2,15 @@ import {
   ReferralProgramAwardModels,
   ReferralProgramEditionStatuses,
   type ReferralProgramEditionSummaryPieSplit,
-} from "@namehash/ens-referrals/v1";
+} from "@namehash/ens-referrals";
 import { millisecondsInSecond } from "date-fns/constants";
+import { type InterpretedName } from "enssdk";
 import { zeroAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
 import {
   getEthnamesSubregistryId,
-  type InterpretedName,
   type NamedRegistrarAction,
   parseUsdc,
   type RegistrarAction,
@@ -26,7 +26,7 @@ describe("isQualifiedReferral", () => {
     status: ReferralProgramEditionStatuses.Closed,
     rules: {
       awardModel: ReferralProgramAwardModels.PieSplit,
-      totalAwardPoolValue: parseUsdc("10000"),
+      awardPool: parseUsdc("10000"),
       maxQualifiedReferrers: 10,
       startTime: new Date(2025, 0, 1).getTime() / millisecondsInSecond,
       endTime: new Date(2026, 0, 1).getTime() / millisecondsInSecond,

@@ -1,12 +1,12 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
+import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals";
 import {
   getEnsManagerNameDetailsUrl,
   RegistrarActionCardLoading,
   RegistrarActionCardMemo,
   useNow,
 } from "@namehash/namehash-ui";
-import type { Address } from "viem";
+import type { Address } from "enssdk";
 
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type NamedRegistrarAction } from "@ensnode/ensnode-sdk";

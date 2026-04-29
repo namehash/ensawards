@@ -3,17 +3,17 @@ import {
   ReferralProgramAwardModels,
   type ReferralProgramEditionSlug,
   type ReferralProgramEditionSummaryPieSplit,
-  type ReferralProgramEditionSummaryRevShareLimit,
+  type ReferralProgramEditionSummaryRevShareCap,
   type ReferrerLeaderboardPagePieSplit,
   ReferrerLeaderboardPageResponseCodes,
-  type ReferrerLeaderboardPageRevShareLimit,
-} from "@namehash/ens-referrals/v1";
+  type ReferrerLeaderboardPageRevShareCap,
+} from "@namehash/ens-referrals";
 import { useNow } from "@namehash/namehash-ui";
 import type { VariantProps } from "class-variance-authority";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useMemo, useState } from "react";
 
-import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import {
   LastUpdateTime,
@@ -44,15 +44,15 @@ export function ReferrerLeaderboardSnippet({
 }: ReferrerLeaderboardSnippetProps) {
   const now = useNow({ timeToRefresh: secondsInMinute });
   const [latestReferralProgramEdition, setLatestReferralProgramEdition] = useState<
-    ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit | null
+    ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareCap | null
   >(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [leaderboardSnippetData, setLeaderboardSnippetData] = useState<
-    ReferrerLeaderboardPageRevShareLimit | ReferrerLeaderboardPagePieSplit | null
+    ReferrerLeaderboardPageRevShareCap | ReferrerLeaderboardPagePieSplit | null
   >(null);
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
-  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
+  const options = useMemo(() => createEnsNodeProviderOptions({ url: getENSNodeUrl() }), []);
 
   async function fetchReferrerLeaderboard(referralProgramEditionSlug: ReferralProgramEditionSlug) {
     setIsError(false);
@@ -92,7 +92,7 @@ export function ReferrerLeaderboardSnippet({
   }
 
   const fetchLatestReferralProgramEdition = async (): Promise<
-    ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit | null
+    ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareCap | null
   > => {
     try {
       const editions = await fetchReferralProgramEditionSummaries();
@@ -144,11 +144,15 @@ export function ReferrerLeaderboardSnippet({
   }, [now]);
 
   return (
-    <ENSNodeProvider config={config}>
+    <EnsNodeProvider options={options}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start max-sm:items-center items-start gap-2 sm:gap-3 relative z-10">
           <h3 className="w-full text-left text-xl sm:text-2xl leading-normal font-semibold text-black">
-            Top {latestReferralProgramEdition?.displayName ?? "Referral program edition"} Referrers
+            Top{" "}
+            {latestReferralProgramEdition?.displayName
+              ? `${latestReferralProgramEdition.displayName} `
+              : ""}
+            Referrers
           </h3>
           {latestReferralProgramEdition && (
             <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start items-center gap-2 sm:gap-10 py-1 sm:pt-1 sm:pb-3">
@@ -237,6 +241,6 @@ export function ReferrerLeaderboardSnippet({
             )}
         </div>
       </TooltipProvider>
-    </ENSNodeProvider>
+    </EnsNodeProvider>
   );
 }

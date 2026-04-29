@@ -1,6 +1,5 @@
 import type { SvgIcon } from "data/shared/svg-icon.ts";
-
-import type { Name } from "@ensnode/ensnode-sdk";
+import type { Name } from "enssdk";
 
 import type { BestPracticeBenchmarks } from "../ens-best-practices/types.ts";
 import type { Project } from "../projects/types.ts";

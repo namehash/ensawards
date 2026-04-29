@@ -1,14 +1,17 @@
 import { getChainName } from "@namehash/namehash-ui";
-import { isNormalizedAddress } from "data/shared/normalizedAddress";
-import { type Address, isAddressEqual } from "viem";
+import {
+  type ChainId,
+  evmChainIdToCoinType,
+  isInterpretedName,
+  isNormalizedAddress,
+  type NormalizedAddress,
+  stringifyAccountId,
+} from "enssdk";
+import { isAddressEqual } from "viem";
 import { describe, expect, it } from "vitest";
 
 import {
-  type ChainId,
-  EnsApiClient,
-  evmChainIdToCoinType,
-  formatAccountId,
-  isNormalizedName,
+  EnsNodeClient,
   type ResolveRecordsResponse,
   type ResolverRecordsResponseBase,
 } from "@ensnode/ensnode-sdk";
@@ -24,7 +27,7 @@ import {
   type EnsProfileForContract,
 } from "./contracts-types.ts";
 
-const client = new EnsApiClient({
+const client = new EnsNodeClient({
   url: getENSNodeUrl(),
 });
 
@@ -34,28 +37,24 @@ const client = new EnsApiClient({
  */
 const serializeEnsProfileForContract = (
   profile?: EnsProfileForContract,
-): Omit<ResolverRecordsResponseBase, "name" | "addresses"> => {
+): ResolverRecordsResponseBase["texts"] => {
   if (profile === undefined) {
     return {
-      texts: {
-        docs: null,
-        "compiled-metadata": null,
-        avatar: null,
-        audits: null,
-      },
-    } as const satisfies Omit<ResolverRecordsResponseBase, "name" | "addresses">;
+      docs: null,
+      "compiled-metadata": null,
+      avatar: null,
+      audits: null,
+    } as const satisfies ResolverRecordsResponseBase["texts"];
   }
 
   return {
-    texts: {
-      docs: profile.docs ? profile.docs.href : null,
-      "compiled-metadata": profile.compiledMetadata ? profile.compiledMetadata.href : null,
-      avatar: profile.avatar ? profile.avatar.href : null,
-      audits: profile.audits ? JSON.stringify(profile.audits) : null,
-      //TODO: to be honest I have no idea how such object could look like,
-      // as I couldn't find any examples, but I'll assume it's a stringified JSON for now
-    },
-  } as const satisfies Omit<ResolverRecordsResponseBase, "name" | "addresses">;
+    docs: profile.docs ? profile.docs.href : null,
+    "compiled-metadata": profile.compiledMetadata ? profile.compiledMetadata.href : null,
+    avatar: profile.avatar ? profile.avatar.href : null,
+    audits: profile.audits ? JSON.stringify(profile.audits) : null,
+    //TODO: to be honest I have no idea how such object could look like,
+    // as I couldn't find any examples, but I'll assume it's a stringified JSON for now
+  } as const satisfies ResolverRecordsResponseBase["texts"];
 };
 
 const testContractsCachedProfile = async (
@@ -77,7 +76,10 @@ const testContractsCachedProfile = async (
 
   expect(
     resolvedAddress !== null &&
-      isAddressEqual(contractsCachedIdentity.contract.address, resolvedAddress as Address),
+      isAddressEqual(
+        contractsCachedIdentity.contract.address,
+        resolvedAddress as NormalizedAddress, // Typecasting here is required due to `records.addresses` field type
+      ),
     `Contract named=${contractsCachedIdentity.name} has a different address than the cached one on ${getChainName(contractsCachedIdentity.contract.chain.id)} chain.`,
   ).toEqual(true);
 
@@ -87,19 +89,19 @@ const testContractsCachedProfile = async (
   expect(
     records.texts.docs,
     `profile.docs field for contract: ${contractsCachedIdentity.name} is stale`,
-  ).toEqual(serializedProfile.texts.docs);
+  ).toEqual(serializedProfile.docs);
   expect(
     records.texts["compiled-metadata"],
     `profile.compiledMetadata field for contract: ${contractsCachedIdentity.name} is stale`,
-  ).toEqual(serializedProfile.texts["compiled-metadata"]);
+  ).toEqual(serializedProfile["compiled-metadata"]);
   expect(
     records.texts.avatar,
     `profile.avatar field for contract: ${contractsCachedIdentity.name} is stale`,
-  ).toEqual(serializedProfile.texts.avatar);
+  ).toEqual(serializedProfile.avatar);
   expect(
     records.texts.audits,
     `profile.audits field for contract: ${contractsCachedIdentity.name} is stale`,
-  ).toEqual(serializedProfile.texts.audits);
+  ).toEqual(serializedProfile.audits);
 };
 
 const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentityResolved) => {
@@ -128,15 +130,16 @@ const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentit
 describe("CachedIdentity", () => {
   const data = CONTRACTS;
 
-  it("For `cachedIdentity` of type `ContractIdentityPrimaryNamed` or `ContractIdentityForwardNamed`, `name` must be a non-empty normalized ENS name", () => {
+  it("For `cachedIdentity` of type `ContractIdentityPrimaryNamed` or `ContractIdentityForwardNamed`, `name` must be a non-empty interpreted ENS name", () => {
     data.forEach((contract) => {
       if (
         contract.cachedIdentity.resolutionStatus == ContractResolutionStatusIds.PrimaryNamed ||
         contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
       ) {
         expect(
-          contract.cachedIdentity.name.length > 0 && isNormalizedName(contract.cachedIdentity.name),
-          `Name={${contract.cachedIdentity.name}} is empty or is not ENS normalized`,
+          contract.cachedIdentity.name.length > 0 &&
+            isInterpretedName(contract.cachedIdentity.name),
+          `Name={${contract.cachedIdentity.name}} is empty or is not ENS interpreted`,
         ).toEqual(true);
       }
     });
@@ -152,14 +155,14 @@ describe("CachedIdentity", () => {
   });
 
   it("No two contracts share the same address and chainId", () => {
-    const contractAddressesPerChain = new Map<ChainId, Set<Address>>();
+    const contractAddressesPerChain = new Map<ChainId, Set<NormalizedAddress>>();
 
     data.forEach((contract) => {
       const contractsChainId = contract.cachedIdentity.contract.chain.id;
       const contractsAddress = contract.cachedIdentity.contract.address;
 
       if (!contractAddressesPerChain.has(contractsChainId)) {
-        contractAddressesPerChain.set(contractsChainId, new Set<Address>());
+        contractAddressesPerChain.set(contractsChainId, new Set<NormalizedAddress>());
       }
 
       // The set will always be defined. We made sure with the if statement above
@@ -217,7 +220,7 @@ describe("Contracts contribution data", () => {
   it("Should have unique contributor entries for each contract", () => {
     data.forEach((contract) => {
       const contributorsList = contract.contributions.map((contribution) =>
-        formatAccountId(contribution.from),
+        stringifyAccountId(contribution.from),
       );
       const uniqueContributors = new Set(contributorsList);
       expect(

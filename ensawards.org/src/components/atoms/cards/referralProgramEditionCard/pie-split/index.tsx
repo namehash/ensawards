@@ -1,7 +1,7 @@
 import {
   ReferralProgramAwardModels,
   type ReferralProgramEditionSummaryPieSplit,
-} from "@namehash/ens-referrals/v1";
+} from "@namehash/ens-referrals";
 import { ChevronRightIcon } from "lucide-react";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge.tsx";
@@ -54,7 +54,7 @@ export const ReferralProgramEditionCardPieSplit = ({
         }}
       />
       <ReferralProgramEditionAwardPool
-        totalAwardPoolValue={referralProgramEditionSummary.rules.totalAwardPoolValue}
+        totalAwardPoolValue={referralProgramEditionSummary.rules.awardPool}
         styles={{
           container:
             "flex flex-row flex-nowrap justify-between items-start gap-0 self-stretch sm:min-w-[120px] sm:flex-col sm:justify-center max-sm:self-stretch",

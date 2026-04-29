@@ -5,10 +5,9 @@ import {
   getEnsManagerAddressDetailsUrl,
   useIsMobile,
 } from "@namehash/namehash-ui";
-import type * as React from "react";
-import type { Address } from "viem";
+import type { Address } from "enssdk";
 
-import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+import { getENSRootChainId } from "@ensnode/datasources";
 
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";

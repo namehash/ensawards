@@ -1,7 +1,6 @@
 import { isValidSlug } from "data/shared/slugs";
+import { isInterpretedName } from "enssdk";
 import { describe, expect, it } from "vitest";
-
-import { isNormalizedName } from "@ensnode/ensnode-sdk";
 
 import { areStringsUnique } from "@/utils";
 
@@ -70,12 +69,12 @@ describe("App data", () => {
     });
   });
 
-  it("In `socials`, `ens`, if defined, must be a non-empty normalized ENS name", () => {
+  it("In `socials`, `ens`, if defined, must be a non-empty interpreted ENS name", () => {
     data.forEach((app) => {
       if (app.socials.ens !== undefined) {
         expect(
-          app.socials.ens.length > 0 && isNormalizedName(app.socials.ens),
-          `Name={${app.socials.ens}} is empty or is not ENS normalized`,
+          app.socials.ens.length > 0 && isInterpretedName(app.socials.ens),
+          `Name={${app.socials.ens}} is empty or is not ENS interpreted`,
         ).toEqual(true);
       }
     });

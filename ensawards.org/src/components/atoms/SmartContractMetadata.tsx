@@ -1,7 +1,5 @@
+import type { Name } from "enssdk";
 import { BookOpen, Braces, CircleUser, ShieldCheck } from "lucide-react";
-import React from "react";
-
-import type { Name } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";

@@ -1,8 +1,7 @@
-import type { Address } from "viem";
+import type { Address, Name } from "enssdk";
 
-import type { ENSNamespaceId } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, useRecords } from "@ensnode/ensnode-react";
-import { type Name, type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
+import { type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { AdvocateProfileWithName } from "@/components/ens-advocates/details-page-components/advocate-profile/AdvocateProfileWithName.tsx";

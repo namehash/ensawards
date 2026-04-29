@@ -1,15 +1,12 @@
-import { Check, CheckCheck, X as XIcon } from "lucide-react";
-import React from "react";
-
-import type { Name } from "@ensnode/ensnode-sdk";
-
-import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-
 import {
   type ContractResolutionStatusId,
   ContractResolutionStatusIds,
-} from "../../../../data/protocols/contracts-types.ts";
+} from "data/protocols/contracts-types.ts";
+import type { Name } from "enssdk";
+import { Check, CheckCheck, X as XIcon } from "lucide-react";
+
+import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
+import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 
 export interface ContractBadgeProps {
   contractResolutionStatus: ContractResolutionStatusId;
