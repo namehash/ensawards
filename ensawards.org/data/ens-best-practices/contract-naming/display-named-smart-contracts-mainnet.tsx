@@ -31,7 +31,7 @@ const implementationRecommendations = (
       </a>{" "}
       of a contract address according to all ENS best practices:
     </p>
-    <ul>
+    <ul className="list-disc pl-5">
       <li>
         <a
           className={linkStyles}
@@ -102,7 +102,7 @@ const desiredOutcomeContent = (
 const useCaseSummaryContent = (
   <p>
     If a contract has an ENS name, you can use its ENS profile to power additional UX improvements
-    such as avatars, metadata, audit information, and more. More information can be found at the
+    such as avatars, metadata, audit information, and more. More information can be found at the{" "}
     <a
       className={linkStyles}
       target="_blank"
@@ -156,6 +156,7 @@ const displayNamedSmartContractsMainnet: BestPracticeApp = {
             <img
               alt="mainnet-interactions-display-named-smart-contracts acceptance test"
               src={acceptanceTestExampleImage.src}
+              className="w-auto h-[800px]"
             />
           </div>
         ),

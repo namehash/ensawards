@@ -1,3 +1,4 @@
+import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 import type { AppSlug } from "data/apps/types.ts";
 import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
@@ -28,10 +29,8 @@ export function getAppBenchmarks(slug: AppSlug): BestPracticeBenchmarks {
  * Otherwise, the value will be an `AppBenchmark`
  * describing how the related {@link App} performed for the {@link BestPractice}.
  */
-export function getAppBenchmarksByBestPractice(
-  slug: BestPracticeSlug,
-): (AppBenchmark | undefined)[] {
-  const benchmarks: (AppBenchmark | undefined)[] = [];
+export function getAppBenchmarksByBestPractice(slug: BestPracticeSlug): AppBenchmark[] {
+  const benchmarks: AppBenchmark[] = [];
 
   for (const appBenchmarks of Object.values(APP_BENCHMARKS)) {
     benchmarks.push(appBenchmarks[slug]);
@@ -46,7 +45,7 @@ export function getAppBenchmarksByBestPractice(
 export function getAppBenchmark(
   appSlug: AppSlug,
   bestPracticeSlug: BestPracticeSlug,
-): AppBenchmark | undefined {
+): AppBenchmark {
   const appBenchmarks = getAppBenchmarks(appSlug);
   return appBenchmarks[bestPracticeSlug];
 }
@@ -59,7 +58,7 @@ export function getAppBenchmark(
  * {@link BenchmarkResults.PartialPass} = 0.5
  * {@link BenchmarkResults.Fail} = 0.0
  */
-export const calcEnsAwardsPoints = (benchmark: AppBenchmark): EnsAwardsPoints => {
+export const calcEnsAwardsPoints = (benchmark: AcceptanceTestBenchmark): EnsAwardsPoints => {
   switch (benchmark.result) {
     case BenchmarkResults.Pass:
       return 1;
@@ -113,9 +112,16 @@ export const groupBenchmarksByCategory = (
 export const calcBestPracticeCategoryScore = (
   benchmarks: BestPracticeBenchmarks,
 ): EnsAwardsScore | undefined => {
-  const completedBenchmarks = Object.values(benchmarks).filter(
-    (benchmark) => benchmark !== undefined,
-  );
+  const completedBenchmarks: AcceptanceTestBenchmark[] = [];
+
+  for (const appBenchmark of Object.values(benchmarks)) {
+    for (const acceptanceTestBenchmark of Object.values(appBenchmark)) {
+      if (acceptanceTestBenchmark !== undefined) {
+        completedBenchmarks.push(acceptanceTestBenchmark);
+      }
+    }
+  }
+
   if (completedBenchmarks.length === 0) return undefined;
 
   const score = Math.round(
@@ -134,10 +140,10 @@ const resultOrder = {
   [BenchmarkResults.Fail]: 2,
 } as const satisfies Record<BenchmarkResult, number>;
 
-/** Sorts two {@link AppBenchmark}s relative to each other. */
+/** Sorts two {@link AcceptanceTestBenchmark}s relative to each other. */
 export const sortBenchmarks = (
-  a: AppBenchmark | undefined,
-  b: AppBenchmark | undefined,
+  a: AcceptanceTestBenchmark | undefined,
+  b: AcceptanceTestBenchmark | undefined,
 ): number => {
   // All undefined benchmarks are interpreted as pending
   // and should be sorted after completed benchmarks
@@ -149,7 +155,9 @@ export const sortBenchmarks = (
   return resultDiff;
 };
 
-export const getBenchmarkLastUpdateTimestamp = (benchmark: AppBenchmark): UnixTimestamp => {
+export const getBenchmarkLastUpdateTimestamp = (
+  benchmark: AcceptanceTestBenchmark,
+): UnixTimestamp => {
   const contributionTimestamps = benchmark.contributions.map(
     (contribution) => contribution.lastUpdated,
   );
@@ -158,7 +166,7 @@ export const getBenchmarkLastUpdateTimestamp = (benchmark: AppBenchmark): UnixTi
 };
 
 export const formatBenchmarkResult = (
-  benchmark?: AppBenchmark,
+  benchmark?: AcceptanceTestBenchmark,
   options: Omit<FormatTypeOptions, "plural"> = { lowercase: false },
 ): string => {
   const { lowercase } = options;

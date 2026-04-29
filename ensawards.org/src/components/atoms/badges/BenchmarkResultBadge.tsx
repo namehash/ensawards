@@ -1,3 +1,4 @@
+import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { type AppBenchmark, BenchmarkResults } from "data/benchmarks/types.ts";
 import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
 import {
@@ -10,11 +11,11 @@ import {
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface BenchmarkResultBadgeProps {
-  benchmark?: AppBenchmark;
+  benchmark?: AcceptanceTestBenchmark;
   className?: string;
 }
 
-export const benchmarkResultToBadgeStyles = (benchmark?: AppBenchmark) => {
+export const benchmarkResultToBadgeStyles = (benchmark?: AcceptanceTestBenchmark) => {
   if (!benchmark) {
     return "text-muted-foreground bg-black/8";
   }
@@ -32,7 +33,7 @@ export const benchmarkResultToBadgeStyles = (benchmark?: AppBenchmark) => {
   }
 };
 
-export const getBenchmarkIcon = (benchmark?: AppBenchmark, className?: string) => {
+export const getBenchmarkIcon = (benchmark?: AcceptanceTestBenchmark, className?: string) => {
   if (!benchmark) {
     return <PendingIcon className={className} />;
   }

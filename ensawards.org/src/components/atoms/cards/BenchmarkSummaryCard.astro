@@ -5,14 +5,19 @@ import { type AppBenchmark } from "data/benchmarks/types.ts";
 import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { getBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
-import { BenchmarkResultBadge, benchmarkResultToBadgeStyles } from "../badges/BenchmarkResultBadge";
+import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
+import { getAcceptanceTestBySlug } from "data/acceptance-tests/utils.ts";
 
 export interface BenchmarkSummaryCardProps {
   bestPractice: BestPracticeApp;
-  benchmark?: AppBenchmark;
+  acceptanceTestsBenchmarks: AppBenchmark;
 }
 
-const { bestPractice, benchmark }: BenchmarkSummaryCardProps = Astro.props;
+const { bestPractice, acceptanceTestsBenchmarks }: BenchmarkSummaryCardProps = Astro.props;
+
+const benchmarksUpdateTimes = Object.values(acceptanceTestsBenchmarks)
+  .filter((benchmark) => benchmark !== undefined)
+  .map((benchmark) => getBenchmarkLastUpdateTimestamp(benchmark));
 
 const bestPracticeHref = `/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`;
 
@@ -53,19 +58,43 @@ const detailValueStyles = cn(
 
     <div class="flex w-full flex-col items-start gap-1 justify-center">
       <p class={detailLabelStyles}>Benchmark result</p>
-      <BenchmarkResultBadge benchmark={benchmark} />
+      {
+        Object.entries(acceptanceTestsBenchmarks).map(
+          ([acceptanceTestSlug, benchmark]) => {
+            const acceptanceTest = getAcceptanceTestBySlug(acceptanceTestSlug);
+
+            if (acceptanceTest === undefined) {
+              throw new Error(
+                `Invariant(AcceptanceTestSlug): Acceptance test with slug ${acceptanceTestSlug} not defined.`,
+              );
+            }
+            return (
+              <div
+                class="flex flex-row gap-3 justify-start items-center"
+                key={`benchmark-result-${bestPractice.bestPracticeSlug}-${acceptanceTestSlug}`}>
+                <BenchmarkResultBadge benchmark={benchmark} />
+                <p class={cn(detailLabelStyles, "text-black")}>
+                  {acceptanceTest.title}
+                </p>
+              </div>
+            );
+          },
+        )
+      }
     </div>
 
     {
-      benchmark !== undefined && (
+      benchmarksUpdateTimes.length > 0 && (
         <div class="flex w-full flex-col items-start gap-1 py-1">
           <p class={detailLabelStyles}>Last updated</p>
           <p class="text-sm leading-normal font-medium text-black">
-            <RelativeTime
-              client:load
-              enforcePast
-              timestamp={getBenchmarkLastUpdateTimestamp(benchmark)}
-            />
+            {benchmarksUpdateTimes.map((timestamp, index) => (
+              <span
+                key={`benchmark-update-time-${bestPractice.bestPracticeSlug}-${index}`}>
+                <RelativeTime client:load enforcePast timestamp={timestamp} />
+                {index < benchmarksUpdateTimes.length - 1 && ", "}
+              </span>
+            ))}
           </p>
         </div>
       )

@@ -10,11 +10,12 @@ import { BenchmarkResults, type AppBenchmark } from "data/benchmarks/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { type BenchmarkResultBadgeProps } from "./BenchmarkResultBadge.tsx";
 import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
+import { type AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 
 const { benchmark, className }: BenchmarkResultBadgeProps = Astro.props;
 
 const benchmarkResultContent = (
-  benchmark?: AppBenchmark,
+  benchmark?: AcceptanceTestBenchmark,
 ): { symbol: ImageMetadata; symbolAlt: string } => {
   if (benchmark === undefined) {
     return {

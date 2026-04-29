@@ -10,7 +10,7 @@ import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import contributors from "../../contributors";
-import exampleProofImage from "./acceptance-test-images/blockscout-proof-example.png";
+import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 
 // TODO: Some of these are placeholder benchmarks just to show how the new benchmarking system works,
 const benchmarks = {

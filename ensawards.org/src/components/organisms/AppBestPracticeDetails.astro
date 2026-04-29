@@ -10,7 +10,7 @@ import {
   ContributorsCard,
   ContributorsCardLoading,
 } from "../atoms/cards/ContributorsCard.tsx";
-import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
+import { BestPracticeTechnicalDetails } from "@/components/molecules/BestPracticeTechnicalDetails.tsx";
 import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
 import { type Contribution } from "data/contributors/types";
@@ -29,14 +29,25 @@ const appsWithBenchmarks = APPS.map((app) => {
   return {
     app,
     bestPractice,
-    benchmark: matchingBenchmark,
+    acceptanceTestBenchmarks: matchingBenchmark,
   };
 });
 
 // Sort benchmark results
 const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
   // First try to differentiate by benchmarks
-  const benchmarksDiff = sortBenchmarks(a.benchmark, b.benchmark);
+
+  let benchmarksDiff = 0;
+
+  const acceptanceTestSlugs = Object.keys(a.acceptanceTestBenchmarks);
+
+  for (let idx = 0; idx < acceptanceTestSlugs.length; idx++) {
+    const acceptanceTestSlug = acceptanceTestSlugs[idx];
+    const aBenchmark = a.acceptanceTestBenchmarks[acceptanceTestSlug];
+    const bBenchmark = b.acceptanceTestBenchmarks[acceptanceTestSlug];
+
+    benchmarksDiff += sortBenchmarks(aBenchmark, bBenchmark);
+  }
 
   if (benchmarksDiff !== 0) return benchmarksDiff;
 
@@ -46,8 +57,11 @@ const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
 
 const bestPracticeScore = calcBestPracticeScore(bestPractice);
 
-const benchmarkContributions: Contribution[] = appsWithBenchmarks.flatMap(({ benchmark }) =>
-  benchmark ? benchmark.contributions : [],
+const benchmarkContributions: Contribution[] = appsWithBenchmarks.flatMap(
+  ({ acceptanceTestBenchmarks }) =>
+    Object.values(acceptanceTestBenchmarks).flatMap(
+      (benchmarkResult) => benchmarkResult?.contributions ?? [],
+    ),
 );
 
 const allContributions: Contribution[] = [...bestPractice.contributions, ...benchmarkContributions];
