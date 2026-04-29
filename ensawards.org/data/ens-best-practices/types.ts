@@ -1,5 +1,7 @@
+import type { AcceptanceTest } from "data/acceptance-tests/types.ts";
 import type { AppBenchmark } from "data/benchmarks/types.ts";
 import type { Contribution } from "data/contributors/types.ts";
+import type { JSX } from "react";
 
 import type { AppType } from "../apps/types.ts";
 import type { ProtocolType } from "../protocols/types.ts";
@@ -32,14 +34,10 @@ export interface BestPracticeAbstract<
   category: BestPracticeCategory; // each best practice belongs to exactly one best practice category
   appliesTo: AppliesToT[];
   technicalDetails: {
-    main: {
-      header: string;
-      content: string;
-    };
-    sides: {
-      header: string;
-      content: string;
-    }[];
+    useCaseSummary: JSX.Element;
+    desiredOutcome: JSX.Element;
+    implementationRecommendations: JSX.Element;
+    acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
   };
   contributions: [Contribution, ...Contribution[]];
 }
@@ -53,12 +51,10 @@ export interface BestPracticeApp
 export type BestPractice = BestPracticeProtocol | BestPracticeApp;
 
 /**
- * Defines relations between {@link BestPracticeSlug} and {@link AppBenchmark}
- * for the related {@link BestPractice}.
+ * Defines relations between {@link BestPracticeSlug} and the benchmark result for a given app.
  *
  * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}.
- * If an app doesn't have a benchmark completed for a `BestPractice` then the benchmark should be explicitly set to `undefined`.
- * Otherwise, the value should be an `AppBenchmark` describing how the related app performed for the `BestPractice`.
+ * The value should be the related {@link AppBenchmark}, or `undefined` when the app has not yet been benchmarked against that best practice.
  */
 export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;
 
