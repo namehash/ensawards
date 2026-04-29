@@ -17,17 +17,16 @@ const benchmarks = {
   //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-03T14:00:00Z") },
   //   ],
   // },
+  // TODO: remember to rollback to benchmarks actuall results (base it on the current prod if needed)
   "display-named-smart-contracts-mainnet": {
-    result: BenchmarkResults.Pass,
-    contributions: [
-      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:24:39.561Z") },
-    ],
+    "mainnet-interactions-display-named-smart-contracts": undefined, // simulate all benchmarks pending
+    "mainnet-interactions-display-named-smart-contracts-at2": undefined, // simulate all benchmarks pending
   },
   "display-named-smart-contracts-l2-chains": {
-    result: BenchmarkResults.Fail,
-    contributions: [
-      { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:24:39.561Z") },
-    ],
+    "l2-chain-interactions-display-named-smart-contracts": undefined, // simulate all benchmarks pending
+  },
+  "mock-bp-all-pending": {
+    "mock-acceptance-test-1": undefined, // simulate pending benchmark
   },
 } as const satisfies BestPracticeBenchmarks;
 

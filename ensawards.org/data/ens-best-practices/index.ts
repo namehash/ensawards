@@ -4,7 +4,7 @@
 import { getDefinedBestPracticeCategories, getDefinedBestPractices } from "./registry.ts";
 import { type BestPractice, type BestPracticeCategory, CategoryStatuses } from "./types.ts";
 
-import.meta.glob("./*/*.ts", { eager: true });
+import.meta.glob("./*/*.{ts,tsx}", { eager: true });
 
 export const ENS_BEST_PRACTICES: BestPractice[] = [
   ...getDefinedBestPractices().sort((a, b) => a.name.localeCompare(b.name)),

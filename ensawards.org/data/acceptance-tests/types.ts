@@ -1,6 +1,6 @@
+import type { BenchmarkResult } from "data/benchmarks/types";
 import type { Contribution } from "data/contributors/types";
 import type { JSX } from "react";
-import type { BenchmarkResult } from "vitest";
 
 /** A unique identifier for an acceptance test.
  *
@@ -22,8 +22,6 @@ export interface AcceptanceTest {
  * Represents the benchmark of an @{link AcceptanceTest} on an {@link App} against a {@link BestPractice}.
  */
 export interface AcceptanceTestBenchmark {
-  acceptanceTestSlug: AcceptanceTestSlug;
-
   /** The result of the benchmark */
   result: BenchmarkResult;
 

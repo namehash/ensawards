@@ -54,9 +54,9 @@ export type BestPractice = BestPracticeProtocol | BestPracticeApp;
  * Defines relations between {@link BestPracticeSlug} and the benchmark result for a given app.
  *
  * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}.
- * The value should be the related {@link AppBenchmark}, or `undefined` when the app has not yet been benchmarked against that best practice.
+ * The value should be the related {@link AppBenchmark}.
  */
-export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;
+export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark>;
 
 export const CategoryStatuses = {
   ComingSoon: "coming-soon",
