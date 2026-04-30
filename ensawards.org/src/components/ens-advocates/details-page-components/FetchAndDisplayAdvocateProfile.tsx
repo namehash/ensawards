@@ -1,4 +1,4 @@
-import { type Address, asInterpretedName } from "enssdk";
+import { type Address, asInterpretedName, isInterpretedName } from "enssdk";
 
 import { getENSRootChainId } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
@@ -32,8 +32,10 @@ export function FetchAndDisplayAdvocateProfile({ address }: FetchAndDisplayAdvoc
     );
 
   // If the advocate's address doesn't have a defined primary name,
+  // or the name is not a valid ENS interpreted name,
   // display a UI based just on the address
-  if (data.name === null) return <AdvocateProfileWithoutName address={address} />;
+  if (data.name === null || !isInterpretedName(data.name))
+    return <AdvocateProfileWithoutName address={address} />;
 
   // Otherwise, use the primary name to obtain additional data about the profile
   // and display it in the UI
