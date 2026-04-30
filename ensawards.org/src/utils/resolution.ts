@@ -1,5 +1,5 @@
 import { millisecondsInSecond } from "date-fns/constants";
-import type { Address, Duration, InterpretedName } from "enssdk";
+import type { Duration, InterpretedName, NormalizedAddress } from "enssdk";
 import { ETH_COIN_TYPE } from "enssdk";
 
 import { EnsNodeClient, type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
@@ -12,7 +12,7 @@ import { getENSNodeUrl } from "@/utils/env";
  * @param name - an {@link InterpretedName} to resolve the Ethereum Mainnet address for.
  * @param timeout - a duration in seconds when the resolution request will timeout.
  *
- * @returns The Ethereum Mainnet {@link Address} for the provided name
+ * @returns The Ethereum Mainnet {@link NormalizedAddress} for the provided name
  *          or null if no Ethereum Mainnet address is found for that name.
  *
  * @throws If the resolution isn't completed before the timeout or a resolution error occurs.
@@ -20,7 +20,7 @@ import { getENSNodeUrl } from "@/utils/env";
 export const resolveEthAddress = async (
   name: InterpretedName,
   timeout: Duration = 5,
-): Promise<Address | null> => {
+): Promise<NormalizedAddress | null> => {
   const client = new EnsNodeClient({ url: getENSNodeUrl() });
 
   // Define the selection of records to resolve. In this case, we only want to resolve the Ethereum Mainnet address.
@@ -43,5 +43,6 @@ export const resolveEthAddress = async (
   const response = await Promise.race([resolutionPromise, timeoutPromise]);
 
   // resolution completed without error before the timeout.
-  return response.records.addresses[ETH_COIN_TYPE] as Address | null;
+  return response.records.addresses[ETH_COIN_TYPE] as NormalizedAddress | null; // Typecasting here is required due to `records.addresses` field type.
+  // We aim to optimize that in the future: https://github.com/namehash/ensnode/issues/2019
 };

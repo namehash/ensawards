@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -34,7 +35,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "SignalService",
       },
-      name: "signals.based.taiko.eth",
+      name: asInterpretedName("signals.based.taiko.eth"),
     },
     contributions: [
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
@@ -49,7 +50,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "Bridge",
       },
-      name: "bridge.based.taiko.eth",
+      name: asInterpretedName("bridge.based.taiko.eth"),
     },
     contributions: [
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
@@ -78,7 +79,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ERC20Vault",
       },
-      name: "v20.based.taiko.eth",
+      name: asInterpretedName("v20.based.taiko.eth"),
     },
     contributions: [
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
@@ -93,7 +94,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ERC721Vault",
       },
-      name: "v721.based.taiko.eth",
+      name: asInterpretedName("v721.based.taiko.eth"),
     },
     contributions: [
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
@@ -108,7 +109,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ERC1155Vault",
       },
-      name: "v1155.based.taiko.eth",
+      name: asInterpretedName("v1155.based.taiko.eth"),
     },
     contributions: [
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },
@@ -165,7 +166,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TaikoInbox",
       },
-      name: "inbox.based.taiko.eth",
+      name: asInterpretedName("inbox.based.taiko.eth"),
     },
     contributions: [
       { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-04T15:25:00.000Z") },

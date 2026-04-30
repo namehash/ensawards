@@ -1,4 +1,4 @@
-import type { Address } from "enssdk";
+import { type Address, asInterpretedName } from "enssdk";
 
 import { getENSRootChainId } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
@@ -37,5 +37,7 @@ export function FetchAndDisplayAdvocateProfile({ address }: FetchAndDisplayAdvoc
 
   // Otherwise, use the primary name to obtain additional data about the profile
   // and display it in the UI
-  return <FetchAndDisplayAdvocateProfileWithName name={data.name} address={address} />;
+  return (
+    <FetchAndDisplayAdvocateProfileWithName name={asInterpretedName(data.name)} address={address} />
+  );
 }

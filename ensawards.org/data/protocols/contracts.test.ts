@@ -53,7 +53,9 @@ const serializeEnsProfileForContract = (
     avatar: profile.avatar ? profile.avatar.href : null,
     audits: profile.audits ? JSON.stringify(profile.audits) : null,
     //TODO: to be honest I have no idea how such object could look like,
-    // as I couldn't find any examples, but I'll assume it's a stringified JSON for now
+    // as I couldn't find any examples, but I'll assume it's a stringified JSON for now.
+    // We want to be able to type this field in a more strict way in the future, once we have more clarity on its structure.
+    // See: https://github.com/namehash/ensnode/issues/2018
   } as const satisfies ResolverRecordsResponseBase["texts"];
 };
 
@@ -78,7 +80,8 @@ const testContractsCachedProfile = async (
     resolvedAddress !== null &&
       isAddressEqual(
         contractsCachedIdentity.contract.address,
-        resolvedAddress as NormalizedAddress, // Typecasting here is required due to `records.addresses` field type
+        resolvedAddress as NormalizedAddress, // Typecasting here is required due to `records.addresses` field type.
+        // We aim to optimize that in the future: https://github.com/namehash/ensnode/issues/2019
       ),
     `Contract named=${contractsCachedIdentity.name} has a different address than the cached one on ${getChainName(contractsCachedIdentity.contract.chain.id)} chain.`,
   ).toEqual(true);
@@ -139,7 +142,7 @@ describe("CachedIdentity", () => {
         expect(
           contract.cachedIdentity.name.length > 0 &&
             isInterpretedName(contract.cachedIdentity.name),
-          `Name={${contract.cachedIdentity.name}} is empty or is not ENS interpreted`,
+          `Name={${contract.cachedIdentity.name}} is empty or is not a valid ENS interpreted name`,
         ).toEqual(true);
       }
     });

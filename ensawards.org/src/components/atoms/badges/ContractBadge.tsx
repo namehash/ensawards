@@ -2,7 +2,7 @@ import {
   type ContractResolutionStatusId,
   ContractResolutionStatusIds,
 } from "data/protocols/contracts-types.ts";
-import type { Name } from "enssdk";
+import type { InterpretedName } from "enssdk";
 import { Check, CheckCheck, X as XIcon } from "lucide-react";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
@@ -10,10 +10,13 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 
 export interface ContractBadgeProps {
   contractResolutionStatus: ContractResolutionStatusId;
-  name?: Name;
+  name?: InterpretedName;
 }
 
-const getTooltipContent = (resolutionStatus: ContractResolutionStatusId, ensName?: Name) => {
+const getTooltipContent = (
+  resolutionStatus: ContractResolutionStatusId,
+  ensName?: InterpretedName,
+) => {
   switch (resolutionStatus) {
     case ContractResolutionStatusIds.ForwardNamed:
       return (

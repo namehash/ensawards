@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -20,7 +21,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TaikoDAO",
       },
-      name: "dao.taiko.eth",
+      name: asInterpretedName("dao.taiko.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-28T14:30:00.000Z") },
@@ -36,7 +37,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TaikoToken",
       },
-      name: "token.taiko.eth",
+      name: asInterpretedName("token.taiko.eth"),
       profile: {
         avatar: new URL("https://euc.li/token.taiko.eth"),
       },
@@ -70,7 +71,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TaikoDAOController",
       },
-      name: "controller.taiko.eth",
+      name: asInterpretedName("controller.taiko.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-28T14:30:00.000Z") },

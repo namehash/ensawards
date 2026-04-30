@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
+import { asInterpretedName } from "enssdk";
+
 import RainbowProject from "../../projects/rainbow";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -17,7 +19,7 @@ const RainbowWallet: App = {
   socials: {
     website: new URL("https://rainbow.me"),
     twitter: new URL("https://x.com/rainbowdotme"),
-    ens: "rainbowwallet.eth",
+    ens: asInterpretedName("rainbowwallet.eth"),
   },
   icon: RainbowIcon,
   ogImagePath: "rainbow-wallet/og.png",

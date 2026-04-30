@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName } from "enssdk";
 import { arbitrum, base, mainnet, optimism, scroll } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -20,7 +21,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "boldToken",
       },
-      name: "bold.token.liquity-protocol.eth",
+      name: asInterpretedName("bold.token.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -91,7 +92,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "shared.collateralRegistry",
       },
-      name: "redeem.liquity-protocol.eth",
+      name: asInterpretedName("redeem.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -190,7 +191,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ETHBranch.borrowerOperations",
       },
-      name: "borrower-ops.eth.liquity-protocol.eth",
+      name: asInterpretedName("borrower-ops.eth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -247,7 +248,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ETHBranch.stabilityPool",
       },
-      name: "stability-pool.eth.liquity-protocol.eth",
+      name: asInterpretedName("stability-pool.eth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -262,7 +263,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ETHBranch.troveManager",
       },
-      name: "trove-manager.eth.liquity-protocol.eth",
+      name: asInterpretedName("trove-manager.eth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -277,7 +278,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ETHBranch.troveNFT",
       },
-      name: "trove.eth.liquity-protocol.eth",
+      name: asInterpretedName("trove.eth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -348,7 +349,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ETHBranch.leverageZapper",
       },
-      name: "leverage-zapper.eth.liquity-protocol.eth",
+      name: asInterpretedName("leverage-zapper.eth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -405,7 +406,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "wstETHBranch.borrowerOperations",
       },
-      name: "borrower-ops.wsteth.liquity-protocol.eth",
+      name: asInterpretedName("borrower-ops.wsteth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -462,7 +463,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "wstETHBranch.stabilityPool",
       },
-      name: "stability-pool.wsteth.liquity-protocol.eth",
+      name: asInterpretedName("stability-pool.wsteth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -477,7 +478,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "wstETHBranch.troveManager",
       },
-      name: "trove-manager.wsteth.liquity-protocol.eth",
+      name: asInterpretedName("trove-manager.wsteth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -492,7 +493,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "wstETHBranch.troveNFT",
       },
-      name: "trove.wsteth.liquity-protocol.eth",
+      name: asInterpretedName("trove.wsteth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -563,7 +564,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "wstETHBranch.leverageZapper",
       },
-      name: "leverage-zapper.wsteth.liquity-protocol.eth",
+      name: asInterpretedName("leverage-zapper.wsteth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -620,7 +621,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "rETHBranch.borrowerOperations",
       },
-      name: "borrower-ops.reth.liquity-protocol.eth",
+      name: asInterpretedName("borrower-ops.reth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -677,7 +678,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "rETHBranch.stabilityPool",
       },
-      name: "stability-pool.reth.liquity-protocol.eth",
+      name: asInterpretedName("stability-pool.reth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -692,7 +693,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "rETHBranch.troveManager",
       },
-      name: "trove-manager.reth.liquity-protocol.eth",
+      name: asInterpretedName("trove-manager.reth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -707,7 +708,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "rETHBranch.troveNFT",
       },
-      name: "trove.reth.liquity-protocol.eth",
+      name: asInterpretedName("trove.reth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -778,7 +779,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "rETHBranch.leverageZapper",
       },
-      name: "leverage-zapper.reth.liquity-protocol.eth",
+      name: asInterpretedName("leverage-zapper.reth.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -793,7 +794,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "governance",
       },
-      name: "governance.liquity-protocol.eth",
+      name: asInterpretedName("governance.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -906,7 +907,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "governance.LQTYToken",
       },
-      name: "lqty.token.liquity-protocol.eth",
+      name: asInterpretedName("lqty.token.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },
@@ -921,7 +922,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "governance.LUSDToken",
       },
-      name: "lusd.token.liquity-protocol.eth",
+      name: asInterpretedName("lusd.token.liquity-protocol.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-02-10T08:41:00.000Z") },

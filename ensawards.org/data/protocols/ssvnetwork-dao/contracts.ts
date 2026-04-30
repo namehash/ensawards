@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -20,7 +21,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "SSVNetwork",
       },
-      name: "ssvnetwork.eth",
+      name: asInterpretedName("ssvnetwork.eth"),
       profile: {
         avatar: new URL("ipfs://bafkreier3kfqjrm6uj6gvncvk233f4x7vymlc2t53fbyfsoq7qafehbcla"),
         docs: new URL("https://docs.ssv.network/developers/smart-contracts/ssvnetwork"),
@@ -39,7 +40,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "SSVNetworkViews",
       },
-      name: "views.ssvnetwork.eth",
+      name: asInterpretedName("views.ssvnetwork.eth"),
     },
     contributions: [
       { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
@@ -54,7 +55,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "SSVToken",
       },
-      name: "ssv.ssvnetwork.eth",
+      name: asInterpretedName("ssv.ssvnetwork.eth"),
     },
     contributions: [
       { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
@@ -69,7 +70,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "CSSVToken",
       },
-      name: "cssv.ssvnetwork.eth",
+      name: asInterpretedName("cssv.ssvnetwork.eth"),
     },
     contributions: [
       { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-08T16:30:00.000Z") },
@@ -84,7 +85,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "DAOTreasury",
       },
-      name: "treasury.ssvnetwork.eth",
+      name: asInterpretedName("treasury.ssvnetwork.eth"),
     },
     contributions: [
       { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
@@ -99,7 +100,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "SSVFoundation",
       },
-      name: "foundation.ssvnetwork.eth",
+      name: asInterpretedName("foundation.ssvnetwork.eth"),
     },
     contributions: [
       { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-08T16:30:00.000Z") },
@@ -114,7 +115,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "IMP1",
       },
-      name: "v1-imp.ssvnetwork.eth",
+      name: asInterpretedName("v1-imp.ssvnetwork.eth"),
     },
     contributions: [
       { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
@@ -129,7 +130,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "IMPLido",
       },
-      name: "v1-imp-lido.ssvnetwork.eth",
+      name: asInterpretedName("v1-imp-lido.ssvnetwork.eth"),
     },
     contributions: [
       { from: contributors.spooky, lastUpdated: parseTimestamp("2026-04-13T22:30:00.000Z") },
