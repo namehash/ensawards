@@ -219,7 +219,7 @@ function registrarActionWithUpdatedIncrementalDuration(
   return {
     ...registrarAction,
     action: { ...registrarAction.action, id: newId, incrementalDuration },
-    name: asInterpretedName(`incrementalDuration-${incrementalDuration}.${registrarAction.name}`),
+    name: asInterpretedName(`incremental-duration-${incrementalDuration}.${registrarAction.name}`),
   } satisfies NamedRegistrarAction;
 }
 

@@ -5,7 +5,7 @@ import {
   type ReferralProgramEditionSummaryRevShareCap,
 } from "@namehash/ens-referrals";
 
-import { CurrencyIds, parseUsdc } from "@ensnode/ensnode-sdk";
+import { parseUsdc } from "@ensnode/ensnode-sdk";
 
 export const mockReferralProgramEditionSummariesList: (
   | ReferralProgramEditionSummaryPieSplit
