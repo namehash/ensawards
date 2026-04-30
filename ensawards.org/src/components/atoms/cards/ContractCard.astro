@@ -69,6 +69,10 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
     <ContractBadge
       client:load
       contractResolutionStatus={contract.cachedIdentity.resolutionStatus}
+      name={contract.cachedIdentity.resolutionStatus ===
+      ContractResolutionStatusIds.Unnamed
+        ? undefined
+        : contract.cachedIdentity.name}
     />
   </div>
   <div
@@ -187,7 +191,6 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
           </p>
           <SmartContractMetadata
             client:load
-            name={contract.cachedIdentity.name}
             metadata={contract.cachedIdentity.profile}
           />
         </>

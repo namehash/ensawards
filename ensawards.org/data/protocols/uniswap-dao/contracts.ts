@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -15,7 +16,7 @@ const contracts: Contract[] = [
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
-      name: "uni.uniswap.eth",
+      name: asInterpretedName("uni.uniswap.eth"),
       contract: {
         address: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
         chain: mainnet,
@@ -35,7 +36,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "Timelock",
       },
-      name: "uniswap.eth",
+      name: asInterpretedName("uniswap.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
@@ -47,7 +48,7 @@ const contracts: Contract[] = [
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
-      name: "governance.uniswap.eth",
+      name: asInterpretedName("governance.uniswap.eth"),
       contract: {
         address: "0x5e4be8bc9637f0eaa1a755019e06a68ce081d58f",
         chain: mainnet,

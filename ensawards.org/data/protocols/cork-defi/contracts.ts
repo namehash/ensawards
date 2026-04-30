@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -20,7 +21,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TimelockUpgrade",
       },
-      name: "timelock-upgrade.phoenix.cork.eth",
+      name: asInterpretedName("timelock-upgrade.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -35,7 +36,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TimelockControllerAdmin",
       },
-      name: "timelock-admin.phoenix.cork.eth",
+      name: asInterpretedName("timelock-admin.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -50,7 +51,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TimelockOperational",
       },
-      name: "timelock-operational.phoenix.cork.eth",
+      name: asInterpretedName("timelock-operational.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -65,7 +66,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ConstraintRateAdapterProxy",
       },
-      name: "constraint-rate-adapter.phoenix.cork.eth",
+      name: asInterpretedName("constraint-rate-adapter.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -80,7 +81,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ConstraintRateAdapter",
       },
-      name: "constraint-rate-adapter-impl.phoenix.cork.eth",
+      name: asInterpretedName("constraint-rate-adapter-impl.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -95,7 +96,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "WhitelistManagerProxy",
       },
-      name: "whitelist.phoenix.cork.eth",
+      name: asInterpretedName("whitelist.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -110,7 +111,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "WhitelistManager",
       },
-      name: "whitelist-impl.phoenix.cork.eth",
+      name: asInterpretedName("whitelist-impl.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -125,7 +126,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "DefaultCorkController",
       },
-      name: "controller.phoenix.cork.eth",
+      name: asInterpretedName("controller.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -140,7 +141,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "CorkPoolManagerProxy",
       },
-      name: "pool-manager.phoenix.cork.eth",
+      name: asInterpretedName("pool-manager.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -155,7 +156,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "CorkPoolManager",
       },
-      name: "pool-manager-impl.phoenix.cork.eth",
+      name: asInterpretedName("pool-manager-impl.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -170,7 +171,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "SharesFactory",
       },
-      name: "shares-factory.phoenix.cork.eth",
+      name: asInterpretedName("shares-factory.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },
@@ -185,7 +186,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "CorkAdapter",
       },
-      name: "adapter.phoenix.cork.eth",
+      name: asInterpretedName("adapter.phoenix.cork.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-01-27T15:15:05.000Z") },

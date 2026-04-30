@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName } from "enssdk";
 import { mainnet, optimism } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -20,7 +21,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "GIV",
       },
-      name: "givtoken.giv.eth",
+      name: asInterpretedName("givtoken.giv.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
@@ -35,7 +36,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TokenDistro",
       },
-      name: "distro.giv.eth",
+      name: asInterpretedName("distro.giv.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
@@ -50,7 +51,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "DevouchMultisig",
       },
-      name: "vouch.giv.eth",
+      name: asInterpretedName("vouch.giv.eth"),
       profile: {
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
@@ -68,7 +69,7 @@ const contracts: Contract[] = [
         chain: optimism,
         codeName: "GIV",
       },
-      name: "givtoken.giv.eth",
+      name: asInterpretedName("givtoken.giv.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
@@ -83,7 +84,7 @@ const contracts: Contract[] = [
         chain: optimism,
         codeName: "TokenDistro",
       },
-      name: "distro.giv.eth",
+      name: asInterpretedName("distro.giv.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
@@ -98,7 +99,7 @@ const contracts: Contract[] = [
         chain: optimism,
         codeName: "DevouchMultisig",
       },
-      name: "vouch.giv.eth",
+      name: asInterpretedName("vouch.giv.eth"),
       profile: {
         avatar: new URL("https://euc.li/vouch.giv.eth"),
       },
@@ -116,7 +117,7 @@ const contracts: Contract[] = [
         chain: optimism,
         codeName: "UnipoolGIVpower",
       },
-      name: "givpower.giv.eth",
+      name: asInterpretedName("givpower.giv.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },
@@ -131,7 +132,7 @@ const contracts: Contract[] = [
         chain: optimism,
         codeName: "DeVouchResolverUpgradeable",
       },
-      name: "devouch.giv.eth",
+      name: asInterpretedName("devouch.giv.eth"),
     },
     contributions: [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-02-27T18:25:20.000Z") },

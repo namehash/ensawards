@@ -76,7 +76,7 @@ export const ContributorsCard = ({
   gitHubTargetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
   sidebarVariant = false,
 }: ContributorsCardProps) => {
-  const ensNodeReactProviderOptions = useMemo(
+  const ensNodeProviderOptions = useMemo(
     () =>
       createEnsNodeProviderOptions({
         url: getENSNodeUrl(),
@@ -93,7 +93,7 @@ export const ContributorsCard = ({
   );
 
   return (
-    <EnsNodeProvider options={ensNodeReactProviderOptions}>
+    <EnsNodeProvider options={ensNodeProviderOptions}>
       <TooltipProvider delayDuration={250} skipDelayDuration={0}>
         <div
           className={cn(

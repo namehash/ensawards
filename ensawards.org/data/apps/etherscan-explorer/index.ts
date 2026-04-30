@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
+import { asInterpretedName } from "enssdk";
+
 import EtherscanProject from "../../projects/etherscan";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -16,7 +18,7 @@ const EtherscanExplorer: App = {
   socials: {
     website: new URL("https://etherscan.io"),
     twitter: new URL("https://x.com/etherscan"),
-    ens: "etherscan.eth",
+    ens: asInterpretedName("etherscan.eth"),
   },
   icon: EtherscanIcon,
   ogImagePath: "etherscan-explorer/og.png",

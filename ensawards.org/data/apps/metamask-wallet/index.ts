@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
+import { asInterpretedName } from "enssdk";
+
 import MetaMaskProject from "../../projects/metamask";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -16,7 +18,7 @@ const MetaMaskWallet: App = {
   socials: {
     website: new URL("https://metamask.io"),
     twitter: new URL("https://x.com/MetaMask"),
-    ens: "metamask.eth",
+    ens: asInterpretedName("metamask.eth"),
   },
   icon: MetaMaskIcon,
   ogImagePath: "metamask-wallet/og.png",

@@ -1,7 +1,7 @@
-import type { Name } from "enssdk";
+import type { InterpretedName } from "enssdk";
 
 export interface QuoteAuthorData {
-  name: Name;
+  name: InterpretedName;
   role: string;
   ensProfile: URL;
 }

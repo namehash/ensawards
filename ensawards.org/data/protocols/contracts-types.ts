@@ -1,5 +1,5 @@
 import type { Contribution } from "data/contributors/types.ts";
-import type { Name, NormalizedAddress } from "enssdk";
+import type { InterpretedName, NormalizedAddress } from "enssdk";
 import type { Chain } from "viem";
 
 import type { Protocol } from "./types.ts";
@@ -108,7 +108,7 @@ export interface ContractIdentityPrimaryNamed {
   /**
    * The result of an ENSIP-19 primary name resolution of `contract.address` on `contract.chain.id`.
    */
-  name: Name;
+  name: InterpretedName;
 
   /**
    * The result of an ENS resolution of the subset of the ENS profile for `name` covered by
@@ -146,7 +146,7 @@ export interface ContractIdentityForwardNamed {
   /**
    * The ENS name that resolves to `contract.address` for the cointype associated with `contract.chain.id`.
    */
-  name: Name;
+  name: InterpretedName;
 
   /**
    * The result of an ENS resolution of the subset of the ENS profile for `name` covered by

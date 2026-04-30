@@ -1,6 +1,7 @@
 import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals";
+import { type Address } from "enssdk";
 import { type ReactNode, useEffect, useState } from "react";
-import { type Address, namehash } from "viem";
+import { namehash } from "viem";
 
 import { useRegistrarActions } from "@ensnode/ensnode-react";
 import {

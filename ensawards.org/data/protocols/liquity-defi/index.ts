@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import LiquityProject from "../../projects/liquity";
 import { defineProtocol } from "../registry.ts";
 import { type DeFiProtocol, DeFiProtocolIds, ProtocolTypes } from "../types.ts";
@@ -17,7 +19,7 @@ const LiquityDeFi: DeFiProtocol = {
   socials: {
     website: new URL("https://www.liquity.org"),
     twitter: new URL("https://x.com/LiquityProtocol"),
-    ens: "liquity-protocol.eth",
+    ens: asInterpretedName("liquity-protocol.eth"),
   },
   ogImagePath: "liquity-defi/og.png",
   twitterOgImagePath: "liquity-defi/twitter-og.png",

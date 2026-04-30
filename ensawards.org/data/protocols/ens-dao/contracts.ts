@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -20,7 +21,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ENSToken",
       },
-      name: "token.ensdao.eth",
+      name: asInterpretedName("token.ensdao.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
@@ -35,7 +36,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TokenLock",
       },
-      name: "tokenlock.ensdao.eth",
+      name: asInterpretedName("tokenlock.ensdao.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
@@ -50,7 +51,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "ENSGovernor",
       },
-      name: "governor.ensdao.eth",
+      name: asInterpretedName("governor.ensdao.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
@@ -65,7 +66,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "TimelockController",
       },
-      name: "wallet.ensdao.eth",
+      name: asInterpretedName("wallet.ensdao.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
@@ -80,7 +81,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "SafeProxy",
       },
-      name: "twap.ensdao.eth",
+      name: asInterpretedName("twap.ensdao.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
@@ -95,7 +96,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "Veto",
       },
-      name: "veto.ensdao.eth",
+      name: asInterpretedName("veto.ensdao.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },
@@ -110,7 +111,7 @@ const contracts: Contract[] = [
         chain: mainnet,
         codeName: "GnosisSafeProxy",
       },
-      name: "endowment.ensdao.eth",
+      name: asInterpretedName("endowment.ensdao.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-10-14T11:30:00.000Z") },

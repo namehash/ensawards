@@ -5,7 +5,6 @@ import {
   type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
   ReferralProgramEditionStatuses,
-  type ReferralProgramEditionSummary,
   type ReferralProgramEditionSummaryPieSplit,
   type ReferralProgramEditionSummaryRevShareCap,
   type ReferralProgramRulesPieSplit,
@@ -13,7 +12,7 @@ import {
   type ReferrerLeaderboardPagePieSplit,
 } from "@namehash/ens-referrals";
 
-import { CurrencyIds } from "@ensnode/ensnode-sdk";
+import { CurrencyIds, parseUsdc } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import type { DisplayReferrerLeaderboardPageProps } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage";
@@ -54,7 +53,7 @@ const fetchErrorProps = {
 
 const mockPieSplitRules = {
   awardModel: ReferralProgramAwardModels.PieSplit,
-  awardPool: { currency: CurrencyIds.USDC, amount: 10000000000n },
+  awardPool: parseUsdc("10000"),
   maxQualifiedReferrers: 10,
   startTime: 1764547200,
   endTime: 1767225599,
@@ -99,13 +98,13 @@ const mockEditionSummaryPieSplit = {
   rules: mockPieSplitRules,
 } as const satisfies ReferralProgramEditionSummaryPieSplit;
 
-const mockDisqualificationAction: AdminActionDisqualification = {
+const mockDisqualification: AdminActionDisqualification = {
   actionType: AdminActionTypes.Disqualification,
   referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
   reason: "Mock longer disqualification text",
 };
 
-const mockDisqualificationWarningAction: AdminActionWarning = {
+const mockWarning: AdminActionWarning = {
   actionType: AdminActionTypes.Warning,
   referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
   reason: "Mock longer warning text placeholder",
@@ -113,10 +112,10 @@ const mockDisqualificationWarningAction: AdminActionWarning = {
 
 const mockRevShareCapRules = {
   awardModel: ReferralProgramAwardModels.RevShareCap,
-  awardPool: { currency: CurrencyIds.USDC, amount: 10000000000n },
-  minBaseRevenueContribution: { currency: CurrencyIds.USDC, amount: 5000000000n },
+  awardPool: parseUsdc("10000"),
+  minBaseRevenueContribution: parseUsdc("500"),
   maxBaseRevenueShare: 0.5,
-  baseAnnualRevenueContribution: { currency: CurrencyIds.USDC, amount: 5000000n },
+  baseAnnualRevenueContribution: parseUsdc("5"),
   startTime: 1764547200,
   endTime: 1767225599,
   subregistryId: {
@@ -124,7 +123,7 @@ const mockRevShareCapRules = {
     address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
   },
   rulesUrl: new URL("https://example.com/rules"),
-  adminActions: [mockDisqualificationAction, mockDisqualificationWarningAction],
+  adminActions: [mockDisqualification, mockWarning],
   areAwardsDistributed: false,
 } as const satisfies ReferralProgramRulesRevShareCap;
 
@@ -134,7 +133,7 @@ const mockEditionSummaryRevShareCap = {
   displayName: "April 2026 Edition",
   status: ReferralProgramEditionStatuses.Active,
   rules: mockRevShareCapRules,
-  awardPoolRemaining: { currency: CurrencyIds.USDC, amount: 8715625715n },
+  awardPoolRemaining: parseUsdc("8715.625715"),
 } as const satisfies ReferralProgramEditionSummaryRevShareCap;
 
 export const mockReferrersLeaderboardData = new Map<
@@ -182,7 +181,7 @@ export const mockReferrersLeaderboardData = new Map<
                 finalScoreBoost: 0.111111111111111,
                 finalScore: 0.803246143670656,
                 awardPoolShare: 0.0276828248101365,
-                awardPoolApproxValue: { currency: CurrencyIds.USDC, amount: 3276828248n },
+                awardPoolApproxValue: parseUsdc("3276.828248"),
                 totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
               },
               {
@@ -195,7 +194,7 @@ export const mockReferrersLeaderboardData = new Map<
                 finalScoreBoost: 0,
                 finalScore: 0.479133726222989,
                 awardPoolShare: 0.01651271544616,
-                awardPoolApproxValue: { currency: CurrencyIds.USDC, amount: 165127154n },
+                awardPoolApproxValue: parseUsdc("165.127154"),
                 totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
               },
               {
@@ -208,7 +207,7 @@ export const mockReferrersLeaderboardData = new Map<
                 finalScoreBoost: 0,
                 finalScore: 0.410686051048276,
                 awardPoolShare: 0,
-                awardPoolApproxValue: { currency: CurrencyIds.USDC, amount: 0n },
+                awardPoolApproxValue: parseUsdc("0"),
                 totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
               },
               {
@@ -221,7 +220,7 @@ export const mockReferrersLeaderboardData = new Map<
                 finalScoreBoost: 0,
                 finalScore: 0.383306980978391,
                 awardPoolShare: 0,
-                awardPoolApproxValue: { currency: CurrencyIds.USDC, amount: 0n },
+                awardPoolApproxValue: parseUsdc("0"),
                 totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
               },
             ],
@@ -264,7 +263,7 @@ export const mockReferrersLeaderboardData = new Map<
             aggregatedMetrics: {
               grandTotalReferrals: 0,
               grandTotalIncrementalDuration: 0,
-              awardPoolRemaining: { currency: CurrencyIds.USDC, amount: 10000000000n },
+              awardPoolRemaining: parseUsdc("10000"),
               grandTotalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
             },
             pageContext: {
@@ -312,20 +311,11 @@ export const mockReferrersLeaderboardData = new Map<
                   currency: CurrencyIds.ETH,
                   amount: 11762726770456096320n,
                 },
-                totalBaseRevenueContribution: {
-                  currency: CurrencyIds.USDC,
-                  amount: 3552409862n,
-                },
+                totalBaseRevenueContribution: parseUsdc("3552.409862"),
                 rank: 1,
                 isQualified: true,
-                uncappedAward: {
-                  currency: CurrencyIds.USDC,
-                  amount: 1776204931n,
-                },
-                cappedAward: {
-                  currency: CurrencyIds.USDC,
-                  amount: 1776204010n,
-                },
+                uncappedAward: parseUsdc("1776.204931"),
+                cappedAward: parseUsdc("1776.20401"),
                 adminAction: null,
               },
               {
@@ -336,21 +326,12 @@ export const mockReferrersLeaderboardData = new Map<
                   currency: CurrencyIds.ETH,
                   amount: 5177998061608530459n,
                 },
-                totalBaseRevenueContribution: {
-                  currency: CurrencyIds.USDC,
-                  amount: 2452384374n,
-                },
+                totalBaseRevenueContribution: parseUsdc("2452.384374"),
                 rank: 2,
                 isQualified: false,
-                uncappedAward: {
-                  currency: CurrencyIds.USDC,
-                  amount: 1226192187n,
-                },
-                cappedAward: {
-                  currency: CurrencyIds.USDC,
-                  amount: 1226192099n,
-                },
-                adminAction: mockDisqualificationAction,
+                uncappedAward: parseUsdc("1226.192187"),
+                cappedAward: parseUsdc("1226.192099"),
+                adminAction: mockDisqualification,
               },
               {
                 referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
@@ -360,21 +341,12 @@ export const mockReferrersLeaderboardData = new Map<
                   currency: CurrencyIds.ETH,
                   amount: 90671049875579170n,
                 },
-                totalBaseRevenueContribution: {
-                  currency: CurrencyIds.USDC,
-                  amount: 20397407n,
-                },
+                totalBaseRevenueContribution: parseUsdc("20.397407"),
                 rank: 4,
                 isQualified: false,
-                uncappedAward: {
-                  currency: CurrencyIds.USDC,
-                  amount: 10198703n,
-                },
-                cappedAward: {
-                  currency: CurrencyIds.USDC,
-                  amount: 0n,
-                },
-                adminAction: mockDisqualificationWarningAction,
+                uncappedAward: parseUsdc("10.198703"),
+                cappedAward: parseUsdc("0"),
+                adminAction: mockWarning,
               },
               {
                 referrer: "0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",
@@ -384,20 +356,11 @@ export const mockReferrersLeaderboardData = new Map<
                   currency: CurrencyIds.ETH,
                   amount: 190714270880730n,
                 },
-                totalBaseRevenueContribution: {
-                  currency: CurrencyIds.USDC,
-                  amount: 396426n,
-                },
+                totalBaseRevenueContribution: parseUsdc("0.396426"),
                 rank: 10,
                 isQualified: false,
-                uncappedAward: {
-                  currency: CurrencyIds.USDC,
-                  amount: 198213n,
-                },
-                cappedAward: {
-                  currency: CurrencyIds.USDC,
-                  amount: 0n,
-                },
+                uncappedAward: parseUsdc("0.198213"),
+                cappedAward: parseUsdc("0"),
                 adminAction: null,
               },
             ],
@@ -408,10 +371,7 @@ export const mockReferrersLeaderboardData = new Map<
                 currency: CurrencyIds.ETH,
                 amount: 17118804944747959622n,
               },
-              awardPoolRemaining: {
-                currency: CurrencyIds.USDC,
-                amount: 6997603891n,
-              },
+              awardPoolRemaining: parseUsdc("6997.603891"),
             },
             pageContext: {
               page: 1,

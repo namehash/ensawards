@@ -103,10 +103,11 @@ export function ReferralLinkForm() {
     }
 
     // Check if the input is normalizable to an interpreted ENS name
-    let interpretedName: InterpretedName;
+    const rawRecipientName = recipientInput;
+    let recipientName: InterpretedName;
 
     try {
-      interpretedName = normalizeName(recipientInput);
+      recipientName = normalizeName(rawRecipientName);
     } catch (error) {
       // Display a generic message (ignore the details on purpose)
       setInputError("Invalid name or address");
@@ -114,9 +115,9 @@ export function ReferralLinkForm() {
       return;
     }
 
-    // The name was normalizable to `interpretedName` so proceed with resolution
+    // `rawRecipientName` was normalizable to an `InterpretedName` so proceed with resolution
     try {
-      const resolvedAddress = await resolveEthAddress(interpretedName);
+      const resolvedAddress = await resolveEthAddress(recipientName);
 
       if (resolvedAddress === null) {
         setInputError("No Ethereum Mainnet address configured for this name.");
@@ -161,7 +162,7 @@ export function ReferralLinkForm() {
   return (
     <div
       className={cn(
-        "w-full min-w-1/2 max-w-[600px] h-fit gap-12 p-5 pt-8 sm:p-8 box-border bg-neutral-50 rounded-2xl",
+        "w-full min-w-1/2 max-w-[calc(100vw-40px)] sm:max-w-[600px] h-fit gap-12 p-5 pt-8 sm:p-8 box-border bg-neutral-50 rounded-2xl",
         verticalFlex,
       )}
     >

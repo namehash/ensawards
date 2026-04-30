@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import SSVNetworkProject from "../../projects/ssvnetwork";
 import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const SSVNetworkDao: DAOProtocol = {
   socials: {
     website: new URL("https://ssv.network"),
     twitter: new URL("https://x.com/ssv_network"),
-    ens: "ssvnetwork.eth",
+    ens: asInterpretedName("ssvnetwork.eth"),
   },
   ogImagePath: "ssvnetwork-dao/og.png",
   twitterOgImagePath: "ssvnetwork-dao/twitter-og.png",

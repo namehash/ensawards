@@ -1,21 +1,15 @@
-import type { Name } from "enssdk";
+import type { EnsProfileForContract } from "data/protocols/contracts-types.ts";
 import { BookOpen, Braces, CircleUser, ShieldCheck } from "lucide-react";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
-import type { EnsProfileForContract } from "../../../data/protocols/contracts-types.ts";
-
 export interface SmartContractMetadataProps {
-  name: Name;
   metadata?: EnsProfileForContract;
 }
 
-const getDeactivatedMetadataFieldMessage = (metadataFieldName: string) =>
-  `The "${metadataFieldName}" field has not been defined for this contract.`;
-
-export function SmartContractMetadata({ metadata, name }: SmartContractMetadataProps) {
+export function SmartContractMetadata({ metadata }: SmartContractMetadataProps) {
   return (
     <TooltipProvider delayDuration={200} skipDelayDuration={0}>
       <div className="flex flex-row flex-nowrap justify-start items-center gap-4 sm:pt-0.5 box-border">
@@ -30,14 +24,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               </div>
               <div className="flex flex-col gap-1 justify-start items-start">
                 <p>Links to the primary documentation for the smart contract.</p>
-                <a
-                  className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-                  href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Learn more
-                </a>
+                <LearnMoreLink />
               </div>
             </div>
           }
@@ -60,14 +47,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               </div>
               <div className="flex flex-col gap-1 justify-start items-start">
                 <p>Supports decentralized contract verification.</p>
-                <a
-                  className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-                  href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Learn more
-                </a>
+                <LearnMoreLink />
               </div>
             </div>
           }
@@ -95,14 +75,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
                   Customize an avatar image for the contract that could appear in apps such as
                   wallets and block explorers.
                 </p>
-                <a
-                  className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-                  href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Learn more
-                </a>
+                <LearnMoreLink />
               </div>
             </div>
           }
@@ -125,14 +98,7 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
               </div>
               <div className="flex flex-col gap-1 justify-start items-start">
                 <p>Links to security audits performed on the contract.</p>
-                <a
-                  className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
-                  href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Learn more
-                </a>
+                <LearnMoreLink />
               </div>
             </div>
           }
@@ -148,3 +114,14 @@ export function SmartContractMetadata({ metadata, name }: SmartContractMetadataP
     </TooltipProvider>
   );
 }
+
+const LearnMoreLink = () => (
+  <a
+    className="text-blue-500 whitespace-nowrap hover:underline hover:underline-offset-[25%]"
+    href="https://discuss.ens.domains/t/ensip-proposal-contract-metadata-standard-and-text-records/21397"
+    target="_blank"
+    rel="noreferrer"
+  >
+    Learn more
+  </a>
+);
