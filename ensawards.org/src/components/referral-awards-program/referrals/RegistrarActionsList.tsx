@@ -6,7 +6,7 @@ import {
   RegistrarActionCardMemo,
   useNow,
 } from "@namehash/namehash-ui";
-import type { Address } from "enssdk";
+import type { NormalizedAddress } from "enssdk";
 
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type NamedRegistrarAction } from "@ensnode/ensnode-sdk";
@@ -67,7 +67,7 @@ export function DisplayRegistrarActionsList({
               },
               referrer: {
                 isExternal: false,
-                getLink: (address: Address, _namespaceId: ENSNamespaceId) =>
+                getLink: (address: NormalizedAddress, _namespaceId: ENSNamespaceId) =>
                   new URL(getEnsAdvocateDetailsRelativePath(address), getEnsAwardsBaseUrl()),
               },
             }}

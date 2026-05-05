@@ -1,10 +1,12 @@
 import { getChainName } from "@namehash/namehash-ui";
 import {
+  asInterpretedName,
   type ChainId,
   evmChainIdToCoinType,
   isInterpretedName,
   isNormalizedAddress,
   type NormalizedAddress,
+  reinterpretName,
   stringifyAccountId,
 } from "enssdk";
 import { isAddressEqual } from "viem";
@@ -117,9 +119,16 @@ const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentit
   );
 
   // If contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed,
-  // expect response to match its cached name
+  // expect response to be non-null and match its cached name
   if (contractsCachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed) {
-    expect(name).toEqual(contractsCachedIdentity.name);
+    if (name === null) {
+      throw new Error(
+        `Primary named contract with address=${contractsCachedIdentity.contract.address} has no primary name on-chain.`,
+      );
+    }
+
+    const reinterpretedName = reinterpretName(asInterpretedName(name));
+    expect(reinterpretedName).toEqual(contractsCachedIdentity.name);
   }
 
   // For forward named and unnamed contracts expect the response value to be null

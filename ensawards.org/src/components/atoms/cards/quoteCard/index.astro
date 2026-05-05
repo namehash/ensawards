@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import { NameDisplay } from "@namehash/namehash-ui";
 
 import type { QuoteCardData } from "./types";
 
@@ -33,7 +34,7 @@ const { quote, author, avatarPath }: QuoteCardData = Astro.props;
       />
       <div class="flex flex-col justify-start items-start gap-0">
         <p class="text-base leading-normal font-semibold text-black">
-          {author.name}
+          <NameDisplay name={author.name} />
         </p>
         <p class="text-sm leading-normal font-medium text-muted-foreground">
           {author.role}

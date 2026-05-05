@@ -1,5 +1,5 @@
 import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals";
-import { type Address } from "enssdk";
+import { type NormalizedAddress } from "enssdk";
 import { type ReactNode, useEffect, useState } from "react";
 import { namehash } from "viem";
 
@@ -21,7 +21,7 @@ import { fetchReferralProgramEditionSummaries } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 interface FetchAndDisplayAdvocateReferralsProps {
-  address: Address;
+  address: NormalizedAddress;
   recordsPerPage: number;
 }
 export function FetchAndDisplayAdvocateReferrals({

@@ -1,6 +1,6 @@
 import { navigate } from "astro:transitions/client";
 import { useIsMobile } from "@namehash/namehash-ui";
-import { type Address } from "enssdk";
+import { toNormalizedAddress } from "enssdk";
 import React, { type ChangeEvent, useState } from "react";
 import { isAddress } from "viem";
 
@@ -9,7 +9,7 @@ import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 export function AdvocateSearchForm() {
-  const [rawInputAddress, setRawInputAddress] = useState<Address | string>("");
+  const [rawInputAddress, setRawInputAddress] = useState<string>("");
   const [inputErrorMessage, setInputErrorMessage] = useState("");
   const isMobile = useIsMobile();
 
@@ -23,8 +23,10 @@ export function AdvocateSearchForm() {
       return;
     }
 
-    //otherwise route to an advocate's profile
-    navigate(`/advocate/${rawInputAddress}`);
+    // otherwise, guarantee that the input address is normalized
+    // and route to an advocate's profile
+    const normalizedAddress = toNormalizedAddress(rawInputAddress);
+    navigate(`/advocate/${normalizedAddress}`);
   };
 
   const handleRawInputNameChange = (e: ChangeEvent<HTMLInputElement>) => {

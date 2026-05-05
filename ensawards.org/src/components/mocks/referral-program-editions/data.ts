@@ -5,7 +5,7 @@ import {
   type ReferralProgramEditionSummaryRevShareCap,
 } from "@namehash/ens-referrals";
 
-import { parseUsdc } from "@ensnode/ensnode-sdk";
+import { parseTimestamp, parseUsdc } from "@ensnode/ensnode-sdk";
 
 export const mockReferralProgramEditionSummariesList: (
   | ReferralProgramEditionSummaryPieSplit
@@ -20,8 +20,8 @@ export const mockReferralProgramEditionSummariesList: (
       awardModel: ReferralProgramAwardModels.PieSplit,
       awardPool: parseUsdc("10000"),
       maxQualifiedReferrers: 10,
-      startTime: 1764547200,
-      endTime: 1767225599,
+      startTime: parseTimestamp("2025-12-01T00:00:00.000Z"),
+      endTime: parseTimestamp("2025-12-31T23:59:59.000Z"),
       subregistryId: {
         chainId: 1,
         address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
@@ -41,8 +41,8 @@ export const mockReferralProgramEditionSummariesList: (
       minBaseRevenueContribution: parseUsdc("500"),
       maxBaseRevenueShare: 0.5,
       baseAnnualRevenueContribution: parseUsdc("5"),
-      startTime: 1772323200,
-      endTime: 1775001599,
+      startTime: parseTimestamp("2026-03-01T00:00:00.000Z"),
+      endTime: parseTimestamp("2026-03-31T23:59:59.000Z"),
       subregistryId: {
         chainId: 1,
         address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
@@ -64,8 +64,8 @@ export const mockReferralProgramEditionSummariesList: (
       minBaseRevenueContribution: parseUsdc("500"),
       maxBaseRevenueShare: 0.5,
       baseAnnualRevenueContribution: parseUsdc("5"),
-      startTime: 1841467131,
-      endTime: 1844145531,
+      startTime: parseTimestamp("2028-05-09T06:38:51.000Z"),
+      endTime: parseTimestamp("2028-06-09T06:38:51.000Z"),
       subregistryId: {
         chainId: 1,
         address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",

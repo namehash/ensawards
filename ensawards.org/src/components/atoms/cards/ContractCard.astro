@@ -10,6 +10,7 @@ import { SmartContractMetadata } from "@/components/atoms/SmartContractMetadata"
 import { breakLongWords } from "@/utils/textModifications";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { getAllProtocolContracts } from "data/protocols/utils.ts";
+import { NameDisplay } from "@namehash/namehash-ui";
 
 export interface ContractCardProps {
   contract: Contract;
@@ -123,7 +124,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
               target="_blank"
               rel="noreferrer"
               class="max-sm:hidden text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-              {contract.cachedIdentity.name}
+              <NameDisplay name={contract.cachedIdentity.name} />
             </a>
             <EnsManagerAppLink
               client:load
@@ -134,7 +135,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
             />
           </div>
           <div class="sm:hidden flex flex-col justify-start items-start gap-0 max-sm:min-w-[105px]">
-            {ensNameForMobileDisplay.map((word, idx) => {
+            {ensNameForMobileDisplay.map((namePart, idx) => {
               const nameLinkHref = `https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`;
               const nameLinkStyles =
                 "text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]";
@@ -146,7 +147,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
                     target="_blank"
                     rel="noreferrer"
                     class={nameLinkStyles}>
-                    {word}
+                    <NameDisplay name={namePart} />
                   </a>
                 );
               }
@@ -158,7 +159,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
                     target="_blank"
                     rel="noreferrer"
                     class={nameLinkStyles}>
-                    {word}
+                    <NameDisplay name={namePart} />
                   </a>
                   <EnsManagerAppLink
                     client:load

@@ -12,7 +12,7 @@ import {
   type ReferrerLeaderboardPagePieSplit,
 } from "@namehash/ens-referrals";
 
-import { CurrencyIds, parseUsdc } from "@ensnode/ensnode-sdk";
+import { CurrencyIds, parseTimestamp, parseUsdc } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import type { DisplayReferrerLeaderboardPageProps } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage";
@@ -55,8 +55,8 @@ const mockPieSplitRules = {
   awardModel: ReferralProgramAwardModels.PieSplit,
   awardPool: parseUsdc("10000"),
   maxQualifiedReferrers: 10,
-  startTime: 1764547200,
-  endTime: 1767225599,
+  startTime: parseTimestamp("2025-12-01T00:00:00.000Z"),
+  endTime: parseTimestamp("2025-12-31T23:59:59.000Z"),
   subregistryId: {
     chainId: 1,
     address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
@@ -87,7 +87,7 @@ const emptyPieSplitLeaderboardData = {
     endIndex: undefined,
   },
   status: ReferralProgramEditionStatuses.Active,
-  accurateAsOf: 1764091210,
+  accurateAsOf: parseTimestamp("2025-11-25T17:20:10.000Z"),
 } as const satisfies ReferrerLeaderboardPagePieSplit;
 
 const mockEditionSummaryPieSplit = {
@@ -116,8 +116,8 @@ const mockRevShareCapRules = {
   minBaseRevenueContribution: parseUsdc("500"),
   maxBaseRevenueShare: 0.5,
   baseAnnualRevenueContribution: parseUsdc("5"),
-  startTime: 1764547200,
-  endTime: 1767225599,
+  startTime: parseTimestamp("2025-12-01T00:00:00.000Z"),
+  endTime: parseTimestamp("2025-12-31T23:59:59.000Z"),
   subregistryId: {
     chainId: 1,
     address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
@@ -242,7 +242,7 @@ export const mockReferrersLeaderboardData = new Map<
               endIndex: 3,
             },
             status: ReferralProgramEditionStatuses.Active,
-            accurateAsOf: 1764580368,
+            accurateAsOf: parseTimestamp("2025-12-01T09:12:48.000Z"),
           },
           isLoading: false,
           editionSummary: mockEditionSummaryPieSplit,
@@ -277,7 +277,7 @@ export const mockReferrersLeaderboardData = new Map<
               endIndex: undefined,
             },
             status: ReferralProgramEditionStatuses.Active,
-            accurateAsOf: 1764091210,
+            accurateAsOf: parseTimestamp("2025-11-25T17:20:10.000Z"),
           },
           isLoading: false,
           editionSummary: mockEditionSummaryRevShareCap,
@@ -384,7 +384,7 @@ export const mockReferrersLeaderboardData = new Map<
               endIndex: undefined,
             },
             status: ReferralProgramEditionStatuses.Active,
-            accurateAsOf: 1773069047,
+            accurateAsOf: parseTimestamp("2026-03-09T15:10:47.000Z"),
           },
           isLoading: false,
           editionSummary: mockEditionSummaryRevShareCap,

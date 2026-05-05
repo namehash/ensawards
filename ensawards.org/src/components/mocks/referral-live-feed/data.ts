@@ -7,7 +7,7 @@ import type {
   RegistrarActionsResponseError,
   RegistrarActionsResponseOk,
 } from "@ensnode/ensnode-sdk";
-import { RegistrarActionsResponseCodes } from "@ensnode/ensnode-sdk";
+import { parseTimestamp, RegistrarActionsResponseCodes } from "@ensnode/ensnode-sdk";
 
 export const registrationWithReferral = {
   action: {
@@ -24,7 +24,7 @@ export const registrationWithReferral = {
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
       node: "0x5bcdea30f2d591f5357045b89d3470d4ba4da00fd344a32fe323ab6fa2c0f343",
-      expiresAt: 1764516816,
+      expiresAt: parseTimestamp("2025-11-30T15:33:36.000Z"),
     },
     pricing: {
       baseCost: {
@@ -46,7 +46,7 @@ export const registrationWithReferral = {
     },
     block: {
       number: 9545322,
-      timestamp: 1762097616,
+      timestamp: parseTimestamp("2025-11-02T15:33:36.000Z"),
     },
     transactionHash: "0x8b3316e97a92ea0f676943a206ef1722b90b279c0a769456a89b2afe37f205fa",
     eventIds: [
@@ -72,7 +72,7 @@ export const renewalWithNoReferral = {
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
       node: "0xa44e5586236b99ea763394a6edbc5ae553a0fd62e138534a96313d4a18b8f28d",
-      expiresAt: 1803205884,
+      expiresAt: parseTimestamp("2027-02-21T10:31:24.000Z"),
     },
     pricing: {
       baseCost: { currency: "ETH", amount: 8732876712338n },
@@ -80,7 +80,7 @@ export const renewalWithNoReferral = {
       total: { currency: "ETH", amount: 8732876712338n },
     },
     referral: { encodedReferrer: null, decodedReferrer: null },
-    block: { number: 9621987, timestamp: 1763045208 },
+    block: { number: 9621987, timestamp: parseTimestamp("2025-11-13T14:46:48.000Z") },
     transactionHash: "0x0915ea32f870485012d9b0b396612154b31df4493f17ca3d21f62f3358a22c9f",
     eventIds: [
       "176304520800000000111551110000000009621987000000000000011350000000000000258",
@@ -105,7 +105,7 @@ export const registrationWithNoReferralAndEncodedLabelHashes = {
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
       node: "0xf1c0e6aa95596e0199f3a6341cdbe055b64ba6041662465e577ed80c4dfac2af",
-      expiresAt: 1793883012,
+      expiresAt: parseTimestamp("2026-11-05T12:50:12.000Z"),
     },
     pricing: {
       baseCost: null,
@@ -118,7 +118,7 @@ export const registrationWithNoReferralAndEncodedLabelHashes = {
     },
     block: {
       number: 9566045,
-      timestamp: 1762347012,
+      timestamp: parseTimestamp("2025-11-05T12:50:12.000Z"),
     },
     transactionHash: "0xa71cf08102ae1f634b22349dac8dc158fe96ae74008b5e24cfcda8587e056d53",
     eventIds: ["176234701200000000111551110000000009566045000000000000014150000000000000198"],
@@ -142,7 +142,7 @@ export const registrationWithZeroEncodedReferrer = {
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
       node: "0xdd274f7805db064520c39d0776602503c29720f88db0e9ca39b98196dcf4c337",
-      expiresAt: 1794580884,
+      expiresAt: parseTimestamp("2026-11-13T14:41:24.000Z"),
     },
     pricing: {
       baseCost: { currency: "ETH", amount: 3125000000003490n },
@@ -153,7 +153,7 @@ export const registrationWithZeroEncodedReferrer = {
       encodedReferrer: "0x0000000000000000000000000000000000000000000000000000000000000000",
       decodedReferrer: "0x0000000000000000000000000000000000000000",
     },
-    block: { number: 9621960, timestamp: 1763044884 },
+    block: { number: 9621960, timestamp: parseTimestamp("2025-11-13T14:41:24.000Z") },
     transactionHash: "0x32391ebba1a90dc02920acafcbd0993aafcb8f0167a16a08efd6886f0e21e433",
     eventIds: [
       "176304488400000000111551110000000009621960000000000000003350000000000000027",
@@ -178,7 +178,7 @@ export const registrationWithReferrerNotMatchingENSHolidayAwardsFormat = {
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
       node: "0x9d5ea970c67219a0c594c0e95bbd51861c40d3383776edf17b7db4cbbd2ad6b9",
-      expiresAt: 1794588924,
+      expiresAt: parseTimestamp("2026-11-13T16:55:24.000Z"),
     },
     pricing: {
       baseCost: {
@@ -200,7 +200,7 @@ export const registrationWithReferrerNotMatchingENSHolidayAwardsFormat = {
     },
     block: {
       number: 9622628,
-      timestamp: 1763052924,
+      timestamp: parseTimestamp("2025-11-13T16:55:24.000Z"),
     },
     transactionHash: "0xa93e18582be652506e24ff16c8cc2dca0377b907ca9aab9236d2eba0d3096cfb",
     eventIds: [
@@ -272,7 +272,7 @@ export const variants: Map<RegistrarActionsVariants, RegistrarActionsResponse | 
         page: 1,
         recordsPerPage: 8,
       },
-      accurateAsOf: 1763052924,
+      accurateAsOf: parseTimestamp("2025-11-13T16:55:24.000Z"),
     } satisfies RegistrarActionsResponseOk,
   ],
 ]);

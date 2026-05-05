@@ -1,6 +1,6 @@
 import { type ReferrerRank } from "@namehash/ens-referrals";
 import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
-import type { Address } from "enssdk";
+import type { NormalizedAddress } from "enssdk";
 
 import { getENSRootChainId } from "@ensnode/datasources";
 import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
@@ -25,7 +25,7 @@ export const ethFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 3,
 });
 
-export const getAdvocateDetailsUrl = (referrerAddress: Address) =>
+export const getAdvocateDetailsUrl = (referrerAddress: NormalizedAddress) =>
   new URL(getEnsAdvocateDetailsRelativePath(referrerAddress), getEnsAwardsBaseUrl());
 
 export interface RankProps {
@@ -96,7 +96,7 @@ export const RankIconLoading = ({
 );
 
 interface ReferrerCardHeaderProps {
-  referrer: Address;
+  referrer: NormalizedAddress;
   rank: ReferrerRank;
   rankTooltipText: string;
   isQualified: boolean;

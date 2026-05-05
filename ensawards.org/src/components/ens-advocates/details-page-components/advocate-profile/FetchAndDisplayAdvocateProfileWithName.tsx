@@ -1,4 +1,4 @@
-import type { Address, InterpretedName } from "enssdk";
+import type { InterpretedName, NormalizedAddress } from "enssdk";
 
 import { ASSUME_IMMUTABLE_QUERY, useRecords } from "@ensnode/ensnode-react";
 import { type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
@@ -10,7 +10,7 @@ import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-pa
 const HeaderPanelTextRecords = ["avatar", "header"];
 
 export interface FetchAndDisplayAdvocateProfileWithNameProps {
-  address: Address;
+  address: NormalizedAddress;
   name: InterpretedName;
 }
 

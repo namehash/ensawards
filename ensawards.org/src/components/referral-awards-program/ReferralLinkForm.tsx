@@ -1,6 +1,6 @@
 import { buildEnsReferralUrl } from "@namehash/ens-referrals";
 import { CopyButton, useIsMobile } from "@namehash/namehash-ui";
-import { type InterpretedName, normalizeName } from "enssdk";
+import { type InterpretedName, normalizeName, toNormalizedAddress } from "enssdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
 import { isAddress } from "viem";
@@ -92,7 +92,7 @@ export function ReferralLinkForm() {
     // Check if the input is a valid address
     if (isAddress(recipientInput, { strict: false })) {
       // Interpret the input as an address to generate the referral link
-      setGeneratedLink(buildEnsReferralUrl(recipientInput).href);
+      setGeneratedLink(buildEnsReferralUrl(toNormalizedAddress(recipientInput)).href);
       setSuccessfulFormSubmit(true);
 
       // Reset validation errors on successful validation
@@ -115,7 +115,8 @@ export function ReferralLinkForm() {
       return;
     }
 
-    // `rawRecipientName` was normalizable to an `InterpretedName` so proceed with resolution
+    // `rawRecipientName` was normalizable to a normalized name (which by definition is an `InterpretedName`)
+    // so proceed with resolution
     try {
       const resolvedAddress = await resolveEthAddress(recipientName);
 
@@ -125,6 +126,8 @@ export function ReferralLinkForm() {
         return;
       }
 
+      // All addresses returned by ENSNode APIs are guaranteed to always be `NormalizedAddress`,
+      // so there is no need to call `toNormalizedAddress` here
       setGeneratedLink(buildEnsReferralUrl(resolvedAddress).href);
 
       setSuccessfulFormSubmit(true);

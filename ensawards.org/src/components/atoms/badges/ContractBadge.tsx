@@ -1,3 +1,4 @@
+import { NameDisplay } from "@namehash/namehash-ui";
 import {
   type ContractResolutionStatusId,
   ContractResolutionStatusIds,
@@ -15,13 +16,33 @@ export interface ContractBadgeProps {
 
 const getTooltipContent = (
   resolutionStatus: ContractResolutionStatusId,
-  ensName?: InterpretedName,
+  name?: InterpretedName,
 ) => {
+  const unnamedContractContent = (
+    <p className="max-w-[275px]">
+      This contract is unnamed. It doesn’t have an{" "}
+      <a
+        className="text-blue-400 hover:underline hover:underline-offset-[25%]"
+        href="https://docs.ens.domains/web/reverse"
+        target="_blank"
+        rel="noreferrer"
+      >
+        ENS primary name
+      </a>{" "}
+      or any known “official” ENS name.
+    </p>
+  );
+
+  if (name === undefined) {
+    return unnamedContractContent;
+  }
+
   switch (resolutionStatus) {
     case ContractResolutionStatusIds.ForwardNamed:
       return (
         <p className="max-w-[275px]">
-          {ensName} successfully resolves to this contract, but this contract does not have an{" "}
+          <NameDisplay name={name} /> successfully resolves to this contract, but this contract does
+          not have an{" "}
           <a
             className="text-blue-400 hover:underline hover:underline-offset-[25%]"
             href="https://docs.ens.domains/web/reverse"
@@ -35,25 +56,12 @@ const getTooltipContent = (
       );
 
     case ContractResolutionStatusIds.Unnamed:
-      return (
-        <p className="max-w-[275px]">
-          This contract is unnamed. It doesn’t have an{" "}
-          <a
-            className="text-blue-400 hover:underline hover:underline-offset-[25%]"
-            href="https://docs.ens.domains/web/reverse"
-            target="_blank"
-            rel="noreferrer"
-          >
-            ENS primary name
-          </a>{" "}
-          or any known “official” ENS name.
-        </p>
-      );
+      return unnamedContractContent;
 
     case ContractResolutionStatusIds.PrimaryNamed:
       return (
         <p className="max-w-[275px]">
-          {ensName} is the{" "}
+          <NameDisplay name={name} /> is the{" "}
           <a
             className="text-blue-400 hover:underline hover:underline-offset-[25%]"
             href="https://docs.ens.domains/web/reverse"
