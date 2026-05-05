@@ -92,7 +92,7 @@ export type ContractResolutionStatusId =
  *
  * Invariants:
  * - `resolutionStatus` must be {@link ContractResolutionStatusIds.PrimaryNamed}.
- * - `name` must be a non-empty normalized ENS name.
+ * - `name` must be a non-empty interpreted ENS name.
  */
 export interface ContractIdentityPrimaryNamed {
   /**
@@ -130,7 +130,7 @@ export interface ContractIdentityPrimaryNamed {
  *
  * Invariants:
  * - `resolutionStatus` must be {@link ContractResolutionStatusIds.ForwardNamed}.
- * - `name` must be a non-empty normalized ENS name.
+ * - `name` must be a non-empty interpreted ENS name.
  */
 export interface ContractIdentityForwardNamed {
   /**
