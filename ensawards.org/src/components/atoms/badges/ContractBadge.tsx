@@ -18,27 +18,13 @@ const getTooltipContent = (
   resolutionStatus: ContractResolutionStatusId,
   name?: InterpretedName,
 ) => {
-  const unnamedContractContent = (
-    <p className="max-w-[275px]">
-      This contract is unnamed. It doesn’t have an{" "}
-      <a
-        className="text-blue-400 hover:underline hover:underline-offset-[25%]"
-        href="https://docs.ens.domains/web/reverse"
-        target="_blank"
-        rel="noreferrer"
-      >
-        ENS primary name
-      </a>{" "}
-      or any known “official” ENS name.
-    </p>
-  );
-
-  if (name === undefined) {
-    return unnamedContractContent;
-  }
-
   switch (resolutionStatus) {
     case ContractResolutionStatusIds.ForwardNamed:
+      if (name === undefined) {
+        throw new Error(
+          "Invariant(Contract): Contract with resolutionStatus of ForwardNamed must have a defined name.",
+        );
+      }
       return (
         <p className="max-w-[275px]">
           <NameDisplay name={name} /> successfully resolves to this contract, but this contract does
@@ -56,9 +42,27 @@ const getTooltipContent = (
       );
 
     case ContractResolutionStatusIds.Unnamed:
-      return unnamedContractContent;
+      return (
+        <p className="max-w-[275px]">
+          This contract is unnamed. It doesn’t have an{" "}
+          <a
+            className="text-blue-400 hover:underline hover:underline-offset-[25%]"
+            href="https://docs.ens.domains/web/reverse"
+            target="_blank"
+            rel="noreferrer"
+          >
+            ENS primary name
+          </a>{" "}
+          or any known “official” ENS name.
+        </p>
+      );
 
     case ContractResolutionStatusIds.PrimaryNamed:
+      if (name === undefined) {
+        throw new Error(
+          "Invariant(Contract): Contract with resolutionStatus of PrimaryNamed must have a defined name.",
+        );
+      }
       return (
         <p className="max-w-[275px]">
           <NameDisplay name={name} /> is the{" "}

@@ -11,6 +11,7 @@ import { breakLongWords } from "@/utils/textModifications";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { getAllProtocolContracts } from "data/protocols/utils.ts";
 import { NameDisplay } from "@namehash/namehash-ui";
+import { beautifyName } from "enssdk";
 
 export interface ContractCardProps {
   contract: Contract;
@@ -19,10 +20,11 @@ export interface ContractCardProps {
 const { contract }: ContractCardProps = Astro.props;
 
 // The fallback should never be used. Only introduced for type safety.
+// Apply beautification by hand to ensure correct display after breaking the name for mobile display.
 const ensNameForMobileDisplay =
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
-    ? breakLongWords(contract.cachedIdentity.name, /(\.)/, 25)
+    ? breakLongWords(beautifyName(contract.cachedIdentity.name), /(\.)/, 25)
     : ["unnamed contract"];
 
 const contractCodeNameForMobileDisplay = breakLongWords(
@@ -147,7 +149,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
                     target="_blank"
                     rel="noreferrer"
                     class={nameLinkStyles}>
-                    <NameDisplay name={namePart} />
+                    {namePart}
                   </a>
                 );
               }
@@ -159,7 +161,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
                     target="_blank"
                     rel="noreferrer"
                     class={nameLinkStyles}>
-                    <NameDisplay name={namePart} />
+                    {namePart}
                   </a>
                   <EnsManagerAppLink
                     client:load
