@@ -1,5 +1,6 @@
 import { AppTypes } from "data/apps/types.ts";
-import { BenchmarkResults } from "data/benchmarks/types.ts";
+import { APP_BENCHMARKS } from "data/benchmarks/index.ts";
+import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types.ts";
 import { calcEnsAwardsPoints, getAppBenchmarksByBestPractice } from "data/benchmarks/utils.ts";
 import { ProtocolTypes } from "data/protocols/types.ts";
 import { asEnsAwardsScore, type EnsAwardsScore } from "data/shared/ens-awards-score.ts";
@@ -103,28 +104,48 @@ export const formatBestPracticeType = (
 export const calcBestPracticeScore = (
   bestPractice: BestPracticeApp,
 ): EnsAwardsScore | undefined => {
-  let benchmarkedApps = 0;
+  let benchmarkedAcceptanceTests = 0;
   let bestPracticePoints = 0;
 
-  const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(bestPractice.bestPracticeSlug);
+  const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(
+    bestPractice.bestPracticeSlug,
+  ).flatMap((appBenchmark) => Object.values(appBenchmark));
 
-  for (const benchmark of bestPracticeBenchmarks) {
-    if (benchmark === undefined) {
+  for (const acceptanceTestBenchmark of bestPracticeBenchmarks) {
+    if (acceptanceTestBenchmark === undefined) {
       continue;
     }
 
-    benchmarkedApps += 1;
+    benchmarkedAcceptanceTests += 1;
 
-    bestPracticePoints += calcEnsAwardsPoints(benchmark);
+    bestPracticePoints += calcEnsAwardsPoints(acceptanceTestBenchmark);
   }
 
-  if (benchmarkedApps === 0) return undefined;
+  if (benchmarkedAcceptanceTests === 0) return undefined;
 
-  const score = Math.round((bestPracticePoints * 100) / benchmarkedApps);
+  const score = Math.round((bestPracticePoints * 100) / benchmarkedAcceptanceTests);
 
   return asEnsAwardsScore(score);
 };
 
+// TODO: How to define a passing app now? When it passes all acceptance tests? When it's ensawards score is at least 50? When it passes at least one of them?
+// For now, I chose the 1st option, but I'm open to changing that
+const isAppPassing = (appBenchmarks: AcceptanceTestBenchmarks): boolean => {
+  let allTestsPassed = true;
+
+  for (const acceptanceTestBenchmark of Object.values(appBenchmarks)) {
+    // Explicit acceptance of Pass & Partial Pass results
+    if (
+      acceptanceTestBenchmark === undefined ||
+      (acceptanceTestBenchmark.result !== BenchmarkResults.Pass &&
+        acceptanceTestBenchmark.result !== BenchmarkResults.PartialPass)
+    ) {
+      allTestsPassed = false;
+      break;
+    }
+  }
+  return allTestsPassed;
+};
 /**
  * Calculates how many apps passed our benchmark on this {@link BestPractice}.
  *
@@ -135,13 +156,8 @@ export const calcAppsPassed = (bestPractice: BestPracticeApp): number => {
 
   const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(bestPractice.bestPracticeSlug);
 
-  bestPracticeBenchmarks.forEach((benchmark) => {
-    // Explicit acceptance of Pass & Partial Pass results
-    if (
-      benchmark !== undefined &&
-      (benchmark.result === BenchmarkResults.Pass ||
-        benchmark.result === BenchmarkResults.PartialPass)
-    ) {
+  bestPracticeBenchmarks.forEach((acceptanceTestsBenchmarks) => {
+    if (isAppPassing(acceptanceTestsBenchmarks)) {
       appsPassed += 1;
     }
   });
@@ -182,4 +198,30 @@ export const formatBestPracticeTarget = (
   }
 
   return formattedTarget;
+};
+
+// TODO: Improve naming. Goal: indicate that the input of this function are two best practice slugs, not two best practices.
+export const sortBestPracticesFromSlugs = (
+  aBestPracticeSlug: BestPracticeSlug,
+  bBestPracticeSlug: BestPracticeSlug,
+): number => {
+  const aBestPractice = getBestPracticeBySlug(aBestPracticeSlug);
+  const bBestPractice = getBestPracticeBySlug(bBestPracticeSlug);
+
+  if (aBestPractice === undefined) {
+    throw new Error(
+      `Invariant(BestPracticeSlug): Best practice with slug ${aBestPracticeSlug} not found`,
+    );
+  }
+  if (bBestPractice === undefined) {
+    throw new Error(
+      `Invariant(BestPracticeSlug): Best practice with slug ${bBestPracticeSlug} not found`,
+    );
+  }
+
+  return sortBestPractices(aBestPractice, bBestPractice);
+};
+
+export const sortBestPractices = (a: BestPractice, b: BestPractice): number => {
+  return a.name.localeCompare(b.name);
 };

@@ -2,7 +2,7 @@ import type { AcceptanceTestBenchmark, AcceptanceTestSlug } from "data/acceptanc
 import { APPS } from "data/apps";
 import { type AppSlug, AppTypes } from "data/apps/types";
 import { getAppBySlug } from "data/apps/utils";
-import type { AppBenchmark } from "data/benchmarks/types";
+import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { ENS_BEST_PRACTICES } from "data/ens-best-practices";
 import {
   type BestPracticeApp,

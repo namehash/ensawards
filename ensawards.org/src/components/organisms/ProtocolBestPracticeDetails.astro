@@ -4,7 +4,6 @@ import type { ImageMetadata } from "astro";
 import { type BestPracticeProtocol } from "data/ens-best-practices/types.ts";
 import { ProtocolTypes } from "data/protocols/types.ts";
 import { type ProtocolId } from "data/protocols/types.ts";
-import { markdownToHtml } from "@/utils/markdown";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import ContractNamingBanner from "@/components/atoms/banners/ContractNamingBanner.astro";
 import LeaderboardCard from "@/components/atoms/cards/LeaderboardCard.astro";
@@ -23,6 +22,7 @@ import {
 import { type Contribution } from "data/contributors/types";
 import { CONTRACTS } from "data/protocols/contracts";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
+import { BestPracticeTechnicalDetails } from "@/components/molecules/BestPracticeTechnicalDetails.tsx";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
@@ -91,29 +91,7 @@ const additionalInfoContainerStyles =
   <ContractNamingBanner />
   <div
     class="w-full max-w-[1216px] flex flex-nowrap flex-col sm:flex-row gap-6 sm:gap-20 justify-start sm:justify-center items-start">
-    <div
-      class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-3">
-      <h2 class="text-2xl leading-none font-semibold text-black">
-        {bestPractice.technicalDetails.main.header}
-      </h2>
-      <p
-        class={technicalSectionContentStyles}
-        set:html={markdownToHtml(bestPractice.technicalDetails.main.content)}
-      />
-      {
-        bestPractice.technicalDetails.sides.map((additionalContent) => (
-          <>
-            <h3 class={technicalSectionMinorHeaderStyles}>
-              {additionalContent.header}
-            </h3>
-            <p
-              class={technicalSectionContentStyles}
-              set:html={markdownToHtml(additionalContent.content)}
-            />
-          </>
-        ))
-      }
-    </div>
+    <BestPracticeTechnicalDetails bestPractice={bestPractice} />
     <div class="w-full sm:w-1/2 h-fit box-border flex flex-col gap-5">
       <div
         class="w-full min-w-[300px] max-w-[420px] box-border h-fit hidden sm:flex flex-col flex-nowrap justify-center items-start gap-4 bg-gray-50 rounded-xl py-5 px-6">

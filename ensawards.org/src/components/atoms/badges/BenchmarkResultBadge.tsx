@@ -1,5 +1,5 @@
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
-import { type AppBenchmark, BenchmarkResults } from "data/benchmarks/types.ts";
+import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types.ts";
 import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
 import {
   X as FailIcon,

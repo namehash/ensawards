@@ -2,14 +2,14 @@
 // on adding and modifying best practices
 
 import contributors from "data/contributors/index.ts";
+import acceptanceTestExampleImage from "data/ens-best-practices/contract-naming/content-images/mainnet-interactions-display-named-smart-contracts-example.png";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { AppTypes } from "../../apps/types.ts";
 import { defineBestPractice } from "../registry.ts";
 import { type BestPracticeApp, BestPracticeTypes } from "../types.ts";
-import acceptanceTestExampleImage from "./content-images/mainnet-interactions-display-named-smart-contracts-example.png";
-import ContractNamingCategory from "./index.ts";
+import DisplayProfilesCategory from "./index.ts";
 
 // TODO: Ofc this is all placeholder content for now. Wandering if we should put it in a separate files,
 // to stop the main definition file from bloating too much
@@ -121,34 +121,35 @@ const useCaseSummaryContent = (
   </p>
 );
 
-const displayNamedSmartContractsL2: BestPracticeApp = {
+const mockBestPracticeAllPending2: BestPracticeApp = {
   type: BestPracticeTypes.App,
-  id: "display-named-smart-contracts-l2-chains",
-  bestPracticeSlug: "display-named-smart-contracts-l2-chains",
-  name: "Display named smart contracts on L2 chains",
+  id: "mock-bp-all-pending-2",
+  bestPracticeSlug: "mock-bp-all-pending-2",
+  name: "Mock BP all pending 2",
   description:
-    "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",
-  category: ContractNamingCategory,
-  appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
+    "Mock best practice with all benchmarks in pending state. This is used to test the display of pending benchmarks in the UI with a best pratice other than Contract Naming.",
+  category: DisplayProfilesCategory,
+  appliesTo: [AppTypes.Explorer],
   technicalDetails: {
     useCaseSummary: useCaseSummaryContent,
     desiredOutcome: desiredOutcomeContent,
     implementationRecommendations: implementationRecommendations,
     acceptanceTests: [
       {
-        acceptanceTestSlug: "l2-chain-interactions-display-named-smart-contracts",
-        name: "Display ENS names for smart contracts on L2 chains",
+        acceptanceTestSlug: "mock-acceptance-test-3",
+        name: "Mock acceptance test 3",
         description: (
           // TODO: This is yet another problem to solve, Where should we store related images?
           // Would it be okay to create a dedicated folder inside the best practice category directory for all BPs
           // or should each BP have a separate folder?
+          // or maybe we should store these images inside data/acceptance-tests ?
           <div>
             <p>
-              When users interact with named smart contracts on an L2 chain the app should display
-              the contract's name as its primary identifier.
+              Mock acceptance test description. This is used to test the display of pending
+              benchmarks in the UI.
             </p>
             <img
-              alt="l2-chain-interactions-display-named-smart-contracts acceptance test"
+              alt="mock-acceptance-test-3 acceptance test"
               src={acceptanceTestExampleImage.src}
             />
           </div>
@@ -162,6 +163,6 @@ const displayNamedSmartContractsL2: BestPracticeApp = {
   ],
 };
 
-defineBestPractice(displayNamedSmartContractsL2);
+defineBestPractice(mockBestPracticeAllPending2);
 
-export default displayNamedSmartContractsL2;
+export default mockBestPracticeAllPending2;

@@ -1,7 +1,7 @@
 ---
 import { RelativeTime } from "@namehash/namehash-ui";
 
-import { type AppBenchmark } from "data/benchmarks/types.ts";
+import { type AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
 import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { getBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
@@ -10,7 +10,7 @@ import { getAcceptanceTestBySlug } from "data/acceptance-tests/utils.ts";
 
 export interface BenchmarkSummaryCardProps {
   bestPractice: BestPracticeApp;
-  acceptanceTestsBenchmarks: AppBenchmark;
+  acceptanceTestsBenchmarks: AcceptanceTestBenchmarks;
 }
 
 const { bestPractice, acceptanceTestsBenchmarks }: BenchmarkSummaryCardProps = Astro.props;
@@ -57,7 +57,7 @@ const detailValueStyles = cn(
     </div>
 
     <div class="flex w-full flex-col items-start gap-1 justify-center">
-      <p class={detailLabelStyles}>Benchmark result</p>
+      <p class={detailLabelStyles}>Acceptance test benchmark results</p>
       {
         Object.entries(acceptanceTestsBenchmarks).map(
           ([acceptanceTestSlug, benchmark]) => {
@@ -74,7 +74,7 @@ const detailValueStyles = cn(
                 key={`benchmark-result-${bestPractice.bestPracticeSlug}-${acceptanceTestSlug}`}>
                 <BenchmarkResultBadge benchmark={benchmark} />
                 <p class={cn(detailLabelStyles, "text-black")}>
-                  {acceptanceTest.title}
+                  {acceptanceTest.name}
                 </p>
               </div>
             );
@@ -82,7 +82,7 @@ const detailValueStyles = cn(
         )
       }
     </div>
-
+    <!-- TODO: This sections should probably be merged with the "results" to make it more clear which benchmark was updated when -->
     {
       benchmarksUpdateTimes.length > 0 && (
         <div class="flex w-full flex-col items-start gap-1 py-1">

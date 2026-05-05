@@ -1,5 +1,5 @@
 import type { AcceptanceTest } from "data/acceptance-tests/types.ts";
-import type { AppBenchmark } from "data/benchmarks/types.ts";
+import type { AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
 import type { Contribution } from "data/contributors/types.ts";
 import type { JSX } from "react";
 
@@ -51,12 +51,13 @@ export interface BestPracticeApp
 export type BestPractice = BestPracticeProtocol | BestPracticeApp;
 
 /**
- * Defines relations between {@link BestPracticeSlug} and the benchmark result for a given app.
+ * Defines relations between {@link BestPracticeSlug} and the benchmark results of the {@link AcceptanceTest}s
+ * belonging to the respective best practice for a given app.
  *
  * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}.
- * The value should be the related {@link AppBenchmark}.
+ * The value should be the related {@link AcceptanceTestBenchmarks}.
  */
-export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark>;
+export type BestPracticeBenchmarks = Record<BestPracticeSlug, AcceptanceTestBenchmarks>;
 
 export const CategoryStatuses = {
   ComingSoon: "coming-soon",

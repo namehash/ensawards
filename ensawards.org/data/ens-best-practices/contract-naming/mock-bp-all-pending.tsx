@@ -137,7 +137,7 @@ const mockBestPracticeAllPending: BestPracticeApp = {
     acceptanceTests: [
       {
         acceptanceTestSlug: "mock-acceptance-test-1",
-        title: "Mock acceptance test 1",
+        name: "Mock acceptance test 1",
         description: (
           // TODO: This is yet another problem to solve, Where should we store related images?
           // Would it be okay to create a dedicated folder inside the best practice category directory for all BPs

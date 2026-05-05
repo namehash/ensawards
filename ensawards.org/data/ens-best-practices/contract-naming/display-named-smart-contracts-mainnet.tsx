@@ -143,7 +143,7 @@ const displayNamedSmartContractsMainnet: BestPracticeApp = {
       // which was always our concern. Keen to hear your thoughts on this.
       {
         acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts",
-        title: "Display ENS names for smart contracts on mainnet",
+        name: "Display ENS names for smart contracts on mainnet",
         description: (
           // TODO: This is yet another problem to solve, Where should we store related images?
           // Would it be okay to create a dedicated folder inside the best practice category directory for all BPs
@@ -163,7 +163,7 @@ const displayNamedSmartContractsMainnet: BestPracticeApp = {
       },
       {
         acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts-at2",
-        title: "Acceptance Test 2",
+        name: "Acceptance Test 2",
         description: (
           // TODO: This is yet another problem to solve, Where should we store related images?
           // Would it be okay to create a dedicated folder inside the best practice category directory for all BPs

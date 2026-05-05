@@ -1,7 +1,8 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { getAcceptanceTestBySlug } from "data/acceptance-tests/utils.ts";
 import type { App } from "data/apps/types.ts";
 import { calcAppScore, getAppById } from "data/apps/utils.ts";
-import type { AppBenchmark } from "data/benchmarks/types.ts";
+import type { AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
 import {
   calcBestPracticeCategoryScore,
   formatBenchmarkResult,
@@ -17,6 +18,8 @@ import type {
 import {
   getBestPracticeBySlug,
   getBestPracticeCategoryBySlug,
+  sortBestPractices,
+  sortBestPracticesFromSlugs,
 } from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
@@ -74,45 +77,80 @@ function BenchmarkCategorySection({
       {isOpen && (
         <div className="flex w-full flex-col gap-4 pt-4">
           {[...Object.entries(benchmarksInCategory)]
-            .sort(([_a, aBenchmark], [_b, bBenchmark]) => sortBenchmarks(aBenchmark, bBenchmark))
-            .map(([bestPracticeSlug, benchmark]: [BestPracticeSlug, AppBenchmark | undefined]) => {
-              const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+            // Sort best practices alphabetically by their name --> TODO: Consider sorting them by their score (with a dedicated helper function)
+            .sort(([aBestPracticeSlug, _a], [bBestPracticeSlug, _b]) =>
+              sortBestPracticesFromSlugs(aBestPracticeSlug, bBestPracticeSlug),
+            )
+            .map(
+              ([bestPracticeSlug, appBenchmarks]: [BestPracticeSlug, AcceptanceTestBenchmarks]) => {
+                const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
 
-              if (bestPractice === undefined) {
-                throw new Error(
-                  `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
-                );
-              }
+                if (bestPractice === undefined) {
+                  throw new Error(
+                    `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
+                  );
+                }
 
-              return (
-                <a
-                  key={bestPractice.id}
-                  href={`/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
-                  className="flex items-start gap-3"
-                >
-                  <GenericTooltip
-                    tooltipOffset={1}
-                    triggerAsChild
-                    content={<p>{formatBenchmarkResult(benchmark, { lowercase: false })}</p>}
+                return (
+                  <div
+                    key={`appSummaryCard-${bestPractice.bestPracticeSlug}`}
+                    className="flex flex-col justify-start items-start gap-2 pl-1"
                   >
-                    <span className="shrink-0 cursor-pointer">
-                      {getBenchmarkIcon(
-                        benchmark,
-                        cn(
-                          "w-6 h-6",
-                          benchmarkResultToBadgeStyles(benchmark),
-                          "bg-transparent",
-                          benchmark === undefined && "p-0.5",
-                        ),
-                      )}
-                    </span>
-                  </GenericTooltip>
-                  <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
-                    {bestPractice.name}
-                  </span>
-                </a>
-              );
-            })}
+                    <h3 className="text-md leading-normal font-semibold text-muted-foreground">
+                      {bestPractice.name}
+                    </h3>
+                    <div className="w-full flex flex-col justify-start items-start gap-1 pl-1">
+                      {Object.entries(appBenchmarks)
+                        .sort(([_a, aAcceptanceTestBenchmark], [_b, bAcceptanceTestBenchmark]) =>
+                          sortBenchmarks(aAcceptanceTestBenchmark, bAcceptanceTestBenchmark),
+                        )
+                        .map(([acceptanceTestSlug, acceptanceTestBenchmark]) => {
+                          const acceptanceTest = getAcceptanceTestBySlug(acceptanceTestSlug);
+
+                          if (acceptanceTest === undefined) {
+                            throw new Error(
+                              `Invariant(AcceptanceTestSlug): Acceptance test with slug ${acceptanceTestSlug} is not defined`,
+                            );
+                          }
+                          return (
+                            <a
+                              href={`/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
+                              className="flex items-start gap-3"
+                            >
+                              <GenericTooltip
+                                tooltipOffset={1}
+                                triggerAsChild
+                                content={
+                                  <p>
+                                    {formatBenchmarkResult(acceptanceTestBenchmark, {
+                                      lowercase: false,
+                                    })}
+                                  </p>
+                                }
+                              >
+                                <span className="shrink-0 cursor-pointer">
+                                  {getBenchmarkIcon(
+                                    acceptanceTestBenchmark,
+                                    cn(
+                                      "w-6 h-6",
+                                      benchmarkResultToBadgeStyles(acceptanceTestBenchmark),
+                                      "bg-transparent",
+                                      acceptanceTestBenchmark === undefined && "p-0.5",
+                                    ),
+                                  )}
+                                </span>
+                              </GenericTooltip>
+                              <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
+                                {acceptanceTest.name}
+                              </span>
+                            </a>
+                          );
+                        })}
+                    </div>
+                  </div>
+                );
+              },
+            )}
         </div>
       )}
     </div>

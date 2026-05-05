@@ -1,23 +1,24 @@
 ---
-import { cn } from "../../../utils/tailwindClassConcatenation";
-import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import type { AcceptanceTest } from "data/acceptance-tests/types";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 
-import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
-
-export interface BenchmarkResultCardProps {
-  bestPractice: BestPracticeApp;
+export interface AcceptanceTestBenchmarkResultCardProps {
+  acceptanceTest: AcceptanceTest;
   viewDetails: {
     text: string;
     link: string;
   };
 }
-const { bestPractice, viewDetails }: BenchmarkResultCardProps = Astro.props;
+const { acceptanceTest, viewDetails }: AcceptanceTestBenchmarkResultCardProps = Astro.props;
+
+//TODO: Refine this component after a new design is proposed
 ---
 
 <a
   href={viewDetails.link}
   target="_self"
-  class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-start gap-3 sm:gap-8 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
+  class="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-nowrap justify-start sm:justify-between items-start sm:items-center gap-3 sm:gap-8 p-4 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs cursor-pointer">
   <!--Mobile Header start-->
   <div
     class="sm:hidden flex flex-row flex-nowrap justify-between items-center self-stretch">
@@ -26,22 +27,22 @@ const { bestPractice, viewDetails }: BenchmarkResultCardProps = Astro.props;
   </div>
   <h3
     class="sm:hidden text-lg leading-normal font-semibold text-black self-stretch">
-    {bestPractice.name}
+    {acceptanceTest.name}
   </h3>
-  <p class="sm:hidden text-sm font-normal leading-6 text-black self-stretch">
+  <!-- <p class="sm:hidden text-sm font-normal leading-6 text-black self-stretch">
     {bestPractice.description}
-  </p>
+  </p> -->
   <!--Mobile Header end-->
   <div
     class="hidden sm:flex flex-row flex-nowrap justify-start items-start gap-4">
     <slot name="icon" />
     <div class="flex flex-col flex-nowrap justify-center items-start gap-3">
-      <h3 class="text-lg leading-normal font-semibold text-black self-stretch">
-        {bestPractice.name}
+      <h3 class="text-md leading-normal font-semibold text-black self-stretch">
+        {acceptanceTest.name}
       </h3>
-      <p class="text-sm font-normal leading-6 text-gray-500 self-stretch">
+      <!-- <p class="text-sm font-normal leading-6 text-gray-500 self-stretch">
         {bestPractice.description}
-      </p>
+      </p> -->
     </div>
   </div>
   <div

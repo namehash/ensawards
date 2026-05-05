@@ -23,15 +23,17 @@ export interface AppBestPracticeDetailsProps {
 const { bestPractice }: AppBestPracticeDetailsProps = Astro.props;
 
 // Get apps that have benchmarks for this specific best practice
-const appsWithBenchmarks = APPS.map((app) => {
-  const matchingBenchmark = getAppBenchmarks(app.appSlug)[bestPractice.bestPracticeSlug];
+const appsWithBenchmarks = APPS.filter((app) => bestPractice.appliesTo.includes(app.type)).map(
+  (app) => {
+    const matchingBenchmark = getAppBenchmarks(app.appSlug)[bestPractice.bestPracticeSlug];
 
-  return {
-    app,
-    bestPractice,
-    acceptanceTestBenchmarks: matchingBenchmark,
-  };
-});
+    return {
+      app,
+      bestPractice,
+      acceptanceTestBenchmarks: matchingBenchmark,
+    };
+  },
+);
 
 // Sort benchmark results
 const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {

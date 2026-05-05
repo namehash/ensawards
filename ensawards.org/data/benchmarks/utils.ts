@@ -1,19 +1,20 @@
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 import type { AppSlug } from "data/apps/types.ts";
+import { getAppBySlug } from "data/apps/utils.ts";
 import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 
 import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
 
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "../ens-best-practices/types.ts";
-import { type BestPracticeCategorySlug } from "../ens-best-practices/types.ts";
+import { type BestPracticeCategorySlug, BestPracticeTypes } from "../ens-best-practices/types.ts";
 import {
   asEnsAwardsScore,
   type EnsAwardsPoints,
   type EnsAwardsScore,
 } from "../shared/ens-awards-score.ts";
 import { APP_BENCHMARKS } from ".";
-import { type AppBenchmark, type BenchmarkResult, BenchmarkResults } from "./types.ts";
+import { type AcceptanceTestBenchmarks, type BenchmarkResult, BenchmarkResults } from "./types.ts";
 
 /** Returns all benchmarks of an {@link App} by its {@link AppSlug}.
  */
@@ -23,17 +24,26 @@ export function getAppBenchmarks(slug: AppSlug): BestPracticeBenchmarks {
 
 /** Returns all benchmarks of a {@link BestPractice} by its {@link BestPracticeSlug}.
  *
- * If the related {@link App} doesn't have a benchmark completed for the specified {@link BestPractice}
- * then this function will return `undefined` as a representation of a pending benchmark for that app.
- *
- * Otherwise, the value will be an `AppBenchmark`
- * describing how the related {@link App} performed for the {@link BestPractice}.
  */
-export function getAppBenchmarksByBestPractice(slug: BestPracticeSlug): AppBenchmark[] {
-  const benchmarks: AppBenchmark[] = [];
+export function getAppBenchmarksByBestPractice(slug: BestPracticeSlug): AcceptanceTestBenchmarks[] {
+  const bestPractice = getBestPracticeBySlug(slug);
 
-  for (const appBenchmarks of Object.values(APP_BENCHMARKS)) {
-    benchmarks.push(appBenchmarks[slug]);
+  if (bestPractice === undefined) {
+    throw new Error(`Invariant(BestPracticeSlug): BestPractice with slug ${slug} is not defined`);
+  }
+
+  const benchmarks: AcceptanceTestBenchmarks[] = [];
+
+  for (const [appSlug, appBenchmarks] of Object.entries(APP_BENCHMARKS)) {
+    const app = getAppBySlug(appSlug);
+
+    if (app === undefined) {
+      throw new Error(`Invariant(AppSlug): App with slug ${appSlug} is not defined`);
+    }
+
+    if (bestPractice.type === BestPracticeTypes.App && bestPractice.appliesTo.includes(app.type)) {
+      benchmarks.push(appBenchmarks[slug]);
+    }
   }
 
   return benchmarks;
@@ -42,10 +52,11 @@ export function getAppBenchmarksByBestPractice(slug: BestPracticeSlug): AppBench
 /** Returns a single benchmark of an {@link App} on a specific {@link BestPractice}
  * decided by the {@link AppSlug} and {@link BestPracticeSlug}.
  * */
+// TODO: Figure out a better name for this function
 export function getAppBenchmark(
   appSlug: AppSlug,
   bestPracticeSlug: BestPracticeSlug,
-): AppBenchmark {
+): AcceptanceTestBenchmarks {
   const appBenchmarks = getAppBenchmarks(appSlug);
   return appBenchmarks[bestPracticeSlug];
 }

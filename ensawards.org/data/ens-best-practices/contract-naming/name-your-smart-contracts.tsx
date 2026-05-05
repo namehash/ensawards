@@ -109,7 +109,7 @@ const nameYourSmartContracts: BestPracticeProtocol = {
     acceptanceTests: [
       {
         acceptanceTestSlug: "enscribe-lookup",
-        title: "Smart Contract ENS name is validated by ENScribe",
+        name: "Smart Contract ENS name is validated by ENScribe",
         description: (
           // TODO: This is yet another problem to solve, Where should we store related images?
           // Would it be okay to create a dedicated folder inside the best practice category directory for all BPs

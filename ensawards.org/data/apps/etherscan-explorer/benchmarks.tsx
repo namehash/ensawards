@@ -38,6 +38,9 @@ const benchmarks = {
       ),
     } as const satisfies AcceptanceTestBenchmark,
   },
+  "mock-bp-all-pending-2": {
+    "mock-acceptance-test-3": undefined,
+  },
 } as const satisfies BestPracticeBenchmarks;
 
 defineAppBenchmarks(EtherscanExplorer, benchmarks);

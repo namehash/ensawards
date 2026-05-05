@@ -6,12 +6,12 @@ import {
 } from "data/benchmarks/utils.ts";
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
 import {
-  createMockBenchmark,
+  createMockAcceptanceTestBenchmark,
   mockDisplayProfilesBestPractice,
   mockForwardResolutionBestPractice,
   mockNormalizeNamesBestPractice,
   mockReverseResolutionBestPractice,
-} from "data/shared/test-utils.ts";
+} from "data/shared/test-utils";
 import { describe, expect, it, vi } from "vitest";
 
 import { BenchmarkResults } from "./types.ts";
@@ -29,15 +29,15 @@ describe("benchmarks-utils", () => {
     it("Should return correct points for each benchmark result type", () => {
       const benchmarkCases = [
         {
-          benchmark: createMockBenchmark(BenchmarkResults.Pass),
+          benchmark: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
           expectedPoints: 1,
         },
         {
-          benchmark: createMockBenchmark(BenchmarkResults.PartialPass),
+          benchmark: createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
           expectedPoints: 0.5,
         },
         {
-          benchmark: createMockBenchmark(BenchmarkResults.Fail),
+          benchmark: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
           expectedPoints: 0,
         },
       ];
@@ -58,9 +58,15 @@ describe("benchmarks-utils", () => {
       });
 
       const benchmarks: BestPracticeBenchmarks = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: undefined,
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: undefined,
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: undefined,
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
       } as const satisfies BestPracticeBenchmarks;
 
       expect(
@@ -79,9 +85,15 @@ describe("benchmarks-utils", () => {
       });
 
       const benchmarks: BestPracticeBenchmarks = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: undefined,
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: undefined,
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: undefined,
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: undefined,
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: undefined,
+        },
       } as const satisfies BestPracticeBenchmarks;
 
       const result = groupBenchmarksByCategory(benchmarks);
@@ -90,8 +102,19 @@ describe("benchmarks-utils", () => {
         Array.from(result.values()),
         "Expected groupBenchmarksByCategory to split benchmarks into separate category groups",
       ).toEqual([
-        { "set-primary-name": undefined },
-        { "display-avatar": undefined, "forward-resolution": undefined },
+        {
+          "set-primary-name": {
+            mockAcceptanceTestSlug1: undefined,
+          },
+        },
+        {
+          "display-avatar": {
+            mockAcceptanceTestSlug2: undefined,
+          },
+          "forward-resolution": {
+            mockAcceptanceTestSlug3: undefined,
+          },
+        },
       ]);
     });
   });
@@ -99,9 +122,15 @@ describe("benchmarks-utils", () => {
   describe("calcBestPracticeCategoryScore", () => {
     it("Should return undefined for no completed benchmarks", () => {
       const benchmarks: BestPracticeBenchmarks = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: undefined,
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: undefined,
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: undefined,
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: undefined,
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: undefined,
+        },
       };
 
       expect(
@@ -112,15 +141,15 @@ describe("benchmarks-utils", () => {
 
     it("Should return the rounded category score for valid benchmarks", () => {
       const validCategoryBenchmarks = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Pass,
-        ),
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Fail,
-        ),
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Fail,
-        ),
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        },
       } as const satisfies BestPracticeBenchmarks;
 
       const result = calcBestPracticeCategoryScore(validCategoryBenchmarks);
@@ -136,17 +165,17 @@ describe("benchmarks-utils", () => {
     it("should allow correct sorting of benchmarks", () => {
       const input = [
         undefined,
-        createMockBenchmark(BenchmarkResults.Fail),
-        createMockBenchmark(BenchmarkResults.Pass),
-        createMockBenchmark(BenchmarkResults.Fail),
-        createMockBenchmark(BenchmarkResults.PartialPass),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
       ];
 
       const expectedOutput = [
-        createMockBenchmark(BenchmarkResults.Pass),
-        createMockBenchmark(BenchmarkResults.PartialPass),
-        createMockBenchmark(BenchmarkResults.Fail),
-        createMockBenchmark(BenchmarkResults.Fail),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         undefined,
       ];
 

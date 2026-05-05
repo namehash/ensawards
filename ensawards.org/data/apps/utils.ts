@@ -1,3 +1,4 @@
+import { getAcceptanceTestBenchmarksByApp } from "data/acceptance-tests/utils.ts";
 import { AWARDS } from "data/awards/index.ts";
 import type { Award } from "data/awards/types.ts";
 import { calcEnsAwardsPoints, getAppBenchmarks } from "data/benchmarks/utils.ts";
@@ -58,21 +59,19 @@ export const getAppByName = (appName: string): App | undefined => {
  * @returns undefined - if no benchmarks are completed.
  */
 export const calcAppScore = (app: App): EnsAwardsScore | undefined => {
-  const appBenchmarks = getAppBenchmarks(app.appSlug);
-
-  const completedBenchmarks = Object.values(appBenchmarks).filter(
-    (benchmark) => benchmark !== undefined,
+  const completedAcceptanceTestBenchmarks = getAcceptanceTestBenchmarksByApp(app.appSlug).filter(
+    (acceptanceTestBenchmark) => acceptanceTestBenchmark !== undefined,
   );
 
-  if (completedBenchmarks.length === 0) return undefined;
+  if (completedAcceptanceTestBenchmarks.length === 0) return undefined;
 
-  const totalPoints: EnsAwardsPoints = completedBenchmarks.reduce(
+  const totalPoints: EnsAwardsPoints = completedAcceptanceTestBenchmarks.reduce(
     (sum, benchmark) => sum + calcEnsAwardsPoints(benchmark),
     0,
   );
 
   // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
-  const score = Math.round((totalPoints * 100) / completedBenchmarks.length);
+  const score = Math.round((totalPoints * 100) / completedAcceptanceTestBenchmarks.length);
 
   return asEnsAwardsScore(score);
 };
