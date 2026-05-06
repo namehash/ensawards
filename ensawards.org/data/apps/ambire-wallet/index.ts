@@ -10,7 +10,7 @@ const AmbireWallet: App = {
   id: "ambire-wallet",
   appSlug: "ambire-wallet",
   project: AmbireProject,
-  name: "Ambire Wallet",
+  name: "Ambire",
   description:
     "A self-custodial Web3 wallet where you can manage tokens, DeFi positions, and NFTs across multiple chains in one place.",
   type: AppTypes.Wallet,
