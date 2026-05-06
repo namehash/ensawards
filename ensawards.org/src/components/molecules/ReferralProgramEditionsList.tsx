@@ -116,7 +116,11 @@ const ReferralProgramEditionsListContainer = ({
           />
         )}
       </div>
-      <div className={subcontainerStyles}>
+      {/* Temporarily hide the section when it's empty 
+      to avoid giving the impression that no referral program editions will come after the current one in May.
+      When the next edition is added to production-editions.json we should be able to just rollback the hiding logic.
+      For more details see: https://namehash.slack.com/archives/C086Z6FNBHN/p1778064151996799 */}
+      <div className={cn(subcontainerStyles, scheduledEditions.length === 0 && "hidden")}>
         <h2 className={headerStyles}>Scheduled</h2>
         {scheduledEditions.length > 0 ? (
           <div className={editionsListStyles}>{scheduledEditions}</div>
@@ -254,25 +258,28 @@ const DisplayGroupedReferralProgramEditionSummariesList = ({
                 />
               );
             })}
-          scheduledEditions={loadingReferralProgramEditionSummaries
-            .filter(
-              (editionSummary) =>
-                editionSummary.status === ReferralProgramEditionStatuses.Scheduled,
-            )
-            .map((editionSummary, index) => {
-              if (editionSummary.awardModel === ReferralProgramAwardModels.RevShareCap) {
-                return (
-                  <ReferralProgramEditionCardRevShareCapLoading
-                    key={`referral-program-edition-loading-scheduled#${index}`}
-                  />
-                );
-              }
-              return (
-                <ReferralProgramEditionCardPieSplitLoading
-                  key={`referral-program-edition-loading-scheduled#${index}`}
-                />
-              );
-            })}
+          // scheduledEditions={loadingReferralProgramEditionSummaries
+          //   .filter(
+          //     (editionSummary) =>
+          //       editionSummary.status === ReferralProgramEditionStatuses.Scheduled,
+          //   )
+          //   .map((editionSummary, index) => {
+          //     if (editionSummary.awardModel === ReferralProgramAwardModels.RevShareCap) {
+          //       return (
+          //         <ReferralProgramEditionCardRevShareCapLoading
+          //           key={`referral-program-edition-loading-scheduled#${index}`}
+          //         />
+          //       );
+          //     }
+          //     return (
+          //       <ReferralProgramEditionCardPieSplitLoading
+          //         key={`referral-program-edition-loading-scheduled#${index}`}
+          //       />
+          //     );
+          //   })}
+          // TODO: Temporarily commented out and passing an empty array.
+          // See L119 for more details.
+          scheduledEditions={[]}
         />
       )}
       {!isLoading && referralProgramEditionSummaries === null && (
