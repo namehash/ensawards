@@ -1,14 +1,9 @@
 import type { AcceptanceTestBenchmark, AcceptanceTestSlug } from "data/acceptance-tests/types";
 import { APPS } from "data/apps";
-import { type AppSlug, AppTypes } from "data/apps/types";
+import { type AppSlug } from "data/apps/types";
 import { getAppBySlug } from "data/apps/utils";
-import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { ENS_BEST_PRACTICES } from "data/ens-best-practices";
-import {
-  type BestPracticeApp,
-  type BestPracticeSlug,
-  BestPracticeTypes,
-} from "data/ens-best-practices/types";
+import { type BestPracticeSlug, BestPracticeTypes } from "data/ens-best-practices/types";
 import { describe, expect, it } from "vitest";
 
 import { formatAccountId } from "@ensnode/ensnode-sdk";

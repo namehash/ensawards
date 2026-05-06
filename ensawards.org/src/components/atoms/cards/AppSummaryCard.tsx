@@ -18,7 +18,6 @@ import type {
 import {
   getBestPracticeBySlug,
   getBestPracticeCategoryBySlug,
-  sortBestPractices,
   sortBestPracticesFromSlugs,
 } from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
@@ -96,7 +95,7 @@ function BenchmarkCategorySection({
                     key={`appSummaryCard-${bestPractice.bestPracticeSlug}`}
                     className="flex flex-col justify-start items-start gap-2 pl-1"
                   >
-                    <h3 className="text-md leading-normal font-semibold text-muted-foreground">
+                    <h3 className="text-base leading-normal font-semibold text-muted-foreground">
                       {bestPractice.name}
                     </h3>
                     <div className="w-full flex flex-col justify-start items-start gap-1 pl-1">
@@ -114,6 +113,7 @@ function BenchmarkCategorySection({
                           }
                           return (
                             <a
+                              key={`bp-${bestPractice.bestPracticeSlug}-${acceptanceTestSlug}`}
                               href={`/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
                               className="flex items-start gap-3"
                             >

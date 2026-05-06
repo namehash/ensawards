@@ -1,5 +1,4 @@
 import { AppTypes } from "data/apps/types.ts";
-import { APP_BENCHMARKS } from "data/benchmarks/index.ts";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types.ts";
 import { calcEnsAwardsPoints, getAppBenchmarksByBestPractice } from "data/benchmarks/utils.ts";
 import { ProtocolTypes } from "data/protocols/types.ts";
@@ -96,7 +95,8 @@ export const formatBestPracticeType = (
 
 /**
  * Calculates an {@link EnsAwardsScore} for a {@link BestPractice},
- * by calculating the average score of all apps that were benchmarked on this best practice.
+ * by calculating the total score of all apps that were benchmarked on this best practice
+ * and dividing it by the total number of acceptance test benchmarks completed on it.
  *
  * @returns `undefined` if no apps were benchmarked on this best practice,
  * otherwise returns the {@link EnsAwardsScore}.

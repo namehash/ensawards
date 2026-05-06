@@ -31,6 +31,7 @@ const implementationRecommendations = (
       </a>{" "}
       of a contract address according to all ENS best practices:
     </p>
+    <br />
     <ul className="list-disc pl-5">
       <li>
         <a
@@ -77,6 +78,7 @@ const implementationRecommendations = (
         (v2.18.0+)
       </li>
     </ul>
+    <br />
     <p>
       Libraries and tools for additional languages or frameworks can be found in the{" "}
       <a

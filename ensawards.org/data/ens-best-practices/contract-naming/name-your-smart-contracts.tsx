@@ -53,7 +53,7 @@ const implementationRecommendations = (
     >
       primary name
     </a>{" "}
-    (reverse resolution) requires the contract to implement
+    (reverse resolution) requires the contract to implement{" "}
     <a
       className={linkStyles}
       target="_blank"

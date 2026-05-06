@@ -19,6 +19,13 @@ import { type AcceptanceTestBenchmarks, type BenchmarkResult, BenchmarkResults }
 /** Returns all benchmarks of an {@link App} by its {@link AppSlug}.
  */
 export function getAppBenchmarks(slug: AppSlug): BestPracticeBenchmarks {
+  const appBenchmarks = APP_BENCHMARKS[slug];
+
+  if (appBenchmarks === undefined) {
+    throw new Error(
+      `Invariant(AppBenchmarks): Benchmarks for app with slug ${slug} are not defined`,
+    );
+  }
   return APP_BENCHMARKS[slug];
 }
 
@@ -42,7 +49,15 @@ export function getAppBenchmarksByBestPractice(slug: BestPracticeSlug): Acceptan
     }
 
     if (bestPractice.type === BestPracticeTypes.App && bestPractice.appliesTo.includes(app.type)) {
-      benchmarks.push(appBenchmarks[slug]);
+      const acceptanceTestBenchmarks = appBenchmarks[slug];
+
+      if (acceptanceTestBenchmarks === undefined) {
+        throw new Error(
+          `Invariant(BestPracticeBenchmarks): Required benchmarks for app-${appSlug} on best practice-${slug} are not defined`,
+        );
+      }
+
+      benchmarks.push(acceptanceTestBenchmarks);
     }
   }
 
@@ -58,7 +73,15 @@ export function getAppBenchmark(
   bestPracticeSlug: BestPracticeSlug,
 ): AcceptanceTestBenchmarks {
   const appBenchmarks = getAppBenchmarks(appSlug);
-  return appBenchmarks[bestPracticeSlug];
+  const acceptanceTestBenchmarks = appBenchmarks[bestPracticeSlug];
+
+  if (acceptanceTestBenchmarks === undefined) {
+    throw new Error(
+      `Invariant(BestPracticeBenchmarks): Required benchmarks for app-${appSlug} on best practice-${bestPracticeSlug} are not defined`,
+    );
+  }
+
+  return acceptanceTestBenchmarks;
 }
 
 /**

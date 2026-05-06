@@ -27,6 +27,12 @@ const appsWithBenchmarks = APPS.filter((app) => bestPractice.appliesTo.includes(
   (app) => {
     const matchingBenchmark = getAppBenchmarks(app.appSlug)[bestPractice.bestPracticeSlug];
 
+    if (matchingBenchmark === undefined) {
+      throw new Error(
+        `Invariant(BestPracticeBenchmarks): Required benchmarks for app-${app.name} on best practice-${bestPractice.name} are not defined`,
+      );
+    }
+
     return {
       app,
       bestPractice,
