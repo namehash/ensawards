@@ -18,7 +18,8 @@ export function FoldableCard({
 }: PropsWithChildren<FoldableCardProps>) {
   const [isOpen, setIsOpen] = useState<boolean>(initiallyOpen);
   const [animationParent] = useAutoAnimate();
-  const chevronStyles = "text-black/30 hover:text-black/60";
+  const chevronStyles =
+    "text-black/30 hover:text-black/60 shrink-0 transition-transform duration-200";
   return (
     <div
       ref={animationParent}
@@ -29,7 +30,7 @@ export function FoldableCard({
         cardStyles,
       )}
     >
-      <div className="w-full h-fit flex flex-row flex-nowrap justify-between items-center">
+      <div className="w-full h-fit flex flex-row flex-nowrap justify-between items-start gap-3">
         <h4 className="text-lg leading-6 font-semibold text-black">{header}</h4>
         <ChevronRight size={24} className={cn(chevronStyles, isOpen && "rotate-90")} />
       </div>

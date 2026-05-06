@@ -8,7 +8,7 @@ import {
   Sparkles,
   TrendingUp,
 } from "@lucide/astro";
-import { FrequentlyAskedQuestions } from "@/components/molecules/FrequentlyAskedQuestions";
+import { FrequentlyAskedQuestions, faqIds } from "@/components/molecules/FrequentlyAskedQuestions";
 import JoinTelegram from "@/components/molecules/JoinTelegram.astro";
 import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList";
 import { ReferralLinkForm } from "@/components/referral-awards-program/ReferralLinkForm";
@@ -336,7 +336,15 @@ const backgroundGreyStyles =
         </div>
         <FrequentlyAskedQuestions
           client:load
-          itemsToShow={["Are there limitations to the referral links?"]}
+          itemsToShow={[
+            faqIds.RefLinkLimitations,
+            faqIds.RewardsToEarn,
+            faqIds.SmartContractVsRefLink,
+            faqIds.OnchainRef,
+            faqIds.RenewalsVsRegistrations,
+            faqIds.ThresholdNotAchieved,
+            faqIds.IntegrationTime,
+          ]}
         />
       </div>
     </div>
