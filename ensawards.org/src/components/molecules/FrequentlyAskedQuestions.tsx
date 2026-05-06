@@ -2,7 +2,22 @@ import type { ReactElement } from "react";
 
 import { FoldableCard } from "../atoms/cards/FoldableCard.tsx";
 
+export const faqIds = {
+  RefLinkLimitations: "referral-link-limitations",
+  EarningPoints: "earning-points",
+  ENSTokens: "ens-tokens",
+  RewardsToEarn: "rewards-to-earn",
+  SmartContractVsRefLink: "smart-contract-vs-referral-link",
+  OnchainRef: "onchain-referral",
+  RenewalsVsRegistrations: "renewals-vs-registrations",
+  ThresholdNotAchieved: "threshold-not-achieved",
+  IntegrationTime: "integration-time",
+} as const;
+
+export type FaqId = (typeof faqIds)[keyof typeof faqIds];
+
 export interface FrequentlyAskedQuestion {
+  id: FaqId;
   question: string;
   answer: ReactElement;
 }
@@ -13,6 +28,7 @@ const textStyles = "text-base leading-normal font-normal text-muted-foreground";
 
 const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
   {
+    id: faqIds.RefLinkLimitations,
     question: "Are there limitations to the referral links?",
     answer: (
       <p className={textStyles}>
@@ -25,6 +41,7 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
     ),
   },
   {
+    id: faqIds.EarningPoints,
     question: "How do I earn points?",
     answer: (
       <p className={textStyles}>
@@ -36,6 +53,7 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
     ),
   },
   {
+    id: faqIds.ENSTokens,
     question: "What's an $ENS?",
     answer: (
       <p className={textStyles}>
@@ -79,10 +97,74 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
       </p>
     ),
   },
+  {
+    id: faqIds.RewardsToEarn,
+    question: "How much I can earn?",
+    answer: (
+      <p className={textStyles}>
+        You earn up to a 50% revenue share on every .eth name registration and renewal attributed to
+        you. You must generate at least $100 in &quot;base revenue contribution&quot; within an
+        edition to qualify for awards. Awards are paid in USDC within 15 days of the edition
+        closing.
+      </p>
+    ),
+  },
+  {
+    id: faqIds.SmartContractVsRefLink,
+    question: "What's the difference between referral links and smart contract integration?",
+    answer: (
+      <p className={textStyles}>
+        Referral links direct users to the ENS Manager App with your attribution. They are easy to
+        set up, and allow you to launch within minutes. Smart contract integration lets you build
+        custom .eth registration and renewal flows directly into your app, giving you full UX
+        control. Both earn the same up to 50% revenue share.
+      </p>
+    ),
+  },
+  {
+    id: faqIds.OnchainRef,
+    question: "How does onchain referral attribution work?",
+    answer: (
+      <p className={textStyles}>
+        When your app calls the ENS registration or renewal contracts, you pass your referrer
+        address as a parameter. Attribution is recorded onchain and is indexed by our open source
+        rules engine that powers the ENSAwards referral leaderboards.
+      </p>
+    ),
+  },
+  {
+    id: faqIds.RenewalsVsRegistrations,
+    question: "Do renewals count the same as new registrations?",
+    answer: (
+      <p className={textStyles}>
+        Yes. Renewals generate the same referral revenue and awards as new registrations.
+      </p>
+    ),
+  },
+  {
+    id: faqIds.ThresholdNotAchieved,
+    question: "What happens if I don't hit the $100 threshold?",
+    answer: (
+      <p className={textStyles}>
+        You don't qualify for awards in that edition. But your referral activity is a strong signal,
+        use what you learned and apply it to the next edition.
+      </p>
+    ),
+  },
+  {
+    id: faqIds.IntegrationTime,
+    question: "How long does it take to integrate?",
+    answer: (
+      <p className={textStyles}>
+        A referral link takes no more than 30 seconds to generate. A smart contract integration can
+        be as simple as a 1-line code change to an existing registration or renewal flow.
+      </p>
+    ),
+  },
 ];
 
 export interface FrequentlyAskedQuestionsProps {
-  itemsToShow: string[];
+  itemsToShow: FaqId[];
   initiallyOpenItem?: number;
 }
 export function FrequentlyAskedQuestions({
@@ -92,7 +174,7 @@ export function FrequentlyAskedQuestions({
   return (
     <div className="w-full min-[810px]:w-1/2 min-[810px]:min-w-1/2 h-fit flex flex-col justify-start items-start gap-2">
       {frequentlyAskedQuestions
-        .filter((faq) => itemsToShow.includes(faq.question))
+        .filter((faq) => itemsToShow.includes(faq.id))
         .map((faq, idx) => (
           <FoldableCard
             key={`FAQ-#${idx}`}

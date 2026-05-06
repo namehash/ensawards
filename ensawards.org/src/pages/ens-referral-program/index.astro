@@ -17,6 +17,7 @@ import { LiveReferralFeed } from "@/components/referral-awards-program/referrals
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import Layout from "@/layouts/Layout.astro";
+import { faqIds } from "@/components/molecules/FrequentlyAskedQuestions";
 
 interface ContentItemData {
   name: string;
@@ -336,7 +337,15 @@ const backgroundGreyStyles =
         </div>
         <FrequentlyAskedQuestions
           client:load
-          itemsToShow={["Are there limitations to the referral links?"]}
+          itemsToShow={[
+            faqIds.RefLinkLimitations,
+            faqIds.RewardsToEarn,
+            faqIds.SmartContractVsRefLink,
+            faqIds.OnchainRef,
+            faqIds.RenewalsVsRegistrations,
+            faqIds.ThresholdNotAchieved,
+            faqIds.IntegrationTime,
+          ]}
         />
       </div>
     </div>
