@@ -8,7 +8,7 @@ import {
   Sparkles,
   TrendingUp,
 } from "@lucide/astro";
-import { FrequentlyAskedQuestions } from "@/components/molecules/FrequentlyAskedQuestions";
+import { FrequentlyAskedQuestions, faqIds } from "@/components/molecules/FrequentlyAskedQuestions";
 import JoinTelegram from "@/components/molecules/JoinTelegram.astro";
 import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList";
 import { ReferralLinkForm } from "@/components/referral-awards-program/ReferralLinkForm";
@@ -17,7 +17,6 @@ import { LiveReferralFeed } from "@/components/referral-awards-program/referrals
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import Layout from "@/layouts/Layout.astro";
-import { faqIds } from "@/components/molecules/FrequentlyAskedQuestions";
 
 interface ContentItemData {
   name: string;

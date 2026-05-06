@@ -99,7 +99,7 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
   },
   {
     id: faqIds.RewardsToEarn,
-    question: "How much I can earn?",
+    question: "How much can I earn?",
     answer: (
       <p className={textStyles}>
         You earn up to a 50% revenue share on every .eth name registration and renewal attributed to
@@ -146,8 +146,8 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
     question: "What happens if I don't hit the $100 threshold?",
     answer: (
       <p className={textStyles}>
-        You don't qualify for awards in that edition. But your referral activity is a strong signal,
-        use what you learned and apply it to the next edition.
+        You don't qualify for awards in that edition. But your referral activity is a strong signal.
+        Use what you learned and apply it to the next edition.
       </p>
     ),
   },
