@@ -5,11 +5,11 @@ import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import BlockscoutExplorer from "data/apps/blockscout-explorer";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
-import contributors from "../../contributors";
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 
 // TODO: Some of these are placeholder benchmarks just to show how the new benchmarking system works,

@@ -2,15 +2,15 @@
 // on adding and modifying app benchmarks
 
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
-import exampleProofImage from "data/apps/blockscout-explorer/acceptance-test-benchmark-proof-example.png";
-import CoinbaseWallet from "data/apps/coinbase-wallet";
+import EtherscanExplorer from "data/apps/etherscan-explorer";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
-import contributors from "../../contributors";
+import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 
 const benchmarks = {
   // "recognize-all-ens-names": {
@@ -38,11 +38,11 @@ const benchmarks = {
       ),
     } as const satisfies AcceptanceTestBenchmark,
   },
-  "mock-bp-all-pending": {
-    "mock-acceptance-test-1": undefined, // simulate pending benchmark
+  "mock-bp-all-pending-2": {
+    "mock-acceptance-test-3": undefined,
   },
 } as const satisfies BestPracticeBenchmarks;
 
-defineAppBenchmarks(CoinbaseWallet, benchmarks);
+defineAppBenchmarks(EtherscanExplorer, benchmarks);
 
 export default benchmarks;

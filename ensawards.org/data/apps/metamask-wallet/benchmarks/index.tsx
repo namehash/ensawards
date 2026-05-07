@@ -4,11 +4,10 @@
 import MetaMaskWallet from "data/apps/metamask-wallet";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
-
-import contributors from "../../contributors";
 
 const benchmarks = {
   // "recognize-all-ens-names": {

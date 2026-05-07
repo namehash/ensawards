@@ -2,7 +2,6 @@
 // on adding and modifying app benchmarks
 
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
-import exampleProofImage from "data/apps/blockscout-explorer/acceptance-test-benchmark-proof-example.png";
 import WalletChanWallet from "data/apps/walletchan-wallet";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types.ts";
@@ -10,6 +9,8 @@ import contributors from "data/contributors";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 
 const benchmarks: BestPracticeBenchmarks = {
   // TODO: remember to rollback to benchmarks actuall results (base it on the current prod if needed)
