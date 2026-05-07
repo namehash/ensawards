@@ -21,7 +21,7 @@ import { EnscribeSolidIcon } from "@/components/atoms/icons/EnscribeSolidIcon";
 import ContractNamingBestPractices from "@/components/contract-naming-season/ContractNamingBestPractices.astro";
 import ContractNamingHero from "@/components/contract-naming-season/ContractNamingHero.astro";
 import ContractNamingIncentivesBanner from "@/components/contract-naming-season/ContractNamingIncentivesBanner.astro";
-import { FrequentlyAskedQuestions } from "@/components/molecules/FrequentlyAskedQuestions";
+import { faqIds, FrequentlyAskedQuestions } from "@/components/molecules/FrequentlyAskedQuestions";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import Layout from "@/layouts/Layout.astro";
 import { type ProtocolId, ProtocolTypes } from "data/protocols/types.ts";
@@ -471,7 +471,7 @@ const startContractNamingTodayButtonStyles =
         </div>
         <FrequentlyAskedQuestions
           client:load
-          itemsToShow={["What's an $ENS?"]}
+          itemsToShow={[faqIds.ENSTokens]}
         />
       </div>
     </div>
