@@ -34,11 +34,8 @@ export interface AcceptanceTestBenchmark {
   contributions: [Contribution, ...Contribution[]];
 
   /**
-   * Notes about how the benchmark result was determined,
-   * which may include details about the testing process,
-   * any challenges encountered, and explanations, as well as proof, for the final result.
+   * Notes about how the benchmark result was determined, which may include details about the testing process,
+   * any challenges encountered, and explanations, as well as a visual proof, for the final result.
    */
-  // TODO: Maybe this element should be made stricter with a dedicated template.
-  // See here for more details: https://namehash.slack.com/archives/C086Z6FNBHN/p1777477037902549?thread_ts=1776097255.913659&cid=C086Z6FNBHN
   notes: JSX.Element;
 }

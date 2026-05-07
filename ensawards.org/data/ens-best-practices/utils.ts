@@ -147,7 +147,7 @@ const isAppPassing = (appBenchmarks: AcceptanceTestBenchmarks): boolean => {
   return allTestsPassed;
 };
 /**
- * Calculates how many apps passed our benchmark on this {@link BestPractice}.
+ * Calculates how many apps passed our acceptance tests on this {@link BestPractice}.
  *
  * For now, both {@link BenchmarkResults.Pass} and {@link BenchmarkResults.PartialPass} are treated as a pass.
  */

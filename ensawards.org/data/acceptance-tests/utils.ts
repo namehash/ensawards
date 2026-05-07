@@ -7,10 +7,12 @@ import type {
 import type { AppSlug } from "data/apps/types";
 import { getAppBenchmarks } from "data/benchmarks/utils.ts";
 
+/** Returns an {@link AcceptanceTest} by {@link AcceptanceTestSlug}. */
 export const getAcceptanceTestBySlug = (slug: AcceptanceTestSlug): AcceptanceTest | undefined => {
   return ACCEPTANCE_TESTS.find((acceptanceTest) => acceptanceTest.acceptanceTestSlug === slug);
 };
 
+/** Returns all {@link AcceptanceTestBenchmark}s of an `App` by {@link AppSlug}. */
 export const getAcceptanceTestBenchmarksByApp = (
   appSlug: AppSlug,
 ): (AcceptanceTestBenchmark | undefined)[] => {

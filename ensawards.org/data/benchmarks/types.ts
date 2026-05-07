@@ -8,9 +8,6 @@ export const BenchmarkResults = {
 
 export type BenchmarkResult = (typeof BenchmarkResults)[keyof typeof BenchmarkResults];
 
-//TODO: Maybe this type should be skipped altogehter and fully replaced with `AcceptanceTestBenchmark`?
-// Not sure about that yet.
-// If this is to stay (which also seems reasonable), then I'd love some help with the terminology.
 /**
  * Represents the benchmark of an {@link App} against an {@link AcceptanceTest} of {@link BestPractice}.
  *

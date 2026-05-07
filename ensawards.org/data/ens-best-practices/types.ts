@@ -51,10 +51,10 @@ export interface BestPracticeApp
 export type BestPractice = BestPracticeProtocol | BestPracticeApp;
 
 /**
- * Defines relations between {@link BestPracticeSlug} and the benchmark results of the {@link AcceptanceTest}s
- * belonging to the respective best practice for a given app.
+ * Defines relations between {@link BestPracticeSlug} and the results of the {@link AcceptanceTest}s benchmarks
+ * belonging to the specified best practice for a given app.
  *
- * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}.
+ * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each applicable {@link BestPractice}.
  * The value should be the related {@link AcceptanceTestBenchmarks}.
  */
 export type BestPracticeBenchmarks = Record<BestPracticeSlug, AcceptanceTestBenchmarks>;

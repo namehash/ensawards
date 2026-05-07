@@ -68,7 +68,7 @@ describe("Benchmarks registry", () => {
     });
   });
 
-  describe("All AppBenchmark entries in all BestPracticeBenchmarks", () => {
+  describe("All AcceptanceTestBenchmarks entries in all BestPracticeBenchmarks", () => {
     it("Should have an explicit entry for all acceptance tests defined for a given best practice", () => {
       const acceptanceTestSlugsByBestPractice: Map<BestPracticeSlug, AcceptanceTestSlug[]> =
         new Map();
