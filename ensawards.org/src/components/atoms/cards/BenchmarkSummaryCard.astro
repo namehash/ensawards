@@ -6,7 +6,7 @@ import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { getBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
 import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
-import { getAcceptanceTestBySlug } from "data/acceptance-tests/utils.ts";
+import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 
 export interface BenchmarkSummaryCardProps {
   bestPractice: BestPracticeApp;
@@ -27,6 +27,9 @@ const detailValueStyles = cn(
   "underline decoration-black/40 decoration-from-font underline-offset-[25%]",
   "transition-all duration-200 hover:decoration-black",
 );
+
+const generalizedAcceptanceTestsBenchmarkResult =
+  generalizeAcceptanceTestBenchmarks(acceptanceTestsBenchmarks);
 ---
 
 <div
@@ -58,43 +61,20 @@ const detailValueStyles = cn(
 
     <div class="flex w-full flex-col items-start gap-1 justify-center">
       <p class={detailLabelStyles}>Acceptance test benchmark results</p>
-      {
-        Object.entries(acceptanceTestsBenchmarks).map(
-          ([acceptanceTestSlug, benchmark]) => {
-            const acceptanceTest = getAcceptanceTestBySlug(acceptanceTestSlug);
-
-            if (acceptanceTest === undefined) {
-              throw new Error(
-                `Invariant(AcceptanceTestSlug): Acceptance test with slug ${acceptanceTestSlug} not defined.`,
-              );
-            }
-            return (
-              <div
-                class="flex flex-row gap-3 justify-start items-center"
-                key={`benchmark-result-${bestPractice.bestPracticeSlug}-${acceptanceTestSlug}`}>
-                <BenchmarkResultBadge benchmark={benchmark} />
-                <p class={cn(detailLabelStyles, "text-black")}>
-                  {acceptanceTest.name}
-                </p>
-              </div>
-            );
-          },
-        )
-      }
+      <BenchmarkResultBadge
+        benchmarkResult={generalizedAcceptanceTestsBenchmarkResult}
+      />
     </div>
-    <!-- TODO: This sections should probably be merged with the "results" to make it more clear which benchmark was updated when -->
     {
       benchmarksUpdateTimes.length > 0 && (
         <div class="flex w-full flex-col items-start gap-1 py-1">
           <p class={detailLabelStyles}>Last updated</p>
           <p class="text-sm leading-normal font-medium text-black">
-            {benchmarksUpdateTimes.map((timestamp, index) => (
-              <span
-                key={`benchmark-update-time-${bestPractice.bestPracticeSlug}-${index}`}>
-                <RelativeTime client:load enforcePast timestamp={timestamp} />
-                {index < benchmarksUpdateTimes.length - 1 && ", "}
-              </span>
-            ))}
+            <RelativeTime
+              client:load
+              enforcePast
+              timestamp={Math.max(...benchmarksUpdateTimes)}
+            />
           </p>
         </div>
       )

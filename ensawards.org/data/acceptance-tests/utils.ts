@@ -5,6 +5,11 @@ import type {
   AcceptanceTestSlug,
 } from "data/acceptance-tests/types";
 import type { AppSlug } from "data/apps/types";
+import {
+  type AcceptanceTestBenchmarks,
+  type BenchmarkResult,
+  BenchmarkResults,
+} from "data/benchmarks/types";
 import { getAppBenchmarks } from "data/benchmarks/utils.ts";
 
 /** Returns an {@link AcceptanceTest} by {@link AcceptanceTestSlug}. */
@@ -21,4 +26,38 @@ export const getAcceptanceTestBenchmarksByApp = (
   return Object.values(appBenchmarks).flatMap((acceptanceTestBenchmarks) =>
     Object.values(acceptanceTestBenchmarks),
   );
+};
+
+/**
+ * Generalizes multiple `AcceptanceTestBenchmark`s into a single `BenchmarkResult` based on the following rules:
+ * - If all benchmarks are {@link BenchmarkResult.Pass} or {@link BenchmarkResult.PartialPass}, returns {@link BenchmarkResult.Pass}
+ * - If all benchmarks are {@link BenchmarkResult.Fail}, returns {@link BenchmarkResult.Fail}
+ * - If at least one benchmark is {@link BenchmarkResult.Fail} and at least one benchmark is {@link BenchmarkResult.Pass} or {@link BenchmarkResult.PartialPass}, returns {@link BenchmarkResult.PartialPass}
+ * - If all benchmarks are `undefined` (pending), returns `undefined`
+ */
+export const generalizeAcceptanceTestBenchmarks = (
+  acceptanceTestBenchmarks: AcceptanceTestBenchmarks,
+): BenchmarkResult | undefined => {
+  const benchmarkResults = Object.values(acceptanceTestBenchmarks).map(
+    (benchmark) => benchmark?.result,
+  );
+
+  const hasPass = benchmarkResults.some(
+    (result) => result === BenchmarkResults.Pass || result === BenchmarkResults.PartialPass,
+  );
+  const hasFail = benchmarkResults.some((result) => result === BenchmarkResults.Fail);
+
+  if (hasPass && hasFail) {
+    return BenchmarkResults.PartialPass;
+  }
+
+  if (hasPass) {
+    return BenchmarkResults.Pass;
+  }
+
+  if (hasFail) {
+    return BenchmarkResults.Fail;
+  }
+
+  return undefined;
 };

@@ -1,3 +1,4 @@
+import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils";
 import type { App } from "data/apps/types.ts";
 import { formatAppType, getAppById } from "data/apps/utils.ts";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
@@ -43,30 +44,23 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
       <div className="flex w-full flex-col items-center">
         {resolvedAppsWithBenchmark.map(({ app, bestPractice, acceptanceTestBenchmarks }, index) => {
           const AppIcon = app.icon;
+          const generalizedBenchmarkResult =
+            generalizeAcceptanceTestBenchmarks(acceptanceTestBenchmarks);
 
           return (
             <Fragment key={`${app.id}-${bestPractice.id}`}>
               <a
                 href={`/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
-                className="w-full flex flex-col justify-center items-start gap-3 py-4 p-[10px] rounded-xl transition-colors duration-200 hover:bg-[#F5F5F5]"
+                className="flex w-full items-center gap-3 py-4 p-[10px] rounded-xl transition-colors duration-200 hover:bg-[#F5F5F5]"
               >
-                <div className="w-full flex flex-row items-center justify-start gap-3">
-                  <AppIcon className="h-8 w-8 shrink-0 rounded-md" />
-                  <span className="min-w-0 flex-1 text-base leading-normal font-semibold text-neutral-900">
-                    {app.name}
-                  </span>
-                </div>
-                <div className="w-full flex flex-row flex-wrap items-center justify-start gap-3">
-                  {Object.entries(acceptanceTestBenchmarks).map(
-                    ([acceptanceTestSlug, benchmark]) => (
-                      <BenchmarkResultBadge
-                        key={acceptanceTestSlug}
-                        benchmark={benchmark}
-                        className="shrink-0 cursor-pointer"
-                      />
-                    ),
-                  )}
-                </div>
+                <AppIcon className="h-8 w-8 shrink-0 rounded-md" />
+                <span className="min-w-0 flex-1 text-base leading-normal font-semibold text-neutral-900">
+                  {app.name}
+                </span>
+                <BenchmarkResultBadge
+                  benchmarkResult={generalizedBenchmarkResult}
+                  className="shrink-0 cursor-pointer"
+                />
               </a>
               {index < appsWithBenchmark.length - 1 && (
                 <div className="w-[calc(100%-28px)] h-[1px] bg-[#F5F5F5]" />
@@ -78,5 +72,3 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
     </div>
   );
 }
-
-export default BenchmarksPerAppTypeCard;

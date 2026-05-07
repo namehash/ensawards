@@ -6,24 +6,23 @@ import benchmarkResultFailSymbol from "@/assets/benchmarkResultFailSymbol.svg";
 import benchmarkResultPartialPassSymbol from "@/assets/benchmarkResultPartialPassSymbol.svg";
 import benchmarkResultPassSymbol from "@/assets/benchmarkResultPassSymbol.svg";
 import benchmarkPendingSymbol from "@/assets/benchmarkPendingSymbol.svg";
-import { BenchmarkResults } from "data/benchmarks/types.ts";
+import { BenchmarkResults, type BenchmarkResult } from "data/benchmarks/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { type BenchmarkResultBadgeProps } from "./BenchmarkResultBadge.tsx";
 import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
-import { type AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 
-const { benchmark, className }: BenchmarkResultBadgeProps = Astro.props;
+const { benchmarkResult, className }: BenchmarkResultBadgeProps = Astro.props;
 
 const benchmarkResultContent = (
-  benchmark?: AcceptanceTestBenchmark,
+  benchmarkResult?: BenchmarkResult,
 ): { symbol: ImageMetadata; symbolAlt: string } => {
-  if (benchmark === undefined) {
+  if (benchmarkResult === undefined) {
     return {
       symbol: benchmarkPendingSymbol,
       symbolAlt: "Pending review benchmark indicator",
     };
   }
-  switch (benchmark.result) {
+  switch (benchmarkResult) {
     case BenchmarkResults.PartialPass:
       return {
         symbol: benchmarkResultPartialPassSymbol,
@@ -41,12 +40,12 @@ const benchmarkResultContent = (
       };
 
     default:
-      const _exhaustive: never = benchmark.result;
+      const _exhaustive: never = benchmarkResult;
       throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };
 
-const { symbol, symbolAlt } = benchmarkResultContent(benchmark);
+const { symbol, symbolAlt } = benchmarkResultContent(benchmarkResult);
 ---
 
 <div
@@ -63,6 +62,6 @@ const { symbol, symbolAlt } = benchmarkResultContent(benchmark);
     quality={100}
   />
   <p class="text-center text-base font-medium leading-normal text-[#F5F5F5]">
-    {formatBenchmarkResult(benchmark, { lowercase: false })}
+    {formatBenchmarkResult(benchmarkResult, { lowercase: false })}
   </p>
 </div>

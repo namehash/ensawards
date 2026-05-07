@@ -67,8 +67,7 @@ export function getAppBenchmarksByBestPractice(slug: BestPracticeSlug): Acceptan
 /** Returns a single benchmark of an {@link App} on a specific {@link BestPractice}
  * decided by the {@link AppSlug} and {@link BestPracticeSlug}.
  * */
-// TODO: Figure out a better name for this function
-export function getAppBenchmark(
+export function getAppAcceptanceTestBenchmarks(
   appSlug: AppSlug,
   bestPracticeSlug: BestPracticeSlug,
 ): AcceptanceTestBenchmarks {
@@ -200,16 +199,16 @@ export const getBenchmarkLastUpdateTimestamp = (
 };
 
 export const formatBenchmarkResult = (
-  benchmark?: AcceptanceTestBenchmark,
+  benchmarkResult?: BenchmarkResult,
   options: Omit<FormatTypeOptions, "plural"> = { lowercase: false },
 ): string => {
   const { lowercase } = options;
 
-  if (!benchmark) {
+  if (!benchmarkResult) {
     return lowercase ? "pending" : "Pending";
   }
 
-  switch (benchmark.result) {
+  switch (benchmarkResult) {
     case BenchmarkResults.Pass:
       return lowercase ? "passed" : "Passed";
 
@@ -220,7 +219,7 @@ export const formatBenchmarkResult = (
       return lowercase ? "failed" : "Failed";
 
     default:
-      const _exhaustive: never = benchmark.result;
+      const _exhaustive: never = benchmarkResult;
       throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };

@@ -20,22 +20,24 @@ export const BestPracticeTechnicalDetails = ({
         {bestPractice.technicalDetails.useCaseSummary}
       </div>
       <div className={technicalSectionContainerStyles}>
-        <h2 className={technicalSectionHeaderStyles}>Desired outcome</h2>
+        <h2 className={cn(technicalSectionHeaderStyles, "text-xl")}>Desired outcome</h2>
         {bestPractice.technicalDetails.desiredOutcome}
       </div>
       <div className={technicalSectionContainerStyles}>
-        <h2 className={technicalSectionHeaderStyles}>Acceptance tests</h2>
+        <h2 className={cn(technicalSectionHeaderStyles, "text-xl")}>Acceptance tests</h2>
         {bestPractice.technicalDetails.acceptanceTests.map((acceptanceTest) => (
           <div key={acceptanceTest.acceptanceTestSlug} className={technicalSectionContainerStyles}>
             <div className={cn(technicalSectionContainerStyles, "gap-1")}>
-              <h3 className={cn(technicalSectionHeaderStyles, "text-xl")}>{acceptanceTest.name}</h3>
+              <h3 className={cn(technicalSectionHeaderStyles, "text-lg")}>{acceptanceTest.name}</h3>
               {acceptanceTest.description}
             </div>
           </div>
         ))}
       </div>
       <div className={technicalSectionContainerStyles}>
-        <h2 className={technicalSectionHeaderStyles}>Implementation recommendations</h2>
+        <h2 className={cn(technicalSectionHeaderStyles, "text-xl")}>
+          Implementation recommendations
+        </h2>
         {bestPractice.technicalDetails.implementationRecommendations}
       </div>
     </div>

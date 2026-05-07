@@ -1,4 +1,7 @@
-import { bestPracticeTechnicalDetailsLinkStyles } from "data/ens-best-practices/styles";
+import {
+  acceptanceTestDetailsContainerStyles,
+  bestPracticeTechnicalDetailsLinkStyles,
+} from "data/ens-best-practices/styles";
 
 import mainnetInteractionsDisplayNamedSmartContractsImage from "./images/mainnet-interactions-display-named-smart-contracts-example.png";
 
@@ -105,22 +108,22 @@ export const useCaseSummary = (
 );
 
 export const mainnetInteractionsDisplayNamedSmartContractsDescription = (
-  <div>
-    <p>
+  <div className={acceptanceTestDetailsContainerStyles}>
+    <p className="w-full">
       When users interact with named smart contracts on Ethereum mainnet the app should display the
       contract's name as its primary identifier.
     </p>
     <img
       alt="mainnet-interactions-display-named-smart-contracts acceptance test"
       src={mainnetInteractionsDisplayNamedSmartContractsImage.src}
-      className="w-auto h-[800px]"
+      className="w-auto h-full max-h-[325px]"
     />
   </div>
 );
 
 export const mainnetInteractionsDisplayNamedSmartContractsAt2Description = (
-  <div>
-    <p>
+  <div className={acceptanceTestDetailsContainerStyles}>
+    <p className="w-full">
       When users interact with named smart contracts on Ethereum mainnet the app should display the
       contract's name as its primary identifier. TEST DESCRIPTION WITHOUT IMAGE
     </p>

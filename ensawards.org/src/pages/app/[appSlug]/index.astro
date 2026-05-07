@@ -2,6 +2,7 @@
 import { EnsIcon, TwitterIcon } from "@namehash/namehash-ui";
 
 import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge";
+import BenchmarkResultCard from "@/components/atoms/cards/BenchmarkResultCard.astro";
 import EnsAwardsScore from "@/components/atoms/ens-awards-score/circular.astro";
 import GlobeIcon from "@/components/atoms/icons/GlobeIcon.astro";
 import ItemsList from "@/components/molecules/ItemsList.astro";
@@ -23,7 +24,6 @@ import {
   sortBenchmarks,
   getAppBenchmarks,
 } from "data/benchmarks/utils";
-import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { getAppContributions } from "data/contributors/utils.ts";
@@ -33,9 +33,8 @@ import {
   getBestPracticeBySlug,
 } from "data/ens-best-practices/utils.ts";
 import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
-import { getAcceptanceTestBySlug } from "data/acceptance-tests/utils.ts";
-import AcceptanceTestBenchmarkResultCard from "@/components/atoms/cards/AcceptanceTestBenchmarkResultCard.astro";
-import { sortBestPracticesFromSlugs } from "data/ens-best-practices/utils.ts";
+import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
+import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { appSlug: app.appSlug } }));
@@ -132,94 +131,78 @@ if (app !== undefined) {
                     );
                   }
 
+                  const benchmarksOnBestPractice = [
+                    ...Object.entries(benchmarksInCategory),
+                  ]
+                    .map(([bestPracticeSlug, bestPracticeBenchmarks]) => {
+                      const bestPractice =
+                        getBestPracticeBySlug(bestPracticeSlug);
+
+                      if (bestPractice === undefined) {
+                        throw new Error(
+                          `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
+                        );
+                      }
+
+                      const generalizedBenchmarkResult =
+                        generalizeAcceptanceTestBenchmarks(
+                          bestPracticeBenchmarks,
+                        );
+                      const generalizedBenchmark =
+                        generalizedBenchmarkResult === undefined
+                          ? undefined
+                          : ({
+                              result: generalizedBenchmarkResult,
+                              // take contributions and notes from the first acceptance test benchmark as a reference
+                              // (guaranteed to exist if generalizedBenchmarkResult is not undefined)
+                              contributions:
+                                bestPracticeBenchmarks?.[
+                                  Object.keys(bestPracticeBenchmarks)[0]
+                                ]?.contributions,
+                              notes:
+                                bestPracticeBenchmarks?.[
+                                  Object.keys(bestPracticeBenchmarks)[0]
+                                ]?.notes,
+                            } as AcceptanceTestBenchmark);
+
+                      return {
+                        bestPractice,
+                        generalizedBenchmark,
+                      };
+                    })
+                    .sort((a, b) =>
+                      sortBenchmarks(
+                        a.generalizedBenchmark,
+                        b.generalizedBenchmark,
+                      ),
+                    );
+
                   return (
-                    <div class="w-full flex flex-col justify-start items-start gap-6">
+                    <div class="w-full flex flex-col justify-start items-start gap-2">
                       <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">
                         <EnsAwardsCircularScoreSmall score={categoryScore} />
                         <span class="flex-1 text-lg leading-normal font-semibold text-black">
                           {category.name}
                         </span>
                       </div>
-                      {[...Object.entries(benchmarksInCategory)]
-                        .sort(
-                          ([aBestPracticeSlug, _a], [bBestPracticeSlug, _b]) =>
-                            // Sort best practices alphabetically by their name --> TODO: Consider sorting best practices by their score (with a dedicated helper function)
-                            sortBestPracticesFromSlugs(
-                              aBestPracticeSlug,
-                              bBestPracticeSlug,
-                            ),
-                        )
-                        .map(
-                          ([bestPracticeSlug, acceptanceTestBenchmarks]: [
-                            BestPracticeSlug,
-                            AcceptanceTestBenchmarks,
-                          ]) => {
-                            const bestPractice =
-                              getBestPracticeBySlug(bestPracticeSlug);
-
-                            if (bestPractice === undefined) {
-                              throw new Error(
-                                `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
-                              );
-                            }
-
-                            return (
-                              <div class="w-full flex flex-col justify-start items-start gap-3 pl-3">
-                                <div class="w-full flex flex-col justify-start items-start gap-1">
-                                  <h3 class="text-lg leading-normal font-semibold text-black self-stretch">
-                                    {bestPractice.name}
-                                  </h3>
-                                  <p class="text-sm font-normal leading-6 text-muted-foreground self-stretch">
-                                    {bestPractice.description}
-                                  </p>
-                                </div>
-                                <div class="w-full flex flex-col justify-start items-start gap-2">
-                                  {[...Object.entries(acceptanceTestBenchmarks)]
-                                    .sort(
-                                      (
-                                        [_aSlug, aBenchmark],
-                                        [_bSlug, bBenchmark],
-                                      ) =>
-                                        sortBenchmarks(aBenchmark, bBenchmark),
-                                    )
-                                    .map(
-                                      ([
-                                        acceptanceTestSlug,
-                                        acceptanceTestBenchmark,
-                                      ]) => {
-                                        const acceptanceTest =
-                                          getAcceptanceTestBySlug(
-                                            acceptanceTestSlug,
-                                          );
-
-                                        if (acceptanceTest === undefined) {
-                                          throw new Error(
-                                            `Invariant(AcceptanceTestSlug): Acceptance test with slug ${acceptanceTestSlug} is not defined`,
-                                          );
-                                        }
-                                        return (
-                                          <AcceptanceTestBenchmarkResultCard
-                                            acceptanceTest={acceptanceTest}
-                                            viewDetails={{
-                                              text: "View detailed report",
-                                              link: `/app/${app.appSlug}/${categorySlug}/${bestPracticeSlug}`,
-                                            }}>
-                                            <BenchmarkResultBadge
-                                              slot="badge"
-                                              className="cursor-pointer"
-                                              benchmark={
-                                                acceptanceTestBenchmark
-                                              }
-                                            />
-                                          </AcceptanceTestBenchmarkResultCard>
-                                        );
-                                      },
-                                    )}
-                                </div>
-                              </div>
-                            );
-                          },
-                        )}
+                      {benchmarksOnBestPractice.map(
+                        ({ bestPractice, generalizedBenchmark }) => {
+                          return (
+                            <BenchmarkResultCard
+                              bestPractice={bestPractice}
+                              viewDetails={{
+                                text: "View detailed report",
+                                link: `/app/${app.appSlug}/${categorySlug}/${bestPractice.bestPracticeSlug}`,
+                              }}>
+                              <BenchmarkResultBadge
+                                slot="badge"
+                                className="cursor-pointer"
+                                benchmarkResult={generalizedBenchmark?.result}
+                              />
+                            </BenchmarkResultCard>
+                          );
+                        },
+                      )}
                     </div>
                   );
                 })}

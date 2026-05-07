@@ -6,6 +6,7 @@ import WalletChanWallet from "data/apps/walletchan-wallet";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types.ts";
 import contributors from "data/contributors";
+import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -21,8 +22,8 @@ const benchmarks: BestPracticeBenchmarks = {
         { from: contributors.apoorvlathey, lastUpdated: parseTimestamp("2026-04-18T00:00:00Z") },
       ],
       notes: (
-        <div>
-          <p>Benchmark placeholder notes</p>
+        <div className={acceptanceTestDetailsContainerStyles}>
+          <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
         </div>
       ),
@@ -33,8 +34,8 @@ const benchmarks: BestPracticeBenchmarks = {
         { from: contributors.apoorvlathey, lastUpdated: parseTimestamp("2026-04-18T00:00:00Z") },
       ],
       notes: (
-        <div>
-          <p>Benchmark placeholder notes</p>
+        <div className={acceptanceTestDetailsContainerStyles}>
+          <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
         </div>
       ),
@@ -47,8 +48,8 @@ const benchmarks: BestPracticeBenchmarks = {
         { from: contributors.apoorvlathey, lastUpdated: parseTimestamp("2026-04-18T00:00:00Z") },
       ],
       notes: (
-        <div>
-          <p>Benchmark placeholder notes</p>
+        <div className={acceptanceTestDetailsContainerStyles}>
+          <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
         </div>
       ),

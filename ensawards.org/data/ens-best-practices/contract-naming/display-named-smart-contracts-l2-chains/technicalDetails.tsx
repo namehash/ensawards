@@ -1,4 +1,7 @@
-import { bestPracticeTechnicalDetailsLinkStyles } from "data/ens-best-practices/styles";
+import {
+  acceptanceTestDetailsContainerStyles,
+  bestPracticeTechnicalDetailsLinkStyles,
+} from "data/ens-best-practices/styles";
 
 import l2ChainsInteractionsDisplayNamedSmartContractsImage from "./images/mock-l2-chains-interactions-display-named-smart-contracts-example.png";
 
@@ -109,8 +112,8 @@ export const useCaseSummary = (
 );
 
 export const l2ChainsInteractionsDisplayNamedSmartContractsDescription = (
-  <div>
-    <p>
+  <div className={acceptanceTestDetailsContainerStyles}>
+    <p className="w-full">
       When users interact with named smart contracts on an L2 chain the app should display the
       contract's name as its primary identifier.
     </p>

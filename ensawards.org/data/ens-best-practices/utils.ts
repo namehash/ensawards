@@ -199,29 +199,3 @@ export const formatBestPracticeTarget = (
 
   return formattedTarget;
 };
-
-// TODO: Improve naming. Goal: indicate that the input of this function are two best practice slugs, not two best practices.
-export const sortBestPracticesFromSlugs = (
-  aBestPracticeSlug: BestPracticeSlug,
-  bBestPracticeSlug: BestPracticeSlug,
-): number => {
-  const aBestPractice = getBestPracticeBySlug(aBestPracticeSlug);
-  const bBestPractice = getBestPracticeBySlug(bBestPracticeSlug);
-
-  if (aBestPractice === undefined) {
-    throw new Error(
-      `Invariant(BestPracticeSlug): Best practice with slug ${aBestPracticeSlug} not found`,
-    );
-  }
-  if (bBestPractice === undefined) {
-    throw new Error(
-      `Invariant(BestPracticeSlug): Best practice with slug ${bBestPracticeSlug} not found`,
-    );
-  }
-
-  return sortBestPractices(aBestPractice, bBestPractice);
-};
-
-export const sortBestPractices = (a: BestPractice, b: BestPractice): number => {
-  return a.name.localeCompare(b.name);
-};

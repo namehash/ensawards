@@ -1,4 +1,7 @@
-import { bestPracticeTechnicalDetailsLinkStyles } from "data/ens-best-practices/styles";
+import {
+  acceptanceTestDetailsContainerStyles,
+  bestPracticeTechnicalDetailsLinkStyles,
+} from "data/ens-best-practices/styles";
 
 import enscribelookupAcceptanceTestImage from "./images/enscribe-lookup-example.png";
 // TODO: The content isn't fully curated for now.
@@ -83,8 +86,8 @@ export const desiredOutcome = (
 );
 
 export const enscribeLookupAcceptanceTestDescription = (
-  <div>
-    <p>
+  <div className={acceptanceTestDetailsContainerStyles}>
+    <p className="w-full">
       When the contract's ENS name or address is looked up in the{" "}
       <a
         className={bestPracticeTechnicalDetailsLinkStyles}

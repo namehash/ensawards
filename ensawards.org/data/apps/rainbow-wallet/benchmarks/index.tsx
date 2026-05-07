@@ -6,6 +6,7 @@ import RainbowWallet from "data/apps/rainbow-wallet";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
+import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -27,8 +28,8 @@ const benchmarks = {
         { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
       ],
       notes: (
-        <div>
-          <p>Benchmark placeholder notes</p>
+        <div className={acceptanceTestDetailsContainerStyles}>
+          <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
         </div>
       ),
@@ -39,8 +40,8 @@ const benchmarks = {
         { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
       ],
       notes: (
-        <div>
-          <p>Benchmark placeholder notes</p>
+        <div className={acceptanceTestDetailsContainerStyles}>
+          <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
         </div>
       ),
@@ -53,8 +54,8 @@ const benchmarks = {
         { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
       ],
       notes: (
-        <div>
-          <p>Benchmark placeholder notes</p>
+        <div className={acceptanceTestDetailsContainerStyles}>
+          <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
         </div>
       ),

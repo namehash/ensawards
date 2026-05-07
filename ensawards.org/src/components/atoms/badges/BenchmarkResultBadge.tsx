@@ -1,5 +1,4 @@
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
-import { BenchmarkResults } from "data/benchmarks/types.ts";
+import { type BenchmarkResult, BenchmarkResults } from "data/benchmarks/types.ts";
 import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
 import {
   X as FailIcon,
@@ -11,15 +10,15 @@ import {
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface BenchmarkResultBadgeProps {
-  benchmark?: AcceptanceTestBenchmark;
+  benchmarkResult?: BenchmarkResult;
   className?: string;
 }
 
-export const benchmarkResultToBadgeStyles = (benchmark?: AcceptanceTestBenchmark) => {
-  if (!benchmark) {
+export const benchmarkResultToBadgeStyles = (benchmarkResult?: BenchmarkResult) => {
+  if (!benchmarkResult) {
     return "text-muted-foreground bg-black/8";
   }
-  switch (benchmark.result) {
+  switch (benchmarkResult) {
     case BenchmarkResults.PartialPass:
       return "text-orange-600 bg-orange-100";
     case BenchmarkResults.Pass:
@@ -28,16 +27,16 @@ export const benchmarkResultToBadgeStyles = (benchmark?: AcceptanceTestBenchmark
       return "text-red-600 bg-[rgba(220,38,38,0.1)]";
 
     default:
-      const _exhaustive: never = benchmark.result;
+      const _exhaustive: never = benchmarkResult;
       throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };
 
-export const getBenchmarkIcon = (benchmark?: AcceptanceTestBenchmark, className?: string) => {
-  if (!benchmark) {
+export const getBenchmarkIcon = (benchmarkResult?: BenchmarkResult, className?: string) => {
+  if (!benchmarkResult) {
     return <PendingIcon className={className} />;
   }
-  switch (benchmark.result) {
+  switch (benchmarkResult) {
     case BenchmarkResults.Pass:
       return <PassIcon className={className} />;
     case BenchmarkResults.PartialPass:
@@ -46,24 +45,24 @@ export const getBenchmarkIcon = (benchmark?: AcceptanceTestBenchmark, className?
       return <FailIcon className={className} />;
 
     default:
-      const _exhaustive: never = benchmark.result;
+      const _exhaustive: never = benchmarkResult;
       throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };
 
-export function BenchmarkResultBadge({ benchmark, className }: BenchmarkResultBadgeProps) {
-  const BenchmarkIcon = getBenchmarkIcon(benchmark, "w-4 h-4");
+export function BenchmarkResultBadge({ benchmarkResult, className }: BenchmarkResultBadgeProps) {
+  const BenchmarkIcon = getBenchmarkIcon(benchmarkResult, "w-4 h-4");
   return (
     <span
       className={cn(
         "w-fit flex flex-row flex-nowrap justify-center items-center gap-1.5 pl-2.5 pr-3 py-1 rounded-full " +
           "text-xs leading-normal font-medium cursor-default",
-        benchmarkResultToBadgeStyles(benchmark),
+        benchmarkResultToBadgeStyles(benchmarkResult),
         className,
       )}
     >
       {BenchmarkIcon}
-      {formatBenchmarkResult(benchmark, { lowercase: false })}
+      {formatBenchmarkResult(benchmarkResult, { lowercase: false })}
     </span>
   );
 }

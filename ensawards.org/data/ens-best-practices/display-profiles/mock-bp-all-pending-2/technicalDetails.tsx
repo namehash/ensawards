@@ -1,4 +1,7 @@
-import { bestPracticeTechnicalDetailsLinkStyles } from "data/ens-best-practices/styles";
+import {
+  acceptanceTestDetailsContainerStyles,
+  bestPracticeTechnicalDetailsLinkStyles,
+} from "data/ens-best-practices/styles";
 
 import acceptanceTestExampleImage from "./images/mock-acceptance-test-image.png";
 
@@ -109,8 +112,8 @@ export const useCaseSummary = (
 );
 
 export const mockAcceptanceTest3Description = (
-  <div>
-    <p>
+  <div className={acceptanceTestDetailsContainerStyles}>
+    <p className="w-full">
       Mock acceptance test description. This is used to test the display of pending benchmarks in
       the UI.
     </p>
