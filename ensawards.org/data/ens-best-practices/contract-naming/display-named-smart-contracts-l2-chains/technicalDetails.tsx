@@ -22,7 +22,7 @@ export const implementationRecommendations = (
       names for L2 networks (including Optimism, Arbitrum, Base, Linea, and Scroll), with an
       automatic fallback to a default primary name (defined on mainnet) if no chain-specific primary
       name is defined. There are several libraries to choose from that support ENSIP-19 and all ENS
-      best practices
+      best practices:
     </p>
     <ul>
       <li>

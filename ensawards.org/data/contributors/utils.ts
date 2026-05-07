@@ -1,6 +1,4 @@
 import { getAcceptanceTestBenchmarksByApp } from "data/acceptance-tests/utils.ts";
-import type { AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
-import { getAppBenchmarks } from "data/benchmarks/utils.ts";
 
 import { formatAccountId } from "@ensnode/ensnode-sdk";
 

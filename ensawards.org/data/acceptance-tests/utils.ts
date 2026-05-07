@@ -30,9 +30,10 @@ export const getAcceptanceTestBenchmarksByApp = (
 
 /**
  * Generalizes multiple `AcceptanceTestBenchmark`s into a single `BenchmarkResult` based on the following rules:
- * - If all benchmarks are {@link BenchmarkResult.Pass} or {@link BenchmarkResult.PartialPass}, returns {@link BenchmarkResult.Pass}
- * - If all benchmarks are {@link BenchmarkResult.Fail}, returns {@link BenchmarkResult.Fail}
- * - If at least one benchmark is {@link BenchmarkResult.Fail} and at least one benchmark is {@link BenchmarkResult.Pass} or {@link BenchmarkResult.PartialPass}, returns {@link BenchmarkResult.PartialPass}
+ * - If all defined benchmarks are {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass}, returns {@link BenchmarkResults.Pass}
+ * - If all defined benchmarks are {@link BenchmarkResults.Fail}, returns {@link BenchmarkResults.Fail}
+ * - If at least one defined benchmark is {@link BenchmarkResults.Fail} and at least one defined benchmark is {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass},
+ * returns {@link BenchmarkResults.PartialPass}
  * - If all benchmarks are `undefined` (pending), returns `undefined`
  */
 export const generalizeAcceptanceTestBenchmarks = (

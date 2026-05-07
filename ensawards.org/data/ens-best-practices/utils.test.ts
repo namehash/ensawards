@@ -1,6 +1,6 @@
 import { type AppBenchmarks } from "data/apps/types";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
-import { calcAppsPassed, calcBestPracticeScore } from "data/ens-best-practices/utils";
+import { calcBestPracticeScore } from "data/ens-best-practices/utils";
 import {
   createMockAcceptanceTestBenchmark,
   mockCoinbaseWalletApp,
@@ -39,54 +39,6 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
     mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {};
     mockAppBenchmarks[mockRainbowApp.appSlug] = {};
     mockAppBenchmarks[mockMetamaskApp.appSlug] = {};
-  });
-  describe("calcAppsPassed", () => {
-    it("Should return the number of apps that passed or partially passed the best practice benchmark", () => {
-      mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
-          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
-        },
-      };
-
-      mockAppBenchmarks[mockRainbowApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
-          mockAcceptanceTestSlug1: undefined,
-        },
-      };
-
-      mockAppBenchmarks[mockMetamaskApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
-          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
-        },
-      };
-
-      expect(calcAppsPassed(mockReverseResolutionBestPractice)).toEqual(2);
-    });
-
-    it("Should exclude all pending benchmarks from the calculation", () => {
-      mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
-          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
-        },
-      };
-
-      mockAppBenchmarks[mockRainbowApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
-          mockAcceptanceTestSlug1: undefined,
-        },
-      };
-
-      mockAppBenchmarks[mockMetamaskApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
-          mockAcceptanceTestSlug1: undefined,
-        },
-      };
-
-      expect(
-        calcAppsPassed(mockReverseResolutionBestPractice),
-        "calcAppsPassed doesn't exclude pending benchmarks",
-      ).toEqual(1);
-    });
   });
 
   describe("calcBestPracticeScore", () => {

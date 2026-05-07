@@ -82,12 +82,13 @@ describe("Benchmarks registry", () => {
 
       Object.entries(data).forEach(([appSlug, appBenchmarks]) => {
         Object.entries(appBenchmarks).forEach(([bestPracticeSlug, appBenchmark]) => {
-          const acceptanceTestSlugs = Object.keys(appBenchmark);
+          const acceptanceTestSlugs = Object.keys(appBenchmark).sort();
+          const expectedSlugs = acceptanceTestSlugsByBestPractice.get(bestPracticeSlug);
 
           expect(
             acceptanceTestSlugs,
             `Missing acceptance test entries for best practice slug={${bestPracticeSlug}}`,
-          ).toEqual(acceptanceTestSlugsByBestPractice.get(bestPracticeSlug));
+          ).toEqual(expectedSlugs?.sort());
         });
       });
     });

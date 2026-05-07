@@ -144,6 +144,17 @@ if (app !== undefined) {
                         );
                       }
 
+                      const referenceAcceptanceTestBenchmark = Object.values(
+                        bestPracticeBenchmarks,
+                      ).find((benchmark) => benchmark !== undefined);
+
+                      if (referenceAcceptanceTestBenchmark === undefined) {
+                        return {
+                          bestPractice,
+                          generalizedBenchmark: undefined,
+                        };
+                      }
+
                       const generalizedBenchmarkResult =
                         generalizeAcceptanceTestBenchmarks(
                           bestPracticeBenchmarks,
@@ -153,16 +164,11 @@ if (app !== undefined) {
                           ? undefined
                           : ({
                               result: generalizedBenchmarkResult,
-                              // take contributions and notes from the first acceptance test benchmark as a reference
+                              // take contributions and notes from the first defined acceptance test benchmark as a reference
                               // (guaranteed to exist if generalizedBenchmarkResult is not undefined)
                               contributions:
-                                bestPracticeBenchmarks?.[
-                                  Object.keys(bestPracticeBenchmarks)[0]
-                                ]?.contributions,
-                              notes:
-                                bestPracticeBenchmarks?.[
-                                  Object.keys(bestPracticeBenchmarks)[0]
-                                ]?.notes,
+                                referenceAcceptanceTestBenchmark.contributions,
+                              notes: referenceAcceptanceTestBenchmark.notes,
                             } as AcceptanceTestBenchmark);
 
                       return {
@@ -213,7 +219,7 @@ if (app !== undefined) {
               client:only="react"
               contributionType={ContributionTypes.BenchmarkResult}
               existingContributions={appContributions}
-              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks.ts`}
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks/index.tsx`}
               sidebarVariant>
               <ContributorsCardLoading
                 slot="fallback"

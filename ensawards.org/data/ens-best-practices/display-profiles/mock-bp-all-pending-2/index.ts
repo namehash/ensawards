@@ -22,7 +22,7 @@ const mockBestPracticeAllPending2: BestPracticeApp = {
   bestPracticeSlug: "mock-bp-all-pending-2",
   name: "Mock BP all pending 2",
   description:
-    "Mock best practice with all benchmarks in pending state. This is used to test the display of pending benchmarks in the UI with a best pratice other than Contract Naming.",
+    "Mock best practice with all benchmarks in pending state. This is used to test the display of pending benchmarks in the UI with a best practice other than Contract Naming.",
   category: DisplayProfilesCategory,
   appliesTo: [AppTypes.Explorer],
   technicalDetails: {

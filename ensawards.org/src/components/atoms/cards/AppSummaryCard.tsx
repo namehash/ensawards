@@ -61,17 +61,24 @@ function BenchmarkCategorySection({
         );
       }
 
+      const referenceAcceptanceTestBenchmark = Object.values(bestPracticeBenchmarks).find(
+        (benchmark) => benchmark !== undefined,
+      );
+
+      if (referenceAcceptanceTestBenchmark === undefined) {
+        return { bestPractice, generalizedBenchmark: undefined };
+      }
+
       const generalizedBenchmarkResult = generalizeAcceptanceTestBenchmarks(bestPracticeBenchmarks);
       const generalizedBenchmark =
         generalizedBenchmarkResult === undefined
           ? undefined
           : ({
               result: generalizedBenchmarkResult,
-              // take contributions and notes from the first acceptance test benchmark as a reference
+              // take contributions and notes from the first defined acceptance test benchmark as a reference
               // (guaranteed to exist if generalizedBenchmarkResult is not undefined)
-              contributions:
-                bestPracticeBenchmarks?.[Object.keys(bestPracticeBenchmarks)[0]]?.contributions,
-              notes: bestPracticeBenchmarks?.[Object.keys(bestPracticeBenchmarks)[0]]?.notes,
+              contributions: referenceAcceptanceTestBenchmark.contributions,
+              notes: referenceAcceptanceTestBenchmark.notes,
             } as AcceptanceTestBenchmark);
 
       return {

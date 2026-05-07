@@ -128,43 +128,6 @@ export const calcBestPracticeScore = (
   return asEnsAwardsScore(score);
 };
 
-// TODO: How to define a passing app now? When it passes all acceptance tests? When it's ensawards score is at least 50? When it passes at least one of them?
-// For now, I chose the 1st option, but I'm open to changing that
-const isAppPassing = (appBenchmarks: AcceptanceTestBenchmarks): boolean => {
-  let allTestsPassed = true;
-
-  for (const acceptanceTestBenchmark of Object.values(appBenchmarks)) {
-    // Explicit acceptance of Pass & Partial Pass results
-    if (
-      acceptanceTestBenchmark === undefined ||
-      (acceptanceTestBenchmark.result !== BenchmarkResults.Pass &&
-        acceptanceTestBenchmark.result !== BenchmarkResults.PartialPass)
-    ) {
-      allTestsPassed = false;
-      break;
-    }
-  }
-  return allTestsPassed;
-};
-/**
- * Calculates how many apps passed our acceptance tests on this {@link BestPractice}.
- *
- * For now, both {@link BenchmarkResults.Pass} and {@link BenchmarkResults.PartialPass} are treated as a pass.
- */
-export const calcAppsPassed = (bestPractice: BestPracticeApp): number => {
-  let appsPassed = 0;
-
-  const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(bestPractice.bestPracticeSlug);
-
-  bestPracticeBenchmarks.forEach((acceptanceTestsBenchmarks) => {
-    if (isAppPassing(acceptanceTestsBenchmarks)) {
-      appsPassed += 1;
-    }
-  });
-
-  return appsPassed;
-};
-
 export const formatBestPracticeTarget = (
   target: BestPracticeTarget,
   options: FormatTypeOptions = { lowercase: false, plural: false },

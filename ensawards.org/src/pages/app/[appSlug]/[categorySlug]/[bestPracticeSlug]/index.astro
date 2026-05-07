@@ -24,6 +24,7 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import { AppSummaryCard } from "@/components/atoms/cards/AppSummaryCard.tsx";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils";
 import { BenchmarkTechnicalDetails } from "@/components/molecules/BenchmarkTechnicalDetails";
+import { type Contribution } from "data/contributors/types";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -65,11 +66,10 @@ if (app !== undefined && bestPractice !== undefined) {
     bestPractice.bestPracticeSlug,
   );
   generalizedBenchmarkResult = generalizeAcceptanceTestBenchmarks(appAcceptanceTestBenchmarks);
-  allContributions = appAcceptanceTestBenchmarks
-    ? Object.values(appAcceptanceTestBenchmarks).flatMap((acceptanceTestBenchmark) =>
-        acceptanceTestBenchmark !== undefined ? acceptanceTestBenchmark.contributions : [],
-      )
-    : [];
+  allContributions = Object.values(appAcceptanceTestBenchmarks).flatMap(
+    (acceptanceTestBenchmark) =>
+      acceptanceTestBenchmark !== undefined ? acceptanceTestBenchmark.contributions : [],
+  );
 }
 ---
 
@@ -138,7 +138,7 @@ if (app !== undefined && bestPractice !== undefined) {
               sidebarVariant
               contributionType={ContributionTypes.BenchmarkResult}
               existingContributions={allContributions}
-              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks.ts`}>
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks/index.tsx`}>
               <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant

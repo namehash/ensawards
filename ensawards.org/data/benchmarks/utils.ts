@@ -26,7 +26,7 @@ export function getAppBenchmarks(slug: AppSlug): BestPracticeBenchmarks {
       `Invariant(AppBenchmarks): Benchmarks for app with slug ${slug} are not defined`,
     );
   }
-  return APP_BENCHMARKS[slug];
+  return appBenchmarks;
 }
 
 /** Returns all benchmarks of a {@link BestPractice} by its {@link BestPracticeSlug}.
