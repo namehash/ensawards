@@ -20,9 +20,13 @@ const { mockGetBestPracticeBySlug } = vi.hoisted(() => ({
   mockGetBestPracticeBySlug: vi.fn(),
 }));
 
-vi.mock("data/ens-best-practices/utils.ts", () => ({
-  getBestPracticeBySlug: mockGetBestPracticeBySlug,
-}));
+vi.mock(import("data/ens-best-practices/utils.ts"), async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    getBestPracticeBySlug: mockGetBestPracticeBySlug,
+  };
+});
 
 describe("benchmarks-utils", () => {
   describe("calcEnsAwardsPoints", () => {
