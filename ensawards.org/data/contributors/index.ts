@@ -32,6 +32,10 @@ const contributors = {
     chainId: mainnet.id,
     address: asNormalizedAddress("0x63a556c75443b176b5a4078e929e38beb37a1ff2"),
   },
+  caldonia: {
+    chainId: mainnet.id,
+    address: "0x9a41c5549bcc7d3f8d80e639714a4823de559134",
+  },
 } as const satisfies Record<ContributorAlias, Contributor>;
 
 export default contributors;
