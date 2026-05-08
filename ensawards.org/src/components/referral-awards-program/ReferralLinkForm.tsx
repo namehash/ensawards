@@ -103,7 +103,7 @@ export function ReferralLinkForm() {
     } catch (error) {
       // If the input is not normalizable to an address, proceed with ENS name validation and resolution
       // We fail silently here because the input might still be a valid ENS name.
-      // The broad user-facing error is handled jointly on L117
+      // The broad user-facing error is handled in the normalizeName catch below.
     }
 
     // Check if the input is normalizable to an interpreted ENS name
