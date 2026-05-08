@@ -35,7 +35,10 @@ try {
       <!--/>-->
       {
         normalizedAddress !== null ? (
-          <EnsAdvocateDetailsPageProvider address={advocate} client:load />
+          <EnsAdvocateDetailsPageProvider
+            address={normalizedAddress}
+            client:load
+          />
         ) : (
           <ErrorInfo
             title="ENS Advocate profile"

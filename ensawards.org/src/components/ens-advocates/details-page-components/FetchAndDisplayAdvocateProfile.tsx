@@ -1,9 +1,4 @@
-import {
-  asInterpretedName,
-  type InterpretedName,
-  type NormalizedAddress,
-  reinterpretName,
-} from "enssdk";
+import { type InterpretedName, type NormalizedAddress, reinterpretName } from "enssdk";
 
 import { getENSRootChainId } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
