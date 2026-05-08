@@ -1,4 +1,4 @@
-import { asInterpretedName, type Duration } from "enssdk";
+import { asInterpretedName, asNormalizedAddress, type Duration } from "enssdk";
 
 import type {
   NamedRegistrarAction,
@@ -7,19 +7,19 @@ import type {
   RegistrarActionsResponseError,
   RegistrarActionsResponseOk,
 } from "@ensnode/ensnode-sdk";
-import { parseTimestamp, RegistrarActionsResponseCodes } from "@ensnode/ensnode-sdk";
+import { parseEth, parseTimestamp, RegistrarActionsResponseCodes } from "@ensnode/ensnode-sdk";
 
 export const registrationWithReferral = {
   action: {
     id: "176209761600000000111551110000000009545322000000000000006750000000000000067",
     type: "registration",
     incrementalDuration: 2419200,
-    registrant: "0x877dd7fa7a6813361de23552c12d25af4a89cda7",
+    registrant: asNormalizedAddress("0x877dd7fa7a6813361de23552c12d25af4a89cda7"),
     registrationLifecycle: {
       subregistry: {
         subregistryId: {
           chainId: 11155111,
-          address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+          address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
         },
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
@@ -27,22 +27,13 @@ export const registrationWithReferral = {
       expiresAt: parseTimestamp("2025-11-30T15:33:36.000Z"),
     },
     pricing: {
-      baseCost: {
-        currency: "ETH",
-        amount: 7671232876711824n,
-      },
-      premium: {
-        currency: "ETH",
-        amount: 0n,
-      },
-      total: {
-        currency: "ETH",
-        amount: 7671232876711824n,
-      },
+      baseCost: parseEth("0.007671232876711824"),
+      premium: parseEth("0"),
+      total: parseEth("0.007671232876711824"),
     },
     referral: {
       encodedReferrer: "0x0000000000000000000000007bddd635be34bcf860d5f02ae53b16fcd17e8f6f",
-      decodedReferrer: "0x7bddd635be34bcf860d5f02ae53b16fcd17e8f6f",
+      decodedReferrer: asNormalizedAddress("0x7bddd635be34bcf860d5f02ae53b16fcd17e8f6f"),
     },
     block: {
       number: 9545322,
@@ -62,12 +53,12 @@ export const renewalWithNoReferral = {
     id: "176304520800000000111551110000000009621987000000000000011350000000000000258",
     type: "renewal",
     incrementalDuration: 86400,
-    registrant: "0xaea0579cdda2b0fe2a9799013569a042d481974f",
+    registrant: asNormalizedAddress("0xaea0579cdda2b0fe2a9799013569a042d481974f"),
     registrationLifecycle: {
       subregistry: {
         subregistryId: {
           chainId: 11155111,
-          address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+          address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
         },
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
@@ -75,9 +66,9 @@ export const renewalWithNoReferral = {
       expiresAt: parseTimestamp("2027-02-21T10:31:24.000Z"),
     },
     pricing: {
-      baseCost: { currency: "ETH", amount: 8732876712338n },
-      premium: { currency: "ETH", amount: 0n },
-      total: { currency: "ETH", amount: 8732876712338n },
+      baseCost: parseEth("0.000008732876712338"),
+      premium: parseEth("0"),
+      total: parseEth("0.000008732876712338"),
     },
     referral: { encodedReferrer: null, decodedReferrer: null },
     block: { number: 9621987, timestamp: parseTimestamp("2025-11-13T14:46:48.000Z") },
@@ -95,12 +86,12 @@ export const registrationWithNoReferralAndEncodedLabelHashes = {
     id: "176234701200000000111551110000000009566045000000000000014150000000000000198",
     type: "registration",
     incrementalDuration: 31536000,
-    registrant: "0x5505957ff5927f29eacabbbe8a304968bf2dc064",
+    registrant: asNormalizedAddress("0x5505957ff5927f29eacabbbe8a304968bf2dc064"),
     registrationLifecycle: {
       subregistry: {
         subregistryId: {
           chainId: 11155111,
-          address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+          address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
         },
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
@@ -132,12 +123,12 @@ export const registrationWithZeroEncodedReferrer = {
     id: "176304488400000000111551110000000009621960000000000000003350000000000000027",
     type: "registration",
     incrementalDuration: 31536000,
-    registrant: "0xf7160904df99ccd003141105ecda8abd57af92fb",
+    registrant: asNormalizedAddress("0xf7160904df99ccd003141105ecda8abd57af92fb"),
     registrationLifecycle: {
       subregistry: {
         subregistryId: {
           chainId: 11155111,
-          address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+          address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
         },
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
@@ -145,13 +136,13 @@ export const registrationWithZeroEncodedReferrer = {
       expiresAt: parseTimestamp("2026-11-13T14:41:24.000Z"),
     },
     pricing: {
-      baseCost: { currency: "ETH", amount: 3125000000003490n },
-      premium: { currency: "ETH", amount: 0n },
-      total: { currency: "ETH", amount: 3125000000003490n },
+      baseCost: parseEth("0.003125000000003490"),
+      premium: parseEth("0"),
+      total: parseEth("0.003125000000003490"),
     },
     referral: {
       encodedReferrer: "0x0000000000000000000000000000000000000000000000000000000000000000",
-      decodedReferrer: "0x0000000000000000000000000000000000000000",
+      decodedReferrer: asNormalizedAddress("0x0000000000000000000000000000000000000000"),
     },
     block: { number: 9621960, timestamp: parseTimestamp("2025-11-13T14:41:24.000Z") },
     transactionHash: "0x32391ebba1a90dc02920acafcbd0993aafcb8f0167a16a08efd6886f0e21e433",
@@ -168,12 +159,12 @@ export const registrationWithReferrerNotMatchingENSHolidayAwardsFormat = {
     id: "176305292400000000111551110000000009622628000000000000002750000000000000049",
     type: "registration",
     incrementalDuration: 31536000,
-    registrant: "0xf925f9aa4044fbdbaf427623b30240a88ce4f409",
+    registrant: asNormalizedAddress("0xf925f9aa4044fbdbaf427623b30240a88ce4f409"),
     registrationLifecycle: {
       subregistry: {
         subregistryId: {
           chainId: 11155111,
-          address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+          address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
         },
         node: "0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae",
       },
@@ -181,22 +172,13 @@ export const registrationWithReferrerNotMatchingENSHolidayAwardsFormat = {
       expiresAt: parseTimestamp("2026-11-13T16:55:24.000Z"),
     },
     pricing: {
-      baseCost: {
-        currency: "ETH",
-        amount: 3125000000003490n,
-      },
-      premium: {
-        currency: "ETH",
-        amount: 0n,
-      },
-      total: {
-        currency: "ETH",
-        amount: 3125000000003490n,
-      },
+      baseCost: parseEth("0.003125000000003490"),
+      premium: parseEth("0"),
+      total: parseEth("0.003125000000003490"),
     },
     referral: {
       encodedReferrer: "0x100000000000000000000000000000000000000000000000000000000000000",
-      decodedReferrer: "0x0000000000000000000000000000000000000000",
+      decodedReferrer: asNormalizedAddress("0x0000000000000000000000000000000000000000"),
     },
     block: {
       number: 9622628,

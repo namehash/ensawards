@@ -4,6 +4,7 @@ import {
   type ReferralProgramEditionSummaryPieSplit,
   type ReferralProgramEditionSummaryRevShareCap,
 } from "@namehash/ens-referrals";
+import { asNormalizedAddress } from "enssdk";
 
 import { parseTimestamp, parseUsdc } from "@ensnode/ensnode-sdk";
 
@@ -24,7 +25,7 @@ export const mockReferralProgramEditionSummariesList: (
       endTime: parseTimestamp("2025-12-31T23:59:59.000Z"),
       subregistryId: {
         chainId: 1,
-        address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+        address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
       },
       rulesUrl: new URL("https://ensawards.org/ens-holiday-awards-rules"),
       areAwardsDistributed: true,
@@ -45,7 +46,7 @@ export const mockReferralProgramEditionSummariesList: (
       endTime: parseTimestamp("2026-03-31T23:59:59.000Z"),
       subregistryId: {
         chainId: 1,
-        address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+        address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
       },
       rulesUrl: new URL("https://ensawards.org/ens-holiday-awards-rules"),
       areAwardsDistributed: false,
@@ -68,7 +69,7 @@ export const mockReferralProgramEditionSummariesList: (
       endTime: parseTimestamp("2028-06-09T06:38:51.000Z"),
       subregistryId: {
         chainId: 1,
-        address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+        address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
       },
       rulesUrl: new URL("https://ensawards.org/ens-holiday-awards-rules"),
       adminActions: [],

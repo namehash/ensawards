@@ -1,5 +1,5 @@
 ---
-import { isAddress } from "viem";
+import { toNormalizedAddress, type NormalizedAddress } from "enssdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import { EnsAdvocateDetailsPageProvider } from "@/components/ens-advocates/EnsAdvocateDetailsPageProvider";
@@ -9,7 +9,14 @@ const { advocate } = Astro.params;
 
 // TODO: once the search form is published and improved to also accept names,
 // refactor that logic so that it also allows names
-const isRouteParamAValidAddress = isAddress(advocate);
+
+let normalizedAddress: NormalizedAddress | null;
+
+try {
+  normalizedAddress = toNormalizedAddress(advocate);
+} catch (error) {
+  normalizedAddress = null;
+}
 ---
 
 <Layout isStatic={true}>
@@ -27,7 +34,7 @@ const isRouteParamAValidAddress = isAddress(advocate);
       <!--  }}-->
       <!--/>-->
       {
-        isRouteParamAValidAddress ? (
+        normalizedAddress !== null ? (
           <EnsAdvocateDetailsPageProvider address={advocate} client:load />
         ) : (
           <ErrorInfo

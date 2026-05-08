@@ -11,8 +11,9 @@ import {
   type ReferralProgramRulesRevShareCap,
   type ReferrerLeaderboardPagePieSplit,
 } from "@namehash/ens-referrals";
+import { asNormalizedAddress } from "enssdk";
 
-import { CurrencyIds, parseTimestamp, parseUsdc } from "@ensnode/ensnode-sdk";
+import { parseEth, parseTimestamp, parseUsdc } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
 import type { DisplayReferrerLeaderboardPageProps } from "@/components/referral-awards-program/referrers/DisplayReferrerLeaderboardPage";
@@ -59,7 +60,7 @@ const mockPieSplitRules = {
   endTime: parseTimestamp("2025-12-31T23:59:59.000Z"),
   subregistryId: {
     chainId: 1,
-    address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+    address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
   },
   rulesUrl: new URL("https://example.com/rules"),
   areAwardsDistributed: true,
@@ -74,7 +75,7 @@ const emptyPieSplitLeaderboardData = {
     grandTotalIncrementalDuration: 0,
     grandTotalQualifiedReferrersFinalScore: 0,
     minFinalScoreToQualify: 0,
-    grandTotalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
+    grandTotalRevenueContribution: parseEth("0"),
   },
   pageContext: {
     page: 1,
@@ -100,13 +101,13 @@ const mockEditionSummaryPieSplit = {
 
 const mockDisqualification: AdminActionDisqualification = {
   actionType: AdminActionTypes.Disqualification,
-  referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
+  referrer: asNormalizedAddress("0xf919a96d2970380b87917b04f02e6d3d08368b10"),
   reason: "Mock longer disqualification text",
 };
 
 const mockWarning: AdminActionWarning = {
   actionType: AdminActionTypes.Warning,
-  referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
+  referrer: asNormalizedAddress("0x1c0ea438837302b4516ac3f380313061ec11760f"),
   reason: "Mock longer warning text placeholder",
 };
 
@@ -120,7 +121,7 @@ const mockRevShareCapRules = {
   endTime: parseTimestamp("2025-12-31T23:59:59.000Z"),
   subregistryId: {
     chainId: 1,
-    address: "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+    address: asNormalizedAddress("0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"),
   },
   rulesUrl: new URL("https://example.com/rules"),
   adminActions: [mockDisqualification, mockWarning],
@@ -172,7 +173,7 @@ export const mockReferrersLeaderboardData = new Map<
             rules: mockPieSplitRules,
             referrers: [
               {
-                referrer: "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
+                referrer: asNormalizedAddress("0x4d982788c01402c4e0f657e1192d7736084ae5a8"),
                 totalReferrals: 5,
                 totalIncrementalDuration: 22813200,
                 score: 0.722921529303591,
@@ -182,10 +183,10 @@ export const mockReferrersLeaderboardData = new Map<
                 finalScore: 0.803246143670656,
                 awardPoolShare: 0.0276828248101365,
                 awardPoolApproxValue: parseUsdc("3276.828248"),
-                totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
+                totalRevenueContribution: parseEth("0"),
               },
               {
-                referrer: "0xabe3fdb4d2cd5f2e7193a4ac380ecb68e899896a",
+                referrer: asNormalizedAddress("0xabe3fdb4d2cd5f2e7193a4ac380ecb68e899896a"),
                 totalReferrals: 7,
                 totalIncrementalDuration: 15120000,
                 score: 0.479133726222989,
@@ -195,10 +196,10 @@ export const mockReferrersLeaderboardData = new Map<
                 finalScore: 0.479133726222989,
                 awardPoolShare: 0.01651271544616,
                 awardPoolApproxValue: parseUsdc("165.127154"),
-                totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
+                totalRevenueContribution: parseEth("0"),
               },
               {
-                referrer: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
+                referrer: asNormalizedAddress("0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d"),
                 totalReferrals: 5,
                 totalIncrementalDuration: 12960000,
                 score: 0.410686051048276,
@@ -208,10 +209,10 @@ export const mockReferrersLeaderboardData = new Map<
                 finalScore: 0.410686051048276,
                 awardPoolShare: 0,
                 awardPoolApproxValue: parseUsdc("0"),
-                totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
+                totalRevenueContribution: parseEth("0"),
               },
               {
-                referrer: "0x2a614b7984854177d22fa23a4034a13ea82e4f97",
+                referrer: asNormalizedAddress("0x2a614b7984854177d22fa23a4034a13ea82e4f97"),
                 totalReferrals: 5,
                 totalIncrementalDuration: 12096000,
                 score: 0.383306980978391,
@@ -221,7 +222,7 @@ export const mockReferrersLeaderboardData = new Map<
                 finalScore: 0.383306980978391,
                 awardPoolShare: 0,
                 awardPoolApproxValue: parseUsdc("0"),
-                totalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
+                totalRevenueContribution: parseEth("0"),
               },
             ],
             aggregatedMetrics: {
@@ -229,7 +230,7 @@ export const mockReferrersLeaderboardData = new Map<
               grandTotalIncrementalDuration: 651636003,
               grandTotalQualifiedReferrersFinalScore: 29.0160469236699,
               minFinalScoreToQualify: 0.479133726222989,
-              grandTotalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
+              grandTotalRevenueContribution: parseEth("0"),
             },
             pageContext: {
               page: 1,
@@ -264,7 +265,7 @@ export const mockReferrersLeaderboardData = new Map<
               grandTotalReferrals: 0,
               grandTotalIncrementalDuration: 0,
               awardPoolRemaining: parseUsdc("10000"),
-              grandTotalRevenueContribution: { currency: CurrencyIds.ETH, amount: 0n },
+              grandTotalRevenueContribution: parseEth("0"),
             },
             pageContext: {
               page: 1,
@@ -304,13 +305,10 @@ export const mockReferrersLeaderboardData = new Map<
             rules: mockRevShareCapRules,
             referrers: [
               {
-                referrer: "0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d",
+                referrer: asNormalizedAddress("0x7e491cde0fbf08e51f54c4fb6b9e24afbd18966d"),
                 totalReferrals: 3045,
                 totalIncrementalDuration: 22420645501,
-                totalRevenueContribution: {
-                  currency: CurrencyIds.ETH,
-                  amount: 11762726770456096320n,
-                },
+                totalRevenueContribution: parseEth("11.762726770456096320"),
                 totalBaseRevenueContribution: parseUsdc("3552.409862"),
                 rank: 1,
                 isQualified: true,
@@ -319,13 +317,10 @@ export const mockReferrersLeaderboardData = new Map<
                 adminAction: null,
               },
               {
-                referrer: "0xf919a96d2970380b87917b04f02e6d3d08368b10",
+                referrer: asNormalizedAddress("0xf919a96d2970380b87917b04f02e6d3d08368b10"),
                 totalReferrals: 898,
                 totalIncrementalDuration: 15477955200,
-                totalRevenueContribution: {
-                  currency: CurrencyIds.ETH,
-                  amount: 5177998061608530459n,
-                },
+                totalRevenueContribution: parseEth("5.177998061608530459"),
                 totalBaseRevenueContribution: parseUsdc("2452.384374"),
                 rank: 2,
                 isQualified: false,
@@ -334,13 +329,10 @@ export const mockReferrersLeaderboardData = new Map<
                 adminAction: mockDisqualification,
               },
               {
-                referrer: "0x1c0ea438837302b4516ac3f380313061ec11760f",
+                referrer: asNormalizedAddress("0x1c0ea438837302b4516ac3f380313061ec11760f"),
                 totalReferrals: 5,
                 totalIncrementalDuration: 128736000,
-                totalRevenueContribution: {
-                  currency: CurrencyIds.ETH,
-                  amount: 90671049875579170n,
-                },
+                totalRevenueContribution: parseEth("0.090671049875579170"),
                 totalBaseRevenueContribution: parseUsdc("20.397407"),
                 rank: 4,
                 isQualified: false,
@@ -349,13 +341,10 @@ export const mockReferrersLeaderboardData = new Map<
                 adminAction: mockWarning,
               },
               {
-                referrer: "0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",
+                referrer: asNormalizedAddress("0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10"),
                 totalReferrals: 1,
                 totalIncrementalDuration: 2502000,
-                totalRevenueContribution: {
-                  currency: CurrencyIds.ETH,
-                  amount: 190714270880730n,
-                },
+                totalRevenueContribution: parseEth("0.000190714270880730"),
                 totalBaseRevenueContribution: parseUsdc("0.396426"),
                 rank: 10,
                 isQualified: false,
@@ -367,10 +356,7 @@ export const mockReferrersLeaderboardData = new Map<
             aggregatedMetrics: {
               grandTotalReferrals: 3965,
               grandTotalIncrementalDuration: 38476706701,
-              grandTotalRevenueContribution: {
-                currency: CurrencyIds.ETH,
-                amount: 17118804944747959622n,
-              },
+              grandTotalRevenueContribution: parseEth("17.118804944747959622"),
               awardPoolRemaining: parseUsdc("6997.603891"),
             },
             pageContext: {

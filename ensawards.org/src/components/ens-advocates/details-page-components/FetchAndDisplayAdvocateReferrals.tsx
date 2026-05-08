@@ -1,7 +1,6 @@
 import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals";
-import { type NormalizedAddress } from "enssdk";
+import { asInterpretedName, type NormalizedAddress, namehashInterpretedName } from "enssdk";
 import { type ReactNode, useEffect, useState } from "react";
-import { namehash } from "viem";
 
 import { useRegistrarActions } from "@ensnode/ensnode-react";
 import {
@@ -33,7 +32,7 @@ export function FetchAndDisplayAdvocateReferrals({
 
   const filters: RegistrarActionsFilter[] = [
     // Include records for direct subnames of `.eth`
-    registrarActionsFilter.byParentNode(namehash("eth")),
+    registrarActionsFilter.byParentNode(namehashInterpretedName(asInterpretedName("eth"))),
     // Include records with `encodedReferrer` other than NULL and ZERO_ENCODED_REFERRER
     registrarActionsFilter.withReferral(true),
     // Include records where `decodedReferrer` address equals the advocate's address

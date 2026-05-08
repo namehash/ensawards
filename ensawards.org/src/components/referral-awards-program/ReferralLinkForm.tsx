@@ -3,7 +3,6 @@ import { CopyButton, useIsMobile } from "@namehash/namehash-ui";
 import { type InterpretedName, normalizeName, toNormalizedAddress } from "enssdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
-import { isAddress } from "viem";
 import * as Yup from "yup";
 
 import { FormButton } from "@/components/atoms/form-elements/FormButton.tsx";
@@ -89,10 +88,11 @@ export function ReferralLinkForm() {
     // Proceed with detailed validation if the initial one is successful
     const recipientInput = data[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient];
 
-    // Check if the input is a valid address
-    if (isAddress(recipientInput, { strict: false })) {
-      // Interpret the input as an address to generate the referral link
-      setGeneratedLink(buildEnsReferralUrl(toNormalizedAddress(recipientInput)).href);
+    // Validate and normalize the input, treating it as an address
+    try {
+      const normalizedAddress = toNormalizedAddress(recipientInput);
+
+      setGeneratedLink(buildEnsReferralUrl(normalizedAddress).href);
       setSuccessfulFormSubmit(true);
 
       // Reset validation errors on successful validation
@@ -100,6 +100,10 @@ export function ReferralLinkForm() {
 
       setIsLoading(false);
       return;
+    } catch (error) {
+      // If the input is not normalizable to an address, proceed with ENS name validation and resolution
+      // We fail silently here because the input might still be a valid ENS name.
+      // The broad user-facing error is handled jointly on L117
     }
 
     // Check if the input is normalizable to an interpreted ENS name

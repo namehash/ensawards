@@ -2,7 +2,6 @@ import { navigate } from "astro:transitions/client";
 import { useIsMobile } from "@namehash/namehash-ui";
 import { toNormalizedAddress } from "enssdk";
 import React, { type ChangeEvent, useState } from "react";
-import { isAddress } from "viem";
 
 import { Input } from "@/components/atoms/form-elements/Input.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";
@@ -16,17 +15,15 @@ export function AdvocateSearchForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Check if the input is a valid address
-    if (!isAddress(rawInputAddress, { strict: false })) {
-      // if not, then set an error message
+    try {
+      // If the input is a valid normalizable address
+      const normalizedAddress = toNormalizedAddress(rawInputAddress);
+      // route to an advocate's profile
+      navigate(`/advocate/${normalizedAddress}`);
+    } catch (error) {
+      // if the address is not valid and/or normalizable, then set an error message
       setInputErrorMessage("Invalid address");
-      return;
     }
-
-    // otherwise, guarantee that the input address is normalized
-    // and route to an advocate's profile
-    const normalizedAddress = toNormalizedAddress(rawInputAddress);
-    navigate(`/advocate/${normalizedAddress}`);
   };
 
   const handleRawInputNameChange = (e: ChangeEvent<HTMLInputElement>) => {

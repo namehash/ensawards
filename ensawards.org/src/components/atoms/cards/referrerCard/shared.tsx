@@ -25,8 +25,8 @@ export const ethFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 3,
 });
 
-export const getAdvocateDetailsUrl = (referrerAddress: NormalizedAddress) =>
-  new URL(getEnsAdvocateDetailsRelativePath(referrerAddress), getEnsAwardsBaseUrl());
+export const getAdvocateDetailsUrl = (address: NormalizedAddress) =>
+  new URL(getEnsAdvocateDetailsRelativePath(address), getEnsAwardsBaseUrl());
 
 export interface RankProps {
   /**

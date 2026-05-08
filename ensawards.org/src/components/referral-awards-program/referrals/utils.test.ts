@@ -3,7 +3,7 @@ import {
   ReferralProgramEditionStatuses,
   type ReferralProgramEditionSummaryPieSplit,
 } from "@namehash/ens-referrals";
-import { asInterpretedName } from "enssdk";
+import { asInterpretedName, asNormalizedAddress } from "enssdk";
 import { zeroAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
@@ -42,7 +42,7 @@ describe("isQualifiedReferral", () => {
     id: "1",
     type: "registration",
     incrementalDuration: 10000,
-    registrant: "0x26A1BC2b06DD438669094bD68f1E2481F47FEC5b",
+    registrant: asNormalizedAddress("0x26a1bc2b06dd438669094bd68f1e2481f47fec5b"),
     registrationLifecycle: {
       subregistry: {
         subregistryId: getEthnamesSubregistryId(ENSNamespaceIds.Mainnet),
@@ -58,7 +58,7 @@ describe("isQualifiedReferral", () => {
     },
     referral: {
       encodedReferrer: "0x1a199654959140E5c1A2F4135fAA7Ba2748939C5",
-      decodedReferrer: "0x1a199654959140E5c1A2F4135fAA7Ba2748939C5",
+      decodedReferrer: asNormalizedAddress("0x1a199654959140e5c1a2f4135faa7ba2748939c5"),
     },
     block: {
       number: 1,

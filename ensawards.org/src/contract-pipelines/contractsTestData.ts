@@ -1,4 +1,4 @@
-import { asInterpretedName } from "enssdk";
+import { asInterpretedName, asNormalizedAddress } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -18,7 +18,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000000",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000000"),
         chain: mainnet,
         codeName: "Project1UnnamedContract1",
       },
@@ -32,7 +32,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000001",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000001"),
         chain: mainnet,
         codeName: "Project1UnnamedContract2",
       },
@@ -46,7 +46,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000002",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000002"),
         chain: mainnet,
         codeName: "Project1NamedContract1",
       },
@@ -61,7 +61,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000003",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000003"),
         chain: mainnet,
         codeName: "Project1NamedContract2",
       },
@@ -76,7 +76,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000004",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000004"),
         chain: mainnet,
         codeName: "Project1NamedContract3",
       },
@@ -91,7 +91,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000005",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000005"),
         chain: mainnet,
         codeName: "Project1NamedContract4",
       },
@@ -106,7 +106,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000006",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000006"),
         chain: mainnet,
         codeName: "Project1NamedContract5",
       },
@@ -121,7 +121,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000007",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000007"),
         chain: mainnet,
         codeName: "Project1NamedContract6",
       },
@@ -136,7 +136,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000008",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000008"),
         chain: mainnet,
         codeName: "Project1NamedContract7",
       },
@@ -151,7 +151,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000009",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000009"),
         chain: mainnet,
         codeName: "Project1ForwardNamedContract1",
       },
@@ -166,7 +166,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000010",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000010"),
         chain: mainnet,
         codeName: "Project2UnnamedContract1",
       },
@@ -180,7 +180,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000011",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000011"),
         chain: mainnet,
         codeName: "Project2UnnamedContract2",
       },
@@ -194,7 +194,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000012",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000012"),
         chain: mainnet,
         codeName: "Project2UnnamedContract3",
       },
@@ -208,7 +208,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000013",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000013"),
         chain: mainnet,
         codeName: "Project2UnnamedContract4",
       },
@@ -222,7 +222,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000014",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000014"),
         chain: mainnet,
         codeName: "Project2UnnamedContract5",
       },
@@ -236,7 +236,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000015",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000015"),
         chain: mainnet,
         codeName: "Project2UnnamedContract6",
       },
@@ -250,7 +250,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000016",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000016"),
         chain: mainnet,
         codeName: "Project2UnnamedContract7",
       },
@@ -264,7 +264,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000017",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000017"),
         chain: mainnet,
         codeName: "Project2NamedContract1",
       },
@@ -279,7 +279,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000018",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000018"),
         chain: mainnet,
         codeName: "Project2NamedContract2",
       },
@@ -294,7 +294,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000019",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000019"),
         chain: mainnet,
         codeName: "Project2ForwardNamedContract1",
       },
@@ -309,7 +309,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000020",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000020"),
         chain: mainnet,
         codeName: "Project3UnnamedContract1",
       },
@@ -323,7 +323,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000021",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000021"),
         chain: mainnet,
         codeName: "Project3UnnamedContract2",
       },
@@ -337,7 +337,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000022",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000022"),
         chain: mainnet,
         codeName: "Project3UnnamedContract3",
       },
@@ -351,7 +351,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000023",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000023"),
         chain: mainnet,
         codeName: "Project3UnnamedContract4",
       },
@@ -365,7 +365,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000024",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000024"),
         chain: mainnet,
         codeName: "Project3NamedContract1",
       },
@@ -380,7 +380,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000025",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000025"),
         chain: mainnet,
         codeName: "Project3NamedContract2",
       },
@@ -395,7 +395,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000026",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000026"),
         chain: mainnet,
         codeName: "Project3NamedContract3",
       },
@@ -410,7 +410,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000027",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000027"),
         chain: mainnet,
         codeName: "Project3NamedContract4",
       },
@@ -425,7 +425,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000028",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000028"),
         chain: mainnet,
         codeName: "Project3NamedContract5",
       },
@@ -440,7 +440,7 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000029",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000029"),
         chain: mainnet,
         codeName: "Project3ForwardNamedContract1",
       },
