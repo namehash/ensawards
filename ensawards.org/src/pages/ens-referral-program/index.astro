@@ -8,7 +8,7 @@ import {
   Sparkles,
   TrendingUp,
 } from "@lucide/astro";
-import { FrequentlyAskedQuestions } from "@/components/molecules/FrequentlyAskedQuestions";
+import { FrequentlyAskedQuestions, faqIds } from "@/components/molecules/FrequentlyAskedQuestions";
 import JoinTelegram from "@/components/molecules/JoinTelegram.astro";
 import { ReferralProgramEditionsList } from "@/components/molecules/ReferralProgramEditionsList";
 import { ReferralLinkForm } from "@/components/referral-awards-program/ReferralLinkForm";
@@ -113,8 +113,13 @@ const backgroundGreyStyles =
           ENS referral program editions
         </h3>
         <p class={cn(descriptionStyles, "text-center")}>
-          Explore editions that are currently active, scheduled for the future,
-          or already closed.
+          <!-- Explore editions that are currently active, scheduled for the future,
+          or already closed. -->
+          <!-- Temporarily change the wording of the description 
+      to avoid giving the impression that no referral program editions will come after the current one in May.
+      When the next edition is added to production-editions.json we should be able to just rollback to the previous text.
+      For more details see: https://namehash.slack.com/archives/C086Z6FNBHN/p1778064151996799  -->
+          Explore all editions.
         </p>
       </div>
       <ReferralProgramEditionsList client:load />
@@ -336,7 +341,15 @@ const backgroundGreyStyles =
         </div>
         <FrequentlyAskedQuestions
           client:load
-          itemsToShow={["Are there limitations to the referral links?"]}
+          itemsToShow={[
+            faqIds.RefLinkLimitations,
+            faqIds.RewardsToEarn,
+            faqIds.SmartContractVsRefLink,
+            faqIds.OnchainRef,
+            faqIds.RenewalsVsRegistrations,
+            faqIds.ThresholdNotAchieved,
+            faqIds.IntegrationTime,
+          ]}
         />
       </div>
     </div>
