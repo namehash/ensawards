@@ -1,4 +1,4 @@
-import type { Address } from "enssdk";
+import type { NormalizedAddress } from "enssdk";
 import { useMemo } from "react";
 
 import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
@@ -9,7 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { getENSNodeUrl } from "@/utils/env";
 
 interface EnsAdvocateDetailsPageProviderProps {
-  address: Address;
+  address: NormalizedAddress;
 }
 
 export function EnsAdvocateDetailsPageProvider({ address }: EnsAdvocateDetailsPageProviderProps) {

@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
+import { asInterpretedName } from "enssdk";
+
 import AmbireProject from "../../projects/ambire";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -17,7 +19,7 @@ const AmbireWallet: App = {
   socials: {
     website: new URL("https://www.ambire.com/"),
     twitter: new URL("https://x.com/ambire"),
-    ens: "ambire.eth",
+    ens: asInterpretedName("ambire.eth"),
   },
   icon: AmbireIcon,
   ogImagePath: "ambire-wallet/og.png",

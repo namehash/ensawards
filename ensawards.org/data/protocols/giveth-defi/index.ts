@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import GivethProject from "../../projects/giveth";
 import { defineProtocol } from "../registry.ts";
 import { type DeFiProtocol, DeFiProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const GivethDeFi: DeFiProtocol = {
   socials: {
     twitter: new URL("https://x.com/giveth"),
     website: new URL("https://giveth.io"),
-    ens: "giv.eth",
+    ens: asInterpretedName("giv.eth"),
   },
   ogImagePath: "giveth-defi/og.png",
   twitterOgImagePath: "giveth-defi/twitter-og.png",

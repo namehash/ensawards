@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
+import { asInterpretedName } from "enssdk";
+
 import WalletChanProject from "../../projects/walletchan";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -16,7 +18,7 @@ const WalletChanWallet: App = {
   socials: {
     website: new URL("https://walletchan.com/"),
     twitter: new URL("https://x.com/walletchan_"),
-    ens: "walletchan.eth",
+    ens: asInterpretedName("walletchan.eth"),
   },
   icon: WalletChanIcon,
   ogImagePath: "walletchan-wallet/og.png",

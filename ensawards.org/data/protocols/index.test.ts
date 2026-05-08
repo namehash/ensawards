@@ -68,7 +68,7 @@ describe("protocols data", () => {
       if (protocol.socials.ens !== undefined) {
         expect(
           protocol.socials.ens.length > 0 && isInterpretedName(protocol.socials.ens),
-          `Name={${protocol.socials.ens}} is empty or is not ENS interpreted`,
+          `Name={${protocol.socials.ens}} is empty or is not a valid ENS interpreted name`,
         ).toEqual(true);
       }
     });

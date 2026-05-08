@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
+import { asInterpretedName } from "enssdk";
+
 import CoinbaseProject from "../../projects/coinbase";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -16,7 +18,7 @@ const CoinbaseWallet: App = {
   socials: {
     website: new URL("https://wallet.coinbase.com"),
     twitter: new URL("https://x.com/coinbase"),
-    ens: "coinbase.eth",
+    ens: asInterpretedName("coinbase.eth"),
   },
   icon: CoinbaseIcon,
   ogImagePath: "coinbase-wallet/og.png",

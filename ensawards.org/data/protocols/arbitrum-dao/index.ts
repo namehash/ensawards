@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import ArbitrumProject from "../../projects/arbitrum";
 import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const ArbitrumDao: DAOProtocol = {
   socials: {
     website: new URL("https://arbitrum.foundation"),
     twitter: new URL("https://x.com/arbitrum"),
-    ens: "arbfoundation.eth",
+    ens: asInterpretedName("arbfoundation.eth"),
   },
   ogImagePath: "arbitrum-dao/og.png",
   twitterOgImagePath: "arbitrum-dao/twitter-og.png",

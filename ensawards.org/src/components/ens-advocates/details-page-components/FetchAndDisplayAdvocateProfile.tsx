@@ -1,4 +1,4 @@
-import type { Address } from "enssdk";
+import { type InterpretedName, type NormalizedAddress, reinterpretName } from "enssdk";
 
 import { getENSRootChainId } from "@ensnode/datasources";
 import { ASSUME_IMMUTABLE_QUERY, usePrimaryName } from "@ensnode/ensnode-react";
@@ -10,7 +10,7 @@ import { FetchAndDisplayAdvocateProfileWithName } from "@/components/ens-advocat
 import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 
 interface FetchAndDisplayAdvocateProfileProps {
-  address: Address;
+  address: NormalizedAddress;
 }
 
 export function FetchAndDisplayAdvocateProfile({ address }: FetchAndDisplayAdvocateProfileProps) {
@@ -34,8 +34,14 @@ export function FetchAndDisplayAdvocateProfile({ address }: FetchAndDisplayAdvoc
   // If the advocate's address doesn't have a defined primary name,
   // display a UI based just on the address
   if (data.name === null) return <AdvocateProfileWithoutName address={address} />;
-
   // Otherwise, use the primary name to obtain additional data about the profile
   // and display it in the UI
-  return <FetchAndDisplayAdvocateProfileWithName name={data.name} address={address} />;
+
+  // Guarantee equal interpretation of the ENS name between the client and server.
+  // See {@link reinterpretName} for more details.
+  const reinterpretedName = reinterpretName(data.name as InterpretedName);
+  // ENSNode guarantees that all names it returns in its APIs are a valid `InterpretedName`,
+  // so the type cast here is safe.
+
+  return <FetchAndDisplayAdvocateProfileWithName name={reinterpretedName} address={address} />;
 }

@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asInterpretedName, asNormalizedAddress } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -16,11 +17,11 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x9cdf589c941ee81d75f34d3755671d614f7cf261",
+        address: asNormalizedAddress("0x9cdf589c941ee81d75f34d3755671d614f7cf261"),
         chain: mainnet,
         codeName: "TaikoDAO",
       },
-      name: "dao.taiko.eth",
+      name: asInterpretedName("dao.taiko.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-28T14:30:00.000Z") },
@@ -32,11 +33,11 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x10dea67478c5f8c5e2d90e5e9b26dbe60c54d800",
+        address: asNormalizedAddress("0x10dea67478c5f8c5e2d90e5e9b26dbe60c54d800"),
         chain: mainnet,
         codeName: "TaikoToken",
       },
-      name: "token.taiko.eth",
+      name: asInterpretedName("token.taiko.eth"),
       profile: {
         avatar: new URL("https://euc.li/token.taiko.eth"),
       },
@@ -51,7 +52,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x5c475bb14727833394b0704266f14157678a72b6",
+        address: asNormalizedAddress("0x5c475bb14727833394b0704266f14157678a72b6"),
         chain: mainnet,
         codeName: "TokenUnlock",
       },
@@ -66,11 +67,11 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x75ba76403b13b26ad1bec70d6ee937314eeacd0a",
+        address: asNormalizedAddress("0x75ba76403b13b26ad1bec70d6ee937314eeacd0a"),
         chain: mainnet,
         codeName: "TaikoDAOController",
       },
-      name: "controller.taiko.eth",
+      name: asInterpretedName("controller.taiko.eth"),
     },
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-28T14:30:00.000Z") },
