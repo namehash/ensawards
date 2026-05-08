@@ -1,5 +1,6 @@
 import { ReferralProgramAwardModels } from "@namehash/ens-referrals";
 import { useNow } from "@namehash/namehash-ui";
+import { interpretCurrency } from "data/shared/currencies";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useState } from "react";
 
@@ -10,10 +11,7 @@ import {
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared";
-import {
-  getReferralProgramEditionSummaryBySlug,
-  parseReferralProgramCurrency,
-} from "@/utils/referralProgram";
+import { getReferralProgramEditionSummaryBySlug } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { usdFormatter } from "@/utils/textModifications";
 
@@ -94,7 +92,7 @@ export const ReferralProgramEditionHeroCardRevShareCap = ({
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
           {referralProgramEditionSummaryData.awardModel === ReferralProgramAwardModels.RevShareCap
-            ? `${usdFormatter.format(parseReferralProgramCurrency(referralProgramEditionSummaryData.rules.minBaseRevenueContribution))} USD`
+            ? `${usdFormatter.format(interpretCurrency(referralProgramEditionSummaryData.rules.minBaseRevenueContribution))} USD`
             : "-"}
         </p>
       </div>

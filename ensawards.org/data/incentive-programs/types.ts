@@ -1,5 +1,6 @@
-import { type EnsTokens } from "data/shared/ensTokens";
 import { ENSAWARDS_SLUG_PATTERN } from "data/shared/slugs";
+
+import type { Price } from "@ensnode/ensnode-sdk";
 
 /** A unique identifier for an {@link IncentiveProgram}.
  *
@@ -31,7 +32,7 @@ export interface IncentiveProgramAwardPool {
   /**
    * The total award pool allocated for this incentive program.
    */
-  totalAwardPool: EnsTokens; // TODO: Should be of type Price once Issue#1941 in ensnode is resolved
+  totalAwardPool: Price;
 }
 
 export type IncentiveProgram = IncentiveProgramAwardPool;

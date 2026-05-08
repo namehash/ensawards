@@ -5,6 +5,7 @@ import type {
   ReferralProgramRulesRevShareCap,
 } from "@namehash/ens-referrals";
 import { AdminActionTypes, SECONDS_PER_YEAR } from "@namehash/ens-referrals";
+import { interpretCurrency } from "data/shared/currencies";
 import { TriangleAlert as RulesBreachIcon } from "lucide-react";
 import { memo } from "react";
 
@@ -14,7 +15,6 @@ import {
   ReferrerCardHeader,
 } from "@/components/atoms/cards/referrerCard/shared";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { usdFormatter } from "@/utils/textModifications";
 
@@ -71,7 +71,7 @@ export const TotalRevenueContributionField = ({
         </p>
       </GenericTooltip>
       <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
-        Ξ {ethFormatter.format(parseReferralProgramCurrency(referrer.totalRevenueContribution))}
+        Ξ {ethFormatter.format(interpretCurrency(referrer.totalRevenueContribution))}
       </p>
     </div>
   );
@@ -86,7 +86,7 @@ export const BaseRevenueContributionField = ({
   );
 
   const totalBaseRevenueContributionInUSD = usdFormatter.format(
-    parseReferralProgramCurrency(referrer.totalBaseRevenueContribution),
+    interpretCurrency(referrer.totalBaseRevenueContribution),
   );
 
   const userFacingTotalBaseRevenueContribution =
@@ -99,10 +99,8 @@ export const BaseRevenueContributionField = ({
         content={
           <p className="max-w-[220px]">
             Measured as US{" "}
-            {usdFormatter.format(
-              parseReferralProgramCurrency(editionRules.baseAnnualRevenueContribution),
-            )}{" "}
-            × {referralYears} years of registrations and renewals referred by this referrer during
+            {usdFormatter.format(interpretCurrency(editionRules.baseAnnualRevenueContribution))} ×{" "}
+            {referralYears} years of registrations and renewals referred by this referrer during
             this edition. Excludes premium revenue sources.
           </p>
         }
@@ -131,12 +129,12 @@ const isReferrerWarned = (
 
 export const RevenueShareField = ({ referrer, editionRules }: ReferrerCardRevShareCapProps) => {
   const minQualifiedRevenueContributionInUSD = usdFormatter.format(
-    parseReferralProgramCurrency(editionRules.minBaseRevenueContribution),
+    interpretCurrency(editionRules.minBaseRevenueContribution),
   );
   const qualifiedRevenueSharePercentage = `${Math.round(editionRules.maxBaseRevenueShare * 100)}%`;
 
   const additionalRevenueRequiredInUSD = usdFormatter.format(
-    parseReferralProgramCurrency({
+    interpretCurrency({
       currency: editionRules.minBaseRevenueContribution.currency,
       amount:
         editionRules.minBaseRevenueContribution.amount -
@@ -242,7 +240,7 @@ export const TentativeAwardsField = ({
         )}
       >
         {referrer.isQualified ? (
-          <>US {usdFormatter.format(parseReferralProgramCurrency(referrer.cappedAward))}</>
+          <>US {usdFormatter.format(interpretCurrency(referrer.cappedAward))}</>
         ) : (
           "-"
         )}

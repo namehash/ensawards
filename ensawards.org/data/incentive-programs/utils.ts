@@ -2,6 +2,7 @@ import { AWARDS } from "data/awards";
 import { type Award, AwardTypes } from "data/awards/types";
 import { INCENTIVE_PROGRAMS } from "data/incentive-programs";
 import type { IncentiveProgram, IncentiveProgramSlug } from "data/incentive-programs/types";
+import { interpretCurrency } from "data/shared/currencies";
 
 export const getIncentiveProgramBySlug = (
   incentiveProgramSlug: IncentiveProgramSlug,
@@ -29,7 +30,10 @@ export const sumIncentiveProgramFinancialAwards = (
     incentiveProgramSlug,
   ).filter((award) => award.type === AwardTypes.FinancialAward);
 
-  return incentiveProgramFinancialAwards.reduce((acc, award) => acc + award.price, 0);
+  return incentiveProgramFinancialAwards.reduce(
+    (acc, award) => acc + interpretCurrency(award.price),
+    0,
+  );
 };
 
 /**
@@ -50,7 +54,8 @@ export const calcIncentiveProgramRemainingAwardPool = (
   }
 
   const remainingAwardPool =
-    incentiveProgram.totalAwardPool - sumIncentiveProgramFinancialAwards(incentiveProgramSlug);
+    interpretCurrency(incentiveProgram.totalAwardPool) -
+    sumIncentiveProgramFinancialAwards(incentiveProgramSlug);
 
   if (remainingAwardPool < 0) {
     throw new Error(

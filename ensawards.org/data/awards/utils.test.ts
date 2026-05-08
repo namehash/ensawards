@@ -2,6 +2,8 @@ import type { ChainId } from "enssdk";
 import { zeroAddress, zeroHash } from "viem";
 import { describe, expect, it } from "vitest";
 
+import { parseEnsTokens } from "@ensnode/ensnode-sdk";
+
 import { type AwardFinancial, AwardTypes } from "./types.ts";
 import { sortFinancialAwardsByPrice } from "./utils.ts";
 
@@ -17,7 +19,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 100,
+          price: parseEnsTokens("100"),
           awardedAt: 1,
           transaction: {
             chainId: placeholderChainId,
@@ -31,7 +33,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 200,
+          price: parseEnsTokens("200"),
           awardedAt: 2,
           transaction: {
             chainId: placeholderChainId,
@@ -45,7 +47,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 150,
+          price: parseEnsTokens("150"),
           awardedAt: 0,
           transaction: {
             chainId: placeholderChainId,
@@ -62,7 +64,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 200,
+          price: parseEnsTokens("200"),
           awardedAt: 2,
           transaction: {
             chainId: placeholderChainId,
@@ -76,7 +78,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 150,
+          price: parseEnsTokens("150"),
           awardedAt: 0,
           transaction: {
             chainId: placeholderChainId,
@@ -90,7 +92,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 100,
+          price: parseEnsTokens("100"),
           awardedAt: 1,
           transaction: {
             chainId: placeholderChainId,
@@ -114,7 +116,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 100,
+          price: parseEnsTokens("100"),
           awardedAt: 2,
           transaction: {
             chainId: placeholderChainId,
@@ -128,7 +130,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 100,
+          price: parseEnsTokens("100"),
           awardedAt: 1,
           transaction: {
             chainId: placeholderChainId,
@@ -142,7 +144,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 100,
+          price: parseEnsTokens("100"),
           awardedAt: 3,
           transaction: {
             chainId: placeholderChainId,
@@ -159,7 +161,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 100,
+          price: parseEnsTokens("100"),
           awardedAt: 1,
           transaction: {
             chainId: placeholderChainId,
@@ -173,7 +175,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 100,
+          price: parseEnsTokens("100"),
           awardedAt: 2,
           transaction: {
             chainId: placeholderChainId,
@@ -187,7 +189,7 @@ describe("awards utils", () => {
             chainId: placeholderChainId,
             address: zeroAddress,
           },
-          price: 100,
+          price: parseEnsTokens("100"),
           awardedAt: 3,
           transaction: {
             chainId: placeholderChainId,
