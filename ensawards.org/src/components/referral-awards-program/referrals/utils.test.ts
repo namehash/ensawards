@@ -3,13 +3,13 @@ import {
   ReferralProgramEditionStatuses,
   type ReferralProgramEditionSummaryPieSplit,
 } from "@namehash/ens-referrals";
-import { asInterpretedName, asNormalizedAddress } from "enssdk";
+import { type AccountId, asInterpretedName, asNormalizedAddress } from "enssdk";
 import { zeroAddress } from "viem";
 import { describe, expect, it } from "vitest";
 
-import { ENSNamespaceIds } from "@ensnode/datasources";
+import { DatasourceNames, type ENSNamespaceId, ENSNamespaceIds } from "@ensnode/datasources";
 import {
-  getEthnamesSubregistryId,
+  maybeGetDatasourceContract,
   type NamedRegistrarAction,
   parseTimestamp,
   parseUsdc,
@@ -17,6 +17,23 @@ import {
 } from "@ensnode/ensnode-sdk";
 
 import { isQualifiedReferral } from "@/components/referral-awards-program/referrals/utils.ts";
+
+// This function was removed without replacement from ensnode-sdk in release 1.11.0
+// (see https://github.com/namehash/ensnode/commit/61731608632f62139496656f6231210f63383f20).
+// This is a local implementation of its replacement, implemented in ensnode/apps/ensapi/src/lib/name-tokens/get-indexed-subregistries.ts
+const getEthnamesSubregistryId = (namespace: ENSNamespaceId): AccountId => {
+  const subregistryId = maybeGetDatasourceContract(
+    namespace,
+    DatasourceNames.ENSRoot,
+    "BaseRegistrar",
+  );
+
+  if (subregistryId === undefined) {
+    throw new Error(`BaseRegistrar contract not found or has multiple addresses for ${namespace}`);
+  }
+
+  return subregistryId;
+};
 
 describe("isQualifiedReferral", () => {
   const mockReferralProgramEditionSummary: ReferralProgramEditionSummaryPieSplit = {

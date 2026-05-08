@@ -11,7 +11,7 @@ import { breakLongWords } from "@/utils/textModifications";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { getAllProtocolContracts } from "data/protocols/utils.ts";
 import { NameDisplay } from "@namehash/namehash-ui";
-import { beautifyName } from "enssdk";
+import { beautifyInterpretedName } from "enssdk";
 
 export interface ContractCardProps {
   contract: Contract;
@@ -24,7 +24,7 @@ const { contract }: ContractCardProps = Astro.props;
 const ensNameForMobileDisplay =
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
-    ? breakLongWords(beautifyName(contract.cachedIdentity.name), /(\.)/, 25)
+    ? breakLongWords(beautifyInterpretedName(contract.cachedIdentity.name), /(\.)/, 25)
     : ["unnamed contract"];
 
 const contractCodeNameForMobileDisplay = breakLongWords(
