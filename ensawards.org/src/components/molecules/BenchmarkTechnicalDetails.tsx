@@ -34,57 +34,48 @@ export const BenchmarkTechnicalDetails = ({
       <div className={technicalSectionContainerStyles}>
         <h2 className={technicalSectionHeaderStyles}>ENS best practice benchmark report</h2>
         {bestPractice.technicalDetails.useCaseSummary}
-      </div>
-      <div className={technicalSectionContainerStyles}>
-        <h2 className={cn(technicalSectionHeaderStyles, "text-xl")}>Desired outcome</h2>
-        {bestPractice.technicalDetails.desiredOutcome}
-      </div>
-      <div className={technicalSectionContainerStyles}>
-        <h2 className={cn(technicalSectionHeaderStyles, "text-xl")}>Acceptance tests results</h2>
-        <div className={cn(technicalSectionContainerStyles, "gap-6")}>
-          {sortedAcceptanceTestBenchmarks.map(
-            ([acceptanceTestSlug, acceptanceTestBenchmark], index) => {
-              const acceptanceTest = getAcceptanceTestBySlug(acceptanceTestSlug);
-
-              if (acceptanceTest === undefined) {
-                throw new Error(
-                  `Invariant(AcceptanceTestSlug): Acceptance test with slug ${acceptanceTestSlug} is not defined`,
-                );
-              }
-              return (
-                <div
-                  key={acceptanceTest.acceptanceTestSlug}
-                  className={technicalSectionContainerStyles}
-                >
-                  <div className={cn(technicalSectionContainerStyles, "gap-3")}>
-                    <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start items-start sm:items-center gap-2">
-                      <h3 className={cn(technicalSectionHeaderStyles, "text-base")}>
-                        {`Test ${index + 1}`}
-                      </h3>
-                      <BenchmarkResultBadge benchmarkResult={acceptanceTestBenchmark?.result} />
-                    </div>
-                    {acceptanceTest.description}
-                    {acceptanceTestBenchmark !== undefined ? (
-                      <div className={cn(technicalSectionContainerStyles, "gap-1")}>
-                        <p className={cn(technicalSectionHeaderStyles, "text-base")}>
-                          Benchmark notes
-                        </p>
-                        {acceptanceTestBenchmark.notes}
-                      </div>
-                    ) : (
-                      <PendingAcceptanceTestResultCTA app={benchmarkedApp} />
-                    )}
-                  </div>
-                </div>
-              );
-            },
-          )}
+        <div className={cn(technicalSectionContainerStyles, "w-full p-4 bg-neutral-50 rounded-xl")}>
+          <h2 className={cn(technicalSectionHeaderStyles, "text-xl")}>Desired outcome</h2>
+          {bestPractice.technicalDetails.desiredOutcome}
         </div>
       </div>
+      {sortedAcceptanceTestBenchmarks.map(
+        ([acceptanceTestSlug, acceptanceTestBenchmark], index) => {
+          const acceptanceTest = getAcceptanceTestBySlug(acceptanceTestSlug);
+
+          if (acceptanceTest === undefined) {
+            throw new Error(
+              `Invariant(AcceptanceTestSlug): Acceptance test with slug ${acceptanceTestSlug} is not defined`,
+            );
+          }
+          return (
+            <div
+              key={acceptanceTest.acceptanceTestSlug}
+              className={technicalSectionContainerStyles}
+            >
+              <h3
+                className={technicalSectionHeaderStyles}
+              >{`Acceptance Test ${index + 1} Result`}</h3>
+              {acceptanceTest.description}
+              <div
+                className={cn(
+                  technicalSectionContainerStyles,
+                  "w-full p-4 bg-neutral-50 rounded-xl",
+                )}
+              >
+                <BenchmarkResultBadge benchmarkResult={acceptanceTestBenchmark?.result} />
+                {acceptanceTestBenchmark !== undefined ? (
+                  acceptanceTestBenchmark.notes
+                ) : (
+                  <PendingAcceptanceTestResultCTA app={benchmarkedApp} />
+                )}
+              </div>
+            </div>
+          );
+        },
+      )}
       <div className={technicalSectionContainerStyles}>
-        <h2 className={cn(technicalSectionHeaderStyles, "text-xl")}>
-          Implementation recommendations
-        </h2>
+        <h2 className={technicalSectionHeaderStyles}>Implementation recommendations</h2>
         {bestPractice.technicalDetails.implementationRecommendations}
       </div>
     </div>

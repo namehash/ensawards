@@ -8,8 +8,8 @@ import { getAddress } from "viem";
 import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
-import GitHubOutlineIcon from "@/assets/githubOutlineIcon.svg";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
+import { GitHubOutlineIcon } from "@/components/atoms/icons/GitHubOutlineIcon";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
@@ -51,16 +51,16 @@ const formatNoContributionsMessage = (contributionType: ContributionType): strin
   switch (contributionType) {
     case ContributionTypes.App:
     case ContributionTypes.Protocol:
-      return "No leaderboard contributions yet";
+      return "No leaderboard contributions";
 
     case ContributionTypes.Contract:
-      return "No smart contract contributions yet";
+      return "No smart contract contributions";
 
     case ContributionTypes.BestPractice:
-      return "No ENS best practice contributions yet";
+      return "No ENS best practice contributions";
 
     case ContributionTypes.BenchmarkResult:
-      return "No acceptance test results contributed yet";
+      return "No acceptance test results contributed";
 
     default:
       const _exhaustive: never = contributionType;
@@ -137,8 +137,8 @@ export const ContributorsCard = ({
               {orderedContributorProfiles.length === 0 ? (
                 <div className="w-full flex flex-col justify-center items-center gap-3 py-3">
                   <NoContributionsIcon size={24} className="text-muted-foreground" />
-                  <p className="text-base text-muted-foreground leading-normal font-normal">
-                    {formatNoContributionsMessage(contributionType)}
+                  <p className="w-full text-base text-center text-muted-foreground leading-normal font-normal">
+                    {formatNoContributionsMessage(contributionType)}&nbsp;yet
                   </p>
                 </div>
               ) : (
@@ -205,7 +205,7 @@ export const ContributorsCard = ({
                     }),
                   )}
                 >
-                  <img src={GitHubOutlineIcon.src} alt="GitHub icon" />
+                  <GitHubOutlineIcon />
                   Edit on GitHub
                 </a>
               </div>

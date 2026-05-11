@@ -1,6 +1,6 @@
 import { type App } from "data/apps/types.ts";
 
-import GitHubOutlineIcon from "@/assets/githubOutlineIcon.svg";
+import { GitHubOutlineIcon } from "@/components/atoms/icons/GitHubOutlineIcon";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
@@ -9,12 +9,10 @@ export interface PendingAcceptanceTestResultCTAProps {
 }
 
 export const PendingAcceptanceTestResultCTA = ({ app }: PendingAcceptanceTestResultCTAProps) => (
-  <div className="w-full max-w-[1216px] h-fit flex flex-col min-[670px]:flex-row items-start min-[670px]:items-center justify-start min-[670px]:justify-between gap-3 min-[670px]:gap-5 p-4 rounded-2xl border border-gray-200 bg-white">
-    <h3 className="text-base leading-normal font-semibold text-slate-800">
-      Acceptance test result pending
-    </h3>
-    <div className="min-[670px]:hidden w-full h-px bg-border" />
-    <div className="w-full min-[670px]:w-fit flex flex-row justify-between min-[670px]:justify-start items-center gap-4">
+  <div className="w-full max-w-[1216px] h-fit flex flex-col items-start justify-start gap-3">
+    <h3 className="text-base leading-normal">Acceptance test result pending</h3>
+    <div className="w-full h-px bg-border" />
+    <div className="w-fit flex flex-row justify-start items-center gap-3">
       <p className="text-base leading-6 font-normal text-muted-foreground">Submit the result</p>
       <a
         href={`https://github.com/namehash/ensawards/tree/main/ensawards.org/data/apps/${app.appSlug}/benchmarks/index.tsx`}
@@ -22,13 +20,13 @@ export const PendingAcceptanceTestResultCTA = ({ app }: PendingAcceptanceTestRes
         rel="noopener noreferrer"
         className={cn(
           shadcnButtonVariants({
-            variant: "secondary",
+            variant: "default",
             size: "default",
             className: "cursor-pointer rounded-full",
           }),
         )}
       >
-        <img src={GitHubOutlineIcon.src} alt="GitHub icon" />
+        <GitHubOutlineIcon />
         Edit on Github
       </a>
     </div>
