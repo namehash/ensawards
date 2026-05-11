@@ -165,7 +165,7 @@ describe("benchmarks-utils", () => {
     });
   });
 
-  describe("sortBenchmarks", () => {
+  describe("sortAcceptanceTestBenchmarks", () => {
     it("should allow correct sorting of benchmarks", () => {
       const input = [
         undefined,

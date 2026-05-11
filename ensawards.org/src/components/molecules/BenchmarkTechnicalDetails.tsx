@@ -1,7 +1,6 @@
 import { getAcceptanceTestBySlug } from "data/acceptance-tests/utils";
 import type { App } from "data/apps/types.ts";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
-import { sortAcceptanceTestBenchmarks } from "data/benchmarks/utils";
 import type { BestPractice } from "data/ens-best-practices/types.ts";
 
 import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge";

@@ -1,4 +1,4 @@
-import type { BenchmarkResult, BenchmarkResults } from "data/benchmarks/types";
+import { type BenchmarkResult, BenchmarkResults } from "data/benchmarks/types";
 import type { Contribution } from "data/contributors/types";
 import type { JSX } from "react";
 

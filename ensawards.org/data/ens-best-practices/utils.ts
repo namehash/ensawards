@@ -1,5 +1,4 @@
 import { AppTypes } from "data/apps/types.ts";
-import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types.ts";
 import {
   calcEnsAwardsPoints,
   getAcceptanceTestBenchmarksByBestPractice,

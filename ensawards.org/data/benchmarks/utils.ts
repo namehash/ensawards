@@ -150,8 +150,8 @@ export const calcBestPracticeCategoryScore = (
 ): EnsAwardsScore | undefined => {
   const completedBenchmarks: AcceptanceTestBenchmark[] = [];
 
-  for (const appBenchmark of Object.values(benchmarks)) {
-    for (const acceptanceTestBenchmark of Object.values(appBenchmark)) {
+  for (const acceptanceTestBenchmarks of Object.values(benchmarks)) {
+    for (const acceptanceTestBenchmark of Object.values(acceptanceTestBenchmarks)) {
       if (acceptanceTestBenchmark !== undefined) {
         completedBenchmarks.push(acceptanceTestBenchmark);
       }
