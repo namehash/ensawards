@@ -5,7 +5,7 @@ import {
   NameDisplay,
 } from "@namehash/namehash-ui";
 
-import { getENSRootChainId } from "@ensnode/ensnode-sdk";
+import { getENSRootChainId } from "@ensnode/datasources";
 
 import type { FetchAndDisplayAdvocateProfileWithNameProps } from "@/components/ens-advocates/details-page-components/advocate-profile/FetchAndDisplayAdvocateProfileWithName.tsx";
 import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles.ts";

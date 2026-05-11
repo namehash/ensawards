@@ -5,14 +5,14 @@ import {
   type ReferralProgramEditionSummary,
   type ReferrerLeaderboardPagePieSplit,
   ReferrerLeaderboardPageResponseCodes,
-  type ReferrerLeaderboardPageRevShareLimit,
-} from "@namehash/ens-referrals/v1";
+  type ReferrerLeaderboardPageRevShareCap,
+} from "@namehash/ens-referrals";
 import { useNow } from "@namehash/namehash-ui";
 import { fromUnixTime, intlFormat } from "date-fns";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import {
   LastUpdateTime,
@@ -51,13 +51,13 @@ export function ReferrerLeaderboard({
   const [isLoading, setIsLoading] = useState(true);
   const [fetchErrorMessage, setFetchErrorMessage] = useState("");
   const [leaderboardData, setLeaderboardData] = useState<
-    ReferrerLeaderboardPageRevShareLimit | ReferrerLeaderboardPagePieSplit | null
+    ReferrerLeaderboardPageRevShareCap | ReferrerLeaderboardPagePieSplit | null
   >(null);
   const [referralProgramEditionSummaryData, setReferralProgramEditionSummaryData] = useState(
     referralProgramEditionSummary,
   );
   const client = useMemo(() => new ENSReferralsClient({ url: getENSNodeUrl() }), []);
-  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
+  const options = useMemo(() => createEnsNodeProviderOptions({ url: getENSNodeUrl() }), []);
   const initialLoadRef = useRef(false);
 
   // refresh every 5 minutes
@@ -157,7 +157,7 @@ export function ReferrerLeaderboard({
   }
 
   return (
-    <ENSNodeProvider config={config}>
+    <EnsNodeProvider options={options}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-center gap-6 sm:gap-4">
           <div className="w-full flex flex-col sm:flex-row sm:flex-wrap justify-start sm:justify-between items-start sm:items-center gap-y-2">
@@ -266,6 +266,6 @@ export function ReferrerLeaderboard({
           )}
         </div>
       </TooltipProvider>
-    </ENSNodeProvider>
+    </EnsNodeProvider>
   );
 }

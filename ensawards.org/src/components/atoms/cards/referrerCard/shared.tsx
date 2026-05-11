@@ -1,8 +1,9 @@
-import { type ReferrerRank } from "@namehash/ens-referrals/v1";
+import { type ReferrerRank } from "@namehash/ens-referrals";
 import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
-import type { Address } from "viem";
+import type { NormalizedAddress } from "enssdk";
 
-import { buildUnresolvedIdentity, getENSRootChainId } from "@ensnode/ensnode-sdk";
+import { getENSRootChainId } from "@ensnode/datasources";
+import { buildUnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import firstPlaceIcon from "@/assets/firstPlaceAward.svg";
 import secondPlaceIcon from "@/assets/secondPlaceAward.svg";
@@ -24,8 +25,8 @@ export const ethFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 3,
 });
 
-export const getAdvocateDetailsUrl = (referrerAddress: Address) =>
-  new URL(getEnsAdvocateDetailsRelativePath(referrerAddress), getEnsAwardsBaseUrl());
+export const getAdvocateDetailsUrl = (address: NormalizedAddress) =>
+  new URL(getEnsAdvocateDetailsRelativePath(address), getEnsAwardsBaseUrl());
 
 export interface RankProps {
   /**
@@ -95,7 +96,7 @@ export const RankIconLoading = ({
 );
 
 interface ReferrerCardHeaderProps {
-  referrer: Address;
+  referrer: NormalizedAddress;
   rank: ReferrerRank;
   rankTooltipText: string;
   isQualified: boolean;

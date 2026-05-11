@@ -2,13 +2,13 @@ import type {
   ReferralProgramEditionSlug,
   ReferralProgramEditionSummary,
   ReferralProgramEditionSummaryPieSplit,
-  ReferralProgramEditionSummaryRevShareLimit,
-} from "@namehash/ens-referrals/v1";
+  ReferralProgramEditionSummaryRevShareCap,
+} from "@namehash/ens-referrals";
 import {
   ENSReferralsClient,
   ReferralProgramAwardModels,
   ReferralProgramEditionSummariesResponseCodes,
-} from "@namehash/ens-referrals/v1";
+} from "@namehash/ens-referrals";
 import { isValidSlug } from "data/shared/slugs";
 
 import { getCurrencyInfo, type Price } from "@ensnode/ensnode-sdk";
@@ -17,7 +17,7 @@ import { getENSNodeUrl } from "@/utils/env";
 
 export const filterOutUnrecognizedEditions = (
   editionSummaries: ReferralProgramEditionSummary[],
-): (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit)[] => {
+): (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareCap)[] => {
   return editionSummaries.filter(
     (editionSummary) => editionSummary.awardModel !== ReferralProgramAwardModels.Unrecognized,
   );
@@ -29,7 +29,7 @@ const getEditionsFetchErrorMessage = (errorMessage: string) =>
 export async function getReferralProgramEditionSummaryBySlug(
   referralProgramSlug: ReferralProgramEditionSlug,
 ): Promise<
-  ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit | undefined
+  ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareCap | undefined
 > {
   if (!referralProgramSlug || !isValidSlug(referralProgramSlug)) return undefined;
 
@@ -56,7 +56,7 @@ export async function getReferralProgramEditionSummaryBySlug(
 }
 
 export async function fetchReferralProgramEditionSummaries(): Promise<
-  (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareLimit)[]
+  (ReferralProgramEditionSummaryPieSplit | ReferralProgramEditionSummaryRevShareCap)[]
 > {
   try {
     const client = new ENSReferralsClient({ url: getENSNodeUrl() });

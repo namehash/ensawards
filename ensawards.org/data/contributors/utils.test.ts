@@ -1,6 +1,5 @@
+import { stringifyAccountId } from "enssdk";
 import { describe, expect, it } from "vitest";
-
-import { formatAccountId } from "@ensnode/ensnode-sdk";
 
 import type { Contributor } from "./types.ts";
 import { countContributorAppearances } from "./utils.ts";
@@ -22,15 +21,15 @@ describe("Contributor utils", () => {
       const result = countContributorAppearances(contributors);
 
       expect(
-        result.get(formatAccountId(contributors[0]))?.count,
+        result.get(stringifyAccountId(contributors[0]))?.count,
         "Expected 2 appearances for the first contributor",
       ).toBe(2);
       expect(
-        result.get(formatAccountId(contributors[2]))?.count,
+        result.get(stringifyAccountId(contributors[2]))?.count,
         "Expected 1 appearance for the second contributor",
       ).toBe(1);
       expect(
-        result.get(formatAccountId(contributors[3]))?.count,
+        result.get(stringifyAccountId(contributors[3]))?.count,
         "Expected 1 appearance for the third contributor",
       ).toBe(1);
     });
@@ -43,11 +42,11 @@ describe("Contributor utils", () => {
       const result = countContributorAppearances(contributors);
 
       expect(
-        result.get(formatAccountId(contributors[0])),
+        result.get(stringifyAccountId(contributors[0])),
         "Expected the first contributor to be defined",
       ).toBeDefined();
       expect(
-        result.get(formatAccountId(contributors[1])),
+        result.get(stringifyAccountId(contributors[1])),
         "Expected the second contributor to be defined",
       ).toBeDefined();
     });
@@ -59,7 +58,7 @@ describe("Contributor utils", () => {
 
       expect(result.size, "Expected only one unique contributor").toBe(1);
       expect(
-        result.get(formatAccountId(singleContributor))?.count,
+        result.get(stringifyAccountId(singleContributor))?.count,
         "Expected 3 appearances for the contributor",
       ).toBe(3);
     });

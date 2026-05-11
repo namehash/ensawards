@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import NounsProject from "../../projects/nouns";
 import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const NounsDao: DAOProtocol = {
   socials: {
     website: new URL("https://nouns.wtf"),
     twitter: new URL("https://x.com/nounsdao"),
-    ens: "nouns.eth",
+    ens: asInterpretedName("nouns.eth"),
   },
   ogImagePath: "nouns-dao/og.png",
   twitterOgImagePath: "nouns-dao/twitter-og.png",

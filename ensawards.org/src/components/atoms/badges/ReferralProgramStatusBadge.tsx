@@ -1,7 +1,7 @@
 import {
   ReferralProgramEditionStatuses,
   type ReferralProgramEditionStatusId,
-} from "@namehash/ens-referrals/v1";
+} from "@namehash/ens-referrals";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";

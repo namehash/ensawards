@@ -4,8 +4,8 @@ import Layout from "@/layouts/Layout.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
 import { ReferralProgramEditionHeroCardPieSplit } from "@/components/atoms/cards/referralProgramEditionCard/pie-split/hero";
-import { ReferralProgramEditionHeroCardRevShareLimit } from "@/components/atoms/cards/referralProgramEditionCard/rev-share/hero";
-import { ReferralProgramAwardModels } from "@namehash/ens-referrals/v1";
+import { ReferralProgramEditionHeroCardRevShareCap } from "@/components/atoms/cards/referralProgramEditionCard/rev-share/hero";
+import { ReferralProgramAwardModels } from "@namehash/ens-referrals";
 import { ReferrerLeaderboard } from "@/components/referral-awards-program/referrers/ReferrerLeaderboard";
 import { getReferralProgramEditionSummaryBySlug } from "@/utils/referralProgram";
 import { ReferralProgramLeaderboardHeroButtons } from "@/components/atoms/ReferralProgramLeaderboardHeroButtons";
@@ -63,8 +63,8 @@ if (referralProgramEditionSummary === undefined) {
           styles: "-top-0 right-0 opacity-10",
         }}>
         {referralProgramEditionSummary.rules.awardModel ===
-        ReferralProgramAwardModels.RevShareLimit ? (
-          <ReferralProgramEditionHeroCardRevShareLimit
+        ReferralProgramAwardModels.RevShareCap ? (
+          <ReferralProgramEditionHeroCardRevShareCap
             client:load
             slot="largerHeroItem"
             referralProgramEditionSummary={referralProgramEditionSummary}

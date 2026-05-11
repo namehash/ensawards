@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import TaikoProject from "../../projects/taiko";
 import { defineProtocol } from "../registry.ts";
 import { type DeFiProtocol, DeFiProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const TaikoDeFi: DeFiProtocol = {
   socials: {
     website: new URL("https://taiko.xyz"),
     twitter: new URL("https://x.com/taikoxyz"),
-    ens: "taiko.eth",
+    ens: asInterpretedName("taiko.eth"),
   },
   ogImagePath: "taiko-defi/og.png",
   twitterOgImagePath: "taiko-defi/twitter-og.png",

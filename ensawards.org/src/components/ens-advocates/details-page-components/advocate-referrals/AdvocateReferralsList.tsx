@@ -1,4 +1,4 @@
-import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
+import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals";
 
 import type { ENSNamespaceId } from "@ensnode/datasources";
 import { type RegistrarActionsResponseOk, type RequestPageParams } from "@ensnode/ensnode-sdk";

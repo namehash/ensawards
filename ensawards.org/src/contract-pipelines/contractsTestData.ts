@@ -1,4 +1,7 @@
+import { asInterpretedName, asNormalizedAddress } from "enssdk";
 import { mainnet } from "viem/chains";
+
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import contributors from "../../data/contributors";
 import {
@@ -15,376 +18,436 @@ export const CONTRACTS_TEST_DATA: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000000",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000000"),
         chain: mainnet,
         codeName: "Project1UnnamedContract1",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000001",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000001"),
         chain: mainnet,
         codeName: "Project1UnnamedContract2",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000002",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000002"),
         chain: mainnet,
         codeName: "Project1NamedContract1",
       },
-      name: "name.p1c1.eth",
+      name: asInterpretedName("name.p1c1.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000003",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000003"),
         chain: mainnet,
         codeName: "Project1NamedContract2",
       },
-      name: "name.p1c2.eth",
+      name: asInterpretedName("name.p1c2.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000004",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000004"),
         chain: mainnet,
         codeName: "Project1NamedContract3",
       },
-      name: "name.p1c3.eth",
+      name: asInterpretedName("name.p1c3.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000005",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000005"),
         chain: mainnet,
         codeName: "Project1NamedContract4",
       },
-      name: "name.p1c4.eth",
+      name: asInterpretedName("name.p1c4.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000006",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000006"),
         chain: mainnet,
         codeName: "Project1NamedContract5",
       },
-      name: "name.p1c5.eth",
+      name: asInterpretedName("name.p1c5.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000007",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000007"),
         chain: mainnet,
         codeName: "Project1NamedContract6",
       },
-      name: "name.p1c6.eth",
+      name: asInterpretedName("name.p1c6.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000008",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000008"),
         chain: mainnet,
         codeName: "Project1NamedContract7",
       },
-      name: "name.p1c7.eth",
+      name: asInterpretedName("name.p1c7.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: ENSDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000009",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000009"),
         chain: mainnet,
         codeName: "Project1ForwardNamedContract1",
       },
-      name: "forward.name.p1c1.eth",
+      name: asInterpretedName("forward.name.p1c1.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000010",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000010"),
         chain: mainnet,
         codeName: "Project2UnnamedContract1",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000011",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000011"),
         chain: mainnet,
         codeName: "Project2UnnamedContract2",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000012",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000012"),
         chain: mainnet,
         codeName: "Project2UnnamedContract3",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000013",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000013"),
         chain: mainnet,
         codeName: "Project2UnnamedContract4",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000014",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000014"),
         chain: mainnet,
         codeName: "Project2UnnamedContract5",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000015",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000015"),
         chain: mainnet,
         codeName: "Project2UnnamedContract6",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000016",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000016"),
         chain: mainnet,
         codeName: "Project2UnnamedContract7",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000017",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000017"),
         chain: mainnet,
         codeName: "Project2NamedContract1",
       },
-      name: "name.p2c1.eth",
+      name: asInterpretedName("name.p2c1.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000018",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000018"),
         chain: mainnet,
         codeName: "Project2NamedContract2",
       },
-      name: "name.p2c2.eth",
+      name: asInterpretedName("name.p2c2.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: UniswapDao,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000019",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000019"),
         chain: mainnet,
         codeName: "Project2ForwardNamedContract1",
       },
-      name: "forward.name.p2c1.eth",
+      name: asInterpretedName("forward.name.p2c1.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000020",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000020"),
         chain: mainnet,
         codeName: "Project3UnnamedContract1",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000021",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000021"),
         chain: mainnet,
         codeName: "Project3UnnamedContract2",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000022",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000022"),
         chain: mainnet,
         codeName: "Project3UnnamedContract3",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000023",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000023"),
         chain: mainnet,
         codeName: "Project3UnnamedContract4",
       },
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000024",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000024"),
         chain: mainnet,
         codeName: "Project3NamedContract1",
       },
-      name: "name.p3c1.eth",
+      name: asInterpretedName("name.p3c1.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000025",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000025"),
         chain: mainnet,
         codeName: "Project3NamedContract2",
       },
-      name: "name.p3c2.eth",
+      name: asInterpretedName("name.p3c2.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000026",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000026"),
         chain: mainnet,
         codeName: "Project3NamedContract3",
       },
-      name: "name.p3c3.eth",
+      name: asInterpretedName("name.p3c3.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000027",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000027"),
         chain: mainnet,
         codeName: "Project3NamedContract4",
       },
-      name: "name.p3c4.eth",
+      name: asInterpretedName("name.p3c4.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000028",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000028"),
         chain: mainnet,
         codeName: "Project3NamedContract5",
       },
-      name: "name.p3c5.eth",
+      name: asInterpretedName("name.p3c5.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
   {
     protocol: LiquityDefi,
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
       contract: {
-        address: "0x0000000000000000000000000000000000000029",
+        address: asNormalizedAddress("0x0000000000000000000000000000000000000029"),
         chain: mainnet,
         codeName: "Project3ForwardNamedContract1",
       },
-      name: "forward.name.p3c1.eth",
+      name: asInterpretedName("forward.name.p3c1.eth"),
     },
-    contributions: [{ from: contributors.y3drk, lastUpdated: 1772614147 }],
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-03-04T08:49:07.000Z") },
+    ],
   },
 ];

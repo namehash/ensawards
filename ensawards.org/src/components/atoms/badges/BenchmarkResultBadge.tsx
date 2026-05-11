@@ -51,12 +51,12 @@ export const getBenchmarkIcon = (benchmarkResult?: BenchmarkResult, className?: 
 };
 
 export function BenchmarkResultBadge({ benchmarkResult, className }: BenchmarkResultBadgeProps) {
-  const BenchmarkIcon = getBenchmarkIcon(benchmarkResult, "w-4 h-4");
+  const BenchmarkIcon = getBenchmarkIcon(benchmarkResult, "w-4 h-4 shrink-0");
   return (
     <span
       className={cn(
         "w-fit flex flex-row flex-nowrap justify-center items-center gap-1.5 pl-2.5 pr-3 py-1 rounded-full " +
-          "text-xs leading-normal font-medium cursor-default",
+          "text-xs leading-normal font-medium text-nowrap cursor-default",
         benchmarkResultToBadgeStyles(benchmarkResult),
         className,
       )}

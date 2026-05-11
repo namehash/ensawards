@@ -1,8 +1,8 @@
 import {
   ReferralProgramAwardModels,
   type ReferralProgramEditionSummaryPieSplit,
-  type ReferralProgramEditionSummaryRevShareLimit,
-} from "@namehash/ens-referrals/v1";
+  type ReferralProgramEditionSummaryRevShareCap,
+} from "@namehash/ens-referrals";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge";
 import {
@@ -17,7 +17,7 @@ import { usdFormatter } from "@/utils/textModifications.ts";
 interface ReferralProgramEditionInfoProps {
   referralProgramEditionSummary:
     | ReferralProgramEditionSummaryPieSplit
-    | ReferralProgramEditionSummaryRevShareLimit;
+    | ReferralProgramEditionSummaryRevShareCap;
   isLoading: boolean;
 }
 
@@ -49,10 +49,10 @@ export const ReferralProgramEditionInfo = ({
         />
       ) : (
         <ReferralProgramEditionAwardPool
-          totalAwardPoolValue={referralProgramEditionSummary.rules.totalAwardPoolValue}
+          totalAwardPoolValue={referralProgramEditionSummary.rules.awardPool}
         />
       )}
-      {referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.RevShareLimit &&
+      {referralProgramEditionSummary.awardModel === ReferralProgramAwardModels.RevShareCap &&
         (isLoading ? (
           <ReferralProgramEditionFieldLoading
             label="Award pool remaining"

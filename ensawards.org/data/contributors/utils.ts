@@ -1,6 +1,5 @@
 import { getAcceptanceTestBenchmarksByApp } from "data/acceptance-tests/utils.ts";
-
-import { formatAccountId } from "@ensnode/ensnode-sdk";
+import { stringifyAccountId } from "enssdk";
 
 import { type App } from "../apps/types.ts";
 import { type Protocol } from "../protocols/types.ts";
@@ -16,7 +15,7 @@ export const countContributorAppearances = (
   const appearancesMap = new Map<string, { contributor: Contributor; count: number }>();
 
   for (const contributor of contributors) {
-    const identifier = formatAccountId(contributor);
+    const identifier = stringifyAccountId(contributor);
     const currentCount = appearancesMap.get(identifier)?.count ?? 0;
     appearancesMap.set(identifier, { contributor, count: currentCount + 1 });
   }

@@ -1,5 +1,6 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
+import { asNormalizedAddress } from "enssdk";
 import { arbitrum, mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
@@ -16,7 +17,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xf3fc178157fb3c87548baa86f9d24ba38e649b58",
+        address: asNormalizedAddress("0xf3fc178157fb3c87548baa86f9d24ba38e649b58"),
         chain: arbitrum,
         codeName: "ArbitrumDaoTreasury",
       },
@@ -30,7 +31,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xbbce8aa77782f13d4202a230d978f361b011db27",
+        address: asNormalizedAddress("0xbbce8aa77782f13d4202a230d978f361b011db27"),
         chain: mainnet,
         codeName: "ARBGatewayL1",
       },
@@ -44,7 +45,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xcad7828a19b363a2b44717afb1786b5196974d8e",
+        address: asNormalizedAddress("0xcad7828a19b363a2b44717afb1786b5196974d8e"),
         chain: arbitrum,
         codeName: "ARBGatewayL2",
       },
@@ -58,7 +59,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x3fffbadaf827559da092217e474760e2b2c3cedd",
+        address: asNormalizedAddress("0x3fffbadaf827559da092217e474760e2b2c3cedd"),
         chain: mainnet,
         codeName: "L1UpgradeExecutor",
       },
@@ -72,7 +73,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xe6841d92b0c345144506576ec13ecf5103ac7f49",
+        address: asNormalizedAddress("0xe6841d92b0c345144506576ec13ecf5103ac7f49"),
         chain: mainnet,
         codeName: "L1Timelock",
       },
@@ -86,7 +87,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xf07ded9dc292157749b6fd268e37df6ea38395b9",
+        address: asNormalizedAddress("0xf07ded9dc292157749b6fd268e37df6ea38395b9"),
         chain: arbitrum,
         codeName: "CoreGovernor",
       },
@@ -100,7 +101,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x789fc99093b09ad01c34dc7251d0c89ce743e5a4",
+        address: asNormalizedAddress("0x789fc99093b09ad01c34dc7251d0c89ce743e5a4"),
         chain: arbitrum,
         codeName: "TreasuryGovernor",
       },
@@ -114,7 +115,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xcf57572261c7c2bcf21ffd220ea7d1a27d40a827",
+        address: asNormalizedAddress("0xcf57572261c7c2bcf21ffd220ea7d1a27d40a827"),
         chain: arbitrum,
         codeName: "ArbOneUpgradeExecutor",
       },
@@ -128,7 +129,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x34d45e99f7d8c45ed05b5ca72d54bbd1fb3f98f0",
+        address: asNormalizedAddress("0x34d45e99f7d8c45ed05b5ca72d54bbd1fb3f98f0"),
         chain: arbitrum,
         codeName: "L2CoreTimelock",
       },
@@ -142,7 +143,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xbfc1feca8b09a5c5d3effe7429ebe24b9c09ef58",
+        address: asNormalizedAddress("0xbfc1feca8b09a5c5d3effe7429ebe24b9c09ef58"),
         chain: arbitrum,
         codeName: "L2TreasuryTimelock",
       },
@@ -156,7 +157,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xf06e95ef589d9c38af242a8aaee8375f14023f85",
+        address: asNormalizedAddress("0xf06e95ef589d9c38af242a8aaee8375f14023f85"),
         chain: mainnet,
         codeName: "SecurityCouncilL1Emergency",
       },
@@ -170,7 +171,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x423552c0f05baccac5bfa91c6dcf1dc53a0a1641",
+        address: asNormalizedAddress("0x423552c0f05baccac5bfa91c6dcf1dc53a0a1641"),
         chain: arbitrum,
         codeName: "SecurityCouncilL2Emergency",
       },
@@ -184,7 +185,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x8a1cda8dee421cd06023470608605934c16a05a0",
+        address: asNormalizedAddress("0x8a1cda8dee421cd06023470608605934c16a05a0"),
         chain: arbitrum,
         codeName: "NomineeElectionGovernor",
       },
@@ -198,7 +199,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x467923b9ae90bdb36ba88eca11604d45f13b712c",
+        address: asNormalizedAddress("0x467923b9ae90bdb36ba88eca11604d45f13b712c"),
         chain: arbitrum,
         codeName: "MemberElectionGovernor",
       },
@@ -212,7 +213,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xd509e5f5aee2a205f554f36e8a7d56094494edfc",
+        address: asNormalizedAddress("0xd509e5f5aee2a205f554f36e8a7d56094494edfc"),
         chain: arbitrum,
         codeName: "Manager",
       },
@@ -226,7 +227,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x7481716f05e315fc4c4a64e56dcd9bc1d6f24c0a",
+        address: asNormalizedAddress("0x7481716f05e315fc4c4a64e56dcd9bc1d6f24c0a"),
         chain: arbitrum,
         codeName: "UpgradeExecRouteBuilder",
       },
@@ -240,7 +241,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x6f3a242ca91a119f872f0073bc14bc8a74a315ad",
+        address: asNormalizedAddress("0x6f3a242ca91a119f872f0073bc14bc8a74a315ad"),
         chain: arbitrum,
         codeName: "MemberRemovalGovernor",
       },
@@ -254,7 +255,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x9bf7b8884fa381a45f8cb2525905fb36c996297a",
+        address: asNormalizedAddress("0x9bf7b8884fa381a45f8cb2525905fb36c996297a"),
         chain: arbitrum,
         codeName: "MemberSyncActionL2",
       },
@@ -268,7 +269,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x9bf7b8884fa381a45f8cb2525905fb36c996297a",
+        address: asNormalizedAddress("0x9bf7b8884fa381a45f8cb2525905fb36c996297a"),
         chain: mainnet,
         codeName: "MemberSyncActionL1",
       },
@@ -282,7 +283,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x1d62ffeb72e4c360ccbbacf7c965153b00260417",
+        address: asNormalizedAddress("0x1d62ffeb72e4c360ccbbacf7c965153b00260417"),
         chain: arbitrum,
         codeName: "ConstitutionHash",
       },
@@ -296,7 +297,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0x5613af0474eb9c528a34701a5b1662e3c8fa0678",
+        address: asNormalizedAddress("0x5613af0474eb9c528a34701a5b1662e3c8fa0678"),
         chain: mainnet,
         codeName: "L1ProxyAdmin",
       },
@@ -310,7 +311,7 @@ const contracts: Contract[] = [
     cachedIdentity: {
       resolutionStatus: ContractResolutionStatusIds.Unnamed,
       contract: {
-        address: "0xdb216562328215e010f819b5abe947bad4ca961e",
+        address: asNormalizedAddress("0xdb216562328215e010f819b5abe947bad4ca961e"),
         chain: arbitrum,
         codeName: "ArbOneProxyAdmin",
       },

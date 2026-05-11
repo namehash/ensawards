@@ -1,10 +1,11 @@
-import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
+import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals";
+import { type UnixTimestamp } from "enssdk";
 import { ChevronRightIcon } from "lucide-react";
 import type { PropsWithChildren } from "react";
 
-import type { PriceUsdc, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { PriceUsdc } from "@ensnode/ensnode-sdk";
 
-import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramTimeline.tsx";
+import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramPeriodDate";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { parseReferralProgramCurrency } from "@/utils/referralProgram";

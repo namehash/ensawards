@@ -4,6 +4,8 @@ import { type BenchmarkResult, BenchmarkResults } from "data/benchmarks/types.ts
 import { zeroAddress } from "viem";
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import { type App, type AppSlug, type AppType, AppTypes } from "../apps/types.ts";
 import {
   type BestPracticeApp,
@@ -56,20 +58,35 @@ export const createMockBestPractice = (overrides: {
         description: <p>Mock acceptance test description 1</p>,
         examplePass: {
           result: BenchmarkResults.Pass,
-          contributions: [{ from: { address: zeroAddress, chainId: mainnet.id }, lastUpdated: 0 }],
+          contributions: [
+            {
+              from: { address: zeroAddress, chainId: mainnet.id },
+              lastUpdated: parseTimestamp("1970-01-01T00:00:00.000Z"),
+            },
+          ],
           notes: <p>Mock notes for acceptance test 1</p>,
         },
       },
     ],
   },
-  contributions: [{ from: { address: zeroAddress, chainId: mainnet.id }, lastUpdated: 0 }],
+  contributions: [
+    {
+      from: { address: zeroAddress, chainId: mainnet.id },
+      lastUpdated: parseTimestamp("1970-01-01T00:00:00.000Z"),
+    },
+  ],
 });
 
 export const createMockAcceptanceTestBenchmark = (
   result: BenchmarkResult,
 ): AcceptanceTestBenchmark => ({
   result,
-  contributions: [{ from: { address: zeroAddress, chainId: mainnet.id }, lastUpdated: 0 }],
+  contributions: [
+    {
+      from: { address: zeroAddress, chainId: mainnet.id },
+      lastUpdated: parseTimestamp("1970-01-01T00:00:00.000Z"),
+    },
+  ],
   notes: <p>Mock notes</p>,
 });
 

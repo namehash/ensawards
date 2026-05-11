@@ -5,9 +5,9 @@ import { type RankProps, ReferrerCardHeaderLoading } from "../shared.tsx";
 /**
  * Display Referrer Card loading state.
  *
- * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareLimit} award model.
+ * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareCap} award model.
  */
-export const ReferrerCardRevShareLimitLoading = ({
+export const ReferrerCardRevShareCapLoading = ({
   rank,
 }: Omit<RankProps, "className" | "isQualified" | "rankTooltipText">) => {
   const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";

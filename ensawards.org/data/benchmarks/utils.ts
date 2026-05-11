@@ -3,8 +3,7 @@ import type { AppSlug } from "data/apps/types.ts";
 import { getAppBySlug } from "data/apps/utils.ts";
 import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
-
-import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { UnixTimestamp } from "enssdk";
 
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "../ens-best-practices/types.ts";
 import { type BestPracticeCategorySlug, BestPracticeTypes } from "../ens-best-practices/types.ts";

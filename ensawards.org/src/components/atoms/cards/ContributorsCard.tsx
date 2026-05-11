@@ -5,7 +5,7 @@ import { User as NoContributionsIcon } from "lucide-react";
 import { useMemo } from "react";
 import { getAddress } from "viem";
 
-import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
@@ -97,9 +97,9 @@ export const ContributorsCard = ({
   gitHubTargetHref = "https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md",
   sidebarVariant = false,
 }: ContributorsCardProps) => {
-  const ensNodeReactConfig = useMemo(
+  const ensNodeProviderOptions = useMemo(
     () =>
-      createConfig({
+      createEnsNodeProviderOptions({
         url: getENSNodeUrl(),
       }),
     [],
@@ -114,7 +114,7 @@ export const ContributorsCard = ({
   );
 
   return (
-    <ENSNodeProvider config={ensNodeReactConfig}>
+    <EnsNodeProvider options={ensNodeProviderOptions}>
       <TooltipProvider delayDuration={250} skipDelayDuration={0}>
         <div
           className={cn(
@@ -213,7 +213,7 @@ export const ContributorsCard = ({
           </div>
         </div>
       </TooltipProvider>
-    </ENSNodeProvider>
+    </EnsNodeProvider>
   );
 };
 

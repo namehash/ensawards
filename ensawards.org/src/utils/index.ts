@@ -1,7 +1,7 @@
 import { getUnixTime } from "date-fns";
-import type { Address } from "viem";
+import type { NormalizedAddress, UnixTimestamp } from "enssdk";
 
-import type { OmnichainIndexingStatusId, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { OmnichainIndexingStatusId } from "@ensnode/ensnode-sdk";
 
 /**
  * Takes in an array of strings and returns true
@@ -35,7 +35,7 @@ export function formatOmnichainIndexingStatus(status: OmnichainIndexingStatusId)
   return formattedStatus;
 }
 
-export function getEnsAdvocateDetailsRelativePath(address: Address): string {
+export function getEnsAdvocateDetailsRelativePath(address: NormalizedAddress): string {
   return `/advocate/${encodeURIComponent(address)}`;
 }
 

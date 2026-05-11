@@ -32,7 +32,7 @@ export type Contribution = {
 };
 ```
 
-`Contributor` is an alias for `AccountId`, which is a CAIP-10 account identifier from `@ensnode/ensnode-sdk`:
+`Contributor` is an alias for `AccountId`, which is a CAIP-10 account identifier from `enssdk`:
 
 ```typescript
 export interface AccountId {
@@ -100,7 +100,7 @@ export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT exte
   socials: {
     website: URL;
     twitter: URL;
-    ens?: Name;
+    ens?: InterpretedName;
   };
   /** The custom Open Graph image for the protocol. 
    * Specified by the relative path from `/data/protocols` to a custom Open Graph image.
@@ -164,7 +164,7 @@ export interface App {
   socials: {
     website: URL;
     twitter: URL;
-    ens?: Name;
+    ens?: InterpretedName;
   };
   /** The custom Open Graph image for the app. 
    * Specified by the relative path from `/data/apps` to a custom Open Graph image.

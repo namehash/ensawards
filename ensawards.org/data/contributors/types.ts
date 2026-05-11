@@ -1,4 +1,4 @@
-import type { AccountId, UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { AccountId, UnixTimestamp } from "enssdk";
 
 /**
  * Human-readable alias for a contributor, used to identify them in the {@link contributors} record

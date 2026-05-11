@@ -30,11 +30,12 @@ export const getAcceptanceTestBenchmarksByApp = (
 
 /**
  * Generalizes multiple `AcceptanceTestBenchmark`s into a single `BenchmarkResult` based on the following rules:
- * - If all defined benchmarks are {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass}, returns {@link BenchmarkResults.Pass}
- * - If all defined benchmarks are {@link BenchmarkResults.Fail}, returns {@link BenchmarkResults.Fail}
- * - If at least one defined benchmark is {@link BenchmarkResults.Fail} and at least one defined benchmark is {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass},
- * returns {@link BenchmarkResults.PartialPass}
- * - If all benchmarks are `undefined` (pending), returns `undefined`
+ * - Returns {@link BenchmarkResults.Pass} if all defined benchmarks are {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass}
+ * - Returns {@link BenchmarkResults.Fail} if all defined benchmarks are {@link BenchmarkResults.Fail},
+ * - Returns {@link BenchmarkResults.PartialPass} if:
+ *     - at least one defined benchmark is {@link BenchmarkResults.Fail} and at least one defined benchmark is {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass},
+ *     - or all defined benchmarks are {@link BenchmarkResults.PartialPass},
+ * -  returns `undefined` if all benchmarks are `undefined` (pending).
  */
 export const generalizeAcceptanceTestBenchmarks = (
   acceptanceTestBenchmarks: AcceptanceTestBenchmarks,
@@ -43,12 +44,17 @@ export const generalizeAcceptanceTestBenchmarks = (
     (benchmark) => benchmark?.result,
   );
 
+  // Explicitly treating passs and partial pass equally
   const hasPass = benchmarkResults.some(
     (result) => result === BenchmarkResults.Pass || result === BenchmarkResults.PartialPass,
   );
   const hasFail = benchmarkResults.some((result) => result === BenchmarkResults.Fail);
 
-  if (hasPass && hasFail) {
+  const allPartialPass = benchmarkResults.every(
+    (result) => result === BenchmarkResults.PartialPass,
+  );
+
+  if ((hasPass && hasFail) || allPartialPass) {
     return BenchmarkResults.PartialPass;
   }
 

@@ -1,6 +1,6 @@
-import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals/v1";
+import { type ReferralProgramEditionSummary } from "@namehash/ens-referrals";
+import { asInterpretedName, namehashInterpretedName } from "enssdk";
 import { useEffect, useState } from "react";
-import { namehash } from "viem";
 
 import { useRegistrarActions } from "@ensnode/ensnode-react";
 import {
@@ -44,7 +44,7 @@ export function FetchAndDisplayRegistrarActionsFeed({
   const namespaceId = DEFAULT_ENS_NAMESPACE;
   const filters: RegistrarActionsFilter[] = [
     // Include records for direct subnames of `.eth`
-    registrarActionsFilter.byParentNode(namehash("eth")),
+    registrarActionsFilter.byParentNode(namehashInterpretedName(asInterpretedName("eth"))),
     // Include records with `encodedReferrer` other than NULL and ZERO_ENCODED_REFERRER
     registrarActionsFilter.withReferral(true),
   ];
@@ -153,12 +153,10 @@ export function FetchAndDisplayRegistrarActionsFeed({
         <h2 className={cn(title.styles?.text ?? "text-2xl leading-normal font-semibold")}>
           {title.text}
         </h2>
-        {registrarActionsQuery.data.accurateAsOf && (
-          <LastUpdateTime
-            timestamp={registrarActionsQuery.data.accurateAsOf}
-            className="text-base sm:text-sm"
-          />
-        )}
+        <LastUpdateTime
+          timestamp={registrarActionsQuery.data.accurateAsOf}
+          className="text-base sm:text-sm"
+        />
       </div>
       <DisplayRegistrarActionsList
         namespaceId={namespaceId}

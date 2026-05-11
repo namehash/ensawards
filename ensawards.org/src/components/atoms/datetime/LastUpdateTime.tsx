@@ -1,7 +1,6 @@
 import { RelativeTime, useNow } from "@namehash/namehash-ui";
 import { secondsInMinute } from "date-fns/constants";
-
-import type { UnixTimestamp } from "@ensnode/ensnode-sdk";
+import type { UnixTimestamp } from "enssdk";
 
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";

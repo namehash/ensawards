@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import TaikoProject from "../../projects/taiko";
 import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const TaikoDao: DAOProtocol = {
   socials: {
     website: new URL("https://dao.taiko.xyz"),
     twitter: new URL("https://x.com/taikoxyz"),
-    ens: "taiko.eth",
+    ens: asInterpretedName("taiko.eth"),
   },
   ogImagePath: "taiko-dao/og.png",
   twitterOgImagePath: "taiko-dao/twitter-og.png",

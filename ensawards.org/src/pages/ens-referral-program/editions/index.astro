@@ -5,13 +5,19 @@ import SubpageHero from "../../../components/molecules/SubpageHero.astro";
 import { ReferralProgramEditionsList } from "../../../components/molecules/ReferralProgramEditionsList";
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../../components/ui/shadcnButtonStyles";
+
+// Temporarily change the wording of the description
+// to avoid giving the impression that no referral program editions will come after the current one in May.
+// When the next edition is added to production-editions.json we should be able to just rollback to the previous text.
+// For more details see: https://namehash.slack.com/archives/C086Z6FNBHN/p1778064151996799
 ---
 
 <Layout
   pageMetadata={{
     title: "ENSAwards: ENS Referral Program Editions",
-    description:
-      "Explore editions that are currently active, scheduled for the future, or already closed.",
+    // description:
+    //   "Explore editions that are currently active, scheduled for the future, or already closed.",
+    description: "Explore all editions.",
     url: "https://ensawards.org/ens-referral-program/editions",
     ogImage: "https://ensawards.org/ens_referral_program_editions_og_image.png",
     twitterImage:
@@ -19,7 +25,7 @@ import { shadcnButtonVariants } from "../../../components/ui/shadcnButtonStyles"
   }}>
   <SubpageHero
     header="ENS referral program editions"
-    description="Explore editions that are currently active, scheduled for the future, or already closed."
+    description="Explore all editions."
     breadcrumbs={[
       { text: "ENS Referral Program", linkHref: "/ens-referral-program" },
     ]}

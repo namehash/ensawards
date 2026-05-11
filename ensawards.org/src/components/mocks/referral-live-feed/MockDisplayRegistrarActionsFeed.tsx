@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
-import { createConfig, ENSNodeProvider } from "@ensnode/ensnode-react";
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 import { RECORDS_PER_PAGE_DEFAULT, RegistrarActionsResponseCodes } from "@ensnode/ensnode-sdk";
 
 import {
@@ -25,7 +25,7 @@ import { variants } from "./data.ts";
 const variantIds = [...variants.keys()];
 
 export function MockDisplayRegistrarActionsFeed() {
-  const config = useMemo(() => createConfig({ url: getENSNodeUrl() }), []);
+  const options = useMemo(() => createEnsNodeProviderOptions({ url: getENSNodeUrl() }), []);
 
   const namespaceId = ENSNamespaceIds.Sepolia;
   const title: ReferralLiveFeedTitle = {
@@ -40,7 +40,7 @@ export function MockDisplayRegistrarActionsFeed() {
   }
 
   return (
-    <ENSNodeProvider config={config}>
+    <EnsNodeProvider options={options}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <section className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
           <div className="flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-4">
@@ -136,6 +136,6 @@ export function MockDisplayRegistrarActionsFeed() {
           </div>{" "}
         </section>
       </TooltipProvider>
-    </ENSNodeProvider>
+    </EnsNodeProvider>
   );
 }

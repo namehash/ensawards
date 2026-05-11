@@ -1,10 +1,8 @@
 import { SUPPORTED_CHAINS } from "@namehash/namehash-ui";
-import { isNormalizedAddress } from "data/shared/normalizedAddress";
 import { isValidSlug } from "data/shared/slugs";
+import { type AccountId, type ChainId, isNormalizedAddress } from "enssdk";
 import { getAddress } from "viem";
 import { describe, expect, it } from "vitest";
-
-import type { AccountId, ChainId } from "@ensnode/ensnode-sdk";
 
 import contributors from ".";
 
