@@ -136,23 +136,6 @@ const acceptanceTest1ExamplePass = {
   ),
 } as const satisfies AcceptanceTestBenchmarkPass;
 
-const acceptanceTest2Description = (
-  <div className={acceptanceTestDetailsContainerStyles}>
-    <p className="w-full">
-      When users interact with named smart contracts on Ethereum mainnet the app should display the
-      contract's name as its primary identifier.
-    </p>
-  </div>
-);
-
-const acceptanceTest2ExamplePass = {
-  result: BenchmarkResults.Pass,
-  contributions: [
-    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
-  ],
-  notes: <p>TEST EXAMPLE WITHOUT IMAGE</p>,
-} as const satisfies AcceptanceTestBenchmarkPass;
-
 const technicalDetails = {
   useCaseSummary: useCaseSummary,
   desiredOutcome: desiredOutcome,
@@ -162,11 +145,6 @@ const technicalDetails = {
       acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts",
       description: acceptanceTest1Description,
       examplePass: acceptanceTest1ExamplePass,
-    },
-    {
-      acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts-at2",
-      description: acceptanceTest2Description,
-      examplePass: acceptanceTest2ExamplePass,
     },
   ],
 } as const satisfies BestPracticeTechnicalDetails;

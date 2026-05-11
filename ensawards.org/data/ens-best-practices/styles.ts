@@ -2,7 +2,9 @@
 // solely because it includes content defined as `JSX` elements.
 //
 // The only purpose of these Tailwind classes is to help style those elements.
-// Neither should be used anywhere else across the codebase.
+// Neither should be used anywhere else across the codebase, besides:
+// 1. The definitions of best practice details (`data/ens-best-practices/*/*/technicalDetails.tsx`)
+// 2. Acceptance tests (`data/ens-best-practices/*/*/technicalDetails.tsx`) and their benchmarks (`data/apps/*/benchmarks/index.tsx`)
 
 // Separated from the other utils to avoid circular dependency issues.
 

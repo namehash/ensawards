@@ -20,7 +20,6 @@ const benchmarks = {
   //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-03T14:00:00Z") },
   //   ],
   // },
-  // TODO: remember to rollback to benchmarks actuall results (base it on the current prod if needed)
   "display-named-smart-contracts-mainnet": {
     "mainnet-interactions-display-named-smart-contracts": {
       result: BenchmarkResults.Pass,
@@ -28,18 +27,7 @@ const benchmarks = {
         { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
       ],
       notes: (
-        <div className={acceptanceTestDetailsContainerStyles}>
-          <p className="w-full">Benchmark placeholder notes</p>
-          <img alt="example proof" src={exampleProofImage.src} />
-        </div>
-      ),
-    } as const satisfies AcceptanceTestBenchmark,
-    "mainnet-interactions-display-named-smart-contracts-at2": {
-      result: BenchmarkResults.Pass,
-      contributions: [
-        { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
-      ],
-      notes: (
+        // TODO: Enhance the notes
         <div className={acceptanceTestDetailsContainerStyles}>
           <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
@@ -54,15 +42,13 @@ const benchmarks = {
         { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
       ],
       notes: (
+        // TODO: Enhance the notes
         <div className={acceptanceTestDetailsContainerStyles}>
           <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
         </div>
       ),
     } as const satisfies AcceptanceTestBenchmark,
-  },
-  "mock-bp-all-pending": {
-    "mock-acceptance-test-1": undefined, // simulate pending benchmark
   },
 } as const satisfies BestPracticeBenchmarks;
 

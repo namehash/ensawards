@@ -13,7 +13,6 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 
-// TODO: Some of these are placeholder benchmarks just to show how the new benchmarking system works,
 const benchmarks = {
   // "recognize-all-ens-names": {
   //   result: BenchmarkResults.Pass,
@@ -28,18 +27,7 @@ const benchmarks = {
         { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:28:32.410Z") },
       ],
       notes: (
-        <div className={acceptanceTestDetailsContainerStyles}>
-          <p className="w-full">Benchmark placeholder notes</p>
-          <img alt="example proof" src={exampleProofImage.src} />
-        </div>
-      ),
-    } as const satisfies AcceptanceTestBenchmark,
-    "mainnet-interactions-display-named-smart-contracts-at2": {
-      result: BenchmarkResults.Pass,
-      contributions: [
-        { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:28:32.410Z") },
-      ],
-      notes: (
+        // TODO: Enhance the notes
         <div className={acceptanceTestDetailsContainerStyles}>
           <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
@@ -54,15 +42,13 @@ const benchmarks = {
         { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:28:32.410Z") },
       ],
       notes: (
+        // TODO: Enhance the notes
         <div className={acceptanceTestDetailsContainerStyles}>
           <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
         </div>
       ),
     } as const satisfies AcceptanceTestBenchmark,
-  },
-  "mock-bp-all-pending-2": {
-    "mock-acceptance-test-3": undefined,
   },
 } as const satisfies BestPracticeBenchmarks;
 

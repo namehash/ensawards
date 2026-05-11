@@ -11,7 +11,7 @@ const DisplayProfilesCategory: BestPracticeCategory = {
   name: "Displaying Profiles",
   description:
     "Avatar images, social records, address records, and more. Ensure each ENS profile is displayed optimally.",
-  status: CategoryStatuses.Active, //TODO: Rollback to "ComingSoon" before merging. Made "active" just for the development purposes
+  status: CategoryStatuses.ComingSoon,
 };
 
 defineBestPracticeCategory(DisplayProfilesCategory);

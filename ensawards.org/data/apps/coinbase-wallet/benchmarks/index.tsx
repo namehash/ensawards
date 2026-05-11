@@ -20,18 +20,14 @@ const benchmarks = {
   //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-03T14:00:00Z") },
   //   ],
   // },
-  // TODO: remember to rollback to benchmarks actuall results (base it on the current prod if needed)
   "display-named-smart-contracts-mainnet": {
-    "mainnet-interactions-display-named-smart-contracts": undefined, // simulate pending benchmark
-    "mainnet-interactions-display-named-smart-contracts-at2": undefined, // simulate both benchmarks pending
-  },
-  "display-named-smart-contracts-l2-chains": {
-    "l2-chain-interactions-display-named-smart-contracts": {
+    "mainnet-interactions-display-named-smart-contracts": {
       result: BenchmarkResults.Fail,
       contributions: [
-        { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:26:20.566Z") },
+        { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:22:55.716Z") },
       ],
       notes: (
+        // TODO: Enhance the notes
         <div className={acceptanceTestDetailsContainerStyles}>
           <p className="w-full">Benchmark placeholder notes</p>
           <img alt="example proof" src={exampleProofImage.src} />
@@ -39,8 +35,20 @@ const benchmarks = {
       ),
     } as const satisfies AcceptanceTestBenchmark,
   },
-  "mock-bp-all-pending": {
-    "mock-acceptance-test-1": undefined, // simulate pending benchmark
+  "display-named-smart-contracts-l2-chains": {
+    "l2-chain-interactions-display-named-smart-contracts": {
+      result: BenchmarkResults.Fail,
+      contributions: [
+        { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:22:55.716Z") },
+      ],
+      notes: (
+        // TODO: Enhance the notes
+        <div className={acceptanceTestDetailsContainerStyles}>
+          <p className="w-full">Benchmark placeholder notes</p>
+          <img alt="example proof" src={exampleProofImage.src} />
+        </div>
+      ),
+    } as const satisfies AcceptanceTestBenchmark,
   },
 } as const satisfies BestPracticeBenchmarks;
 
