@@ -11,7 +11,10 @@ import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
+import { cn } from "@/utils/tailwindClassConcatenation";
+
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
+import namedSmartContractsOnMainnetProofImage from "./named-smart-contracts-on-mainnet-proof.png";
 
 const benchmarks: BestPracticeBenchmarks = {
   "display-named-smart-contracts-mainnet": {
@@ -22,9 +25,17 @@ const benchmarks: BestPracticeBenchmarks = {
       ],
       notes: (
         // TODO: Enhance the notes
-        <div className={acceptanceTestDetailsContainerStyles}>
-          <p className="w-full">Benchmark placeholder notes</p>
-          <img alt="example proof" src={exampleProofImage.src} />
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">
+            Screenshot presents a transaction interaction on mainnet (setting name's records using
+            ENS public resolver contract) where the user is interacting with a contract that has an
+            ENS name, and the wallet is correctly displaying the ENS name of the contract.
+          </p>
+          <img
+            alt="proof image"
+            src={namedSmartContractsOnMainnetProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
         </div>
       ),
     } as const satisfies AcceptanceTestBenchmark,
@@ -37,9 +48,13 @@ const benchmarks: BestPracticeBenchmarks = {
       ],
       notes: (
         // TODO: Enhance the notes
-        <div className={acceptanceTestDetailsContainerStyles}>
-          <p className="w-full">Benchmark placeholder notes</p>
-          <img alt="example proof" src={exampleProofImage.src} />
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">TODO: Add correct Benchmark notes</p>
+          <img
+            alt="example proof"
+            src={exampleProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
         </div>
       ),
     } as const satisfies AcceptanceTestBenchmark,

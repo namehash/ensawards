@@ -9,6 +9,8 @@ import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
+import { cn } from "@/utils/tailwindClassConcatenation";
+
 import mainnetInteractionsDisplayNamedSmartContractsImage from "./images/mainnet-interactions-display-named-smart-contracts-example.png";
 
 // TODO: The content isn't fully curated for now.
@@ -128,11 +130,21 @@ const acceptanceTest1ExamplePass = {
     { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
   ],
   notes: (
-    <img
-      alt="mainnet-interactions-display-named-smart-contracts acceptance test"
-      src={mainnetInteractionsDisplayNamedSmartContractsImage.src}
-      className="w-auto h-full max-h-[325px]"
-    />
+    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+      <p className="w-full">
+        Below you can see how{" "}
+        <a className={bestPracticeTechnicalDetailsLinkStyles} href="/app/walletchan-wallet">
+          WalletChan
+        </a>{" "}
+        displays the name of the contract it interacts with in addition to its address.
+      </p>
+      <img
+        alt="mainnet-interactions-display-named-smart-contracts acceptance test"
+        src={mainnetInteractionsDisplayNamedSmartContractsImage.src}
+        className="w-auto h-full max-h-[325px] rounded-xl"
+      />
+      <p className="w-full">That allows the user to easily identify the contract.</p>
+    </div>
   ),
 } as const satisfies AcceptanceTestBenchmarkPass;
 

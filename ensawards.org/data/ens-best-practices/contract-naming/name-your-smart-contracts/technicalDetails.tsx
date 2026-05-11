@@ -9,11 +9,13 @@ import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
+import { cn } from "@/utils/tailwindClassConcatenation";
+
 import enscribelookupAcceptanceTestImage from "./images/enscribe-lookup-example.png";
 
 // TODO: The content isn't fully curated for now.
 
-const implementationRecommendations = (
+const useCaseSummary = (
   <div>
     Contracts should be{" "}
     <a
@@ -72,7 +74,7 @@ const implementationRecommendations = (
   </div>
 );
 
-const useCaseSummary = (
+const implementationRecommendations = (
   <p>
     Assigning ENS names to contracts gives users confidence they're interacting with the correct
     contract. This is particularly valuable for security, as users can confirm{" "}
@@ -114,7 +116,34 @@ const acceptanceTest1ExamplePass = {
   contributions: [
     { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
   ],
-  notes: <img alt="enscribe-lookup acceptance test" src={enscribelookupAcceptanceTestImage.src} />,
+  notes: (
+    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+      <p className="w-full">
+        Below you can see the verification on the{" "}
+        <a
+          className={bestPracticeTechnicalDetailsLinkStyles}
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://app.enscribe.xyz/"
+        >
+          Enscribe App
+        </a>{" "}
+        how{" "}
+        <a className={bestPracticeTechnicalDetailsLinkStyles} href="/protocol/nouns-dao">
+          Nouns DAO
+        </a>{" "}
+        has named one of its smart contracts.
+      </p>
+      <img
+        alt="enscribe-lookup acceptance test"
+        src={enscribelookupAcceptanceTestImage.src}
+        className="w-auto h-full max-h-[350px] rounded-xl"
+      />
+      <p className="w-full">
+        This is the first (but vital) step in ensuring users can easily identify the contract.
+      </p>
+    </div>
+  ),
 } as const satisfies AcceptanceTestBenchmarkPass;
 
 const technicalDetails = {

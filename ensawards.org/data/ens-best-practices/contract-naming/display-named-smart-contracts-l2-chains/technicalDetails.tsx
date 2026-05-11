@@ -9,13 +9,15 @@ import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
+import { cn } from "@/utils/tailwindClassConcatenation";
+
 import l2ChainsInteractionsDisplayNamedSmartContractsImage from "./images/mock-l2-chains-interactions-display-named-smart-contracts-example.png";
 
 // TODO: The content isn't fully curated for now.
 const implementationRecommendations = (
   <div>
     <p>
-      When users interact with a contract on an L2 chain, use the
+      When users interact with a contract on an L2 chain, use the{" "}
       <a
         className={bestPracticeTechnicalDetailsLinkStyles}
         href="https://docs.ens.domains/ensip/19"
@@ -30,7 +32,8 @@ const implementationRecommendations = (
       name is defined. There are several libraries to choose from that support ENSIP-19 and all ENS
       best practices:
     </p>
-    <ul>
+    <br />
+    <ul className="list-disc pl-5">
       <li>
         <a
           className={bestPracticeTechnicalDetailsLinkStyles}
@@ -76,6 +79,7 @@ const implementationRecommendations = (
         (v2.18.0+)
       </li>
     </ul>
+    <br />
     <p>
       Libraries and tools for additional languages or frameworks can be found in the{" "}
       <a
@@ -104,7 +108,7 @@ const useCaseSummary = (
     from this, as the contract can then configure its name directly on the chain it is deployed to
     without any need to update state on mainnet. If a contract has an ENS name, you can use the
     contract's ENS profile to power additional UX improvements such as displaying the contract's
-    avatar, metadata, audit information, and more. More information can be found at this
+    avatar, metadata, audit information, and more. More information can be found at this{" "}
     <a
       className={bestPracticeTechnicalDetailsLinkStyles}
       target="_blank"
@@ -132,10 +136,14 @@ const examplePassAcceptanceTest1 = {
     { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
   ],
   notes: (
-    <img
-      alt="l2-chain-interactions-display-named-smart-contracts acceptance test"
-      src={l2ChainsInteractionsDisplayNamedSmartContractsImage.src}
-    />
+    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+      <p className="w-full">TODO: Find a suitable example for L2 chain interactions</p>
+      <img
+        alt="l2-chain-interactions-display-named-smart-contracts acceptance test"
+        src={l2ChainsInteractionsDisplayNamedSmartContractsImage.src}
+        className="w-auto h-full max-h-[325px] rounded-xl"
+      />
+    </div>
   ),
 } as const satisfies AcceptanceTestBenchmarkPass;
 
