@@ -3,12 +3,7 @@
 
 import { AppTypes } from "data/apps/types.ts";
 import contributors from "data/contributors/index.ts";
-import {
-  desiredOutcome,
-  implementationRecommendations,
-  mockAcceptanceTest3Description,
-  useCaseSummary,
-} from "data/ens-best-practices/display-profiles/mock-bp-all-pending-2/technicalDetails.tsx";
+import technicalDetails from "data/ens-best-practices/display-profiles/mock-bp-all-pending-2/technicalDetails.tsx";
 import { defineBestPractice } from "data/ens-best-practices/registry.ts";
 import { type BestPracticeApp, BestPracticeTypes } from "data/ens-best-practices/types.ts";
 
@@ -25,18 +20,7 @@ const mockBestPracticeAllPending2: BestPracticeApp = {
     "Mock best practice with all benchmarks in pending state. This is used to test the display of pending benchmarks in the UI with a best practice other than Contract Naming.",
   category: DisplayProfilesCategory,
   appliesTo: [AppTypes.Explorer],
-  technicalDetails: {
-    useCaseSummary: useCaseSummary,
-    desiredOutcome: desiredOutcome,
-    implementationRecommendations: implementationRecommendations,
-    acceptanceTests: [
-      {
-        acceptanceTestSlug: "mock-acceptance-test-3",
-        name: "Mock acceptance test 3",
-        description: mockAcceptanceTest3Description,
-      },
-    ],
-  },
+  technicalDetails: technicalDetails,
   contributions: [
     { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-03T11:25:00.000Z") },
     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-12T14:51:00.000Z") },

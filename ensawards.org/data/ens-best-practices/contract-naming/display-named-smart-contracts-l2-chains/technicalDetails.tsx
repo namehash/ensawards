@@ -1,12 +1,18 @@
+import type { AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
+import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
 import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsLinkStyles,
 } from "data/ens-best-practices/styles";
+import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types";
+
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import l2ChainsInteractionsDisplayNamedSmartContractsImage from "./images/mock-l2-chains-interactions-display-named-smart-contracts-example.png";
 
 // TODO: The content isn't fully curated for now.
-export const implementationRecommendations = (
+const implementationRecommendations = (
   <div>
     <p>
       When users interact with a contract on an L2 chain, use the
@@ -85,14 +91,14 @@ export const implementationRecommendations = (
   </div>
 );
 
-export const desiredOutcome = (
+const desiredOutcome = (
   <p>
     Users can easily identify and interact with named smart contracts on an L2 chain, improving
     security and user experience.
   </p>
 );
 
-export const useCaseSummary = (
+const useCaseSummary = (
   <p>
     ENSIP-19 enables primary names to be set on any chain. Contracts deployed to an L2 chain benefit
     from this, as the contract can then configure its name directly on the chain it is deployed to
@@ -111,15 +117,39 @@ export const useCaseSummary = (
   </p>
 );
 
-export const l2ChainsInteractionsDisplayNamedSmartContractsDescription = (
+const acceptanceTest1Description = (
   <div className={acceptanceTestDetailsContainerStyles}>
     <p className="w-full">
       When users interact with named smart contracts on an L2 chain the app should display the
       contract's name as its primary identifier.
     </p>
+  </div>
+);
+
+const examplePassAcceptanceTest1 = {
+  result: BenchmarkResults.Pass,
+  contributions: [
+    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
+  ],
+  notes: (
     <img
       alt="l2-chain-interactions-display-named-smart-contracts acceptance test"
       src={l2ChainsInteractionsDisplayNamedSmartContractsImage.src}
     />
-  </div>
-);
+  ),
+} as const satisfies AcceptanceTestBenchmarkPass;
+
+const technicalDetails = {
+  useCaseSummary: useCaseSummary,
+  desiredOutcome: desiredOutcome,
+  implementationRecommendations: implementationRecommendations,
+  acceptanceTests: [
+    {
+      acceptanceTestSlug: "l2-chain-interactions-display-named-smart-contracts",
+      description: acceptanceTest1Description,
+      examplePass: examplePassAcceptanceTest1,
+    },
+  ],
+} as const satisfies BestPracticeTechnicalDetails;
+
+export default technicalDetails;

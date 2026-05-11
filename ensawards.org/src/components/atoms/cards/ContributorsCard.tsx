@@ -47,6 +47,27 @@ const formatContributionType = (contributionType: ContributionType): string => {
   }
 };
 
+const formatNoContributionsMessage = (contributionType: ContributionType): string => {
+  switch (contributionType) {
+    case ContributionTypes.App:
+    case ContributionTypes.Protocol:
+      return "No leaderboard contributions yet";
+
+    case ContributionTypes.Contract:
+      return "No smart contract contributions yet";
+
+    case ContributionTypes.BestPractice:
+      return "No ENS best practice contributions yet";
+
+    case ContributionTypes.BenchmarkResult:
+      return "No acceptance test results contributed yet";
+
+    default:
+      const _exhaustive: never = contributionType;
+      throw new Error(`Unsupported ContributionType: ${_exhaustive}`);
+  }
+};
+
 export const ContributionTypes = {
   App: "app",
   BestPractice: "best-practice",
@@ -117,7 +138,7 @@ export const ContributorsCard = ({
                 <div className="w-full flex flex-col justify-center items-center gap-3 py-3">
                   <NoContributionsIcon size={24} className="text-muted-foreground" />
                   <p className="text-base text-muted-foreground leading-normal font-normal">
-                    No contributions yet
+                    {formatNoContributionsMessage(contributionType)}
                   </p>
                 </div>
               ) : (

@@ -22,6 +22,13 @@ export type BestPracticeTarget = AppType | ProtocolType;
  */
 export type BestPracticeSlug = string;
 
+export interface BestPracticeTechnicalDetails {
+  useCaseSummary: JSX.Element;
+  desiredOutcome: JSX.Element;
+  implementationRecommendations: JSX.Element;
+  acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
+}
+
 export interface BestPracticeAbstract<
   BestPracticeT extends BestPracticeType,
   AppliesToT extends BestPracticeTarget,
@@ -33,12 +40,7 @@ export interface BestPracticeAbstract<
   description: string;
   category: BestPracticeCategory; // each best practice belongs to exactly one best practice category
   appliesTo: AppliesToT[];
-  technicalDetails: {
-    useCaseSummary: JSX.Element;
-    desiredOutcome: JSX.Element;
-    implementationRecommendations: JSX.Element;
-    acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
-  };
+  technicalDetails: BestPracticeTechnicalDetails;
   contributions: [Contribution, ...Contribution[]];
 }
 

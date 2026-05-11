@@ -19,6 +19,4 @@ describe("Acceptance test data", () => {
 
     expect(areStringsUnique(slugArray), `Slugs for Acceptance Tests are not unique`).toEqual(true);
   });
-
-  // TODO: Any more immediate tests we should add here?
 });

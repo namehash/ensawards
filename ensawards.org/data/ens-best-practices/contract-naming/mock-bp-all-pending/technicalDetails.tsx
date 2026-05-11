@@ -1,12 +1,18 @@
+import { type AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
+import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
 import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsLinkStyles,
 } from "data/ens-best-practices/styles";
+import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types";
+
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import acceptanceTestExampleImage from "./images/mock-acceptance-test-image.png";
 
 // TODO: Ofc this is all placeholder content for now.
-export const implementationRecommendations = (
+const implementationRecommendations = (
   <div>
     <p>
       When users interact with a contract on an L2 chain, use the
@@ -85,14 +91,14 @@ export const implementationRecommendations = (
   </div>
 );
 
-export const desiredOutcome = (
+const desiredOutcome = (
   <p>
     Users can easily identify and interact with named smart contracts on an L2 chain, improving
     security and user experience.
   </p>
 );
 
-export const useCaseSummary = (
+const useCaseSummary = (
   <p>
     ENSIP-19 enables primary names to be set on any chain. Contracts deployed to an L2 chain benefit
     from this, as the contract can then configure its name directly on the chain it is deployed to
@@ -111,12 +117,34 @@ export const useCaseSummary = (
   </p>
 );
 
-export const mockAcceptanceTest1Description = (
+const acceptanceTest1Description = (
   <div className={acceptanceTestDetailsContainerStyles}>
     <p className="w-full">
       Mock acceptance test description. This is used to test the display of pending benchmarks in
       the UI.
     </p>
-    <img alt="mock-acceptance-test-1 acceptance test" src={acceptanceTestExampleImage.src} />
   </div>
 );
+
+const acceptanceTest1ExamplePass = {
+  result: BenchmarkResults.Pass,
+  contributions: [
+    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
+  ],
+  notes: <img alt="mock-acceptance-test-1 acceptance test" src={acceptanceTestExampleImage.src} />,
+} as const satisfies AcceptanceTestBenchmarkPass;
+
+const technicalDetails = {
+  useCaseSummary: useCaseSummary,
+  desiredOutcome: desiredOutcome,
+  implementationRecommendations: implementationRecommendations,
+  acceptanceTests: [
+    {
+      acceptanceTestSlug: "mock-acceptance-test-1",
+      description: acceptanceTest1Description,
+      examplePass: acceptanceTest1ExamplePass,
+    },
+  ],
+} as const satisfies BestPracticeTechnicalDetails;
+
+export default technicalDetails;

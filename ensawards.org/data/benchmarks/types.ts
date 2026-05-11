@@ -9,7 +9,7 @@ export const BenchmarkResults = {
 export type BenchmarkResult = (typeof BenchmarkResults)[keyof typeof BenchmarkResults];
 
 /**
- * Represents the benchmarks of an {@link App} against {@link AcceptanceTest}s of {@link BestPractice}.
+ * Represents the benchmarks of an {@link App} against {@link AcceptanceTest}s of {@link BestPractice}s.
  *
  * @invariant An explicit key for each {@link AcceptanceTestSlug} should be added to this `Record`
  * for each {@link AcceptanceTest} available on a given best practice.

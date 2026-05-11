@@ -2,7 +2,7 @@ import {
   calcBestPracticeCategoryScore,
   calcEnsAwardsPoints,
   groupBenchmarksByCategory,
-  sortBenchmarks,
+  sortAcceptanceTestBenchmarks,
 } from "data/benchmarks/utils.ts";
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
 import {
@@ -183,7 +183,7 @@ describe("benchmarks-utils", () => {
         undefined,
       ];
 
-      const result = input.sort((a, b) => sortBenchmarks(a, b));
+      const result = input.sort((a, b) => sortAcceptanceTestBenchmarks(a, b));
 
       expectedOutput.forEach((benchmark, index) =>
         expect(benchmark, `Expected sorted benchmark at index ${index} to match`).toEqual(

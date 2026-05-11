@@ -29,10 +29,12 @@ export function getAppBenchmarks(slug: AppSlug): BestPracticeBenchmarks {
   return appBenchmarks;
 }
 
-/** Returns all benchmarks of a {@link BestPractice} by its {@link BestPracticeSlug}.
- *
+/**
+ * Returns all {@link AcceptanceTestBenchmarks} of a {@link BestPractice} by its {@link BestPracticeSlug}.
  */
-export function getAppBenchmarksByBestPractice(slug: BestPracticeSlug): AcceptanceTestBenchmarks[] {
+export function getAcceptanceTestBenchmarksByBestPractice(
+  slug: BestPracticeSlug,
+): AcceptanceTestBenchmarks[] {
   const bestPractice = getBestPracticeBySlug(slug);
 
   if (bestPractice === undefined) {
@@ -64,7 +66,7 @@ export function getAppBenchmarksByBestPractice(slug: BestPracticeSlug): Acceptan
   return benchmarks;
 }
 
-/** Returns a single benchmark of an {@link App} on a specific {@link BestPractice}
+/** Returns the {@link AcceptanceTestBenchmarks} of an {@link App} on a specific {@link BestPractice}
  * decided by the {@link AppSlug} and {@link BestPracticeSlug}.
  * */
 export function getAppAcceptanceTestBenchmarks(
@@ -104,8 +106,9 @@ export const calcEnsAwardsPoints = (benchmark: AcceptanceTestBenchmark): EnsAwar
       return 0;
 
     default:
-      const _exhaustive: never = benchmark.result;
-      throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
+      throw new Error(
+        `Unsupported BenchmarkResult in AcceptanceTestBenchmark: ${JSON.stringify(benchmark)}`,
+      );
   }
 };
 
@@ -174,7 +177,7 @@ const resultOrder = {
 } as const satisfies Record<BenchmarkResult, number>;
 
 /** Sorts two {@link AcceptanceTestBenchmark}s relative to each other. */
-export const sortBenchmarks = (
+export const sortAcceptanceTestBenchmarks = (
   a: AcceptanceTestBenchmark | undefined,
   b: AcceptanceTestBenchmark | undefined,
 ): number => {
@@ -188,7 +191,7 @@ export const sortBenchmarks = (
   return resultDiff;
 };
 
-export const getBenchmarkLastUpdateTimestamp = (
+export const getAcceptanceTestBenchmarkLastUpdateTimestamp = (
   benchmark: AcceptanceTestBenchmark,
 ): UnixTimestamp => {
   const contributionTimestamps = benchmark.contributions.map(

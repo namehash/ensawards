@@ -8,7 +8,7 @@ import {
   formatBenchmarkResult,
   getAppBenchmarks,
   groupBenchmarksByCategory,
-  sortBenchmarks,
+  sortAcceptanceTestBenchmarks,
 } from "data/benchmarks/utils.ts";
 import type {
   BestPracticeBenchmarks,
@@ -86,7 +86,7 @@ function BenchmarkCategorySection({
         generalizedBenchmark,
       };
     })
-    .sort((a, b) => sortBenchmarks(a.generalizedBenchmark, b.generalizedBenchmark));
+    .sort((a, b) => sortAcceptanceTestBenchmarks(a.generalizedBenchmark, b.generalizedBenchmark));
 
   return (
     <div ref={animationParent} className="w-full border-t border-gray-200 py-4">

@@ -1,12 +1,18 @@
+import type { AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
+import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
 import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsLinkStyles,
 } from "data/ens-best-practices/styles";
+import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types";
+
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import mainnetInteractionsDisplayNamedSmartContractsImage from "./images/mainnet-interactions-display-named-smart-contracts-example.png";
 
 // TODO: The content isn't fully curated for now.
-export const implementationRecommendations = (
+const implementationRecommendations = (
   <div>
     <p>
       Looking up the name of a smart contract on Ethereum mainnet uses the same process as looking
@@ -84,14 +90,14 @@ export const implementationRecommendations = (
   </div>
 );
 
-export const desiredOutcome = (
+const desiredOutcome = (
   <p>
     Users can easily identify and interact with named smart contracts on Ethereum mainnet, improving
     security and user experience.
   </p>
 );
 
-export const useCaseSummary = (
+const useCaseSummary = (
   <p>
     If a contract has an ENS name, you can use its ENS profile to power additional UX improvements
     such as avatars, metadata, audit information, and more. More information can be found at the{" "}
@@ -107,25 +113,62 @@ export const useCaseSummary = (
   </p>
 );
 
-export const mainnetInteractionsDisplayNamedSmartContractsDescription = (
+const acceptanceTest1Description = (
   <div className={acceptanceTestDetailsContainerStyles}>
     <p className="w-full">
       When users interact with named smart contracts on Ethereum mainnet the app should display the
       contract's name as its primary identifier.
     </p>
+  </div>
+);
+
+const acceptanceTest1ExamplePass = {
+  result: BenchmarkResults.Pass,
+  contributions: [
+    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
+  ],
+  notes: (
     <img
       alt="mainnet-interactions-display-named-smart-contracts acceptance test"
       src={mainnetInteractionsDisplayNamedSmartContractsImage.src}
       className="w-auto h-full max-h-[325px]"
     />
-  </div>
-);
+  ),
+} as const satisfies AcceptanceTestBenchmarkPass;
 
-export const mainnetInteractionsDisplayNamedSmartContractsAt2Description = (
+const acceptanceTest2Description = (
   <div className={acceptanceTestDetailsContainerStyles}>
     <p className="w-full">
       When users interact with named smart contracts on Ethereum mainnet the app should display the
-      contract's name as its primary identifier. TEST DESCRIPTION WITHOUT IMAGE
+      contract's name as its primary identifier.
     </p>
   </div>
 );
+
+const acceptanceTest2ExamplePass = {
+  result: BenchmarkResults.Pass,
+  contributions: [
+    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
+  ],
+  notes: <p>TEST EXAMPLE WITHOUT IMAGE</p>,
+} as const satisfies AcceptanceTestBenchmarkPass;
+
+const technicalDetails = {
+  useCaseSummary: useCaseSummary,
+  desiredOutcome: desiredOutcome,
+  implementationRecommendations: implementationRecommendations,
+  acceptanceTests: [
+    {
+      acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts",
+      description: acceptanceTest1Description,
+      examplePass: acceptanceTest1ExamplePass,
+    },
+    {
+      acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts-at2",
+      description: acceptanceTest2Description,
+      examplePass: acceptanceTest2ExamplePass,
+    },
+  ],
+} as const satisfies BestPracticeTechnicalDetails;
+
+export default technicalDetails;

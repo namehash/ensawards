@@ -1,4 +1,4 @@
-import type { BenchmarkResult } from "data/benchmarks/types";
+import type { BenchmarkResult, BenchmarkResults } from "data/benchmarks/types";
 import type { Contribution } from "data/contributors/types";
 import type { JSX } from "react";
 
@@ -13,17 +13,35 @@ export type AcceptanceTestSlug = string;
  * Represents an acceptance test that an app can be evaluated against.
  */
 export interface AcceptanceTest {
+  /**
+   * Unique identifier for the acceptance test.
+   */
   acceptanceTestSlug: AcceptanceTestSlug;
-  name: string;
+
+  /**
+   * Description of the acceptance test, which should provide clear and detailed information
+   * about the criteria and requirements that an {@link App} must meet to pass the test.
+   * This may include specific functionalities to be tested, user interactions to be evaluated, and any relevant technical details or considerations.
+   *
+   * @note The description should not include examples of passed or failed benchmarks, there are dedicated fields for that
+   * (see {@link AcceptanceTest.examplePass}, {@link AcceptanceTest.examplePartialPass}, or {@link AcceptanceTest.exampleFail}).
+   */
   description: JSX.Element;
+
+  /**
+   * Examples of benchmark results that illustrate what a passing, partially passing, or failing result looks like for this acceptance test.
+   */
+  examplePass: AcceptanceTestBenchmarkPass;
+  examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
+  exampleFail?: AcceptanceTestBenchmarkFail;
 }
 
 /**
  * Represents the benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice}.
  */
-export interface AcceptanceTestBenchmark {
+export interface AcceptanceTestBenchmarkAbstract<BenchmarkResultT extends BenchmarkResult> {
   /** The result of the benchmark */
-  result: BenchmarkResult;
+  result: BenchmarkResultT;
 
   /** A record of all contributors involved in the addition or maintenance of the benchmark's data.
    *
@@ -39,3 +57,29 @@ export interface AcceptanceTestBenchmark {
    */
   notes: JSX.Element;
 }
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that has fully passed our criteria.
+ */
+export interface AcceptanceTestBenchmarkPass
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Pass> {}
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that has partially passed our criteria.
+ */
+export interface AcceptanceTestBenchmarkPartialPass
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.PartialPass> {}
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that hasn't passed our criteria.
+ */
+export interface AcceptanceTestBenchmarkFail
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Fail> {}
+
+export type AcceptanceTestBenchmark =
+  | AcceptanceTestBenchmarkPass
+  | AcceptanceTestBenchmarkPartialPass
+  | AcceptanceTestBenchmarkFail;

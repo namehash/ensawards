@@ -201,6 +201,13 @@ Defines a specific requirement that an app or protocol must meet to pass a bench
 1. Create a new `BestPractice` default-export and its definition in `ensawards.org/data/ens-best-practices/[category]/[bestPractice]/index.ts`, where `[category]` is the category slug and `[bestPractice]` is the practice slug. Make sure to also call `defineBestPractice()` on it. For reference see [ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts/index.ts](ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts/index.ts).
 2. Make sure to follow its data model defined in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
+export interface BestPracticeTechnicalDetails {
+  useCaseSummary: JSX.Element;
+  desiredOutcome: JSX.Element;
+  implementationRecommendations: JSX.Element;
+  acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
+}
+
 export interface BestPracticeAbstract<
   BestPracticeT extends BestPracticeType,
   AppliesToT extends BestPracticeTarget,
@@ -212,12 +219,7 @@ export interface BestPracticeAbstract<
   description: string;
   category: BestPracticeCategory; // each best practice belongs to exactly one best practice category
   appliesTo: AppliesToT[];
-  technicalDetails: {
-    useCaseSummary: JSX.Element;
-    desiredOutcome: JSX.Element;
-    implementationRecommendations: JSX.Element;
-    acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
-  };
+  technicalDetails: BestPracticeTechnicalDetails;
   contributions: [Contribution, ...Contribution[]]; // Remember to add yourself as a contributor
 }
 
@@ -243,9 +245,27 @@ export type BestPractice = BestPracticeProtocol | BestPracticeApp;
      * Represents an acceptance test that an app can be evaluated against.
      */
     export interface AcceptanceTest {
+      /**
+      * Unique identifier for the acceptance test.
+      */
       acceptanceTestSlug: AcceptanceTestSlug;
-      name: string;
+
+      /**
+      * Description of the acceptance test, which should provide clear and detailed information
+      * about the criteria and requirements that an {@link App} must meet to pass the test.
+      * This may include specific functionalities to be tested, user interactions to be evaluated, and any relevant technical details or considerations.
+      *
+      * @note The description should not include examples of passed or failed benchmarks, there are dedicated fields for that
+      * (see {@link AcceptanceTest.examplePass}, {@link AcceptanceTest.examplePartialPass}, or {@link AcceptanceTest.exampleFail}).
+      */
       description: JSX.Element;
+
+      /**
+      * Examples of benchmark results that illustrate what a passing, partially passing, or failing result looks like for this acceptance test.
+      */
+      examplePass: AcceptanceTestBenchmarkPass;
+      examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
+      exampleFail?: AcceptanceTestBenchmarkFail;
     }
     ```
 4. In your PR describe your reasoning for adding it.
@@ -323,9 +343,9 @@ Where `AcceptanceTestBenchmark` represents the benchmark performed on a single a
 /**
  * Represents the benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice}.
  */
-export interface AcceptanceTestBenchmark {
+export interface AcceptanceTestBenchmarkAbstract<BenchmarkResultT extends BenchmarkResult> {
   /** The result of the benchmark */
-  result: BenchmarkResult;
+  result: BenchmarkResultT;
 
   /** A record of all contributors involved in the addition or maintenance of the benchmark's data.
    *
@@ -341,6 +361,32 @@ export interface AcceptanceTestBenchmark {
    */
   notes: JSX.Element;
 }
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that has fully passed our criteria.
+ */
+export interface AcceptanceTestBenchmarkPass
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Pass> {}
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that has partially passed our criteria.
+ */
+export interface AcceptanceTestBenchmarkPartialPass
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.PartialPass> {}
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that hasn't passed our criteria.
+ */
+export interface AcceptanceTestBenchmarkFail
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Fail> {}
+
+export type AcceptanceTestBenchmark =
+  | AcceptanceTestBenchmarkPass
+  | AcceptanceTestBenchmarkPartialPass
+  | AcceptanceTestBenchmarkFail;
 ```
 
 3. Add notes made during the benchmarking process in the form of a simple JSX element that is a part of the new item in the `benchmarks` record. For reference, see [ensawards.org/data/apps/walletchan-wallet/benchmarks/index.tsx](ensawards.org/data/apps/walletchan-wallet/benchmarks/index.tsx).

@@ -9,12 +9,7 @@ import { type BestPracticeApp, BestPracticeTypes } from "data/ens-best-practices
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import ContractNamingCategory from "../index.ts";
-import {
-  desiredOutcome,
-  implementationRecommendations,
-  l2ChainsInteractionsDisplayNamedSmartContractsDescription,
-  useCaseSummary,
-} from "./technicalDetails.tsx";
+import technicalDetails from "./technicalDetails.tsx";
 
 const displayNamedSmartContractsL2: BestPracticeApp = {
   type: BestPracticeTypes.App,
@@ -25,18 +20,7 @@ const displayNamedSmartContractsL2: BestPracticeApp = {
     "Display ENS names instead of addresses when users interact with named smart contracts on L2 chains.",
   category: ContractNamingCategory,
   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
-  technicalDetails: {
-    useCaseSummary: useCaseSummary,
-    desiredOutcome: desiredOutcome,
-    implementationRecommendations: implementationRecommendations,
-    acceptanceTests: [
-      {
-        acceptanceTestSlug: "l2-chain-interactions-display-named-smart-contracts",
-        name: "Display ENS names for smart contracts on L2 chains",
-        description: l2ChainsInteractionsDisplayNamedSmartContractsDescription,
-      },
-    ],
-  },
+  technicalDetails: technicalDetails,
   contributions: [
     { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-03T11:25:00.000Z") },
     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-12T14:51:00.000Z") },

@@ -9,13 +9,7 @@ import { type BestPracticeApp, BestPracticeTypes } from "data/ens-best-practices
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import ContractNamingCategory from "../index.ts";
-import {
-  desiredOutcome,
-  implementationRecommendations,
-  mainnetInteractionsDisplayNamedSmartContractsAt2Description,
-  mainnetInteractionsDisplayNamedSmartContractsDescription,
-  useCaseSummary,
-} from "./technicalDetails.tsx";
+import technicalDetails from "./technicalDetails.tsx";
 
 const displayNamedSmartContractsMainnet: BestPracticeApp = {
   type: BestPracticeTypes.App,
@@ -26,23 +20,7 @@ const displayNamedSmartContractsMainnet: BestPracticeApp = {
     "Display ENS names instead of addresses when users interact with named smart contracts on Ethereum mainnet.",
   category: ContractNamingCategory,
   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
-  technicalDetails: {
-    useCaseSummary: useCaseSummary,
-    desiredOutcome: desiredOutcome,
-    implementationRecommendations: implementationRecommendations,
-    acceptanceTests: [
-      {
-        acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts",
-        name: "Display ENS names for smart contracts on mainnet",
-        description: mainnetInteractionsDisplayNamedSmartContractsDescription,
-      },
-      {
-        acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts-at2",
-        name: "Acceptance Test 2",
-        description: mainnetInteractionsDisplayNamedSmartContractsAt2Description,
-      },
-    ],
-  },
+  technicalDetails: technicalDetails,
   contributions: [
     { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-03T11:25:00.000Z") },
     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-12T14:51:00.000Z") },

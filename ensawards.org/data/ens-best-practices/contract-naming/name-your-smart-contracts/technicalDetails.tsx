@@ -1,12 +1,19 @@
+import { type AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
+import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
 import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsLinkStyles,
 } from "data/ens-best-practices/styles";
+import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types";
+
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import enscribelookupAcceptanceTestImage from "./images/enscribe-lookup-example.png";
+
 // TODO: The content isn't fully curated for now.
 
-export const implementationRecommendations = (
+const implementationRecommendations = (
   <div>
     Contracts should be{" "}
     <a
@@ -65,7 +72,7 @@ export const implementationRecommendations = (
   </div>
 );
 
-export const useCaseSummary = (
+const useCaseSummary = (
   <p>
     Assigning ENS names to contracts gives users confidence they're interacting with the correct
     contract. This is particularly valuable for security, as users can confirm{" "}
@@ -78,14 +85,14 @@ export const useCaseSummary = (
   </p>
 );
 
-export const desiredOutcome = (
+const desiredOutcome = (
   <p>
     The users of your protocol can easily verify they're interacting with the correct contracts,
     improving security and user confidence.
   </p>
 );
 
-export const enscribeLookupAcceptanceTestDescription = (
+const acceptanceTest1Description = (
   <div className={acceptanceTestDetailsContainerStyles}>
     <p className="w-full">
       When the contract's ENS name or address is looked up in the{" "}
@@ -99,6 +106,28 @@ export const enscribeLookupAcceptanceTestDescription = (
       </a>{" "}
       the result should display the contract's name with an appropriate icon.
     </p>
-    <img alt="enscribe-lookup acceptance test" src={enscribelookupAcceptanceTestImage.src} />
   </div>
 );
+
+const acceptanceTest1ExamplePass = {
+  result: BenchmarkResults.Pass,
+  contributions: [
+    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
+  ],
+  notes: <img alt="enscribe-lookup acceptance test" src={enscribelookupAcceptanceTestImage.src} />,
+} as const satisfies AcceptanceTestBenchmarkPass;
+
+const technicalDetails = {
+  useCaseSummary: useCaseSummary,
+  desiredOutcome: desiredOutcome,
+  implementationRecommendations: implementationRecommendations,
+  acceptanceTests: [
+    {
+      acceptanceTestSlug: "enscribe-lookup",
+      description: acceptanceTest1Description,
+      examplePass: acceptanceTest1ExamplePass,
+    },
+  ],
+} as const satisfies BestPracticeTechnicalDetails;
+
+export default technicalDetails;

@@ -4,7 +4,7 @@ import { RelativeTime } from "@namehash/namehash-ui";
 import { type AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
 import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { getBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
+import { getAcceptanceTestBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
 import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 
@@ -17,7 +17,7 @@ const { bestPractice, acceptanceTestsBenchmarks }: BenchmarkSummaryCardProps = A
 
 const benchmarksUpdateTimes = Object.values(acceptanceTestsBenchmarks)
   .filter((benchmark) => benchmark !== undefined)
-  .map((benchmark) => getBenchmarkLastUpdateTimestamp(benchmark));
+  .map((benchmark) => getAcceptanceTestBenchmarkLastUpdateTimestamp(benchmark));
 
 const bestPracticeHref = `/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`;
 
@@ -60,7 +60,7 @@ const generalizedAcceptanceTestsBenchmarkResult =
     </div>
 
     <div class="flex w-full flex-col items-start gap-1 justify-center">
-      <p class={detailLabelStyles}>Acceptance test benchmark results</p>
+      <p class={detailLabelStyles}>Acceptance test results</p>
       <BenchmarkResultBadge
         benchmarkResult={generalizedAcceptanceTestsBenchmarkResult}
       />

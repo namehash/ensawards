@@ -9,12 +9,7 @@ import { ProtocolTypes } from "data/protocols/types.ts";
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import ContractNamingCategory from "../index.ts";
-import {
-  desiredOutcome,
-  enscribeLookupAcceptanceTestDescription,
-  implementationRecommendations,
-  useCaseSummary,
-} from "./technicalDetails.tsx";
+import technicalDetails from "./technicalDetails.tsx";
 
 const nameYourSmartContracts: BestPracticeProtocol = {
   type: BestPracticeTypes.Protocol,
@@ -24,18 +19,7 @@ const nameYourSmartContracts: BestPracticeProtocol = {
   description: "Upgrade security and UX when users interact with your smart contracts.",
   category: ContractNamingCategory,
   appliesTo: [ProtocolTypes.DAO, ProtocolTypes.DeFi],
-  technicalDetails: {
-    useCaseSummary: useCaseSummary,
-    desiredOutcome: desiredOutcome,
-    implementationRecommendations: implementationRecommendations,
-    acceptanceTests: [
-      {
-        acceptanceTestSlug: "enscribe-lookup",
-        name: "Smart Contract ENS name is validated by ENScribe",
-        description: enscribeLookupAcceptanceTestDescription,
-      },
-    ],
-  },
+  technicalDetails: technicalDetails,
   contributions: [
     { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-03T11:25:00.000Z") },
     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-12T14:51:00.000Z") },

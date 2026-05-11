@@ -4,7 +4,7 @@ import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { calcBestPracticeScore } from "data/ens-best-practices/utils.ts";
-import { sortBenchmarks, getAppBenchmarks } from "data/benchmarks/utils.ts";
+import { sortAcceptanceTestBenchmarks, getAppBenchmarks } from "data/benchmarks/utils.ts";
 import {
   ContributionTypes,
   ContributorsCard,
@@ -54,7 +54,7 @@ const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
     const aBenchmark = a.acceptanceTestBenchmarks[acceptanceTestSlug];
     const bBenchmark = b.acceptanceTestBenchmarks[acceptanceTestSlug];
 
-    benchmarksDiff += sortBenchmarks(aBenchmark, bBenchmark);
+    benchmarksDiff += sortAcceptanceTestBenchmarks(aBenchmark, bBenchmark);
   }
 
   if (benchmarksDiff !== 0) return benchmarksDiff;

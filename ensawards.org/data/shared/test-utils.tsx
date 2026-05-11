@@ -1,6 +1,6 @@
 import type { AcceptanceTestBenchmark, AcceptanceTestSlug } from "data/acceptance-tests/types.ts";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
-import { type BenchmarkResult } from "data/benchmarks/types.ts";
+import { type BenchmarkResult, BenchmarkResults } from "data/benchmarks/types.ts";
 import { zeroAddress } from "viem";
 import { mainnet } from "viem/chains";
 
@@ -54,7 +54,11 @@ export const createMockBestPractice = (overrides: {
       {
         acceptanceTestSlug: "mock-acceptance-test-slug-1",
         description: <p>Mock acceptance test description 1</p>,
-        name: "Mock acceptance test title 1",
+        examplePass: {
+          result: BenchmarkResults.Pass,
+          contributions: [{ from: { address: zeroAddress, chainId: mainnet.id }, lastUpdated: 0 }],
+          notes: <p>Mock notes for acceptance test 1</p>,
+        },
       },
     ],
   },

@@ -22,7 +22,7 @@ vi.mock(import("data/benchmarks/utils.ts"), async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...actual,
-    getAppBenchmarksByBestPractice: (bestPracticeSlug: string) => {
+    getAcceptanceTestBenchmarksByBestPractice: (bestPracticeSlug: string) => {
       const benchmarks: AcceptanceTestBenchmarks[] = [];
 
       for (const appBenchmarks of Object.values(mockAppBenchmarks)) {

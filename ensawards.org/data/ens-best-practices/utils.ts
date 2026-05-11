@@ -1,6 +1,9 @@
 import { AppTypes } from "data/apps/types.ts";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types.ts";
-import { calcEnsAwardsPoints, getAppBenchmarksByBestPractice } from "data/benchmarks/utils.ts";
+import {
+  calcEnsAwardsPoints,
+  getAcceptanceTestBenchmarksByBestPractice,
+} from "data/benchmarks/utils.ts";
 import { ProtocolTypes } from "data/protocols/types.ts";
 import { asEnsAwardsScore, type EnsAwardsScore } from "data/shared/ens-awards-score.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
@@ -107,7 +110,7 @@ export const calcBestPracticeScore = (
   let benchmarkedAcceptanceTests = 0;
   let bestPracticePoints = 0;
 
-  const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(
+  const bestPracticeBenchmarks = getAcceptanceTestBenchmarksByBestPractice(
     bestPractice.bestPracticeSlug,
   ).flatMap((appBenchmark) => Object.values(appBenchmark));
 

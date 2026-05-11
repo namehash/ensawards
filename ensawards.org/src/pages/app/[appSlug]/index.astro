@@ -21,7 +21,7 @@ import { type EnsAwardsScore as EnsAwardsScoreType } from "data/shared/ens-award
 import {
   groupBenchmarksByCategory,
   calcBestPracticeCategoryScore,
-  sortBenchmarks,
+  sortAcceptanceTestBenchmarks,
   getAppBenchmarks,
 } from "data/benchmarks/utils";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
@@ -177,7 +177,7 @@ if (app !== undefined) {
                       };
                     })
                     .sort((a, b) =>
-                      sortBenchmarks(
+                      sortAcceptanceTestBenchmarks(
                         a.generalizedBenchmark,
                         b.generalizedBenchmark,
                       ),
