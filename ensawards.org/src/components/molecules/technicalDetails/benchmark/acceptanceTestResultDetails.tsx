@@ -1,4 +1,4 @@
-import { RelativeTime, ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
+import { RelativeTime } from "@namehash/namehash-ui";
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { useMemo } from "react";
 
