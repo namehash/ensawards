@@ -131,7 +131,12 @@ export const ContributorsCard = ({
             </div>
           </div>
 
-          <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
+          <div
+            className={cn(
+              "w-full flex flex-col gap-3 sm:gap-4",
+              !sidebarVariant && "lg:w-1/2 lg:items-end",
+            )}
+          >
             <div className="flex flex-wrap items-start gap-3 py-1.5">
               {orderedContributorProfiles.length === 0 ? (
                 <div className="w-full flex flex-col justify-center items-center gap-3 py-3">
@@ -152,33 +157,21 @@ export const ContributorsCard = ({
 
             <div className="w-full h-px bg-border"></div>
 
-            <div
+            <a
+              href={gitHubTargetHref}
+              target="_blank"
+              rel="noreferrer"
               className={cn(
-                "w-full flex flex-col gap-3",
-                !sidebarVariant && "sm:flex-row sm:justify-between sm:items-center",
+                shadcnButtonVariants({
+                  variant: "secondary",
+                  size: "default",
+                  className: "cursor-pointer rounded-full w-fit max-sm:text-wrap max-sm:h-fit",
+                }),
               )}
             >
-              <p className="text-base leading-6 font-normal text-muted-foreground">
-                Submit a contribution
-              </p>
-              <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
-                <a
-                  href={gitHubTargetHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={cn(
-                    shadcnButtonVariants({
-                      variant: "secondary",
-                      size: "default",
-                      className: "cursor-pointer rounded-full max-sm:self-stretch",
-                    }),
-                  )}
-                >
-                  <GitHubOutlineIcon />
-                  Edit on GitHub
-                </a>
-              </div>
-            </div>
+              <GitHubOutlineIcon />
+              Submit a contribution on GitHub
+            </a>
           </div>
         </div>
       </TooltipProvider>
@@ -213,7 +206,7 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
         />
         <a
           href={getEnsAdvocateDetailsRelativePath(contributor.address)}
-          className="text-xs leading-normal text-blue-500 font-normal hover:underline hover:underline-offset-[25%]"
+          className="text-xs leading-normal text-white font-normal underline underline-offset-[25%] decoration-white/40 hover:decoration-white transition-all duration-200"
         >
           View ENS Advocate profile
         </a>
@@ -278,7 +271,12 @@ export const ContributorsCardLoading = ({
         </div>
       </div>
 
-      <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
+      <div
+        className={cn(
+          "w-full flex flex-col gap-3 sm:gap-4",
+          !sidebarVariant && "lg:w-1/2 lg:items-end",
+        )}
+      >
         <div className="flex flex-wrap items-start gap-3 py-1.5">
           <Skeleton className={cn(loadingStyles, "w-10 h-10 rounded-full")} />
           <Skeleton className={cn(loadingStyles, "w-10 h-10 rounded-full")} />
@@ -287,21 +285,7 @@ export const ContributorsCardLoading = ({
 
         <div className="w-full h-px bg-border"></div>
 
-        <div
-          className={cn(
-            "w-full flex flex-col gap-3",
-            !sidebarVariant && "sm:flex-row sm:justify-between sm:items-center",
-          )}
-        >
-          <p className="text-base leading-6 font-normal text-muted-foreground">
-            Submit a contribution
-          </p>
-          <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
-            <Skeleton
-              className={cn(loadingStyles, "w-[154px] h-[36px] rounded-full max-sm:self-stretch")}
-            />
-          </div>
-        </div>
+        <Skeleton className={cn(loadingStyles, "w-[265px] h-[36px] rounded-full")} />
       </div>
     </div>
   );

@@ -36,13 +36,13 @@ export const AcceptanceTestResultFooter = ({
       <TooltipProvider delayDuration={250} skipDelayDuration={0}>
         <div className="w-full flex flex-row flex-wrap justify-between items-center gap-5">
           <p className="w-fit">
-            Last updated{" "}
+            Test completed{" "}
             <span className="text-black font-medium">
               <RelativeTime enforcePast timestamp={lastBenchmarkUpdate.lastUpdated} />
             </span>
           </p>
           <div className="w-fit flex flex-row flex-nowrap justify-end items-center gap-3">
-            by
+            Contributed by
             <DisplayContributorIdentity contributor={lastBenchmarkUpdate.from} />
           </div>
         </div>
@@ -56,10 +56,10 @@ export const AcceptanceTestResultFooterLoading = () => {
   return (
     <div className="w-full flex flex-row flex-wrap justify-between items-center gap-5">
       <div className="w-fit flex flex-row items-center justify-start gap-2">
-        Last updated <div className={cn(loadingStateStyles, "w-[95px] h-4")} />
+        Test completed <div className={cn(loadingStateStyles, "w-[95px] h-4")} />
       </div>
       <div className="w-fit flex flex-row flex-nowrap justify-end items-center gap-3">
-        by
+        Contributed by
         <div className={cn(loadingStateStyles, "w-10 h-10 rounded-full")} />
       </div>
     </div>

@@ -87,7 +87,7 @@ const implementationRecommendations = (
   </p>
 );
 
-const desiredOutcome = (
+const benefitFromUsingEns = (
   <p>
     The users of your protocol can easily verify they're interacting with the correct contracts,
     improving security and user confidence.
@@ -148,7 +148,7 @@ const contractHasPrimaryNameExamplePass = {
 
 const technicalDetails = {
   useCaseSummary: useCaseSummary,
-  desiredOutcome: desiredOutcome,
+  benefitFromUsingEns: benefitFromUsingEns,
   implementationRecommendations: implementationRecommendations,
   acceptanceTests: [
     {

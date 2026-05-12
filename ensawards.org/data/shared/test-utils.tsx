@@ -51,7 +51,7 @@ export const createMockBestPractice = (overrides: {
   technicalDetails: {
     useCaseSummary: <p>Mock use case summary</p>,
     implementationRecommendations: <p>Mock implementation recommendations</p>,
-    desiredOutcome: <p>Mock desired outcome</p>,
+    benefitFromUsingEns: <p>Mock benefit from using ENS</p>,
     acceptanceTests: [
       {
         acceptanceTestSlug: "mock-acceptance-test-slug-1",

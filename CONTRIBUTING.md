@@ -229,7 +229,7 @@ For reference see [ensawards.org/data/ens-best-practices/contract-naming/name-yo
 ```typescript
 export interface BestPracticeTechnicalDetails {
   useCaseSummary: JSX.Element;
-  desiredOutcome: JSX.Element;
+  benefitFromUsingEns: JSX.Element;
   implementationRecommendations: JSX.Element;
   acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
 }

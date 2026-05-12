@@ -92,7 +92,7 @@ const implementationRecommendations = (
   </div>
 );
 
-const desiredOutcome = (
+const benefitFromUsingEns = (
   <p>
     Users can easily identify and interact with named smart contracts on Ethereum mainnet, improving
     security and user experience.
@@ -150,7 +150,7 @@ const mainnetInteractionsDisplayNamedSmartContractsExamplePass = {
 
 const technicalDetails = {
   useCaseSummary: useCaseSummary,
-  desiredOutcome: desiredOutcome,
+  benefitFromUsingEns: benefitFromUsingEns,
   implementationRecommendations: implementationRecommendations,
   acceptanceTests: [
     {

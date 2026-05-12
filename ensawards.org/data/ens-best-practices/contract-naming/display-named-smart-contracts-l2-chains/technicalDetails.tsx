@@ -95,7 +95,7 @@ const implementationRecommendations = (
   </div>
 );
 
-const desiredOutcome = (
+const benefitFromUsingEns = (
   <p>
     Users can easily identify and interact with named smart contracts on an L2 chain, improving
     security and user experience.
@@ -149,7 +149,7 @@ const l2ChainInteractionsDisplayNamedSmartContractsExamplePass = {
 
 const technicalDetails = {
   useCaseSummary: useCaseSummary,
-  desiredOutcome: desiredOutcome,
+  benefitFromUsingEns: benefitFromUsingEns,
   implementationRecommendations: implementationRecommendations,
   acceptanceTests: [
     {

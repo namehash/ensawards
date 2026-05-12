@@ -24,7 +24,7 @@ export type BestPracticeSlug = string;
 
 export interface BestPracticeTechnicalDetails {
   useCaseSummary: JSX.Element;
-  desiredOutcome: JSX.Element;
+  benefitFromUsingEns: JSX.Element;
   implementationRecommendations: JSX.Element;
   acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
 }
