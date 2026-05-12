@@ -51,27 +51,37 @@ export const generalizeAcceptanceTestBenchmarks = (
     (benchmark) => benchmark?.result,
   );
 
-  // For now, we'll explicitly treat pass and partial pass equally
-  const hasPass = benchmarkResults.some(
-    (result) => result === BenchmarkResults.Pass || result === BenchmarkResults.PartialPass,
-  );
-  const hasFail = benchmarkResults.some((result) => result === BenchmarkResults.Fail);
+  const definedBenchmarkResults = benchmarkResults.filter((result) => result !== undefined);
 
-  const allPartialPass = benchmarkResults.every(
+  if (definedBenchmarkResults.length === 0) {
+    return undefined;
+  }
+
+  const allDefinedBenchmarksPassPartially = definedBenchmarkResults.every(
     (result) => result === BenchmarkResults.PartialPass,
   );
 
-  if ((hasPass && hasFail) || allPartialPass) {
+  if (allDefinedBenchmarksPassPartially) {
     return BenchmarkResults.PartialPass;
   }
 
-  if (hasPass) {
+  // For now, we'll explicitly treat pass and partial pass equally
+  // (For cases where not all benchmarks are partial pass)
+  const allDefinedBenchmarksPass = definedBenchmarkResults.every(
+    (result) => result === BenchmarkResults.Pass || result === BenchmarkResults.PartialPass,
+  );
+
+  if (allDefinedBenchmarksPass) {
     return BenchmarkResults.Pass;
   }
 
-  if (hasFail) {
+  const allDefinedBenchmarksFail = definedBenchmarkResults.every(
+    (result) => result === BenchmarkResults.Fail,
+  );
+
+  if (allDefinedBenchmarksFail) {
     return BenchmarkResults.Fail;
   }
 
-  return undefined;
+  return BenchmarkResults.PartialPass;
 };

@@ -11,6 +11,8 @@ describe("Acceptance test utils", () => {
       const inputBenchmarks = {
         "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
         "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
+        "mock-acceptance-test-3": undefined,
+        // pending benchmarks should be ignored in this case of the generalization
       } as const satisfies AcceptanceTestBenchmarks;
 
       expect(
@@ -25,6 +27,8 @@ describe("Acceptance test utils", () => {
       const inputBenchmarks = {
         "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        "mock-acceptance-test-3": undefined,
+        // pending benchmarks should be ignored in this case of the generalization
       } as const satisfies AcceptanceTestBenchmarks;
 
       expect(
@@ -42,6 +46,9 @@ describe("Acceptance test utils", () => {
         const inputBenchmarks = {
           "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
           "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+          "mock-acceptance-test-3": createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
+          "mock-acceptance-test-4": undefined,
+          // pending benchmarks should be ignored in this case of the generalization
         } as const satisfies AcceptanceTestBenchmarks;
 
         expect(
@@ -57,6 +64,8 @@ describe("Acceptance test utils", () => {
       const inputBenchmarks = {
         "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
         "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
+        "mock-acceptance-test-3": undefined,
+        // pending benchmarks should be ignored in this case of the generalization
       } as const satisfies AcceptanceTestBenchmarks;
 
       expect(
