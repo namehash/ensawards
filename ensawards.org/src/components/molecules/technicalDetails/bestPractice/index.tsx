@@ -42,7 +42,7 @@ export const BestPracticeTechnicalDetails = ({
             <div
               className={cn(technicalSectionContainerStyles, "w-full p-4 bg-neutral-50 rounded-lg")}
             >
-              <h3
+              <h4
                 className={cn(
                   technicalSectionHeaderStyles,
                   "text-xl w-full flex flex-row items-start justify-between gap-3",
@@ -50,7 +50,7 @@ export const BestPracticeTechnicalDetails = ({
               >
                 Example test result
                 <BenchmarkResultBadge benchmarkResult={BenchmarkResults.Pass} />
-              </h3>
+              </h4>
               {acceptanceTest.examplePass.notes}
             </div>
             {acceptanceTest.examplePartialPass !== undefined && (
