@@ -3,7 +3,6 @@ import type { Contribution, Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
 import { User as NoContributionsIcon } from "lucide-react";
 import { useMemo } from "react";
-import { getAddress } from "viem";
 
 import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
@@ -142,42 +141,12 @@ export const ContributorsCard = ({
                   </p>
                 </div>
               ) : (
-                orderedContributorProfiles.map((profile) => {
-                  const identity = buildUnresolvedIdentity(
-                    profile.address,
-                    DEFAULT_ENS_NAMESPACE,
-                    profile.chainId,
-                  );
-
-                  return (
-                    <GenericTooltip
-                      key={`contributor-${profile.chainId}-${getAddress(profile.address)}`}
-                      triggerAsChild
-                      content={
-                        <ContributorTooltipContent contributor={profile} identity={identity} />
-                      }
-                      tooltipOffset={1}
-                    >
-                      <div className="w-10 h-10 rounded-full">
-                        <ResolveAndDisplayIdentity
-                          identity={identity}
-                          namespaceId={DEFAULT_ENS_NAMESPACE}
-                          withLink={true}
-                          identityLinkDetails={{
-                            isExternal: false,
-                            link: new URL(
-                              getEnsAdvocateDetailsRelativePath(profile.address),
-                              getEnsAwardsBaseUrl(),
-                            ),
-                          }}
-                          withTooltip={false}
-                          withAvatar={true}
-                          withIdentifier={false}
-                        />
-                      </div>
-                    </GenericTooltip>
-                  );
-                })
+                orderedContributorProfiles.map((profile) => (
+                  <DisplayContributorIdentity
+                    key={`${profile.chainId}-${profile.address}`}
+                    contributor={profile}
+                  />
+                ))
               )}
             </div>
 
@@ -250,6 +219,40 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
         </a>
       </div>
     </div>
+  );
+};
+
+export const DisplayContributorIdentity = ({ contributor }: { contributor: Contributor }) => {
+  const identity = buildUnresolvedIdentity(
+    contributor.address,
+    DEFAULT_ENS_NAMESPACE,
+    contributor.chainId,
+  );
+
+  return (
+    <GenericTooltip
+      triggerAsChild
+      content={<ContributorTooltipContent contributor={contributor} identity={identity} />}
+      tooltipOffset={1}
+    >
+      <div className="w-10 h-10 rounded-full">
+        <ResolveAndDisplayIdentity
+          identity={identity}
+          namespaceId={DEFAULT_ENS_NAMESPACE}
+          withLink={true}
+          identityLinkDetails={{
+            isExternal: false,
+            link: new URL(
+              getEnsAdvocateDetailsRelativePath(contributor.address),
+              getEnsAwardsBaseUrl(),
+            ),
+          }}
+          withTooltip={false}
+          withAvatar={true}
+          withIdentifier={false}
+        />
+      </div>
+    </GenericTooltip>
   );
 };
 

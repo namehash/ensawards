@@ -23,7 +23,7 @@ import BenchmarkSummaryCard from "@/components/atoms/cards/BenchmarkSummaryCard.
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { AppSummaryCard } from "@/components/atoms/cards/AppSummaryCard.tsx";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils";
-import { BenchmarkTechnicalDetails } from "@/components/molecules/BenchmarkTechnicalDetails";
+import BenchmarkTechnicalDetails from "@/components/molecules/technicalDetails/benchmark/index.astro";
 import { type Contribution } from "data/contributors/types";
 
 export function getStaticPaths() {
