@@ -2,7 +2,7 @@ import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
 import type { Contribution, Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
 import { User as NoContributionsIcon } from "lucide-react";
-import { useMemo } from "react";
+import { type ReactElement, useMemo } from "react";
 
 import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
@@ -46,20 +46,20 @@ const formatContributionType = (contributionType: ContributionType): string => {
   }
 };
 
-const formatNoContributionsMessage = (contributionType: ContributionType): string => {
+const formatNoContributionsMessage = (contributionType: ContributionType): ReactElement => {
   switch (contributionType) {
     case ContributionTypes.App:
     case ContributionTypes.Protocol:
-      return "No leaderboard contributions";
+      return <span>No leaderboard contributions&nbsp;yet</span>;
 
     case ContributionTypes.Contract:
-      return "No smart contract contributions";
+      return <span>No smart contract contributions&nbsp;yet</span>;
 
     case ContributionTypes.BestPractice:
-      return "No ENS best practice contributions";
+      return <span>No ENS best practice contributions&nbsp;yet</span>;
 
     case ContributionTypes.BenchmarkResult:
-      return "No acceptance test results contributed";
+      return <span>No acceptance test results contributed&nbsp;yet</span>;
 
     default:
       const _exhaustive: never = contributionType;
@@ -137,7 +137,7 @@ export const ContributorsCard = ({
                 <div className="w-full flex flex-col justify-center items-center gap-3 py-3">
                   <NoContributionsIcon size={24} className="text-muted-foreground" />
                   <p className="w-full text-base text-center text-muted-foreground leading-normal font-normal">
-                    {formatNoContributionsMessage(contributionType)}&nbsp;yet
+                    {formatNoContributionsMessage(contributionType)}
                   </p>
                 </div>
               ) : (

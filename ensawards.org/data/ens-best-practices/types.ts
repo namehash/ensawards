@@ -56,7 +56,8 @@ export type BestPractice = BestPracticeProtocol | BestPracticeApp;
  * Defines relations between {@link BestPracticeSlug} and the {@link AcceptanceTestBenchmarks}
  * of the related {@link BestPractice} for a given app.
  *
- * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each applicable {@link BestPractice}.
+ * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record`
+ * for each applicable {@link BestPractice}.
  * The value should be the related {@link AcceptanceTestBenchmarks}.
  */
 export type BestPracticeBenchmarks = Record<BestPracticeSlug, AcceptanceTestBenchmarks>;

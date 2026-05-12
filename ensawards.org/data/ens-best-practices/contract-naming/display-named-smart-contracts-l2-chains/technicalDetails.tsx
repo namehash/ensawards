@@ -121,7 +121,7 @@ const useCaseSummary = (
   </p>
 );
 
-const acceptanceTest1Description = (
+const l2ChainInteractionsDisplayNamedSmartContractsDescription = (
   <div className={acceptanceTestDetailsContainerStyles}>
     <p className="w-full">
       When users interact with named smart contracts on an L2 chain the app should display the
@@ -130,7 +130,7 @@ const acceptanceTest1Description = (
   </div>
 );
 
-const examplePassAcceptanceTest1 = {
+const l2ChainInteractionsDisplayNamedSmartContractsExamplePass = {
   result: BenchmarkResults.Pass,
   contributions: [
     { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
@@ -154,8 +154,8 @@ const technicalDetails = {
   acceptanceTests: [
     {
       acceptanceTestSlug: "l2-chain-interactions-display-named-smart-contracts",
-      description: acceptanceTest1Description,
-      examplePass: examplePassAcceptanceTest1,
+      description: l2ChainInteractionsDisplayNamedSmartContractsDescription,
+      examplePass: l2ChainInteractionsDisplayNamedSmartContractsExamplePass,
     },
   ],
 } as const satisfies BestPracticeTechnicalDetails;

@@ -29,11 +29,18 @@ export const getAcceptanceTestBenchmarksByApp = (
 };
 
 /**
- * Generalizes multiple `AcceptanceTestBenchmark`s into a single `BenchmarkResult` based on the following rules:
- * - Returns {@link BenchmarkResults.Pass} if all defined benchmarks are {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass}
- * - Returns {@link BenchmarkResults.Fail} if all defined benchmarks are {@link BenchmarkResults.Fail},
+ * Generalizes multiple `AcceptanceTestBenchmark`s into a single `BenchmarkResult`
+ * based on the following rules:
+ * - Returns {@link BenchmarkResults.Pass} if all defined benchmarks
+ * are {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass}
+ *
+ * - Returns {@link BenchmarkResults.Fail} if all defined benchmarks
+ * are {@link BenchmarkResults.Fail},
+ *
  * - Returns {@link BenchmarkResults.PartialPass} if:
- *     - at least one defined benchmark is {@link BenchmarkResults.Fail} and at least one defined benchmark is {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass},
+ *     - at least one defined benchmark is {@link BenchmarkResults.Fail}
+ *       and at least one defined benchmark is
+ *       {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass},
  *     - or all defined benchmarks are {@link BenchmarkResults.PartialPass},
  * -  returns `undefined` if all benchmarks are `undefined` (pending).
  */
@@ -44,7 +51,7 @@ export const generalizeAcceptanceTestBenchmarks = (
     (benchmark) => benchmark?.result,
   );
 
-  // Explicitly treating passs and partial pass equally
+  // For now, we'll explicitly treat pass and partial pass equally
   const hasPass = benchmarkResults.some(
     (result) => result === BenchmarkResults.Pass || result === BenchmarkResults.PartialPass,
   );

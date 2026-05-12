@@ -94,7 +94,7 @@ const desiredOutcome = (
   </p>
 );
 
-const acceptanceTest1Description = (
+const contractHasPrimaryNameDescription = (
   <div className={acceptanceTestDetailsContainerStyles}>
     <p className="w-full">
       When the contract's ENS name or address is looked up in the{" "}
@@ -111,7 +111,7 @@ const acceptanceTest1Description = (
   </div>
 );
 
-const acceptanceTest1ExamplePass = {
+const contractHasPrimaryNameExamplePass = {
   result: BenchmarkResults.Pass,
   contributions: [
     { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
@@ -152,9 +152,9 @@ const technicalDetails = {
   implementationRecommendations: implementationRecommendations,
   acceptanceTests: [
     {
-      acceptanceTestSlug: "enscribe-lookup",
-      description: acceptanceTest1Description,
-      examplePass: acceptanceTest1ExamplePass,
+      acceptanceTestSlug: "contract-has-primary-name",
+      description: contractHasPrimaryNameDescription,
+      examplePass: contractHasPrimaryNameExamplePass,
     },
   ],
 } as const satisfies BestPracticeTechnicalDetails;

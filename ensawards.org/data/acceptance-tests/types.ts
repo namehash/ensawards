@@ -19,17 +19,26 @@ export interface AcceptanceTest {
   acceptanceTestSlug: AcceptanceTestSlug;
 
   /**
-   * Description of the acceptance test, which should provide clear and detailed information
-   * about the criteria and requirements that an {@link App} must meet to pass the test.
-   * This may include specific functionalities to be tested, user interactions to be evaluated, and any relevant technical details or considerations.
+   * Description of the acceptance test,
+   * which should provide clear and detailed information
+   * about the criteria and requirements that
+   * an {@link App} must meet to pass the test.
+   * This may include specific functionalities to be tested,
+   * user interactions to be evaluated,
+   * and any relevant technical details or considerations.
    *
-   * @note The description should not include examples of passed or failed benchmarks, there are dedicated fields for that
-   * (see {@link AcceptanceTest.examplePass}, {@link AcceptanceTest.examplePartialPass}, or {@link AcceptanceTest.exampleFail}).
+   * @note The description should not include examples of passed or failed benchmarks,
+   * there are dedicated fields for that
+   * (see {@link AcceptanceTest.examplePass},
+   * {@link AcceptanceTest.examplePartialPass},
+   * or {@link AcceptanceTest.exampleFail}).
    */
   description: JSX.Element;
 
   /**
-   * Examples of benchmark results that illustrate what a passing, partially passing, or failing result looks like for this acceptance test.
+   * Examples of benchmark results that illustrate
+   * what a passing, partially passing, or failing result
+   * looks like for this acceptance test.
    */
   examplePass: AcceptanceTestBenchmarkPass;
   examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
@@ -43,38 +52,42 @@ export interface AcceptanceTestBenchmarkAbstract<BenchmarkResultT extends Benchm
   /** The result of the benchmark */
   result: BenchmarkResultT;
 
-  /** A record of all contributors involved in the addition or maintenance of the benchmark's data.
+  /** A record of all contributors involved
+   * in the addition or maintenance of the benchmark's data.
    *
-   * @invariant Multiple {@link Contribution} from the same contributor on the same app benchmark are not allowed.
+   * @invariant Multiple {@link Contribution} from the same contributor
+   * on the same app benchmark are not allowed.
    * When a contributor makes updates to their existing contribution,
    * they should update the `lastUpdated` timestamp of their existing `Contribution`.
    */
   contributions: [Contribution, ...Contribution[]];
 
   /**
-   * Notes about how the benchmark result was determined, which may include details about the testing process,
-   * any challenges encountered, and explanations, as well as a visual proof, for the final result.
+   * Notes about how the benchmark result was determined,
+   * which may include details about the testing process,
+   * any challenges encountered, and explanations,
+   * as well as a visual proof, for the final result.
    */
   notes: JSX.Element;
 }
 
 /**
  * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
- * that has fully passed our criteria.
+ * that has fully passed the acceptance test.
  */
 export interface AcceptanceTestBenchmarkPass
   extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Pass> {}
 
 /**
  * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
- * that has partially passed our criteria.
+ * that has partially passed the acceptance test.
  */
 export interface AcceptanceTestBenchmarkPartialPass
   extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.PartialPass> {}
 
 /**
  * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
- * that hasn't passed our criteria.
+ * that hasn't passed the acceptance test.
  */
 export interface AcceptanceTestBenchmarkFail
   extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Fail> {}

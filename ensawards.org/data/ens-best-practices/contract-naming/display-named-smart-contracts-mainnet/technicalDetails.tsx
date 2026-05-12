@@ -115,7 +115,7 @@ const useCaseSummary = (
   </p>
 );
 
-const acceptanceTest1Description = (
+const mainnetInteractionsDisplayNamedSmartContractsDescription = (
   <div className={acceptanceTestDetailsContainerStyles}>
     <p className="w-full">
       When users interact with named smart contracts on Ethereum mainnet the app should display the
@@ -124,7 +124,7 @@ const acceptanceTest1Description = (
   </div>
 );
 
-const acceptanceTest1ExamplePass = {
+const mainnetInteractionsDisplayNamedSmartContractsExamplePass = {
   result: BenchmarkResults.Pass,
   contributions: [
     { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
@@ -155,8 +155,8 @@ const technicalDetails = {
   acceptanceTests: [
     {
       acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts",
-      description: acceptanceTest1Description,
-      examplePass: acceptanceTest1ExamplePass,
+      description: mainnetInteractionsDisplayNamedSmartContractsDescription,
+      examplePass: mainnetInteractionsDisplayNamedSmartContractsExamplePass,
     },
   ],
 } as const satisfies BestPracticeTechnicalDetails;

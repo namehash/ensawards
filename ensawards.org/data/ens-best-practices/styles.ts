@@ -1,5 +1,5 @@
 // NOTE: These styles are part of the `data/ens-best-practices` directory
-// solely because it includes content defined as `JSX` elements.
+// solely because this data directory includes content defined as `JSX` elements.
 //
 // The only purpose of these Tailwind classes is to help style those elements.
 // Neither should be used anywhere else across the codebase, besides:
