@@ -27,7 +27,7 @@ export const PendingAcceptanceTestResultCTA = ({ app }: PendingAcceptanceTestRes
         )}
       >
         <GitHubOutlineIcon />
-        Edit on Github
+        Edit on GitHub
       </a>
     </div>
   </div>

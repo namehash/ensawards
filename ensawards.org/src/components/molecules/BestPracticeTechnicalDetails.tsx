@@ -52,7 +52,12 @@ export const BestPracticeTechnicalDetails = ({
               {acceptanceTest.examplePass.notes}
             </div>
             {acceptanceTest.examplePartialPass !== undefined && (
-              <div className={cn(technicalSectionContainerStyles, "p-4 bg-neutral-50 rounded-lg")}>
+              <div
+                className={cn(
+                  technicalSectionContainerStyles,
+                  "w-full p-4 bg-neutral-50 rounded-lg",
+                )}
+              >
                 <h3
                   className={cn(
                     technicalSectionHeaderStyles,
@@ -69,7 +74,12 @@ export const BestPracticeTechnicalDetails = ({
               </div>
             )}
             {acceptanceTest.exampleFail !== undefined && (
-              <div className={cn(technicalSectionContainerStyles, "p-4 bg-neutral-50 rounded-lg")}>
+              <div
+                className={cn(
+                  technicalSectionContainerStyles,
+                  "w-full p-4 bg-neutral-50 rounded-lg",
+                )}
+              >
                 <h3
                   className={cn(
                     technicalSectionHeaderStyles,
