@@ -31,6 +31,14 @@ export interface IncentiveProgramAwardPool {
 
   /**
    * The total award pool allocated for this incentive program.
+   *
+   * @invariant
+   * Award pool amount must be finite and greater than 0.
+   *
+   * @invariant
+   * All financial awards associated with this incentive program
+   * must have a {@link Price.currency} that matches the
+   * {@link totalAwardPool.currency} of this `totalAwardPool`.
    */
   totalAwardPool: Price;
 }

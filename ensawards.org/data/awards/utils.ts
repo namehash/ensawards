@@ -38,5 +38,5 @@ export const isValidAwardValue = (awardPrice: Price): boolean => {
 
   // Then check the user-facing interpreted value
   const interpretedAmount = interpretCurrency(awardPrice);
-  return Number.isFinite(interpretedAmount) && interpretedAmount > 0n;
+  return Number.isFinite(interpretedAmount) && interpretedAmount > 0;
 };
