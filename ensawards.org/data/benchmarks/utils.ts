@@ -93,7 +93,9 @@ export function getAppAcceptanceTestBenchmarks(
  * {@link BenchmarkResults.Fail} = 0.0
  */
 export const calcEnsAwardsPoints = (benchmark: AcceptanceTestBenchmark): EnsAwardsPoints => {
-  switch (benchmark.result) {
+  const benchmarkResult = benchmark.result;
+
+  switch (benchmarkResult) {
     case BenchmarkResults.Pass:
       return 1;
 
@@ -105,7 +107,8 @@ export const calcEnsAwardsPoints = (benchmark: AcceptanceTestBenchmark): EnsAwar
       return 0;
 
     default:
-      throw new Error(`Unsupported BenchmarkResult in AcceptanceTestBenchmark: ${benchmark}`);
+      const _exhaustive: never = benchmarkResult;
+      throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
 };
 
