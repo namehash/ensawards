@@ -9,6 +9,9 @@ import { type AwardFinancial } from "./types";
  *
  * Prioritizes awards with higher {@link AwardFinancial.price.amount} and,
  * in case of a tie, earlier {@link AwardFinancial.awardedAt} date.
+ *
+ * @throws
+ * If the two awards have different {@link AwardFinancial.price.currency} values.
  */
 export const sortFinancialAwardsByPrice = (a: AwardFinancial, b: AwardFinancial): number => {
   if (a.price.currency !== b.price.currency) {
