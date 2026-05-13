@@ -60,7 +60,7 @@ export const BestPracticeTechnicalDetails = ({
                   "w-full p-4 bg-neutral-50 rounded-lg",
                 )}
               >
-                <h3
+                <h4
                   className={cn(
                     technicalSectionHeaderStyles,
                     "text-xl w-full flex flex-row items-start justify-between gap-3",
@@ -68,7 +68,7 @@ export const BestPracticeTechnicalDetails = ({
                 >
                   Example test result
                   <BenchmarkResultBadge benchmarkResult={BenchmarkResults.PartialPass} />
-                </h3>
+                </h4>
                 {acceptanceTest.examplePartialPass.notes}
               </div>
             )}
@@ -79,7 +79,7 @@ export const BestPracticeTechnicalDetails = ({
                   "w-full p-4 bg-neutral-50 rounded-lg",
                 )}
               >
-                <h3
+                <h4
                   className={cn(
                     technicalSectionHeaderStyles,
                     "text-xl w-full flex flex-row items-start justify-between gap-3",
@@ -87,7 +87,7 @@ export const BestPracticeTechnicalDetails = ({
                 >
                   Example test result
                   <BenchmarkResultBadge benchmarkResult={BenchmarkResults.Fail} />
-                </h3>
+                </h4>
                 {acceptanceTest.exampleFail.notes}
               </div>
             )}

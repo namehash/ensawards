@@ -1,4 +1,4 @@
-import type { AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
+import type { AcceptanceTest, AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
@@ -115,50 +115,46 @@ const useCaseSummary = (
   </p>
 );
 
-const mainnetInteractionsDisplayNamedSmartContractsDescription = (
-  <div className={acceptanceTestDetailsContainerStyles}>
-    <p className="w-full">
-      When users interact with named smart contracts on Ethereum mainnet the app should display the
-      contract's name as its primary identifier.
-    </p>
-  </div>
-);
-
-const mainnetInteractionsDisplayNamedSmartContractsExamplePass = {
-  result: BenchmarkResults.Pass,
-  contributions: [
-    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
-  ],
-  notes: (
-    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+const acceptanceTest1 = {
+  acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts",
+  description: (
+    <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
-        Below you can see how{" "}
-        <a className={bestPracticeTechnicalDetailsLinkStyles} href="/app/walletchan-wallet">
-          WalletChan
-        </a>{" "}
-        displays the name of the contract it interacts with in addition to its address.
+        When users interact with named smart contracts on Ethereum mainnet the app should display
+        the contract's name as its primary identifier.
       </p>
-      <img
-        alt="mainnet-interactions-display-named-smart-contracts acceptance test"
-        src={mainnetInteractionsDisplayNamedSmartContractsImage.src}
-        className="w-auto h-full max-h-[325px] rounded-xl"
-      />
-      <p className="w-full">That allows the user to easily identify the contract.</p>
     </div>
   ),
-} as const satisfies AcceptanceTestBenchmarkPass;
+  examplePass: {
+    result: BenchmarkResults.Pass,
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
+    ],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          Below you can see how{" "}
+          <a className={bestPracticeTechnicalDetailsLinkStyles} href="/app/walletchan-wallet">
+            WalletChan
+          </a>{" "}
+          displays the name of the contract it interacts with in addition to its address.
+        </p>
+        <img
+          alt="mainnet-interactions-display-named-smart-contracts acceptance test"
+          src={mainnetInteractionsDisplayNamedSmartContractsImage.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+        <p className="w-full">That allows the user to easily identify the contract.</p>
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmarkPass,
+} as const satisfies AcceptanceTest;
 
 const technicalDetails = {
-  useCaseSummary: useCaseSummary,
-  benefitFromUsingEns: benefitFromUsingEns,
-  implementationRecommendations: implementationRecommendations,
-  acceptanceTests: [
-    {
-      acceptanceTestSlug: "mainnet-interactions-display-named-smart-contracts",
-      description: mainnetInteractionsDisplayNamedSmartContractsDescription,
-      examplePass: mainnetInteractionsDisplayNamedSmartContractsExamplePass,
-    },
-  ],
+  useCaseSummary,
+  benefitFromUsingEns,
+  implementationRecommendations,
+  acceptanceTests: [acceptanceTest1],
 } as const satisfies BestPracticeTechnicalDetails;
 
 export default technicalDetails;

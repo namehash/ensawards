@@ -1,4 +1,4 @@
-import type { AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
+import type { AcceptanceTest, AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
@@ -121,43 +121,39 @@ const useCaseSummary = (
   </p>
 );
 
-const l2ChainInteractionsDisplayNamedSmartContractsDescription = (
-  <div className={acceptanceTestDetailsContainerStyles}>
-    <p className="w-full">
-      When users interact with named smart contracts on an L2 chain the app should display the
-      contract's name as its primary identifier.
-    </p>
-  </div>
-);
-
-const l2ChainInteractionsDisplayNamedSmartContractsExamplePass = {
-  result: BenchmarkResults.Pass,
-  contributions: [
-    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
-  ],
-  notes: (
-    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-      <p className="w-full">TODO: Find a suitable example for L2 chain interactions</p>
-      <img
-        alt="l2-chain-interactions-display-named-smart-contracts acceptance test"
-        src={l2ChainsInteractionsDisplayNamedSmartContractsImage.src}
-        className="w-auto h-full max-h-[325px] rounded-xl"
-      />
+const acceptanceTest1 = {
+  acceptanceTestSlug: "l2-chain-interactions-display-named-smart-contracts",
+  description: (
+    <div className={acceptanceTestDetailsContainerStyles}>
+      <p className="w-full">
+        When users interact with named smart contracts on an L2 chain the app should display the
+        contract's name as its primary identifier.
+      </p>
     </div>
   ),
-} as const satisfies AcceptanceTestBenchmarkPass;
+  examplePass: {
+    result: BenchmarkResults.Pass,
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
+    ],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">TODO: Find a suitable example for L2 chain interactions</p>
+        <img
+          alt="l2-chain-interactions-display-named-smart-contracts acceptance test"
+          src={l2ChainsInteractionsDisplayNamedSmartContractsImage.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmarkPass,
+} as const satisfies AcceptanceTest;
 
 const technicalDetails = {
-  useCaseSummary: useCaseSummary,
-  benefitFromUsingEns: benefitFromUsingEns,
-  implementationRecommendations: implementationRecommendations,
-  acceptanceTests: [
-    {
-      acceptanceTestSlug: "l2-chain-interactions-display-named-smart-contracts",
-      description: l2ChainInteractionsDisplayNamedSmartContractsDescription,
-      examplePass: l2ChainInteractionsDisplayNamedSmartContractsExamplePass,
-    },
-  ],
+  useCaseSummary,
+  benefitFromUsingEns,
+  implementationRecommendations,
+  acceptanceTests: [acceptanceTest1],
 } as const satisfies BestPracticeTechnicalDetails;
 
 export default technicalDetails;

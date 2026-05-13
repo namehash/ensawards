@@ -1,4 +1,4 @@
-import { type AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
+import { type AcceptanceTest, type AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
@@ -94,32 +94,12 @@ const benefitFromUsingEns = (
   </p>
 );
 
-const contractHasPrimaryNameDescription = (
-  <div className={acceptanceTestDetailsContainerStyles}>
-    <p className="w-full">
-      When the contract's ENS name or address is looked up in the{" "}
-      <a
-        className={bestPracticeTechnicalDetailsLinkStyles}
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://app.enscribe.xyz/"
-      >
-        Enscribe App
-      </a>{" "}
-      the result should display the contract's name with an appropriate icon.
-    </p>
-  </div>
-);
-
-const contractHasPrimaryNameExamplePass = {
-  result: BenchmarkResults.Pass,
-  contributions: [
-    { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
-  ],
-  notes: (
-    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+const acceptanceTest1 = {
+  acceptanceTestSlug: "contract-has-primary-name",
+  description: (
+    <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
-        Below you can see the verification on the{" "}
+        When the contract's ENS name or address is looked up in the{" "}
         <a
           className={bestPracticeTechnicalDetailsLinkStyles}
           target="_blank"
@@ -128,35 +108,51 @@ const contractHasPrimaryNameExamplePass = {
         >
           Enscribe App
         </a>{" "}
-        how{" "}
-        <a className={bestPracticeTechnicalDetailsLinkStyles} href="/protocol/nouns-dao">
-          Nouns DAO
-        </a>{" "}
-        has named one of its smart contracts.
-      </p>
-      <img
-        alt="enscribe-lookup acceptance test"
-        src={enscribelookupAcceptanceTestImage.src}
-        className="w-auto h-full max-h-[350px] rounded-xl"
-      />
-      <p className="w-full">
-        This is the first (but vital) step in ensuring users can easily identify the contract.
+        the result should display the contract's name with an appropriate icon.
       </p>
     </div>
   ),
-} as const satisfies AcceptanceTestBenchmarkPass;
+  examplePass: {
+    result: BenchmarkResults.Pass,
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-05-11T10:17:00Z") },
+    ],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          Below you can see the verification on the{" "}
+          <a
+            className={bestPracticeTechnicalDetailsLinkStyles}
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://app.enscribe.xyz/"
+          >
+            Enscribe App
+          </a>{" "}
+          how{" "}
+          <a className={bestPracticeTechnicalDetailsLinkStyles} href="/protocol/nouns-dao">
+            Nouns DAO
+          </a>{" "}
+          has named one of its smart contracts.
+        </p>
+        <img
+          alt="enscribe-lookup acceptance test"
+          src={enscribelookupAcceptanceTestImage.src}
+          className="w-auto h-full max-h-[350px] rounded-xl"
+        />
+        <p className="w-full">
+          This is the first (but vital) step in ensuring users can easily identify the contract.
+        </p>
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmarkPass,
+} as const satisfies AcceptanceTest;
 
 const technicalDetails = {
-  useCaseSummary: useCaseSummary,
-  benefitFromUsingEns: benefitFromUsingEns,
-  implementationRecommendations: implementationRecommendations,
-  acceptanceTests: [
-    {
-      acceptanceTestSlug: "contract-has-primary-name",
-      description: contractHasPrimaryNameDescription,
-      examplePass: contractHasPrimaryNameExamplePass,
-    },
-  ],
+  useCaseSummary,
+  benefitFromUsingEns,
+  implementationRecommendations,
+  acceptanceTests: [acceptanceTest1],
 } as const satisfies BestPracticeTechnicalDetails;
 
 export default technicalDetails;
