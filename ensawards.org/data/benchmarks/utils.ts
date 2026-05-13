@@ -105,9 +105,7 @@ export const calcEnsAwardsPoints = (benchmark: AcceptanceTestBenchmark): EnsAwar
       return 0;
 
     default:
-      throw new Error(
-        `Unsupported BenchmarkResult in AcceptanceTestBenchmark: ${JSON.stringify(benchmark)}`,
-      );
+      throw new Error(`Unsupported BenchmarkResult in AcceptanceTestBenchmark: ${benchmark}`);
   }
 };
 

@@ -140,7 +140,7 @@ const acceptanceTest1 = {
           displays the name of the contract it interacts with in addition to its address.
         </p>
         <img
-          alt="mainnet-interactions-display-named-smart-contracts acceptance test"
+          alt="WalletChan displaying a smart contract ENS name next to its address during interaction"
           src={mainnetInteractionsDisplayNamedSmartContractsImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
