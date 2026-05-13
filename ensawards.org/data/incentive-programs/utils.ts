@@ -30,10 +30,16 @@ export const sumIncentiveProgramFinancialAwards = (
     incentiveProgramSlug,
   ).filter((award) => award.type === AwardTypes.FinancialAward);
 
-  return incentiveProgramFinancialAwards.reduce(
-    (acc, award) => acc + interpretCurrency(award.price),
-    0,
+  if (incentiveProgramFinancialAwards.length === 0) {
+    return 0;
+  }
+
+  const totalFinancialAwards = incentiveProgramFinancialAwards.reduce(
+    (acc, award) => ({ currency: acc.currency, amount: acc.amount + award.price.amount }),
+    { currency: incentiveProgramFinancialAwards[0].price.currency, amount: 0n },
   );
+
+  return interpretCurrency(totalFinancialAwards);
 };
 
 /**
