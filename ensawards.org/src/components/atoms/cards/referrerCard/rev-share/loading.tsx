@@ -42,9 +42,7 @@ export const ReferrerCardRevShareCapLoading = ({
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
         <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
-          {editionStatus === undefined || editionStatus === ReferralProgramEditionStatuses.Closed
-            ? "Awards"
-            : "Tentative awards"}
+          {editionStatus === ReferralProgramEditionStatuses.Closed ? "Awards" : "Tentative awards"}
         </p>
         <div className={cn(loadingStateStyles, "w-[80px] h-[14px] mt-[4px] mb-[3px]")} />
       </div>
