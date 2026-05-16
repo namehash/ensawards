@@ -1,6 +1,8 @@
-import type {
-  AggregatedReferrerMetricsPieSplit,
-  AwardedReferrerMetricsPieSplit,
+import {
+  type AggregatedReferrerMetricsPieSplit,
+  type AwardedReferrerMetricsPieSplit,
+  ReferralProgramEditionStatuses,
+  type ReferralProgramEditionStatusId,
 } from "@namehash/ens-referrals";
 import { memo } from "react";
 
@@ -14,6 +16,7 @@ import { numberFormatter, ReferralYearsField, ReferrerCardHeader } from "../shar
 export interface ReferrerCardPieSplitProps {
   referrer: AwardedReferrerMetricsPieSplit;
   aggregatedMetrics: AggregatedReferrerMetricsPieSplit;
+  editionStatus: ReferralProgramEditionStatusId;
 }
 
 /**
@@ -21,7 +24,11 @@ export interface ReferrerCardPieSplitProps {
  *
  * This component is specifically designed for the {@link ReferralProgramAwardModels.PieSplit} award model.
  */
-function ReferrerCardPieSplit({ referrer, aggregatedMetrics }: ReferrerCardPieSplitProps) {
+function ReferrerCardPieSplit({
+  referrer,
+  aggregatedMetrics,
+  editionStatus,
+}: ReferrerCardPieSplitProps) {
   const yearsRequiredToBeQualified = numberFormatter.format(
     Math.max(0.01, aggregatedMetrics.minFinalScoreToQualify - referrer.finalScore),
   );
@@ -102,9 +109,20 @@ function ReferrerCardPieSplit({ referrer, aggregatedMetrics }: ReferrerCardPieSp
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
         <GenericTooltip
           tooltipOffset={0}
-          content={<p className="max-w-[140px]">Estimated value of $ENS awards in USD</p>}
+          content={
+            <p className="max-w-[140px]">
+              {editionStatus !== ReferralProgramEditionStatuses.Closed
+                ? "Estimated value"
+                : "Value"}{" "}
+              of $ENS awards in USD
+            </p>
+          }
         >
-          <p className="text-muted-foreground text-sm leading-normal font-normal">Awards</p>
+          <p className="text-muted-foreground text-sm leading-normal font-normal">
+            {editionStatus === ReferralProgramEditionStatuses.Closed
+              ? "Awards"
+              : "Tentative awards"}
+          </p>
         </GenericTooltip>
         <p
           className={cn(

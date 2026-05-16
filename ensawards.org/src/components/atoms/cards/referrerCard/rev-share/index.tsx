@@ -2,9 +2,14 @@ import type {
   AdminActionDisqualification,
   AdminActionWarning,
   AwardedReferrerMetricsRevShareCap,
+  ReferralProgramEditionStatusId,
   ReferralProgramRulesRevShareCap,
 } from "@namehash/ens-referrals";
-import { AdminActionTypes, SECONDS_PER_YEAR } from "@namehash/ens-referrals";
+import {
+  AdminActionTypes,
+  ReferralProgramEditionStatuses,
+  SECONDS_PER_YEAR,
+} from "@namehash/ens-referrals";
 import { TriangleAlert as RulesBreachIcon } from "lucide-react";
 import { memo } from "react";
 
@@ -21,6 +26,7 @@ import { usdFormatter } from "@/utils/textModifications";
 export interface ReferrerCardRevShareCapProps {
   referrer: AwardedReferrerMetricsRevShareCap;
   editionRules: ReferralProgramRulesRevShareCap;
+  editionStatus: ReferralProgramEditionStatusId;
 }
 
 /**
@@ -28,7 +34,11 @@ export interface ReferrerCardRevShareCapProps {
  *
  * This component is specifically designed for the {@link ReferralProgramAwardModels.RevShareCap} award model.
  */
-function ReferrerCardRevShareCap({ referrer, editionRules }: ReferrerCardRevShareCapProps) {
+function ReferrerCardRevShareCap({
+  referrer,
+  editionRules,
+  editionStatus,
+}: ReferrerCardRevShareCapProps) {
   return (
     <div className="w-full h-fit min-h-[80px] box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xs bg-white">
       <ReferrerCardHeader
@@ -40,7 +50,7 @@ function ReferrerCardRevShareCap({ referrer, editionRules }: ReferrerCardRevShar
       <TotalRevenueContributionField referrer={referrer} />
       <BaseRevenueContributionField referrer={referrer} editionRules={editionRules} />
       <RevenueShareField referrer={referrer} editionRules={editionRules} />
-      <TentativeAwardsField referrer={referrer} />
+      <TentativeAwardsField referrer={referrer} editionStatus={editionStatus} />
     </div>
   );
 }
@@ -80,7 +90,7 @@ export const TotalRevenueContributionField = ({
 export const BaseRevenueContributionField = ({
   referrer,
   editionRules,
-}: ReferrerCardRevShareCapProps) => {
+}: Omit<ReferrerCardRevShareCapProps, "editionStatus">) => {
   const referralYears = numberFormatter.format(
     referrer.totalIncrementalDuration / SECONDS_PER_YEAR,
   );
@@ -129,7 +139,10 @@ const isReferrerWarned = (
 ): referrer is AwardedReferrerMetricsRevShareCap & { adminAction: AdminActionWarning } =>
   referrer.adminAction !== null && referrer.adminAction.actionType === AdminActionTypes.Warning;
 
-export const RevenueShareField = ({ referrer, editionRules }: ReferrerCardRevShareCapProps) => {
+export const RevenueShareField = ({
+  referrer,
+  editionRules,
+}: Omit<ReferrerCardRevShareCapProps, "editionStatus">) => {
   const minQualifiedRevenueContributionInUSD = usdFormatter.format(
     parseReferralProgramCurrency(editionRules.minBaseRevenueContribution),
   );
@@ -217,22 +230,23 @@ const DisqualifiedFieldContent = ({
 
 export const TentativeAwardsField = ({
   referrer,
-}: {
-  referrer: AwardedReferrerMetricsRevShareCap;
-}) => {
+  editionStatus,
+}: Omit<ReferrerCardRevShareCapProps, "editionRules">) => {
   return (
     <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
       <GenericTooltip
         tooltipOffset={0}
         content={
           <p className="max-w-[220px]">
-            Estimated awards that will be paid to the referrer at the conclusion of this referral
-            program edition.
+            {editionStatus === ReferralProgramEditionStatuses.Closed
+              ? "Awards that were"
+              : "Estimated awards that will be"}{" "}
+            paid to the referrer at the conclusion of this referral program edition.
           </p>
         }
       >
         <p className="text-muted-foreground text-sm leading-normal font-normal text-left">
-          Tentative awards
+          {editionStatus === ReferralProgramEditionStatuses.Closed ? "Awards" : "Tentative awards"}
         </p>
       </GenericTooltip>
       <p
