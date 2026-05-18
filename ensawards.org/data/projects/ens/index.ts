@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
+// for additional advice on adding and modifying projects
+
 import { defineProject } from "../registry.ts";
 import { type Project, ProjectIds } from "../types.ts";
 import EnsIcon from "./icon.tsx";

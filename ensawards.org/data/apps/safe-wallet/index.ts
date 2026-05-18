@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
+// for additional advice on adding and modifying apps
+
 import SafeProject from "data/projects/safe";
 import { asInterpretedName } from "enssdk";
 

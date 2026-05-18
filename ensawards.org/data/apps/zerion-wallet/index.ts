@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
+// for additional advice on adding and modifying apps
+
 import ZerionProject from "data/projects/zerion/index.ts";
 
 import { defineApp } from "../registry.ts";

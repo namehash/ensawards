@@ -1,7 +1,7 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
 // for additional advice on adding and modifying app benchmarks
 
-import RabbyWallet from "data/apps/rabby-wallet";
+import StatusWallet from "data/apps/status-wallet";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
@@ -15,6 +15,6 @@ const benchmarks: BestPracticeBenchmarks = {
   },
 };
 
-defineAppBenchmarks(RabbyWallet, benchmarks);
+defineAppBenchmarks(StatusWallet, benchmarks);
 
 export default benchmarks;

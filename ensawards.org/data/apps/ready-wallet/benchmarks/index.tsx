@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
+// for additional advice on adding and modifying app benchmarks
+
 import ReadyWallet from "data/apps/ready-wallet";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
