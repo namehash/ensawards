@@ -17,7 +17,6 @@ Linea, and Scroll), with an automatic fallback to a default primary name (define
 chain-specific primary name is defined. There are several libraries to choose from that support 
 ENSIP-19 and all ENS best practices:
 - [ensnode-sdk](https://github.com/namehash/ensnode/blob/main/packages/ensnode-sdk/README.md) (v1.0.0+)
-- [ensnode-react](https://github.com/namehash/ensnode/blob/main/packages/ensnode-react/README.md) (v1.0.0+)
 - [Viem](https://viem.sh/docs/ens/actions/getEnsName#chain-specific-resolution) (v2.35.0+)
 - [Wagmi](https://wagmi.sh/react/api/hooks/useEnsName#chainid) (v2.18.0+)
 Libraries and tools for additional languages or frameworks can be found in the [ENS documentation](https://docs.ens.domains/web/libraries).`;
