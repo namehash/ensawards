@@ -114,7 +114,7 @@ function ReferrerCardPieSplit({
               {editionStatus !== ReferralProgramEditionStatuses.Closed
                 ? "Estimated value"
                 : "Value"}{" "}
-              of $ENS awards in USD
+              of $ENS award distribution in USD
             </p>
           }
         >

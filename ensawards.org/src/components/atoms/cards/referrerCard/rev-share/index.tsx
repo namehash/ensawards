@@ -241,7 +241,7 @@ export const TentativeAwardsField = ({
             {editionStatus === ReferralProgramEditionStatuses.Closed
               ? "Awards that were"
               : "Estimated awards that will be"}{" "}
-            paid to the referrer at the conclusion of this referral program edition.
+            distributed to the referrer at the conclusion of this referral program edition.
           </p>
         }
       >
