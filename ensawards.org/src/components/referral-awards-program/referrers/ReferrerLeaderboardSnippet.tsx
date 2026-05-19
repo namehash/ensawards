@@ -8,12 +8,10 @@ import {
   ReferrerLeaderboardPageResponseCodes,
   type ReferrerLeaderboardPageRevShareCap,
 } from "@namehash/ens-referrals";
-import { useNow } from "@namehash/namehash-ui";
+import { createEnsNodeProviderOptions, EnsNodeProvider, useNow } from "@namehash/namehash-ui";
 import type { VariantProps } from "class-variance-authority";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useMemo, useState } from "react";
-
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import {
   LastUpdateTime,
