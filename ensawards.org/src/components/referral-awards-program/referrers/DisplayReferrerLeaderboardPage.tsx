@@ -53,6 +53,7 @@ export function DisplayReferrerLeaderboardPage({
               <ReferrerCardPieSplitLoading
                 key={`Referrer-loading-${pageOffset + elem}`}
                 rank={pageOffset + elem + 1}
+                editionStatus={editionSummary?.status}
               />
             );
           }
@@ -62,6 +63,7 @@ export function DisplayReferrerLeaderboardPage({
             <ReferrerCardRevShareCapLoading
               key={`Referrer-loading-${pageOffset + elem}`}
               rank={pageOffset + elem + 1}
+              editionStatus={editionSummary?.status}
             />
           );
         })}
@@ -93,6 +95,7 @@ export function DisplayReferrerLeaderboardPage({
             key={`Referrer-${referrer.referrer}`}
             referrer={referrer}
             aggregatedMetrics={leaderboardPageData.aggregatedMetrics}
+            editionStatus={leaderboardPageData.status}
           />
         ))}
       {leaderboardPageData.awardModel === ReferralProgramAwardModels.RevShareCap &&
@@ -101,6 +104,7 @@ export function DisplayReferrerLeaderboardPage({
             key={`Referrer-${referrer.referrer}`}
             referrer={referrer}
             editionRules={leaderboardPageData.rules}
+            editionStatus={leaderboardPageData.status}
           />
         ))}
     </div>
