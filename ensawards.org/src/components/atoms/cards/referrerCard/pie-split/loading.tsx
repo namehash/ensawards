@@ -1,3 +1,8 @@
+import {
+  ReferralProgramEditionStatuses,
+  type ReferralProgramEditionStatusId,
+} from "@namehash/ens-referrals";
+
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 import { type RankProps, ReferrerCardHeaderLoading } from "../shared.tsx";
@@ -9,7 +14,10 @@ import { type RankProps, ReferrerCardHeaderLoading } from "../shared.tsx";
  */
 export const ReferrerCardPieSplitLoading = ({
   rank,
-}: Omit<RankProps, "className" | "isQualified" | "rankTooltipText">) => {
+  editionStatus,
+}: Omit<RankProps, "className" | "isQualified" | "rankTooltipText"> & {
+  editionStatus?: ReferralProgramEditionStatusId;
+}) => {
   const loadingStateStyles = "animate-pulse bg-gray-200 rounded-sm";
   return (
     <div className="w-full h-fit box-border flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start sm:items-center gap-2 p-4 sm:p-6 sm:gap-y-5 rounded-2xl border border-gray-200 bg-white">
@@ -33,7 +41,9 @@ export const ReferrerCardPieSplitLoading = ({
         />
       </div>
       <div className="sm:min-w-[120px] flex flex-row sm:flex-col flex-nowrap justify-between sm:justify-center items-start min-[1100px]:items-end gap-0 max-sm:self-stretch">
-        <p className="text-muted-foreground text-sm leading-normal font-normal">Awards</p>
+        <p className="text-muted-foreground text-sm leading-normal font-normal">
+          {editionStatus === ReferralProgramEditionStatuses.Closed ? "Awards" : "Tentative awards"}
+        </p>
         <div className={cn(loadingStateStyles, "w-[88px] h-[14px] mt-[4px] mb-[3px]")} />
       </div>
     </div>
