@@ -88,7 +88,9 @@ const protocolContractDataContributions: Contribution[] = Object.keys(protocolSc
                     name={protocol.name}
                     ensAwardsScore={value}
                     viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
-                    viewDetailsText={`${formatProtocolType(protocolType, { lowercase: false })}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
+                    viewDetailsText={formatProtocolType(protocolType, {
+                      lowercase: false,
+                    })}>
                     {idx < 3 ? (
                       <Image
                         alt={`${idx + 1}-place`}

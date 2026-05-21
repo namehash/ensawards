@@ -124,11 +124,16 @@ export const formatAppType = (
       formattedType = plural ? "Explorers" : "Explorer";
       break;
 
+    case AppTypes.DeFi:
+      formattedType = plural ? "DeFi apps" : "DeFi app";
+      break;
+
     default:
       const _exhaustive: never = appType;
       throw new Error(`Unsupported AppType: ${_exhaustive}`);
   }
 
+  // TODO: Should we keep the "DeFi" formatting even for the lowercase option selected?
   if (lowercase) {
     formattedType = formattedType.toLowerCase();
   }

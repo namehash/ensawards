@@ -19,7 +19,7 @@ const displayNamedSmartContractsMainnet: BestPracticeApp = {
   description:
     "Display ENS names instead of addresses when users interact with named smart contracts on Ethereum mainnet.",
   category: ContractNamingCategory,
-  appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
+  appliesTo: [AppTypes.Wallet, AppTypes.Explorer, AppTypes.DeFi],
   technicalDetails: technicalDetails,
   contributions: [
     { from: contributors.lightwalker, lastUpdated: parseTimestamp("2025-11-03T11:25:00.000Z") },

@@ -135,7 +135,7 @@ export const formatProtocolType = (
 
   switch (protocolType) {
     case ProtocolTypes.DeFi:
-      return lowercase ? "defi" : "DeFi";
+      return lowercase ? "defi protocol" : "DeFi protocol";
 
     case ProtocolTypes.DAO:
       return lowercase ? "dao" : "DAO";

@@ -47,7 +47,7 @@ export type ProtocolId = (typeof ProtocolIds)[keyof typeof ProtocolIds];
 
 export const ProtocolTypes = {
   DAO: "dao",
-  DeFi: "defi",
+  DeFi: "defi-protocol",
 } as const;
 
 export type ProtocolType = (typeof ProtocolTypes)[keyof typeof ProtocolTypes];

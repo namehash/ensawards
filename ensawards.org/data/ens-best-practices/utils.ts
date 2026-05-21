@@ -145,6 +145,10 @@ export const formatBestPracticeTarget = (
       formattedTarget = plural ? "Wallets" : "Wallet";
       break;
 
+    case AppTypes.DeFi:
+      formattedTarget = plural ? "DeFi apps" : "DeFi app";
+      break;
+
     case ProtocolTypes.DAO:
       formattedTarget = plural ? "DAOs" : "DAO";
       break;
