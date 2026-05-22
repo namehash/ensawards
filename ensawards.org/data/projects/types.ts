@@ -26,6 +26,7 @@ export const ProjectIds = {
   Ledger: "project-ledger",
   World: "project-world",
   OneInch: "project-1inch",
+  Trust: "project-trust",
 } as const;
 
 /**

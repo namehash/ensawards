@@ -1,0 +1,63 @@
+import React from "react";
+
+import { cn } from "@/utils/tailwindClassConcatenation";
+
+const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    id="Layer_1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    viewBox="560 220 800 640"
+    className={cn("bg-white", className)}
+    {...props}
+  >
+    <defs>
+      <linearGradient
+        id="linear-gradient"
+        x1="1123.26"
+        y1="1865.78"
+        x2="954.61"
+        y2="1337.5"
+        gradientTransform="translate(0 2182) scale(1 -1)"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset=".02" stopColor="blue" />
+        <stop offset=".08" stopColor="#0094ff" />
+        <stop offset=".16" stopColor="#48ff91" />
+        <stop offset=".42" stopColor="#0094ff" />
+        <stop offset=".68" stopColor="#0038ff" />
+        <stop offset=".9" stopColor="#0500ff" />
+      </linearGradient>
+    </defs>
+    <path
+      className="fill-[#0500ff]"
+      d="m738.71,423.41l221.45-72.3v500.52c-158.18-66.74-221.45-194.65-221.45-266.94v-161.28Z"
+    />
+    <path
+      className="fill-[url(#linear-gradient)]"
+      d="m1181.62,423.41l-221.45-72.3v500.52c158.18-66.74,221.45-194.65,221.45-266.94v-161.28Z"
+    />
+    <path
+      className="fill-[#0500ff]"
+      d="m825.91,230.85h30.9v17.31c10.13-15.56,21.78-17.31,38.84-17.31v30.6h-7.77c-20.44,0-30.23,9.62-30.23,28.67v32.52h-31.75v-91.79Z"
+    />
+    <path
+      className="fill-[#0500ff]"
+      d="m998.78,322.63h-31.75v-8.75c-6.93,8.05-16.38,11.54-28.03,11.54-22.12,0-34.62-13.11-34.62-37.24v-57.34h31.75v50.18c0,11.36,5.57,18,15.02,18s15.88-6.47,15.88-17.48v-50.7h31.75v91.79Z"
+    />
+    <path
+      className="fill-[#0500ff]"
+      d="m1006.54,294.3h29.73c1.36,6.64,5.91,9.43,16.88,9.43,8.95,0,14.19-2.09,14.19-5.94,0-2.98-2.54-4.9-9.79-6.47l-23.98-5.42c-16.04-3.66-24.15-12.93-24.15-27.8,0-19.59,14.35-29.73,42.21-29.73s41.54,9.88,43.91,31.04h-29.55c-.5-5.59-6.25-9.01-15.7-9.01-7.59,0-12.49,2.44-12.49,6.12,0,3.14,3.2,5.59,9.63,7.18l25.16,6.12c16.54,4.01,24.49,12.41,24.49,26.05,0,18.89-16.38,30.08-44.23,30.08s-46.27-12.06-46.27-31.65h-.03Z"
+    />
+    <path
+      className="fill-[#0500ff]"
+      d="m1181.62,259.4v-28.55h-78.35v28.56h23.38v63.22h31.58v-63.24h23.39Z"
+    />
+    <path
+      className="fill-[#0500ff]"
+      d="m817.08,259.4v-28.55h-78.35v28.56h23.38v63.22h31.58v-63.24h23.38Z"
+    />
+  </svg>
+);
+
+export default Icon;
