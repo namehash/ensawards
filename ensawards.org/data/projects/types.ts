@@ -28,6 +28,8 @@ export const ProjectIds = {
   OneInch: "project-1inch",
   Trust: "project-trust",
   Phantom: "project-phantom",
+  Curve: "project-curve",
+  Lido: "project-lido",
 } as const;
 
 /**
