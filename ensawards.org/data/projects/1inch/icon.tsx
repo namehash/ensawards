@@ -1,0 +1,23 @@
+import React from "react";
+
+const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    id="1"
+    data-name="1"
+    xmlns="http://www.w3.org/2000/svg"
+    width="181mm"
+    height="181mm"
+    version="1.1"
+    viewBox="0 0 513 513"
+    className={className}
+    {...props}
+  >
+    <path d="M512.8,0H0v512.8h512.8V0Z" />
+    <path
+      d="M169.7,383.7h172.9v-36.7h-63.8s0-218.7,0-218.7h-37.8c-1.5,30.6-10.3,38.3-52.1,38.3h-19.2v34.6h63.8v145.8h-63.8v36.7ZM360.7,201.2v-72.9h-36.7v72.9h36.7ZM425.1,201.2v-72.9h-36.7v72.9h36.7Z"
+      fill="#fff"
+    />
+  </svg>
+);
+
+export default Icon;

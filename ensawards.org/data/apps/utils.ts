@@ -27,6 +27,10 @@ export const asAppType = (maybeAppType: string): AppType => {
       return AppTypes.Wallet;
     case "explorer":
       return AppTypes.Explorer;
+
+    case "defi-app":
+      return AppTypes.DeFi;
+
     default:
       throw new Error(`Invalid AppType value: ${maybeAppType}`);
   }

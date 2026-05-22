@@ -84,7 +84,7 @@ export const asProtocolType = (maybeProtocolType: string): ProtocolType => {
     case "dao":
       return ProtocolTypes.DAO;
 
-    case "defi":
+    case "defi-protocol":
       return ProtocolTypes.DeFi;
 
     default:
