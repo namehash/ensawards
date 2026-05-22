@@ -7,9 +7,9 @@ import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import ReadyIcon from "./icon.tsx";
 
-const ReadyWallet: App = {
-  id: "ready-wallet",
-  appSlug: "ready-wallet",
+const ReadyXWallet: App = {
+  id: "readyx-wallet",
+  appSlug: "readyx-wallet",
   type: AppTypes.Wallet,
   project: ReadyProject,
   name: "Ready X",
@@ -23,6 +23,6 @@ const ReadyWallet: App = {
   // TODO: Add OG images
 };
 
-defineApp(ReadyWallet);
+defineApp(ReadyXWallet);
 
-export default ReadyWallet;
+export default ReadyXWallet;

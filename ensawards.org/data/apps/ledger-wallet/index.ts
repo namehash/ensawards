@@ -7,9 +7,9 @@ import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import LedgerIcon from "./icon.tsx";
 
-const LedgerWalletWallet: App = {
-  id: "ledgerwallet-wallet",
-  appSlug: "ledgerwallet-wallet",
+const LedgerWallet: App = {
+  id: "ledger-wallet",
+  appSlug: "ledger-wallet",
   type: AppTypes.Wallet,
   project: LedgerProject,
   name: "Ledger Wallet",
@@ -23,6 +23,6 @@ const LedgerWalletWallet: App = {
   // TODO: Add OG images
 };
 
-defineApp(LedgerWalletWallet);
+defineApp(LedgerWallet);
 
-export default LedgerWalletWallet;
+export default LedgerWallet;
