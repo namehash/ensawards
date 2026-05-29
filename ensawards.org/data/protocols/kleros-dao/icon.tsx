@@ -1,12 +1,15 @@
 import React from "react";
 
-const Icon = (props: React.SVGProps<SVGSVGElement>) => (
+import { cn } from "@/utils/tailwindClassConcatenation";
+
+const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="54"
     height="48"
     viewBox="0 0 54 48"
     fill="none"
+    className={cn("bg-white p-1 rounded-lg", className)}
     {...props}
   >
     <path
