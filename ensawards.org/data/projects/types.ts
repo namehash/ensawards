@@ -19,6 +19,7 @@ export const ProjectIds = {
   WalletChan: "project-walletchan",
   Ambire: "project-ambire",
   Superfluid: "project-superfluid",
+  Kleros: "project-kleros",
 } as const;
 
 /**

@@ -10,6 +10,7 @@ import { asNormalizedAddress } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
+import Kleros from "data/protocols/kleros-dao";
 import SSVNetworkDao from "data/protocols/ssvnetwork-dao";
 import Superfluid from "data/protocols/superfluid-defi";
 
@@ -500,7 +501,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     },
     awardedEntityMetadata: {
       type: EntityMetadataTypes.Protocol,
-      protocol: SSVNetworkDao,
+      protocol: Kleros,
     },
     price: 500,
     awardedAt: mayBulkDistribution.timestamp,
