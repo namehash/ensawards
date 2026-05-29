@@ -34,7 +34,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -50,7 +50,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -66,7 +66,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -82,7 +82,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -99,7 +99,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -118,7 +118,7 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       transactionHash: "0xd43817d37e0db75a9f488959b8b839d2adde174b4ca0c80e9f5d20f8bbda122c",
     },
-    reason: "TODO: Define award reason",
+    reason: "Custom integration",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -127,10 +127,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0x883753beab357a2c29f3766c6ad158e72a78ce51"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Elimu",
+      link: new URL("https://elimu.ai/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small Project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -142,7 +147,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -154,7 +159,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -166,7 +171,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -175,10 +180,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0x03abd529e8af2de9ed48cd92e57aa7b0c1b797dc"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Bittrees",
+      link: new URL("https://bittrees.org/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small Project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -190,7 +200,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -202,7 +212,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -211,10 +221,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0xeb7fa4b15edbd75eb3c8d62e7f7bf8c059e97fe1"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "ENSWheel",
+      link: new URL("https://x.com/enswheel"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small Project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -226,7 +241,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -238,7 +253,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -250,7 +265,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -262,7 +277,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -274,7 +289,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -286,7 +301,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -295,10 +310,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0xda064c4567fad2c9da7b6dd08b5c2b2607960340"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "SimpleX Network",
+      link: new URL("https://simplex.chat/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small Project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -310,7 +330,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -322,7 +342,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -331,10 +351,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0xf1aa941d56041d47a9a18e99609a047707fe96c7"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "EthereumPhunks",
+      link: new URL("https://ethereumphunks.com/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small Project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -346,7 +371,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -358,7 +383,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -370,7 +395,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -382,7 +407,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   // This award was distributed over two separate transactions.
   // The second transaction Hash is: 0x526e83bce85a6921234b1f0d3921756ba8728c8f938d1b1241d70acee3550a8f
@@ -396,10 +421,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0x2117bf88b4cb0186eaa87500a045fc998290e42a"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Gramajo",
+      link: new URL("https://0xgramajo.xyz/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Contributions and Collaborations",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -408,10 +438,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0xb2eb328c26de2d0a7f68198aa7813b287b3d06b4"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Dev Tools Guild",
+      link: new URL("https://devtoolsguild.xyz/"),
+    },
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium Project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -420,10 +455,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0x546457bbddf5e09929399768ab5a9d588cb0334d"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Proof Of Groove",
+      link: new URL("https://www.proofofgroove.xyz/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small Project",
   },
 ];
 
