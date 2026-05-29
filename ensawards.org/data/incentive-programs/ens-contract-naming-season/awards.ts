@@ -11,6 +11,7 @@ import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import SSVNetworkDao from "data/protocols/ssvnetwork-dao";
+import Superfluid from "data/protocols/superfluid-defi";
 
 const marchBulkDistribution = {
   timestamp: parseTimestamp("2026-03-06T11:21:23Z"),
@@ -499,7 +500,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     },
     awardedEntityMetadata: {
       type: EntityMetadataTypes.Protocol,
-      protocol: Kleros,
+      protocol: SSVNetworkDao,
     },
     price: 500,
     awardedAt: mayBulkDistribution.timestamp,

@@ -24,6 +24,7 @@ export const DeFiProtocolIds = {
   Uniswap: "protocol-uniswap-defi",
   Cork: "protocol-cork-defi",
   Giveth: "protocol-giveth-defi",
+  Superfluid: "protocol-superfluid-defi",
 } as const;
 
 /**
