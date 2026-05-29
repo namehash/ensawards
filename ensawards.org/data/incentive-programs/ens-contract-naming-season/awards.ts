@@ -146,7 +146,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "Small Project",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -199,7 +199,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "Small Project",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -240,7 +240,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "Small Project",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -329,7 +329,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "Small Project",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -370,7 +370,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "Small Project",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -440,7 +440,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "Contributions and Collaborations",
+    reason: "Contributions and collaborations",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -457,7 +457,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "Medium Project",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -474,7 +474,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "Small Project",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -573,7 +573,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: mayBulkDistribution.timestamp,
     transaction: mayBulkDistribution.transaction,
-    reason: "Medium project",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
