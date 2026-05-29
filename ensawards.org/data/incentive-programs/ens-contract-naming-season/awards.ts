@@ -136,23 +136,6 @@ const ensContractNamingSeasonAwards: Award[] = [
     associatedIncentiveProgramSlug: "ens-contract-naming-season",
     awardedTo: {
       chainId: mainnet.id,
-      address: asNormalizedAddress("0x883753beab357a2c29f3766c6ad158e72a78ce51"),
-    },
-    awardedEntityMetadata: {
-      type: EntityMetadataTypes.Custom,
-      name: "Elimu",
-      link: new URL("https://elimu.ai/"),
-    },
-    price: 100,
-    awardedAt: marchBulkDistribution.timestamp,
-    transaction: marchBulkDistribution.transaction,
-    reason: "Small project",
-  },
-  {
-    type: AwardTypes.FinancialAward,
-    associatedIncentiveProgramSlug: "ens-contract-naming-season",
-    awardedTo: {
-      chainId: mainnet.id,
       address: asNormalizedAddress("0x843819e77947e2ca4f198dfa9c32cf49b598ef4b"),
     },
     price: 10,
@@ -541,6 +524,26 @@ const ensContractNamingSeasonAwards: Award[] = [
     transaction: mayBulkDistribution.transaction,
     reason: "Small project",
   },
+  // This award was distributed over two separate transactions.
+  // The first transaction Hash is: 0x97b1011ebe8253cc54876d79390b8927cfb72d0307b5c32009035f0fb656ff8f
+  // on chain with id: 1
+  // {
+  //   type: AwardTypes.FinancialAward,
+  //   associatedIncentiveProgramSlug: "ens-contract-naming-season",
+  //   awardedTo: {
+  //     chainId: mainnet.id,
+  //     address: asNormalizedAddress("0x883753beab357a2c29f3766c6ad158e72a78ce51"),
+  //   },
+  //   awardedEntityMetadata: {
+  //     type: EntityMetadataTypes.Custom,
+  //     name: "Elimu",
+  //     link: new URL("https://elimu.ai/"),
+  //   },
+  //   price: 100,
+  //   awardedAt: marchBulkDistribution.timestamp,
+  //   transaction: marchBulkDistribution.transaction,
+  //   reason: "Small project",
+  // },
   {
     type: AwardTypes.FinancialAward,
     associatedIncentiveProgramSlug: "ens-contract-naming-season",
@@ -553,10 +556,10 @@ const ensContractNamingSeasonAwards: Award[] = [
       name: "Elimu",
       link: new URL("https://elimu.ai/"),
     },
-    price: 100,
+    price: 200,
     awardedAt: mayBulkDistribution.timestamp,
     transaction: mayBulkDistribution.transaction,
-    reason: "Small project, named second time",
+    reason: "Small project, named twice",
   },
   {
     type: AwardTypes.FinancialAward,
