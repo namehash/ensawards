@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import CorkProject from "../../projects/cork";
 import { defineProtocol } from "../registry.ts";
 import { type DeFiProtocol, DeFiProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const CorkDeFi: DeFiProtocol = {
   socials: {
     twitter: new URL("https://x.com/Corkprotocol"),
     website: new URL("https://www.cork.tech"),
-    ens: "cork.eth",
+    ens: asInterpretedName("cork.eth"),
   },
   ogImagePath: "cork-defi/og.png",
   twitterOgImagePath: "cork-defi/twitter-og.png",

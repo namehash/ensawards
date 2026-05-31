@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying apps
 
+import { asInterpretedName } from "enssdk";
+
 import BlockscoutProject from "../../projects/blockscout";
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -16,7 +18,7 @@ const BlockscoutExplorer: App = {
   socials: {
     website: new URL("https://www.blockscout.com"),
     twitter: new URL("https://x.com/blockscout"),
-    ens: "blockscout.eth",
+    ens: asInterpretedName("blockscout.eth"),
   },
   icon: BlockscoutIcon,
   ogImagePath: "blockscout-explorer/og.png",

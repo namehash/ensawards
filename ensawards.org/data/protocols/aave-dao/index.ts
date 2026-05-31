@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import AaveProject from "../../projects/aave";
 import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const AaveDao: DAOProtocol = {
   socials: {
     website: new URL("https://aave.com"),
     twitter: new URL("https://x.com/aave"),
-    ens: "aave.eth",
+    ens: asInterpretedName("aave.eth"),
   },
   ogImagePath: "aave-dao/og.png",
   twitterOgImagePath: "aave-dao/twitter-og.png",

@@ -1,7 +1,7 @@
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@namehash/namehash-ui";
 import { useMemo, useState } from "react";
 
 import { ENSNamespaceIds } from "@ensnode/datasources";
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 import { RECORDS_PER_PAGE_DEFAULT, RegistrarActionsResponseCodes } from "@ensnode/ensnode-sdk";
 
 import {

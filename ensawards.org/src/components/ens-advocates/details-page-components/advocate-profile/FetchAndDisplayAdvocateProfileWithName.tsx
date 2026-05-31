@@ -1,6 +1,6 @@
-import type { Address, Name } from "enssdk";
+import { ASSUME_IMMUTABLE_QUERY, useRecords } from "@namehash/namehash-ui";
+import type { InterpretedName, NormalizedAddress } from "enssdk";
 
-import { ASSUME_IMMUTABLE_QUERY, useRecords } from "@ensnode/ensnode-react";
 import { type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";
@@ -10,8 +10,8 @@ import { EnsAdvocateProfileLoading } from "@/components/ens-advocates/details-pa
 const HeaderPanelTextRecords = ["avatar", "header"];
 
 export interface FetchAndDisplayAdvocateProfileWithNameProps {
-  address: Address;
-  name: Name;
+  address: NormalizedAddress;
+  name: InterpretedName;
 }
 
 //TODO: this name is way too long, but for now, I don't have any idea how to name it better

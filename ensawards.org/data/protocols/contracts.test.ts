@@ -1,10 +1,12 @@
 import { getChainName } from "@namehash/namehash-ui";
 import {
+  asInterpretedName,
   type ChainId,
   evmChainIdToCoinType,
   isInterpretedName,
   isNormalizedAddress,
   type NormalizedAddress,
+  reinterpretName,
   stringifyAccountId,
 } from "enssdk";
 import { isAddressEqual } from "viem";
@@ -53,7 +55,9 @@ const serializeEnsProfileForContract = (
     avatar: profile.avatar ? profile.avatar.href : null,
     audits: profile.audits ? JSON.stringify(profile.audits) : null,
     //TODO: to be honest I have no idea how such object could look like,
-    // as I couldn't find any examples, but I'll assume it's a stringified JSON for now
+    // as I couldn't find any examples, but I'll assume it's a stringified JSON for now.
+    // We want to be able to type this field in a more strict way in the future, once we have more clarity on its structure.
+    // See: https://github.com/namehash/ensnode/issues/2018
   } as const satisfies ResolverRecordsResponseBase["texts"];
 };
 
@@ -78,7 +82,8 @@ const testContractsCachedProfile = async (
     resolvedAddress !== null &&
       isAddressEqual(
         contractsCachedIdentity.contract.address,
-        resolvedAddress as NormalizedAddress, // Typecasting here is required due to `records.addresses` field type
+        resolvedAddress as NormalizedAddress, // Typecasting here is required due to `records.addresses` field type.
+        // We aim to optimize that in the future: https://github.com/namehash/ensnode/issues/2019
       ),
     `Contract named=${contractsCachedIdentity.name} has a different address than the cached one on ${getChainName(contractsCachedIdentity.contract.chain.id)} chain.`,
   ).toEqual(true);
@@ -114,9 +119,16 @@ const testContractsPrimaryName = async (contractsCachedIdentity: ContractIdentit
   );
 
   // If contract's resolutionStatus is ContractResolutionStatusIds.PrimaryNamed,
-  // expect response to match its cached name
+  // expect response to be non-null and match its cached name
   if (contractsCachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed) {
-    expect(name).toEqual(contractsCachedIdentity.name);
+    if (name === null) {
+      throw new Error(
+        `Primary named contract with address=${contractsCachedIdentity.contract.address} has no primary name on-chain.`,
+      );
+    }
+
+    const reinterpretedName = reinterpretName(asInterpretedName(name));
+    expect(reinterpretedName).toEqual(contractsCachedIdentity.name);
   }
 
   // For forward named and unnamed contracts expect the response value to be null
@@ -139,7 +151,7 @@ describe("CachedIdentity", () => {
         expect(
           contract.cachedIdentity.name.length > 0 &&
             isInterpretedName(contract.cachedIdentity.name),
-          `Name={${contract.cachedIdentity.name}} is empty or is not ENS interpreted`,
+          `Name={${contract.cachedIdentity.name}} is empty or is not a valid ENS interpreted name`,
         ).toEqual(true);
       }
     });

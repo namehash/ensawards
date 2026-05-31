@@ -3,6 +3,8 @@ import { type BenchmarkResult } from "data/benchmarks/types.ts";
 import { zeroAddress } from "viem";
 import { mainnet } from "viem/chains";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
 import { type App, type AppSlug, type AppType, AppTypes } from "../apps/types.ts";
 import {
   type BestPracticeApp,
@@ -52,12 +54,22 @@ export const createMockBestPractice = (overrides: {
     },
     sides: [],
   },
-  contributions: [{ from: { address: zeroAddress, chainId: mainnet.id }, lastUpdated: 0 }],
+  contributions: [
+    {
+      from: { address: zeroAddress, chainId: mainnet.id },
+      lastUpdated: parseTimestamp("1970-01-01T00:00:00.000Z"),
+    },
+  ],
 });
 
 export const createMockBenchmark = (result: BenchmarkResult): AppBenchmark => ({
   result,
-  contributions: [{ from: { address: zeroAddress, chainId: mainnet.id }, lastUpdated: 0 }],
+  contributions: [
+    {
+      from: { address: zeroAddress, chainId: mainnet.id },
+      lastUpdated: parseTimestamp("1970-01-01T00:00:00.000Z"),
+    },
+  ],
 });
 
 export const createMockApp = (overrides: {

@@ -7,12 +7,10 @@ import {
   ReferrerLeaderboardPageResponseCodes,
   type ReferrerLeaderboardPageRevShareCap,
 } from "@namehash/ens-referrals";
-import { useNow } from "@namehash/namehash-ui";
+import { createEnsNodeProviderOptions, EnsNodeProvider, useNow } from "@namehash/namehash-ui";
 import { fromUnixTime, intlFormat } from "date-fns";
 import { secondsInMinute } from "date-fns/constants";
 import { useEffect, useMemo, useRef, useState } from "react";
-
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import {
   LastUpdateTime,

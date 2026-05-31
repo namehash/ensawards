@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import UniswapProject from "../../projects/uniswap";
 import { defineProtocol } from "../registry.ts";
 import { type DAOProtocol, DAOProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const UniswapDao: DAOProtocol = {
   socials: {
     website: new URL("https://www.uniswapfoundation.org"),
     twitter: new URL("https://x.com/UniswapFND"),
-    ens: "uniswap.eth",
+    ens: asInterpretedName("uniswap.eth"),
   },
   ogImagePath: "uniswap-dao/og.png",
   twitterOgImagePath: "uniswap-dao/twitter-og.png",

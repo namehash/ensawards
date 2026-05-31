@@ -74,7 +74,7 @@ describe("App data", () => {
       if (app.socials.ens !== undefined) {
         expect(
           app.socials.ens.length > 0 && isInterpretedName(app.socials.ens),
-          `Name={${app.socials.ens}} is empty or is not ENS interpreted`,
+          `Name={${app.socials.ens}} is empty or is not a valid ENS interpreted name`,
         ).toEqual(true);
       }
     });

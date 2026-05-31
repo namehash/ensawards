@@ -10,6 +10,8 @@ import { SmartContractMetadata } from "@/components/atoms/SmartContractMetadata"
 import { breakLongWords } from "@/utils/textModifications";
 import { type ProtocolId } from "data/protocols/types.ts";
 import { getAllProtocolContracts } from "data/protocols/utils.ts";
+import { NameDisplay } from "@namehash/namehash-ui";
+import { beautifyInterpretedName } from "enssdk";
 
 export interface ContractCardProps {
   contract: Contract;
@@ -18,11 +20,17 @@ export interface ContractCardProps {
 const { contract }: ContractCardProps = Astro.props;
 
 // The fallback should never be used. Only introduced for type safety.
+// Apply beautification by hand to ensure correct display after breaking the name for mobile display.
 const ensNameForMobileDisplay =
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.PrimaryNamed ||
   contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.ForwardNamed
-    ? breakLongWords(contract.cachedIdentity.name, /(\.)/, 25)
+    ? breakLongWords(beautifyInterpretedName(contract.cachedIdentity.name), /(\.)/, 25)
     : ["unnamed contract"];
+
+const contractName =
+  contract.cachedIdentity.resolutionStatus === ContractResolutionStatusIds.Unnamed
+    ? undefined
+    : contract.cachedIdentity.name;
 
 const contractCodeNameForMobileDisplay = breakLongWords(
   contract.cachedIdentity.contract.codeName,
@@ -69,6 +77,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
     <ContractBadge
       client:load
       contractResolutionStatus={contract.cachedIdentity.resolutionStatus}
+      name={contractName}
     />
   </div>
   <div
@@ -119,7 +128,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
               target="_blank"
               rel="noreferrer"
               class="max-sm:hidden text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]">
-              {contract.cachedIdentity.name}
+              <NameDisplay name={contract.cachedIdentity.name} />
             </a>
             <EnsManagerAppLink
               client:load
@@ -130,7 +139,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
             />
           </div>
           <div class="sm:hidden flex flex-col justify-start items-start gap-0 max-sm:min-w-[105px]">
-            {ensNameForMobileDisplay.map((word, idx) => {
+            {ensNameForMobileDisplay.map((namePart, idx) => {
               const nameLinkHref = `https://app.enscribe.xyz/explore/${contract.cachedIdentity.contract.chain.id}/${encodeURIComponent(contract.cachedIdentity.name)}`;
               const nameLinkStyles =
                 "text-sm leading-[20px] font-medium text-blue-600 whitespace-nowrap hover:underline hover:underline-offset-[25%]";
@@ -142,7 +151,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
                     target="_blank"
                     rel="noreferrer"
                     class={nameLinkStyles}>
-                    {word}
+                    {namePart}
                   </a>
                 );
               }
@@ -154,7 +163,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
                     target="_blank"
                     rel="noreferrer"
                     class={nameLinkStyles}>
-                    {word}
+                    {namePart}
                   </a>
                   <EnsManagerAppLink
                     client:load
@@ -187,7 +196,6 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
           </p>
           <SmartContractMetadata
             client:load
-            name={contract.cachedIdentity.name}
             metadata={contract.cachedIdentity.profile}
           />
         </>
@@ -212,10 +220,7 @@ const getContractNameFieldWidth = (protocolId: ProtocolId): string => {
     <ContractBadge
       client:load
       contractResolutionStatus={contract.cachedIdentity.resolutionStatus}
-      name={contract.cachedIdentity.resolutionStatus ===
-      ContractResolutionStatusIds.Unnamed
-        ? undefined
-        : contract.cachedIdentity.name}
+      name={contractName}
     />
   </div>
 </div>

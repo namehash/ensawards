@@ -2,9 +2,8 @@ import {
   type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
 } from "@namehash/ens-referrals";
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@namehash/namehash-ui";
 import { useMemo, useState } from "react";
-
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import {
   type MockReferrersListState,
@@ -20,7 +19,7 @@ import { cn } from "@/utils/tailwindClassConcatenation.ts";
 const DEFAULT_STATE = MockReferrersListStates.Loaded;
 
 export function MockDisplayReferrerLeaderboardPage() {
-  const ensNodeReactProviderOptions = useMemo(
+  const ensNodeProviderOptions = useMemo(
     () =>
       createEnsNodeProviderOptions({
         url: getENSNodeUrl(),
@@ -33,7 +32,7 @@ export function MockDisplayReferrerLeaderboardPage() {
   );
 
   return (
-    <EnsNodeProvider options={ensNodeReactProviderOptions}>
+    <EnsNodeProvider options={ensNodeProviderOptions}>
       <TooltipProvider delayDuration={200} skipDelayDuration={0}>
         <div className="w-full max-w-[1216px] box-border h-fit flex flex-col flex-nowrap justify-start items-start gap-3 sm:gap-6">
           <div className="flex flex-col flex-nowrap justify-start items-start gap-2 sm:gap-4">

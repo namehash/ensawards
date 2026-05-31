@@ -1,6 +1,8 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying protocols
 
+import { asInterpretedName } from "enssdk";
+
 import UniswapProject from "../../projects/uniswap";
 import { defineProtocol } from "../registry.ts";
 import { type DeFiProtocol, DeFiProtocolIds, ProtocolTypes } from "../types.ts";
@@ -18,7 +20,7 @@ const UniswapDeFi: DeFiProtocol = {
   socials: {
     website: new URL("https://app.uniswap.org"),
     twitter: new URL("https://x.com/Uniswap"),
-    ens: "uniswap.eth",
+    ens: asInterpretedName("uniswap.eth"),
   },
   ogImagePath: "uniswap-defi/og.png",
   twitterOgImagePath: "uniswap-defi/twitter-og.png",

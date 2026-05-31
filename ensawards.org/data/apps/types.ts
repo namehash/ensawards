@@ -1,5 +1,5 @@
 import type { SvgIcon } from "data/shared/svg-icon.ts";
-import type { Name } from "enssdk";
+import type { InterpretedName } from "enssdk";
 
 import type { BestPracticeBenchmarks } from "../ens-best-practices/types.ts";
 import type { Project } from "../projects/types.ts";
@@ -35,7 +35,7 @@ export interface App {
   socials: {
     website: URL;
     twitter: URL;
-    ens?: Name;
+    ens?: InterpretedName;
   };
   /** The custom Open Graph image for the app.
    * Specified by the relative path from `/data/apps` to a custom Open Graph image.

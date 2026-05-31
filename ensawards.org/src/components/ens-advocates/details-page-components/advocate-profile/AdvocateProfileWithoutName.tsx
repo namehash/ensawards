@@ -5,7 +5,7 @@ import {
   getEnsManagerAddressDetailsUrl,
   useIsMobile,
 } from "@namehash/namehash-ui";
-import type { Address } from "enssdk";
+import type { NormalizedAddress } from "enssdk";
 
 import { getENSRootChainId } from "@ensnode/datasources";
 
@@ -14,7 +14,7 @@ import { DEFAULT_ENS_NAMESPACE } from "@/utils/namespace.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 
 interface AdvocateProfileWithoutNameProps {
-  address: Address;
+  address: NormalizedAddress;
 }
 
 export function AdvocateProfileWithoutName({ address }: AdvocateProfileWithoutNameProps) {

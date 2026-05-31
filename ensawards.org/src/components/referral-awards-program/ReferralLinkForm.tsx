@@ -1,9 +1,8 @@
 import { buildEnsReferralUrl } from "@namehash/ens-referrals";
 import { CopyButton, useIsMobile } from "@namehash/namehash-ui";
-import { type InterpretedName, normalizeName } from "enssdk";
+import { type InterpretedName, normalizeName, toNormalizedAddress } from "enssdk";
 import { CircleAlertIcon, Link2 as LinkIcon, RefreshCw as RefreshIcon } from "lucide-react";
 import React, { type FormEvent, useState } from "react";
-import { isAddress } from "viem";
 import * as Yup from "yup";
 
 import { FormButton } from "@/components/atoms/form-elements/FormButton.tsx";
@@ -89,10 +88,11 @@ export function ReferralLinkForm() {
     // Proceed with detailed validation if the initial one is successful
     const recipientInput = data[ENSAwardsReferralLinkFormFields.ReferralAwardRecipient];
 
-    // Check if the input is a valid address
-    if (isAddress(recipientInput, { strict: false })) {
-      // Interpret the input as an address to generate the referral link
-      setGeneratedLink(buildEnsReferralUrl(recipientInput).href);
+    // Validate and normalize the input, treating it as an address
+    try {
+      const normalizedAddress = toNormalizedAddress(recipientInput);
+
+      setGeneratedLink(buildEnsReferralUrl(normalizedAddress).href);
       setSuccessfulFormSubmit(true);
 
       // Reset validation errors on successful validation
@@ -100,13 +100,18 @@ export function ReferralLinkForm() {
 
       setIsLoading(false);
       return;
+    } catch (error) {
+      // If the input is not normalizable to an address, proceed with ENS name validation and resolution
+      // We fail silently here because the input might still be a valid ENS name.
+      // The broad user-facing error is handled in the normalizeName catch below.
     }
 
     // Check if the input is normalizable to an interpreted ENS name
-    let interpretedName: InterpretedName;
+    const rawRecipientName = recipientInput;
+    let recipientName: InterpretedName;
 
     try {
-      interpretedName = normalizeName(recipientInput);
+      recipientName = normalizeName(rawRecipientName);
     } catch (error) {
       // Display a generic message (ignore the details on purpose)
       setInputError("Invalid name or address");
@@ -114,9 +119,10 @@ export function ReferralLinkForm() {
       return;
     }
 
-    // The name was normalizable to `interpretedName` so proceed with resolution
+    // `rawRecipientName` was normalizable to a normalized name (which by definition is an `InterpretedName`)
+    // so proceed with resolution
     try {
-      const resolvedAddress = await resolveEthAddress(interpretedName);
+      const resolvedAddress = await resolveEthAddress(recipientName);
 
       if (resolvedAddress === null) {
         setInputError("No Ethereum Mainnet address configured for this name.");
@@ -124,6 +130,8 @@ export function ReferralLinkForm() {
         return;
       }
 
+      // All addresses returned by ENSNode APIs are guaranteed to always be `NormalizedAddress`,
+      // so there is no need to call `toNormalizedAddress` here
       setGeneratedLink(buildEnsReferralUrl(resolvedAddress).href);
 
       setSuccessfulFormSubmit(true);
@@ -161,7 +169,7 @@ export function ReferralLinkForm() {
   return (
     <div
       className={cn(
-        "w-full min-w-1/2 max-w-[600px] h-fit gap-12 p-5 pt-8 sm:p-8 box-border bg-neutral-50 rounded-2xl",
+        "w-full max-w-[calc(100vw-40px)] sm:max-w-[600px] h-fit gap-12 p-5 pt-8 sm:p-8 box-border bg-neutral-50 rounded-2xl",
         verticalFlex,
       )}
     >
