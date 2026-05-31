@@ -4,15 +4,15 @@ import { type Award, type AwardDistribution, AwardTypes } from "data/awards/type
 import { EntityMetadataTypes } from "data/entity-metadata/types";
 import CorkDeFi from "data/protocols/cork-defi";
 import GivethDeFi from "data/protocols/giveth-defi";
+import Kleros from "data/protocols/kleros-dao";
 import LiquityDeFi from "data/protocols/liquity-defi";
 import NounsDao from "data/protocols/nouns-dao";
+import SSVNetworkDao from "data/protocols/ssvnetwork-dao";
+import Superfluid from "data/protocols/superfluid-defi";
 import { asNormalizedAddress } from "enssdk";
 import { mainnet } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
-import Kleros from "data/protocols/kleros-dao";
-import SSVNetworkDao from "data/protocols/ssvnetwork-dao";
-import Superfluid from "data/protocols/superfluid-defi";
 
 const marchBulkDistribution = {
   timestamp: parseTimestamp("2026-03-06T11:21:23Z"),
@@ -733,7 +733,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     awardedAt: mayBulkDistribution.timestamp,
     transaction: mayBulkDistribution.transaction,
     reason: "Individual",
-  }
+  },
 ];
 
 defineAwards(ensContractNamingSeasonAwards);
