@@ -12,7 +12,6 @@ import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import KlerosDao from ".";
 
 const contracts: Contract[] = [
-  // Template entry — replace the placeholder address/codeName with a real Kleros contract.
   {
     protocol: KlerosDao,
     cachedIdentity: {
@@ -121,22 +120,7 @@ const contracts: Contract[] = [
   {
     protocol: KlerosDao,
     cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
-      contract: {
-        address: asNormalizedAddress("0x897d83a7d5f23555efa15e1be297d5503522cba3"),
-        chain: mainnet,
-        codeName: "Kleros",
-      },
-      name: asInterpretedName("chainlink-vrf.deployd.kleroslabs.eth"),
-    },
-    contributions: [
-      { from: contributors.nischal, lastUpdated: parseTimestamp("2026-05-29T00:00:00.000Z") },
-    ],
-  },
-  {
-    protocol: KlerosDao,
-    cachedIdentity: {
-      resolutionStatus: ContractResolutionStatusIds.ForwardNamed,
+      resolutionStatus: ContractResolutionStatusIds.PrimaryNamed,
       contract: {
         address: asNormalizedAddress("0x897d83a7d5f23555efa15e1be297d5503522cba3"),
         chain: arbitrum,

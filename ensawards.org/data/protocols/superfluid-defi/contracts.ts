@@ -1,7 +1,7 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice on adding and modifying protocol's contracts
 
 import { asInterpretedName, asNormalizedAddress } from "enssdk";
-import { base, mainnet } from "viem/chains";
+import { base } from "viem/chains";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
@@ -12,7 +12,6 @@ import { ContractResolutionStatusIds } from "../contracts-types.ts";
 import SuperfluidDeFi from ".";
 
 const contracts: Contract[] = [
-  // Template entry — replace the placeholder address/codeName with a real Superfluid contract.
   {
     protocol: SuperfluidDeFi,
     cachedIdentity: {
@@ -283,7 +282,6 @@ const contracts: Contract[] = [
       { from: contributors.nischal, lastUpdated: parseTimestamp("2026-05-29T00:00:00.000Z") },
     ],
   },
-  
 ];
 
 defineContracts(contracts);
