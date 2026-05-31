@@ -84,7 +84,7 @@
     "rules": {
       "awardModel": "rev-share-cap",
       "awardPool": { "currency": "USDC", "amount": "20000000000" },
-      "minBaseRevenueContribution": { "currency": "USDC", "amount": "2000000000" },
+      "minBaseRevenueContribution": { "currency": "USDC", "amount": "100000000" },
       "baseAnnualRevenueContribution": { "currency": "USDC", "amount": "5000000" },
       "maxBaseRevenueShare": 0.5,
       "startTime": 1780272000,
