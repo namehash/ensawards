@@ -69,7 +69,13 @@
       },
       "rulesUrl": "https://ensawards.org/ens-referral-program/editions/2026-05/rules",
       "areAwardsDistributed": false,
-      "adminActions": []
+      "adminActions": [
+        {
+          "actionType": "Disqualification",
+          "referrer": "0x98f483319f95804ddd25b83b3290e49fed708892",
+          "reason": "Disqualified for May 2026 due to violation of rule 1 of the Code of Conduct. Insufficient evidence that most referrals were not self-referrals."
+        }
+      ]
     }
   },
   {
