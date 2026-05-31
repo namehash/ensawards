@@ -103,9 +103,10 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
     answer: (
       <p className={textStyles}>
         You earn up to a 50% revenue share on every .eth name registration and renewal attributed to
-        you. You must generate at least $2,000 in &quot;base revenue contribution&quot; within an
-        edition to qualify for awards. In other words, the minimum award distribution for current
-        editions is $1,000. Awards are paid in USDC within 15 days of the edition closing.
+        you. As of June 2026, you must generate at least $2,000 in &quot;base revenue
+        contribution&quot; within an edition to qualify for awards. In other words, as of June 2026,
+        the minimum possible award distribution to a referrer for an edition is $1,000. Awards are
+        paid in USDC within 15 days of the edition closing.
       </p>
     ),
   },
