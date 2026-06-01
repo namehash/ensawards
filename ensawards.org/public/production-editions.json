@@ -69,6 +69,32 @@
       },
       "rulesUrl": "https://ensawards.org/ens-referral-program/editions/2026-05/rules",
       "areAwardsDistributed": false,
+      "adminActions": [
+        {
+          "actionType": "Disqualification",
+          "referrer": "0x98f483319f95804ddd25b83b3290e49fed708892",
+          "reason": "Disqualified for May 2026 due to violation of rule 1 of the Code of Conduct. Insufficient evidence that most referrals were not self-referrals."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "2026-06",
+    "displayName": "June 2026",
+    "rules": {
+      "awardModel": "rev-share-cap",
+      "awardPool": { "currency": "USDC", "amount": "20000000000" },
+      "minBaseRevenueContribution": { "currency": "USDC", "amount": "100000000" },
+      "baseAnnualRevenueContribution": { "currency": "USDC", "amount": "5000000" },
+      "maxBaseRevenueShare": 0.5,
+      "startTime": 1780272000,
+      "endTime": 1782863999,
+      "subregistryId": {
+        "chainId": 1,
+        "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
+      },
+      "rulesUrl": "https://ensawards.org/ens-referral-program/editions/2026-06/rules",
+      "areAwardsDistributed": false,
       "adminActions": []
     }
   }

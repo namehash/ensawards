@@ -143,7 +143,7 @@ const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
   },
   {
     id: faqIds.ThresholdNotAchieved,
-    question: "What happens if I don't hit the $100 threshold?",
+    question: "What happens if I don't hit the minimum revenue contribution threshold?",
     answer: (
       <p className={textStyles}>
         You don't qualify for awards in that edition. But your referral activity is a strong signal.
