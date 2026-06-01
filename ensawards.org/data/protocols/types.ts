@@ -11,6 +11,7 @@ export const DAOProtocolIds = {
   AaveDao: "protocol-aave-dao",
   TaikoDao: "protocol-taiko-dao",
   SSVNetworkDao: "protocol-ssvnetwork-dao",
+  KlerosDao: "protocol-kleros-dao",
 } as const;
 
 /**
@@ -24,6 +25,7 @@ export const DeFiProtocolIds = {
   Uniswap: "protocol-uniswap-defi",
   Cork: "protocol-cork-defi",
   Giveth: "protocol-giveth-defi",
+  Superfluid: "protocol-superfluid-defi",
 } as const;
 
 /**

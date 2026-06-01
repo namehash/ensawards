@@ -4,8 +4,11 @@ import { type Award, type AwardDistribution, AwardTypes } from "data/awards/type
 import { EntityMetadataTypes } from "data/entity-metadata/types";
 import CorkDeFi from "data/protocols/cork-defi";
 import GivethDeFi from "data/protocols/giveth-defi";
+import Kleros from "data/protocols/kleros-dao";
 import LiquityDeFi from "data/protocols/liquity-defi";
 import NounsDao from "data/protocols/nouns-dao";
+import SSVNetworkDao from "data/protocols/ssvnetwork-dao";
+import Superfluid from "data/protocols/superfluid-defi";
 import { asNormalizedAddress } from "enssdk";
 import { mainnet } from "viem/chains";
 
@@ -16,6 +19,14 @@ const marchBulkDistribution = {
   transaction: {
     chainId: mainnet.id,
     transactionHash: "0x97b1011ebe8253cc54876d79390b8927cfb72d0307b5c32009035f0fb656ff8f",
+  },
+} as const satisfies AwardDistribution;
+
+const mayBulkDistribution = {
+  timestamp: parseTimestamp("2026-05-27T08:13:47Z"),
+  transaction: {
+    chainId: mainnet.id,
+    transactionHash: "0x3e7eb84d762df97d25d037278e1afc5b6fdc60a99632dd0fc13639bbd6dc7019",
   },
 } as const satisfies AwardDistribution;
 
@@ -34,7 +45,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -50,7 +61,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -66,7 +77,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -82,7 +93,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -99,7 +110,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -118,19 +129,7 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       transactionHash: "0xd43817d37e0db75a9f488959b8b839d2adde174b4ca0c80e9f5d20f8bbda122c",
     },
-    reason: "TODO: Define award reason",
-  },
-  {
-    type: AwardTypes.FinancialAward,
-    associatedIncentiveProgramSlug: "ens-contract-naming-season",
-    awardedTo: {
-      chainId: mainnet.id,
-      address: asNormalizedAddress("0x883753beab357a2c29f3766c6ad158e72a78ce51"),
-    },
-    price: 100,
-    awardedAt: marchBulkDistribution.timestamp,
-    transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Custom integration",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -142,7 +141,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -154,7 +153,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -166,7 +165,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -175,10 +174,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0x03abd529e8af2de9ed48cd92e57aa7b0c1b797dc"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Bittrees",
+      link: new URL("https://bittrees.org/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -190,7 +194,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -202,7 +206,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -211,10 +215,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0xeb7fa4b15edbd75eb3c8d62e7f7bf8c059e97fe1"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "ENSWheel",
+      link: new URL("https://x.com/enswheel"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -226,7 +235,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -238,7 +247,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -250,7 +259,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -262,7 +271,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -274,7 +283,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -286,7 +295,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -295,10 +304,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0xda064c4567fad2c9da7b6dd08b5c2b2607960340"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "SimpleX Network",
+      link: new URL("https://simplex.chat/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -310,7 +324,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -322,7 +336,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -331,10 +345,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0xf1aa941d56041d47a9a18e99609a047707fe96c7"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "EthereumPhunks",
+      link: new URL("https://ethereumphunks.com/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -346,7 +365,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -358,7 +377,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -370,7 +389,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -382,7 +401,7 @@ const ensContractNamingSeasonAwards: Award[] = [
     price: 10,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Individual",
   },
   // This award was distributed over two separate transactions.
   // The second transaction Hash is: 0x526e83bce85a6921234b1f0d3921756ba8728c8f938d1b1241d70acee3550a8f
@@ -396,10 +415,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0x2117bf88b4cb0186eaa87500a045fc998290e42a"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Gramajo",
+      link: new URL("https://0xgramajo.xyz/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Contributions and collaborations",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -408,10 +432,15 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0xb2eb328c26de2d0a7f68198aa7813b287b3d06b4"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Dev Tools Guild",
+      link: new URL("https://devtoolsguild.xyz/"),
+    },
     price: 500,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Medium project",
   },
   {
     type: AwardTypes.FinancialAward,
@@ -420,10 +449,290 @@ const ensContractNamingSeasonAwards: Award[] = [
       chainId: mainnet.id,
       address: asNormalizedAddress("0x546457bbddf5e09929399768ab5a9d588cb0334d"),
     },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Proof Of Groove",
+      link: new URL("https://www.proofofgroove.xyz/"),
+    },
     price: 100,
     awardedAt: marchBulkDistribution.timestamp,
     transaction: marchBulkDistribution.transaction,
-    reason: "TODO: Define award reason",
+    reason: "Small project",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0xac808840f02c47c05507f48165d2222ff28ef4e1"),
+    },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Protocol,
+      protocol: Superfluid,
+    },
+    price: 500,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Medium project",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x86ead908fb5d6f900ff109c9e26f79300f99271a"),
+    },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Protocol,
+      protocol: Kleros,
+    },
+    price: 500,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Medium project",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0xb35096b074fdb9bbac63e3adae0bbde512b2e6b6"),
+    },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Protocol,
+      protocol: SSVNetworkDao,
+    },
+    price: 1000,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Large project",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x8884ae2d5a381833565a8aae6bd38bc3e4520412"),
+    },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "ENSFall",
+      link: new URL("https://ensfall.xyz/"),
+    },
+    price: 100,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Small project",
+  },
+  // This award was distributed over two separate transactions.
+  // The first transaction Hash is: 0x97b1011ebe8253cc54876d79390b8927cfb72d0307b5c32009035f0fb656ff8f
+  // on chain with id: 1
+  // {
+  //   type: AwardTypes.FinancialAward,
+  //   associatedIncentiveProgramSlug: "ens-contract-naming-season",
+  //   awardedTo: {
+  //     chainId: mainnet.id,
+  //     address: asNormalizedAddress("0x883753beab357a2c29f3766c6ad158e72a78ce51"),
+  //   },
+  //   awardedEntityMetadata: {
+  //     type: EntityMetadataTypes.Custom,
+  //     name: "Elimu",
+  //     link: new URL("https://elimu.ai/"),
+  //   },
+  //   price: 100,
+  //   awardedAt: marchBulkDistribution.timestamp,
+  //   transaction: marchBulkDistribution.transaction,
+  //   reason: "Small project",
+  // },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x883753beab357a2c29f3766c6ad158e72a78ce51"),
+    },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Elimu",
+      link: new URL("https://elimu.ai/"),
+    },
+    price: 200,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Small project, named twice",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0xd54641d2f5336a260a3635a7c834c3af692c85b1"),
+    },
+    awardedEntityMetadata: {
+      type: EntityMetadataTypes.Custom,
+      name: "Liaison Capital",
+      link: new URL("https://opensea.io/collection/liaisoncapital"),
+    },
+    price: 100,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Small project",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x02b60f47eecadc7b34591ffb9add33e3014b3c83"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x8562e4199743671322652dd7955920d7bb0fd372"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x07f62f48709b2c427e54e102531d07d9e21ad99e"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x733455e2f63f5b1c812a00a93da46d504f7b52a4"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0xe2eedd9ab6522f0fbef92e3483208708a2e3352f"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x89c828be2e60624710423f1e6eaff34f7d4c8ae3"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0xf462e5dac4ee5ee9d6bfd5a5c633a5104612fd59"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x05592957fb56bd230f8fa41515ed902a1d3e94d0"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x5ab137b17c3584a9debba742964f09f84a4a5a7c"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0xb19918e6fcd9a5373a1e967aaa38c24f7c667f3b"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x69eab63384c37d44a18401fd765e4c54df2b4185"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x926a19d7429f9ad47b2cb2b0e5c46a9e69f05a3e"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
+  },
+  {
+    type: AwardTypes.FinancialAward,
+    associatedIncentiveProgramSlug: "ens-contract-naming-season",
+    awardedTo: {
+      chainId: mainnet.id,
+      address: asNormalizedAddress("0x5560650bf336dafc2aab23e6c2bcc78028877725"),
+    },
+    price: 10,
+    awardedAt: mayBulkDistribution.timestamp,
+    transaction: mayBulkDistribution.transaction,
+    reason: "Individual",
   },
 ];
 
