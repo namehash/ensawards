@@ -59,6 +59,10 @@ const benchmarks: BestPracticeBenchmarks = {
       ),
     } as const satisfies AcceptanceTestBenchmark,
   },
+  "use-latest-universal-resolver": {
+    // TODO: Add benchmarks for the "Use latest Universal Resolver" best practice
+    "correctly-resolve-ensv2-test-name-address": undefined,
+  },
 } as const satisfies BestPracticeBenchmarks;
 
 defineAppBenchmarks(WalletChanWallet, benchmarks);
