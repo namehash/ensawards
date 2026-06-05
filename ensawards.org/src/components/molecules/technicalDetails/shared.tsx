@@ -19,7 +19,7 @@ export const DesiredOutcome = ({ bestPractice }: { bestPractice: BestPractice })
         "text-xl w-full flex flex-row items-center justify-between gap-3",
       )}
     >
-      Benefit from using ENS
+      {bestPractice.technicalDetails.benefitFromUsingEnsTitle ?? "Benefit from using ENS"}
       <EnsIcon width={28} height={28} className="text-[#0080BC]" />
     </h2>
     {bestPractice.technicalDetails.benefitFromUsingEns}

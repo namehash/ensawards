@@ -25,6 +25,8 @@ export type BestPracticeSlug = string;
 export interface BestPracticeTechnicalDetails {
   useCaseSummary: JSX.Element;
   benefitFromUsingEns: JSX.Element;
+  /** Title for the benefit card. Defaults to "Benefit from using ENS" when omitted. */
+  benefitFromUsingEnsTitle?: string;
   implementationRecommendations: JSX.Element;
   acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
 }

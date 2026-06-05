@@ -15,8 +15,9 @@ const useLatestUniversalResolver: BestPracticeApp = {
   type: BestPracticeTypes.App,
   id: "use-latest-universal-resolver",
   bestPracticeSlug: "use-latest-universal-resolver",
-  name: "Use latest Universal Resolver",
-  description: "Adopt the latest Universal Resolver to make the transition to ENSv2 seamless.",
+  name: "Use the latest Universal Resolver",
+  description:
+    "Keep your ENS name resolutions correct under ENSv2 by adopting the latest Universal Resolver.",
   category: ENSv2ReadinessCategory,
   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
   technicalDetails: technicalDetails,

@@ -12,23 +12,124 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-// TODO: Appreciate any advice about the content :)
-const implementationRecommendations = (
-  <div>
+const useCaseSummary = (
+  <div className="flex flex-col gap-2">
     <p>
-      To ensure your application works seamlessly with ENSv2, you'll need to make a few key updates.
-      Luckily, for most applications they are as simple as updating to the latest version of a{" "}
+      ENSv2 doesn't replace ENSv1 — the two coexist onchain at the same time. For your app, that
+      means the way ENS names resolve is changing, and apps that don't keep up will silently return
+      stale or incorrect results.
+    </p>
+    <p>
+      The ENS team has deployed a new, stable{" "}
       <a
         className={bestPracticeTechnicalDetailsLinkStyles}
-        href="https://docs.ens.domains/resolvers/universal/#implementation-guide"
+        href="https://docs.ens.domains/resolvers/universal"
         target="_blank"
         rel="noopener noreferrer"
       >
-        supported library
-      </a>
-      . Here are some of the most popular ones that have already added support for ENSv2:
+        Universal Resolver
+      </a>{" "}
+      — an upgradeable proxy contract owned by the ENS DAO that acts as the canonical entry point
+      for resolving any ENS name. Point your resolution at this proxy address instead of hardcoding
+      a specific implementation. Because the ENS DAO controls the proxy, it can upgrade it to the
+      new ENSv2-compatible Universal Resolver after ENSv2 launches — so apps pointed at the proxy
+      stay correct through the transition with no code changes, while apps still pinned to the old
+      implementation will silently fall behind.
     </p>
+    <p>
+      For the ENS team's full guidance on preparing your app for ENSv2, see their{" "}
+      <a
+        className={bestPracticeTechnicalDetailsLinkStyles}
+        href="https://docs.ens.domains/web/ensv2-readiness/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ENSv2 readiness guide
+      </a>
+      .
+    </p>
+    <p>
+      <strong>Beyond resolution — the Omnigraph also handles your indexed ENS data.</strong>
+    </p>
+    <p>
+      Resolution is only half of ENSv2 readiness. The other half is the indexed ENS data your app
+      reads — the names an address owns, profiles, histories, and search. Most apps get that today
+      from the{" "}
+      <a
+        className={bestPracticeTechnicalDetailsLinkStyles}
+        href="https://ensnode.io/docs/integrate/ens-subgraph/key-limitations"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ENS Subgraph
+      </a>
+      , which is ENSv1-only and single-chain: it has no concept of ENSv2, and already can't see
+      Basenames (.base.eth), Lineanames (.linea.eth), or 3DNS (.box) names. The moment ENSv2
+      launches, it stops being a reliable view of ENS.
+    </p>
+    <p>
+      The{" "}
+      <a
+        className={bestPracticeTechnicalDetailsLinkStyles}
+        href="https://ensnode.io/docs/integrate/omnigraph"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ENS Omnigraph API
+      </a>{" "}
+      covers both halves in one integration — a single typed GraphQL API over both ENSv1 and ENSv2,
+      across every ENS chain. Write your query once and get correct, normalized, ready-to-render
+      results regardless of protocol version or chain, with the protocol's footguns (name
+      normalization, stable IDs, the effective resolver, multichain primary names) handled for you.
+      Adopting it for resolution makes the rest of your app ENSv2-ready too.
+    </p>
+  </div>
+);
+
+const benefitFromUsingEnsTitle = "Why it's necessary to use the new Universal Resolver";
+const benefitFromUsingEns = (
+  <p>
+    Point your app at the stable Universal Resolver once, and your ENS name resolution keeps
+    returning correct results straight through the ENSv2 launch — no migration scramble, no broken
+    names, and no code changes when the upgrade lands.
+  </p>
+);
+
+const implementationRecommendations = (
+  <div className="flex flex-col gap-2">
+    <p>There are two ways to satisfy this best practice. Pick whichever fits your app.</p>
     <br />
+    <p>
+      <strong>1. Recommended — resolve through the ENS Omnigraph API.</strong>
+    </p>
+    <p>
+      Instead of wiring up resolution yourself, route your ENS data through ENSNode's{" "}
+      <a
+        className={bestPracticeTechnicalDetailsLinkStyles}
+        href="https://ensnode.io/docs/integrate/omnigraph"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ENS Omnigraph API
+      </a>{" "}
+      — a single typed GraphQL API over both ENSv1 and ENSv2, on every ENS chain. It performs
+      protocol-correct resolution for you using the latest Universal Resolver under the hood
+      (including the CCIP-Read offchain lookups), so your app returns the right answer by default —
+      and resolutions for indexed names run an order of magnitude faster thanks to{" "}
+      <a
+        className={bestPracticeTechnicalDetailsLinkStyles}
+        href="https://ensnode.io/docs/integrate/omnigraph/protocol-acceleration"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Protocol Acceleration
+      </a>
+      .
+    </p>
+    <p>
+      The same integration also handles the indexed-data half of ENSv2 readiness — the part the
+      legacy ENS Subgraph can't, because it goes stale the moment ENSv2 launches. Drop it in with:
+    </p>
     <ul className="list-disc pl-5">
       <li>
         <a
@@ -39,8 +140,7 @@ const implementationRecommendations = (
         >
           enssdk
         </a>{" "}
-        (v1.14.0+)
-        {/* TODO: Appreciate advice if I remember the version where Matt introduced ensv2 support correctly */}
+        — typed TypeScript client
       </li>
       <li>
         <a
@@ -51,9 +151,18 @@ const implementationRecommendations = (
         >
           enskit
         </a>{" "}
-        (v1.14.0+)
-        {/* TODO: Appreciate advice if I remember the version where Matt introduced ensv2 support correctly */}
+        — React components and hooks
       </li>
+    </ul>
+    <br />
+    <p>
+      <strong>2. Minimal — point your resolution at the latest Universal Resolver.</strong>
+    </p>
+    <p>
+      If your app resolves names directly via viem or wagmi, updating to a version that targets the
+      latest Universal Resolver is often all you need:
+    </p>
+    <ul className="list-disc pl-5">
       <li>
         <a
           className={bestPracticeTechnicalDetailsLinkStyles}
@@ -61,76 +170,31 @@ const implementationRecommendations = (
           target="_blank"
           rel="noopener noreferrer"
         >
-          viem
+          viem (v2.35.0+)
         </a>{" "}
-        (v2.35.0+)
+        — upgrade to this version.
       </li>
       <li>
+        wagmi — pin{" "}
         <a
           className={bestPracticeTechnicalDetailsLinkStyles}
-          href="https://github.com/ensdomains/ensjs/releases/tag/%40ensdomains%2Fensjs%404.2.3"
+          href="https://github.com/wevm/viem/blob/main/src/CHANGELOG.md#2350"
           target="_blank"
           rel="noopener noreferrer"
         >
-          ENSjs
+          viem (v2.35.0+)
         </a>{" "}
-        (v4.2.3+)
+        yourself. wagmi accepts any viem 2.x, so upgrading wagmi alone won't pull in the new
+        Universal Resolver.
       </li>
       <li>
-        <a
-          className={bestPracticeTechnicalDetailsLinkStyles}
-          href="https://web3py.readthedocs.io/en/stable/release_notes.html#web3-py-v7-16-0-2026-05-01"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          web3.py
-        </a>{" "}
-        (v7.16.0+)
+        custom — resolve records from the new Universal Resolver proxy (
+        <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm">
+          0xeeeeeeee14d718c2b47d9923deab1335e144eeee
+        </span>
+        ) instead of an individual implementation.
       </li>
     </ul>
-    <br />
-    {/* TODO: Should we also mention our other integration options here? */}
-    <p>
-      If you want to dive deeper into the technical details and interact with the universal resolver
-      directly, you can have a look at the{" "}
-      <a
-        className={bestPracticeTechnicalDetailsLinkStyles}
-        href="https://docs.ens.domains/resolvers/universal/#implementation-guide"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        official ENS documentation
-      </a>
-      .
-    </p>
-  </div>
-);
-
-const benefitFromUsingEns = (
-  <p>
-    Adopting the latest universal resolver will allow your application to correctly resolve and look
-    up ENSv2 names across multiple chains.
-  </p>
-);
-
-const useCaseSummary = (
-  <div>
-    <p>
-      For ENSv2, there is a{" "}
-      <a
-        className={bestPracticeTechnicalDetailsLinkStyles}
-        href="https://docs.ens.domains/resolvers/universal"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        new Universal Resolver
-      </a>{" "}
-      that acts as the canonical entry point for resolving ENS names.
-    </p>
-    <p>
-      Your application needs to use it in order to be ready for ENSv2. Its address won't change in
-      the future if its implementation is changed.
-    </p>
   </div>
 );
 
@@ -139,22 +203,24 @@ const acceptanceTest1 = {
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
-        To test if an application uses the latest Universal Resolver, try resolving the address for{" "}
+        To check whether an application uses the latest Universal Resolver, try resolving the
+        address for{" "}
         <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm">
           ur.integration-tests.eth
         </span>
-        . It should return
+        . It should return{" "}
         <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm">
           0x2222222222222222222222222222222222222222
         </span>
         .
       </p>
       <p>
-        If it returns
+        If it returns{" "}
         <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm">
           0x1111111111111111111111111111111111111111
         </span>{" "}
-        instead, you're still using the old resolver and should update your app.
+        instead, or fails to resolve the name, the app is still using the old resolver and should
+        update.
       </p>
     </div>
   ),
@@ -189,6 +255,7 @@ const acceptanceTest1 = {
 const technicalDetails = {
   useCaseSummary,
   benefitFromUsingEns,
+  benefitFromUsingEnsTitle,
   implementationRecommendations,
   acceptanceTests: [acceptanceTest1],
 } as const satisfies BestPracticeTechnicalDetails;

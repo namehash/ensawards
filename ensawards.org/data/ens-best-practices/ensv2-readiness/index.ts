@@ -9,7 +9,8 @@ const ENSv2ReadinessCategory: BestPracticeCategory = {
   id: "ensv2-readiness",
   categorySlug: "ensv2-readiness",
   name: "ENSv2 Readiness",
-  description: "Ensure your project is ready for the next generation of ENS.",
+  description:
+    "Be ready for ENSv2 — keep resolving and reading ENS data correctly through the upgrade and beyond.",
   status: CategoryStatuses.Active,
 };
 
