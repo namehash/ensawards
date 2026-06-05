@@ -15,6 +15,7 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 import namedSmartContractsOnMainnetProofImage from "./named-smart-contracts-on-mainnet-proof.png";
+import useLatestUniversalResolverProofImage from "./use-latest-universal-resolver-proof.png";
 
 const benchmarks: BestPracticeBenchmarks = {
   "display-named-smart-contracts-mainnet": {
@@ -60,8 +61,25 @@ const benchmarks: BestPracticeBenchmarks = {
     } as const satisfies AcceptanceTestBenchmark,
   },
   "use-latest-universal-resolver": {
-    // TODO: Add benchmarks for the "Use latest Universal Resolver" best practice
-    "correctly-resolve-ensv2-test-name-address": undefined,
+    "correctly-resolve-ensv2-test-name-address": {
+      result: BenchmarkResults.Fail,
+      contributions: [
+        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T16:07:00Z") },
+      ],
+      notes: (
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">
+            The resolution was tested using the &quot;send&quot; flow. The app failed to resolve the
+            address for the test name, which we interpret as a failure.
+          </p>
+          <img
+            alt="WalletChan completely failed to resolve the test name"
+            src={useLatestUniversalResolverProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
+        </div>
+      ),
+    },
   },
 } as const satisfies BestPracticeBenchmarks;
 

@@ -1,4 +1,5 @@
 import type { AcceptanceTest, AcceptanceTestBenchmarkPass } from "data/acceptance-tests/types";
+import useLatestUniversalResolverExamplePassImage from "data/apps/metamask-wallet/benchmarks/use-latest-universal-resolver-proof.png";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
@@ -16,7 +17,7 @@ const implementationRecommendations = (
   <div>
     <p>
       To ensure your application works seamlessly with ENSv2, you'll need to make a few key updates.
-      Luckily, for the most applications they are as simple as updating to the latest version of a{" "}
+      Luckily, for most applications they are as simple as updating to the latest version of a{" "}
       <a
         className={bestPracticeTechnicalDetailsLinkStyles}
         href="https://docs.ens.domains/resolvers/universal/#implementation-guide"
@@ -90,8 +91,8 @@ const implementationRecommendations = (
     <br />
     {/* TODO: Should we also mention our other integration options here? */}
     <p>
-      If you want to dive deeper into the technical details, and interact with the universal
-      resolver directly you can have a look at the{" "}
+      If you want to dive deeper into the technical details and interact with the universal resolver
+      directly, you can have a look at the{" "}
       <a
         className={bestPracticeTechnicalDetailsLinkStyles}
         href="https://docs.ens.domains/resolvers/universal/#implementation-guide"
@@ -160,22 +161,26 @@ const acceptanceTest1 = {
   examplePass: {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T15:04:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T15:34:00Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          NOT READY{" "}
-          <a className={bestPracticeTechnicalDetailsLinkStyles} href="/app/walletchan-wallet">
-            NOT READY
+          Below you can see how{" "}
+          <a className={bestPracticeTechnicalDetailsLinkStyles} href="/app/metamask-wallet">
+            MetaMask
           </a>{" "}
-          NOT READY.
+          correctly resolves the{" "}
+          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm">
+            ur.integration-tests.eth
+          </span>{" "}
+          test name to the address of the new Universal Resolver.
         </p>
-        {/* <img
-          alt="WalletChan displaying a smart contract ENS name next to its address during interaction"
-          src={mainnetInteractionsDisplayNamedSmartContractsImage.src}
+        <img
+          alt="MetaMask Wallet is using the latest Universal Resolver"
+          src={useLatestUniversalResolverExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
-        /> */}
+        />
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkPass,

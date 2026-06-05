@@ -11,6 +11,10 @@ import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
+import { cn } from "@/utils/tailwindClassConcatenation";
+
+import useLatestUniversalResolverProofImage from "./use-latest-universal-resolver-proof.png";
+
 const benchmarks = {
   // "recognize-all-ens-names": {
   //   result: BenchmarkResults.Pass,
@@ -47,8 +51,26 @@ const benchmarks = {
     } as const satisfies AcceptanceTestBenchmark,
   },
   "use-latest-universal-resolver": {
-    // TODO: Add benchmarks for the "Use latest Universal Resolver" best practice
-    "correctly-resolve-ensv2-test-name-address": undefined,
+    "correctly-resolve-ensv2-test-name-address": {
+      result: BenchmarkResults.Pass,
+      contributions: [
+        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T15:34:00Z") },
+      ],
+      notes: (
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">
+            The resolution was tested using the &quot;send&quot; flow. The displayed address is that
+            of the latest Universal Resolver. That means MetaMask Wallet is using the latest
+            resolver, making a big step towards ENSv2 readiness.
+          </p>
+          <img
+            alt="MetaMask Wallet is using the latest Universal Resolver"
+            src={useLatestUniversalResolverProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
+        </div>
+      ),
+    },
   },
 } as const satisfies BestPracticeBenchmarks;
 
