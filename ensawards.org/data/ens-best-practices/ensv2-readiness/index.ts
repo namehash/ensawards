@@ -12,6 +12,7 @@ const ENSv2ReadinessCategory: BestPracticeCategory = {
   description:
     "Be ready for ENSv2 — keep resolving and reading ENS data correctly through the upgrade and beyond.",
   status: CategoryStatuses.Active,
+  order: 0,
 };
 
 defineBestPracticeCategory(ENSv2ReadinessCategory);

@@ -62,7 +62,7 @@ const benchmarks = {
       ),
     } as const satisfies AcceptanceTestBenchmark,
   },
-  "use-latest-universal-resolver": {
+  "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
       result: BenchmarkResults.Fail,
       contributions: [

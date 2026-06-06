@@ -84,4 +84,6 @@ export interface BestPracticeCategory {
   name: string;
   description: string;
   status: CategoryStatus;
+  /** Sort priority within a status group; lower comes first, undefined sorts last (then by name). */
+  order?: number;
 }

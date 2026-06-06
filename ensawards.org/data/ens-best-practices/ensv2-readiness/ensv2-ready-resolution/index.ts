@@ -13,11 +13,10 @@ import technicalDetails from "./technicalDetails.tsx";
 
 const useLatestUniversalResolver: BestPracticeApp = {
   type: BestPracticeTypes.App,
-  id: "use-latest-universal-resolver",
-  bestPracticeSlug: "use-latest-universal-resolver",
-  name: "Use the latest Universal Resolver",
-  description:
-    "Keep your ENS name resolutions correct under ENSv2 by adopting the latest Universal Resolver.",
+  id: "ensv2-ready-resolution",
+  bestPracticeSlug: "ensv2-ready-resolution",
+  name: "Correctly Resolve All Names For ENSv2",
+  description: "Make sure your app keeps resolving ENS names correctly once ENSv2 launches.",
   category: ENSv2ReadinessCategory,
   appliesTo: [AppTypes.Wallet, AppTypes.Explorer],
   technicalDetails: technicalDetails,

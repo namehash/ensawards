@@ -10,6 +10,7 @@ import {
   groupBenchmarksByCategory,
   sortAcceptanceTestBenchmarks,
 } from "data/benchmarks/utils.ts";
+import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import type {
   BestPracticeBenchmarks,
   BestPracticeCategorySlug,
@@ -176,17 +177,23 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
           </div>
           <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
         </div>
-        {[...benchmarksByCategory.entries()].map(([categorySlug, benchmarksInCategory], index) => {
-          return (
-            <BenchmarkCategorySection
-              key={`${resolvedApp.appSlug}-benchmarks-in-${categorySlug}-category`}
-              app={resolvedApp}
-              categorySlug={categorySlug}
-              benchmarksInCategory={benchmarksInCategory}
-              initiallyOpen={index === 0}
-            />
-          );
-        })}
+        {[...benchmarksByCategory.entries()]
+          .sort(
+            ([a], [b]) =>
+              BEST_PRACTICE_CATEGORIES.findIndex((category) => category.categorySlug === a) -
+              BEST_PRACTICE_CATEGORIES.findIndex((category) => category.categorySlug === b),
+          )
+          .map(([categorySlug, benchmarksInCategory], index) => {
+            return (
+              <BenchmarkCategorySection
+                key={`${resolvedApp.appSlug}-benchmarks-in-${categorySlug}-category`}
+                app={resolvedApp}
+                categorySlug={categorySlug}
+                benchmarksInCategory={benchmarksInCategory}
+                initiallyOpen={index === 0}
+              />
+            );
+          })}
       </div>
     </TooltipProvider>
   );
