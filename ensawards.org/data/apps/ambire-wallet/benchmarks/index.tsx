@@ -53,12 +53,11 @@ const benchmarks = {
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            The resolution was tested using the &quot;send&quot; flow. The displayed address is that
-            of the latest Universal Resolver. That means Ambire Wallet is using the latest resolver,
-            making a big step towards ENSv2 readiness.
+            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The resolved address
+            is correct.
           </p>
           <img
-            alt="Ambire Wallet is using the latest Universal Resolver"
+            alt="Ambire Wallet correctly resolves the name for ENSv2"
             src={useLatestUniversalResolverProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />

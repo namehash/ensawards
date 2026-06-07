@@ -71,12 +71,11 @@ const benchmarks = {
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            The attempted resolution of the test name returned the address of the old Universal
-            Resolver. That means Blockscout is still using the old resolver and needs an update in
-            order to be ready for ENSv2.
+            ENSv2 ready resolution was tested using the &quot;search&quot; flow. The resolved
+            address is <i>NOT</i> correct.
           </p>
           <img
-            alt="Blockscout is still using the old Universal Resolver"
+            alt="Blockscout fails to resolve the name for ENSv2"
             src={useLatestUniversalResolverProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />

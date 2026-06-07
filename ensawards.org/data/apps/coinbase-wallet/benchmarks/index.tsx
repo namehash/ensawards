@@ -70,13 +70,11 @@ const benchmarks = {
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            The resolution was tested using the &quot;send&quot; flow. When inspected, the resolved
-            address of the test name is that of the old Universal Resolver. That means Coinbase
-            Wallet is still using the old resolver and needs an update in order to be ready for
-            ENSv2.
+            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The resolved address
+            is <i>NOT</i> correct.
           </p>
           <img
-            alt="Coinbase Wallet is still using the old Universal Resolver"
+            alt="Coinbase Wallet fails to resolve the name for ENSv2"
             src={useLatestUniversalResolverProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />

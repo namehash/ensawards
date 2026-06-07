@@ -73,7 +73,7 @@ const benchmarks: BestPracticeBenchmarks = {
             address for the test name, which we interpret as a failure.
           </p>
           <img
-            alt="WalletChan completely failed to resolve the test name"
+            alt="WalletChan failed to resolve the test name"
             src={useLatestUniversalResolverProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
