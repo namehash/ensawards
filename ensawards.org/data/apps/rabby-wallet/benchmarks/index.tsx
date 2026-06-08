@@ -47,7 +47,7 @@ const benchmarks: BestPracticeBenchmarks = {
       ),
     } as const satisfies AcceptanceTestBenchmark,
   },
-};
+} as const satisfies BestPracticeBenchmarks;
 
 defineAppBenchmarks(RabbyWallet, benchmarks);
 

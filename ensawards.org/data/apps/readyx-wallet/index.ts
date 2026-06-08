@@ -1,7 +1,7 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
 // for additional advice on adding and modifying apps
 
-import ReadyProject from "data/projects/ready/index.ts";
+import ReadyProject from "data/projects/ready";
 
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
