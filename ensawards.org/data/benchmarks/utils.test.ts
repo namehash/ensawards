@@ -13,7 +13,7 @@ import {
   mockNormalizeNamesBestPractice,
   mockReverseResolutionBestPractice,
 } from "data/shared/test-utils";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { BenchmarkResults } from "./types.ts";
 
@@ -150,6 +150,29 @@ describe("benchmarks-utils", () => {
       name: "Mock Best Practice 3",
       bestPracticeSlug: "mock-best-practice-3",
       ...mockBestPracticeCategoryDetails,
+    });
+
+    beforeEach(() => {
+      mockGetBestPracticeBySlug.mockReset();
+
+      mockGetBestPracticeBySlug.mockImplementation((slug: BestPracticeSlug) => {
+        switch (slug) {
+          case mockBestPractice1.bestPracticeSlug:
+            return mockBestPractice1;
+
+          case mockBestPractice2.bestPracticeSlug:
+            return mockBestPractice2;
+
+          case mockBestPractice3.bestPracticeSlug:
+            return mockBestPractice3;
+
+          case mockReverseResolutionBestPractice.bestPracticeSlug:
+            return mockReverseResolutionBestPractice;
+
+          default:
+            throw new Error(`No best practice found for slug: ${slug}`);
+        }
+      });
     });
 
     it("Should return undefined for no completed benchmarks", () => {

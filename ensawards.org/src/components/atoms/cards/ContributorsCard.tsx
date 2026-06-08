@@ -163,7 +163,7 @@ export const ContributorsCard = ({
             <a
               href={gitHubTargetHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className={cn(
                 shadcnButtonVariants({
                   variant: "secondary",

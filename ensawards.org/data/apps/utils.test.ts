@@ -70,25 +70,26 @@ describe("App utils", () => {
           return 0;
       }
     });
-  });
 
-  mockGetAcceptanceTestBenchmarksByApp.mockImplementation((appSlug: AppSlug) => {
-    switch (appSlug) {
-      case mockCoinbaseWalletApp.appSlug:
-        return Object.values(mockBenchmarks[mockCoinbaseWalletApp.appSlug]).flatMap(
-          (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
-        );
-      case mockRainbowApp.appSlug:
-        return Object.values(mockBenchmarks[mockRainbowApp.appSlug]).flatMap(
-          (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
-        );
-      case mockMetamaskApp.appSlug:
-        return Object.values(mockBenchmarks[mockMetamaskApp.appSlug]).flatMap(
-          (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
-        );
-      default:
-        throw new Error(`No benchmarks defined for app with slug ${appSlug}`);
-    }
+    mockGetAcceptanceTestBenchmarksByApp.mockReset();
+    mockGetAcceptanceTestBenchmarksByApp.mockImplementation((appSlug: AppSlug) => {
+      switch (appSlug) {
+        case mockCoinbaseWalletApp.appSlug:
+          return Object.values(mockBenchmarks[mockCoinbaseWalletApp.appSlug]).flatMap(
+            (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+          );
+        case mockRainbowApp.appSlug:
+          return Object.values(mockBenchmarks[mockRainbowApp.appSlug]).flatMap(
+            (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+          );
+        case mockMetamaskApp.appSlug:
+          return Object.values(mockBenchmarks[mockMetamaskApp.appSlug]).flatMap(
+            (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+          );
+        default:
+          throw new Error(`No benchmarks defined for app with slug ${appSlug}`);
+      }
+    });
   });
 
   describe("validateAppType", () => {
