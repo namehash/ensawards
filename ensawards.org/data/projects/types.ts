@@ -20,6 +20,8 @@ export const ProjectIds = {
   Ambire: "project-ambire",
   Superfluid: "project-superfluid",
   Kleros: "project-kleros",
+  Safe: "project-safe",
+  Rabby: "project-rabby",
 } as const;
 
 /**

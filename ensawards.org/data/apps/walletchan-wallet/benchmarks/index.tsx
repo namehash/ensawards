@@ -71,11 +71,11 @@ const benchmarks: BestPracticeBenchmarks = {
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            The resolution was tested using the &quot;send&quot; flow. The app failed to resolve the
-            address for the test name, which we interpret as a failure.
+            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The app fails to
+            resolve the address for the test name, which we interpret as a failure.
           </p>
           <img
-            alt="WalletChan failed to resolve the test name"
+            alt="WalletChan fails to resolve the name for ENSv2"
             src={correctlyResolveEnsv2TestNameAddressProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
