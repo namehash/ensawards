@@ -1,11 +1,16 @@
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
+import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 import type { AppSlug } from "data/apps/types.ts";
 import { getAppBySlug } from "data/apps/utils.ts";
 import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 import type { UnixTimestamp } from "enssdk";
 
-import type { BestPracticeBenchmarks, BestPracticeSlug } from "../ens-best-practices/types.ts";
+import type {
+  BestPractice,
+  BestPracticeBenchmarks,
+  BestPracticeSlug,
+} from "../ens-best-practices/types.ts";
 import {
   type BestPracticeCategory,
   type BestPracticeCategorySlug,
@@ -274,4 +279,32 @@ export const formatBenchmarkResult = (
       const _exhaustive: never = benchmarkResult;
       throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
   }
+};
+
+/*
+ * Summarizes all acceptance test benchmarks of an `App` related to a `BestPractice` into a single `BenchmarkResult`.
+ *
+ * @returns an object containing the best practice and the summarized benchmark result for that best practice,
+ * if any belonging benchmarks exist. Otherwise, returns the best practice with an undefined benchmark result.
+ *
+ * @throws Error if `BestPracticeSlug` invariant is violated
+ */
+export const summarizeAppsAcceptanceTestBenchmarks = (
+  bestPracticeSlug: BestPracticeSlug,
+  bestPracticeBenchmarks: AcceptanceTestBenchmarks,
+): { bestPractice: BestPractice; generalizedBenchmarkResult?: BenchmarkResult } => {
+  const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+
+  if (bestPractice === undefined) {
+    throw new Error(
+      `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
+    );
+  }
+
+  const generalizedBenchmarkResult = generalizeAcceptanceTestBenchmarks(bestPracticeBenchmarks);
+
+  return {
+    bestPractice,
+    generalizedBenchmarkResult,
+  };
 };

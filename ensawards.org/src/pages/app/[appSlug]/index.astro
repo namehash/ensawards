@@ -24,18 +24,14 @@ import {
   sortBenchmarkResults,
   getAppBenchmarks,
 } from "data/benchmarks/utils";
-import { type AcceptanceTestBenchmarks, type BenchmarkResult } from "data/benchmarks/types";
-import type { BestPracticeBenchmarks, BestPractice } from "data/ens-best-practices/types";
+import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { getAppContributions } from "data/contributors/utils.ts";
-import type { BestPracticeCategorySlug, BestPracticeSlug } from "data/ens-best-practices/types";
-import {
-  getBestPracticeCategoryBySlug,
-  getBestPracticeBySlug,
-} from "data/ens-best-practices/utils.ts";
+import type { BestPracticeCategorySlug } from "data/ens-best-practices/types";
+import { getBestPracticeCategoryBySlug } from "data/ens-best-practices/utils.ts";
 import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
-import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 import { CategoryStatuses } from "data/ens-best-practices/types.ts";
+import { summarizeAppsAcceptanceTestBenchmarks } from "data/benchmarks/utils.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { appSlug: app.appSlug } }));
@@ -58,34 +54,6 @@ if (app !== undefined) {
 
   benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(app.appSlug));
 }
-
-/*
- * Summarizes all acceptance test benchmarks of an `App` related to a `BestPractice` into a single `BenchmarkResult`.
- *
- * @returns an object containing the best practice and the summarized benchmark result for that best practice,
- * if any belonging benchmarks exist. Otherwise, returns the best practice with an undefined benchmark result.
- *
- * @throws Error if `BestPracticeSlug` invariant is violated
- */
-const summarizeAppsAcceptanceTestBenchmarks = (
-  bestPracticeSlug: BestPracticeSlug,
-  bestPracticeBenchmarks: AcceptanceTestBenchmarks,
-): { bestPractice: BestPractice; generalizedBenchmarkResult?: BenchmarkResult } => {
-  const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
-
-  if (bestPractice === undefined) {
-    throw new Error(
-      `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
-    );
-  }
-
-  const generalizedBenchmarkResult = generalizeAcceptanceTestBenchmarks(bestPracticeBenchmarks);
-
-  return {
-    bestPractice,
-    generalizedBenchmarkResult,
-  };
-};
 ---
 
 {

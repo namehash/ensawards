@@ -1,6 +1,4 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
-import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 import type { App } from "data/apps/types.ts";
 import { calcAppScore, getAppById } from "data/apps/utils.ts";
 import {
@@ -8,7 +6,8 @@ import {
   formatBenchmarkResult,
   getAppBenchmarks,
   groupBenchmarksByCategory,
-  sortAcceptanceTestBenchmarks,
+  sortBenchmarkResults,
+  summarizeAppsAcceptanceTestBenchmarks,
 } from "data/benchmarks/utils.ts";
 import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import {
@@ -16,10 +15,7 @@ import {
   type BestPracticeCategorySlug,
   CategoryStatuses,
 } from "data/ens-best-practices/types.ts";
-import {
-  getBestPracticeBySlug,
-  getBestPracticeCategoryBySlug,
-} from "data/ens-best-practices/utils.ts";
+import { getBestPracticeCategoryBySlug } from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
@@ -54,41 +50,12 @@ function BenchmarkCategorySection({
   }
 
   const appBenchmarksData = [...Object.entries(benchmarksInCategory)]
-    .map(([bestPracticeSlug, bestPracticeBenchmarks]) => {
-      const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
-
-      if (bestPractice === undefined) {
-        throw new Error(
-          `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
-        );
-      }
-
-      const referenceAcceptanceTestBenchmark = Object.values(bestPracticeBenchmarks).find(
-        (benchmark) => benchmark !== undefined,
-      );
-
-      if (referenceAcceptanceTestBenchmark === undefined) {
-        return { bestPractice, generalizedBenchmark: undefined };
-      }
-
-      const generalizedBenchmarkResult = generalizeAcceptanceTestBenchmarks(bestPracticeBenchmarks);
-      const generalizedBenchmark =
-        generalizedBenchmarkResult === undefined
-          ? undefined
-          : ({
-              result: generalizedBenchmarkResult,
-              // take contributions and notes from the first defined acceptance test benchmark as a reference
-              // (guaranteed to exist if generalizedBenchmarkResult is not undefined)
-              contributions: referenceAcceptanceTestBenchmark.contributions,
-              notes: referenceAcceptanceTestBenchmark.notes,
-            } as AcceptanceTestBenchmark);
-
-      return {
-        bestPractice,
-        generalizedBenchmark,
-      };
-    })
-    .sort((a, b) => sortAcceptanceTestBenchmarks(a.generalizedBenchmark, b.generalizedBenchmark));
+    .map(([bestPracticeSlug, bestPracticeBenchmarks]) =>
+      summarizeAppsAcceptanceTestBenchmarks(bestPracticeSlug, bestPracticeBenchmarks),
+    )
+    .sort((a, b) =>
+      sortBenchmarkResults(a.generalizedBenchmarkResult, b.generalizedBenchmarkResult),
+    );
 
   return (
     <div ref={animationParent} className="w-full border-t border-gray-200 py-4">
@@ -112,7 +79,7 @@ function BenchmarkCategorySection({
 
       {isOpen && (
         <div className="flex w-full flex-col gap-4 pt-4">
-          {appBenchmarksData.map(({ bestPractice, generalizedBenchmark }) => {
+          {appBenchmarksData.map(({ bestPractice, generalizedBenchmarkResult }) => {
             return (
               <a
                 key={bestPractice.id}
@@ -124,7 +91,7 @@ function BenchmarkCategorySection({
                   triggerAsChild
                   content={
                     <p>
-                      {formatBenchmarkResult(generalizedBenchmark?.result, {
+                      {formatBenchmarkResult(generalizedBenchmarkResult, {
                         lowercase: false,
                       })}
                     </p>
@@ -132,12 +99,12 @@ function BenchmarkCategorySection({
                 >
                   <span className="shrink-0 cursor-pointer">
                     {getBenchmarkIcon(
-                      generalizedBenchmark?.result,
+                      generalizedBenchmarkResult,
                       cn(
                         "w-6 h-6",
-                        benchmarkResultToBadgeStyles(generalizedBenchmark?.result),
+                        benchmarkResultToBadgeStyles(generalizedBenchmarkResult),
                         "bg-transparent",
-                        generalizedBenchmark === undefined && "p-0.5",
+                        generalizedBenchmarkResult === undefined && "p-0.5",
                       ),
                     )}
                   </span>
