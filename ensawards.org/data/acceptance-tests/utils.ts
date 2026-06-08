@@ -11,19 +11,38 @@ import {
   BenchmarkResults,
 } from "data/benchmarks/types";
 import { getAppBenchmarks } from "data/benchmarks/utils.ts";
+import { CategoryStatuses } from "data/ens-best-practices/types";
+import { getBestPracticeBySlug } from "data/ens-best-practices/utils";
 
 /** Returns an {@link AcceptanceTest} by {@link AcceptanceTestSlug}. */
 export const getAcceptanceTestBySlug = (slug: AcceptanceTestSlug): AcceptanceTest | undefined => {
   return ACCEPTANCE_TESTS.find((acceptanceTest) => acceptanceTest.acceptanceTestSlug === slug);
 };
 
-/** Returns all {@link AcceptanceTestBenchmark}s of an `App` by {@link AppSlug}. */
+/**
+ * Returns all {@link AcceptanceTestBenchmark}s of an `App` by {@link AppSlug}
+ * for all {@link BestPractice}s belonging to an `Active` {@link BestPracticeCategory}.
+ */
 export const getAcceptanceTestBenchmarksByApp = (
   appSlug: AppSlug,
 ): (AcceptanceTestBenchmark | undefined)[] => {
   const appBenchmarks = getAppBenchmarks(appSlug);
 
-  return Object.values(appBenchmarks).flatMap((acceptanceTestBenchmarks) =>
+  const benchmarksInActiveBestPracticeCategories = Object.entries(appBenchmarks).filter(
+    ([bestPracticeSlug, _]) => {
+      const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+
+      if (bestPractice === undefined) {
+        throw new Error(
+          `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} is not defined`,
+        );
+      }
+
+      return bestPractice.category.status === CategoryStatuses.Active;
+    },
+  );
+
+  return benchmarksInActiveBestPracticeCategories.flatMap(([_, acceptanceTestBenchmarks]) =>
     Object.values(acceptanceTestBenchmarks),
   );
 };

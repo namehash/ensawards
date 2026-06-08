@@ -6,7 +6,12 @@ import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 import type { UnixTimestamp } from "enssdk";
 
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "../ens-best-practices/types.ts";
-import { type BestPracticeCategorySlug, BestPracticeTypes } from "../ens-best-practices/types.ts";
+import {
+  type BestPracticeCategory,
+  type BestPracticeCategorySlug,
+  BestPracticeTypes,
+  CategoryStatuses,
+} from "../ens-best-practices/types.ts";
 import {
   asEnsAwardsScore,
   type EnsAwardsPoints,
@@ -140,14 +145,43 @@ export const groupBenchmarksByCategory = (
  * Calculates {@link EnsAwardsScore} for all benchmarks belonging to a single {@link BestPracticeCategory}.
  *
  * @returns
- * undefined - if no benchmarks are completed for the `BestPracticeCategory`.
+ * undefined - if no benchmarks are completed for the `BestPracticeCategory`
+ * or the category status is not `Active`.
  * Otherwise, an {@link EnsAwardsScore} calculation for the `BestPracticeCategory`
  *
  * @throws if the {@link EnsAwardsScore} invariants are not satisfied
+ * @throws if the input benchmarks do not belong to the same `BestPracticeCategory`
  */
 export const calcBestPracticeCategoryScore = (
   benchmarks: BestPracticeBenchmarks,
 ): EnsAwardsScore | undefined => {
+  let bestPracticeCategory: undefined | BestPracticeCategory = undefined;
+
+  for (const bestPracticeSlug of Object.keys(benchmarks)) {
+    const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+
+    if (!bestPractice) {
+      throw new Error(
+        `Invariant(BestPracticeSlug): BestPractice with slug ${bestPracticeSlug} is not defined`,
+      );
+    }
+
+    if (bestPracticeCategory === undefined) {
+      bestPracticeCategory = bestPractice.category;
+    }
+
+    if (bestPractice.category.categorySlug !== bestPracticeCategory.categorySlug) {
+      throw new Error(`All benchmarks must belong to the same category`);
+    }
+  }
+
+  if (
+    bestPracticeCategory === undefined ||
+    bestPracticeCategory.status !== CategoryStatuses.Active
+  ) {
+    return undefined;
+  }
+
   const completedBenchmarks: AcceptanceTestBenchmark[] = [];
 
   for (const acceptanceTestBenchmarks of Object.values(benchmarks)) {

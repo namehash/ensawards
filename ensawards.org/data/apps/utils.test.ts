@@ -14,11 +14,13 @@ import {
 } from "../shared/test-utils";
 import { type App, type AppBenchmarks, type AppSlug, AppTypes } from "./types.ts";
 
-const { mockApps, mockEnsAwardsPoints, mockBenchmarks } = vi.hoisted(() => ({
-  mockApps: [] as App[],
-  mockEnsAwardsPoints: vi.fn(),
-  mockBenchmarks: {} as AppBenchmarks,
-}));
+const { mockApps, mockEnsAwardsPoints, mockBenchmarks, mockGetAcceptanceTestBenchmarksByApp } =
+  vi.hoisted(() => ({
+    mockApps: [] as App[],
+    mockEnsAwardsPoints: vi.fn(),
+    mockBenchmarks: {} as AppBenchmarks,
+    mockGetAcceptanceTestBenchmarksByApp: vi.fn(),
+  }));
 
 vi.mock("./index.ts", () => ({
   APPS: mockApps,
@@ -31,6 +33,10 @@ vi.mock("data/benchmarks/index.ts", () => ({
 vi.mock("data/benchmarks/utils.ts", () => ({
   calcEnsAwardsPoints: mockEnsAwardsPoints,
   getAppBenchmarks: (slug: AppSlug) => mockBenchmarks[slug],
+}));
+
+vi.mock("data/acceptance-tests/utils.ts", () => ({
+  getAcceptanceTestBenchmarksByApp: mockGetAcceptanceTestBenchmarksByApp,
 }));
 
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
@@ -64,6 +70,25 @@ describe("App utils", () => {
           return 0;
       }
     });
+  });
+
+  mockGetAcceptanceTestBenchmarksByApp.mockImplementation((appSlug: AppSlug) => {
+    switch (appSlug) {
+      case mockCoinbaseWalletApp.appSlug:
+        return Object.values(mockBenchmarks[mockCoinbaseWalletApp.appSlug]).flatMap(
+          (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+        );
+      case mockRainbowApp.appSlug:
+        return Object.values(mockBenchmarks[mockRainbowApp.appSlug]).flatMap(
+          (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+        );
+      case mockMetamaskApp.appSlug:
+        return Object.values(mockBenchmarks[mockMetamaskApp.appSlug]).flatMap(
+          (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+        );
+      default:
+        throw new Error(`No benchmarks defined for app with slug ${appSlug}`);
+    }
   });
 
   describe("validateAppType", () => {

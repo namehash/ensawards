@@ -23,25 +23,28 @@ const benchmarks = {
   //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-03T14:00:00Z") },
   //   ],
   // },
+
+  // TODO: `Contract Naming` category is temporarily hidden due to unfit content,
+  // and so are all benchmarks belonging to it.
+  // We aim to fix it as soon as we have the capacity.
+  // See: https://github.com/namehash/ensawards/issues/222
   "display-named-smart-contracts-mainnet": {
-    "mainnet-interactions-display-named-smart-contracts": undefined, // TODO: roll back to real benchmark before merging.
-    // {
-    //   result: BenchmarkResults.Pass,
-    //   contributions: [
-    //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
-    //   ],
-    //   notes: (
-    //     // TODO: Enhance the notes
-    //     <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-    //       <p className="w-full">Benchmark placeholder notes</p>
-    //       <img
-    //         alt="example proof"
-    //         src={exampleProofImage.src}
-    //         className="w-auto h-full max-h-[325px] rounded-xl"
-    //       />
-    //     </div>
-    //   ),
-    // } as const satisfies AcceptanceTestBenchmark,
+    "mainnet-interactions-display-named-smart-contracts": {
+      result: BenchmarkResults.Pass,
+      contributions: [
+        { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
+      ],
+      notes: (
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">Benchmark placeholder notes</p>
+          <img
+            alt="example proof"
+            src={exampleProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
+        </div>
+      ),
+    } as const satisfies AcceptanceTestBenchmark,
   },
   "display-named-smart-contracts-l2-chains": {
     "l2-chain-interactions-display-named-smart-contracts": {
@@ -50,7 +53,6 @@ const benchmarks = {
         { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:19:28.672Z") },
       ],
       notes: (
-        // TODO: Enhance the notes
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">Benchmark placeholder notes</p>
           <img

@@ -10,7 +10,10 @@ const ContractNamingCategory: BestPracticeCategory = {
   categorySlug: "contract-naming",
   name: "Contract naming",
   description: "Improve the UX and security of smart contract interactions.",
-  status: CategoryStatuses.Active,
+  status: CategoryStatuses.ComingSoon,
+  // TODO: This category is temporarily hidden due to unfit content.
+  // We aim to fix it as soon as we have the capacity.
+  // See: https://github.com/namehash/ensawards/issues/222
 };
 
 defineBestPracticeCategory(ContractNamingCategory);

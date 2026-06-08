@@ -16,6 +16,10 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.png";
 
 const benchmarks = {
+  // TODO: `Contract Naming` category is temporarily hidden due to unfit content,
+  // and so are all benchmarks belonging to it.
+  // We aim to fix it as soon as we have the capacity.
+  // See: https://github.com/namehash/ensawards/issues/222
   "display-named-smart-contracts-mainnet": {
     "mainnet-interactions-display-named-smart-contracts": {
       result: BenchmarkResults.PartialPass,
@@ -23,7 +27,6 @@ const benchmarks = {
         { from: contributors.caldonia, lastUpdated: parseTimestamp("2026-04-23T19:50:24Z") },
       ],
       notes: (
-        // TODO: Enhance the notes
         <div className={acceptanceTestDetailsContainerStyles}>
           <p className="w-full">Benchmark placeholder notes</p>
         </div>
@@ -37,7 +40,6 @@ const benchmarks = {
         { from: contributors.caldonia, lastUpdated: parseTimestamp("2026-04-23T19:50:24Z") },
       ],
       notes: (
-        // TODO: Enhance the notes
         <div className={acceptanceTestDetailsContainerStyles}>
           <p className="w-full">Benchmark placeholder notes</p>
         </div>

@@ -35,6 +35,7 @@ import {
 import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
+import { CategoryStatuses } from "data/ens-best-practices/types.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { appSlug: app.appSlug } }));
@@ -129,6 +130,10 @@ if (app !== undefined) {
                     throw new Error(
                       `Invariant(CategorySlug): Category with slug ${categorySlug} not found`,
                     );
+                  }
+
+                  if (category.status !== CategoryStatuses.Active) {
+                    return null;
                   }
 
                   const benchmarksOnBestPractice = [

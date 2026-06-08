@@ -17,6 +17,7 @@ import {
   type BestPracticeTarget,
   type BestPracticeType,
   BestPracticeTypes,
+  CategoryStatuses,
 } from "./types.ts";
 
 /**
@@ -101,11 +102,16 @@ export const formatBestPracticeType = (
  * and dividing it by the total number of acceptance test benchmarks completed on it.
  *
  * @returns `undefined` if no apps were benchmarked on this best practice,
- * otherwise returns the {@link EnsAwardsScore}.
+ * or the best practice belongs to a category with status other than `Active`.
+ * Otherwise returns the {@link EnsAwardsScore}.
  */
 export const calcBestPracticeScore = (
   bestPractice: BestPracticeApp,
 ): EnsAwardsScore | undefined => {
+  if (bestPractice.category.status !== CategoryStatuses.Active) {
+    return undefined;
+  }
+
   let benchmarkedAcceptanceTests = 0;
   let bestPracticePoints = 0;
 

@@ -11,9 +11,10 @@ import {
   sortAcceptanceTestBenchmarks,
 } from "data/benchmarks/utils.ts";
 import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
-import type {
-  BestPracticeBenchmarks,
-  BestPracticeCategorySlug,
+import {
+  type BestPracticeBenchmarks,
+  type BestPracticeCategorySlug,
+  CategoryStatuses,
 } from "data/ens-best-practices/types.ts";
 import {
   getBestPracticeBySlug,
@@ -164,6 +165,21 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
   const appScore = calcAppScore(resolvedApp);
   const benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(resolvedApp.appSlug));
 
+  // Remove inactive categories from the summary
+  const benchmarksInActiveCategories = [...benchmarksByCategory].filter(
+    ([categorySlug, _bestPracticeBenchmarks]) => {
+      const category = getBestPracticeCategoryBySlug(categorySlug);
+
+      if (category === undefined) {
+        throw new Error(
+          `Invariant(BestPracticeCategorySlug): Category with slug ${categorySlug} not defined`,
+        );
+      }
+
+      return category.status === CategoryStatuses.Active;
+    },
+  );
+
   // Precompute the best practice category --> index mapping to
   // optimize time complexity of sorting categories
   const categorySlugToIndex: Record<BestPracticeCategorySlug, number> = {};
@@ -173,8 +189,9 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
 
   // Sort categories based on the BestPracticeCategory.order field
   // (used to initially order BEST_PRACTICE_CATEGORIES array)
-  const benchmarksByCategorySorted = [...benchmarksByCategory.entries()].sort(
-    ([a], [b]) => categorySlugToIndex[a] - categorySlugToIndex[b],
+  const benchmarksByCategorySorted = benchmarksInActiveCategories.sort(
+    ([aCategorySlug, _a], [bCategorySlug, _b]) =>
+      categorySlugToIndex[aCategorySlug] - categorySlugToIndex[bCategorySlug],
   );
 
   const AppIcon = resolvedApp.icon;

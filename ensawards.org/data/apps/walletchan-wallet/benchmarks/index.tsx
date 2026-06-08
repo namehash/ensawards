@@ -18,6 +18,10 @@ import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-
 import namedSmartContractsOnMainnetProofImage from "./named-smart-contracts-on-mainnet-proof.png";
 
 const benchmarks: BestPracticeBenchmarks = {
+  // TODO: `Contract Naming` category is temporarily hidden due to unfit content,
+  // and so are all benchmarks belonging to it.
+  // We aim to fix it as soon as we have the capacity.
+  // See: https://github.com/namehash/ensawards/issues/222
   "display-named-smart-contracts-mainnet": {
     "mainnet-interactions-display-named-smart-contracts": {
       result: BenchmarkResults.Pass,
@@ -25,7 +29,6 @@ const benchmarks: BestPracticeBenchmarks = {
         { from: contributors.apoorvlathey, lastUpdated: parseTimestamp("2026-04-18T00:00:00Z") },
       ],
       notes: (
-        // TODO: Enhance the notes
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
             Screenshot presents a transaction interaction on mainnet (setting name's records using
@@ -48,7 +51,6 @@ const benchmarks: BestPracticeBenchmarks = {
         { from: contributors.apoorvlathey, lastUpdated: parseTimestamp("2026-04-18T00:00:00Z") },
       ],
       notes: (
-        // TODO: Enhance the notes
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">TODO: Add correct Benchmark notes</p>
           <img

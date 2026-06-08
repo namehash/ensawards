@@ -7,6 +7,7 @@ import {
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
 import {
   createMockAcceptanceTestBenchmark,
+  createMockBestPractice,
   mockDisplayProfilesBestPractice,
   mockForwardResolutionBestPractice,
   mockNormalizeNamesBestPractice,
@@ -124,15 +125,42 @@ describe("benchmarks-utils", () => {
   });
 
   describe("calcBestPracticeCategoryScore", () => {
+    const mockBestPracticeCategoryDetails = {
+      categoryId: "mock-category",
+      categoryName: "Mock Category",
+      categorySlug: "mock-category",
+    };
+
+    const mockBestPractice1 = createMockBestPractice({
+      id: "mock-best-practice-1",
+      name: "Mock Best Practice 1",
+      bestPracticeSlug: "mock-best-practice-1",
+      ...mockBestPracticeCategoryDetails,
+    });
+
+    const mockBestPractice2 = createMockBestPractice({
+      id: "mock-best-practice-2",
+      name: "Mock Best Practice 2",
+      bestPracticeSlug: "mock-best-practice-2",
+      ...mockBestPracticeCategoryDetails,
+    });
+
+    const mockBestPractice3 = createMockBestPractice({
+      id: "mock-best-practice-3",
+      name: "Mock Best Practice 3",
+      bestPracticeSlug: "mock-best-practice-3",
+      ...mockBestPracticeCategoryDetails,
+    });
+
     it("Should return undefined for no completed benchmarks", () => {
       const benchmarks: BestPracticeBenchmarks = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+        [mockBestPractice1.bestPracticeSlug]: {
           mockAcceptanceTestSlug1: undefined,
         },
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+        [mockBestPractice2.bestPracticeSlug]: {
           mockAcceptanceTestSlug2: undefined,
         },
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+        [mockBestPractice3.bestPracticeSlug]: {
           mockAcceptanceTestSlug3: undefined,
         },
       };
@@ -145,13 +173,13 @@ describe("benchmarks-utils", () => {
 
     it("Should return the rounded category score for valid benchmarks", () => {
       const validCategoryBenchmarks = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+        [mockBestPractice1.bestPracticeSlug]: {
           mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
         },
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+        [mockBestPractice2.bestPracticeSlug]: {
           mockAcceptanceTestSlug2: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         },
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+        [mockBestPractice3.bestPracticeSlug]: {
           mockAcceptanceTestSlug3: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         },
       } as const satisfies BestPracticeBenchmarks;
@@ -162,6 +190,24 @@ describe("benchmarks-utils", () => {
         result,
         `Expected calcBestPracticeCategoryScore to return the rounded percentage for valid category benchmarks, got ${result} instead`,
       ).toEqual(33);
+    });
+
+    it("Should throw an error if benchmarks belong to different categories", () => {
+      const benchmarks: BestPracticeBenchmarks = {
+        [mockBestPractice1.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
+        [mockBestPractice2.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: undefined,
+        },
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: undefined,
+        },
+      };
+
+      expect(() => calcBestPracticeCategoryScore(benchmarks)).toThrow(
+        "All benchmarks must belong to the same category",
+      );
     });
   });
 
