@@ -13,7 +13,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import useLatestUniversalResolverProofImage from "./use-latest-universal-resolver-proof.png";
+import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.png";
 
 const benchmarks = {
   // "recognize-all-ens-names": {
@@ -64,12 +64,12 @@ const benchmarks = {
           </p>
           <img
             alt="MetaMask Wallet correctly resolves the name for ENSv2"
-            src={useLatestUniversalResolverProofImage.src}
+            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
         </div>
       ),
-    },
+    } as const satisfies AcceptanceTestBenchmark,
   },
 } as const satisfies BestPracticeBenchmarks;
 

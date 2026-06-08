@@ -11,7 +11,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import ENSv2ReadinessCategory from "../index.ts";
 import technicalDetails from "./technicalDetails.tsx";
 
-const useLatestUniversalResolver: BestPracticeApp = {
+const ensv2ReadyResolution: BestPracticeApp = {
   type: BestPracticeTypes.App,
   id: "ensv2-ready-resolution",
   bestPracticeSlug: "ensv2-ready-resolution",
@@ -27,6 +27,6 @@ const useLatestUniversalResolver: BestPracticeApp = {
   ],
 };
 
-defineBestPractice(useLatestUniversalResolver);
+defineBestPractice(ensv2ReadyResolution);
 
-export default useLatestUniversalResolver;
+export default ensv2ReadyResolution;

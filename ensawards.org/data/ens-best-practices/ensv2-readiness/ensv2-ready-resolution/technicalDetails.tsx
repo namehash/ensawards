@@ -3,8 +3,6 @@ import type {
   AcceptanceTestBenchmarkFail,
   AcceptanceTestBenchmarkPass,
 } from "data/acceptance-tests/types";
-import useLatestUniversalResolverExamplePassImage from "data/apps/metamask-wallet/benchmarks/use-latest-universal-resolver-proof.png";
-import useLatestUniversalResolverExampleFailImage from "data/apps/rainbow-wallet/benchmarks/use-latest-universal-resolver-proof.png";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
@@ -16,6 +14,9 @@ import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
+
+import correctlyResolveEnsv2TestNameAddressExampleFailImage from "./images/correctly-resolve-ensv2-test-name-address-fail-example.png";
+import correctlyResolveEnsv2TestNameAddressExamplePassImage from "./images/correctly-resolve-ensv2-test-name-address-pass-example.png";
 
 const useCaseSummary = (
   <div className="flex flex-col gap-2">
@@ -160,7 +161,7 @@ const implementationRecommendations = (
       If your app makes its own low-level RPC calls instead of using the Omnigraph or a helper
       library like viem, point your resolution RPC calls at ENS's new stable Universal Resolver
       proxy (
-      <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm">
+      <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
         0xeeeeeeee14d718c2b47d9923deab1335e144eeee
       </span>
       ) rather than hardcoding a specific Universal Resolver implementation. Because ENS controls
@@ -186,11 +187,11 @@ const acceptanceTest1 = {
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
         To check whether an app has ENSv2 ready resolution, resolve the name{" "}
-        <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm whitespace-nowrap">
+        <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
           ur.integration-tests.eth
         </span>{" "}
         and verify it resolves to the correct address,{" "}
-        <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm whitespace-nowrap">
+        <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
           0x2222222222222222222222222222222222222222
         </span>
         .
@@ -210,18 +211,18 @@ const acceptanceTest1 = {
             MetaMask
           </a>{" "}
           resolves the name{" "}
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm whitespace-nowrap">
+          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
             ur.integration-tests.eth
           </span>{" "}
           to the correct address:
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm whitespace-nowrap">
+          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
             0x2222222222222222222222222222222222222222
           </span>
           .
         </p>
         <img
           alt="MetaMask correctly resolves the name for ENSv2"
-          src={useLatestUniversalResolverExamplePassImage.src}
+          src={correctlyResolveEnsv2TestNameAddressExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -236,11 +237,11 @@ const acceptanceTest1 = {
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
           An app that is <i>NOT</i> ENSv2 ready resolves the name{" "}
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm whitespace-nowrap">
+          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
             ur.integration-tests.eth
           </span>{" "}
           to an invalid address such as:{" "}
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm whitespace-nowrap">
+          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
             0x1111111111111111111111111111111111111111
           </span>
           , or fails to resolve the name at all. <br />
@@ -249,7 +250,7 @@ const acceptanceTest1 = {
         </p>
         <img
           alt="Rainbow Wallet fails to resolve the name for ENSv2"
-          src={useLatestUniversalResolverExampleFailImage.src}
+          src={correctlyResolveEnsv2TestNameAddressExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>

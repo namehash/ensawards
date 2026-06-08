@@ -14,7 +14,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
-import useLatestUniversalResolverProofImage from "./use-latest-universal-resolver-proof.png";
+import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.png";
 
 const benchmarks = {
   // "recognize-all-ens-names": {
@@ -67,7 +67,6 @@ const benchmarks = {
       contributions: [
         { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T14:55:00Z") },
       ],
-      // TODO: Please let me know if the screenshots are okay
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
@@ -76,12 +75,12 @@ const benchmarks = {
           </p>
           <img
             alt="Blockscout fails to resolve the name for ENSv2"
-            src={useLatestUniversalResolverProofImage.src}
+            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
         </div>
       ),
-    },
+    } as const satisfies AcceptanceTestBenchmark,
   },
 } as const satisfies BestPracticeBenchmarks;
 

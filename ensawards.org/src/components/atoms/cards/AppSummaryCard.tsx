@@ -20,7 +20,7 @@ import {
   getBestPracticeCategoryBySlug,
 } from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
@@ -164,12 +164,20 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
   const appScore = calcAppScore(resolvedApp);
   const benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(resolvedApp.appSlug));
 
+  // Precompute the best practice category --> index mapping to
+  // optimize time complexity of sorting categories
+  const categorySlugToIndex: Record<BestPracticeCategorySlug, number> = useMemo(() => {
+    const slugToIndexMapping: Record<BestPracticeCategorySlug, number> = {};
+    BEST_PRACTICE_CATEGORIES.forEach((category, index) => {
+      slugToIndexMapping[category.categorySlug] = index;
+    });
+    return slugToIndexMapping;
+  }, [BEST_PRACTICE_CATEGORIES]);
+
   // Sort categories based on the BestPracticeCategory.order field
   // (used to initially order BEST_PRACTICE_CATEGORIES array)
   const benchmarksByCategorySorted = [...benchmarksByCategory.entries()].sort(
-    ([a], [b]) =>
-      BEST_PRACTICE_CATEGORIES.findIndex((category) => category.categorySlug === a) -
-      BEST_PRACTICE_CATEGORIES.findIndex((category) => category.categorySlug === b),
+    ([a], [b]) => categorySlugToIndex[a] - categorySlugToIndex[b],
   );
 
   const AppIcon = resolvedApp.icon;

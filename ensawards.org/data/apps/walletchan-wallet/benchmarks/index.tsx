@@ -14,8 +14,8 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
+import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.png";
 import namedSmartContractsOnMainnetProofImage from "./named-smart-contracts-on-mainnet-proof.png";
-import useLatestUniversalResolverProofImage from "./use-latest-universal-resolver-proof.png";
 
 const benchmarks: BestPracticeBenchmarks = {
   "display-named-smart-contracts-mainnet": {
@@ -74,12 +74,12 @@ const benchmarks: BestPracticeBenchmarks = {
           </p>
           <img
             alt="WalletChan failed to resolve the test name"
-            src={useLatestUniversalResolverProofImage.src}
+            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
         </div>
       ),
-    },
+    } as const satisfies AcceptanceTestBenchmark,
   },
 } as const satisfies BestPracticeBenchmarks;
 
