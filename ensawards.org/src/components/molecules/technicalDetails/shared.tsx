@@ -11,7 +11,7 @@ export const technicalSectionContainerStyles =
 
 export const technicalSectionHeaderStyles = "text-2xl leading-none font-semibold text-black";
 
-export const DesiredOutcome = ({ bestPractice }: { bestPractice: BestPractice }) => (
+export const BenefitFromUsingEns = ({ bestPractice }: { bestPractice: BestPractice }) => (
   <div className={cn(technicalSectionContainerStyles, "w-full p-4 bg-[#0080BC]/5 rounded-xl")}>
     <h2
       className={cn(

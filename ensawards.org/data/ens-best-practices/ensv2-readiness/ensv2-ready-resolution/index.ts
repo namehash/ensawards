@@ -22,6 +22,8 @@ const useLatestUniversalResolver: BestPracticeApp = {
   technicalDetails: technicalDetails,
   contributions: [
     { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T13:01:00.000Z") },
+    { from: contributors.shrugs, lastUpdated: parseTimestamp("2026-06-06T17:14:00.000Z") },
+    { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-07T17:20:00.000Z") },
   ],
 };
 

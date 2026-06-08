@@ -230,6 +230,8 @@ For reference see [ensawards.org/data/ens-best-practices/contract-naming/name-yo
 export interface BestPracticeTechnicalDetails {
   useCaseSummary: JSX.Element;
   benefitFromUsingEns: JSX.Element;
+  /** Title for the benefit card. Defaults to "Benefit from using ENS" when omitted. */
+  benefitFromUsingEnsTitle?: string;
   implementationRecommendations: JSX.Element;
   acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
 }
@@ -334,6 +336,8 @@ export interface BestPracticeCategory {
   name: string;
   description: string;
   status: CategoryStatus;
+  /** Sort priority within a status group; lower comes first, undefined sorts last (then by name). */
+  order?: number;
 }
 ```
 4. In your PR describe your reasoning for adding it.

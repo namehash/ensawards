@@ -6,7 +6,7 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 
 import {
   AcceptanceTestDetailsContainer,
-  DesiredOutcome,
+  BenefitFromUsingEns,
   ImplementationRecommendations,
   technicalSectionContainerStyles,
   technicalSectionHeaderStyles,
@@ -30,7 +30,7 @@ export const BestPracticeTechnicalDetails = ({
       <div className={technicalSectionContainerStyles}>
         <h2 className={technicalSectionHeaderStyles}>ENS best practice overview</h2>
         <UseCaseSummary bestPractice={bestPractice} />
-        <DesiredOutcome bestPractice={bestPractice} />
+        <BenefitFromUsingEns bestPractice={bestPractice} />
       </div>
       {sortedAcceptanceTests.map((acceptanceTest, index) => (
         <AcceptanceTestDetailsContainer

@@ -163,6 +163,15 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
 
   const appScore = calcAppScore(resolvedApp);
   const benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(resolvedApp.appSlug));
+
+  // Sort categories based on the BestPracticeCategory.order field
+  // (used to initially order BEST_PRACTICE_CATEGORIES array)
+  const benchmarksByCategorySorted = [...benchmarksByCategory.entries()].sort(
+    ([a], [b]) =>
+      BEST_PRACTICE_CATEGORIES.findIndex((category) => category.categorySlug === a) -
+      BEST_PRACTICE_CATEGORIES.findIndex((category) => category.categorySlug === b),
+  );
+
   const AppIcon = resolvedApp.icon;
 
   return (
@@ -177,23 +186,17 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
           </div>
           <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
         </div>
-        {[...benchmarksByCategory.entries()]
-          .sort(
-            ([a], [b]) =>
-              BEST_PRACTICE_CATEGORIES.findIndex((category) => category.categorySlug === a) -
-              BEST_PRACTICE_CATEGORIES.findIndex((category) => category.categorySlug === b),
-          )
-          .map(([categorySlug, benchmarksInCategory], index) => {
-            return (
-              <BenchmarkCategorySection
-                key={`${resolvedApp.appSlug}-benchmarks-in-${categorySlug}-category`}
-                app={resolvedApp}
-                categorySlug={categorySlug}
-                benchmarksInCategory={benchmarksInCategory}
-                initiallyOpen={index === 0}
-              />
-            );
-          })}
+        {benchmarksByCategorySorted.map(([categorySlug, benchmarksInCategory], index) => {
+          return (
+            <BenchmarkCategorySection
+              key={`${resolvedApp.appSlug}-benchmarks-in-${categorySlug}-category`}
+              app={resolvedApp}
+              categorySlug={categorySlug}
+              benchmarksInCategory={benchmarksInCategory}
+              initiallyOpen={index === 0}
+            />
+          );
+        })}
       </div>
     </TooltipProvider>
   );
