@@ -1,6 +1,7 @@
+import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils";
 import type { App } from "data/apps/types.ts";
 import { formatAppType, getAppById } from "data/apps/utils.ts";
-import type { AppBenchmark } from "data/benchmarks/types";
+import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import type { BestPracticeApp } from "data/ens-best-practices/types";
 import { Fragment } from "react";
 
@@ -9,7 +10,7 @@ import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultB
 export interface AppWithBenchmark {
   app: App;
   bestPractice: BestPracticeApp;
-  benchmark?: AppBenchmark;
+  acceptanceTestBenchmarks: AcceptanceTestBenchmarks;
 }
 
 export interface BenchmarksPerAppTypeCardProps {
@@ -18,11 +19,13 @@ export interface BenchmarksPerAppTypeCardProps {
 
 export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerAppTypeCardProps) {
   // A necessary step due to Astro Island's inner serialization logic
-  const resolvedAppsWithBenchmark = appsWithBenchmark.map(({ app, bestPractice, benchmark }) => ({
-    app: getAppById(app.id) ?? app,
-    bestPractice,
-    benchmark,
-  }));
+  const resolvedAppsWithBenchmark = appsWithBenchmark.map(
+    ({ app, bestPractice, acceptanceTestBenchmarks }) => ({
+      app: getAppById(app.id) ?? app,
+      bestPractice,
+      acceptanceTestBenchmarks,
+    }),
+  );
 
   if (resolvedAppsWithBenchmark.length === 0) return null;
 
@@ -39,8 +42,10 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
         {formatAppType(firstApp.type, { plural: false, lowercase: false })} benchmarks
       </h3>
       <div className="flex w-full flex-col items-center">
-        {resolvedAppsWithBenchmark.map(({ app, bestPractice, benchmark }, index) => {
+        {resolvedAppsWithBenchmark.map(({ app, bestPractice, acceptanceTestBenchmarks }, index) => {
           const AppIcon = app.icon;
+          const generalizedBenchmarkResult =
+            generalizeAcceptanceTestBenchmarks(acceptanceTestBenchmarks);
 
           return (
             <Fragment key={`${app.id}-${bestPractice.id}`}>
@@ -52,7 +57,10 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
                 <span className="min-w-0 flex-1 text-base leading-normal font-semibold text-neutral-900">
                   {app.name}
                 </span>
-                <BenchmarkResultBadge benchmark={benchmark} className="shrink-0 cursor-pointer" />
+                <BenchmarkResultBadge
+                  benchmarkResult={generalizedBenchmarkResult}
+                  className="shrink-0 cursor-pointer"
+                />
               </a>
               {index < appsWithBenchmark.length - 1 && (
                 <div className="w-[calc(100%-28px)] h-[1px] bg-[#F5F5F5]" />
@@ -64,5 +72,3 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
     </div>
   );
 }
-
-export default BenchmarksPerAppTypeCard;

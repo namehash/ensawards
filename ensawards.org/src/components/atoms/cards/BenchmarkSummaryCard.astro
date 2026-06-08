@@ -1,18 +1,23 @@
 ---
 import { RelativeTime } from "@namehash/namehash-ui";
 
-import { type AppBenchmark } from "data/benchmarks/types.ts";
+import { type AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
 import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { getBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
-import { BenchmarkResultBadge, benchmarkResultToBadgeStyles } from "../badges/BenchmarkResultBadge";
+import { getAcceptanceTestBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
+import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
+import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 
 export interface BenchmarkSummaryCardProps {
   bestPractice: BestPracticeApp;
-  benchmark?: AppBenchmark;
+  acceptanceTestsBenchmarks: AcceptanceTestBenchmarks;
 }
 
-const { bestPractice, benchmark }: BenchmarkSummaryCardProps = Astro.props;
+const { bestPractice, acceptanceTestsBenchmarks }: BenchmarkSummaryCardProps = Astro.props;
+
+const benchmarksUpdateTimes = Object.values(acceptanceTestsBenchmarks)
+  .filter((benchmark) => benchmark !== undefined)
+  .map((benchmark) => getAcceptanceTestBenchmarkLastUpdateTimestamp(benchmark));
 
 const bestPracticeHref = `/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`;
 
@@ -22,6 +27,9 @@ const detailValueStyles = cn(
   "underline decoration-black/40 decoration-from-font underline-offset-[25%]",
   "transition-all duration-200 hover:decoration-black",
 );
+
+const generalizedAcceptanceTestsBenchmarkResult =
+  generalizeAcceptanceTestBenchmarks(acceptanceTestsBenchmarks);
 ---
 
 <div
@@ -52,19 +60,20 @@ const detailValueStyles = cn(
     </div>
 
     <div class="flex w-full flex-col items-start gap-1 justify-center">
-      <p class={detailLabelStyles}>Benchmark result</p>
-      <BenchmarkResultBadge benchmark={benchmark} />
+      <p class={detailLabelStyles}>Acceptance test results</p>
+      <BenchmarkResultBadge
+        benchmarkResult={generalizedAcceptanceTestsBenchmarkResult}
+      />
     </div>
-
     {
-      benchmark !== undefined && (
+      benchmarksUpdateTimes.length > 0 && (
         <div class="flex w-full flex-col items-start gap-1 py-1">
           <p class={detailLabelStyles}>Last updated</p>
           <p class="text-sm leading-normal font-medium text-black">
             <RelativeTime
               client:load
               enforcePast
-              timestamp={getBenchmarkLastUpdateTimestamp(benchmark)}
+              timestamp={Math.max(...benchmarksUpdateTimes)}
             />
           </p>
         </div>

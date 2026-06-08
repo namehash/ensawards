@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
-import { BestPracticeTypes, type BestPracticeApp } from "data/ens-best-practices/types";
+import { BestPracticeTypes } from "data/ens-best-practices/types";
 import { APPS } from "data/apps";
 import { type App } from "data/apps/types";
 import { getAppBySlug, formatAppType } from "data/apps/utils.ts";
@@ -12,17 +12,19 @@ import {
 } from "data/ens-best-practices/utils.ts";
 import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import BenchmarkResultHeroBadge from "@/components/atoms/badges/BenchmarkResultHeroBadge.astro";
-import { type AppBenchmark } from "data/benchmarks/types";
-import { getAppBenchmark } from "data/benchmarks/utils";
+import { type AcceptanceTestBenchmarks, type BenchmarkResult } from "data/benchmarks/types";
+import { getAppAcceptanceTestBenchmarks } from "data/benchmarks/utils";
 import {
   ContributionTypes,
   ContributorsCard,
   ContributorsCardLoading,
 } from "@/components/atoms/cards/ContributorsCard.tsx";
-import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
 import BenchmarkSummaryCard from "@/components/atoms/cards/BenchmarkSummaryCard.astro";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { AppSummaryCard } from "@/components/atoms/cards/AppSummaryCard.tsx";
+import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils";
+import BenchmarkTechnicalDetails from "@/components/molecules/technicalDetails/benchmark/index.astro";
+import { type Contribution } from "data/contributors/types";
 
 export function getStaticPaths() {
   const staticPaths = [];
@@ -53,11 +55,21 @@ const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
 const app = getAppBySlug(appSlug);
 
 let AppIcon;
-let appBenchmark: AppBenchmark | undefined = undefined;
+let appAcceptanceTestBenchmarks: AcceptanceTestBenchmarks = {};
+let generalizedBenchmarkResult: BenchmarkResult | undefined = undefined;
+let allContributions: Contribution[] = [];
 
 if (app !== undefined && bestPractice !== undefined) {
   AppIcon = app.icon;
-  appBenchmark = getAppBenchmark(app.appSlug, bestPractice.bestPracticeSlug);
+  appAcceptanceTestBenchmarks = getAppAcceptanceTestBenchmarks(
+    app.appSlug,
+    bestPractice.bestPracticeSlug,
+  );
+  generalizedBenchmarkResult = generalizeAcceptanceTestBenchmarks(appAcceptanceTestBenchmarks);
+  allContributions = Object.values(appAcceptanceTestBenchmarks).flatMap(
+    (acceptanceTestBenchmark) =>
+      acceptanceTestBenchmark !== undefined ? acceptanceTestBenchmark.contributions : [],
+  );
 }
 ---
 
@@ -90,8 +102,8 @@ if (app !== undefined && bestPractice !== undefined) {
           </p>
         </div>
         <BenchmarkResultHeroBadge
-          benchmark={appBenchmark}
           slot="largerHeroItem"
+          benchmarkResult={generalizedBenchmarkResult}
         />
       </SubpageHero>
       <section class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center p-5 gap-5 sm:gap-10 sm:py-[60px] sm:px-8">
@@ -99,11 +111,15 @@ if (app !== undefined && bestPractice !== undefined) {
           <div class="lg:hidden block w-full">
             <AppSummaryCard client:load app={app} />
           </div>
-          <BestPracticeTechnicalDetails bestPractice={bestPractice} />
+          <BenchmarkTechnicalDetails
+            bestPractice={bestPractice}
+            acceptanceTestBenchmarks={appAcceptanceTestBenchmarks}
+            benchmarkedApp={app}
+          />
           <div class="w-full lg:w-1/3 h-fit box-border flex flex-col gap-5">
             <BenchmarkSummaryCard
               bestPractice={bestPractice}
-              benchmark={appBenchmark}>
+              acceptanceTestsBenchmarks={appAcceptanceTestBenchmarks}>
               <div slot="appInfo" class="flex h-7 items-center gap-3">
                 <AppIcon className="w-[28px] h-[28px] shrink-0 rounded-[6px]" />
                 <a
@@ -122,10 +138,8 @@ if (app !== undefined && bestPractice !== undefined) {
               client:only="react"
               sidebarVariant
               contributionType={ContributionTypes.BenchmarkResult}
-              existingContributions={
-                appBenchmark !== undefined ? appBenchmark.contributions : []
-              }
-              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks.ts`}>
+              existingContributions={allContributions}
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks/index.tsx`}>
               <ContributorsCardLoading
                 slot="fallback"
                 sidebarVariant

@@ -21,19 +21,17 @@ import { type EnsAwardsScore as EnsAwardsScoreType } from "data/shared/ens-award
 import {
   groupBenchmarksByCategory,
   calcBestPracticeCategoryScore,
-  sortBenchmarks,
+  sortBenchmarkResults,
   getAppBenchmarks,
 } from "data/benchmarks/utils";
-import type { AppBenchmark } from "data/benchmarks/types";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { getAppContributions } from "data/contributors/utils.ts";
-import type { BestPracticeCategorySlug, BestPracticeSlug } from "data/ens-best-practices/types";
-import {
-  getBestPracticeCategoryBySlug,
-  getBestPracticeBySlug,
-} from "data/ens-best-practices/utils.ts";
+import type { BestPracticeCategorySlug } from "data/ens-best-practices/types";
+import { getBestPracticeCategoryBySlug } from "data/ens-best-practices/utils.ts";
 import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
+import { CategoryStatuses } from "data/ens-best-practices/types.ts";
+import { summarizeAppsAcceptanceTestBenchmarks } from "data/benchmarks/utils.ts";
 
 export function getStaticPaths() {
   return APPS.map((app) => ({ params: { appSlug: app.appSlug } }));
@@ -130,6 +128,26 @@ if (app !== undefined) {
                     );
                   }
 
+                  if (category.status !== CategoryStatuses.Active) {
+                    return null;
+                  }
+
+                  const benchmarksOnBestPractice = [
+                    ...Object.entries(benchmarksInCategory),
+                  ]
+                    .map(([bestPracticeSlug, bestPracticeBenchmarks]) =>
+                      summarizeAppsAcceptanceTestBenchmarks(
+                        bestPracticeSlug,
+                        bestPracticeBenchmarks,
+                      ),
+                    )
+                    .sort((a, b) =>
+                      sortBenchmarkResults(
+                        a.generalizedBenchmarkResult,
+                        b.generalizedBenchmarkResult,
+                      ),
+                    );
+
                   return (
                     <div class="w-full flex flex-col justify-start items-start gap-2">
                       <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">
@@ -138,40 +156,24 @@ if (app !== undefined) {
                           {category.name}
                         </span>
                       </div>
-                      {[...Object.entries(benchmarksInCategory)]
-                        .sort(([_a, aBenchmark], [_b, bBenchmark]) =>
-                          sortBenchmarks(aBenchmark, bBenchmark),
-                        )
-                        .map(
-                          ([bestPracticeSlug, benchmark]: [
-                            BestPracticeSlug,
-                            AppBenchmark | undefined,
-                          ]) => {
-                            const bestPractice =
-                              getBestPracticeBySlug(bestPracticeSlug);
-
-                            if (bestPractice === undefined) {
-                              throw new Error(
-                                `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
-                              );
-                            }
-
-                            return (
-                              <BenchmarkResultCard
-                                bestPractice={bestPractice}
-                                viewDetails={{
-                                  text: "View detailed report",
-                                  link: `/app/${app.appSlug}/${categorySlug}/${bestPracticeSlug}`,
-                                }}>
-                                <BenchmarkResultBadge
-                                  slot="badge"
-                                  className="cursor-pointer"
-                                  benchmark={benchmark}
-                                />
-                              </BenchmarkResultCard>
-                            );
-                          },
-                        )}
+                      {benchmarksOnBestPractice.map(
+                        ({ bestPractice, generalizedBenchmarkResult }) => {
+                          return (
+                            <BenchmarkResultCard
+                              bestPractice={bestPractice}
+                              viewDetails={{
+                                text: "View detailed report",
+                                link: `/app/${app.appSlug}/${categorySlug}/${bestPractice.bestPracticeSlug}`,
+                              }}>
+                              <BenchmarkResultBadge
+                                slot="badge"
+                                className="cursor-pointer"
+                                benchmarkResult={generalizedBenchmarkResult}
+                              />
+                            </BenchmarkResultCard>
+                          );
+                        },
+                      )}
                     </div>
                   );
                 })}
@@ -182,7 +184,7 @@ if (app !== undefined) {
               client:only="react"
               contributionType={ContributionTypes.BenchmarkResult}
               existingContributions={appContributions}
-              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks.ts`}
+              gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/apps/${app.appSlug}/benchmarks/index.tsx`}
               sidebarVariant>
               <ContributorsCardLoading
                 slot="fallback"

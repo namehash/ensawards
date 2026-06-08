@@ -1,23 +1,21 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import type { App } from "data/apps/types.ts";
 import { calcAppScore, getAppById } from "data/apps/utils.ts";
-import type { AppBenchmark } from "data/benchmarks/types.ts";
 import {
   calcBestPracticeCategoryScore,
   formatBenchmarkResult,
   getAppBenchmarks,
   groupBenchmarksByCategory,
-  sortBenchmarks,
+  sortBenchmarkResults,
+  summarizeAppsAcceptanceTestBenchmarks,
 } from "data/benchmarks/utils.ts";
-import type {
-  BestPracticeBenchmarks,
-  BestPracticeCategorySlug,
-  BestPracticeSlug,
-} from "data/ens-best-practices/types.ts";
+import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import {
-  getBestPracticeBySlug,
-  getBestPracticeCategoryBySlug,
-} from "data/ens-best-practices/utils.ts";
+  type BestPracticeBenchmarks,
+  type BestPracticeCategorySlug,
+  CategoryStatuses,
+} from "data/ens-best-practices/types.ts";
+import { getBestPracticeCategoryBySlug } from "data/ens-best-practices/utils.ts";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
@@ -51,6 +49,14 @@ function BenchmarkCategorySection({
     throw new Error(`Invariant(CategorySlug): Category with slug ${categorySlug} not found`);
   }
 
+  const appBenchmarksData = [...Object.entries(benchmarksInCategory)]
+    .map(([bestPracticeSlug, bestPracticeBenchmarks]) =>
+      summarizeAppsAcceptanceTestBenchmarks(bestPracticeSlug, bestPracticeBenchmarks),
+    )
+    .sort((a, b) =>
+      sortBenchmarkResults(a.generalizedBenchmarkResult, b.generalizedBenchmarkResult),
+    );
+
   return (
     <div ref={animationParent} className="w-full border-t border-gray-200 py-4">
       <button
@@ -73,46 +79,42 @@ function BenchmarkCategorySection({
 
       {isOpen && (
         <div className="flex w-full flex-col gap-4 pt-4">
-          {[...Object.entries(benchmarksInCategory)]
-            .sort(([_a, aBenchmark], [_b, bBenchmark]) => sortBenchmarks(aBenchmark, bBenchmark))
-            .map(([bestPracticeSlug, benchmark]: [BestPracticeSlug, AppBenchmark | undefined]) => {
-              const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
-
-              if (bestPractice === undefined) {
-                throw new Error(
-                  `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
-                );
-              }
-
-              return (
-                <a
-                  key={bestPractice.id}
-                  href={`/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
-                  className="flex items-start gap-3"
+          {appBenchmarksData.map(({ bestPractice, generalizedBenchmarkResult }) => {
+            return (
+              <a
+                key={bestPractice.id}
+                href={`/app/${app.appSlug}/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}`}
+                className="flex items-start gap-3"
+              >
+                <GenericTooltip
+                  tooltipOffset={1}
+                  triggerAsChild
+                  content={
+                    <p>
+                      {formatBenchmarkResult(generalizedBenchmarkResult, {
+                        lowercase: false,
+                      })}
+                    </p>
+                  }
                 >
-                  <GenericTooltip
-                    tooltipOffset={1}
-                    triggerAsChild
-                    content={<p>{formatBenchmarkResult(benchmark, { lowercase: false })}</p>}
-                  >
-                    <span className="shrink-0 cursor-pointer">
-                      {getBenchmarkIcon(
-                        benchmark,
-                        cn(
-                          "w-6 h-6",
-                          benchmarkResultToBadgeStyles(benchmark),
-                          "bg-transparent",
-                          benchmark === undefined && "p-0.5",
-                        ),
-                      )}
-                    </span>
-                  </GenericTooltip>
-                  <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
-                    {bestPractice.name}
+                  <span className="shrink-0 cursor-pointer">
+                    {getBenchmarkIcon(
+                      generalizedBenchmarkResult,
+                      cn(
+                        "w-6 h-6",
+                        benchmarkResultToBadgeStyles(generalizedBenchmarkResult),
+                        "bg-transparent",
+                        generalizedBenchmarkResult === undefined && "p-0.5",
+                      ),
+                    )}
                   </span>
-                </a>
-              );
-            })}
+                </GenericTooltip>
+                <span className="text-sm leading-normal font-medium text-black underline decoration-black/40 decoration-from-font underline-offset-[25%] transition-all duration-200 hover:decoration-black">
+                  {bestPractice.name}
+                </span>
+              </a>
+            );
+          })}
         </div>
       )}
     </div>
@@ -129,6 +131,36 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
 
   const appScore = calcAppScore(resolvedApp);
   const benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(resolvedApp.appSlug));
+
+  // Remove inactive categories from the summary
+  const benchmarksInActiveCategories = [...benchmarksByCategory].filter(
+    ([categorySlug, _bestPracticeBenchmarks]) => {
+      const category = getBestPracticeCategoryBySlug(categorySlug);
+
+      if (category === undefined) {
+        throw new Error(
+          `Invariant(BestPracticeCategorySlug): Category with slug ${categorySlug} not defined`,
+        );
+      }
+
+      return category.status === CategoryStatuses.Active;
+    },
+  );
+
+  // Precompute the best practice category --> index mapping to
+  // optimize time complexity of sorting categories
+  const categorySlugToIndex: Record<BestPracticeCategorySlug, number> = {};
+  BEST_PRACTICE_CATEGORIES.forEach((category, index) => {
+    categorySlugToIndex[category.categorySlug] = index;
+  });
+
+  // Sort categories based on the BestPracticeCategory.order field
+  // (used to initially order BEST_PRACTICE_CATEGORIES array)
+  const benchmarksByCategorySorted = [...benchmarksInActiveCategories].sort(
+    ([aCategorySlug, _a], [bCategorySlug, _b]) =>
+      categorySlugToIndex[aCategorySlug] - categorySlugToIndex[bCategorySlug],
+  );
+
   const AppIcon = resolvedApp.icon;
 
   return (
@@ -143,7 +175,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
           </div>
           <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
         </div>
-        {[...benchmarksByCategory.entries()].map(([categorySlug, benchmarksInCategory], index) => {
+        {benchmarksByCategorySorted.map(([categorySlug, benchmarksInCategory], index) => {
           return (
             <BenchmarkCategorySection
               key={`${resolvedApp.appSlug}-benchmarks-in-${categorySlug}-category`}

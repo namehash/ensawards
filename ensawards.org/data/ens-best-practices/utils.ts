@@ -1,6 +1,8 @@
 import { AppTypes } from "data/apps/types.ts";
-import { BenchmarkResults } from "data/benchmarks/types.ts";
-import { calcEnsAwardsPoints, getAppBenchmarksByBestPractice } from "data/benchmarks/utils.ts";
+import {
+  calcEnsAwardsPoints,
+  getAcceptanceTestBenchmarksByBestPractice,
+} from "data/benchmarks/utils.ts";
 import { ProtocolTypes } from "data/protocols/types.ts";
 import { asEnsAwardsScore, type EnsAwardsScore } from "data/shared/ens-awards-score.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
@@ -15,6 +17,7 @@ import {
   type BestPracticeTarget,
   type BestPracticeType,
   BestPracticeTypes,
+  CategoryStatuses,
 } from "./types.ts";
 
 /**
@@ -95,58 +98,42 @@ export const formatBestPracticeType = (
 
 /**
  * Calculates an {@link EnsAwardsScore} for a {@link BestPractice},
- * by calculating the average score of all apps that were benchmarked on this best practice.
+ * by calculating the total score of all apps that were benchmarked on this best practice
+ * and dividing it by the total number of acceptance test benchmarks completed on it.
  *
  * @returns `undefined` if no apps were benchmarked on this best practice,
- * otherwise returns the {@link EnsAwardsScore}.
+ * or the best practice belongs to a category with status other than `Active`.
+ * Otherwise returns the {@link EnsAwardsScore}.
  */
 export const calcBestPracticeScore = (
   bestPractice: BestPracticeApp,
 ): EnsAwardsScore | undefined => {
-  let benchmarkedApps = 0;
+  if (bestPractice.category.status !== CategoryStatuses.Active) {
+    return undefined;
+  }
+
+  let benchmarkedAcceptanceTests = 0;
   let bestPracticePoints = 0;
 
-  const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(bestPractice.bestPracticeSlug);
+  const bestPracticeBenchmarks = getAcceptanceTestBenchmarksByBestPractice(
+    bestPractice.bestPracticeSlug,
+  ).flatMap((appBenchmark) => Object.values(appBenchmark));
 
-  for (const benchmark of bestPracticeBenchmarks) {
-    if (benchmark === undefined) {
+  for (const acceptanceTestBenchmark of bestPracticeBenchmarks) {
+    if (acceptanceTestBenchmark === undefined) {
       continue;
     }
 
-    benchmarkedApps += 1;
+    benchmarkedAcceptanceTests += 1;
 
-    bestPracticePoints += calcEnsAwardsPoints(benchmark);
+    bestPracticePoints += calcEnsAwardsPoints(acceptanceTestBenchmark);
   }
 
-  if (benchmarkedApps === 0) return undefined;
+  if (benchmarkedAcceptanceTests === 0) return undefined;
 
-  const score = Math.round((bestPracticePoints * 100) / benchmarkedApps);
+  const score = Math.round((bestPracticePoints * 100) / benchmarkedAcceptanceTests);
 
   return asEnsAwardsScore(score);
-};
-
-/**
- * Calculates how many apps passed our benchmark on this {@link BestPractice}.
- *
- * For now, both {@link BenchmarkResults.Pass} and {@link BenchmarkResults.PartialPass} are treated as a pass.
- */
-export const calcAppsPassed = (bestPractice: BestPracticeApp): number => {
-  let appsPassed = 0;
-
-  const bestPracticeBenchmarks = getAppBenchmarksByBestPractice(bestPractice.bestPracticeSlug);
-
-  bestPracticeBenchmarks.forEach((benchmark) => {
-    // Explicit acceptance of Pass & Partial Pass results
-    if (
-      benchmark !== undefined &&
-      (benchmark.result === BenchmarkResults.Pass ||
-        benchmark.result === BenchmarkResults.PartialPass)
-    ) {
-      appsPassed += 1;
-    }
-  });
-
-  return appsPassed;
 };
 
 export const formatBestPracticeTarget = (

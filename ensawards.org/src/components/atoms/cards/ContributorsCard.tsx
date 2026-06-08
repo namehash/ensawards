@@ -6,13 +6,12 @@ import {
 import type { Contribution, Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
 import { User as NoContributionsIcon } from "lucide-react";
-import { useMemo } from "react";
-import { getAddress } from "viem";
+import { type ReactElement, useMemo } from "react";
 
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
-import GitHubOutlineIcon from "@/assets/githubOutlineIcon.svg";
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";
+import { GitHubOutlineIcon } from "@/components/atoms/icons/GitHubOutlineIcon";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getEnsAdvocateDetailsRelativePath, getEnsAwardsBaseUrl } from "@/utils";
@@ -43,6 +42,27 @@ const formatContributionType = (contributionType: ContributionType): string => {
 
     case ContributionTypes.BenchmarkResult:
       return "benchmarks";
+
+    default:
+      const _exhaustive: never = contributionType;
+      throw new Error(`Unsupported ContributionType: ${_exhaustive}`);
+  }
+};
+
+const formatNoContributionsMessage = (contributionType: ContributionType): ReactElement => {
+  switch (contributionType) {
+    case ContributionTypes.App:
+    case ContributionTypes.Protocol:
+      return <span>No leaderboard contributions&nbsp;yet</span>;
+
+    case ContributionTypes.Contract:
+      return <span>No smart contract contributions&nbsp;yet</span>;
+
+    case ContributionTypes.BestPractice:
+      return <span>No ENS best practice contributions&nbsp;yet</span>;
+
+    case ContributionTypes.BenchmarkResult:
+      return <span>No acceptance test results contributed&nbsp;yet</span>;
 
     default:
       const _exhaustive: never = contributionType;
@@ -114,84 +134,47 @@ export const ContributorsCard = ({
             </div>
           </div>
 
-          <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
+          <div
+            className={cn(
+              "w-full flex flex-col gap-3 sm:gap-4",
+              !sidebarVariant && "lg:w-1/2 lg:items-end",
+            )}
+          >
             <div className="flex flex-wrap items-start gap-3 py-1.5">
               {orderedContributorProfiles.length === 0 ? (
                 <div className="w-full flex flex-col justify-center items-center gap-3 py-3">
                   <NoContributionsIcon size={24} className="text-muted-foreground" />
-                  <p className="text-base text-muted-foreground leading-normal font-normal">
-                    No contributions yet
+                  <p className="w-full text-base text-center text-muted-foreground leading-normal font-normal">
+                    {formatNoContributionsMessage(contributionType)}
                   </p>
                 </div>
               ) : (
-                orderedContributorProfiles.map((profile) => {
-                  const identity = buildUnresolvedIdentity(
-                    profile.address,
-                    DEFAULT_ENS_NAMESPACE,
-                    profile.chainId,
-                  );
-
-                  return (
-                    <GenericTooltip
-                      key={`contributor-${profile.chainId}-${getAddress(profile.address)}`}
-                      triggerAsChild
-                      content={
-                        <ContributorTooltipContent contributor={profile} identity={identity} />
-                      }
-                      tooltipOffset={1}
-                    >
-                      <div className="w-10 h-10 rounded-full">
-                        <ResolveAndDisplayIdentity
-                          identity={identity}
-                          namespaceId={DEFAULT_ENS_NAMESPACE}
-                          withLink={true}
-                          identityLinkDetails={{
-                            isExternal: false,
-                            link: new URL(
-                              getEnsAdvocateDetailsRelativePath(profile.address),
-                              getEnsAwardsBaseUrl(),
-                            ),
-                          }}
-                          withTooltip={false}
-                          withAvatar={true}
-                          withIdentifier={false}
-                        />
-                      </div>
-                    </GenericTooltip>
-                  );
-                })
+                orderedContributorProfiles.map((profile) => (
+                  <DisplayContributorIdentity
+                    key={`${profile.chainId}-${profile.address}`}
+                    contributor={profile}
+                  />
+                ))
               )}
             </div>
 
             <div className="w-full h-px bg-border"></div>
 
-            <div
+            <a
+              href={gitHubTargetHref}
+              target="_blank"
+              rel="noreferrer noopener"
               className={cn(
-                "w-full flex flex-col gap-3",
-                !sidebarVariant && "sm:flex-row sm:justify-between sm:items-center",
+                shadcnButtonVariants({
+                  variant: "secondary",
+                  size: "default",
+                  className: "cursor-pointer rounded-full w-fit max-sm:text-wrap max-sm:h-fit",
+                }),
               )}
             >
-              <p className="text-base leading-6 font-normal text-muted-foreground">
-                Submit a contribution
-              </p>
-              <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
-                <a
-                  href={gitHubTargetHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={cn(
-                    shadcnButtonVariants({
-                      variant: "secondary",
-                      size: "default",
-                      className: "cursor-pointer rounded-full max-sm:self-stretch",
-                    }),
-                  )}
-                >
-                  <img src={GitHubOutlineIcon.src} alt="GitHub icon" />
-                  Edit on GitHub
-                </a>
-              </div>
-            </div>
+              <GitHubOutlineIcon />
+              Submit a contribution on GitHub
+            </a>
           </div>
         </div>
       </TooltipProvider>
@@ -226,12 +209,46 @@ const ContributorTooltipContent = ({ contributor, identity }: ContributorTooltip
         />
         <a
           href={getEnsAdvocateDetailsRelativePath(contributor.address)}
-          className="text-xs leading-normal text-blue-500 font-normal hover:underline hover:underline-offset-[25%]"
+          className="text-xs leading-normal text-white font-normal underline underline-offset-[25%] decoration-white/40 hover:decoration-white transition-all duration-200"
         >
           View ENS Advocate profile
         </a>
       </div>
     </div>
+  );
+};
+
+export const DisplayContributorIdentity = ({ contributor }: { contributor: Contributor }) => {
+  const identity = buildUnresolvedIdentity(
+    contributor.address,
+    DEFAULT_ENS_NAMESPACE,
+    contributor.chainId,
+  );
+
+  return (
+    <GenericTooltip
+      triggerAsChild
+      content={<ContributorTooltipContent contributor={contributor} identity={identity} />}
+      tooltipOffset={1}
+    >
+      <div className="w-10 h-10 rounded-full">
+        <ResolveAndDisplayIdentity
+          identity={identity}
+          namespaceId={DEFAULT_ENS_NAMESPACE}
+          withLink={true}
+          identityLinkDetails={{
+            isExternal: false,
+            link: new URL(
+              getEnsAdvocateDetailsRelativePath(contributor.address),
+              getEnsAwardsBaseUrl(),
+            ),
+          }}
+          withTooltip={false}
+          withAvatar={true}
+          withIdentifier={false}
+        />
+      </div>
+    </GenericTooltip>
   );
 };
 
@@ -257,7 +274,12 @@ export const ContributorsCardLoading = ({
         </div>
       </div>
 
-      <div className={cn("w-full flex flex-col gap-3 sm:gap-4", !sidebarVariant && "lg:w-1/2")}>
+      <div
+        className={cn(
+          "w-full flex flex-col gap-3 sm:gap-4",
+          !sidebarVariant && "lg:w-1/2 lg:items-end",
+        )}
+      >
         <div className="flex flex-wrap items-start gap-3 py-1.5">
           <Skeleton className={cn(loadingStyles, "w-10 h-10 rounded-full")} />
           <Skeleton className={cn(loadingStyles, "w-10 h-10 rounded-full")} />
@@ -266,21 +288,7 @@ export const ContributorsCardLoading = ({
 
         <div className="w-full h-px bg-border"></div>
 
-        <div
-          className={cn(
-            "w-full flex flex-col gap-3",
-            !sidebarVariant && "sm:flex-row sm:justify-between sm:items-center",
-          )}
-        >
-          <p className="text-base leading-6 font-normal text-muted-foreground">
-            Submit a contribution
-          </p>
-          <div className="flex flex-row-reverse sm:flex-row justify-end sm:justify-start items-center gap-2 max-sm:self-stretch">
-            <Skeleton
-              className={cn(loadingStyles, "w-[154px] h-[36px] rounded-full max-sm:self-stretch")}
-            />
-          </div>
-        </div>
+        <Skeleton className={cn(loadingStyles, "w-[265px] h-[36px] rounded-full")} />
       </div>
     </div>
   );

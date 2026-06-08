@@ -1,8 +1,8 @@
-import { type AppBenchmark, BenchmarkResults } from "data/benchmarks/types.ts";
+import { BenchmarkResults } from "data/benchmarks/types.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
-  createMockBenchmark,
+  createMockAcceptanceTestBenchmark,
   mockCoinbaseWalletApp,
   mockDisplayProfilesBestPractice,
   mockEtherscanApp,
@@ -11,14 +11,16 @@ import {
   mockNormalizeNamesBestPractice,
   mockRainbowApp,
   mockReverseResolutionBestPractice,
-} from "../shared/test-utils.ts";
+} from "../shared/test-utils";
 import { type App, type AppBenchmarks, type AppSlug, AppTypes } from "./types.ts";
 
-const { mockApps, mockEnsAwardsPoints, mockBenchmarks } = vi.hoisted(() => ({
-  mockApps: [] as App[],
-  mockEnsAwardsPoints: vi.fn(),
-  mockBenchmarks: {} as AppBenchmarks,
-}));
+const { mockApps, mockEnsAwardsPoints, mockBenchmarks, mockGetAcceptanceTestBenchmarksByApp } =
+  vi.hoisted(() => ({
+    mockApps: [] as App[],
+    mockEnsAwardsPoints: vi.fn(),
+    mockBenchmarks: {} as AppBenchmarks,
+    mockGetAcceptanceTestBenchmarksByApp: vi.fn(),
+  }));
 
 vi.mock("./index.ts", () => ({
   APPS: mockApps,
@@ -32,6 +34,12 @@ vi.mock("data/benchmarks/utils.ts", () => ({
   calcEnsAwardsPoints: mockEnsAwardsPoints,
   getAppBenchmarks: (slug: AppSlug) => mockBenchmarks[slug],
 }));
+
+vi.mock("data/acceptance-tests/utils.ts", () => ({
+  getAcceptanceTestBenchmarksByApp: mockGetAcceptanceTestBenchmarksByApp,
+}));
+
+import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 
 import {
   appliesToAllApps,
@@ -51,7 +59,7 @@ describe("App utils", () => {
   beforeEach(() => {
     mockApps.splice(0, mockApps.length);
     mockEnsAwardsPoints.mockReset();
-    mockEnsAwardsPoints.mockImplementation((benchmark: AppBenchmark) => {
+    mockEnsAwardsPoints.mockImplementation((benchmark: AcceptanceTestBenchmark) => {
       switch (benchmark.result) {
         case BenchmarkResults.Pass:
           return 1;
@@ -60,6 +68,26 @@ describe("App utils", () => {
         case BenchmarkResults.Fail:
         default:
           return 0;
+      }
+    });
+
+    mockGetAcceptanceTestBenchmarksByApp.mockReset();
+    mockGetAcceptanceTestBenchmarksByApp.mockImplementation((appSlug: AppSlug) => {
+      switch (appSlug) {
+        case mockCoinbaseWalletApp.appSlug:
+          return Object.values(mockBenchmarks[mockCoinbaseWalletApp.appSlug]).flatMap(
+            (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+          );
+        case mockRainbowApp.appSlug:
+          return Object.values(mockBenchmarks[mockRainbowApp.appSlug]).flatMap(
+            (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+          );
+        case mockMetamaskApp.appSlug:
+          return Object.values(mockBenchmarks[mockMetamaskApp.appSlug]).flatMap(
+            (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+          );
+        default:
+          throw new Error(`No benchmarks defined for app with slug ${appSlug}`);
       }
     });
   });
@@ -117,16 +145,18 @@ describe("App utils", () => {
 
     it("Should return the rounded ENSAwards score for an app with benchmarks", () => {
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Pass,
-        ),
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Pass,
-        ),
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Fail,
-        ),
-        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        },
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: undefined,
+        },
       };
 
       const result = calcAppScore(mockCoinbaseWalletApp);
@@ -136,10 +166,18 @@ describe("App utils", () => {
 
     it("Should return undefined when the app has no defined benchmarks", () => {
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: undefined,
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: undefined,
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: undefined,
-        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: undefined,
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: undefined,
+        },
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: undefined,
+        },
       };
       const result = calcAppScore(mockCoinbaseWalletApp);
 
@@ -149,9 +187,9 @@ describe("App utils", () => {
     it("Should throw when the calculated score is greater than 100", () => {
       mockEnsAwardsPoints.mockReturnValue(2);
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Pass,
-        ),
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        },
       };
 
       expect(() => calcAppScore(mockCoinbaseWalletApp)).toThrow(
@@ -162,9 +200,9 @@ describe("App utils", () => {
     it("Should throw when the calculated score is less than 0", () => {
       mockEnsAwardsPoints.mockReturnValue(-1);
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Pass,
-        ),
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        },
       };
 
       expect(() => calcAppScore(mockCoinbaseWalletApp)).toThrow(
@@ -186,36 +224,48 @@ describe("App utils", () => {
   describe("sortApps", () => {
     it("Should sort apps in descending order of their scores", () => {
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Pass,
-        ),
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Pass,
-        ),
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Fail,
-        ),
-        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        },
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: undefined,
+        },
       };
 
       mockBenchmarks[mockRainbowApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Pass,
-        ),
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Fail,
-        ),
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: createMockBenchmark(
-          BenchmarkResults.Fail,
-        ),
-        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        },
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: undefined,
+        },
       };
 
       mockBenchmarks[mockMetamaskApp.appSlug] = {
-        [mockReverseResolutionBestPractice.bestPracticeSlug]: undefined,
-        [mockDisplayProfilesBestPractice.bestPracticeSlug]: undefined,
-        [mockForwardResolutionBestPractice.bestPracticeSlug]: undefined,
-        [mockNormalizeNamesBestPractice.bestPracticeSlug]: undefined,
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: undefined,
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: undefined,
+        },
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: undefined,
+        },
       };
 
       const apps = [mockMetamaskApp, mockRainbowApp, mockCoinbaseWalletApp];

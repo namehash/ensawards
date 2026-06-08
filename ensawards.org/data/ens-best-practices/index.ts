@@ -4,7 +4,8 @@
 import { getDefinedBestPracticeCategories, getDefinedBestPractices } from "./registry.ts";
 import { type BestPractice, type BestPracticeCategory, CategoryStatuses } from "./types.ts";
 
-import.meta.glob("./*/*.ts", { eager: true });
+import.meta.glob("./*/index.ts", { eager: true });
+import.meta.glob("./*/*/index.ts", { eager: true });
 
 export const ENS_BEST_PRACTICES: BestPractice[] = [
   ...getDefinedBestPractices().sort((a, b) => a.name.localeCompare(b.name)),
@@ -12,10 +13,14 @@ export const ENS_BEST_PRACTICES: BestPractice[] = [
 
 export const BEST_PRACTICE_CATEGORIES: BestPracticeCategory[] = [
   ...getDefinedBestPracticeCategories().sort((a, b) => {
-    if (a.status === b.status) return a.name.localeCompare(b.name);
+    if (a.status !== b.status) {
+      return a.status === CategoryStatuses.Active ? -1 : 1;
+    }
 
-    if (a.status === CategoryStatuses.Active) return -1;
+    const aOrder = a.order ?? Number.POSITIVE_INFINITY;
+    const bOrder = b.order ?? Number.POSITIVE_INFINITY;
+    if (aOrder !== bOrder) return aOrder - bOrder;
 
-    return 1;
+    return a.name.localeCompare(b.name);
   }),
 ];

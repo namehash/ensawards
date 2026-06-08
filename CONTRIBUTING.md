@@ -46,16 +46,22 @@ This is our way to show appreciation to the people who contributed to our cause.
 ![Social credit for contributors](./ensawards.org/src/assets/contributorsDocsSocialCredit.png)
 
 To add yourself:
-1. Add your `AccountId` to the `contributors` collection in [ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) (if this is your first contribution).
+1. Add your `AccountId` to the `contributors` collection in 
+[ensawards.org/data/contributors/index.ts](ensawards.org/data/contributors/index.ts) 
+(if this is your first contribution).
 2. Reference yourself in the contributions array of the entity you are updating. If you update the same entity multiple times, update the `lastUpdated` field for each change with the timestamp of your most recent update to that entity.
 
-For reference see [ensawards.org/data/apps/metamask-wallet/benchmarks.ts](ensawards.org/data/apps/metamask-wallet/benchmarks.ts).
+For reference see 
+[ensawards.org/data/apps/metamask-wallet/benchmarks/index.tsx](ensawards.org/data/apps/metamask-wallet/benchmarks/index.tsx).
 
 ### Adding a new `Project`
 
 1. Create a new subdirectory in the [ensawards.org/data/projects/](ensawards.org/data/projects) named after the project you want to add. The directory name should be the lowercase project name. If the name contains multiple words, join them with hyphens ("-").
-2. Inside the new directory, create an `index.ts` file and default-export the project definition. Make sure to also call `defineProject()` on it. For reference see [ensawards.org/data/projects/aave/index.ts](ensawards.org/data/projects/aave/index.ts).
-3. Follow its data model that you can look up in the [ensawards.org/data/projects/types.ts](ensawards.org/data/projects/types.ts) file. You can also have a quick glance at it below.
+2. Inside the new directory, create an `index.ts` file and default-export the project definition. Make sure to also call `defineProject()` on it. For reference see 
+[ensawards.org/data/projects/aave/index.ts](ensawards.org/data/projects/aave/index.ts).
+3. Follow its data model that you can look up in the 
+[ensawards.org/data/projects/types.ts](ensawards.org/data/projects/types.ts) file. 
+You can also have a quick glance at it below.
 
 ```typescript
 export interface Project {
@@ -69,7 +75,8 @@ export interface Project {
   };
 }
 ```
-4. Add an SVG icon as a React component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/projects/aave/icon.tsx](ensawards.org/data/projects/aave/icon.tsx).
+4. Add an SVG icon as a React component in the created directory (`icon.tsx`). For reference, see 
+[ensawards.org/data/projects/aave/icon.tsx](ensawards.org/data/projects/aave/icon.tsx).
 5. You are welcome to propose updates to already added projects using the same approach.
 
 ### Relationship between `Projects`, `Protocols` and `Apps`
@@ -85,8 +92,13 @@ For this reason, every new `App` or `Protocol` must be associated with a corresp
 ### Adding a new `Protocol`
 
 1. Create a new subdirectory in the [ensawards.org/data/protocols/](ensawards.org/data/protocols) named after the protocol you want to add. The directory name should be the same as the slug of the protocol (for reference see [ensawards.org/data/protocols/ens-dao/index.ts](ensawards.org/data/protocols/ens-dao/index.ts)).
-2. Inside the new directory, create an `index.ts` file and default-export the protocol definition. Make sure to also call `defineProtocol()` on it. For reference see [ensawards.org/data/protocols/ens-dao/index.ts](ensawards.org/data/protocols/ens-dao/index.ts).
-3. Make sure to follow its data model that you can look up in the [ensawards.org/data/protocols/types.ts](ensawards.org/data/protocols/types.ts) file. Remember that the `Protocol` can represent either a `DAO` or a `DeFi protocol`. Below you can see its most important interface and type:
+2. Inside the new directory, create an `index.ts` file and default-export the protocol definition. 
+Make sure to also call `defineProtocol()` on it. For reference see 
+[ensawards.org/data/protocols/ens-dao/index.ts](ensawards.org/data/protocols/ens-dao/index.ts).
+3. Make sure to follow its data model that you can look up in the 
+[ensawards.org/data/protocols/types.ts](ensawards.org/data/protocols/types.ts) file. 
+Remember that the `Protocol` can represent either a `DAO` or a `DeFi protocol`. 
+Below you can see its most important interface and type:
 
 ```typescript
 export interface ProtocolAbstract<ProtocolIdT extends ProtocolId, ProtocolT extends ProtocolType> {
@@ -129,14 +141,17 @@ export type Protocol = DAOProtocol | DeFiProtocol;
 
 ```
 
-4. Add an SVG icon as a React component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/protocols/ens-dao/icon.tsx](ensawards.org/data/protocols/ens-dao/icon.tsx).
+4. Add an SVG icon as a React component in the created directory (`icon.tsx`). 
+For reference, see [ensawards.org/data/protocols/ens-dao/icon.tsx](ensawards.org/data/protocols/ens-dao/icon.tsx).
 5. In your PR describe your reasoning for adding this `Protocol`.
 6. You are welcome to propose updates to existing protocols using the same approach.
 
 ### Adding a new `Contract`
 
-1. Add the new contract object to the `contracts` array in the [ensawards.org/data/protocols/[protocol-directory]/contracts.ts](ensawards.org/data/protocols/aave-dao/contracts.ts) file where `[protocol-directory]` matches the protocol’s `Protocol.protocolSlug` value.
-2. Make sure to follow the data model defined in the [ensawards.org/data/protocols/contracts-types.ts](ensawards.org/data/protocols/contracts-types.ts) file.
+1. Add the new contract object to the `contracts` array in the 
+[ensawards.org/data/protocols/[protocol-directory]/contracts.ts](ensawards.org/data/protocols/aave-dao/contracts.ts) file where `[protocol-directory]` matches the protocol’s `Protocol.protocolSlug` value.
+2. Make sure to follow the data model defined in the 
+[ensawards.org/data/protocols/contracts-types.ts](ensawards.org/data/protocols/contracts-types.ts) file.
 ```typescript
 export interface Contract {
   protocol: Protocol;
@@ -149,9 +164,12 @@ export interface Contract {
 
 ### Adding a new `App`
 
-1. Create a new subdirectory in the [ensawards.org/data/apps/](ensawards.org/data/apps) named after the app you want to add. The directory name should be the same as the slug of the app (for reference see [ensawards.org/data/apps/metamask-wallet/index.ts](ensawards.org/data/apps/metamask-wallet/index.ts)).
-2. Inside the new directory, create an `index.ts` file and default-export the app definition. Make sure to also call `defineApp()` on it. For reference see [ensawards.org/data/apps/rainbow-wallet/index.ts](ensawards.org/data/apps/rainbow-wallet/index.ts).
-3. Follow the corresponding data model available in the [ensawards.org/data/apps/types.ts](ensawards.org/data/apps/types.ts) file.
+1. Create a new subdirectory in the [ensawards.org/data/apps/](ensawards.org/data/apps) named after the app you want to add. The directory name should be the same as the slug of the app (for reference see 
+[ensawards.org/data/apps/metamask-wallet/index.ts](ensawards.org/data/apps/metamask-wallet/index.ts)).
+2. Inside the new directory, create an `index.ts` file and default-export the app definition. Make sure to also call `defineApp()` on it. 
+For reference see [ensawards.org/data/apps/rainbow-wallet/index.ts](ensawards.org/data/apps/rainbow-wallet/index.ts).
+3. Follow the corresponding data model available in the 
+[ensawards.org/data/apps/types.ts](ensawards.org/data/apps/types.ts) file.
 ```typescript
 export interface App {
   id: string;
@@ -186,7 +204,9 @@ export interface App {
 }
 ```
 
-4. Add an SVG icon as a React component in the created directory (`icon.tsx`). For reference, see [ensawards.org/data/apps/blockscout-explorer/icon.tsx](ensawards.org/data/apps/blockscout-explorer/icon.tsx).
+4. Add an SVG icon as a React component in the created directory (`icon.tsx`). 
+For reference, see 
+[ensawards.org/data/apps/blockscout-explorer/icon.tsx](ensawards.org/data/apps/blockscout-explorer/icon.tsx).
 5. In your PR describe your reasoning for adding that new `App`.
 6. You are welcome to propose updates to already added apps using the same approach.
 
@@ -196,11 +216,26 @@ Best practices are structured hierarchically and can be added on two levels:
 
 #### `BestPractice`
 
-Defines a specific requirement that an app or protocol must meet to pass a benchmark test. They are grouped into categories.
+Defines a specific requirement that an app or protocol must meet to pass a benchmark test. 
+They are grouped into categories.
 
-1. Create a new `BestPractice` default-export and its definition in `ensawards.org/data/ens-best-practices/[category]/[bestPractice].ts`, where `[category]` is the category slug and `[bestPractice]` is the practice slug. Make sure to also call `defineBestPractice()` on it. For reference see [ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts.ts](ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts.ts).
-2. Make sure to follow its data model defined in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
+1. Create a new `BestPractice` default-export and its 
+definition in `ensawards.org/data/ens-best-practices/[category]/[bestPractice]/index.ts`, 
+where `[category]` is the category slug and `[bestPractice]` is the practice slug. 
+Make sure to also call `defineBestPractice()` on it. 
+For reference see [ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts/index.ts](ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts/index.ts).
+2. Make sure to follow its data model defined in the 
+[ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
+export interface BestPracticeTechnicalDetails {
+  useCaseSummary: JSX.Element;
+  benefitFromUsingEns: JSX.Element;
+  /** Title for the benefit card. Defaults to "Benefit from using ENS" when omitted. */
+  benefitFromUsingEnsTitle?: string;
+  implementationRecommendations: JSX.Element;
+  acceptanceTests: [AcceptanceTest, ...AcceptanceTest[]];
+}
+
 export interface BestPracticeAbstract<
   BestPracticeT extends BestPracticeType,
   AppliesToT extends BestPracticeTarget,
@@ -212,16 +247,7 @@ export interface BestPracticeAbstract<
   description: string;
   category: BestPracticeCategory; // each best practice belongs to exactly one best practice category
   appliesTo: AppliesToT[];
-  technicalDetails: {
-    main: {
-      header: string;
-      content: string;
-    };
-    sides: {
-      header: string;
-      content: string;
-    }[];
-  };
+  technicalDetails: BestPracticeTechnicalDetails;
   contributions: [Contribution, ...Contribution[]]; // Remember to add yourself as a contributor
 }
 
@@ -233,16 +259,69 @@ export interface BestPracticeApp
 
 export type BestPractice = BestPracticeProtocol | BestPracticeApp;
 ```
-3. In your PR describe your reasoning for adding it.
-4. If you want your best practice to be a part of a new category, learn how to add one below.
+3. Add technical details as simple JSX elements in the created directory (`technicalDetails.tsx`). 
+For reference, see [ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts/technicalDetails.tsx](ensawards.org/data/ens-best-practices/contract-naming/name-your-smart-contracts/technicalDetails.tsx).
+    * Make sure to follow the `AcceptanceTest` data model available in the 
+    [ensawards.org/data/acceptance-tests/types.ts](ensawards.org/data/acceptance-tests/types.ts) file.
+    ```typescript
+    /** A unique identifier for an acceptance test.
+    *
+    * @invariant Must be unique across all acceptance tests.
+    * @invariant Must match {@link ENSAWARDS_SLUG_PATTERN}.
+    */
+    export type AcceptanceTestSlug = string;
+
+    /**
+    * Represents an acceptance test that an app can be evaluated against.
+    */
+    export interface AcceptanceTest {
+      /**
+      * Unique identifier for the acceptance test.
+      */
+      acceptanceTestSlug: AcceptanceTestSlug;
+
+      /**
+      * Description of the acceptance test,
+      * which should provide clear and detailed information
+      * about the criteria and requirements that
+      * an {@link App} must meet to pass the test.
+      * This may include specific functionalities to be tested,
+      * user interactions to be evaluated,
+      * and any relevant technical details or considerations.
+      *
+      * @note The description should not include examples of passed or failed benchmarks,
+      * there are dedicated fields for that
+      * (see {@link AcceptanceTest.examplePass},
+      * {@link AcceptanceTest.examplePartialPass},
+      * or {@link AcceptanceTest.exampleFail}).
+      */
+      description: JSX.Element;
+
+      /**
+      * Examples of benchmark results that illustrate
+      * what a passing, partially passing, or failing result
+      * looks like for this acceptance test.
+      */
+      examplePass: AcceptanceTestBenchmarkPass;
+      examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
+      exampleFail?: AcceptanceTestBenchmarkFail;
+    }
+    ```
+4. In your PR describe your reasoning for adding it.
+5. If you want your best practice to be a part of a new category, learn how to add one below.
 
 #### `BestPracticeCategory`
 
 Categories sort best practices into topic-related groups based on their characteristics. They are a level above the basic `BestPractice` objects in the "Best Practices" hierarchy.
 
-1. To add a new category, create a new subdirectory in the [ensawards.org/data/ens-best-practices/](ensawards.org/data/ens-best-practices/) named after the best practice category you want to add. The directory name should be the same as the slug of the category (for reference see [ensawards.org/data/ens-best-practices/contract-naming/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts)).
-2. Inside the new directory, create an `index.ts` file and default-export the category definition. Make sure to also call `defineBestPracticeCategory()` on it. For reference see [ensawards.org/data/ens-best-practices/contract-naming/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts).
-3. Follow its data model available in the [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
+1. To add a new category, create a new subdirectory in the 
+[ensawards.org/data/ens-best-practices/](ensawards.org/data/ens-best-practices/) 
+named after the best practice category you want to add. The directory name should be the same as the slug of the category (for reference see 
+[ensawards.org/data/ens-best-practices/contract-naming/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts)).
+2. Inside the new directory, create an `index.ts` file and default-export the category definition. Make sure to also call `defineBestPracticeCategory()` on it. For reference see 
+[ensawards.org/data/ens-best-practices/contract-naming/index.ts](ensawards.org/data/ens-best-practices/contract-naming/index.ts).
+3. Follow its data model available in the 
+[ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
 export const CategoryStatuses = {
   ComingSoon: "coming-soon",
@@ -257,27 +336,34 @@ export interface BestPracticeCategory {
   name: string;
   description: string;
   status: CategoryStatus;
+  /** Sort priority within a status group; lower comes first, undefined sorts last (then by name). */
+  order?: number;
 }
 ```
 4. In your PR describe your reasoning for adding it.
 
 ### Suggest a `benchmark update`
 
-1. To suggest a benchmark update for an existing app, modify its `benchmarks` record in the [ensawards.org/data/apps/[app-directory]/benchmarks.ts](ensawards.org/data/apps/rainbow-wallet/benchmarks.ts) file where `[app-directory]` represents the slug of the relevant app. These records define relationships between benchmarks and best practices. Their data model is available at [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts).
+1. To suggest a benchmark update for an existing app, modify its `benchmarks` record in the 
+[ensawards.org/data/apps/[app-directory]/benchmarks/index.tsx](ensawards.org/data/apps/rainbow-wallet/benchmarks/index.tsx) file 
+where `[app-directory]` represents the slug of the relevant app. These records define relationships between benchmarks and best practices. Their data model is available at 
+[ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts).
 
 ```typescript
 /**
- * Defines relations between {@link BestPracticeSlug} and {@link AppBenchmark}
- * for the related {@link BestPractice}.
+ * Defines relations between {@link BestPracticeSlug} and the {@link AcceptanceTestBenchmarks}
+ * of the related {@link BestPractice} for a given app.
  *
- * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record` for each available {@link BestPractice}. 
- * If an app doesn't have a benchmark completed for a `BestPractice` then the benchmark should be explicitly set to `undefined`. 
- * Otherwise, the value should be an `AppBenchmark` describing how the related app performed for the `BestPractice`.
+ * @invariant An explicit key for each `BestPracticeSlug` should be added to this `Record`
+ * for each applicable {@link BestPractice}.
+ * The value should be the related {@link AcceptanceTestBenchmarks}.
  */
-export type BestPracticeBenchmarks = Record<BestPracticeSlug, AppBenchmark | undefined>;
+export type BestPracticeBenchmarks = Record<BestPracticeSlug, AcceptanceTestBenchmarks>;
 ```
 
-For reference see [ensawards.org/data/apps/blockscout-explorer/benchmarks.ts](ensawards.org/data/apps/blockscout-explorer/benchmarks.ts) for an example benchmarks record.
+For reference see 
+[ensawards.org/data/apps/blockscout-explorer/benchmarks/index.tsx](ensawards.org/data/apps/blockscout-explorer/benchmarks/index.tsx) 
+for an example benchmarks record.
 
 2. Make sure to follow the benchmark data model. It is available in the [ensawards.org/data/benchmarks/types.ts](ensawards.org/data/benchmarks/types.ts) file.
 ```typescript
@@ -289,18 +375,83 @@ export const BenchmarkResults = {
 
 export type BenchmarkResult = (typeof BenchmarkResults)[keyof typeof BenchmarkResults];
 
-export interface AppBenchmark {
-  result: BenchmarkResult;
+/**
+ * Represents the benchmarks of an {@link App} against {@link AcceptanceTest}s of {@link BestPractice}s.
+ *
+ * @invariant 
+ * An explicit key for each {@link AcceptanceTestSlug} should be added to this `Record`
+ * for each {@link AcceptanceTest} available on a given best practice.
+ *
+ * If an app doesn't have a benchmark completed for an `AcceptanceTest`
+ * then the benchmark should be explicitly set to `undefined`.
+ *
+ * Otherwise, the value should be an `AcceptanceTestBenchmark`
+ * describing how the related app performed for the `AcceptanceTest`.
+ */
+export type AcceptanceTestBenchmarks = Record<
+  AcceptanceTestSlug,
+  AcceptanceTestBenchmark | undefined
+>;
+```
 
-  /** A record of all contributors involved in the addition or maintenance of the benchmark's data.
+Where `AcceptanceTestBenchmark` represents the benchmark performed on a single acceptance test. Its data model is available in the [ensawards.org/data/acceptance-tests/types.ts](ensawards.org/data/acceptance-tests/types.ts) file.
+
+```typescript
+/**
+ * Represents the benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice}.
+ */
+export interface AcceptanceTestBenchmarkAbstract<BenchmarkResultT extends BenchmarkResult> {
+  /** The result of the benchmark */
+  result: BenchmarkResultT;
+
+  /** A record of all contributors involved
+   * in the addition or maintenance of the benchmark's data.
    *
-   * @invariant Multiple {@link Contribution} from the same contributor on the same app benchmark  are not allowed.
-   * When a contributor makes updates to their existing contribution, 
+   * @invariant Multiple {@link Contribution} from the same contributor
+   * on the same app benchmark are not allowed.
+   * When a contributor makes updates to their existing contribution,
    * they should update the `lastUpdated` timestamp of their existing `Contribution`.
    */
   contributions: [Contribution, ...Contribution[]];
+
+  /**
+   * Notes about how the benchmark result was determined, 
+   * which may include details about the testing process,
+   * any challenges encountered, and explanations, 
+   * as well as a visual proof, for the final result.
+   */
+  notes: JSX.Element;
 }
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that has fully passed the acceptance test.
+ */
+export interface AcceptanceTestBenchmarkPass
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Pass> {}
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that has partially passed the acceptance test.
+ */
+export interface AcceptanceTestBenchmarkPartialPass
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.PartialPass> {}
+
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that hasn't passed the acceptance test.
+ */
+export interface AcceptanceTestBenchmarkFail
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Fail> {}
+
+export type AcceptanceTestBenchmark =
+  | AcceptanceTestBenchmarkPass
+  | AcceptanceTestBenchmarkPartialPass
+  | AcceptanceTestBenchmarkFail;
 ```
+
+3. Add notes made during the benchmarking process in the form of a simple JSX element that is a part of the new item in the `benchmarks` record. For reference, see 
+[ensawards.org/data/apps/walletchan-wallet/benchmarks/index.tsx](ensawards.org/data/apps/walletchan-wallet/benchmarks/index.tsx).
 
 
 ## Using `Biome` and `Prettier` together

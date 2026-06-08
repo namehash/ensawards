@@ -1,5 +1,6 @@
-import type { AppBenchmark } from "data/benchmarks/types.ts";
-import { type BenchmarkResult } from "data/benchmarks/types.ts";
+import type { AcceptanceTestBenchmark, AcceptanceTestSlug } from "data/acceptance-tests/types.ts";
+import type { AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
+import { type BenchmarkResult, BenchmarkResults } from "data/benchmarks/types.ts";
 import { zeroAddress } from "viem";
 import { mainnet } from "viem/chains";
 
@@ -48,11 +49,25 @@ export const createMockBestPractice = (overrides: {
   },
   appliesTo: [AppTypes.Wallet],
   technicalDetails: {
-    main: {
-      header: "Main details",
-      content: "Main content",
-    },
-    sides: [],
+    useCaseSummary: <p>Mock use case summary</p>,
+    implementationRecommendations: <p>Mock implementation recommendations</p>,
+    benefitFromUsingEns: <p>Mock benefit from using ENS</p>,
+    acceptanceTests: [
+      {
+        acceptanceTestSlug: "mock-acceptance-test-slug-1",
+        description: <p>Mock acceptance test description 1</p>,
+        examplePass: {
+          result: BenchmarkResults.Pass,
+          contributions: [
+            {
+              from: { address: zeroAddress, chainId: mainnet.id },
+              lastUpdated: parseTimestamp("1970-01-01T00:00:00.000Z"),
+            },
+          ],
+          notes: <p>Mock notes for acceptance test 1</p>,
+        },
+      },
+    ],
   },
   contributions: [
     {
@@ -62,7 +77,9 @@ export const createMockBestPractice = (overrides: {
   ],
 });
 
-export const createMockBenchmark = (result: BenchmarkResult): AppBenchmark => ({
+export const createMockAcceptanceTestBenchmark = (
+  result: BenchmarkResult,
+): AcceptanceTestBenchmark => ({
   result,
   contributions: [
     {
@@ -70,6 +87,7 @@ export const createMockBenchmark = (result: BenchmarkResult): AppBenchmark => ({
       lastUpdated: parseTimestamp("1970-01-01T00:00:00.000Z"),
     },
   ],
+  notes: <p>Mock notes</p>,
 });
 
 export const createMockApp = (overrides: {
