@@ -14,6 +14,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
+import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.gif";
 
 const benchmarks = {
   // "recognize-all-ens-names": {
@@ -54,6 +55,27 @@ const benchmarks = {
           <img
             alt="example proof"
             src={exampleProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
+        </div>
+      ),
+    } as const satisfies AcceptanceTestBenchmark,
+  },
+  "ensv2-ready-resolution": {
+    "correctly-resolve-ensv2-test-name-address": {
+      result: BenchmarkResults.Fail,
+      contributions: [
+        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T15:12:00Z") },
+      ],
+      notes: (
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">
+            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The resolved address
+            is <i>NOT</i> correct.
+          </p>
+          <img
+            alt="Coinbase Wallet fails to resolve the name for ENSv2"
+            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
         </div>

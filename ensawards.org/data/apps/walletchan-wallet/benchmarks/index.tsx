@@ -14,6 +14,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
+import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.png";
 import namedSmartContractsOnMainnetProofImage from "./named-smart-contracts-on-mainnet-proof.png";
 
 const benchmarks: BestPracticeBenchmarks = {
@@ -53,6 +54,27 @@ const benchmarks: BestPracticeBenchmarks = {
           <img
             alt="example proof"
             src={exampleProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
+        </div>
+      ),
+    } as const satisfies AcceptanceTestBenchmark,
+  },
+  "ensv2-ready-resolution": {
+    "correctly-resolve-ensv2-test-name-address": {
+      result: BenchmarkResults.Fail,
+      contributions: [
+        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T16:07:00Z") },
+      ],
+      notes: (
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">
+            The resolution was tested using the &quot;send&quot; flow. The app failed to resolve the
+            address for the test name, which we interpret as a failure.
+          </p>
+          <img
+            alt="WalletChan failed to resolve the test name"
+            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
         </div>

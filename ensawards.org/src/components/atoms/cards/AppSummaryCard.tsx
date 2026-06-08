@@ -10,6 +10,7 @@ import {
   groupBenchmarksByCategory,
   sortAcceptanceTestBenchmarks,
 } from "data/benchmarks/utils.ts";
+import { BEST_PRACTICE_CATEGORIES } from "data/ens-best-practices";
 import type {
   BestPracticeBenchmarks,
   BestPracticeCategorySlug,
@@ -162,6 +163,20 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
 
   const appScore = calcAppScore(resolvedApp);
   const benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(resolvedApp.appSlug));
+
+  // Precompute the best practice category --> index mapping to
+  // optimize time complexity of sorting categories
+  const categorySlugToIndex: Record<BestPracticeCategorySlug, number> = {};
+  BEST_PRACTICE_CATEGORIES.forEach((category, index) => {
+    categorySlugToIndex[category.categorySlug] = index;
+  });
+
+  // Sort categories based on the BestPracticeCategory.order field
+  // (used to initially order BEST_PRACTICE_CATEGORIES array)
+  const benchmarksByCategorySorted = [...benchmarksByCategory.entries()].sort(
+    ([a], [b]) => categorySlugToIndex[a] - categorySlugToIndex[b],
+  );
+
   const AppIcon = resolvedApp.icon;
 
   return (
@@ -176,7 +191,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
           </div>
           <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
         </div>
-        {[...benchmarksByCategory.entries()].map(([categorySlug, benchmarksInCategory], index) => {
+        {benchmarksByCategorySorted.map(([categorySlug, benchmarksInCategory], index) => {
           return (
             <BenchmarkCategorySection
               key={`${resolvedApp.appSlug}-benchmarks-in-${categorySlug}-category`}

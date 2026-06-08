@@ -4,7 +4,7 @@ import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import type { BestPractice } from "data/ens-best-practices/types.ts";
 
 import {
-  DesiredOutcome,
+  BenefitFromUsingEns,
   technicalSectionContainerStyles,
   technicalSectionHeaderStyles,
   ImplementationRecommendations,
@@ -43,7 +43,7 @@ const sortedAcceptanceTestBenchmarks = [...Object.entries(acceptanceTestBenchmar
       ENS best practice benchmark report
     </h2>
     <UseCaseSummary bestPractice={bestPractice} />
-    <DesiredOutcome bestPractice={bestPractice} />
+    <BenefitFromUsingEns bestPractice={bestPractice} />
   </div>
   {
     sortedAcceptanceTestBenchmarks.map(
