@@ -1,10 +1,13 @@
-import { ResolveAndDisplayIdentity } from "@namehash/namehash-ui";
+import {
+  createEnsNodeProviderOptions,
+  EnsNodeProvider,
+  ResolveAndDisplayIdentity,
+} from "@namehash/namehash-ui";
 import type { Contribution, Contributor } from "data/contributors/types";
 import { countContributorAppearances } from "data/contributors/utils";
 import { User as NoContributionsIcon } from "lucide-react";
 import { type ReactElement, useMemo } from "react";
 
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 import { buildUnresolvedIdentity, type UnresolvedIdentity } from "@ensnode/ensnode-sdk";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip";

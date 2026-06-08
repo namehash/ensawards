@@ -2,9 +2,8 @@ import {
   type ReferralProgramAwardModel,
   ReferralProgramAwardModels,
 } from "@namehash/ens-referrals";
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@namehash/namehash-ui";
 import { useMemo, useState } from "react";
-
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import {
   type MockReferrersListState,

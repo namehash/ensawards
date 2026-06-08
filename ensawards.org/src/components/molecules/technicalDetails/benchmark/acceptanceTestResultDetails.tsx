@@ -1,8 +1,6 @@
-import { RelativeTime } from "@namehash/namehash-ui";
+import { createEnsNodeProviderOptions, EnsNodeProvider, RelativeTime } from "@namehash/namehash-ui";
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { useMemo } from "react";
-
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import { DisplayContributorIdentity } from "@/components/atoms/cards/ContributorsCard";
 import { TooltipProvider } from "@/components/ui/tooltip";

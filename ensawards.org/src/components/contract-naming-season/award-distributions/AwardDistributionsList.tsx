@@ -1,11 +1,10 @@
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@namehash/namehash-ui";
 import { AwardTypes } from "data/awards/types";
 import { sortFinancialAwardsByPrice } from "data/awards/utils";
 import EnsContractNamingSeason from "data/incentive-programs/ens-contract-naming-season";
 import { getAwardsByIncentiveProgramSlug } from "data/incentive-programs/utils";
 import { stringifyAccountId } from "enssdk";
 import { useMemo } from "react";
-
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import { ContractNamingSeasonAwardCard } from "@/components/atoms/cards/contractNamingSeasonAwardCard";
 import { TooltipProvider } from "@/components/ui/tooltip";

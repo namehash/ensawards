@@ -59,14 +59,11 @@ importers:
         specifier: ^10.0.3
         version: 10.0.3(astro@6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))(react@19.2.0)(rollup@4.59.0)
       '@ensnode/datasources':
-        specifier: 1.11.1
-        version: 1.11.1(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
-      '@ensnode/ensnode-react':
-        specifier: 1.11.1
-        version: 1.11.1(@tanstack/react-query@5.90.11(react@19.2.0))(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react@19.2.0)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+        specifier: 1.14.0
+        version: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       '@ensnode/ensnode-sdk':
-        specifier: 1.11.1
-        version: 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+        specifier: 1.14.0
+        version: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       '@formkit/auto-animate':
         specifier: ^0.9.0
         version: 0.9.0
@@ -80,11 +77,11 @@ importers:
         specifier: ^1.7.0
         version: 1.7.0(astro@6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))
       '@namehash/ens-referrals':
-        specifier: 1.11.1
-        version: 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+        specifier: 1.14.0
+        version: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       '@namehash/namehash-ui':
-        specifier: 1.11.1
-        version: 1.11.1(@ensnode/ensnode-react@1.11.1(@tanstack/react-query@5.90.11(react@19.2.0))(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react@19.2.0)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6)))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+        specifier: 1.14.0
+        version: 1.14.0(@tanstack/react-query@5.90.11(react@19.2.0))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       '@radix-ui/react-avatar':
         specifier: ^1.1.10
         version: 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -106,6 +103,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.14
         version: 4.1.17(vite@7.3.2(@types/node@22.19.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.3))
+      '@tanstack/react-query':
+        specifier: ^5.0.0
+        version: 5.90.11(react@19.2.0)
       '@types/react':
         specifier: ^19.1.9
         version: 19.2.6
@@ -134,8 +134,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       enssdk:
-        specifier: 1.11.1
-        version: 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+        specifier: 1.14.0
+        version: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       lucide-react:
         specifier: ^0.534.0
         version: 0.534.0(react@19.2.0)
@@ -469,21 +469,15 @@ packages:
   '@ensdomains/address-encoder@1.1.4':
     resolution: {integrity: sha512-hBY6VxVw9A1cMPOKDIvPB2nlmgaw2dvrrj/p/9tkGWmD+qdfKYZTdZuSdFcUGxhhzEB4HeLG/a98ytlTq84KcA==}
 
-  '@ensnode/datasources@1.11.1':
-    resolution: {integrity: sha512-CVYFgkv/qU77IWYj3PzkHiNnvBj1KJxLKwy+Nho+v0ZkPC9/orJ6b9//ButYnxEzivsjo7cAXK5pIwSXjX4leQ==}
+  '@ensnode/datasources@1.14.0':
+    resolution: {integrity: sha512-SpuxYmo5240eW4d+vliXgjWww1XbMiJyZTCW3qWWmQPoTfRH1BTA3p9CghtR4S4knMQ0dFuA5q89lhq8t53z1Q==}
     peerDependencies:
-      viem: ^2.22.13
+      viem: ^2.50.3
 
-  '@ensnode/ensnode-react@1.11.1':
-    resolution: {integrity: sha512-LFfRdMjTzfrOfuYCHPvtbI1lIAwYB2rO+P8NsxV1ZYR6zBKljKIad/yvAwXV0VNjp+NH2BNd8Rz6zu45Rv+b8A==}
+  '@ensnode/ensnode-sdk@1.14.0':
+    resolution: {integrity: sha512-3qSWHH0RDInMK27tDOnPgUiQMN+s05FloMZXJV6hNqusLMfEwGc68anqcMEIL03nP60Nkh3VPJJkoXFOrEmT4g==}
     peerDependencies:
-      '@tanstack/react-query': ^5.0.0
-      react: ^18.0.0 || ^19.0.0
-
-  '@ensnode/ensnode-sdk@1.11.1':
-    resolution: {integrity: sha512-ZC/7ufgaFbj0RoGE7nTXPz7MF/iJKmSthxohUPLHiQsdlkG5guwoy0QYxAnYLm//ymPfkxkCe1Di+xKnC5psVw==}
-    peerDependencies:
-      viem: ^2.22.13
+      viem: ^2.50.3
 
   '@esbuild/aix-ppc64@0.27.3':
     resolution: {integrity: sha512-9fJMTNFTWZMh5qwrBItuziu834eOCUcEqymSH7pY+zoMVEZg3gcPuBNxH1EvfVYe9h0x/Ptw8KBzv7qxb7l8dg==}
@@ -880,15 +874,15 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@namehash/ens-referrals@1.11.1':
-    resolution: {integrity: sha512-eQCgRujZCDbLPgekEN4vhL6pOtSHjJcDgVFlZJkjecGOQGEo9Mq7RVQXaMiQK3NJE6gfGzAhC+/qzoqUmSQWbQ==}
+  '@namehash/ens-referrals@1.14.0':
+    resolution: {integrity: sha512-Djqqob0EXOuMKr+y5rLnugr7bNIPsTTL93XeQgisfk9aXpUE6invZ/Zw2V5rxAPvGIeaRt93zW1XiKGcThu1og==}
     peerDependencies:
-      viem: ^2.22.13
+      viem: ^2.50.3
 
-  '@namehash/namehash-ui@1.11.1':
-    resolution: {integrity: sha512-Y1hvxWrqa1h3UbuMRIPjVhzi82ojoCgc91VZ5xfP8+/ogLH72uvKCGMQnvxAeTw+5DC9i7IgG6RmQ2vj/+vEPg==}
+  '@namehash/namehash-ui@1.14.0':
+    resolution: {integrity: sha512-FyaMG8XBWJ79w7S1BmOegokMI1ZPdxzVtJSKIulj4dR936ip0xl7OnkKAFuEjXMythkdMV9gnZqIZE2qwP/fsg==}
     peerDependencies:
-      '@ensnode/ensnode-react': 1.11.1
+      '@tanstack/react-query': ^5.0.0
       react: ^19.0.0
       react-dom: ^19.0.0
       sonner: ^2.0.3
@@ -2113,8 +2107,8 @@ packages:
     resolution: {integrity: sha512-d4lC8xfavMeBjzGr2vECC3fsGXziXZQyJxD868h2M/mBI3PwAuODxAkLkq5HYuvrPYcUtiLzsTo8U3PgX3Ocww==}
     engines: {node: '>=10.13.0'}
 
-  enssdk@1.11.1:
-    resolution: {integrity: sha512-iXucNul5+Ftqb+poShrXGUEsz07GoDCvjyth+CRhLtTE1QwctksX/pFfG9thNDWstGVuZdVU5Xp6vRD/qWi5Gw==}
+  enssdk@1.14.0:
+    resolution: {integrity: sha512-lK7bD/6SUnI6q16+9WgUJks/F1zScKIfHsdqCZD07i9Z1ZuC1ip2EArZPMEwEPfm8b5a0V4hpfZ5LglFcgcYiQ==}
     peerDependencies:
       gql.tada: ^1.8.10
       graphql: ^16
@@ -3871,32 +3865,23 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
 
-  '@ensnode/datasources@1.11.1(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
+  '@ensnode/datasources@1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
     dependencies:
       '@ponder/utils': 0.2.18(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+      enssdk: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       viem: 2.52.2(typescript@5.9.3)(zod@4.3.6)
-    transitivePeerDependencies:
-      - typescript
-
-  '@ensnode/ensnode-react@1.11.1(@tanstack/react-query@5.90.11(react@19.2.0))(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react@19.2.0)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
-    dependencies:
-      '@ensnode/ensnode-sdk': 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
-      '@tanstack/react-query': 5.90.11(react@19.2.0)
-      enssdk: 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
-      react: 19.2.0
     transitivePeerDependencies:
       - gql.tada
       - graphql
       - typescript
-      - viem
 
-  '@ensnode/ensnode-sdk@1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
+  '@ensnode/ensnode-sdk@1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
     dependencies:
       '@ensdomains/address-encoder': 1.1.4
-      '@ensnode/datasources': 1.11.1(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+      '@ensnode/datasources': 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       caip: 1.1.1
       date-fns: 4.1.0
-      enssdk: 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+      enssdk: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       viem: 2.52.2(typescript@5.9.3)(zod@4.3.6)
       zod: 4.3.6
     transitivePeerDependencies:
@@ -4172,10 +4157,10 @@ snapshots:
       - encoding
       - supports-color
 
-  '@namehash/ens-referrals@1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
+  '@namehash/ens-referrals@1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
     dependencies:
-      '@ensnode/ensnode-sdk': 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
-      enssdk: 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+      '@ensnode/ensnode-sdk': 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+      enssdk: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       viem: 2.52.2(typescript@5.9.3)(zod@4.3.6)
       zod: 4.3.6
     transitivePeerDependencies:
@@ -4183,19 +4168,19 @@ snapshots:
       - graphql
       - typescript
 
-  '@namehash/namehash-ui@1.11.1(@ensnode/ensnode-react@1.11.1(@tanstack/react-query@5.90.11(react@19.2.0))(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react@19.2.0)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6)))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
+  '@namehash/namehash-ui@1.14.0(@tanstack/react-query@5.90.11(react@19.2.0))(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sonner@2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(tailwindcss@4.1.17)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))':
     dependencies:
-      '@ensnode/datasources': 1.11.1(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
-      '@ensnode/ensnode-react': 1.11.1(@tanstack/react-query@5.90.11(react@19.2.0))(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(react@19.2.0)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
-      '@ensnode/ensnode-sdk': 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+      '@ensnode/datasources': 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+      '@ensnode/ensnode-sdk': 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@radix-ui/react-slot': 1.2.4(@types/react@19.2.6)(react@19.2.0)
       '@radix-ui/react-tooltip': 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.6))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@tanstack/react-query': 5.90.11(react@19.2.0)
       boring-avatars: 2.0.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       class-variance-authority: 0.7.1
       clsx: 2.1.1
       date-fns: 4.1.0
-      enssdk: 1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
+      enssdk: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
       lucide-react: 0.548.0(react@19.2.0)
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
@@ -5402,7 +5387,7 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.3.0
 
-  enssdk@1.11.1(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6)):
+  enssdk@1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6)):
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
       '@ensdomains/address-encoder': 1.1.4
