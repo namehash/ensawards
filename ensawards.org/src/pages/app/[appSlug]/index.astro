@@ -21,10 +21,11 @@ import { type EnsAwardsScore as EnsAwardsScoreType } from "data/shared/ens-award
 import {
   groupBenchmarksByCategory,
   calcBestPracticeCategoryScore,
-  sortAcceptanceTestBenchmarks,
+  sortBenchmarkResults,
   getAppBenchmarks,
 } from "data/benchmarks/utils";
-import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
+import { type AcceptanceTestBenchmarks, type BenchmarkResult } from "data/benchmarks/types";
+import type { BestPracticeBenchmarks, BestPractice } from "data/ens-best-practices/types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
 import { getAppContributions } from "data/contributors/utils.ts";
 import type { BestPracticeCategorySlug, BestPracticeSlug } from "data/ens-best-practices/types";
@@ -34,7 +35,6 @@ import {
 } from "data/ens-best-practices/utils.ts";
 import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 import { CategoryStatuses } from "data/ens-best-practices/types.ts";
 
 export function getStaticPaths() {
@@ -58,6 +58,34 @@ if (app !== undefined) {
 
   benchmarksByCategory = groupBenchmarksByCategory(getAppBenchmarks(app.appSlug));
 }
+
+/*
+ * Summarizes all acceptance test benchmarks of an `App` related to a `BestPractice` into a single `BenchmarkResult`.
+ *
+ * @returns an object containing the best practice and the summarized benchmark result for that best practice,
+ * if any belonging benchmarks exist. Otherwise, returns the best practice with an undefined benchmark result.
+ *
+ * @throws Error if `BestPracticeSlug` invariant is violated
+ */
+const summarizeAppsAcceptanceTestBenchmarks = (
+  bestPracticeSlug: BestPracticeSlug,
+  bestPracticeBenchmarks: AcceptanceTestBenchmarks,
+): { bestPractice: BestPractice; generalizedBenchmarkResult?: BenchmarkResult } => {
+  const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+
+  if (bestPractice === undefined) {
+    throw new Error(
+      `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
+    );
+  }
+
+  const generalizedBenchmarkResult = generalizeAcceptanceTestBenchmarks(bestPracticeBenchmarks);
+
+  return {
+    bestPractice,
+    generalizedBenchmarkResult,
+  };
+};
 ---
 
 {
@@ -139,52 +167,16 @@ if (app !== undefined) {
                   const benchmarksOnBestPractice = [
                     ...Object.entries(benchmarksInCategory),
                   ]
-                    .map(([bestPracticeSlug, bestPracticeBenchmarks]) => {
-                      const bestPractice =
-                        getBestPracticeBySlug(bestPracticeSlug);
-
-                      if (bestPractice === undefined) {
-                        throw new Error(
-                          `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} not found`,
-                        );
-                      }
-
-                      const referenceAcceptanceTestBenchmark = Object.values(
+                    .map(([bestPracticeSlug, bestPracticeBenchmarks]) =>
+                      summarizeAppsAcceptanceTestBenchmarks(
+                        bestPracticeSlug,
                         bestPracticeBenchmarks,
-                      ).find((benchmark) => benchmark !== undefined);
-
-                      if (referenceAcceptanceTestBenchmark === undefined) {
-                        return {
-                          bestPractice,
-                          generalizedBenchmark: undefined,
-                        };
-                      }
-
-                      const generalizedBenchmarkResult =
-                        generalizeAcceptanceTestBenchmarks(
-                          bestPracticeBenchmarks,
-                        );
-                      const generalizedBenchmark =
-                        generalizedBenchmarkResult === undefined
-                          ? undefined
-                          : ({
-                              result: generalizedBenchmarkResult,
-                              // take contributions and notes from the first defined acceptance test benchmark as a reference
-                              // (guaranteed to exist if generalizedBenchmarkResult is not undefined)
-                              contributions:
-                                referenceAcceptanceTestBenchmark.contributions,
-                              notes: referenceAcceptanceTestBenchmark.notes,
-                            } as AcceptanceTestBenchmark);
-
-                      return {
-                        bestPractice,
-                        generalizedBenchmark,
-                      };
-                    })
+                      ),
+                    )
                     .sort((a, b) =>
-                      sortAcceptanceTestBenchmarks(
-                        a.generalizedBenchmark,
-                        b.generalizedBenchmark,
+                      sortBenchmarkResults(
+                        a.generalizedBenchmarkResult,
+                        b.generalizedBenchmarkResult,
                       ),
                     );
 
@@ -197,7 +189,7 @@ if (app !== undefined) {
                         </span>
                       </div>
                       {benchmarksOnBestPractice.map(
-                        ({ bestPractice, generalizedBenchmark }) => {
+                        ({ bestPractice, generalizedBenchmarkResult }) => {
                           return (
                             <BenchmarkResultCard
                               bestPractice={bestPractice}
@@ -208,7 +200,7 @@ if (app !== undefined) {
                               <BenchmarkResultBadge
                                 slot="badge"
                                 className="cursor-pointer"
-                                benchmarkResult={generalizedBenchmark?.result}
+                                benchmarkResult={generalizedBenchmarkResult}
                               />
                             </BenchmarkResultCard>
                           );

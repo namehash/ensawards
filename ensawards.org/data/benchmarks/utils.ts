@@ -215,13 +215,28 @@ export const sortAcceptanceTestBenchmarks = (
   a: AcceptanceTestBenchmark | undefined,
   b: AcceptanceTestBenchmark | undefined,
 ): number => {
-  // All undefined benchmarks are interpreted as pending
+  // All undefined acceptance test benchmarks are interpreted as pending
   // and should be sorted after completed benchmarks
   if (!a && !b) return 0;
   if (!a) return 1;
   if (!b) return -1;
 
   const resultDiff = resultOrder[a.result] - resultOrder[b.result];
+  return resultDiff;
+};
+
+/** Sorts two {@link BenchmarkResult}s relative to each other. */
+export const sortBenchmarkResults = (
+  a: BenchmarkResult | undefined,
+  b: BenchmarkResult | undefined,
+): number => {
+  // All undefined benchmark results are interpreted as pending
+  // and should be sorted after completed benchmark results
+  if (!a && !b) return 0;
+  if (!a) return 1;
+  if (!b) return -1;
+
+  const resultDiff = resultOrder[a] - resultOrder[b];
   return resultDiff;
 };
 

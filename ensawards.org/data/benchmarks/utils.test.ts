@@ -3,6 +3,7 @@ import {
   calcEnsAwardsPoints,
   groupBenchmarksByCategory,
   sortAcceptanceTestBenchmarks,
+  sortBenchmarkResults,
 } from "data/benchmarks/utils.ts";
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
 import {
@@ -253,6 +254,34 @@ describe("benchmarks-utils", () => {
       ];
 
       const result = input.sort((a, b) => sortAcceptanceTestBenchmarks(a, b));
+
+      expectedOutput.forEach((benchmark, index) =>
+        expect(benchmark, `Expected sorted benchmark at index ${index} to match`).toEqual(
+          result[index],
+        ),
+      );
+    });
+  });
+
+  describe("sortBenchmarkResults", () => {
+    it("should allow correct sorting of benchmark results", () => {
+      const input = [
+        undefined,
+        BenchmarkResults.Fail,
+        BenchmarkResults.Pass,
+        BenchmarkResults.Fail,
+        BenchmarkResults.PartialPass,
+      ];
+
+      const expectedOutput = [
+        BenchmarkResults.Pass,
+        BenchmarkResults.PartialPass,
+        BenchmarkResults.Fail,
+        BenchmarkResults.Fail,
+        undefined,
+      ];
+
+      const result = input.sort((a, b) => sortBenchmarkResults(a, b));
 
       expectedOutput.forEach((benchmark, index) =>
         expect(benchmark, `Expected sorted benchmark at index ${index} to match`).toEqual(

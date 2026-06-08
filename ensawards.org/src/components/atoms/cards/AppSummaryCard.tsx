@@ -189,7 +189,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
 
   // Sort categories based on the BestPracticeCategory.order field
   // (used to initially order BEST_PRACTICE_CATEGORIES array)
-  const benchmarksByCategorySorted = benchmarksInActiveCategories.sort(
+  const benchmarksByCategorySorted = [...benchmarksInActiveCategories].sort(
     ([aCategorySlug, _a], [bCategorySlug, _b]) =>
       categorySlugToIndex[aCategorySlug] - categorySlugToIndex[bCategorySlug],
   );
