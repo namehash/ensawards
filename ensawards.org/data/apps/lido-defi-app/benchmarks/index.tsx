@@ -13,8 +13,8 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
+import correctlyResolveEnsv2TestNameAddressProofImageName from "./correctly-resolve-ensv2-test-name-address-proof.png";
 import correctlyResolveEnsv2TestNameAddressProofImageAddress from "./correctly-resolve-ensv2-test-name-address-proof-address.png";
-import correctlyResolveEnsv2TestNameAddressProofImageName from "./correctly-resolve-ensv2-test-name-address-proof-name.png";
 
 const benchmarks: BestPracticeBenchmarks = {
   // TODO: `Contract Naming` category is temporarily hidden due to unfit content,
