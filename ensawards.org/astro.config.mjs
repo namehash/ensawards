@@ -43,6 +43,8 @@ export default defineConfig({
     "/leaderboards/referrer": "/ens-referral-program/editions/2025-12/leaderboard",
 
     "/ens-best-practices/contract-naming": "/ens-best-practices",
+
+    "/leaderboards/defi": "/leaderboards/defi-protocol",
   },
 
   adapter: vercel(),
