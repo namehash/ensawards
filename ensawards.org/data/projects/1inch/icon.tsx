@@ -2,8 +2,6 @@ import React from "react";
 
 const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
-    id="1"
-    data-name="1"
     xmlns="http://www.w3.org/2000/svg"
     width="181mm"
     height="181mm"

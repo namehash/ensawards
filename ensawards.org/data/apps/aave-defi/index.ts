@@ -17,7 +17,7 @@ const AaveDeFi: App = {
   description:
     "A decentralized lending app where users can supply assets to earn yield and borrow against their collateral across Ethereum and multiple L2 networks.",
   socials: {
-    website: new URL("https://aave.com/app"),
+    website: new URL("https://aave.com"),
     twitter: new URL("https://x.com/aave"),
     ens: asInterpretedName("aave.eth"),
   },

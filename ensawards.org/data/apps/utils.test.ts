@@ -95,6 +95,8 @@ describe("App utils", () => {
   describe("validateAppType", () => {
     it("Should return the app type for a valid AppType value", () => {
       expect(asAppType("wallet")).toEqual(AppTypes.Wallet);
+      expect(asAppType("explorer")).toEqual(AppTypes.Explorer);
+      expect(asAppType("defi-app")).toEqual(AppTypes.DeFi);
     });
 
     it("Should throw an error for an invalid AppType value", () => {
