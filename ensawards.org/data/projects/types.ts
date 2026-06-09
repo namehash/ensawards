@@ -23,6 +23,7 @@ export const ProjectIds = {
   Safe: "project-safe",
   Rabby: "project-rabby",
   Ready: "project-ready",
+  Zerion: "project-zerion",
 } as const;
 
 /**
