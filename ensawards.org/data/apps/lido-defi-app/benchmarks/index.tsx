@@ -37,7 +37,7 @@ const benchmarks: BestPracticeBenchmarks = {
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
             ENSv2 ready resolution was tested using the &quot;rewards&quot; explorer. The app
-            doesn't explicitly prompt the user to pass an ENS name as identifier, but when when it
+            doesn't explicitly prompt the user to pass an ENS name as identifier, but when it
             receives one, the resolved address is correct.
           </p>
           <div className="flex flex-col justify-start items-center gap-5">
