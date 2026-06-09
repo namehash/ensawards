@@ -106,7 +106,7 @@ const placeIcons = [
                     name={protocol.name}
                     ensAwardsScore={value}
                     viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
-                    viewDetailsText={`${formatProtocolType(protocolType)}${protocolType !== ProtocolTypes.DAO ? " protocol" : ""} report`}>
+                    viewDetailsText={`${formatProtocolType(protocolType)} report`}>
                     <Image
                       alt={`${idx + 1}-place`}
                       src={images[placeIcons[idx]]()}

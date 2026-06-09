@@ -213,7 +213,7 @@ describe("App utils", () => {
 
   describe("appliesToAllApps", () => {
     it("Should return true when all app types are included in targets", () => {
-      expect(appliesToAllApps([AppTypes.Wallet, AppTypes.Explorer])).toEqual(true);
+      expect(appliesToAllApps([AppTypes.Wallet, AppTypes.Explorer, AppTypes.DeFi])).toEqual(true);
     });
 
     it("Should return false when not all app types are included in targets", () => {
