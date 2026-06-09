@@ -26,6 +26,7 @@ export const ProjectIds = {
   Zerion: "project-zerion",
   Status: "project-status",
   World: "project-world",
+  Trust: "project-trust",
 } as const;
 
 /**
