@@ -8,9 +8,9 @@ import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import AaveIcon from "./icon.tsx";
 
-const AaveDeFiApp: App = {
-  id: "aave-defi-app",
-  appSlug: "aave-defi-app",
+const AaveDeFi: App = {
+  id: "aave-defi",
+  appSlug: "aave-defi",
   type: AppTypes.DeFi,
   project: AaveProject,
   name: "Aave",
@@ -25,6 +25,6 @@ const AaveDeFiApp: App = {
   // TODO: Add OG images
 };
 
-defineApp(AaveDeFiApp);
+defineApp(AaveDeFi);
 
-export default AaveDeFiApp;
+export default AaveDeFi;

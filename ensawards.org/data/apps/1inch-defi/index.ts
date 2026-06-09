@@ -8,9 +8,9 @@ import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import OneInchIcon from "./icon.tsx";
 
-const OneInchDeFiApp: App = {
-  id: "1inch-defi-app",
-  appSlug: "1inch-defi-app",
+const OneInchDeFi: App = {
+  id: "1inch-defi",
+  appSlug: "1inch-defi",
   type: AppTypes.DeFi,
   project: OneInchProject,
   name: '1inch"',
@@ -25,6 +25,6 @@ const OneInchDeFiApp: App = {
   // TODO: Add OG images
 };
 
-defineApp(OneInchDeFiApp);
+defineApp(OneInchDeFi);
 
-export default OneInchDeFiApp;
+export default OneInchDeFi;

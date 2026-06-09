@@ -8,9 +8,9 @@ import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import UniswapIcon from "./icon.tsx";
 
-const UniswapDeFiApp: App = {
-  id: "uniswap-defi-app",
-  appSlug: "uniswap-defi-app",
+const UniswapDeFi: App = {
+  id: "uniswap-defi",
+  appSlug: "uniswap-defi",
   type: AppTypes.DeFi,
   project: UniswapProject,
   name: "Uniswap",
@@ -25,6 +25,6 @@ const UniswapDeFiApp: App = {
   // TODO: Add OG images
 };
 
-defineApp(UniswapDeFiApp);
+defineApp(UniswapDeFi);
 
-export default UniswapDeFiApp;
+export default UniswapDeFi;

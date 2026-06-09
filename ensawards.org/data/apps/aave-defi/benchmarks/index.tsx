@@ -2,19 +2,22 @@
 // for additional advice on adding and modifying app benchmarks
 
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
-import OneInchDeFiApp from "data/apps/1inch-defi-app";
+import AaveDeFi from "data/apps/aave-defi";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
-import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
+import {
+  acceptanceTestDetailsContainerStyles,
+  bestPracticeTechnicalDetailsLinkStyles,
+} from "data/ens-best-practices/styles";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import correctlyResolveEnsv2TestNameAddressProofImagePortfolio from "./correctly-resolve-ensv2-test-name-address-proof-portfolio.gif";
-import correctlyResolveEnsv2TestNameAddressProofImageSend from "./correctly-resolve-ensv2-test-name-address-proof-send.png";
+import correctlyResolveEnsv2TestNameAddressProofImageV3 from "./correctly-resolve-ensv2-test-name-address-proof-v3.gif";
+import correctlyResolveEnsv2TestNameAddressProofImageV4 from "./correctly-resolve-ensv2-test-name-address-proof-v4.png";
 
 const benchmarks: BestPracticeBenchmarks = {
   // TODO: `Contract Naming` category is temporarily hidden due to unfit content,
@@ -29,25 +32,43 @@ const benchmarks: BestPracticeBenchmarks = {
   },
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
+      result: BenchmarkResults.PartialPass,
       contributions: [
-        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-09T12:41:00Z") },
+        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-09T11:56:00Z") },
       ],
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            ENSv2 ready resolution was tested for two different flows of the app: &quot;send&quot;
-            and &quot;portfolio&quot;. In both cases the resolved address is <i>NOT</i> correct.
+            ENSv2 ready resolution was tested for two versions of the app:{" "}
+            <a
+              className={bestPracticeTechnicalDetailsLinkStyles}
+              href="https://app.aave.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Aave&nbsp;(v3)
+            </a>{" "}
+            and{" "}
+            <a
+              className={bestPracticeTechnicalDetailsLinkStyles}
+              href="https://pro.aave.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Aave&nbsp;Pro&nbsp;(v4)
+            </a>{" "}
+            using the &quot;watch&quot; tool for both of them. The resolved address is correct for
+            the v4 version, but <i>INCORRECT</i> for the v3 variant.
           </p>
           <div className="flex flex-col justify-start items-center gap-5">
             <img
-              alt="1inch defi app fails to resolve the name for ENSv2"
-              src={correctlyResolveEnsv2TestNameAddressProofImagePortfolio.src}
+              alt="Aave defi app fails to resolve the name for ENSv2"
+              src={correctlyResolveEnsv2TestNameAddressProofImageV3.src}
               className="w-auto h-full max-h-[325px] rounded-xl"
             />
             <img
-              alt="1inch defi app fails to resolve the name for ENSv2"
-              src={correctlyResolveEnsv2TestNameAddressProofImageSend.src}
+              alt="Aave Pro defi app correctly resolves the name for ENSv2"
+              src={correctlyResolveEnsv2TestNameAddressProofImageV4.src}
               className="w-auto h-full max-h-[325px] rounded-xl"
             />
           </div>
@@ -57,6 +78,6 @@ const benchmarks: BestPracticeBenchmarks = {
   },
 } as const satisfies BestPracticeBenchmarks;
 
-defineAppBenchmarks(OneInchDeFiApp, benchmarks);
+defineAppBenchmarks(AaveDeFi, benchmarks);
 
 export default benchmarks;

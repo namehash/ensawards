@@ -7,9 +7,9 @@ import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
 import LidoIcon from "./icon.tsx";
 
-const LidoDeFiApp: App = {
-  id: "lido-defi-app",
-  appSlug: "lido-defi-app",
+const LidoDeFi: App = {
+  id: "lido-defi",
+  appSlug: "lido-defi",
   type: AppTypes.DeFi,
   project: LidoProject,
   name: "Lido",
@@ -23,6 +23,6 @@ const LidoDeFiApp: App = {
   // TODO: Add OG images
 };
 
-defineApp(LidoDeFiApp);
+defineApp(LidoDeFi);
 
-export default LidoDeFiApp;
+export default LidoDeFi;

@@ -2,19 +2,19 @@
 // for additional advice on adding and modifying app benchmarks
 
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
-import LidoDeFiApp from "data/apps/lido-defi-app";
+import OneInchDeFi from "data/apps/1inch-defi";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
-import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
+import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import correctlyResolveEnsv2TestNameAddressProofImageName from "./correctly-resolve-ensv2-test-name-address-proof.png";
-import correctlyResolveEnsv2TestNameAddressProofImageAddress from "./correctly-resolve-ensv2-test-name-address-proof-address.png";
+import correctlyResolveEnsv2TestNameAddressProofImagePortfolio from "./correctly-resolve-ensv2-test-name-address-proof-portfolio.gif";
+import correctlyResolveEnsv2TestNameAddressProofImageSend from "./correctly-resolve-ensv2-test-name-address-proof-send.png";
 
 const benchmarks: BestPracticeBenchmarks = {
   // TODO: `Contract Naming` category is temporarily hidden due to unfit content,
@@ -29,26 +29,25 @@ const benchmarks: BestPracticeBenchmarks = {
   },
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.PartialPass,
+      result: BenchmarkResults.Fail,
       contributions: [
-        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-09T13:49:30Z") },
+        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-09T12:41:00Z") },
       ],
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            ENSv2 ready resolution was tested using the &quot;rewards&quot; explorer. The app
-            doesn't explicitly prompt the user to pass an ENS name as identifier, but when it
-            receives one, the resolved address is correct.
+            ENSv2 ready resolution was tested for two different flows of the app: &quot;send&quot;
+            and &quot;portfolio&quot;. In both cases the resolved address is <i>NOT</i> correct.
           </p>
           <div className="flex flex-col justify-start items-center gap-5">
             <img
-              alt="Lido DeFi app correctly resolves the name for ENSv2"
-              src={correctlyResolveEnsv2TestNameAddressProofImageName.src}
+              alt="1inch defi app fails to resolve the name for ENSv2"
+              src={correctlyResolveEnsv2TestNameAddressProofImagePortfolio.src}
               className="w-auto h-full max-h-[325px] rounded-xl"
             />
             <img
-              alt="Proof that the resolution flow is the same for address and name inputs"
-              src={correctlyResolveEnsv2TestNameAddressProofImageAddress.src}
+              alt="1inch defi app fails to resolve the name for ENSv2"
+              src={correctlyResolveEnsv2TestNameAddressProofImageSend.src}
               className="w-auto h-full max-h-[325px] rounded-xl"
             />
           </div>
@@ -58,6 +57,6 @@ const benchmarks: BestPracticeBenchmarks = {
   },
 } as const satisfies BestPracticeBenchmarks;
 
-defineAppBenchmarks(LidoDeFiApp, benchmarks);
+defineAppBenchmarks(OneInchDeFi, benchmarks);
 
 export default benchmarks;
