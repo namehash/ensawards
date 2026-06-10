@@ -22,7 +22,8 @@ const SafeWallet: App = {
     ens: asInterpretedName("safe.eth"),
   },
   icon: SafeIcon,
-  // TODO: Add OG images
+  ogImagePath: "safe-wallet/og.png",
+  twitterOgImagePath: "safe-wallet/twitter-og.png",
 };
 
 defineApp(SafeWallet);

@@ -19,6 +19,8 @@ const SuperfluidDeFi: DeFiProtocol = {
     website: new URL("https://superfluid.org"),
     twitter: new URL("https://x.com/Superfluid_HQ"),
   },
+  ogImagePath: "superfluid-defi/og.png",
+  twitterOgImagePath: "superfluid-defi/twitter-og.png",
 };
 
 defineProtocol(SuperfluidDeFi);

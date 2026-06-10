@@ -22,7 +22,8 @@ const OneInchDeFi: App = {
     ens: asInterpretedName("1inch.eth"),
   },
   icon: OneInchIcon,
-  // TODO: Add OG images
+  ogImagePath: "1inch-defi/og.png",
+  twitterOgImagePath: "1inch-defi/twitter-og.png",
 };
 
 defineApp(OneInchDeFi);

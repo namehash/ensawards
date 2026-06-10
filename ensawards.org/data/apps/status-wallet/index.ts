@@ -20,7 +20,8 @@ const StatusWallet: App = {
     twitter: new URL("https://x.com/ethstatus"),
   },
   icon: StatusIcon,
-  // TODO: Add OG images
+  ogImagePath: "status-wallet/og.png",
+  twitterOgImagePath: "status-wallet/twitter-og.png",
 };
 
 defineApp(StatusWallet);
