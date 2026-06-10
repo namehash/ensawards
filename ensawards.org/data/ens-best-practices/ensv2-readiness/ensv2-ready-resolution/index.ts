@@ -18,7 +18,7 @@ const ensv2ReadyResolution: BestPracticeApp = {
   name: "Correctly Resolve All Names For ENSv2",
   description: "Make sure your app keeps resolving ENS names correctly once ENSv2 launches.",
   category: ENSv2ReadinessCategory,
-  appliesTo: [AppTypes.Wallet, AppTypes.Explorer, AppTypes.DeFi],
+  appliesTo: [AppTypes.Wallet, AppTypes.Explorer, AppTypes.DeFi, AppTypes.Exchange],
   technicalDetails: technicalDetails,
   contributions: [
     { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T13:01:00.000Z") },
