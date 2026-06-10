@@ -19,6 +19,8 @@ const KlerosDao: DAOProtocol = {
     website: new URL("https://kleros.io"),
     twitter: new URL("https://x.com/Kleros_io"),
   },
+  ogImagePath: "kleros-dao/og.png",
+  twitterOgImagePath: "kleros-dao/twitter-og.png",
 };
 
 defineProtocol(KlerosDao);

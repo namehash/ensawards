@@ -20,7 +20,8 @@ const RabbyWallet: App = {
     website: new URL("https://rabby.io/"),
     twitter: new URL("https://x.com/Rabby_io"),
   },
-  // TODO: Add OG images
+  ogImagePath: "rabby-wallet/og.png",
+  twitterOgImagePath: "rabby-wallet/twitter-og.png",
 };
 
 defineApp(RabbyWallet);

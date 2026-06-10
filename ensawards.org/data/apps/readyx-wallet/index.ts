@@ -20,7 +20,8 @@ const ReadyXWallet: App = {
     twitter: new URL("https://x.com/ready_co"),
   },
   icon: ReadyIcon,
-  // TODO: Add OG images
+  ogImagePath: "readyx-wallet/og.png",
+  twitterOgImagePath: "readyx-wallet/twitter-og.png",
 };
 
 defineApp(ReadyXWallet);
