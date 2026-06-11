@@ -13,7 +13,8 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.gif";
+import correctlyResolveEnsv2TestNameAddressProofImageCopyTrading from "./correctly-resolve-ensv2-test-name-address-proof-copy-trading.gif";
+import correctlyResolveEnsv2TestNameAddressProofImageWithdrawal from "./correctly-resolve-ensv2-test-name-address-proof-withdrawal.png";
 
 const benchmarks: BestPracticeBenchmarks = {
   "ensv2-ready-resolution": {
@@ -30,8 +31,18 @@ const benchmarks: BestPracticeBenchmarks = {
             to resolve it, both of which we interpret as a failure.
           </p>
           <img
-            alt="Binance Exchange doesn't allow ENS name as recipient in the copy-trading flow"
-            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
+            alt="Binance exchange doesn't allow ENS name as recipient in the copy-trading flow"
+            src={correctlyResolveEnsv2TestNameAddressProofImageCopyTrading.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
+          <p className="w-full">
+            The ENSv2 ready resolution was also tested using the &quot;withdrawal&quot; flow. The
+            app doesn't allow using ENS name as the recipient identifier, which we interpret as a
+            failure.
+          </p>
+          <img
+            alt="Binance exchange doesn't allow ENS name as recipient in the withdrawal flow"
+            src={correctlyResolveEnsv2TestNameAddressProofImageWithdrawal.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
         </div>
