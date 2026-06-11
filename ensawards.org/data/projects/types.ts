@@ -32,6 +32,7 @@ export const ProjectIds = {
   Lido: "project-lido",
   Binance: "project-binance",
   OKX: "project-okx",
+  Kraken: "project-kraken",
 } as const;
 
 /**
