@@ -14,7 +14,7 @@ const KrakenProject: Project = {
   icon: KrakenIcon,
   socials: {
     website: new URL("https://www.kraken.com"),
-    twitter: new URL("https://www.x.com/krakenfx"),
+    twitter: new URL("https://x.com/krakenfx"),
   },
 };
 
