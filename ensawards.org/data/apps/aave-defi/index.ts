@@ -22,7 +22,8 @@ const AaveDeFi: App = {
     ens: asInterpretedName("aave.eth"),
   },
   icon: AaveIcon,
-  // TODO: Add OG images
+  ogImagePath: "aave-defi/og.png",
+  twitterOgImagePath: "aave-defi/twitter-og.png",
 };
 
 defineApp(AaveDeFi);

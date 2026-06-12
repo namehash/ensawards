@@ -20,7 +20,8 @@ const WorldWallet: App = {
     twitter: new URL("https://x.com/worldnetwork"),
   },
   icon: WorldIcon,
-  // TODO: Add OG images
+  ogImagePath: "worldapp-wallet/og.png",
+  twitterOgImagePath: "worldapp-wallet/twitter-og.png",
 };
 
 defineApp(WorldWallet);

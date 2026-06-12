@@ -20,7 +20,8 @@ const ZerionWallet: App = {
     twitter: new URL("https://x.com/zerion"),
   },
   icon: ZerionIcon,
-  // TODO: Add OG images
+  ogImagePath: "zerion-wallet/og.png",
+  twitterOgImagePath: "zerion-wallet/twitter-og.png",
 };
 
 defineApp(ZerionWallet);
