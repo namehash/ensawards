@@ -14,16 +14,30 @@ export const EnsAwardsCircularScoreSmall = ({
 }) => {
   if (scoreResult.score === undefined && scoreResult.label === undefined) {
     throw new Error(
-      "Invariant(ScoreBar): Either score or label must be defined in scoreResult. Both are undefined.",
+      "Invariant(EnsAwardsScoreResult): Either score or label must be defined in scoreResult. Both are undefined.",
     );
   }
 
   if (scoreResult.score === undefined) {
-    return scoreResult.label === EnsAwardsUndefinedScoreLabels.Pending ? (
-      <AllBenchmarksPendingIcon />
-    ) : (
-      <AllBenchmarksNotApplicableIcon />
-    );
+    switch (scoreResult.label) {
+      case EnsAwardsUndefinedScoreLabels.Pending:
+        return <AllBenchmarksPendingIcon />;
+      case EnsAwardsUndefinedScoreLabels.NotApplicable:
+        return <AllBenchmarksNotApplicableIcon />;
+
+      case EnsAwardsUndefinedScoreLabels.InactiveCategory:
+        // This variant will never be publicly available,
+        return (
+          <div className="w-fit h-fit p-8 flex flex-row justify-center items-center bg-white">
+            <p className="text-xs font-medium text-gray-500">Inactive Category</p>
+          </div>
+        );
+
+      default:
+        throw new Error(
+          `Invariant(EnsAwardsScoreResult): Unrecognized label '${scoreResult.label}' in scoreResult.`,
+        );
+    }
   }
 
   const roundedScore = Math.round(scoreResult.score);

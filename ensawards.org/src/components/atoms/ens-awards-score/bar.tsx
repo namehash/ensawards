@@ -54,7 +54,7 @@ export const ScoreBar = ({
 }: EnsAwardsBarScoreProps) => {
   if (scoreResult.score === undefined && scoreResult.label === undefined) {
     throw new Error(
-      "Invariant(ScoreBar): Either score or label must be defined in scoreResult. Both are undefined.",
+      "Invariant(EnsAwardsScoreResult): Either score or label must be defined in scoreResult. Both are undefined.",
     );
   }
 

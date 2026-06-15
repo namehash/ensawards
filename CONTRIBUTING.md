@@ -448,7 +448,7 @@ export interface AcceptanceTestBenchmarkFail
 /**
  * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
  * that is not applicable to the acceptance test scenario.
- * Most often, this is because the app doesn't use ENS at all, 
+ * Most often, this is because the app doesn't use ENS at all,
  * in places where it should.
  */
 export interface NotApplicableAcceptanceTestBenchmark

@@ -1,3 +1,5 @@
+import type { FormatTypeOptions } from "data/shared/format-type-options";
+
 /**
  * Points awarded for a benchmark result, where higher points indicate better benchmark results.
  * Used for calculating an EnsAwardsScore.
@@ -18,13 +20,35 @@ export type EnsAwardsPoints = number;
 export type EnsAwardsScore = number;
 
 export const EnsAwardsUndefinedScoreLabels = {
-  Pending: "Pending",
-  NotApplicable: "Not Applicable",
-  InactiveCategory: "Inactive Category",
+  Pending: "pending",
+  NotApplicable: "not-applicable",
+  InactiveCategory: "inactive-category",
 } as const;
 
 export type EnsAwardsUndefinedScoreLabel =
   (typeof EnsAwardsUndefinedScoreLabels)[keyof typeof EnsAwardsUndefinedScoreLabels];
+
+export const formatEnsAwardsUndefinedScoreLabel = (
+  label: EnsAwardsUndefinedScoreLabel,
+  options: Omit<FormatTypeOptions, "plural"> = { lowercase: false },
+): string => {
+  const { lowercase } = options;
+
+  switch (label) {
+    case EnsAwardsUndefinedScoreLabels.Pending:
+      return lowercase ? "pending" : "Pending";
+
+    case EnsAwardsUndefinedScoreLabels.NotApplicable:
+      return lowercase ? "not applicable" : "Not Applicable";
+
+    case EnsAwardsUndefinedScoreLabels.InactiveCategory:
+      return lowercase ? "inactive category" : "Inactive Category";
+
+    default:
+      const _exhaustive: never = label;
+      throw new Error(`Unsupported EnsAwardsUndefinedScoreLabel: ${_exhaustive}`);
+  }
+};
 
 export interface EnsAwardsScoreResult {
   /**

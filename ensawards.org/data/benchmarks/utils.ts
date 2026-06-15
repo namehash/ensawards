@@ -106,7 +106,6 @@ export function getAppAcceptanceTestBenchmarks(
  * {@link BenchmarkResults.Pass} = 1.0
  * {@link BenchmarkResults.PartialPass} = 0.5
  * {@link BenchmarkResults.Fail} = 0.0
- * {@link BenchmarkResults.NotApplicable} = undefined
  */
 export const calcEnsAwardsPoints = (
   benchmark: ApplicableAcceptanceTestBenchmark,

@@ -76,7 +76,7 @@ const protocolContractDataContributions: Contribution[] = Object.keys(protocolSc
         <ItemsList containerStyles="gap-3 sm:gap-3">
           {
             [...Object.entries(protocolScores)].map(
-              ([scoredProtocolId, value], idx) => {
+              ([scoredProtocolId, ensAwardsScore], idx) => {
                 // Type casting is necessary due to `Record`'s type nature.
                 // We are completely sure of its correctness
                 const protocolId = scoredProtocolId as ProtocolId;
@@ -86,7 +86,7 @@ const protocolContractDataContributions: Contribution[] = Object.keys(protocolSc
                   <LeaderboardCard
                     key={`leaderboard-card-${protocol.protocolSlug}`}
                     name={protocol.name}
-                    ensAwardsScore={value}
+                    ensAwardsScore={{ score: ensAwardsScore }}
                     viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
                     viewDetailsText={`${formatProtocolType(protocolType, { lowercase: false })} report`}>
                     {idx < 3 ? (

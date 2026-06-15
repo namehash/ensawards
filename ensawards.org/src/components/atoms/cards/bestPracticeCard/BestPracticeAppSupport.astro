@@ -1,0 +1,29 @@
+---
+import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
+import { formatEnsAwardsUndefinedScoreLabel } from "data/shared/ens-awards-score";
+import { type EnsAwardsScoreResult } from "data/shared/ens-awards-score";
+
+interface Props {
+  scoreResult: EnsAwardsScoreResult;
+}
+
+const { scoreResult }: Props = Astro.props;
+
+if (scoreResult.score === undefined && scoreResult.label === undefined) {
+  throw new Error(
+    "Invariant(EnsAwardsScoreResult): Either score or label must be defined in scoreResult. Both are undefined.",
+  );
+}
+---
+
+{
+  scoreResult.score === undefined ? (
+    <p class="text-sm leading-normal font-medium text-black">
+      {scoreResult.label !== undefined
+        ? formatEnsAwardsUndefinedScoreLabel(scoreResult.label)
+        : "-"}
+    </p>
+  ) : (
+    <ScoreBar scoreResult={scoreResult} mobileAdaptive={false} />
+  )
+}
