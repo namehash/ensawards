@@ -7,7 +7,7 @@ import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
-import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
+import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
