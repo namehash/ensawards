@@ -1,4 +1,9 @@
-import type { EnsAwardsScore, EnsAwardsScoreResult } from "data/shared/ens-awards-score";
+import {
+  type EnsAwardsScore,
+  type EnsAwardsScoreResult,
+  EnsAwardsScoreResultTypes,
+  formatEnsAwardsUndefinedScoreLabel,
+} from "data/shared/ens-awards-score";
 
 import { getScoreColor } from "@/utils/styles";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -52,19 +57,14 @@ export const ScoreBar = ({
   mobileAdaptive,
   undefinedScoreStyles,
 }: EnsAwardsBarScoreProps) => {
-  if (scoreResult.score === undefined && scoreResult.label === undefined) {
-    throw new Error(
-      "Invariant(EnsAwardsScoreResult): Either score or label must be defined in scoreResult. Both are undefined.",
-    );
-  }
-
-  if (scoreResult.score === undefined) {
+  if (scoreResult.type === EnsAwardsScoreResultTypes.Undefined) {
     return (
       <p className={cn("text-sm leading-normal font-medium text-black", undefinedScoreStyles)}>
-        {scoreResult.label}
+        {formatEnsAwardsUndefinedScoreLabel(scoreResult.label)}
       </p>
     );
   }
+
   return (
     <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
       <div

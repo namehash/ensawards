@@ -7,7 +7,10 @@ import {
   sortBenchmarkResults,
 } from "data/benchmarks/utils.ts";
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
-import type { EnsAwardsPoints } from "data/shared/ens-awards-score.ts";
+import {
+  type EnsAwardsPoints,
+  EnsAwardsUndefinedScoreLabels,
+} from "data/shared/ens-awards-score.ts";
 import {
   createMockAcceptanceTestBenchmark,
   createMockBestPractice,
@@ -213,8 +216,13 @@ describe("benchmarks-utils", () => {
 
       expect(
         calcBestPracticeCategoryScore(benchmarks).score,
-        "Expected calcBestPracticeCategoryScore to return undefined for an empty benchmark list",
+        "Expected calcBestPracticeCategoryScore to return undefined for a list of pending benchmarks",
       ).toEqual(undefined);
+
+      expect(
+        calcBestPracticeCategoryScore(benchmarks).label,
+        "Expected calcBestPracticeCategoryScore to return a result with a 'pending' label for a list of pending benchmarks",
+      ).toEqual(EnsAwardsUndefinedScoreLabels.Pending);
     });
 
     it("Should return undefined for completed, but not applicable benchmarks", () => {
@@ -240,6 +248,11 @@ describe("benchmarks-utils", () => {
         calcBestPracticeCategoryScore(benchmarks).score,
         "Expected calcBestPracticeCategoryScore to return undefined for a list of not applicable benchmarks",
       ).toEqual(undefined);
+
+      expect(
+        calcBestPracticeCategoryScore(benchmarks).label,
+        "Expected calcBestPracticeCategoryScore to return a result with a 'not-applicable' label for a list of not applicable benchmarks",
+      ).toEqual(EnsAwardsUndefinedScoreLabels.NotApplicable);
     });
 
     it("Should return the rounded category score for valid benchmarks", () => {

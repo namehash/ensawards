@@ -10,6 +10,7 @@ import {
   asEnsAwardsScore,
   type EnsAwardsScore,
   type EnsAwardsScoreResult,
+  EnsAwardsScoreResultTypes,
   EnsAwardsUndefinedScoreLabels,
 } from "data/shared/ens-awards-score.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
@@ -119,6 +120,7 @@ export const formatBestPracticeType = (
 export const calcBestPracticeScore = (bestPractice: BestPracticeApp): EnsAwardsScoreResult => {
   if (bestPractice.category.status !== CategoryStatuses.Active) {
     return {
+      type: EnsAwardsScoreResultTypes.Undefined,
       score: undefined,
       label: EnsAwardsUndefinedScoreLabels.InactiveCategory,
     };
@@ -135,6 +137,7 @@ export const calcBestPracticeScore = (bestPractice: BestPracticeApp): EnsAwardsS
 
   if (completedBenchmarks.length === 0) {
     return {
+      type: EnsAwardsScoreResultTypes.Undefined,
       score: undefined,
       label: EnsAwardsUndefinedScoreLabels.Pending,
     };
@@ -148,6 +151,7 @@ export const calcBestPracticeScore = (bestPractice: BestPracticeApp): EnsAwardsS
 
   if (completedApplicableBenchmarks.length === 0) {
     return {
+      type: EnsAwardsScoreResultTypes.Undefined,
       score: undefined,
       label: EnsAwardsUndefinedScoreLabels.NotApplicable,
     };
@@ -161,7 +165,11 @@ export const calcBestPracticeScore = (bestPractice: BestPracticeApp): EnsAwardsS
 
   const score = Math.round((bestPracticePoints * 100) / benchmarkedAcceptanceTests);
 
-  return { score: asEnsAwardsScore(score) };
+  return {
+    type: EnsAwardsScoreResultTypes.Defined,
+    score: asEnsAwardsScore(score),
+    label: undefined,
+  };
 };
 
 export const formatBestPracticeTarget = (

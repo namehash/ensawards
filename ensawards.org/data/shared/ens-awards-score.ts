@@ -50,21 +50,49 @@ export const formatEnsAwardsUndefinedScoreLabel = (
   }
 };
 
-export interface EnsAwardsScoreResult {
+export const EnsAwardsScoreResultTypes = {
+  Defined: "defined",
+  Undefined: "undefined",
+} as const;
+
+export type EnsAwardsScoreResultType =
+  (typeof EnsAwardsScoreResultTypes)[keyof typeof EnsAwardsScoreResultTypes];
+
+export interface EnsAwardsScoreResultAbstract<
+  EnsAwardsScoreResultTypeT extends EnsAwardsScoreResultType,
+  EnsAwardsScoreT extends EnsAwardsScore | undefined,
+  EnsAwardsUndefinedScoreLabelT extends EnsAwardsUndefinedScoreLabel | undefined,
+> {
+  type: EnsAwardsScoreResultTypeT;
   /**
    * Calculated EnsAwardsScore for the benchmarked entity
    * ({@link App}, {@link Protocol}, {@link BestPractice}, or {@link BestPracticeCategory}).
    *
    * Can be `undefined` if no benchmarks were completed or if all completed benchmarks returned a not applicable result.
    */
-  score?: EnsAwardsScore;
+  score: EnsAwardsScoreT;
 
   /**
    * Label to display instead of the score when necessary.
-   * @invariant Required for `undefined` scores to provide context to the user.
    */
-  label?: EnsAwardsUndefinedScoreLabel;
+  label: EnsAwardsUndefinedScoreLabelT;
 }
+
+export interface EnsAwardsScoreResultDefined
+  extends EnsAwardsScoreResultAbstract<
+    typeof EnsAwardsScoreResultTypes.Defined,
+    EnsAwardsScore,
+    undefined
+  > {}
+
+export interface EnsAwardsScoreResultUndefined
+  extends EnsAwardsScoreResultAbstract<
+    typeof EnsAwardsScoreResultTypes.Undefined,
+    undefined,
+    EnsAwardsUndefinedScoreLabel
+  > {}
+
+export type EnsAwardsScoreResult = EnsAwardsScoreResultDefined | EnsAwardsScoreResultUndefined;
 
 /**
  * Checks if a number is a valid {@link EnsAwardsScore}.

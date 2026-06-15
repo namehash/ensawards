@@ -1,5 +1,6 @@
 import {
   type EnsAwardsScoreResult,
+  EnsAwardsScoreResultTypes,
   EnsAwardsUndefinedScoreLabels,
 } from "data/shared/ens-awards-score";
 
@@ -12,13 +13,7 @@ export const EnsAwardsCircularScoreSmall = ({
 }: {
   scoreResult: EnsAwardsScoreResult;
 }) => {
-  if (scoreResult.score === undefined && scoreResult.label === undefined) {
-    throw new Error(
-      "Invariant(EnsAwardsScoreResult): Either score or label must be defined in scoreResult. Both are undefined.",
-    );
-  }
-
-  if (scoreResult.score === undefined) {
+  if (scoreResult.type === EnsAwardsScoreResultTypes.Undefined) {
     switch (scoreResult.label) {
       case EnsAwardsUndefinedScoreLabels.Pending:
         return <AllBenchmarksPendingIcon />;
@@ -34,9 +29,7 @@ export const EnsAwardsCircularScoreSmall = ({
         );
 
       default:
-        throw new Error(
-          `Invariant(EnsAwardsScoreResult): Unrecognized label '${scoreResult.label}' in scoreResult.`,
-        );
+        throw new Error("Invariant(EnsAwardsScoreResult): Unrecognized label in scoreResult.");
     }
   }
 

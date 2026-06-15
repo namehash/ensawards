@@ -1,6 +1,11 @@
 ---
 import { cn } from "../../utils/tailwindClassConcatenation";
-import { type EnsAwardsScoreResult, type EnsAwardsScore } from "data/shared/ens-awards-score";
+import {
+  type EnsAwardsScoreResult,
+  type EnsAwardsScore,
+  formatEnsAwardsUndefinedScoreLabel,
+  EnsAwardsScoreResultTypes,
+} from "data/shared/ens-awards-score";
 
 export interface CircularScoreProps {
   scoreResult: EnsAwardsScoreResult;
@@ -35,12 +40,6 @@ const getGradientColorIndex = (score?: EnsAwardsScore) => {
 const gradientIndex = getGradientColorIndex(scoreResult.score);
 const colorFrom = gradientStartColors[gradientIndex];
 const colorTo = gradientStopColors[gradientIndex];
-
-if (scoreResult.score === undefined && scoreResult.label === undefined) {
-  throw new Error(
-    "Invariant(EnsAwardsScoreResult): Either score or label must be defined in scoreResult. Both are undefined.",
-  );
-}
 
 // Count size parameters of the score bar
 const radius = (size - strokeWidth) / 2;
@@ -88,9 +87,9 @@ const circumference = 2 * Math.PI * radius;
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-0">
     {
-      scoreResult.score === undefined ? (
+      scoreResult.type === EnsAwardsScoreResultTypes.Undefined ? (
         <p class="max-w-[100px] text-base text-wrap text-center leading-normal font-semibold text-[rgba(245,245,245,0.5)]">
-          {scoreResult.label}
+          {formatEnsAwardsUndefinedScoreLabel(scoreResult.label)}
         </p>
       ) : (
         <p

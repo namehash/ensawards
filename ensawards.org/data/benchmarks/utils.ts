@@ -25,6 +25,7 @@ import {
   type EnsAwardsPoints,
   type EnsAwardsScore,
   type EnsAwardsScoreResult,
+  EnsAwardsScoreResultTypes,
   EnsAwardsUndefinedScoreLabels,
 } from "../shared/ens-awards-score.ts";
 import { APP_BENCHMARKS } from ".";
@@ -194,7 +195,11 @@ export const calcBestPracticeCategoryScore = (
     bestPracticeCategory === undefined ||
     bestPracticeCategory.status !== CategoryStatuses.Active
   ) {
-    return { score: undefined, label: EnsAwardsUndefinedScoreLabels.InactiveCategory };
+    return {
+      type: EnsAwardsScoreResultTypes.Undefined,
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.InactiveCategory,
+    };
   }
 
   const completedBenchmarks: AcceptanceTestBenchmark[] = [];
@@ -208,7 +213,11 @@ export const calcBestPracticeCategoryScore = (
   }
 
   if (completedBenchmarks.length === 0)
-    return { score: undefined, label: EnsAwardsUndefinedScoreLabels.Pending };
+    return {
+      type: EnsAwardsScoreResultTypes.Undefined,
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.Pending,
+    };
 
   // explicitly exclude benchmarks with `NotApplicable` result
   const completedApplicableBenchmarks: ApplicableAcceptanceTestBenchmark[] =
@@ -218,7 +227,11 @@ export const calcBestPracticeCategoryScore = (
     );
 
   if (completedApplicableBenchmarks.length === 0)
-    return { score: undefined, label: EnsAwardsUndefinedScoreLabels.NotApplicable };
+    return {
+      type: EnsAwardsScoreResultTypes.Undefined,
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.NotApplicable,
+    };
 
   const score = Math.round(
     (completedApplicableBenchmarks.reduce(
@@ -229,7 +242,11 @@ export const calcBestPracticeCategoryScore = (
       completedApplicableBenchmarks.length,
   );
 
-  return { score: asEnsAwardsScore(score) };
+  return {
+    type: EnsAwardsScoreResultTypes.Defined,
+    score: asEnsAwardsScore(score),
+    label: undefined,
+  };
 };
 
 /** Declare sort order for benchmark result (Pass → Partial Pass → Fail) */

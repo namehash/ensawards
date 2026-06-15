@@ -10,6 +10,7 @@ import {
   type EnsAwardsPoints,
   type EnsAwardsScore,
   type EnsAwardsScoreResult,
+  EnsAwardsScoreResultTypes,
   EnsAwardsUndefinedScoreLabels,
 } from "data/shared/ens-awards-score.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
@@ -78,7 +79,11 @@ export const calcAppScore = (app: App): EnsAwardsScoreResult => {
   );
 
   if (completedAcceptanceTestBenchmarks.length === 0)
-    return { score: undefined, label: EnsAwardsUndefinedScoreLabels.Pending };
+    return {
+      type: EnsAwardsScoreResultTypes.Undefined,
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.Pending,
+    };
 
   const completedApplicableAcceptanceTestBenchmarks: ApplicableAcceptanceTestBenchmark[] =
     completedAcceptanceTestBenchmarks.filter(
@@ -88,7 +93,11 @@ export const calcAppScore = (app: App): EnsAwardsScoreResult => {
     );
 
   if (completedApplicableAcceptanceTestBenchmarks.length === 0)
-    return { score: undefined, label: EnsAwardsUndefinedScoreLabels.NotApplicable };
+    return {
+      type: EnsAwardsScoreResultTypes.Undefined,
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.NotApplicable,
+    };
 
   const totalPoints: EnsAwardsPoints = completedApplicableAcceptanceTestBenchmarks.reduce(
     (sum, benchmark) => sum + calcEnsAwardsPoints(benchmark),
@@ -100,7 +109,11 @@ export const calcAppScore = (app: App): EnsAwardsScoreResult => {
     (totalPoints * 100) / completedApplicableAcceptanceTestBenchmarks.length,
   );
 
-  return { score: asEnsAwardsScore(score) };
+  return {
+    type: EnsAwardsScoreResultTypes.Defined,
+    score: asEnsAwardsScore(score),
+    label: undefined,
+  };
 };
 
 /**
