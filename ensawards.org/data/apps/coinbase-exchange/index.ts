@@ -20,7 +20,8 @@ const CoinbaseExchange: App = {
     twitter: new URL("https://x.com/coinbase"),
   },
   icon: CoinbaseIcon,
-  // TODO: Add OG images
+  ogImagePath: "coinbase-exchange/og.png",
+  twitterOgImagePath: "coinbase-exchange/twitter-og.png",
 };
 
 defineApp(CoinbaseExchange);

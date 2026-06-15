@@ -20,7 +20,8 @@ const KrakenExchange: App = {
     twitter: new URL("https://x.com/krakenfx"),
   },
   icon: KrakenIcon,
-  // TODO: Add OG images
+  ogImagePath: "kraken-exchange/og.png",
+  twitterOgImagePath: "kraken-exchange/twitter-og.png",
 };
 
 defineApp(KrakenExchange);

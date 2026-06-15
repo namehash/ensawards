@@ -20,7 +20,8 @@ const RobinhoodWallet: App = {
     twitter: new URL("https://x.com/robinhoodapp"),
   },
   icon: RobinhoodIcon,
-  // TODO: Add OG images
+  ogImagePath: "robinhood-wallet/og.png",
+  twitterOgImagePath: "robinhood-wallet/twitter-og.png",
 };
 
 defineApp(RobinhoodWallet);

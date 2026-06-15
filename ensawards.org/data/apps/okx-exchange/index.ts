@@ -20,7 +20,8 @@ const OKXExchange: App = {
     twitter: new URL("https://x.com/okx"),
   },
   icon: OKXIcon,
-  // TODO: Add OG images
+  ogImagePath: "okx-exchange/og.png",
+  twitterOgImagePath: "okx-exchange/twitter-og.png",
 };
 
 defineApp(OKXExchange);
