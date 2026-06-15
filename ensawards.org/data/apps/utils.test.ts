@@ -97,6 +97,7 @@ describe("App utils", () => {
       expect(asAppType("wallet")).toEqual(AppTypes.Wallet);
       expect(asAppType("explorer")).toEqual(AppTypes.Explorer);
       expect(asAppType("defi-app")).toEqual(AppTypes.DeFi);
+      expect(asAppType("exchange")).toEqual(AppTypes.Exchange);
     });
 
     it("Should throw an error for an invalid AppType value", () => {
@@ -215,7 +216,9 @@ describe("App utils", () => {
 
   describe("appliesToAllApps", () => {
     it("Should return true when all app types are included in targets", () => {
-      expect(appliesToAllApps([AppTypes.Wallet, AppTypes.Explorer, AppTypes.DeFi])).toEqual(true);
+      expect(
+        appliesToAllApps([AppTypes.Wallet, AppTypes.Explorer, AppTypes.DeFi, AppTypes.Exchange]),
+      ).toEqual(true);
     });
 
     it("Should return false when not all app types are included in targets", () => {

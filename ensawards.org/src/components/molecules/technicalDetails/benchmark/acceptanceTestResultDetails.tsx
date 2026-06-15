@@ -1,5 +1,11 @@
-import { createEnsNodeProviderOptions, EnsNodeProvider, RelativeTime } from "@namehash/namehash-ui";
+import {
+  createEnsNodeProviderOptions,
+  EnsNodeProvider,
+  RelativeTime,
+  useNow,
+} from "@namehash/namehash-ui";
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
+import { secondsInMinute } from "date-fns/constants";
 import { useMemo } from "react";
 
 import { DisplayContributorIdentity } from "@/components/atoms/cards/ContributorsCard";
@@ -14,6 +20,7 @@ export interface AcceptanceTestResultFooterProps {
 export const AcceptanceTestResultFooter = ({
   acceptanceTestBenchmark,
 }: AcceptanceTestResultFooterProps) => {
+  const now = useNow({ timeToRefresh: secondsInMinute }); // update every minute
   const lastBenchmarkUpdate = acceptanceTestBenchmark.contributions.reduce(
     (latest, contribution) => {
       return contribution.lastUpdated > latest.lastUpdated ? contribution : latest;
@@ -36,7 +43,11 @@ export const AcceptanceTestResultFooter = ({
           <p className="w-fit">
             Test completed{" "}
             <span className="text-black font-medium">
-              <RelativeTime enforcePast timestamp={lastBenchmarkUpdate.lastUpdated} />
+              <RelativeTime
+                enforcePast
+                relativeTo={now}
+                timestamp={lastBenchmarkUpdate.lastUpdated}
+              />
             </span>
           </p>
           <div className="w-fit flex flex-row flex-nowrap justify-end items-center gap-3">

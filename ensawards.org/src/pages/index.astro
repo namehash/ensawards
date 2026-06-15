@@ -40,6 +40,10 @@ const placeIcons = [
           .sort((a, b) => sortApps(a.app, b.app))
           .slice(0, 3);
 
+        if (rankedApps.length === 0) {
+          return null;
+        }
+
         return (
           <ItemsList
             header={`Top ${formatBestPracticeTarget(appType, { lowercase: false, plural: true })}`}

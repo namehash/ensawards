@@ -20,7 +20,8 @@ const LidoDeFi: App = {
     twitter: new URL("https://x.com/lidofinance"),
   },
   icon: LidoIcon,
-  // TODO: Add OG images
+  ogImagePath: "lido-defi/og.png",
+  twitterOgImagePath: "lido-defi/twitter-og.png",
 };
 
 defineApp(LidoDeFi);

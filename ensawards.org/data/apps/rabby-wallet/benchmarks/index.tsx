@@ -28,18 +28,18 @@ const benchmarks: BestPracticeBenchmarks = {
   },
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
+      result: BenchmarkResults.Pass,
       contributions: [
-        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-08T12:59:18Z") },
+        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-15T06:40:48Z") },
       ],
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The wallet doesn't
-            allow using ENS name as the recipient identifier, which we interpret as a failure.
+            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The resolved address
+            is correct.
           </p>
           <img
-            alt="Rabby Wallet doesn't allow ENS name as recipient in the send flow"
+            alt="Rabby Wallet correctly resolves the name for ENSv2"
             src={correctlyResolveEnsv2TestNameAddressProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />

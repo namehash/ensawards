@@ -29,6 +29,8 @@ export const asAppType = (maybeAppType: string): AppType => {
       return AppTypes.Explorer;
     case "defi-app":
       return AppTypes.DeFi;
+    case "exchange":
+      return AppTypes.Exchange;
     default:
       throw new Error(`Invalid AppType value: ${maybeAppType}`);
   }
@@ -130,6 +132,10 @@ export const formatAppType = (
 
     case AppTypes.DeFi:
       formattedType = plural ? "DeFi apps" : "DeFi app";
+      break;
+
+    case AppTypes.Exchange:
+      formattedType = plural ? "Exchanges" : "Exchange";
       break;
 
     default:
