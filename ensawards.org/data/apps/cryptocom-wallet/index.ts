@@ -20,7 +20,8 @@ const CryptoComWallet: App = {
     twitter: new URL("https://x.com/cryptocom"),
   },
   icon: CryptoComIcon,
-  // TODO: Add OG images
+  ogImagePath: "cryptocom-wallet/og.png",
+  twitterOgImagePath: "cryptocom-wallet/twitter-og.png",
 };
 
 defineApp(CryptoComWallet);

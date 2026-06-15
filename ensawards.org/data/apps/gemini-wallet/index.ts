@@ -20,7 +20,8 @@ const GeminiWallet: App = {
     twitter: new URL("https://x.com/gemini"),
   },
   icon: GeminiIcon,
-  // TODO: Add OG images
+  ogImagePath: "gemini-wallet/og.png",
+  twitterOgImagePath: "gemini-wallet/twitter-og.png",
 };
 
 defineApp(GeminiWallet);

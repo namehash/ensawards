@@ -20,7 +20,8 @@ const BinanceWallet: App = {
     twitter: new URL("https://x.com/binance"),
   },
   icon: BinanceIcon,
-  // TODO: Add OG images
+  ogImagePath: "binance-wallet/og.png",
+  twitterOgImagePath: "binance-wallet/twitter-og.png",
 };
 
 defineApp(BinanceWallet);

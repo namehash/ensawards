@@ -20,7 +20,8 @@ const BinanceExchange: App = {
     twitter: new URL("https://x.com/binance"),
   },
   icon: BinanceIcon,
-  // TODO: Add OG images
+  ogImagePath: "binance-exchange/og.png",
+  twitterOgImagePath: "binance-exchange/twitter-og.png",
 };
 
 defineApp(BinanceExchange);

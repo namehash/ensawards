@@ -20,7 +20,8 @@ const RobinhoodExchange: App = {
     twitter: new URL("https://x.com/robinhoodapp"),
   },
   icon: RobinhoodIcon,
-  // TODO: Add OG images
+  ogImagePath: "robinhood-exchange/og.png",
+  twitterOgImagePath: "robinhood-exchange/twitter-og.png",
 };
 
 defineApp(RobinhoodExchange);

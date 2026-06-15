@@ -20,7 +20,8 @@ const TrustWallet: App = {
     twitter: new URL("https://x.com/trustwallet"),
   },
   icon: TrustWalletIcon,
-  // TODO: Add OG images
+  ogImagePath: "trust-wallet/og.png",
+  twitterOgImagePath: "trust-wallet/twitter-og.png",
 };
 
 defineApp(TrustWallet);

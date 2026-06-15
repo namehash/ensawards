@@ -20,7 +20,8 @@ const OKXWallet: App = {
     twitter: new URL("https://x.com/okx"),
   },
   icon: OKXIcon,
-  // TODO: Add OG images
+  ogImagePath: "okx-wallet/og.png",
+  twitterOgImagePath: "okx-wallet/twitter-og.png",
 };
 
 defineApp(OKXWallet);

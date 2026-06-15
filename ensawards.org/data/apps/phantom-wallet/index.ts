@@ -20,7 +20,8 @@ const PhantomWallet: App = {
     twitter: new URL("https://x.com/phantom"),
   },
   icon: PhantomWalletIcon,
-  // TODO: Add OG images
+  ogImagePath: "phantom-wallet/og.png",
+  twitterOgImagePath: "phantom-wallet/twitter-og.png",
 };
 
 defineApp(PhantomWallet);
