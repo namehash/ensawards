@@ -28,7 +28,7 @@ const benchmarks: BestPracticeBenchmarks = {
   },
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
+      result: BenchmarkResults.NotApplicable,
       contributions: [
         { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-11T07:33:06Z") },
       ],
@@ -36,7 +36,8 @@ const benchmarks: BestPracticeBenchmarks = {
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
             ENSv2 ready resolution was tested using the &quot;send&quot; flow. The wallet doesn't
-            allow using ENS name as the recipient identifier, which we interpret as a failure.
+            allow using ENS name as the recipient identifier, which we interpret as not applicable
+            to our acceptance test scenario.
           </p>
           <img
             alt="Binance Wallet doesn't allow ENS name as recipient in the send flow"

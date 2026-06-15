@@ -55,14 +55,19 @@ export const getAcceptanceTestBenchmarksByApp = (
  *       {@link BenchmarkResults.Pass}
  *     - and all others are {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass}
  *
- * - Returns {@link BenchmarkResults.Fail} if all defined benchmarks
- * are {@link BenchmarkResults.Fail},
+ * - Returns {@link BenchmarkResults.Fail} if:
+ *     - in all defined benchmarks there is at least one
+ *       {@link BenchmarkResults.Fail}
+ *     - and all others are {@link BenchmarkResults.Fail} or {@link BenchmarkResults.NotApplicable}
  *
  * - Returns {@link BenchmarkResults.PartialPass} if:
  *     - at least one defined benchmark is {@link BenchmarkResults.Fail}
  *       and at least one defined benchmark is
  *       {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass},
  *     - or all defined benchmarks are {@link BenchmarkResults.PartialPass},
+ *
+ * - Returns {@link BenchmarkResults.NotApplicable} if:
+ *    - all defined benchmarks are {@link BenchmarkResults.NotApplicable}
  *
  * -  Returns `undefined` if all benchmarks are `undefined` (pending).
  */
@@ -87,6 +92,14 @@ export const generalizeAcceptanceTestBenchmarks = (
     return BenchmarkResults.PartialPass;
   }
 
+  const allDefinedBenchmarksNotApplicable = definedBenchmarkResults.every(
+    (result) => result === BenchmarkResults.NotApplicable,
+  );
+
+  if (allDefinedBenchmarksNotApplicable) {
+    return BenchmarkResults.NotApplicable;
+  }
+
   // For now, we'll explicitly treat pass and partial pass equally
   // (For cases where not all benchmarks are partial pass)
   const allDefinedBenchmarksPass = definedBenchmarkResults.every(
@@ -97,8 +110,10 @@ export const generalizeAcceptanceTestBenchmarks = (
     return BenchmarkResults.Pass;
   }
 
+  // For now, we'll explicitly treat fail and not applicable equally
+  // (For cases where not all benchmarks are not applicable)
   const allDefinedBenchmarksFail = definedBenchmarkResults.every(
-    (result) => result === BenchmarkResults.Fail,
+    (result) => result === BenchmarkResults.Fail || result === BenchmarkResults.NotApplicable,
   );
 
   if (allDefinedBenchmarksFail) {

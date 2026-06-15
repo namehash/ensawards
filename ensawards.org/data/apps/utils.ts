@@ -1,12 +1,16 @@
+import type { ApplicableAcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 import { getAcceptanceTestBenchmarksByApp } from "data/acceptance-tests/utils.ts";
 import { AWARDS } from "data/awards/index.ts";
 import type { Award } from "data/awards/types.ts";
-import { calcEnsAwardsPoints } from "data/benchmarks/utils.ts";
+import { BenchmarkResults } from "data/benchmarks/types.ts";
+import { calcEnsAwardsPoints, getAppBenchmarks } from "data/benchmarks/utils.ts";
 import { EntityMetadataTypes } from "data/entity-metadata/types.ts";
 import {
   asEnsAwardsScore,
   type EnsAwardsPoints,
   type EnsAwardsScore,
+  type EnsAwardsScoreResult,
+  EnsAwardsUndefinedScoreLabels,
 } from "data/shared/ens-awards-score.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 
@@ -60,26 +64,43 @@ export const getAppByName = (appName: string): App | undefined => {
 /**
  * Calculates {@link EnsAwardsScore} for an app.
  *
- * @returns undefined - if no benchmarks are completed or
- * if all completed benchmarks belong to a `BestPracticeCategory`
+ * @returns
+ * An {@link EnsAwardsScoreResult} object containing the score and a label describing the result.
+ * The {@link EnsAwardsScoreResult.score} field is:
+ *  - undefined - if no benchmarks are completed, all completed benchmarks returned a not applicable result,
+ * or if all completed benchmarks belong to a `BestPracticeCategory`
  * with status other than `Active`.
+ *  - an {@link EnsAwardsScore} calculation for the `App` otherwise.
  */
-export const calcAppScore = (app: App): EnsAwardsScore | undefined => {
+export const calcAppScore = (app: App): EnsAwardsScoreResult => {
   const completedAcceptanceTestBenchmarks = getAcceptanceTestBenchmarksByApp(app.appSlug).filter(
     (acceptanceTestBenchmark) => acceptanceTestBenchmark !== undefined,
   );
 
-  if (completedAcceptanceTestBenchmarks.length === 0) return undefined;
+  if (completedAcceptanceTestBenchmarks.length === 0)
+    return { score: undefined, label: EnsAwardsUndefinedScoreLabels.Pending };
 
-  const totalPoints: EnsAwardsPoints = completedAcceptanceTestBenchmarks.reduce(
+  const completedApplicableAcceptanceTestBenchmarks: ApplicableAcceptanceTestBenchmark[] =
+    completedAcceptanceTestBenchmarks.filter(
+      (benchmark): benchmark is ApplicableAcceptanceTestBenchmark =>
+        // explicitly exclude benchmarks with `NotApplicable` result
+        benchmark.result !== BenchmarkResults.NotApplicable,
+    );
+
+  if (completedApplicableAcceptanceTestBenchmarks.length === 0)
+    return { score: undefined, label: EnsAwardsUndefinedScoreLabels.NotApplicable };
+
+  const totalPoints: EnsAwardsPoints = completedApplicableAcceptanceTestBenchmarks.reduce(
     (sum, benchmark) => sum + calcEnsAwardsPoints(benchmark),
     0,
   );
 
   // Guarantee EnsAwardsScore type invariant by rounding the score to the nearest integer
-  const score = Math.round((totalPoints * 100) / completedAcceptanceTestBenchmarks.length);
+  const score = Math.round(
+    (totalPoints * 100) / completedApplicableAcceptanceTestBenchmarks.length,
+  );
 
-  return asEnsAwardsScore(score);
+  return { score: asEnsAwardsScore(score) };
 };
 
 /**
@@ -90,16 +111,23 @@ export const appliesToAllApps = (targets: BestPracticeTarget[]): boolean =>
 
 /**
  * Sorts two {@link App}s based on their {@link EnsAwardsScore}.
+ * For apps with `undefined` score,
+ * the one with more benchmarks with `NotApplicable` result is ranked higher.
  */
 export const sortApps = (a: App, b: App): number => {
-  const aScore = calcAppScore(a);
-  const bScore = calcAppScore(b);
+  const aScoreResult = calcAppScore(a);
+  const bScoreResult = calcAppScore(b);
 
-  if (aScore === undefined && bScore === undefined) return 0;
-  if (bScore === undefined) return -1;
-  if (aScore === undefined) return 1;
+  if (aScoreResult.score === undefined && bScoreResult.score === undefined) {
+    const aNotApplicableBenchmarks = calcNotApplicableAppBenchmarks(a);
+    const bNotApplicableBenchmarks = calcNotApplicableAppBenchmarks(b);
+    return bNotApplicableBenchmarks - aNotApplicableBenchmarks;
+  }
 
-  return bScore - aScore;
+  if (bScoreResult.score === undefined) return -1;
+  if (aScoreResult.score === undefined) return 1;
+
+  return bScoreResult.score - aScoreResult.score;
 };
 
 /** Builds the URL for an app's Open Graph image.
@@ -166,3 +194,10 @@ export const getAwardsByAppSlug = (appSlug: AppSlug): Award[] =>
       award.awardedEntityMetadata?.type === EntityMetadataTypes.App &&
       award.awardedEntityMetadata.app.appSlug === appSlug,
   );
+
+const calcNotApplicableAppBenchmarks = (app: App): number =>
+  Object.values(getAppBenchmarks(app.appSlug))
+    .flatMap((acceptanceTestBenchmarks) => Object.values(acceptanceTestBenchmarks))
+    .filter(
+      (benchmark) => benchmark !== undefined && benchmark.result === BenchmarkResults.NotApplicable,
+    ).length;

@@ -44,6 +44,7 @@ export interface AcceptanceTest {
   examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
   exampleFail?: AcceptanceTestBenchmarkFail;
 }
+// TODO: Decided that there is no point in adding an example for NotApplicable.
 
 /**
  * Represents the benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice}.
@@ -92,7 +93,20 @@ export interface AcceptanceTestBenchmarkPartialPass
 export interface AcceptanceTestBenchmarkFail
   extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Fail> {}
 
-export type AcceptanceTestBenchmark =
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that is not applicable to the acceptance test scenario.
+ * Most often, this is because the app doesn't use ENS at all,
+ * in places where it should.
+ */
+export interface NotApplicableAcceptanceTestBenchmark
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.NotApplicable> {}
+
+export type ApplicableAcceptanceTestBenchmark =
   | AcceptanceTestBenchmarkPass
   | AcceptanceTestBenchmarkPartialPass
   | AcceptanceTestBenchmarkFail;
+
+export type AcceptanceTestBenchmark =
+  | ApplicableAcceptanceTestBenchmark
+  | NotApplicableAcceptanceTestBenchmark;

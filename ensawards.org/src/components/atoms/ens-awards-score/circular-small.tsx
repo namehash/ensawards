@@ -1,16 +1,36 @@
-import { type EnsAwardsScore } from "data/shared/ens-awards-score";
+import {
+  type EnsAwardsScoreResult,
+  EnsAwardsUndefinedScoreLabels,
+} from "data/shared/ens-awards-score";
 
+import { AllBenchmarksNotApplicableIcon } from "@/components/atoms/icons/AllBenchmarksNotApplicableIcon";
 import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon";
 import { getScoreColor } from "@/utils/styles";
 
-export const EnsAwardsCircularScoreSmall = ({ score }: { score?: EnsAwardsScore }) => {
-  if (score === undefined) return <AllBenchmarksPendingIcon />;
+export const EnsAwardsCircularScoreSmall = ({
+  scoreResult,
+}: {
+  scoreResult: EnsAwardsScoreResult;
+}) => {
+  if (scoreResult.score === undefined && scoreResult.label === undefined) {
+    throw new Error(
+      "Invariant(ScoreBar): Either score or label must be defined in scoreResult. Both are undefined.",
+    );
+  }
 
-  const roundedScore = Math.round(score);
+  if (scoreResult.score === undefined) {
+    return scoreResult.label === EnsAwardsUndefinedScoreLabels.Pending ? (
+      <AllBenchmarksPendingIcon />
+    ) : (
+      <AllBenchmarksNotApplicableIcon />
+    );
+  }
+
+  const roundedScore = Math.round(scoreResult.score);
   const radius = 13;
   const circumference = 2 * Math.PI * radius;
   const dashOffset = circumference * (1 - roundedScore / 100);
-  const progressColorClass = `text-${getScoreColor(score)}`;
+  const progressColorClass = `text-${getScoreColor(scoreResult.score)}`;
 
   return (
     <div className="relative flex h-8 w-8 shrink-0 items-center justify-center">

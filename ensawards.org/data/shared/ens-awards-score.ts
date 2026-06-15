@@ -17,6 +17,31 @@ export type EnsAwardsPoints = number;
  */
 export type EnsAwardsScore = number;
 
+export const EnsAwardsUndefinedScoreLabels = {
+  Pending: "Pending",
+  NotApplicable: "Not Applicable",
+  InactiveCategory: "Inactive Category",
+} as const;
+
+export type EnsAwardsUndefinedScoreLabel =
+  (typeof EnsAwardsUndefinedScoreLabels)[keyof typeof EnsAwardsUndefinedScoreLabels];
+
+export interface EnsAwardsScoreResult {
+  /**
+   * Calculated EnsAwardsScore for the benchmarked entity
+   * ({@link App}, {@link Protocol}, {@link BestPractice}, or {@link BestPracticeCategory}).
+   *
+   * Can be `undefined` if no benchmarks were completed or if all completed benchmarks returned a not applicable result.
+   */
+  score?: EnsAwardsScore;
+
+  /**
+   * Label to display instead of the score when necessary.
+   * @invariant Required for `undefined` scores to provide context to the user.
+   */
+  label?: EnsAwardsUndefinedScoreLabel;
+}
+
 /**
  * Checks if a number is a valid {@link EnsAwardsScore}.
  */

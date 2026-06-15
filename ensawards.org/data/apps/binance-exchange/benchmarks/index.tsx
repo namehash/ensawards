@@ -19,7 +19,7 @@ import correctlyResolveEnsv2TestNameAddressProofImageWithdrawal from "./correctl
 const benchmarks: BestPracticeBenchmarks = {
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
+      result: BenchmarkResults.NotApplicable,
       contributions: [
         { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-11T07:30:06Z") },
       ],
@@ -28,7 +28,8 @@ const benchmarks: BestPracticeBenchmarks = {
           <p className="w-full">
             ENSv2 ready resolution was tested using the search tool in the &quot;copy-trading&quot;
             flow. The app either doesn't allow using ENS name as the trader identifier or fails to
-            resolve it, both of which we interpret as a failure.
+            resolve it, both of which we interpret as not applicable to our acceptance test
+            scenario.
           </p>
           <img
             alt="Binance exchange doesn't allow ENS name as trader in the copy-trading flow"
@@ -37,8 +38,8 @@ const benchmarks: BestPracticeBenchmarks = {
           />
           <p className="w-full">
             The ENSv2 ready resolution was also tested using the &quot;withdrawal&quot; flow. The
-            app doesn't allow using ENS name as the recipient identifier, which we interpret as a
-            failure.
+            app doesn't allow using ENS name as the recipient identifier, which we interpret as not
+            applicable to our acceptance test scenario.
           </p>
           <img
             alt="Binance exchange doesn't allow ENS name as recipient in the withdrawal flow"

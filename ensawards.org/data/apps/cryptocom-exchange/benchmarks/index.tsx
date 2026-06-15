@@ -18,7 +18,7 @@ import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-
 const benchmarks: BestPracticeBenchmarks = {
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
+      result: BenchmarkResults.NotApplicable,
       contributions: [
         { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-11T13:47:40Z") },
       ],
@@ -26,7 +26,8 @@ const benchmarks: BestPracticeBenchmarks = {
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
             ENSv2 ready resolution was tested using the &quot;withdrawal&quot; flow. The app doesn't
-            allow using ENS name as the recipient identifier, which we interpret as a failure.
+            allow using ENS name as the recipient identifier, which we interpret as not applicable
+            to our acceptance test scenario.
           </p>
           <img
             alt="Crypto.com exchange doesn't allow ENS name as recipient in the withdrawal flow"

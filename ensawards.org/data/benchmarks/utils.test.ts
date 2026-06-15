@@ -1,3 +1,4 @@
+import type { ApplicableAcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 import {
   calcBestPracticeCategoryScore,
   calcEnsAwardsPoints,
@@ -6,6 +7,7 @@ import {
   sortBenchmarkResults,
 } from "data/benchmarks/utils.ts";
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
+import type { EnsAwardsPoints } from "data/shared/ens-awards-score.ts";
 import {
   createMockAcceptanceTestBenchmark,
   createMockBestPractice,
@@ -33,17 +35,27 @@ vi.mock(import("data/ens-best-practices/utils.ts"), async (importOriginal) => {
 describe("benchmarks-utils", () => {
   describe("calcEnsAwardsPoints", () => {
     it("Should return correct points for each benchmark result type", () => {
-      const benchmarkCases = [
+      const benchmarkCases: {
+        benchmark: ApplicableAcceptanceTestBenchmark;
+        expectedPoints: EnsAwardsPoints;
+      }[] = [
+        // Type assertions are acceptable here since we are in a fully controlled setting
         {
-          benchmark: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+          benchmark: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.Pass,
+          ) as ApplicableAcceptanceTestBenchmark,
           expectedPoints: 1,
         },
         {
-          benchmark: createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
+          benchmark: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.PartialPass,
+          ) as ApplicableAcceptanceTestBenchmark,
           expectedPoints: 0.5,
         },
         {
-          benchmark: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+          benchmark: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.Fail,
+          ) as ApplicableAcceptanceTestBenchmark,
           expectedPoints: 0,
         },
       ];
@@ -153,6 +165,13 @@ describe("benchmarks-utils", () => {
       ...mockBestPracticeCategoryDetails,
     });
 
+    const mockBestPractice4 = createMockBestPractice({
+      id: "mock-best-practice-4",
+      name: "Mock Best Practice 4",
+      bestPracticeSlug: "mock-best-practice-4",
+      ...mockBestPracticeCategoryDetails,
+    });
+
     beforeEach(() => {
       mockGetBestPracticeBySlug.mockReset();
 
@@ -166,6 +185,9 @@ describe("benchmarks-utils", () => {
 
           case mockBestPractice3.bestPracticeSlug:
             return mockBestPractice3;
+
+          case mockBestPractice4.bestPracticeSlug:
+            return mockBestPractice4;
 
           case mockReverseResolutionBestPractice.bestPracticeSlug:
             return mockReverseResolutionBestPractice;
@@ -190,8 +212,33 @@ describe("benchmarks-utils", () => {
       };
 
       expect(
-        calcBestPracticeCategoryScore(benchmarks),
+        calcBestPracticeCategoryScore(benchmarks).score,
         "Expected calcBestPracticeCategoryScore to return undefined for an empty benchmark list",
+      ).toEqual(undefined);
+    });
+
+    it("Should return undefined for completed, but not applicable benchmarks", () => {
+      const benchmarks: BestPracticeBenchmarks = {
+        [mockBestPractice1.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.NotApplicable,
+          ),
+        },
+        [mockBestPractice2.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.NotApplicable,
+          ),
+        },
+        [mockBestPractice3.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.NotApplicable,
+          ),
+        },
+      };
+
+      expect(
+        calcBestPracticeCategoryScore(benchmarks).score,
+        "Expected calcBestPracticeCategoryScore to return undefined for a list of not applicable benchmarks",
       ).toEqual(undefined);
     });
 
@@ -206,9 +253,14 @@ describe("benchmarks-utils", () => {
         [mockBestPractice3.bestPracticeSlug]: {
           mockAcceptanceTestSlug3: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         },
+        [mockBestPractice4.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.NotApplicable,
+          ),
+        },
       } as const satisfies BestPracticeBenchmarks;
 
-      const result = calcBestPracticeCategoryScore(validCategoryBenchmarks);
+      const result = calcBestPracticeCategoryScore(validCategoryBenchmarks).score;
 
       expect(
         result,
@@ -241,6 +293,7 @@ describe("benchmarks-utils", () => {
         undefined,
         createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
         createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
       ];
@@ -250,6 +303,7 @@ describe("benchmarks-utils", () => {
         createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
         createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
         undefined,
       ];
 
@@ -271,6 +325,7 @@ describe("benchmarks-utils", () => {
         BenchmarkResults.Pass,
         BenchmarkResults.Fail,
         BenchmarkResults.PartialPass,
+        BenchmarkResults.NotApplicable,
       ];
 
       const expectedOutput = [
@@ -278,6 +333,7 @@ describe("benchmarks-utils", () => {
         BenchmarkResults.PartialPass,
         BenchmarkResults.Fail,
         BenchmarkResults.Fail,
+        BenchmarkResults.NotApplicable,
         undefined,
       ];
 

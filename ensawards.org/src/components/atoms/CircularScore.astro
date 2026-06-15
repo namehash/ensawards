@@ -1,14 +1,14 @@
 ---
 import { cn } from "../../utils/tailwindClassConcatenation";
-import { type EnsAwardsScore } from "data/shared/ens-awards-score";
+import { type EnsAwardsScoreResult, type EnsAwardsScore } from "data/shared/ens-awards-score";
 
 export interface CircularScoreProps {
-  score?: EnsAwardsScore;
+  scoreResult: EnsAwardsScoreResult;
   size?: number;
   strokeWidth?: number;
 }
 
-const { score, size = 139, strokeWidth = 10 }: CircularScoreProps = Astro.props;
+const { scoreResult, size = 139, strokeWidth = 10 }: CircularScoreProps = Astro.props;
 
 const gradientStartColors = ["#12D494", "#ffd230", "#fb2c36", "#d1d1d1"];
 const gradientStopColors = ["#0D9A6B", "#e17100", "#c10007", "#969696"];
@@ -32,9 +32,15 @@ const getGradientColorIndex = (score?: EnsAwardsScore) => {
   return 0;
 };
 
-const gradientIndex = getGradientColorIndex(score);
+const gradientIndex = getGradientColorIndex(scoreResult.score);
 const colorFrom = gradientStartColors[gradientIndex];
 const colorTo = gradientStopColors[gradientIndex];
+
+if (scoreResult.score === undefined && scoreResult.label === undefined) {
+  throw new Error(
+    "Invariant(ScoreBar): Either score or label must be defined in scoreResult. Both are undefined.",
+  );
+}
 
 // Count size parameters of the score bar
 const radius = (size - strokeWidth) / 2;
@@ -82,20 +88,20 @@ const circumference = 2 * Math.PI * radius;
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-0">
     {
-      score === undefined ? (
-        <p class="text-base leading-normal font-semibold text-[rgba(245,245,245,0.5)]">
-          Pending
+      scoreResult.score === undefined ? (
+        <p class="max-w-[100px] text-base text-wrap text-center leading-normal font-semibold text-[rgba(245,245,245,0.5)]">
+          {scoreResult.label}
         </p>
       ) : (
         <p
           id="scoreNumber"
-          data-score={score}
+          data-score={scoreResult.score}
           class="text-4xl text-white leading-8 font-semibold transition-all ease-linear"
         />
       )
     }
     {
-      score !== undefined && (
+      scoreResult.score !== undefined && (
         <p class={cn("text-4xl text-white leading-8 font-semibold")}>%</p>
       )
     }

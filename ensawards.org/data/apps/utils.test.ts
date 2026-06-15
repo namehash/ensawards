@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
   createMockAcceptanceTestBenchmark,
+  createMockBestPractice,
   mockCoinbaseWalletApp,
   mockDisplayProfilesBestPractice,
   mockEtherscanApp,
@@ -30,10 +31,14 @@ vi.mock("data/benchmarks/index.ts", () => ({
   APP_BENCHMARKS: mockBenchmarks,
 }));
 
-vi.mock("data/benchmarks/utils.ts", () => ({
-  calcEnsAwardsPoints: mockEnsAwardsPoints,
-  getAppBenchmarks: (slug: AppSlug) => mockBenchmarks[slug],
-}));
+vi.mock(import("data/benchmarks/utils.ts"), async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    calcEnsAwardsPoints: mockEnsAwardsPoints,
+    getAppBenchmarks: (slug: AppSlug) => mockBenchmarks[slug],
+  };
+});
 
 vi.mock("data/acceptance-tests/utils.ts", () => ({
   getAcceptanceTestBenchmarksByApp: mockGetAcceptanceTestBenchmarksByApp,
@@ -56,6 +61,18 @@ const setMockApps = (...apps: App[]) => {
 };
 
 describe("App utils", () => {
+  const mockBestPractice1 = createMockBestPractice({
+    id: "mock-bp-1",
+    name: "Mock Best Practice 1",
+    bestPracticeSlug: "mock-best-practice-1",
+    categoryId: "mock-category-1",
+    categoryName: "Mock Category 1",
+    categorySlug: "mock-category-1",
+  });
+  const mockNotApplicableBenchmarkResult = createMockAcceptanceTestBenchmark(
+    BenchmarkResults.NotApplicable,
+  );
+
   beforeEach(() => {
     mockApps.splice(0, mockApps.length);
     mockEnsAwardsPoints.mockReset();
@@ -86,6 +103,12 @@ describe("App utils", () => {
           return Object.values(mockBenchmarks[mockMetamaskApp.appSlug]).flatMap(
             (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
           );
+
+        case mockEtherscanApp.appSlug:
+          return Object.values(mockBenchmarks[mockEtherscanApp.appSlug]).flatMap(
+            (bestPracticeBenchmarks) => Object.values(bestPracticeBenchmarks),
+          );
+
         default:
           throw new Error(`No benchmarks defined for app with slug ${appSlug}`);
       }
@@ -160,15 +183,39 @@ describe("App utils", () => {
         [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
           mockAcceptanceTestSlug4: undefined,
         },
+        [mockBestPractice1.bestPracticeSlug]: {
+          mockAcceptanceTestSlug5: mockNotApplicableBenchmarkResult,
+        },
       };
 
-      const result = calcAppScore(mockCoinbaseWalletApp);
+      const result = calcAppScore(mockCoinbaseWalletApp).score;
 
       expect(result, `Expected ENSAwards score to be 67 got ${result}`).toEqual(67);
     });
 
-    it("Should return undefined when the app has no defined benchmarks", () => {
+    it("Should return undefined when the app has no defined benchmarks or all benchmark results are `NotApplicable`", () => {
       mockBenchmarks[mockCoinbaseWalletApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: undefined,
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: undefined,
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: undefined,
+        },
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: mockNotApplicableBenchmarkResult,
+        },
+      };
+      const resultMixed = calcAppScore(mockCoinbaseWalletApp);
+
+      expect(
+        resultMixed.score,
+        `Expected ENSAwards score to be undefined got ${resultMixed}`,
+      ).toBeUndefined();
+
+      mockBenchmarks[mockRainbowApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: {
           mockAcceptanceTestSlug1: undefined,
         },
@@ -182,9 +229,12 @@ describe("App utils", () => {
           mockAcceptanceTestSlug4: undefined,
         },
       };
-      const result = calcAppScore(mockCoinbaseWalletApp);
+      const resultAllUndefined = calcAppScore(mockRainbowApp);
 
-      expect(result, `Expected ENSAwards score to be undefined got ${result}`).toBeUndefined();
+      expect(
+        resultAllUndefined.score,
+        `Expected ENSAwards score to be undefined got ${resultAllUndefined.score}`,
+      ).toBeUndefined();
     });
 
     it("Should throw when the calculated score is greater than 100", () => {
@@ -241,6 +291,9 @@ describe("App utils", () => {
         [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
           mockAcceptanceTestSlug4: undefined,
         },
+        [mockBestPractice1.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: mockNotApplicableBenchmarkResult,
+        },
       };
 
       mockBenchmarks[mockRainbowApp.appSlug] = {
@@ -254,6 +307,9 @@ describe("App utils", () => {
           mockAcceptanceTestSlug3: createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         },
         [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: mockNotApplicableBenchmarkResult,
+        },
+        [mockBestPractice1.bestPracticeSlug]: {
           mockAcceptanceTestSlug4: undefined,
         },
       };
@@ -268,13 +324,39 @@ describe("App utils", () => {
         [mockForwardResolutionBestPractice.bestPracticeSlug]: {
           mockAcceptanceTestSlug3: undefined,
         },
+        [mockBestPractice1.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: undefined,
+        },
         [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
           mockAcceptanceTestSlug4: undefined,
         },
       };
 
-      const apps = [mockMetamaskApp, mockRainbowApp, mockCoinbaseWalletApp];
-      const expectedOrder = [mockCoinbaseWalletApp, mockRainbowApp, mockMetamaskApp];
+      mockBenchmarks[mockEtherscanApp.appSlug] = {
+        [mockReverseResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug1: mockNotApplicableBenchmarkResult,
+        },
+        [mockDisplayProfilesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug2: mockNotApplicableBenchmarkResult,
+        },
+        [mockForwardResolutionBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug3: mockNotApplicableBenchmarkResult,
+        },
+        [mockBestPractice1.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: mockNotApplicableBenchmarkResult,
+        },
+        [mockNormalizeNamesBestPractice.bestPracticeSlug]: {
+          mockAcceptanceTestSlug4: mockNotApplicableBenchmarkResult,
+        },
+      };
+
+      const apps = [mockMetamaskApp, mockRainbowApp, mockCoinbaseWalletApp, mockEtherscanApp];
+      const expectedOrder = [
+        mockCoinbaseWalletApp,
+        mockRainbowApp,
+        mockEtherscanApp,
+        mockMetamaskApp,
+      ];
       const sortedApps = apps.sort(sortApps);
 
       sortedApps.forEach((app, index) => {

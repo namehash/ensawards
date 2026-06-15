@@ -19,7 +19,7 @@ import correctlyResolveEnsv2TestNameAddressProofImage2 from "./correctly-resolve
 const benchmarks: BestPracticeBenchmarks = {
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
+      result: BenchmarkResults.NotApplicable,
       contributions: [
         { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-15T06:59:00Z") },
       ],
@@ -27,7 +27,8 @@ const benchmarks: BestPracticeBenchmarks = {
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
             ENSv2 ready resolution was tested using the &quot;send&quot; flow. The app doesn't allow
-            using ENS name as the recipient identifier, which we interpret as a failure.
+            using ENS name as the recipient identifier, which we interpret as not applicable to our
+            acceptance test scenario.
           </p>
           <div className="flex flex-col justify-start items-center gap-5">
             <img

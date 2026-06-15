@@ -1,10 +1,17 @@
+import type { ApplicableAcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 import { AppTypes } from "data/apps/types.ts";
+import { BenchmarkResults } from "data/benchmarks/types.ts";
 import {
   calcEnsAwardsPoints,
   getAcceptanceTestBenchmarksByBestPractice,
 } from "data/benchmarks/utils.ts";
 import { ProtocolTypes } from "data/protocols/types.ts";
-import { asEnsAwardsScore, type EnsAwardsScore } from "data/shared/ens-awards-score.ts";
+import {
+  asEnsAwardsScore,
+  type EnsAwardsScore,
+  type EnsAwardsScoreResult,
+  EnsAwardsUndefinedScoreLabels,
+} from "data/shared/ens-awards-score.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 
 import { BEST_PRACTICE_CATEGORIES, ENS_BEST_PRACTICES } from "./index.ts";
@@ -101,15 +108,20 @@ export const formatBestPracticeType = (
  * by calculating the total score of all apps that were benchmarked on this best practice
  * and dividing it by the total number of acceptance test benchmarks completed on it.
  *
- * @returns `undefined` if no apps were benchmarked on this best practice,
+ * @returns
+ * An {@link EnsAwardsScoreResult} object containing the score and a label describing the result.
+ * The {@link EnsAwardsScoreResult.score} field is:
+ *  - `undefined` if no apps were benchmarked on this best practice,
+ * all of its completed benchmarks returned a not applicable result,
  * or the best practice belongs to a category with status other than `Active`.
- * Otherwise returns the {@link EnsAwardsScore}.
+ *  - {@link EnsAwardsScore} otherwise.
  */
-export const calcBestPracticeScore = (
-  bestPractice: BestPracticeApp,
-): EnsAwardsScore | undefined => {
+export const calcBestPracticeScore = (bestPractice: BestPracticeApp): EnsAwardsScoreResult => {
   if (bestPractice.category.status !== CategoryStatuses.Active) {
-    return undefined;
+    return {
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.InactiveCategory,
+    };
   }
 
   let benchmarkedAcceptanceTests = 0;
@@ -119,21 +131,37 @@ export const calcBestPracticeScore = (
     bestPractice.bestPracticeSlug,
   ).flatMap((appBenchmark) => Object.values(appBenchmark));
 
-  for (const acceptanceTestBenchmark of bestPracticeBenchmarks) {
-    if (acceptanceTestBenchmark === undefined) {
-      continue;
-    }
+  const completedBenchmarks = bestPracticeBenchmarks.filter((benchmark) => benchmark !== undefined);
 
+  if (completedBenchmarks.length === 0) {
+    return {
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.Pending,
+    };
+  }
+
+  const completedApplicableBenchmarks: ApplicableAcceptanceTestBenchmark[] =
+    completedBenchmarks.filter(
+      // explicitly exclude benchmarks that are pending or not applicable
+      (benchmark) => benchmark.result !== BenchmarkResults.NotApplicable,
+    );
+
+  if (completedApplicableBenchmarks.length === 0) {
+    return {
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.NotApplicable,
+    };
+  }
+
+  for (const acceptanceTestBenchmark of completedApplicableBenchmarks) {
     benchmarkedAcceptanceTests += 1;
 
     bestPracticePoints += calcEnsAwardsPoints(acceptanceTestBenchmark);
   }
 
-  if (benchmarkedAcceptanceTests === 0) return undefined;
-
   const score = Math.round((bestPracticePoints * 100) / benchmarkedAcceptanceTests);
 
-  return asEnsAwardsScore(score);
+  return { score: asEnsAwardsScore(score) };
 };
 
 export const formatBestPracticeTarget = (

@@ -25,25 +25,32 @@ describe("Acceptance test utils", () => {
       },
     );
 
-    it("Returns `BenchmarkResults.Fail` if all defined benchmarks are `BenchmarkResults.Fail`", () => {
-      const expectedResult = BenchmarkResults.Fail;
+    it(
+      "Returns `BenchmarkResults.Fail` if in all defined benchmarks there is at least one `BenchmarkResults.Fail`" +
+        " and all others are `BenchmarkResults.Fail` or `BenchmarkResults.NotApplicable`",
+      () => {
+        const expectedResult = BenchmarkResults.Fail;
 
-      const inputBenchmarks = {
-        "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
-        "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
-        "mock-acceptance-test-3": undefined,
-        // pending benchmarks should be ignored in this case of the generalization
-      } as const satisfies AcceptanceTestBenchmarks;
+        const inputBenchmarks = {
+          "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+          "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+          "mock-acceptance-test-3": createMockAcceptanceTestBenchmark(
+            BenchmarkResults.NotApplicable,
+          ),
+          "mock-acceptance-test-4": undefined,
+          // pending benchmarks should be ignored in this case of the generalization
+        } as const satisfies AcceptanceTestBenchmarks;
 
-      expect(
-        generalizeAcceptanceTestBenchmarks(inputBenchmarks),
-        "generalizeAcceptanceTestBenchmarks should return `BenchmarkResults.Fail`",
-      ).toEqual(expectedResult);
-    });
+        expect(
+          generalizeAcceptanceTestBenchmarks(inputBenchmarks),
+          "generalizeAcceptanceTestBenchmarks should return `BenchmarkResults.Fail`",
+        ).toEqual(expectedResult);
+      },
+    );
 
     it(
       "Returns `BenchmarkResults.PartialPass` if at least one defined benchmark is `BenchmarkResults.Fail`" +
-        " and at least one defined benchmark is `BenchmarkResults.Pass`",
+        " and at least one defined benchmark is `BenchmarkResults.Pass` or `BenchmarkResults.PartialPass`",
       () => {
         const expectedResult = BenchmarkResults.PartialPass;
 
@@ -75,6 +82,22 @@ describe("Acceptance test utils", () => {
       expect(
         generalizeAcceptanceTestBenchmarks(inputBenchmarks),
         "generalizeAcceptanceTestBenchmarks should return `BenchmarkResults.PartialPass`",
+      ).toEqual(expectedResult);
+    });
+
+    it("Returns `BenchmarkResults.NotApplicable` if all defined benchmarks are `BenchmarkResults.NotApplicable`", () => {
+      const expectedResult = BenchmarkResults.NotApplicable;
+
+      const inputBenchmarks = {
+        "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
+        "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
+        "mock-acceptance-test-3": undefined,
+        // pending benchmarks should be ignored in this case of the generalization
+      } as const satisfies AcceptanceTestBenchmarks;
+
+      expect(
+        generalizeAcceptanceTestBenchmarks(inputBenchmarks),
+        "generalizeAcceptanceTestBenchmarks should return `BenchmarkResults.NotApplicable`",
       ).toEqual(expectedResult);
     });
 

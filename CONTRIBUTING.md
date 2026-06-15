@@ -371,6 +371,7 @@ export const BenchmarkResults = {
   Pass: "passed",
   PartialPass: "partially-passed",
   Fail: "failed",
+  NotApplicable: "not-applicable",
 } as const;
 
 export type BenchmarkResult = (typeof BenchmarkResults)[keyof typeof BenchmarkResults];
@@ -444,10 +445,23 @@ export interface AcceptanceTestBenchmarkPartialPass
 export interface AcceptanceTestBenchmarkFail
   extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.Fail> {}
 
-export type AcceptanceTestBenchmark =
+/**
+ * Represents a benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice},
+ * that is not applicable to the acceptance test scenario.
+ * Most often, this is because the app doesn't use ENS at all, 
+ * in places where it should.
+ */
+export interface NotApplicableAcceptanceTestBenchmark
+  extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.NotApplicable> {}
+
+export type ApplicableAcceptanceTestBenchmark =
   | AcceptanceTestBenchmarkPass
   | AcceptanceTestBenchmarkPartialPass
   | AcceptanceTestBenchmarkFail;
+
+export type AcceptanceTestBenchmark =
+  | ApplicableAcceptanceTestBenchmark
+  | NotApplicableAcceptanceTestBenchmark;
 ```
 
 3. Add notes made during the benchmarking process in the form of a simple JSX element that is a part of the new item in the `benchmarks` record. For reference, see 

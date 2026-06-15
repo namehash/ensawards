@@ -2,13 +2,13 @@
 import { cn } from "../../../utils/tailwindClassConcatenation";
 import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
 import { EnsAwardsBarScore } from "@/components/atoms/ens-awards-score/bar.tsx";
-import { type EnsAwardsScore } from "data/shared/ens-awards-score.ts";
+import { type EnsAwardsScoreResult } from "data/shared/ens-awards-score.ts";
 
 export interface LeaderboardCardProps {
   name: string;
   viewDetailsHref: string;
   viewDetailsText?: string;
-  ensAwardsScore?: EnsAwardsScore;
+  ensAwardsScore: EnsAwardsScoreResult;
 }
 
 const { name, viewDetailsHref, viewDetailsText, ensAwardsScore }: LeaderboardCardProps =
@@ -41,7 +41,7 @@ const { name, viewDetailsHref, viewDetailsText, ensAwardsScore }: LeaderboardCar
   </div>
   <div
     class="flex flex-nowrap flex-col sm:flex-row justify-start sm:justify-end items-center gap-2 sm:gap-10 max-sm:self-stretch">
-    <EnsAwardsBarScore score={ensAwardsScore} />
+    <EnsAwardsBarScore scoreResult={ensAwardsScore} />
     <button
       class={cn(
         shadcnButtonVariants({

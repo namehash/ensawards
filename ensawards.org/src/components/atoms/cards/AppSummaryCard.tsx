@@ -65,7 +65,7 @@ function BenchmarkCategorySection({
         aria-expanded={isOpen}
         className="flex w-full items-center gap-3 text-left"
       >
-        <EnsAwardsCircularScoreSmall score={categoryScore} />
+        <EnsAwardsCircularScoreSmall scoreResult={categoryScore} />
         <span className="flex-1 text-lg leading-normal font-semibold text-black">
           {category.name}
         </span>
@@ -173,7 +173,7 @@ export function AppSummaryCard({ app }: AppSummaryCardProps) {
             </div>
             <h3 className="text-lg leading-normal font-semibold text-black">{resolvedApp.name}</h3>
           </div>
-          <EnsAwardsBarScore score={appScore} mobileAdaptive={false} />
+          <EnsAwardsBarScore scoreResult={appScore} mobileAdaptive={false} />
         </div>
         {benchmarksByCategorySorted.map(([categorySlug, benchmarksInCategory], index) => {
           return (
