@@ -17,7 +17,7 @@ const RobinhoodWallet: App = {
     "Self-custodial multi-chain wallet for storing, swapping, and staking digital assets and connecting to decentralized applications.",
   socials: {
     website: new URL("https://robinhood.com/eu/en/wallet/"),
-    twitter: new URL("https://x.com/RobinhoodApp"),
+    twitter: new URL("https://x.com/robinhoodapp"),
   },
   icon: RobinhoodIcon,
   // TODO: Add OG images

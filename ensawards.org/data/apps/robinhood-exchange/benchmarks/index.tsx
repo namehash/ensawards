@@ -26,8 +26,8 @@ const benchmarks: BestPracticeBenchmarks = {
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The wallet doesn't
-            allow using ENS name as the recipient identifier, which we interpret as a failure.
+            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The app doesn't allow
+            using ENS name as the recipient identifier, which we interpret as a failure.
           </p>
           <div className="flex flex-col justify-start items-center gap-5">
             <img

@@ -5,7 +5,6 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
     viewBox="0 -5 42 42"
     version="1.1"
     fill="#5741d9"

@@ -5,6 +5,7 @@ import {
   useNow,
 } from "@namehash/namehash-ui";
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
+import { secondsInMinute } from "date-fns/constants";
 import { useMemo } from "react";
 
 import { DisplayContributorIdentity } from "@/components/atoms/cards/ContributorsCard";
@@ -19,7 +20,7 @@ export interface AcceptanceTestResultFooterProps {
 export const AcceptanceTestResultFooter = ({
   acceptanceTestBenchmark,
 }: AcceptanceTestResultFooterProps) => {
-  const now = useNow({ timeToRefresh: 60 }); // update every minute
+  const now = useNow({ timeToRefresh: secondsInMinute }); // update every minute
   const lastBenchmarkUpdate = acceptanceTestBenchmark.contributions.reduce(
     (latest, contribution) => {
       return contribution.lastUpdated > latest.lastUpdated ? contribution : latest;
