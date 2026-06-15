@@ -68,7 +68,7 @@
         "address": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"
       },
       "rulesUrl": "https://ensawards.org/ens-referral-program/editions/2026-05/rules",
-      "areAwardsDistributed": false,
+      "areAwardsDistributed": true,
       "adminActions": [
         {
           "actionType": "Disqualification",
