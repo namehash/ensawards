@@ -36,6 +36,7 @@ export const ProjectIds = {
   CryptoCom: "project-cryptocom",
   Robinhood: "project-robinhood",
   Gemini: "project-gemini",
+  Frame: "project-frame",
 } as const;
 
 /**
