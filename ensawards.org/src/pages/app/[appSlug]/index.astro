@@ -29,6 +29,10 @@ import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score
 import { getAppContributions } from "data/contributors/utils.ts";
 import type { BestPracticeCategorySlug } from "data/ens-best-practices/types";
 import { getBestPracticeCategoryBySlug } from "data/ens-best-practices/utils.ts";
+import {
+  EnsAwardsScoreResultTypes,
+  EnsAwardsUndefinedScoreLabels,
+} from "data/shared/ens-awards-score.ts";
 import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
 import { CategoryStatuses } from "data/ens-best-practices/types.ts";
 import { summarizeAppsAcceptanceTestBenchmarks } from "data/benchmarks/utils.ts";
@@ -42,7 +46,11 @@ const { appSlug } = Astro.params;
 const app = getAppBySlug(appSlug);
 
 // The default values should never be used. Only introduced for type safety.
-let appScore: EnsAwardsScoreResult = { score: undefined, label: undefined };
+let appScore: EnsAwardsScoreResult = {
+  type: EnsAwardsScoreResultTypes.Undefined,
+  score: undefined,
+  label: EnsAwardsUndefinedScoreLabels.NotApplicable,
+};
 let AppIcon;
 let appContributions: Contribution[] = [];
 let benchmarksByCategory: Map<BestPracticeCategorySlug, BestPracticeBenchmarks> = new Map();

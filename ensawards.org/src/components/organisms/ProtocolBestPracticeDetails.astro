@@ -23,6 +23,7 @@ import { type Contribution } from "data/contributors/types";
 import { CONTRACTS } from "data/protocols/contracts";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
 import { BestPracticeTechnicalDetails } from "@/components/molecules/technicalDetails/bestPractice";
+import { EnsAwardsScoreResultTypes } from "data/shared/ens-awards-score.ts";
 
 export interface ProtocolBestPracticeDetailsProps {
   bestPractice: BestPracticeProtocol;
@@ -157,7 +158,11 @@ const additionalInfoContainerStyles =
                 <LeaderboardCard
                   key={`leaderboard-card-${protocol.protocolSlug}`}
                   name={protocol.name}
-                  ensAwardsScore={{ score: ensAwardsScore }}
+                  ensAwardsScore={{
+                    type: EnsAwardsScoreResultTypes.Defined,
+                    score: ensAwardsScore,
+                    label: undefined,
+                  }}
                   viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
                   viewDetailsText={`${formatProtocolType(protocolType)} report`}>
                   {idx < 3 ? (

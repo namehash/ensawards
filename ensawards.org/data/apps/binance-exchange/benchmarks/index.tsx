@@ -27,7 +27,7 @@ const benchmarks: BestPracticeBenchmarks = {
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
             ENSv2 ready resolution was tested using the search tool in the &quot;copy-trading&quot;
-            flow. The appdoesn't allow using ENS name as the trader identifier, which we interpret
+            flow. The app doesn't allow using ENS name as the trader identifier, which we interpret
             as not applicable to our acceptance test scenario.
           </p>
           <img

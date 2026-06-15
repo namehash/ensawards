@@ -3,7 +3,6 @@ import { formatBestPracticeTarget } from "data/ens-best-practices/utils.ts";
 import type { ImageMetadata } from "astro";
 import LeaderboardsHeroImage from "@/assets/leaderboardsHeroImage.png";
 import { ProtocolTypes } from "data/protocols/types.ts";
-import DataLoadingError from "@/components/organisms/DataLoadingError.astro";
 import type { ProtocolId } from "data/protocols/types.ts";
 import SubpageHero from "@/components/molecules/SubpageHero.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -19,7 +18,7 @@ import {
 } from "@/components/atoms/cards/ContributorsCard";
 import type { Contribution } from "data/contributors/types";
 import { getProtocolContributions } from "data/contributors/utils";
-import { type EnsAwardsScore } from "data/shared/ens-awards-score.ts";
+import { type EnsAwardsScore, EnsAwardsScoreResultTypes } from "data/shared/ens-awards-score.ts";
 
 export function getStaticPaths() {
   return Object.values(ProtocolTypes).map((protocolType) => ({
@@ -86,7 +85,11 @@ const protocolContractDataContributions: Contribution[] = Object.keys(protocolSc
                   <LeaderboardCard
                     key={`leaderboard-card-${protocol.protocolSlug}`}
                     name={protocol.name}
-                    ensAwardsScore={{ score: ensAwardsScore }}
+                    ensAwardsScore={{
+                      type: EnsAwardsScoreResultTypes.Defined,
+                      score: ensAwardsScore,
+                      label: undefined,
+                    }}
                     viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
                     viewDetailsText={`${formatProtocolType(protocolType, { lowercase: false })} report`}>
                     {idx < 3 ? (
