@@ -1,5 +1,4 @@
 import {
-  type EnsAwardsScore,
   type EnsAwardsScoreResult,
   EnsAwardsScoreResultTypes,
   formatEnsAwardsUndefinedScoreLabel,

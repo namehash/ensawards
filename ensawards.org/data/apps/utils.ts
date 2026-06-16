@@ -1,9 +1,13 @@
-import type { ApplicableAcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
+import type {
+  AcceptanceTestBenchmark,
+  ApplicableAcceptanceTestBenchmark,
+} from "data/acceptance-tests/types.ts";
 import { getAcceptanceTestBenchmarksByApp } from "data/acceptance-tests/utils.ts";
 import { AWARDS } from "data/awards/index.ts";
 import type { Award } from "data/awards/types.ts";
 import { BenchmarkResults } from "data/benchmarks/types.ts";
 import { calcEnsAwardsPoints, getAppBenchmarks } from "data/benchmarks/utils.ts";
+import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 import { EntityMetadataTypes } from "data/entity-metadata/types.ts";
 import {
   asEnsAwardsScore,
@@ -17,7 +21,11 @@ import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 
 import { getEnsAwardsBaseUrl } from "@/utils/index.ts";
 
-import type { BestPractice, BestPracticeTarget } from "../ens-best-practices/types.ts";
+import {
+  type BestPractice,
+  type BestPracticeTarget,
+  CategoryStatuses,
+} from "../ens-best-practices/types.ts";
 import { APPS } from "./index.ts";
 import { type App, type AppSlug, type AppType, AppTypes } from "./types.ts";
 
@@ -208,9 +216,33 @@ export const getAwardsByAppSlug = (appSlug: AppSlug): Award[] =>
       award.awardedEntityMetadata.app.appSlug === appSlug,
   );
 
-const calcNotApplicableAppBenchmarks = (app: App): number =>
-  Object.values(getAppBenchmarks(app.appSlug))
-    .flatMap((acceptanceTestBenchmarks) => Object.values(acceptanceTestBenchmarks))
-    .filter(
-      (benchmark) => benchmark !== undefined && benchmark.result === BenchmarkResults.NotApplicable,
-    ).length;
+/**
+ * Calculates the number of benchmarks with `NotApplicable` result for a given {@link App}.
+ *
+ * Excludes the benchmarks that belong to an inactive {@link BestPracticeCategory}.
+ */
+const calcNotApplicableAppBenchmarks = (app: App): number => {
+  const benchmarksInActiveCategories: AcceptanceTestBenchmark[] = [];
+
+  Object.entries(getAppBenchmarks(app.appSlug)).forEach(
+    ([bestPracticeSlug, acceptanceTestBenchmarks]) => {
+      const bestPractice = getBestPracticeBySlug(bestPracticeSlug);
+
+      if (bestPractice === undefined) {
+        throw new Error(
+          `Invariant(BestPracticeSlug): Best practice with slug ${bestPracticeSlug} is not defined`,
+        );
+      }
+
+      if (bestPractice.category.status === CategoryStatuses.Active) {
+        benchmarksInActiveCategories.push(
+          ...Object.values(acceptanceTestBenchmarks).filter((benchmark) => benchmark !== undefined),
+        );
+      }
+    },
+  );
+
+  return benchmarksInActiveCategories.filter(
+    (benchmark) => benchmark.result === BenchmarkResults.NotApplicable,
+  ).length;
+};
