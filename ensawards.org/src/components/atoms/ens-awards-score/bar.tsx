@@ -1,6 +1,6 @@
 import type { EnsAwardsScore } from "data/shared/ens-awards-score";
 
-import { getScoreColor } from "@/utils/styles";
+import { calculateScoreBarFill, getScoreColor } from "@/components/atoms/ens-awards-score/utils";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface EnsAwardsBarScoreProps {
@@ -62,10 +62,11 @@ export const ScoreBar = ({ score, mobileAdaptive, pendingScoreStyles }: EnsAward
       >
         <div
           className={cn(
-            "absolute h-full self-stretch rounded-[20px] z-10",
+            "absolute h-full self-stretch rounded-l-[20px] z-10",
             `bg-${getScoreColor(score)}`,
+            score === 100 && "rounded-r-[20px]",
           )}
-          style={{ width: `calc(${score}%)` }}
+          style={{ width: `calc(${calculateScoreBarFill(score)}%)` }}
         ></div>
       </div>
       <p
