@@ -58,8 +58,6 @@ vi.mock(import("data/ens-best-practices/utils.ts"), async (importOriginal) => {
   };
 });
 
-import { mock } from "node:test";
-
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
 import type { BestPracticeSlug } from "data/ens-best-practices/types.ts";
 
