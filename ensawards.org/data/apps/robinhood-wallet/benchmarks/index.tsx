@@ -36,8 +36,13 @@ const benchmarks: BestPracticeBenchmarks = {
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
             ENSv2 ready resolution was tested using the &quot;send&quot; flow. The wallet doesn't
-            allow using ENS name as the recipient identifier, which we interpret as not applicable
-            to our acceptance test scenario.
+            support the use of ENS names at all as the recipient identifier.
+            <br />
+            <br />
+            While that's a key issue that this app is encouraged to improve, this best practice is
+            applicable specifically to apps that already have an existing ENS integration and making
+            sure existing integrations are ENSv2 compatible. Therefore, for this best practice we
+            apply a rating of not applicable.
           </p>
           <img
             alt="Robinhood Wallet doesn't allow ENS name as recipient in the send flow"
