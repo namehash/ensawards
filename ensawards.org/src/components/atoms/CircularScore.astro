@@ -140,8 +140,12 @@ const circumference = 2 * Math.PI * radius;
       counter += 1;
 
       // For small scores take into account the previously set inital offset
-      // Otherwise proceed normally
-      offset = circumference * (1 - calcScoreBarFill(counter) / 100);
+      if (targetScore < SIGNIFICANT_SCORE_THRESHOLD) {
+        offset = circumference * (1 - calcScoreBarFill(counter) / 100);
+      } else {
+        // Otherwise proceed normally
+        offset = circumference * (1 - counter / 100);
+      }
 
       // Display new values
       progressBar.setAttribute("stroke-dashoffset", offset.toString());
