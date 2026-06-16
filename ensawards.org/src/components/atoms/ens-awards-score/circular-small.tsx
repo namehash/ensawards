@@ -1,6 +1,6 @@
 import { type EnsAwardsScore } from "data/shared/ens-awards-score";
 
-import { calculateScoreBarFill, getScoreColor } from "@/components/atoms/ens-awards-score/utils";
+import { calcScoreBarFill, getScoreColor } from "@/components/atoms/ens-awards-score/utils";
 import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon";
 
 export const EnsAwardsCircularScoreSmall = ({ score }: { score?: EnsAwardsScore }) => {
@@ -8,7 +8,7 @@ export const EnsAwardsCircularScoreSmall = ({ score }: { score?: EnsAwardsScore 
 
   const radius = 13;
   const circumference = 2 * Math.PI * radius;
-  const dashOffset = circumference * (1 - calculateScoreBarFill(score) / 100);
+  const dashOffset = circumference * (1 - calcScoreBarFill(score) / 100);
   const progressColorClass = `text-${getScoreColor(score)}`;
 
   return (

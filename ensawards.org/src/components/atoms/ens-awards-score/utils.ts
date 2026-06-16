@@ -1,25 +1,31 @@
 import { type EnsAwardsScore } from "data/shared/ens-awards-score";
 
 /**
- * Score threshold above which the score is considered "significant"
- * and the UX optimization for small scores is not applied to it.
+ * Score threshold at or above which the score is considered "significant"
+ * and the UX optimization for small scores is not applied.
  */
 export const SIGNIFICANT_SCORE_THRESHOLD = 33;
 
-export const calculateScoreBarFill = (score: EnsAwardsScore): number => {
+/**
+ * Minimum fill percentage for the score bar to ensure
+ * it's visible even for very low scores (including 0).
+ */
+export const MIN_VISIBLE_SCOREBAR_FILL = 10;
+
+export const calcScoreBarFill = (score: EnsAwardsScore): number => {
   // Ensure that significant scores
   // are always correctly represented on the bar
   if (score >= SIGNIFICANT_SCORE_THRESHOLD) {
     return score;
   }
 
-  // Minimal fill to ensure the bar is visible even for very low scores
-  let baseFill = 10;
-
-  // Calculate the fill based on the score
-  const resultFill = Math.round(baseFill + (score / 100) * (100 - baseFill));
-
-  return resultFill;
+  // Calculate the scaled fill based on the score
+  // Map [0, SIGNIFICANT_SCORE_THRESHOLD) into [MIN_VISIBLE_SCOREBAR_FILL, SIGNIFICANT_SCORE_THRESHOLD)
+  return Math.round(
+    MIN_VISIBLE_SCOREBAR_FILL +
+      (score / SIGNIFICANT_SCORE_THRESHOLD) *
+        (SIGNIFICANT_SCORE_THRESHOLD - MIN_VISIBLE_SCOREBAR_FILL),
+  );
 };
 
 export const getScoreColor = (score: EnsAwardsScore): string =>

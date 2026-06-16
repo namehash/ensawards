@@ -102,11 +102,11 @@ const circumference = 2 * Math.PI * radius;
   </div>
 </div>
 <script>
-  import { SIGNIFICANT_SCORE_THRESHOLD } from "@/components/atoms/ens-awards-score/utils";
-  
-  // We should still display a small part
-  // of the progress bar for small scores (including 0)
-  const barOffsetForSmallScores = 10;
+  import {
+    SIGNIFICANT_SCORE_THRESHOLD,
+    MIN_VISIBLE_SCOREBAR_FILL,
+    calcScoreBarFill,
+  } from "@/components/atoms/ens-awards-score/utils";
 
   function initializeScore() {
     // Set up of the numeric label
@@ -128,7 +128,7 @@ const circumference = 2 * Math.PI * radius;
     // For small scores (including 0)
     // we should still show a little bit of the progress bar
     if (targetScore < SIGNIFICANT_SCORE_THRESHOLD) {
-      offset = circumference * (1 - barOffsetForSmallScores / 100);
+      offset = circumference * (1 - MIN_VISIBLE_SCOREBAR_FILL / 100);
       progressBar.setAttribute("stroke-dashoffset", offset.toString());
     }
 
@@ -140,17 +140,8 @@ const circumference = 2 * Math.PI * radius;
       counter += 1;
 
       // For small scores take into account the previously set inital offset
-      if (targetScore < SIGNIFICANT_SCORE_THRESHOLD) {
-        offset =
-          circumference *
-          (1 - barOffsetForSmallScores / 100) *
-          (1 - counter / 100);
-      }
-
       // Otherwise proceed normally
-      else {
-        offset = circumference * (1 - counter / 100);
-      }
+      offset = circumference * (1 - calcScoreBarFill(counter) / 100);
 
       // Display new values
       progressBar.setAttribute("stroke-dashoffset", offset.toString());
