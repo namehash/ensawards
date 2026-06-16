@@ -20,7 +20,8 @@ const FrameWallet: App = {
     twitter: new URL("https://x.com/0xFrame"),
   },
   icon: FrameIcon,
-  // TODO: Add OG images
+  ogImagePath: "frame-wallet/og.png",
+  twitterOgImagePath: "frame-wallet/twitter-og.png",
 };
 
 defineApp(FrameWallet);
