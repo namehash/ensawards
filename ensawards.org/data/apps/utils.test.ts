@@ -15,13 +15,19 @@ import {
 } from "../shared/test-utils";
 import { type App, type AppBenchmarks, type AppSlug, AppTypes } from "./types.ts";
 
-const { mockApps, mockEnsAwardsPoints, mockBenchmarks, mockGetAcceptanceTestBenchmarksByApp } =
-  vi.hoisted(() => ({
-    mockApps: [] as App[],
-    mockEnsAwardsPoints: vi.fn(),
-    mockBenchmarks: {} as AppBenchmarks,
-    mockGetAcceptanceTestBenchmarksByApp: vi.fn(),
-  }));
+const {
+  mockApps,
+  mockEnsAwardsPoints,
+  mockBenchmarks,
+  mockGetAcceptanceTestBenchmarksByApp,
+  mockGetBestPracticeBySlug,
+} = vi.hoisted(() => ({
+  mockApps: [] as App[],
+  mockEnsAwardsPoints: vi.fn(),
+  mockBenchmarks: {} as AppBenchmarks,
+  mockGetAcceptanceTestBenchmarksByApp: vi.fn(),
+  mockGetBestPracticeBySlug: vi.fn(),
+}));
 
 vi.mock("./index.ts", () => ({
   APPS: mockApps,
@@ -44,7 +50,18 @@ vi.mock("data/acceptance-tests/utils.ts", () => ({
   getAcceptanceTestBenchmarksByApp: mockGetAcceptanceTestBenchmarksByApp,
 }));
 
+vi.mock(import("data/ens-best-practices/utils.ts"), async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    getBestPracticeBySlug: mockGetBestPracticeBySlug,
+  };
+});
+
+import { mock } from "node:test";
+
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
+import type { BestPracticeSlug } from "data/ens-best-practices/types.ts";
 
 import {
   appliesToAllApps,
@@ -111,6 +128,29 @@ describe("App utils", () => {
 
         default:
           throw new Error(`No benchmarks defined for app with slug ${appSlug}`);
+      }
+    });
+
+    mockGetBestPracticeBySlug.mockReset();
+    mockGetBestPracticeBySlug.mockImplementation((bestPracticeSlug: BestPracticeSlug) => {
+      switch (bestPracticeSlug) {
+        case mockReverseResolutionBestPractice.bestPracticeSlug:
+          return mockReverseResolutionBestPractice;
+
+        case mockDisplayProfilesBestPractice.bestPracticeSlug:
+          return mockDisplayProfilesBestPractice;
+
+        case mockForwardResolutionBestPractice.bestPracticeSlug:
+          return mockForwardResolutionBestPractice;
+
+        case mockNormalizeNamesBestPractice.bestPracticeSlug:
+          return mockNormalizeNamesBestPractice;
+
+        case mockBestPractice1.bestPracticeSlug:
+          return mockBestPractice1;
+
+        default:
+          throw new Error(`No best practice defined for slug ${bestPracticeSlug}`);
       }
     });
   });
