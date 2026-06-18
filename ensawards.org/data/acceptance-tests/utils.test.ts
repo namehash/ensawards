@@ -85,14 +85,13 @@ describe("Acceptance test utils", () => {
       ).toEqual(expectedResult);
     });
 
-    it("Returns `BenchmarkResults.NotApplicable` if all defined benchmarks are `BenchmarkResults.NotApplicable`", () => {
+    it("Returns `BenchmarkResults.NotApplicable` if all benchmarks are defined and `BenchmarkResults.NotApplicable`", () => {
       const expectedResult = BenchmarkResults.NotApplicable;
 
       const inputBenchmarks = {
         "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
         "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
-        "mock-acceptance-test-3": undefined,
-        // pending benchmarks should be ignored in this case of the generalization
+        "mock-acceptance-test-3": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
       } as const satisfies AcceptanceTestBenchmarks;
 
       expect(
@@ -101,17 +100,28 @@ describe("Acceptance test utils", () => {
       ).toEqual(expectedResult);
     });
 
-    it("Returns `undefined` if all benchmarks are `undefined` (pending)", () => {
+    it("Returns `undefined` if all benchmarks are `undefined` (pending) or all defined benchmarks are `BenchmarkResults.NotApplicable`", () => {
       const expectedResult = undefined;
 
-      const inputBenchmarks = {
+      const inputBenchmarks1 = {
         "mock-acceptance-test-1": undefined,
         "mock-acceptance-test-2": undefined,
       } as const satisfies AcceptanceTestBenchmarks;
 
+      const inputBenchmarks2 = {
+        "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
+        "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
+        "mock-acceptance-test-3": undefined,
+      } as const satisfies AcceptanceTestBenchmarks;
+
       expect(
-        generalizeAcceptanceTestBenchmarks(inputBenchmarks),
+        generalizeAcceptanceTestBenchmarks(inputBenchmarks1),
         "generalizeAcceptanceTestBenchmarks should return `undefined` for all pending benchmarks",
+      ).toEqual(expectedResult);
+
+      expect(
+        generalizeAcceptanceTestBenchmarks(inputBenchmarks2),
+        "generalizeAcceptanceTestBenchmarks should return `undefined` for all defined benchmarks being `NotApplicable`",
       ).toEqual(expectedResult);
     });
   });

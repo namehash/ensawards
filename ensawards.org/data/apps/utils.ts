@@ -100,11 +100,14 @@ export const calcAppScore = (app: App): EnsAwardsScoreResult => {
         benchmark.result !== BenchmarkResults.NotApplicable,
     );
 
+  // For an overall app if the only benchmarks we have
+  // are `Pending` or `Not Applicable`,
+  // the overall app score should still be `Pending`.
   if (completedApplicableAcceptanceTestBenchmarks.length === 0)
     return {
       type: EnsAwardsScoreResultTypes.Undefined,
       score: undefined,
-      label: EnsAwardsUndefinedScoreLabels.NotApplicable,
+      label: EnsAwardsUndefinedScoreLabels.Pending,
     };
 
   const totalPoints: EnsAwardsPoints = completedApplicableAcceptanceTestBenchmarks.reduce(
