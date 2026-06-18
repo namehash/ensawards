@@ -1,6 +1,7 @@
 import type {
   AcceptanceTest,
   AcceptanceTestBenchmarkFail,
+  AcceptanceTestBenchmarkNotApplicable,
   AcceptanceTestBenchmarkPass,
 } from "data/acceptance-tests/types";
 import { BenchmarkResults } from "data/benchmarks/types";
@@ -16,6 +17,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import correctlyResolveEnsv2TestNameAddressExampleFailImage from "./images/correctly-resolve-ensv2-test-name-address-fail-example.png";
+import correctlyResolveEnsv2TestNameAddressExampleNotApplicableImage from "./images/correctly-resolve-ensv2-test-name-address-not-applicable-example.gif";
 import correctlyResolveEnsv2TestNameAddressExamplePassImage from "./images/correctly-resolve-ensv2-test-name-address-pass-example.gif";
 
 const useCaseSummary = (
@@ -221,7 +223,7 @@ const acceptanceTest1 = {
           .
         </p>
         <img
-          alt="MetaMask correctly resolves the name for ENSv2"
+          alt="Rabby Wallet correctly resolves the name for ENSv2"
           src={correctlyResolveEnsv2TestNameAddressExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
@@ -231,7 +233,7 @@ const acceptanceTest1 = {
   exampleFail: {
     result: BenchmarkResults.Fail,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T15:34:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-18T10:00:00Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
@@ -250,13 +252,39 @@ const acceptanceTest1 = {
           <b>Apps failing this test require an urgent update! 🚨</b>
         </p>
         <img
-          alt="Rainbow Wallet fails to resolve the name for ENSv2"
+          alt="Zerion fails to resolve the name for ENSv2"
           src={correctlyResolveEnsv2TestNameAddressExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkFail,
+  exampleNotApplicable: {
+    result: BenchmarkResults.NotApplicable,
+    contributions: [
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-18T10:48:00Z") },
+    ],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          This best practice is targeted towards apps that already support ENS resolution being
+          ENSv2 ready.
+          <br />
+          <br />
+          Therefore, any app that currently doesn’t support ENS resolution at all is classified as
+          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
+            Not Applicable
+          </span>{" "}
+          for this best practice.
+        </p>
+        <img
+          alt="Binance Wallet doesn't currently support ENS resolution at all"
+          src={correctlyResolveEnsv2TestNameAddressExampleNotApplicableImage.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmarkNotApplicable,
 } as const satisfies AcceptanceTest;
 
 const technicalDetails = {
