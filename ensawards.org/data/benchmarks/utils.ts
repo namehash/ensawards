@@ -1,4 +1,7 @@
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
+import type {
+  AcceptanceTestBenchmark,
+  AcceptanceTestBenchmarkApplicable,
+} from "data/acceptance-tests/types.ts";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 import type { AppSlug } from "data/apps/types.ts";
 import { getAppBySlug } from "data/apps/utils.ts";
@@ -21,6 +24,9 @@ import {
   asEnsAwardsScore,
   type EnsAwardsPoints,
   type EnsAwardsScore,
+  type EnsAwardsScoreResult,
+  EnsAwardsScoreResultTypes,
+  EnsAwardsUndefinedScoreLabels,
 } from "../shared/ens-awards-score.ts";
 import { APP_BENCHMARKS } from ".";
 import { type AcceptanceTestBenchmarks, type BenchmarkResult, BenchmarkResults } from "./types.ts";
@@ -102,7 +108,9 @@ export function getAppAcceptanceTestBenchmarks(
  * {@link BenchmarkResults.PartialPass} = 0.5
  * {@link BenchmarkResults.Fail} = 0.0
  */
-export const calcEnsAwardsPoints = (benchmark: AcceptanceTestBenchmark): EnsAwardsPoints => {
+export const calcEnsAwardsPoints = (
+  benchmark: AcceptanceTestBenchmarkApplicable,
+): EnsAwardsPoints => {
   const benchmarkResult = benchmark.result;
 
   switch (benchmarkResult) {
@@ -150,16 +158,19 @@ export const groupBenchmarksByCategory = (
  * Calculates {@link EnsAwardsScore} for all benchmarks belonging to a single {@link BestPracticeCategory}.
  *
  * @returns
- * undefined - if no benchmarks are completed for the `BestPracticeCategory`
+ * An {@link EnsAwardsScoreResult} object containing the score and a label describing the result.
+ * The {@link EnsAwardsScoreResult.score} field is:
+ *  - undefined - if no benchmarks are completed for the `BestPracticeCategory`,
+ * all completed benchmarks returned a not applicable result,
  * or the category status is not `Active`.
- * Otherwise, an {@link EnsAwardsScore} calculation for the `BestPracticeCategory`
+ *  - an {@link EnsAwardsScore} calculation for the `BestPracticeCategory` otherwise.
  *
  * @throws if the {@link EnsAwardsScore} invariants are not satisfied
  * @throws if the input benchmarks do not belong to the same `BestPracticeCategory`
  */
 export const calcBestPracticeCategoryScore = (
   benchmarks: BestPracticeBenchmarks,
-): EnsAwardsScore | undefined => {
+): EnsAwardsScoreResult => {
   let bestPracticeCategory: undefined | BestPracticeCategory = undefined;
 
   for (const bestPracticeSlug of Object.keys(benchmarks)) {
@@ -184,7 +195,11 @@ export const calcBestPracticeCategoryScore = (
     bestPracticeCategory === undefined ||
     bestPracticeCategory.status !== CategoryStatuses.Active
   ) {
-    return undefined;
+    return {
+      type: EnsAwardsScoreResultTypes.Undefined,
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.InactiveCategory,
+    };
   }
 
   const completedBenchmarks: AcceptanceTestBenchmark[] = [];
@@ -197,22 +212,50 @@ export const calcBestPracticeCategoryScore = (
     }
   }
 
-  if (completedBenchmarks.length === 0) return undefined;
+  if (completedBenchmarks.length === 0)
+    return {
+      type: EnsAwardsScoreResultTypes.Undefined,
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.Pending,
+    };
+
+  // explicitly exclude benchmarks with `NotApplicable` result
+  const completedApplicableBenchmarks: AcceptanceTestBenchmarkApplicable[] =
+    completedBenchmarks.filter(
+      (benchmark): benchmark is AcceptanceTestBenchmarkApplicable =>
+        benchmark.result !== BenchmarkResults.NotApplicable,
+    );
+
+  if (completedApplicableBenchmarks.length === 0)
+    return {
+      type: EnsAwardsScoreResultTypes.Undefined,
+      score: undefined,
+      label: EnsAwardsUndefinedScoreLabels.NotApplicable,
+    };
 
   const score = Math.round(
-    (completedBenchmarks.reduce((sum, benchmark) => sum + calcEnsAwardsPoints(benchmark), 0) *
+    (completedApplicableBenchmarks.reduce(
+      (sum, benchmark) => sum + calcEnsAwardsPoints(benchmark),
+      0,
+    ) *
       100) /
-      completedBenchmarks.length,
+      completedApplicableBenchmarks.length,
   );
 
-  return asEnsAwardsScore(score);
+  return {
+    type: EnsAwardsScoreResultTypes.Defined,
+    score: asEnsAwardsScore(score),
+    label: undefined,
+  };
 };
 
-/** Declare sort order for benchmark result (Pass → Partial Pass → Fail) */
+/** Declare sort order for benchmark result
+ * (Pass → Partial Pass → Fail → Not Applicable) */
 const resultOrder = {
   [BenchmarkResults.Pass]: 0,
   [BenchmarkResults.PartialPass]: 1,
   [BenchmarkResults.Fail]: 2,
+  [BenchmarkResults.NotApplicable]: 3,
 } as const satisfies Record<BenchmarkResult, number>;
 
 /** Sorts two {@link AcceptanceTestBenchmark}s relative to each other. */
@@ -274,6 +317,9 @@ export const formatBenchmarkResult = (
 
     case BenchmarkResults.Fail:
       return lowercase ? "failed" : "Failed";
+
+    case BenchmarkResults.NotApplicable:
+      return lowercase ? "not applicable" : "Not Applicable";
 
     default:
       const _exhaustive: never = benchmarkResult;

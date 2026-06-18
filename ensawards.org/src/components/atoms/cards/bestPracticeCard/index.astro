@@ -1,20 +1,17 @@
 ---
 import { type BestPractice, BestPracticeTypes } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { shadcnButtonVariants } from "../../ui/shadcnButtonStyles";
+import { shadcnButtonVariants } from "@/components/ui/shadcnButtonStyles";
 import { AppliesToBadges } from "@/components/atoms/badges/AppliesToBadges.tsx";
 import EnscribeIcon from "@/components/atoms/icons/EnscribeIconLight.astro";
 import { calcBestPracticeScore } from "data/ens-best-practices/utils.ts";
-import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
+import BestPracticeAppSupport from "@/components/atoms/cards/bestPracticeCard/BestPracticeAppSupport.astro";
 
 export interface BestPracticeCardProps {
   bestPractice: BestPractice;
 }
 
 const { bestPractice }: BestPracticeCardProps = Astro.props;
-
-const bestPracticeScore =
-  bestPractice.type === BestPracticeTypes.App ? calcBestPracticeScore(bestPractice) : undefined;
 ---
 
 <a
@@ -75,11 +72,9 @@ const bestPracticeScore =
       </p>
       {
         bestPractice.type === BestPracticeTypes.App ? (
-          bestPracticeScore === undefined ? (
-            <p class="text-sm leading-normal font-medium text-black">Pending</p>
-          ) : (
-            <ScoreBar score={bestPracticeScore} mobileAdaptive={false} />
-          )
+          <BestPracticeAppSupport
+            scoreResult={calcBestPracticeScore(bestPractice)}
+          />
         ) : (
           <EnscribeIcon />
         )

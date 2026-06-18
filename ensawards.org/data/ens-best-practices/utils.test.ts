@@ -62,10 +62,10 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
 
       const result = calcBestPracticeScore(mockReverseResolutionBestPractice);
 
-      expect(result, `Expected score to be 50, got ${result} instead`).toEqual(50);
+      expect(result.score, `Expected score to be 50, got ${result.score} instead`).toEqual(50);
     });
 
-    it("Should return undefined when no apps are benchmarked for the best practice", () => {
+    it("Should return undefined score when no apps are benchmarked for the best practice or all defined benchmarks returned a not applicable result", () => {
       mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: {
           mockAcceptanceTestSlug1: undefined,
@@ -80,19 +80,21 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
 
       mockAppBenchmarks[mockMetamaskApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: {
-          mockAcceptanceTestSlug1: undefined,
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.NotApplicable,
+          ),
         },
       };
 
       const result = calcBestPracticeScore(mockReverseResolutionBestPractice);
 
       expect(
-        result,
-        "calcBestPracticeScore should return undefined when no apps are benchmarked",
+        result.score,
+        "calcBestPracticeScore should return undefined when no apps are benchmarked or all defined benchmarks returned a not applicable result",
       ).toBeUndefined();
     });
 
-    it("Should exclude pending benchmarks from the calculation", () => {
+    it("Should exclude pending & not applicable benchmarks from the calculation", () => {
       mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: {
           mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
@@ -106,13 +108,18 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
 
       mockAppBenchmarks[mockMetamaskApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: {
-          mockAcceptanceTestSlug1: undefined,
+          mockAcceptanceTestSlug1: createMockAcceptanceTestBenchmark(
+            BenchmarkResults.NotApplicable,
+          ),
         },
       };
 
       const result = calcBestPracticeScore(mockReverseResolutionBestPractice);
 
-      expect(result, "calcBestPracticeScore doesn't exclude pending benchmarks").toEqual(100);
+      expect(
+        result.score,
+        "calcBestPracticeScore doesn't exclude pending & not applicable benchmarks",
+      ).toEqual(100);
     });
   });
 });

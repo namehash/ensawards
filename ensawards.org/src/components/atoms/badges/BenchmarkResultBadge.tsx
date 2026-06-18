@@ -2,6 +2,7 @@ import { type BenchmarkResult, BenchmarkResults } from "data/benchmarks/types.ts
 import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
 import {
   X as FailIcon,
+  CircleOff as NotApplicableIcon,
   Check as PartialPassIcon,
   CheckCheck as PassIcon,
   Clock as PendingIcon,
@@ -26,6 +27,9 @@ export const benchmarkResultToBadgeStyles = (benchmarkResult?: BenchmarkResult) 
     case BenchmarkResults.Fail:
       return "text-red-600 bg-[rgba(220,38,38,0.1)]";
 
+    case BenchmarkResults.NotApplicable:
+      return "text-muted-foreground bg-black/8";
+
     default:
       const _exhaustive: never = benchmarkResult;
       throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
@@ -43,6 +47,9 @@ export const getBenchmarkIcon = (benchmarkResult?: BenchmarkResult, className?: 
       return <PartialPassIcon className={className} />;
     case BenchmarkResults.Fail:
       return <FailIcon className={className} />;
+
+    case BenchmarkResults.NotApplicable:
+      return <NotApplicableIcon className={className} />;
 
     default:
       const _exhaustive: never = benchmarkResult;

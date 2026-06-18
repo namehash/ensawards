@@ -17,7 +17,7 @@ import {
   ContributorsCardLoading,
 } from "@/components/atoms/cards/ContributorsCard.tsx";
 import { type Contribution } from "data/contributors/types.ts";
-import { type EnsAwardsScore as EnsAwardsScoreType } from "data/shared/ens-awards-score.ts";
+import { type EnsAwardsScoreResult } from "data/shared/ens-awards-score.ts";
 import {
   groupBenchmarksByCategory,
   calcBestPracticeCategoryScore,
@@ -29,6 +29,10 @@ import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score
 import { getAppContributions } from "data/contributors/utils.ts";
 import type { BestPracticeCategorySlug } from "data/ens-best-practices/types";
 import { getBestPracticeCategoryBySlug } from "data/ens-best-practices/utils.ts";
+import {
+  EnsAwardsScoreResultTypes,
+  EnsAwardsUndefinedScoreLabels,
+} from "data/shared/ens-awards-score.ts";
 import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
 import { CategoryStatuses } from "data/ens-best-practices/types.ts";
 import { summarizeAppsAcceptanceTestBenchmarks } from "data/benchmarks/utils.ts";
@@ -42,7 +46,11 @@ const { appSlug } = Astro.params;
 const app = getAppBySlug(appSlug);
 
 // The default values should never be used. Only introduced for type safety.
-let appScore: EnsAwardsScoreType | undefined = undefined;
+let appScore: EnsAwardsScoreResult = {
+  type: EnsAwardsScoreResultTypes.Undefined,
+  score: undefined,
+  label: EnsAwardsUndefinedScoreLabels.NotApplicable,
+};
 let AppIcon;
 let appContributions: Contribution[] = [];
 let benchmarksByCategory: Map<BestPracticeCategorySlug, BestPracticeBenchmarks> = new Map();
@@ -107,7 +115,7 @@ if (app !== undefined) {
         </div>
         <EnsAwardsScore
           slot="largerHeroItem"
-          score={appScore}
+          scoreResult={appScore}
           label="ENSAwards score"
         />
       </SubpageHero>
@@ -151,7 +159,9 @@ if (app !== undefined) {
                   return (
                     <div class="w-full flex flex-col justify-start items-start gap-2">
                       <div class="w-full flex flex-row items-center justify-start gap-3 pb-2">
-                        <EnsAwardsCircularScoreSmall score={categoryScore} />
+                        <EnsAwardsCircularScoreSmall
+                          scoreResult={categoryScore}
+                        />
                         <span class="flex-1 text-lg leading-normal font-semibold text-black">
                           {category.name}
                         </span>
