@@ -1,6 +1,6 @@
 import type {
   AcceptanceTestBenchmark,
-  ApplicableAcceptanceTestBenchmark,
+  AcceptanceTestBenchmarkApplicable,
 } from "data/acceptance-tests/types.ts";
 import { getAcceptanceTestBenchmarksByApp } from "data/acceptance-tests/utils.ts";
 import { AWARDS } from "data/awards/index.ts";
@@ -93,9 +93,9 @@ export const calcAppScore = (app: App): EnsAwardsScoreResult => {
       label: EnsAwardsUndefinedScoreLabels.Pending,
     };
 
-  const completedApplicableAcceptanceTestBenchmarks: ApplicableAcceptanceTestBenchmark[] =
+  const completedApplicableAcceptanceTestBenchmarks: AcceptanceTestBenchmarkApplicable[] =
     completedAcceptanceTestBenchmarks.filter(
-      (benchmark): benchmark is ApplicableAcceptanceTestBenchmark =>
+      (benchmark) =>
         // explicitly exclude benchmarks with `NotApplicable` result
         benchmark.result !== BenchmarkResults.NotApplicable,
     );

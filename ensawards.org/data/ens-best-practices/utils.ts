@@ -1,4 +1,4 @@
-import type { ApplicableAcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
+import type { AcceptanceTestBenchmarkApplicable } from "data/acceptance-tests/types.ts";
 import { AppTypes } from "data/apps/types.ts";
 import { BenchmarkResults } from "data/benchmarks/types.ts";
 import {
@@ -143,7 +143,7 @@ export const calcBestPracticeScore = (bestPractice: BestPracticeApp): EnsAwardsS
     };
   }
 
-  const completedApplicableBenchmarks: ApplicableAcceptanceTestBenchmark[] =
+  const completedApplicableBenchmarks: AcceptanceTestBenchmarkApplicable[] =
     completedBenchmarks.filter(
       // explicitly exclude benchmarks that are pending or not applicable
       (benchmark) => benchmark.result !== BenchmarkResults.NotApplicable,

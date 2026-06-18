@@ -46,7 +46,7 @@ export interface AcceptanceTest {
   examplePass: AcceptanceTestBenchmarkPass;
   examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
   exampleFail?: AcceptanceTestBenchmarkFail;
-  exampleNotApplicable?: NotApplicableAcceptanceTestBenchmark;
+  exampleNotApplicable?: AcceptanceTestBenchmarkNotApplicable;
 }
 
 /**
@@ -102,14 +102,14 @@ export interface AcceptanceTestBenchmarkFail
  * Most often, this is because the app doesn't use ENS at all,
  * in places where it should.
  */
-export interface NotApplicableAcceptanceTestBenchmark
+export interface AcceptanceTestBenchmarkNotApplicable
   extends AcceptanceTestBenchmarkAbstract<typeof BenchmarkResults.NotApplicable> {}
 
-export type ApplicableAcceptanceTestBenchmark =
+export type AcceptanceTestBenchmarkApplicable =
   | AcceptanceTestBenchmarkPass
   | AcceptanceTestBenchmarkPartialPass
   | AcceptanceTestBenchmarkFail;
 
 export type AcceptanceTestBenchmark =
-  | ApplicableAcceptanceTestBenchmark
-  | NotApplicableAcceptanceTestBenchmark;
+  | AcceptanceTestBenchmarkApplicable
+  | AcceptanceTestBenchmarkNotApplicable;

@@ -1,4 +1,4 @@
-import type { ApplicableAcceptanceTestBenchmark } from "data/acceptance-tests/types.ts";
+import type { AcceptanceTestBenchmarkApplicable } from "data/acceptance-tests/types.ts";
 import {
   calcBestPracticeCategoryScore,
   calcEnsAwardsPoints,
@@ -39,26 +39,26 @@ describe("benchmarks-utils", () => {
   describe("calcEnsAwardsPoints", () => {
     it("Should return correct points for each benchmark result type", () => {
       const benchmarkCases: {
-        benchmark: ApplicableAcceptanceTestBenchmark;
+        benchmark: AcceptanceTestBenchmarkApplicable;
         expectedPoints: EnsAwardsPoints;
       }[] = [
         // Type assertions are acceptable here since we are in a fully controlled setting
         {
           benchmark: createMockAcceptanceTestBenchmark(
             BenchmarkResults.Pass,
-          ) as ApplicableAcceptanceTestBenchmark,
+          ) as AcceptanceTestBenchmarkApplicable,
           expectedPoints: 1,
         },
         {
           benchmark: createMockAcceptanceTestBenchmark(
             BenchmarkResults.PartialPass,
-          ) as ApplicableAcceptanceTestBenchmark,
+          ) as AcceptanceTestBenchmarkApplicable,
           expectedPoints: 0.5,
         },
         {
           benchmark: createMockAcceptanceTestBenchmark(
             BenchmarkResults.Fail,
-          ) as ApplicableAcceptanceTestBenchmark,
+          ) as AcceptanceTestBenchmarkApplicable,
           expectedPoints: 0,
         },
       ];

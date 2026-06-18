@@ -1,6 +1,6 @@
 import type {
   AcceptanceTestBenchmark,
-  ApplicableAcceptanceTestBenchmark,
+  AcceptanceTestBenchmarkApplicable,
 } from "data/acceptance-tests/types.ts";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 import type { AppSlug } from "data/apps/types.ts";
@@ -109,7 +109,7 @@ export function getAppAcceptanceTestBenchmarks(
  * {@link BenchmarkResults.Fail} = 0.0
  */
 export const calcEnsAwardsPoints = (
-  benchmark: ApplicableAcceptanceTestBenchmark,
+  benchmark: AcceptanceTestBenchmarkApplicable,
 ): EnsAwardsPoints => {
   const benchmarkResult = benchmark.result;
 
@@ -220,9 +220,9 @@ export const calcBestPracticeCategoryScore = (
     };
 
   // explicitly exclude benchmarks with `NotApplicable` result
-  const completedApplicableBenchmarks: ApplicableAcceptanceTestBenchmark[] =
+  const completedApplicableBenchmarks: AcceptanceTestBenchmarkApplicable[] =
     completedBenchmarks.filter(
-      (benchmark): benchmark is ApplicableAcceptanceTestBenchmark =>
+      (benchmark): benchmark is AcceptanceTestBenchmarkApplicable =>
         benchmark.result !== BenchmarkResults.NotApplicable,
     );
 
