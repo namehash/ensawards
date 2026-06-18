@@ -39,6 +39,7 @@ export const ProjectIds = {
   Frame: "project-frame",
   Exodus: "project-exodus",
   Taho: "project-taho",
+  Pendle: "project-pendle",
 } as const;
 
 /**
