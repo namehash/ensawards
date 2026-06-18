@@ -27,22 +27,26 @@ export interface AcceptanceTest {
    * user interactions to be evaluated,
    * and any relevant technical details or considerations.
    *
-   * @note The description should not include examples of passed or failed benchmarks,
+   * @note The description should not include examples of
+   * passed, partially passed, failed, or not applicable benchmarks,
    * there are dedicated fields for that
    * (see {@link AcceptanceTest.examplePass},
    * {@link AcceptanceTest.examplePartialPass},
-   * or {@link AcceptanceTest.exampleFail}).
+   * {@link AcceptanceTest.exampleFail},
+   * or {@link AcceptanceTest.exampleNotApplicable}).
    */
   description: JSX.Element;
 
   /**
    * Examples of benchmark results that illustrate
-   * what a passing, partially passing, or failing result
+   * what a passing, partially passing, failing,
+   * or not applicable result
    * looks like for this acceptance test.
    */
   examplePass: AcceptanceTestBenchmarkPass;
   examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
   exampleFail?: AcceptanceTestBenchmarkFail;
+  exampleNotApplicable?: NotApplicableAcceptanceTestBenchmark;
 }
 
 /**
