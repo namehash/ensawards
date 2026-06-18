@@ -16,10 +16,6 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import correctlyResolveEnsv2TestNameAddressProofImageCopyTrading from "./correctly-resolve-ensv2-test-name-address-proof-copy-trading.gif";
 import correctlyResolveEnsv2TestNameAddressProofImageWithdrawal from "./correctly-resolve-ensv2-test-name-address-proof-withdrawal.png";
 
-// TODO: Here we can test how the layout looks
-// when the explanation for the not applicable result is separated
-// from the result description and joined with it.
-// In my opinion the separation looks better but I'm open to using either of these.
 const benchmarks: BestPracticeBenchmarks = {
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
@@ -44,10 +40,13 @@ const benchmarks: BestPracticeBenchmarks = {
             src={correctlyResolveEnsv2TestNameAddressProofImageCopyTrading.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
+          <span className="w-full h-px bg-gray-200 my-5" />
           <p className="w-full">
             The ENSv2 ready resolution was also tested using the &quot;withdrawal&quot; flow. The
-            app doesn't support the use of ENS names at all as the recipient identifier. While
-            that's a key issue that this app is encouraged to improve, this best practice is
+            app doesn't support the use of ENS names at all as the recipient identifier.
+            <br />
+            <br />
+            While that's a key issue that this app is encouraged to improve, this best practice is
             applicable specifically to apps that already have an existing ENS integration and making
             sure existing integrations are ENSv2 compatible. Therefore, for this best practice we
             apply a rating of not applicable.

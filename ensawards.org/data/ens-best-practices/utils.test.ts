@@ -65,7 +65,7 @@ describe("BestPractice and BestPracticeCategory Utils", () => {
       expect(result.score, `Expected score to be 50, got ${result.score} instead`).toEqual(50);
     });
 
-    it("Should return undefined when no apps are benchmarked for the best practice or all defined benchmarks returned a not applicable result", () => {
+    it("Should return undefined score when no apps are benchmarked for the best practice or all defined benchmarks returned a not applicable result", () => {
       mockAppBenchmarks[mockCoinbaseWalletApp.appSlug] = {
         [mockReverseResolutionBestPractice.bestPracticeSlug]: {
           mockAcceptanceTestSlug1: undefined,

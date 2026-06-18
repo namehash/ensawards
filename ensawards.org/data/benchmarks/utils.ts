@@ -249,7 +249,8 @@ export const calcBestPracticeCategoryScore = (
   };
 };
 
-/** Declare sort order for benchmark result (Pass → Partial Pass → Fail) */
+/** Declare sort order for benchmark result
+ * (Pass → Partial Pass → Fail → Not Applicable) */
 const resultOrder = {
   [BenchmarkResults.Pass]: 0,
   [BenchmarkResults.PartialPass]: 1,
