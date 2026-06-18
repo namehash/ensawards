@@ -15,7 +15,7 @@ import enscribelookupAcceptanceTestImage from "./images/enscribe-lookup-example.
 
 // TODO: The content isn't fully curated for now.
 
-const useCaseSummary = (
+const ensBestPracticeOverview = (
   <div>
     Contracts should be{" "}
     <a
@@ -149,7 +149,7 @@ const acceptanceTest1 = {
 } as const satisfies AcceptanceTest;
 
 const technicalDetails = {
-  useCaseSummary,
+  ensBestPracticeOverview,
   benefitFromUsingEns,
   implementationRecommendations,
   acceptanceTests: [acceptanceTest1],

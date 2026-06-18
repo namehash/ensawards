@@ -8,7 +8,7 @@ import {
   technicalSectionContainerStyles,
   technicalSectionHeaderStyles,
   ImplementationRecommendations,
-  UseCaseSummary,
+  EnsBestPracticeOverview,
   AcceptanceTestDetailsContainer,
 } from "../shared";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -42,7 +42,7 @@ const sortedAcceptanceTestBenchmarks = [...Object.entries(acceptanceTestBenchmar
     <h2 class={technicalSectionHeaderStyles}>
       ENS best practice benchmark report
     </h2>
-    <UseCaseSummary bestPractice={bestPractice} />
+    <EnsBestPracticeOverview bestPractice={bestPractice} />
     <BenefitFromUsingEns bestPractice={bestPractice} />
   </div>
   {

@@ -99,7 +99,7 @@ const benefitFromUsingEns = (
   </p>
 );
 
-const useCaseSummary = (
+const ensBestPracticeOverview = (
   <p>
     If a contract has an ENS name, you can use its ENS profile to power additional UX improvements
     such as avatars, metadata, audit information, and more. More information can be found at the{" "}
@@ -151,7 +151,7 @@ const acceptanceTest1 = {
 } as const satisfies AcceptanceTest;
 
 const technicalDetails = {
-  useCaseSummary,
+  ensBestPracticeOverview,
   benefitFromUsingEns,
   implementationRecommendations,
   acceptanceTests: [acceptanceTest1],

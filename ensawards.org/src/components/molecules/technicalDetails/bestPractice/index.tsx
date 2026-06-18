@@ -7,10 +7,10 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import {
   AcceptanceTestDetailsContainer,
   BenefitFromUsingEns,
+  EnsBestPracticeOverview,
   ImplementationRecommendations,
   technicalSectionContainerStyles,
   technicalSectionHeaderStyles,
-  UseCaseSummary,
 } from "../shared";
 
 export interface BestPracticeTechnicalDetailsProps {
@@ -29,7 +29,7 @@ export const BestPracticeTechnicalDetails = ({
     <div className="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">
       <div className={technicalSectionContainerStyles}>
         <h2 className={technicalSectionHeaderStyles}>ENS best practice overview</h2>
-        <UseCaseSummary bestPractice={bestPractice} />
+        <EnsBestPracticeOverview bestPractice={bestPractice} />
         <BenefitFromUsingEns bestPractice={bestPractice} />
       </div>
       {sortedAcceptanceTests.map((acceptanceTest, index) => (
