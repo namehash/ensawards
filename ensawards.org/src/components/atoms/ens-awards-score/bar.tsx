@@ -4,7 +4,7 @@ import {
   formatEnsAwardsUndefinedScoreLabel,
 } from "data/shared/ens-awards-score";
 
-import { getScoreColor } from "@/utils/styles";
+import { calcScoreBarFill, getScoreColor } from "@/components/atoms/ens-awards-score/utils";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface EnsAwardsBarScoreProps {
@@ -74,10 +74,11 @@ export const ScoreBar = ({
       >
         <div
           className={cn(
-            "absolute h-full self-stretch rounded-[20px] z-10",
+            "absolute h-full self-stretch rounded-l-[20px] z-10",
             `bg-${getScoreColor(scoreResult.score)}`,
+            scoreResult.score === 100 && "rounded-r-[20px]",
           )}
-          style={{ width: `calc(${scoreResult.score}%)` }}
+          style={{ width: `calc(${calcScoreBarFill(scoreResult.score)}%)` }}
         ></div>
       </div>
       <p

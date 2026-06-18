@@ -4,9 +4,9 @@ import {
   EnsAwardsUndefinedScoreLabels,
 } from "data/shared/ens-awards-score";
 
+import { calcScoreBarFill, getScoreColor } from "@/components/atoms/ens-awards-score/utils";
 import { AllBenchmarksNotApplicableIcon } from "@/components/atoms/icons/AllBenchmarksNotApplicableIcon";
 import { AllBenchmarksPendingIcon } from "@/components/atoms/icons/AllBenchmarksPendingIcon";
-import { getScoreColor } from "@/utils/styles";
 
 export const EnsAwardsCircularScoreSmall = ({
   scoreResult,
@@ -33,10 +33,9 @@ export const EnsAwardsCircularScoreSmall = ({
     }
   }
 
-  const roundedScore = Math.round(scoreResult.score);
   const radius = 13;
   const circumference = 2 * Math.PI * radius;
-  const dashOffset = circumference * (1 - roundedScore / 100);
+  const dashOffset = circumference * (1 - calcScoreBarFill(scoreResult.score) / 100);
   const progressColorClass = `text-${getScoreColor(scoreResult.score)}`;
 
   return (
@@ -56,7 +55,9 @@ export const EnsAwardsCircularScoreSmall = ({
           className={progressColorClass}
         />
       </svg>
-      <span className="absolute text-[10px] leading-3 font-medium text-black">{roundedScore}</span>
+      <span className="absolute text-[10px] leading-3 font-medium text-black">
+        {scoreResult.score}
+      </span>
     </div>
   );
 };
