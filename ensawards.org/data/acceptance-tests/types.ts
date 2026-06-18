@@ -44,7 +44,6 @@ export interface AcceptanceTest {
   examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
   exampleFail?: AcceptanceTestBenchmarkFail;
 }
-// TODO: Decided that there is no point in adding an example for NotApplicable.
 
 /**
  * Represents the benchmark of an {@link AcceptanceTest} on an {@link App} against a {@link BestPractice}.
