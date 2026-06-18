@@ -91,6 +91,25 @@ export const BestPracticeTechnicalDetails = ({
                 {acceptanceTest.exampleFail.notes}
               </div>
             )}
+            {acceptanceTest.exampleNotApplicable !== undefined && (
+              <div
+                className={cn(
+                  technicalSectionContainerStyles,
+                  "w-full p-4 bg-neutral-50 rounded-lg",
+                )}
+              >
+                <h4
+                  className={cn(
+                    technicalSectionHeaderStyles,
+                    "text-xl w-full flex flex-row items-start justify-between gap-3",
+                  )}
+                >
+                  Example test result
+                  <BenchmarkResultBadge benchmarkResult={BenchmarkResults.NotApplicable} />
+                </h4>
+                {acceptanceTest.exampleNotApplicable.notes}
+              </div>
+            )}
           </>
         </AcceptanceTestDetailsContainer>
       ))}

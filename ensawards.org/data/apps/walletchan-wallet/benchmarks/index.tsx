@@ -64,18 +64,18 @@ const benchmarks: BestPracticeBenchmarks = {
   },
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
+      result: BenchmarkResults.Pass,
       contributions: [
-        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T16:07:00Z") },
+        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-18T08:26:11Z") },
       ],
       notes: (
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
-            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The app fails to
-            resolve the address for the test name, which we interpret as a failure.
+            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The resolved address
+            is correct.
           </p>
           <img
-            alt="WalletChan fails to resolve the name for ENSv2"
+            alt="WalletChan correctly resolves the name for ENSv2"
             src={correctlyResolveEnsv2TestNameAddressProofImage.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
