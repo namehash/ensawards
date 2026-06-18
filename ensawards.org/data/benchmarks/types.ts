@@ -4,6 +4,7 @@ export const BenchmarkResults = {
   Pass: "passed",
   PartialPass: "partially-passed",
   Fail: "failed",
+  NotApplicable: "not-applicable",
 } as const;
 
 export type BenchmarkResult = (typeof BenchmarkResults)[keyof typeof BenchmarkResults];

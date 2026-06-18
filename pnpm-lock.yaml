@@ -62,7 +62,7 @@ importers:
         version: 3.7.2
       '@astrojs/vercel':
         specifier: ^10.0.3
-        version: 10.0.3(astro@6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))(react@19.2.0)(rollup@4.59.0)
+        version: 10.0.3(astro@6.4.8(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))(react@19.2.0)(rollup@4.59.0)
       '@ensnode/datasources':
         specifier: 1.14.0
         version: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
@@ -80,7 +80,7 @@ importers:
         version: 2.2.0(react@19.2.0)
       '@lucide/astro':
         specifier: ^1.7.0
-        version: 1.7.0(astro@6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))
+        version: 1.7.0(astro@6.4.8(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))
       '@namehash/ens-referrals':
         specifier: 1.14.0
         version: 1.14.0(gql.tada@1.9.2(graphql@16.13.2)(typescript@5.9.3))(graphql@16.13.2)(typescript@5.9.3)(viem@2.52.2(typescript@5.9.3)(zod@4.3.6))
@@ -118,8 +118,8 @@ importers:
         specifier: ^19.1.7
         version: 19.2.3(@types/react@19.2.6)
       astro:
-        specifier: ^6.1.10
-        version: 6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3)
+        specifier: ^6.4.8
+        version: 6.4.8(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3)
       astro-font:
         specifier: ^1.0.0
         version: 1.1.0
@@ -1887,8 +1887,8 @@ packages:
   astro-seo@1.1.0:
     resolution: {integrity: sha512-G6LDNDyga30o+52v58jU7C35n3cORUzk7RSuY+xf/ZRbW6JiNplyaOO1VoYVKO+xzYNaBcxqNln2RFRR/wgJNQ==}
 
-  astro@6.4.4:
-    resolution: {integrity: sha512-hVe8tq3lqt/Dr0UyB//yUmQSlHMTU8scTiF/vQddQVahLE4TTaSdH5H0nb7OvRcwo0UmlAO8DWYar4jNaS7H+A==}
+  astro@6.4.8:
+    resolution: {integrity: sha512-KK5lX90uU9EeVaTjINyj3sy9/NFXVa59aowaqbWBDDKLXZh4rr7GwIaCFYVetE22MJtsCNFerQXn0vlCLmpP/Q==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3638,14 +3638,14 @@ snapshots:
       is-wsl: 3.1.1
       which-pm-runs: 1.1.0
 
-  '@astrojs/vercel@10.0.3(astro@6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))(react@19.2.0)(rollup@4.59.0)':
+  '@astrojs/vercel@10.0.3(astro@6.4.8(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))(react@19.2.0)(rollup@4.59.0)':
     dependencies:
       '@astrojs/internal-helpers': 0.8.0
       '@vercel/analytics': 1.6.1(react@19.2.0)
       '@vercel/functions': 3.4.3
       '@vercel/nft': 1.5.0(rollup@4.59.0)
       '@vercel/routing-utils': 5.3.3
-      astro: 6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3)
+      astro: 6.4.8(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3)
       esbuild: 0.28.1
       tinyglobby: 0.2.15
     transitivePeerDependencies:
@@ -4145,9 +4145,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@lucide/astro@1.7.0(astro@6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))':
+  '@lucide/astro@1.7.0(astro@6.4.8(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3))':
     dependencies:
-      astro: 6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3)
+      astro: 6.4.8(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3)
 
   '@mapbox/node-pre-gyp@2.0.3':
     dependencies:
@@ -5114,7 +5114,7 @@ snapshots:
       - prettier-plugin-astro
       - typescript
 
-  astro@6.4.4(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3):
+  astro@6.4.8(@types/node@22.19.1)(@vercel/functions@3.4.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(yaml@2.8.3):
     dependencies:
       '@astrojs/compiler': 4.0.0
       '@astrojs/internal-helpers': 0.10.0

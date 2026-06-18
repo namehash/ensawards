@@ -17,6 +17,7 @@ import { formatBestPracticeTarget } from "data/ens-best-practices/utils.ts";
 import { getContractNamingScoresByProtocolType } from "@/contract-pipelines/utils.ts";
 import { getProtocolById, formatProtocolType } from "data/protocols/utils.ts";
 import { calcAppScore, sortApps, formatAppType } from "data/apps/utils.ts";
+import { EnsAwardsScoreResultTypes } from "data/shared/ens-awards-score.ts";
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,svg}");
 const placeIcons = [
@@ -98,7 +99,7 @@ const placeIcons = [
             containerStyles="gap-3 sm:gap-2 sm:justify-start max-sm:justify-center">
             {[...Object.entries(protocolScores)]
               .slice(0, 3)
-              .map(([scoredProtocolId, value], idx) => {
+              .map(([scoredProtocolId, ensAwardsScore], idx) => {
                 // Type casting is necessary due to `Record`'s type nature.
                 // We are completely sure of its correctness
                 const protocolId = scoredProtocolId as ProtocolId;
@@ -108,7 +109,11 @@ const placeIcons = [
                   <LeaderboardCard
                     key={`leaderboard-card-${protocol.protocolSlug}`}
                     name={protocol.name}
-                    ensAwardsScore={value}
+                    ensAwardsScore={{
+                      type: EnsAwardsScoreResultTypes.Defined,
+                      score: ensAwardsScore,
+                      label: undefined,
+                    }}
                     viewDetailsHref={`/protocol/${protocol.protocolSlug}`}
                     viewDetailsText={`${formatProtocolType(protocolType)} report`}>
                     <Image

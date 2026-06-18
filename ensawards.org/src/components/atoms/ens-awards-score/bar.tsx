@@ -1,10 +1,14 @@
-import type { EnsAwardsScore } from "data/shared/ens-awards-score";
+import {
+  type EnsAwardsScoreResult,
+  EnsAwardsScoreResultTypes,
+  formatEnsAwardsUndefinedScoreLabel,
+} from "data/shared/ens-awards-score";
 
 import { calcScoreBarFill, getScoreColor } from "@/components/atoms/ens-awards-score/utils";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface EnsAwardsBarScoreProps {
-  score?: EnsAwardsScore;
+  scoreResult: EnsAwardsScoreResult;
 
   /**
    * Whether the score UI is adapted for mobile screen sizes or not.
@@ -18,15 +22,15 @@ export interface EnsAwardsBarScoreProps {
   mobileAdaptive?: boolean;
 
   /**
-   * Optional additional styles to apply to the pending score state.
+   * Optional additional styles to apply to the undefined score state.
    */
-  pendingScoreStyles?: string;
+  undefinedScoreStyles?: string;
 }
 
 export const EnsAwardsBarScore = ({
-  score,
+  scoreResult,
   mobileAdaptive = true,
-  pendingScoreStyles,
+  undefinedScoreStyles,
 }: EnsAwardsBarScoreProps) => {
   return (
     <div
@@ -39,20 +43,28 @@ export const EnsAwardsBarScore = ({
     >
       <p className="text-muted-foreground text-sm leading-normal font-normal">ENSAwards score</p>
       <ScoreBar
-        score={score}
+        scoreResult={scoreResult}
         mobileAdaptive={mobileAdaptive}
-        pendingScoreStyles={pendingScoreStyles}
+        undefinedScoreStyles={undefinedScoreStyles}
       />
     </div>
   );
 };
 
-export const ScoreBar = ({ score, mobileAdaptive, pendingScoreStyles }: EnsAwardsBarScoreProps) =>
-  score === undefined ? (
-    <p className={cn("text-sm leading-normal font-medium text-black", pendingScoreStyles)}>
-      Pending
-    </p>
-  ) : (
+export const ScoreBar = ({
+  scoreResult,
+  mobileAdaptive,
+  undefinedScoreStyles,
+}: EnsAwardsBarScoreProps) => {
+  if (scoreResult.type === EnsAwardsScoreResultTypes.Undefined) {
+    return (
+      <p className={cn("text-sm leading-normal font-medium text-black", undefinedScoreStyles)}>
+        {formatEnsAwardsUndefinedScoreLabel(scoreResult.label)}
+      </p>
+    );
+  }
+
+  return (
     <div className="flex flex-row flex-nowrap justify-start items-center gap-2 self-stretch">
       <div
         className={cn(
@@ -63,20 +75,21 @@ export const ScoreBar = ({ score, mobileAdaptive, pendingScoreStyles }: EnsAward
         <div
           className={cn(
             "absolute h-full self-stretch rounded-l-[20px] z-10",
-            `bg-${getScoreColor(score)}`,
-            score === 100 && "rounded-r-[20px]",
+            `bg-${getScoreColor(scoreResult.score)}`,
+            scoreResult.score === 100 && "rounded-r-[20px]",
           )}
-          style={{ width: `calc(${calcScoreBarFill(score)}%)` }}
+          style={{ width: `calc(${calcScoreBarFill(scoreResult.score)}%)` }}
         ></div>
       </div>
       <p
         className={cn(
           "text-sm leading-normal",
           mobileAdaptive ? "font-medium sm:font-semibold" : "font-semibold",
-          `text-${getScoreColor(score)}`,
+          `text-${getScoreColor(scoreResult.score)}`,
         )}
       >
-        {score}%
+        {scoreResult.score}%
       </p>
     </div>
   );
+};

@@ -55,8 +55,10 @@ export const getAcceptanceTestBenchmarksByApp = (
  *       {@link BenchmarkResults.Pass}
  *     - and all others are {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass}
  *
- * - Returns {@link BenchmarkResults.Fail} if all defined benchmarks
- * are {@link BenchmarkResults.Fail},
+ * - Returns {@link BenchmarkResults.Fail} if:
+ *     - in all defined benchmarks there is at least one
+ *       {@link BenchmarkResults.Fail}
+ *     - and all others are {@link BenchmarkResults.Fail} or {@link BenchmarkResults.NotApplicable}
  *
  * - Returns {@link BenchmarkResults.PartialPass} if:
  *     - at least one defined benchmark is {@link BenchmarkResults.Fail}
@@ -64,7 +66,11 @@ export const getAcceptanceTestBenchmarksByApp = (
  *       {@link BenchmarkResults.Pass} or {@link BenchmarkResults.PartialPass},
  *     - or all defined benchmarks are {@link BenchmarkResults.PartialPass},
  *
- * -  Returns `undefined` if all benchmarks are `undefined` (pending).
+ * - Returns {@link BenchmarkResults.NotApplicable} if:
+ *    - all benchmarks are **defined** and {@link BenchmarkResults.NotApplicable}
+ *
+ * -  Returns `undefined` if all benchmarks are `undefined` (pending)
+ *    or all defined benchmarks are {@link BenchmarkResults.NotApplicable}.
  */
 export const generalizeAcceptanceTestBenchmarks = (
   acceptanceTestBenchmarks: AcceptanceTestBenchmarks,
@@ -75,7 +81,19 @@ export const generalizeAcceptanceTestBenchmarks = (
 
   const definedBenchmarkResults = benchmarkResults.filter((result) => result !== undefined);
 
-  if (definedBenchmarkResults.length === 0) {
+  const allBenchmarksNotApplicable = definedBenchmarkResults.every(
+    (result) => result === BenchmarkResults.NotApplicable,
+  );
+
+  // We want to be very strict about returning NotApplicable,
+  // so we only return it if all benchmarks are defined and `NotApplicable`.
+  if (allBenchmarksNotApplicable && definedBenchmarkResults.length === benchmarkResults.length) {
+    return BenchmarkResults.NotApplicable;
+  }
+
+  // And for all possible mixes of pending and NotApplicable,
+  // we want to return undefined (pending).
+  if (definedBenchmarkResults.length === 0 || allBenchmarksNotApplicable) {
     return undefined;
   }
 
@@ -97,8 +115,10 @@ export const generalizeAcceptanceTestBenchmarks = (
     return BenchmarkResults.Pass;
   }
 
+  // For now, we'll explicitly treat fail and not applicable equally
+  // (For cases where not all benchmarks are not applicable)
   const allDefinedBenchmarksFail = definedBenchmarkResults.every(
-    (result) => result === BenchmarkResults.Fail,
+    (result) => result === BenchmarkResults.Fail || result === BenchmarkResults.NotApplicable,
   );
 
   if (allDefinedBenchmarksFail) {

@@ -19,7 +19,7 @@ import correctlyResolveEnsv2TestNameAddressProofImageWithdrawal from "./correctl
 const benchmarks: BestPracticeBenchmarks = {
   "ensv2-ready-resolution": {
     "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
+      result: BenchmarkResults.NotApplicable,
       contributions: [
         { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-11T07:30:06Z") },
       ],
@@ -27,18 +27,29 @@ const benchmarks: BestPracticeBenchmarks = {
         <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
           <p className="w-full">
             ENSv2 ready resolution was tested using the search tool in the &quot;copy-trading&quot;
-            flow. The app either doesn't allow using ENS name as the trader identifier or fails to
-            resolve it, both of which we interpret as a failure.
+            flow. The app doesn't support the use of ENS names at all as the trader identifier.
+            <br />
+            <br />
+            While that's a key issue that this app is encouraged to improve, this best practice is
+            applicable specifically to apps that already have an existing ENS integration and making
+            sure existing integrations are ENSv2 compatible. Therefore, for this best practice we
+            apply a rating of not applicable.
           </p>
           <img
             alt="Binance exchange doesn't allow ENS name as trader in the copy-trading flow"
             src={correctlyResolveEnsv2TestNameAddressProofImageCopyTrading.src}
             className="w-auto h-full max-h-[325px] rounded-xl"
           />
+          <span className="w-full h-px bg-gray-200 my-5" />
           <p className="w-full">
             The ENSv2 ready resolution was also tested using the &quot;withdrawal&quot; flow. The
-            app doesn't allow using ENS name as the recipient identifier, which we interpret as a
-            failure.
+            app doesn't support the use of ENS names at all as the recipient identifier.
+            <br />
+            <br />
+            While that's a key issue that this app is encouraged to improve, this best practice is
+            applicable specifically to apps that already have an existing ENS integration and making
+            sure existing integrations are ENSv2 compatible. Therefore, for this best practice we
+            apply a rating of not applicable.
           </p>
           <img
             alt="Binance exchange doesn't allow ENS name as recipient in the withdrawal flow"

@@ -6,6 +6,7 @@ import benchmarkResultFailSymbol from "@/assets/benchmarkResultFailSymbol.svg";
 import benchmarkResultPartialPassSymbol from "@/assets/benchmarkResultPartialPassSymbol.svg";
 import benchmarkResultPassSymbol from "@/assets/benchmarkResultPassSymbol.svg";
 import benchmarkPendingSymbol from "@/assets/benchmarkPendingSymbol.svg";
+import benchmarkNotApplicableSymbol from "@/assets/benchmarkNotApplicableSymbol.svg";
 import { BenchmarkResults, type BenchmarkResult } from "data/benchmarks/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import { type BenchmarkResultBadgeProps } from "./BenchmarkResultBadge.tsx";
@@ -39,6 +40,12 @@ const benchmarkResultContent = (
         symbolAlt: "Failed benchmark result indicator",
       };
 
+    case BenchmarkResults.NotApplicable:
+      return {
+        symbol: benchmarkNotApplicableSymbol,
+        symbolAlt: "Not applicable review benchmark indicator",
+      };
+
     default:
       const _exhaustive: never = benchmarkResult;
       throw new Error(`Unsupported BenchmarkResult: ${_exhaustive}`);
@@ -50,7 +57,7 @@ const { symbol, symbolAlt } = benchmarkResultContent(benchmarkResult);
 
 <div
   class={cn(
-    "flex w-full max-w-[124px] sm:max-w-[228px] flex-col items-center gap-[14px] rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#191D4D_0%,#10143F_100%)] px-6 sm:px-11 pb-[13px] sm:pb-[23px] pt-4.5 sm:pt-8 relative z-10",
+    "flex w-fit max-w-[165px] sm:max-w-[228px] flex-col items-center gap-[14px] rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#191D4D_0%,#10143F_100%)] px-6 sm:px-11 pb-[13px] sm:pb-[23px] pt-4.5 sm:pt-8 relative z-10",
     className,
   )}>
   <Image
