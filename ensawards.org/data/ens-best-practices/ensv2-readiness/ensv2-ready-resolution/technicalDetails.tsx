@@ -16,7 +16,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import correctlyResolveEnsv2TestNameAddressExampleFailImage from "./images/correctly-resolve-ensv2-test-name-address-fail-example.png";
-import correctlyResolveEnsv2TestNameAddressExamplePassImage from "./images/correctly-resolve-ensv2-test-name-address-pass-example.png";
+import correctlyResolveEnsv2TestNameAddressExamplePassImage from "./images/correctly-resolve-ensv2-test-name-address-pass-example.gif";
 
 const useCaseSummary = (
   <div className="flex flex-col gap-2">
@@ -201,14 +201,14 @@ const acceptanceTest1 = {
   examplePass: {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T15:34:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-18T10:00:00Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
           An ENSv2-ready app such as{" "}
-          <a className={bestPracticeTechnicalDetailsLinkStyles} href="/app/metamask-wallet">
-            MetaMask
+          <a className={bestPracticeTechnicalDetailsLinkStyles} href="/app/rabby-wallet">
+            Rabby Wallet
           </a>{" "}
           resolves the name{" "}
           <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
@@ -244,7 +244,8 @@ const acceptanceTest1 = {
           <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
             0x1111111111111111111111111111111111111111
           </span>
-          , or fails to resolve the name at all. <br />
+          .
+          <br />
           <br />
           <b>Apps failing this test require an urgent update! 🚨</b>
         </p>
