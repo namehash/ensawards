@@ -164,11 +164,11 @@ const implementationRecommendations = (
   </div>
 );
 
-const vitalikEnsNameSpan = (
+export const vitalikEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>vitalik.eth</span>
 );
 
-const vitalikAddressSpan = (
+export const vitalikAddressSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>
     0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
   </span>
@@ -229,15 +229,15 @@ const acceptanceTest1 = {
   } as const satisfies AcceptanceTestBenchmarkFail,
 } as const satisfies AcceptanceTest;
 
-const ethereumUnnormalizedEnsNameSpan = (
+export const ethereumUnnormalizedEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>Ξthereum.eth</span>
 );
 
-const ethereumNormalizedEnsNameSpan = (
+export const ethereumNormalizedEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>ξthereum.eth</span>
 );
 
-const ethereumAddressSpan = (
+export const ethereumAddressSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>
     0x31C09F0616532F7a6f33d9ee4e1F45Ea529481af
   </span>
@@ -304,11 +304,11 @@ const acceptanceTest2 = {
   } as const satisfies AcceptanceTestBenchmarkFail,
 } as const satisfies AcceptanceTest;
 
-const jesseBaseEnsNameSpan = (
+export const jesseBaseEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>jesse.base.eth</span>
 );
 
-const jesseBaseAddressSpan = (
+export const jesseBaseAddressSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>
     0x2211d1D0020DAEA8039E46Cf1367962070d77DA9
   </span>
@@ -371,11 +371,11 @@ const acceptanceTest3 = {
   } as const satisfies AcceptanceTestBenchmarkFail,
 } as const satisfies AcceptanceTest;
 
-const dperriComEnsNameSpan = (
+export const dperriComEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>dperri.com</span>
 );
 
-const dperriComAddressSpan = (
+export const dperriComAddressSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>
     0x0b08dA7068b73A579Bd5E8a8290ff8afd37bc32A
   </span>
@@ -436,11 +436,11 @@ const acceptanceTest4 = {
   } as const satisfies AcceptanceTestBenchmarkFail,
 } as const satisfies AcceptanceTest;
 
-const lightkeeperEnsNameSpan = (
+export const lightkeeperEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>lightkeeper.eth</span>
 );
 
-const lightkeeperAddressSpan = (
+export const lightkeeperAddressSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>
     0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
   </span>
@@ -504,11 +504,11 @@ const acceptanceTest5 = {
   } as const satisfies AcceptanceTestBenchmarkFail,
 } as const satisfies AcceptanceTest;
 
-const gregskrilEnsNameSpan = (
+export const gregskrilEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>gregskril.eth</span>
 );
 
-const gregskrilAddressBitcoinSpan = (
+export const gregskrilAddressBitcoinSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>3NnpwUMGdGKuYaPDQagNXAgVXz9HdnJDNS</span>
 );
 
@@ -571,7 +571,7 @@ const acceptanceTest6 = {
   } as const satisfies AcceptanceTestBenchmarkFail,
 } as const satisfies AcceptanceTest;
 
-const gregskrilAddressSolanaSpan = (
+export const gregskrilAddressSolanaSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>
     2JQANQn1kccapb7GT8XScf9qBy59uMo9vh9WwVQhwStJ
   </span>
@@ -636,11 +636,11 @@ const acceptanceTest7 = {
   } as const satisfies AcceptanceTestBenchmarkFail,
 } as const satisfies AcceptanceTest;
 
-const zissouEnsNameSpan = (
+export const zissouEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>zissou.eth</span>
 );
 
-const zissouAddressSpan = (
+export const zissouAddressSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>
     <i>(invalid address)</i>
   </span>

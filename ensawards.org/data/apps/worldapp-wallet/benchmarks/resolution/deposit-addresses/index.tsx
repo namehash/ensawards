@@ -5,6 +5,10 @@ import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
+  vitalikAddressSpan,
+  vitalikEnsNameSpan,
+} from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
+import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsCodeStyles,
 } from "data/ens-best-practices/styles";
@@ -13,8 +17,8 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import correctlyResolveDirectOnchainSubnameAddressProofImage1 from "./correctly-resolve-direct-onchain-subname-address-proof-1.png";
-import correctlyResolveDirectOnchainSubnameAddressProofImage2 from "./correctly-resolve-direct-onchain-subname-address-proof-2.png";
+import at1Proof1 from "./at-1-1.png";
+import at1Proof2 from "./at-1-2.png";
 
 const depositAddresses = {
   "correctly-resolve-direct-onchain-subname-address": {
@@ -25,18 +29,20 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The wallet doesn't support the
-          use of ENS names at all as the recipient identifier, which we classify as a failure.
+          ENS resolution was tested using the &quot;send&quot; flow with {vitalikEnsNameSpan}. The
+          wallet doesn't support the use of ENS names at all as the recipient identifier, so it never
+          resolves the expected Ethereum Mainnet address ({vitalikAddressSpan}), which we classify as
+          a failure.
         </p>
         <div className="flex flex-row flex-wrap justify-center items-start gap-5">
           <img
             alt="World App's wallet doesn't allow ENS name as recipient in the send flow, part 1"
-            src={correctlyResolveDirectOnchainSubnameAddressProofImage1.src}
+            src={at1Proof1.src}
             className="w-auto h-full max-h-[325px] md:max-w-[calc(50%-10px)] rounded-xl"
           />
           <img
             alt="World App's wallet doesn't allow ENS name as recipient in the send flow, part 2"
-            src={correctlyResolveDirectOnchainSubnameAddressProofImage2.src}
+            src={at1Proof2.src}
             className="w-auto h-full max-h-[325px] md:max-w-[calc(50%-10px)] rounded-xl"
           />
         </div>

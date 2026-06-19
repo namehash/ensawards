@@ -5,6 +5,21 @@ import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
+  dperriComAddressSpan,
+  dperriComEnsNameSpan,
+  ethereumAddressSpan,
+  ethereumNormalizedEnsNameSpan,
+  ethereumUnnormalizedEnsNameSpan,
+  gregskrilAddressSolanaSpan,
+  gregskrilEnsNameSpan,
+  jesseBaseAddressSpan,
+  jesseBaseEnsNameSpan,
+  lightkeeperAddressSpan,
+  lightkeeperEnsNameSpan,
+  vitalikAddressSpan,
+  vitalikEnsNameSpan,
+} from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
+import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsCodeStyles,
 } from "data/ens-best-practices/styles";
@@ -13,12 +28,12 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import correctlyImplementCcipReadForEthSubnamesProofImage from "./correctly-implement-ccip-read-for-eth-subnames-proof.gif";
-import correctlyImplementCcipReadForOffchainDnsNamesProofImage from "./correctly-implement-ccip-read-for-offchain-dns-names-proof.gif";
-import correctlyResolveDirectOnchainSubnameAddressProofImage from "./correctly-resolve-direct-onchain-subname-address-proof.gif";
-import correctlyResolveNamesForDifferentEvmChainsProofImage from "./correctly-resolve-names-for-different-evm-chains-proof.gif";
-import correctlyResolveNamesForSolanaProofImage from "./correctly-resolve-names-for-solana-proof.gif";
-import correctlyResolveNamesRequiringNormalizationProofImage from "./correctly-resolve-names-requiring-normalization-proof.gif";
+import at1Proof from "./at-1.gif";
+import at2Proof from "./at-2.gif";
+import at3Proof from "./at-3.gif";
+import at4Proof from "./at-4.gif";
+import at5Proof from "./at-5.gif";
+import at7Proof from "./at-7.gif";
 
 const depositAddresses = {
   "correctly-resolve-direct-onchain-subname-address": {
@@ -29,12 +44,12 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The resolved address is
-          correct.
+          ENS resolution was tested using the &quot;send&quot; flow. The resolved Ethereum Mainnet
+          address of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
         </p>
         <img
           alt="Coinbase Wallet correctly resolves the address for vitalik.eth"
-          src={correctlyResolveDirectOnchainSubnameAddressProofImage.src}
+          src={at1Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -48,12 +63,14 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The resolved address is
-          correct.
+          ENS resolution was tested using the &quot;send&quot; flow. The input{" "}
+          {ethereumUnnormalizedEnsNameSpan} was correctly normalized to{" "}
+          {ethereumNormalizedEnsNameSpan} and resolved to the correct Ethereum Mainnet address (
+          {ethereumAddressSpan}).
         </p>
         <img
           alt="Coinbase Wallet correctly resolves the address for Ξthereum.eth"
-          src={correctlyResolveNamesRequiringNormalizationProofImage.src}
+          src={at2Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -67,12 +84,13 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The resolved address is
-          correct.
+          ENS resolution was tested using the &quot;send&quot; flow. The CCIP-Read enabled .eth
+          subname {jesseBaseEnsNameSpan} resolved to the correct Ethereum Mainnet address (
+          {jesseBaseAddressSpan}).
         </p>
         <img
           alt="Coinbase Wallet correctly resolves the address for jesse.base.eth"
-          src={correctlyImplementCcipReadForEthSubnamesProofImage.src}
+          src={at3Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -86,12 +104,13 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The app <i>FAILS</i> to resolve
-          the input name.
+          ENS resolution was tested using the &quot;send&quot; flow. The offchain DNS name{" "}
+          {dperriComEnsNameSpan} was <i>NOT</i> resolved to its expected Ethereum Mainnet address (
+          {dperriComAddressSpan}).
         </p>
         <img
           alt="Coinbase Wallet fails to resolve the address for dperri.com"
-          src={correctlyImplementCcipReadForOffchainDnsNamesProofImage.src}
+          src={at4Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -105,12 +124,13 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow in context of the Base chain.
-          The resolved address is <i>NOT</i> correct.
+          ENS resolution was tested using the &quot;send&quot; flow in context of the Base chain. For{" "}
+          {lightkeeperEnsNameSpan} the resolved address is <i>NOT</i> the expected Base chain address
+          ({lightkeeperAddressSpan}).
         </p>
         <img
           alt="Coinbase Wallet fails to resolve the address for lightkeeper.eth in context of the Base chain"
-          src={correctlyResolveNamesForDifferentEvmChainsProofImage.src}
+          src={at5Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -125,12 +145,12 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The app <i>FAILS</i> to resolve
-          the Solana address for the input name.
+          ENS resolution was tested using the &quot;send&quot; flow. For {gregskrilEnsNameSpan} the
+          app <i>FAILS</i> to resolve the expected Solana address ({gregskrilAddressSolanaSpan}).
         </p>
         <img
-          alt="Coinbase Wallet fails to resolve the address for gregskrill.eth"
-          src={correctlyResolveNamesForSolanaProofImage.src}
+          alt="Coinbase Wallet fails to resolve the Solana address for gregskril.eth"
+          src={at7Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>

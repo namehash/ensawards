@@ -5,6 +5,10 @@ import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
+  vitalikAddressSpan,
+  vitalikEnsNameSpan,
+} from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
+import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsCodeStyles,
 } from "data/ens-best-practices/styles";
@@ -13,7 +17,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import correctlyResolveDirectOnchainSubnameAddressProofImage from "./correctly-resolve-direct-onchain-subname-address-proof.png";
+import at1Proof from "./at-1.png";
 
 const depositAddresses = {
   "correctly-resolve-direct-onchain-subname-address": {
@@ -24,12 +28,14 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The wallet doesn't support the
-          use of ENS names at all as the recipient identifier, which we classify as a failure.
+          ENS resolution was tested using the &quot;send&quot; flow with {vitalikEnsNameSpan}. The
+          wallet doesn't support the use of ENS names at all as the recipient identifier, so it never
+          resolves the expected Ethereum Mainnet address ({vitalikAddressSpan}), which we classify as
+          a failure.
         </p>
         <img
           alt="ReadyX doesn't allow ENS name as recipient in the send flow"
-          src={correctlyResolveDirectOnchainSubnameAddressProofImage.src}
+          src={at1Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
