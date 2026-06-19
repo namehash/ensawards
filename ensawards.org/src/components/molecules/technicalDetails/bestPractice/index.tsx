@@ -20,10 +20,16 @@ export interface BestPracticeTechnicalDetailsProps {
 export const BestPracticeTechnicalDetails = ({
   bestPractice,
 }: BestPracticeTechnicalDetailsProps) => {
-  // Sort acceptance tests by slug (alphabetically) to ensure consistent display order across best practice details and benchmark details pages.
-  const sortedAcceptanceTests = [...bestPractice.technicalDetails.acceptanceTests].sort((a, b) =>
-    a.acceptanceTestSlug.localeCompare(b.acceptanceTestSlug),
-  );
+  // Sort acceptance tests by order (ascending) to ensure consistent display order
+  // across best practice details and benchmark details pages.
+  // The tiebreaker is the alphabetical order of the acceptance test slug.
+  const sortedAcceptanceTests = [...bestPractice.technicalDetails.acceptanceTests].sort((a, b) => {
+    const aOrder = a.order ?? Number.POSITIVE_INFINITY;
+    const bOrder = b.order ?? Number.POSITIVE_INFINITY;
+    if (aOrder !== bOrder) return aOrder - bOrder;
+
+    return a.acceptanceTestSlug.localeCompare(b.acceptanceTestSlug);
+  });
 
   return (
     <div className="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">

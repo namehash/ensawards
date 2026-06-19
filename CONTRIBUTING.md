@@ -309,6 +309,9 @@ For reference, see [ensawards.org/data/ens-best-practices/contract-naming/name-y
       examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
       exampleFail?: AcceptanceTestBenchmarkFail;
       exampleNotApplicable?: NotApplicableAcceptanceTestBenchmark;
+
+      /** Sort priority within a {@link BestPractice}; lower comes first, undefined sorts last (then by name). */
+      order?: number;
     }
     ```
 4. In your PR describe your reasoning for adding it.

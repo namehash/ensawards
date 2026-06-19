@@ -1,7 +1,6 @@
 import type {
   AcceptanceTest,
   AcceptanceTestBenchmarkFail,
-  AcceptanceTestBenchmarkNotApplicable,
   AcceptanceTestBenchmarkPass,
 } from "data/acceptance-tests/types";
 import { BenchmarkResults } from "data/benchmarks/types";
@@ -22,10 +21,10 @@ import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-exam
 const ensBestPracticeOverview = (
   <div className="flex flex-col gap-2">
     <p>
-      When an app needs their users to identify a particular address on a particular chain where an
+      When an app needs its users to identify a particular address on a particular chain where an
       action should be taken (such as a transfer or deposit), ENS offers the possibility of a better
       user experience. Instead of forcing users to enter a long string of hexadecimal digits, with
-      ENS users can have the option of entering a simple name such as{" "}
+      ENS, users can have the option of entering a simple name such as{" "}
       <span className={bestPracticeTechnicalDetailsCodeStyles}>vitalik.eth</span>. ENS can then be
       used to translate this input name into the relevant deposit address, such as
       <span className={bestPracticeTechnicalDetailsCodeStyles}>
@@ -79,10 +78,13 @@ const benefitFromUsingEns = (
     >
       address poisoning attacks
     </a>
-    . If ENS resolution is integrated, but not according to all ENS best practices, then it can
-    cause big issues. For example, deposits may silently be sent to the wrong address and be
-    irrecoverably lost. Or only a subset of ENS names might be properly supported which damages the
-    network effects and market distribution of ENS.
+    .
+    <br />
+    <br />
+    If ENS resolution is integrated, but not according to all ENS best practices, then it can cause
+    big issues. For example, deposits may silently be sent to the wrong address and be irrecoverably
+    lost. Or only a subset of ENS names might be properly supported which damages the network
+    effects and market distribution of ENS.
   </p>
 );
 
@@ -158,18 +160,6 @@ const implementationRecommendations = (
   </div>
 );
 
-const acceptanceTest1ReferenceSpan = (
-  <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>
-);
-
-const acceptanceTest5ReferenceSpan = (
-  <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>
-);
-
-const notApplicableReferenceSpan = (
-  <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>
-);
-
 const vitalikEnsNameSpan = (
   <span className={bestPracticeTechnicalDetailsCodeStyles}>vitalik.eth</span>
 );
@@ -181,6 +171,7 @@ const vitalikAddressSpan = (
 );
 
 const acceptanceTest1 = {
+  order: 0,
   acceptanceTestSlug: "correctly-resolve-direct-onchain-subname-address",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
@@ -250,6 +241,7 @@ const ethereumAddressSpan = (
 );
 
 const acceptanceTest2 = {
+  order: 1,
   acceptanceTestSlug: "correctly-resolve-names-requiring-normalization",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
@@ -307,26 +299,6 @@ const acceptanceTest2 = {
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkFail,
-  exampleNotApplicable: {
-    result: BenchmarkResults.NotApplicable,
-    contributions: [
-      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
-    ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          If an app fails {acceptanceTest1ReferenceSpan} then it doesn&apos;t appear to support ENS
-          resolution at all and therefore we classify this acceptance test as{" "}
-          {notApplicableReferenceSpan}.
-        </p>
-        <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmarkNotApplicable,
 } as const satisfies AcceptanceTest;
 
 const jesseBaseEnsNameSpan = (
@@ -340,6 +312,7 @@ const jesseBaseAddressSpan = (
 );
 
 const acceptanceTest3 = {
+  order: 2,
   acceptanceTestSlug: "correctly-implement-ccip-read-for-eth-subnames",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
@@ -393,26 +366,6 @@ const acceptanceTest3 = {
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkFail,
-  exampleNotApplicable: {
-    result: BenchmarkResults.NotApplicable,
-    contributions: [
-      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
-    ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          If an app fails {acceptanceTest1ReferenceSpan} then it doesn&apos;t appear to support ENS
-          resolution at all and therefore we classify this acceptance test as{" "}
-          {notApplicableReferenceSpan}.
-        </p>
-        <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmarkNotApplicable,
 } as const satisfies AcceptanceTest;
 
 const dperriComEnsNameSpan = (
@@ -426,6 +379,7 @@ const dperriComAddressSpan = (
 );
 
 const acceptanceTest4 = {
+  order: 3,
   acceptanceTestSlug: "correctly-implement-ccip-read-for-offchain-dns-names",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
@@ -479,26 +433,6 @@ const acceptanceTest4 = {
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkFail,
-  exampleNotApplicable: {
-    result: BenchmarkResults.NotApplicable,
-    contributions: [
-      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
-    ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          If an app fails {acceptanceTest1ReferenceSpan} then it doesn&apos;t appear to support ENS
-          resolution at all and therefore we classify this acceptance test as{" "}
-          {notApplicableReferenceSpan}.
-        </p>
-        <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmarkNotApplicable,
 } as const satisfies AcceptanceTest;
 
 const lightkeeperEnsNameSpan = (
@@ -512,6 +446,7 @@ const lightkeeperAddressSpan = (
 );
 
 const acceptanceTest5 = {
+  order: 4,
   acceptanceTestSlug: "correctly-resolve-names-for-different-evm-chains",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
@@ -566,26 +501,6 @@ const acceptanceTest5 = {
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkFail,
-  exampleNotApplicable: {
-    result: BenchmarkResults.NotApplicable,
-    contributions: [
-      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
-    ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          If an app fails {acceptanceTest1ReferenceSpan} then it doesn&apos;t appear to support ENS
-          resolution at all and therefore we classify this acceptance test as{" "}
-          {notApplicableReferenceSpan}.
-        </p>
-        <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmarkNotApplicable,
 } as const satisfies AcceptanceTest;
 
 const gregskrilEnsNameSpan = (
@@ -597,6 +512,7 @@ const gregskrilAddressBitcoinSpan = (
 );
 
 const acceptanceTest6 = {
+  order: 5,
   acceptanceTestSlug: "correctly-resolve-names-for-bitcoin",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
@@ -652,26 +568,6 @@ const acceptanceTest6 = {
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkFail,
-  exampleNotApplicable: {
-    result: BenchmarkResults.NotApplicable,
-    contributions: [
-      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
-    ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          If an app fails {acceptanceTest1ReferenceSpan} then it doesn&apos;t appear to support ENS
-          resolution at all or app doesn&apos;t have context of non-EVM chain Bitcoin, we classify
-          this acceptance test as {notApplicableReferenceSpan}.
-        </p>
-        <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmarkNotApplicable,
 } as const satisfies AcceptanceTest;
 
 const gregskrilAddressSolanaSpan = (
@@ -681,6 +577,7 @@ const gregskrilAddressSolanaSpan = (
 );
 
 const acceptanceTest7 = {
+  order: 6,
   acceptanceTestSlug: "correctly-resolve-names-for-solana",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
@@ -736,26 +633,6 @@ const acceptanceTest7 = {
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkFail,
-  exampleNotApplicable: {
-    result: BenchmarkResults.NotApplicable,
-    contributions: [
-      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
-    ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          If an app fails {acceptanceTest1ReferenceSpan} then it doesn&apos;t appear to support ENS
-          resolution at all or app doesn&apos;t have context of non-EVM chain Solana, we classify
-          this acceptance test as {notApplicableReferenceSpan}.
-        </p>
-        <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmarkNotApplicable,
 } as const satisfies AcceptanceTest;
 
 const zissouEnsNameSpan = (
@@ -769,6 +646,7 @@ const zissouAddressSpan = (
 );
 
 const acceptanceTest8 = {
+  order: 7,
   acceptanceTestSlug: "correctly-handle-resolution-for-chains-with-invalid-address-formatting",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
@@ -825,26 +703,6 @@ const acceptanceTest8 = {
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmarkFail,
-  exampleNotApplicable: {
-    result: BenchmarkResults.NotApplicable,
-    contributions: [
-      { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
-    ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          If an app fails {acceptanceTest1ReferenceSpan} or {acceptanceTest5ReferenceSpan} then it
-          doesn&apos;t appear to support ENS resolution on Base at all and therefore we classify
-          this acceptance test as {notApplicableReferenceSpan}.
-        </p>
-        <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmarkNotApplicable,
 } as const satisfies AcceptanceTest;
 
 const technicalDetails = {
