@@ -6,6 +6,19 @@ import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
+  dperriComAddressSpan,
+  dperriComEnsNameSpan,
+  ethereumAddressSpan,
+  ethereumNormalizedEnsNameSpan,
+  ethereumUnnormalizedEnsNameSpan,
+  jesseBaseAddressSpan,
+  jesseBaseEnsNameSpan,
+  lightkeeperAddressSpan,
+  lightkeeperEnsNameSpan,
+  vitalikAddressSpan,
+  vitalikEnsNameSpan,
+} from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
+import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsCodeStyles,
 } from "data/ens-best-practices/styles";
@@ -29,7 +42,8 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on etherscan.io. The resolved address is correct.
+          Tested using the name lookup search on etherscan.io. The resolved Ethereum Mainnet address
+          of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
         </p>
         <img
           alt="Etherscan correctly resolves the direct onchain subname address"
@@ -47,8 +61,10 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on etherscan.io. The name requiring normalization
-          resolved to the correct address.
+          Tested using the name lookup search on etherscan.io. The input{" "}
+          {ethereumUnnormalizedEnsNameSpan} was correctly normalized to{" "}
+          {ethereumNormalizedEnsNameSpan} and resolved to the correct Ethereum Mainnet address (
+          {ethereumAddressSpan}).
         </p>
         <img
           alt="Etherscan correctly resolves a name requiring normalization"
@@ -66,8 +82,9 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on etherscan.io. The CCIP-Read enabled .eth subname
-          resolved to the correct address.
+          Tested using the name lookup search on etherscan.io. The CCIP-Read enabled .eth subname{" "}
+          {jesseBaseEnsNameSpan} resolved to the correct Ethereum Mainnet address (
+          {jesseBaseAddressSpan}).
         </p>
         <img
           alt="Etherscan correctly implements CCIP-Read for .eth subnames"
@@ -85,8 +102,9 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on etherscan.io. The offchain DNS name resolved to the
-          correct address via CCIP-Read.
+          Tested using the name lookup search on etherscan.io. The offchain DNS name{" "}
+          {dperriComEnsNameSpan} resolved to the correct Ethereum Mainnet address via CCIP-Read (
+          {dperriComAddressSpan}).
         </p>
         <img
           alt="Etherscan correctly implements CCIP-Read for offchain DNS names"
@@ -104,8 +122,9 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on basescan.org. The shown address was the mainnet
-          address, <i>NOT</i> the Base address of that name.
+          Tested using the name lookup search on basescan.org. For {lightkeeperEnsNameSpan} the
+          shown address was the mainnet address, <i>NOT</i> the expected Base chain address (
+          {lightkeeperAddressSpan}).
         </p>
         <img
           alt="Etherscan fails to resolve the Base deposit address"

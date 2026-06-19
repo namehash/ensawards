@@ -3,6 +3,19 @@ import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
+  dperriComAddressSpan,
+  dperriComEnsNameSpan,
+  ethereumAddressSpan,
+  ethereumNormalizedEnsNameSpan,
+  ethereumUnnormalizedEnsNameSpan,
+  jesseBaseAddressSpan,
+  jesseBaseEnsNameSpan,
+  lightkeeperAddressSpan,
+  lightkeeperEnsNameSpan,
+  vitalikAddressSpan,
+  vitalikEnsNameSpan,
+} from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
+import {
   acceptanceTestDetailsContainerStyles,
   bestPracticeTechnicalDetailsCodeStyles,
 } from "data/ens-best-practices/styles";
@@ -27,7 +40,7 @@ const depositAddresses = {
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
           Tested using the quick-search feature on the main page of eth.blockscout.com. The resolved
-          address is correct.
+          Ethereum Mainnet address of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
         </p>
         <img
           alt="Blockscout correctly resolves the deposit address of a direct onchain name"
@@ -45,8 +58,10 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the quick-search feature on eth.blockscout.com with a name requiring
-          normalization. The resolved address is correct.
+          Tested using the quick-search feature on eth.blockscout.com. The input{" "}
+          {ethereumUnnormalizedEnsNameSpan} was correctly normalized to{" "}
+          {ethereumNormalizedEnsNameSpan} and resolved to the correct Ethereum Mainnet address (
+          {ethereumAddressSpan}).
         </p>
         <img
           alt="Blockscout correctly resolves the deposit address of a name requiring normalization"
@@ -64,8 +79,9 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the quick-search feature on eth.blockscout.com. The offchain .eth subname was
-          resolved to the correct address via CCIP-Read.
+          Tested using the quick-search feature on eth.blockscout.com. The CCIP-Read enabled .eth
+          subname {jesseBaseEnsNameSpan} resolved to the correct Ethereum Mainnet address (
+          {jesseBaseAddressSpan}).
         </p>
         <img
           alt="Blockscout correctly resolves the deposit address of an offchain .eth subname via CCIP-Read"
@@ -83,8 +99,9 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the quick-search feature on eth.blockscout.com. The offchain DNS name was
-          resolved to the correct address via CCIP-Read.
+          Tested using the quick-search feature on eth.blockscout.com. The offchain DNS name{" "}
+          {dperriComEnsNameSpan} resolved to the correct Ethereum Mainnet address via CCIP-Read (
+          {dperriComAddressSpan}).
         </p>
         <img
           alt="Blockscout correctly resolves the deposit address of an offchain DNS name via CCIP-Read"
@@ -102,8 +119,9 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the quick-search feature on base.blockscout.com. The shown address was the
-          mainnet address, <i>NOT</i> the Base address of that name.
+          Tested using the quick-search feature on base.blockscout.com. For {lightkeeperEnsNameSpan}{" "}
+          the shown address was the mainnet address, <i>NOT</i> the expected Base chain address (
+          {lightkeeperAddressSpan}).
         </p>
         <img
           alt="Blockscout fails to resolve the Base deposit address"
