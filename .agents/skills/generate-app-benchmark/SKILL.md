@@ -38,7 +38,7 @@ Copy this checklist and track progress:
 - [ ] Step 6: Typecheck
 ```
 
-### Step 1: Resolve acceptance test slugs (once)
+### Step 1: Resolve acceptance test slugs + canonical name/address spans (once)
 
 The `manual.json` test `id`s map **positionally** (1-based) to the best
 practice's acceptance tests, in declaration order. Read them from the best
@@ -50,6 +50,27 @@ ensawards.org/data/ens-best-practices/**/<best-practice-slug>/technicalDetails.t
 
 Grep `acceptanceTestSlug` there; the order top-to-bottom is the `id` order
 (`id: 1` → first slug, etc.).
+
+While reading that file, also note the **canonical ENS name and expected
+address** each acceptance test exercises. These are defined as exported `*Span`
+constants (e.g. `vitalikEnsNameSpan`, `vitalikAddressSpan`,
+`lightkeeperEnsNameSpan`, `lightkeeperAddressSpan`, ...) that render the name /
+address in the correct code style. The benchmark notes **must** reference these
+exported spans rather than vague phrasing — import them from the best practice's
+`technicalDetails` module:
+
+```tsx
+import {
+  vitalikEnsNameSpan,
+  vitalikAddressSpan,
+  // ...one pair (or more) per test you emit
+} from "data/ens-best-practices/<category>/<best-practice-slug>/technicalDetails";
+```
+
+If a span you need isn't exported yet, add `export` to its `const` declaration
+in `technicalDetails.tsx` (a non-breaking change). Map each acceptance test id to
+its spans (name + expected chain + expected address) so Step 4 can write concrete
+notes.
 
 ### Step 3: Locate manual.json + proof media (per app)
 
@@ -139,8 +160,15 @@ test present in `manual.json`** (keyed by the slug at that id's position).
 
 Notes prose: write a short natural sentence per test combining the relevant
 `method` (per-test override if present, else the global `method`) and the
-`reason`. For failures, emphasize the negative outcome with `<i>NOT</i>` as in
-the examples. Include an `<img>` only when a matching proof image exists.
+`reason`. **Always name the concrete ENS name tested and the expected address**
+using the spans imported in Step 1 (e.g. "The resolved Ethereum Mainnet address
+of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).") instead of vague
+phrasing like "The resolved address is correct.". For passes, state the resolved
+name maps to the expected address; for failures, name the tested ENS name and the
+expected address, then emphasize the negative outcome with `<i>NOT</i>` (e.g. the
+shown value was wrong / an error appeared). Include an `<img>` only when a matching
+proof image exists. `Not Applicable` notes generally don't reference a specific
+address (see Special overrides).
 
 The `reason` and `method` strings are **not strict** — they are author notes,
 not literal copy. Freely rephrase, correct, and expand them so the prose reads
@@ -158,6 +186,12 @@ import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/st
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
+import {
+  <nameSpanForId1>,
+  <addressSpanForId1>,
+  // ...more spans, one (or more) per emitted test
+} from "data/ens-best-practices/<category>/<best-practice-slug>/technicalDetails";
+
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import at1Proof from "./at-1.png";
@@ -169,7 +203,7 @@ const <camelCaseBestPracticeSlug> = {
     contributions: [{ from: contributors.<contributor>, lastUpdated: parseTimestamp("<datetime>") }],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full"><sentence from method + reason></p>
+        <p className="w-full"><sentence from method + reason, naming {<nameSpan>} and {<addressSpan>}></p>
         <img
           alt="<app> correctly resolves ..."
           src={at1Proof.src}
@@ -195,7 +229,8 @@ Result-specific entry examples — match these renderings:
   notes: (
     <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
       <p className="w-full">
-        Tested using the search flow on etherscan.io. The resolved address is correct.
+        Tested using the search flow on etherscan.io. The resolved Ethereum Mainnet address of{" "}
+        {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
       </p>
       <img
         alt="Etherscan correctly resolves the deposit address"
@@ -207,7 +242,7 @@ Result-specific entry examples — match these renderings:
 } as const satisfies AcceptanceTestBenchmark,
 ```
 
-**Failed** (emphasize the failure):
+**Failed** (name the ENS name + expected address, then emphasize the failure):
 
 ```tsx
 "correctly-resolve-names-for-different-evm-chains": {
@@ -216,8 +251,9 @@ Result-specific entry examples — match these renderings:
   notes: (
     <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
       <p className="w-full">
-        Tested using the search flow on basescan.org. The shown address was the mainnet
-        address, <i>NOT</i> the Base address of that name.
+        Tested using the search flow on basescan.org. For {lightkeeperEnsNameSpan} the shown
+        address was the mainnet address, <i>NOT</i> the expected Base chain address
+        ({lightkeeperAddressSpan}).
       </p>
       <img
         alt="Etherscan fails to resolve the Base deposit address"
