@@ -1,12 +1,19 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md for additional advice
 // on adding and modifying app benchmarks
 
+import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import EtherscanExplorer from "data/apps/etherscan-explorer";
-import { mockedExampleBenchmark } from "data/benchmarks/mocked-example-benchmark";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
+import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import { cn } from "@/utils/tailwindClassConcatenation";
+
+import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 import depositAddresses from "./resolution/deposit-address";
 import ensv2ReadyResolution from "./resolution/ensv2-ready-resolution";
 
@@ -25,14 +32,40 @@ const benchmarks = {
   // We aim to fix it as soon as we have the capacity.
   // See: https://github.com/namehash/ensawards/issues/222
   "display-named-smart-contracts-mainnet": {
-    "mainnet-interactions-display-named-smart-contracts": mockedExampleBenchmark({
+    "mainnet-interactions-display-named-smart-contracts": {
       result: BenchmarkResults.Pass,
-    }),
+      contributions: [
+        { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:26:20.566Z") },
+      ],
+      notes: (
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">TODO: Add real benchmark notes</p>
+          <img
+            alt="example proof"
+            src={exampleProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
+        </div>
+      ),
+    } as const satisfies AcceptanceTestBenchmark,
   },
   "display-named-smart-contracts-l2-chains": {
-    "l2-chain-interactions-display-named-smart-contracts": mockedExampleBenchmark({
+    "l2-chain-interactions-display-named-smart-contracts": {
       result: BenchmarkResults.Fail,
-    }),
+      contributions: [
+        { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-08T18:26:20.566Z") },
+      ],
+      notes: (
+        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+          <p className="w-full">TODO: Add real benchmark notes</p>
+          <img
+            alt="example proof"
+            src={exampleProofImage.src}
+            className="w-auto h-full max-h-[325px] rounded-xl"
+          />
+        </div>
+      ),
+    } as const satisfies AcceptanceTestBenchmark,
   },
 } as const satisfies BestPracticeBenchmarks;
 
