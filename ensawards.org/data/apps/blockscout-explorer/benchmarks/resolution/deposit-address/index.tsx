@@ -1,14 +1,149 @@
+import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
+import { BenchmarkResults } from "data/benchmarks/types";
+import contributors from "data/contributors";
+import {
+  acceptanceTestDetailsContainerStyles,
+  bestPracticeTechnicalDetailsCodeStyles,
+} from "data/ens-best-practices/styles";
+
+import { parseTimestamp } from "@ensnode/ensnode-sdk";
+
+import { cn } from "@/utils/tailwindClassConcatenation";
+
+import at1Proof from "./at-1.png";
+import at2Proof from "./at-2.png";
+import at3Proof from "./at-3.png";
+import at4Proof from "./at-4.png";
+import at5Proof from "./at-5.png";
 
 const depositAddresses = {
-  "correctly-resolve-direct-onchain-subname-address": undefined,
-  "correctly-resolve-names-requiring-normalization": undefined,
-  "correctly-implement-ccip-read-for-eth-subnames": undefined,
-  "correctly-implement-ccip-read-for-offchain-dns-names": undefined,
-  "correctly-resolve-names-for-different-evm-chains": undefined,
-  "correctly-resolve-names-for-bitcoin": undefined,
-  "correctly-resolve-names-for-solana": undefined,
-  "correctly-handle-resolution-for-chains-with-invalid-address-formatting": undefined,
+  "correctly-resolve-direct-onchain-subname-address": {
+    result: BenchmarkResults.Pass,
+    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          Tested using the quick-search feature on the main page of eth.blockscout.com. The resolved
+          address is correct.
+        </p>
+        <img
+          alt="Blockscout correctly resolves the deposit address of a direct onchain name"
+          src={at1Proof.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmark,
+  "correctly-resolve-names-requiring-normalization": {
+    result: BenchmarkResults.Pass,
+    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          Tested using the quick-search feature on eth.blockscout.com with a name requiring
+          normalization. The resolved address is correct.
+        </p>
+        <img
+          alt="Blockscout correctly resolves the deposit address of a name requiring normalization"
+          src={at2Proof.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmark,
+  "correctly-implement-ccip-read-for-eth-subnames": {
+    result: BenchmarkResults.Pass,
+    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          Tested using the quick-search feature on eth.blockscout.com. The offchain .eth subname was
+          resolved to the correct address via CCIP-Read.
+        </p>
+        <img
+          alt="Blockscout correctly resolves the deposit address of an offchain .eth subname via CCIP-Read"
+          src={at3Proof.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmark,
+  "correctly-implement-ccip-read-for-offchain-dns-names": {
+    result: BenchmarkResults.Pass,
+    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          Tested using the quick-search feature on eth.blockscout.com. The offchain DNS name was
+          resolved to the correct address via CCIP-Read.
+        </p>
+        <img
+          alt="Blockscout correctly resolves the deposit address of an offchain DNS name via CCIP-Read"
+          src={at4Proof.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmark,
+  "correctly-resolve-names-for-different-evm-chains": {
+    result: BenchmarkResults.Fail,
+    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          Tested using the quick-search feature on base.blockscout.com. The shown address was the
+          mainnet address, <i>NOT</i> the Base address of that name.
+        </p>
+        <img
+          alt="Blockscout fails to resolve the Base deposit address"
+          src={at5Proof.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmark,
+  "correctly-resolve-names-for-bitcoin": {
+    result: BenchmarkResults.NotApplicable,
+    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          The app doesn't have context of the non-EVM chain Bitcoin and therefore we classify this
+          acceptance test as{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+        </p>
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmark,
+  "correctly-resolve-names-for-solana": {
+    result: BenchmarkResults.NotApplicable,
+    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          The app doesn't have context of the non-EVM chain Solana and therefore we classify this
+          acceptance test as{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+        </p>
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmark,
+  "correctly-handle-resolution-for-chains-with-invalid-address-formatting": {
+    result: BenchmarkResults.NotApplicable,
+    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    notes: (
+      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+        <p className="w-full">
+          Based on the results of the{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>, the app
+          doesn't appear to support ENS resolution on Base and therefore we classify this acceptance
+          test as{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+        </p>
+      </div>
+    ),
+  } as const satisfies AcceptanceTestBenchmark,
 } as const satisfies AcceptanceTestBenchmarks;
 
 export default depositAddresses;
