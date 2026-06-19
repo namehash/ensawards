@@ -40,6 +40,10 @@ const contributors = {
     chainId: mainnet.id,
     address: asNormalizedAddress("0xbd4cd9ae5bff533bf4ee926eeddc3dca5e2cdb4c"),
   },
+  llev: {
+    chainId: mainnet.id,
+    address: asNormalizedAddress("0xc0de20a37e2dac848f81a93bd85fe4acdde7c0de"),
+  },
 } as const satisfies Record<ContributorAlias, Contributor>;
 
 export default contributors;
