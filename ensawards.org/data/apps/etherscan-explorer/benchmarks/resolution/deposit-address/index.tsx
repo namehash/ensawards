@@ -1,8 +1,14 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
+// for additional advice on adding and modifying apps
+
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
-import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
+import {
+  acceptanceTestDetailsContainerStyles,
+  bestPracticeTechnicalDetailsCodeStyles,
+} from "data/ens-best-practices/styles";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
@@ -116,7 +122,11 @@ const depositAddresses = {
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">Etherscan doesn't support Bitcoin.</p>
+        <p className="w-full">
+          The app doesn't have context of the non-EVM chain Bitcoin and therefore we classify this
+          acceptance test as{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+        </p>
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmark,
@@ -127,7 +137,11 @@ const depositAddresses = {
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">Etherscan doesn't support Solana.</p>
+        <p className="w-full">
+          The app doesn't have context of the non-EVM chain Solana and therefore we classify this
+          acceptance test as{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+        </p>
       </div>
     ),
   } as const satisfies AcceptanceTestBenchmark,
@@ -139,8 +153,10 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Not applicable, as Etherscan does not correctly resolve names across different EVM chains
-          in the first place.
+          Based on the results of the{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>, the app
+          doesn't appear to support ENS resolution on Base and therefore we classify this acceptance
+          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
         </p>
       </div>
     ),

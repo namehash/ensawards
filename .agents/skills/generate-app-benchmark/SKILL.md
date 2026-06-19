@@ -223,6 +223,68 @@ cd ensawards.org && pnpm astro sync && pnpm exec tsc --noEmit
 Fix any errors before finishing. The IDE may show a stale "is not a module"
 error referencing a deleted `index.ts`; `tsc` is the source of truth.
 
+## Special overrides
+
+### deposit-address
+
+When a test is `not-applicable` because a **dependent test failed** (e.g. the
+`reason` says something like "at#5 is failed"), don't write a literal note.
+Instead, derive the cause from the dependency and emit a styled note that
+references the failed acceptance test. Import
+`bestPracticeTechnicalDetailsCodeStyles` alongside
+`acceptanceTestDetailsContainerStyles` from `data/ens-best-practices/styles`.
+
+If the dependency is **Acceptance Test 1** (the app doesn't appear to support ENS
+resolution at all):
+
+```tsx
+<div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+  <p className="w-full">
+    Based on the results of the{" "}
+    <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the
+    app doesn't appear to support ENS resolution at all and therefore we classify this
+    acceptance test as{" "}
+    <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+  </p>
+</div>
+```
+
+If the dependency is the **different-EVM-chains / Base test** (Acceptance Test 5)
+that failed, reference Test 5 and say the app doesn't support resolution on Base:
+
+```tsx
+<div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
+  <p className="w-full">
+    Based on the results of the{" "}
+    <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>, the
+    app doesn't appear to support ENS resolution on Base and therefore we classify this
+    acceptance test as{" "}
+    <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+  </p>
+</div>
+```
+
+For non-EVM chains the app doesn't support, use the same styled `Not Applicable`
+treatment (no dependent-test reference):
+
+```tsx
+// Bitcoin
+<p className="w-full">
+  The app doesn't have context of the non-EVM chain Bitcoin and therefore we classify this
+  acceptance test as{" "}
+  <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+</p>
+```
+
+```tsx
+// Solana
+<p className="w-full">
+  The app doesn't have context of the non-EVM chain Solana and therefore we classify this
+  acceptance test as{" "}
+  <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+</p>
+```
+
 ## Notes
 
 - Only emit entries for ids present in `manual.json`. Other acceptance tests of
