@@ -22,8 +22,8 @@ const ensv2ReadyResolution = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENSv2 ready resolution was tested using the &quot;search&quot; flow. The resolved
-          address is <i>NOT</i> correct.
+          ENSv2 ready resolution was tested using the &quot;search&quot; flow. The resolved address
+          is <i>NOT</i> correct.
         </p>
         <img
           alt="Blockscout fails to resolve the name for ENSv2"

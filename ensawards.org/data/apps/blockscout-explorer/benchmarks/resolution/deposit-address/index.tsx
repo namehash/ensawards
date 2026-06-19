@@ -20,7 +20,9 @@ import at5Proof from "./at-5.png";
 const depositAddresses = {
   "correctly-resolve-direct-onchain-subname-address": {
     result: BenchmarkResults.Pass,
-    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
+    ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -37,7 +39,9 @@ const depositAddresses = {
   } as const satisfies AcceptanceTestBenchmark,
   "correctly-resolve-names-requiring-normalization": {
     result: BenchmarkResults.Pass,
-    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
+    ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -54,7 +58,9 @@ const depositAddresses = {
   } as const satisfies AcceptanceTestBenchmark,
   "correctly-implement-ccip-read-for-eth-subnames": {
     result: BenchmarkResults.Pass,
-    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
+    ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -71,7 +77,9 @@ const depositAddresses = {
   } as const satisfies AcceptanceTestBenchmark,
   "correctly-implement-ccip-read-for-offchain-dns-names": {
     result: BenchmarkResults.Pass,
-    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
+    ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -88,7 +96,9 @@ const depositAddresses = {
   } as const satisfies AcceptanceTestBenchmark,
   "correctly-resolve-names-for-different-evm-chains": {
     result: BenchmarkResults.Fail,
-    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
+    ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -105,7 +115,9 @@ const depositAddresses = {
   } as const satisfies AcceptanceTestBenchmark,
   "correctly-resolve-names-for-bitcoin": {
     result: BenchmarkResults.NotApplicable,
-    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
+    ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -118,7 +130,9 @@ const depositAddresses = {
   } as const satisfies AcceptanceTestBenchmark,
   "correctly-resolve-names-for-solana": {
     result: BenchmarkResults.NotApplicable,
-    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
+    ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -131,15 +145,16 @@ const depositAddresses = {
   } as const satisfies AcceptanceTestBenchmark,
   "correctly-handle-resolution-for-chains-with-invalid-address-formatting": {
     result: BenchmarkResults.NotApplicable,
-    contributions: [{ from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") }],
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
+    ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
           Based on the results of the{" "}
           <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>, the app
           doesn't appear to support ENS resolution on Base and therefore we classify this acceptance
-          test as{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
+          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
         </p>
       </div>
     ),
