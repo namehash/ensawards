@@ -228,7 +228,7 @@ For reference see [ensawards.org/data/ens-best-practices/contract-naming/name-yo
 [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts) file.
 ```typescript
 export interface BestPracticeTechnicalDetails {
-  useCaseSummary: JSX.Element;
+  ensBestPracticeOverview: JSX.Element;
   benefitFromUsingEns: JSX.Element;
   /** Title for the benefit card. Defaults to "Benefit from using ENS" when omitted. */
   benefitFromUsingEnsTitle?: string;
@@ -309,6 +309,9 @@ For reference, see [ensawards.org/data/ens-best-practices/contract-naming/name-y
       examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
       exampleFail?: AcceptanceTestBenchmarkFail;
       exampleNotApplicable?: NotApplicableAcceptanceTestBenchmark;
+
+      /** Sort priority within a {@link BestPractice}; lower comes first, undefined sorts last (then by slug). */
+      order?: number;
     }
     ```
 4. In your PR describe your reasoning for adding it.

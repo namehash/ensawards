@@ -5,16 +5,15 @@ import { defineBestPracticeCategory } from "../registry.ts";
 import type { BestPracticeCategory } from "../types.ts";
 import { CategoryStatuses } from "../types.ts";
 
-const ENSv2ReadinessCategory: BestPracticeCategory = {
-  id: "ensv2-readiness",
-  categorySlug: "ensv2-readiness",
-  name: "ENSv2 Readiness",
-  description:
-    "Be ready for ENSv2 — keep resolving and reading ENS data correctly through the upgrade and beyond.",
+const ENSResolutionCategory: BestPracticeCategory = {
+  id: "resolution",
+  categorySlug: "resolution",
+  name: "ENS Resolution",
+  description: "Correctly resolve the profiles of ENS names.",
   status: CategoryStatuses.Active,
   order: 0,
 };
 
-defineBestPracticeCategory(ENSv2ReadinessCategory);
+defineBestPracticeCategory(ENSResolutionCategory);
 
-export default ENSv2ReadinessCategory;
+export default ENSResolutionCategory;

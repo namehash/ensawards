@@ -8,6 +8,7 @@ import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
   acceptanceTestDetailsContainerStyles,
+  bestPracticeTechnicalDetailsCodeStyles,
   bestPracticeTechnicalDetailsLinkStyles,
 } from "data/ens-best-practices/styles";
 import type { BestPracticeTechnicalDetails } from "data/ens-best-practices/types";
@@ -20,7 +21,7 @@ import correctlyResolveEnsv2TestNameAddressExampleFailImage from "./images/corre
 import correctlyResolveEnsv2TestNameAddressExampleNotApplicableImage from "./images/correctly-resolve-ensv2-test-name-address-not-applicable-example.gif";
 import correctlyResolveEnsv2TestNameAddressExamplePassImage from "./images/correctly-resolve-ensv2-test-name-address-pass-example.gif";
 
-const useCaseSummary = (
+const ensBestPracticeOverview = (
   <div className="flex flex-col gap-2">
     <p>
       ENS is upgrading to{" "}
@@ -163,7 +164,7 @@ const implementationRecommendations = (
       If your app makes its own low-level RPC calls instead of using the Omnigraph or a helper
       library like viem, point your resolution RPC calls at ENS's new stable Universal Resolver
       proxy (
-      <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
+      <span className={bestPracticeTechnicalDetailsCodeStyles}>
         0xeeeeeeee14d718c2b47d9923deab1335e144eeee
       </span>
       ) rather than hardcoding a specific Universal Resolver implementation. Because ENS controls
@@ -189,11 +190,9 @@ const acceptanceTest1 = {
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
         To check whether an app has ENSv2 ready resolution, resolve the name{" "}
-        <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
-          ur.integration-tests.eth
-        </span>{" "}
-        and verify it resolves to the correct address,{" "}
-        <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
+        <span className={bestPracticeTechnicalDetailsCodeStyles}>ur.integration-tests.eth</span> and
+        verify it resolves to the correct address,{" "}
+        <span className={bestPracticeTechnicalDetailsCodeStyles}>
           0x2222222222222222222222222222222222222222
         </span>
         .
@@ -213,11 +212,9 @@ const acceptanceTest1 = {
             Rabby Wallet
           </a>{" "}
           resolves the name{" "}
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
-            ur.integration-tests.eth
-          </span>{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>ur.integration-tests.eth</span>{" "}
           to the correct address:
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>
             0x2222222222222222222222222222222222222222
           </span>
           .
@@ -239,11 +236,9 @@ const acceptanceTest1 = {
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
           An app that is <i>NOT</i> ENSv2 ready resolves the name{" "}
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
-            ur.integration-tests.eth
-          </span>{" "}
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>ur.integration-tests.eth</span>{" "}
           to an invalid address such as:{" "}
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>
             0x1111111111111111111111111111111111111111
           </span>
           .
@@ -272,10 +267,8 @@ const acceptanceTest1 = {
           <br />
           <br />
           Therefore, any app that currently doesn’t support ENS resolution at all is classified as
-          <span className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all">
-            Not Applicable
-          </span>{" "}
-          for this best practice.
+          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span> for this
+          best practice.
         </p>
         <img
           alt="Binance Wallet doesn't currently support ENS resolution at all"
@@ -288,7 +281,7 @@ const acceptanceTest1 = {
 } as const satisfies AcceptanceTest;
 
 const technicalDetails = {
-  useCaseSummary,
+  ensBestPracticeOverview,
   benefitFromUsingEnsTitle,
   benefitFromUsingEns,
   implementationRecommendations,

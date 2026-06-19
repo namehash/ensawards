@@ -8,7 +8,7 @@ import { type BestPracticeApp, BestPracticeTypes } from "data/ens-best-practices
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
-import ENSv2ReadinessCategory from "../index.ts";
+import ENSResolutionCategory from "../index.ts";
 import technicalDetails from "./technicalDetails.tsx";
 
 const ensv2ReadyResolution: BestPracticeApp = {
@@ -17,7 +17,7 @@ const ensv2ReadyResolution: BestPracticeApp = {
   bestPracticeSlug: "ensv2-ready-resolution",
   name: "Correctly Resolve All Names For ENSv2",
   description: "Make sure your app keeps resolving ENS names correctly once ENSv2 launches.",
-  category: ENSv2ReadinessCategory,
+  category: ENSResolutionCategory,
   appliesTo: [AppTypes.Wallet, AppTypes.Explorer, AppTypes.DeFi, AppTypes.Exchange],
   technicalDetails: technicalDetails,
   contributions: [
