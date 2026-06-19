@@ -310,7 +310,7 @@ For reference, see [ensawards.org/data/ens-best-practices/contract-naming/name-y
       exampleFail?: AcceptanceTestBenchmarkFail;
       exampleNotApplicable?: NotApplicableAcceptanceTestBenchmark;
 
-      /** Sort priority within a {@link BestPractice}; lower comes first, undefined sorts last (then by name). */
+      /** Sort priority within a {@link BestPractice}; lower comes first, undefined sorts last (then by slug). */
       order?: number;
     }
     ```
