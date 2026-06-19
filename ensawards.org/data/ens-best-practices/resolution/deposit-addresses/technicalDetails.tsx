@@ -16,8 +16,9 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage from "./correctly-implement-ccip-read-for-offchain-dns-names-example-fail.gif";
 import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-example-placeholder.png";
+import correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage from "./images/correctly-implement-ccip-read-for-offchain-dns-names-example-fail.gif";
+import correctlyResolveDirectOnchainSubnameAddressExampleFailImage from "./images/correctly-resolve-direct-onchain-subname-address-example-fail.gif";
 import correctlyResolveDirectOnchainSubnameAddressExamplePassImage from "./images/correctly-resolve-direct-onchain-subname-address-example-pass.gif";
 
 const ensBestPracticeOverview = (
@@ -210,7 +211,6 @@ const acceptanceTest1 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -219,8 +219,8 @@ const acceptanceTest1 = {
           than the correct value ({vitalikAddressSpan}).
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Binance Wallet doesn't allow ENS name as recipient in the send flow"
+          src={correctlyResolveDirectOnchainSubnameAddressExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
