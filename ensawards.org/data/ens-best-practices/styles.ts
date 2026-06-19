@@ -15,4 +15,4 @@ export const acceptanceTestDetailsContainerStyles =
   "flex flex-col justify-start items-center gap-3";
 
 export const bestPracticeTechnicalDetailsCodeStyles =
-  "px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap  max-[400px]:break-all";
+  "px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 font-mono text-sm min-[400px]:whitespace-nowrap max-[400px]:break-all";

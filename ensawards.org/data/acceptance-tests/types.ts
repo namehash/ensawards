@@ -48,7 +48,7 @@ export interface AcceptanceTest {
   exampleFail?: AcceptanceTestBenchmarkFail;
   exampleNotApplicable?: AcceptanceTestBenchmarkNotApplicable;
 
-  /** Sort priority within a {@link BestPractice}; lower comes first, undefined sorts last (then by name). */
+  /** Sort priority within a {@link BestPractice}; lower comes first, undefined sorts last (then by slug). */
   order?: number;
 }
 

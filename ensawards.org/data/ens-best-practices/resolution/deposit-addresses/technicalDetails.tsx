@@ -39,7 +39,7 @@ const ensBestPracticeOverview = (
     </p>
     <p>
       The simplest way to get this right—and to continuously and automatically stay up to date with
-      all ENS best practices even as ENS keeps evolving— is to use the{" "}
+      all ENS best practices even as ENS keeps evolving—is to use the{" "}
       <a
         className={bestPracticeTechnicalDetailsLinkStyles}
         href="https://ensnode.io/docs/integrate/omnigraph"
@@ -490,8 +490,9 @@ const acceptanceTest5 = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          An app fails this test when it fails to correctly resolve this input to anything other
-          than the correct value ({lightkeeperAddressSpan}).
+          An app fails this test when it does not accept ENS names such as {lightkeeperEnsNameSpan}{" "}
+          as input or fails to correctly resolve this input to anything other than the correct value
+          ({lightkeeperAddressSpan}).
         </p>
         <img
           alt="Placeholder"
