@@ -23,8 +23,8 @@ const ensv2ReadyResolution = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENSv2 ready resolution was tested for two different flows of the app: &quot;send&quot;
-          and &quot;portfolio&quot;. In both cases the resolved address is <i>NOT</i> correct.
+          ENSv2 ready resolution was tested for two different flows of the app: &quot;send&quot; and
+          &quot;portfolio&quot;. In both cases the resolved address is <i>NOT</i> correct.
         </p>
         <div className="flex flex-col justify-start items-center gap-5">
           <img
