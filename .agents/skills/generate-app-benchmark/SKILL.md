@@ -31,7 +31,8 @@ Copy this checklist and track progress:
 - [ ] Step 1: Resolve the best practice's ordered acceptance test slugs
 - [ ] Step 2: Resolve datetime (use input or current UTC time)
 - [ ] For each app:
-  - [ ] Step 3: Locate manual.json + proof images
+  - [ ] Step 3: Locate manual.json + proof media
+  - [ ] Step 3b: Normalize proof media to .png / .gif
   - [ ] Step 4: Generate the best-practice index.tsx
   - [ ] Step 5: Wire it into the app's main benchmarks/index.tsx
 - [ ] Step 6: Typecheck
@@ -50,7 +51,7 @@ ensawards.org/data/ens-best-practices/**/<best-practice-slug>/technicalDetails.t
 Grep `acceptanceTestSlug` there; the order top-to-bottom is the `id` order
 (`id: 1` → first slug, etc.).
 
-### Step 3: Locate manual.json + proof images (per app)
+### Step 3: Locate manual.json + proof media (per app)
 
 Search the app's benchmarks dir:
 
@@ -60,9 +61,52 @@ ensawards.org/data/apps/<app>/benchmarks/**/manual.json
 
 Pick the `manual.json` whose directory corresponds to the target best practice
 (directory name may differ slightly from the slug, e.g. `deposit-address` vs
-`deposit-addresses`). Proof images sit in the **same directory**, named with a
-trailing test id: `at-<id>.<ext>` or `ac-<id>.<ext>` (`.png`/`.gif`/`.jpg`).
-Match each image to a test by its id. A test may have no image.
+`deposit-addresses`). Proof media sit in the **same directory**, named with a
+trailing test id: `at-<id>.<ext>` or `ac-<id>.<ext>`. Match each file to a test
+by its id. A test may have no media. Source files can be images (`.png`, `.jpg`,
+`.webp`, ...) or screen recordings (`.mov`, `.mp4`, ...).
+
+### Step 3b: Normalize proof media to .png / .gif
+
+The benchmark file may only reference `.png` or `.gif` assets. Normalize each
+proof file `at-<id>.<ext>` in place, then `git rm` the original if its extension
+changed:
+
+| Source                                      | Action                       |
+| ------------------------------------------- | ---------------------------- |
+| `.png`                                      | keep as-is                   |
+| `.gif`                                      | keep as-is                   |
+| other image (`.jpg`/`.jpeg`/`.webp`/`.heic`/`.tiff`/`.bmp`) | convert → `at-<id>.png` |
+| video (`.mov`/`.mp4`/`.m4v`/`.webm`/`.avi`/`.mkv`)          | convert → `at-<id>.gif` |
+
+Conversions can be finicky; pick commands by OS (default to **macOS**).
+
+**Image → PNG**
+
+macOS (built-in `sips`, no install):
+
+```bash
+sips -s format png "at-1.jpg" --out "at-1.png" && git rm "at-1.jpg"
+```
+
+Windows (ImageMagick):
+
+```powershell
+magick "at-1.jpg" "at-1.png"; git rm "at-1.jpg"
+```
+
+**Video → GIF** (both OSes use `ffmpeg`; install via `brew install ffmpeg` /
+`winget install Gyan.FFmpeg` if missing):
+
+```bash
+ffmpeg -y -i "at-5.mov" \
+  -vf "fps=12,scale=800:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+  -loop 0 "at-5.gif" && git rm "at-5.mov"
+```
+
+Tune `fps` / `scale` down if the resulting `.gif` is large. After this step every
+proof file is a `.png` or `.gif`, and that final extension is what the import in
+Step 4 must reference.
 
 `manual.json` schema:
 
