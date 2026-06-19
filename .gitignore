@@ -24,3 +24,6 @@ dist
 .codex
 .vscode/mcp.json
 .claude
+
+# Manual files for benchmark skill
+ensawards.org/data/apps/*/benchmarks/**/manual.json

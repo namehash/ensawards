@@ -18,6 +18,7 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 
 import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-example-placeholder.png";
 import correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage from "./images/correctly-implement-ccip-read-for-offchain-dns-names-example-fail.gif";
+import correctlyImplementCcipReadForOffchainDnsNamesExamplePassImage from "./images/correctly-implement-ccip-read-for-offchain-dns-names-example-pass.gif";
 import correctlyResolveDirectOnchainSubnameAddressExampleFailImage from "./images/correctly-resolve-direct-onchain-subname-address-example-fail.gif";
 import correctlyResolveDirectOnchainSubnameAddressExamplePassImage from "./images/correctly-resolve-direct-onchain-subname-address-example-pass.gif";
 
@@ -42,7 +43,7 @@ const ensBestPracticeOverview = (
     </p>
     <p>
       The simplest way to get this right—and to continuously and automatically stay up to date with
-      all ENS best practices even as ENS keeps evolving— is to use the{" "}
+      all ENS best practices even as ENS keeps evolving—is to use the{" "}
       <a
         className={bestPracticeTechnicalDetailsLinkStyles}
         href="https://ensnode.io/docs/integrate/omnigraph"
@@ -399,7 +400,6 @@ const acceptanceTest4 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -407,8 +407,8 @@ const acceptanceTest4 = {
           {dperriComEnsNameSpan} to {dperriComAddressSpan}.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="WalletChan correctly resolves the address for dperri.com"
+          src={correctlyImplementCcipReadForOffchainDnsNamesExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
