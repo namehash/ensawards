@@ -67,37 +67,6 @@ const benchmarks = {
       ),
     } as const satisfies AcceptanceTestBenchmark,
   },
-  "ensv2-ready-resolution": {
-    "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
-      contributions: [
-        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T14:45:00Z") },
-      ],
-      notes: (
-        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-          <p className="w-full">
-            ENSv2 ready resolution was tested using the &quot;search&quot; flow. The resolved
-            address is <i>NOT</i> correct.
-          </p>
-          <img
-            alt="Etherscan fails to resolve the name for ENSv2"
-            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
-            className="w-auto h-full max-h-[325px] rounded-xl"
-          />
-        </div>
-      ),
-    } as const satisfies AcceptanceTestBenchmark,
-  },
-  "deposit-addresses": {
-    "correctly-resolve-direct-onchain-subname-address": undefined,
-    "correctly-resolve-names-requiring-normalization": undefined,
-    "correctly-implement-ccip-read-for-eth-subnames": undefined,
-    "correctly-implement-ccip-read-for-offchain-dns-names": undefined,
-    "correctly-resolve-names-for-different-evm-chains": undefined,
-    "correctly-resolve-names-for-bitcoin": undefined,
-    "correctly-resolve-names-for-solana": undefined,
-    "correctly-handle-resolution-for-chains-with-invalid-address-formatting": undefined,
-  },
 } as const satisfies BestPracticeBenchmarks;
 
 defineAppBenchmarks(EtherscanExplorer, benchmarks);
