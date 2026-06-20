@@ -48,8 +48,7 @@ practice's technical details:
 ensawards.org/data/ens-best-practices/**/<best-practice-slug>/technicalDetails.tsx
 ```
 
-Grep `acceptanceTestSlug` there; the order top-to-bottom is the `id` order
-(`id: 1` → first slug, etc.).
+Sort the acceptance tests by `order` (slug as the tiebreaker) before mapping `manual.json` ids to slugs.
 
 While reading that file, also note the **canonical ENS name and expected
 address** each acceptance test exercises. These are defined as exported `*Span`
@@ -93,10 +92,10 @@ The benchmark file may only reference `.png` or `.gif` assets. Normalize each
 proof file `at-<id>.<ext>` in place, then `git rm` the original if its extension
 changed:
 
-| Source                                      | Action                       |
-| ------------------------------------------- | ---------------------------- |
-| `.png`                                      | keep as-is                   |
-| `.gif`                                      | keep as-is                   |
+| Source                                                      | Action                  |
+| ----------------------------------------------------------- | ----------------------- |
+| `.png`                                                      | keep as-is              |
+| `.gif`                                                      | keep as-is              |
 | other image (`.jpg`/`.jpeg`/`.webp`/`.heic`/`.tiff`/`.bmp`) | convert → `at-<id>.png` |
 | video (`.mov`/`.mp4`/`.m4v`/`.webm`/`.avi`/`.mkv`)          | convert → `at-<id>.gif` |
 

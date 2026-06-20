@@ -127,9 +127,9 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the &quot;quick-search&quot; feature on base.blockscout.com. For{" "}
-          {lightkeeperEnsNameSpan} the shown address was the mainnet address, <i>NOT</i> the
-          expected Base chain address ({lightkeeperAddressSpan}).
+          Tested using the &quot;send&quot; feature of ETH on base network on main page of 1inch.com
+          with connected EVM wallet. For {lightkeeperEnsNameSpan} the shown address was the mainnet
+          address, <i>NOT</i> the expected Base chain address ({lightkeeperAddressSpan}).
         </p>
         <img
           alt="1inch fails to resolve the Base deposit address"

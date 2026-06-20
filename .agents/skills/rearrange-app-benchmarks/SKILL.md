@@ -48,9 +48,7 @@ the same directory.
 ### Step 2: Extract `ensv2-ready-resolution` (only if the key exists)
 
 1. Create `benchmarks/resolution/ensv2-ready-resolution/`.
-2. Move the proof image(s) imported by this block into that directory, renamed
-   `ac-1.png`, `ac-2.png`, ... (keep the original extension), using `git mv` to
-   preserve history.
+2.  Move the proof image(s) imported by this block into that directory, renamed `ac-1.<original-ext>`, `ac-2.<original-ext>`, ... using `git mv` to preserve history.
 3. Create `benchmarks/resolution/ensv2-ready-resolution/index.tsx` that
    `export default`s the **same** benchmark object, copied **verbatim** (results,
    contributions, notes, alt text unchanged). Update the proof image import(s) to
