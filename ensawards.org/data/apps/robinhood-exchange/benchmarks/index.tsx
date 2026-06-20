@@ -52,14 +52,14 @@ const benchmarks: BestPracticeBenchmarks = {
     } as const satisfies AcceptanceTestBenchmark,
   },
   "deposit-addresses": {
-    "correctly-resolve-direct-onchain-subname-address": undefined,
-    "correctly-resolve-names-requiring-normalization": undefined,
-    "correctly-implement-ccip-read-for-eth-subnames": undefined,
-    "correctly-implement-ccip-read-for-offchain-dns-names": undefined,
-    "correctly-resolve-names-for-different-evm-chains": undefined,
-    "correctly-resolve-names-for-bitcoin": undefined,
-    "correctly-resolve-names-for-solana": undefined,
-    "correctly-handle-resolution-for-chains-with-invalid-address-formatting": undefined,
+    "at01-resolve-onchain-name": undefined,
+    "at02-resolve-name-needing-normalization": undefined,
+    "at03-resolve-offchain-eth-subname": undefined,
+    "at04-resolve-offchain-dns-name": undefined,
+    "at05-resolve-name-on-other-evm-chain": undefined,
+    "at06-resolve-bitcoin-address": undefined,
+    "at07-resolve-solana-address": undefined,
+    "at08-handle-invalid-address-format": undefined,
   },
 };
 

@@ -471,7 +471,43 @@ export type AcceptanceTestBenchmark =
   | NotApplicableAcceptanceTestBenchmark;
 ```
 
-3. Add notes made during the benchmarking process in the form of a simple JSX element that is a part of the new item in the `benchmarks` record. For reference, see 
+3. Add notes describing how the benchmark result was determined. The `notes` field is a JSX element, but for most best practices you should **not** hand-write the markup.
+
+#### Use a best practice's note builders (preferred)
+
+Many best practices ship a `notes.tsx` module next to their `technicalDetails.tsx`:
+
+```
+ensawards.org/data/ens-best-practices/[category]/[bestPractice]/notes.tsx
+```
+
+When one exists, generate your notes with these builder functions instead of writing `<div>`/`<p>`/`<img>` by hand. Every acceptance test always exercises the same ENS name, expected address, and chain, so the builders bake those in for you — you only supply what actually varies per app: how you tested it (`method`) and the proof screenshot(s) (`proof`). This keeps notes consistent and accurate, and makes them easy to update later.
+
+For example, the `deposit-addresses` best practice (see [ensawards.org/data/ens-best-practices/resolution/deposit-addresses/notes.tsx](ensawards.org/data/ens-best-practices/resolution/deposit-addresses/notes.tsx)) exports builders such as `buildPassNoteForAT1`, `buildFailNoteForAT5`, `buildEnsNotSupportedNote`, `buildNotApplicableForNonEvmChain`, and `buildNotApplicableForFailedTest`. A benchmark entry then reads:
+
+```tsx
+import {
+  buildFailNoteForAT5,
+  buildPassNoteForAT1,
+} from "data/ens-best-practices/resolution/deposit-addresses/notes";
+
+// ...
+
+"at01-resolve-onchain-name": {
+  result: BenchmarkResults.Pass,
+  contributions: [{ from: contributors.you, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") }],
+  notes: buildPassNoteForAT1({
+    method: 'the "send" flow',
+    proof: { image: at1Proof, alt: "MyApp correctly resolves the address for vitalik.eth" },
+  }),
+},
+```
+
+The `fail` builders also accept an optional `extra` sentence for app-specific detail, and there's a `buildBenchmarkNote` escape hatch for the rare result no builder covers. For full per-app references see [ensawards.org/data/apps/etherscan-explorer/benchmarks/resolution/deposit-address/index.tsx](ensawards.org/data/apps/etherscan-explorer/benchmarks/resolution/deposit-address/index.tsx) and [ensawards.org/data/apps/zerion-wallet/benchmarks/resolution/deposit-addresses/index.tsx](ensawards.org/data/apps/zerion-wallet/benchmarks/resolution/deposit-addresses/index.tsx).
+
+#### Writing notes by hand (when there's no `notes.tsx`)
+
+If the relevant best practice doesn't provide note builders, write the `notes` JSX element directly as part of the new item in the `benchmarks` record. For reference, see 
 [ensawards.org/data/apps/walletchan-wallet/benchmarks/index.tsx](ensawards.org/data/apps/walletchan-wallet/benchmarks/index.tsx).
 
 

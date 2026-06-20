@@ -1,32 +1,19 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
 // for additional advice on adding and modifying app benchmarks
 
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
-  dperriComAddressSpan,
-  dperriComEnsNameSpan,
-  ethereumAddressSpan,
-  ethereumNormalizedEnsNameSpan,
-  ethereumUnnormalizedEnsNameSpan,
-  gregskrilAddressSolanaSpan,
-  gregskrilEnsNameSpan,
-  jesseBaseAddressSpan,
-  jesseBaseEnsNameSpan,
-  lightkeeperAddressSpan,
-  lightkeeperEnsNameSpan,
-  vitalikAddressSpan,
-  vitalikEnsNameSpan,
-} from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
-import {
-  acceptanceTestDetailsContainerStyles,
-  bestPracticeTechnicalDetailsCodeStyles,
-} from "data/ens-best-practices/styles";
+  buildFailNoteForAT4,
+  buildFailNoteForAT5,
+  buildFailNoteForAT7,
+  buildNotApplicableForFailedTest,
+  buildPassNoteForAT1,
+  buildPassNoteForAT2,
+  buildPassNoteForAT3,
+} from "data/ens-best-practices/resolution/deposit-addresses/notes";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
-
-import { cn } from "@/utils/tailwindClassConcatenation";
 
 import at1Proof from "./at-1.gif";
 import at2Proof from "./at-2.gif";
@@ -35,144 +22,95 @@ import at4Proof from "./at-4.gif";
 import at5Proof from "./at-5.gif";
 import at7Proof from "./at-7.gif";
 
+const method = 'the "send" flow';
+
 const depositAddresses = {
-  "correctly-resolve-direct-onchain-subname-address": {
+  "at01-resolve-onchain-name": {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T10:17:33Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The resolved Ethereum Mainnet
-          address of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
-        </p>
-        <img
-          alt="Coinbase Wallet correctly resolves the address for vitalik.eth"
-          src={at1Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-requiring-normalization": {
+    notes: buildPassNoteForAT1({
+      method,
+      proof: {
+        image: at1Proof,
+        alt: "Coinbase Wallet correctly resolves the address for vitalik.eth",
+      },
+    }),
+  },
+  "at02-resolve-name-needing-normalization": {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T10:19:15Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The input{" "}
-          {ethereumUnnormalizedEnsNameSpan} was correctly normalized to{" "}
-          {ethereumNormalizedEnsNameSpan} and resolved to the correct Ethereum Mainnet address (
-          {ethereumAddressSpan}).
-        </p>
-        <img
-          alt="Coinbase Wallet correctly resolves the address for Ξthereum.eth"
-          src={at2Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-implement-ccip-read-for-eth-subnames": {
+    notes: buildPassNoteForAT2({
+      method,
+      proof: {
+        image: at2Proof,
+        alt: "Coinbase Wallet correctly resolves the address for Ξthereum.eth",
+      },
+    }),
+  },
+  "at03-resolve-offchain-eth-subname": {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T10:20:22Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The CCIP-Read enabled .eth
-          subname {jesseBaseEnsNameSpan} resolved to the correct Ethereum Mainnet address (
-          {jesseBaseAddressSpan}).
-        </p>
-        <img
-          alt="Coinbase Wallet correctly resolves the address for jesse.base.eth"
-          src={at3Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-implement-ccip-read-for-offchain-dns-names": {
+    notes: buildPassNoteForAT3({
+      method,
+      proof: {
+        image: at3Proof,
+        alt: "Coinbase Wallet correctly resolves the address for jesse.base.eth",
+      },
+    }),
+  },
+  "at04-resolve-offchain-dns-name": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T10:22:06Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The offchain DNS name{" "}
-          {dperriComEnsNameSpan} was <i>NOT</i> resolved to its expected Ethereum Mainnet address (
-          {dperriComAddressSpan}).
-        </p>
-        <img
-          alt="Coinbase Wallet fails to resolve the address for dperri.com"
-          src={at4Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-different-evm-chains": {
+    notes: buildFailNoteForAT4({
+      method,
+      proof: {
+        image: at4Proof,
+        alt: "Coinbase Wallet fails to resolve the address for dperri.com",
+      },
+    }),
+  },
+  "at05-resolve-name-on-other-evm-chain": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T10:26:55Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow in context of the Base chain.
-          For {lightkeeperEnsNameSpan} the resolved address is <i>NOT</i> the expected Base chain
-          address ({lightkeeperAddressSpan}).
-        </p>
-        <img
-          alt="Coinbase Wallet fails to resolve the address for lightkeeper.eth in context of the Base chain"
-          src={at5Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-bitcoin": undefined, // TODO: Had trouble testing this, skipped not to waste more time, need help
-  "correctly-resolve-names-for-solana": {
+    notes: buildFailNoteForAT5({
+      method,
+      proof: {
+        image: at5Proof,
+        alt: "Coinbase Wallet fails to resolve the address for lightkeeper.eth in context of the Base chain",
+      },
+    }),
+  },
+  "at06-resolve-bitcoin-address": undefined, // TODO: Had trouble testing this, skipped not to waste more time, need help
+  "at07-resolve-solana-address": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T11:35:34Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. For {gregskrilEnsNameSpan} the
-          app <i>FAILS</i> to resolve the expected Solana address ({gregskrilAddressSolanaSpan}).
-        </p>
-        <img
-          alt="Coinbase Wallet fails to resolve the Solana address for gregskril.eth"
-          src={at7Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-handle-resolution-for-chains-with-invalid-address-formatting": {
+    notes: buildFailNoteForAT7({
+      method,
+      proof: {
+        image: at7Proof,
+        alt: "Coinbase Wallet fails to resolve the Solana address for gregskril.eth",
+      },
+    }),
+  },
+  "at08-handle-invalid-address-format": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T11:51:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>, the app
-          doesn't appear to support ENS resolution on Base at all and therefore we classify this
-          acceptance test as{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
+    notes: buildNotApplicableForFailedTest({ testNumber: 5, scope: "on Base" }),
+  },
 } as const satisfies AcceptanceTestBenchmarks;
 
 export default depositAddresses;

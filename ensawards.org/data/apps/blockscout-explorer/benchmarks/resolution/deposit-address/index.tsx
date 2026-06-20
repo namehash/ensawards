@@ -1,28 +1,20 @@
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
+// for additional advice on adding and modifying apps
+
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
-  dperriComAddressSpan,
-  dperriComEnsNameSpan,
-  ethereumAddressSpan,
-  ethereumNormalizedEnsNameSpan,
-  ethereumUnnormalizedEnsNameSpan,
-  jesseBaseAddressSpan,
-  jesseBaseEnsNameSpan,
-  lightkeeperAddressSpan,
-  lightkeeperEnsNameSpan,
-  vitalikAddressSpan,
-  vitalikEnsNameSpan,
-} from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
-import {
-  acceptanceTestDetailsContainerStyles,
-  bestPracticeTechnicalDetailsCodeStyles,
-} from "data/ens-best-practices/styles";
+  buildFailNoteForAT5,
+  buildNotApplicableForFailedTest,
+  buildNotApplicableForNonEvmChain,
+  buildPassNoteForAT1,
+  buildPassNoteForAT2,
+  buildPassNoteForAT3,
+  buildPassNoteForAT4,
+} from "data/ens-best-practices/resolution/deposit-addresses/notes";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
-
-import { cn } from "@/utils/tailwindClassConcatenation";
 
 import at1Proof from "./at-1.png";
 import at2Proof from "./at-2.png";
@@ -31,152 +23,90 @@ import at4Proof from "./at-4.png";
 import at5Proof from "./at-5.png";
 
 const depositAddresses = {
-  "correctly-resolve-direct-onchain-subname-address": {
+  "at01-resolve-onchain-name": {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Tested using the quick-search feature on the main page of eth.blockscout.com. The resolved
-          Ethereum Mainnet address of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
-        </p>
-        <img
-          alt="Blockscout correctly resolves the deposit address of a direct onchain name"
-          src={at1Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-requiring-normalization": {
+    notes: buildPassNoteForAT1({
+      method: "the quick-search feature on the main page of eth.blockscout.com",
+      proof: {
+        image: at1Proof,
+        alt: "Blockscout correctly resolves the deposit address of a direct onchain name",
+      },
+    }),
+  },
+  "at02-resolve-name-needing-normalization": {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Tested using the quick-search feature on eth.blockscout.com. The input{" "}
-          {ethereumUnnormalizedEnsNameSpan} was correctly normalized to{" "}
-          {ethereumNormalizedEnsNameSpan} and resolved to the correct Ethereum Mainnet address (
-          {ethereumAddressSpan}).
-        </p>
-        <img
-          alt="Blockscout correctly resolves the deposit address of a name requiring normalization"
-          src={at2Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-implement-ccip-read-for-eth-subnames": {
+    notes: buildPassNoteForAT2({
+      method: "the quick-search feature on eth.blockscout.com",
+      proof: {
+        image: at2Proof,
+        alt: "Blockscout correctly resolves the deposit address of a name requiring normalization",
+      },
+    }),
+  },
+  "at03-resolve-offchain-eth-subname": {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Tested using the quick-search feature on eth.blockscout.com. The CCIP-Read enabled .eth
-          subname {jesseBaseEnsNameSpan} resolved to the correct Ethereum Mainnet address (
-          {jesseBaseAddressSpan}).
-        </p>
-        <img
-          alt="Blockscout correctly resolves the deposit address of an offchain .eth subname via CCIP-Read"
-          src={at3Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-implement-ccip-read-for-offchain-dns-names": {
+    notes: buildPassNoteForAT3({
+      method: "the quick-search feature on eth.blockscout.com",
+      proof: {
+        image: at3Proof,
+        alt: "Blockscout correctly resolves the deposit address of an offchain .eth subname via CCIP-Read",
+      },
+    }),
+  },
+  "at04-resolve-offchain-dns-name": {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Tested using the quick-search feature on eth.blockscout.com. The offchain DNS name{" "}
-          {dperriComEnsNameSpan} resolved to the correct Ethereum Mainnet address via CCIP-Read (
-          {dperriComAddressSpan}).
-        </p>
-        <img
-          alt="Blockscout correctly resolves the deposit address of an offchain DNS name via CCIP-Read"
-          src={at4Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-different-evm-chains": {
+    notes: buildPassNoteForAT4({
+      method: "the quick-search feature on eth.blockscout.com",
+      proof: {
+        image: at4Proof,
+        alt: "Blockscout correctly resolves the deposit address of an offchain DNS name via CCIP-Read",
+      },
+    }),
+  },
+  "at05-resolve-name-on-other-evm-chain": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Tested using the quick-search feature on base.blockscout.com. For {lightkeeperEnsNameSpan}{" "}
-          the shown address was the mainnet address, <i>NOT</i> the expected Base chain address (
-          {lightkeeperAddressSpan}).
-        </p>
-        <img
-          alt="Blockscout fails to resolve the Base deposit address"
-          src={at5Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-bitcoin": {
+    notes: buildFailNoteForAT5({
+      method: "the quick-search feature on base.blockscout.com",
+      proof: { image: at5Proof, alt: "Blockscout fails to resolve the Base deposit address" },
+      extra: "The app showed the Ethereum Mainnet address instead.",
+    }),
+  },
+  "at06-resolve-bitcoin-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          The app doesn't have context of the non-EVM chain Bitcoin and therefore we classify this
-          acceptance test as{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-solana": {
+    notes: buildNotApplicableForNonEvmChain({ chain: "Bitcoin" }),
+  },
+  "at07-resolve-solana-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          The app doesn't have context of the non-EVM chain Solana and therefore we classify this
-          acceptance test as{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-handle-resolution-for-chains-with-invalid-address-formatting": {
+    notes: buildNotApplicableForNonEvmChain({ chain: "Solana" }),
+  },
+  "at08-handle-invalid-address-format": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>, the app
-          doesn't appear to support ENS resolution on Base and therefore we classify this acceptance
-          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
+    notes: buildNotApplicableForFailedTest({ testNumber: 5, scope: "on Base" }),
+  },
 } as const satisfies AcceptanceTestBenchmarks;
 
 export default depositAddresses;
