@@ -12,9 +12,10 @@ import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
-
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
-import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.png";
+
+import depositAddresses from "./resolution/deposit-address";
+import ensv2ReadyResolution from "./resolution/ensv2-ready-resolution";
 
 const benchmarks = {
   // "recognize-all-ens-names": {
@@ -23,6 +24,9 @@ const benchmarks = {
   //     { from: contributors.stevedylan, lastUpdated: parseTimestamp("2025-12-03T14:00:00Z") },
   //   ],
   // },
+
+  "ensv2-ready-resolution": ensv2ReadyResolution,
+  "deposit-addresses": depositAddresses,
 
   // TODO: `Contract Naming` category is temporarily hidden due to unfit content,
   // and so are all benchmarks belonging to it.
@@ -63,37 +67,6 @@ const benchmarks = {
         </div>
       ),
     } as const satisfies AcceptanceTestBenchmark,
-  },
-  "ensv2-ready-resolution": {
-    "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Fail,
-      contributions: [
-        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T15:12:00Z") },
-      ],
-      notes: (
-        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-          <p className="w-full">
-            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The resolved address
-            is <i>NOT</i> correct.
-          </p>
-          <img
-            alt="Rainbow Wallet fails to resolve the name for ENSv2"
-            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
-            className="w-auto h-full max-h-[325px] rounded-xl"
-          />
-        </div>
-      ),
-    } as const satisfies AcceptanceTestBenchmark,
-  },
-  "deposit-addresses": {
-    "at01-resolve-onchain-name": undefined,
-    "at02-resolve-name-needing-normalization": undefined,
-    "at03-resolve-offchain-eth-subname": undefined,
-    "at04-resolve-offchain-dns-name": undefined,
-    "at05-resolve-name-on-other-evm-chain": undefined,
-    "at06-resolve-bitcoin-address": undefined,
-    "at07-resolve-solana-address": undefined,
-    "at08-handle-invalid-address-format": undefined,
   },
 } as const satisfies BestPracticeBenchmarks;
 
