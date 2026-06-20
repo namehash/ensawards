@@ -101,8 +101,9 @@ const depositAddresses = {
       },
       children: (
         <>
-          The app has Solana context but shows message "Send is not supported on Solana" so there is no way to test this scenario.
-          Therefore we classify this acceptance test as Not Applicable.
+          The app has Solana context but shows message "Send is not supported on Solana" so there is
+          no way to test this scenario. Therefore we classify this acceptance test as Not
+          Applicable.
         </>
       ),
     }),
