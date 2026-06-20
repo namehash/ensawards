@@ -12,8 +12,8 @@ import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
-import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 
+import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
 import depositAddresses from "./resolution/deposit-address";
 import ensv2ReadyResolution from "./resolution/ensv2-ready-resolution";
 
