@@ -29,7 +29,8 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import at1Proof from "./at-1.png";
-import at2Proof from "./at-2.png";
+import at2_1Proof from "./at-2.1.png";
+import at2_2Proof from "./at-2.2.png";
 import at3Proof from "./at-3.png";
 import at4Proof from "./at-4.png";
 import at5Proof from "./at-5.png";
@@ -66,13 +67,20 @@ const depositAddresses = {
         <p className="w-full">
           ENS resolution was tested using the &quot;send&quot; flow. For{" "}
           {ethereumUnnormalizedEnsNameSpan} (normalized to {ethereumNormalizedEnsNameSpan}) the
-          resolved Ethereum Mainnet address is correct ({ethereumAddressSpan}), but the app
-          associates a completely different ENS name with this address, which we interpret as a
-          failure.
+          resolved Ethereum Mainnet address is correct ({ethereumAddressSpan}), but the app behaves
+          inconsistently when displaying the resolved name. Repeated attempts produce different
+          outcomes: sometimes it associates a completely different ENS name with this address,
+          sometimes it shows &quot;No Result Found&quot; for the entered name. Every observed
+          outcome is incorrect, so we count this as a failure.
         </p>
         <img
           alt="Zerion correctly resolves the address for Ξthereum.eth, but associates a different ENS name with this address"
-          src={at2Proof.src}
+          src={at2_1Proof.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+        <img
+          alt="Zerion sometimes shows No Result Found when resolving Ξthereum.eth"
+          src={at2_2Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
