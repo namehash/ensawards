@@ -17,6 +17,10 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-example-placeholder.png";
+import correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage from "./images/correctly-implement-ccip-read-for-offchain-dns-names-example-fail.gif";
+import correctlyImplementCcipReadForOffchainDnsNamesExamplePassImage from "./images/correctly-implement-ccip-read-for-offchain-dns-names-example-pass.gif";
+import correctlyResolveDirectOnchainSubnameAddressExampleFailImage from "./images/correctly-resolve-direct-onchain-subname-address-example-fail.gif";
+import correctlyResolveDirectOnchainSubnameAddressExamplePassImage from "./images/correctly-resolve-direct-onchain-subname-address-example-pass.gif";
 
 const ensBestPracticeOverview = (
   <div className="flex flex-col gap-2">
@@ -187,8 +191,8 @@ const acceptanceTest1 = {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T08:48:26Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -196,8 +200,8 @@ const acceptanceTest1 = {
           {vitalikEnsNameSpan} to {vitalikAddressSpan}.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Ambire Wallet correctly resolves the address for vitalik.eth"
+          src={correctlyResolveDirectOnchainSubnameAddressExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -208,7 +212,6 @@ const acceptanceTest1 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -217,8 +220,8 @@ const acceptanceTest1 = {
           than the correct value ({vitalikAddressSpan}).
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Binance Wallet doesn't allow ENS name as recipient in the send flow"
+          src={correctlyResolveDirectOnchainSubnameAddressExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -397,7 +400,6 @@ const acceptanceTest4 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -405,8 +407,8 @@ const acceptanceTest4 = {
           {dperriComEnsNameSpan} to {dperriComAddressSpan}.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="WalletChan correctly resolves the address for dperri.com"
+          src={correctlyImplementCcipReadForOffchainDnsNamesExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -417,7 +419,6 @@ const acceptanceTest4 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -426,8 +427,8 @@ const acceptanceTest4 = {
           {dperriComAddressSpan}).
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Ambire Wallet fails to resolve the address for dperri.com"
+          src={correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -490,9 +491,8 @@ const acceptanceTest5 = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          An app fails this test when it does not accept ENS names such as {lightkeeperEnsNameSpan}{" "}
-          as input or fails to correctly resolve this input to anything other than the correct value
-          ({lightkeeperAddressSpan}).
+          An app fails this test when it fails to correctly resolve this input to anything other
+          than the correct value ({lightkeeperAddressSpan}).
         </p>
         <img
           alt="Placeholder"
