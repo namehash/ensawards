@@ -76,9 +76,9 @@ export function buildBenchmarkNote({
       <p className="w-full">{children}</p>
       {proofs.length > 0 && (
         <div className="flex flex-col justify-start items-center gap-5">
-          {proofs.map((proofItem) => (
+          {proofs.map((proofItem, index) => (
             <img
-              key={proofItem.alt}
+              key={index}
               alt={proofItem.alt}
               src={proofItem.image.src}
               className="w-auto h-full max-h-[325px] rounded-xl"
