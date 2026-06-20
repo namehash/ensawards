@@ -62,6 +62,20 @@ const depositAddresses = {
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
   },
+  "at07-resolve-solana-address": {
+    result: BenchmarkResults.NotApplicable,
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-20T17:47:02Z") },
+    ],
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
+  "at08-handle-invalid-address-format": {
+    result: BenchmarkResults.NotApplicable,
+    contributions: [
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-20T17:47:02Z") },
+    ],
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
 } as const satisfies AcceptanceTestBenchmarks;
 
 export default depositAddresses;
