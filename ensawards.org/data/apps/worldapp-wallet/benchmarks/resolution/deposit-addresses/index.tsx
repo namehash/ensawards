@@ -1,166 +1,87 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
 // for additional advice on adding and modifying app benchmarks
 
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
-  vitalikAddressSpan,
-  vitalikEnsNameSpan,
-} from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
-import {
-  acceptanceTestDetailsContainerStyles,
-  bestPracticeTechnicalDetailsCodeStyles,
-} from "data/ens-best-practices/styles";
+  buildEnsNotSupportedNote,
+  buildNotApplicableForFailedTest,
+} from "data/ens-best-practices/resolution/deposit-addresses/notes";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
-
-import { cn } from "@/utils/tailwindClassConcatenation";
 
 import at1Proof1 from "./at-1-1.png";
 import at1Proof2 from "./at-1-2.png";
 
 const depositAddresses = {
-  "correctly-resolve-direct-onchain-subname-address": {
+  "at01-resolve-onchain-name": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T13:45:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow with {vitalikEnsNameSpan}. The
-          wallet doesn't support the use of ENS names at all as the recipient identifier, so it
-          never resolves the expected Ethereum Mainnet address ({vitalikAddressSpan}), which we
-          classify as a failure.
-        </p>
-        <div className="flex flex-row flex-wrap justify-center items-start gap-5">
-          <img
-            alt="World App's wallet doesn't allow ENS name as recipient in the send flow, part 1"
-            src={at1Proof1.src}
-            className="w-auto h-full max-h-[325px] md:max-w-[calc(50%-10px)] rounded-xl"
-          />
-          <img
-            alt="World App's wallet doesn't allow ENS name as recipient in the send flow, part 2"
-            src={at1Proof2.src}
-            className="w-auto h-full max-h-[325px] md:max-w-[calc(50%-10px)] rounded-xl"
-          />
-        </div>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-requiring-normalization": {
+    notes: buildEnsNotSupportedNote({
+      method: 'the "send" flow',
+      proof: [
+        {
+          image: at1Proof1,
+          alt: "World App's wallet doesn't allow ENS name as recipient in the send flow, part 1",
+        },
+        {
+          image: at1Proof2,
+          alt: "World App's wallet doesn't allow ENS name as recipient in the send flow, part 2",
+        },
+      ],
+    }),
+  },
+  "at02-resolve-name-needing-normalization": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T13:32:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the app
-          doesn't appear to support ENS resolution at all and therefore we classify this acceptance
-          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-implement-ccip-read-for-eth-subnames": {
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
+  "at03-resolve-offchain-eth-subname": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T13:32:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the app
-          doesn't appear to support ENS resolution at all and therefore we classify this acceptance
-          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-implement-ccip-read-for-offchain-dns-names": {
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
+  "at04-resolve-offchain-dns-name": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T13:32:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the app
-          doesn't appear to support ENS resolution at all and therefore we classify this acceptance
-          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-different-evm-chains": {
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
+  "at05-resolve-name-on-other-evm-chain": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T13:32:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the app
-          doesn't appear to support ENS resolution at all and therefore we classify this acceptance
-          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-bitcoin": {
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
+  "at06-resolve-bitcoin-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T13:33:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the app
-          doesn't appear to support ENS resolution at all and therefore we classify this acceptance
-          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-solana": {
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
+  "at07-resolve-solana-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T13:33:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the app
-          doesn't appear to support ENS resolution at all and therefore we classify this acceptance
-          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-handle-resolution-for-chains-with-invalid-address-formatting": {
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
+  "at08-handle-invalid-address-format": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T13:33:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the app
-          doesn't appear to support ENS resolution at all and therefore we classify this acceptance
-          test as <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
+  },
 } as const satisfies AcceptanceTestBenchmarks;
 
 export default depositAddresses;

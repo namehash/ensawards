@@ -17,10 +17,10 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-example-placeholder.png";
-import correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage from "./images/correctly-implement-ccip-read-for-offchain-dns-names-example-fail.gif";
-import correctlyImplementCcipReadForOffchainDnsNamesExamplePassImage from "./images/correctly-implement-ccip-read-for-offchain-dns-names-example-pass.gif";
-import correctlyResolveDirectOnchainSubnameAddressExampleFailImage from "./images/correctly-resolve-direct-onchain-subname-address-example-fail.gif";
-import correctlyResolveDirectOnchainSubnameAddressExamplePassImage from "./images/correctly-resolve-direct-onchain-subname-address-example-pass.gif";
+import correctlyResolveDirectOnchainSubnameAddressExampleFailImage from "./images/at01-resolve-onchain-name-example-fail.gif";
+import correctlyResolveDirectOnchainSubnameAddressExamplePassImage from "./images/at01-resolve-onchain-name-example-pass.gif";
+import correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage from "./images/at04-resolve-offchain-dns-name-example-fail.gif";
+import correctlyImplementCcipReadForOffchainDnsNamesExamplePassImage from "./images/at04-resolve-offchain-dns-name-example-pass.gif";
 
 const ensBestPracticeOverview = (
   <div className="flex flex-col gap-2">
@@ -176,7 +176,7 @@ export const vitalikAddressSpan = (
 
 const acceptanceTest1 = {
   order: 0,
-  acceptanceTestSlug: "correctly-resolve-direct-onchain-subname-address",
+  acceptanceTestSlug: "at01-resolve-onchain-name",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
@@ -245,7 +245,7 @@ export const ethereumAddressSpan = (
 
 const acceptanceTest2 = {
   order: 1,
-  acceptanceTestSlug: "correctly-resolve-names-requiring-normalization",
+  acceptanceTestSlug: "at02-resolve-name-needing-normalization",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
@@ -316,7 +316,7 @@ export const jesseBaseAddressSpan = (
 
 const acceptanceTest3 = {
   order: 2,
-  acceptanceTestSlug: "correctly-implement-ccip-read-for-eth-subnames",
+  acceptanceTestSlug: "at03-resolve-offchain-eth-subname",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
@@ -383,7 +383,7 @@ export const dperriComAddressSpan = (
 
 const acceptanceTest4 = {
   order: 3,
-  acceptanceTestSlug: "correctly-implement-ccip-read-for-offchain-dns-names",
+  acceptanceTestSlug: "at04-resolve-offchain-dns-name",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
@@ -448,7 +448,7 @@ export const lightkeeperAddressSpan = (
 
 const acceptanceTest5 = {
   order: 4,
-  acceptanceTestSlug: "correctly-resolve-names-for-different-evm-chains",
+  acceptanceTestSlug: "at05-resolve-name-on-other-evm-chain",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
@@ -514,7 +514,7 @@ export const gregskrilAddressBitcoinSpan = (
 
 const acceptanceTest6 = {
   order: 5,
-  acceptanceTestSlug: "correctly-resolve-names-for-bitcoin",
+  acceptanceTestSlug: "at06-resolve-bitcoin-address",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
@@ -579,7 +579,7 @@ export const gregskrilAddressSolanaSpan = (
 
 const acceptanceTest7 = {
   order: 6,
-  acceptanceTestSlug: "correctly-resolve-names-for-solana",
+  acceptanceTestSlug: "at07-resolve-solana-address",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">
@@ -648,7 +648,7 @@ export const zissouAddressSpan = (
 
 const acceptanceTest8 = {
   order: 7,
-  acceptanceTestSlug: "correctly-handle-resolution-for-chains-with-invalid-address-formatting",
+  acceptanceTestSlug: "at08-handle-invalid-address-format",
   description: (
     <div className={acceptanceTestDetailsContainerStyles}>
       <p className="w-full">

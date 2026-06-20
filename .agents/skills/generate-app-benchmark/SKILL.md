@@ -38,7 +38,7 @@ Copy this checklist and track progress:
 - [ ] Step 6: Typecheck
 ```
 
-### Step 1: Resolve acceptance test slugs + canonical name/address spans (once)
+### Step 1: Resolve acceptance test slugs + note builders (once)
 
 The `manual.json` test `id`s map **positionally** (1-based) to the best
 practice's acceptance tests, in declaration order. Read them from the best
@@ -50,26 +50,41 @@ ensawards.org/data/ens-best-practices/**/<best-practice-slug>/technicalDetails.t
 
 Sort the acceptance tests by `order` (slug as the tiebreaker) before mapping `manual.json` ids to slugs.
 
-While reading that file, also note the **canonical ENS name and expected
-address** each acceptance test exercises. These are defined as exported `*Span`
-constants (e.g. `vitalikEnsNameSpan`, `vitalikAddressSpan`,
-`lightkeeperEnsNameSpan`, `lightkeeperAddressSpan`, ...) that render the name /
-address in the correct code style. The benchmark notes **must** reference these
-exported spans rather than vague phrasing — import them from the best practice's
-`technicalDetails` module:
+#### Prefer the best practice's shared note builders
 
-```tsx
-import {
-  vitalikEnsNameSpan,
-  vitalikAddressSpan,
-  // ...one pair (or more) per test you emit
-} from "data/ens-best-practices/<category>/<best-practice-slug>/technicalDetails";
+A best practice may ship a `notes.tsx` module next to its `technicalDetails.tsx`:
+
+```
+ensawards.org/data/ens-best-practices/<category>/<best-practice-slug>/notes.tsx
 ```
 
-If a span you need isn't exported yet, add `export` to its `const` declaration
-in `technicalDetails.tsx` (a non-breaking change). Map each acceptance test id to
-its spans (name + expected chain + expected address) so Step 4 can write concrete
-notes.
+If it exists, **the benchmark notes must be generated with these builders** —
+do **not** hand-write `<div>`/`<p>`/`<img>` markup or import the canonical
+`*Span` constants into the app file. Each acceptance test always exercises the
+same ENS name, expected address, and chain, so those are already baked into the
+builders. The app file only supplies what varies per app:
+
+- `method` — how the test was run (e.g. `'the "send" flow'`)
+- `proof` — the screenshot(s) (`{ image, alt }`, or an array for multiple)
+- which builder you call (encodes the result + acceptance test)
+
+Read `notes.tsx` to see the available builders. `deposit-addresses` exports, for
+example:
+
+- `buildPassNoteForAT1`…`buildPassNoteForAT8` — a name resolves correctly.
+- `buildFailNoteForAT1`…`buildFailNoteForAT8` — a name fails to resolve; each
+  takes an optional `extra` follow-up sentence for app-specific detail.
+- `buildEnsNotSupportedNote` — the app doesn't accept ENS names at all (AT1).
+- `buildNotApplicableForNonEvmChain({ chain })` — Bitcoin / Solana not supported.
+- `buildNotApplicableForFailedTest({ testNumber, scope })` — a prerequisite test
+  failed (`scope` defaults to `"at all"`; use `"on Base"` for the AT5 cascade).
+- `buildBenchmarkNote({ children, proof })` — escape hatch for an unusual result
+  no builder covers. Only here may you import `*Span` constants from
+  `technicalDetails` to write custom prose.
+
+If `notes.tsx` doesn't exist for the target best practice, fall back to writing
+notes inline (see the legacy guidance at the end of Step 4), referencing the
+exported `*Span` constants from `technicalDetails.tsx` (add `export` if missing).
 
 ### Step 3: Locate manual.json + proof media (per app)
 
@@ -157,41 +172,33 @@ Write `index.tsx` in the directory that holds `manual.json` (replace any empty
 `AcceptanceTestBenchmarks` keyed by acceptance test slug. Include **one entry per
 test present in `manual.json`** (keyed by the slug at that id's position).
 
-Notes prose: write a short natural sentence per test combining the relevant
-`method` (per-test override if present, else the global `method`) and the
-`reason`. **Always name the concrete ENS name tested and the expected address**
-using the spans imported in Step 1 (e.g. "The resolved Ethereum Mainnet address
-of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).") instead of vague
-phrasing like "The resolved address is correct.". For passes, state the resolved
-name maps to the expected address; for failures, name the tested ENS name and the
-expected address, then emphasize the negative outcome with `<i>NOT</i>` (e.g. the
-shown value was wrong / an error appeared). Include an `<img>` only when a matching
-proof image exists. `Not Applicable` notes generally don't reference a specific
-address (see Special overrides).
+Notes: call the right note builder per entry (see Step 1). Pick the builder from
+the acceptance test id (its 1-based position) and the recorded `status`, then pass:
 
-The `reason` and `method` strings are **not strict** — they are author notes,
-not literal copy. Freely rephrase, correct, and expand them so the prose reads
-naturally and accurately reflects what the test actually verified. Add clarifying
-detail where helpful; just don't contradict the recorded `status`.
+- `method` — derive a short phrase from the per-test `method` override (else the
+  global `method`) describing **how** the test was run. Omit the chain context the
+  builder already bakes in (e.g. don't repeat "on Base" for the AT5 builder).
+- `proof` — `{ image: <import>, alt: "<app> ..." }` when a matching proof image
+  exists; multiple images → pass an array. Omit when there's no proof.
+- `extra` (fail builders) — an optional extra sentence for app-specific detail
+  (e.g. `'The app showed an "invalid domain format" error instead.'`).
 
-File template (one import per proof image, in id order):
+The `reason` and `method` strings are **not strict** — they are author notes, not
+literal copy. Use them to choose the builder and to phrase `method`/`extra`
+naturally and accurately; just don't contradict the recorded `status`.
+
+File template (deposit-addresses; import only the builders + proofs you use):
 
 ```tsx
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
-import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
+import {
+  buildPassNoteForAT1,
+  // ...one builder per emitted test
+} from "data/ens-best-practices/<category>/<best-practice-slug>/notes";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
-
-import {
-  <nameSpanForId1>,
-  <addressSpanForId1>,
-  // ...more spans, one (or more) per emitted test
-} from "data/ens-best-practices/<category>/<best-practice-slug>/technicalDetails";
-
-import { cn } from "@/utils/tailwindClassConcatenation";
 
 import at1Proof from "./at-1.png";
 // ...more proof imports
@@ -200,83 +207,81 @@ const <camelCaseBestPracticeSlug> = {
   "<slug-for-id-1>": {
     result: BenchmarkResults.Pass,
     contributions: [{ from: contributors.<contributor>, lastUpdated: parseTimestamp("<datetime>") }],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full"><sentence from method + reason, naming {<nameSpan>} and {<addressSpan>}></p>
-        <img
-          alt="<app> correctly resolves ..."
-          src={at1Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
+    notes: buildPassNoteForAT1({
+      method: "<how it was tested>",
+      proof: { image: at1Proof, alt: "<app> correctly resolves ..." },
+    }),
+  },
   // ...more entries
 } as const satisfies AcceptanceTestBenchmarks;
 
 export default <camelCaseBestPracticeSlug>;
 ```
 
+The single `} as const satisfies AcceptanceTestBenchmarks;` at the end type-checks
+every entry, so individual entries don't need a per-entry
+`as const satisfies AcceptanceTestBenchmark` (and the `AcceptanceTestBenchmark`
+type import isn't needed in deposit-addresses files).
+
 Result-specific entry examples — match these renderings:
 
 **Passed** (proof image present):
 
 ```tsx
-"correctly-resolve-direct-onchain-subname-address": {
+"at01-resolve-onchain-name": {
   result: BenchmarkResults.Pass,
   contributions: [{ from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-15T06:40:48Z") }],
-  notes: (
-    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-      <p className="w-full">
-        Tested using the search flow on etherscan.io. The resolved Ethereum Mainnet address of{" "}
-        {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
-      </p>
-      <img
-        alt="Etherscan correctly resolves the deposit address"
-        src={at1Proof.src}
-        className="w-auto h-full max-h-[325px] rounded-xl"
-      />
-    </div>
-  ),
-} as const satisfies AcceptanceTestBenchmark,
+  notes: buildPassNoteForAT1({
+    method: "the name lookup search on etherscan.io",
+    proof: { image: at1Proof, alt: "Etherscan correctly resolves the deposit address" },
+  }),
+},
 ```
 
-**Failed** (name the ENS name + expected address, then emphasize the failure):
+**Failed** (the builder bakes in the ENS name, expected address, and `<i>NOT</i>`
+emphasis; add `extra` for any app-specific detail):
 
 ```tsx
-"correctly-resolve-names-for-different-evm-chains": {
+"at05-resolve-name-on-other-evm-chain": {
   result: BenchmarkResults.Fail,
   contributions: [{ from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-09T06:37:10Z") }],
-  notes: (
-    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-      <p className="w-full">
-        Tested using the search flow on basescan.org. For {lightkeeperEnsNameSpan} the shown
-        address was the mainnet address, <i>NOT</i> the expected Base chain address
-        ({lightkeeperAddressSpan}).
-      </p>
-      <img
-        alt="Etherscan fails to resolve the Base deposit address"
-        src={at5Proof.src}
-        className="w-auto h-full max-h-[325px] rounded-xl"
-      />
-    </div>
-  ),
-} as const satisfies AcceptanceTestBenchmark,
+  notes: buildFailNoteForAT5({
+    method: "the name lookup search on basescan.org",
+    proof: { image: at5Proof, alt: "Etherscan fails to resolve the Base deposit address" },
+    extra: "The app showed the Ethereum Mainnet address instead.",
+  }),
+},
 ```
 
-**Not applicable** (typically no proof image — omit `<img>`):
+**Not applicable** (no proof needed — omit `proof`):
 
 ```tsx
-"correctly-resolve-names-for-bitcoin": {
+"at06-resolve-bitcoin-address": {
   result: BenchmarkResults.NotApplicable,
   contributions: [{ from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-08T16:18:00Z") }],
-  notes: (
-    <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-      <p className="w-full">Etherscan doesn't support Bitcoin.</p>
-    </div>
-  ),
-} as const satisfies AcceptanceTestBenchmark,
+  notes: buildNotApplicableForNonEvmChain({ chain: "Bitcoin" }),
+},
 ```
+
+**Escape hatch** (result a builder doesn't cover — write custom prose; this is the
+only place you may import `*Span` constants from `technicalDetails`):
+
+```tsx
+notes: buildBenchmarkNote({
+  proof: { image: at2Proof, alt: "..." },
+  children: (
+    <>
+      Tested using {method}. For {ethereumUnnormalizedEnsNameSpan} the resolved address is correct
+      ({ethereumAddressSpan}), but the app behaves inconsistently ... so we count this as a failure.
+    </>
+  ),
+}),
+```
+
+**Legacy fallback** (only when the best practice has no `notes.tsx`): write the
+note inline as `<div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>`
+with a `<p>` and optional `<img>`, naming the concrete ENS name and expected
+address via the `*Span` constants imported from `technicalDetails.tsx`.
 
 ### Step 5: Wire into the app's main benchmarks file
 
@@ -304,65 +309,26 @@ error referencing a deleted `index.ts`; `tsc` is the source of truth.
 
 ## Special overrides
 
-### deposit-address
+### deposit-addresses
 
-When a test is `not-applicable` because a **dependent test failed** (e.g. the
-`reason` says something like "at#5 is failed"), don't write a literal note.
-Instead, derive the cause from the dependency and emit a styled note that
-references the failed acceptance test. Import
-`bestPracticeTechnicalDetailsCodeStyles` alongside
-`acceptanceTestDetailsContainerStyles` from `data/ens-best-practices/styles`.
+Use the `notes.tsx` builders (see Step 1) for these recurring patterns instead of
+writing markup:
 
-If the dependency is **Acceptance Test 1** (the app doesn't appear to support ENS
-resolution at all):
+- **App doesn't accept ENS names at all** (AT1 fails this way): use
+  `buildEnsNotSupportedNote({ method, proof })`. The remaining acceptance tests
+  then become Not Applicable via `buildNotApplicableForFailedTest({ testNumber: 1 })`
+  (default `scope: "at all"`).
+- **`not-applicable` because a dependent test failed** (e.g. `reason` says
+  "at#5 is failed"): `buildNotApplicableForFailedTest({ testNumber, scope })`.
+  For the AT5 / Base cascade pass `scope: "on Base"`.
+- **Non-EVM chain not supported** (Bitcoin / Solana):
+  `buildNotApplicableForNonEvmChain({ chain: "Bitcoin" })` /
+  `{ chain: "Solana" }` (pass `proof` if a screenshot exists).
 
-```tsx
-<div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-  <p className="w-full">
-    Based on the results of the{" "}
-    <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 1</span>, the
-    app doesn't appear to support ENS resolution at all and therefore we classify this
-    acceptance test as{" "}
-    <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-  </p>
-</div>
-```
-
-If the dependency is the **different-EVM-chains / Base test** (Acceptance Test 5)
-that failed, reference Test 5 and say the app doesn't support resolution on Base:
-
-```tsx
-<div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-  <p className="w-full">
-    Based on the results of the{" "}
-    <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>, the
-    app doesn't appear to support ENS resolution on Base and therefore we classify this
-    acceptance test as{" "}
-    <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-  </p>
-</div>
-```
-
-For non-EVM chains the app doesn't support, use the same styled `Not Applicable`
-treatment (no dependent-test reference):
-
-```tsx
-// Bitcoin
-<p className="w-full">
-  The app doesn't have context of the non-EVM chain Bitcoin and therefore we classify this
-  acceptance test as{" "}
-  <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-</p>
-```
-
-```tsx
-// Solana
-<p className="w-full">
-  The app doesn't have context of the non-EVM chain Solana and therefore we classify this
-  acceptance test as{" "}
-  <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-</p>
-```
+Never import `*Span` constants or `bestPracticeTechnicalDetailsCodeStyles` /
+`acceptanceTestDetailsContainerStyles` into a deposit-addresses app file — the
+builders own all of that. The only exception is the `buildBenchmarkNote` escape
+hatch, where you write custom prose and may import the spans you need.
 
 ## Notes
 

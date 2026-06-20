@@ -1,32 +1,25 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
 // for additional advice on adding and modifying app benchmarks
 
-import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
-  dperriComAddressSpan,
-  dperriComEnsNameSpan,
+  buildBenchmarkNote,
+  buildFailNoteForAT3,
+  buildFailNoteForAT4,
+  buildFailNoteForAT5,
+  buildFailNoteForAT7,
+  buildNotApplicableForFailedTest,
+  buildNotApplicableForNonEvmChain,
+  buildPassNoteForAT1,
+} from "data/ens-best-practices/resolution/deposit-addresses/notes";
+import {
   ethereumAddressSpan,
   ethereumNormalizedEnsNameSpan,
   ethereumUnnormalizedEnsNameSpan,
-  gregskrilAddressSolanaSpan,
-  gregskrilEnsNameSpan,
-  jesseBaseAddressSpan,
-  jesseBaseEnsNameSpan,
-  lightkeeperAddressSpan,
-  lightkeeperEnsNameSpan,
-  vitalikAddressSpan,
-  vitalikEnsNameSpan,
 } from "data/ens-best-practices/resolution/deposit-addresses/technicalDetails";
-import {
-  acceptanceTestDetailsContainerStyles,
-  bestPracticeTechnicalDetailsCodeStyles,
-} from "data/ens-best-practices/styles";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
-
-import { cn } from "@/utils/tailwindClassConcatenation";
 
 import at1Proof from "./at-1.png";
 import at2_1Proof from "./at-2.1.png";
@@ -37,172 +30,111 @@ import at5Proof from "./at-5.png";
 import at6Proof from "./at-6.png";
 import at7Proof from "./at-7.png";
 
+const method = 'the "send" flow';
+
 const depositAddresses = {
-  "correctly-resolve-direct-onchain-subname-address": {
+  "at01-resolve-onchain-name": {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T14:56:43Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The resolved Ethereum Mainnet
-          address of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
-        </p>
-        <img
-          alt="Zerion correctly resolves the address for vitalik.eth"
-          src={at1Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-requiring-normalization": {
+    notes: buildPassNoteForAT1({
+      method,
+      proof: { image: at1Proof, alt: "Zerion correctly resolves the address for vitalik.eth" },
+    }),
+  },
+  // The standard AT2 fail note doesn't capture this nuance, so we write a custom note.
+  "at02-resolve-name-needing-normalization": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T15:02:11Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. For{" "}
-          {ethereumUnnormalizedEnsNameSpan} (normalized to {ethereumNormalizedEnsNameSpan}) the
-          resolved Ethereum Mainnet address is correct ({ethereumAddressSpan}), but the app behaves
-          inconsistently when displaying the resolved name. Repeated attempts produce different
-          outcomes: sometimes it associates a completely different ENS name with this address,
-          sometimes it shows &quot;No Result Found&quot; for the entered name. Every observed
-          outcome is incorrect, so we count this as a failure.
-        </p>
-        <img
-          alt="Zerion correctly resolves the address for Ξthereum.eth, but associates a different ENS name with this address"
-          src={at2_1Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-        <img
-          alt="Zerion sometimes shows No Result Found when resolving Ξthereum.eth"
-          src={at2_2Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-implement-ccip-read-for-eth-subnames": {
+    notes: buildBenchmarkNote({
+      proof: [
+        {
+          image: at2_1Proof,
+          alt: "Zerion correctly resolves the address for Ξthereum.eth, but associates a different ENS name with this address",
+        },
+        {
+          image: at2_2Proof,
+          alt: "Zerion sometimes shows No Result Found when resolving Ξthereum.eth",
+        },
+      ],
+      children: (
+        <>
+          Tested using {method}. For {ethereumUnnormalizedEnsNameSpan} (normalized to{" "}
+          {ethereumNormalizedEnsNameSpan}) the resolved Ethereum Mainnet address is correct (
+          {ethereumAddressSpan}), but the app behaves inconsistently when displaying the resolved
+          name. Repeated attempts produce different outcomes: sometimes it associates a completely
+          different ENS name with this address, sometimes it shows "No Result Found" for the entered
+          name. Every observed outcome is incorrect, so we count this as a failure.
+        </>
+      ),
+    }),
+  },
+  "at03-resolve-offchain-eth-subname": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T15:10:31Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The CCIP-Read enabled .eth
-          subname {jesseBaseEnsNameSpan} was <i>NOT</i> resolved to its expected Ethereum Mainnet
-          address ({jesseBaseAddressSpan}).
-        </p>
-        <img
-          alt="Zerion fails to resolve the address for jesse.base.eth"
-          src={at3Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-implement-ccip-read-for-offchain-dns-names": {
+    notes: buildFailNoteForAT3({
+      method,
+      proof: { image: at3Proof, alt: "Zerion fails to resolve the address for jesse.base.eth" },
+    }),
+  },
+  "at04-resolve-offchain-dns-name": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T15:13:31Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow. The offchain DNS name{" "}
-          {dperriComEnsNameSpan} was <i>NOT</i> resolved to its expected Ethereum Mainnet address (
-          {dperriComAddressSpan}).
-        </p>
-        <img
-          alt="Zerion fails to resolve the address for dperri.com"
-          src={at4Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-different-evm-chains": {
+    notes: buildFailNoteForAT4({
+      method,
+      proof: { image: at4Proof, alt: "Zerion fails to resolve the address for dperri.com" },
+    }),
+  },
+  "at05-resolve-name-on-other-evm-chain": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T15:16:11Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow in context of the Base chain.
-          For {lightkeeperEnsNameSpan} the resolved address is <i>NOT</i> the expected Base chain
-          address ({lightkeeperAddressSpan}).
-        </p>
-        <img
-          alt="Zerion fails to resolve the address for lightkeeper.eth in context of the Base chain"
-          src={at5Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-bitcoin": {
+    notes: buildFailNoteForAT5({
+      method,
+      proof: {
+        image: at5Proof,
+        alt: "Zerion fails to resolve the address for lightkeeper.eth in context of the Base chain",
+      },
+    }),
+  },
+  "at06-resolve-bitcoin-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T15:24:21Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          The app doesn't have context of non-EVM chain Bitcoin and therefore we classify this
-          acceptance test as{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-        <img
-          alt="Zerion doesn't have context of non-EVM chain Bitcoin"
-          src={at6Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-resolve-names-for-solana": {
+    notes: buildNotApplicableForNonEvmChain({
+      chain: "Bitcoin",
+      proof: { image: at6Proof, alt: "Zerion doesn't have context of non-EVM chain Bitcoin" },
+    }),
+  },
+  "at07-resolve-solana-address": {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T15:28:04Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow in the context of the Solana
-          chain. For {gregskrilEnsNameSpan} the resolved address is <i>NOT</i> the expected Solana
-          address ({gregskrilAddressSolanaSpan}).
-        </p>
-        <img
-          alt="Zerion fails to resolve the Solana address for gregskril.eth"
-          src={at7Proof.src}
-          className="w-auto h-full max-h-[325px] rounded-xl"
-        />
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
-  "correctly-handle-resolution-for-chains-with-invalid-address-formatting": {
+    notes: buildFailNoteForAT7({
+      method,
+      proof: {
+        image: at7Proof,
+        alt: "Zerion fails to resolve the Solana address for gregskril.eth",
+      },
+    }),
+  },
+  "at08-handle-invalid-address-format": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T15:20:00Z") },
     ],
-    notes: (
-      <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-        <p className="w-full">
-          Based on the results of the{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Acceptance Test 5</span>, the app
-          doesn't appear to support ENS resolution on Base at all and therefore we classify this
-          acceptance test as{" "}
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>Not Applicable</span>.
-        </p>
-      </div>
-    ),
-  } as const satisfies AcceptanceTestBenchmark,
+    notes: buildNotApplicableForFailedTest({ testNumber: 5, scope: "on Base" }),
+  },
 } as const satisfies AcceptanceTestBenchmarks;
 
 export default depositAddresses;
