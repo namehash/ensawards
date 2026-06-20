@@ -1,6 +1,3 @@
-// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
-// for additional advice on adding and modifying apps
-
 import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { BenchmarkResults } from "data/benchmarks/types";
@@ -37,16 +34,16 @@ const depositAddresses = {
   "correctly-resolve-direct-onchain-subname-address": {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") },
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on etherscan.io. The resolved Ethereum Mainnet address
-          of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
+          Tested using the quick-search feature on the main page of eth.blockscout.com. The resolved
+          Ethereum Mainnet address of {vitalikEnsNameSpan} is correct ({vitalikAddressSpan}).
         </p>
         <img
-          alt="Etherscan correctly resolves the direct onchain subname address"
+          alt="Blockscout correctly resolves the deposit address of a direct onchain name"
           src={at1Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
@@ -56,18 +53,18 @@ const depositAddresses = {
   "correctly-resolve-names-requiring-normalization": {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") },
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on etherscan.io. The input{" "}
+          Tested using the quick-search feature on eth.blockscout.com. The input{" "}
           {ethereumUnnormalizedEnsNameSpan} was correctly normalized to{" "}
           {ethereumNormalizedEnsNameSpan} and resolved to the correct Ethereum Mainnet address (
           {ethereumAddressSpan}).
         </p>
         <img
-          alt="Etherscan correctly resolves a name requiring normalization"
+          alt="Blockscout correctly resolves the deposit address of a name requiring normalization"
           src={at2Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
@@ -77,17 +74,17 @@ const depositAddresses = {
   "correctly-implement-ccip-read-for-eth-subnames": {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") },
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on etherscan.io. The CCIP-Read enabled .eth subname{" "}
-          {jesseBaseEnsNameSpan} resolved to the correct Ethereum Mainnet address (
+          Tested using the quick-search feature on eth.blockscout.com. The CCIP-Read enabled .eth
+          subname {jesseBaseEnsNameSpan} resolved to the correct Ethereum Mainnet address (
           {jesseBaseAddressSpan}).
         </p>
         <img
-          alt="Etherscan correctly implements CCIP-Read for .eth subnames"
+          alt="Blockscout correctly resolves the deposit address of an offchain .eth subname via CCIP-Read"
           src={at3Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
@@ -97,17 +94,17 @@ const depositAddresses = {
   "correctly-implement-ccip-read-for-offchain-dns-names": {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") },
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on etherscan.io. The offchain DNS name{" "}
+          Tested using the quick-search feature on eth.blockscout.com. The offchain DNS name{" "}
           {dperriComEnsNameSpan} resolved to the correct Ethereum Mainnet address via CCIP-Read (
           {dperriComAddressSpan}).
         </p>
         <img
-          alt="Etherscan correctly implements CCIP-Read for offchain DNS names"
+          alt="Blockscout correctly resolves the deposit address of an offchain DNS name via CCIP-Read"
           src={at4Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
@@ -117,17 +114,17 @@ const depositAddresses = {
   "correctly-resolve-names-for-different-evm-chains": {
     result: BenchmarkResults.Fail,
     contributions: [
-      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") },
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          Tested using the name lookup search on basescan.org. For {lightkeeperEnsNameSpan} the
-          shown address was the mainnet address, <i>NOT</i> the expected Base chain address (
+          Tested using the quick-search feature on base.blockscout.com. For {lightkeeperEnsNameSpan}{" "}
+          the shown address was the mainnet address, <i>NOT</i> the expected Base chain address (
           {lightkeeperAddressSpan}).
         </p>
         <img
-          alt="Etherscan fails to resolve the Base deposit address"
+          alt="Blockscout fails to resolve the Base deposit address"
           src={at5Proof.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
@@ -137,7 +134,7 @@ const depositAddresses = {
   "correctly-resolve-names-for-bitcoin": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") },
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
@@ -152,7 +149,7 @@ const depositAddresses = {
   "correctly-resolve-names-for-solana": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") },
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
@@ -167,7 +164,7 @@ const depositAddresses = {
   "correctly-handle-resolution-for-chains-with-invalid-address-formatting": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T11:48:58Z") },
+      { from: contributors.llev, lastUpdated: parseTimestamp("2026-06-19T14:27:32Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
