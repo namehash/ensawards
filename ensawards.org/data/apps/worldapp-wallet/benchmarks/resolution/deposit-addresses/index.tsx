@@ -30,9 +30,9 @@ const depositAddresses = {
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
           ENS resolution was tested using the &quot;send&quot; flow with {vitalikEnsNameSpan}. The
-          wallet doesn't support the use of ENS names at all as the recipient identifier, so it never
-          resolves the expected Ethereum Mainnet address ({vitalikAddressSpan}), which we classify as
-          a failure.
+          wallet doesn't support the use of ENS names at all as the recipient identifier, so it
+          never resolves the expected Ethereum Mainnet address ({vitalikAddressSpan}), which we
+          classify as a failure.
         </p>
         <div className="flex flex-row flex-wrap justify-center items-start gap-5">
           <img

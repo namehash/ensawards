@@ -121,9 +121,9 @@ const depositAddresses = {
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENS resolution was tested using the &quot;send&quot; flow in context of the Base chain. For{" "}
-          {lightkeeperEnsNameSpan} the resolved address is <i>NOT</i> the expected Base chain address
-          ({lightkeeperAddressSpan}).
+          ENS resolution was tested using the &quot;send&quot; flow in context of the Base chain.
+          For {lightkeeperEnsNameSpan} the resolved address is <i>NOT</i> the expected Base chain
+          address ({lightkeeperAddressSpan}).
         </p>
         <img
           alt="WalletChan fails to resolve the address for lightkeeper.eth in context of the Base chain"
