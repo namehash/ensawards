@@ -74,7 +74,16 @@ export function buildBenchmarkNote({
   return (
     <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
       <p className="w-full">{children}</p>
-      {proofs.length > 0 && (
+      {/* A single proof renders as a direct sibling of the prose (matching the
+          container's gap); multiple proofs get their own stacked wrapper. */}
+      {proofs.length === 1 && (
+        <img
+          alt={proofs[0].alt}
+          src={proofs[0].image.src}
+          className="w-auto h-full max-h-[325px] rounded-xl"
+        />
+      )}
+      {proofs.length > 1 && (
         <div className="flex flex-col justify-start items-center gap-5">
           {proofs.map((proofItem, index) => (
             <img
