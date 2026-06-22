@@ -19,6 +19,7 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-example-placeholder.png";
 import at01ResolveOnchainNameExampleFailImage from "./images/at01-resolve-onchain-name-example-fail.gif";
 import at01ResolveOnchainNameExamplePassImage from "./images/at01-resolve-onchain-name-example-pass.gif";
+import at02ResolveNameNeedingNormalizationExampleFailImage from "./images/at02-resolve-name-needing-normalization-example-fail.png";
 import at02ResolveNameNeedingNormalizationExamplePassImage from "./images/at02-resolve-name-needing-normalization-example-pass.gif";
 import at03ResolveOffchainEthSubnameExampleFailImage from "./images/at03-resolve-offchain-eth-subname-example-fail.gif";
 import at03ResolveOffchainEthSubnameExamplePassImage from "./images/at03-resolve-offchain-eth-subname-example-pass.gif";
@@ -28,6 +29,7 @@ import at05ResolveNameOnOtherEvmChainExampleFailImage from "./images/at05-resolv
 import at05ResolveNameOnOtherEvmChainExamplePassImage from "./images/at05-resolve-name-on-other-evm-chain-example-pass.png";
 import at06ResolveBitcoinAddressExamplePassImage from "./images/at06-resolve-bitcoin-address-example-pass.png";
 import at07ResolveSolanaAddressExamplePassImage from "./images/at07-resolve-solana-address-example-pass.png";
+import at08HandleInvalidAddressFormatExampleFailImage from "./images/at08-handle-invalid-address-format-example-fail.png";
 import at08HandleInvalidAddressFormatExamplePassImage from "./images/at08-handle-invalid-address-format-example-pass.png";
 
 const ensBestPracticeOverview = (
@@ -291,8 +293,8 @@ const acceptanceTest2 = {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:36:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -302,8 +304,8 @@ const acceptanceTest2 = {
           than the correct value ({ethereumAddressSpan}).
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Gemini Wallet fails to correctly normalize and resolve the address for Ξthereum.eth"
+          src={at02ResolveNameNeedingNormalizationExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -690,8 +692,8 @@ const acceptanceTest8 = {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:25:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -699,8 +701,8 @@ const acceptanceTest8 = {
           gracefully and breaks the overall user experience.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Metamask resolves zissou.eth to the Ethereum Mainnet address instead of the Base address."
+          src={at08HandleInvalidAddressFormatExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
