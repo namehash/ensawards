@@ -19,8 +19,11 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-example-placeholder.png";
 import at01ResolveOnchainNameExampleFailImage from "./images/at01-resolve-onchain-name-example-fail.gif";
 import at01ResolveOnchainNameExamplePassImage from "./images/at01-resolve-onchain-name-example-pass.gif";
+import at02ResolveNameNeedingNormalizationExamplePassImage from "./images/at02-resolve-name-needing-normalization-example-pass.gif";
+import at03ResolveOffchainEthSubnameExampleFailImage from "./images/at03-resolve-offchain-eth-subname-example-fail.gif";
 import at04ResolveOffchainDnsNameExampleFailImage from "./images/at04-resolve-offchain-dns-name-example-fail.gif";
 import at04ResolveOffchainDnsNameExamplePassImage from "./images/at04-resolve-offchain-dns-name-example-pass.gif";
+import at05ResolveNameOnOtherEvmChainExampleFailImage from "./images/at05-resolve-name-on-other-evm-chain-example-fail.gif";
 import at05ResolveNameOnOtherEvmChainExamplePassImage from "./images/at05-resolve-name-on-other-evm-chain-example-pass.png";
 import at06ResolveBitcoinAddressExamplePassImage from "./images/at06-resolve-bitcoin-address-example-pass.png";
 import at07ResolveSolanaAddressExamplePassImage from "./images/at07-resolve-solana-address-example-pass.png";
@@ -268,7 +271,6 @@ const acceptanceTest2 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -277,8 +279,8 @@ const acceptanceTest2 = {
           Ethereum Mainnet address of {ethereumNormalizedEnsNameSpan} to {ethereumAddressSpan}.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Rabby correctly resolves the address for Ξthereum.eth"
+          src={at02ResolveNameNeedingNormalizationExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -357,7 +359,6 @@ const acceptanceTest3 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -366,8 +367,8 @@ const acceptanceTest3 = {
           {jesseBaseAddressSpan}).
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Phantom fails to resolve the address for jesse.base.eth"
+          src={at03ResolveOffchainEthSubnameExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -491,7 +492,6 @@ const acceptanceTest5 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -499,8 +499,8 @@ const acceptanceTest5 = {
           than the correct value ({lightkeeperAddressSpan}).
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Rabby resolves lightkeepr.eth to incorrect address on the Base chain"
+          src={at05ResolveNameOnOtherEvmChainExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
