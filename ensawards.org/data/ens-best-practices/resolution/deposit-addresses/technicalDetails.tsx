@@ -501,7 +501,7 @@ const acceptanceTest5 = {
           than the correct value ({lightkeeperAddressSpan}).
         </p>
         <img
-          alt="Rabby resolves lightkeepr.eth to incorrect address on the Base chain"
+          alt="Rabby resolves lightkeeper.eth to incorrect address on the Base chain"
           src={at05ResolveNameOnOtherEvmChainExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
@@ -701,7 +701,7 @@ const acceptanceTest8 = {
           gracefully and breaks the overall user experience.
         </p>
         <img
-          alt="Metamask resolves zissou.eth to the Ethereum Mainnet address instead of the Base address."
+          alt="MetaMask resolves zissou.eth to the Ethereum Mainnet address instead of the Base address."
           src={at08HandleInvalidAddressFormatExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
