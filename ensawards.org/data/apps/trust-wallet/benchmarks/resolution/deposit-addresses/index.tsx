@@ -22,7 +22,7 @@ const depositAddresses = {
       method,
       proof: {
         image: at1Proof,
-        alt: "Status Wallet doesn't allow ENS name as recipient in the send flow",
+        alt: "Trust Wallet doesn't allow ENS name as recipient in the send flow",
       },
     }),
   },
