@@ -703,7 +703,8 @@ const acceptanceTest8 = {
         </p>
         <p className="w-full">
           Although the UI shows a resolved address, this fails because {zissouEnsNameSpan} cannot be
-          resolved on Base and silently falling back to the Ethereum Mainnet address risks
+          resolved on Base (because the address record saved on Base for this name is not a valid
+          EVM address) and is silently falling back to the Ethereum Mainnet address, which risks
           irrecoverable loss of funds.
         </p>
         <img
