@@ -102,7 +102,7 @@ const benefitFromUsingEns = (
   </p>
 );
 
-const useCaseSummary = (
+const ensBestPracticeOverview = (
   <p>
     ENSIP-19 enables primary names to be set on any chain. Contracts deployed to an L2 chain benefit
     from this, as the contract can then configure its name directly on the chain it is deployed to
@@ -150,7 +150,7 @@ const acceptanceTest1 = {
 } as const satisfies AcceptanceTest;
 
 const technicalDetails = {
-  useCaseSummary,
+  ensBestPracticeOverview,
   benefitFromUsingEns,
   implementationRecommendations,
   acceptanceTests: [acceptanceTest1],
