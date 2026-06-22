@@ -16,7 +16,6 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-example-placeholder.png";
 import at01ResolveOnchainNameExampleFailImage from "./images/at01-resolve-onchain-name-example-fail.gif";
 import at01ResolveOnchainNameExamplePassImage from "./images/at01-resolve-onchain-name-example-pass.gif";
 import at02ResolveNameNeedingNormalizationExampleFailImage from "./images/at02-resolve-name-needing-normalization-example-fail.png";
@@ -27,7 +26,9 @@ import at04ResolveOffchainDnsNameExampleFailImage from "./images/at04-resolve-of
 import at04ResolveOffchainDnsNameExamplePassImage from "./images/at04-resolve-offchain-dns-name-example-pass.gif";
 import at05ResolveNameOnOtherEvmChainExampleFailImage from "./images/at05-resolve-name-on-other-evm-chain-example-fail.gif";
 import at05ResolveNameOnOtherEvmChainExamplePassImage from "./images/at05-resolve-name-on-other-evm-chain-example-pass.png";
+import at06ResolveBitcoinAddressExampleFailImage from "./images/at06-resolve-bitcoin-address-example-fail.png";
 import at06ResolveBitcoinAddressExamplePassImage from "./images/at06-resolve-bitcoin-address-example-pass.png";
+import at07ResolveSolanaAddressExampleFailImage from "./images/at07-resolve-solana-address-example-fail.gif";
 import at07ResolveSolanaAddressExamplePassImage from "./images/at07-resolve-solana-address-example-pass.png";
 import at08HandleInvalidAddressFormatExampleFailImage from "./images/at08-handle-invalid-address-format-example-fail.png";
 import at08HandleInvalidAddressFormatExamplePassImage from "./images/at08-handle-invalid-address-format-example-pass.png";
@@ -557,8 +558,8 @@ const acceptanceTest6 = {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T14:54:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -567,8 +568,8 @@ const acceptanceTest6 = {
           input to anything other than the correct value ({gregskrilAddressBitcoinSpan}).
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Phantom fails to resolve the address for gregskril.eth on Bitcoin"
+          src={at06ResolveBitcoinAddressExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -621,8 +622,8 @@ const acceptanceTest7 = {
     result: BenchmarkResults.Fail,
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:49:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T14:51:00Z") },
     ],
-    // TODO: Insert true example of an app failing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -631,8 +632,8 @@ const acceptanceTest7 = {
           input to anything other than the correct value ({gregskrilAddressSolanaSpan}).
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Coinbase Wallet fails to resolve the address for gregskril.eth on Solana"
+          src={at07ResolveSolanaAddressExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
