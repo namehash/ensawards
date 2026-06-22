@@ -701,6 +701,11 @@ const acceptanceTest8 = {
           An app fails this test if the resolution of an invalid EVM address is not handled
           gracefully and breaks the overall user experience.
         </p>
+        <p className="w-full">
+          Although the UI shows a resolved address, this fails because {zissouEnsNameSpan} cannot be
+          resolved on Base and silently falling back to the Ethereum Mainnet address risks
+          irrecoverable loss of funds.
+        </p>
         <img
           alt="MetaMask resolves zissou.eth to the Ethereum Mainnet address instead of the Base address."
           src={at08HandleInvalidAddressFormatExampleFailImage.src}
