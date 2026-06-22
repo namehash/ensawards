@@ -17,10 +17,14 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import acceptanceTestExampleImagePlaceholder from "./images/acceptance-test-example-placeholder.png";
-import correctlyResolveDirectOnchainSubnameAddressExampleFailImage from "./images/at01-resolve-onchain-name-example-fail.gif";
-import correctlyResolveDirectOnchainSubnameAddressExamplePassImage from "./images/at01-resolve-onchain-name-example-pass.gif";
-import correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage from "./images/at04-resolve-offchain-dns-name-example-fail.gif";
-import correctlyImplementCcipReadForOffchainDnsNamesExamplePassImage from "./images/at04-resolve-offchain-dns-name-example-pass.gif";
+import at01ResolveOnchainNameExampleFailImage from "./images/at01-resolve-onchain-name-example-fail.gif";
+import at01ResolveOnchainNameExamplePassImage from "./images/at01-resolve-onchain-name-example-pass.gif";
+import at04ResolveOffchainDnsNameExampleFailImage from "./images/at04-resolve-offchain-dns-name-example-fail.gif";
+import at04ResolveOffchainDnsNameExamplePassImage from "./images/at04-resolve-offchain-dns-name-example-pass.gif";
+import at05ResolveNameOnOtherEvmChainExamplePassImage from "./images/at05-resolve-name-on-other-evm-chain-example-pass.png";
+import at06ResolveBitcoinAddressExamplePassImage from "./images/at06-resolve-bitcoin-address-example-pass.png";
+import at07ResolveSolanaAddressExamplePassImage from "./images/at07-resolve-solana-address-example-pass.png";
+import at08HandleInvalidAddressFormatExamplePassImage from "./images/at08-handle-invalid-address-format-example-pass.png";
 
 const ensBestPracticeOverview = (
   <div className="flex flex-col gap-2">
@@ -201,7 +205,7 @@ const acceptanceTest1 = {
         </p>
         <img
           alt="Ambire Wallet correctly resolves the address for vitalik.eth"
-          src={correctlyResolveDirectOnchainSubnameAddressExamplePassImage.src}
+          src={at01ResolveOnchainNameExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -221,7 +225,7 @@ const acceptanceTest1 = {
         </p>
         <img
           alt="Binance Wallet doesn't allow ENS name as recipient in the send flow"
-          src={correctlyResolveDirectOnchainSubnameAddressExampleFailImage.src}
+          src={at01ResolveOnchainNameExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -408,7 +412,7 @@ const acceptanceTest4 = {
         </p>
         <img
           alt="WalletChan correctly resolves the address for dperri.com"
-          src={correctlyImplementCcipReadForOffchainDnsNamesExamplePassImage.src}
+          src={at04ResolveOffchainDnsNameExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -428,7 +432,7 @@ const acceptanceTest4 = {
         </p>
         <img
           alt="Ambire Wallet fails to resolve the address for dperri.com"
-          src={correctlyImplementCcipReadForOffchainDnsNamesExampleFailImage.src}
+          src={at04ResolveOffchainDnsNameExampleFailImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -466,8 +470,8 @@ const acceptanceTest5 = {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T07:51:00Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -475,8 +479,8 @@ const acceptanceTest5 = {
           {lightkeeperEnsNameSpan} to {lightkeeperAddressSpan}.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Crypto.com Wallet correctly resolves the address for lightkeeper.eth on the Base chain"
+          src={at05ResolveNameOnOtherEvmChainExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -533,7 +537,6 @@ const acceptanceTest6 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -541,8 +544,8 @@ const acceptanceTest6 = {
           {gregskrilEnsNameSpan} to {gregskrilAddressBitcoinSpan}.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Coinbase Wallet correctly resolves the address for gregskril.eth on Bitcoin"
+          src={at06ResolveBitcoinAddressExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -598,7 +601,6 @@ const acceptanceTest7 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -606,8 +608,8 @@ const acceptanceTest7 = {
           {gregskrilEnsNameSpan} to {gregskrilAddressSolanaSpan}.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="OKX Wallet correctly resolves the address for gregskril.eth on Solana"
+          src={at07ResolveSolanaAddressExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
@@ -667,8 +669,8 @@ const acceptanceTest8 = {
     result: BenchmarkResults.Pass,
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T07:57:00Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -677,8 +679,8 @@ const acceptanceTest8 = {
           experience.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Crypto.com Wallet gracefully handles the invalid address for zissou.eth on the Base chain"
+          src={at08HandleInvalidAddressFormatExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>

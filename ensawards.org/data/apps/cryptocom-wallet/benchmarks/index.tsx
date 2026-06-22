@@ -5,7 +5,7 @@ import CryptoComWallet from "data/apps/cryptocom-wallet";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
-import depositAddresses from "./resolution/deposit-address";
+import depositAddresses from "./resolution/deposit-addresses";
 import ensv2ReadyResolution from "./resolution/ensv2-ready-resolution";
 
 const benchmarks: BestPracticeBenchmarks = {
