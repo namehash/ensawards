@@ -11,9 +11,7 @@ import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
-import { cn } from "@/utils/tailwindClassConcatenation";
-
-import depositAddresses from "./resolution/deposit-address";
+import depositAddresses from "./resolution/deposit-addresses";
 import ensv2ReadyResolution from "./resolution/ensv2-ready-resolution";
 
 const benchmarks = {

@@ -4,22 +4,22 @@
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
+  buildFailNoteForAT2,
   buildFailNoteForAT5,
   buildNotApplicableForFailedTest,
   buildNotApplicableForNonEvmChain,
   buildPassNoteForAT1,
-  buildPassNoteForAT2,
   buildPassNoteForAT3,
   buildPassNoteForAT4,
 } from "data/ens-best-practices/resolution/deposit-addresses/notes";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
-import at1Proof from "./at-1.gif";
-import at2Proof from "./at-2.gif";
-import at3Proof from "./at-3.gif";
-import at4Proof from "./at-4.gif";
-import at5Proof from "./at-5.gif";
+import at1Proof from "./at-1.png";
+import at2Proof from "./at-2.png";
+import at3Proof from "./at-3.png";
+import at4Proof from "./at-4.png";
+import at5Proof from "./at-5.png";
 
 const method = 'the "send" flow';
 
@@ -27,56 +27,66 @@ const depositAddresses = {
   "at01-resolve-onchain-name": {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T16:04:13Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:38:32Z") },
     ],
     notes: buildPassNoteForAT1({
       method,
-      proof: { image: at1Proof, alt: "WalletChan correctly resolves the address for vitalik.eth" },
+      proof: {
+        image: at1Proof,
+        alt: "Gemini Wallet correctly resolves the address for vitalik.eth",
+      },
     }),
   },
   "at02-resolve-name-needing-normalization": {
-    result: BenchmarkResults.Pass,
+    result: BenchmarkResults.Fail,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T16:07:55Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:38:32Z") },
     ],
-    notes: buildPassNoteForAT2({
+    notes: buildFailNoteForAT2({
       method,
-      proof: { image: at2Proof, alt: "WalletChan correctly resolves the address for Ξthereum.eth" },
+      proof: {
+        image: at2Proof,
+        alt: "Gemini Wallet fails to resolve the address for Ξthereum.eth",
+      },
+      extra: "The name is normalized incorrectly, resulting in an incorrect resolved address.",
     }),
   },
   "at03-resolve-offchain-eth-subname": {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T16:13:18Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:38:32Z") },
     ],
     notes: buildPassNoteForAT3({
       method,
       proof: {
         image: at3Proof,
-        alt: "WalletChan correctly resolves the address for jesse.base.eth",
+        alt: "Gemini Wallet correctly resolves the address for jesse.base.eth",
       },
     }),
   },
   "at04-resolve-offchain-dns-name": {
     result: BenchmarkResults.Pass,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T15:15:52Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:38:32Z") },
     ],
     notes: buildPassNoteForAT4({
       method,
-      proof: { image: at4Proof, alt: "WalletChan correctly resolves the address for dperri.com" },
+      proof: {
+        image: at4Proof,
+        alt: "Gemini Wallet correctly resolves the address for dperri.com",
+      },
     }),
   },
   "at05-resolve-name-on-other-evm-chain": {
     result: BenchmarkResults.Fail,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T16:25:50Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:38:32Z") },
     ],
     notes: buildFailNoteForAT5({
       method,
       proof: {
         image: at5Proof,
-        alt: "WalletChan fails to resolve the address for lightkeeper.eth in context of the Base chain",
+        alt: "Gemini Wallet fails to resolve the address for lightkeeper.eth on the Base chain",
       },
       extra: "The app resolved to the Ethereum Mainnet address instead of the Base address.",
     }),
@@ -84,21 +94,21 @@ const depositAddresses = {
   "at06-resolve-bitcoin-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T16:19:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:38:32Z") },
     ],
     notes: buildNotApplicableForNonEvmChain({ chain: "Bitcoin" }),
   },
   "at07-resolve-solana-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T16:19:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:38:32Z") },
     ],
     notes: buildNotApplicableForNonEvmChain({ chain: "Solana" }),
   },
   "at08-handle-invalid-address-format": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-19T16:26:00Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-22T12:38:32Z") },
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 5, scope: "on Base" }),
   },
