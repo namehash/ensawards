@@ -94,9 +94,8 @@ Search the app's benchmarks dir:
 ensawards.org/data/apps/<app>/benchmarks/**/manual.json
 ```
 
-Pick the `manual.json` whose directory corresponds to the target best practice
-(directory name may differ slightly from the slug, e.g. `deposit-address` vs
-`deposit-addresses`). Proof media sit in the **same directory**, named with a
+Pick the `manual.json` whose directory corresponds to the target best practice.
+Proof media sit in the **same directory**, named with a
 trailing test id: `at-<id>.<ext>` or `ac-<id>.<ext>`. Match each file to a test
 by its id. A test may have no media. Source files can be images (`.png`, `.jpg`,
 `.webp`, ...) or screen recordings (`.mov`, `.mp4`, ...).
@@ -290,7 +289,7 @@ practice's placeholder block (the slug mapping to `undefined` entries) with a
 reference to the generated module, and add the import:
 
 ```tsx
-import depositAddresses from "./resolution/deposit-address";
+import depositAddresses from "./resolution/deposit-addresses";
 // ...
   "deposit-addresses": depositAddresses,
 ```

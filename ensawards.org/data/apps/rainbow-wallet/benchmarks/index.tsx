@@ -14,7 +14,7 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 import { cn } from "@/utils/tailwindClassConcatenation";
 
 import exampleProofImage from "./acceptance-test-benchmark-proof-example.png";
-import depositAddresses from "./resolution/deposit-address";
+import depositAddresses from "./resolution/deposit-addresses";
 import ensv2ReadyResolution from "./resolution/ensv2-ready-resolution";
 
 const benchmarks = {
