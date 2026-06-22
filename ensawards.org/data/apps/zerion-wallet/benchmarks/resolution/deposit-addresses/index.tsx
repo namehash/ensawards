@@ -80,6 +80,7 @@ const depositAddresses = {
     notes: buildFailNoteForAT3({
       method,
       proof: { image: at3Proof, alt: "Zerion fails to resolve the address for jesse.base.eth" },
+      extra: 'The app showed the message "No results".',
     }),
   },
   "at04-resolve-offchain-dns-name": {
@@ -90,6 +91,7 @@ const depositAddresses = {
     notes: buildFailNoteForAT4({
       method,
       proof: { image: at4Proof, alt: "Zerion fails to resolve the address for dperri.com" },
+      extra: 'The app showed the message "No results".',
     }),
   },
   "at05-resolve-name-on-other-evm-chain": {
@@ -103,6 +105,7 @@ const depositAddresses = {
         image: at5Proof,
         alt: "Zerion fails to resolve the address for lightkeeper.eth in context of the Base chain",
       },
+      extra: "The app resolved to the Ethereum Mainnet address instead of the Base address.",
     }),
   },
   "at06-resolve-bitcoin-address": {
@@ -126,6 +129,8 @@ const depositAddresses = {
         image: at7Proof,
         alt: "Zerion fails to resolve the Solana address for gregskril.eth",
       },
+      extra:
+        'The app showed the message "Recipient is on Ethereum but the sending wallet is on Solana".',
     }),
   },
   "at08-handle-invalid-address-format": {

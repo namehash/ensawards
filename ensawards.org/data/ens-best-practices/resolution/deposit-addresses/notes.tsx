@@ -167,8 +167,8 @@ export function buildPassNoteForAT5({ method, proof }: { method: Method; proof?:
     proof,
     children: (
       <>
-        Tested using {method}. The resolved Base chain address of {lightkeeperEnsNameSpan} is
-        correct ({lightkeeperAddressSpan}).
+        Tested using {method} in context of the Base chain. The resolved Base chain address of{" "}
+        {lightkeeperEnsNameSpan} is correct ({lightkeeperAddressSpan}).
       </>
     ),
   });
@@ -285,8 +285,9 @@ export function buildFailNoteForAT5({ method, proof, extra }: FailArgs) {
     proof,
     children: (
       <>
-        Tested using {method}. For {lightkeeperEnsNameSpan} the resolved address is <i>NOT</i> the
-        expected Base chain address ({lightkeeperAddressSpan}).{withExtra(extra)}
+        Tested using {method} in context of the Base chain. For {lightkeeperEnsNameSpan} the
+        resolved address is <i>NOT</i> the expected Base chain address ({lightkeeperAddressSpan}).
+        {withExtra(extra)}
       </>
     ),
   });

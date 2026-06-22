@@ -351,9 +351,9 @@ export interface BestPracticeCategory {
 
 ### Suggest a `benchmark update`
 
-1. To suggest a benchmark update for an existing app, modify its `benchmarks` record in the 
-[ensawards.org/data/apps/[app-directory]/benchmarks/index.tsx](ensawards.org/data/apps/rainbow-wallet/benchmarks/index.tsx) file 
-where `[app-directory]` represents the slug of the relevant app. These records define relationships between benchmarks and best practices. Their data model is available at 
+1. To suggest a benchmark update for an existing app, modify its relevant `benchmarks` record in the 
+[ensawards.org/data/apps/[app-directory]/benchmarks/[best-practice-category-slug]/[best-practice-slug]/index.tsx](ensawards.org/data/apps/blockscout-explorer/benchmarks/resolution/deposit-address/index.tsx) file 
+where `[app-directory]`, `[best-practice-category-slug]`, and `[best-practice-slug]` represent the slugs of the relevant app, best practice category, and best practice. These records define relationships between benchmarks and best practices. Their data model is available at 
 [ensawards.org/data/ens-best-practices/types.ts](ensawards.org/data/ens-best-practices/types.ts).
 
 ```typescript
@@ -369,7 +369,7 @@ export type BestPracticeBenchmarks = Record<BestPracticeSlug, AcceptanceTestBenc
 ```
 
 For reference see 
-[ensawards.org/data/apps/blockscout-explorer/benchmarks/index.tsx](ensawards.org/data/apps/blockscout-explorer/benchmarks/index.tsx) 
+[ensawards.org/data/apps/blockscout-explorer/benchmarks/resolution/deposit-address/index.tsx](ensawards.org/data/apps/blockscout-explorer/benchmarks/resolution/deposit-address/index.tsx) 
 for an example benchmarks record.
 
 2. Make sure to follow the benchmark data model. It is available in the [ensawards.org/data/benchmarks/types.ts](ensawards.org/data/benchmarks/types.ts) file.
