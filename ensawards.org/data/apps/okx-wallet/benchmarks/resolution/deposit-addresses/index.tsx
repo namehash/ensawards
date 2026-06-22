@@ -64,6 +64,7 @@ const depositAddresses = {
         image: at3Proof,
         alt: "OKX Wallet fails to resolve the address for jesse.base.eth",
       },
+      extra: 'The app showed the message "Invalid address".',
     }),
   },
   "at04-resolve-offchain-dns-name": {
@@ -77,6 +78,7 @@ const depositAddresses = {
         image: at4Proof,
         alt: "OKX Wallet fails to resolve the address for dperri.com",
       },
+      extra: 'The app showed the message "Invalid address".',
     }),
   },
   "at05-resolve-name-on-other-evm-chain": {
@@ -90,6 +92,7 @@ const depositAddresses = {
         image: at5Proof,
         alt: "OKX Wallet fails to resolve the address for lightkeeper.eth on the Base chain",
       },
+      extra: 'The app showed the message "Invalid address".',
     }),
   },
   "at06-resolve-bitcoin-address": {

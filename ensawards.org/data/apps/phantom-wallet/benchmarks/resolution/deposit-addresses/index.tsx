@@ -64,6 +64,7 @@ const depositAddresses = {
         image: at3Proof,
         alt: "Phantom Wallet fails to resolve the address for jesse.base.eth",
       },
+      extra: 'The app showed the message "Invalid Ethereum address".',
     }),
   },
   "at04-resolve-offchain-dns-name": {
@@ -77,6 +78,7 @@ const depositAddresses = {
         image: at4Proof,
         alt: "Phantom Wallet fails to resolve the address for dperri.com",
       },
+      extra: 'The app showed the message "Invalid Ethereum address".',
     }),
   },
   "at05-resolve-name-on-other-evm-chain": {
@@ -90,6 +92,7 @@ const depositAddresses = {
         image: at5Proof,
         alt: "Phantom Wallet fails to resolve the address for lightkeeper.eth on the Base chain",
       },
+      extra: "The app resolved to the Ethereum Mainnet address instead of the Base address.",
     }),
   },
   "at06-resolve-bitcoin-address": {
@@ -103,6 +106,7 @@ const depositAddresses = {
         image: at6Proof,
         alt: "Phantom Wallet fails to resolve the Bitcoin address for gregskril.eth",
       },
+      extra: 'The app showed the message "Invalid Bitcoin address".',
     }),
   },
   "at07-resolve-solana-address": {
@@ -116,6 +120,7 @@ const depositAddresses = {
         image: at7Proof,
         alt: "Phantom Wallet fails to resolve the Solana address for gregskril.eth",
       },
+      extra: 'The app showed the message "Invalid Solana address".',
     }),
   },
   "at08-handle-invalid-address-format": {

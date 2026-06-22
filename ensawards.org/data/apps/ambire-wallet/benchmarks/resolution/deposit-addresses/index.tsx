@@ -74,6 +74,7 @@ const depositAddresses = {
     notes: buildFailNoteForAT4({
       method,
       proof: { image: at4Proof, alt: "Ambire Wallet fails to resolve the address for dperri.com" },
+      extra: 'The app showed the message "Failed to resolve ENS Domain".',
     }),
   },
   "at05-resolve-name-on-other-evm-chain": {
@@ -87,6 +88,7 @@ const depositAddresses = {
         image: at5Proof,
         alt: "Ambire Wallet fails to resolve the address for lightkeeper.eth in context of the Base chain",
       },
+      extra: "The app resolved to the Ethereum Mainnet address instead of the Base address.",
     }),
   },
   "at06-resolve-bitcoin-address": {

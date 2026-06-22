@@ -77,6 +77,7 @@ const depositAddresses = {
         image: at4Proof,
         alt: "Coinbase Wallet fails to resolve the address for dperri.com",
       },
+      extra: `The app couldn't find the ENS name with a ".com" TLD.`,
     }),
   },
   "at05-resolve-name-on-other-evm-chain": {
@@ -90,6 +91,7 @@ const depositAddresses = {
         image: at5Proof,
         alt: "Coinbase Wallet fails to resolve the address for lightkeeper.eth in context of the Base chain",
       },
+      extra: "The app resolved to the Ethereum Mainnet address instead of the Base address.",
     }),
   },
   "at06-resolve-bitcoin-address": {
@@ -116,6 +118,7 @@ const depositAddresses = {
         image: at7Proof,
         alt: "Coinbase Wallet fails to resolve the Solana address for gregskril.eth",
       },
+      extra: 'The app showed the message "No results".',
     }),
   },
   "at08-handle-invalid-address-format": {

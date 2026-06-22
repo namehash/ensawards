@@ -78,6 +78,7 @@ const depositAddresses = {
         image: at5Proof,
         alt: "WalletChan fails to resolve the address for lightkeeper.eth in context of the Base chain",
       },
+      extra: "The app resolved to the Ethereum Mainnet address instead of the Base address.",
     }),
   },
   "at06-resolve-bitcoin-address": {

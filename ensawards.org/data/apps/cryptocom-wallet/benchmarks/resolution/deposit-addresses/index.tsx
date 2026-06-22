@@ -50,6 +50,7 @@ const depositAddresses = {
         image: at2Proof,
         alt: "Crypto.com Wallet fails to resolve the address for Ξthereum.eth",
       },
+      extra: 'The app showed the message "Invalid address".',
     }),
   },
   "at03-resolve-offchain-eth-subname": {
@@ -63,6 +64,7 @@ const depositAddresses = {
         image: at3Proof,
         alt: "Crypto.com Wallet fails to resolve the address for jesse.base.eth",
       },
+      extra: 'The app showed the message "Invalid address".',
     }),
   },
   "at04-resolve-offchain-dns-name": {
@@ -76,6 +78,7 @@ const depositAddresses = {
         image: at4Proof,
         alt: "Crypto.com Wallet fails to resolve the address for dperri.com",
       },
+      extra: 'The app showed the message "Invalid address".',
     }),
   },
   "at05-resolve-name-on-other-evm-chain": {

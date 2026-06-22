@@ -21,6 +21,7 @@ import at01ResolveOnchainNameExampleFailImage from "./images/at01-resolve-onchai
 import at01ResolveOnchainNameExamplePassImage from "./images/at01-resolve-onchain-name-example-pass.gif";
 import at02ResolveNameNeedingNormalizationExamplePassImage from "./images/at02-resolve-name-needing-normalization-example-pass.gif";
 import at03ResolveOffchainEthSubnameExampleFailImage from "./images/at03-resolve-offchain-eth-subname-example-fail.gif";
+import at03ResolveOffchainEthSubnameExamplePassImage from "./images/at03-resolve-offchain-eth-subname-example-pass.gif";
 import at04ResolveOffchainDnsNameExampleFailImage from "./images/at04-resolve-offchain-dns-name-example-fail.gif";
 import at04ResolveOffchainDnsNameExamplePassImage from "./images/at04-resolve-offchain-dns-name-example-pass.gif";
 import at05ResolveNameOnOtherEvmChainExampleFailImage from "./images/at05-resolve-name-on-other-evm-chain-example-fail.gif";
@@ -339,7 +340,6 @@ const acceptanceTest3 = {
     contributions: [
       { from: contributors.lightwalker, lastUpdated: parseTimestamp("2026-06-18T15:46:00Z") },
     ],
-    // TODO: Insert true example of an app passing this acceptance test when performing the benchmarks
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
@@ -347,8 +347,8 @@ const acceptanceTest3 = {
           {jesseBaseEnsNameSpan} to {jesseBaseAddressSpan}.
         </p>
         <img
-          alt="Placeholder"
-          src={acceptanceTestExampleImagePlaceholder.src}
+          alt="Safe{Wallet} correctly resolves the address for jesse.base.eth"
+          src={at03ResolveOffchainEthSubnameExamplePassImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
       </div>
