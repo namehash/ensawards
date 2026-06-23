@@ -1,9 +1,11 @@
 import type { AcceptanceTestBenchmarkApplicable } from "data/acceptance-tests/types.ts";
 import {
+  calcBenchmarkFailRatio,
   calcBestPracticeCategoryScore,
   calcEnsAwardsPoints,
   groupBenchmarksByCategory,
   sortAcceptanceTestBenchmarks,
+  sortBenchmarkFailRatios,
   sortBenchmarkResults,
 } from "data/benchmarks/utils.ts";
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
@@ -21,7 +23,11 @@ import {
 } from "data/shared/test-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { BenchmarkResults } from "./types.ts";
+import {
+  type AcceptanceTestBenchmarks,
+  type BenchmarkFailRatio,
+  BenchmarkResults,
+} from "./types.ts";
 
 const { mockGetBestPracticeBySlug } = vi.hoisted(() => ({
   mockGetBestPracticeBySlug: vi.fn(),
@@ -354,6 +360,58 @@ describe("benchmarks-utils", () => {
 
       expectedOutput.forEach((benchmark, index) =>
         expect(benchmark, `Expected sorted benchmark at index ${index} to match`).toEqual(
+          result[index],
+        ),
+      );
+    });
+  });
+
+  describe("calcBenchmarkFailRatio", () => {
+    it("should return the correct fail ratio for a given set of benchmarks", () => {
+      const expectedResult = {
+        benchmarksFailed: 2,
+        allBenchmarks: 7,
+      } as const satisfies BenchmarkFailRatio;
+
+      const inputBenchmarks = {
+        "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
+        "mock-acceptance-test-3": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
+        "mock-acceptance-test-4": undefined,
+        "mock-acceptance-test-5": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+        "mock-acceptance-test-6": createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
+        "mock-acceptance-test-7": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
+      } as const satisfies AcceptanceTestBenchmarks;
+
+      const result = calcBenchmarkFailRatio(inputBenchmarks);
+
+      expect(
+        result,
+        "Expected calcBenchmarkFailRatio to return the correct fail ratio for a given set of benchmarks",
+      ).toEqual(expectedResult);
+    });
+  });
+
+  describe("sortBenchmarkFailRatios", () => {
+    it("should allow correct sorting of benchmark fail ratios", () => {
+      const input = [
+        { benchmarksFailed: 2, allBenchmarks: 10 },
+        { benchmarksFailed: 1, allBenchmarks: 4 },
+        { benchmarksFailed: 3, allBenchmarks: 5 },
+        { benchmarksFailed: 2, allBenchmarks: 2 },
+      ];
+
+      const expectedOutput = [
+        { benchmarksFailed: 2, allBenchmarks: 10 }, // 20%
+        { benchmarksFailed: 1, allBenchmarks: 4 }, // 25%
+        { benchmarksFailed: 3, allBenchmarks: 5 }, // 60%
+        { benchmarksFailed: 2, allBenchmarks: 2 }, // 100%
+      ];
+
+      const result = input.sort((a, b) => sortBenchmarkFailRatios(a, b));
+
+      expectedOutput.forEach((failRatio, index) =>
+        expect(failRatio, `Expected sorted fail ratio at index ${index} to match`).toEqual(
           result[index],
         ),
       );
