@@ -1,6 +1,6 @@
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils";
 import type { App } from "data/apps/types.ts";
-import { formatAppType, getAppById, sortApps } from "data/apps/utils.ts";
+import { formatAppType, getAppById } from "data/apps/utils.ts";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import {
   calcBenchmarkSuccessRatio,
@@ -69,7 +69,6 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
             {
               app,
               bestPractice,
-              acceptanceTestBenchmarks,
               generalizedBenchmarkResult,
               acceptanceTestsBenchmarksSuccessRatio,
             },

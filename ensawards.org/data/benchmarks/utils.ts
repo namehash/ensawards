@@ -402,14 +402,12 @@ export const sortBenchmarkSuccessRatios = (
   a: BenchmarkSuccessRatio | undefined,
   b: BenchmarkSuccessRatio | undefined,
 ): number => {
-  let successRatioDiff = 0;
-  if (a !== undefined && b !== undefined) {
-    const aNumericalSuccesRatio = a.testsPassed / a.allTests;
-    const bNumericalSuccesRatio = b.testsPassed / b.allTests;
+  if (a === undefined && b === undefined) return 0;
+  if (a === undefined) return 1;
+  if (b === undefined) return -1;
 
-    successRatioDiff = bNumericalSuccesRatio - aNumericalSuccesRatio;
-  }
-  if (a === undefined) successRatioDiff = 1;
-  if (b === undefined) successRatioDiff = -1;
-  return successRatioDiff;
+  const aNumericalSuccesRatio = a.testsPassed / a.allTests;
+  const bNumericalSuccesRatio = b.testsPassed / b.allTests;
+
+  return bNumericalSuccesRatio - aNumericalSuccesRatio;
 };
