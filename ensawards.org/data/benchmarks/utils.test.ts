@@ -1,12 +1,12 @@
 import type { AcceptanceTestBenchmarkApplicable } from "data/acceptance-tests/types.ts";
 import {
-  calcBenchmarkSuccessRatio,
+  calcBenchmarkFailRatio,
   calcBestPracticeCategoryScore,
   calcEnsAwardsPoints,
   groupBenchmarksByCategory,
   sortAcceptanceTestBenchmarks,
+  sortBenchmarkFailRatios,
   sortBenchmarkResults,
-  sortBenchmarkSuccessRatios,
 } from "data/benchmarks/utils.ts";
 import type { BestPracticeBenchmarks, BestPracticeSlug } from "data/ens-best-practices/types.ts";
 import {
@@ -25,8 +25,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
   type AcceptanceTestBenchmarks,
+  type BenchmarkFailRatio,
   BenchmarkResults,
-  type BenchmarkSuccessRatio,
 } from "./types.ts";
 
 const { mockGetBestPracticeBySlug } = vi.hoisted(() => ({
@@ -366,72 +366,52 @@ describe("benchmarks-utils", () => {
     });
   });
 
-  describe("calcBenchmarkSuccessRatio", () => {
-    it("should return the correct success ratio for a given set of benchmarks", () => {
+  describe("calcBenchmarkFailRatio", () => {
+    it("should return the correct fail ratio for a given set of benchmarks", () => {
       const expectedResult = {
-        testsPassed: 3,
-        allTests: 5,
-      } as const satisfies BenchmarkSuccessRatio;
+        benchmarksFailed: 2,
+        allBenchmarks: 7,
+      } as const satisfies BenchmarkFailRatio;
 
       const inputBenchmarks = {
         "mock-acceptance-test-1": createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
         "mock-acceptance-test-2": createMockAcceptanceTestBenchmark(BenchmarkResults.Pass),
         "mock-acceptance-test-3": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
-        // benchmarks with `not-applicable` result should be ignored
         "mock-acceptance-test-4": undefined,
-        // pending benchmarks should be ignored
         "mock-acceptance-test-5": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
         "mock-acceptance-test-6": createMockAcceptanceTestBenchmark(BenchmarkResults.PartialPass),
         "mock-acceptance-test-7": createMockAcceptanceTestBenchmark(BenchmarkResults.Fail),
       } as const satisfies AcceptanceTestBenchmarks;
 
-      const result = calcBenchmarkSuccessRatio(inputBenchmarks);
+      const result = calcBenchmarkFailRatio(inputBenchmarks);
 
       expect(
         result,
-        "Expected calcBenchmarkSuccessRatio to return the correct success ratio for a given set of benchmarks",
+        "Expected calcBenchmarkFailRatio to return the correct fail ratio for a given set of benchmarks",
       ).toEqual(expectedResult);
-    });
-
-    it("should return undefined if there are no applicable benchmarks", () => {
-      const inputBenchmarks = {
-        "mock-acceptance-test-1": undefined,
-        "mock-acceptance-test-2": undefined,
-        "mock-acceptance-test-3": createMockAcceptanceTestBenchmark(BenchmarkResults.NotApplicable),
-        "mock-acceptance-test-4": undefined,
-      } as const satisfies AcceptanceTestBenchmarks;
-
-      const result = calcBenchmarkSuccessRatio(inputBenchmarks);
-
-      expect(
-        result,
-        "Expected result to be undefined when there are only pending or not applicable benchmarks",
-      ).toBeUndefined();
     });
   });
 
-  describe("sortBenchmarkSuccessRatios", () => {
-    it("should allow correct sorting of benchmark success ratios", () => {
+  describe("sortBenchmarkFailRatios", () => {
+    it("should allow correct sorting of benchmark fail ratios", () => {
       const input = [
-        undefined,
-        { testsPassed: 2, allTests: 10 },
-        { testsPassed: 3, allTests: 4 },
-        { testsPassed: 2, allTests: 5 },
-        { testsPassed: 0, allTests: 2 },
+        { benchmarksFailed: 2, allBenchmarks: 10 },
+        { benchmarksFailed: 1, allBenchmarks: 4 },
+        { benchmarksFailed: 3, allBenchmarks: 5 },
+        { benchmarksFailed: 2, allBenchmarks: 2 },
       ];
 
       const expectedOutput = [
-        { testsPassed: 3, allTests: 4 }, // 75%
-        { testsPassed: 2, allTests: 5 }, // 40%
-        { testsPassed: 2, allTests: 10 }, // 20%
-        { testsPassed: 0, allTests: 2 }, // 0%
-        undefined, // all benchmarks either pending or not applicable
+        { benchmarksFailed: 2, allBenchmarks: 10 }, // 20%
+        { benchmarksFailed: 1, allBenchmarks: 4 }, // 25%
+        { benchmarksFailed: 3, allBenchmarks: 5 }, // 60%
+        { benchmarksFailed: 2, allBenchmarks: 2 }, // 100%
       ];
 
-      const result = input.sort((a, b) => sortBenchmarkSuccessRatios(a, b));
+      const result = input.sort((a, b) => sortBenchmarkFailRatios(a, b));
 
-      expectedOutput.forEach((successRatio, index) =>
-        expect(successRatio, `Expected sorted success ratio at index ${index} to match`).toEqual(
+      expectedOutput.forEach((failRatio, index) =>
+        expect(failRatio, `Expected sorted fail ratio at index ${index} to match`).toEqual(
           result[index],
         ),
       );

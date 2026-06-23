@@ -1,7 +1,7 @@
 import {
+  type BenchmarkFailRatio,
   type BenchmarkResult,
   BenchmarkResults,
-  type BenchmarkSuccessRatio,
 } from "data/benchmarks/types.ts";
 import { formatBenchmarkResult } from "data/benchmarks/utils.ts";
 import { CircleOff as NotApplicableIcon, Clock as PendingIcon } from "lucide-react";
@@ -10,7 +10,7 @@ import { cn } from "@/utils/tailwindClassConcatenation";
 
 export interface BenchmarkResultBadgeProps {
   benchmarkResult?: BenchmarkResult;
-  successRatio?: BenchmarkSuccessRatio;
+  failRatio?: BenchmarkFailRatio;
   className?: string;
 }
 
@@ -97,23 +97,36 @@ export const getBenchmarkIcon = (benchmarkResult?: BenchmarkResult, className?: 
 
 const formatBenchmarkResultBadgeText = ({
   benchmarkResult,
-  successRatio,
+  failRatio,
 }: Omit<BenchmarkResultBadgeProps, "className">) => {
-  if (successRatio !== undefined && benchmarkResult === BenchmarkResults.PartialPass) {
-    if (successRatio.testsPassed > successRatio.allTests) {
-      throw new Error(
-        `Invariant(BenchmarkSuccessRatio): testsPassed (${successRatio.testsPassed}) must be less than or equal to allTests (${successRatio.allTests})`,
-      );
-    }
-    return `${successRatio.allTests - successRatio.testsPassed}/${successRatio.allTests} tests failed`;
+  const defaultText = formatBenchmarkResult(benchmarkResult, { lowercase: false });
+
+  if (failRatio === undefined) {
+    return defaultText;
   }
 
-  return formatBenchmarkResult(benchmarkResult, { lowercase: false });
+  if (benchmarkResult !== BenchmarkResults.PartialPass) {
+    return defaultText;
+  }
+
+  // For cases where all benchmarks have `BenchmarkResults.PartialPass`
+  // we will display the default partial pass label.
+  if (failRatio.benchmarksFailed === 0) {
+    return defaultText;
+  }
+
+  if (failRatio.benchmarksFailed > failRatio.allBenchmarks) {
+    throw new Error(
+      `Invariant(BenchmarkFailRatio): testsFailed (${failRatio.benchmarksFailed}) must be less than or equal to allTests (${failRatio.allBenchmarks})`,
+    );
+  }
+
+  return `${failRatio.benchmarksFailed}/${failRatio.allBenchmarks} tests failed`;
 };
 
 export function BenchmarkResultBadge({
   benchmarkResult,
-  successRatio,
+  failRatio,
   className,
 }: BenchmarkResultBadgeProps) {
   const BenchmarkIcon = getBenchmarkIcon(benchmarkResult, "w-4 h-4 shrink-0");
@@ -127,7 +140,7 @@ export function BenchmarkResultBadge({
       )}
     >
       {BenchmarkIcon}
-      {formatBenchmarkResultBadgeText({ benchmarkResult, successRatio })}
+      {formatBenchmarkResultBadgeText({ benchmarkResult, failRatio })}
     </span>
   );
 }

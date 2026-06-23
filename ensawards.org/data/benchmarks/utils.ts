@@ -8,6 +8,7 @@ import { getAppBySlug } from "data/apps/utils.ts";
 import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 import type { UnixTimestamp } from "enssdk";
+import { bench } from "vitest";
 
 import type {
   BestPractice,
@@ -31,9 +32,9 @@ import {
 import { APP_BENCHMARKS } from ".";
 import {
   type AcceptanceTestBenchmarks,
+  type BenchmarkFailRatio,
   type BenchmarkResult,
   BenchmarkResults,
-  type BenchmarkSuccessRatio,
 } from "./types.ts";
 
 /** Returns all benchmarks of an {@link App} by its {@link AppSlug}.
@@ -361,53 +362,35 @@ export const summarizeAppsAcceptanceTestBenchmarks = (
 };
 
 /**
- * Calculates the {@link BenchmarkSuccessRatio} for a given set of {@link AcceptanceTestBenchmarks}.
+ * Calculates the {@link BenchmarkFailRatio} for a given set of {@link AcceptanceTestBenchmarks}.
  *
- * Omits the `undefined` (pending) benchmarks and the ones with `BenchmarkResults.NotApplicable` from the calculation.
+ * Includes the `undefined` (pending) benchmarks and the ones with `BenchmarkResults.NotApplicable`
+ * in the calculation of `allBenchmarks`.
  */
-export const calcBenchmarkSuccessRatio = (
+export const calcBenchmarkFailRatio = (
   acceptanceTestBenchmarks: AcceptanceTestBenchmarks,
-): BenchmarkSuccessRatio | undefined => {
-  let testsPassed = 0;
-  let allTests = 0;
+): BenchmarkFailRatio => {
+  const benchmarks = Object.values(acceptanceTestBenchmarks);
+  let benchmarksFailed = 0;
+  const allBenchmarks = benchmarks.length;
 
-  for (const benchmark of Object.values(acceptanceTestBenchmarks)) {
-    if (benchmark === undefined || benchmark.result === BenchmarkResults.NotApplicable) {
-      continue;
+  benchmarks.forEach((benchmark) => {
+    if (benchmark && benchmark.result === BenchmarkResults.Fail) {
+      benchmarksFailed += 1;
     }
+  });
 
-    allTests += 1;
-
-    // Currently, we treat `BenchmarkResults.PartialPass`
-    // and `BenchmarkResults.Pass` as successful benchmarks.
-    if (
-      benchmark.result === BenchmarkResults.Pass ||
-      benchmark.result === BenchmarkResults.PartialPass
-    ) {
-      testsPassed += 1;
-    }
-  }
-
-  if (allTests === 0) {
-    return undefined;
-  }
-
-  return { testsPassed, allTests };
+  return { benchmarksFailed, allBenchmarks };
 };
 
 /**
- * Sorts two {@link BenchmarkSuccessRatio}s relative to each other.
+ * Sorts two {@link BenchmarkFailRatio}s relative to each other.
+ *
+ * Sort order: ascending by the ratio of failed benchmarks to all benchmarks.
  */
-export const sortBenchmarkSuccessRatios = (
-  a: BenchmarkSuccessRatio | undefined,
-  b: BenchmarkSuccessRatio | undefined,
-): number => {
-  if (a === undefined && b === undefined) return 0;
-  if (a === undefined) return 1;
-  if (b === undefined) return -1;
+export const sortBenchmarkFailRatios = (a: BenchmarkFailRatio, b: BenchmarkFailRatio): number => {
+  const aNumericalFailRatio = a.benchmarksFailed / a.allBenchmarks;
+  const bNumericalFailRatio = b.benchmarksFailed / b.allBenchmarks;
 
-  const aNumericalSuccesRatio = a.testsPassed / a.allTests;
-  const bNumericalSuccesRatio = b.testsPassed / b.allTests;
-
-  return bNumericalSuccesRatio - aNumericalSuccesRatio;
+  return aNumericalFailRatio - bNumericalFailRatio;
 };

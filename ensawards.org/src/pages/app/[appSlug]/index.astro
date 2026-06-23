@@ -23,7 +23,7 @@ import {
   calcBestPracticeCategoryScore,
   sortBenchmarkResults,
   getAppBenchmarks,
-  calcBenchmarkSuccessRatio,
+  calcBenchmarkFailRatio,
 } from "data/benchmarks/utils";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
@@ -149,9 +149,7 @@ if (app !== undefined) {
                         bestPracticeSlug,
                         bestPracticeBenchmarks,
                       ),
-                      successRatio: calcBenchmarkSuccessRatio(
-                        bestPracticeBenchmarks,
-                      ),
+                      failRatio: calcBenchmarkFailRatio(bestPracticeBenchmarks),
                     }))
                     .sort((a, b) =>
                       sortBenchmarkResults(
@@ -174,7 +172,7 @@ if (app !== undefined) {
                         ({
                           bestPractice,
                           generalizedBenchmarkResult,
-                          successRatio,
+                          failRatio,
                         }) => {
                           return (
                             <BenchmarkResultCard
@@ -187,7 +185,7 @@ if (app !== undefined) {
                                 slot="badge"
                                 className="cursor-pointer"
                                 benchmarkResult={generalizedBenchmarkResult}
-                                successRatio={successRatio}
+                                failRatio={failRatio}
                               />
                             </BenchmarkResultCard>
                           );

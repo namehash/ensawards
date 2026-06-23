@@ -6,7 +6,7 @@ import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import {
   getAcceptanceTestBenchmarkLastUpdateTimestamp,
-  calcBenchmarkSuccessRatio,
+  calcBenchmarkFailRatio,
 } from "data/benchmarks/utils.ts";
 import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
@@ -34,7 +34,7 @@ const detailValueStyles = cn(
 const generalizedAcceptanceTestsBenchmarkResult =
   generalizeAcceptanceTestBenchmarks(acceptanceTestBenchmarks);
 
-const acceptanceTestsBenchmarksSuccessRatio = calcBenchmarkSuccessRatio(acceptanceTestBenchmarks);
+const acceptanceTestsBenchmarksFailRatio = calcBenchmarkFailRatio(acceptanceTestBenchmarks);
 ---
 
 <div
@@ -68,7 +68,7 @@ const acceptanceTestsBenchmarksSuccessRatio = calcBenchmarkSuccessRatio(acceptan
       <p class={detailLabelStyles}>Acceptance test results</p>
       <BenchmarkResultBadge
         benchmarkResult={generalizedAcceptanceTestsBenchmarkResult}
-        successRatio={acceptanceTestsBenchmarksSuccessRatio}
+        failRatio={acceptanceTestsBenchmarksFailRatio}
       />
     </div>
     {

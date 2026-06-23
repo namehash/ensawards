@@ -3,9 +3,9 @@ import type { App } from "data/apps/types.ts";
 import { formatAppType, getAppById } from "data/apps/utils.ts";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import {
-  calcBenchmarkSuccessRatio,
+  calcBenchmarkFailRatio,
+  sortBenchmarkFailRatios,
   sortBenchmarkResults,
-  sortBenchmarkSuccessRatios,
 } from "data/benchmarks/utils";
 import type { BestPracticeApp } from "data/ens-best-practices/types";
 import { Fragment } from "react";
@@ -30,9 +30,9 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
       bestPractice,
       acceptanceTestBenchmarks,
       generalizedBenchmarkResult: generalizeAcceptanceTestBenchmarks(acceptanceTestBenchmarks),
-      acceptanceTestsBenchmarksSuccessRatio: calcBenchmarkSuccessRatio(acceptanceTestBenchmarks),
+      acceptanceTestsBenchmarksFailRatio: calcBenchmarkFailRatio(acceptanceTestBenchmarks),
     }))
-    // sort the apps by their generalized benchmark result, then by success ratio, and finally by their name
+    // sort the apps by their generalized benchmark result, then by fail ratio, and finally by their name
     .sort((a, b) => {
       const benchmarkResultsDiff = sortBenchmarkResults(
         a.generalizedBenchmarkResult,
@@ -40,11 +40,11 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
       );
       if (benchmarkResultsDiff !== 0) return benchmarkResultsDiff;
 
-      const successRatioDiff = sortBenchmarkSuccessRatios(
-        a.acceptanceTestsBenchmarksSuccessRatio,
-        b.acceptanceTestsBenchmarksSuccessRatio,
+      const failRatioDiff = sortBenchmarkFailRatios(
+        a.acceptanceTestsBenchmarksFailRatio,
+        b.acceptanceTestsBenchmarksFailRatio,
       );
-      if (successRatioDiff !== 0) return successRatioDiff;
+      if (failRatioDiff !== 0) return failRatioDiff;
 
       return a.app.name.localeCompare(b.app.name);
     });
@@ -66,12 +66,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
       <div className="flex w-full flex-col items-center">
         {resolvedAppsWithBenchmark.map(
           (
-            {
-              app,
-              bestPractice,
-              generalizedBenchmarkResult,
-              acceptanceTestsBenchmarksSuccessRatio,
-            },
+            { app, bestPractice, generalizedBenchmarkResult, acceptanceTestsBenchmarksFailRatio },
             index,
           ) => {
             const AppIcon = app.icon;
@@ -88,7 +83,7 @@ export function BenchmarksPerAppTypeCard({ appsWithBenchmark }: BenchmarksPerApp
                   </span>
                   <BenchmarkResultBadge
                     benchmarkResult={generalizedBenchmarkResult}
-                    successRatio={acceptanceTestsBenchmarksSuccessRatio}
+                    failRatio={acceptanceTestsBenchmarksFailRatio}
                     className="shrink-0 cursor-pointer"
                   />
                 </a>

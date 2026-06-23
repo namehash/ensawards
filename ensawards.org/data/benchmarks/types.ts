@@ -28,26 +28,27 @@ export type AcceptanceTestBenchmarks = Record<
 >;
 
 /**
- * Represents the ratio of successful benchmarks
+ * Represents the ratio of failed benchmarks
  * for a given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
  */
-export interface BenchmarkSuccessRatio {
+export interface BenchmarkFailRatio {
   /**
    * Number of all tests that
-   * had a benchmark result of `BenchmarkResults.Pass` or `BenchmarkResults.PartialPass`
-   * for the given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
+   * had a benchmark result of `BenchmarkResults.Fail` for the given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
    *
    * @invariant
    * Must be >= 0
    */
-  testsPassed: number;
+  benchmarksFailed: number;
 
   /**
-   * Number of all tests that were relevant
+   * Number of all test benchmarks that were relevant
    * for the given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
    *
+   * Includes `pending` and `not-applicable` benchmarks.
+   *
    * @invariant
-   * Must be greater or equal to `testsPassed`.
+   * Must be greater or equal to `benchmarksFailed`.
    */
-  allTests: number;
+  allBenchmarks: number;
 }
