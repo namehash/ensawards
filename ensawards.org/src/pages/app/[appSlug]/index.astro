@@ -23,6 +23,7 @@ import {
   calcBestPracticeCategoryScore,
   sortBenchmarkResults,
   getAppBenchmarks,
+  calcBenchmarkFailRatio,
 } from "data/benchmarks/utils";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 import { EnsAwardsCircularScoreSmall } from "@/components/atoms/ens-awards-score/circular-small.tsx";
@@ -143,12 +144,13 @@ if (app !== undefined) {
                   const benchmarksOnBestPractice = [
                     ...Object.entries(benchmarksInCategory),
                   ]
-                    .map(([bestPracticeSlug, bestPracticeBenchmarks]) =>
-                      summarizeAppsAcceptanceTestBenchmarks(
+                    .map(([bestPracticeSlug, bestPracticeBenchmarks]) => ({
+                      ...summarizeAppsAcceptanceTestBenchmarks(
                         bestPracticeSlug,
                         bestPracticeBenchmarks,
                       ),
-                    )
+                      failRatio: calcBenchmarkFailRatio(bestPracticeBenchmarks),
+                    }))
                     .sort((a, b) =>
                       sortBenchmarkResults(
                         a.generalizedBenchmarkResult,
@@ -167,7 +169,11 @@ if (app !== undefined) {
                         </span>
                       </div>
                       {benchmarksOnBestPractice.map(
-                        ({ bestPractice, generalizedBenchmarkResult }) => {
+                        ({
+                          bestPractice,
+                          generalizedBenchmarkResult,
+                          failRatio,
+                        }) => {
                           return (
                             <BenchmarkResultCard
                               bestPractice={bestPractice}
@@ -179,6 +185,7 @@ if (app !== undefined) {
                                 slot="badge"
                                 className="cursor-pointer"
                                 benchmarkResult={generalizedBenchmarkResult}
+                                failRatio={failRatio}
                               />
                             </BenchmarkResultCard>
                           );
