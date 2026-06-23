@@ -4,18 +4,21 @@ import { RelativeTime } from "@namehash/namehash-ui";
 import { type AcceptanceTestBenchmarks } from "data/benchmarks/types.ts";
 import { type BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
-import { getAcceptanceTestBenchmarkLastUpdateTimestamp } from "data/benchmarks/utils.ts";
+import {
+  getAcceptanceTestBenchmarkLastUpdateTimestamp,
+  calcBenchmarkSuccessRatio,
+} from "data/benchmarks/utils.ts";
 import { BenchmarkResultBadge } from "../badges/BenchmarkResultBadge";
 import { generalizeAcceptanceTestBenchmarks } from "data/acceptance-tests/utils.ts";
 
 export interface BenchmarkSummaryCardProps {
   bestPractice: BestPracticeApp;
-  acceptanceTestsBenchmarks: AcceptanceTestBenchmarks;
+  acceptanceTestBenchmarks: AcceptanceTestBenchmarks;
 }
 
-const { bestPractice, acceptanceTestsBenchmarks }: BenchmarkSummaryCardProps = Astro.props;
+const { bestPractice, acceptanceTestBenchmarks }: BenchmarkSummaryCardProps = Astro.props;
 
-const benchmarksUpdateTimes = Object.values(acceptanceTestsBenchmarks)
+const benchmarksUpdateTimes = Object.values(acceptanceTestBenchmarks)
   .filter((benchmark) => benchmark !== undefined)
   .map((benchmark) => getAcceptanceTestBenchmarkLastUpdateTimestamp(benchmark));
 
@@ -29,7 +32,9 @@ const detailValueStyles = cn(
 );
 
 const generalizedAcceptanceTestsBenchmarkResult =
-  generalizeAcceptanceTestBenchmarks(acceptanceTestsBenchmarks);
+  generalizeAcceptanceTestBenchmarks(acceptanceTestBenchmarks);
+
+const acceptanceTestsBenchmarksSuccessRatio = calcBenchmarkSuccessRatio(acceptanceTestBenchmarks);
 ---
 
 <div
@@ -63,6 +68,7 @@ const generalizedAcceptanceTestsBenchmarkResult =
       <p class={detailLabelStyles}>Acceptance test results</p>
       <BenchmarkResultBadge
         benchmarkResult={generalizedAcceptanceTestsBenchmarkResult}
+        successRatio={acceptanceTestsBenchmarksSuccessRatio}
       />
     </div>
     {

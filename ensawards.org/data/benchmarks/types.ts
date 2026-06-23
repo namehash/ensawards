@@ -26,3 +26,28 @@ export type AcceptanceTestBenchmarks = Record<
   AcceptanceTestSlug,
   AcceptanceTestBenchmark | undefined
 >;
+
+/**
+ * Represents the ratio of successful benchmarks
+ * for a given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
+ */
+export interface BenchmarkSuccessRatio {
+  /**
+   * Number of all tests that
+   * had a benchmark result of `BenchmarkResults.Pass` or `BenchmarkResults.PartialPass`
+   * for the given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
+   *
+   * @invariant
+   * Must be >= 0
+   */
+  testsPassed: number;
+
+  /**
+   * Number of all tests that were relevant
+   * for the given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
+   *
+   * @invariant
+   * Must be greater or equal to `testsPassed`.
+   */
+  allTests: number;
+}

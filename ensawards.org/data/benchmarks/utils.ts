@@ -29,7 +29,12 @@ import {
   EnsAwardsUndefinedScoreLabels,
 } from "../shared/ens-awards-score.ts";
 import { APP_BENCHMARKS } from ".";
-import { type AcceptanceTestBenchmarks, type BenchmarkResult, BenchmarkResults } from "./types.ts";
+import {
+  type AcceptanceTestBenchmarks,
+  type BenchmarkResult,
+  BenchmarkResults,
+  type BenchmarkSuccessRatio,
+} from "./types.ts";
 
 /** Returns all benchmarks of an {@link App} by its {@link AppSlug}.
  */
@@ -353,4 +358,58 @@ export const summarizeAppsAcceptanceTestBenchmarks = (
     bestPractice,
     generalizedBenchmarkResult,
   };
+};
+
+/**
+ * Calculates the {@link BenchmarkSuccessRatio} for a given set of {@link AcceptanceTestBenchmarks}.
+ *
+ * Omits the `undefined` (pending) benchmarks and the ones with `BenchmarkResults.NotApplicable` from the calculation.
+ */
+export const calcBenchmarkSuccessRatio = (
+  acceptanceTestBenchmarks: AcceptanceTestBenchmarks,
+): BenchmarkSuccessRatio | undefined => {
+  let testsPassed = 0;
+  let allTests = 0;
+
+  for (const benchmark of Object.values(acceptanceTestBenchmarks)) {
+    if (benchmark === undefined || benchmark.result === BenchmarkResults.NotApplicable) {
+      continue;
+    }
+
+    allTests += 1;
+
+    // Currently, we treat `BenchmarkResults.PartialPass`
+    // and `BenchmarkResults.Pass` as successful benchmarks.
+    if (
+      benchmark.result === BenchmarkResults.Pass ||
+      benchmark.result === BenchmarkResults.PartialPass
+    ) {
+      testsPassed += 1;
+    }
+  }
+
+  if (allTests === 0) {
+    return undefined;
+  }
+
+  return { testsPassed, allTests };
+};
+
+/**
+ * Sorts two {@link BenchmarkSuccessRatio}s relative to each other.
+ */
+export const sortBenchmarkSuccessRatios = (
+  a: BenchmarkSuccessRatio | undefined,
+  b: BenchmarkSuccessRatio | undefined,
+): number => {
+  let successRatioDiff = 0;
+  if (a !== undefined && b !== undefined) {
+    const aNumericalSuccesRatio = a.testsPassed / a.allTests;
+    const bNumericalSuccesRatio = b.testsPassed / b.allTests;
+
+    successRatioDiff = bNumericalSuccesRatio - aNumericalSuccesRatio;
+  }
+  if (a === undefined) successRatioDiff = 1;
+  if (b === undefined) successRatioDiff = -1;
+  return successRatioDiff;
 };
