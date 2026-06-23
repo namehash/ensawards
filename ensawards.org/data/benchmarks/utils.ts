@@ -8,7 +8,6 @@ import { getAppBySlug } from "data/apps/utils.ts";
 import { getBestPracticeBySlug } from "data/ens-best-practices/utils.ts";
 import type { FormatTypeOptions } from "data/shared/format-type-options.ts";
 import type { UnixTimestamp } from "enssdk";
-import { bench } from "vitest";
 
 import type {
   BestPractice,
@@ -389,6 +388,12 @@ export const calcBenchmarkFailRatio = (
  * Sort order: ascending by the ratio of failed benchmarks to all benchmarks.
  */
 export const sortBenchmarkFailRatios = (a: BenchmarkFailRatio, b: BenchmarkFailRatio): number => {
+  if (a.allBenchmarks === 0 || b.allBenchmarks === 0) {
+    throw new Error(
+      `Invariant(BenchmarkFailRatio): allBenchmarks must be greater than 0 for both ratios being compared`,
+    );
+  }
+
   const aNumericalFailRatio = a.benchmarksFailed / a.allBenchmarks;
   const bNumericalFailRatio = b.benchmarksFailed / b.allBenchmarks;
 

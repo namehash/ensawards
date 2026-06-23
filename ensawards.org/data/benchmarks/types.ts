@@ -48,7 +48,9 @@ export interface BenchmarkFailRatio {
    * Includes `pending` and `not-applicable` benchmarks.
    *
    * @invariant
-   * Must be greater or equal to `benchmarksFailed`.
+   * Must be >= `benchmarksFailed` and >= 1.
+   * Supported by the invariant of {@link AcceptanceTestBenchmarks}
+   * and type definition of {@link BestPractice.technicalDetails.acceptanceTests}.
    */
   allBenchmarks: number;
 }
