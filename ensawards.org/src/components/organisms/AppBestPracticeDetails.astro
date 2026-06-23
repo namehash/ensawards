@@ -118,9 +118,9 @@ const additionalInfoContainerStyles =
 <section
   class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center py-6 sm:py-[60px] px-5 sm:px-8">
   <div
-    class="w-full max-w-[1216px] flex flex-nowrap flex-col md:flex-row gap-6 md:gap-20 justify-start md:justify-center items-start">
+    class="w-full max-w-[1216px] flex flex-nowrap flex-col min-[850px]:flex-row gap-6 min-[850px]:gap-20 justify-start min-[850px]:justify-between items-start">
     <BestPracticeTechnicalDetails bestPractice={bestPractice} />
-    <div class="w-full md:w-1/2 h-fit box-border flex flex-col gap-5">
+    <div class="w-full min-[850px]:w-1/2 h-fit box-border flex flex-col gap-5">
       <ContributorsCard
         client:only="react"
         sidebarVariant

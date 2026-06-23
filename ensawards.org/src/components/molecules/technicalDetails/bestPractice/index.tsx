@@ -32,7 +32,7 @@ export const BestPracticeTechnicalDetails = ({
   });
 
   return (
-    <div className="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">
+    <div className="w-full max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">
       <div className={technicalSectionContainerStyles}>
         <h2 className={technicalSectionHeaderStyles}>ENS best practice overview</h2>
         <EnsBestPracticeOverview bestPractice={bestPractice} />
