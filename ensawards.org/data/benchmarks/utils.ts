@@ -29,7 +29,12 @@ import {
   EnsAwardsUndefinedScoreLabels,
 } from "../shared/ens-awards-score.ts";
 import { APP_BENCHMARKS } from ".";
-import { type AcceptanceTestBenchmarks, type BenchmarkResult, BenchmarkResults } from "./types.ts";
+import {
+  type AcceptanceTestBenchmarks,
+  type BenchmarkFailRatio,
+  type BenchmarkResult,
+  BenchmarkResults,
+} from "./types.ts";
 
 /** Returns all benchmarks of an {@link App} by its {@link AppSlug}.
  */
@@ -353,4 +358,44 @@ export const summarizeAppsAcceptanceTestBenchmarks = (
     bestPractice,
     generalizedBenchmarkResult,
   };
+};
+
+/**
+ * Calculates the {@link BenchmarkFailRatio} for a given set of {@link AcceptanceTestBenchmarks}.
+ *
+ * Includes the `undefined` (pending) benchmarks and the ones with `BenchmarkResults.NotApplicable`
+ * in the calculation of `allBenchmarks`.
+ */
+export const calcBenchmarkFailRatio = (
+  acceptanceTestBenchmarks: AcceptanceTestBenchmarks,
+): BenchmarkFailRatio => {
+  const benchmarks = Object.values(acceptanceTestBenchmarks);
+  let benchmarksFailed = 0;
+  const allBenchmarks = benchmarks.length;
+
+  benchmarks.forEach((benchmark) => {
+    if (benchmark && benchmark.result === BenchmarkResults.Fail) {
+      benchmarksFailed += 1;
+    }
+  });
+
+  return { benchmarksFailed, allBenchmarks };
+};
+
+/**
+ * Sorts two {@link BenchmarkFailRatio}s relative to each other.
+ *
+ * Sort order: ascending by the ratio of failed benchmarks to all benchmarks.
+ */
+export const sortBenchmarkFailRatios = (a: BenchmarkFailRatio, b: BenchmarkFailRatio): number => {
+  if (a.allBenchmarks === 0 || b.allBenchmarks === 0) {
+    throw new Error(
+      `Invariant(BenchmarkFailRatio): allBenchmarks must be greater than 0 for both ratios being compared`,
+    );
+  }
+
+  const aNumericalFailRatio = a.benchmarksFailed / a.allBenchmarks;
+  const bNumericalFailRatio = b.benchmarksFailed / b.allBenchmarks;
+
+  return aNumericalFailRatio - bNumericalFailRatio;
 };

@@ -26,3 +26,31 @@ export type AcceptanceTestBenchmarks = Record<
   AcceptanceTestSlug,
   AcceptanceTestBenchmark | undefined
 >;
+
+/**
+ * Represents the ratio of failed benchmarks
+ * for a given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
+ */
+export interface BenchmarkFailRatio {
+  /**
+   * Number of all tests that
+   * had a benchmark result of `BenchmarkResults.Fail` for the given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
+   *
+   * @invariant
+   * Must be >= 0
+   */
+  benchmarksFailed: number;
+
+  /**
+   * Number of all test benchmarks that were relevant
+   * for the given {@link App}, {@link BestPractice}, or {@link BestPracticeCategory}.
+   *
+   * Includes `pending` and `not-applicable` benchmarks.
+   *
+   * @invariant
+   * Must be >= `benchmarksFailed` and >= 1.
+   * Supported by the invariant of {@link AcceptanceTestBenchmarks}
+   * and type definition of {@link BestPractice.technicalDetails.acceptanceTests}.
+   */
+  allBenchmarks: number;
+}

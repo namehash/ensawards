@@ -47,6 +47,9 @@ export interface AcceptanceTest {
   examplePartialPass?: AcceptanceTestBenchmarkPartialPass;
   exampleFail?: AcceptanceTestBenchmarkFail;
   exampleNotApplicable?: AcceptanceTestBenchmarkNotApplicable;
+
+  /** Sort priority within a {@link BestPractice}; lower comes first, undefined sorts last (then by slug). */
+  order?: number;
 }
 
 /**

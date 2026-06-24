@@ -8,7 +8,7 @@ import {
   technicalSectionContainerStyles,
   technicalSectionHeaderStyles,
   ImplementationRecommendations,
-  UseCaseSummary,
+  EnsBestPracticeOverview,
   AcceptanceTestDetailsContainer,
 } from "../shared";
 import { cn } from "@/utils/tailwindClassConcatenation";
@@ -19,6 +19,7 @@ import {
   AcceptanceTestResultFooter,
   AcceptanceTestResultFooterLoading,
 } from "./acceptanceTestResultDetails.tsx";
+import { getAcceptanceTestBySlug } from "data/acceptance-tests/utils";
 
 interface BenchmarkTechnicalDetailsProps {
   bestPractice: BestPractice;
@@ -29,10 +30,32 @@ interface BenchmarkTechnicalDetailsProps {
 const { bestPractice, acceptanceTestBenchmarks, benchmarkedApp }: BenchmarkTechnicalDetailsProps =
   Astro.props;
 
-// Sort acceptance tests by slug (alphabetically) to ensure consistent display order across best practice details and benchmark details pages.
+// Sort acceptance tests by order (ascending) to ensure consistent display order
+// across best practice details and benchmark details pages.
+// The tiebreaker is the alphabetical order of the acceptance test slug.
 const sortedAcceptanceTestBenchmarks = [...Object.entries(acceptanceTestBenchmarks)].sort(
-  ([aAcceptanceTestSlug, _a], [bAcceptanceTestSlug, _b]) =>
-    aAcceptanceTestSlug.localeCompare(bAcceptanceTestSlug),
+  ([aAcceptanceTestSlug, _a], [bAcceptanceTestSlug, _b]) => {
+    const aAcceptanceTest = getAcceptanceTestBySlug(aAcceptanceTestSlug);
+    const bAcceptanceTest = getAcceptanceTestBySlug(bAcceptanceTestSlug);
+
+    if (!aAcceptanceTest) {
+      throw new Error(
+        `Invariant(AcceptanceTestSlug): Acceptance test with slug="${aAcceptanceTestSlug}" is not defined.`,
+      );
+    }
+
+    if (!bAcceptanceTest) {
+      throw new Error(
+        `Invariant(AcceptanceTestSlug): Acceptance test with slug="${bAcceptanceTestSlug}" is not defined.`,
+      );
+    }
+
+    const aOrder = aAcceptanceTest.order ?? Number.POSITIVE_INFINITY;
+    const bOrder = bAcceptanceTest.order ?? Number.POSITIVE_INFINITY;
+    if (aOrder !== bOrder) return aOrder - bOrder;
+
+    return aAcceptanceTestSlug.localeCompare(bAcceptanceTestSlug);
+  },
 );
 ---
 
@@ -42,7 +65,7 @@ const sortedAcceptanceTestBenchmarks = [...Object.entries(acceptanceTestBenchmar
     <h2 class={technicalSectionHeaderStyles}>
       ENS best practice benchmark report
     </h2>
-    <UseCaseSummary bestPractice={bestPractice} />
+    <EnsBestPracticeOverview bestPractice={bestPractice} />
     <BenefitFromUsingEns bestPractice={bestPractice} />
   </div>
   {

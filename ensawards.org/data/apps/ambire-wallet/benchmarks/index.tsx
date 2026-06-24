@@ -11,9 +11,8 @@ import type { BestPracticeBenchmarks } from "data/ens-best-practices/types.ts";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
-import { cn } from "@/utils/tailwindClassConcatenation";
-
-import correctlyResolveEnsv2TestNameAddressProofImage from "./correctly-resolve-ensv2-test-name-address-proof.png";
+import depositAddresses from "./resolution/deposit-addresses";
+import ensv2ReadyResolution from "./resolution/ensv2-ready-resolution";
 
 const benchmarks = {
   // TODO: `Contract Naming` category is temporarily hidden due to unfit content,
@@ -46,27 +45,8 @@ const benchmarks = {
       ),
     } as const satisfies AcceptanceTestBenchmark,
   },
-  "ensv2-ready-resolution": {
-    "correctly-resolve-ensv2-test-name-address": {
-      result: BenchmarkResults.Pass,
-      contributions: [
-        { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-06-05T17:29:00Z") },
-      ],
-      notes: (
-        <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
-          <p className="w-full">
-            ENSv2 ready resolution was tested using the &quot;send&quot; flow. The resolved address
-            is correct.
-          </p>
-          <img
-            alt="Ambire Wallet correctly resolves the name for ENSv2"
-            src={correctlyResolveEnsv2TestNameAddressProofImage.src}
-            className="w-auto h-full max-h-[325px] rounded-xl"
-          />
-        </div>
-      ),
-    } as const satisfies AcceptanceTestBenchmark,
-  },
+  "ensv2-ready-resolution": ensv2ReadyResolution,
+  "deposit-addresses": depositAddresses,
 } as const satisfies BestPracticeBenchmarks;
 
 defineAppBenchmarks(AmbireWallet, benchmarks);

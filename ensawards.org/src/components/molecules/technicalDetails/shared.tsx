@@ -33,8 +33,8 @@ export const ImplementationRecommendations = ({ bestPractice }: { bestPractice: 
   </div>
 );
 
-export const UseCaseSummary = ({ bestPractice }: { bestPractice: BestPractice }) => (
-  <>{bestPractice.technicalDetails.useCaseSummary}</>
+export const EnsBestPracticeOverview = ({ bestPractice }: { bestPractice: BestPractice }) => (
+  <>{bestPractice.technicalDetails.ensBestPracticeOverview}</>
 );
 
 export interface AcceptanceTestDetailsProps {

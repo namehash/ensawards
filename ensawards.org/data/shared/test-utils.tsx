@@ -49,7 +49,7 @@ export const createMockBestPractice = (overrides: {
   },
   appliesTo: [AppTypes.Wallet],
   technicalDetails: {
-    useCaseSummary: <p>Mock use case summary</p>,
+    ensBestPracticeOverview: <p>Mock use case summary</p>,
     implementationRecommendations: <p>Mock implementation recommendations</p>,
     benefitFromUsingEns: <p>Mock benefit from using ENS</p>,
     acceptanceTests: [
