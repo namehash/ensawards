@@ -47,8 +47,8 @@ const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => {
           y2="-32.9459"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B46F9" />
-          <stop offset="1" stop-color="#BBFBE0" />
+          <stop stopColor="#0B46F9" />
+          <stop offset="1" stopColor="#BBFBE0" />
         </linearGradient>
         <linearGradient
           id={id("paint1_linear")}
@@ -58,8 +58,8 @@ const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => {
           y2="-32.9459"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B46F9" />
-          <stop offset="1" stop-color="#BBFBE0" />
+          <stop stopColor="#0B46F9" />
+          <stop offset="1" stopColor="#BBFBE0" />
         </linearGradient>
         <linearGradient
           id={id("paint2_linear")}
@@ -69,8 +69,8 @@ const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => {
           y2="-32.9459"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B46F9" />
-          <stop offset="1" stop-color="#BBFBE0" />
+          <stop stopColor="#0B46F9" />
+          <stop offset="1" stopColor="#BBFBE0" />
         </linearGradient>
         <linearGradient
           id={id("paint3_linear")}
@@ -80,8 +80,8 @@ const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => {
           y2="-32.9459"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B46F9" />
-          <stop offset="1" stop-color="#BBFBE0" />
+          <stop stopColor="#0B46F9" />
+          <stop offset="1" stopColor="#BBFBE0" />
         </linearGradient>
         <linearGradient
           id={id("paint4_linear")}
@@ -91,8 +91,8 @@ const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => {
           y2="178.125"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.119792" stop-color="#8952FF" stop-opacity="0.87" />
-          <stop offset="1" stop-color="#DABDFF" stop-opacity="0" />
+          <stop offset="0.119792" stopColor="#8952FF" stopOpacity="0.87" />
+          <stop offset="1" stopColor="#DABDFF" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>

@@ -36,7 +36,7 @@ const depositAddresses = {
           >
             Boros
           </a>{" "}
-          app , and the "dashboard" tool for the{" "}
+          app, and the "dashboard" tool for the{" "}
           <a
             className={bestPracticeTechnicalDetailsLinkStyles}
             target="_blank"
