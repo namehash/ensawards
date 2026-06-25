@@ -42,6 +42,7 @@ export const ProjectIds = {
   Taho: "project-taho",
   Pendle: "project-pendle",
   Hyperliquid: "project-hyperliquid",
+  Polymarket: "project-polymarket",
 } as const;
 
 /**
