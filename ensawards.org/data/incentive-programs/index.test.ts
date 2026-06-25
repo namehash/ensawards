@@ -29,7 +29,7 @@ describe("Incentive Program data", () => {
     );
   });
 
-  it("For the AwardPool type, all of programs's awards should be of the same currency as the program's totalAwardPool", () => {
+  it("For the AwardPool type, all of program's awards should be of the same currency as the program's totalAwardPool", () => {
     data.forEach((incentiveProgram) => {
       if (incentiveProgram.type === IncentiveProgramTypes.AwardPool) {
         const programCurrency = incentiveProgram.totalAwardPool.currency;
