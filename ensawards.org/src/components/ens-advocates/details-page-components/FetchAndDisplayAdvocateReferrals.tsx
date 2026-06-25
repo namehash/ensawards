@@ -1,8 +1,8 @@
 import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals";
+import { useRegistrarActions } from "@namehash/namehash-ui";
 import { asInterpretedName, type NormalizedAddress, namehashInterpretedName } from "enssdk";
 import { type ReactNode, useEffect, useState } from "react";
 
-import { useRegistrarActions } from "@ensnode/ensnode-react";
 import {
   type RegistrarActionsFilter,
   RegistrarActionsOrders,

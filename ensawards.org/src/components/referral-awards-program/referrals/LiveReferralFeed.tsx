@@ -1,6 +1,5 @@
+import { createEnsNodeProviderOptions, EnsNodeProvider } from "@namehash/namehash-ui";
 import { useMemo } from "react";
-
-import { createEnsNodeProviderOptions, EnsNodeProvider } from "@ensnode/ensnode-react";
 
 import {
   FetchAndDisplayRegistrarActionsFeed,

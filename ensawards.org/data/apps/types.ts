@@ -10,6 +10,8 @@ import type { Project } from "../projects/types.ts";
 export const AppTypes = {
   Wallet: "wallet",
   Explorer: "explorer",
+  DeFi: "defi-app",
+  Exchange: "exchange",
 } as const;
 
 /**

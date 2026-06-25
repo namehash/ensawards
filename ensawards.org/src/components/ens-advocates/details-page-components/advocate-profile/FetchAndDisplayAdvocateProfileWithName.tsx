@@ -1,6 +1,6 @@
+import { ASSUME_IMMUTABLE_QUERY, useRecords } from "@namehash/namehash-ui";
 import type { InterpretedName, NormalizedAddress } from "enssdk";
 
-import { ASSUME_IMMUTABLE_QUERY, useRecords } from "@ensnode/ensnode-react";
 import { type ResolverRecordsSelection } from "@ensnode/ensnode-sdk";
 
 import { ErrorInfo } from "@/components/atoms/ErrorInfo.tsx";

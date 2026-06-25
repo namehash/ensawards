@@ -1,14 +1,19 @@
 ---
 import { cn } from "../../utils/tailwindClassConcatenation";
-import { type EnsAwardsScore } from "data/shared/ens-awards-score";
+import {
+  type EnsAwardsScoreResult,
+  type EnsAwardsScore,
+  formatEnsAwardsUndefinedScoreLabel,
+  EnsAwardsScoreResultTypes,
+} from "data/shared/ens-awards-score";
 
 export interface CircularScoreProps {
-  score?: EnsAwardsScore;
+  scoreResult: EnsAwardsScoreResult;
   size?: number;
   strokeWidth?: number;
 }
 
-const { score, size = 139, strokeWidth = 10 }: CircularScoreProps = Astro.props;
+const { scoreResult, size = 139, strokeWidth = 10 }: CircularScoreProps = Astro.props;
 
 const gradientStartColors = ["#12D494", "#ffd230", "#fb2c36", "#d1d1d1"];
 const gradientStopColors = ["#0D9A6B", "#e17100", "#c10007", "#969696"];
@@ -32,7 +37,7 @@ const getGradientColorIndex = (score?: EnsAwardsScore) => {
   return 0;
 };
 
-const gradientIndex = getGradientColorIndex(score);
+const gradientIndex = getGradientColorIndex(scoreResult.score);
 const colorFrom = gradientStartColors[gradientIndex];
 const colorTo = gradientStopColors[gradientIndex];
 
@@ -82,26 +87,32 @@ const circumference = 2 * Math.PI * radius;
   <div
     class="absolute w-full flex flex-row flex-nowrap justify-center items-start gap-0">
     {
-      score === undefined ? (
-        <p class="text-base leading-normal font-semibold text-[rgba(245,245,245,0.5)]">
-          Pending
+      scoreResult.type === EnsAwardsScoreResultTypes.Undefined ? (
+        <p class="max-w-[100px] text-base text-wrap text-center leading-normal font-semibold text-[rgba(245,245,245,0.5)]">
+          {formatEnsAwardsUndefinedScoreLabel(scoreResult.label)}
         </p>
       ) : (
         <p
           id="scoreNumber"
-          data-score={score}
+          data-score={scoreResult.score}
           class="text-4xl text-white leading-8 font-semibold transition-all ease-linear"
         />
       )
     }
     {
-      score !== undefined && (
+      scoreResult.score !== undefined && (
         <p class={cn("text-4xl text-white leading-8 font-semibold")}>%</p>
       )
     }
   </div>
 </div>
 <script>
+  import {
+    SIGNIFICANT_SCORE_THRESHOLD,
+    MIN_VISIBLE_SCOREBAR_FILL,
+    calcScoreBarFill,
+  } from "@/components/atoms/ens-awards-score/utils";
+
   function initializeScore() {
     // Set up of the numeric label
     const scoreLabel = document.getElementById("scoreNumber");
@@ -116,17 +127,30 @@ const circumference = 2 * Math.PI * radius;
 
     // Set up of the progress bar
     const progressBar = document.getElementById("progressBar");
-    const radius = Number(progressBar.dataset.radius);
     const circumference = Number(progressBar.dataset.circumference);
     let offset = circumference;
 
+    // For small scores (including 0)
+    // we should still show a little bit of the progress bar
+    if (targetScore < SIGNIFICANT_SCORE_THRESHOLD) {
+      offset = circumference * (1 - MIN_VISIBLE_SCOREBAR_FILL / 100);
+      progressBar.setAttribute("stroke-dashoffset", offset.toString());
+    }
+
     // Initial delay
-    let delay = 200;
+    let delay = 0;
 
     function animateScore() {
       // Calculate new values
       counter += 1;
-      offset = circumference * (1 - counter / 100);
+
+      // For small scores take into account the previously set initial offset
+      if (targetScore < SIGNIFICANT_SCORE_THRESHOLD) {
+        offset = circumference * (1 - calcScoreBarFill(counter) / 100);
+      } else {
+        // Otherwise proceed normally
+        offset = circumference * (1 - counter / 100);
+      }
 
       // Display new values
       progressBar.setAttribute("stroke-dashoffset", offset.toString());

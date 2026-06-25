@@ -33,7 +33,8 @@ import {
 } from "@/components/atoms/cards/ContributorsCard";
 import { type Contribution } from "data/contributors/types";
 import { getProtocolContributions } from "data/contributors/utils";
-import type { EnsAwardsScore } from "data/shared/ens-awards-score";
+import type { EnsAwardsScoreResult } from "data/shared/ens-awards-score";
+import { EnsAwardsScoreResultTypes } from "data/shared/ens-awards-score";
 import AwardsCard from "@/components/atoms/cards/AwardsCard.astro";
 
 export function getStaticPaths() {
@@ -55,14 +56,22 @@ const protocol = getProtocolBySlug(protocolSlug);
 
 // The default values should never be used. Only introduced for type safety.
 let protocolContracts: Contract[] = [];
-let protocolScore: EnsAwardsScore = 0;
+let protocolScoreResult: EnsAwardsScoreResult = {
+  type: EnsAwardsScoreResultTypes.Defined,
+  score: 0,
+  label: undefined,
+};
 let ProtocolIcon: typeof GlobeIcon = GlobeIcon;
 let protocolContributions: Contribution[] = [];
 
 if (protocol) {
   protocolContracts = getAllProtocolContracts(protocol.id);
   ProtocolIcon = protocol.icon;
-  protocolScore = getContractNamingScoresByProtocolType(protocol.protocolType)[protocol.id] ?? 0;
+  protocolScoreResult = {
+    type: EnsAwardsScoreResultTypes.Defined,
+    score: getContractNamingScoresByProtocolType(protocol.protocolType)[protocol.id] ?? 0,
+    label: undefined,
+  };
   protocolContributions = getProtocolContributions(protocol);
 }
 ---
@@ -119,7 +128,7 @@ if (protocol) {
         </div>
         <EnsAwardsScoreDisplay
           slot="largerHeroItem"
-          score={protocolScore}
+          scoreResult={protocolScoreResult}
           label="ENSAwards score"
         />
       </SubpageHero>

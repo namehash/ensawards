@@ -4,13 +4,13 @@ import type { BestPracticeApp } from "data/ens-best-practices/types.ts";
 import { cn } from "@/utils/tailwindClassConcatenation";
 import SubpageHero from "../molecules/SubpageHero.astro";
 import { calcBestPracticeScore } from "data/ens-best-practices/utils.ts";
-import { sortBenchmarks, getAppBenchmarks } from "data/benchmarks/utils.ts";
+import { sortAcceptanceTestBenchmarks, getAppBenchmarks } from "data/benchmarks/utils.ts";
 import {
   ContributionTypes,
   ContributorsCard,
   ContributorsCardLoading,
 } from "../atoms/cards/ContributorsCard.tsx";
-import BestPracticeTechnicalDetails from "@/components/molecules/BestPracticeTechnicalDetails.astro";
+import { BestPracticeTechnicalDetails } from "@/components/molecules/technicalDetails/bestPractice";
 import { BenchmarksPerAppTypeCard } from "@/components/atoms/cards/BenchmarksPerAppTypeCard.tsx";
 import { ScoreBar } from "@/components/atoms/ens-awards-score/bar.tsx";
 import { type Contribution } from "data/contributors/types";
@@ -23,20 +23,39 @@ export interface AppBestPracticeDetailsProps {
 const { bestPractice }: AppBestPracticeDetailsProps = Astro.props;
 
 // Get apps that have benchmarks for this specific best practice
-const appsWithBenchmarks = APPS.map((app) => {
-  const matchingBenchmark = getAppBenchmarks(app.appSlug)[bestPractice.bestPracticeSlug];
+const appsWithBenchmarks = APPS.filter((app) => bestPractice.appliesTo.includes(app.type)).map(
+  (app) => {
+    const matchingBenchmark = getAppBenchmarks(app.appSlug)[bestPractice.bestPracticeSlug];
 
-  return {
-    app,
-    bestPractice,
-    benchmark: matchingBenchmark,
-  };
-});
+    if (matchingBenchmark === undefined) {
+      throw new Error(
+        `Invariant(BestPracticeBenchmarks): Required benchmarks for app-${app.name} on best practice-${bestPractice.name} are not defined`,
+      );
+    }
+
+    return {
+      app,
+      bestPractice,
+      acceptanceTestBenchmarks: matchingBenchmark,
+    };
+  },
+);
 
 // Sort benchmark results
 const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
   // First try to differentiate by benchmarks
-  const benchmarksDiff = sortBenchmarks(a.benchmark, b.benchmark);
+
+  let benchmarksDiff = 0;
+
+  const acceptanceTestSlugs = Object.keys(a.acceptanceTestBenchmarks);
+
+  for (let idx = 0; idx < acceptanceTestSlugs.length; idx++) {
+    const acceptanceTestSlug = acceptanceTestSlugs[idx];
+    const aBenchmark = a.acceptanceTestBenchmarks[acceptanceTestSlug];
+    const bBenchmark = b.acceptanceTestBenchmarks[acceptanceTestSlug];
+
+    benchmarksDiff += sortAcceptanceTestBenchmarks(aBenchmark, bBenchmark);
+  }
 
   if (benchmarksDiff !== 0) return benchmarksDiff;
 
@@ -46,8 +65,11 @@ const sortedAppsByBenchmark = appsWithBenchmarks.sort((a, b) => {
 
 const bestPracticeScore = calcBestPracticeScore(bestPractice);
 
-const benchmarkContributions: Contribution[] = appsWithBenchmarks.flatMap(({ benchmark }) =>
-  benchmark ? benchmark.contributions : [],
+const benchmarkContributions: Contribution[] = appsWithBenchmarks.flatMap(
+  ({ acceptanceTestBenchmarks }) =>
+    Object.values(acceptanceTestBenchmarks).flatMap(
+      (benchmarkResult) => benchmarkResult?.contributions ?? [],
+    ),
 );
 
 const allContributions: Contribution[] = [...bestPractice.contributions, ...benchmarkContributions];
@@ -86,9 +108,9 @@ const additionalInfoContainerStyles =
       )}>
       <p class="text-gray-400 whitespace-nowrap">App support</p>
       <ScoreBar
-        score={bestPracticeScore}
+        scoreResult={bestPracticeScore}
         mobileAdaptive={false}
-        pendingScoreStyles="text-base leading-normal font-semibold text-white"
+        undefinedScoreStyles="text-base leading-normal font-semibold text-white"
       />
     </div>
   </Fragment>
@@ -96,15 +118,15 @@ const additionalInfoContainerStyles =
 <section
   class="w-full box-border h-fit flex flex-col flex-nowrap justify-start items-center py-6 sm:py-[60px] px-5 sm:px-8">
   <div
-    class="w-full max-w-[1216px] flex flex-nowrap flex-col md:flex-row gap-6 md:gap-20 justify-start md:justify-center items-start">
+    class="w-full max-w-[1216px] flex flex-nowrap flex-col min-[850px]:flex-row gap-6 min-[850px]:gap-20 justify-start min-[850px]:justify-between items-start">
     <BestPracticeTechnicalDetails bestPractice={bestPractice} />
-    <div class="w-full md:w-1/2 h-fit box-border flex flex-col gap-5">
+    <div class="w-full min-[850px]:w-1/2 h-fit box-border flex flex-col gap-5">
       <ContributorsCard
         client:only="react"
         sidebarVariant
         contributionType={ContributionTypes.BestPractice}
         existingContributions={allContributions}
-        gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}.ts`}>
+        gitHubTargetHref={`https://github.com/namehash/ensawards/blob/main/ensawards.org/data/ens-best-practices/${bestPractice.category.categorySlug}/${bestPractice.bestPracticeSlug}/index.ts`}>
         <ContributorsCardLoading
           slot="fallback"
           sidebarVariant

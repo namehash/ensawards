@@ -1,0 +1,114 @@
+---
+import type { App } from "data/apps/types.ts";
+import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
+import type { BestPractice } from "data/ens-best-practices/types.ts";
+
+import {
+  BenefitFromUsingEns,
+  technicalSectionContainerStyles,
+  technicalSectionHeaderStyles,
+  ImplementationRecommendations,
+  EnsBestPracticeOverview,
+  AcceptanceTestDetailsContainer,
+} from "../shared";
+import { cn } from "@/utils/tailwindClassConcatenation";
+import { BenchmarkResultBadge } from "@/components/atoms/badges/BenchmarkResultBadge.tsx";
+import { PendingAcceptanceTestResultCTA } from "@/components/atoms/banners/PendingAcceptanceTestResultCTA.tsx";
+import {
+  AcceptanceTestResultNotes,
+  AcceptanceTestResultFooter,
+  AcceptanceTestResultFooterLoading,
+} from "./acceptanceTestResultDetails.tsx";
+import { getAcceptanceTestBySlug } from "data/acceptance-tests/utils";
+
+interface BenchmarkTechnicalDetailsProps {
+  bestPractice: BestPractice;
+  acceptanceTestBenchmarks: AcceptanceTestBenchmarks;
+  benchmarkedApp: App;
+}
+
+const { bestPractice, acceptanceTestBenchmarks, benchmarkedApp }: BenchmarkTechnicalDetailsProps =
+  Astro.props;
+
+// Sort acceptance tests by order (ascending) to ensure consistent display order
+// across best practice details and benchmark details pages.
+// The tiebreaker is the alphabetical order of the acceptance test slug.
+const sortedAcceptanceTestBenchmarks = [...Object.entries(acceptanceTestBenchmarks)].sort(
+  ([aAcceptanceTestSlug, _a], [bAcceptanceTestSlug, _b]) => {
+    const aAcceptanceTest = getAcceptanceTestBySlug(aAcceptanceTestSlug);
+    const bAcceptanceTest = getAcceptanceTestBySlug(bAcceptanceTestSlug);
+
+    if (!aAcceptanceTest) {
+      throw new Error(
+        `Invariant(AcceptanceTestSlug): Acceptance test with slug="${aAcceptanceTestSlug}" is not defined.`,
+      );
+    }
+
+    if (!bAcceptanceTest) {
+      throw new Error(
+        `Invariant(AcceptanceTestSlug): Acceptance test with slug="${bAcceptanceTestSlug}" is not defined.`,
+      );
+    }
+
+    const aOrder = aAcceptanceTest.order ?? Number.POSITIVE_INFINITY;
+    const bOrder = bAcceptanceTest.order ?? Number.POSITIVE_INFINITY;
+    if (aOrder !== bOrder) return aOrder - bOrder;
+
+    return aAcceptanceTestSlug.localeCompare(bAcceptanceTestSlug);
+  },
+);
+---
+
+<div
+  class="max-w-[716px] flex flex-nowrap flex-col justify-center items-start gap-6">
+  <div class={technicalSectionContainerStyles}>
+    <h2 class={technicalSectionHeaderStyles}>
+      ENS best practice benchmark report
+    </h2>
+    <EnsBestPracticeOverview bestPractice={bestPractice} />
+    <BenefitFromUsingEns bestPractice={bestPractice} />
+  </div>
+  {
+    sortedAcceptanceTestBenchmarks.map(
+      ([acceptanceTestSlug, acceptanceTestBenchmark], index) => (
+        <AcceptanceTestDetailsContainer
+          key={acceptanceTestSlug}
+          acceptanceTestSlug={acceptanceTestSlug}
+          testIndex={index}>
+          <div
+            class={cn(
+              technicalSectionContainerStyles,
+              "w-full p-4 bg-neutral-50 rounded-xl",
+            )}>
+            <h4
+              class={cn(
+                technicalSectionHeaderStyles,
+                "text-xl w-full flex flex-row items-start justify-between gap-3",
+              )}>
+              {`Test ${index + 1} Result`}
+              <BenchmarkResultBadge
+                benchmarkResult={acceptanceTestBenchmark?.result}
+              />
+            </h4>
+            {acceptanceTestBenchmark === undefined ? (
+              <PendingAcceptanceTestResultCTA app={benchmarkedApp} />
+            ) : (
+              <>
+                <AcceptanceTestResultNotes
+                  acceptanceTestBenchmark={acceptanceTestBenchmark}
+                />
+                <div class="w-full h-px bg-border" />
+                <AcceptanceTestResultFooter
+                  acceptanceTestBenchmark={acceptanceTestBenchmark}
+                  client:only="react">
+                  <AcceptanceTestResultFooterLoading slot="fallback" />
+                </AcceptanceTestResultFooter>
+              </>
+            )}
+          </div>
+        </AcceptanceTestDetailsContainer>
+      ),
+    )
+  }
+  <ImplementationRecommendations bestPractice={bestPractice} />
+</div>

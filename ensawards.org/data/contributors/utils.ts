@@ -1,4 +1,4 @@
-import { getAppBenchmarks } from "data/benchmarks/utils.ts";
+import { getAcceptanceTestBenchmarksByApp } from "data/acceptance-tests/utils.ts";
 import { stringifyAccountId } from "enssdk";
 
 import { type App } from "../apps/types.ts";
@@ -24,7 +24,7 @@ export const countContributorAppearances = (
 };
 
 export const getAppContributions = (app: App): Contribution[] =>
-  Object.values(getAppBenchmarks(app.appSlug))
+  getAcceptanceTestBenchmarksByApp(app.appSlug)
     .filter((benchmark) => benchmark !== undefined)
     .flatMap((benchmark) => benchmark.contributions);
 

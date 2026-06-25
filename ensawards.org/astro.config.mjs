@@ -43,6 +43,77 @@ export default defineConfig({
     "/leaderboards/referrer": "/ens-referral-program/editions/2025-12/leaderboard",
 
     "/ens-best-practices/contract-naming": "/ens-best-practices",
+
+    "/leaderboards/defi": "/leaderboards/defi-protocol",
+
+    // The `ensv2-readiness` best practice category was renamed to `resolution`.
+    "/ens-best-practices/ensv2-readiness/ensv2-ready-resolution":
+      "/ens-best-practices/resolution/ensv2-ready-resolution",
+
+    "/app/1inch-defi/ensv2-readiness/ensv2-ready-resolution":
+      "/app/1inch-defi/resolution/ensv2-ready-resolution",
+    "/app/aave-defi/ensv2-readiness/ensv2-ready-resolution":
+      "/app/aave-defi/resolution/ensv2-ready-resolution",
+    "/app/ambire-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/ambire-wallet/resolution/ensv2-ready-resolution",
+    "/app/binance-exchange/ensv2-readiness/ensv2-ready-resolution":
+      "/app/binance-exchange/resolution/ensv2-ready-resolution",
+    "/app/binance-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/binance-wallet/resolution/ensv2-ready-resolution",
+    "/app/blockscout-explorer/ensv2-readiness/ensv2-ready-resolution":
+      "/app/blockscout-explorer/resolution/ensv2-ready-resolution",
+    "/app/coinbase-exchange/ensv2-readiness/ensv2-ready-resolution":
+      "/app/coinbase-exchange/resolution/ensv2-ready-resolution",
+    "/app/coinbase-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/coinbase-wallet/resolution/ensv2-ready-resolution",
+    "/app/cryptocom-exchange/ensv2-readiness/ensv2-ready-resolution":
+      "/app/cryptocom-exchange/resolution/ensv2-ready-resolution",
+    "/app/cryptocom-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/cryptocom-wallet/resolution/ensv2-ready-resolution",
+    "/app/etherscan-explorer/ensv2-readiness/ensv2-ready-resolution":
+      "/app/etherscan-explorer/resolution/ensv2-ready-resolution",
+    "/app/frame-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/frame-wallet/resolution/ensv2-ready-resolution",
+    "/app/gemini-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/gemini-wallet/resolution/ensv2-ready-resolution",
+    "/app/kraken-exchange/ensv2-readiness/ensv2-ready-resolution":
+      "/app/kraken-exchange/resolution/ensv2-ready-resolution",
+    "/app/kraken-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/kraken-wallet/resolution/ensv2-ready-resolution",
+    "/app/lido-defi/ensv2-readiness/ensv2-ready-resolution":
+      "/app/lido-defi/resolution/ensv2-ready-resolution",
+    "/app/metamask-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/metamask-wallet/resolution/ensv2-ready-resolution",
+    "/app/okx-exchange/ensv2-readiness/ensv2-ready-resolution":
+      "/app/okx-exchange/resolution/ensv2-ready-resolution",
+    "/app/okx-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/okx-wallet/resolution/ensv2-ready-resolution",
+    "/app/phantom-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/phantom-wallet/resolution/ensv2-ready-resolution",
+    "/app/rabby-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/rabby-wallet/resolution/ensv2-ready-resolution",
+    "/app/rainbow-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/rainbow-wallet/resolution/ensv2-ready-resolution",
+    "/app/readyx-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/readyx-wallet/resolution/ensv2-ready-resolution",
+    "/app/robinhood-exchange/ensv2-readiness/ensv2-ready-resolution":
+      "/app/robinhood-exchange/resolution/ensv2-ready-resolution",
+    "/app/robinhood-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/robinhood-wallet/resolution/ensv2-ready-resolution",
+    "/app/safe-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/safe-wallet/resolution/ensv2-ready-resolution",
+    "/app/status-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/status-wallet/resolution/ensv2-ready-resolution",
+    "/app/trust-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/trust-wallet/resolution/ensv2-ready-resolution",
+    "/app/uniswap-defi/ensv2-readiness/ensv2-ready-resolution":
+      "/app/uniswap-defi/resolution/ensv2-ready-resolution",
+    "/app/walletchan-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/walletchan-wallet/resolution/ensv2-ready-resolution",
+    "/app/worldapp-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/worldapp-wallet/resolution/ensv2-ready-resolution",
+    "/app/zerion-wallet/ensv2-readiness/ensv2-ready-resolution":
+      "/app/zerion-wallet/resolution/ensv2-ready-resolution",
   },
 
   adapter: vercel(),

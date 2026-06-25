@@ -34,7 +34,15 @@ const contributors = {
   },
   caldonia: {
     chainId: mainnet.id,
-    address: "0x9a41c5549bcc7d3f8d80e639714a4823de559134",
+    address: asNormalizedAddress("0x9a41c5549bcc7d3f8d80e639714a4823de559134"),
+  },
+  shrugs: {
+    chainId: mainnet.id,
+    address: asNormalizedAddress("0xbd4cd9ae5bff533bf4ee926eeddc3dca5e2cdb4c"),
+  },
+  llev: {
+    chainId: mainnet.id,
+    address: asNormalizedAddress("0xc0de20a37e2dac848f81a93bd85fe4acdde7c0de"),
   },
 } as const satisfies Record<ContributorAlias, Contributor>;
 
