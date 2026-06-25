@@ -381,7 +381,7 @@ export function buildNotApplicableForNonEvmChain({
   });
 }
 
-/** The app has no concept of the given EVM chain (e.g. Base). */
+/** The app has no concept of the given EVM chain (for now, Base only). */
 export function buildNotApplicableForEvmChain({
   chain,
   proof,

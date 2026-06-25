@@ -14,7 +14,7 @@ const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => {
       viewBox="0 0 300 300"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("", className)}
+      className={cn("p-1", className)}
       {...props}
     >
       <path
