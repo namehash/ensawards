@@ -20,7 +20,8 @@ const HyperliquidDeFi: App = {
     twitter: new URL("https://x.com/HyperliquidX"),
   },
   icon: HyperliquidIcon,
-  // TODO: Add OG images
+  ogImagePath: "hyperliquid-defi/og.png",
+  twitterOgImagePath: "hyperliquid-defi/twitter-og.png",
 };
 
 defineApp(HyperliquidDeFi);

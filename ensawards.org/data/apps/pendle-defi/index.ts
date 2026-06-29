@@ -20,7 +20,8 @@ const PendleDeFi: App = {
     twitter: new URL("https://x.com/pendle_fi"),
   },
   icon: PendleIcon,
-  // TODO: Add OG images
+  ogImagePath: "pendle-defi/og.png",
+  twitterOgImagePath: "pendle-defi/twitter-og.png",
 };
 
 defineApp(PendleDeFi);
