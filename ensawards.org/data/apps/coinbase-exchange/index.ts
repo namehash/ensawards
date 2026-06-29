@@ -2,6 +2,7 @@
 // for additional advice on adding and modifying apps
 
 import CoinbaseProject from "data/projects/coinbase";
+import { asInterpretedName } from "enssdk";
 
 import { defineApp } from "../registry.ts";
 import { type App, AppTypes } from "../types.ts";
@@ -18,6 +19,7 @@ const CoinbaseExchange: App = {
   socials: {
     website: new URL("https://www.coinbase.com"),
     twitter: new URL("https://x.com/coinbase"),
+    ens: asInterpretedName("coinbase.eth"),
   },
   icon: CoinbaseIcon,
   ogImagePath: "coinbase-exchange/og.png",

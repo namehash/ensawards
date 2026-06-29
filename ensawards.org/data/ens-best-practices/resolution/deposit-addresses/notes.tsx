@@ -381,6 +381,25 @@ export function buildNotApplicableForNonEvmChain({
   });
 }
 
+/** The app has no concept of the given EVM chain (for now, Base only). */
+export function buildNotApplicableForEvmChain({
+  chain,
+  proof,
+}: {
+  chain: "Base";
+  proof?: ProofInput;
+}) {
+  return buildBenchmarkNote({
+    proof,
+    children: (
+      <>
+        The app doesn't have context of the EVM chain {chain} and therefore we classify this
+        acceptance test as {notApplicableSpan}.
+      </>
+    ),
+  });
+}
+
 /**
  * This test can't be evaluated because a prerequisite acceptance test failed.
  * `scope` describes what the app doesn't support, e.g. `"at all"` (when Acceptance

@@ -38,6 +38,11 @@ export const ProjectIds = {
   Gemini: "project-gemini",
   Frame: "project-frame",
   Bybit: "project-bybit",
+  Exodus: "project-exodus",
+  Taho: "project-taho",
+  Pendle: "project-pendle",
+  Hyperliquid: "project-hyperliquid",
+  Polymarket: "project-polymarket",
 } as const;
 
 /**
