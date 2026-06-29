@@ -45,6 +45,7 @@ export const ProjectIds = {
   Polymarket: "project-polymarket",
   Bitget: "project-bitget",
   HTX: "project-htx",
+  BingX: "project-bingx",
 } as const;
 
 /**

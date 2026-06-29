@@ -2,7 +2,7 @@ import React from "react";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import logo from "./icon.jpg";
+import icon from "./icon.jpg";
 
 const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -12,7 +12,7 @@ const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
     className={cn("px-1 bg-white rounded-md", className)}
     {...props}
   >
-    <image href={logo.src} width="24" height="24" />
+    <image href={icon.src} width="24" height="24" />
   </svg>
 );
 
