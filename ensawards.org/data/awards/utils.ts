@@ -20,11 +20,8 @@ export const sortFinancialAwardsByPrice = (a: AwardFinancial, b: AwardFinancial)
     );
   }
 
-  const aPriceAmount = a.price.amount;
-  const bPriceAmount = b.price.amount;
-
-  if (aPriceAmount > bPriceAmount) return -1;
-  if (aPriceAmount < bPriceAmount) return 1;
+  if (a.price.amount > b.price.amount) return -1;
+  if (a.price.amount < b.price.amount) return 1;
 
   return a.awardedAt - b.awardedAt;
 };
