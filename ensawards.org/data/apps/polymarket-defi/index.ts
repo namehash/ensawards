@@ -20,7 +20,8 @@ const PolymarketDeFi: App = {
     twitter: new URL("https://x.com/Polymarket"),
   },
   icon: PolymarketIcon,
-  // TODO: Add OG images
+  ogImagePath: "polymarket-defi/og.png",
+  twitterOgImagePath: "polymarket-defi/twitter-og.png",
 };
 
 defineApp(PolymarketDeFi);
