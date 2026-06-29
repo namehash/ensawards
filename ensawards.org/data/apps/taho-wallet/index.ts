@@ -20,7 +20,8 @@ const TahoWallet: App = {
     twitter: new URL("https://x.com/taho_xyz"),
   },
   icon: TahoWalletIcon,
-  // TODO: Add OG images
+  ogImagePath: "taho-wallet/og.png",
+  twitterOgImagePath: "taho-wallet/twitter-og.png",
 };
 
 defineApp(TahoWallet);
