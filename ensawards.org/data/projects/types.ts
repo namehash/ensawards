@@ -44,6 +44,7 @@ export const ProjectIds = {
   Hyperliquid: "project-hyperliquid",
   Polymarket: "project-polymarket",
   Bitget: "project-bitget",
+  HTX: "project-htx",
 } as const;
 
 /**
