@@ -28,7 +28,7 @@ const ensv2ReadyResolution = {
           apply a rating of not applicable.
         </p>
         <img
-          alt="Bybit exchange doesn't allow ENS name as recipient in the withdrawal flow"
+          alt="Bitget exchange doesn't allow ENS name as recipient in the withdrawal flow"
           src={at1ProofImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
