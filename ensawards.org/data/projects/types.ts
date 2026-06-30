@@ -46,6 +46,7 @@ export const ProjectIds = {
   Toobit: "project-toobit",
   MEXC: "project-mexc",
   LBank: "project-lbank",
+  BitMart: "project-bitmart",
 } as const;
 
 /**
