@@ -46,6 +46,7 @@ export const ProjectIds = {
   Bitget: "project-bitget",
   HTX: "project-htx",
   BingX: "project-bingx",
+  Gate: "project-gate",
 } as const;
 
 /**
