@@ -20,7 +20,8 @@ const ExodusWallet: App = {
     twitter: new URL("https://x.com/exodus"),
   },
   icon: ExodusWalletIcon,
-  // TODO: Add OG images
+  ogImagePath: "exodus-wallet/og.png",
+  twitterOgImagePath: "exodus-wallet/twitter-og.png",
 };
 
 defineApp(ExodusWallet);
