@@ -45,6 +45,7 @@ export const ProjectIds = {
   Polymarket: "project-polymarket",
   Toobit: "project-toobit",
   MEXC: "project-mexc",
+  LBank: "project-lbank",
 } as const;
 
 /**
