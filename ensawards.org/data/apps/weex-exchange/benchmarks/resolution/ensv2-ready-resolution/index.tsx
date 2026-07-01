@@ -17,13 +17,13 @@ const ensv2ReadyResolution = {
   "correctly-resolve-ensv2-test-name-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-01T07:58:39Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-01T09:33:01Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENSv2 ready resolution was tested using the &quot;Add address&quot; feature. The app
-          doesn't support the use of ENS names at all as the recipient identifier.
+          ENSv2 ready resolution was tested using the &quot;withdrawal&quot; flow. The app doesn't
+          support the use of ENS names at all as the recipient identifier.
           <br />
           <br />
           While that's a key issue that this app is encouraged to improve, this best practice is
@@ -32,7 +32,7 @@ const ensv2ReadyResolution = {
           apply a rating of not applicable.
         </p>
         <img
-          alt="CoinW exchange doesn't allow ENS name as recipient in the Add address feature"
+          alt="WEEX exchange doesn't allow ENS name as recipient in the withdrawal flow"
           src={at1ProofImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />

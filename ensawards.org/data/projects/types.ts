@@ -48,6 +48,7 @@ export const ProjectIds = {
   LBank: "project-lbank",
   BitMart: "project-bitmart",
   CoinW: "project-coinw",
+  WEEX: "project-weex",
 } as const;
 
 /**
