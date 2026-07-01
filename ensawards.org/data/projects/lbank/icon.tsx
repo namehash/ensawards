@@ -1,7 +1,5 @@
 import React from "react";
 
-import { cn } from "@/utils/tailwindClassConcatenation";
-
 const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => {
   const reactId = React.useId();
   const id = (name: string) => `${reactId}-${name}`;
