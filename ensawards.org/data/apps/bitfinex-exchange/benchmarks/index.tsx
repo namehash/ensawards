@@ -1,7 +1,7 @@
 // Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
 // for additional advice on adding and modifying app benchmarks
 
-import KrakenExchange from "data/apps/kraken-exchange";
+import BitfinexExchange from "data/apps/bitfinex-exchange";
 import { defineAppBenchmarks } from "data/benchmarks/registry";
 import type { BestPracticeBenchmarks } from "data/ens-best-practices/types";
 
@@ -13,6 +13,6 @@ const benchmarks: BestPracticeBenchmarks = {
   "deposit-addresses": depositAddresses,
 };
 
-defineAppBenchmarks(KrakenExchange, benchmarks);
+defineAppBenchmarks(BitfinexExchange, benchmarks);
 
 export default benchmarks;
