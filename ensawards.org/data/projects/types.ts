@@ -50,6 +50,8 @@ export const ProjectIds = {
   Bitfinex: "project-bitfinex",
   Bitunix: "project-bitunix",
   XTcom: "project-xtcom",
+  WhiteBIT: "project-whitebit",
+  Ourbit: "project-ourbit",
 } as const;
 
 /**
