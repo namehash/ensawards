@@ -49,6 +49,7 @@ export const ProjectIds = {
   Gate: "project-gate",
   Bitfinex: "project-bitfinex",
   Bitunix: "project-bitunix",
+  XTcom: "project-xtcom",
 } as const;
 
 /**
