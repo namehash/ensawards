@@ -4,10 +4,10 @@ import {
   ReferralProgramEditionStatuses,
   type ReferralProgramEditionStatusId,
 } from "@namehash/ens-referrals";
+import { interpretCurrency } from "data/shared/currencies";
 import { memo } from "react";
 
 import { GenericTooltip } from "@/components/atoms/GenericTooltip.tsx";
-import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { usdFormatter } from "@/utils/textModifications.ts";
 
@@ -131,9 +131,7 @@ function ReferrerCardPieSplit({
           )}
         >
           {referrer.isQualified ? (
-            <>
-              US {usdFormatter.format(parseReferralProgramCurrency(referrer.awardPoolApproxValue))}
-            </>
+            <>US {usdFormatter.format(interpretCurrency(referrer.awardPoolApproxValue))}</>
           ) : (
             "-"
           )}

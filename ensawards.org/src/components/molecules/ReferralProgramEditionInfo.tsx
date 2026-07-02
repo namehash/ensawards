@@ -3,6 +3,7 @@ import {
   type ReferralProgramEditionSummaryPieSplit,
   type ReferralProgramEditionSummaryRevShareCap,
 } from "@namehash/ens-referrals";
+import { interpretCurrency } from "data/shared/currencies";
 
 import { ReferralProgramStatusBadge } from "@/components/atoms/badges/ReferralProgramStatusBadge";
 import {
@@ -11,7 +12,6 @@ import {
   ReferralProgramEditionRules,
   ReferralProgramEditionTimePeriod,
 } from "@/components/atoms/cards/referralProgramEditionCard/shared.tsx";
-import { parseReferralProgramCurrency } from "@/utils/referralProgram.ts";
 import { usdFormatter } from "@/utils/textModifications.ts";
 
 interface ReferralProgramEditionInfoProps {
@@ -69,7 +69,7 @@ export const ReferralProgramEditionInfo = ({
             </p>
             <p className="text-sm leading-normal font-medium text-black max-sm:text-right cursor-default">
               {usdFormatter.format(
-                parseReferralProgramCurrency(referralProgramEditionSummary.awardPoolRemaining),
+                interpretCurrency(referralProgramEditionSummary.awardPoolRemaining),
               )}{" "}
               USD
             </p>
