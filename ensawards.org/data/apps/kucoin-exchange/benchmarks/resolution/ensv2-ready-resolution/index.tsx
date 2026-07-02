@@ -11,23 +11,22 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import { cn } from "@/utils/tailwindClassConcatenation";
 
-import ensv2ProofImage from "./ac-2.png";
+import ensv2ProofImage from "./at-1.png";
 
 const ensv2ReadyResolution = {
   "correctly-resolve-ensv2-test-name-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:38:16Z"),
       },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENSv2 ready resolution was tested using the &quot;withdraw&quot; feature on kucoin.com by
-          attempting to use &quot;ur.integration-tests.eth&quot; as the recipient identifier. The
-          app doesn't support the use of ENS names at all and rejects ENS input.
+          ENSv2 ready resolution was tested using the &quot;withdraw&quot; flow. The app doesn't
+          support the use of ENS names at all as the recipient identifier.
           <br />
           <br />
           While that's a key issue that this app is encouraged to improve, this best practice is

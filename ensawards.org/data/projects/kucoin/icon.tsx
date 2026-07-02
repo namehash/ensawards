@@ -1,7 +1,5 @@
 import React from "react";
 
-import { cn } from "@/utils/tailwindClassConcatenation";
-
 const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
     fill="none"
@@ -9,7 +7,7 @@ const Icon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
     viewBox="0 0 40 40"
     width="40"
     xmlns="http://www.w3.org/2000/svg"
-    className={cn("p-1.5", className)}
+    className={className}
     {...props}
   >
     <rect fill="#01bc8d" height="40" rx="20" width="40" />

@@ -1,3 +1,6 @@
+// Read https://github.com/namehash/ensawards/blob/main/CONTRIBUTING.md
+// for additional advice on adding and modifying app benchmarks
+
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
@@ -10,15 +13,15 @@ import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import at1Proof from "./at-1.png";
 
-const method = "the 'withdraw' feature on kucoin.com";
+const method = 'the "withdraw" flow';
 
 const depositAddresses = {
   "at01-resolve-onchain-name": {
     result: BenchmarkResults.Fail,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:36:36Z"),
       },
     ],
     notes: buildEnsNotSupportedNote({
@@ -33,8 +36,8 @@ const depositAddresses = {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:36:36Z"),
       },
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
@@ -43,8 +46,8 @@ const depositAddresses = {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:36:36Z"),
       },
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
@@ -53,8 +56,8 @@ const depositAddresses = {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:36:36Z"),
       },
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
@@ -63,8 +66,8 @@ const depositAddresses = {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:36:36Z"),
       },
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
@@ -73,8 +76,8 @@ const depositAddresses = {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:36:36Z"),
       },
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
@@ -83,8 +86,8 @@ const depositAddresses = {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:36:36Z"),
       },
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
@@ -93,8 +96,8 @@ const depositAddresses = {
     result: BenchmarkResults.NotApplicable,
     contributions: [
       {
-        from: contributors.y3drk,
-        lastUpdated: parseTimestamp("2026-07-02T00:00:00Z"),
+        from: contributors.notrab,
+        lastUpdated: parseTimestamp("2026-07-02T07:36:36Z"),
       },
     ],
     notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
