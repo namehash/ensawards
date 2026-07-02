@@ -59,6 +59,7 @@ export const ProjectIds = {
   XTcom: "project-xtcom",
   WhiteBIT: "project-whitebit",
   Ourbit: "project-ourbit",
+  MEW: "project-mew",
 } as const;
 
 /**
