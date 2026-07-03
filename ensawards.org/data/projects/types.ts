@@ -60,6 +60,8 @@ export const ProjectIds = {
   WhiteBIT: "project-whitebit",
   Ourbit: "project-ourbit",
   MEW: "project-mew",
+  Gem: "project-gem",
+  ImToken: "project-imtoken",
 } as const;
 
 /**
