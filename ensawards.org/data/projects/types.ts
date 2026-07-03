@@ -62,6 +62,8 @@ export const ProjectIds = {
   MEW: "project-mew",
   Gem: "project-gem",
   ImToken: "project-imtoken",
+  SafePal: "project-safepal",
+  TokenPocket: "project-tokenpocket",
 } as const;
 
 /**
