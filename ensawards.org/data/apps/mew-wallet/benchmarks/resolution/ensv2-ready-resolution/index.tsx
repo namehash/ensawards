@@ -33,7 +33,7 @@ const ensv2ReadyResolution = {
           ).
         </p>
         <img
-          alt="1inch Wallet fails to resolve the name for ENSv2"
+          alt="MyEtherWallet fails to resolve the name for ENSv2"
           src={at1ProofImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />
