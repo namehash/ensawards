@@ -5,10 +5,7 @@ import type { AcceptanceTestBenchmark } from "data/acceptance-tests/types";
 import type { AcceptanceTestBenchmarks } from "data/benchmarks/types";
 import { BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
-import {
-  acceptanceTestDetailsContainerStyles,
-  bestPracticeTechnicalDetailsCodeStyles,
-} from "data/ens-best-practices/styles";
+import { acceptanceTestDetailsContainerStyles } from "data/ens-best-practices/styles";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
@@ -18,22 +15,24 @@ import at1ProofImage from "./at-1.png";
 
 const ensv2ReadyResolution = {
   "correctly-resolve-ensv2-test-name-address": {
-    result: BenchmarkResults.Fail,
+    result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T13:58:28Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:09:00Z") },
     ],
     notes: (
       <div className={cn(acceptanceTestDetailsContainerStyles, "w-full")}>
         <p className="w-full">
-          ENSv2 ready resolution was tested using the &quot;send&quot; flow. The resolved address is{" "}
-          <i>NOT</i> the expected Ethereum Mainnet address (
-          <span className={bestPracticeTechnicalDetailsCodeStyles}>
-            0x2222222222222222222222222222222222222222
-          </span>
-          ).
+          ENSv2 ready resolution was tested using the &quot;send&quot; flow. The app doesn't support
+          the use of ENS names at all as the recipient identifier.
+          <br />
+          <br />
+          While that's a key issue that this app is encouraged to improve, this best practice is
+          applicable specifically to apps that already have an existing ENS integration and making
+          sure existing integrations are ENSv2 compatible. Therefore, for this best practice we
+          apply a rating of not applicable.
         </p>
         <img
-          alt="MyEtherWallet fails to resolve the name for ENSv2"
+          alt="MyEtherWallet app doesn't allow ENS name as recipient in the send flow"
           src={at1ProofImage.src}
           className="w-auto h-full max-h-[325px] rounded-xl"
         />

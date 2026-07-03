@@ -4,127 +4,76 @@
 import { type AcceptanceTestBenchmarks, BenchmarkResults } from "data/benchmarks/types";
 import contributors from "data/contributors";
 import {
-  buildFailNoteForAT2,
-  buildFailNoteForAT5,
+  buildEnsNotSupportedNote,
   buildNotApplicableForFailedTest,
-  buildNotApplicableForNonEvmChain,
-  buildPassNoteForAT1,
-  buildPassNoteForAT3,
-  buildPassNoteForAT4,
 } from "data/ens-best-practices/resolution/deposit-addresses/notes";
 
 import { parseTimestamp } from "@ensnode/ensnode-sdk";
 
 import at1Proof from "./at-1.png";
-import at2Proof from "./at-2.png";
-import at3Proof from "./at-3.png";
-import at4Proof from "./at-4.png";
-import at5Proof from "./at-5.png";
-import at6Proof from "./at-6.png";
-import at7Proof from "./at-7.png";
-
-const method = 'the "send" flow';
 
 const depositAddresses = {
   "at01-resolve-onchain-name": {
-    result: BenchmarkResults.Pass,
+    result: BenchmarkResults.Fail,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T14:00:22Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:17:12Z") },
     ],
-    notes: buildPassNoteForAT1({
-      method,
+    notes: buildEnsNotSupportedNote({
+      method: 'the "send" flow',
       proof: {
         image: at1Proof,
-        alt: "MyEtherWallet correctly resolves the address for vitalik.eth",
+        alt: "MyEtherWallet doesn't allow ENS names as the recipient in the send flow",
       },
     }),
   },
   "at02-resolve-name-needing-normalization": {
-    result: BenchmarkResults.Fail,
+    result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T14:00:22Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:17:12Z") },
     ],
-    notes: buildFailNoteForAT2({
-      method,
-      proof: {
-        image: at2Proof,
-        alt: "MyEtherWallet fails to resolve the address for Ξthereum.eth",
-      },
-      extra: 'The app showed the message "invalid address".',
-    }),
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
   },
   "at03-resolve-offchain-eth-subname": {
-    result: BenchmarkResults.Pass,
+    result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T14:00:22Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:17:12Z") },
     ],
-    notes: buildPassNoteForAT3({
-      method,
-      proof: {
-        image: at3Proof,
-        alt: "MyEtherWallet correctly resolves the address for jesse.base.eth",
-      },
-    }),
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
   },
   "at04-resolve-offchain-dns-name": {
-    result: BenchmarkResults.Pass,
+    result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T14:00:22Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:17:12Z") },
     ],
-    notes: buildPassNoteForAT4({
-      method,
-      proof: {
-        image: at4Proof,
-        alt: "MyEtherWallet correctly resolves the address for dperri.com",
-      },
-    }),
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
   },
   "at05-resolve-name-on-other-evm-chain": {
-    result: BenchmarkResults.Fail,
+    result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T14:00:22Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:17:12Z") },
     ],
-    notes: buildFailNoteForAT5({
-      method,
-      proof: {
-        image: at5Proof,
-        alt: "MyEtherWallet fails to resolve the address for lightkeeper.eth on the Base chain",
-      },
-      extra: "The app resolved to the Ethereum Mainnet address instead of the Base address.",
-    }),
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
   },
   "at06-resolve-bitcoin-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T14:00:22Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:17:12Z") },
     ],
-    notes: buildNotApplicableForNonEvmChain({
-      chain: "Bitcoin",
-      proof: {
-        image: at6Proof,
-        alt: "MyEtherWallet has no context of the Bitcoin chain in the send flow",
-      },
-    }),
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
   },
   "at07-resolve-solana-address": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T14:00:22Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:17:12Z") },
     ],
-    notes: buildNotApplicableForNonEvmChain({
-      chain: "Solana",
-      proof: {
-        image: at7Proof,
-        alt: "MyEtherWallet has no context of the Solana chain in the send flow",
-      },
-    }),
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
   },
   "at08-handle-invalid-address-format": {
     result: BenchmarkResults.NotApplicable,
     contributions: [
-      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-02T14:00:22Z") },
+      { from: contributors.y3drk, lastUpdated: parseTimestamp("2026-07-03T12:17:12Z") },
     ],
-    notes: buildNotApplicableForFailedTest({ testNumber: 5, scope: "on Base" }),
+    notes: buildNotApplicableForFailedTest({ testNumber: 1 }),
   },
 } as const satisfies AcceptanceTestBenchmarks;
 

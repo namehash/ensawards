@@ -14,9 +14,9 @@ const MyEtherWallet: App = {
   project: MEWProject,
   name: "MyEtherWallet",
   description:
-    "Self-custodial wallet interface for creating and accessing Ethereum wallets, sending and swapping tokens, and interacting with decentralized applications.",
+    "Self-custodial mobile wallet for iOS and Android that lets you create and access Ethereum wallets, buy, send, and swap tokens, and connect to decentralized applications on the go.",
   socials: {
-    website: new URL("https://app.myetherwallet.com/"),
+    website: new URL("https://www.mewwallet.com"),
     twitter: new URL("https://x.com/myetherwallet"),
   },
   icon: MEWIcon,
