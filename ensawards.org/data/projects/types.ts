@@ -59,6 +59,11 @@ export const ProjectIds = {
   XTcom: "project-xtcom",
   WhiteBIT: "project-whitebit",
   Ourbit: "project-ourbit",
+  MEW: "project-mew",
+  Gem: "project-gem",
+  ImToken: "project-imtoken",
+  SafePal: "project-safepal",
+  TokenPocket: "project-tokenpocket",
 } as const;
 
 /**
