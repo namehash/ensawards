@@ -20,7 +20,8 @@ const BitunixExchange: App = {
     twitter: new URL("https://x.com/BitunixOfficial"),
   },
   icon: BitunixIcon,
-  // TODO: Add OG images
+  ogImagePath: "bitunix-exchange/og.png",
+  twitterOgImagePath: "bitunix-exchange/twitter-og.png",
 };
 
 defineApp(BitunixExchange);

@@ -20,7 +20,8 @@ const BitfinexExchange: App = {
     twitter: new URL("https://x.com/bitfinex"),
   },
   icon: BitfinexIcon,
-  // TODO: Add OG images
+  ogImagePath: "bitfinex-exchange/og.png",
+  twitterOgImagePath: "bitfinex-exchange/twitter-og.png",
 };
 
 defineApp(BitfinexExchange);

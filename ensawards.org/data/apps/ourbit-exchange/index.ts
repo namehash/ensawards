@@ -20,7 +20,8 @@ const OurbitExchange: App = {
     twitter: new URL("https://x.com/ourbit"),
   },
   icon: OurbitIcon,
-  // TODO: Add OG images
+  ogImagePath: "ourbit-exchange/og.png",
+  twitterOgImagePath: "ourbit-exchange/twitter-og.png",
 };
 
 defineApp(OurbitExchange);

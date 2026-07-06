@@ -20,7 +20,8 @@ const KuCoinExchange: App = {
     twitter: new URL("https://x.com/KuCoinCom"),
   },
   icon: KuCoinIcon,
-  // TODO: Add OG images
+  ogImagePath: "kucoin-exchange/og.png",
+  twitterOgImagePath: "kucoin-exchange/twitter-og.png",
 };
 
 defineApp(KuCoinExchange);

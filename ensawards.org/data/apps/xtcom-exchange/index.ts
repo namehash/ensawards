@@ -20,7 +20,8 @@ const XTcomExchange: App = {
     twitter: new URL("https://x.com/XTexchange"),
   },
   icon: XTcomIcon,
-  // TODO: Add OG images
+  ogImagePath: "xtcom-exchange/og.png",
+  twitterOgImagePath: "xtcom-exchange/twitter-og.png",
 };
 
 defineApp(XTcomExchange);
