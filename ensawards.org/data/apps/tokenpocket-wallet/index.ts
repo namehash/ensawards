@@ -20,7 +20,8 @@ const TokenPocketWallet: App = {
     twitter: new URL("https://x.com/TokenPocket_TP"),
   },
   icon: TokenPocketIcon,
-  // TODO: Add OG images
+  ogImagePath: "tokenpocket-wallet/og.png",
+  twitterOgImagePath: "tokenpocket-wallet/twitter-og.png",
 };
 
 defineApp(TokenPocketWallet);

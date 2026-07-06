@@ -20,7 +20,8 @@ const ImTokenWallet: App = {
     twitter: new URL("https://twitter.com/imTokenOfficial"),
   },
   icon: ImTokenIcon,
-  // TODO: Add OG images
+  ogImagePath: "imtoken-wallet/og.png",
+  twitterOgImagePath: "imtoken-wallet/twitter-og.png",
 };
 
 defineApp(ImTokenWallet);

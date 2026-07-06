@@ -20,7 +20,8 @@ const EnkryptWallet: App = {
     twitter: new URL("https://x.com/enkrypt"),
   },
   icon: EnkryptIcon,
-  // TODO: Add OG images
+  ogImagePath: "enkrypt-wallet/og.png",
+  twitterOgImagePath: "enkrypt-wallet/twitter-og.png",
 };
 
 defineApp(EnkryptWallet);

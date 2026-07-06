@@ -20,7 +20,8 @@ const MyEtherWallet: App = {
     twitter: new URL("https://x.com/myetherwallet"),
   },
   icon: MEWIcon,
-  // TODO: Add OG images
+  ogImagePath: "mew-wallet/og.png",
+  twitterOgImagePath: "mew-wallet/twitter-og.png",
 };
 
 defineApp(MyEtherWallet);

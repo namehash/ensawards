@@ -22,7 +22,8 @@ const UniswapWallet: App = {
     ens: asInterpretedName("uniswap.eth"),
   },
   icon: UniswapIcon,
-  // TODO: Add OG images
+  ogImagePath: "uniswap-wallet/og.png",
+  twitterOgImagePath: "uniswap-wallet/twitter-og.png",
 };
 
 defineApp(UniswapWallet);

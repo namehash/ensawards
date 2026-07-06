@@ -20,7 +20,8 @@ const BitgetWallet: App = {
     twitter: new URL("https://x.com/bitget"),
   },
   icon: BitgetIcon,
-  // TODO: Add OG images
+  ogImagePath: "bitget-wallet/og.png",
+  twitterOgImagePath: "bitget-wallet/twitter-og.png",
 };
 
 defineApp(BitgetWallet);
