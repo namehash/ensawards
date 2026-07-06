@@ -20,7 +20,8 @@ const GateExchange: App = {
     twitter: new URL("https://x.com/Gate"),
   },
   icon: GateIcon,
-  // TODO: Add OG images
+  ogImagePath: "gate-exchange/og.png",
+  twitterOgImagePath: "gate-exchange/twitter-og.png",
 };
 
 defineApp(GateExchange);

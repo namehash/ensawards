@@ -20,7 +20,8 @@ const BingXExchange: App = {
     twitter: new URL("https://x.com/BingXOfficial"),
   },
   icon: BingXIcon,
-  // TODO: Add OG images
+  ogImagePath: "bingx-exchange/og.png",
+  twitterOgImagePath: "bingx-exchange/twitter-og.png",
 };
 
 defineApp(BingXExchange);

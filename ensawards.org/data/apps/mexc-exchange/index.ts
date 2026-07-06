@@ -20,7 +20,8 @@ const MEXCExchange: App = {
     twitter: new URL("https://x.com/MEXC"),
   },
   icon: MEXCIcon,
-  // TODO: Add OG images
+  ogImagePath: "mexc-exchange/og.png",
+  twitterOgImagePath: "mexc-exchange/twitter-og.png",
 };
 
 defineApp(MEXCExchange);

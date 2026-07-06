@@ -20,7 +20,8 @@ const SafePalWallet: App = {
     twitter: new URL("https://x.com/SafePal"),
   },
   icon: SafePalIcon,
-  // TODO: Add OG images
+  ogImagePath: "safepal-wallet/og.png",
+  twitterOgImagePath: "safepal-wallet/twitter-og.png",
 };
 
 defineApp(SafePalWallet);

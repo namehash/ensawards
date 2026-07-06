@@ -20,7 +20,8 @@ const ToobitExchange: App = {
     twitter: new URL("https://x.com/Toobit_official"),
   },
   icon: ToobitIcon,
-  // TODO: Add OG images
+  ogImagePath: "toobit-exchange/og.png",
+  twitterOgImagePath: "toobit-exchange/twitter-og.png",
 };
 
 defineApp(ToobitExchange);

@@ -20,7 +20,8 @@ const BitMartExchange: App = {
     twitter: new URL("https://x.com/BitMartExchange"),
   },
   icon: BitMartIcon,
-  // TODO: Add OG images
+  ogImagePath: "bitmart-exchange/og.png",
+  twitterOgImagePath: "bitmart-exchange/twitter-og.png",
 };
 
 defineApp(BitMartExchange);

@@ -20,7 +20,8 @@ const OneInchWallet: App = {
     twitter: new URL("https://x.com/1inch"),
   },
   icon: OneInchIcon,
-  // TODO: Add OG images
+  ogImagePath: "1inch-wallet/og.png",
+  twitterOgImagePath: "1inch-wallet/twitter-og.png",
 };
 
 defineApp(OneInchWallet);

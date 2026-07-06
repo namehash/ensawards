@@ -20,7 +20,8 @@ const HTXExchange: App = {
     twitter: new URL("https://twitter.com/HTX_Global"),
   },
   icon: HTXIcon,
-  // TODO: Add OG images
+  ogImagePath: "htx-exchange/og.png",
+  twitterOgImagePath: "htx-exchange/twitter-og.png",
 };
 
 defineApp(HTXExchange);

@@ -20,7 +20,8 @@ const LBankExchange: App = {
     twitter: new URL("https://x.com/LBank_Exchange"),
   },
   icon: LBankIcon,
-  // TODO: Add OG images
+  ogImagePath: "lbank-exchange/og.png",
+  twitterOgImagePath: "lbank-exchange/twitter-og.png",
 };
 
 defineApp(LBankExchange);

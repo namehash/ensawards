@@ -20,7 +20,8 @@ const WEEXExchange: App = {
     twitter: new URL("https://x.com/WEEX_Official"),
   },
   icon: WEEXIcon,
-  // TODO: Add OG images
+  ogImagePath: "weex-exchange/og.png",
+  twitterOgImagePath: "weex-exchange/twitter-og.png",
 };
 
 defineApp(WEEXExchange);

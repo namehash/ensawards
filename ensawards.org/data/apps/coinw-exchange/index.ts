@@ -20,7 +20,8 @@ const CoinWExchange: App = {
     twitter: new URL("https://x.com/CoinWOfficial"),
   },
   icon: CoinWIcon,
-  // TODO: Add OG images
+  ogImagePath: "coinw-exchange/og.png",
+  twitterOgImagePath: "coinw-exchange/twitter-og.png",
 };
 
 defineApp(CoinWExchange);

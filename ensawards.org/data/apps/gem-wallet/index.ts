@@ -20,7 +20,8 @@ const GemWallet: App = {
     twitter: new URL("https://x.com/gemwallet"),
   },
   icon: GemIcon,
-  // TODO: Add OG images
+  ogImagePath: "gem-wallet/og.png",
+  twitterOgImagePath: "gem-wallet/twitter-og.png",
 };
 
 defineApp(GemWallet);

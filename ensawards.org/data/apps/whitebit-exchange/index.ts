@@ -20,7 +20,8 @@ const WhiteBITExchange: App = {
     twitter: new URL("https://x.com/WhiteBit"),
   },
   icon: WhiteBITIcon,
-  // TODO: Add OG images
+  ogImagePath: "whitebit-exchange/og.png",
+  twitterOgImagePath: "whitebit-exchange/twitter-og.png",
 };
 
 defineApp(WhiteBITExchange);
