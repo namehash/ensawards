@@ -2,9 +2,10 @@ import type { App } from "data/apps/types.ts";
 import type { EntityMetadata } from "data/entity-metadata/types.ts";
 import type { IncentiveProgram, IncentiveProgramSlug } from "data/incentive-programs/types.ts";
 import type { Protocol } from "data/protocols/types.ts";
-import { type EnsTokens } from "data/shared/ensTokens.ts";
 import type { TransactionRef } from "data/shared/transactionRef.ts";
 import type { AccountId, UnixTimestamp } from "enssdk";
+
+import type { Price } from "@ensnode/ensnode-sdk";
 
 export const AwardTypes = {
   FinancialAward: "financial-award",
@@ -53,11 +54,11 @@ export interface AwardAbstract<AwardTypeT extends AwardType> {
 export interface AwardRecognition extends AwardAbstract<typeof AwardTypes.RecognitionAward> {}
 
 export interface AwardFinancial extends AwardAbstract<typeof AwardTypes.FinancialAward> {
-  /** Amount of the award in $ENS.
+  /** Financial award in any currency supported by {@link Price}.
    *
    * @invariant Award amount must be finite and greater than 0.
    */
-  price: EnsTokens; // should be replaced with `Price` from enssdk when Issue#1941 is completed.
+  price: Price;
 
   /**
    * Details of the transaction associated with the distribution of this award.

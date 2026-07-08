@@ -6,6 +6,7 @@ import {
   useNow,
 } from "@namehash/namehash-ui";
 import { type AwardFinancial } from "data/awards/types";
+import { interpretCurrency } from "data/shared/currencies";
 import { ENS_TOKENS_TO_USDC_CONVERSION_RATE, ensTokenFormatter } from "data/shared/ensTokens";
 import { secondsInMinute } from "date-fns/constants";
 import { useCallback, useMemo } from "react";
@@ -38,7 +39,7 @@ export const ContractNamingSeasonAwardCard = ({ award }: ContractNamingSeasonAwa
   );
   const awardedToDetailsUrl = getAdvocateDetailsUrl(award.awardedTo.address);
 
-  const estimatedValueUSD = award.price * ENS_TOKENS_TO_USDC_CONVERSION_RATE;
+  const estimatedValueUSD = interpretCurrency(award.price) * ENS_TOKENS_TO_USDC_CONVERSION_RATE;
 
   const awardedContentWrapper = useCallback(
     ({ children }: React.PropsWithChildren): React.ReactNode =>
@@ -99,7 +100,7 @@ export const ContractNamingSeasonAwardCard = ({ award }: ContractNamingSeasonAwa
           Award
         </p>
         <p className="text-sm leading-normal font-medium text-black max-sm:text-right">
-          {ensTokenFormatter.format(award.price)} $ENS
+          {ensTokenFormatter.format(interpretCurrency(award.price))} $ENS
         </p>
       </div>
 

@@ -1,4 +1,5 @@
 import type { ReferralProgramEditionSummary } from "@namehash/ens-referrals";
+import { interpretCurrency } from "data/shared/currencies";
 import { type UnixTimestamp } from "enssdk";
 import { ChevronRightIcon } from "lucide-react";
 import type { PropsWithChildren } from "react";
@@ -8,7 +9,6 @@ import type { PriceUsdc } from "@ensnode/ensnode-sdk";
 import { ReferralProgramPeriodDate } from "@/components/atoms/ReferralProgramPeriodDate";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { parseReferralProgramCurrency } from "@/utils/referralProgram";
 import { cn } from "@/utils/tailwindClassConcatenation.ts";
 import { usdFormatter } from "@/utils/textModifications";
 
@@ -96,7 +96,7 @@ export const ReferralProgramEditionAwardPool = ({
             "text-sm leading-normal font-medium text-black max-sm:text-right cursor-default",
         )}
       >
-        {usdFormatter.format(parseReferralProgramCurrency(totalAwardPoolValue))} USD
+        {usdFormatter.format(interpretCurrency(totalAwardPoolValue))} USD
       </p>
     </div>
   );
